@@ -2,7 +2,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Clothing Ecommerce</title>
+	<title>Food Menu</title>
 	<!-- ==========FONTAWSOME CDN LINK ================== -->
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" /> --}}
     <!-- ============GOOGLE FONTS LINK================== -->
@@ -15,6 +15,7 @@
     {{-- <link rel="stylesheet" href="{{ asset('css/framework7-bundle.min.css') }}" />  --}}
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/framework7/1.5.2/css/framework7.ios.colors.min.css" /> --}}
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/framework7/1.5.2/css/framework7.ios.min.css" /> --}}
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 	@vite('resources/css/app.css')
 </head>
 <body>

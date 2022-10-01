@@ -117,13 +117,14 @@ import MasterDetailDetail from './pages/master-detail-detail.vue';
 import Store from './pages/store.vue';
 
 import NotFound from './pages/404.vue';
+import Register from "./components/Register.vue";
 
 // Pages
 export default [
   // Index page
   {
     path: '/',
-    component: Home,
+    component: Register,
     master(f7) {
       return f7.theme === 'aurora';
     },
