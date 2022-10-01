@@ -118,6 +118,7 @@ import Store from './pages/store.vue';
 
 import NotFound from './pages/404.vue';
 import Register from "./components/Register.vue";
+import Favourite from "./components/Favourite.vue";
 
 // Pages
 export default [
@@ -128,6 +129,11 @@ export default [
     master(f7) {
       return f7.theme === 'aurora';
     },
+  },
+  // Favourite page
+  {
+    path: '/favourites/',
+    component: Favourite,
   },
   // About page
   {

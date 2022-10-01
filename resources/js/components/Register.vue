@@ -33,7 +33,7 @@
       </div>
       <div class="registranstion font-18">Registration</div>
       <div class="card">
-        <a class="link icon-only" href="/about/">
+        <a class="link icon-only" href="/favourites/">
           <i class="f7-icons size-22 text-color-red padding-half font-18">heart</i>
         </a>
       </div>
@@ -59,7 +59,7 @@
             <div class="item-inner">
               <div class="item-title item-label font-16 text-color-lightBlue">Enter your phone number</div>
               <div class="item-input-wrap">
-                <input type="text" name="name" class="padding" placeholder="Enter your phone number" />
+                <input type="text" name="number" class="padding" placeholder="Enter your phone number" />
               </div>
             </div>
           </div>
@@ -67,14 +67,14 @@
             <div class="item-inner">
               <div class="item-title item-label font-16 text-color-lightBlue">Enter your family member member</div>
               <div class="item-input-wrap">
-                <input type="text" name="name" class="padding" placeholder="5 family member" />
+                <input type="text" name="member" class="padding" placeholder="5 family member" />
               </div>
             </div>
           </div>
         </form>
       </div>
       <div class="text-align-center">
-        <a class="link text-underline" href="javascript:;">Check Time</a>
+        <a class="link text-underline text-color-blue" href="javascript:;">Check Time</a>
         <div class="countdown_section" :style="{ 'visibility' : visibility}">
           <i class="f7-icons size-22 text-color-blue padding-half">alarm</i>
           <p class="no-margin font-30">01:25:10</p>
@@ -82,8 +82,8 @@
       </div>
       <div class="margin">
         <div class="row">
-          <button class="col button button-raised button-large">Register</button>
-          <button class="col button button-raised button-large">Menu</button>
+          <button class="col button register-button button-raised text-color-blue button-large open-confirm text-transform-capitalize" @click="register">Register</button>
+          <button class="col button register-button button-raised text-color-blue button-large text-transform-capitalize">Menu</button>
         </div>
       </div>
     </div>
@@ -116,33 +116,53 @@ import {
   f7MenuDropdown,
   f7MenuDropdownItem
 } from 'framework7-vue';
+import Framework7 from 'framework7/lite/bundle';
 import { onMounted } from 'vue';
 export default {
-    components : {
-        f7Page,
-        f7Navbar,
-        f7BlockTitle,
-        f7Block,
-        f7Row,
-        f7Col,
-        f7Button,
-        f7Menu,
-        f7MenuItem,
-        f7MenuDropdown,
-        f7MenuDropdownItem,
-    },
-    mounted() {
-      $('.navbar-bg').remove();
-    },
-    data() {
-      return {
-        visibility : 'hidden',
-      }
-    },
+  components : {
+      f7Page,
+      f7Navbar,
+      f7BlockTitle,
+      f7Block,
+      f7Row,
+      f7Col,
+      f7Button,
+      f7Menu,
+      f7MenuItem,
+      f7MenuDropdown,
+      f7MenuDropdownItem
+  },
+  mounted() {
+    $('.navbar-bg').remove();
+  },
+  data() {
+    return {
+      visibility : 'hidden',
+      app : Framework7,
+    }
+  },
+  methods: {
+    register() {
+      f7.dialog.confirm('', () => {
+        f7.dialog.alert('Success!');
+        setTimeout(() => {          
+          $('.dialog-title').html("<img src='/images/success.png'>");
+          $('.dialog-button').addClass('col button button-raised button-large text-transform-capitalize');
+          $('.dialog-button').addClass('active');
+          $('.dialog-button').css('width','50%');
+        }, 200);
+      });
+      $('.dialog-title').text("Are you confirm to register?");
+      $('.dialog-button').addClass('col button button-raised button-large text-transform-capitalize');
+      $('.dialog-button').eq(1).addClass('active');
+
+    }
+  },
 }
+
 </script>
 <style scoped>
-  .menu-dropdown-center:before , .menu-dropdown-center:after{
+  .menu-dropdown-center:before , .menu-dropdown-center:after,.ios .dialog-inner:after{
     content: none !important;
   }
   .bg-color-transparent{
@@ -152,15 +172,7 @@ export default {
     top : -8px !important;
     left : 60% !important;
   }
-  .font-18{
-    font-size : 18px;
-  }
-  .font-16{
-    font-size : 16px !important;
-  }
-  .font-30{
-    font-size : 30px;
-  }
+  
   .registranstion{
     color: #394C65;
   }
@@ -186,5 +198,34 @@ export default {
   }
   .text-color-Blue{
     color: #3083FF !important;
+  }
+  .text-transform-capitalize{
+    text-transform: capitalize;
+  }
+  
+</style>
+<style>
+  .ios .dialog-inner:after{
+    content: none !important;
+  }
+  .ios .dialog-button{
+    margin: 0 5px;
+    border-radius: var(--f7-dialog-border-radius) !important;
+  }
+  .ios .dialog-buttons{
+    margin : 0 5px 15px;    
+  }
+  .register-button:hover , .register-button:active, .active{
+    background: linear-gradient(71.02deg, #3083FF -23.38%, #0FB3FF 113.05%)!important;
+    color: #fff !important;
+  }
+  .font-18{
+    font-size : 18px;
+  }
+  .font-16{
+    font-size : 16px !important;
+  }
+  .font-30{
+    font-size : 30px;
   }
 </style>
