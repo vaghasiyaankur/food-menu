@@ -162,7 +162,7 @@ export default {
 
 </script>
 <style scoped>
-  .menu-dropdown-center:before , .menu-dropdown-center:after,.ios .dialog-inner:after{
+  .menu-dropdown-center:before , .menu-dropdown-center:after, .dialog-inner:after{
     content: none !important;
   }
   .bg-color-transparent{
@@ -205,14 +205,14 @@ export default {
   
 </style>
 <style>
-  .ios .dialog-inner:after{
+   .dialog-inner:after{
     content: none !important;
   }
-  .ios .dialog-button{
-    margin: 0 5px;
+   .dialog-button{
+    margin: 0 5px !important;
     border-radius: var(--f7-dialog-border-radius) !important;
   }
-  .ios .dialog-buttons{
+   .dialog-buttons{
     margin : 0 5px 15px;    
   }
   .register-button:hover , .register-button:active, .active{
