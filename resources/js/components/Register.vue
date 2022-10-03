@@ -205,7 +205,7 @@ export default {
   
 </style>
 <style>
-   .dialog-inner:after{
+  .dialog-inner:after{
     content: none !important;
   }
    .dialog-button{
