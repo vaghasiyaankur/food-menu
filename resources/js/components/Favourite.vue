@@ -16,14 +16,74 @@
             <div class="text-align-center text-color-gray">
                 <p> See your favorite food list and place order </p>
             </div>
-            <div class="card">
-                <div class="card-content card-content-padding">
-                    <div class="row align-items-center">
-                        <div class="col-20">
-                            <i class="f7-icons size-22 padding-half font-18 bg-color-red text-color-white fav-list-remove-icon">minus</i>
+            <div class="card cart-list">
+                <div class="card-content card-content-padding no-padding-bottom">
+                    <div class="row">
+                        <div class="col-20 padding-top">
+                            <i class="f7-icons size-22 padding-icon font-18 bg-color-red text-color-white fav-list-remove-icon">minus</i>
                         </div>
-                        <div class="col-80 border-bottom row">
-                            <div class="col-75">
+                        <div class="col-80 padding-bottom border-bottom row">
+                            <div class="col-75 border-right">
+                                <p>Jini Dosa</p>
+                            </div>
+                            <div class="col-25">
+                                <p>110.00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content card-content-padding no-padding-bottom">
+                    <div class="row">
+                        <div class="col-20 padding-top">
+                            <i class="f7-icons size-22 padding-icon font-18 bg-color-red text-color-white fav-list-remove-icon">minus</i>
+                        </div>
+                        <div class="col-80 padding-bottom border-bottom row">
+                            <div class="col-75 border-right">
+                                <p>Cheese Paneer Chilli Dosa Chilli Dosa</p>
+                            </div>
+                            <div class="col-25">
+                                <p>110.00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content card-content-padding no-padding-bottom">
+                    <div class="row">
+                        <div class="col-20 padding-top">
+                            <i class="f7-icons size-22 padding-icon font-18 bg-color-red text-color-white fav-list-remove-icon">minus</i>
+                        </div>
+                        <div class="col-80 padding-bottom border-bottom row">
+                            <div class="col-75 border-right">
+                                <p>Jini Dosa</p>
+                            </div>
+                            <div class="col-25">
+                                <p>110.00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content card-content-padding no-padding-bottom">
+                    <div class="row">
+                        <div class="col-20 padding-top">
+                            <i class="f7-icons size-22 padding-icon font-18 bg-color-red text-color-white fav-list-remove-icon">minus</i>
+                        </div>
+                        <div class="col-80 padding-bottom border-bottom row">
+                            <div class="col-75 border-right">
+                                <p>Cheese Paneer Chilli Dosa Chilli Dosa</p>
+                            </div>
+                            <div class="col-25">
+                                <p>110.00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content card-content-padding">
+                    <div class="row">
+                        <div class="col-20 padding-top">
+                            <i class="f7-icons size-22 padding-icon font-18 bg-color-red text-color-white fav-list-remove-icon">minus</i>
+                        </div>
+                        <div class="col-80 padding-bottom border-bottom row">
+                            <div class="col-75 border-right">
                                 <p>Jini Dosa</p>
                             </div>
                             <div class="col-25">
@@ -67,10 +127,18 @@ export default {
     .border-bottom{
         border-bottom: 1px solid #EAEAEA;
     }
+    .padding-icon{
+        padding : 3px;
+    }
+    .border-right{
+        border-right: 1px solid #F3F3F3 !important;
+    }
 </style>
 
 <style>
-
+    .cart-list{
+        box-shadow: 1px 2px 5px 2px rgb(0 0 0 / 20%);
+    }
     .padding-top-page-content{
         padding-top : 50px !important;
     }

@@ -1,5 +1,5 @@
 <template>
-<f7-page color="bg-color-white">
+<f7-page color="bg-color-white" @page:beforeremove="onPageBeforeRemove" @page:beforeout="onPageBeforeOut">
     <div class="row align-items-center">
       <div class="menu">
         <div class="menu-inner bg-color-white color-black">
@@ -81,12 +81,30 @@
         </div>
       </div>
       <div class="margin">
-        <div class="row">
-          <button class="col button register-button button-raised text-color-blue button-large open-confirm text-transform-capitalize" @click="register">Register</button>
-          <button class="col button register-button button-raised text-color-blue button-large text-transform-capitalize">Menu</button>
+        <div class="row bottom-bar justify-content-start">
+          <div class="col bottom-button margin-right">
+            <f7-button class="button bg-color-white register-button button-raised text-color-blue button-large text-transform-capitalize" @click="register">Register</f7-button>
+          </div>
+          <div class="col bottom-button">
+            <f7-button class="button bg-color-white register-button button-raised text-color-blue button-large text-transform-capitalize" fill sheet-open=".demo-sheet-swipe-to-close">Menu</f7-button>
+          </div>
         </div>
       </div>
     </div>
+    <f7-sheet
+    class="demo-sheet-swipe-to-close"
+    style="height:auto; --f7-sheet-bg-color: #fff;"
+    swipe-to-close
+    backdrop
+  >
+    <f7-page-content>
+      <f7-block-title large>Hello!</f7-block-title>
+      <f7-block>
+        <p>Eaque maiores ducimus, impedit unde culpa qui, explicabo accusamus, non vero corporis voluptatibus similique odit ab. Quaerat quasi consectetur quidem libero? Repudiandae adipisci vel voluptatum, autem libero minus dignissimos repellat.</p>
+        <p>Iusto, est corrupti! Totam minus voluptas natus esse possimus nobis, delectus veniam expedita sapiente ut cum reprehenderit aliquid odio amet praesentium vero temporibus obcaecati beatae aspernatur incidunt, perferendis voluptates doloribus?</p>
+      </f7-block>
+    </f7-page-content>
+  </f7-sheet>
 </f7-page>
 </template>
 
@@ -95,17 +113,8 @@ import $ from "jquery";
 import {
   f7Page,
   f7Navbar,
-  f7NavLeft,
-  f7NavTitle,
-  f7NavTitleLarge,
-  f7NavRight,
   f7BlockTitle,
-  f7List,
-  f7ListItem,
-  f7Link,
-  f7Searchbar,
-  f7Icon,
-  theme,
+  f7PageContent,
   f7,
   f7Block,
   f7Row,
@@ -114,7 +123,8 @@ import {
   f7Menu,
   f7MenuItem,
   f7MenuDropdown,
-  f7MenuDropdownItem
+  f7MenuDropdownItem,
+  f7Sheet
 } from 'framework7-vue';
 import Framework7 from 'framework7/lite/bundle';
 import { onMounted } from 'vue';
@@ -130,7 +140,8 @@ export default {
       f7Menu,
       f7MenuItem,
       f7MenuDropdown,
-      f7MenuDropdownItem
+      f7MenuDropdownItem,
+      f7Sheet,f7PageContent
   },
   mounted() {
     $('.navbar-bg').remove();
@@ -156,7 +167,17 @@ export default {
       $('.dialog-button').addClass('col button button-raised button-large text-transform-capitalize');
       $('.dialog-button').eq(1).addClass('active');
 
-    }
+    },
+    onPageBeforeOut() {
+      const self = this;
+      // Close opened sheets on page out
+      f7.sheet.close();
+    },
+    onPageBeforeRemove() {
+      const self = this;
+      // Destroy sheet modal when page removed
+      if (self.sheet) self.sheet.destroy();
+    },
   },
 }
 
@@ -202,7 +223,15 @@ export default {
   .text-transform-capitalize{
     text-transform: capitalize;
   }
-  
+  .bottom-bar{
+    position: fixed;
+    bottom: 20px;
+    width: 100%;
+  }
+  .bottom-button{
+    flex: 0 0 40%;
+    max-width: 40%;
+  }
 </style>
 <style>
   .dialog-inner:after{
