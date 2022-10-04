@@ -6,11 +6,11 @@
         title="My Favourite"
         back-link="Back"
         >
-        <div class="card favourites-card">
-            <a class="link icon-only" href="/favourites/">
-              <i class="f7-icons size-22 text-color-red padding-half font-18">heart_fill</i>
-            </a>
-          </div>
+            <div class="card favourites-card">
+                <a class="link icon-only" href="/favourites/">
+                    <i class="f7-icons size-22 text-color-red padding-half font-18">heart_fill</i>
+                </a>
+            </div>
         </f7-navbar>
         <div class="margin-left margin-right">
             <div class="text-align-center text-color-gray">
@@ -109,13 +109,13 @@ export default {
     f7BlockTitle,
     f7Block,
   },
-  mounted() {
-    $('.page-content').addClass('padding-top-page-content');
-  },
 };
 </script>
 
 <style scoped>
+    .page-content {
+        padding-top: 0px !important;
+    }
     .favourites-card{
         width: 30px;
         height: 30px;
