@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('number');
             $table->string('member');
+            $table->string('floor_location');
             $table->timestamps();
         });
     }

@@ -15,7 +15,6 @@
     {{-- <link rel="stylesheet" href="{{ asset('css/framework7-bundle.min.css') }}" />  --}}
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/framework7/1.5.2/css/framework7.ios.colors.min.css" /> --}}
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/framework7/1.5.2/css/framework7.ios.min.css" /> --}}
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 	@vite('resources/css/app.css')
 </head>
 <body>

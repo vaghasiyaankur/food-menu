@@ -1,6 +1,6 @@
 <template>
     <f7-page color="bg-color-white">
-        <h1>dsfsfs</h1>
+        
     </f7-page>
 </template>
 
@@ -17,6 +17,5 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
 </style>

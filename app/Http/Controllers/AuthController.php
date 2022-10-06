@@ -24,6 +24,7 @@ class AuthController extends Controller
         $regster->name = $request->name;
         $regster->number = $request->number;
         $regster->member = $request->member;
+        $regster->floor_location = $request->floor_location;
         $regster->save();
 
         return response()->json(['success', 'registration added successfully.']);

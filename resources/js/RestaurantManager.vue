@@ -1,17 +1,11 @@
 <template>
   <f7-app v-bind="f7Params">
-    <!-- <f7-panel left cover resizable>
-      <f7-view url="/panel-left/" links-view=".view-main"></f7-view>
-    </f7-panel> -->
-    <!-- <f7-panel right reveal resizable>
-      <f7-view url="/panel-right/"></f7-view>
-    </f7-panel> -->
     <f7-view url="/" :main="true" class="safe-areas" :master-detail-breakpoint="768"></f7-view>
   </f7-app>
 </template>
 <script>
 import { f7App, f7Panel, f7View } from 'framework7-vue';
-import routes from './routes';
+import routes from './restaurant-manager-routes';
 import store from './store';
 
 export default {
@@ -49,7 +43,7 @@ export default {
     };
   },
   mounted() {
-    console.log("tevdg");
-},
+    console.log("here");
+  },
 };
 </script>

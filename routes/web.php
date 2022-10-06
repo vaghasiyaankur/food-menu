@@ -12,10 +12,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('restaurant-manager/{any}', function () {
-    return view('welcome');
+Route::get('/restaurant-manager/{any}', function () {
+    return view('restaurant_manager');
 })->where('any', '.*');
 
-Route::get('{any}', function () {
+Route::get('/guest-app/{any}', function () {
     return view('welcome');
 })->where('any', '.*');

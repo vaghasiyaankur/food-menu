@@ -1,26 +1,29 @@
 <template>
-    <f7-page class="page-favourite bg-color-white"> 
-        <f7-navbar
-        large
-        transparent
-        title="My Favourite"
-        back-link="Back"
-        >
-            <div class="card favourites-card">
-                <a class="link icon-only" href="/favourites/">
-                    <i class="f7-icons size-22 text-color-red padding-half font-18">heart_fill</i>
-                </a>
-            </div>
-        </f7-navbar>
+    <f7-page class="page-favourite bg-color-white">
+        <div class="nav-bar">
+            <f7-navbar
+            class="navbar-menu text-color-white"
+            large
+            transparent
+            title="My Favourite"
+            back-link="Back"
+            >
+                <div class="favourites-card">
+                    <a class="link icon-only" href="/favourites/">
+                        <i class="f7-icons size-22 text-color-dark-orange padding-half font-18">heart_fill</i>
+                    </a>
+                </div>
+            </f7-navbar>
+        </div>
         <div class="margin-left margin-right">
-            <div class="text-align-center text-color-gray">
+            <!-- <div class="text-align-center text-color-gray">
                 <p> See your favorite food list and place order </p>
-            </div>
+            </div> -->
             <div class="card cart-list">
                 <div class="card-content card-content-padding no-padding-bottom">
                     <div class="row">
                         <div class="col-20 padding-top">
-                            <i class="f7-icons size-22 padding-icon font-18 bg-color-red text-color-white fav-list-remove-icon">minus</i>
+                            <i class="f7-icons size-22 padding-icon font-18 bg-color-dark-orange text-color-white fav-list-remove-icon">minus</i>
                         </div>
                         <div class="col-80 padding-bottom border-bottom row">
                             <div class="col-75 border-right">
@@ -35,7 +38,7 @@
                 <div class="card-content card-content-padding no-padding-bottom">
                     <div class="row">
                         <div class="col-20 padding-top">
-                            <i class="f7-icons size-22 padding-icon font-18 bg-color-red text-color-white fav-list-remove-icon">minus</i>
+                            <i class="f7-icons size-22 padding-icon font-18 bg-color-dark-orange text-color-white fav-list-remove-icon">minus</i>
                         </div>
                         <div class="col-80 padding-bottom border-bottom row">
                             <div class="col-75 border-right">
@@ -50,7 +53,7 @@
                 <div class="card-content card-content-padding no-padding-bottom">
                     <div class="row">
                         <div class="col-20 padding-top">
-                            <i class="f7-icons size-22 padding-icon font-18 bg-color-red text-color-white fav-list-remove-icon">minus</i>
+                            <i class="f7-icons size-22 padding-icon font-18 bg-color-dark-orange text-color-white fav-list-remove-icon">minus</i>
                         </div>
                         <div class="col-80 padding-bottom border-bottom row">
                             <div class="col-75 border-right">
@@ -65,7 +68,7 @@
                 <div class="card-content card-content-padding no-padding-bottom">
                     <div class="row">
                         <div class="col-20 padding-top">
-                            <i class="f7-icons size-22 padding-icon font-18 bg-color-red text-color-white fav-list-remove-icon">minus</i>
+                            <i class="f7-icons size-22 padding-icon font-18 bg-color-dark-orange text-color-white fav-list-remove-icon">minus</i>
                         </div>
                         <div class="col-80 padding-bottom border-bottom row">
                             <div class="col-75 border-right">
@@ -80,7 +83,7 @@
                 <div class="card-content card-content-padding">
                     <div class="row">
                         <div class="col-20 padding-top">
-                            <i class="f7-icons size-22 padding-icon font-18 bg-color-red text-color-white fav-list-remove-icon">minus</i>
+                            <i class="f7-icons size-22 padding-icon font-18 bg-color-dark-orange text-color-white fav-list-remove-icon">minus</i>
                         </div>
                         <div class="col-80 padding-bottom border-bottom row">
                             <div class="col-75 border-right">
@@ -113,6 +116,15 @@ export default {
 </script>
 
 <style scoped>
+    .nav-bar{
+        background: #38373D;
+        border-radius: 8px 8px 0px 0px;
+        transform: matrix(1, 0, 0, -1, 0, 0);
+    }
+
+    .navbar-menu{
+        transform: matrix(1, 0, 0, -1, 0, 0);
+    }
     .page-content {
         padding-top: 0px !important;
     }
@@ -133,6 +145,12 @@ export default {
     .border-right{
         border-right: 1px solid #F3F3F3 !important;
     }
+    .text-color-dark-orange{
+        color: #FC4B1A !important;
+    }
+    .bg-color-dark-orange{
+        background: #FC4B1A !important;
+    }
 </style>
 
 <style>
@@ -151,5 +169,9 @@ export default {
     }
     .fav-list-remove-icon{
         border-radius: 50%;
+    }
+
+    .navbar a.link{
+        color: #FC4B1A !important;
     }
 </style>
