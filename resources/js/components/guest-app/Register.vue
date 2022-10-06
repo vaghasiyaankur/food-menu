@@ -13,7 +13,7 @@
                       <path d="M13.625 7.4855H12.2188V7.01729C12.2188 6.75871 12.0089 6.54907 11.75 6.54907C11.4911 6.54907 11.2812 6.75871 11.2812 7.01729V7.4855H9.875C9.61612 7.4855 9.40625 7.69514 9.40625 7.95372C9.40625 8.2123 9.61612 8.42193 9.875 8.42193H9.98844C10.2555 9.28383 10.6577 9.94538 11.1002 10.4755C10.74 10.8046 10.3756 11.0744 10.0509 11.3338C9.84878 11.4954 9.816 11.79 9.97775 11.9919C10.1396 12.1939 10.4346 12.2265 10.6366 12.065C10.963 11.8042 11.3543 11.5143 11.75 11.1516C12.146 11.5145 12.538 11.8049 12.8634 12.065C13.0656 12.2266 13.3606 12.1938 13.5223 11.9919C13.684 11.79 13.6512 11.4953 13.4491 11.3338C13.1253 11.075 12.7604 10.8049 12.3998 10.4755C12.8423 9.94538 13.2445 9.28383 13.5116 8.42193H13.625C13.8839 8.42193 14.0938 8.2123 14.0938 7.95372C14.0938 7.69514 13.8839 7.4855 13.625 7.4855ZM11.75 9.78741C11.4508 9.41221 11.1816 8.96438 10.9787 8.41881H12.5213C12.3184 8.96438 12.0492 9.41221 11.75 9.78741Z" fill="black" fill-opacity="0.2"/>
                       <path d="M14.5938 3.27154H7.83122L7.63028 1.66144C7.5425 0.959989 6.94263 0.43103 6.23491 0.43103H1.40625C0.630844 0.43103 0 1.06115 0 1.83568V12.1676C0 12.9422 0.630844 13.5723 1.40625 13.5723H5.35884L5.55722 15.1824C5.64484 15.8824 6.24472 16.4128 6.95262 16.4128H14.5938C15.3692 16.4128 16 15.7827 16 15.0081V4.67618C16 3.90166 15.3692 3.27154 14.5938 3.27154ZM1.40625 12.6358C1.14778 12.6358 0.9375 12.4258 0.9375 12.1676V1.83568C0.9375 1.5775 1.14778 1.36746 1.40625 1.36746H6.23491C6.47081 1.36746 6.67078 1.54376 6.7 1.77743C6.76794 2.32168 7.98775 12.096 8.05513 12.6358H1.40625ZM6.46012 14.8443L6.30341 13.5723H7.56103L6.46012 14.8443ZM15.0625 15.0081C15.0625 15.2663 14.8522 15.4764 14.5938 15.4764H7.15231L8.93681 13.4146C9.02816 13.3116 9.06909 13.175 9.05022 13.0392L7.94809 4.20797H14.5938C14.8522 4.20797 15.0625 4.41801 15.0625 4.67618V15.0081Z" fill="#7A8BA0"/>
                       <path d="M14.5938 3.27154H7.83122L7.63028 1.66144C7.5425 0.959989 6.94263 0.43103 6.23491 0.43103H1.40625C0.630844 0.43103 0 1.06115 0 1.83568V12.1676C0 12.9422 0.630844 13.5723 1.40625 13.5723H5.35884L5.55722 15.1824C5.64484 15.8824 6.24472 16.4128 6.95262 16.4128H14.5938C15.3692 16.4128 16 15.7827 16 15.0081V4.67618C16 3.90166 15.3692 3.27154 14.5938 3.27154ZM1.40625 12.6358C1.14778 12.6358 0.9375 12.4258 0.9375 12.1676V1.83568C0.9375 1.5775 1.14778 1.36746 1.40625 1.36746H6.23491C6.47081 1.36746 6.67078 1.54376 6.7 1.77743C6.76794 2.32168 7.98775 12.096 8.05513 12.6358H1.40625ZM6.46012 14.8443L6.30341 13.5723H7.56103L6.46012 14.8443ZM15.0625 15.0081C15.0625 15.2663 14.8522 15.4764 14.5938 15.4764H7.15231L8.93681 13.4146C9.02816 13.3116 9.06909 13.175 9.05022 13.0392L7.94809 4.20797H14.5938C14.8522 4.20797 15.0625 4.41801 15.0625 4.67618V15.0081Z" fill="black" fill-opacity="0.2"/>
-                      </svg> 
+                      </svg>
                     </div>
                     <div class="col text-align-right">
                       <svg xmlns="http://www.w3.org/2000/svg" width="7" height="4" viewBox="0 0 7 4" fill="none">
@@ -51,7 +51,7 @@
             <div class="item-inner">
               <div class="item-title item-label font-16 text-color-lightBlue">Enter your name</div>
               <div class="item-input-wrap">
-                <input type="text" name="name" class="padding" placeholder="Enter Your name" />
+                <input type="text" v-model="name" name="name" class="padding" placeholder="Enter Your name" />
               </div>
             </div>
           </div>
@@ -59,7 +59,7 @@
             <div class="item-inner">
               <div class="item-title item-label font-16 text-color-lightBlue">Enter your phone number</div>
               <div class="item-input-wrap">
-                <input type="text" name="number" class="padding" placeholder="Enter your phone number" />
+                <input type="number" v-model="number" name="number" class="padding" placeholder="Enter your phone number" />
               </div>
             </div>
           </div>
@@ -67,19 +67,22 @@
             <div class="item-inner">
               <div class="item-title item-label font-16 text-color-lightBlue">Enter your family member member</div>
               <div class="item-input-wrap">
-                <input type="text" name="member" class="padding" placeholder="5 family member" />
+                <input type="number" v-model="member" name="member" class="padding" placeholder="5 family member" />
               </div>
             </div>
           </div>
         </form>
       </div>
       <div class="text-align-center">
-        <a class="link text-underline text-color-blue" href="javascript:;">Check Time</a>
-        <div class="countdown_section" :style="{ 'display' : display}">
+        <a class="link text-underline text-color-blue"  :class="{ 'display-none' : !display }" href="javascript:;" @click="checkTime">Check Time</a>
+        <div class="countdown_section position-relative" :class="{ 'display-none' : display }">
           <i class="f7-icons size-22 text-color-blue padding-half">alarm</i>
-          <p class="no-margin font-30">01:25:10</p>
+          <i class="f7-icons font-13 padding-half close-countdown" @click="display = true">xmark</i>
+          <vue-countdown :time="60 * 60 * 1000" v-slot="{ hours, minutes, seconds }">
+            <p class="no-margin font-30">{{ hours }} : {{ minutes }} : {{ seconds }}</p>
+          </vue-countdown>
         </div>
-      </div>      
+      </div>
     </div>
     <div class="padding bottom-bar">
         <div class="row justify-content-start">
@@ -114,7 +117,7 @@
             <div class="swiper-slide slide-active">
               <div class="menu-image col">
                 <img src="/images/indian_dish.png" alt="">
-              </div>  
+              </div>
               <p class="font-13 no-margin text-align-center margin-top-half">Indian</p>
             </div>
             <div class="swiper-slide">
@@ -329,6 +332,8 @@ import {
 } from 'framework7-vue';
 import Framework7 from 'framework7/lite/bundle';
 import { onMounted } from 'vue';
+import VueCountdown from '@chenfengyuan/vue-countdown';
+import axios from "axios";
 export default {
   components : {
       f7Page,
@@ -342,31 +347,63 @@ export default {
       f7MenuItem,
       f7MenuDropdown,
       f7MenuDropdownItem,
-      f7Sheet,f7PageContent
+      f7Sheet,f7PageContent,
+      VueCountdown
   },
   mounted() {
     $('.navbar-bg').remove();
+    $(".page-content").css('padding-top', 0);
   },
   data() {
     return {
-      display : 'none',
+      display : true,
       app : Framework7,
+      name : '',
+      number : '',
+      member : '',
     }
   },
   methods: {
     register() {
-      f7.dialog.confirm('', () => {
-        f7.dialog.alert('Success!');
-        setTimeout(() => {          
-          $('.dialog-title').html("<img src='/images/success.png'>");
-          $('.dialog-button').addClass('col button button-raised button-large text-transform-capitalize');
-          $('.dialog-button').addClass('active');
-          $('.dialog-button').css('width','50%');
-        }, 200);
-      });
-      $('.dialog-title').text("Are you confirm to register?");
-      $('.dialog-button').addClass('col button button-raised button-large text-transform-capitalize');
-      $('.dialog-button').eq(1).addClass('active');
+
+        if(this.name == '' || this.number == '' || this.member == ''){
+            this.notification('Please fill the form details.');
+            return;
+        }
+
+        if(this.number.length > 10){
+            this.notification('Please check your number and enter your mobail number.');
+            return;
+        }
+
+        f7.dialog.confirm('', () => {
+
+            var formData = new FormData();
+            formData.append('name' , this.name);
+            formData.append('number' , this.number);
+            formData.append('member' , this.member);
+
+            axios.post('/api/register',formData)
+            .then((res) => {
+
+                f7.dialog.alert('Success!');
+                setTimeout(() => {
+                $('.dialog-title').html("<img src='/images/success.png'>");
+                $('.dialog-button').addClass('col button button-raised button-large text-transform-capitalize');
+                $('.dialog-button').addClass('active');
+                $('.dialog-button').css('width','50%');
+                }, 200);
+            })
+            .catch((error) => {
+                var err = error.response.data.error;
+                if(err){
+                    this.notification('Please fill the form details.');
+                }
+            })
+        });
+        $('.dialog-title').text("Are you confirm to register?");
+        $('.dialog-button').addClass('col button button-raised button-large text-transform-capitalize');
+        $('.dialog-button').eq(1).addClass('active');
 
     },
     onPageBeforeOut() {
@@ -381,11 +418,30 @@ export default {
     },
     closePopup(){
       document.querySelector('.sheet-backdrop').click();
+    },
+    checkTime(){
+      if(this.name == '' || this.number == '' || this.member == ''){
+        this.notification('Please fill the form details.');
+      }else{
+        this.display = false;
+      }
+    },
+    notification(notice){
+        var notificationFull = f7.notification.create({
+          subtitle: notice,
+          closeTimeout: 3000,
+        });
+        notificationFull.open();
     }
   },
 }
 </script>
 <style scoped>
+    .close-countdown{
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
   .menu-dropdown-center:before , .menu-dropdown-center:after, .dialog-inner:after{
     content: none !important;
   }
@@ -396,7 +452,7 @@ export default {
     top : -8px !important;
     left : 60% !important;
   }
-  
+
   .registranstion{
     color: #394C65;
   }
@@ -459,11 +515,11 @@ export default {
 
   .menu-image {
     box-sizing: border-box;
-    width: 67px;
-    height: 67px;
     background: #F7FAFF;
     border-radius: 7px;
     display: flex;
+    width: 100%;
+    height: 100%;
     justify-content: center;
     align-items: center;
   }
@@ -499,6 +555,10 @@ export default {
     border-bottom: 2px dotted #394C65;
     height: 1em;
   }
+  .swiper-slide{
+    width: 67px;
+    height: 67px;
+  }
   .menu-lists{
     height: 100%;
     max-height: 450px;
@@ -521,7 +581,7 @@ export default {
     border-radius: var(--f7-dialog-border-radius) !important;
   }
    .dialog-buttons{
-    margin : 0 5px 15px;    
+    margin : 0 5px 15px;
   }
   .register-button:hover , .register-button:active, .active{
     background: linear-gradient(71.02deg, #3083FF -23.38%, #0FB3FF 113.05%)!important;

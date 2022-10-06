@@ -1,11 +1,13 @@
 <template>
   <f7-app v-bind="f7Params">
-    <f7-panel left cover resizable>
+    <!-- <f7-panel left cover resizable>
       <f7-view url="/panel-left/" links-view=".view-main"></f7-view>
-    </f7-panel>
-    <f7-panel right reveal resizable>
+    </f7-panel> -->
+    <!-- <f7-panel right reveal resizable>
       <f7-view url="/panel-right/"></f7-view>
-    </f7-panel>
+    </f7-panel> -->
+    {{ $route }}
+    <!-- <f7-view url="/restaurant-manager/" v-if="$route.name == 'RestaurantManager'" :main="true" class="safe-areas" :master-detail-breakpoint="768"></f7-view> -->
     <f7-view url="/" :main="true" class="safe-areas" :master-detail-breakpoint="768"></f7-view>
   </f7-app>
 </template>
