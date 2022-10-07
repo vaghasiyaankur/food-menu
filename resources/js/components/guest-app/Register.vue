@@ -88,18 +88,20 @@
         <div class="text-align-center">
             <a class="link text-underline text-color-black" :class="{ 'display-none' : !display }" href="javascript:;" @click="checkTime">Check Time</a>
             <div class="countdown_section position-relative" :class="{ 'display-none' : display }">
-                <img src="/images/clock.png" alt="">
-                <i class="f7-icons font-13 padding-half margin-bottom close-countdown" @click="display = true">xmark</i>
-                <vue-countdown :time="60 * 60 * 1000" v-slot="{ hours, minutes, seconds }">
-                    <p class="no-margin font-30">{{ hours }} : {{ minutes }} : {{ seconds }}</p>
-                </vue-countdown>
+                <div style="background : url('/images/dots.png')">
+                    <img src="/images/clock.png" alt="">
+                    <i class="f7-icons font-13 padding-half margin-bottom close-countdown" @click="display = true">xmark</i>
+                    <vue-countdown :time="60 * 60 * 1000" v-slot="{ hours, minutes, seconds }">
+                        <p class="no-margin font-30">{{ hours }} : {{ minutes }} : {{ seconds }}</p>
+                    </vue-countdown>
+                </div>
             </div>
         </div>
     </div>
     <div class="padding bottom-bar">
         <div class="row justify-content-start">
             <div class="col bottom-button margin-right">
-                <f7-button class="button bg-color-white register-button button-raised text-color-black button-large text-transform-capitalize" @click="register">Book Table</f7-button>
+                <f7-button class="button bg-color-white register-button button-raised text-color-black button-large text-transform-capitalize" @click="register" id="book_table">Book Table</f7-button>
             </div>
             <div class="col bottom-button">
                 <f7-button class="button bg-color-white register-button button-raised text-color-black button-large text-transform-capitalize" fill sheet-open=".demo-sheet-swipe-to-close" @click="title = 'Menu'">Menu</f7-button>
@@ -181,6 +183,8 @@ export default {
 
             f7.dialog.confirm('', () => {
 
+
+
                 var formData = new FormData();
                 formData.append('name' , this.name);
                 formData.append('number' , this.number);
@@ -189,8 +193,9 @@ export default {
 
                 axios.post('/api/register',formData)
                 .then((res) => {
-
+                    document.getElementById('book_table').classList.add('active');
                     f7.dialog.alert('Success!',() => {
+                        document.getElementById('book_table').classList.remove('active');
                         f7.view.main.router.navigate({ url: '/waiting/' });
                     });
                     setTimeout(() => {

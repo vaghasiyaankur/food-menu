@@ -42,11 +42,13 @@
         <div class="margin countdown_section">
             <div class="text-align-center">Lorem Ipsum is simply dummy text of the printing and typesetting industry</div>
             <div class="countdown position-relative text-align-center margin">
-                <img src="/images/clock.png" alt="">
-                <i class="f7-icons font-13 padding-half margin-bottom close-countdown" @click="display = true">xmark</i>
-                <vue-countdown :time="60 * 60 * 1000" v-slot="{ hours, minutes, seconds }">
-                    <p class="no-margin font-30">{{ hours }} : {{ minutes }} : {{ seconds }}</p>
-                </vue-countdown>
+                <div style="background : url('/images/dots.png')">
+                    <img src="/images/clock.png" alt="">
+                    <i class="f7-icons font-13 padding-half margin-bottom close-countdown" @click="display = true">xmark</i>
+                    <vue-countdown :time="60 * 60 * 1000" v-slot="{ hours, minutes, seconds }">
+                        <p class="no-margin font-30">{{ hours }} : {{ minutes }} : {{ seconds }}</p>
+                    </vue-countdown>
+                </div>
             </div>
         </div>
         <div class="menu-button">
@@ -57,7 +59,7 @@
 </template>
 
 <script>
-import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7Button } from 'framework7-vue';
+import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7Button,f7 } from 'framework7-vue';
 import $ from 'jquery';
 import VueCountdown from '@chenfengyuan/vue-countdown';
 import Menu from './Menu.vue';
@@ -71,6 +73,7 @@ export default {
         f7Block,
         VueCountdown,
         Menu,
+        f7,
         f7Button
     },
     methods: {
