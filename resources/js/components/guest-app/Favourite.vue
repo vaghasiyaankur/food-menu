@@ -16,9 +16,9 @@
             </f7-navbar>
         </div>
         <div class="margin-left margin-right">
-            <!-- <div class="text-align-center text-color-gray">
+            <div class="text-align-center text-color-gray">
                 <p> See your favorite food list and place order </p>
-            </div> -->
+            </div>
             <div class="card cart-list">
                 <div class="card-content card-content-padding no-padding-bottom">
                     <div class="row">

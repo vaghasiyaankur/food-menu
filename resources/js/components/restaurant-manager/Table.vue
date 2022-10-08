@@ -1,14 +1,23 @@
 <template>
     <f7-page color="bg-color-white">
-        <f7-navbar class="navbar-menu text-color-black bg-color-white" large transparent back-link="Back">
-            <div class="right">
-                <div class="row header-link">
-                    <div class="col"><button class="col button button-raised text-color-black padding">Menu management</button></div>
-                    <div class="col"><button class="col button button-raised text-color-black padding">Close reservation</button></div>
-                    <div class="col"><button class="col button button-raised text-color-black padding">Settings</button></div>
+        <div class="header-links display-flex align-items-center padding-right">
+            <div class="row header-link justify-content-flex-end align-items-center">
+                <div class="col-20">
+                    <div class="menu-item menu-item-dropdown">
+                    <div class="menu-item-content button button-raised bg-dark text-color-white padding-left-half padding-right-half">Menu management</div>
+                    <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
+                        <div class="menu-dropdown-content bg-color-white padding-left padding-right">
+                            <a href="#" class="menu-dropdown-link menu-close"></a>
+                            <a href="/food-category/" class="menu-dropdown-link menu-close text-color-black">Food Category</a>
+                            <a href="#" class="menu-dropdown-link menu-close text-color-black">Food Menu</a>
+                        </div>
+                    </div>
+                    </div>
                 </div>
+                <div class="col-20 padding-left-half padding-right-half height-40"><button class="col nav-botton button button-raised bg-dark text-color-white padding">Close reservation</button></div>
+                <div class="col-20 padding-left-half padding-right-half height-40"><button class="col nav-botton button button-raised bg-dark text-color-white padding">Settings</button></div>
             </div>
-        </f7-navbar>
+        </div>
 
         <div class="tables">
             <div class="row table_row">
@@ -29,28 +38,28 @@
                                     <div class="col-25">
                                         <div class="person-info tooltip" >
                                             <div class="text-align-center person">
-                                                <i class="f7-icons size-22">person_fill</i>
+                                                <i class="f7-icons size-12">person_fill</i>
                                                 <span>&nbsp;3</span>
                                             </div>
                                             <div class="waiting-time margin-top-half text-align-center">
-                                                <i class="f7-icons size-22">clock_fill</i>
+                                                <i class="f7-icons size-12">clock_fill</i>
                                                 <span>2:47</span>
                                             </div>
-                                            <div class="tooltiptext">
-                                                <div class="user-info ">
-                                            <div class="display-flex">
-                                                <i class="f7-icons size-12">person_fill</i>
-                                                <span>John Smith</span>
-                                            </div>
-                                            <div class="display-flex">
-                                                <i class="f7-icons size-12">+91 12345 12345</i>
-                                                <span>+91 12345 12345</span>
-                                            </div>
-                                            <div class="display-flex">
-                                                <i class="f7-icons size-12">person_2_fill</i>
-                                                <span>5 family member</span>
-                                            </div>
-                                        </div>
+                                            <div class="tooltiptext padding-half">
+                                                <div class="user-info">
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
+                                                        <span class="text-color-black">John Smith</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">+91 12345 12345</i>
+                                                        <span class="text-color-black">+91 12345 12345</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
+                                                        <span class="text-color-black">5 family member</span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
 
@@ -829,18 +838,47 @@ export default {
     components : {
         f7,f7Page, f7Navbar, f7BlockTitle, f7Block
     },
-    // methods: {
-    //     openTooltip(){
-    //         f7.tooltip.create({
-    //             targetEl: '.person-info',
-    //             text: '<div class="bg-color-white">sddsdsfds</div>'
-    //         });
-    //     }
-    // },
 }
 </script>
 
 <style scoped>
+
+    .header-links{
+        box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.15);
+        height: 60px !important;
+        position: relative;
+        z-index: 99;
+    }
+    .height-40{
+        height: 40px;
+    }
+    .nav-botton{
+        height: 100%;
+    }
+    .menu-item-content{
+        position: relative;
+        z-index: 9;
+    }
+    .menu-dropdown-content{
+        box-shadow: 0px 0.5px 12px rgba(0, 0, 0, 0.2);
+        min-width: 100% !important;
+        top:-30px;
+    }
+    .menu-dropdown-center:before, .menu-dropdown-center:after {
+        content : none;
+    }
+    .bg-dark{
+        background: #38373D;
+    }
+    .menu-item-dropdown-opened .menu-item-content{
+        background: #F33E3E;
+    }
+    .menu-dropdown-link:nth-child(2){
+        border-bottom: 1px solid #EFEFEF;
+    }
+    .color-pink{
+        background: #F33E3E;
+    }
     .tables .table_row,.table_reservation .row{
         justify-content: flex-start;
         width: 100%;
@@ -859,13 +897,10 @@ export default {
     .card-header{
         border-radius: 10px 10px 0 0 !important;
     }
-    .size-12{
-        font-size :12px;
-    }
-    .user-info{
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.11);
-    }
-    .tooltip {
+.size-12{
+    font-size :12px;
+}
+.tooltip {
     position: relative;
     display: inline-block;
     opacity: 1;
@@ -873,7 +908,7 @@ export default {
     background: #f1f1f1;
     padding: 10px;
     color: black;
-    line-height: initial;
+    line-height: 1.4;
     transform: inherit;
     transition-duration: inherit;
     transition-property: inherit;
@@ -912,10 +947,6 @@ export default {
 </style>
 
 <style>
-    .navbar-menu{
-        box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.15);
-        height: 60px !important;
-    }
     .navbar a.link{
         color : #000;
     }
@@ -951,7 +982,7 @@ export default {
     .person-info{
         background: #F1F1F1;
         border-radius: 5px;
-        padding: 7px 5px;
+        padding: 7px 5px !important;
         font-size: 10px !important;
     }
     .person{
@@ -965,4 +996,3 @@ export default {
         align-items: end;
     }
 </style>
-
