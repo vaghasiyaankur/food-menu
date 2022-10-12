@@ -2,26 +2,25 @@
     <f7-page color="bg-color-white">
         <div class="header-links display-flex align-items-center padding-right">
             <div class="row header-link justify-content-flex-end align-items-center">
-                <div class="col-20">
+                <div class="col-20 nav-button">
                     <div class="menu-item menu-item-dropdown">
-                    <div class="menu-item-content button button-raised bg-dark text-color-white padding-left-half padding-right-half">Menu management</div>
-                    <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
-                        <div class="menu-dropdown-content bg-color-white padding-left padding-right">
-                            <a href="#" class="menu-dropdown-link menu-close"></a>
-                            <a href="/food-category/" class="menu-dropdown-link menu-close text-color-black">Food Category</a>
-                            <a href="#" class="menu-dropdown-link menu-close text-color-black">Food Menu</a>
+                        <div class="menu-item-content button button-raised bg-dark text-color-white padding-left-half padding-right-half">Menu management</div>
+                        <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
+                            <div class="menu-dropdown-content bg-color-white padding-left padding-right">
+                                <a href="#" class="menu-dropdown-link menu-close"></a>
+                                <a href="/food-category/" class="menu-dropdown-link menu-close text-color-black">Food Category</a>
+                                <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black">Food Menu</a>
+                            </div>
                         </div>
                     </div>
-                    </div>
                 </div>
-                <div class="col-20 padding-left-half padding-right-half height-40"><button class="col nav-botton button button-raised bg-dark text-color-white padding">Close reservation</button></div>
-                <div class="col-20 padding-left-half padding-right-half height-40"><button class="col nav-botton button button-raised bg-dark text-color-white padding">Settings</button></div>
+                <div class="col-20 padding-left-half padding-right-half height-40 nav-button"><button class="col nav-botton button button-raised bg-dark text-color-white padding closeReservation" @click="$root.closeReservation()">Close reservation</button></div>
+                <div class="col-20 padding-left-half padding-right-half height-40 nav-button"><button class="col nav-botton button button-raised bg-dark text-color-white padding">Settings</button></div>
             </div>
         </div>
-
         <div class="tables">
             <div class="row table_row">
-                <div class="col-25 no-padding">
+                <div class="col-25 no-padding table-card">
                     <div class="card">
                         <div class="card-header no-padding">
                             <div class="row header_detail">
@@ -33,9 +32,9 @@
                             <div class="table_image text-align-center">
                                 <img src="/images/table/3_member_table.png" alt="">
                             </div>
-                            <div class="table_reservation margin-top">
+                            <div class="table_reservation margin-top equal-height-table">
                                 <div class="row">
-                                    <div class="col-25">
+                                    <div class="col-25 table_reservation_info">
                                         <div class="person-info tooltip" >
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-12">person_fill</i>
@@ -62,23 +61,8 @@
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <!-- <div class="bg-color-white user-info ">
-                                            <div class="display-flex">
-                                                <i class="f7-icons size-12">person_fill</i>
-                                                <span>John Smith</span>
-                                            </div>
-                                            <div class="display-flex">
-                                                <i class="f7-icons size-12">+91 12345 12345</i>
-                                                <span>+91 12345 12345</span>
-                                            </div>
-                                            <div class="display-flex">
-                                                <i class="f7-icons size-12">person_2_fill</i>
-                                                <span>5 family member</span>
-                                            </div>
-                                        </div> -->
                                     </div>
-                                    <div class="col-25">
+                                    <div class="col-25 table_reservation_info">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -90,7 +74,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-25">
+                                    <div class="col-25 table_reservation_info">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -102,7 +86,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-25">
+                                    <div class="col-25 table_reservation_info">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -114,7 +98,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-25">
+                                    <div class="col-25 table_reservation_info">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -126,7 +110,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-25">
+                                    <div class="col-25 table_reservation_info">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -143,7 +127,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-25 no-padding">
+                <div class="col-25 no-padding table-card">
                     <div class="card">
                         <div class="card-header no-padding">
                             <div class="row header_detail">
@@ -155,9 +139,9 @@
                             <div class="table_image text-align-center">
                                 <img src="/images/table/4_member_table.png" alt="">
                             </div>
-                            <div class="table_reservation margin-top">
+                            <div class="table_reservation margin-top equal-height-table">
                                 <div class="row">
-                                    <div class="col-25">
+                                    <div class="col-25 table_reservation_info">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -169,7 +153,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-25">
+                                    <div class="col-25 table_reservation_info">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -181,7 +165,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-25">
+                                    <div class="col-25 table_reservation_info">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -193,7 +177,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-25">
+                                    <div class="col-25 table_reservation_info">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -205,7 +189,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-25">
+                                    <div class="col-25 table_reservation_info">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -222,7 +206,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-25 no-padding">
+                <div class="col-25 no-padding table-card">
                     <div class="card">
                         <div class="card-header no-padding ">
                             <div class="row header_detail">
@@ -234,9 +218,9 @@
                             <div class="table_image text-align-center">
                                 <img src="/images/table/5_member_table.png" alt="">
                             </div>
-                            <div class="table_reservation margin-top">
+                            <div class="table_reservation margin-top equal-height-table">
                                 <div class="row">
-                                    <div class="col-25">
+                                    <div class="col-25 table_reservation_info">
                                         <div class="person-info " data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -249,7 +233,7 @@
 
                                         </div>
                                     </div>
-                                    <div class="col-25">
+                                    <div class="col-25 table_reservation_info">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -261,7 +245,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-25">
+                                    <div class="col-25 table_reservation_info">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -273,7 +257,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-25">
+                                    <div class="col-25 table_reservation_info">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -290,7 +274,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-25 no-padding">
+                <div class="col-25 no-padding table-card">
                     <div class="card">
                         <div class="card-header no-padding">
                             <div class="row header_detail">
@@ -302,9 +286,9 @@
                             <div class="table_image text-align-center">
                                 <img src="/images/table/6_member_table.png" alt="">
                             </div>
-                            <div class="table_reservation margin-top">
+                            <div class="table_reservation margin-top equal-height-table">
                                 <div class="row">
-                                    <div class="col-25">
+                                    <div class="col-25 table_reservation_info">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -316,7 +300,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-25">
+                                    <div class="col-25 table_reservation_info">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -328,7 +312,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-25">
+                                    <div class="col-25 table_reservation_info">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -340,7 +324,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-25">
+                                    <div class="col-25 table_reservation_info">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -357,7 +341,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-25 no-padding">
+                <div class="col-25 no-padding table-card">
                     <div class="card">
                         <div class="card-header no-padding">
                             <div class="row header_detail">
@@ -369,9 +353,9 @@
                             <div class="table_image text-align-center">
                                 <img src="/images/table/1_member_table.png" alt="">
                             </div>
-                            <div class="table_reservation margin-top">
+                            <div class="table_reservation margin-top equal-height-table">
                                 <div class="row">
-                                    <div class="col-25">
+                                    <div class="col-25 table_reservation_info">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -383,7 +367,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-25">
+                                    <div class="col-25 table_reservation_info">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -395,7 +379,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-25">
+                                    <div class="col-25 table_reservation_info">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -407,7 +391,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-25">
+                                    <div class="col-25 table_reservation_info">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -419,7 +403,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-25">
+                                    <div class="col-25 table_reservation_info">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -431,7 +415,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-25">
+                                    <div class="col-25 table_reservation_info">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -448,7 +432,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-25 no-padding">
+                <div class="col-25 no-padding table-card">
                     <div class="card">
                         <div class="card-header no-padding">
                             <div class="row header_detail">
@@ -460,9 +444,9 @@
                             <div class="table_image text-align-center">
                                 <img src="/images/table/2_member_table.png" alt="">
                             </div>
-                            <div class="table_reservation margin-top">
+                            <div class="table_reservation margin-top equal-height-table">
                                 <div class="row">
-                                    <div class="col-25">
+                                    <div class="col-25 table_reservation_info">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -474,7 +458,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-25">
+                                    <div class="col-25 table_reservation_info">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -486,7 +470,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-25">
+                                    <div class="col-25 table_reservation_info">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -498,7 +482,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-25">
+                                    <div class="col-25 table_reservation_info">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -510,7 +494,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-25">
+                                    <div class="col-25 table_reservation_info">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -522,7 +506,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-25">
+                                    <div class="col-25 table_reservation_info">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -539,7 +523,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-25 no-padding">
+                <div class="col-25 no-padding table-card">
                     <div class="card">
                         <div class="card-header no-padding">
                             <div class="row header_detail">
@@ -551,9 +535,9 @@
                             <div class="table_image text-align-center">
                                 <img src="/images/table/7_member_table.png" alt="">
                             </div>
-                            <div class="table_reservation margin-top">
+                            <div class="table_reservation margin-top equal-height-table">
                                 <div class="row">
-                                    <div class="col-25">
+                                    <div class="col-25 table_reservation_info">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -565,7 +549,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-25">
+                                    <div class="col-25 table_reservation_info">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -577,7 +561,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-25">
+                                    <div class="col-25 table_reservation_info">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -589,7 +573,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-25">
+                                    <div class="col-25 table_reservation_info">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -606,7 +590,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-25 no-padding">
+                <div class="col-25 no-padding table-card">
                     <div class="card">
                         <div class="card-header no-padding">
                             <div class="row header_detail">
@@ -618,9 +602,9 @@
                             <div class="table_image text-align-center">
                                 <img src="/images/table/8_member_table.png" alt="">
                             </div>
-                            <div class="table_reservation margin-top">
+                            <div class="table_reservation margin-top equal-height-table">
                                 <div class="row">
-                                    <div class="col-25">
+                                    <div class="col-25 table_reservation_info">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -637,7 +621,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-25">
+                                    <div class="col-25 table_reservation_info">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -654,7 +638,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-25 no-padding">
+                <div class="col-25 no-padding table-card">
                     <div class="card">
                         <div class="card-header no-padding">
                             <div class="row header_detail">
@@ -666,9 +650,9 @@
                             <div class="table_image text-align-center">
                                 <img src="/images/table/10_member_table.png" alt="">
                             </div>
-                            <div class="table_reservation margin-top">
+                            <div class="table_reservation margin-top equal-height-table">
                                 <div class="row">
-                                    <div class="col-25">
+                                    <div class="col-25 table_reservation_info">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -680,7 +664,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-25">
+                                    <div class="col-25 table_reservation_info">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -697,7 +681,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-25 no-padding">
+                <div class="col-25 no-padding table-card">
                     <div class="card">
                         <div class="card-header no-padding">
                             <div class="row header_detail">
@@ -709,9 +693,9 @@
                             <div class="table_image text-align-center">
                                 <img src="/images/table/20_member_table.png" alt="">
                             </div>
-                            <div class="table_reservation margin-top">
+                            <div class="table_reservation margin-top equal-height-table">
                                 <div class="row">
-                                    <div class="col-25">
+                                    <div class="col-25 table_reservation_info">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -723,7 +707,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-25">
+                                    <div class="col-25 table_reservation_info">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -740,7 +724,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-25 no-padding">
+                <div class="col-25 no-padding table-card">
                     <div class="card">
                         <div class="card-header no-padding">
                             <div class="row header_detail">
@@ -752,9 +736,9 @@
                             <div class="table_image text-align-center">
                                 <img src="/images/table/9_member_table.png" alt="">
                             </div>
-                            <div class="table_reservation margin-top">
+                            <div class="table_reservation margin-top equal-height-table">
                                 <div class="row">
-                                    <div class="col-25">
+                                    <div class="col-25 table_reservation_info">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -766,7 +750,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-25">
+                                    <div class="col-25 table_reservation_info">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -783,7 +767,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-25 no-padding">
+                <div class="col-25 no-padding table-card">
                     <div class="card">
                         <div class="card-header no-padding">
                             <div class="row header_detail">
@@ -795,9 +779,9 @@
                             <div class="table_image text-align-center">
                                 <img src="/images/table/15_member_table.png" alt="">
                             </div>
-                            <div class="table_reservation margin-top">
+                            <div class="table_reservation margin-top equal-height-table">
                                 <div class="row">
-                                    <div class="col-25">
+                                    <div class="col-25 table_reservation_info">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -809,7 +793,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-25">
+                                    <div class="col-25 table_reservation_info">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -828,15 +812,34 @@
                 </div>
             </div>
         </div>
-    </f7-page>
+        </f7-page>
 </template>
 
 <script>
 import { f7,f7Page, f7Navbar, f7BlockTitle, f7Block } from 'framework7-vue';
+import $ from 'jquery';
 export default {
     name : 'RegisterPage',
     components : {
         f7,f7Page, f7Navbar, f7BlockTitle, f7Block
+    },
+    mounted() {
+        this.equal_height();
+    },
+    updated() {
+        this.equal_height();
+    },
+    methods: {
+        equal_height(){
+            var highestBox = 0;
+            var targetDiv = document.querySelectorAll('.equal-height-table');
+            for(var i=0; i<targetDiv.length;i++){
+            if(targetDiv[i].clientHeight > highestBox){
+                    highestBox = targetDiv[i].clientHeight;
+            }
+            }
+            document.querySelectorAll(".equal-height-table").forEach(node => node.style.height = highestBox + "px");
+        },
     },
 }
 </script>
@@ -871,20 +874,17 @@ export default {
         background: #38373D;
     }
     .menu-item-dropdown-opened .menu-item-content{
-        background: #F33E3E;
+        background: #ff2d55;
     }
     .menu-dropdown-link:nth-child(2){
         border-bottom: 1px solid #EFEFEF;
     }
-    .color-pink{
-        background: #F33E3E;
-    }
-    .tables .table_row,.table_reservation .row{
+    .table_reservation .row{
         justify-content: flex-start;
         width: 100%;
     }
     .col-25{
-        width: 25% !important;
+        /* width: 25% !important; */
         padding: 5px;
     }
     .table_image {
@@ -896,6 +896,14 @@ export default {
     }
     .card-header{
         border-radius: 10px 10px 0 0 !important;
+    }
+    .card-content
+    {
+        height: 100%;
+        min-height: 210px;
+    }
+    .table_reservation_info{
+        width: 25% !important;
     }
 .size-12{
     font-size :12px;
@@ -943,6 +951,15 @@ export default {
 
 .tooltip:hover .tooltiptext {
   visibility: visible;
+}
+
+@media screen and (max-width : 820px) {
+    .nav-button {
+        width : 25% !important;
+    }
+    .table-card{
+        width : 33.33% !important;
+    }
 }
 </style>
 
@@ -994,5 +1011,32 @@ export default {
         display: flex;
         justify-content: flex-start;
         align-items: end;
+    }
+    .bg-color-dark-pink {
+        background-color: #F33E3E !important;
+    }
+
+    .dialog-text {
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 24px;
+    }
+
+    .dialog-inner:after {
+        content: none !important;
+    }
+
+    .dialog {
+        background-color: #fff !important;
+        width: 378px !important;
+    }
+
+    .dialog-button {
+        margin: 0 5px !important;
+        border-radius: var(--f7-dialog-border-radius) !important;
+    }
+
+    .dialog-buttons {
+        margin: 0 5px 15px;
     }
 </style>

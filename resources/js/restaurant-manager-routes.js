@@ -1,6 +1,8 @@
 
 import Table from "./components/restaurant-manager/Table.vue";
 import FoodCategory from "./components/restaurant-manager/FoodCategory.vue";
+import FoodSubCategory from "./components/restaurant-manager/FoodSubCategory.vue";
+import FoodProduct from "./components/restaurant-manager/FoodProduct.vue";
 // Pages
 export default [
   // Index page
@@ -15,6 +17,14 @@ export default [
     path: '/food-category/',
     component: FoodCategory,
   },
+  {
+    path: '/food-subcategory/',
+    component: FoodSubCategory,
+  },
 
+  {
+    path: '/food-product/',
+    component: FoodProduct,
+  },
 
 ]
