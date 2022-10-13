@@ -22,7 +22,7 @@
                 </div>
             </f7-navbar>
         </div>
-        <div class="subcategory-list-section">
+        <div class="product-list-section">
             <div class="card">
                 <div class="card_header">
                     <div class="row padding-left padding-right align-items-center">

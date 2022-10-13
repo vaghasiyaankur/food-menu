@@ -473,4 +473,9 @@ export default {
         width: 50%;
         margin-left: 20px;
     }
+    @media screen and (max-width:820px) {
+        .left {
+            width: 30%;
+        }
+    }
 </style>

@@ -14,14 +14,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-20 padding-left-half padding-right-half height-40 nav-button"><button class="col nav-botton button button-raised bg-dark text-color-white padding closeReservation" @click="$root.closeReservation()">Close reservation</button></div>
-                <div class="col-20 padding-left-half padding-right-half height-40 nav-button"><button class="col nav-botton button button-raised bg-dark text-color-white padding">Settings</button></div>
+                <div class="col-20 padding-left-half padding-right-half height-40 nav-button"><button class="col nav-link button button-raised bg-dark text-color-white padding closeReservation" @click="$root.closeReservation()">Close reservation</button></div>
+                <div class="col-20 padding-left-half padding-right-half height-40 nav-button"><a href="/settings/" class="col link nav-link button button-raised bg-dark text-color-white padding">Settings</a></div>
             </div>
         </div>
         <div class="tables">
-            <div class="row table_row">
-                <div class="col-25 no-padding table-card">
-                    <div class="card">
+            <div class="row table_row margin-horizontal">
+                <div class="col-25 card no-padding no-margin-horizontal table-card">
+                    <div class="">
                         <div class="card-header no-padding">
                             <div class="row header_detail">
                                 <div class="text-color-white table-number padding-half">Table : 1</div>
@@ -127,8 +127,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-25 no-padding table-card">
-                    <div class="card">
+                <div class="col-25 card no-padding no-margin-horizontal table-card">
+                    <div class="">
                         <div class="card-header no-padding">
                             <div class="row header_detail">
                                 <div class="text-color-white table-number padding-half">Table : 2</div>
@@ -206,8 +206,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-25 no-padding table-card">
-                    <div class="card">
+                <div class="col-25 card no-padding no-margin-horizontal table-card">
+                    <div class="">
                         <div class="card-header no-padding ">
                             <div class="row header_detail">
                                 <div class="text-color-white table-number padding-half">Table : 3</div>
@@ -274,8 +274,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-25 no-padding table-card">
-                    <div class="card">
+                <div class="col-25 card no-margin-horizontal no-padding table-card">
+                    <div class="">
                         <div class="card-header no-padding">
                             <div class="row header_detail">
                                 <div class="text-color-white table-number padding-half">Table : 4</div>
@@ -341,8 +341,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-25 no-padding table-card">
-                    <div class="card">
+                <div class="col-25 card no-padding no-margin-horizontal table-card">
+                    <div class="">
                         <div class="card-header no-padding">
                             <div class="row header_detail">
                                 <div class="text-color-white table-number padding-half">Table : 5</div>
@@ -432,8 +432,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-25 no-padding table-card">
-                    <div class="card">
+                <div class="col-25 card no-padding no-margin-horizontal table-card">
+                    <div class="">
                         <div class="card-header no-padding">
                             <div class="row header_detail">
                                 <div class="text-color-white table-number padding-half">Table : 6</div>
@@ -523,8 +523,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-25 no-padding table-card">
-                    <div class="card">
+                <div class="col-25 card no-padding no-margin-horizontal table-card">
+                    <div class="">
                         <div class="card-header no-padding">
                             <div class="row header_detail">
                                 <div class="text-color-white table-number padding-half">Table : 7</div>
@@ -590,8 +590,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-25 no-padding table-card">
-                    <div class="card">
+                <div class="col-25 card no-padding no-margin-horizontal table-card">
+                    <div class="">
                         <div class="card-header no-padding">
                             <div class="row header_detail">
                                 <div class="text-color-white table-number padding-half">Table : 8</div>
@@ -638,8 +638,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-25 no-padding table-card">
-                    <div class="card">
+                <div class="col-25 card no-padding no-margin-horizontal table-card">
+                    <div class="">
                         <div class="card-header no-padding">
                             <div class="row header_detail">
                                 <div class="text-color-white table-number padding-half">Table : 9</div>
@@ -681,8 +681,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-25 no-padding table-card">
-                    <div class="card">
+                <div class="col-25 card no-padding no-margin-horizontal table-card">
+                    <div class="">
                         <div class="card-header no-padding">
                             <div class="row header_detail">
                                 <div class="text-color-white table-number padding-half">Table : 10</div>
@@ -724,8 +724,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-25 no-padding table-card">
-                    <div class="card">
+                <div class="col-25 card no-padding no-margin-horizontal table-card">
+                    <div class="">
                         <div class="card-header no-padding">
                             <div class="row header_detail">
                                 <div class="text-color-white table-number padding-half">Table : 11</div>
@@ -767,8 +767,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-25 no-padding table-card">
-                    <div class="card">
+                <div class="col-25 card no-padding no-margin-horizontal table-card">
+                    <div class="">
                         <div class="card-header no-padding">
                             <div class="row header_detail">
                                 <div class="text-color-white table-number padding-half">Table : 12</div>
@@ -855,8 +855,9 @@ export default {
     .height-40{
         height: 40px;
     }
-    .nav-botton{
+    .nav-link,.menu-item-content {
         height: 100%;
+        text-transform: capitalize;
     }
     .menu-item-content{
         position: relative;
@@ -964,6 +965,9 @@ export default {
 </style>
 
 <style>
+    .nav-button{
+        text-transform: capitalize;
+    }
     .navbar a.link{
         color : #000;
     }

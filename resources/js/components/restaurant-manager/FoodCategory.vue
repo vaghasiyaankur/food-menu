@@ -16,8 +16,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col padding-left-half padding-right-half height-40"><button class="col nav-botton button button-raised bg-dark text-color-white padding closeReservation" @click="$root.closeReservation()">Close reservation</button></div>
-                    <div class="col padding-left-half padding-right-half height-40"><button class="col nav-botton button button-raised bg-dark text-color-white padding">Settings</button></div>
+                    <div class="col padding-left-half padding-right-half height-40"><button class="col nav-link button button-raised bg-dark text-color-white padding closeReservation" @click="$root.closeReservation()">Close reservation</button></div>
+                    <div class="col padding-left-half padding-right-half height-40"><button class="col nav-link button button-raised bg-dark text-color-white padding">Settings</button></div>
                 </div>
             </div>
         </f7-navbar>
@@ -363,10 +363,6 @@ export default {
     height: 40px;
 }
 
-.nav-botton {
-    height: 100%;
-}
-
 .menu-item-content {
     position: relative;
     z-index: 9;
@@ -509,6 +505,11 @@ export default {
 .navbar-large .title {
     opacity: 1 !important;
     left: 0 !important;
+}
+
+.nav-link,.menu-item-content {
+    height: 100%;
+    text-transform: capitalize;
 }
 
 .title-large {
