@@ -1,207 +1,206 @@
 <template>
-    <f7-page>
-        <div class="nav-bar">
-            <f7-navbar class="navbar-menu bg-color-white" large transparent back-link="Back">
-                <div class="header-links display-flex align-items-center padding-right">
-                    <div class="row header-link justify-content-flex-end align-items-center">
-                        <div class="col">
-                            <div class="menu-item menu-item-dropdown">
-                                <div class="menu-item-content button button-raised bg-pink text-color-white padding-left-half padding-right-half">Menu management</div>
-                                <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
-                                    <div class="menu-dropdown-content bg-color-white padding-left padding-right">
-                                        <a href="#" class="menu-dropdown-link menu-close"></a>
-                                        <a href="/food-category/" class="menu-dropdown-link menu-close text-color-pink">Food Category</a>
-                                        <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black">Food Menu</a>
-                                    </div>
+<f7-page>
+    <div class="nav-bar">
+        <f7-navbar class="navbar-menu bg-color-white" large transparent back-link="Back">
+            <div class="header-links display-flex align-items-center padding-right">
+                <div class="row header-link justify-content-flex-end align-items-center">
+                    <div class="col">
+                        <div class="menu-item menu-item-dropdown">
+                            <div class="menu-item-content button button-raised bg-pink text-color-white padding-left-half padding-right-half">Menu management</div>
+                            <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
+                                <div class="menu-dropdown-content bg-color-white padding-left padding-right">
+                                    <a href="#" class="menu-dropdown-link menu-close"></a>
+                                    <a href="/food-category/" class="menu-dropdown-link menu-close text-color-pink">Food Category</a>
+                                    <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black">Food Menu</a>
                                 </div>
                             </div>
                         </div>
-                        <div class="col padding-left-half padding-right-half height-40"><button class="col nav-botton button button-raised bg-dark text-color-white padding closeReservation" @click="$root.closeReservation()">Close reservation</button></div>
-                        <div class="col padding-left-half padding-right-half height-40"><button class="col nav-botton button button-raised bg-dark text-color-white padding">Settings</button></div>
                     </div>
+                    <div class="col padding-left-half padding-right-half height-40"><button class="col nav-botton button button-raised bg-dark text-color-white padding closeReservation" @click="$root.closeReservation()">Close reservation</button></div>
+                    <div class="col padding-left-half padding-right-half height-40"><a href="/settings/" class="col nav-link button button-raised bg-dark text-color-white padding">Settings</a></div>
                 </div>
-            </f7-navbar>
-        </div>
-        <div class="subcategory-list-section">
-            <div class="card">
-                <div class="card_header">
-                    <div class="row padding-left padding-right align-items-center">
-                        <div class="col-50">
-                            <h3>Sub Category</h3>
-                        </div>
-                        <div class="col-50">
-                            <div class="row align-items-center">
-                                <div class="col">
-                                    <div class="item-content item-input">
-                                        <div class="item-inner">
-                                            <div class="item-input-wrap row padding-half">
-                                                <i class="f7-icons font-22 search-icon">search</i>
-                                                <input type="search" name="search" id="searchData">
-                                            </div>
+            </div>
+        </f7-navbar>
+    </div>
+    <div class="subcategory-list-section">
+        <div class="card">
+            <div class="card_header">
+                <div class="row padding-left padding-right align-items-center">
+                    <div class="col-50">
+                        <h3>Sub Category</h3>
+                    </div>
+                    <div class="col-50">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <div class="item-content item-input">
+                                    <div class="item-inner">
+                                        <div class="item-input-wrap row padding-half">
+                                            <i class="f7-icons font-22 search-icon">search</i>
+                                            <input type="search" name="search" id="searchData">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col padding-left-half padding-right-half">
-                                    <button class="button button-raised bg-dark text-color-white padding height-36" @click="addSubCategory"><i class="f7-icons font-22">plus_square</i> Add Sub Category</button>
+                            </div>
+                            <div class="col padding-left-half padding-right-half">
+                                <button class="button button-raised bg-dark text-color-white padding height-36" @click="addSubCategory"><i class="f7-icons font-22">plus_square</i> Add Sub Category</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-content card-content-padding">
+                <div class="main-category text-color-pink padding-left-half">Indian</div>
+                <div class="category-list border-bottom padding-top padding-bottom">
+                    <div class="row align-items-center">
+                        <div class="col-60">
+                            <div class="display-flex align-items-center">
+                                <span class="padding-left-half sub_category_name">Kathiyavadi thali</span>
+                            </div>
+                        </div>
+                        <div class="col-40 action-buttons">
+                            <div class="row align-items-center">
+                                <div class="col-50">
+                                    <button class="button button-raised text-color-black padding height-36" @click="addProduct"><i class="f7-icons font-22">plus</i> Add Product</button>
+                                </div>
+                                <div class="col-25">
+                                    <button class="button button-raised text-color-black padding height-36" @click="editSubCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                </div>
+                                <div class="col-25">
+                                    <button class="button button-raised bg-karaka-orange text-color-white padding height-36" @click="removeSubCategory"><i class="f7-icons font-22">trash</i> Delete</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="card-content card-content-padding">
-                    <div class="main-category text-color-pink padding-left-half">Indian</div>
-                    <div class="category-list border-bottom padding-top padding-bottom">
-                        <div class="row align-items-center">
-                            <div class="col-60">
-                                <div class="display-flex align-items-center">
-                                    <span class="padding-left-half sub_category_name">Kathiyavadi thali</span>
-                                </div>
+                <div class="category-list border-bottom padding-top padding-bottom">
+                    <div class="row align-items-center">
+                        <div class="col-60">
+                            <div class="display-flex align-items-center">
+                                <span class="padding-left-half sub_category_name">Dal</span>
                             </div>
-                            <div class="col-40 action-buttons">
-                                <div class="row align-items-center">
-                                    <div class="col-50">
-                                        <button class="button button-raised text-color-black padding height-36" @click="addProduct"><i class="f7-icons font-22">plus</i> Add Product</button>
-                                    </div>
-                                    <div class="col-25">
-                                        <button class="button button-raised text-color-black padding height-36" @click="editSubCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
-                                    </div>
-                                    <div class="col-25">
-                                        <button class="button button-raised bg-karaka-orange text-color-white padding height-36" @click="removeSubCategory"><i class="f7-icons font-22">trash</i> Delete</button>
-                                    </div>
+                        </div>
+                        <div class="col-40 action-buttons">
+                            <div class="row align-items-center">
+                                <div class="col-50">
+                                    <button class="button button-raised text-color-black padding height-36" @click="addProduct"><i class="f7-icons font-22">plus</i> Add Product</button>
+                                </div>
+                                <div class="col-25">
+                                    <button class="button button-raised text-color-black padding height-36" @click="editSubCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                </div>
+                                <div class="col-25">
+                                    <button class="button button-raised bg-karaka-orange text-color-white padding height-36" @click="removeSubCategory"><i class="f7-icons font-22">trash</i> Delete</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="category-list border-bottom padding-top padding-bottom">
-                        <div class="row align-items-center">
-                            <div class="col-60">
-                                <div class="display-flex align-items-center">
-                                    <span class="padding-left-half sub_category_name">Dal</span>
-                                </div>
+                </div>
+                <div class="category-list border-bottom padding-top padding-bottom">
+                    <div class="row align-items-center">
+                        <div class="col-60">
+                            <div class="display-flex align-items-center">
+                                <span class="padding-left-half sub_category_name">Roti</span>
                             </div>
-                            <div class="col-40 action-buttons">
-                                <div class="row align-items-center">
-                                    <div class="col-50">
-                                        <button class="button button-raised text-color-black padding height-36" @click="addProduct"><i class="f7-icons font-22">plus</i> Add Product</button>
-                                    </div>
-                                    <div class="col-25">
-                                        <button class="button button-raised text-color-black padding height-36" @click="editSubCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
-                                    </div>
-                                    <div class="col-25">
-                                        <button class="button button-raised bg-karaka-orange text-color-white padding height-36" @click="removeSubCategory"><i class="f7-icons font-22">trash</i> Delete</button>
-                                    </div>
+                        </div>
+                        <div class="col-40 action-buttons">
+                            <div class="row align-items-center">
+                                <div class="col-50">
+                                    <button class="button button-raised text-color-black padding height-36" @click="addProduct"><i class="f7-icons font-22">plus</i> Add Product</button>
+                                </div>
+                                <div class="col-25">
+                                    <button class="button button-raised text-color-black padding height-36" @click="editSubCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                </div>
+                                <div class="col-25">
+                                    <button class="button button-raised bg-karaka-orange text-color-white padding height-36" @click="removeSubCategory"><i class="f7-icons font-22">trash</i> Delete</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="category-list border-bottom padding-top padding-bottom">
-                        <div class="row align-items-center">
-                            <div class="col-60">
-                                <div class="display-flex align-items-center">
-                                    <span class="padding-left-half sub_category_name">Roti</span>
-                                </div>
+                </div>
+                <div class="main-category text-color-pink padding-left-half margin-top padding-top-half">Panjabi</div>
+                <div class="category-list border-bottom padding-top padding-bottom">
+                    <div class="row align-items-center">
+                        <div class="col-60">
+                            <div class="display-flex align-items-center">
+                                <span class="padding-left-half sub_category_name">Paratha</span>
                             </div>
-                            <div class="col-40 action-buttons">
-                                <div class="row align-items-center">
-                                    <div class="col-50">
-                                        <button class="button button-raised text-color-black padding height-36" @click="addProduct"><i class="f7-icons font-22">plus</i> Add Product</button>
-                                    </div>
-                                    <div class="col-25">
-                                        <button class="button button-raised text-color-black padding height-36" @click="editSubCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
-                                    </div>
-                                    <div class="col-25">
-                                        <button class="button button-raised bg-karaka-orange text-color-white padding height-36" @click="removeSubCategory"><i class="f7-icons font-22">trash</i> Delete</button>
-                                    </div>
+                        </div>
+                        <div class="col-40 action-buttons">
+                            <div class="row align-items-center">
+                                <div class="col-50">
+                                    <button class="button button-raised text-color-black padding height-36" @click="addProduct"><i class="f7-icons font-22">plus</i> Add Product</button>
+                                </div>
+                                <div class="col-25">
+                                    <button class="button button-raised text-color-black padding height-36" @click="editSubCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                </div>
+                                <div class="col-25">
+                                    <button class="button button-raised bg-karaka-orange text-color-white padding height-36" @click="removeSubCategory"><i class="f7-icons font-22">trash</i> Delete</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="main-category text-color-pink padding-left-half margin-top padding-top-half">Panjabi</div>
-                    <div class="category-list border-bottom padding-top padding-bottom">
-                        <div class="row align-items-center">
-                            <div class="col-60">
-                                <div class="display-flex align-items-center">
-                                    <span class="padding-left-half sub_category_name">Paratha</span>
-                                </div>
+                </div>
+                <div class="category-list padding-top padding-bottom">
+                    <div class="row align-items-center">
+                        <div class="col-60">
+                            <div class="display-flex align-items-center">
+                                <span class="padding-left-half sub_category_name">Panjabi sabji</span>
                             </div>
-                            <div class="col-40 action-buttons">
-                                <div class="row align-items-center">
-                                    <div class="col-50">
-                                        <button class="button button-raised text-color-black padding height-36" @click="addProduct"><i class="f7-icons font-22">plus</i> Add Product</button>
-                                    </div>
-                                    <div class="col-25">
-                                        <button class="button button-raised text-color-black padding height-36" @click="editSubCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
-                                    </div>
-                                    <div class="col-25">
-                                        <button class="button button-raised bg-karaka-orange text-color-white padding height-36" @click="removeSubCategory"><i class="f7-icons font-22">trash</i> Delete</button>
-                                    </div>
+                        </div>
+                        <div class="col-40 action-buttons">
+                            <div class="row align-items-center">
+                                <div class="col-50">
+                                    <button class="button button-raised text-color-black padding height-36" @click="addProduct"><i class="f7-icons font-22">plus</i> Add Product</button>
+                                </div>
+                                <div class="col-25">
+                                    <button class="button button-raised text-color-black padding height-36" @click="editSubCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                </div>
+                                <div class="col-25">
+                                    <button class="button button-raised bg-karaka-orange text-color-white padding height-36" @click="removeSubCategory"><i class="f7-icons font-22">trash</i> Delete</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="category-list padding-top padding-bottom">
-                        <div class="row align-items-center">
-                            <div class="col-60">
-                                <div class="display-flex align-items-center">
-                                    <span class="padding-left-half sub_category_name">Panjabi sabji</span>
-                                </div>
+                </div>
+                <div class="main-category text-color-pink padding-left-half margin-top padding-top-half">Fast Food</div>
+                <div class="category-list border-bottom padding-top padding-bottom">
+                    <div class="row align-items-center">
+                        <div class="col-60">
+                            <div class="display-flex align-items-center">
+                                <span class="padding-left-half sub_category_name">Sandwich</span>
                             </div>
-                            <div class="col-40 action-buttons">
-                                <div class="row align-items-center">
-                                    <div class="col-50">
-                                        <button class="button button-raised text-color-black padding height-36" @click="addProduct"><i class="f7-icons font-22">plus</i> Add Product</button>
-                                    </div>
-                                    <div class="col-25">
-                                        <button class="button button-raised text-color-black padding height-36" @click="editSubCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
-                                    </div>
-                                    <div class="col-25">
-                                        <button class="button button-raised bg-karaka-orange text-color-white padding height-36" @click="removeSubCategory"><i class="f7-icons font-22">trash</i> Delete</button>
-                                    </div>
+                        </div>
+                        <div class="col-40 action-buttons">
+                            <div class="row align-items-center">
+                                <div class="col-50">
+                                    <button class="button button-raised text-color-black padding height-36" @click="addProduct"><i class="f7-icons font-22">plus</i> Add Product</button>
+                                </div>
+                                <div class="col-25">
+                                    <button class="button button-raised text-color-black padding height-36" @click="editSubCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                </div>
+                                <div class="col-25">
+                                    <button class="button button-raised bg-karaka-orange text-color-white padding height-36" @click="removeSubCategory"><i class="f7-icons font-22">trash</i> Delete</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="main-category text-color-pink padding-left-half margin-top padding-top-half">Fast Food</div>
-                    <div class="category-list border-bottom padding-top padding-bottom">
-                        <div class="row align-items-center">
-                            <div class="col-60">
-                                <div class="display-flex align-items-center">
-                                    <span class="padding-left-half sub_category_name">Sandwich</span>
-                                </div>
-                            </div>
-                            <div class="col-40 action-buttons">
-                                <div class="row align-items-center">
-                                    <div class="col-50">
-                                        <button class="button button-raised text-color-black padding height-36" @click="addProduct"><i class="f7-icons font-22">plus</i> Add Product</button>
-                                    </div>
-                                    <div class="col-25">
-                                        <button class="button button-raised text-color-black padding height-36" @click="editSubCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
-                                    </div>
-                                    <div class="col-25">
-                                        <button class="button button-raised bg-karaka-orange text-color-white padding height-36" @click="removeSubCategory"><i class="f7-icons font-22">trash</i> Delete</button>
-                                    </div>
-                                </div>
+                </div>
+                <div class="category-list padding-top padding-bottom">
+                    <div class="row align-items-center">
+                        <div class="col-60">
+                            <div class="display-flex align-items-center">
+                                <span class="padding-left-half sub_category_name">Pizza</span>
                             </div>
                         </div>
-                    </div>
-                    <div class="category-list padding-top padding-bottom">
-                        <div class="row align-items-center">
-                            <div class="col-60">
-                                <div class="display-flex align-items-center">
-                                    <span class="padding-left-half sub_category_name">Pizza</span>
+                        <div class="col-40 action-buttons">
+                            <div class="row align-items-center">
+                                <div class="col-50">
+                                    <button class="button button-raised text-color-black padding height-36" @click="addProduct"><i class="f7-icons font-22">plus</i> Add Product</button>
                                 </div>
-                            </div>
-                            <div class="col-40 action-buttons">
-                                <div class="row align-items-center">
-                                    <div class="col-50">
-                                        <button class="button button-raised text-color-black padding height-36" @click="addProduct"><i class="f7-icons font-22">plus</i> Add Product</button>
-                                    </div>
-                                    <div class="col-25">
-                                        <button class="button button-raised text-color-black padding height-36" @click="editSubCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
-                                    </div>
-                                    <div class="col-25">
-                                        <button class="button button-raised bg-karaka-orange text-color-white padding height-36" @click="removeSubCategory"><i class="f7-icons font-22">trash</i> Delete</button>
-                                    </div>
+                                <div class="col-25">
+                                    <button class="button button-raised text-color-black padding height-36" @click="editSubCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                </div>
+                                <div class="col-25">
+                                    <button class="button button-raised bg-karaka-orange text-color-white padding height-36" @click="removeSubCategory"><i class="f7-icons font-22">trash</i> Delete</button>
                                 </div>
                             </div>
                         </div>
@@ -209,53 +208,54 @@
                 </div>
             </div>
         </div>
-        <div class="display-none" id="sub_category_popup">
-            <div class="dialog-title category-title"></div>
-            <div class="category-add padding">
-                <div class="categoryForm text-align-left no-padding">
-                    <label for="" class="add_category_name">Sub category name</label>
-                    <input type="text" name="name" class="category-name margin-top-half padding-left-half padding-right-half" placeholder="Add sub category name">
-                </div>
-                <div class="categoryForm text-align-left margin-top">
-                    <label for="" class="add_category_name">Parent category</label>
-                    <div class="item-input-wrap input-dropdown-wrap category-name margin-top-half no-padding">
-                        <select placeholder="Please choose..." class="selectCategory padding-left-half">
-                            <option value="indian">indian</option>
-                            <option value="chinese">chinese</option>
-                            <option value="panjabi">panjabi</option>
-                            <option value="dessert">dessert</option>
-                            <option value="fast_food">fast food</option>
-                        </select>
-                    </div>
+    </div>
+    <div class="display-none" id="sub_category_popup">
+        <div class="dialog-title category-title"></div>
+        <div class="category-add padding">
+            <div class="categoryForm text-align-left no-padding">
+                <label for="" class="add_category_name">Sub category name</label>
+                <input type="text" name="name" class="category-name margin-top-half padding-left-half padding-right-half" placeholder="Add sub category name">
+            </div>
+            <div class="categoryForm text-align-left margin-top">
+                <label for="" class="add_category_name">Parent category</label>
+                <div class="item-input-wrap input-dropdown-wrap category-name margin-top-half no-padding">
+                    <select placeholder="Please choose..." class="selectCategory padding-left-half">
+                        <option value="indian">indian</option>
+                        <option value="chinese">chinese</option>
+                        <option value="panjabi">panjabi</option>
+                        <option value="dessert">dessert</option>
+                        <option value="fast_food">fast food</option>
+                    </select>
                 </div>
             </div>
         </div>
-        <div class="display-none" id="product_popup">
-            <div class="dialog-title category-title"></div>
-            <div class="category-add padding">
-                <div class="categoryForm text-align-left no-padding">
-                    <label for="" class="add_category_name">Add product</label>
-                    <input type="text" name="name" class="category-name margin-top-half padding-left-half padding-right-half" placeholder="Add Product name">
-                </div>
-                <div class="categoryForm text-align-left margin-top">
-                    <label for="" class="add_category_name">Parent category</label>
-                    <div class="item-input-wrap input-dropdown-wrap category-name margin-top-half no-padding">
-                        <select placeholder="Please choose..." class="selectCategory padding-left-half">
-                            <option value="indian">indian</option>
-                            <option value="chinese">chinese</option>
-                            <option value="panjabi">panjabi</option>
-                            <option value="dessert">dessert</option>
-                            <option value="fast_food">fast food</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="categoryForm margin-top text-align-left no-padding">
-                    <label for="" class="add_category_name">Price</label>
-                    <input type="text" name="name" class="category-name margin-top-half padding-left-half padding-right-half" placeholder="Add product price">
+    </div>
+    <div class="display-none" id="product_popup">
+        <div class="dialog-title category-title"></div>
+        <div class="category-add padding">
+            <div class="categoryForm text-align-left no-padding">
+                <label for="" class="add_category_name">Add product</label>
+                <input type="text" name="name" class="category-name margin-top-half padding-left-half padding-right-half" placeholder="Add Product name">
+            </div>
+            <div class="categoryForm text-align-left margin-top">
+                <label for="" class="add_category_name">Parent category</label>
+                <div class="item-input-wrap input-dropdown-wrap category-name margin-top-half no-padding">
+                    <select placeholder="Please choose..." class="selectCategory padding-left-half">
+                        <option value="indian">indian</option>
+                        <option value="chinese">chinese</option>
+                        <option value="panjabi">panjabi</option>
+                        <option value="dessert">dessert</option>
+                        <option value="fast_food">fast food</option>
+                    </select>
                 </div>
             </div>
+            <div class="categoryForm margin-top text-align-left no-padding">
+                <label for="" class="add_category_name">Price</label>
+                <input type="text" name="name" class="category-name margin-top-half padding-left-half padding-right-half" placeholder="Add product price">
+            </div>
         </div>
-    </f7-page>
+    </div>
+</f7-page>
 </template>
 
 <script>
@@ -263,7 +263,7 @@ import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Input } from 'framework7
 import $ from 'jquery';
 
 export default {
-    name : 'FoodSubCategory',
+    name: 'FoodSubCategory',
     components: {
         f7Page,
         f7Navbar,
@@ -294,13 +294,14 @@ export default {
             subCat.open(false)
 
             setTimeout(() => {
+                $('.category-title').remove();
                 $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });
                 $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
                 $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
                 $('.dialog-button').eq(1).removeClass('text-color-black');
             }, 200);
         },
-        removeSubCategory(){
+        removeSubCategory() {
             f7.dialog.confirm('Are you sure delete the sub category?');
             setTimeout(() => {
                 $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });
@@ -310,7 +311,7 @@ export default {
                 $('.dialog-button').eq(1).removeClass('text-color-black');
             }, 200);
         },
-        editSubCategory(){
+        editSubCategory() {
             var edit_cat = f7.dialog.create({
                 title: 'Add Product',
                 content: document.getElementById('sub_category_popup').innerHTML,
@@ -328,13 +329,14 @@ export default {
             edit_cat.open(false)
 
             setTimeout(() => {
+                $('.category-title').remove();
                 $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });
                 $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
                 $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
                 $('.dialog-button').eq(1).removeClass('text-color-black');
             }, 200);
         },
-        addProduct(){
+        addProduct() {
             var product = f7.dialog.create({
                 title: 'Add Product',
                 content: document.getElementById('product_popup').innerHTML,
@@ -352,6 +354,7 @@ export default {
             product.open(false)
 
             setTimeout(() => {
+                $('.category-title').remove();
                 $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });
                 $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
                 $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
@@ -363,119 +366,133 @@ export default {
 </script>
 
 <style scoped>
-    .page-food-category {
-        background: #f1f1f1;
-    }
+.page-food-category {
+    background: #f1f1f1;
+}
 
-    .navbar-menu {
-        box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.15);
-        height: 60px !important;
-        position: relative;
-        z-index: 99;
-    }
+.navbar-menu {
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.15);
+    height: 60px !important;
+    position: relative;
+    z-index: 99;
+}
 
-    .height-40 {
-        height: 40px;
-    }
+.height-40 {
+    height: 40px;
+}
 
-    .height-36 {
-        height: 36px;
-    }
+.height-36 {
+    height: 36px;
+}
 
-    .nav-botton {
-        height: 100%;
-    }
+.nav-botton {
+    height: 100%;
+}
 
-    .menu-item-content {
-        position: relative;
-        z-index: 9;
-    }
+.menu-item-content {
+    position: relative;
+    z-index: 9;
+}
 
-    .menu-dropdown-content {
-        box-shadow: 0px 0.5px 12px rgba(0, 0, 0, 0.2);
-        min-width: 100% !important;
-        top: -30px;
-    }
+.menu-dropdown-content {
+    box-shadow: 0px 0.5px 12px rgba(0, 0, 0, 0.2);
+    min-width: 100% !important;
+    top: -30px;
+}
 
+.header-links {
+    width: 50%;
+}
+
+.menu-dropdown-center:before,
+.menu-dropdown-center:after {
+    content: none;
+}
+
+.bg-dark {
+    background: #38373D;
+}
+
+.menu-item-dropdown-opened .menu-item-content {
+    background: #F33E3E;
+}
+
+.menu-dropdown-link:nth-child(2) {
+    border-bottom: 1px solid #EFEFEF;
+}
+
+.bg-pink {
+    background: #F33E3E;
+}
+
+.text-color-pink {
+    color: #F33E3E;
+}
+
+.font-22 {
+    font-size: 22px;
+}
+
+.nav-bar {
+    border-radius: 8px 8px 0px 0px;
+}
+
+.page-content {
+    padding-top: 0px !important;
+}
+
+.item-input-wrap {
+    width: 100%;
+    background: #F0F0F0;
+    border: 0.5px solid #DCDCDC;
+    border-radius: 7px;
+    height: auto;
+}
+
+.bg-karaka-orange {
+    background: #EE4925;
+}
+
+.sub_category_name {
+    font-size: 18px;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #EAEAEA;
+}
+
+.main-category {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+#searchData {
+    width: 90%;
+}
+
+.nav-link,
+.menu-item-content {
+    height: 100% !important;
+    text-transform: capitalize !important;
+}
+
+@media screen and (max-width:820px) {
     .header-links {
-        width: 50%;
-    }
-
-    .menu-dropdown-center:before,
-    .menu-dropdown-center:after {
-        content: none;
-    }
-
-    .bg-dark {
-        background: #38373D;
-    }
-
-    .menu-item-dropdown-opened .menu-item-content {
-        background: #F33E3E;
-    }
-
-    .menu-dropdown-link:nth-child(2) {
-        border-bottom: 1px solid #EFEFEF;
-    }
-
-    .bg-pink {
-        background: #F33E3E;
-    }
-
-    .text-color-pink {
-        color: #F33E3E;
-    }
-
-    .font-22 {
-        font-size: 22px;
-    }
-
-    .nav-bar {
-        border-radius: 8px 8px 0px 0px;
-    }
-
-    .page-content {
-        padding-top: 0px !important;
-    }
-    .item-input-wrap {
         width: 100%;
-        background: #F0F0F0;
-        border: 0.5px solid #DCDCDC;
-        border-radius: 7px;
-        height: auto;
     }
-    .bg-karaka-orange{
-        background: #EE4925;
-    }
-    .sub_category_name{
-        font-size: 18px;
-    }
-    .border-bottom {
-        border-bottom: 1px solid #EAEAEA;
-    }
-    .main-category{
-        font-weight: 600;
-        font-size: 20px;
-        line-height: 24px;
-    }
-    #searchData {
-        width: 90%;
-    }
-    @media screen and (max-width:820px) {
-        .header-links {
-            width: 100%;
-        }
-    }
+}
 </style>
 
 <style>
+.left {
+    width: 50%;
+    margin-left: 20px;
+}
+
+@media screen and (max-width:820px) {
     .left {
-        width: 50%;
-        margin-left: 20px;
+        width: 30%;
     }
-    @media screen and (max-width:820px) {
-        .left {
-            width: 30%;
-        }
-    }
+}
 </style>

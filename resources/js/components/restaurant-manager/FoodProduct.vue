@@ -16,8 +16,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col padding-left-half padding-right-half height-40"><button class="col nav-botton button button-raised bg-dark text-color-white padding closeReservation" @click="$root.closeReservation()">Close reservation</button></div>
-                        <div class="col padding-left-half padding-right-half height-40"><button class="col nav-botton button button-raised bg-dark text-color-white padding">Settings</button></div>
+                        <div class="col padding-left-half padding-right-half height-40"><button class="col nav-link button button-raised bg-dark text-color-white padding closeReservation" @click="$root.closeReservation()">Close reservation</button></div>
+                        <div class="col padding-left-half padding-right-half height-40"><a href="/settings/" class="col nav-link button button-raised bg-dark text-color-white padding">Settings</a></div>
                     </div>
                 </div>
             </f7-navbar>
@@ -625,6 +625,7 @@ export default {
             product.open(false)
 
             setTimeout(() => {
+                $('.category-title').remove();
                 $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });
                 $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
                 $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
@@ -659,6 +660,7 @@ export default {
             product.open(false)
 
             setTimeout(() => {
+                $('.category-title').remove();
                 $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });
                 $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
                 $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
@@ -787,6 +789,12 @@ export default {
         font-size: 14px;
         line-height: 17px;
     }
+
+    .nav-link,.menu-item-content {
+        height: 100% !important;
+        text-transform: capitalize !important;
+    }
+
     @media screen and (max-width:820px) {
         .header-links {
             width: 100%;

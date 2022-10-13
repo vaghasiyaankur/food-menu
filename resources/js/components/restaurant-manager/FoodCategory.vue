@@ -17,7 +17,7 @@
                         </div>
                     </div>
                     <div class="col padding-left-half padding-right-half height-40"><button class="col nav-link button button-raised bg-dark text-color-white padding closeReservation" @click="$root.closeReservation()">Close reservation</button></div>
-                    <div class="col padding-left-half padding-right-half height-40"><button class="col nav-link button button-raised bg-dark text-color-white padding">Settings</button></div>
+                    <div class="col padding-left-half padding-right-half height-40"><a href="/settings/" class="col nav-link button button-raised bg-dark text-color-white padding">Settings</a></div>
                 </div>
             </div>
         </f7-navbar>
@@ -193,7 +193,6 @@
         </div>
     </div>
     <div class="display-none" id="category_popup">
-        <div class="dialog-title category-title"></div>
         <div class="category-add padding">
             <div class="categoryForm text-align-left">
                 <label for="" class="add_category_name">Category name</label>
@@ -213,7 +212,6 @@
         </div>
     </div>
     <div class="display-none" id="sub_category_popup">
-        <div class="dialog-title category-title"></div>
         <div class="category-add padding">
             <div class="categoryForm text-align-left no-padding">
                 <label for="" class="add_category_name">Sub category name</label>
@@ -288,6 +286,7 @@ export default {
             addCat.open(false);
 
             setTimeout(() => {
+                $('.category-title').remove();
                 $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });
                 $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
                 $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
@@ -313,6 +312,7 @@ export default {
             editCat.open(false)
 
             setTimeout(() => {
+                $('.category-title').remove();
                 $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });
                 $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
                 $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
@@ -337,6 +337,7 @@ export default {
             subCat.open(false)
 
             setTimeout(() => {
+                $('.category-title').remove();
                 $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });
                 $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
                 $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
@@ -508,8 +509,8 @@ export default {
 }
 
 .nav-link,.menu-item-content {
-    height: 100%;
-    text-transform: capitalize;
+    height: 100% !important;
+    text-transform: capitalize !important;
 }
 
 .title-large {
@@ -520,8 +521,8 @@ export default {
     border-radius: 50%;
 }
 
-.category-title {
-    border-bottom: 1px solid #D8D8D8;
+.category-add {
+    border-top: 1px solid #D8D8D8;
 }
 
 .add_category_name {
