@@ -3,7 +3,6 @@
     <f7-sheet
         class="demo-sheet-swipe-to-close"
         style="height:auto; --f7-sheet-bg-color: #fff;"
-        swipe-to-close
         backdrop
     >
         <f7-page-content>
@@ -16,7 +15,7 @@
         <f7-block-title class="text-align-center font-18 text-color-black margin-top-half">Food Menu</f7-block-title>
         <div class="margin">
             <!-- <div class="text-align-center text-color-gray">Select your favourite food <br> and enjoy with family</div> -->
-            <div data-pagination='{"el": ".swiper-pagination"}' data-space-between="10" data-slides-per-view="5"
+            <div data-pagination='{"el":".swiper-pagination"}' data-space-between="10" data-slides-per-view="5"
             class="swiper swiper-init demo-swiper margin-top margin-bottom" style="height : 120px">
             <div class="swiper-pagination"></div>
             <div class="swiper-wrapper">
@@ -225,6 +224,7 @@ import {
   f7Sheet
 } from 'framework7-vue';
 import VueCountdown from '@chenfengyuan/vue-countdown';
+import $ from 'jquery';
 export default {
     components : {
         f7BlockTitle,
@@ -234,10 +234,12 @@ export default {
     },
     methods: {
         closePopup(){
-        document.querySelector('.sheet-backdrop').click();
+            document.querySelector('.sheet-backdrop').click();
+            this.$emit('textChange');
         },
     },
 }
+
 </script>
 
 <style scoped>

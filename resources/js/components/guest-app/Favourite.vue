@@ -10,7 +10,7 @@
             >
                 <div class="favourites-card">
                     <a class="link icon-only" href="/favourites/">
-                        <i class="f7-icons size-22 text-color-dark-orange padding-half font-18">heart_fill</i>
+                        <i class="f7-icons size-22 text-color-white padding-half font-18">heart_fill</i>
                     </a>
                 </div>
             </f7-navbar>
@@ -116,7 +116,7 @@ export default {
 </script>
 
 <style scoped>
-    .nav-bar{
+.nav-bar{
         background: #38373D;
         border-radius: 8px 8px 0px 0px;
         transform: matrix(1, 0, 0, -1, 0, 0);
@@ -124,6 +124,7 @@ export default {
 
     .navbar-menu{
         transform: matrix(1, 0, 0, -1, 0, 0);
+        height: 56px;
     }
     .page-content {
         padding-top: 0px !important;
@@ -136,6 +137,9 @@ export default {
         width :100% !important;
         height: 100% !important;
     }
+    .card{
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    }
     .border-bottom{
         border-bottom: 1px solid #EAEAEA;
     }
@@ -146,14 +150,20 @@ export default {
         border-right: 1px solid #F3F3F3 !important;
     }
     .text-color-dark-orange{
-        color: #FC4B1A !important;
+        color: #F33E3E !important;
     }
     .bg-color-dark-orange{
-        background: #FC4B1A !important;
+        background: #F33E3E !important;
     }
 </style>
 
 <style>
+    .navbar .title{
+        left: -11px !important;
+        font-weight: 600 !important;
+        font-size: 19px !important;
+        line-height: 23px !important;
+    }
     .cart-list{
         box-shadow: 1px 2px 5px 2px rgb(0 0 0 / 20%);
     }
@@ -172,6 +182,9 @@ export default {
     }
 
     .navbar a.link{
-        color: #FC4B1A !important;
+        color: #fff !important;
+        font-weight: 500;
+        font-size: 15px;
+        line-height: 18px;
     }
 </style>
