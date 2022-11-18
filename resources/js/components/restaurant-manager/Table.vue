@@ -22,10 +22,10 @@
                 <div class=" padding-left-half padding-right-half height-40 nav-button"><a href="/settings/" class="col link nav-link button button-raised bg-dark text-color-white padding">Settings</a></div>
             </div>
         </div>
-        <div class="tables margin-top">
+        <div class="tables margin-horizontal">
             <div class="row table_row margin-horizontal padding-top margin-top">
                 <!-- ========= TABLE 1 START ========= -->
-                <div class="col-25 no-padding no-margin-horizontal table-card"> 
+                <div class="col-25 no-padding margin-bottom table-card"> 
                        <!--======= TABLE CHAIR ========= -->
                     <div class="row table_top_chair">
                         <div class="col">
@@ -40,7 +40,7 @@
                         </div>
                     </div>               
 
-                    <div class="card no-margin table_1">
+                    <div class="card no-margin table_1 equal-height-table">
                         <div class="card-header no-padding">
                             <div class="row header_detail">
                                 <div class="table-number padding-half"> <p class="no-margin">Table No.</p>                                     
@@ -54,10 +54,10 @@
                             <!-- <div class="table_image text-align-center">
                                 <img src="/images/table/3_member_table.png" alt="">
                             </div> -->
-                            <div class="table_reservation margin-top equal-height-table">
-                                <h3>Reserved</h3>
-                                <div class="row padding-horizontal-half">
-                                    <div class="col-50 table_reservation_info">
+                            <div class="table_reservation">
+                                <h3 class="no-margin-top">Reserved</h3>
+                                <div class="row">
+                                    <div class="col-50 table_reservation_info margin-bottom">
                                         <div class="person-info tooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-12">person_fill</i>
@@ -89,7 +89,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-50 table_reservation_info">
+                                    <div class="col-50 table_reservation_info margin-bottom">
                                         <div class="person-info tooltip" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -121,7 +121,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-50 table_reservation_info margin-top">
+                                    <div class="col-50 table_reservation_info margin-bottom">
                                         <div class="person-info tooltip" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -153,7 +153,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-50 table_reservation_info margin-top">
+                                    <div class="col-50 table_reservation_info margin-bottom">
                                         <div class="person-info tooltip" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -252,7 +252,7 @@
                     </div>  
                 </div>
                 <!-- ======== TABLE 2 START ======= -->
-                <div class="col-30 no-padding no-margin-horizontal table-card">    
+                <div class="col-30 no-padding margin-bottom table-card center_table_card">    
                     <!--======= TABLE CHAIR ========= -->
                     <div class="row table_top_chair">
                         <div class="col">
@@ -271,7 +271,7 @@
                             </div>
                         </div>
                     </div> 
-                    <div class="card table_2 no-margin">                        
+                    <div class="card table_2 no-margin equal-height-table">                        
                         <div class="card-header no-padding">
                             <div class="row header_detail">
                                 <div class="table-number padding-half"> 
@@ -284,14 +284,46 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card-content card-content-padding">
+                        <div class="card-content card-content-padding padding-horizontal-half">
                             <!-- <div class="table_image text-align-center">
                                 <img src="/images/table/4_member_table.png" alt="">
                             </div> -->
-                            <div class="table_reservation margin-top equal-height-table">
-                                <h3>Empty</h3>
-                                <div class="row padding-horizontal-half">
-                                    <div class="col-50 table_reservation_info">
+                            <div class="table_reservation">
+                                <h3 class="no-margin-top">Empty</h3>
+                                <div class="row">
+                                    <div class="col-50 table_reservation_info margin-bottom">
+                                        <div class="person-info tooltip" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;4</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>   
+                                            <div class="tooltiptext padding-half">
+                                                <div class="user-info">
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
+                                                        <span class="text-color-black">John Smith</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">clock</i>
+                                                        <span class="text-color-black">3:00pm</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">phone</i>
+                                                        <span class="text-color-black">+91 12345 12345</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
+                                                        <span class="text-color-black">5 family member</span>
+                                                    </div>
+                                                </div>
+                                            </div>                                         
+                                        </div>
+                                    </div>
+                                    <div class="col-50 table_reservation_info margin-bottom">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -303,8 +335,8 @@
                                             </div>                                            
                                         </div>
                                     </div>
-                                    <div class="col-50 table_reservation_info ">
-                                        <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
+                                    <div class="col-50 table_reservation_info margin-bottom">
+                                        <div class="person-info tooltip" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
                                                 <span>&nbsp;4</span>
@@ -312,19 +344,27 @@
                                                     <i class="f7-icons size-22">clock_fill</i>
                                                     <span>2:47</span>
                                                 </span>
-                                            </div>                                            
-                                        </div>
-                                    </div>
-                                    <div class="col-50 table_reservation_info margin-top">
-                                        <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
-                                            <div class="text-align-center person">
-                                                <i class="f7-icons size-22">person_fill</i>
-                                                <span>&nbsp;4</span>
-                                                <span class="waiting-time margin-top-half text-align-center">
-                                                    <i class="f7-icons size-22">clock_fill</i>
-                                                    <span>2:47</span>
-                                                </span>
-                                            </div>                                           
+                                            </div> 
+                                            <div class="tooltiptext padding-half">
+                                                <div class="user-info">
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
+                                                        <span class="text-color-black">John Smith</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">clock</i>
+                                                        <span class="text-color-black">3:00pm</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">phone</i>
+                                                        <span class="text-color-black">+91 12345 12345</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
+                                                        <span class="text-color-black">5 family member</span>
+                                                    </div>
+                                                </div>
+                                            </div>                                          
                                         </div>
                                     </div>
                                     <!-- <div class="col-25 table_reservation_info">
@@ -375,7 +415,7 @@
                     </div> 
                 </div>
                 <!-- ======= TABLE 3 START ========== -->
-                <div class="col-40 no-padding no-margin-horizontal table-card">
+                <div class="col-40 no-padding margin-bottom table-card">
                     <!--======= TABLE CHAIR ========= -->
                     <div class="row table_top_chair">
                         <div class="col">
@@ -399,7 +439,7 @@
                             </div>
                         </div>
                     </div>  
-                    <div class="card table_3 no-margin">
+                    <div class="card table_3 no-margin-vertical equal-height-table">
                         <div class="card-header no-padding ">
                             <div class="row header_detail">
                                 <div class="table-number padding-half"> <p class="no-margin">Table No.</p>
@@ -410,14 +450,15 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card-content card-content-padding">
+                        <div class="card-content card-content-padding padding-horizontal-half">
                              
                             <!-- <div class="table_image text-align-center">
                                 <img src="/images/table/5_member_table.png" alt="">
                             </div> -->
-                            <div class="table_reservation margin-top equal-height-table">
+                            <div class="table_reservation">
+                                <h3 class="no-margin-top">Order Running</h3>
                                 <div class="row">
-                                    <div class="col-33 table_reservation_info">
+                                    <div class="col-33 table_reservation_info margin-bottom">
                                         <div class="person-info " data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -430,7 +471,7 @@
 
                                         </div>
                                     </div>
-                                    <div class="col-33 table_reservation_info">
+                                    <div class="col-33 table_reservation_info margin-bottom">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -442,7 +483,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-33 table_reservation_info">
+                                    <div class="col-33 table_reservation_info margin-bottom">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -454,7 +495,7 @@
                                             </div>                                            
                                         </div>
                                     </div>
-                                    <div class="col-33 table_reservation_info">
+                                    <div class="col-33 table_reservation_info margin-bottom">
                                         <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                             <div class="text-align-center person">
                                                 <i class="f7-icons size-22">person_fill</i>
@@ -494,6 +535,8 @@
                         </div>
                     </div> 
                 </div>
+                 
+                
                 <!-- <div class="col-25 card no-margin-horizontal no-padding table-card">
                     <div class="">
                         <div class="card-header no-padding">
@@ -1031,6 +1074,2471 @@
                     </div>
                 </div> -->
             </div>
+            <div class="row table_row margin-horizontal padding-top margin-top">
+                <!-- ======= TABLE 4 START ========== -->
+                <div class="col-45 no-padding margin-bottom table-card table_4_margin">
+                    <!--======= TABLE CHAIR ========= -->
+                    <div class="row table_top_chair">
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-4.svg" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-4.svg" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-4.svg" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-4.svg" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-4.svg" alt="table">
+                            </div>
+                        </div>
+                    </div>  
+                    <div class="card table_4 no-margin equal-height-table">
+                        <div class="card-header no-padding ">
+                            <div class="row header_detail">
+                                <div class="table-number padding-half"> <p class="no-margin">Table No.</p>
+                                    <p class=" text-align-center no-margin"> 04</p>                                    
+                                </div>
+                                <div class="table-capacity text-align-right padding-half"> <p class="no-margin">Capacity</p>
+                                    <p class=" text-align-center no-margin"> 10</p>                                                                        
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-content card-content-padding padding-horizontal-half">
+                            
+                            <!-- <div class="table_image text-align-center">
+                                <img src="/images/table/5_member_table.png" alt="">
+                            </div> -->
+                            <div class="table_reservation">
+                                <h3 class="no-margin-top">Order Completed</h3>
+                                <div class="row">
+                                    <div class="col-25 table_reservation_info margin-bottom">
+                                        <div class="person-info " data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;5</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-25 table_reservation_info margin-bottom">
+                                        <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;5</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-25 table_reservation_info margin-bottom">
+                                        <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;5</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>                                            
+                                        </div>
+                                    </div>
+                                    <div class="col-25 table_reservation_info margin-bottom">
+                                        <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;5</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--======= TABLE CHAIR ========= -->
+                    <div class="row table_bottom_chair">
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table4-1.svg" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table4-1.svg" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table4-1.svg" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table4-1.svg" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table4-1.svg" alt="table">
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+                <!-- ======= TABLE 5 START ========== -->
+                <div class="col-55 no-padding margin-bottom table-card">
+                    <!--======= TABLE CHAIR ========= -->
+                    <div class="row table_top_chair">
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-5.svg" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-5.svg" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-5.svg" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-5.svg" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-5.svg" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-5.svg" alt="table">
+                            </div>
+                        </div>
+                    </div>  
+                    <div class="card table_5 no-margin equal-height-table">
+                        <div class="card-header no-padding ">
+                            <div class="row header_detail">
+                                <div class="table-number padding-half"> <p class="no-margin">Table No.</p>
+                                    <p class=" text-align-center no-margin"> 05</p>                                    
+                                </div>
+                                <div class="table-capacity text-align-right padding-half"> <p class="no-margin">Capacity</p>
+                                    <p class=" text-align-center no-margin"> 12</p>                                                                        
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-content card-content-padding padding-horizontal-half">
+                            
+                            <!-- <div class="table_image text-align-center">
+                                <img src="/images/table/5_member_table.png" alt="">
+                            </div> -->
+                            <div class="table_reservation">
+                                <h3 class="no-margin-top">Order Completed</h3>
+                                <div class="row">
+                                    <div class="col-20 table_reservation_info margin-bottom">
+                                        <div class="person-info " data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;5</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-20 table_reservation_info margin-bottom">
+                                        <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;5</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-20 table_reservation_info margin-bottom">
+                                        <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;5</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>                                            
+                                        </div>
+                                    </div>
+                                    <div class="col-20 table_reservation_info margin-bottom">
+                                        <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;5</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-20 table_reservation_info margin-bottom">
+                                        <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;5</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--======= TABLE CHAIR ========= -->
+                    <div class="row table_bottom_chair">
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table5-1.svg" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table5-1.svg" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table5-1.svg" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table5-1.svg" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table5-1.svg" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table5-1.svg" alt="table">
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+            <div class="row table_row margin-horizontal padding-top margin-top">
+                 <!-- ========= TABLE 1 START ========= -->
+                 <div class="col-25 no-padding margin-bottom table-card"> 
+                    <!--======= TABLE CHAIR ========= -->
+                    <div class="row table_top_chair">
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-1.png" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-1.png" alt="table">
+                            </div>
+                        </div>
+                    </div>               
+
+                    <div class="card no-margin table_1 equal-height-table">
+                        <div class="card-header no-padding">
+                            <div class="row header_detail">
+                                <div class="table-number padding-half"> <p class="no-margin">Table No.</p>                                     
+                                <p class=" text-align-center no-margin"> 01</p>
+                                </div>
+                                <div class="table-capacity text-align-right padding-half">
+                                    <p class="no-margin"> Capacity </p> <p class="text-align-center no-margin">04</p> </div>
+                            </div>
+                        </div>
+                        <div class="card-content card-content-padding padding-horizontal-half">
+                            <div class="table_reservation">
+                                <h3 class="no-margin-top">Reserved</h3>
+                                <div class="row">
+                                    <div class="col-50 table_reservation_info margin-bottom">
+                                        <div class="person-info tooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-12">person_fill</i>
+                                                <span>&nbsp;3</span>                                                
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-12">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>
+                                            <div class="tooltiptext padding-half">
+                                                <div class="user-info">                                                    
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
+                                                        <span class="text-color-black">John Smith</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">clock</i>
+                                                        <span class="text-color-black">3:00pm</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">phone</i>
+                                                        <span class="text-color-black">+91 12345 12345</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
+                                                        <span class="text-color-black">5 family member</span>
+                                                    </div>                                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-50 table_reservation_info margin-bottom">
+                                        <div class="person-info tooltip" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;3</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>
+                                            <div class="tooltiptext padding-half">
+                                                <div class="user-info">
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
+                                                        <span class="text-color-black">John Smith</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">clock</i>
+                                                        <span class="text-color-black">3:00pm</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">phone</i>
+                                                        <span class="text-color-black">+91 12345 12345</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
+                                                        <span class="text-color-black">5 family member</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-50 table_reservation_info margin-bottom">
+                                        <div class="person-info tooltip" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;3</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>
+                                            <div class="tooltiptext padding-half">
+                                                <div class="user-info">
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
+                                                        <span class="text-color-black">John Smith</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">clock</i>
+                                                        <span class="text-color-black">3:00pm</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">phone</i>
+                                                        <span class="text-color-black">+91 12345 12345</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
+                                                        <span class="text-color-black">5 family member</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-50 table_reservation_info margin-bottom">
+                                        <div class="person-info tooltip" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;3</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>
+                                            <div class="tooltiptext padding-half">
+                                                <div class="user-info">
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
+                                                        <span class="text-color-black">John Smith</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">clock</i>
+                                                        <span class="text-color-black">3:00pm</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">phone</i>
+                                                        <span class="text-color-black">+91 12345 12345</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
+                                                        <span class="text-color-black">5 family member</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--======= TABLE CHAIR ========= -->
+                    <div class="row table_bottom_chair">
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table1-2.png" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table1-2.png" alt="table">
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+                 <!-- ========= TABLE 1 START ========= -->
+                 <div class="col-25 no-padding margin-bottom table-card center_table_card"> 
+                    <!--======= TABLE CHAIR ========= -->
+                    <div class="row table_top_chair">
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-1.png" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-1.png" alt="table">
+                            </div>
+                        </div>
+                    </div>               
+
+                    <div class="card no-margin table_1 equal-height-table">
+                        <div class="card-header no-padding">
+                            <div class="row header_detail">
+                                <div class="table-number padding-half"> <p class="no-margin">Table No.</p>                                     
+                                <p class=" text-align-center no-margin"> 01</p>
+                                </div>
+                                <div class="table-capacity text-align-right padding-half">
+                                    <p class="no-margin"> Capacity </p> <p class="text-align-center no-margin">04</p> </div>
+                            </div>
+                        </div>
+                        <div class="card-content card-content-padding padding-horizontal-half">
+                            <div class="table_reservation">
+                                <h3 class="no-margin-top">Reserved</h3>
+                                <div class="row">
+                                    <div class="col-50 table_reservation_info margin-bottom">
+                                        <div class="person-info tooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-12">person_fill</i>
+                                                <span>&nbsp;3</span>                                                
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-12">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>
+                                            <div class="tooltiptext padding-half">
+                                                <div class="user-info">                                                    
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
+                                                        <span class="text-color-black">John Smith</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">clock</i>
+                                                        <span class="text-color-black">3:00pm</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">phone</i>
+                                                        <span class="text-color-black">+91 12345 12345</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
+                                                        <span class="text-color-black">5 family member</span>
+                                                    </div>                                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-50 table_reservation_info margin-bottom">
+                                        <div class="person-info tooltip" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;3</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>
+                                            <div class="tooltiptext padding-half">
+                                                <div class="user-info">
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
+                                                        <span class="text-color-black">John Smith</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">clock</i>
+                                                        <span class="text-color-black">3:00pm</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">phone</i>
+                                                        <span class="text-color-black">+91 12345 12345</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
+                                                        <span class="text-color-black">5 family member</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-50 table_reservation_info margin-bottom">
+                                        <div class="person-info tooltip" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;3</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>
+                                            <div class="tooltiptext padding-half">
+                                                <div class="user-info">
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
+                                                        <span class="text-color-black">John Smith</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">clock</i>
+                                                        <span class="text-color-black">3:00pm</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">phone</i>
+                                                        <span class="text-color-black">+91 12345 12345</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
+                                                        <span class="text-color-black">5 family member</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-50 table_reservation_info margin-bottom">
+                                        <div class="person-info tooltip" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;3</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>
+                                            <div class="tooltiptext padding-half">
+                                                <div class="user-info">
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
+                                                        <span class="text-color-black">John Smith</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">clock</i>
+                                                        <span class="text-color-black">3:00pm</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">phone</i>
+                                                        <span class="text-color-black">+91 12345 12345</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
+                                                        <span class="text-color-black">5 family member</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--======= TABLE CHAIR ========= -->
+                    <div class="row table_bottom_chair">
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table1-2.png" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table1-2.png" alt="table">
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+                 <!-- ========= TABLE 1 START ========= -->
+                 <div class="col-25 no-padding margin-bottom table-card table_card_right_margin"> 
+                    <!--======= TABLE CHAIR ========= -->
+                    <div class="row table_top_chair">
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-1.png" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-1.png" alt="table">
+                            </div>
+                        </div>
+                    </div>               
+
+                    <div class="card no-margin table_1 equal-height-table">
+                        <div class="card-header no-padding">
+                            <div class="row header_detail">
+                                <div class="table-number padding-half"> <p class="no-margin">Table No.</p>                                     
+                                <p class=" text-align-center no-margin"> 01</p>
+                                </div>
+                                <div class="table-capacity text-align-right padding-half">
+                                    <p class="no-margin"> Capacity </p> <p class="text-align-center no-margin">04</p> </div>
+                            </div>
+                        </div>
+                        <div class="card-content card-content-padding padding-horizontal-half">
+                            <!-- <div class="table_image text-align-center">
+                                <img src="/images/table/3_member_table.png" alt="">
+                            </div> -->
+                            <div class="table_reservation">
+                                <h3 class="no-margin-top">Reserved</h3>
+                                <div class="row">
+                                    <div class="col-50 table_reservation_info margin-bottom">
+                                        <div class="person-info tooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-12">person_fill</i>
+                                                <span>&nbsp;3</span>                                                
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-12">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>
+                                            <div class="tooltiptext padding-half">
+                                                <div class="user-info">                                                    
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
+                                                        <span class="text-color-black">John Smith</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">clock</i>
+                                                        <span class="text-color-black">3:00pm</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">phone</i>
+                                                        <span class="text-color-black">+91 12345 12345</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
+                                                        <span class="text-color-black">5 family member</span>
+                                                    </div>                                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-50 table_reservation_info margin-bottom">
+                                        <div class="person-info tooltip" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;3</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>
+                                            <div class="tooltiptext padding-half">
+                                                <div class="user-info">
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
+                                                        <span class="text-color-black">John Smith</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">clock</i>
+                                                        <span class="text-color-black">3:00pm</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">phone</i>
+                                                        <span class="text-color-black">+91 12345 12345</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
+                                                        <span class="text-color-black">5 family member</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-50 table_reservation_info margin-bottom">
+                                        <div class="person-info tooltip" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;3</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>
+                                            <div class="tooltiptext padding-half">
+                                                <div class="user-info">
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
+                                                        <span class="text-color-black">John Smith</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">clock</i>
+                                                        <span class="text-color-black">3:00pm</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">phone</i>
+                                                        <span class="text-color-black">+91 12345 12345</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
+                                                        <span class="text-color-black">5 family member</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-50 table_reservation_info margin-bottom">
+                                        <div class="person-info tooltip" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;3</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>
+                                            <div class="tooltiptext padding-half">
+                                                <div class="user-info">
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
+                                                        <span class="text-color-black">John Smith</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">clock</i>
+                                                        <span class="text-color-black">3:00pm</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">phone</i>
+                                                        <span class="text-color-black">+91 12345 12345</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
+                                                        <span class="text-color-black">5 family member</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-25 table_reservation_info">
+                                        <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;3</span>
+                                            </div>
+                                            <div class="waiting-time margin-top-half text-align-center">
+                                                <i class="f7-icons size-22">clock_fill</i>
+                                                <span>2:47</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-25 table_reservation_info">
+                                        <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;3</span>
+                                            </div>
+                                            <div class="waiting-time margin-top-half text-align-center">
+                                                <i class="f7-icons size-22">clock_fill</i>
+                                                <span>2:47</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-25 table_reservation_info">
+                                        <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;3</span>
+                                            </div>
+                                            <div class="waiting-time margin-top-half text-align-center">
+                                                <i class="f7-icons size-22">clock_fill</i>
+                                                <span>2:47</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-25 table_reservation_info">
+                                        <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;3</span>
+                                            </div>
+                                            <div class="waiting-time margin-top-half text-align-center">
+                                                <i class="f7-icons size-22">clock_fill</i>
+                                                <span>2:47</span>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--======= TABLE CHAIR ========= -->
+                    <div class="row table_bottom_chair">
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table1-2.png" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table1-2.png" alt="table">
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+                 <!-- ========= TABLE 9 START ========= -->
+                 <div class="col-20 no-padding margin-bottom table-card"> 
+                    <!--======= TABLE CHAIR ========= -->
+                    <div class="row table_top_chair">
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table9.svg" alt="table">
+                            </div>
+                        </div>
+                    </div>               
+
+                    <div class="card table_9 equal-height-table">
+                        <div class="card-header no-padding">
+                            <div class="row header_detail">
+                                <div class="table-number padding-half"> <p class="no-margin">Table No.</p>                                     
+                                <p class=" text-align-center no-margin"> 09</p>
+                                </div>
+                                <div class="table-capacity text-align-right padding-half">
+                                    <p class="no-margin"> Capacity </p> <p class="text-align-center no-margin">02</p> </div>
+                            </div>
+                        </div>
+                        <div class="card-content card-content-padding padding-horizontal-half">
+                            <!-- <div class="table_image text-align-center">
+                                <img src="/images/table/3_member_table.png" alt="">
+                            </div> -->
+                            <div class="table_reservation">
+                                <h3 class="no-margin-top">Empty</h3>
+                                <div class="row">
+                                    <div class="col-100 table_reservation_info margin-bottom">
+                                        <div class="person-info tooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-12">person_fill</i>
+                                                <span>&nbsp;3</span>                                                
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-12">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>
+                                            <div class="tooltiptext padding-half">
+                                                <div class="user-info">                                                    
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
+                                                        <span class="text-color-black">John Smith</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">clock</i>
+                                                        <span class="text-color-black">3:00pm</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">phone</i>
+                                                        <span class="text-color-black">+91 12345 12345</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
+                                                        <span class="text-color-black">5 family member</span>
+                                                    </div>                                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-100 table_reservation_info margin-bottom">
+                                        <div class="person-info tooltip" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;3</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>
+                                            <div class="tooltiptext padding-half">
+                                                <div class="user-info">
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
+                                                        <span class="text-color-black">John Smith</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">clock</i>
+                                                        <span class="text-color-black">3:00pm</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">phone</i>
+                                                        <span class="text-color-black">+91 12345 12345</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
+                                                        <span class="text-color-black">5 family member</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                 
+                                    <!-- <div class="col-25 table_reservation_info">
+                                        <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;3</span>
+                                            </div>
+                                            <div class="waiting-time margin-top-half text-align-center">
+                                                <i class="f7-icons size-22">clock_fill</i>
+                                                <span>2:47</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-25 table_reservation_info">
+                                        <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;3</span>
+                                            </div>
+                                            <div class="waiting-time margin-top-half text-align-center">
+                                                <i class="f7-icons size-22">clock_fill</i>
+                                                <span>2:47</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-25 table_reservation_info">
+                                        <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;3</span>
+                                            </div>
+                                            <div class="waiting-time margin-top-half text-align-center">
+                                                <i class="f7-icons size-22">clock_fill</i>
+                                                <span>2:47</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-25 table_reservation_info">
+                                        <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;3</span>
+                                            </div>
+                                            <div class="waiting-time margin-top-half text-align-center">
+                                                <i class="f7-icons size-22">clock_fill</i>
+                                                <span>2:47</span>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--======= TABLE CHAIR ========= -->
+                    <div class="row table_bottom_chair">
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table9-1.svg" alt="table">
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+            <div class="row table_row margin-horizontal padding-top margin-top">
+                <!-- ======= TABLE 10 START ========== -->
+                <div class="col-100 no-padding margin-bottom table-card">
+                    <!--======= TABLE CHAIR ========= -->
+                    <div class="row table_top_chair">
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table10.svg" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table10.svg" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table10.svg" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table10.svg" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table10.svg" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table10.svg" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table10.svg" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table10.svg" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table10.svg" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table10.svg" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table10.svg" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table10.svg" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table10.svg" alt="table">
+                            </div>
+                        </div>
+                    </div>  
+                    <div class="card table_10 no-margin equal-height-table">
+                        <div class="card-header no-padding ">
+                            <div class="row header_detail">
+                                <div class="table-number padding-half"> <p class="no-margin">Table No.</p>
+                                    <p class=" text-align-center no-margin"> 10</p>                                    
+                                </div>
+                                <div class="table-capacity text-align-right padding-half"> <p class="no-margin">Capacity</p>
+                                    <p class=" text-align-center no-margin"> 26</p>                                                                        
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-content card-content-padding padding-horizontal-half">
+                            <div class="table_reservation">
+                                <h3 class="no-margin-top">Order Completed</h3>
+                                <div class="display-flex">
+                                    <div class="table_reservation_info margin-bottom margin-right">
+                                        <div class="person-info " data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;5</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="table_reservation_info margin-bottom margin-right">
+                                        <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;5</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="table_reservation_info margin-bottom margin-right">
+                                        <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;5</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>                                            
+                                        </div>
+                                    </div>
+                                    <div class="table_reservation_info margin-bottom margin-right">
+                                        <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;5</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="table_reservation_info margin-bottom margin-right">
+                                        <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;5</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="table_reservation_info margin-bottom margin-right">
+                                        <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;5</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--======= TABLE CHAIR ========= -->
+                    <div class="row table_bottom_chair">
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table10-1.svg" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table10-1.svg" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table10-1.svg" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table10-1.svg" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table10-1.svg" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table10-1.svg" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table10-1.svg" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table10-1.svg" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table10-1.svg" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table10-1.svg" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table10-1.svg" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table10-1.svg" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table10-1.svg" alt="table">
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+            <div class="row table_row margin-horizontal padding-top margin-top">
+                 <!-- ========= TABLE 9 START ========= -->
+                <div class="col-20 no-padding margin-bottom table-card"> 
+                    <!--======= TABLE CHAIR ========= -->
+                    <div class="row table_top_chair">
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table9.svg" alt="table">
+                            </div>
+                        </div>
+                    </div>               
+
+                    <div class="card table_9 equal-height-table">
+                        <div class="card-header no-padding">
+                            <div class="row header_detail">
+                                <div class="table-number padding-half"> <p class="no-margin">Table No.</p>                                     
+                                <p class=" text-align-center no-margin"> 09</p>
+                                </div>
+                                <div class="table-capacity text-align-right padding-half">
+                                    <p class="no-margin"> Capacity </p> <p class="text-align-center no-margin">02</p> </div>
+                            </div>
+                        </div>
+                        <div class="card-content card-content-padding padding-horizontal-half">
+                            <div class="table_reservation">
+                                <h3 class="no-margin-top">Empty</h3>
+                                <div class="row">
+                                    <div class="col-100 table_reservation_info margin-bottom">
+                                        <div class="person-info tooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-12">person_fill</i>
+                                                <span>&nbsp;3</span>                                                
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-12">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>
+                                            <div class="tooltiptext padding-half">
+                                                <div class="user-info">                                                    
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
+                                                        <span class="text-color-black">John Smith</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">clock</i>
+                                                        <span class="text-color-black">3:00pm</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">phone</i>
+                                                        <span class="text-color-black">+91 12345 12345</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
+                                                        <span class="text-color-black">5 family member</span>
+                                                    </div>                                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-100 table_reservation_info margin-bottom">
+                                        <div class="person-info tooltip" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;3</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>
+                                            <div class="tooltiptext padding-half">
+                                                <div class="user-info">
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
+                                                        <span class="text-color-black">John Smith</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">clock</i>
+                                                        <span class="text-color-black">3:00pm</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">phone</i>
+                                                        <span class="text-color-black">+91 12345 12345</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
+                                                        <span class="text-color-black">5 family member</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--======= TABLE CHAIR ========= -->
+                    <div class="row table_bottom_chair">
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table9-1.svg" alt="table">
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+                 <!-- ========= TABLE 9 START ========= -->
+                <div class="col-20 no-padding margin-bottom table-card"> 
+                    <!--======= TABLE CHAIR ========= -->
+                    <div class="row table_top_chair">
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table9.svg" alt="table">
+                            </div>
+                        </div>
+                    </div>               
+
+                    <div class="card table_9 equal-height-table">
+                        <div class="card-header no-padding">
+                            <div class="row header_detail">
+                                <div class="table-number padding-half"> <p class="no-margin">Table No.</p>                                     
+                                <p class=" text-align-center no-margin"> 09</p>
+                                </div>
+                                <div class="table-capacity text-align-right padding-half">
+                                    <p class="no-margin"> Capacity </p> <p class="text-align-center no-margin">02</p> </div>
+                            </div>
+                        </div>
+                        <div class="card-content card-content-padding padding-horizontal-half">
+                            <div class="table_reservation">
+                                <h3 class="no-margin-top">Empty</h3>
+                                <div class="row">
+                                    <div class="col-100 table_reservation_info margin-bottom">
+                                        <div class="person-info tooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-12">person_fill</i>
+                                                <span>&nbsp;3</span>                                                
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-12">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>
+                                            <div class="tooltiptext padding-half">
+                                                <div class="user-info">                                                    
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
+                                                        <span class="text-color-black">John Smith</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">clock</i>
+                                                        <span class="text-color-black">3:00pm</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">phone</i>
+                                                        <span class="text-color-black">+91 12345 12345</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
+                                                        <span class="text-color-black">5 family member</span>
+                                                    </div>                                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-100 table_reservation_info margin-bottom">
+                                        <div class="person-info tooltip" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;3</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>
+                                            <div class="tooltiptext padding-half">
+                                                <div class="user-info">
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
+                                                        <span class="text-color-black">John Smith</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">clock</i>
+                                                        <span class="text-color-black">3:00pm</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">phone</i>
+                                                        <span class="text-color-black">+91 12345 12345</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
+                                                        <span class="text-color-black">5 family member</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--======= TABLE CHAIR ========= -->
+                    <div class="row table_bottom_chair">
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table9-1.svg" alt="table">
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+                 <!-- ========= TABLE 9 START ========= -->
+                <div class="col-20 no-padding margin-bottom table-card"> 
+                    <!--======= TABLE CHAIR ========= -->
+                    <div class="row table_top_chair">
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table9.svg" alt="table">
+                            </div>
+                        </div>
+                    </div>               
+
+                    <div class="card table_9 equal-height-table">
+                        <div class="card-header no-padding">
+                            <div class="row header_detail">
+                                <div class="table-number padding-half"> <p class="no-margin">Table No.</p>                                     
+                                <p class=" text-align-center no-margin"> 09</p>
+                                </div>
+                                <div class="table-capacity text-align-right padding-half">
+                                    <p class="no-margin"> Capacity </p> <p class="text-align-center no-margin">02</p> </div>
+                            </div>
+                        </div>
+                        <div class="card-content card-content-padding padding-horizontal-half">
+                            <div class="table_reservation">
+                                <h3 class="no-margin-top">Empty</h3>
+                                <div class="row">
+                                    <div class="col-100 table_reservation_info margin-bottom">
+                                        <div class="person-info tooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-12">person_fill</i>
+                                                <span>&nbsp;3</span>                                                
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-12">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>
+                                            <div class="tooltiptext padding-half">
+                                                <div class="user-info">                                                    
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
+                                                        <span class="text-color-black">John Smith</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">clock</i>
+                                                        <span class="text-color-black">3:00pm</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">phone</i>
+                                                        <span class="text-color-black">+91 12345 12345</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
+                                                        <span class="text-color-black">5 family member</span>
+                                                    </div>                                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-100 table_reservation_info margin-bottom">
+                                        <div class="person-info tooltip" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;3</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>
+                                            <div class="tooltiptext padding-half">
+                                                <div class="user-info">
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
+                                                        <span class="text-color-black">John Smith</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">clock</i>
+                                                        <span class="text-color-black">3:00pm</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">phone</i>
+                                                        <span class="text-color-black">+91 12345 12345</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
+                                                        <span class="text-color-black">5 family member</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--======= TABLE CHAIR ========= -->
+                    <div class="row table_bottom_chair">
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table9-1.svg" alt="table">
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+                 <!-- ======== TABLE 2 START ======= -->
+                 <div class="col-30 no-padding margin-bottom table-card">    
+                    <!--======= TABLE CHAIR ========= -->
+                    <div class="row table_top_chair">
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-2.png" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-2.png" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-2.png" alt="table">
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="card table_2 no-margin equal-height-table">                        
+                        <div class="card-header no-padding">
+                            <div class="row header_detail">
+                                <div class="table-number padding-half"> 
+                                    <p class="no-margin">Table No. </p>
+                                    <p class=" text-align-center no-margin"> 02</p>
+                                </div>
+                                <div class="table-capacity text-align-right padding-half"> 
+                                    <p class="no-margin">Capacity </p>
+                                    <p class="text-align-center no-margin">06</p>                                     
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-content card-content-padding padding-horizontal-half">
+                            <div class="table_reservation">
+                                <h3 class="no-margin-top">Empty</h3>
+                                <div class="row">
+                                    <div class="col-50 table_reservation_info margin-bottom">
+                                        <div class="person-info tooltip" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;4</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>   
+                                            <div class="tooltiptext padding-half">
+                                                <div class="user-info">
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
+                                                        <span class="text-color-black">John Smith</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">clock</i>
+                                                        <span class="text-color-black">3:00pm</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">phone</i>
+                                                        <span class="text-color-black">+91 12345 12345</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
+                                                        <span class="text-color-black">5 family member</span>
+                                                    </div>
+                                                </div>
+                                            </div>                                         
+                                        </div>
+                                    </div>
+                                    <div class="col-50 table_reservation_info margin-bottom">
+                                        <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;4</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>                                            
+                                        </div>
+                                    </div>
+                                    <div class="col-50 table_reservation_info margin-bottom">
+                                        <div class="person-info tooltip" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;4</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div> 
+                                            <div class="tooltiptext padding-half">
+                                                <div class="user-info">
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
+                                                        <span class="text-color-black">John Smith</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">clock</i>
+                                                        <span class="text-color-black">3:00pm</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">phone</i>
+                                                        <span class="text-color-black">+91 12345 12345</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
+                                                        <span class="text-color-black">5 family member</span>
+                                                    </div>
+                                                </div>
+                                            </div>                                          
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--======= TABLE CHAIR ========= -->
+                    <div class="row table_bottom_chair">
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-2-1.png" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-2-1.png" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-2-1.png" alt="table">
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+            <div class="row table_row margin-horizontal padding-top margin-top">
+                 <!-- ======== TABLE 2 START ======= -->
+                <div class="col-30 no-padding margin-bottom table-card">    
+                    <!--======= TABLE CHAIR ========= -->
+                    <div class="row table_top_chair">
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-2.png" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-2.png" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-2.png" alt="table">
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="card table_2 no-margin equal-height-table">                        
+                        <div class="card-header no-padding">
+                            <div class="row header_detail">
+                                <div class="table-number padding-half"> 
+                                    <p class="no-margin">Table No. </p>
+                                    <p class=" text-align-center no-margin"> 02</p>
+                                </div>
+                                <div class="table-capacity text-align-right padding-half"> 
+                                    <p class="no-margin">Capacity </p>
+                                    <p class="text-align-center no-margin">06</p>                                     
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-content card-content-padding padding-horizontal-half">
+                            <div class="table_reservation">
+                                <h3 class="no-margin-top">Empty</h3>
+                                <div class="row">
+                                    <div class="col-50 table_reservation_info margin-bottom">
+                                        <div class="person-info tooltip" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;4</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>   
+                                            <div class="tooltiptext padding-half">
+                                                <div class="user-info">
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
+                                                        <span class="text-color-black">John Smith</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">clock</i>
+                                                        <span class="text-color-black">3:00pm</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">phone</i>
+                                                        <span class="text-color-black">+91 12345 12345</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
+                                                        <span class="text-color-black">5 family member</span>
+                                                    </div>
+                                                </div>
+                                            </div>                                         
+                                        </div>
+                                    </div>
+                                    <div class="col-50 table_reservation_info margin-bottom">
+                                        <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;4</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>                                            
+                                        </div>
+                                    </div>
+                                    <div class="col-50 table_reservation_info margin-bottom">
+                                        <div class="person-info tooltip" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;4</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div> 
+                                            <div class="tooltiptext padding-half">
+                                                <div class="user-info">
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
+                                                        <span class="text-color-black">John Smith</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">clock</i>
+                                                        <span class="text-color-black">3:00pm</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">phone</i>
+                                                        <span class="text-color-black">+91 12345 12345</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
+                                                        <span class="text-color-black">5 family member</span>
+                                                    </div>
+                                                </div>
+                                            </div>                                          
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--======= TABLE CHAIR ========= -->
+                    <div class="row table_bottom_chair">
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-2-1.png" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-2-1.png" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-2-1.png" alt="table">
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+                  <!-- ======== TABLE 2 START ======= -->
+                <div class="col-30 no-padding margin-bottom table-card">    
+                    <!--======= TABLE CHAIR ========= -->
+                    <div class="row table_top_chair">
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-2.png" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-2.png" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-2.png" alt="table">
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="card table_2 no-margin equal-height-table">                        
+                        <div class="card-header no-padding">
+                            <div class="row header_detail">
+                                <div class="table-number padding-half"> 
+                                    <p class="no-margin">Table No. </p>
+                                    <p class=" text-align-center no-margin"> 02</p>
+                                </div>
+                                <div class="table-capacity text-align-right padding-half"> 
+                                    <p class="no-margin">Capacity </p>
+                                    <p class="text-align-center no-margin">06</p>                                     
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-content card-content-padding padding-horizontal-half">
+                            <div class="table_reservation">
+                                <h3 class="no-margin-top">Empty</h3>
+                                <div class="row">
+                                    <div class="col-50 table_reservation_info margin-bottom">
+                                        <div class="person-info tooltip" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;4</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>   
+                                            <div class="tooltiptext padding-half">
+                                                <div class="user-info">
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
+                                                        <span class="text-color-black">John Smith</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">clock</i>
+                                                        <span class="text-color-black">3:00pm</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">phone</i>
+                                                        <span class="text-color-black">+91 12345 12345</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
+                                                        <span class="text-color-black">5 family member</span>
+                                                    </div>
+                                                </div>
+                                            </div>                                         
+                                        </div>
+                                    </div>
+                                    <div class="col-50 table_reservation_info margin-bottom">
+                                        <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;4</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>                                            
+                                        </div>
+                                    </div>
+                                    <div class="col-50 table_reservation_info margin-bottom">
+                                        <div class="person-info tooltip" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;4</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div> 
+                                            <div class="tooltiptext padding-half">
+                                                <div class="user-info">
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
+                                                        <span class="text-color-black">John Smith</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">clock</i>
+                                                        <span class="text-color-black">3:00pm</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">phone</i>
+                                                        <span class="text-color-black">+91 12345 12345</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
+                                                        <span class="text-color-black">5 family member</span>
+                                                    </div>
+                                                </div>
+                                            </div>                                          
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--======= TABLE CHAIR ========= -->
+                    <div class="row table_bottom_chair">
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-2-1.png" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-2-1.png" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-2-1.png" alt="table">
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+                  <!-- ======== TABLE 2 START ======= -->
+                <div class="col-30 no-padding margin-bottom table-card">    
+                    <!--======= TABLE CHAIR ========= -->
+                    <div class="row table_top_chair">
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-2.png" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-2.png" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-2.png" alt="table">
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="card table_2 no-margin equal-height-table">                        
+                        <div class="card-header no-padding">
+                            <div class="row header_detail">
+                                <div class="table-number padding-half"> 
+                                    <p class="no-margin">Table No. </p>
+                                    <p class=" text-align-center no-margin"> 02</p>
+                                </div>
+                                <div class="table-capacity text-align-right padding-half"> 
+                                    <p class="no-margin">Capacity </p>
+                                    <p class="text-align-center no-margin">06</p>                                     
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-content card-content-padding padding-horizontal-half">
+                            <div class="table_reservation">
+                                <h3 class="no-margin-top">Empty</h3>
+                                <div class="row">
+                                    <div class="col-50 table_reservation_info margin-bottom">
+                                        <div class="person-info tooltip" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;4</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>   
+                                            <div class="tooltiptext padding-half">
+                                                <div class="user-info">
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
+                                                        <span class="text-color-black">John Smith</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">clock</i>
+                                                        <span class="text-color-black">3:00pm</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">phone</i>
+                                                        <span class="text-color-black">+91 12345 12345</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
+                                                        <span class="text-color-black">5 family member</span>
+                                                    </div>
+                                                </div>
+                                            </div>                                         
+                                        </div>
+                                    </div>
+                                    <div class="col-50 table_reservation_info margin-bottom">
+                                        <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;4</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>                                            
+                                        </div>
+                                    </div>
+                                    <div class="col-50 table_reservation_info margin-bottom">
+                                        <div class="person-info tooltip" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;4</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div> 
+                                            <div class="tooltiptext padding-half">
+                                                <div class="user-info">
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
+                                                        <span class="text-color-black">John Smith</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">clock</i>
+                                                        <span class="text-color-black">3:00pm</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">phone</i>
+                                                        <span class="text-color-black">+91 12345 12345</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
+                                                        <span class="text-color-black">5 family member</span>
+                                                    </div>
+                                                </div>
+                                            </div>                                          
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--======= TABLE CHAIR ========= -->
+                    <div class="row table_bottom_chair">
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-2-1.png" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-2-1.png" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-2-1.png" alt="table">
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+            <div class="row table_row margin-horizontal padding-top margin-top">
+                 <!-- ======= TABLE 3 START ========== -->
+                 <div class="col-40 no-padding margin-bottom table-card">
+                    <!--======= TABLE CHAIR ========= -->
+                    <div class="row table_top_chair">
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-3.png" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-3.png" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-3.png" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-3.png" alt="table">
+                            </div>
+                        </div>
+                    </div>  
+                    <div class="card table_3 no-margin-vertical equal-height-table">
+                        <div class="card-header no-padding ">
+                            <div class="row header_detail">
+                                <div class="table-number padding-half"> <p class="no-margin">Table No.</p>
+                                    <p class=" text-align-center no-margin"> 03</p>                                    
+                                </div>
+                                <div class="table-capacity text-align-right padding-half"> <p class="no-margin">Capacity</p>
+                                    <p class=" text-align-center no-margin"> 08</p>                                                                        
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-content card-content-padding padding-horizontal-half">
+                            <div class="table_reservation">
+                                <h3 class="no-margin-top">Order Running</h3>
+                                <div class="row">
+                                    <div class="col-33 table_reservation_info margin-bottom">
+                                        <div class="person-info " data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;5</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-33 table_reservation_info margin-bottom">
+                                        <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;5</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-33 table_reservation_info margin-bottom">
+                                        <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;5</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>                                            
+                                        </div>
+                                    </div>
+                                    <div class="col-33 table_reservation_info margin-bottom">
+                                        <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;5</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--======= TABLE CHAIR ========= -->
+                    <div class="row table_bottom_chair">
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table3-1.png" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table3-1.png" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table3-1.png" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table3-1.png" alt="table">
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+                <!-- ======== TABLE 2 START ======= -->
+                <div class="col-30 no-padding margin-bottom table-card">    
+                    <!--======= TABLE CHAIR ========= -->
+                    <div class="row table_top_chair">
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-2.png" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-2.png" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-2.png" alt="table">
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="card table_2 no-margin equal-height-table">                        
+                        <div class="card-header no-padding">
+                            <div class="row header_detail">
+                                <div class="table-number padding-half"> 
+                                    <p class="no-margin">Table No. </p>
+                                    <p class=" text-align-center no-margin"> 02</p>
+                                </div>
+                                <div class="table-capacity text-align-right padding-half"> 
+                                    <p class="no-margin">Capacity </p>
+                                    <p class="text-align-center no-margin">06</p>                                     
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-content card-content-padding padding-horizontal-half">
+                            <div class="table_reservation">
+                                <h3 class="no-margin-top">Empty</h3>
+                                <div class="row">
+                                    <div class="col-50 table_reservation_info margin-bottom">
+                                        <div class="person-info tooltip" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;4</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>   
+                                            <div class="tooltiptext padding-half">
+                                                <div class="user-info">
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
+                                                        <span class="text-color-black">John Smith</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">clock</i>
+                                                        <span class="text-color-black">3:00pm</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">phone</i>
+                                                        <span class="text-color-black">+91 12345 12345</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
+                                                        <span class="text-color-black">5 family member</span>
+                                                    </div>
+                                                </div>
+                                            </div>                                         
+                                        </div>
+                                    </div>
+                                    <div class="col-50 table_reservation_info margin-bottom">
+                                        <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;4</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>                                            
+                                        </div>
+                                    </div>
+                                    <div class="col-50 table_reservation_info margin-bottom">
+                                        <div class="person-info tooltip" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;4</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div> 
+                                            <div class="tooltiptext padding-half">
+                                                <div class="user-info">
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
+                                                        <span class="text-color-black">John Smith</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">clock</i>
+                                                        <span class="text-color-black">3:00pm</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">phone</i>
+                                                        <span class="text-color-black">+91 12345 12345</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
+                                                        <span class="text-color-black">5 family member</span>
+                                                    </div>
+                                                </div>
+                                            </div>                                          
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--======= TABLE CHAIR ========= -->
+                    <div class="row table_bottom_chair">
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-2-1.png" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-2-1.png" alt="table">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table-2-1.png" alt="table">
+                            </div>
+                        </div>
+                    </div> 
+                </div>    
+                  <!-- ========= TABLE 9 START ========= -->
+                  <div class="col-20 no-padding margin-bottom table-card"> 
+                    <!--======= TABLE CHAIR ========= -->
+                    <div class="row table_top_chair">
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table9.svg" alt="table">
+                            </div>
+                        </div>
+                    </div>               
+
+                    <div class="card table_9 equal-height-table">
+                        <div class="card-header no-padding">
+                            <div class="row header_detail">
+                                <div class="table-number padding-half"> <p class="no-margin">Table No.</p>                                     
+                                <p class=" text-align-center no-margin"> 09</p>
+                                </div>
+                                <div class="table-capacity text-align-right padding-half">
+                                    <p class="no-margin"> Capacity </p> <p class="text-align-center no-margin">02</p> </div>
+                            </div>
+                        </div>
+                        <div class="card-content card-content-padding padding-horizontal-half">
+                            <div class="table_reservation">
+                                <h3 class="no-margin-top">Empty</h3>
+                                <div class="row">
+                                    <div class="col-100 table_reservation_info margin-bottom">
+                                        <div class="person-info tooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-12">person_fill</i>
+                                                <span>&nbsp;3</span>                                                
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-12">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>
+                                            <div class="tooltiptext padding-half">
+                                                <div class="user-info">                                                    
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
+                                                        <span class="text-color-black">John Smith</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">clock</i>
+                                                        <span class="text-color-black">3:00pm</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">phone</i>
+                                                        <span class="text-color-black">+91 12345 12345</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
+                                                        <span class="text-color-black">5 family member</span>
+                                                    </div>                                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-100 table_reservation_info margin-bottom">
+                                        <div class="person-info tooltip" data-tooltip="Button tooltip text" @click="openTooltip">
+                                            <div class="text-align-center person">
+                                                <i class="f7-icons size-22">person_fill</i>
+                                                <span>&nbsp;3</span>
+                                                <span class="waiting-time margin-top-half text-align-center">
+                                                    <i class="f7-icons size-22">clock_fill</i>
+                                                    <span>2:47</span>
+                                                </span>
+                                            </div>
+                                            <div class="tooltiptext padding-half">
+                                                <div class="user-info">
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
+                                                        <span class="text-color-black">John Smith</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">clock</i>
+                                                        <span class="text-color-black">3:00pm</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">phone</i>
+                                                        <span class="text-color-black">+91 12345 12345</span>
+                                                    </div>
+                                                    <div class="display-flex padding-left-half padding-top-half">
+                                                        <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
+                                                        <span class="text-color-black">5 family member</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--======= TABLE CHAIR ========= -->
+                    <div class="row table_bottom_chair">
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img src="/images/table/table9-1.svg" alt="table">
+                            </div>
+                        </div>
+                    </div>  
+                </div>           
+            </div>
         </div>
         </f7-page>
 </template>
@@ -1060,6 +3568,7 @@ export default {
             }
             document.querySelectorAll(".equal-height-table").forEach(node => node.style.height = highestBox + "px");
         },
+        
     },
 }
 </script>
@@ -1069,7 +3578,8 @@ export default {
     .header-links{
         box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.15);
         height: 60px !important;
-        position: relative;
+        position: fixed;
+        width: 100%;
         z-index: 99;
     }
     .height-40{
@@ -1169,7 +3679,79 @@ export default {
 .tooltip:hover .tooltiptext {
   visibility: visible;
 }
+.table_row .table_1{
+    border-left: 10px solid #0FC963;
+    width: 100%;
+    min-width: 250px;
+}
+.table_row .table_2{
+    border-left: 10px solid #FF6161;
+    width: 100%;
+    max-width: 332px;
+}
+.table_row .table_3{
+    border-left: 10px solid #FC8E5E;
+    width: 100%;
+    max-width: 412px;
+}
+.table_row .table_4{
+    border-left: 10px solid #FF619A;
+    width: 100%;
+    min-width: 500px;
+}
+.table_row .table_4 .card-content,.table_row .table_5 .card-content{
+    padding-top: 50px;
+}
+.table_row .table_10 .card-content{
+    padding-top: 50px;
 
+}
+.table_row .table_4_margin{
+    margin-right: 103px;
+}
+.table_row .table_5{
+    border-left: 10px solid #9ECBFF;
+    width: 100%;
+    min-width: 574px;
+}
+.table_row .table_9{
+    width:100%;
+    min-width: 182px;    
+    max-width: 182px;
+    margin: 0 auto;
+    border-left: 10px solid #FCD95E;
+}
+.table_row .table_10 {
+    width:100%;
+    min-width: 1180px;    
+    margin: 0 auto;
+    border-left: 10px solid #C6C6C6;;
+}
+.table_top_chair{
+    margin-bottom: -2px;
+}
+.table_bottom_chair{
+    margin-top: -2px;
+}
+.tables{
+    width: 100%;
+    height: calc(100vh - 70px);
+    overflow: auto;
+    margin-top: 70px;
+}
+.center_table_card{
+    margin-left: 93px;
+    margin-right: 93px;
+}
+.tables .row{
+    flex-wrap: nowrap !important;
+}
+.tables .table_row .row{
+    flex-wrap: wrap !important;
+}
+.table_card_right_margin{
+    margin-right: 82px;
+}
 @media screen and (max-width : 820px) {
     .nav-button {
         width : 25% !important;
@@ -1181,6 +3763,9 @@ export default {
 </style>
 
 <style>
+    *{
+        box-sizing: border-box;
+    }
     .nav-button{
         text-transform: capitalize;
     }
@@ -1228,7 +3813,7 @@ export default {
         padding: 7px 5px !important;
         font-size: 10px !important;
         width: 100%;
-        max-width: 108px;
+        max-width: 94px;
     }
     /*.person{
         border-bottom: 1px solid;
@@ -1280,20 +3865,5 @@ export default {
     .table_row .card{
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.11);
     }
-    .table_row .table_1{
-        border-left: 10px solid #0FC963;
-    }
-    .table_row .table_2{
-        border-left: 10px solid #FF6161;
-    }
-    .table_row .table_3{
-        border-left: 10px solid #FC8E5E;
-
-    }
-    .table_top_chair{
-        margin-bottom: -2px;
-    }
-    .table_bottom_chair{
-        margin-top: -2px;
-    }
+   
 </style>
