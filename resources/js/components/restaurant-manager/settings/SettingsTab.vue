@@ -81,6 +81,10 @@ export default {
 </script>
 
 <style scoped>
+
+.product-list-section .tabs-animated-wrap .card{
+    box-shadow:none;
+}
     .page-food-category {
         background: #f1f1f1;
     }
@@ -181,6 +185,7 @@ export default {
         font-weight: 600;
         font-size: 20px;
         line-height: 24px;
+        color: #38373D;
     }
     .tabs-animated-wrap,.tabs-animated-wrap > .tabs{
         height: auto;

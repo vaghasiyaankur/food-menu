@@ -23,7 +23,7 @@
             </f7-navbar>
         </div>
         <div class="product-list-section">
-            <div class="card">
+            <div class="card product_list_card no-margin">
                 <div class="card_header">
                     <div class="row padding-left padding-right align-items-center">
                         <div class="col-50">
@@ -42,7 +42,7 @@
                                     </div>
                                 </div>
                                 <div class="col padding-left-half padding-right-half">
-                                    <button class="button button-raised bg-dark text-color-white padding height-36" @click="addProduct"><i class="f7-icons font-22">plus_square</i> Add Product</button>
+                                    <button class="button bg-dark text-color-white padding height-36" @click="addProduct"><i class="f7-icons font-22">plus_square</i> Add Product</button>
                                 </div>
                             </div>
                         </div>
@@ -51,390 +51,283 @@
                 <div class="card-content card-content-padding">
                     <div class="row">
                         <div class="col-50">
-                            <div class="card product_lists">
-                                <div class="card_header padding-horizontal padding-top text-align-center">
-                                    <div class="border-bottom padding-bottom">
-                                        <span class="card-title">Kathiyavadi thali</span>
-                                    </div>
-                                </div>
-                                <div class="card-content padding-top">
-                                    <div class="product_list padding-vertical-half">
-                                        <div class="row align-items-center padding-horizontal">
-                                            <div class="col-60">
-                                                <div class="row">
-                                                    <div class="col product-detail">Rice</div>
-                                                    <div class="col text-align-right product-detail">₹ 70.00</div>
-                                                </div>
-                                            </div>
-                                            <div class="col-40">
-                                                <div class="row">
-                                                    <div class="col-50">
-                                                        <button class="button button-raised text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-22">square_pencil</i> Edit</button>
-                                                    </div>
-                                                    <div class="col-50">
-                                                        <button class="button button-raised bg-karaka-orange text-color-white padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-22">trash</i> Delete</button>
-                                                    </div>
-                                                </div>
+                            <div class="row">                                
+                                <div class="col-100">
+                                    <div class="card product_lists">
+                                        <div class="card_header padding-horizontal padding-top text-align-center">
+                                            <div class="border-bottom padding-bottom">
+                                                <span class="card-title">Kathiyavadi thali</span>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="product_list padding-vertical-half">
-                                        <div class="row align-items-center padding-horizontal">
-                                            <div class="col-60">
-                                                <div class="row">
-                                                    <div class="col product-detail">Dal</div>
-                                                    <div class="col text-align-right product-detail">₹ 70.00</div>
-                                                </div>
-                                            </div>
-                                            <div class="col-40">
-                                                <div class="row">
-                                                    <div class="col-50">
-                                                        <button class="button button-raised text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                        <div class="card-content padding-top">
+                                            <div class="product_list padding-vertical-half">
+                                                <div class="row align-items-center padding-horizontal">
+                                                    <div class="col-60">
+                                                        <div class="row">
+                                                            <div class="col product-detail">Rice</div>
+                                                            <div class="col text-align-right product-detail">₹ 70.00</div>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-50">
-                                                        <button class="button button-raised bg-karaka-orange text-color-white padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-22">trash</i> Delete</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product_list padding-vertical-half">
-                                        <div class="row align-items-center padding-horizontal">
-                                            <div class="col-60">
-                                                <div class="row">
-                                                    <div class="col product-detail">Roti</div>
-                                                    <div class="col text-align-right product-detail">₹ 70.00</div>
-                                                </div>
-                                            </div>
-                                            <div class="col-40">
-                                                <div class="row">
-                                                    <div class="col-50">
-                                                        <button class="button button-raised text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-22">square_pencil</i> Edit</button>
-                                                    </div>
-                                                    <div class="col-50">
-                                                        <button class="button button-raised bg-karaka-orange text-color-white padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-22">trash</i> Delete</button>
+                                                    <div class="col-40">
+                                                        <div class="row">
+                                                            <div class="col-50">
+                                                                <button class="button text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                                            </div>
+                                                            <div class="col-50">
+                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-22">trash</i> Delete</button>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="product_list padding-vertical-half">
-                                        <div class="row align-items-center padding-horizontal">
-                                            <div class="col-60">
-                                                <div class="row">
-                                                    <div class="col product-detail">Sabji</div>
-                                                    <div class="col text-align-right product-detail">₹ 70.00</div>
-                                                </div>
-                                            </div>
-                                            <div class="col-40">
-                                                <div class="row">
-                                                    <div class="col-50">
-                                                        <button class="button button-raised text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                            <div class="product_list padding-vertical-half">
+                                                <div class="row align-items-center padding-horizontal">
+                                                    <div class="col-60">
+                                                        <div class="row">
+                                                            <div class="col product-detail">Dal</div>
+                                                            <div class="col text-align-right product-detail">₹ 70.00</div>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-50">
-                                                        <button class="button button-raised bg-karaka-orange text-color-white padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-22">trash</i> Delete</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product_list padding-vertical-half">
-                                        <div class="row align-items-center padding-horizontal">
-                                            <div class="col-60">
-                                                <div class="row">
-                                                    <div class="col product-detail">Chhas</div>
-                                                    <div class="col text-align-right product-detail">₹ 70.00</div>
-                                                </div>
-                                            </div>
-                                            <div class="col-40">
-                                                <div class="row">
-                                                    <div class="col-50">
-                                                        <button class="button button-raised text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-22">square_pencil</i> Edit</button>
-                                                    </div>
-                                                    <div class="col-50">
-                                                        <button class="button button-raised bg-karaka-orange text-color-white padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-22">trash</i> Delete</button>
+                                                    <div class="col-40">
+                                                        <div class="row">
+                                                            <div class="col-50">
+                                                                <button class="button text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                                            </div>
+                                                            <div class="col-50">
+                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-22">trash</i> Delete</button>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="product_list padding-vertical-half">
-                                        <div class="row align-items-center padding-horizontal">
-                                            <div class="col-60">
-                                                <div class="row">
-                                                    <div class="col product-detail">Sabji</div>
-                                                    <div class="col text-align-right product-detail">₹ 70.00</div>
-                                                </div>
-                                            </div>
-                                            <div class="col-40">
-                                                <div class="row">
-                                                    <div class="col-50">
-                                                        <button class="button button-raised text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                            <div class="product_list padding-vertical-half">
+                                                <div class="row align-items-center padding-horizontal">
+                                                    <div class="col-60">
+                                                        <div class="row">
+                                                            <div class="col product-detail">Roti</div>
+                                                            <div class="col text-align-right product-detail">₹ 70.00</div>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-50">
-                                                        <button class="button button-raised bg-karaka-orange text-color-white padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-22">trash</i> Delete</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product_list padding-vertical-half">
-                                        <div class="row align-items-center padding-horizontal">
-                                            <div class="col-60">
-                                                <div class="row">
-                                                    <div class="col product-detail">Chhas</div>
-                                                    <div class="col text-align-right product-detail">₹ 70.00</div>
-                                                </div>
-                                            </div>
-                                            <div class="col-40">
-                                                <div class="row">
-                                                    <div class="col-50">
-                                                        <button class="button button-raised text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-22">square_pencil</i> Edit</button>
-                                                    </div>
-                                                    <div class="col-50">
-                                                        <button class="button button-raised bg-karaka-orange text-color-white padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-22">trash</i> Delete</button>
+                                                    <div class="col-40">
+                                                        <div class="row">
+                                                            <div class="col-50">
+                                                                <button class="button text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                                            </div>
+                                                            <div class="col-50">
+                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-22">trash</i> Delete</button>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="product_list padding-vertical-half">
-                                        <div class="row align-items-center padding-horizontal">
-                                            <div class="col-60">
-                                                <div class="row">
-                                                    <div class="col product-detail">Sabji</div>
-                                                    <div class="col text-align-right product-detail">₹ 70.00</div>
-                                                </div>
-                                            </div>
-                                            <div class="col-40">
-                                                <div class="row">
-                                                    <div class="col-50">
-                                                        <button class="button button-raised text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                            <div class="product_list padding-vertical-half">
+                                                <div class="row align-items-center padding-horizontal">
+                                                    <div class="col-60">
+                                                        <div class="row">
+                                                            <div class="col product-detail">Sabji</div>
+                                                            <div class="col text-align-right product-detail">₹ 70.00</div>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-50">
-                                                        <button class="button button-raised bg-karaka-orange text-color-white padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-22">trash</i> Delete</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-50">
-                            <div class="card product_lists">
-                                <div class="card_header padding-horizontal padding-top text-align-center">
-                                    <div class="border-bottom padding-bottom">
-                                        <span class="card-title">Paratha</span>
-                                    </div>
-                                </div>
-                                <div class="card-content padding-top">
-                                    <div class="product_list padding-vertical-half">
-                                        <div class="row align-items-center padding-horizontal">
-                                            <div class="col-60">
-                                                <div class="row">
-                                                    <div class="col product-detail">Rice</div>
-                                                    <div class="col text-align-right product-detail">₹ 70.00</div>
-                                                </div>
-                                            </div>
-                                            <div class="col-40">
-                                                <div class="row">
-                                                    <div class="col-50">
-                                                        <button class="button button-raised text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-22">square_pencil</i> Edit</button>
-                                                    </div>
-                                                    <div class="col-50">
-                                                        <button class="button button-raised bg-karaka-orange text-color-white padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-22">trash</i> Delete</button>
+                                                    <div class="col-40">
+                                                        <div class="row">
+                                                            <div class="col-50">
+                                                                <button class="button text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                                            </div>
+                                                            <div class="col-50">
+                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-22">trash</i> Delete</button>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="product_list padding-vertical-half">
-                                        <div class="row align-items-center padding-horizontal">
-                                            <div class="col-60">
-                                                <div class="row">
-                                                    <div class="col product-detail">Dal</div>
-                                                    <div class="col text-align-right product-detail">₹ 70.00</div>
-                                                </div>
-                                            </div>
-                                            <div class="col-40">
-                                                <div class="row">
-                                                    <div class="col-50">
-                                                        <button class="button button-raised text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                            <div class="product_list padding-vertical-half">
+                                                <div class="row align-items-center padding-horizontal">
+                                                    <div class="col-60">
+                                                        <div class="row">
+                                                            <div class="col product-detail">Chhas</div>
+                                                            <div class="col text-align-right product-detail">₹ 70.00</div>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-50">
-                                                        <button class="button button-raised bg-karaka-orange text-color-white padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-22">trash</i> Delete</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product_list padding-vertical-half">
-                                        <div class="row align-items-center padding-horizontal">
-                                            <div class="col-60">
-                                                <div class="row">
-                                                    <div class="col product-detail">Roti</div>
-                                                    <div class="col text-align-right product-detail">₹ 70.00</div>
-                                                </div>
-                                            </div>
-                                            <div class="col-40">
-                                                <div class="row">
-                                                    <div class="col-50">
-                                                        <button class="button button-raised text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-22">square_pencil</i> Edit</button>
-                                                    </div>
-                                                    <div class="col-50">
-                                                        <button class="button button-raised bg-karaka-orange text-color-white padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-22">trash</i> Delete</button>
+                                                    <div class="col-40">
+                                                        <div class="row">
+                                                            <div class="col-50">
+                                                                <button class="button text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                                            </div>
+                                                            <div class="col-50">
+                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-22">trash</i> Delete</button>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="product_list padding-vertical-half">
-                                        <div class="row align-items-center padding-horizontal">
-                                            <div class="col-60">
-                                                <div class="row">
-                                                    <div class="col product-detail">Sabji</div>
-                                                    <div class="col text-align-right product-detail">₹ 70.00</div>
+                                            <div class="product_list padding-vertical-half">
+                                                <div class="row align-items-center padding-horizontal">
+                                                    <div class="col-60">
+                                                        <div class="row">
+                                                            <div class="col product-detail">Sabji</div>
+                                                            <div class="col text-align-right product-detail">₹ 70.00</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-40">
+                                                        <div class="row">
+                                                            <div class="col-50">
+                                                                <button class="button text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                                            </div>
+                                                            <div class="col-50">
+                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-22">trash</i> Delete</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="col-40">
-                                                <div class="row">
-                                                    <div class="col-50">
-                                                        <button class="button button-raised text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                            <div class="product_list padding-vertical-half">
+                                                <div class="row align-items-center padding-horizontal">
+                                                    <div class="col-60">
+                                                        <div class="row">
+                                                            <div class="col product-detail">Chhas</div>
+                                                            <div class="col text-align-right product-detail">₹ 70.00</div>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-50">
-                                                        <button class="button button-raised bg-karaka-orange text-color-white padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-22">trash</i> Delete</button>
+                                                    <div class="col-40">
+                                                        <div class="row">
+                                                            <div class="col-50">
+                                                                <button class="button text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                                            </div>
+                                                            <div class="col-50">
+                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-22">trash</i> Delete</button>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="product_list padding-vertical-half">
-                                        <div class="row align-items-center padding-horizontal">
-                                            <div class="col-60">
-                                                <div class="row">
-                                                    <div class="col product-detail">Chhas</div>
-                                                    <div class="col text-align-right product-detail">₹ 70.00</div>
-                                                </div>
-                                            </div>
-                                            <div class="col-40">
-                                                <div class="row">
-                                                    <div class="col-50">
-                                                        <button class="button button-raised text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                            <div class="product_list padding-vertical-half">
+                                                <div class="row align-items-center padding-horizontal">
+                                                    <div class="col-60">
+                                                        <div class="row">
+                                                            <div class="col product-detail">Sabji</div>
+                                                            <div class="col text-align-right product-detail">₹ 70.00</div>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-50">
-                                                        <button class="button button-raised bg-karaka-orange text-color-white padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-22">trash</i> Delete</button>
+                                                    <div class="col-40">
+                                                        <div class="row">
+                                                            <div class="col-50">
+                                                                <button class="button text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                                            </div>
+                                                            <div class="col-50">
+                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-22">trash</i> Delete</button>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-50">
-                            <div class="card product_lists">
-                                <div class="card_header padding-horizontal padding-top text-align-center">
-                                    <div class="border-bottom padding-bottom">
-                                        <span class="card-title">Pizza</span>
-                                    </div>
-                                </div>
-                                <div class="card-content padding-top">
-                                    <div class="product_list padding-vertical-half">
-                                        <div class="row align-items-center padding-horizontal">
-                                            <div class="col-60">
-                                                <div class="row">
-                                                    <div class="col product-detail">Rice</div>
-                                                    <div class="col text-align-right product-detail">₹ 70.00</div>
-                                                </div>
-                                            </div>
-                                            <div class="col-40">
-                                                <div class="row">
-                                                    <div class="col-50">
-                                                        <button class="button button-raised text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-22">square_pencil</i> Edit</button>
-                                                    </div>
-                                                    <div class="col-50">
-                                                        <button class="button button-raised bg-karaka-orange text-color-white padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-22">trash</i> Delete</button>
-                                                    </div>
-                                                </div>
+                                <div class="col-100">
+                                    <div class="card product_lists">
+                                        <div class="card_header padding-horizontal padding-top text-align-center">
+                                            <div class="border-bottom padding-bottom">
+                                                <span class="card-title">Paratha</span>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="product_list padding-vertical-half">
-                                        <div class="row align-items-center padding-horizontal">
-                                            <div class="col-60">
-                                                <div class="row">
-                                                    <div class="col product-detail">Dal</div>
-                                                    <div class="col text-align-right product-detail">₹ 70.00</div>
-                                                </div>
-                                            </div>
-                                            <div class="col-40">
-                                                <div class="row">
-                                                    <div class="col-50">
-                                                        <button class="button button-raised text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                        <div class="card-content padding-top">
+                                            <div class="product_list padding-vertical-half">
+                                                <div class="row align-items-center padding-horizontal">
+                                                    <div class="col-60">
+                                                        <div class="row">
+                                                            <div class="col product-detail">Rice</div>
+                                                            <div class="col text-align-right product-detail">₹ 70.00</div>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-50">
-                                                        <button class="button button-raised bg-karaka-orange text-color-white padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-22">trash</i> Delete</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product_list padding-vertical-half">
-                                        <div class="row align-items-center padding-horizontal">
-                                            <div class="col-60">
-                                                <div class="row">
-                                                    <div class="col product-detail">Roti</div>
-                                                    <div class="col text-align-right product-detail">₹ 70.00</div>
-                                                </div>
-                                            </div>
-                                            <div class="col-40">
-                                                <div class="row">
-                                                    <div class="col-50">
-                                                        <button class="button button-raised text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-22">square_pencil</i> Edit</button>
-                                                    </div>
-                                                    <div class="col-50">
-                                                        <button class="button button-raised bg-karaka-orange text-color-white padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-22">trash</i> Delete</button>
+                                                    <div class="col-40">
+                                                        <div class="row">
+                                                            <div class="col-50">
+                                                                <button class="button text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                                            </div>
+                                                            <div class="col-50">
+                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-22">trash</i> Delete</button>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="product_list padding-vertical-half">
-                                        <div class="row align-items-center padding-horizontal">
-                                            <div class="col-60">
-                                                <div class="row">
-                                                    <div class="col product-detail">Sabji</div>
-                                                    <div class="col text-align-right product-detail">₹ 70.00</div>
+                                            <div class="product_list padding-vertical-half">
+                                                <div class="row align-items-center padding-horizontal">
+                                                    <div class="col-60">
+                                                        <div class="row">
+                                                            <div class="col product-detail">Dal</div>
+                                                            <div class="col text-align-right product-detail">₹ 70.00</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-40">
+                                                        <div class="row">
+                                                            <div class="col-50">
+                                                                <button class="button text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                                            </div>
+                                                            <div class="col-50">
+                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-22">trash</i> Delete</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="col-40">
-                                                <div class="row">
-                                                    <div class="col-50">
-                                                        <button class="button button-raised text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                            <div class="product_list padding-vertical-half">
+                                                <div class="row align-items-center padding-horizontal">
+                                                    <div class="col-60">
+                                                        <div class="row">
+                                                            <div class="col product-detail">Roti</div>
+                                                            <div class="col text-align-right product-detail">₹ 70.00</div>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-50">
-                                                        <button class="button button-raised bg-karaka-orange text-color-white padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-22">trash</i> Delete</button>
+                                                    <div class="col-40">
+                                                        <div class="row">
+                                                            <div class="col-50">
+                                                                <button class="button text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                                            </div>
+                                                            <div class="col-50">
+                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-22">trash</i> Delete</button>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="product_list padding-vertical-half">
-                                        <div class="row align-items-center padding-horizontal">
-                                            <div class="col-60">
-                                                <div class="row">
-                                                    <div class="col product-detail">Chhas</div>
-                                                    <div class="col text-align-right product-detail">₹ 70.00</div>
+                                            <div class="product_list padding-vertical-half">
+                                                <div class="row align-items-center padding-horizontal">
+                                                    <div class="col-60">
+                                                        <div class="row">
+                                                            <div class="col product-detail">Sabji</div>
+                                                            <div class="col text-align-right product-detail">₹ 70.00</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-40">
+                                                        <div class="row">
+                                                            <div class="col-50">
+                                                                <button class="button text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                                            </div>
+                                                            <div class="col-50">
+                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-22">trash</i> Delete</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="col-40">
-                                                <div class="row">
-                                                    <div class="col-50">
-                                                        <button class="button button-raised text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                            <div class="product_list padding-vertical-half">
+                                                <div class="row align-items-center padding-horizontal">
+                                                    <div class="col-60">
+                                                        <div class="row">
+                                                            <div class="col product-detail">Chhas</div>
+                                                            <div class="col text-align-right product-detail">₹ 70.00</div>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-50">
-                                                        <button class="button button-raised bg-karaka-orange text-color-white padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-22">trash</i> Delete</button>
+                                                    <div class="col-40">
+                                                        <div class="row">
+                                                            <div class="col-50">
+                                                                <button class="button text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                                            </div>
+                                                            <div class="col-50">
+                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-22">trash</i> Delete</button>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -444,116 +337,231 @@
                             </div>
                         </div>
                         <div class="col-50">
-                            <div class="card product_lists">
-                                <div class="card_header padding-horizontal padding-top text-align-center">
-                                    <div class="border-bottom padding-bottom">
-                                        <span class="card-title">Sandwich</span>
+                            <div class="row">
+                                <div class="col-100">
+                                    <div class="card product_lists">
+                                        <div class="card_header padding-horizontal padding-top text-align-center">
+                                            <div class="border-bottom padding-bottom">
+                                                <span class="card-title">Pizza</span>
+                                            </div>
+                                        </div>
+                                        <div class="card-content padding-top">
+                                            <div class="product_list padding-vertical-half">
+                                                <div class="row align-items-center padding-horizontal">
+                                                    <div class="col-60">
+                                                        <div class="row">
+                                                            <div class="col product-detail">Rice</div>
+                                                            <div class="col text-align-right product-detail">₹ 70.00</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-40">
+                                                        <div class="row">
+                                                            <div class="col-50">
+                                                                <button class="button text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                                            </div>
+                                                            <div class="col-50">
+                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-22">trash</i> Delete</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="product_list padding-vertical-half">
+                                                <div class="row align-items-center padding-horizontal">
+                                                    <div class="col-60">
+                                                        <div class="row">
+                                                            <div class="col product-detail">Dal</div>
+                                                            <div class="col text-align-right product-detail">₹ 70.00</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-40">
+                                                        <div class="row">
+                                                            <div class="col-50">
+                                                                <button class="button text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                                            </div>
+                                                            <div class="col-50">
+                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-22">trash</i> Delete</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="product_list padding-vertical-half">
+                                                <div class="row align-items-center padding-horizontal">
+                                                    <div class="col-60">
+                                                        <div class="row">
+                                                            <div class="col product-detail">Roti</div>
+                                                            <div class="col text-align-right product-detail">₹ 70.00</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-40">
+                                                        <div class="row">
+                                                            <div class="col-50">
+                                                                <button class="button text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                                            </div>
+                                                            <div class="col-50">
+                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-22">trash</i> Delete</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="product_list padding-vertical-half">
+                                                <div class="row align-items-center padding-horizontal">
+                                                    <div class="col-60">
+                                                        <div class="row">
+                                                            <div class="col product-detail">Sabji</div>
+                                                            <div class="col text-align-right product-detail">₹ 70.00</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-40">
+                                                        <div class="row">
+                                                            <div class="col-50">
+                                                                <button class="button text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                                            </div>
+                                                            <div class="col-50">
+                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-22">trash</i> Delete</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="product_list padding-vertical-half">
+                                                <div class="row align-items-center padding-horizontal">
+                                                    <div class="col-60">
+                                                        <div class="row">
+                                                            <div class="col product-detail">Chhas</div>
+                                                            <div class="col text-align-right product-detail">₹ 70.00</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-40">
+                                                        <div class="row">
+                                                            <div class="col-50">
+                                                                <button class="button text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                                            </div>
+                                                            <div class="col-50">
+                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-22">trash</i> Delete</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="card-content padding-top">
-                                    <div class="product_list padding-vertical-half">
-                                        <div class="row align-items-center padding-horizontal">
-                                            <div class="col-60">
-                                                <div class="row">
-                                                    <div class="col product-detail">Rice</div>
-                                                    <div class="col text-align-right product-detail">₹ 70.00</div>
+                                <div class="col-100">
+                                    <div class="card product_lists">
+                                        <div class="card_header padding-horizontal padding-top text-align-center">
+                                            <div class="border-bottom padding-bottom">
+                                                <span class="card-title">Sandwich</span>
+                                            </div>
+                                        </div>
+                                        <div class="card-content padding-top">
+                                            <div class="product_list padding-vertical-half">
+                                                <div class="row align-items-center padding-horizontal">
+                                                    <div class="col-60">
+                                                        <div class="row">
+                                                            <div class="col product-detail">Rice</div>
+                                                            <div class="col text-align-right product-detail">₹ 70.00</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-40">
+                                                        <div class="row">
+                                                            <div class="col-50">
+                                                                <button class="button text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                                            </div>
+                                                            <div class="col-50">
+                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-22">trash</i> Delete</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="col-40">
-                                                <div class="row">
-                                                    <div class="col-50">
-                                                        <button class="button button-raised text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                            <div class="product_list padding-vertical-half">
+                                                <div class="row align-items-center padding-horizontal">
+                                                    <div class="col-60">
+                                                        <div class="row">
+                                                            <div class="col product-detail">Dal</div>
+                                                            <div class="col text-align-right product-detail">₹ 70.00</div>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-50">
-                                                        <button class="button button-raised bg-karaka-orange text-color-white padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-22">trash</i> Delete</button>
+                                                    <div class="col-40">
+                                                        <div class="row">
+                                                            <div class="col-50">
+                                                                <button class="button text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                                            </div>
+                                                            <div class="col-50">
+                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-22">trash</i> Delete</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="product_list padding-vertical-half">
+                                                <div class="row align-items-center padding-horizontal">
+                                                    <div class="col-60">
+                                                        <div class="row">
+                                                            <div class="col product-detail">Roti</div>
+                                                            <div class="col text-align-right product-detail">₹ 70.00</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-40">
+                                                        <div class="row">
+                                                            <div class="col-50">
+                                                                <button class="button text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                                            </div>
+                                                            <div class="col-50">
+                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-22">trash</i> Delete</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="product_list padding-vertical-half">
+                                                <div class="row align-items-center padding-horizontal">
+                                                    <div class="col-60">
+                                                        <div class="row">
+                                                            <div class="col product-detail">Sabji</div>
+                                                            <div class="col text-align-right product-detail">₹ 70.00</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-40">
+                                                        <div class="row">
+                                                            <div class="col-50">
+                                                                <button class="button text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                                            </div>
+                                                            <div class="col-50">
+                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-22">trash</i> Delete</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="product_list padding-vertical-half">
+                                                <div class="row align-items-center padding-horizontal">
+                                                    <div class="col-60">
+                                                        <div class="row">
+                                                            <div class="col product-detail">Chhas</div>
+                                                            <div class="col text-align-right product-detail">₹ 70.00</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-40">
+                                                        <div class="row">
+                                                            <div class="col-50">
+                                                                <button class="button text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                                            </div>
+                                                            <div class="col-50">
+                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-22">trash</i> Delete</button>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="product_list padding-vertical-half">
-                                        <div class="row align-items-center padding-horizontal">
-                                            <div class="col-60">
-                                                <div class="row">
-                                                    <div class="col product-detail">Dal</div>
-                                                    <div class="col text-align-right product-detail">₹ 70.00</div>
-                                                </div>
-                                            </div>
-                                            <div class="col-40">
-                                                <div class="row">
-                                                    <div class="col-50">
-                                                        <button class="button button-raised text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-22">square_pencil</i> Edit</button>
-                                                    </div>
-                                                    <div class="col-50">
-                                                        <button class="button button-raised bg-karaka-orange text-color-white padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-22">trash</i> Delete</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product_list padding-vertical-half">
-                                        <div class="row align-items-center padding-horizontal">
-                                            <div class="col-60">
-                                                <div class="row">
-                                                    <div class="col product-detail">Roti</div>
-                                                    <div class="col text-align-right product-detail">₹ 70.00</div>
-                                                </div>
-                                            </div>
-                                            <div class="col-40">
-                                                <div class="row">
-                                                    <div class="col-50">
-                                                        <button class="button button-raised text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-22">square_pencil</i> Edit</button>
-                                                    </div>
-                                                    <div class="col-50">
-                                                        <button class="button button-raised bg-karaka-orange text-color-white padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-22">trash</i> Delete</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product_list padding-vertical-half">
-                                        <div class="row align-items-center padding-horizontal">
-                                            <div class="col-60">
-                                                <div class="row">
-                                                    <div class="col product-detail">Sabji</div>
-                                                    <div class="col text-align-right product-detail">₹ 70.00</div>
-                                                </div>
-                                            </div>
-                                            <div class="col-40">
-                                                <div class="row">
-                                                    <div class="col-50">
-                                                        <button class="button button-raised text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-22">square_pencil</i> Edit</button>
-                                                    </div>
-                                                    <div class="col-50">
-                                                        <button class="button button-raised bg-karaka-orange text-color-white padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-22">trash</i> Delete</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product_list padding-vertical-half">
-                                        <div class="row align-items-center padding-horizontal">
-                                            <div class="col-60">
-                                                <div class="row">
-                                                    <div class="col product-detail">Chhas</div>
-                                                    <div class="col text-align-right product-detail">₹ 70.00</div>
-                                                </div>
-                                            </div>
-                                            <div class="col-40">
-                                                <div class="row">
-                                                    <div class="col-50">
-                                                        <button class="button button-raised text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-22">square_pencil</i> Edit</button>
-                                                    </div>
-                                                    <div class="col-50">
-                                                        <button class="button button-raised bg-karaka-orange text-color-white padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-22">trash</i> Delete</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                </div>  
                             </div>
-                        </div>
+                        </div>                        
                     </div>
                 </div>
             </div>
@@ -672,6 +680,17 @@ export default {
 </script>
 
 <style scoped>
+.product-list-section .product_list_card.card{
+    background-color: #ffffff;
+    box-shadow:none;
+}
+.product-list-section .product_list_card .card.product_lists{
+   box-shadow: 0px 1px 10px rgba(51, 51, 51, 0.1);
+   border-radius: 10px;
+}
+.product-list-section .product_list_card .card.product_lists .product_list .button{
+    box-shadow:none;
+}
     .page-food-category {
         background: #f1f1f1;
     }
