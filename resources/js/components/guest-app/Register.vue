@@ -379,8 +379,8 @@ $(document).on('click', '.sheet-backdrop', function () {
 .icon-checkbox,.checkbox i{
     border-radius: 3px !important;
     margin-right: 5px !important;
-    width: 12px;
-    height: 12px;
+    width: 17px;
+    height: 17px;
 }
 .item-checkbox .item-inner{
     font-weight: 400;
@@ -393,9 +393,7 @@ label.item-checkbox input[type='checkbox']:checked~.icon-checkbox{
     border-color: #F33E3E;
 }
 label.item-checkbox input[type='checkbox']:checked~.icon-checkbox:after{
-    width: 12px;
-    height: 12px;
-    line-height: 0.9;
+    line-height: 17px;
     font-size: 15px;
 }
 </style>

@@ -243,6 +243,8 @@ export default {
 </script>
 
 <style scoped>
+
+
 .border-popup{
     width: 40px;
     height: 5px;
@@ -263,7 +265,7 @@ export default {
   }
 
   .slide-active .menu-image{
-    background: #fc4b1a59;
+    background: #f33e3e59;
     box-shadow: 0px 1px 3px rgba(255, 127, 87, 0.7);
     border-radius: 7px;
   }

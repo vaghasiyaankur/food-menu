@@ -4,26 +4,33 @@
         <f7-navbar class="navbar-menu bg-color-white" large transparent back-link="Back">
             <div class="header-links display-flex align-items-center padding-right">
                 <div class="row header-link justify-content-flex-end align-items-center">
-                    <div class="col">
+                    <div class=" padding-left-half padding-right-half height-40 nav-button">
+                        <a href="/Reservation/" class="col link nav-link button button-raised bg-dark text-color-white padding">
+                            Reservation</a>
+                    </div>
+                    <div class="nav-button">
                         <div class="menu-item menu-item-dropdown">
                             <div class="menu-item-content button button-raised bg-pink text-color-white padding-left-half padding-right-half">Menu management</div>
                             <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
                                 <div class="menu-dropdown-content bg-color-white padding-left padding-right">
                                     <a href="#" class="menu-dropdown-link menu-close"></a>
                                     <a href="/food-category/" class="menu-dropdown-link menu-close text-color-pink">Food Category</a>
-                                    <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black">Food Menu</a>
+                                    <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black">Food Menu</a>                                    
+                                    <a href="/food-subcategory/" class="menu-dropdown-link menu-close text-color-black">Food subCategory</a>
+                                    <a href="/digital-menu/" class="menu-dropdown-link menu-close text-color-black">Digital Menu</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col padding-left-half padding-right-half height-40"><button class="col nav-botton button button-raised bg-dark text-color-white padding closeReservation" @click="$root.closeReservation()">Close reservation</button></div>
-                    <div class="col padding-left-half padding-right-half height-40"><a href="/settings/" class="col nav-link button button-raised bg-dark text-color-white padding">Settings</a></div>
+                    <div class=" padding-left-half padding-right-half height-40 nav-button"><a href="/Reporting/" class="link nav-link button button-raised bg-dark text-color-white padding">Reporting</a></div>
+                    <div class="padding-left-half padding-right-half height-40"><button class="nav-botton button button-raised bg-dark text-color-white padding closeReservation" @click="$root.closeReservation()">Close reservation</button></div>
+                    <div class="padding-left-half padding-right-half height-40"><a href="/settings/" class="nav-link button button-raised bg-dark text-color-white padding">Settings</a></div>
                 </div>
             </div>
         </f7-navbar>
     </div>
     <div class="subcategory-list-section">
-        <div class="card">
+        <div class="card elevation-2">
             <div class="card_header">
                 <div class="row padding-left padding-right align-items-center">
                     <div class="col-50">
@@ -50,7 +57,7 @@
             </div>
             <div class="card-content card-content-padding">
                 <div class="main-category text-color-pink padding-left-half">Indian</div>
-                <div class="category-list border-bottom padding-top padding-bottom">
+                <div class="category-list border-bottom padding-vertical-half">
                     <div class="row align-items-center">
                         <div class="col-60">
                             <div class="display-flex align-items-center">
@@ -60,19 +67,19 @@
                         <div class="col-40 action-buttons">
                             <div class="row align-items-center">
                                 <div class="col-50">
-                                    <button class="button button-raised text-color-black padding height-36" @click="addProduct"><i class="f7-icons font-22">plus</i> Add Product</button>
+                                    <button class="button text-color-black padding height-36" @click="addProduct"><i class="f7-icons font-22">plus_square</i> Add Product</button>
                                 </div>
                                 <div class="col-25">
-                                    <button class="button button-raised text-color-black padding height-36" @click="editSubCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                    <button class="button text-color-black padding height-36" @click="editSubCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
                                 </div>
                                 <div class="col-25">
-                                    <button class="button button-raised bg-karaka-orange text-color-white padding height-36" @click="removeSubCategory"><i class="f7-icons font-22">trash</i> Delete</button>
+                                    <button class="button text-color-red padding height-36" @click="removeSubCategory"><i class="f7-icons font-22">trash</i> Delete</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="category-list border-bottom padding-top padding-bottom">
+                <div class="category-list border-bottom padding-vertical-half">
                     <div class="row align-items-center">
                         <div class="col-60">
                             <div class="display-flex align-items-center">
@@ -82,19 +89,19 @@
                         <div class="col-40 action-buttons">
                             <div class="row align-items-center">
                                 <div class="col-50">
-                                    <button class="button button-raised text-color-black padding height-36" @click="addProduct"><i class="f7-icons font-22">plus</i> Add Product</button>
+                                    <button class="button text-color-black padding height-36" @click="addProduct"><i class="f7-icons font-22">plus_square</i> Add Product</button>
                                 </div>
                                 <div class="col-25">
-                                    <button class="button button-raised text-color-black padding height-36" @click="editSubCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                    <button class="button text-color-black padding height-36" @click="editSubCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
                                 </div>
                                 <div class="col-25">
-                                    <button class="button button-raised bg-karaka-orange text-color-white padding height-36" @click="removeSubCategory"><i class="f7-icons font-22">trash</i> Delete</button>
+                                    <button class="button text-color-red padding height-36" @click="removeSubCategory"><i class="f7-icons font-22">trash</i> Delete</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="category-list border-bottom padding-top padding-bottom">
+                <div class="category-list border-bottom padding-vertical-half">
                     <div class="row align-items-center">
                         <div class="col-60">
                             <div class="display-flex align-items-center">
@@ -104,20 +111,20 @@
                         <div class="col-40 action-buttons">
                             <div class="row align-items-center">
                                 <div class="col-50">
-                                    <button class="button button-raised text-color-black padding height-36" @click="addProduct"><i class="f7-icons font-22">plus</i> Add Product</button>
+                                    <button class="button text-color-black padding height-36" @click="addProduct"><i class="f7-icons font-22">plus_square</i> Add Product</button>
                                 </div>
                                 <div class="col-25">
-                                    <button class="button button-raised text-color-black padding height-36" @click="editSubCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                    <button class="button text-color-black padding height-36" @click="editSubCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
                                 </div>
                                 <div class="col-25">
-                                    <button class="button button-raised bg-karaka-orange text-color-white padding height-36" @click="removeSubCategory"><i class="f7-icons font-22">trash</i> Delete</button>
+                                    <button class="button text-color-red padding height-36" @click="removeSubCategory"><i class="f7-icons font-22">trash</i> Delete</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="main-category text-color-pink padding-left-half margin-top padding-top-half">Panjabi</div>
-                <div class="category-list border-bottom padding-top padding-bottom">
+                <div class="category-list border-bottom padding-vertical-half">
                     <div class="row align-items-center">
                         <div class="col-60">
                             <div class="display-flex align-items-center">
@@ -127,19 +134,19 @@
                         <div class="col-40 action-buttons">
                             <div class="row align-items-center">
                                 <div class="col-50">
-                                    <button class="button button-raised text-color-black padding height-36" @click="addProduct"><i class="f7-icons font-22">plus</i> Add Product</button>
+                                    <button class="button text-color-black padding height-36" @click="addProduct"><i class="f7-icons font-22">plus_square</i> Add Product</button>
                                 </div>
                                 <div class="col-25">
-                                    <button class="button button-raised text-color-black padding height-36" @click="editSubCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                    <button class="button text-color-black padding height-36" @click="editSubCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
                                 </div>
                                 <div class="col-25">
-                                    <button class="button button-raised bg-karaka-orange text-color-white padding height-36" @click="removeSubCategory"><i class="f7-icons font-22">trash</i> Delete</button>
+                                    <button class="button text-color-red padding height-36" @click="removeSubCategory"><i class="f7-icons font-22">trash</i> Delete</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="category-list padding-top padding-bottom">
+                <div class="category-list padding-vertical-half">
                     <div class="row align-items-center">
                         <div class="col-60">
                             <div class="display-flex align-items-center">
@@ -149,20 +156,20 @@
                         <div class="col-40 action-buttons">
                             <div class="row align-items-center">
                                 <div class="col-50">
-                                    <button class="button button-raised text-color-black padding height-36" @click="addProduct"><i class="f7-icons font-22">plus</i> Add Product</button>
+                                    <button class="button text-color-black padding height-36" @click="addProduct"><i class="f7-icons font-22">plus_square</i> Add Product</button>
                                 </div>
                                 <div class="col-25">
-                                    <button class="button button-raised text-color-black padding height-36" @click="editSubCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                    <button class="button text-color-black padding height-36" @click="editSubCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
                                 </div>
                                 <div class="col-25">
-                                    <button class="button button-raised bg-karaka-orange text-color-white padding height-36" @click="removeSubCategory"><i class="f7-icons font-22">trash</i> Delete</button>
+                                    <button class="button text-color-red padding height-36" @click="removeSubCategory"><i class="f7-icons font-22">trash</i> Delete</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="main-category text-color-pink padding-left-half margin-top padding-top-half">Fast Food</div>
-                <div class="category-list border-bottom padding-top padding-bottom">
+                <div class="category-list border-bottom padding-vertical-half">
                     <div class="row align-items-center">
                         <div class="col-60">
                             <div class="display-flex align-items-center">
@@ -172,19 +179,19 @@
                         <div class="col-40 action-buttons">
                             <div class="row align-items-center">
                                 <div class="col-50">
-                                    <button class="button button-raised text-color-black padding height-36" @click="addProduct"><i class="f7-icons font-22">plus</i> Add Product</button>
+                                    <button class="button text-color-black padding height-36" @click="addProduct"><i class="f7-icons font-22">plus_square</i> Add Product</button>
                                 </div>
                                 <div class="col-25">
-                                    <button class="button button-raised text-color-black padding height-36" @click="editSubCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                    <button class="button text-color-black padding height-36" @click="editSubCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
                                 </div>
                                 <div class="col-25">
-                                    <button class="button button-raised bg-karaka-orange text-color-white padding height-36" @click="removeSubCategory"><i class="f7-icons font-22">trash</i> Delete</button>
+                                    <button class="button text-color-red padding height-36" @click="removeSubCategory"><i class="f7-icons font-22">trash</i> Delete</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="category-list padding-top padding-bottom">
+                <div class="category-list padding-vertical-half">
                     <div class="row align-items-center">
                         <div class="col-60">
                             <div class="display-flex align-items-center">
@@ -194,13 +201,13 @@
                         <div class="col-40 action-buttons">
                             <div class="row align-items-center">
                                 <div class="col-50">
-                                    <button class="button button-raised text-color-black padding height-36" @click="addProduct"><i class="f7-icons font-22">plus</i> Add Product</button>
+                                    <button class="button text-color-black padding height-36" @click="addProduct"><i class="f7-icons font-22">plus_square</i> Add Product</button>
                                 </div>
                                 <div class="col-25">
-                                    <button class="button button-raised text-color-black padding height-36" @click="editSubCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                    <button class="button text-color-black padding height-36" @click="editSubCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
                                 </div>
                                 <div class="col-25">
-                                    <button class="button button-raised bg-karaka-orange text-color-white padding height-36" @click="removeSubCategory"><i class="f7-icons font-22">trash</i> Delete</button>
+                                    <button class="button text-color-red padding height-36" @click="removeSubCategory"><i class="f7-icons font-22">trash</i> Delete</button>
                                 </div>
                             </div>
                         </div>
@@ -273,7 +280,7 @@ export default {
         f7Input
     },
     mounted() {
-        $('.page-content').css('background', '#F0F0F0');
+        $('.page-content').css('background', '#FFF');
     },
     methods: {
         addSubCategory() {
@@ -369,7 +376,10 @@ export default {
 .page-food-category {
     background: #f1f1f1;
 }
-
+.subcategory-list-section .card{
+    height: calc(100vh - 94px);
+    overflow: auto;
+}
 .navbar-menu {
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.15);
     height: 60px !important;
@@ -401,7 +411,7 @@ export default {
 }
 
 .header-links {
-    width: 50%;
+    width: 75%;
 }
 
 .menu-dropdown-center:before,
@@ -486,7 +496,7 @@ export default {
 
 <style>
 .left {
-    width: 50%;
+    width: 20%;
     margin-left: 20px;
 }
 

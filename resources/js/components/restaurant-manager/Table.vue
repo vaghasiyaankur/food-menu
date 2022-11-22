@@ -1,28 +1,31 @@
 <template>
     <f7-page color="bg-color-white">
-        <div class="header-links display-flex align-items-center padding-right">
-            <div class="row header-link justify-content-flex-end align-items-center">
-                <div class=" padding-left-half padding-right-half height-40 nav-button">
-                    <a href="/Reservation/" class="col link nav-link button button-raised bg-dark text-color-white padding">
-                        Reservation</a>
-                </div>
-                <div class=" nav-button">
-                    <div class="menu-item menu-item-dropdown">
-                        <div class="menu-item-content button button-raised bg-dark text-color-white padding-left-half padding-right-half">Menu management</div>
-                        <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
-                            <div class="menu-dropdown-content bg-color-white padding-left padding-right">
-                                <a href="#" class="menu-dropdown-link menu-close"></a>
-                                <a href="/food-category/" class="menu-dropdown-link menu-close text-color-black">Food Category</a>
-                                <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black">Food Menu</a>
+            <div class="header-links display-flex align-items-center padding-right">
+                <div class="row header-link justify-content-flex-end align-items-center">
+                    <div class=" padding-left-half padding-right-half height-40 nav-button">
+                        <a href="/Reservation/" class="col link nav-link button button-raised bg-dark text-color-white padding">
+                            Reservation</a>
+                    </div>
+                    <div class=" nav-button">
+                        <div class="menu-item menu-item-dropdown">
+                            <div class="menu-item-content button button-raised bg-dark text-color-white padding-left-half padding-right-half">Menu management</div>
+                            <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
+                                <div class="menu-dropdown-content bg-color-white padding-left padding-right">
+                                    <a href="#" class="menu-dropdown-link menu-close"></a>
+                                    <a href="/food-category/" class="menu-dropdown-link menu-close text-color-black">Food Category</a>
+                                    <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black">Food Menu</a>
+                                    <a href="/food-subcategory/" class="menu-dropdown-link menu-close text-color-black">Food SubCategory</a>
+                                    <a href="/digital-menu/" class="menu-dropdown-link menu-close text-color-black">Digital Menu</a>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class=" padding-left-half padding-right-half height-40 nav-button"><a href="/Reporting/" class="col link nav-link button button-raised bg-dark text-color-white padding">Reporting</a></div>
+                    <div class=" padding-left-half padding-right-half height-40 nav-button"><button class="col nav-link button button-raised bg-dark text-color-white padding closeReservation" @click="$root.closeReservation()">Close reservation</button></div>
+                    <div class=" padding-left-half padding-right-half height-40 nav-button"><a href="/settings/" class="col link nav-link button button-raised bg-dark text-color-white padding">Settings</a></div>
                 </div>
-                <div class=" padding-left-half padding-right-half height-40 nav-button"><a href="/Reporting/" class="col link nav-link button button-raised bg-dark text-color-white padding">Reporting</a></div>
-                <div class=" padding-left-half padding-right-half height-40 nav-button"><button class="col nav-link button button-raised bg-dark text-color-white padding closeReservation" @click="$root.closeReservation()">Close reservation</button></div>
-                <div class=" padding-left-half padding-right-half height-40 nav-button"><a href="/settings/" class="col link nav-link button button-raised bg-dark text-color-white padding">Settings</a></div>
             </div>
-        </div>
+        
         <div class="table_main">
             <!-- ============= TABLE FLOOR SWIPER ============= -->
            <div class="table_floor_swiper">
@@ -195,18 +198,56 @@
                                     <h3 class="no-margin-top">Reserved</h3>
                                     <div class="row">
                                         <div class="col-50 table_reservation_info margin-bottom">
-                                            <div class="person-info popover-open" data-popover=".popover-about">
+                                            <div class="person-info popover-open" data-popover=".popover-table1">
                                                 <div class="text-align-center person">
-                                                    <i class="f7-icons size-12">person_fill</i>
-                                                    <span>&nbsp;3</span>                                                
+                                                    <i class="f7-icons size-22">person_fill</i>
+                                                    <span>&nbsp;4</span>
                                                     <span class="waiting-time margin-top-half text-align-center">
-                                                        <i class="f7-icons size-12">clock_fill</i>
+                                                        <i class="f7-icons size-22">clock_fill</i>
                                                         <span>2:47</span>
                                                     </span>
-                                                </div>
-                                                <div class="popover popover-about padding-half">
-                                                    <div class="user-info popover-inner">                                                    
-                                                        <div class="display-flex padding-left-half padding-top">
+                                                </div>   
+                                                <div class="popover popover-table1 padding-half">
+                                                    <div class="user-info popover-inner">
+                                                        <div class="display-flex padding-left-half padding-top-half align-items-center">
+                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_fill</i>
+                                                            <span class="text-color-black">John Smith</span>
+                                                        </div>
+                                                        <div class="display-flex padding-left-half padding-top align-items-center">
+                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">clock</i>
+                                                            <span class="text-color-black">3:00pm</span>
+                                                        </div>
+                                                        <div class="display-flex padding-left-half padding-top align-items-center">
+                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">phone</i>
+                                                            <span class="text-color-black">+91 12345 12345</span>
+                                                        </div>
+                                                        <div class="display-flex padding-left-half padding-top-half align-items-center padding-bottom">
+                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_2_fill</i>
+                                                            <span class="text-color-black">5 family member</span>
+                                                        </div>
+                                                        <div class="card-footer no-margin no-padding justify-content-center">
+                                                            <h3 >Change Floor</h3>
+                                                            <!-- <div class="floor_option">
+
+                                                            </div> -->
+                                                        </div>
+                                                    </div>
+                                                </div>                                         
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-50 table_reservation_info margin-bottom">
+                                            <div class="person-info popover-open" data-popover=".popover-link">
+                                                <div class="text-align-center person">
+                                                    <i class="f7-icons size-22">person_fill</i>
+                                                    <span>&nbsp;4</span>
+                                                    <span class="waiting-time margin-top-half text-align-center">
+                                                        <i class="f7-icons size-22">clock_fill</i>
+                                                        <span>2:47</span>
+                                                    </span>
+                                                </div>   
+                                                <div class="popover popover-link padding-half">
+                                                    <div class="user-info popover-inner">
+                                                        <div class="display-flex padding-left-half padding-top-half">
                                                             <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
                                                             <span class="text-color-black">John Smith</span>
                                                         </div>
@@ -218,12 +259,44 @@
                                                             <i class="f7-icons size-12 text-color-black padding-right-half">phone</i>
                                                             <span class="text-color-black">+91 12345 12345</span>
                                                         </div>
-                                                        <div class="display-flex padding-left-half padding-top">
+                                                        <div class="display-flex padding-left-half padding-top-half">
                                                             <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
                                                             <span class="text-color-black">5 family member</span>
-                                                        </div>                                                
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                </div>                                         
+                                            </div>
+                                        </div>
+                                        <div class="col-50 table_reservation_info margin-bottom">
+                                            <div class="person-info popover-open" data-popover=".popover-link">
+                                                <div class="text-align-center person">
+                                                    <i class="f7-icons size-22">person_fill</i>
+                                                    <span>&nbsp;4</span>
+                                                    <span class="waiting-time margin-top-half text-align-center">
+                                                        <i class="f7-icons size-22">clock_fill</i>
+                                                        <span>2:47</span>
+                                                    </span>
+                                                </div>   
+                                                <div class="popover popover-link padding-half">
+                                                    <div class="user-info popover-inner">
+                                                        <div class="display-flex padding-left-half padding-top-half">
+                                                            <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
+                                                            <span class="text-color-black">John Smith</span>
+                                                        </div>
+                                                        <div class="display-flex padding-left-half padding-top">
+                                                            <i class="f7-icons size-12 text-color-black padding-right-half">clock</i>
+                                                            <span class="text-color-black">3:00pm</span>
+                                                        </div>
+                                                        <div class="display-flex padding-left-half padding-top">
+                                                            <i class="f7-icons size-12 text-color-black padding-right-half">phone</i>
+                                                            <span class="text-color-black">+91 12345 12345</span>
+                                                        </div>
+                                                        <div class="display-flex padding-left-half padding-top-half">
+                                                            <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
+                                                            <span class="text-color-black">5 family member</span>
+                                                        </div>
+                                                    </div>
+                                                </div>                                         
                                             </div>
                                         </div>
                                         <div class="col-50 table_reservation_info margin-bottom">
@@ -257,71 +330,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-50 table_reservation_info margin-bottom">
-                                            <div class="person-info tooltip" data-tooltip="Button tooltip text" @click="openTooltip">
-                                                <div class="text-align-center person">
-                                                    <i class="f7-icons size-22">person_fill</i>
-                                                    <span>&nbsp;3</span>
-                                                    <span class="waiting-time margin-top-half text-align-center">
-                                                        <i class="f7-icons size-22">clock_fill</i>
-                                                        <span>2:47</span>
-                                                    </span>
-                                                </div>
-                                                <div class="tooltiptext padding-half">
-                                                    <div class="user-info">
-                                                        <div class="display-flex padding-left-half padding-top-half">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
-                                                            <span class="text-color-black">John Smith</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half">clock</i>
-                                                            <span class="text-color-black">3:00pm</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half">phone</i>
-                                                            <span class="text-color-black">+91 12345 12345</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top-half">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
-                                                            <span class="text-color-black">5 family member</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-50 table_reservation_info margin-bottom">
-                                            <div class="person-info tooltip" data-tooltip="Button tooltip text" @click="openTooltip">
-                                                <div class="text-align-center person">
-                                                    <i class="f7-icons size-22">person_fill</i>
-                                                    <span>&nbsp;3</span>
-                                                    <span class="waiting-time margin-top-half text-align-center">
-                                                        <i class="f7-icons size-22">clock_fill</i>
-                                                        <span>2:47</span>
-                                                    </span>
-                                                </div>
-                                                <div class="tooltiptext padding-half">
-                                                    <div class="user-info">
-                                                        <div class="display-flex padding-left-half padding-top-half">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
-                                                            <span class="text-color-black">John Smith</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half">clock</i>
-                                                            <span class="text-color-black">3:00pm</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half">phone</i>
-                                                            <span class="text-color-black">+91 12345 12345</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top-half">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
-                                                            <span class="text-color-black">5 family member</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -378,7 +387,7 @@
                                     <h3 class="no-margin-top">Empty</h3>
                                     <div class="row">
                                         <div class="col-50 table_reservation_info margin-bottom">
-                                            <div class="person-info popover-open" data-popover=".popover-link">
+                                            <div class="person-info popover-open" data-popover=".popover-table-2">
                                                 <div class="text-align-center person">
                                                     <i class="f7-icons size-22">person_fill</i>
                                                     <span>&nbsp;4</span>
@@ -387,22 +396,22 @@
                                                         <span>2:47</span>
                                                     </span>
                                                 </div>   
-                                                <div class="popover popover-link padding-half">
+                                                <div class="popover popover-table-2 padding-half">
                                                     <div class="user-info popover-inner">
-                                                        <div class="display-flex padding-left-half padding-top-half">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
+                                                        <div class="display-flex padding-left-half padding-top-half align-items-center">
+                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_fill</i>
                                                             <span class="text-color-black">John Smith</span>
                                                         </div>
-                                                        <div class="display-flex padding-left-half padding-top">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half">clock</i>
+                                                        <div class="display-flex padding-left-half padding-top align-items-center">
+                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">clock</i>
                                                             <span class="text-color-black">3:00pm</span>
                                                         </div>
-                                                        <div class="display-flex padding-left-half padding-top">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half">phone</i>
+                                                        <div class="display-flex padding-left-half padding-top align-items-center">
+                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">phone</i>
                                                             <span class="text-color-black">+91 12345 12345</span>
                                                         </div>
-                                                        <div class="display-flex padding-left-half padding-top-half">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
+                                                        <div class="display-flex padding-left-half padding-top-half align-items-center">
+                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_2_fill</i>
                                                             <span class="text-color-black">5 family member</span>
                                                         </div>
                                                     </div>
@@ -3934,7 +3943,7 @@ export default {
 .size-12{
     font-size :12px;
 }
-.tooltip {
+/*.tooltip {
     position: relative;
     display: inline-block;
     opacity: 1;
@@ -3977,7 +3986,7 @@ export default {
 
 .tooltip:hover .tooltiptext {
   visibility: visible;
-}
+}*/
 .table_row .table_1{
     border-left: 10px solid #0FC963;
     width: 100%;
@@ -4089,6 +4098,11 @@ export default {
     align-items:center;
     margin-left: 5px;
 
+}
+/*=============== POPOVER=================*/
+.popover{
+    width: 100%;
+    max-width: 180px;
 }
 @media screen and (max-width : 820px) {
     .nav-button {

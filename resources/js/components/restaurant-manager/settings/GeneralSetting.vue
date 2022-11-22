@@ -44,7 +44,18 @@
             </div>
             <h3 class="card-title">Time Zone</h3>
             <div class="row">
-                <div class="col"></div>
+                <div class="col">
+                    <p><a class="link popover-open" href="#" data-popover=".popover-about">Open About Popover</a></p>
+                    <div class="popover popover-about modal-in">
+                        <div class="popover-angle on-top" ></div>
+                        <div class="popover-inner">
+                            <div class="block">
+                                <p>About</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ac diam ac quam euismod porta vel a nunc. Quisque sodales scelerisque est, at porta justo cursus ac.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="col"></div>
             </div>
         </div>

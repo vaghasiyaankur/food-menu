@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { f7App, f7Panel, f7View, f7 } from 'framework7-vue';
+import { f7App, f7Panel, f7View, f7,f7Page,f7Navbar } from 'framework7-vue';
 import routes from './restaurant-manager-routes';
 import store from './store';
 import $ from 'jquery';
@@ -15,7 +15,9 @@ export default {
         f7App,
         f7Panel,
         f7View,
-        f7
+        f7,
+        f7Page,
+        f7Navbar
     },
     data() {
         // Demo Theme
@@ -43,7 +45,7 @@ export default {
                     closeOnEscape: true,
                 },
             },
-        };
+        }
     },
     methods: {
         closeReservation() {
@@ -59,6 +61,12 @@ export default {
                 $('.dialog-button').eq(1).removeClass('text-color-black');
             }, 200);
         }
+    },
+    computed: {
+        manager() {
+            console.log(f7);
+            // return this.$route.path === '/'
+        },
     },
 };
 </script>

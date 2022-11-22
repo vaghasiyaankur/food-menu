@@ -4,20 +4,27 @@
             <f7-navbar class="navbar-menu bg-color-white" large transparent back-link="Back">
                 <div class="header-links display-flex align-items-center padding-right">
                     <div class="row header-link justify-content-flex-end align-items-center">
-                        <div class="col">
+                        <div class=" padding-left-half padding-right-half height-40 nav-button">
+                            <a href="/Reservation/" class="col link nav-link button button-raised bg-dark text-color-white padding">
+                                Reservation</a>
+                        </div>
+                        <div class="nav-button">
                             <div class="menu-item menu-item-dropdown">
                                 <div class="menu-item-content button button-raised bg-pink text-color-white padding-left-half padding-right-half">Menu management</div>
                                 <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
                                     <div class="menu-dropdown-content bg-color-white padding-left padding-right">
                                         <a href="#" class="menu-dropdown-link menu-close"></a>
                                         <a href="/food-category/" class="menu-dropdown-link menu-close text-color-pink">Food Category</a>
-                                        <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black">Food Menu</a>
+                                        <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black">Food Menu</a>                                        
+                                        <a href="/food-subcategory/" class="menu-dropdown-link menu-close text-color-black">Food SubCategory</a>
+                                        <a href="/digital-menu/" class="menu-dropdown-link menu-close text-color-black">Digital Menu</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col padding-left-half padding-right-half height-40"><button class="col nav-link button button-raised bg-dark text-color-white padding closeReservation" @click="$root.closeReservation()">Close reservation</button></div>
-                        <div class="col padding-left-half padding-right-half height-40"><a href="/settings/" class="col nav-link button button-raised bg-dark text-color-white padding">Settings</a></div>
+                        <div class=" padding-left-half padding-right-half height-40 nav-button"><a href="/Reporting/" class="link nav-link button button-raised bg-dark text-color-white padding">Reporting</a></div>
+                        <div class="padding-left-half padding-right-half height-40"><button class="nav-link button button-raised bg-dark text-color-white padding closeReservation" @click="$root.closeReservation()">Close reservation</button></div>
+                        <div class=" padding-left-half padding-right-half height-40"><a href="/settings/" class="nav-link button button-raised bg-dark text-color-white padding">Settings</a></div>
                     </div>
                 </div>
             </f7-navbar>
@@ -25,7 +32,7 @@
         <div class="product-list-section">
             <div class="card product_list_card no-margin">
                 <div class="card_header">
-                    <div class="row padding-left padding-right align-items-center">
+                    <div class="row padding-horizontal margin-horizontal align-items-center">
                         <div class="col-50">
                             <h3 class="card-title">Product</h3>
                         </div>
@@ -726,7 +733,7 @@ export default {
     }
 
     .header-links {
-        width: 50%;
+        width: 75%;
     }
 
     .menu-dropdown-center:before,
@@ -823,7 +830,7 @@ export default {
 
 <style>
     .left {
-        width: 50%;
+        width: 20%;
         margin-left: 20px;
     }
     .search-icon{

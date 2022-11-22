@@ -4,10 +4,12 @@ import FoodCategory from "./components/restaurant-manager/FoodCategory.vue";
 import FoodSubCategory from "./components/restaurant-manager/FoodSubCategory.vue";
 import FoodProduct from "./components/restaurant-manager/FoodProduct.vue";
 import Setting from "./components/restaurant-manager/settings/SettingsTab.vue";
+import DigitalMenu from "./components/restaurant-manager/DigitalMenu.vue";
 // Pages
 export default [
   // Index page
   {
+    name : 'Table',
     path: '/',
     component: Table,
     master(f7) {
@@ -15,22 +17,32 @@ export default [
     },
   },
   {
+    name : 'FoodCategory',
     path: '/food-category/',
     component: FoodCategory,
   },
   {
+    name : 'FoodSubCategory',
     path: '/food-subcategory/',
     component: FoodSubCategory,
   },
 
   {
+    name : 'FoodProduct',
     path: '/food-product/',
     component: FoodProduct,
   },
 
   {
+    name : 'Setting',
     path: '/settings/',
     component: Setting,
+  },
+
+  {
+    name : 'DigitalMenu',
+    path: '/digital-menu/',
+    component: DigitalMenu,
   },
 
 ]

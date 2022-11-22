@@ -4,10 +4,10 @@
         <f7-navbar class="navbar-menu bg-color-white" large transparent back-link="Back">
             <div class="header-links display-flex align-items-center padding-right">
                 <div class="row header-link justify-content-flex-end align-items-center">
-                    <!-- <div class=" padding-left-half padding-right-half height-40 nav-button">
+                    <div class=" padding-left-half padding-right-half height-40 nav-button">
                         <a href="/Reservation/" class="col link nav-link button button-raised bg-dark text-color-white padding">
                             Reservation</a>
-                    </div> -->
+                    </div>
                     <div class="nav-button">
                         <div class="menu-item menu-item-dropdown">                            
                             <div class="menu-item-content button button-raised bg-pink text-color-white padding-left-half padding-right-half">Menu management</div>
@@ -16,19 +16,21 @@
                                     <a href="#" class="menu-dropdown-link menu-close"></a>
                                     <a href="/food-category/" class="menu-dropdown-link menu-close text-color-pink">Food Category</a>
                                     <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black">Food Menu</a>
+                                    <a href="/food-subcategory/" class="menu-dropdown-link menu-close text-color-black">Food SubCategory</a>
+                                    <a href="/digital-menu/" class="menu-dropdown-link menu-close text-color-black">Digital Menu</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class=" padding-left-half padding-right-half height-40 nav-button"><a href="/Reporting/" class="col link nav-link button button-raised bg-dark text-color-white padding">Reporting</a></div>
-                    <div class="padding-left-half padding-right-half height-40"><button class="col nav-link button button-raised bg-dark text-color-white padding closeReservation" @click="$root.closeReservation()">Close reservation</button></div>
-                    <div class="padding-left-half padding-right-half height-40"><a href="/settings/" class="col nav-link button button-raised bg-dark text-color-white padding">Settings</a></div>
+                    <div class=" padding-left-half padding-right-half height-40 nav-button"><a href="/Reporting/" class="link nav-link button button-raised bg-dark text-color-white padding">Reporting</a></div>
+                    <div class="padding-left-half padding-right-half height-40"><button class="nav-link button button-raised bg-dark text-color-white padding closeReservation" @click="$root.closeReservation()">Close reservation</button></div>
+                    <div class="padding-left-half padding-right-half height-40"><a href="/settings/" class="nav-link button button-raised bg-dark text-color-white padding">Settings</a></div>
                 </div>
             </div>
         </f7-navbar>
     </div>
     <div class="category-list-section">
-        <div class="card">
+        <div class="card elevation-2">
             <div class="card_header">
                 <div class="row padding-left padding-right align-items-center">
                     <div class="col-50">
@@ -261,7 +263,7 @@ export default {
         f7Input
     },
     mounted() {
-        $('.page-content').css('background', '#F0F0F0');
+        $('.page-content').css('background', '#FFF');
     },
     methods: {
         removeCategory() {
@@ -356,6 +358,15 @@ export default {
 </script>
 
 <style scoped>
+
+.nav-bar{
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+}
+.category-list-section{
+    margin-top: 70px
+}
 .page-food-category {
     background: #f1f1f1;
 }
@@ -409,6 +420,7 @@ export default {
 
 .page-content {
     padding-top: 0px !important;
+    background-color:#fff !important;
 }
 
 .icon-only {
@@ -429,7 +441,7 @@ export default {
 }
 
 .header-links {
-    width: 50%;
+    width: 75%;
 }
 
 .bg-pink {
@@ -505,7 +517,7 @@ export default {
 
 <style>
 .left {
-    width: 50%;
+    width: 20%;
     margin-left: 20px;
 }
 .dialog-title{
