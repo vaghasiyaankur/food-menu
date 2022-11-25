@@ -8,11 +8,25 @@
                         <a href="/Reservation/" class="col link nav-link button button-raised bg-dark text-color-white padding">
                             Reservation</a>
                     </div>
-                    <div class="nav-button">
+                    <div class="col-20 nav-button">
+                        <div class="menu-item menu-item-dropdown">
+                            <div class="menu-item-content button button-raised bg-dark text-color-white padding-left-half padding-right-half">Menu management</div>
+                            <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
+                                <div class="menu-dropdown-content bg-color-white no-padding">
+                                    <a href="#" class="menu-dropdown-link menu-close"></a>
+                                    <a href="/food-category/" class="menu-dropdown-link menu-close text-color-black">Food Category</a>
+                                    <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black">Food Menu</a>
+                                    <a href="/food-subcategory/" class="menu-dropdown-link menu-close text-color-black">Food SubCategory</a>
+                                    <a href="/digital-menu/" class="menu-dropdown-link menu-close text-color-black">Digital Menu</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="nav-button">
                         <div class="menu-item menu-item-dropdown">                            
                             <div class="menu-item-content button button-raised bg-pink text-color-white padding-left-half padding-right-half">Menu management</div>
                             <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
-                                <div class="menu-dropdown-content bg-color-white padding-left padding-right">
+                                <div class="menu-dropdown-content bg-color-white no-padding">
                                     <a href="#" class="menu-dropdown-link menu-close"></a>
                                     <a href="/food-category/" class="menu-dropdown-link menu-close text-color-pink">Food Category</a>
                                     <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black">Food Menu</a>
@@ -21,7 +35,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class=" padding-left-half padding-right-half height-40 nav-button"><a href="/Reporting/" class="link nav-link button button-raised bg-dark text-color-white padding">Reporting</a></div>
                     <div class="padding-left-half padding-right-half height-40"><button class="nav-link button button-raised bg-dark text-color-white padding closeReservation" @click="$root.closeReservation()">Close reservation</button></div>
                     <div class="padding-left-half padding-right-half height-40"><a href="/settings/" class="nav-link button button-raised bg-dark text-color-white padding">Settings</a></div>
@@ -276,6 +290,7 @@ export default {
                 $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
                 $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
                 $('.dialog-button').eq(1).removeClass('text-color-black');
+                $('.dialog-buttons').addClass('margin-top no-margin-bottom')
             }, 200);
         },
         addCategory() {
@@ -300,6 +315,7 @@ export default {
                 $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
                 $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
                 $('.dialog-button').eq(1).removeClass('text-color-black');
+                $('.dialog-buttons').addClass('margin-top no-margin-bottom')
             }, 200);
         },
         editCategory() {
@@ -326,6 +342,7 @@ export default {
                 $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
                 $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
                 $('.dialog-button').eq(1).removeClass('text-color-black');
+                $('.dialog-buttons').addClass('margin-top no-margin-bottom')
             }, 200);
         },
         addSubCategory() {
@@ -351,6 +368,7 @@ export default {
                 $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
                 $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
                 $('.dialog-button').eq(1).removeClass('text-color-black');
+                $('.dialog-buttons').addClass('margin-top no-margin-bottom')
             }, 200);
         }
     },
@@ -585,7 +603,7 @@ export default {
 }
 
 .add-image-text {
-    border: 1px solid #CECECE;
+    border: 1px solid transparent;
     border-radius: 7px;
     padding: 8px 15px;
 }

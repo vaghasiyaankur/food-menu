@@ -5,7 +5,7 @@
                 <div class="col">
                     <div class="general_info_form">
                         <form class="list margin-vertical" id="my-form">
-                           <div class="item-content item-input  margin-bottom">
+                           <div class="item-content item-input margin-bottom no-padding-left">
                               <div class="item-inner">
                                  <div class=" block-title no-margin-top">Restaurant Name</div>
                                  <div class="item-input-wrap">
@@ -13,13 +13,13 @@
                                 </div>
                               </div>
                            </div>
-                           <div class="item-content item-input margin-bottom">
+                           <div class="item-content item-input margin-bottom no-padding-left">
                               <div class="item-inner">
                                  <div class="block-title no-margin-top">Phone Number</div>
                                  <div class="item-input-wrap"><input type="number" name="number" class="padding margin-top-half" placeholder="Enter phone number"></div>
                               </div>
                            </div>
-                           <div class="item-content item-input margin-bottom">
+                           <div class="item-content item-input margin-bottom no-padding-left">
                               <div class="item-inner">
                                  <div class="block-title no-margin-top">Manager Name</div>
                                  <div class="item-input-wrap">
@@ -44,31 +44,353 @@
             </div>
             <h3 class="card-title">Time Zone</h3>
             <div class="row">
-                <div class="col">
-                    <p><a class="link popover-open" href="#" data-popover=".popover-about">Open About Popover</a></p>
-                    <div class="popover popover-about modal-in">
-                        <div class="popover-angle on-top" ></div>
-                        <div class="popover-inner">
-                            <div class="block">
-                                <p>About</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ac diam ac quam euismod porta vel a nunc. Quisque sodales scelerisque est, at porta justo cursus ac.</p>
+                <div class="col padding-right">
+                    <div class="block-title no-margin-top no-margin-left">Open Time:</div>
+                    <div class="drop-down"  @click="addClass()">
+                        <div id="dropDown" class="drop-down__button">
+                            <div class="drop-down__store display-flex justify_content_between padding align-items-center">
+                                <span class="drop-down__name">
+                                    <input type="text" placeholder="Date Time" v-model="opentime" readonly="readonly" id="start-picker-date" />
+                                </span>                                             
+                                <span classs="down__icon">
+                                    <i class="f7-icons">arrowtriangle_down_fill</i>
+                                </span>
                             </div>
                         </div>
-                    </div>
+                        
+                        <div class="drop-down__menu-box">
+                            <div class="drop-down__menu">
+                                <div class="block-title margin-top">Set Open Time</div>
+                                    <!-- <div class="list no-margin">
+                                        <ul>
+                                            <li>
+                                                <div class="item-content item-input">
+                                                    <div class="item-inner">
+                                                        <div class="item-input-wrap">
+                                                            <input type="text" placeholder="Date Time" v-model="opentime" readonly="readonly" id="start-picker-date" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div> -->
+                                <div class="block block-strong no-padding no-margin margin-bottom time_piker_inner">
+                                    <div id="start-picker-date-container"></div>
+                                </div>  
+                                <div class="display-flex justify-content-end padding-bottom time__button">
+                                    <a class="padding-right text-color-black" href="javascript:;">Cancel</a>
+                                    <a class="text-color-red" href="javascript:;" @click="opentimeshow()">OK</a>   
+                                </div>                              
+                            </div>
+                        </div>
+                    </div>                    
                 </div>
-                <div class="col"></div>
+                <div class="col padding-left">
+                    <div class="block-title no-margin-top no-margin-left">Open Time:</div>
+                    <div class="drop-down-1"  @click="addClass1()">
+                        <div id="dropDown" class="drop-down__button">
+                            <div class="drop-down__store display-flex justify_content_between padding align-items-center">
+                                <span class="drop-down__name">
+                                    <input type="text" placeholder="Date Time" v-model="closetime" readonly="readonly" id="end-picker-date" />
+                                </span>                                             
+                                <span classs="down__icon">
+                                    <i class="f7-icons">arrowtriangle_down_fill</i>
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="drop-down__menu-box">
+                            <div class="drop-down__menu">
+                                <div class="block-title margin-top">Set Close Time</div>                                                                    
+                                    <!-- <div class="list no-margin">
+                                        <ul>
+                                            <li>
+                                                <div class="item-content item-input">
+                                                    <div class="item-inner">
+                                                        <div class="item-input-wrap">
+                                                        <input type="text" placeholder="Date Time" v-model="closetime" readonly="readonly" id="end-picker-date" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div> -->
+                                <div class="block block-strong no-padding no-margin margin-bottom time_piker_inner">
+                                    <div id="end-picker-date-container"></div>
+                                </div>
+                                <div class="display-flex justify-content-end padding-bottom time__button">
+                                    <a class="padding-right text-color-black" href="javascript:;">Cancel</a>
+                                    <a class="text-color-red" href="javascript:;" @click="endtimeshow()">OK</a>   
+                                </div>  
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+            <div class="submit__button margin-top padding-top">
+                <button class="col button button-large button-fill">Save</button>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+    import { f7 } from 'framework7-vue';
+    import $ from 'jquery';
     export default {
-        name : 'GeneralSetting'
+        name : 'GeneralSetting',
+        components : {
+            f7
+        },
+        data() {
+            return {
+                opentime: '',
+                closetime : '',
+                opentimepicker : '',
+                closetimepicker : '',
+            }
+        },
+        methods: {
+            addClass(){
+                $('.drop-down').toggleClass('drop-down--active');
+                var today = new Date();
+                f7.picker.create({
+                    containerEl: '#start-picker-date-container',
+                    inputEl: '#start-picker-date',
+                    toolbar: false,
+                    rotateEffect: true,
+                    value: [
+                    today.getHours() < 10 ? '0' + today.getHours() : today.getHours(),
+                    today.getMinutes() < 10 ? '0' + today.getMinutes() : today.getMinutes()
+                    ],
+                    formatValue: function (values, displayValues) {
+                    return displayValues[0] + ' : ' + values[1]  + ' ' +  values[2];
+                    },
+                    cols: [
+                    // Hours
+                    {
+                        values: (function () {
+                        var arr = [];
+                        for (var i = 1; i <= 12; i++) { arr.push(i < 10 ? '0' + i : i); }
+                        return arr;
+                        })(),
+                    },
+                    // Divider
+                    {
+                        divider: true,
+                        content: ':'
+                    },
+                    // Minutes
+                    {
+                        values: (function () {
+                        var arr = [];
+                        for (var i = 0; i <= 59; i++) { arr.push(i < 10 ? '0' + i : i); }
+                        return arr;
+                        })(),
+                    },
+                    // am / pm
+                    {
+                        values: (function () {
+                        var arr = ['AM','PM'];
+                        
+                        return arr;
+                        })(),
+                    }
+                    ],
+                    on: {
+                    change: function (picker, values, displayValues) {
+                        var daysInMonth = picker.value[0] + ' : ' + picker.value[1] + ' ' + picker.value[2];
+                        // picker.cols[0].setValue(daysInMonth);
+                        this.opentimepicker = daysInMonth;
+                    },
+                    }
+                })
+            },
+            addClass1(){
+                $('.drop-down-1').toggleClass('drop-down--active');
+                var today = new Date();
+                f7.picker.create({
+                    containerEl: '#end-picker-date-container',
+                    inputEl: '#end-picker-date',
+                    toolbar: false,
+                    rotateEffect: true,
+                    value: [
+                    today.getHours() < 10 ? '0' + today.getHours() : today.getHours(),
+                    today.getMinutes() < 10 ? '0' + today.getMinutes() : today.getMinutes()
+                    ],
+                    formatValue: function (values, displayValues) {
+                    return displayValues[0] + ' : ' + values[1]  + ' ' +  values[2];
+                    },
+                    cols: [
+                    // Hours
+                    {
+                        values: (function () {
+                        var arr = [];
+                        for (var i = 1; i <= 12; i++) { arr.push(i < 10 ? '0' + i : i); }
+                        return arr;
+                        })(),
+                    },
+                    // Divider
+                    {
+                        divider: true,
+                        content: ':'
+                    },
+                    // Minutes
+                    {
+                        values: (function () {
+                        var arr = [];
+                        for (var i = 0; i <= 59; i++) { arr.push(i < 10 ? '0' + i : i); }
+                        return arr;
+                        })(),
+                    },
+                    // am / pm
+                    {
+                        values: (function () {
+                        var arr = ['AM','PM'];
+                        
+                        return arr;
+                        })(),
+                    }
+                    ],
+                    on: {
+                    change: function (picker, values, displayValues) {
+                        var daysInMonth = picker.value[0] + ' : ' + picker.value[1]  + ' ' + picker.value[2];
+                        // picker.cols[0].setValue(daysInMonth);
+                        this.closetimepicker = daysInMonth;
+                    },
+                    }
+                })
+            },
+            opentimeshow(){
+                this.opentime = this.opentimepicker;
+                console.log(this.opentime);
+            },
+            endtimeshow(){
+                this.closetime = this.closetimepicker;
+                console.log(this.closetime);
+            }
+        }
     }
+    // $(document).ready(function(){
+    //     $('#dropDown').click(function(){
+    //         $('.drop-down').toggleClass('drop-down--active');
+    //     });
+    // });
 </script>
 <style scoped>
-.list input[type='text'], .list input[type='password'], .list input[type='search'], .list input[type='email'], .list input[type='tel'], .list input[type='url'], .list input[type='date'], .list input[type='month'], .list input[type='datetime-local'], .list input[type='time'], .list input[type='number'], .list select{
+
+.justify_content_between{
+    justify-content:space-between
+}
+.submit__button button{
+    width: 100%;
+    max-width: 160px;
+    margin: 0 auto;
+    border-radius: 10px;
+    background-color: #F33E3E;
+}
+/*=========TIMEPIKER DROPDOWN CSS =============*/
+
+.time_piker_inner{
+    height:100%;
+    max-height:120px;
+    overflow:hidden ;
+}
+#start-picker-date-container{
+    height:100%;
+    max-height:120px;
+}
+.time__button a{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+}
+.block-strong:after{
+    background-color:transparent !important;
+}
+.block-strong:before{
+    background-color:transparent !important;
+}
+
+.f7-icons{
+    font-size:14px !important;
+}
+  .drop-down,.drop-down-1{
+      display: inline-block;
+      position: relative;
+      width: 100%;
+  }
+  
+  .drop-down__button{
+    background:#FAFAFA;
+    display: inline-block;
+    text-align: left;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px 0px rgba(0,0,0,0.2);
+    width:100%
+  }
+   
+  .drop-down__name input{
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: 2px;
+    width: 100%;
+  }
+  
+  .drop-down__menu-box {
+    position: absolute;
+    width: 100%;
+    left: 14.5%;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.11);
+    transition: all 0.3s;    
+    visibility: hidden;
+    opacity: 0;
+    margin-top: 5px;
+    z-index: 10;
+    width: 100%;
+    max-width: 378px;
+    border-radius: 10px;
+  }
+  
+  .drop-down__menu {
+      margin: 0;
+      padding: 0 13px;
+      list-style: none;
+    
+  }
+  .drop-down__menu-box:before{
+    content: '';
+    background-color: transparent;
+    border-right: 15px solid transparent;
+    position: absolute;
+    border-left: 15px solid transparent;
+    border-bottom: 15px solid #fff;
+    border-top: 15px solid transparent;
+    top: -30px;
+    right: 50%;
+  
+  }
+    .drop-down__item {
+      font-size: 13px;
+      padding: 13px 0;
+      text-align: left;
+      font-weight: 500;
+      color: #909dc2;
+      cursor: pointer;
+      position: relative;
+      border-bottom: 1px solid #e0e2e9;
+  }
+  
+  .drop-down--active .drop-down__menu-box, .drop-down--active-1 .drop-down__menu-box{
+    visibility: visible;
+    opacity: 1;
+    margin-top: 15px;
+  }
+  .list input[type='text'], .list input[type='password'], .list input[type='search'], .list input[type='email'], .list input[type='tel'], .list input[type='url'], .list input[type='date'], .list input[type='month'], .list input[type='datetime-local'], .list input[type='time'], .list input[type='number'], .list select{
     background-color:#FAFAFA;
     border-radius: 10px;
 }
@@ -79,7 +401,7 @@
     opacity: 0;
     position: absolute;
     width: 100%;
-    height: 100%;
+    height: auto;
 }
 .formbold-file-input label {
     position: relative;
@@ -111,4 +433,20 @@
     color: #38373D;
 }
 </style>
-
+<style>
+.picker-items{
+    padding:43px 0 !important;
+}
+.picker-center-highlight{
+    background-color:transparent !important;
+}
+.picker-columns{
+    width: 90%;
+    height: 60% !important;
+    background:  linear-gradient(180deg, #F3F4F5 0%, #FFFFFF 34.65%, #FFFFFF 63.19%, rgba(243, 244, 245, 0.857255) 100%);
+    border-radius: 10px;
+    margin:0 auto;
+    justify-content: space-between !important;
+    -webkit-mask-box-image: none !important;
+}
+</style>

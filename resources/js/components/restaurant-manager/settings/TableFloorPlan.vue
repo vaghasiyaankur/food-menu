@@ -5,7 +5,7 @@
                 <h3 class="card-title no-margin">Table List</h3>
             </div>
             <div class="add_table_button">
-                <button class="button"><i class="f7-icons margin-right-half">plus_square</i> Add Table</button>
+                <button class="button" @click="$emit('tablehide')"><i class="f7-icons margin-right-half">plus_square</i> Add Table</button>
             </div>
         </div>
         <div class="card-content">
@@ -253,8 +253,8 @@
     font-weight: 600;
     font-size: 15px;
     line-height: 18px;
-
     color: #555555;
+    background-color: #F4F4F4;
 }
 .data-table tbody td:before, .data-table tbody th:before{
     background-color: transparent !important;

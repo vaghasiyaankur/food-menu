@@ -50,7 +50,7 @@ export default {
     methods: {
         closeReservation() {
             $('.closeReservation').css('background-color', '#F33E3E');
-            f7.dialog.confirm('Are you sure close the reservation?', () => {
+            f7.dialog.confirm('Are you sure close the reservation?',() => {
                 $('.closeReservation').css('background-color', '');
             });
             setTimeout(() => {
@@ -58,7 +58,9 @@ export default {
                 $('.dialog-title').html("<img src='/images/close.png'>");
                 $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
                 $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
-                $('.dialog-button').eq(1).removeClass('text-color-black');
+                $('.dialog-button').eq(1).removeClass('text-color-black');                
+                $('.dialog-text').addClass('margin-top');
+                $('.dialog-buttons').addClass('margin-top no-margin-bottom')
             }, 200);
         }
     },

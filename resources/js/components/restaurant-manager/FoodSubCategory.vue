@@ -8,11 +8,11 @@
                         <a href="/Reservation/" class="col link nav-link button button-raised bg-dark text-color-white padding">
                             Reservation</a>
                     </div>
-                    <div class="nav-button">
+                    <div class="nav-button col-20">
                         <div class="menu-item menu-item-dropdown">
                             <div class="menu-item-content button button-raised bg-pink text-color-white padding-left-half padding-right-half">Menu management</div>
                             <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
-                                <div class="menu-dropdown-content bg-color-white padding-left padding-right">
+                                <div class="menu-dropdown-content bg-color-white no-padding">
                                     <a href="#" class="menu-dropdown-link menu-close"></a>
                                     <a href="/food-category/" class="menu-dropdown-link menu-close text-color-pink">Food Category</a>
                                     <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black">Food Menu</a>                                    
@@ -306,6 +306,7 @@ export default {
                 $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
                 $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
                 $('.dialog-button').eq(1).removeClass('text-color-black');
+                $('.dialog-buttons').addClass('margin-top no-margin-bottom')
             }, 200);
         },
         removeSubCategory() {
@@ -316,6 +317,7 @@ export default {
                 $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
                 $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
                 $('.dialog-button').eq(1).removeClass('text-color-black');
+                $('.dialog-buttons').addClass('margin-top no-margin-bottom')
             }, 200);
         },
         editSubCategory() {
@@ -341,6 +343,7 @@ export default {
                 $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
                 $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
                 $('.dialog-button').eq(1).removeClass('text-color-black');
+                $('.dialog-buttons').addClass('margin-top no-margin-bottom')
             }, 200);
         },
         addProduct() {
@@ -366,6 +369,7 @@ export default {
                 $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
                 $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
                 $('.dialog-button').eq(1).removeClass('text-color-black');
+                $('.dialog-buttons').addClass('margin-top no-margin-bottom')
             }, 200);
         }
     },

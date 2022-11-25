@@ -225,7 +225,7 @@ export default {
                     }
                 })
             });
-            $('.dialog-title').text("Are you confirm to register?");
+            $('.dialog-title').text("Are you confirm to register?").css('font-size','20px');
             $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
             $('.dialog-button').eq(1).removeClass('text-color-black');
             $('.dialog-button').eq(1).addClass('active');
@@ -393,8 +393,12 @@ label.item-checkbox input[type='checkbox']:checked~.icon-checkbox{
     border-color: #F33E3E;
 }
 label.item-checkbox input[type='checkbox']:checked~.icon-checkbox:after{
-    line-height: 17px;
-    font-size: 15px;
+    line-height: 15px;
+    font-size: 13px;
+}
+.icon-checkbox:after, .checkbox i:after{
+    left: -3px;
+    top:-1px
 }
 </style>
 <style>

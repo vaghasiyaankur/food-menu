@@ -8,11 +8,11 @@
                             <a href="/Reservation/" class="col link nav-link button button-raised bg-dark text-color-white padding">
                                 Reservation</a>
                         </div>
-                        <div class="nav-button">
+                        <div class="nav-button col-20">
                             <div class="menu-item menu-item-dropdown">
                                 <div class="menu-item-content button button-raised bg-dark text-color-white padding-left-half padding-right-half">Menu management</div>
                                 <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
-                                    <div class="menu-dropdown-content bg-color-white padding-left padding-right">
+                                    <div class="menu-dropdown-content bg-color-white no-padding">
                                         <a href="#" class="menu-dropdown-link menu-close"></a>
                                         <a href="/food-category/" class="menu-dropdown-link menu-close text-color-pink">Food Category</a>
                                         <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black">Food Menu                                            
@@ -31,7 +31,7 @@
             </f7-navbar>
         </div>
         <div class="product-list-section">
-            <div class="card">
+            <div class="card elevation-2">
                 <div class="card_header">
                     <div class="row padding-left padding-right align-items-center">
                         <div class="col-50">
@@ -43,7 +43,7 @@
                     <div class="toolbar tabbar toolbar-top">
                         <div class="toolbar-inner">
                             <a href="#tab-1" class="tab-link tab-link-active">General</a>
-                            <a href="#tab-2" class="tab-link">Add floor plan</a>
+                            <a href="#tab-2" class="tab-link">Table Management</a>
                             <a href="#tab-3" class="tab-link">Next</a>
                         </div>
                     </div>
@@ -53,10 +53,11 @@
                                 <GeneralSetting />
                             </div>
                             <div id="tab-2" class="tab">
-                                <AddFloorPlan />
+                                <TableFloorPlan v-if="tableShow" @tablehide="tableShow = false" />
+                                <AddTable v-if="!tableShow" @tableshow="tableShow = true" />
                             </div>
                             <div id="tab-3" class="tab">
-                                <h2>tab 3</h2>
+                                <h2>Tab 3</h2>
                             </div>
                         </div>
                     </div>
@@ -68,7 +69,8 @@
 <script>
 import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Input } from 'framework7-vue';
 import GeneralSetting from './GeneralSetting.vue';
-import AddFloorPlan from './AddFloorPlan.vue';
+import TableFloorPlan from './TableFloorPlan.vue';
+import AddTable from './AddTable.vue';
 import $ from 'jquery';
 export default {
     name : 'SettingsTab',
@@ -80,7 +82,13 @@ export default {
         f7,
         f7Input,
         GeneralSetting,
-        AddFloorPlan
+        TableFloorPlan,
+        AddTable,
+    },
+    data(){
+        return {
+            tableShow : true,
+        }
     },
     mounted() {
         $('.page-content').css('background', '#FFF');
@@ -89,10 +97,15 @@ export default {
 </script>
 
 <style scoped>
-
+.product-list-section{
+    margin-top:70px;
+}
 .product-list-section .tabs-animated-wrap .card{
     box-shadow:none;
 }
+/*.product-list-section .card{
+    height: calc(100vh - 95px);
+}*/
     .page-food-category {
         background: #f1f1f1;
     }
@@ -147,6 +160,9 @@ export default {
 
     .nav-bar {
         border-radius: 8px 8px 0px 0px;
+        position:fixed;
+        width:100%;
+        z-index: 99;
     }
 
     .page-content {
@@ -196,9 +212,9 @@ export default {
         color: #38373D;
 
     }
-    .tabs-animated-wrap,.tabs-animated-wrap > .tabs{
-        height: auto;
-    }
+    /*.product-list-section .tabs-animated-wrap,.product-list-section .tabs-animated-wrap > .tabs{
+        height: calc(100vh - 211px);
+    }*/
 
     .tab-link{
         background-image: url('/images/tab_bg.png');
