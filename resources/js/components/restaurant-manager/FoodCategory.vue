@@ -1,29 +1,36 @@
 <template>
-<f7-page>
-    <div class="nav-bar">
-        <f7-navbar class="navbar-menu bg-color-white" large transparent back-link="Back">
-            <div class="header-links display-flex align-items-center padding-right">
-                <div class="row header-link justify-content-flex-end align-items-center">
-                    <div class=" padding-left-half padding-right-half height-40 nav-button">
-                        <a href="/Reservation/" class="col link nav-link button button-raised bg-dark text-color-white padding">
-                            Reservation</a>
-                    </div>
-                    <div class="col-20 nav-button">
-                        <div class="menu-item menu-item-dropdown">
-                            <div class="menu-item-content button button-raised bg-dark text-color-white padding-left-half padding-right-half">Menu management</div>
-                            <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
-                                <div class="menu-dropdown-content bg-color-white no-padding">
-                                    <a href="#" class="menu-dropdown-link menu-close"></a>
-                                    <a href="/food-category/" class="menu-dropdown-link menu-close text-color-black">Food Category</a>
-                                    <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black">Food Menu</a>
-                                    <a href="/food-subcategory/" class="menu-dropdown-link menu-close text-color-black">Food SubCategory</a>
-                                    <a href="/digital-menu/" class="menu-dropdown-link menu-close text-color-black">Digital Menu</a>
+    <f7-page>
+        <div class="nav-bar">
+            <f7-navbar class="navbar-menu bg-color-white" large transparent back-link="Back">
+                <div class="header-links display-flex align-items-center padding-right">
+                    <div class="row header-link justify-content-flex-end align-items-center">
+                        <div class=" padding-left-half padding-right-half height-40 nav-button">
+                            <a href="/Reservation/"
+                                class="col link nav-link button button-raised bg-dark text-color-white padding">
+                                Reservation</a>
+                        </div>
+                        <div class="col-20 nav-button">
+                            <div class="menu-item menu-item-dropdown">
+                                <div
+                                    class="menu-item-content button button-raised bg-dark text-color-white padding-left-half padding-right-half">
+                                    Menu management</div>
+                                <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
+                                    <div class="menu-dropdown-content bg-color-white no-padding">
+                                        <a href="#" class="menu-dropdown-link menu-close"></a>
+                                        <a href="/food-category/"
+                                            class="menu-dropdown-link menu-close text-color-black">Food Category</a>
+                                        <a href="/food-product/"
+                                            class="menu-dropdown-link menu-close text-color-black">Food Menu</a>
+                                        <a href="/food-subcategory/"
+                                            class="menu-dropdown-link menu-close text-color-black">Food SubCategory</a>
+                                        <a href="/digital-menu/"
+                                            class="menu-dropdown-link menu-close text-color-black">Digital Menu</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- <div class="nav-button">
-                        <div class="menu-item menu-item-dropdown">                            
+                        <!-- <div class="nav-button">
+                        <div class="menu-item menu-item-dropdown">
                             <div class="menu-item-content button button-raised bg-pink text-color-white padding-left-half padding-right-half">Menu management</div>
                             <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
                                 <div class="menu-dropdown-content bg-color-white no-padding">
@@ -36,177 +43,80 @@
                             </div>
                         </div>
                     </div> -->
-                    <div class=" padding-left-half padding-right-half height-40 nav-button"><a href="/Reporting/" class="link nav-link button button-raised bg-dark text-color-white padding">Reporting</a></div>
-                    <div class="padding-left-half padding-right-half height-40"><button class="nav-link button button-raised bg-dark text-color-white padding closeReservation" @click="$root.closeReservation()">Close reservation</button></div>
-                    <div class="padding-left-half padding-right-half height-40"><a href="/settings/" class="nav-link button button-raised bg-dark text-color-white padding">Settings</a></div>
-                </div>
-            </div>
-        </f7-navbar>
-    </div>
-    <div class="category-list-section">
-        <div class="card elevation-2">
-            <div class="card_header">
-                <div class="row padding-left padding-right align-items-center">
-                    <div class="col-50">
-                        <h3>Category</h3>
+                        <div class=" padding-left-half padding-right-half height-40 nav-button"><a href="/Reporting/"
+                                class="link nav-link button button-raised bg-dark text-color-white padding">Reporting</a>
+                        </div>
+                        <div class="padding-left-half padding-right-half height-40"><button
+                                class="nav-link button button-raised bg-dark text-color-white padding closeReservation"
+                                @click="$root.closeReservation()">Close reservation</button></div>
+                        <div class="padding-left-half padding-right-half height-40"><a href="/settings/"
+                                class="nav-link button button-raised bg-dark text-color-white padding">Settings</a>
+                        </div>
                     </div>
-                    <div class="col-50">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <div class="item-content item-input">
-                                    <div class="item-inner">
-                                        <div class="item-input-wrap row padding-half">
-                                            <i class="f7-icons font-22 search-icon">search</i>
-                                            <input type="search" name="search" id="searchData">
+                </div>
+            </f7-navbar>
+        </div>
+        <div class="category-list-section">
+            <div class="card elevation-2">
+                <div class="card_header">
+                    <div class="row padding-left padding-right align-items-center">
+                        <div class="col-50">
+                            <h3>Category</h3>
+                        </div>
+                        <div class="col-50">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <div class="item-content item-input">
+                                        <div class="item-inner">
+                                            <div class="item-input-wrap row padding-half">
+                                                <i class="f7-icons font-22 search-icon">search</i>
+                                                <input type="search" name="search" id="searchData">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col padding-left-half padding-right-half">
-                                <button class="button button-raised bg-dark text-color-white padding height-36" @click="addCategory"><i class="f7-icons font-22">plus_square</i> Add category</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card-content card-content-padding">
-                <div class="category-list border-bottom padding-top padding-bottom">
-                    <div class="row align-items-center">
-                        <div class="col-5 category-count">
-                            <span>1.</span>
-                        </div>
-                        <div class="col-60">
-                            <div class="display-flex align-items-center">
-                                <div class="category_image">
-                                    <img src="/images/category/indian_dish.png" alt="">
-                                </div>
-                                <p class="padding-left-half category_name">Indian</p>
-                            </div>
-                        </div>
-                        <div class="col-35 action-buttons">
-                            <div class="row align-items-center">
-                                <div class="col-50">
-                                    <button class="button text-color-black padding height-36 border__right" @click="addSubCategory">
-                                        <i class="f7-icons font-22">plus_square</i>Add sub category
-                                    </button>
-                                </div>
-                                <div class="col-25">
-                                    <button class="button text-color-black padding height-36" @click="editCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
-                                </div>
-                                <div class="col-25">
-                                    <button class="button text-color-red padding height-36" @click="removeCategory"><i class="f7-icons font-22">trash</i> Delete</button>
+                                <div class="col padding-left-half padding-right-half">
+                                    <button class="button button-raised bg-dark text-color-white padding height-36"
+                                        @click="addCategory"><i class="f7-icons font-22">plus_square</i> Add
+                                        category</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="category-list border-bottom padding-top padding-bottom">
-                    <div class="row align-items-center">
-                        <div class="col-5 category-count">
-                            <span>2.</span>
-                        </div>
-                        <div class="col-60">
-                            <div class="display-flex align-items-center">
-                                <div class="category_image">
-                                    <img src="/images/category/chinese_dish.png" alt="">
-                                </div>
-                                <p class="padding-left-half category_name">Chinese</p>
+                <div class="card-content card-content-padding">
+                    <div class="category-list border-bottom padding-top padding-bottom"
+                        v-for="(category,index) in categories" :key="category">
+                        <div class="row align-items-center">
+                            <div class="col-5 category-count">
+                                <span>{{ index + 1 }}.</span>
                             </div>
-                        </div>
-                        <div class="col-35 action-buttons">
-                            <div class="row align-items-center">
-                                <div class="col-50">
-                                    <button class="button border__right text-color-black padding height-36" @click="addSubCategory"><i class="f7-icons font-22">plus_square</i> Add sub category</button>
-                                </div>
-                                <div class="col-25">
-                                    <button class="button text-color-black padding height-36" @click="editCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
-                                </div>
-                                <div class="col-25">
-                                    <button class="button text-color-red padding height-36" @click="removeCategory"><i class="f7-icons font-22">trash</i> Delete</button>
+                            <div class="col-60">
+                                <div class="display-flex align-items-center">
+                                    <div class="category_image">
+                                        <img :src="'/storage'+category.image" alt="">
+                                    </div>
+                                    <p class="padding-left-half category_name">{{ category.name }}</p>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="category-list border-bottom padding-top padding-bottom">
-                    <div class="row align-items-center">
-                        <div class="col-5 category-count">
-                            <span>3.</span>
-                        </div>
-                        <div class="col-60">
-                            <div class="display-flex align-items-center">
-                                <div class="category_image">
-                                    <img src="/images/category/panjabi_dish.png" alt="">
-                                </div>
-                                <p class="padding-left-half category_name">Panjabi</p>
-                            </div>
-                        </div>
-                        <div class="col-35 action-buttons">
-                            <div class="row align-items-center">
-                                <div class="col-50">
-                                    <button class="button border__right text-color-black padding height-36" @click="addSubCategory"><i class="f7-icons font-22">plus_square</i> Add sub category</button>
-                                </div>
-                                <div class="col-25">
-                                    <button class="button text-color-black padding height-36" @click="editCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
-                                </div>
-                                <div class="col-25">
-                                    <button class="button text-color-red padding height-36" @click="removeCategory"><i class="f7-icons font-22">trash</i> Delete</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="category-list border-bottom padding-top padding-bottom">
-                    <div class="row align-items-center">
-                        <div class="col-5 category-count">
-                            <span>4.</span>
-                        </div>
-                        <div class="col-60">
-                            <div class="display-flex align-items-center">
-                                <div class="category_image">
-                                    <img src="/images/category/dessert.png" alt="">
-                                </div>
-                                <p class="padding-left-half category_name">Dessert</p>
-                            </div>
-                        </div>
-                        <div class="col-35 action-buttons">
-                            <div class="row align-items-center">
-                                <div class="col-50">
-                                    <button class="button border__right text-color-black padding height-36" @click="addSubCategory"><i class="f7-icons font-22" >plus_square</i> Add sub category</button>
-                                </div>
-                                <div class="col-25">
-                                    <button class="button text-color-black padding height-36" @click="editCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
-                                </div>
-                                <div class="col-25">
-                                    <button class="button text-color-red padding height-36" @click="removeCategory"><i class="f7-icons font-22">trash</i> Delete</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="category-list padding-top padding-bottom">
-                    <div class="row align-items-center">
-                        <div class="col-5 category-count">
-                            <span>5.</span>
-                        </div>
-                        <div class="col-60">
-                            <div class="display-flex align-items-center">
-                                <div class="category_image">
-                                    <img src="/images/category/fast_food.png" alt="">
-                                </div>
-                                <p class="padding-left-half category_name">Fast Food</p>
-                            </div>
-                        </div>
-                        <div class="col-35 action-buttons">
-                            <div class="row align-items-center">
-                                <div class="col-50">
-                                    <button class="button border__right text-color-black padding height-36" @click="addSubCategory"><i class="f7-icons font-22" >plus_square</i> Add sub category</button>
-                                </div>
-                                <div class="col-25">
-                                    <button class="button text-color-black padding height-36" @click="editCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
-                                </div>
-                                <div class="col-25">
-                                    <button class="button text-color-red padding height-36" @click="removeCategory"><i class="f7-icons font-22">trash</i> Delete</button>
+                            <div class="col-35 action-buttons">
+                                <div class="row align-items-center">
+                                    <div class="col-50">
+                                        <button class="button text-color-black padding height-36 border__right"
+                                            @click="addSubCategory(category.id)">
+                                            <i class="f7-icons font-22">plus_square</i>Add sub category
+                                        </button>
+                                    </div>
+                                    <div class="col-25">
+                                        <button class="button text-color-black padding height-36"
+                                            @click="editCategory(category.id)"><i
+                                                class="f7-icons font-22">square_pencil</i> Edit</button>
+                                    </div>
+                                    <div class="col-25">
+                                        <button class="button text-color-red padding height-36"
+                                            @click="removeCategory(category.id)"><i class="f7-icons font-22">trash</i>
+                                            Delete</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -214,58 +124,67 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="display-none" id="category_popup">
-        <div class="category-add padding">
-            <div class="categoryForm text-align-left">
-                <label for="" class="add_category_name">Category name</label>
-                <input type="text" v-model="test" name="name" class="category-name margin-top-half padding-left-half padding-right-half" placeholder="Add category name">
-            </div>
-            <div class="category-image-selection margin-top">
-                <input type="file" class="add-category-image" id="categoryImage" />
-                <label class="category-image text-align-center" for="categoryImage">
-                    <div class="margin-bottom">
-                        <img src="/images/add-image.png" />
-                    </div>
-                    <div>
-                        <span class="add-image-text">Select Image</span>
-                    </div>
-                </label>
-            </div>
-        </div>
-    </div>
-    <div class="display-none" id="sub_category_popup">
-        <div class="category-add padding">
-            <div class="categoryForm text-align-left no-padding">
-                <label for="" class="add_category_name">Sub category name</label>
-                <input type="text" name="name" class="category-name margin-top-half padding-left-half padding-right-half" placeholder="Add sub category name">
-            </div>
-            <div class="categoryForm text-align-left margin-top">
-                <label for="" class="add_category_name">Parent category</label>
-                <div class="item-input-wrap input-dropdown-wrap category-name margin-top-half no-padding">
-                    <select placeholder="Please choose..." class="selectCategory padding-left-half">
-                        <option value="indian">indian</option>
-                        <option value="chinese">chinese</option>
-                        <option value="panjabi">panjabi</option>
-                        <option value="dessert">dessert</option>
-                        <option value="fast_food">fast food</option>
-                    </select>
+        <div class="display-none" id="category_popup">
+            <div class="category-add padding">
+                <div class="categoryForm text-align-left">
+                    <label for="" class="add_category_name">Category name</label>
+                    <input type="text" v-model="test" name="name"
+                        class="category-name margin-top-half padding-left-half padding-right-half"
+                        placeholder="Add category name">
+                </div>
+                <div class="category-image-selection margin-top">
+                    <input type="file" class="add-category-image" @change="addimageChange" id="categoryImage" />
+                    <label class="category-image text-align-center" for="categoryImage">
+                        <div class="margin-bottom">
+                            <img :src="image_url" />
+                        </div>
+                        <div>
+                            <span class="add-image-text">Select Image</span>
+                        </div>
+                    </label>
                 </div>
             </div>
         </div>
-    </div>
-</f7-page>
+        <div class="display-none" id="sub_category_popup">
+            <div class="category-add padding">
+                <div class="categoryForm text-align-left no-padding">
+                    <label for="" class="add_category_name">Sub category name</label>
+                    <input type="text" name="name"
+                        class="category-name margin-top-half padding-left-half padding-right-half"
+                        placeholder="Add sub category name">
+                </div>
+                <div class="categoryForm text-align-left margin-top">
+                    <label for="" class="add_category_name">Parent category</label>
+                    <div class="item-input-wrap input-dropdown-wrap category-name margin-top-half no-padding">
+                        <select placeholder="Please choose..." class="selectCategory padding-left-half">
+                            <option value="indian">indian</option>
+                            <option value="chinese">chinese</option>
+                            <option value="panjabi">panjabi</option>
+                            <option value="dessert">dessert</option>
+                            <option value="fast_food">fast food</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </f7-page>
 </template>
 
 <script>
 import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Input } from 'framework7-vue';
 import $ from 'jquery';
+import axios from "axios";
 
 export default {
     name: 'Favourite',
     data() {
         return {
             test: 'indian',
+            categories: [],
+            name: '',
+            image: '',
+            image_url: '/images/add-image.png',
+            categoryopen: false,
         }
     },
     components: {
@@ -278,8 +197,20 @@ export default {
     },
     mounted() {
         $('.page-content').css('background', '#FFF');
+        this.getCategories();
     },
     methods: {
+        addimageChange(e) {
+            this.image = e.target.files[0];
+            this.image_url = URL.createObjectURL(this.image);
+            console.log(this.image);
+        },
+        getCategories() {
+            axios.get('/api/get-categories')
+            .then((res) => {
+                this.categories = res.data;
+            })
+        },
         removeCategory() {
             f7.dialog.confirm('Are you sure delete the category?', () => {
                 $('.closeReservation').css('background-color', '');
@@ -298,16 +229,36 @@ export default {
                 title: 'Add Category',
                 content: document.getElementById('category_popup').innerHTML,
                 buttons: [{
-                        text: 'Cancel',
-                        class: 'button'
+                    text: 'Cancel',
+                    class: 'button'
+                },
+                {
+                    text: 'Ok',
+                    class: 'button',
+                    onChange: function () {
+                        console.log("here");
                     },
-                    {
-                        text: 'Ok',
-                        class: 'button'
-                    },
+                    onClick: function (dialog) {
+                        const config = {
+                            headers: { 'content-type': 'multipart/form-data' }
+                        }
+
+                        var name = dialog.$el.find('.category-name').val();
+                        var image = dialog.$el.find('#categoryImage').prop('files')[0];
+                        // var image = this.image;
+                        console.log(image);
+
+                        // var formData = new FormData();
+                        // formData.append('name', this.name);
+                        // formData.append('image', this.image);
+                        // axios.post('/api/add-categories',formData)
+                        // .then((res) => {
+                        //     this.categories = res.data;
+                        // })
+                    }
+                },
                 ],
-            });
-            addCat.open(false);
+            }).open(false);
 
             setTimeout(() => {
                 $('.category-title').remove();
@@ -316,7 +267,7 @@ export default {
                 $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
                 $('.dialog-button').eq(1).removeClass('text-color-black');
                 $('.dialog-buttons').addClass('margin-top no-margin-bottom')
-            }, 200);
+            }, 100);
         },
         editCategory() {
 
@@ -324,14 +275,17 @@ export default {
                 title: 'Edit Category',
                 content: document.getElementById('category_popup').innerHTML,
                 buttons: [{
-                        text: 'Cancel',
-                        class: 'button'
-                    },
-                    {
-                        text: 'Ok',
-                        class: 'button'
-                    },
+                    text: 'Cancel',
+                    class: 'button'
+                },
+                {
+                    text: 'Ok',
+                    class: 'button'
+                },
                 ],
+                onOpen: function (dialog) {
+                    dialog.$el.find('.category-name').val()
+                }
             });
 
             editCat.open(false)
@@ -350,13 +304,13 @@ export default {
                 title: 'Add sub category',
                 content: document.getElementById('sub_category_popup').innerHTML,
                 buttons: [{
-                        text: 'Cancel',
-                        class: 'button'
-                    },
-                    {
-                        text: 'Ok',
-                        class: 'button'
-                    },
+                    text: 'Cancel',
+                    class: 'button'
+                },
+                {
+                    text: 'Ok',
+                    class: 'button'
+                },
                 ],
             });
 
@@ -370,21 +324,22 @@ export default {
                 $('.dialog-button').eq(1).removeClass('text-color-black');
                 $('.dialog-buttons').addClass('margin-top no-margin-bottom')
             }, 200);
-        }
+        },
     },
 };
 </script>
 
 <style scoped>
-
-.nav-bar{
+.nav-bar {
     position: fixed;
     width: 100%;
     z-index: 100;
 }
-.category-list-section{
+
+.category-list-section {
     margin-top: 70px
 }
+
 .page-food-category {
     background: #f1f1f1;
 }
@@ -424,7 +379,7 @@ export default {
     background: #F33E3E;
 }
 
-.menu-dropdown-link:nth-child(2) {
+.menu-dropdown-link {
     border-bottom: 1px solid #EFEFEF;
 }
 
@@ -438,7 +393,7 @@ export default {
 
 .page-content {
     padding-top: 0px !important;
-    background-color:#fff !important;
+    background-color: #fff !important;
 }
 
 .icon-only {
@@ -466,7 +421,7 @@ export default {
     background: #F33E3E;
 }
 
-.bg-karaka-orange{
+.bg-karaka-orange {
     background: #EE4925;
 }
 
@@ -514,15 +469,18 @@ export default {
     font-size: 18px;
     line-height: 18px;
 }
-.category-list-section .category-list .button{
-    box-shadow:none;
+
+.category-list-section .category-list .button {
+    box-shadow: none;
 }
+
 .action-buttons button {
     text-transform: capitalize;
 }
-.border__right{
-    border-right:1px solid #D8D8D8;
-    border-radius:0;
+
+.border__right {
+    border-right: 1px solid #D8D8D8;
+    border-radius: 0;
 }
 
 
@@ -538,9 +496,11 @@ export default {
     width: 20%;
     margin-left: 20px;
 }
-.dialog-title{
+
+.dialog-title {
     padding-bottom: 10px;
 }
+
 .cart-list {
     box-shadow: 1px 2px 5px 2px rgb(0 0 0 / 20%);
 }
@@ -554,7 +514,8 @@ export default {
     left: 0 !important;
 }
 
-.nav-link,.menu-item-content {
+.nav-link,
+.menu-item-content {
     height: 100% !important;
     text-transform: capitalize !important;
 }
@@ -613,8 +574,8 @@ export default {
     margin: 0 auto 15px;
 }
 
-.selectCategory{
-    width : 100%;
+.selectCategory {
+    width: 100%;
     height: 40px;
 }
 

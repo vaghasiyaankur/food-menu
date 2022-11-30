@@ -11,10 +11,10 @@
                             <div class="menu-item-content button button-raised bg-dark text-color-white padding-left-half padding-right-half">Menu management</div>
                             <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
                                 <div class="menu-dropdown-content bg-color-white no-padding">
-                                    <!-- <a href="#" class="menu-dropdown-link menu-close"></a> -->
+                                    <a href="#" class="menu-dropdown-link menu-close"></a>
                                     <a href="/food-category/" class="menu-dropdown-link menu-close text-color-black">Food Category</a>
-                                    <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black">Food Menu</a>
                                     <a href="/food-subcategory/" class="menu-dropdown-link menu-close text-color-black">Food SubCategory</a>
+                                    <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black">Food Menu</a>
                                     <a href="/digital-menu/" class="menu-dropdown-link menu-close text-color-black">Digital Menu</a>
                                 </div>
                             </div>
@@ -25,18 +25,18 @@
                     <div class=" padding-left-half padding-right-half height-40 nav-button"><a href="/settings/" class="col link nav-link button button-raised bg-dark text-color-white padding">Settings</a></div>
                 </div>
             </div>
-        
+
         <div class="table_main">
             <!-- ============= TABLE FLOOR SWIPER ============= -->
            <div class="table_floor_swiper">
                 <div class="row">
-                    <div class="col-80">                        
+                    <div class="col-80">
                         <div data-pagination='{"el":".swiper-pagination"}' data-navigation="{'el':'.swiper-navigation'}" data-space-between="10" data-slides-per-view="5"
                             class="swiper swiper-init demo-swiper margin-top margin-bottom floor_swiper_inner  swiper-navigation">
                             <!-- <div class="swiper-pagination"></div> -->
                             <div class="swiper-wrapper padding-left-half">
                                 <div class="swiper-slide slide-active">
-                                    <p class="no-margin text-align-center margin-top-half swiper_text display-flex">Ground Floor (Non-AC)  
+                                    <p class="no-margin text-align-center margin-top-half swiper_text display-flex">Ground Floor (Non-AC)
                                         <span class="room_available color-blue">20</span>
                                     </p>
                                 </div>
@@ -80,18 +80,18 @@
                                         <span class="room_available color-blue">20</span>
                                     </p>
                                 </div>
-                            </div>                                                                  
+                            </div>
                         </div>
                         <!-- <div class="margin-top margin-bottom floor_swiper_inner">
                             <f7-swiper navigation :speed="500" :slidesPerView="5" :spaceBetween="5">
-                                <f7-swiper-slide> 
+                                <f7-swiper-slide>
                                     <div class="swiper-slide slide-active">
-                                        <p class="no-margin text-align-center margin-top-half swiper_text display-flex">Ground Floor (Non-AC)  
+                                        <p class="no-margin text-align-center margin-top-half swiper_text display-flex">Ground Floor (Non-AC)
                                             <span class="room_available color-blue">20</span>
                                         </p>
                                     </div>
                                 </f7-swiper-slide>
-                                <f7-swiper-slide>   
+                                <f7-swiper-slide>
                                     <div class="swiper-slide">
                                         <p class="no-margin text-align-center margin-top-half swiper_text display-flex">First Floor (AC)
                                             <span class="room_available color-blue">20</span>
@@ -154,7 +154,7 @@
                         <div class="current_capacity">
                             <div class="current_capacity_card card display-flex align-items-center no-margin-vertical justify_content_between">
                                 <div class="card_img padding-left">
-                                    <img src="/images/capacity.png" alt="">                                    
+                                    <img src="/images/capacity.png" alt="">
                                 </div>
                                 <div class="card-content card-content-padding padding-vertical-half">
                                     <p class="no-margin">Current Capacity</p>
@@ -163,12 +163,12 @@
                             </div>
                         </div>
                     </div>
-                </div>  
+                </div>
            </div>
             <div class="tables margin-horizontal">
                 <div class="row table_row margin-horizontal padding-top margin-top">
                     <!-- ========= TABLE 1 START ========= -->
-                    <div class="col-25 no-padding margin-bottom table-card"> 
+                    <div class="col-25 no-padding margin-bottom table-card">
                         <!--======= TABLE CHAIR ========= -->
                         <div class="row table_top_chair">
                             <div class="col">
@@ -181,12 +181,12 @@
                                     <img src="/images/table/table-1.png" alt="table">
                                 </div>
                             </div>
-                        </div>               
+                        </div>
 
                         <div class="card no-margin table_1 equal-height-table">
                             <div class="card-header no-padding">
                                 <div class="row header_detail">
-                                    <div class="table-number padding-half"> <p class="no-margin">Table No.</p>                                     
+                                    <div class="table-number padding-half"> <p class="no-margin">Table No.</p>
                                     <p class=" text-align-center no-margin"> 01</p>
                                     </div>
                                     <div class="table-capacity text-align-right padding-half">
@@ -209,7 +209,7 @@
                                                         <i class="f7-icons size-22">clock_fill</i>
                                                         <span>2:47</span>
                                                     </span>
-                                                </div>   
+                                                </div>
                                                 <div class="popover popover-table padding-half">
                                                     <div class="user-info popover-inner">
                                                         <div class="display-flex padding-left-half padding-top-half align-items-center">
@@ -234,15 +234,15 @@
                                                         </div>
                                                         <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="addClass()">
                                                             <h3 class="text-color-red">Change Floor</h3>
-                                                            
-                                                        </div>     
+
+                                                        </div>
                                                          <!-- ============FLOOR DROP DOWN  ============= -->
                                                          <div class="list simple-list floor_dropdwon">
                                                             <ul>
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>1<sup>st</sup> Floor (AC)</span> 
+                                                                            <span>1<sup>st</sup> Floor (AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">20</span>
@@ -252,7 +252,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>2<sup>nd</sup> Floor (AC)</span> 
+                                                                            <span>2<sup>nd</sup> Floor (AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">12</span>
@@ -262,7 +262,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>3<sup>rd</sup> Floor (AC)</span> 
+                                                                            <span>3<sup>rd</sup> Floor (AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">16</span>
@@ -272,7 +272,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>4<sup>th</sup> Floor (AC)</span> 
+                                                                            <span>4<sup>th</sup> Floor (AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">15</span>
@@ -282,7 +282,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>5<sup>th</sup> Floor (AC)</span> 
+                                                                            <span>5<sup>th</sup> Floor (AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">08</span>
@@ -292,7 +292,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>6<sup>th</sup> Floor (AC)</span> 
+                                                                            <span>6<sup>th</sup> Floor (AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">13</span>
@@ -302,7 +302,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span> 
+                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">18</span>
@@ -312,7 +312,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span> 
+                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">18</span>
@@ -320,11 +320,11 @@
                                                                     </div>
                                                                 </li>
                                                             </ul>
-                                                        </div>                                                
-                                                                                                               
-                                                    </div>                                                    
-                                                </div>    
-                                                                                                                                                 
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
                                             </div>
                                         </div>
                                         <div class="table_reservation_info margin-bottom">
@@ -339,7 +339,7 @@
                                                         <i class="f7-icons size-22">clock_fill</i>
                                                         <span>2:47</span>
                                                     </span>
-                                                </div>   
+                                                </div>
                                                 <div class="popover popover-table1-1 padding-half">
                                                     <div class="user-info popover-inner">
                                                         <div class="display-flex padding-left-half padding-top-half align-items-center">
@@ -364,15 +364,15 @@
                                                         </div>
                                                         <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="addClass()">
                                                             <h3 class="text-color-red">Change Floor</h3>
-                                                            
-                                                        </div>     
+
+                                                        </div>
                                                          <!-- ============FLOOR DROP DOWN  ============= -->
                                                          <div class="list simple-list floor_dropdwon">
                                                             <ul>
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>1<sup>st</sup> Floor (AC)</span> 
+                                                                            <span>1<sup>st</sup> Floor (AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">20</span>
@@ -382,7 +382,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>2<sup>nd</sup> Floor (AC)</span> 
+                                                                            <span>2<sup>nd</sup> Floor (AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">12</span>
@@ -392,7 +392,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>3<sup>rd</sup> Floor (AC)</span> 
+                                                                            <span>3<sup>rd</sup> Floor (AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">16</span>
@@ -402,7 +402,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>4<sup>th</sup> Floor (AC)</span> 
+                                                                            <span>4<sup>th</sup> Floor (AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">15</span>
@@ -412,7 +412,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>5<sup>th</sup> Floor (AC)</span> 
+                                                                            <span>5<sup>th</sup> Floor (AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">08</span>
@@ -422,7 +422,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>6<sup>th</sup> Floor (AC)</span> 
+                                                                            <span>6<sup>th</sup> Floor (AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">13</span>
@@ -432,7 +432,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span> 
+                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">18</span>
@@ -442,7 +442,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span> 
+                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">18</span>
@@ -450,10 +450,10 @@
                                                                     </div>
                                                                 </li>
                                                             </ul>
-                                                        </div>                                                
-                                                                                                               
-                                                    </div>                                                    
-                                                </div>                                                                                                      
+                                                        </div>
+
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="table_reservation_info margin-bottom">
@@ -468,7 +468,7 @@
                                                         <i class="f7-icons size-22">clock_fill</i>
                                                         <span>2:47</span>
                                                     </span>
-                                                </div>  
+                                                </div>
                                                 <div class="popover popover-table1-3 padding-half">
                                                     <div class="user-info popover-inner">
                                                         <div class="display-flex padding-left-half padding-top-half align-items-center">
@@ -493,15 +493,15 @@
                                                         </div>
                                                         <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="addClass()">
                                                             <h3 class="text-color-red">Change Floor</h3>
-                                                            
-                                                        </div>     
+
+                                                        </div>
                                                          <!-- ============FLOOR DROP DOWN  ============= -->
                                                          <div class="list simple-list floor_dropdwon">
                                                             <ul>
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>1<sup>st</sup> Floor (AC)</span> 
+                                                                            <span>1<sup>st</sup> Floor (AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">20</span>
@@ -511,7 +511,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>2<sup>nd</sup> Floor (AC)</span> 
+                                                                            <span>2<sup>nd</sup> Floor (AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">12</span>
@@ -521,7 +521,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>3<sup>rd</sup> Floor (AC)</span> 
+                                                                            <span>3<sup>rd</sup> Floor (AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">16</span>
@@ -531,7 +531,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>4<sup>th</sup> Floor (AC)</span> 
+                                                                            <span>4<sup>th</sup> Floor (AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">15</span>
@@ -541,7 +541,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>5<sup>th</sup> Floor (AC)</span> 
+                                                                            <span>5<sup>th</sup> Floor (AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">08</span>
@@ -551,7 +551,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>6<sup>th</sup> Floor (AC)</span> 
+                                                                            <span>6<sup>th</sup> Floor (AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">13</span>
@@ -561,7 +561,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span> 
+                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">18</span>
@@ -571,7 +571,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span> 
+                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">18</span>
@@ -579,12 +579,12 @@
                                                                     </div>
                                                                 </li>
                                                             </ul>
-                                                        </div>                                                
-                                                                                                               
-                                                    </div>                                                    
-                                                </div>                                                                                                  
+                                                        </div>
+
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>                                        
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -601,10 +601,10 @@
                                     <img src="/images/table/table1-2.png" alt="table">
                                 </div>
                             </div>
-                        </div>  
+                        </div>
                     </div>
                     <!-- ======== TABLE 2 START ======= -->
-                    <div class="col-30 no-padding margin-bottom table-card center_table_card">    
+                    <div class="col-30 no-padding margin-bottom table-card center_table_card">
                         <!--======= TABLE CHAIR ========= -->
                         <div class="row table_top_chair">
                             <div class="col">
@@ -622,17 +622,17 @@
                                     <img src="/images/table/table-2.png" alt="table">
                                 </div>
                             </div>
-                        </div> 
-                        <div class="card table_2 no-margin equal-height-table">                        
+                        </div>
+                        <div class="card table_2 no-margin equal-height-table">
                             <div class="card-header no-padding">
                                 <div class="row header_detail">
-                                    <div class="table-number padding-half"> 
+                                    <div class="table-number padding-half">
                                         <p class="no-margin">Table No. </p>
                                         <p class=" text-align-center no-margin"> 02</p>
                                     </div>
-                                    <div class="table-capacity text-align-right padding-half"> 
+                                    <div class="table-capacity text-align-right padding-half">
                                         <p class="no-margin">Capacity </p>
-                                        <p class="text-align-center no-margin">06</p>                                     
+                                        <p class="text-align-center no-margin">06</p>
                                     </div>
                                 </div>
                             </div>
@@ -652,7 +652,7 @@
                                                         <i class="f7-icons size-22">clock_fill</i>
                                                         <span>2:47</span>
                                                     </span>
-                                                </div>   
+                                                </div>
                                                 <div class="popover popover-table-2 padding-half">
                                                     <div class="user-info popover-inner">
                                                         <div class="display-flex padding-left-half padding-top-half align-items-center">
@@ -677,15 +677,15 @@
                                                         </div>
                                                         <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="addClass()">
                                                             <h3 class="text-color-red">Change Floor</h3>
-                                                            
-                                                        </div>     
+
+                                                        </div>
                                                          <!-- ============FLOOR DROP DOWN  ============= -->
                                                          <div class="list simple-list floor_dropdwon">
                                                             <ul>
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>1<sup>st</sup> Floor (AC)</span> 
+                                                                            <span>1<sup>st</sup> Floor (AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">20</span>
@@ -695,7 +695,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>2<sup>nd</sup> Floor (AC)</span> 
+                                                                            <span>2<sup>nd</sup> Floor (AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">12</span>
@@ -705,7 +705,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>3<sup>rd</sup> Floor (AC)</span> 
+                                                                            <span>3<sup>rd</sup> Floor (AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">16</span>
@@ -715,7 +715,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>4<sup>th</sup> Floor (AC)</span> 
+                                                                            <span>4<sup>th</sup> Floor (AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">15</span>
@@ -725,7 +725,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>5<sup>th</sup> Floor (AC)</span> 
+                                                                            <span>5<sup>th</sup> Floor (AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">08</span>
@@ -735,7 +735,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>6<sup>th</sup> Floor (AC)</span> 
+                                                                            <span>6<sup>th</sup> Floor (AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">13</span>
@@ -745,7 +745,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span> 
+                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">18</span>
@@ -755,7 +755,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span> 
+                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">18</span>
@@ -763,10 +763,10 @@
                                                                     </div>
                                                                 </li>
                                                             </ul>
-                                                        </div>                                                
-                                                                                                               
-                                                    </div>                                                    
-                                                </div>                                           
+                                                        </div>
+
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="table_reservation_info margin-bottom">
@@ -781,7 +781,7 @@
                                                         <i class="f7-icons size-22">clock_fill</i>
                                                         <span>2:47</span>
                                                     </span>
-                                                </div>  
+                                                </div>
                                                 <div class="popover popover-table2-2 padding-half">
                                                     <div class="user-info popover-inner">
                                                         <div class="display-flex padding-left-half padding-top-half align-items-center">
@@ -806,15 +806,15 @@
                                                         </div>
                                                         <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="addClass()">
                                                             <h3 class="text-color-red">Change Floor</h3>
-                                                            
-                                                        </div>     
+
+                                                        </div>
                                                          <!-- ============FLOOR DROP DOWN  ============= -->
                                                          <div class="list simple-list floor_dropdwon">
                                                             <ul>
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>1<sup>st</sup> Floor (AC)</span> 
+                                                                            <span>1<sup>st</sup> Floor (AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">20</span>
@@ -824,7 +824,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>2<sup>nd</sup> Floor (AC)</span> 
+                                                                            <span>2<sup>nd</sup> Floor (AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">12</span>
@@ -834,7 +834,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>3<sup>rd</sup> Floor (AC)</span> 
+                                                                            <span>3<sup>rd</sup> Floor (AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">16</span>
@@ -844,7 +844,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>4<sup>th</sup> Floor (AC)</span> 
+                                                                            <span>4<sup>th</sup> Floor (AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">15</span>
@@ -854,7 +854,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>5<sup>th</sup> Floor (AC)</span> 
+                                                                            <span>5<sup>th</sup> Floor (AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">08</span>
@@ -864,7 +864,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>6<sup>th</sup> Floor (AC)</span> 
+                                                                            <span>6<sup>th</sup> Floor (AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">13</span>
@@ -874,7 +874,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span> 
+                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">18</span>
@@ -884,7 +884,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span> 
+                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">18</span>
@@ -892,10 +892,10 @@
                                                                     </div>
                                                                 </li>
                                                             </ul>
-                                                        </div>                                                
-                                                                                                               
-                                                    </div>                                                    
-                                                </div>                                                                                                  
+                                                        </div>
+
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -919,7 +919,7 @@
                                     <img src="/images/table/table-2-1.png" alt="table">
                                 </div>
                             </div>
-                        </div> 
+                        </div>
                     </div>
                     <!-- ======= TABLE 3 START ========== -->
                     <div class="col-40 no-padding margin-bottom table-card">
@@ -945,19 +945,19 @@
                                     <img src="/images/table/table-3.png" alt="table">
                                 </div>
                             </div>
-                        </div>  
+                        </div>
                         <div class="card table_3 no-margin equal-height-table">
                             <div class="card-header no-padding ">
                                 <div class="row header_detail">
                                     <div class="table-number padding-half"> <p class="no-margin">Table No.</p>
-                                        <p class=" text-align-center no-margin"> 03</p>                                    
+                                        <p class=" text-align-center no-margin"> 03</p>
                                     </div>
                                     <div class="table-capacity text-align-right padding-half"> <p class="no-margin">Capacity</p>
-                                        <p class=" text-align-center no-margin"> 08</p>                                                                        
+                                        <p class=" text-align-center no-margin"> 08</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-content card-content-padding padding-horizontal-half table3__details">                            
+                            <div class="card-content card-content-padding padding-horizontal-half table3__details">
                                 <!-- <h3 class="no-margin-top">Order Running</h3> -->
                                 <div class="table_reservation">
                                     <div class="display-flex">
@@ -973,7 +973,7 @@
                                                         <i class="f7-icons size-22">clock_fill</i>
                                                         <span>2:47</span>
                                                     </span>
-                                                </div>  
+                                                </div>
                                                 <div class="popover popover-table3 padding-half">
                                                     <div class="user-info popover-inner">
                                                         <div class="display-flex padding-left-half padding-top-half align-items-center">
@@ -998,15 +998,15 @@
                                                         </div>
                                                         <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="addClass()">
                                                             <h3 class="text-color-red">Change Floor</h3>
-                                                            
-                                                        </div>     
+
+                                                        </div>
                                                          <!-- ============FLOOR DROP DOWN  ============= -->
                                                         <div class="list simple-list floor_dropdwon">
                                                             <ul>
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>1<sup>st</sup> Floor (AC)</span> 
+                                                                            <span>1<sup>st</sup> Floor (AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">20</span>
@@ -1016,7 +1016,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>2<sup>nd</sup> Floor (AC)</span> 
+                                                                            <span>2<sup>nd</sup> Floor (AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">12</span>
@@ -1026,7 +1026,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>3<sup>rd</sup> Floor (AC)</span> 
+                                                                            <span>3<sup>rd</sup> Floor (AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">16</span>
@@ -1036,7 +1036,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>4<sup>th</sup> Floor (AC)</span> 
+                                                                            <span>4<sup>th</sup> Floor (AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">15</span>
@@ -1046,7 +1046,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>5<sup>th</sup> Floor (AC)</span> 
+                                                                            <span>5<sup>th</sup> Floor (AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">08</span>
@@ -1056,7 +1056,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>6<sup>th</sup> Floor (AC)</span> 
+                                                                            <span>6<sup>th</sup> Floor (AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">13</span>
@@ -1066,7 +1066,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span> 
+                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">18</span>
@@ -1076,7 +1076,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span> 
+                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">18</span>
@@ -1084,10 +1084,10 @@
                                                                     </div>
                                                                 </li>
                                                             </ul>
-                                                        </div>                                                
-                                                                                                               
-                                                    </div>                                                    
-                                                </div>                                                                                                  
+                                                        </div>
+
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="table_reservation_info margin-bottom" >
@@ -1102,13 +1102,13 @@
                                                         <i class="f7-icons size-22">clock_fill</i>
                                                         <span>2:47</span>
                                                     </span>
-                                                </div>  
+                                                </div>
                                                 <div class="popover popover-move padding">
                                                     <div class="user-info popover-inner text-align-center">
                                                         <p class="text-color-white no-margin">Moved</p>
-                                                        <p class="text-color-white no-margin">50 seconds ago</p>                                      
-                                                    </div>                                                    
-                                                </div>                                                                                                  
+                                                        <p class="text-color-white no-margin">50 seconds ago</p>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="table_reservation_info margin-bottom">
@@ -1123,7 +1123,7 @@
                                                         <i class="f7-icons size-22">clock_fill</i>
                                                         <span>2:47</span>
                                                     </span>
-                                                </div>  
+                                                </div>
                                                 <div class="popover popover-table3-2 padding-half">
                                                     <div class="user-info popover-inner">
                                                         <div class="display-flex padding-left-half padding-top-half align-items-center">
@@ -1148,15 +1148,15 @@
                                                         </div>
                                                         <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="addClass()">
                                                             <h3 class="text-color-red">Change Floor</h3>
-                                                            
-                                                        </div>     
+
+                                                        </div>
                                                          <!-- ============FLOOR DROP DOWN  ============= -->
                                                         <div class="list simple-list floor_dropdwon">
                                                             <ul>
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>1<sup>st</sup> Floor (AC)</span> 
+                                                                            <span>1<sup>st</sup> Floor (AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">20</span>
@@ -1166,7 +1166,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>2<sup>nd</sup> Floor (AC)</span> 
+                                                                            <span>2<sup>nd</sup> Floor (AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">12</span>
@@ -1176,7 +1176,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>3<sup>rd</sup> Floor (AC)</span> 
+                                                                            <span>3<sup>rd</sup> Floor (AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">16</span>
@@ -1186,7 +1186,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>4<sup>th</sup> Floor (AC)</span> 
+                                                                            <span>4<sup>th</sup> Floor (AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">15</span>
@@ -1196,7 +1196,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>5<sup>th</sup> Floor (AC)</span> 
+                                                                            <span>5<sup>th</sup> Floor (AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">08</span>
@@ -1206,7 +1206,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>6<sup>th</sup> Floor (AC)</span> 
+                                                                            <span>6<sup>th</sup> Floor (AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">13</span>
@@ -1216,7 +1216,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span> 
+                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">18</span>
@@ -1226,7 +1226,7 @@
                                                                 <li>
                                                                     <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                         <div class="floor_name">
-                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span> 
+                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span>
                                                                         </div>
                                                                         <div class="floor_room_available">
                                                                             <span class="room_available">18</span>
@@ -1234,10 +1234,10 @@
                                                                     </div>
                                                                 </li>
                                                             </ul>
-                                                        </div>                                                
-                                                                                                               
-                                                    </div>                                                    
-                                                </div>                                                                                                  
+                                                        </div>
+
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -1266,8 +1266,8 @@
                                     <img src="/images/table/table3-1.png" alt="table">
                                 </div>
                             </div>
-                        </div> 
-                    </div>                                                            
+                        </div>
+                    </div>
                 </div>
                 <div class="row table_row margin-horizontal padding-top margin-top">
                     <!-- ======= TABLE 4 START ========== -->
@@ -1299,15 +1299,15 @@
                                     <img src="/images/table/table-4.svg" alt="table">
                                 </div>
                             </div>
-                        </div>  
+                        </div>
                         <div class="card table_4 no-margin equal-height-table">
                             <div class="card-header no-padding ">
                                 <div class="row header_detail">
                                     <div class="table-number padding-half"> <p class="no-margin">Table No.</p>
-                                        <p class=" text-align-center no-margin"> 04</p>                                    
+                                        <p class=" text-align-center no-margin"> 04</p>
                                     </div>
                                     <div class="table-capacity text-align-right padding-half"> <p class="no-margin">Capacity</p>
-                                        <p class=" text-align-center no-margin"> 10</p>                                                                        
+                                        <p class=" text-align-center no-margin"> 10</p>
                                     </div>
                                 </div>
                             </div>
@@ -1358,7 +1358,7 @@
                                                         <i class="f7-icons size-22">clock_fill</i>
                                                         <span>2:47</span>
                                                     </span>
-                                                </div>                                            
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-25 table_reservation_info margin-bottom">
@@ -1404,7 +1404,7 @@
                                     <img src="/images/table/table4-1.svg" alt="table">
                                 </div>
                             </div>
-                        </div> 
+                        </div>
                     </div>
                     <!-- ======= TABLE 5 START ========== -->
                     <div class="col-55 no-padding margin-bottom table-card">
@@ -1440,20 +1440,20 @@
                                     <img src="/images/table/table-5.svg" alt="table">
                                 </div>
                             </div>
-                        </div>  
+                        </div>
                         <div class="card table_5 no-margin equal-height-table">
                             <div class="card-header no-padding ">
                                 <div class="row header_detail">
                                     <div class="table-number padding-half"> <p class="no-margin">Table No.</p>
-                                        <p class=" text-align-center no-margin"> 05</p>                                    
+                                        <p class=" text-align-center no-margin"> 05</p>
                                     </div>
                                     <div class="table-capacity text-align-right padding-half"> <p class="no-margin">Capacity</p>
-                                        <p class=" text-align-center no-margin"> 12</p>                                                                        
+                                        <p class=" text-align-center no-margin"> 12</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="card-content card-content-padding padding-horizontal-half">
-                                
+
                                 <!-- <div class="table_image text-align-center">
                                     <img src="/images/table/5_member_table.png" alt="">
                                 </div> -->
@@ -1494,7 +1494,7 @@
                                                         <i class="f7-icons size-22">clock_fill</i>
                                                         <span>2:47</span>
                                                     </span>
-                                                </div>                                            
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-20 table_reservation_info margin-bottom">
@@ -1557,12 +1557,12 @@
                                     <img src="/images/table/table5-1.svg" alt="table">
                                 </div>
                             </div>
-                        </div> 
+                        </div>
                     </div>
                 </div>
                 <div class="row table_row margin-horizontal padding-top margin-top">
                     <!-- ========= TABLE 1 START ========= -->
-                    <div class="col-25 no-padding margin-bottom table-card"> 
+                    <div class="col-25 no-padding margin-bottom table-card">
                         <!--======= TABLE CHAIR ========= -->
                         <div class="row table_top_chair">
                             <div class="col">
@@ -1575,11 +1575,11 @@
                                     <img src="/images/table/table-1.png" alt="table">
                                 </div>
                             </div>
-                        </div>               
+                        </div>
                         <div class="card no-margin table_1 equal-height-table">
                             <div class="card-header no-padding">
                                 <div class="row header_detail">
-                                    <div class="table-number padding-half"> <p class="no-margin">Table No.</p>                                     
+                                    <div class="table-number padding-half"> <p class="no-margin">Table No.</p>
                                     <p class=" text-align-center no-margin"> 01</p>
                                     </div>
                                     <div class="table-capacity text-align-right padding-half">
@@ -1599,7 +1599,7 @@
                                                         <i class="f7-icons size-22">clock_fill</i>
                                                         <span>2:47</span>
                                                     </span>
-                                                </div>   
+                                                </div>
                                                 <div class="popover popover-table1 padding-half">
                                                     <div class="user-info popover-inner">
                                                         <div class="display-flex padding-left-half padding-top-half align-items-center">
@@ -1620,7 +1620,7 @@
                                                         </div>
                                                         <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="addClass()">
                                                             <h3>Change Floor</h3>
-                                                        </div>                                                     
+                                                        </div>
                                                         <!-- ============FLOOR DROP DOWN  ============= -->
                                                         <div class="list simple-list floor_dropdwon ">
                                                             <ul>
@@ -1630,8 +1630,8 @@
                                                             </ul>
                                                         </div>
                                                     </div>
-                                                    
-                                                </div>                                                                                                    
+
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-50 table_reservation_info margin-bottom">
@@ -1643,7 +1643,7 @@
                                                         <i class="f7-icons size-22">clock_fill</i>
                                                         <span>2:47</span>
                                                     </span>
-                                                </div>   
+                                                </div>
                                                 <div class="popover popover-link padding-half">
                                                     <div class="user-info popover-inner">
                                                         <div class="display-flex padding-left-half padding-top-half">
@@ -1663,7 +1663,7 @@
                                                             <span class="text-color-black">5 family member</span>
                                                         </div>
                                                     </div>
-                                                </div>                                         
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-50 table_reservation_info margin-bottom">
@@ -1675,7 +1675,7 @@
                                                         <i class="f7-icons size-22">clock_fill</i>
                                                         <span>2:47</span>
                                                     </span>
-                                                </div>   
+                                                </div>
                                                 <div class="popover popover-link padding-half">
                                                     <div class="user-info popover-inner">
                                                         <div class="display-flex padding-left-half padding-top-half">
@@ -1695,7 +1695,7 @@
                                                             <span class="text-color-black">5 family member</span>
                                                         </div>
                                                     </div>
-                                                </div>                                         
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-50 table_reservation_info margin-bottom">
@@ -1746,10 +1746,10 @@
                                     <img src="/images/table/table1-2.png" alt="table">
                                 </div>
                             </div>
-                        </div>  
+                        </div>
                     </div>
                     <!-- ========= TABLE 1 START ========= -->
-                    <div class="col-25 no-padding margin-bottom table-card center_table_card"> 
+                    <div class="col-25 no-padding margin-bottom table-card center_table_card">
                         <!--======= TABLE CHAIR ========= -->
                         <div class="row table_top_chair">
                             <div class="col">
@@ -1762,12 +1762,12 @@
                                     <img src="/images/table/table-1.png" alt="table">
                                 </div>
                             </div>
-                        </div>               
+                        </div>
 
                         <div class="card no-margin table_1 equal-height-table">
                             <div class="card-header no-padding">
                                 <div class="row header_detail">
-                                    <div class="table-number padding-half"> <p class="no-margin">Table No.</p>                                     
+                                    <div class="table-number padding-half"> <p class="no-margin">Table No.</p>
                                     <p class=" text-align-center no-margin"> 01</p>
                                     </div>
                                     <div class="table-capacity text-align-right padding-half">
@@ -1782,14 +1782,14 @@
                                             <div class="person-info tooltip">
                                                 <div class="text-align-center person">
                                                     <i class="f7-icons size-12">person_fill</i>
-                                                    <span>&nbsp;3</span>                                                
+                                                    <span>&nbsp;3</span>
                                                     <span class="waiting-time margin-top-half text-align-center">
                                                         <i class="f7-icons size-12">clock_fill</i>
                                                         <span>2:47</span>
                                                     </span>
                                                 </div>
                                                 <div class="tooltiptext padding-half">
-                                                    <div class="user-info">                                                    
+                                                    <div class="user-info">
                                                         <div class="display-flex padding-left-half padding-top">
                                                             <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
                                                             <span class="text-color-black">John Smith</span>
@@ -1805,7 +1805,7 @@
                                                         <div class="display-flex padding-left-half padding-top">
                                                             <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
                                                             <span class="text-color-black">5 family member</span>
-                                                        </div>                                                
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1905,7 +1905,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>                                    
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1922,10 +1922,10 @@
                                     <img src="/images/table/table1-2.png" alt="table">
                                 </div>
                             </div>
-                        </div>  
+                        </div>
                     </div>
                     <!-- ========= TABLE 1 START ========= -->
-                    <div class="col-25 no-padding margin-bottom table-card table_card_right_margin"> 
+                    <div class="col-25 no-padding margin-bottom table-card table_card_right_margin">
                         <!--======= TABLE CHAIR ========= -->
                         <div class="row table_top_chair">
                             <div class="col">
@@ -1938,12 +1938,12 @@
                                     <img src="/images/table/table-1.png" alt="table">
                                 </div>
                             </div>
-                        </div>               
+                        </div>
 
                         <div class="card no-margin table_1 equal-height-table">
                             <div class="card-header no-padding">
                                 <div class="row header_detail">
-                                    <div class="table-number padding-half"> <p class="no-margin">Table No.</p>                                     
+                                    <div class="table-number padding-half"> <p class="no-margin">Table No.</p>
                                     <p class=" text-align-center no-margin"> 01</p>
                                     </div>
                                     <div class="table-capacity text-align-right padding-half">
@@ -1961,14 +1961,14 @@
                                             <div class="person-info tooltip">
                                                 <div class="text-align-center person">
                                                     <i class="f7-icons size-12">person_fill</i>
-                                                    <span>&nbsp;3</span>                                                
+                                                    <span>&nbsp;3</span>
                                                     <span class="waiting-time margin-top-half text-align-center">
                                                         <i class="f7-icons size-12">clock_fill</i>
                                                         <span>2:47</span>
                                                     </span>
                                                 </div>
                                                 <div class="tooltiptext padding-half">
-                                                    <div class="user-info">                                                    
+                                                    <div class="user-info">
                                                         <div class="display-flex padding-left-half padding-top">
                                                             <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
                                                             <span class="text-color-black">John Smith</span>
@@ -1984,7 +1984,7 @@
                                                         <div class="display-flex padding-left-half padding-top">
                                                             <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
                                                             <span class="text-color-black">5 family member</span>
-                                                        </div>                                                
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2149,10 +2149,10 @@
                                     <img src="/images/table/table1-2.png" alt="table">
                                 </div>
                             </div>
-                        </div>  
+                        </div>
                     </div>
                     <!-- ========= TABLE 9 START ========= -->
-                    <div class="col-20 no-padding margin-bottom table-card"> 
+                    <div class="col-20 no-padding margin-bottom table-card">
                         <!--======= TABLE CHAIR ========= -->
                         <div class="row table_top_chair">
                             <div class="col">
@@ -2160,12 +2160,12 @@
                                     <img src="/images/table/table9.svg" alt="table">
                                 </div>
                             </div>
-                        </div>               
+                        </div>
 
                         <div class="card table_9 equal-height-table">
                             <div class="card-header no-padding">
                                 <div class="row header_detail">
-                                    <div class="table-number padding-half"> <p class="no-margin">Table No.</p>                                     
+                                    <div class="table-number padding-half"> <p class="no-margin">Table No.</p>
                                     <p class=" text-align-center no-margin"> 09</p>
                                     </div>
                                     <div class="table-capacity text-align-right padding-half">
@@ -2183,14 +2183,14 @@
                                             <div class="person-info tooltip">
                                                 <div class="text-align-center person">
                                                     <i class="f7-icons size-12">person_fill</i>
-                                                    <span>&nbsp;3</span>                                                
+                                                    <span>&nbsp;3</span>
                                                     <span class="waiting-time margin-top-half text-align-center">
                                                         <i class="f7-icons size-12">clock_fill</i>
                                                         <span>2:47</span>
                                                     </span>
                                                 </div>
                                                 <div class="tooltiptext padding-half">
-                                                    <div class="user-info">                                                    
+                                                    <div class="user-info">
                                                         <div class="display-flex padding-left-half padding-top">
                                                             <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
                                                             <span class="text-color-black">John Smith</span>
@@ -2206,7 +2206,7 @@
                                                         <div class="display-flex padding-left-half padding-top">
                                                             <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
                                                             <span class="text-color-black">5 family member</span>
-                                                        </div>                                                
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2243,7 +2243,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    
+
                                         <!-- <div class="col-25 table_reservation_info">
                                             <div class="person-info" data-tooltip="Button tooltip text" @click="openTooltip">
                                                 <div class="text-align-center person">
@@ -2303,7 +2303,7 @@
                                     <img src="/images/table/table9-1.svg" alt="table">
                                 </div>
                             </div>
-                        </div>  
+                        </div>
                     </div>
                 </div>
                 <div class="row table_row margin-horizontal padding-top margin-top">
@@ -2376,15 +2376,15 @@
                                     <img src="/images/table/table10.svg" alt="table">
                                 </div>
                             </div>
-                        </div>  
+                        </div>
                         <div class="card table_10 no-margin equal-height-table">
                             <div class="card-header no-padding ">
                                 <div class="row header_detail">
                                     <div class="table-number padding-half"> <p class="no-margin">Table No.</p>
-                                        <p class=" text-align-center no-margin"> 10</p>                                    
+                                        <p class=" text-align-center no-margin"> 10</p>
                                     </div>
                                     <div class="table-capacity text-align-right padding-half"> <p class="no-margin">Capacity</p>
-                                        <p class=" text-align-center no-margin"> 26</p>                                                                        
+                                        <p class=" text-align-center no-margin"> 26</p>
                                     </div>
                                 </div>
                             </div>
@@ -2426,7 +2426,7 @@
                                                         <i class="f7-icons size-22">clock_fill</i>
                                                         <span>2:47</span>
                                                     </span>
-                                                </div>                                            
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="table_reservation_info margin-bottom margin-right">
@@ -2536,12 +2536,12 @@
                                     <img src="/images/table/table10-1.svg" alt="table">
                                 </div>
                             </div>
-                        </div> 
+                        </div>
                     </div>
                 </div>
                 <div class="row table_row margin-horizontal padding-top margin-top">
                     <!-- ========= TABLE 9 START ========= -->
-                    <div class="col-20 no-padding margin-bottom table-card"> 
+                    <div class="col-20 no-padding margin-bottom table-card">
                         <!--======= TABLE CHAIR ========= -->
                         <div class="row table_top_chair">
                             <div class="col">
@@ -2549,12 +2549,12 @@
                                     <img src="/images/table/table9.svg" alt="table">
                                 </div>
                             </div>
-                        </div>               
+                        </div>
 
                         <div class="card table_9 equal-height-table">
                             <div class="card-header no-padding">
                                 <div class="row header_detail">
-                                    <div class="table-number padding-half"> <p class="no-margin">Table No.</p>                                     
+                                    <div class="table-number padding-half"> <p class="no-margin">Table No.</p>
                                     <p class=" text-align-center no-margin"> 09</p>
                                     </div>
                                     <div class="table-capacity text-align-right padding-half">
@@ -2569,14 +2569,14 @@
                                             <div class="person-info tooltip">
                                                 <div class="text-align-center person">
                                                     <i class="f7-icons size-12">person_fill</i>
-                                                    <span>&nbsp;3</span>                                                
+                                                    <span>&nbsp;3</span>
                                                     <span class="waiting-time margin-top-half text-align-center">
                                                         <i class="f7-icons size-12">clock_fill</i>
                                                         <span>2:47</span>
                                                     </span>
                                                 </div>
                                                 <div class="tooltiptext padding-half">
-                                                    <div class="user-info">                                                    
+                                                    <div class="user-info">
                                                         <div class="display-flex padding-left-half padding-top">
                                                             <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
                                                             <span class="text-color-black">John Smith</span>
@@ -2592,7 +2592,7 @@
                                                         <div class="display-flex padding-left-half padding-top">
                                                             <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
                                                             <span class="text-color-black">5 family member</span>
-                                                        </div>                                                
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2640,10 +2640,10 @@
                                     <img src="/images/table/table9-1.svg" alt="table">
                                 </div>
                             </div>
-                        </div>  
+                        </div>
                     </div>
                     <!-- ========= TABLE 9 START ========= -->
-                    <div class="col-20 no-padding margin-bottom table-card"> 
+                    <div class="col-20 no-padding margin-bottom table-card">
                         <!--======= TABLE CHAIR ========= -->
                         <div class="row table_top_chair">
                             <div class="col">
@@ -2651,12 +2651,12 @@
                                     <img src="/images/table/table9.svg" alt="table">
                                 </div>
                             </div>
-                        </div>               
+                        </div>
 
                         <div class="card table_9 equal-height-table">
                             <div class="card-header no-padding">
                                 <div class="row header_detail">
-                                    <div class="table-number padding-half"> <p class="no-margin">Table No.</p>                                     
+                                    <div class="table-number padding-half"> <p class="no-margin">Table No.</p>
                                     <p class=" text-align-center no-margin"> 09</p>
                                     </div>
                                     <div class="table-capacity text-align-right padding-half">
@@ -2671,14 +2671,14 @@
                                             <div class="person-info tooltip">
                                                 <div class="text-align-center person">
                                                     <i class="f7-icons size-12">person_fill</i>
-                                                    <span>&nbsp;3</span>                                                
+                                                    <span>&nbsp;3</span>
                                                     <span class="waiting-time margin-top-half text-align-center">
                                                         <i class="f7-icons size-12">clock_fill</i>
                                                         <span>2:47</span>
                                                     </span>
                                                 </div>
                                                 <div class="tooltiptext padding-half">
-                                                    <div class="user-info">                                                    
+                                                    <div class="user-info">
                                                         <div class="display-flex padding-left-half padding-top">
                                                             <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
                                                             <span class="text-color-black">John Smith</span>
@@ -2694,7 +2694,7 @@
                                                         <div class="display-flex padding-left-half padding-top">
                                                             <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
                                                             <span class="text-color-black">5 family member</span>
-                                                        </div>                                                
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2742,10 +2742,10 @@
                                     <img src="/images/table/table9-1.svg" alt="table">
                                 </div>
                             </div>
-                        </div>  
+                        </div>
                     </div>
                     <!-- ========= TABLE 9 START ========= -->
-                    <div class="col-20 no-padding margin-bottom table-card"> 
+                    <div class="col-20 no-padding margin-bottom table-card">
                         <!--======= TABLE CHAIR ========= -->
                         <div class="row table_top_chair">
                             <div class="col">
@@ -2753,12 +2753,12 @@
                                     <img src="/images/table/table9.svg" alt="table">
                                 </div>
                             </div>
-                        </div>               
+                        </div>
 
                         <div class="card table_9 equal-height-table">
                             <div class="card-header no-padding">
                                 <div class="row header_detail">
-                                    <div class="table-number padding-half"> <p class="no-margin">Table No.</p>                                     
+                                    <div class="table-number padding-half"> <p class="no-margin">Table No.</p>
                                     <p class=" text-align-center no-margin"> 09</p>
                                     </div>
                                     <div class="table-capacity text-align-right padding-half">
@@ -2773,14 +2773,14 @@
                                             <div class="person-info tooltip">
                                                 <div class="text-align-center person">
                                                     <i class="f7-icons size-12">person_fill</i>
-                                                    <span>&nbsp;3</span>                                                
+                                                    <span>&nbsp;3</span>
                                                     <span class="waiting-time margin-top-half text-align-center">
                                                         <i class="f7-icons size-12">clock_fill</i>
                                                         <span>2:47</span>
                                                     </span>
                                                 </div>
                                                 <div class="tooltiptext padding-half">
-                                                    <div class="user-info">                                                    
+                                                    <div class="user-info">
                                                         <div class="display-flex padding-left-half padding-top">
                                                             <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
                                                             <span class="text-color-black">John Smith</span>
@@ -2796,7 +2796,7 @@
                                                         <div class="display-flex padding-left-half padding-top">
                                                             <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
                                                             <span class="text-color-black">5 family member</span>
-                                                        </div>                                                
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2844,10 +2844,10 @@
                                     <img src="/images/table/table9-1.svg" alt="table">
                                 </div>
                             </div>
-                        </div>  
+                        </div>
                     </div>
                     <!-- ======== TABLE 2 START ======= -->
-                    <div class="col-30 no-padding margin-bottom table-card">    
+                    <div class="col-30 no-padding margin-bottom table-card">
                         <!--======= TABLE CHAIR ========= -->
                         <div class="row table_top_chair">
                             <div class="col">
@@ -2865,17 +2865,17 @@
                                     <img src="/images/table/table-2.png" alt="table">
                                 </div>
                             </div>
-                        </div> 
-                        <div class="card table_2 no-margin equal-height-table">                        
+                        </div>
+                        <div class="card table_2 no-margin equal-height-table">
                             <div class="card-header no-padding">
                                 <div class="row header_detail">
-                                    <div class="table-number padding-half"> 
+                                    <div class="table-number padding-half">
                                         <p class="no-margin">Table No. </p>
                                         <p class=" text-align-center no-margin"> 02</p>
                                     </div>
-                                    <div class="table-capacity text-align-right padding-half"> 
+                                    <div class="table-capacity text-align-right padding-half">
                                         <p class="no-margin">Capacity </p>
-                                        <p class="text-align-center no-margin">06</p>                                     
+                                        <p class="text-align-center no-margin">06</p>
                                     </div>
                                 </div>
                             </div>
@@ -2892,7 +2892,7 @@
                                                         <i class="f7-icons size-22">clock_fill</i>
                                                         <span>2:47</span>
                                                     </span>
-                                                </div>   
+                                                </div>
                                                 <div class="tooltiptext padding-half">
                                                     <div class="user-info">
                                                         <div class="display-flex padding-left-half padding-top-half">
@@ -2912,7 +2912,7 @@
                                                             <span class="text-color-black">5 family member</span>
                                                         </div>
                                                     </div>
-                                                </div>                                         
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-50 table_reservation_info margin-bottom">
@@ -2924,7 +2924,7 @@
                                                         <i class="f7-icons size-22">clock_fill</i>
                                                         <span>2:47</span>
                                                     </span>
-                                                </div>                                            
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-50 table_reservation_info margin-bottom">
@@ -2936,7 +2936,7 @@
                                                         <i class="f7-icons size-22">clock_fill</i>
                                                         <span>2:47</span>
                                                     </span>
-                                                </div> 
+                                                </div>
                                                 <div class="tooltiptext padding-half">
                                                     <div class="user-info">
                                                         <div class="display-flex padding-left-half padding-top-half">
@@ -2956,7 +2956,7 @@
                                                             <span class="text-color-black">5 family member</span>
                                                         </div>
                                                     </div>
-                                                </div>                                          
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -2980,12 +2980,12 @@
                                     <img src="/images/table/table-2-1.png" alt="table">
                                 </div>
                             </div>
-                        </div> 
+                        </div>
                     </div>
                 </div>
                 <div class="row table_row margin-horizontal padding-top margin-top">
                     <!-- ======== TABLE 2 START ======= -->
-                    <div class="col-30 no-padding margin-bottom table-card">    
+                    <div class="col-30 no-padding margin-bottom table-card">
                         <!--======= TABLE CHAIR ========= -->
                         <div class="row table_top_chair">
                             <div class="col">
@@ -3003,17 +3003,17 @@
                                     <img src="/images/table/table-2.png" alt="table">
                                 </div>
                             </div>
-                        </div> 
-                        <div class="card table_2 no-margin equal-height-table">                        
+                        </div>
+                        <div class="card table_2 no-margin equal-height-table">
                             <div class="card-header no-padding">
                                 <div class="row header_detail">
-                                    <div class="table-number padding-half"> 
+                                    <div class="table-number padding-half">
                                         <p class="no-margin">Table No. </p>
                                         <p class=" text-align-center no-margin"> 02</p>
                                     </div>
-                                    <div class="table-capacity text-align-right padding-half"> 
+                                    <div class="table-capacity text-align-right padding-half">
                                         <p class="no-margin">Capacity </p>
-                                        <p class="text-align-center no-margin">06</p>                                     
+                                        <p class="text-align-center no-margin">06</p>
                                     </div>
                                 </div>
                             </div>
@@ -3030,7 +3030,7 @@
                                                         <i class="f7-icons size-22">clock_fill</i>
                                                         <span>2:47</span>
                                                     </span>
-                                                </div>   
+                                                </div>
                                                 <div class="tooltiptext padding-half">
                                                     <div class="user-info">
                                                         <div class="display-flex padding-left-half padding-top-half">
@@ -3050,7 +3050,7 @@
                                                             <span class="text-color-black">5 family member</span>
                                                         </div>
                                                     </div>
-                                                </div>                                         
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-50 table_reservation_info margin-bottom">
@@ -3062,7 +3062,7 @@
                                                         <i class="f7-icons size-22">clock_fill</i>
                                                         <span>2:47</span>
                                                     </span>
-                                                </div>                                            
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-50 table_reservation_info margin-bottom">
@@ -3074,7 +3074,7 @@
                                                         <i class="f7-icons size-22">clock_fill</i>
                                                         <span>2:47</span>
                                                     </span>
-                                                </div> 
+                                                </div>
                                                 <div class="tooltiptext padding-half">
                                                     <div class="user-info">
                                                         <div class="display-flex padding-left-half padding-top-half">
@@ -3094,7 +3094,7 @@
                                                             <span class="text-color-black">5 family member</span>
                                                         </div>
                                                     </div>
-                                                </div>                                          
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -3118,10 +3118,10 @@
                                     <img src="/images/table/table-2-1.png" alt="table">
                                 </div>
                             </div>
-                        </div> 
+                        </div>
                     </div>
                     <!-- ======== TABLE 2 START ======= -->
-                    <div class="col-30 no-padding margin-bottom table-card">    
+                    <div class="col-30 no-padding margin-bottom table-card">
                         <!--======= TABLE CHAIR ========= -->
                         <div class="row table_top_chair">
                             <div class="col">
@@ -3139,17 +3139,17 @@
                                     <img src="/images/table/table-2.png" alt="table">
                                 </div>
                             </div>
-                        </div> 
-                        <div class="card table_2 no-margin equal-height-table">                        
+                        </div>
+                        <div class="card table_2 no-margin equal-height-table">
                             <div class="card-header no-padding">
                                 <div class="row header_detail">
-                                    <div class="table-number padding-half"> 
+                                    <div class="table-number padding-half">
                                         <p class="no-margin">Table No. </p>
                                         <p class=" text-align-center no-margin"> 02</p>
                                     </div>
-                                    <div class="table-capacity text-align-right padding-half"> 
+                                    <div class="table-capacity text-align-right padding-half">
                                         <p class="no-margin">Capacity </p>
-                                        <p class="text-align-center no-margin">06</p>                                     
+                                        <p class="text-align-center no-margin">06</p>
                                     </div>
                                 </div>
                             </div>
@@ -3166,7 +3166,7 @@
                                                         <i class="f7-icons size-22">clock_fill</i>
                                                         <span>2:47</span>
                                                     </span>
-                                                </div>   
+                                                </div>
                                                 <div class="tooltiptext padding-half">
                                                     <div class="user-info">
                                                         <div class="display-flex padding-left-half padding-top-half">
@@ -3186,7 +3186,7 @@
                                                             <span class="text-color-black">5 family member</span>
                                                         </div>
                                                     </div>
-                                                </div>                                         
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-50 table_reservation_info margin-bottom">
@@ -3198,7 +3198,7 @@
                                                         <i class="f7-icons size-22">clock_fill</i>
                                                         <span>2:47</span>
                                                     </span>
-                                                </div>                                            
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-50 table_reservation_info margin-bottom">
@@ -3210,7 +3210,7 @@
                                                         <i class="f7-icons size-22">clock_fill</i>
                                                         <span>2:47</span>
                                                     </span>
-                                                </div> 
+                                                </div>
                                                 <div class="tooltiptext padding-half">
                                                     <div class="user-info">
                                                         <div class="display-flex padding-left-half padding-top-half">
@@ -3230,7 +3230,7 @@
                                                             <span class="text-color-black">5 family member</span>
                                                         </div>
                                                     </div>
-                                                </div>                                          
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -3254,10 +3254,10 @@
                                     <img src="/images/table/table-2-1.png" alt="table">
                                 </div>
                             </div>
-                        </div> 
+                        </div>
                     </div>
                     <!-- ======== TABLE 2 START ======= -->
-                    <div class="col-30 no-padding margin-bottom table-card">    
+                    <div class="col-30 no-padding margin-bottom table-card">
                         <!--======= TABLE CHAIR ========= -->
                         <div class="row table_top_chair">
                             <div class="col">
@@ -3275,17 +3275,17 @@
                                     <img src="/images/table/table-2.png" alt="table">
                                 </div>
                             </div>
-                        </div> 
-                        <div class="card table_2 no-margin equal-height-table">                        
+                        </div>
+                        <div class="card table_2 no-margin equal-height-table">
                             <div class="card-header no-padding">
                                 <div class="row header_detail">
-                                    <div class="table-number padding-half"> 
+                                    <div class="table-number padding-half">
                                         <p class="no-margin">Table No. </p>
                                         <p class=" text-align-center no-margin"> 02</p>
                                     </div>
-                                    <div class="table-capacity text-align-right padding-half"> 
+                                    <div class="table-capacity text-align-right padding-half">
                                         <p class="no-margin">Capacity </p>
-                                        <p class="text-align-center no-margin">06</p>                                     
+                                        <p class="text-align-center no-margin">06</p>
                                     </div>
                                 </div>
                             </div>
@@ -3302,7 +3302,7 @@
                                                         <i class="f7-icons size-22">clock_fill</i>
                                                         <span>2:47</span>
                                                     </span>
-                                                </div>   
+                                                </div>
                                                 <div class="tooltiptext padding-half">
                                                     <div class="user-info">
                                                         <div class="display-flex padding-left-half padding-top-half">
@@ -3322,7 +3322,7 @@
                                                             <span class="text-color-black">5 family member</span>
                                                         </div>
                                                     </div>
-                                                </div>                                         
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-50 table_reservation_info margin-bottom">
@@ -3334,7 +3334,7 @@
                                                         <i class="f7-icons size-22">clock_fill</i>
                                                         <span>2:47</span>
                                                     </span>
-                                                </div>                                            
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-50 table_reservation_info margin-bottom">
@@ -3346,7 +3346,7 @@
                                                         <i class="f7-icons size-22">clock_fill</i>
                                                         <span>2:47</span>
                                                     </span>
-                                                </div> 
+                                                </div>
                                                 <div class="tooltiptext padding-half">
                                                     <div class="user-info">
                                                         <div class="display-flex padding-left-half padding-top-half">
@@ -3366,7 +3366,7 @@
                                                             <span class="text-color-black">5 family member</span>
                                                         </div>
                                                     </div>
-                                                </div>                                          
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -3390,7 +3390,7 @@
                                     <img src="/images/table/table-2-1.png" alt="table">
                                 </div>
                             </div>
-                        </div> 
+                        </div>
                     </div>
                 </div>
                 <div class="row table_row margin-horizontal padding-top margin-top">
@@ -3418,15 +3418,15 @@
                                     <img src="/images/table/table-3.png" alt="table">
                                 </div>
                             </div>
-                        </div>  
+                        </div>
                         <div class="card table_3 no-margin equal-height-table">
                             <div class="card-header no-padding ">
                                 <div class="row header_detail">
                                     <div class="table-number padding-half"> <p class="no-margin">Table No.</p>
-                                        <p class=" text-align-center no-margin"> 03</p>                                    
+                                        <p class=" text-align-center no-margin"> 03</p>
                                     </div>
                                     <div class="table-capacity text-align-right padding-half"> <p class="no-margin">Capacity</p>
-                                        <p class=" text-align-center no-margin"> 08</p>                                                                        
+                                        <p class=" text-align-center no-margin"> 08</p>
                                     </div>
                                 </div>
                             </div>
@@ -3468,7 +3468,7 @@
                                                         <i class="f7-icons size-22">clock_fill</i>
                                                         <span>2:47</span>
                                                     </span>
-                                                </div>                                            
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-33 table_reservation_info margin-bottom">
@@ -3509,10 +3509,10 @@
                                     <img src="/images/table/table3-1.png" alt="table">
                                 </div>
                             </div>
-                        </div> 
+                        </div>
                     </div>
                     <!-- ======== TABLE 2 START ======= -->
-                    <div class="col-30 no-padding margin-bottom table-card">    
+                    <div class="col-30 no-padding margin-bottom table-card">
                         <!--======= TABLE CHAIR ========= -->
                         <div class="row table_top_chair">
                             <div class="col">
@@ -3530,17 +3530,17 @@
                                     <img src="/images/table/table-2.png" alt="table">
                                 </div>
                             </div>
-                        </div> 
-                        <div class="card table_2 no-margin equal-height-table">                        
+                        </div>
+                        <div class="card table_2 no-margin equal-height-table">
                             <div class="card-header no-padding">
                                 <div class="row header_detail">
-                                    <div class="table-number padding-half"> 
+                                    <div class="table-number padding-half">
                                         <p class="no-margin">Table No. </p>
                                         <p class=" text-align-center no-margin"> 02</p>
                                     </div>
-                                    <div class="table-capacity text-align-right padding-half"> 
+                                    <div class="table-capacity text-align-right padding-half">
                                         <p class="no-margin">Capacity </p>
-                                        <p class="text-align-center no-margin">06</p>                                     
+                                        <p class="text-align-center no-margin">06</p>
                                     </div>
                                 </div>
                             </div>
@@ -3557,7 +3557,7 @@
                                                         <i class="f7-icons size-22">clock_fill</i>
                                                         <span>2:47</span>
                                                     </span>
-                                                </div>   
+                                                </div>
                                                 <div class="tooltiptext padding-half">
                                                     <div class="user-info">
                                                         <div class="display-flex padding-left-half padding-top-half">
@@ -3577,7 +3577,7 @@
                                                             <span class="text-color-black">5 family member</span>
                                                         </div>
                                                     </div>
-                                                </div>                                         
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-50 table_reservation_info margin-bottom">
@@ -3589,7 +3589,7 @@
                                                         <i class="f7-icons size-22">clock_fill</i>
                                                         <span>2:47</span>
                                                     </span>
-                                                </div>                                            
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-50 table_reservation_info margin-bottom">
@@ -3601,7 +3601,7 @@
                                                         <i class="f7-icons size-22">clock_fill</i>
                                                         <span>2:47</span>
                                                     </span>
-                                                </div> 
+                                                </div>
                                                 <div class="tooltiptext padding-half">
                                                     <div class="user-info">
                                                         <div class="display-flex padding-left-half padding-top-half">
@@ -3621,7 +3621,7 @@
                                                             <span class="text-color-black">5 family member</span>
                                                         </div>
                                                     </div>
-                                                </div>                                          
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -3645,10 +3645,10 @@
                                     <img src="/images/table/table-2-1.png" alt="table">
                                 </div>
                             </div>
-                        </div> 
-                    </div>    
+                        </div>
+                    </div>
                     <!-- ========= TABLE 9 START ========= -->
-                    <div class="col-20 no-padding margin-bottom table-card"> 
+                    <div class="col-20 no-padding margin-bottom table-card">
                         <!--======= TABLE CHAIR ========= -->
                         <div class="row table_top_chair">
                             <div class="col">
@@ -3656,11 +3656,11 @@
                                     <img src="/images/table/table9.svg" alt="table">
                                 </div>
                             </div>
-                        </div>               
+                        </div>
                         <div class="card table_9 equal-height-table">
                             <div class="card-header no-padding">
                                 <div class="row header_detail">
-                                    <div class="table-number padding-half"> <p class="no-margin">Table No.</p>                                     
+                                    <div class="table-number padding-half"> <p class="no-margin">Table No.</p>
                                     <p class=" text-align-center no-margin"> 09</p>
                                     </div>
                                     <div class="table-capacity text-align-right padding-half">
@@ -3675,14 +3675,14 @@
                                             <div class="person-info tooltip">
                                                 <div class="text-align-center person">
                                                     <i class="f7-icons size-12">person_fill</i>
-                                                    <span>&nbsp;3</span>                                                
+                                                    <span>&nbsp;3</span>
                                                     <span class="waiting-time margin-top-half text-align-center">
                                                         <i class="f7-icons size-12">clock_fill</i>
                                                         <span>2:47</span>
                                                     </span>
                                                 </div>
                                                 <div class="tooltiptext padding-half">
-                                                    <div class="user-info">                                                    
+                                                    <div class="user-info">
                                                         <div class="display-flex padding-left-half padding-top">
                                                             <i class="f7-icons size-12 text-color-black padding-right-half">person_fill</i>
                                                             <span class="text-color-black">John Smith</span>
@@ -3698,7 +3698,7 @@
                                                         <div class="display-flex padding-left-half padding-top">
                                                             <i class="f7-icons size-12 text-color-black padding-right-half">person_2_fill</i>
                                                             <span class="text-color-black">5 family member</span>
-                                                        </div>                                                
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -3746,8 +3746,8 @@
                                     <img src="/images/table/table9-1.svg" alt="table">
                                 </div>
                             </div>
-                        </div>  
-                    </div>           
+                        </div>
+                    </div>
                 </div>
                 <div class="row table_row margin-horizontal padding-top margin-top">
                     <!-- ======= TABLE 10 START ========== -->
@@ -3819,15 +3819,15 @@
                                     <img src="/images/table/table10.svg" alt="table">
                                 </div>
                             </div>
-                        </div>  
+                        </div>
                         <div class="card table_10 no-margin equal-height-table">
                             <div class="card-header no-padding ">
                                 <div class="row header_detail">
                                     <div class="table-number padding-half"> <p class="no-margin">Table No.</p>
-                                        <p class=" text-align-center no-margin"> 10</p>                                    
+                                        <p class=" text-align-center no-margin"> 10</p>
                                     </div>
                                     <div class="table-capacity text-align-right padding-half"> <p class="no-margin">Capacity</p>
-                                        <p class=" text-align-center no-margin"> 26</p>                                                                        
+                                        <p class=" text-align-center no-margin"> 26</p>
                                     </div>
                                 </div>
                             </div>
@@ -3869,7 +3869,7 @@
                                                         <i class="f7-icons size-22">clock_fill</i>
                                                         <span>2:47</span>
                                                     </span>
-                                                </div>                                            
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="table_reservation_info margin-bottom margin-right">
@@ -3979,7 +3979,7 @@
                                     <img src="/images/table/table10-1.svg" alt="table">
                                 </div>
                             </div>
-                        </div> 
+                        </div>
                     </div>
                 </div>
             </div>
@@ -4011,7 +4011,7 @@ export default {
             }
             }
             document.querySelectorAll(".equal-height-table").forEach(node => node.style.height = highestBox + "px");
-        },        
+        },
         addClass(){
             $('.floor_dropdwon').toggleClass('floor_dropdown_visible');
         },
@@ -4066,7 +4066,7 @@ export default {
     .menu-item-dropdown-opened .menu-item-content{
         background: #ff2d55;
     }
-    .menu-dropdown-link:nth-child(2){
+    .menu-dropdown-link{
         border-bottom: 1px solid #EFEFEF;
     }
     /*.table_reservation .row{
@@ -4131,14 +4131,14 @@ export default {
 }
 .table_row .table_9{
     width:100%;
-    min-width: 182px;    
+    min-width: 182px;
     max-width: 182px;
     margin: 0 auto;
     border-left: 10px solid #FCD95E;
 }
 .table_row .table_10 {
     width:100%;
-    /*min-width: 1180px; */   
+    /*min-width: 1180px; */
     margin: 0 auto;
     border-left: 10px solid #C6C6C6;;
 }
@@ -4199,7 +4199,7 @@ export default {
     justify-content:center;
 }
 /*.swiper-slide{
-    width:150px !important; 
+    width:150px !important;
 }*/
 /*.swiper-button-next:after{
     content:"";
@@ -4210,7 +4210,7 @@ export default {
     margin-left: 20px;
     padding-bottom: 12px;
 }
-.table_main .table_floor_swiper .floor_swiper_inner .room_available{    
+.table_main .table_floor_swiper .floor_swiper_inner .room_available{
     width:35px;
     height:21px;
     background: #FDD5D5;
@@ -4417,5 +4417,5 @@ export default {
     .table_row .card{
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.11);
     }
-   
+
 </style>

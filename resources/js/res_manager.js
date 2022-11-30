@@ -21,5 +21,4 @@ Framework7.use(Framework7Vue);
 
 // Init Vue App
 const app = createApp(RestaurantManager);
-
 app.mount('#app');
