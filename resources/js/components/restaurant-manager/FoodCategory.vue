@@ -125,23 +125,29 @@
             </div>
         </div>
         <div class="display-none" id="category_popup">
-            <div class="category-add padding">
-                <div class="categoryForm text-align-left">
-                    <label for="" class="add_category_name">Category name</label>
-                    <input type="text" v-model="test" name="name"
-                        class="category-name margin-top-half padding-left-half padding-right-half"
-                        placeholder="Add category name">
+            <div class="category-form">
+                <div class="category-add padding">
+                    <div class="categoryForm text-align-left">
+                        <label for="" class="add_category_name">Category name</label>
+                        <input type="text" name="name"
+                            class="category-name margin-top-half padding-left-half padding-right-half"
+                            placeholder="Add category name">
+                    </div>
+                    <div class="category-image-selection margin-top">
+                        <input type="file" class="add-category-image" @change="addimageChange" id="categoryImage" />
+                        <label class="category-image text-align-center" for="categoryImage">
+                            <div class="margin-bottom">
+                                <img :src="image_url" />
+                            </div>
+                            <div>
+                                <span class="add-image-text">Select Image</span>
+                            </div>
+                        </label>
+                    </div>
                 </div>
-                <div class="category-image-selection margin-top">
-                    <input type="file" class="add-category-image" @change="addimageChange" id="categoryImage" />
-                    <label class="category-image text-align-center" for="categoryImage">
-                        <div class="margin-bottom">
-                            <img :src="image_url" />
-                        </div>
-                        <div>
-                            <span class="add-image-text">Select Image</span>
-                        </div>
-                    </label>
+                <div class="margin-top no-margin-bottom">
+                    <button type="button" class="button button-raised text-color-black button-large popup-close">Cancel</button>
+                    <button type="button" class="button button-raised button-large bg-karaka-orange" style="background-color: rgb(243, 62, 62); color: rgb(255, 255, 255);">Ok</button>
                 </div>
             </div>
         </div>
@@ -151,7 +157,7 @@
                     <label for="" class="add_category_name">Sub category name</label>
                     <input type="text" name="name"
                         class="category-name margin-top-half padding-left-half padding-right-half"
-                        placeholder="Add sub category name">
+                        placeholder="Add sub category name" v-model="name">
                 </div>
                 <div class="categoryForm text-align-left margin-top">
                     <label for="" class="add_category_name">Parent category</label>
@@ -181,7 +187,7 @@ export default {
         return {
             test: 'indian',
             categories: [],
-            name: '',
+            name: 'test',
             image: '',
             image_url: '/images/add-image.png',
             categoryopen: false,
@@ -225,49 +231,56 @@ export default {
             }, 200);
         },
         addCategory() {
-            var addCat = f7.dialog.create({
-                title: 'Add Category',
-                content: document.getElementById('category_popup').innerHTML,
-                buttons: [{
-                    text: 'Cancel',
-                    class: 'button'
-                },
-                {
-                    text: 'Ok',
-                    class: 'button',
-                    onChange: function () {
-                        console.log("here");
-                    },
-                    onClick: function (dialog) {
-                        const config = {
-                            headers: { 'content-type': 'multipart/form-data' }
-                        }
+            // var addCat = f7.popup.create({
+            //     title: 'Add Category',
+            //     content: document.getElementById('category_popup').innerHTML,
+            //     buttons: [{
+            //         text: 'Cancel',
+            //         class: 'button'
+            //     },
+            //     {
+            //         text: 'Ok',
+            //         class: 'button',
+            //         onChange: function () {
+            //             console.log("here");
+            //         },
+            //         onClick: function (dialog) {
+            //             const config = {
+            //                 headers: { 'content-type': 'multipart/form-data' }
+            //             }
 
-                        var name = dialog.$el.find('.category-name').val();
-                        var image = dialog.$el.find('#categoryImage').prop('files')[0];
-                        // var image = this.image;
-                        console.log(image);
+            //             var name = dialog.$el.find('.category-name').val();
+            //             var image = dialog.$el.find('#categoryImage').prop('files')[0];
+            //             // var image = this.image;
+            //             console.log(image);
 
-                        // var formData = new FormData();
-                        // formData.append('name', this.name);
-                        // formData.append('image', this.image);
-                        // axios.post('/api/add-categories',formData)
-                        // .then((res) => {
-                        //     this.categories = res.data;
-                        // })
-                    }
-                },
-                ],
-            }).open(false);
+            //             // var formData = new FormData();
+            //             // formData.append('name', this.name);
+            //             // formData.append('image', this.image);
+            //             // axios.post('/api/add-categories',formData)
+            //             // .then((res) => {
+            //             //     this.categories = res.data;
+            //             // })
+            //         }
+            //     },
+            //     ],
+            // }).open(false);
 
-            setTimeout(() => {
-                $('.category-title').remove();
-                $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });
-                $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
-                $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
-                $('.dialog-button').eq(1).removeClass('text-color-black');
-                $('.dialog-buttons').addClass('margin-top no-margin-bottom')
-            }, 100);
+            // setTimeout(() => {
+            //     $('.category-title').remove();
+            //     $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });
+            //     $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
+            //     $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
+            //     $('.dialog-button').eq(1).removeClass('text-color-black');
+            //     $('.dialog-buttons').addClass('margin-top no-margin-bottom')
+            // }, 100);
+            var addCategory = f7.popup.create({
+                content: `<div id="addCategory" class="popup" style="position: fixed; display: block; border-radius: 15px;">` +                         document.getElementById('category_popup').innerHTML +`</div>`,
+            });
+            addCategory.open(false);
+            addCategory.on('close', function (popup) {
+                console.log(popup.$el.find('#categoryImage'));
+            });
         },
         editCategory() {
 
@@ -483,7 +496,6 @@ export default {
     border-radius: 0;
 }
 
-
 @media screen and (max-width:820px) {
     .header-links {
         width: 100%;
@@ -577,6 +589,14 @@ export default {
 .selectCategory {
     width: 100%;
     height: 40px;
+}
+
+.popup {
+    width: 378px !important;
+    height:auto !important;
+    top: 35% !important;
+    left: 35% !important;
+    margin : 0 !important;
 }
 
 @media screen and (max-width:820px) {
