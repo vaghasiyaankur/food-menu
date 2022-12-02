@@ -257,9 +257,9 @@ export default {
         }
     },
 }
-$(document).on('click', '.sheet-backdrop', function () {
-    $('.registraion-text').text('Registration');
-});
+    $(document).on('click', '.sheet-backdrop', function () {
+        $('.registraion-text').text('Registration');
+    });
 </script>
 
 <style scoped>

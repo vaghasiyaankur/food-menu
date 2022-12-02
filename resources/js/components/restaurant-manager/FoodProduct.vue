@@ -49,7 +49,8 @@
                                     </div>
                                 </div>
                                 <div class="col padding-left-half padding-right-half">
-                                    <button class="button bg-dark text-color-white padding height-36" @click="addProduct"><i class="f7-icons font-22 margin-right-half">plus_square</i> Add Product</button>
+                                    <button class="button bg-dark text-color-white padding height-36 popup-open"
+                                    data-popup="#product_popup" @click="addProduct"><i class="f7-icons font-22 margin-right-half">plus_square</i> Add Product</button>
                                 </div>
                             </div>
                         </div>
@@ -78,7 +79,8 @@
                                                     <div class="col-40">
                                                         <div class="row">
                                                             <div class="col-50">
-                                                                <button class="button text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
+                                                                <button class="button text-color-black padding height-36 option-button  popup-open"
+                                                                data-popup="#product_popup" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
                                                             </div>
                                                             <div class="col-50">
                                                                 <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
@@ -98,7 +100,8 @@
                                                     <div class="col-40">
                                                         <div class="row">
                                                             <div class="col-50">
-                                                                <button class="button text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
+                                                                <button class="button text-color-black padding height-36 option-button  popup-open"
+                                                                data-popup="#product_popup" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
                                                             </div>
                                                             <div class="col-50">
                                                                 <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
@@ -118,7 +121,8 @@
                                                     <div class="col-40">
                                                         <div class="row">
                                                             <div class="col-50">
-                                                                <button class="button text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
+                                                                <button class="button text-color-black padding height-36 option-button  popup-open"
+                                                                data-popup="#product_popup" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
                                                             </div>
                                                             <div class="col-50">
                                                                 <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
@@ -138,7 +142,8 @@
                                                     <div class="col-40">
                                                         <div class="row">
                                                             <div class="col-50">
-                                                                <button class="button text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
+                                                                <button class="button text-color-black padding height-36 option-button  popup-open"
+                                                                data-popup="#product_popup" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
                                                             </div>
                                                             <div class="col-50">
                                                                 <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
@@ -158,7 +163,8 @@
                                                     <div class="col-40">
                                                         <div class="row">
                                                             <div class="col-50">
-                                                                <button class="button text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
+                                                                <button class="button text-color-black padding height-36 option-button  popup-open"
+                                                                data-popup="#product_popup" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
                                                             </div>
                                                             <div class="col-50">
                                                                 <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
@@ -178,7 +184,8 @@
                                                     <div class="col-40">
                                                         <div class="row">
                                                             <div class="col-50">
-                                                                <button class="button text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
+                                                                <button class="button text-color-black padding height-36 option-button  popup-open"
+                                                                data-popup="#product_popup" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
                                                             </div>
                                                             <div class="col-50">
                                                                 <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
@@ -198,7 +205,8 @@
                                                     <div class="col-40">
                                                         <div class="row">
                                                             <div class="col-50">
-                                                                <button class="button text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
+                                                                <button class="button text-color-black padding height-36 option-button  popup-open"
+                                                                data-popup="#product_popup" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
                                                             </div>
                                                             <div class="col-50">
                                                                 <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
@@ -218,7 +226,8 @@
                                                     <div class="col-40">
                                                         <div class="row">
                                                             <div class="col-50">
-                                                                <button class="button text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
+                                                                <button class="button text-color-black padding height-36 option-button  popup-open"
+                                                                data-popup="#product_popup" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
                                                             </div>
                                                             <div class="col-50">
                                                                 <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
@@ -249,7 +258,8 @@
                                                     <div class="col-40">
                                                         <div class="row">
                                                             <div class="col-50">
-                                                                <button class="button text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
+                                                                <button class="button text-color-black padding height-36 option-button  popup-open"
+                                                                data-popup="#product_popup" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
                                                             </div>
                                                             <div class="col-50">
                                                                 <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
@@ -269,7 +279,8 @@
                                                     <div class="col-40">
                                                         <div class="row">
                                                             <div class="col-50">
-                                                                <button class="button text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
+                                                                <button class="button text-color-black padding height-36 option-button  popup-open"
+                                                                data-popup="#product_popup" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
                                                             </div>
                                                             <div class="col-50">
                                                                 <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
@@ -289,7 +300,8 @@
                                                     <div class="col-40">
                                                         <div class="row">
                                                             <div class="col-50">
-                                                                <button class="button text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
+                                                                <button class="button text-color-black padding height-36 option-button  popup-open"
+                                                                data-popup="#product_popup" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
                                                             </div>
                                                             <div class="col-50">
                                                                 <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
@@ -309,7 +321,8 @@
                                                     <div class="col-40">
                                                         <div class="row">
                                                             <div class="col-50">
-                                                                <button class="button text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
+                                                                <button class="button text-color-black padding height-36 option-button  popup-open"
+                                                                data-popup="#product_popup" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
                                                             </div>
                                                             <div class="col-50">
                                                                 <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
@@ -329,7 +342,8 @@
                                                     <div class="col-40">
                                                         <div class="row">
                                                             <div class="col-50">
-                                                                <button class="button text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
+                                                                <button class="button text-color-black padding height-36 option-button  popup-open"
+                                                                data-popup="#product_popup" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
                                                             </div>
                                                             <div class="col-50">
                                                                 <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
@@ -364,7 +378,8 @@
                                                     <div class="col-40">
                                                         <div class="row">
                                                             <div class="col-50">
-                                                                <button class="button text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
+                                                                <button class="button text-color-black padding height-36 option-button  popup-open"
+                                    data-popup="#product_popup" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
                                                             </div>
                                                             <div class="col-50">
                                                                 <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
@@ -384,7 +399,8 @@
                                                     <div class="col-40">
                                                         <div class="row">
                                                             <div class="col-50">
-                                                                <button class="button text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
+                                                                <button class="button text-color-black padding height-36 option-button  popup-open"
+                                    data-popup="#product_popup" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
                                                             </div>
                                                             <div class="col-50">
                                                                 <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
@@ -404,7 +420,8 @@
                                                     <div class="col-40">
                                                         <div class="row">
                                                             <div class="col-50">
-                                                                <button class="button text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
+                                                                <button class="button text-color-black padding height-36 option-button  popup-open"
+                                    data-popup="#product_popup" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
                                                             </div>
                                                             <div class="col-50">
                                                                 <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
@@ -424,7 +441,8 @@
                                                     <div class="col-40">
                                                         <div class="row">
                                                             <div class="col-50">
-                                                                <button class="button text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
+                                                                <button class="button text-color-black padding height-36 option-button  popup-open"
+                                    data-popup="#product_popup" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
                                                             </div>
                                                             <div class="col-50">
                                                                 <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
@@ -444,7 +462,8 @@
                                                     <div class="col-40">
                                                         <div class="row">
                                                             <div class="col-50">
-                                                                <button class="button text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
+                                                                <button class="button text-color-black padding height-36 option-button  popup-open"
+                                    data-popup="#product_popup" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
                                                             </div>
                                                             <div class="col-50">
                                                                 <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
@@ -475,7 +494,8 @@
                                                     <div class="col-40">
                                                         <div class="row">
                                                             <div class="col-50">
-                                                                <button class="button text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
+                                                                <button class="button text-color-black padding height-36 option-button  popup-open"
+                                    data-popup="#product_popup" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
                                                             </div>
                                                             <div class="col-50">
                                                                 <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
@@ -495,7 +515,8 @@
                                                     <div class="col-40">
                                                         <div class="row">
                                                             <div class="col-50">
-                                                                <button class="button text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
+                                                                <button class="button text-color-black padding height-36 option-button  popup-open"
+                                    data-popup="#product_popup" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
                                                             </div>
                                                             <div class="col-50">
                                                                 <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
@@ -515,7 +536,8 @@
                                                     <div class="col-40">
                                                         <div class="row">
                                                             <div class="col-50">
-                                                                <button class="button text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
+                                                                <button class="button text-color-black padding height-36 option-button  popup-open"
+                                    data-popup="#product_popup" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
                                                             </div>
                                                             <div class="col-50">
                                                                 <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
@@ -535,7 +557,8 @@
                                                     <div class="col-40">
                                                         <div class="row">
                                                             <div class="col-50">
-                                                                <button class="button text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
+                                                                <button class="button text-color-black padding height-36 option-button  popup-open"
+                                    data-popup="#product_popup" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
                                                             </div>
                                                             <div class="col-50">
                                                                 <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
@@ -555,7 +578,8 @@
                                                     <div class="col-40">
                                                         <div class="row">
                                                             <div class="col-50">
-                                                                <button class="button text-color-black padding height-36 option-button" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
+                                                                <button class="button text-color-black padding height-36 option-button  popup-open"
+                                    data-popup="#product_popup" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
                                                             </div>
                                                             <div class="col-50">
                                                                 <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
@@ -573,9 +597,9 @@
                 </div>
             </div>
         </div>
-        <div class="display-none" id="product_popup">
-            <div class="dialog-title category-title"></div>
-            <div class="category-add padding-top">
+        <div id="product_popup" class="popup" style="position: fixed; display: block; border-radius: 15px;">
+            <div class="text-align-center padding popup_title">Add Product</div>
+            <div class="category-add padding">
                 <div class="categoryForm text-align-left no-padding">
                     <label for="" class="add_category_name">Add product</label>
                     <input type="text" name="name" class="category-name margin-top-half padding-left-half padding-right-half" placeholder="Add Product name">
@@ -596,11 +620,12 @@
                     <label for="" class="add_category_name">Price</label>
                     <input type="text" name="name" class="category-name margin-top-half padding-left-half padding-right-half" placeholder="Add product price">
                 </div>
-                <div class="margin-top no-margin-bottom">
-                    <button type="button" class="button button-raised button-large bg-karaka-orange margin-bottom" style="background-color: rgb(243, 62, 62); color: rgb(255, 255, 255);">Ok</button>
-                    <button type="button" class="button button-raised text-color-black button-large popup-close">Cancel</button>
+                <div class="margin-top no-margin-bottom display-flex justify-content-center padding-top popup_button">
+                    <button type="button" class="button button-raised text-color-black button-large popup-close margin-right">Cancel</button>
+                    <button type="button" class="button button-raised button-large bg-karaka-orange" style="background-color: rgb(243, 62, 62); color: rgb(255, 255, 255);" @click="addCategory">Ok</button>
                 </div>
             </div>
+            <div><img src="/images/flow.png" style="width:100%"></div>
         </div>
     </f7-page>
 </template>
@@ -627,30 +652,30 @@ export default {
     },
     methods: {
         addProduct(){
-            var product = f7.dialog.create({
-                title: 'Add Product',
-                content: document.getElementById('product_popup').innerHTML,
-                buttons: [{
-                        text: 'Cancel',
-                        class: 'button'
-                    },
-                    {
-                        text: 'Ok',
-                        class: 'button'
-                    },
-                ],
-            });
+            // var product = f7.dialog.create({
+            //     title: 'Add Product',
+            //     content: document.getElementById('product_popup').innerHTML,
+            //     buttons: [{
+            //             text: 'Cancel',
+            //             class: 'button'
+            //         },
+            //         {
+            //             text: 'Ok',
+            //             class: 'button'
+            //         },
+            //     ],
+            // });
 
-            product.open(false)
+            // product.open(false)
 
-            setTimeout(() => {
-                $('.category-title').remove();
-                $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });
-                $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
-                $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
-                $('.dialog-button').eq(1).removeClass('text-color-black');
-                $('.dialog-buttons').addClass('margin-top no-margin-bottom')
-            }, 200);
+            // setTimeout(() => {
+            //     $('.category-title').remove();
+            //     $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });
+            //     $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
+            //     $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
+            //     $('.dialog-button').eq(1).removeClass('text-color-black');
+            //     $('.dialog-buttons').addClass('margin-top no-margin-bottom')
+            // }, 200);
         },
         removeProduct(){
             f7.dialog.confirm('Are you sure delete the product?');
@@ -664,30 +689,30 @@ export default {
             }, 200);
         },
         editProduct(){
-            var product = f7.dialog.create({
-                title: 'Edit Product',
-                content: document.getElementById('product_popup').innerHTML,
-                buttons: [{
-                        text: 'Cancel',
-                        class: 'button'
-                    },
-                    {
-                        text: 'Ok',
-                        class: 'button'
-                    },
-                ],
-            });
+            // var product = f7.dialog.create({
+            //     title: 'Edit Product',
+            //     content: document.getElementById('product_popup').innerHTML,
+            //     buttons: [{
+            //             text: 'Cancel',
+            //             class: 'button'
+            //         },
+            //         {
+            //             text: 'Ok',
+            //             class: 'button'
+            //         },
+            //     ],
+            // });
 
-            product.open(false)
+            // product.open(false)
 
-            setTimeout(() => {
-                $('.category-title').remove();
-                $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });
-                $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
-                $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
-                $('.dialog-button').eq(1).removeClass('text-color-black');
-                $('.dialog-buttons').addClass('margin-top no-margin-bottom')
-            }, 200);
+            // setTimeout(() => {
+            //     $('.category-title').remove();
+            //     $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });
+            //     $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
+            //     $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
+            //     $('.dialog-button').eq(1).removeClass('text-color-black');
+            //     $('.dialog-buttons').addClass('margin-top no-margin-bottom')
+            // }, 200);
         }
     },
 }
@@ -828,6 +853,16 @@ export default {
     .nav-link,.menu-item-content {
         height: 100% !important;
         text-transform: capitalize !important;
+    }
+    .popup_title{
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 22px;
+        color: #38373D;
+    }
+    .popup_button .button{
+        width: 130px;
+        border-radius: 10px;
     }
 
     @media screen and (max-width:820px) {

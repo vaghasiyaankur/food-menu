@@ -49,7 +49,7 @@
                                 </div>
                             </div>
                             <div class="col padding-left-half padding-right-half">
-                                <button class="button button-raised bg-dark text-color-white padding height-36" @click="addSubCategory"><i class="f7-icons font-22">plus_square</i> Add Sub Category</button>
+                                <button class="button button-raised bg-dark text-color-white padding height-36 popup-open" data-popup="#sub_category_popup" @click="addSubCategory"><i class="f7-icons font-22">plus_square</i> Add Sub Category</button>
                             </div>
                         </div>
                     </div>
@@ -67,10 +67,10 @@
                         <div class="col-40 action-buttons">
                             <div class="row align-items-center">
                                 <div class="col-50">
-                                    <button class="button text-color-black padding height-36" @click="addProduct"><i class="f7-icons font-22">plus_square</i> Add Product</button>
+                                    <button class="button text-color-black padding height-36 popup-open" data-popup="#product_popup" @click="addProduct"><i class="f7-icons font-22">plus_square</i> Add Product</button>
                                 </div>
                                 <div class="col-25">
-                                    <button class="button text-color-black padding height-36" @click="editSubCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                    <button class="button text-color-black padding height-36 popup-open" data-popup="#product_popup" @click="editSubCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
                                 </div>
                                 <div class="col-25">
                                     <button class="button text-color-red padding height-36" @click="removeSubCategory"><i class="f7-icons font-22">trash</i> Delete</button>
@@ -89,10 +89,10 @@
                         <div class="col-40 action-buttons">
                             <div class="row align-items-center">
                                 <div class="col-50">
-                                    <button class="button text-color-black padding height-36" @click="addProduct"><i class="f7-icons font-22">plus_square</i> Add Product</button>
+                                    <button class="button text-color-black padding height-36 popup-open" data-popup="#product_popup" @click="addProduct"><i class="f7-icons font-22">plus_square</i> Add Product</button>
                                 </div>
                                 <div class="col-25">
-                                    <button class="button text-color-black padding height-36" @click="editSubCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                    <button class="button text-color-black padding height-36 popup-open" data-popup="#product_popup" @click="editSubCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
                                 </div>
                                 <div class="col-25">
                                     <button class="button text-color-red padding height-36" @click="removeSubCategory"><i class="f7-icons font-22">trash</i> Delete</button>
@@ -111,10 +111,10 @@
                         <div class="col-40 action-buttons">
                             <div class="row align-items-center">
                                 <div class="col-50">
-                                    <button class="button text-color-black padding height-36" @click="addProduct"><i class="f7-icons font-22">plus_square</i> Add Product</button>
+                                    <button class="button text-color-black padding height-36 popup-open" data-popup="#product_popup" @click="addProduct"><i class="f7-icons font-22">plus_square</i> Add Product</button>
                                 </div>
                                 <div class="col-25">
-                                    <button class="button text-color-black padding height-36" @click="editSubCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                    <button class="button text-color-black padding height-36 popup-open" data-popup="#product_popup" @click="editSubCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
                                 </div>
                                 <div class="col-25">
                                     <button class="button text-color-red padding height-36" @click="removeSubCategory"><i class="f7-icons font-22">trash</i> Delete</button>
@@ -134,10 +134,10 @@
                         <div class="col-40 action-buttons">
                             <div class="row align-items-center">
                                 <div class="col-50">
-                                    <button class="button text-color-black padding height-36" @click="addProduct"><i class="f7-icons font-22">plus_square</i> Add Product</button>
+                                    <button class="button text-color-black padding height-36 popup-open" data-popup="#product_popup" @click="addProduct"><i class="f7-icons font-22">plus_square</i> Add Product</button>
                                 </div>
                                 <div class="col-25">
-                                    <button class="button text-color-black padding height-36" @click="editSubCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                    <button class="button text-color-black padding height-36 popup-open" data-popup="#product_popup" @click="editSubCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
                                 </div>
                                 <div class="col-25">
                                     <button class="button text-color-red padding height-36" @click="removeSubCategory"><i class="f7-icons font-22">trash</i> Delete</button>
@@ -156,10 +156,10 @@
                         <div class="col-40 action-buttons">
                             <div class="row align-items-center">
                                 <div class="col-50">
-                                    <button class="button text-color-black padding height-36" @click="addProduct"><i class="f7-icons font-22">plus_square</i> Add Product</button>
+                                    <button class="button text-color-black padding height-36 popup-open" data-popup="#product_popup" @click="addProduct"><i class="f7-icons font-22">plus_square</i> Add Product</button>
                                 </div>
                                 <div class="col-25">
-                                    <button class="button text-color-black padding height-36" @click="editSubCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                    <button class="button text-color-black padding height-36 popup-open" data-popup="#product_popup" @click="editSubCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
                                 </div>
                                 <div class="col-25">
                                     <button class="button text-color-red padding height-36" @click="removeSubCategory"><i class="f7-icons font-22">trash</i> Delete</button>
@@ -179,10 +179,10 @@
                         <div class="col-40 action-buttons">
                             <div class="row align-items-center">
                                 <div class="col-50">
-                                    <button class="button text-color-black padding height-36" @click="addProduct"><i class="f7-icons font-22">plus_square</i> Add Product</button>
+                                    <button class="button text-color-black padding height-36 popup-open" data-popup="#product_popup" @click="addProduct"><i class="f7-icons font-22">plus_square</i> Add Product</button>
                                 </div>
                                 <div class="col-25">
-                                    <button class="button text-color-black padding height-36" @click="editSubCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                    <button class="button text-color-black padding height-36 popup-open" data-popup="#product_popup" @click="editSubCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
                                 </div>
                                 <div class="col-25">
                                     <button class="button text-color-red padding height-36" @click="removeSubCategory"><i class="f7-icons font-22">trash</i> Delete</button>
@@ -201,10 +201,10 @@
                         <div class="col-40 action-buttons">
                             <div class="row align-items-center">
                                 <div class="col-50">
-                                    <button class="button text-color-black padding height-36" @click="addProduct"><i class="f7-icons font-22">plus_square</i> Add Product</button>
+                                    <button class="button text-color-black padding height-36 popup-open" data-popup="#product_popup" @click="addProduct"><i class="f7-icons font-22">plus_square</i> Add Product</button>
                                 </div>
                                 <div class="col-25">
-                                    <button class="button text-color-black padding height-36" @click="editSubCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                    <button class="button text-color-black padding height-36 popup-open" data-popup="#product_popup" @click="editSubCategory"><i class="f7-icons font-22">square_pencil</i> Edit</button>
                                 </div>
                                 <div class="col-25">
                                     <button class="button text-color-red padding height-36" @click="removeSubCategory"><i class="f7-icons font-22">trash</i> Delete</button>
@@ -216,9 +216,9 @@
             </div>
         </div>
     </div>
-    <div class="display-none" id="sub_category_popup">
-        <div class="dialog-title category-title"></div>
-        <div class="category-add padding-top">
+    <div id="sub_category_popup" class="popup" style="position: fixed; display: block; border-radius: 15px;">
+        <div class="text-align-center padding popup_title">Add Sub category</div>
+        <div class="category-add padding">            
             <div class="categoryForm text-align-left no-padding">
                 <label for="" class="add_category_name">Sub category name</label>
                 <input type="text" name="name" class="category-name margin-top-half padding-left-half padding-right-half" placeholder="Add sub category name">
@@ -235,15 +235,16 @@
                     </select>
                 </div>
             </div>
-            <div class="margin-top no-margin-bottom">
-                <button type="button" class="button button-raised button-large bg-karaka-orange margin-bottom" style="background-color: rgb(243, 62, 62); color: rgb(255, 255, 255);">Ok</button>
-                <button type="button" class="button button-raised text-color-black button-large popup-close">Cancel</button>
+            <div class="margin-top no-margin-bottom display-flex justify-content-center padding-top popup_button">
+                <button type="button" class="button button-raised text-color-black button-large popup-close margin-right">Cancel</button>
+                <button type="button" class="button button-raised button-large bg-karaka-orange" style="background-color: rgb(243, 62, 62); color: rgb(255, 255, 255);" @click="addCategory">Ok</button>
             </div>
         </div>
+        <div><img src="/images/flow.png" style="width:100%"></div>
     </div>
-    <div class="display-none" id="product_popup">
-        <div class="dialog-title category-title"></div>
-        <div class="category-add padding-top">
+    <div id="product_popup" class="popup" style="position: fixed; display: block; border-radius: 15px;">
+        <div class="text-align-center padding popup_title">Add Category</div>
+        <div class="category-add padding">
             <div class="categoryForm text-align-left no-padding">
                 <label for="" class="add_category_name">Add product</label>
                 <input type="text" name="name" class="category-name margin-top-half padding-left-half padding-right-half" placeholder="Add Product name">
@@ -264,11 +265,12 @@
                 <label for="" class="add_category_name">Price</label>
                 <input type="text" name="name" class="category-name margin-top-half padding-left-half padding-right-half" placeholder="Add product price">
             </div>
-            <div class="margin-top no-margin-bottom">
-                <button type="button" class="button button-raised button-large bg-karaka-orange margin-bottom" style="background-color: rgb(243, 62, 62); color: rgb(255, 255, 255);">Ok</button>
-                <button type="button" class="button button-raised text-color-black button-large popup-close">Cancel</button>
+            <div class="margin-top no-margin-bottom display-flex justify-content-center padding-top popup_button">
+                <button type="button" class="button button-raised text-color-black button-large popup-close margin-right">Cancel</button>
+                <button type="button" class="button button-raised button-large bg-karaka-orange" style="background-color: rgb(243, 62, 62); color: rgb(255, 255, 255);" @click="addCategory">Ok</button>
             </div>
         </div>
+        <div><img src="/images/flow.png" style="width:100%"></div>
     </div>
 </f7-page>
 </template>
@@ -292,30 +294,30 @@ export default {
     },
     methods: {
         addSubCategory() {
-            var subCat = f7.dialog.create({
-                title: 'Add sub category',
-                content: document.getElementById('sub_category_popup').innerHTML,
-                buttons: [{
-                        text: 'Cancel',
-                        class: 'button'
-                    },
-                    {
-                        text: 'Ok',
-                        class: 'button'
-                    },
-                ],
-            });
+            // var subCat = f7.dialog.create({
+            //     title: 'Add sub category',
+            //     content: document.getElementById('sub_category_popup').innerHTML,
+            //     buttons: [{
+            //             text: 'Cancel',
+            //             class: 'button'
+            //         },
+            //         {
+            //             text: 'Ok',
+            //             class: 'button'
+            //         },
+            //     ],
+            // });
 
-            subCat.open(false)
+            // subCat.open(false)
 
-            setTimeout(() => {
-                $('.category-title').remove();
-                $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });
-                $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
-                $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
-                $('.dialog-button').eq(1).removeClass('text-color-black');
-                $('.dialog-buttons').addClass('margin-top no-margin-bottom')
-            }, 200);
+            // setTimeout(() => {
+            //     $('.category-title').remove();
+            //     $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });
+            //     $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
+            //     $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
+            //     $('.dialog-button').eq(1).removeClass('text-color-black');
+            //     $('.dialog-buttons').addClass('margin-top no-margin-bottom')
+            // }, 200);
         },
         removeSubCategory() {
             f7.dialog.confirm('Are you sure delete the sub category?');
@@ -329,56 +331,56 @@ export default {
             }, 200);
         },
         editSubCategory() {
-            var edit_cat = f7.dialog.create({
-                title: 'Add Product',
-                content: document.getElementById('sub_category_popup').innerHTML,
-                buttons: [{
-                        text: 'Cancel',
-                        class: 'button'
-                    },
-                    {
-                        text: 'Ok',
-                        class: 'button'
-                    },
-                ],
-            });
+            // var edit_cat = f7.dialog.create({
+            //     title: 'Add Product',
+            //     content: document.getElementById('sub_category_popup').innerHTML,
+            //     buttons: [{
+            //             text: 'Cancel',
+            //             class: 'button'
+            //         },
+            //         {
+            //             text: 'Ok',
+            //             class: 'button'
+            //         },
+            //     ],
+            // });
 
-            edit_cat.open(false)
+            // edit_cat.open(false)
 
-            setTimeout(() => {
-                $('.category-title').remove();
-                $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });
-                $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
-                $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
-                $('.dialog-button').eq(1).removeClass('text-color-black');
-                $('.dialog-buttons').addClass('margin-top no-margin-bottom')
-            }, 200);
+            // setTimeout(() => {
+            //     $('.category-title').remove();
+            //     $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });
+            //     $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
+            //     $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
+            //     $('.dialog-button').eq(1).removeClass('text-color-black');
+            //     $('.dialog-buttons').addClass('margin-top no-margin-bottom')
+            // }, 200);
         },
         addProduct() {
-            var product = f7.dialog.create({
-                title: 'Add Product',
-                content: document.getElementById('product_popup').innerHTML,
-                buttons: [{
-                        text: 'Cancel',
-                        class: 'button'
-                    },
-                    {
-                        text: 'Ok',
-                        class: 'button'
-                    },
-                ],
-            });
+            // var product = f7.dialog.create({
+            //     title: 'Add Product',
+            //     content: document.getElementById('product_popup').innerHTML,
+            //     buttons: [{
+            //             text: 'Cancel',
+            //             class: 'button'
+            //         },
+            //         {
+            //             text: 'Ok',
+            //             class: 'button'
+            //         },
+            //     ],
+            // });
 
-            product.open(false)
+            // product.open(false)
 
-            setTimeout(() => {
-                $('.category-title').remove();
-                $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });
-                $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
-                $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
-                $('.dialog-button').eq(1).removeClass('text-color-black');
-                $('.dialog-buttons').addClass('margin-top no-margin-bottom')
-            }, 200);
+            // setTimeout(() => {
+            //     $('.category-title').remove();
+            //     $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });
+            //     $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
+            //     $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
+            //     $('.dialog-button').eq(1).removeClass('text-color-black');
+            //     $('.dialog-buttons').addClass('margin-top no-margin-bottom')
+            // }, 200);
         }
     },
 }
@@ -498,7 +500,16 @@ export default {
     height: 100% !important;
     text-transform: capitalize !important;
 }
-
+.popup_title{
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: #38373D;
+}
+.popup_button .button{
+    width: 130px;
+    border-radius: 10px;
+}
 @media screen and (max-width:820px) {
     .header-links {
         width: 100%;

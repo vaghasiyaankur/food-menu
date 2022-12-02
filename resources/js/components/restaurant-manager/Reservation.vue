@@ -86,10 +86,14 @@
                                         </label>
                                     </div>
                                     <div class="text-align-center margin-top">
-                                        <a class="link text-underline text-color-black" href="javascript:;">Check Time</a>
-                                        <div class="countdown_section position-relative display-none">
-                                            <div style="background: url(&quot;/images/dots.png&quot;);">
-                                                <img src="/images/clock.png" alt=""><i class="f7-icons font-13 padding-half margin-bottom close-countdown">xmark</i><span><p class="no-margin font-30">0 : 37 : 22</p></span>
+                                        <a class="link text-underline text-color-black" @click="(display = false)" href="javascript:;">Check Time</a>
+                                        <div class="countdown_section position-relative" :class="{ 'display-none' : display }">
+                                            <div style="background : url('/images/dots.png')">
+                                                <img src="/images/clock.png" alt="">
+                                                <i class="f7-icons font-13 padding-half margin-bottom close-countdown" @click="display = true">xmark</i>
+                                                <vue-countdown :time="60 * 60 * 1000" v-slot="{ hours, minutes, seconds }">
+                                                    <p class="no-margin font-30">{{ hours }} : {{ minutes }} : {{ seconds }}</p>
+                                                </vue-countdown>
                                             </div>
                                         </div>
                                     </div>
@@ -99,26 +103,235 @@
                         
                         <div class="padding bottom-bar">
                             <div class="row justify-content-start">
-                               <div class="col bottom-button margin-right">
-                                  <a class="button button bg-color-white register-button button-raised text-color-black button-large text-transform-capitalize" href="#" id="book_table">
-                                     Book Table
-                                  </a>
-                               </div>
-                               <div class="col bottom-button">
-                                  <a class="button button-fill sheet-open button bg-color-white register-button button-raised text-color-black button-large text-transform-capitalize" href="#" data-sheet=".demo-sheet-swipe-to-close">
-                                     Menu
-                                  </a>
-                               </div>
+                                <div class="col bottom-button margin-right">
+                                    <f7-button class="button bg-color-white register-button button-raised text-color-black button-large text-transform-capitalize" @click="register" id="book_table">Book Table</f7-button>
+                                </div>
+                                <div class="col bottom-button">
+                                    <f7-button class="button bg-color-white register-button button-raised text-color-black button-large text-transform-capitalize" fill sheet-open=".demo-sheet-swipe-to-close" @click="title = 'Menu'">Menu</f7-button>
+                                </div>
                             </div>
-                         </div>
+                        </div>
                     </div>
                 </div>  
             </div>          
         </div>
+        <f7-sheet class="demo-sheet-swipe-to-close" style="height:auto; --f7-sheet-bg-color: #fff;" backdrop>
+            <f7-page-content>
+                <div class="row">
+                    <div class="col">
+                        <div class="border-popup"></div>
+                    </div>
+                </div>
+                <i class="f7-icons font-30 close-menu" @click="closePopup">xmark</i>
+                <f7-block-title class="text-align-center font-18 text-color-black margin-top-half">Food Menu</f7-block-title>
+                <div class="margin">
+                    <!-- <div class="text-align-center text-color-gray">Select your favourite food <br> and enjoy with family</div> -->
+                    <div data-pagination='{"el":".swiper-pagination"}' data-space-between="10" data-slides-per-view="8"
+                        class="swiper swiper-init demo-swiper margin-top margin-bottom" style="height : 120px">
+                        <div class="swiper-pagination"></div>
+                        <div class="swiper-wrapper">
+                        <div class="swiper-slide slide-active">
+                            <div class="menu-image col">
+                                <img src="/images/indian_dish.png" alt="">
+                            </div>
+                            <p class="font-13 no-margin text-align-center margin-top-half">Indian</p>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="menu-image">
+                                <img src="/images/chinese_dish.png" alt="">
+                            </div>
+                            <p class="font-13 no-margin text-align-center margin-top-half">Chinese</p>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="menu-image">
+                                <img src="/images/panjabi_dish.png" alt="">
+                            </div>
+                            <p class="font-13 no-margin text-align-center margin-top-half">Panjabi</p>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="menu-image">
+                                <img src="/images/dessert_dish.png" alt="">
+                            </div>
+                            <p class="font-13 no-margin text-align-center margin-top-half">Dessert</p>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="menu-image">
+                                <img src="/images/fast_food_dish.png" alt="">
+                            </div>
+                            <p class="font-13 no-margin text-align-center margin-top-half">Fast Food</p>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="menu-image">
+                                <img src="/images/indian_dish.png" alt="">
+                            </div>
+                            <p class="font-13 no-margin text-align-center margin-top-half">Indian</p>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="menu-image">
+                                <img src="/images/chinese_dish.png" alt="">
+                            </div>
+                            <p class="font-13 no-margin text-align-center margin-top-half">Chinese</p>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="menu-image">
+                                <img src="/images/panjabi_dish.png" alt="">
+                            </div>
+                            <p class="font-13 no-margin text-align-center margin-top-half">Panjabi</p>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="menu-image">
+                                <img src="/images/dessert_dish.png" alt="">
+                            </div>
+                            <p class="font-13 no-margin text-align-center margin-top-half">Dessert</p>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="menu-image">
+                                <img src="/images/fast_food_dish.png" alt="">
+                            </div>
+                            <p class="font-13 no-margin text-align-center margin-top-half">Fast Food</p>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="position-relative">
+                        <div class="menu-title"><span>Indian Menu</span></div>
+                    </div>
+                    <div class="menu-details margin-top">
+                        <div class="menu-lists">
+                        <div class="menu-list">
+                            <div class="font-18 text-align-center menu-list-title text-color-black"><u>Dosa</u></div>
+                            <div class="list row margin-half align-items-center">
+                                <div class="col-10">
+                                    <span class="add-favlist">
+                                    <i class="f7-icons size-22 bg-color-white text-color-red padding-half font-13">heart</i>
+                                    </span>
+                                </div>
+                                <div class="col-70 display-flex">Jini Dosa <span class="dots"></span></div>
+                                <div class="col-20">110.00</div>
+                            </div>
+                            <div class="list row margin-half align-items-center">
+                                <div class="col-10">
+                                    <span class="add-favlist">
+                                    <i class="f7-icons size-22 bg-color-white text-color-red padding-half font-13">heart_fill</i>
+                                    </span>
+                                </div>
+                                <div class="col-70 display-flex">Cheese Paneer Chilli Dosa <span class="dots"></span></div>
+                                <div class="col-20">110.00</div>
+                            </div>
+                            <div class="list row margin-half align-items-center">
+                                <div class="col-10">
+                                    <span class="add-favlist">
+                                    <i class="f7-icons size-22 bg-color-white text-color-red padding-half font-13">heart</i>
+                                    </span>
+                                </div>
+                                <div class="col-70 display-flex">Paneer jini Dosa <span class="dots"></span></div>
+                                <div class="col-20">110.00</div>
+                            </div>
+                            <div class="list row margin-half align-items-center">
+                                <div class="col-10">
+                                    <span class="add-favlist">
+                                    <i class="f7-icons size-22 bg-color-white text-color-red padding-half font-13">heart_fill</i>
+                                    </span>
+                                </div>
+                                <div class="col-70 display-flex">Pav Bhaji Dosa <span class="dots"></span></div>
+                                <div class="col-20">110.00</div>
+                            </div>
+                            <div class="list row margin-half align-items-center">
+                                <div class="col-10">
+                                    <span class="add-favlist">
+                                    <i class="f7-icons size-22 bg-color-white text-color-red padding-half font-13">heart_fill</i>
+                                    </span>
+                                </div>
+                                <div class="col-70 display-flex">Pizza Dosa <span class="dots"></span></div>
+                                <div class="col-20">110.00</div>
+                            </div>
+                            <div class="list row margin-half align-items-center">
+                                <div class="col-10">
+                                    <span class="add-favlist">
+                                    <i class="f7-icons size-22 bg-color-white text-color-red padding-half font-13">heart</i>
+                                    </span>
+                                </div>
+                                <div class="col-70 display-flex">Masala Dosa <span class="dots"></span></div>
+                                <div class="col-20">110.00</div>
+                            </div>
+                            <div class="list row margin-half align-items-center">
+                                <div class="col-10">
+                                    <span class="add-favlist">
+                                    <i class="f7-icons size-22 bg-color-white text-color-red padding-half font-13">heart</i>
+                                    </span>
+                                </div>
+                                <div class="col-70 display-flex">Sada Dosa <span class="dots"></span></div>
+                                <div class="col-20">110.00</div>
+                            </div>
+                            <div class="list row margin-half align-items-center">
+                                <div class="col-10">
+                                    <span class="add-favlist">
+                                    <i class="f7-icons size-22 bg-color-white text-color-red padding-half font-13">heart</i>
+                                    </span>
+                                </div>
+                                <div class="col-70 display-flex">Mysore Dosa <span class="dots"></span></div>
+                                <div class="col-20">110.00</div>
+                            </div>
+                        </div>
+                        <div class="menu-list">
+                            <div class="font-18 text-align-center menu-list-title text-black"><u>Gujrati Dish</u></div>
+                            <div class="list row margin-half align-items-center">
+                                <div class="col-10">
+                                    <span class="add-favlist">
+                                    <i class="f7-icons size-22 bg-color-white text-color-red padding-half font-13">heart_fill</i>
+                                    </span>
+                                </div>
+                                <div class="col-70 display-flex">Rice <span class="dots"></span></div>
+                                <div class="col-20">110.00</div>
+                            </div>
+                            <div class="list row margin-half align-items-center">
+                                <div class="col-10">
+                                    <span class="add-favlist">
+                                    <i class="f7-icons size-22 bg-color-white text-color-red padding-half font-13">heart</i>
+                                    </span>
+                                </div>
+                                <div class="col-70 display-flex">Dal <span class="dots"></span></div>
+                                <div class="col-20">110.00</div>
+                            </div>
+                            <div class="list row margin-half align-items-center">
+                                <div class="col-10">
+                                    <span class="add-favlist">
+                                    <i class="f7-icons size-22 bg-color-white text-color-red padding-half font-13">heart</i>
+                                    </span>
+                                </div>
+                                <div class="col-70 display-flex">Roti <span class="dots"></span></div>
+                                <div class="col-20">110.00</div>
+                            </div>
+                            <div class="list row margin-half align-items-center">
+                                <div class="col-10">
+                                    <span class="add-favlist">
+                                    <i class="f7-icons size-22 bg-color-white text-color-red padding-half font-13">heart</i>
+                                    </span>
+                                </div>
+                                <div class="col-70 display-flex">Pavbhaji <span class="dots"></span></div>
+                                <div class="col-20">110.00</div>
+                            </div>
+                            <div class="list row margin-half align-items-center">
+                                <div class="col-10">
+                                    <span class="add-favlist">
+                                    <i class="f7-icons size-22 bg-color-white text-color-red padding-half font-13">heart</i>
+                                    </span>
+                                </div>
+                                <div class="col-70 display-flex">Samosa <span class="dots"></span></div>
+                                <div class="col-20">110.00</div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </f7-page-content>
+        </f7-sheet>
     </f7-page>
 </template>
 <script>
-import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Input } from 'framework7-vue';
+import $ from "jquery";
+import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Input, f7Button, f7Sheet, f7PageContent} from 'framework7-vue';
+import VueCountdown from '@chenfengyuan/vue-countdown';
+import axios from "axios";
 export default {
     name : 'Reservation',
     components: {
@@ -127,12 +340,80 @@ export default {
         f7BlockTitle,
         f7Block,
         f7,
-        f7Input
+        f7Input,
+        f7Button,
+        f7Sheet,
+        f7PageContent,
+        VueCountdown
     },
+    data() {
+        return {
+            display : true
+        }
+    },
+    methods: {
+        closePopup(){
+            document.querySelector('.sheet-backdrop').click();
+            this.$emit('textChange');
+        },
+        register() {
+            f7.dialog.confirm('', () => {
+            });
+
+            setTimeout(() => {
+                $('.dialog-title').text("Are you confirm to register?").css('font-size','20px');
+                $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
+                $('.dialog-button').eq(1).removeClass('text-color-black');
+                $('.dialog-button').eq(1).addClass('active');                
+                $('.dialog-inner').addClass('margin-top');
+                $('.dialog-buttons').css({ 'margin-top': '25px', 'margin-bottom': '35px' });
+            });
+        }
+       
+
+    }
+
 }
 </script>
 <style scoped>
+/*========== FOOD MENU MODAL CSS =============*/
+.close-menu{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+.border-popup{
+    width: 40px;
+    height: 5px;
+    background: #F3F3F3;
+    margin: 12px auto 0;
+}
+.menu-image{
+    box-sizing: border-box;
+    background: #FAF5F2;
+    border-radius: 7px;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.swiper-slide{
+    width: 67px;
+    height: 67px;
+}
+.demo-swiper .swiper-slide{
+    font-size: 25px;
+    font-weight: 300;
+    display: block;
+    background: #fff;
+    color: #000;
+}
+.font-18 {
+    font-size: 18px !important;
+}
 /*============ RESERVATION CARD ============*/
+
 .reservation_card .card{
     height: calc(100vh - 100px);
 }
@@ -297,5 +578,11 @@ label.item-checkbox input[type='checkbox']:checked ~ .icon-checkbox:after, label
     .header-links {
         width: 100%;
     }
+}
+</style>
+<style>
+.register-button:hover, .register-button:active, .active {
+    background: #F33E3E !important;
+    color: #fff !important;
 }
 </style>
