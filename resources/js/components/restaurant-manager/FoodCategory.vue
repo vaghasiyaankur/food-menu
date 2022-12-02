@@ -124,60 +124,69 @@
                 </div>
             </div>
         </div>
-        <div id="category_popup" class="popup categoryPopup" style="position: fixed; display: block; border-radius: 15px;">
-            <div class="category-form">
-                <div class="category-add padding">
-                    <div class="categoryForm text-align-left">
-                        <label for="" class="add_category_name">Category name</label>
-                        <input type="text" v-model="category.name" name="name"
-                            class="category-name margin-top-half padding-left-half padding-right-half"
-                            placeholder="Add category name">
-                    </div>
-                    <div class="category-image-selection margin-top">
-                        <input type="file" class="add-category-image" @change="addimageChange" id="categoryImage" />
-                        <label class="category-image text-align-center" for="categoryImage">
-                            <div v-if="image_url">
-                                <img :src="image_url" alt="" />
-                            </div>
-                            <div v-else>
+        <div class="display-none" id="category_popup">
+                <div class="category-form">
+                    <div class="add_category_name text-align-center padding">Category name</div>
+                    <div class="category-add padding">
+                        <div class="categoryForm text-align-left">
+                            <input type="text" name="name"
+                                class="category-name margin-top-half padding-left-half padding-right-half"
+                                placeholder="Add category name">
+                        </div>
+                        <div class="category-image-selection margin-top">
+                            <input type="file" class="add-category-image" @change="addimageChange" id="categoryImage" />
+                            <label class="category-image text-align-center" for="categoryImage">
                                 <div class="margin-bottom">
-                                    <img src="/images/add-image.png" />
+                                    <img :src="image_url" />
                                 </div>
                                 <div>
                                     <span class="add-image-text">Select Image</span>
                                 </div>
-                            </div>
-                        </label>
+                            </label>
+                        </div>
                     </div>
+                    <div class="margin-top no-margin-bottom padding-horizontal display-flex justify-content-center">
+                        <div class="popup_button margin-right">
+                            <button type="button" class="button button-raised text-color-black button-large popup-close">Cancel</button>
+                        </div>
+                        <div class="popup_button">
+                            <button type="button" class="button button-raised button-large bg-karaka-orange" style="background-color: rgb(243, 62, 62); color: rgb(255, 255, 255);">Ok</button>
+                        </div>
+                    </div>
+                    <div><img src="/images/flow.png" style="width:100%"></div>
                 </div>
-                <div class="margin-top no-margin-bottom">
-                    <button type="button" class="button button-raised text-color-black button-large popup-close">Cancel</button>
-                    <button type="button" class="button button-raised button-large bg-karaka-orange" style="background-color: rgb(243, 62, 62); color: rgb(255, 255, 255);" @click="addCategory">Ok</button>
-                </div>
-            </div>
         </div>
         <div class="display-none" id="sub_category_popup">
-            <div class="category-add padding">
-                <div class="categoryForm text-align-left no-padding">
-                    <label for="" class="add_category_name">Sub category name</label>
-                    <input type="text" name="name"
-                        class="category-name margin-top-half padding-left-half padding-right-half"
-                        placeholder="Add sub category name">
-                </div>
-                <div class="categoryForm text-align-left margin-top">
-                    <label for="" class="add_category_name">Parent category</label>
-                    <div class="item-input-wrap input-dropdown-wrap category-name margin-top-half no-padding">
-                        <select placeholder="Please choose..." class="selectCategory padding-left-half">
-                            <option value="indian">indian</option>
-                            <option value="chinese">chinese</option>
-                            <option value="panjabi">panjabi</option>
-                            <option value="dessert">dessert</option>
-                            <option value="fast_food">fast food</option>
-                        </select>
+                <div class="add_category_name text-align-center padding">Sub category name</div>
+                <div class="category-add padding-top">
+                    <div class="categoryForm text-align-left no-padding">
+                        <input type="text" name="name"
+                            class="category-name margin-top-half padding-left-half padding-right-half"
+                            placeholder="Add sub category name" v-model="name">
+                    </div>
+                    <div class="categoryForm text-align-left margin-top">
+                        <label for="" class="add_category_name">Parent category</label>
+                        <div class="item-input-wrap input-dropdown-wrap category-name margin-top-half no-padding">
+                            <select placeholder="Please choose..." class="selectCategory padding-left-half">
+                                <option value="indian">indian</option>
+                                <option value="chinese">chinese</option>
+                                <option value="panjabi">panjabi</option>
+                                <option value="dessert">dessert</option>
+                                <option value="fast_food">fast food</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
+                <div class="margin-top no-margin-bottom padding-horizontal display-flex justify-content-center">
+                    <div class="popup_button margin-right">
+                        <button type="button" class="button button-raised text-color-black button-large popup-close">Cancel</button>
+                    </div>
+                    <div class="popup_button">
+                        <button type="button" class="button button-raised button-large bg-karaka-orange" style="background-color: rgb(243, 62, 62); color: rgb(255, 255, 255);">Ok</button>
+                    </div>
+                </div>
+                <div><img src="/images/flow.png" style="width:100%"></div>
             </div>
-        </div>
     </f7-page>
 </template>
 
@@ -237,52 +246,137 @@ export default {
             }, 200);
         },
         addCategory() {
-            const config = {
-                headers: { 'content-type': 'multipart/form-data' }
-            }
-            var formData = new FormData();
-            formData.append('name', this.category.name);
-            formData.append('image', this.category.image);
-            axios.post('/api/add-category', formData, config)
-            .then((res) => {
-                this.categories.push(res.data);
-                f7.popup.close(`#category_popup`);
-            })
+            // var addCat = f7.popup.create({
+            //     title: 'Add Category',
+            //     content: document.getElementById('category_popup').innerHTML,
+            //     buttons: [{
+            //         text: 'Cancel',
+            //         class: 'button'
+            //     },
+            //     {
+            //         text: 'Ok',
+            //         class: 'button',
+            //         onChange: function () {
+            //             console.log("here");
+            //         },
+            //         onClick: function (dialog) {
+            //             const config = {
+            //                 headers: { 'content-type': 'multipart/form-data' }
+            //             }
+
+            //             var name = dialog.$el.find('.category-name').val();
+            //             var image = dialog.$el.find('#categoryImage').prop('files')[0];
+            //             // var image = this.image;
+            //             console.log(image);
+
+            //             // var formData = new FormData();
+            //             // formData.append('name', this.name);
+            //             // formData.append('image', this.image);
+            //             // axios.post('/api/add-categories',formData)
+            //             // .then((res) => {
+            //             //     this.categories = res.data;
+            //             // })
+            //         }
+            //     },
+            //     ],
+            // }).open(false);
+
+            // setTimeout(() => {
+            //     $('.category-title').remove();
+            //     $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });
+            //     $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
+            //     $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
+            //     $('.dialog-button').eq(1).removeClass('text-color-black');
+            //     $('.dialog-buttons').addClass('margin-top no-margin-bottom')
+            // }, 100);
+            var addCategory = f7.popup.create({
+                content: `<div id="addCategory" class="popup" style="position: fixed; display: block; border-radius: 15px;">` +  document.getElementById('category_popup').innerHTML +`</div>`,
+            });
+            addCategory.open(false);
+            addCategory.on('close', function (popup) {
+                console.log(popup.$el.find('#categoryImage'));
+            });
         },
         editCategory() {
 
+            // var editCat = f7.dialog.create({
+            //     title: 'Edit Category',
+            //     content: document.getElementById('category_popup').innerHTML,
+            //     buttons: [{
+            //         text: 'Cancel',
+            //         class: 'button'
+            //     },
+            //     {
+            //         text: 'Ok',
+            //         class: 'button'
+            //     },
+            //     ],
+            //     onOpen: function (dialog) {
+            //         dialog.$el.find('.category-name').val()
+            //     }
+            // });
+
+            // editCat.open(false)
+
+            // setTimeout(() => {
+            //     $('.category-title').remove();
+            //     $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });
+            //     $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
+            //     $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
+            //     $('.dialog-button').eq(1).removeClass('text-color-black');
+            //     $('.dialog-buttons').addClass('margin-top no-margin-bottom')
+            // }, 200);
+            var addCategory = f7.popup.create({
+                content: `<div id="addCategory" class="popup" style="position: fixed; display: block; border-radius: 15px;">` +  document.getElementById('category_popup').innerHTML +`</div>`,
+            });
+            addCategory.open(false);
+            addCategory.on('close', function (popup) {
+                console.log(popup.$el.find('#categoryImage'));
+            });
+            
         },
         addSubCategory() {
-            var subCat = f7.dialog.create({
-                title: 'Add sub category',
-                content: document.getElementById('sub_category_popup').innerHTML,
-                buttons: [{
-                    text: 'Cancel',
-                    class: 'button'
-                },
-                {
-                    text: 'Ok',
-                    class: 'button'
-                },
-                ],
+            // var subCat = f7.dialog.create({
+            //     title: 'Add sub category',
+            //     content: document.getElementById('sub_category_popup').innerHTML,
+            //     buttons: [{
+            //         text: 'Cancel',
+            //         class: 'button'
+            //     },
+            //     {
+            //         text: 'Ok',
+            //         class: 'button'
+            //     },
+            //     ],
+            // });
+
+            // subCat.open(false)
+
+            // setTimeout(() => {
+            //     $('.category-title').remove();
+            //     $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });
+            //     $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
+            //     $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
+            //     $('.dialog-button').eq(1).removeClass('text-color-black');
+            //     $('.dialog-buttons').addClass('margin-top no-margin-bottom')
+            // }, 200);
+            var addCategory = f7.popup.create({
+                content: `<div id="addCategory" class="popup" style="position: fixed; display: block; border-radius: 15px;">` +  document.getElementById('category_popup').innerHTML +`</div>`,
             });
-
-            subCat.open(false)
-
-            setTimeout(() => {
-                $('.category-title').remove();
-                $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });
-                $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
-                $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
-                $('.dialog-button').eq(1).removeClass('text-color-black');
-                $('.dialog-buttons').addClass('margin-top no-margin-bottom')
-            }, 200);
+            addCategory.open(false);
+            addCategory.on('close', function (popup) {
+                console.log(popup.$el.find('#categoryImage'));
+            });
         },
     },
 };
 </script>
 
 <style scoped>
+.popup_button .button{
+    width: 130px;
+    border-radius: 10px;
+}
 .nav-bar {
     position: fixed;
     width: 100%;

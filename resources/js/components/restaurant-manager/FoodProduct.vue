@@ -575,7 +575,7 @@
         </div>
         <div class="display-none" id="product_popup">
             <div class="dialog-title category-title"></div>
-            <div class="category-add padding">
+            <div class="category-add padding-top">
                 <div class="categoryForm text-align-left no-padding">
                     <label for="" class="add_category_name">Add product</label>
                     <input type="text" name="name" class="category-name margin-top-half padding-left-half padding-right-half" placeholder="Add Product name">
@@ -595,6 +595,10 @@
                 <div class="categoryForm margin-top text-align-left no-padding">
                     <label for="" class="add_category_name">Price</label>
                     <input type="text" name="name" class="category-name margin-top-half padding-left-half padding-right-half" placeholder="Add product price">
+                </div>
+                <div class="margin-top no-margin-bottom">
+                    <button type="button" class="button button-raised button-large bg-karaka-orange margin-bottom" style="background-color: rgb(243, 62, 62); color: rgb(255, 255, 255);">Ok</button>
+                    <button type="button" class="button button-raised text-color-black button-large popup-close">Cancel</button>
                 </div>
             </div>
         </div>
