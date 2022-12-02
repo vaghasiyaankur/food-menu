@@ -24,3 +24,5 @@ Route::post('/register', [AuthController::class, 'register']);
 
 Route::get('/get-categories',[CategoryController::class, 'getCategories']);
 
+Route::post('add-category',[CategoryController::class, 'addCategory']);
+

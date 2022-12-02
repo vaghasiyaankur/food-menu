@@ -76,8 +76,8 @@
                                     </div>
                                 </div>
                                 <div class="col padding-left-half padding-right-half">
-                                    <button class="button button-raised bg-dark text-color-white padding height-36"
-                                        @click="addCategory"><i class="f7-icons font-22">plus_square</i> Add
+                                    <button class="button button-raised bg-dark text-color-white padding height-36 popup-open"
+                                        data-popup=".categoryPopup"><i class="f7-icons font-22">plus_square</i> Add
                                         category</button>
                                 </div>
                             </div>
@@ -108,7 +108,7 @@
                                         </button>
                                     </div>
                                     <div class="col-25">
-                                        <button class="button text-color-black padding height-36"
+                                        <button class="button text-color-black padding height-36 popup-open"
                                             @click="editCategory(category.id)"><i
                                                 class="f7-icons font-22">square_pencil</i> Edit</button>
                                     </div>
@@ -124,30 +124,35 @@
                 </div>
             </div>
         </div>
-        <div class="display-none" id="category_popup">
+        <div id="category_popup" class="popup categoryPopup" style="position: fixed; display: block; border-radius: 15px;">
             <div class="category-form">
                 <div class="category-add padding">
                     <div class="categoryForm text-align-left">
                         <label for="" class="add_category_name">Category name</label>
-                        <input type="text" name="name"
+                        <input type="text" v-model="category.name" name="name"
                             class="category-name margin-top-half padding-left-half padding-right-half"
                             placeholder="Add category name">
                     </div>
                     <div class="category-image-selection margin-top">
                         <input type="file" class="add-category-image" @change="addimageChange" id="categoryImage" />
                         <label class="category-image text-align-center" for="categoryImage">
-                            <div class="margin-bottom">
-                                <img :src="image_url" />
+                            <div v-if="image_url">
+                                <img :src="image_url" alt="" />
                             </div>
-                            <div>
-                                <span class="add-image-text">Select Image</span>
+                            <div v-else>
+                                <div class="margin-bottom">
+                                    <img src="/images/add-image.png" />
+                                </div>
+                                <div>
+                                    <span class="add-image-text">Select Image</span>
+                                </div>
                             </div>
                         </label>
                     </div>
                 </div>
                 <div class="margin-top no-margin-bottom">
                     <button type="button" class="button button-raised text-color-black button-large popup-close">Cancel</button>
-                    <button type="button" class="button button-raised button-large bg-karaka-orange" style="background-color: rgb(243, 62, 62); color: rgb(255, 255, 255);">Ok</button>
+                    <button type="button" class="button button-raised button-large bg-karaka-orange" style="background-color: rgb(243, 62, 62); color: rgb(255, 255, 255);" @click="addCategory">Ok</button>
                 </div>
             </div>
         </div>
@@ -157,7 +162,7 @@
                     <label for="" class="add_category_name">Sub category name</label>
                     <input type="text" name="name"
                         class="category-name margin-top-half padding-left-half padding-right-half"
-                        placeholder="Add sub category name" v-model="name">
+                        placeholder="Add sub category name">
                 </div>
                 <div class="categoryForm text-align-left margin-top">
                     <label for="" class="add_category_name">Parent category</label>
@@ -187,10 +192,12 @@ export default {
         return {
             test: 'indian',
             categories: [],
-            name: 'test',
-            image: '',
-            image_url: '/images/add-image.png',
-            categoryopen: false,
+            category: {
+                id : '',
+                name: '',
+                image: '',
+            },
+            image_url: null,
         }
     },
     components: {
@@ -207,9 +214,8 @@ export default {
     },
     methods: {
         addimageChange(e) {
-            this.image = e.target.files[0];
-            this.image_url = URL.createObjectURL(this.image);
-            console.log(this.image);
+            this.category.image = e.target.files[0];
+            this.image_url = URL.createObjectURL(this.category.image);
         },
         getCategories() {
             axios.get('/api/get-categories')
@@ -231,86 +237,20 @@ export default {
             }, 200);
         },
         addCategory() {
-            // var addCat = f7.popup.create({
-            //     title: 'Add Category',
-            //     content: document.getElementById('category_popup').innerHTML,
-            //     buttons: [{
-            //         text: 'Cancel',
-            //         class: 'button'
-            //     },
-            //     {
-            //         text: 'Ok',
-            //         class: 'button',
-            //         onChange: function () {
-            //             console.log("here");
-            //         },
-            //         onClick: function (dialog) {
-            //             const config = {
-            //                 headers: { 'content-type': 'multipart/form-data' }
-            //             }
-
-            //             var name = dialog.$el.find('.category-name').val();
-            //             var image = dialog.$el.find('#categoryImage').prop('files')[0];
-            //             // var image = this.image;
-            //             console.log(image);
-
-            //             // var formData = new FormData();
-            //             // formData.append('name', this.name);
-            //             // formData.append('image', this.image);
-            //             // axios.post('/api/add-categories',formData)
-            //             // .then((res) => {
-            //             //     this.categories = res.data;
-            //             // })
-            //         }
-            //     },
-            //     ],
-            // }).open(false);
-
-            // setTimeout(() => {
-            //     $('.category-title').remove();
-            //     $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });
-            //     $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
-            //     $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
-            //     $('.dialog-button').eq(1).removeClass('text-color-black');
-            //     $('.dialog-buttons').addClass('margin-top no-margin-bottom')
-            // }, 100);
-            var addCategory = f7.popup.create({
-                content: `<div id="addCategory" class="popup" style="position: fixed; display: block; border-radius: 15px;">` +                         document.getElementById('category_popup').innerHTML +`</div>`,
-            });
-            addCategory.open(false);
-            addCategory.on('close', function (popup) {
-                console.log(popup.$el.find('#categoryImage'));
-            });
+            const config = {
+                headers: { 'content-type': 'multipart/form-data' }
+            }
+            var formData = new FormData();
+            formData.append('name', this.category.name);
+            formData.append('image', this.category.image);
+            axios.post('/api/add-category', formData, config)
+            .then((res) => {
+                this.categories.push(res.data);
+                f7.popup.close(`#category_popup`);
+            })
         },
         editCategory() {
 
-            var editCat = f7.dialog.create({
-                title: 'Edit Category',
-                content: document.getElementById('category_popup').innerHTML,
-                buttons: [{
-                    text: 'Cancel',
-                    class: 'button'
-                },
-                {
-                    text: 'Ok',
-                    class: 'button'
-                },
-                ],
-                onOpen: function (dialog) {
-                    dialog.$el.find('.category-name').val()
-                }
-            });
-
-            editCat.open(false)
-
-            setTimeout(() => {
-                $('.category-title').remove();
-                $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });
-                $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
-                $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
-                $('.dialog-button').eq(1).removeClass('text-color-black');
-                $('.dialog-buttons').addClass('margin-top no-margin-bottom')
-            }, 200);
         },
         addSubCategory() {
             var subCat = f7.dialog.create({
