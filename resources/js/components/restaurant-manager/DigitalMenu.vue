@@ -8,16 +8,18 @@
                                 <a href="/Reservation/" class="col link nav-link button button-raised bg-dark text-color-white padding">
                                     Reservation</a>
                             </div>
-                            <div class="nav-button col-20">
+                            <div class="nav-button col-25">
                                 <div class="menu-item menu-item-dropdown">
-                                    <div class="menu-item-content button button-raised bg-pink text-color-white padding-left-half padding-right-half">Menu management</div>
+                                    <div class="menu-item-content button button-raised bg-pink text-color-white padding-left-half padding-right-half">Menu management
+                                        <i class="f7-icons">chevron_down</i>
+                                    </div>
                                     <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
                                         <div class="menu-dropdown-content bg-color-white no-padding">
-                                            <a href="#" class="menu-dropdown-link menu-close"></a>
-                                            <a href="/food-category/" class="menu-dropdown-link menu-close text-color-pink">Food Category</a>
-                                            <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black">Food Menu</a>
-                                            <a href="/food-subcategory/" class="menu-dropdown-link menu-close text-color-black">Food subCategory</a>
-                                            <a href="/digital-menu/" class="menu-dropdown-link menu-close text-color-black">Digital Menu</a>
+                                            <a href="#" class="menu-dropdown-link menu-close margin-horizontal no-padding"></a>
+                                            <a href="/food-category/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food Category</a>
+                                            <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food Menu</a>
+                                            <a href="/food-subcategory/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food subCategory</a>
+                                            <a href="/digital-menu/" class="menu-dropdown-link menu-close text-color-pink margin-horizontal no-padding">Digital Menu</a>
                                         </div>
                                     </div>
                                 </div>
@@ -293,6 +295,10 @@
     </script>
     
     <style scoped>
+    .menu-item-dropdown .menu-item-content .f7-icons{
+        font-size: 15px;
+        margin-left: 10px;
+    }
     .page-content{
         background-color: #fff !important;
     }
@@ -361,7 +367,9 @@
     .menu-dropdown-link:nth-child(2) {
         border-bottom: 1px solid #EFEFEF;
     }
-    
+    .menu-dropdown-link{
+        border-bottom: 1px solid #EFEFEF;
+    }
     .bg-pink {
         background: #F33E3E;
     }
@@ -391,13 +399,6 @@
         background: #fff;
         color: #000;
       }
-    
-      .slide-active .menu-image{
-        background: #f33e3e59;
-        box-shadow: 0px 1px 3px rgba(255, 127, 87, 0.7);
-        border-radius: 7px;
-      }
-    
       .menu-image {
         box-sizing: border-box;
         background: #FAF5F2;
@@ -467,6 +468,11 @@
     </style>
     
     <style>
+    .slide-active .menu-image{
+        background: #f33e3e59 !important;
+        box-shadow: 0px 1px 3px rgba(255, 127, 87, 0.7);
+        border-radius: 7px;
+      }
     .left {
         width: 20%;
         margin-left: 20px;

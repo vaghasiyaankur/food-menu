@@ -6,16 +6,18 @@
                         <a href="/Reservation/" class="col link nav-link button button-raised bg-dark text-color-white padding">
                             Reservation</a>
                     </div>
-                    <div class="col-15 nav-button">
+                    <div class="col-20 nav-button">
                         <div class="menu-item menu-item-dropdown">
-                            <div class="menu-item-content button button-raised bg-dark text-color-white padding-left-half padding-right-half">Menu management</div>
+                            <div class="menu-item-content button button-raised bg-dark text-color-white padding-left-half padding-right-half">Menu management
+                                <i class="f7-icons">chevron_down</i>
+                            </div>
                             <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
                                 <div class="menu-dropdown-content bg-color-white no-padding">
-                                    <a href="#" class="menu-dropdown-link menu-close"></a>
-                                    <a href="/food-category/" class="menu-dropdown-link menu-close text-color-black">Food Category</a>
-                                    <a href="/food-subcategory/" class="menu-dropdown-link menu-close text-color-black">Food SubCategory</a>
-                                    <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black">Food Menu</a>
-                                    <a href="/digital-menu/" class="menu-dropdown-link menu-close text-color-black">Digital Menu</a>
+                                    <a href="#" class="menu-dropdown-link menu-close margin-horizontal no-padding"></a>
+                                    <a href="/food-category/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food Category</a>
+                                    <a href="/food-subcategory/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food SubCategory</a>
+                                    <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food Menu</a>
+                                    <a href="/digital-menu/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Digital Menu</a>
                                 </div>
                             </div>
                         </div>
@@ -4024,6 +4026,11 @@ export default {
 </script>
 
 <style scoped>
+
+.menu-item-dropdown .menu-item-content .f7-icons{
+    font-size: 15px;
+    margin-left: 10px;
+}
 .border__bottom{
     border-bottom: 0.5px solid #555555;
 }
@@ -4033,64 +4040,52 @@ export default {
 .justify_content_between{
     justify-content: space-between;
 }
-    .header-links{
-        box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.15);
-        background-color: #fff;
-        height: 60px !important;
-        position: fixed;
-        width: 100%;
-        z-index: 99;
-    }
-    .height-40{
-        height: 40px;
-    }
-    .nav-link,.menu-item-content {
-        height: 100%;
-        text-transform: capitalize;
-    }
-    .menu-item-content{
-        position: relative;
-        z-index: 9;
-    }
-    .menu-dropdown-content{
-        box-shadow: 0px 0.5px 12px rgba(0, 0, 0, 0.2);
-        min-width: 100% !important;
-        top:-30px;
-    }
-    .menu-dropdown-center:before, .menu-dropdown-center:after {
-        content : none;
-    }
-    .bg-dark{
-        background: #38373D;
-    }
-    .menu-item-dropdown-opened .menu-item-content{
-        background: #ff2d55;
-    }
-    .menu-dropdown-link{
-        border-bottom: 1px solid #EFEFEF;
-    }
-    /*.table_reservation .row{
-        justify-content: flex-start;
-        width: 100%;
-    }*/
-    .col-25{
-        /* width: 25% !important; */
-        padding: 5px;
-    }
-    .table_image {
-        height: 100%;
-        min-height: 44px;
-    }
-    .card {
-        border-radius: 10px;
-    }
-    /*.card-content{
-        height: 100%;
-        min-height: 210px;
-    }*/
-    /*.table_reservation_info{
-        width: 25% !important;
-    }*/
+.header-links{
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.15);
+    background-color: #fff;
+    height: 60px !important;
+    position: fixed;
+    width: 100%;
+    z-index: 99;
+}
+.height-40{
+    height: 40px;
+}
+.nav-link,.menu-item-content {
+    height: 100%;
+    text-transform: capitalize;
+}
+.menu-item-content{
+    position: relative;
+    z-index: 9;
+}
+.menu-dropdown-content{
+    box-shadow: 0px 0.5px 12px rgba(0, 0, 0, 0.2);
+    min-width: 100% !important;
+    top:-30px;
+}
+.menu-dropdown-center:before, .menu-dropdown-center:after {
+    content : none;
+}
+.bg-dark{
+    background: #38373D;
+}
+.menu-item-dropdown-opened .menu-item-content{
+    background: #ff2d55;
+}
+.menu-dropdown-link{
+    border-bottom: 1px solid #EFEFEF;
+}
+.col-25{
+    padding: 5px;
+}
+.table_image {
+    height: 100%;
+    min-height: 44px;
+}
+.card {
+    border-radius: 10px;
+}
 .size-12{
     font-size :12px;
 }
@@ -4132,13 +4127,13 @@ export default {
 .table_row .table_9{
     width:100%;
     min-width: 182px;
-    max-width: 182px;
+    /*max-width: 182px;*/
     margin: 0 auto;
     border-left: 10px solid #FCD95E;
 }
 .table_row .table_10 {
     width:100%;
-    /*min-width: 1180px; */
+    min-width: 1120px;
     margin: 0 auto;
     border-left: 10px solid #C6C6C6;;
 }
@@ -4198,13 +4193,6 @@ export default {
     white-space: nowrap;
     justify-content:center;
 }
-/*.swiper-slide{
-    width:150px !important;
-}*/
-/*.swiper-button-next:after{
-    content:"";
-    back
-}*/
 .table_main .table_floor_swiper .floor_swiper_inner{
     border-bottom:1px solid #E0E0E0;
     margin-left: 20px;
@@ -4258,7 +4246,6 @@ export default {
     transform: translateY(-1em);
 
 }
-
 .popover-angle:after{
     border:0.5px solid #999999 !important;
 }
@@ -4299,123 +4286,109 @@ export default {
 }
 .ios .popover-angle.on-bottom:after {
     left: 0;
-    top: -22px;
+    top: -22px !important;
 }
 
-    *{
-        box-sizing: border-box;
-    }
-    .header-link .button{
-        border-radius: 10px !important;
-    }
-    .header-link .menu-item{
-        border-radius: 10px !important;
-    }
-    .nav-button{
-        text-transform: capitalize;
-    }
-    .navbar a.link{
-        color : #000;
-    }
-    .left{
-        width: 60%;
-        margin-right: 0 !important;
-    }
-    .right{
-        width : 40%;
-        margin-left: 0 !important;
-    }
-    .header-link{
-        width: 100%;
-    }
-    .header-link button{
-        text-transform: capitalize;
-    }
-    .card-header{
-        background: transparent;
-        /*box-shadow: 0px 1px 2px rgba(218, 172, 172, 0.22);*/
-        min-height: 0 !important;
-        overflow: hidden;
-        color: #000;
-        border-radius: 10px 10px 0 0 !important;
-    }
-    .card-header:after{
-        background-color: transparent !important;
-    }
-    .header_detail{
-        width:100%;
-    }
-    /*.table-number{
-        background: #F33E3E;
-    }*/
-    .person-info i{
-        font-size: 12px !important;
-        padding-right: 5px;
-        white-space: nowrap;
-    }
-    .person-info{
-        background: #F1F1F1;
-        border-radius: 5px;
-        padding: 7px 5px !important;
-        font-size: 10px !important;
-        width: 100%;
-        max-width: 94px;
-        margin-right: 23px;
-    }
-    .person-info_move{
-        background: #fff;
-        border: 1px solid #F33E3E;
-        box-shadow: 0px 0px 10px rgb(241 2 2 / 29%);
-    }
-    /*.person{
-        border-bottom: 1px solid;
-    }*/
-    .waiting-time{
-        border-left: 0.5px solid #555555;
-        padding-left: 8px;
-        margin-left: 8px;
-    }
-    /*.table_reservation{
-        height: 100%;
-        min-height: 125px;
-        display: flex;
-        justify-content: flex-start;
-        align-items: end;
-    }*/
-    .table_reservation_info .person-info span{
-        font-size: 12px;
-        line-height: 15px;
-        color: #38373D;
-    }
-    .bg-color-dark-pink {
-        background-color: #F33E3E !important;
-    }
+*{
+    box-sizing: border-box;
+}
+.header-link .button{
+    border-radius: 10px !important;
+}
+.header-link .menu-item{
+    border-radius: 10px !important;
+}
+.nav-button{
+    text-transform: capitalize;
+}
+.navbar a.link{
+    color : #000;
+}
+.left{
+    width: 60%;
+    margin-right: 0 !important;
+}
+.right{
+    width : 40%;
+    margin-left: 0 !important;
+}
+.header-link{
+    width: 100%;
+}
+.header-link button{
+    text-transform: capitalize;
+}
+.card-header{
+    background: transparent;
+    min-height: 0 !important;
+    overflow: hidden;
+    color: #000;
+    border-radius: 10px 10px 0 0 !important;
+}
+.card-header:after{
+    background-color: transparent !important;
+}
+.header_detail{
+    width:100%;
+}
+.person-info i{
+    font-size: 12px !important;
+    padding-right: 5px;
+    white-space: nowrap;
+}
+.person-info{
+    background: #F1F1F1;
+    border-radius: 5px;
+    padding: 7px 5px !important;
+    font-size: 10px !important;
+    width: 100%;
+    max-width: 94px;
+    margin-right: 23px;
+}
+.person-info_move{
+    background: #fff;
+    border: 1px solid #F33E3E;
+    box-shadow: 0px 0px 10px rgb(241 2 2 / 29%);
+}
+.waiting-time{
+    border-left: 0.5px solid #555555;
+    padding-left: 8px;
+    margin-left: 8px;
+}
+.table_reservation_info .person-info span{
+    font-size: 12px;
+    line-height: 15px;
+    color: #38373D;
+}
+.bg-color-dark-pink {
+    background-color: #F33E3E !important;
+}
 
-    .dialog-text {
-        font-weight: 500;
-        font-size: 20px;
-        line-height: 24px;
-    }
+.dialog-text {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+}
 
-    .dialog-inner:after {
-        content: none !important;
-    }
+.dialog-inner:after {
+    content: none !important;
+}
 
-    .dialog {
-        background-color: #fff !important;
-        width: 378px !important;
-    }
+.dialog {
+    background-color: #fff !important;
+    width: 378px !important;
+}
 
-    .dialog-button {
-        margin: 0 5px !important;
-        border-radius: var(--f7-dialog-border-radius) !important;
-    }
+.dialog-button {
+    margin: 0 5px !important;
+    border-radius: var(--f7-dialog-border-radius) !important;
+}
 
-    .dialog-buttons {
-        margin: 0 5px 15px;
-    }
-    .table_row .card{
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.11);
+.dialog-buttons {
+    margin: 0 5px 15px;
+}
+.table_row .card{
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.11);
     }
 
 </style>

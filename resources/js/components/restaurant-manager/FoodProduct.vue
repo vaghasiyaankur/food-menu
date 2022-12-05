@@ -8,16 +8,18 @@
                             <a href="/Reservation/" class="col link nav-link button button-raised bg-dark text-color-white padding">
                                 Reservation</a>
                         </div>
-                        <div class="col-20 nav-button">
+                        <div class="col-25 nav-button">
                             <div class="menu-item menu-item-dropdown">
-                                <div class="menu-item-content button button-raised bg-pink text-color-white padding-left-half padding-right-half">Menu management</div>
+                                <div class="menu-item-content button button-raised bg-pink text-color-white padding-left-half padding-right-half">Menu management
+                                    <i class="f7-icons">chevron_down</i>
+                                </div>
                                 <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
                                     <div class="menu-dropdown-content bg-color-white no-padding">
-                                        <a href="#" class="menu-dropdown-link menu-close"></a>
-                                        <a href="/food-category/" class="menu-dropdown-link menu-close text-color-pink">Food Category</a>
-                                        <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black">Food Menu</a>                                        
-                                        <a href="/food-subcategory/" class="menu-dropdown-link menu-close text-color-black">Food SubCategory</a>
-                                        <a href="/digital-menu/" class="menu-dropdown-link menu-close text-color-black">Digital Menu</a>
+                                        <a href="#" class="menu-dropdown-link menu-close margin-horizontal no-padding"></a>
+                                        <a href="/food-category/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food Category</a>
+                                        <a href="/food-product/" class="menu-dropdown-link menu-close text-color-pink margin-horizontal no-padding">Food Menu</a>                                        
+                                        <a href="/food-subcategory/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food SubCategory</a>
+                                        <a href="/digital-menu/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Digital Menu</a>
                                     </div>
                                 </div>
                             </div>
@@ -719,6 +721,10 @@ export default {
 </script>
 
 <style scoped>
+.menu-item-dropdown .menu-item-content .f7-icons{
+    font-size: 15px;
+    margin-left: 10px;
+}
 .product-list-section .product_list_card.card{
     background-color: #ffffff;
     box-shadow:none;
@@ -784,6 +790,9 @@ export default {
     .menu-dropdown-link:nth-child(2) {
         border-bottom: 1px solid #EFEFEF;
     }
+    .menu-dropdown-link{
+        border-bottom: 1px solid #EFEFEF;
+    }
 
     .border-bottom {
         border-bottom: 1px solid #EAEAEA;
@@ -805,6 +814,9 @@ export default {
     }
     .nav-bar {
         border-radius: 8px 8px 0px 0px;
+        position: fixed;
+        width: 100%;
+        z-index: 99;
     }
 
     .page-content {

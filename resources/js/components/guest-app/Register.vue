@@ -376,12 +376,12 @@ export default {
     height: calc(100vh - 150px);
     overflow-y: auto;
 }
-.icon-checkbox,.checkbox i{
+/*.icon-checkbox,.checkbox i{
     border-radius: 3px !important;
     margin-right: 5px !important;
     width: 17px;
     height: 17px;
-}
+}*/
 .item-checkbox .item-inner{
     font-weight: 400;
     font-size: 12px;
@@ -392,14 +392,18 @@ label.item-checkbox input[type='checkbox']:checked~.icon-checkbox{
     background-color: #F33E3E;
     border-color: #F33E3E;
 }
-label.item-checkbox input[type='checkbox']:checked~.icon-checkbox:after{
+.icon-checkbox, .checkbox i{
+    border-radius: 3px;
+}
+/*label.item-checkbox input[type='checkbox']:checked~.icon-checkbox:after{
     line-height: 15px;
     font-size: 13px;
-}
-.icon-checkbox:after, .checkbox i:after{
+}*/
+/*.icon-checkbox:after, .checkbox i:after{
     left: -3px;
     top:-1px
-}
+}*/
+
 </style>
 <style>
 .swiper-pagination-bullet-active {
@@ -441,4 +445,5 @@ label.item-checkbox input[type='checkbox']:checked~.icon-checkbox:after{
 .font-30 {
     font-size: 30px;
 }
+
 </style>
