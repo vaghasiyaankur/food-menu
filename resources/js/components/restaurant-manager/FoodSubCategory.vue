@@ -62,15 +62,15 @@
                     <div class="main-category text-color-pink padding-left-half margin-top padding-top-half">{{ subcategory.name }}</div>
                     <div class="category-list border-bottom padding-vertical-half" v-for="subcat in subcategory.sub_category" :key="subcat">
                         <div class="row align-items-center">
-                            <div class="col-60">
+                            <div class="col-100 large-60 medium-55">
                                 <div class="display-flex align-items-center">
                                     <span class="padding-left-half sub_category_name">{{ subcat.name }}</span>
                                 </div>
                             </div>
-                            <div class="col-40 action-buttons">
+                            <div class="col-100 large-40 medium-45 action-buttons">
                                 <div class="row align-items-center">
                                     <div class="col-50">
-                                        <button class="button text-color-black padding height-36 popup-open border__right" data-popup="#product_popup" @click="addProduct(subcat.id)"><i class="f7-icons font-22">plus_square</i>&nbsp; Add Product</button>
+                                        <button class="button text-color-black padding height-36 popup-open border__right" data-popup="#product_popup" @click="product.sub_category = subcat.id"><i class="f7-icons font-22">plus_square</i>&nbsp; Add Product</button>
                                     </div>
                                     <div class="col-25">
                                         <button class="button text-color-black padding height-36 popup-open" data-popup="#sub_category_popup" @click="editSubCategory(subcat.id)"><i class="f7-icons font-22">square_pencil</i> Edit</button>
@@ -113,23 +113,23 @@
         <div class="category-add padding">
             <div class="categoryForm text-align-left no-padding">
                 <label for="" class="add_category_name">Add product</label>
-                <input type="text" name="name" class="category-name margin-top-half padding-left-half padding-right-half" placeholder="Add Product name">
+                <input type="text" v-model="product.name" name="name" class="category-name margin-top-half padding-left-half padding-right-half" placeholder="Add Product name">
             </div>
             <div class="categoryForm text-align-left margin-top">
                 <label for="" class="add_category_name">Choose Sub category</label>
                 <div class="item-input-wrap input-dropdown-wrap category-name margin-top-half no-padding">
-                    <select placeholder="Please choose..." v-model="product" class="selectCategory padding-left-half">
-                        <option v-for="(category,key) in categoryOption" :key="category" :value="key">{{ category }}</option>
+                    <select placeholder="Please choose..." v-model="product.sub_category" class="selectCategory padding-left-half">
+                        <option v-for="(subCat,key) in subCategoryOption" :key="subCat" :value="key">{{ subCat }}</option>
                     </select>
                 </div>
             </div>
             <div class="categoryForm margin-top text-align-left no-padding">
                 <label for="" class="add_category_name">Price</label>
-                <input type="text" name="name" class="category-name margin-top-half padding-left-half padding-right-half" placeholder="Add product price">
+                <input type="text" name="name" v-model="product.price" class="category-name margin-top-half padding-left-half padding-right-half" placeholder="Add product price">
             </div>
             <div class="margin-top no-margin-bottom display-flex justify-content-center padding-top popup_button">
                 <button type="button" class="button button-raised text-color-black button-large popup-close margin-right poup-button">Cancel</button>
-                <button type="button" class="button button-raised button-large bg-karaka-orange poup-button" style="background-color: rgb(243, 62, 62); color: rgb(255, 255, 255);" @click="addCategory">Ok</button>
+                <button type="button" class="button button-raised button-large bg-karaka-orange poup-button" style="background-color: rgb(243, 62, 62); color: rgb(255, 255, 255);" @click="addProduct">Ok</button>
             </div>
         </div>
         <div><img src="/images/flow.png" style="width:100%"></div>
@@ -163,6 +163,12 @@ export default {
             },
             subCategory_title: 'Add Sub Category',
             search: '',
+            subCategoryOption: [],
+            product: {
+                name : '',
+                sub_category : null,
+                price : '',
+            }
 
         }
     },
@@ -172,6 +178,7 @@ export default {
     mounted() {
         $('.page-content').css('background', '#FFF');
         this.getAllCategories();
+        this.getAllSubCategories();
     },
     methods: {
         getSubCategories() {
@@ -232,11 +239,35 @@ export default {
             })
         },
         addProduct() {
+
+            var formData = new FormData();
+            formData.append('name', this.product.name);
+            formData.append('price', this.product.price);
+            formData.append('sub_category_id', this.product.sub_category);
+
+            if (!this.product.name || !this.product.price || !this.product.sub_category) {
+                this.notification('Please fill the form details.');
+                return false;
+            }
+
+            axios.post('/api/add-product', formData)
+                .then((res) => {
+                    f7.popup.close(`#product_popup`);
+                    this.product.name = '';
+                    this.product.price = '';
+                    this.product.sub_category = null;
+            })
         },
         getAllCategories() {
             axios.get('/api/categories')
             .then((res) => {
                 this.categoryOption = res.data;
+            })
+        },
+        getAllSubCategories() {
+            axios.get('/api/sub-categories')
+            .then((res) => {
+                this.subCategoryOption = res.data;
             })
         },
         notification(notice) {
