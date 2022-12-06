@@ -72,13 +72,13 @@
                                         <div class="card-content padding-top">
                                             <div class="product_list padding-vertical-half">
                                                 <div class="row align-items-center padding-horizontal">
-                                                    <div class="col-60">
+                                                    <div class="col-100 large-60 medium-50">
                                                         <div class="row">
                                                             <div class="col product-detail">Rice</div>
                                                             <div class="col text-align-right product-detail">₹ 70.00</div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-40">
+                                                    <div class="col-100 large-40 medium-50">
                                                         <div class="row">
                                                             <div class="col-50">
                                                                 <button class="button text-color-black padding height-36 option-button  popup-open"
@@ -93,13 +93,13 @@
                                             </div>
                                             <div class="product_list padding-vertical-half">
                                                 <div class="row align-items-center padding-horizontal">
-                                                    <div class="col-60">
+                                                    <div class="col-100 large-60 medium-50">
                                                         <div class="row">
                                                             <div class="col product-detail">Dal</div>
                                                             <div class="col text-align-right product-detail">₹ 70.00</div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-40">
+                                                    <div class="col-100 large-40 medium-50">
                                                         <div class="row">
                                                             <div class="col-50">
                                                                 <button class="button text-color-black padding height-36 option-button  popup-open"
@@ -114,13 +114,13 @@
                                             </div>
                                             <div class="product_list padding-vertical-half">
                                                 <div class="row align-items-center padding-horizontal">
-                                                    <div class="col-60">
+                                                    <div class="col-100 large-60 medium-50">
                                                         <div class="row">
                                                             <div class="col product-detail">Roti</div>
                                                             <div class="col text-align-right product-detail">₹ 70.00</div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-40">
+                                                    <div class="col-100 large-40 medium-50">
                                                         <div class="row">
                                                             <div class="col-50">
                                                                 <button class="button text-color-black padding height-36 option-button  popup-open"
@@ -135,13 +135,13 @@
                                             </div>
                                             <div class="product_list padding-vertical-half">
                                                 <div class="row align-items-center padding-horizontal">
-                                                    <div class="col-60">
+                                                    <div class="col-100 large-60 medium-50">
                                                         <div class="row">
                                                             <div class="col product-detail">Sabji</div>
                                                             <div class="col text-align-right product-detail">₹ 70.00</div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-40">
+                                                    <div class="col-100 large-40 medium-50">
                                                         <div class="row">
                                                             <div class="col-50">
                                                                 <button class="button text-color-black padding height-36 option-button  popup-open"
@@ -156,13 +156,13 @@
                                             </div>
                                             <div class="product_list padding-vertical-half">
                                                 <div class="row align-items-center padding-horizontal">
-                                                    <div class="col-60">
+                                                    <div class="col-100 large-60 medium-50">
                                                         <div class="row">
                                                             <div class="col product-detail">Chhas</div>
                                                             <div class="col text-align-right product-detail">₹ 70.00</div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-40">
+                                                    <div class="col-100 large-40 medium-50">
                                                         <div class="row">
                                                             <div class="col-50">
                                                                 <button class="button text-color-black padding height-36 option-button  popup-open"
@@ -177,13 +177,13 @@
                                             </div>
                                             <div class="product_list padding-vertical-half">
                                                 <div class="row align-items-center padding-horizontal">
-                                                    <div class="col-60">
+                                                    <div class="col-100 large-60 medium-50">
                                                         <div class="row">
                                                             <div class="col product-detail">Sabji</div>
                                                             <div class="col text-align-right product-detail">₹ 70.00</div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-40">
+                                                    <div class="col-100 large-40 medium-50">
                                                         <div class="row">
                                                             <div class="col-50">
                                                                 <button class="button text-color-black padding height-36 option-button  popup-open"
@@ -198,13 +198,13 @@
                                             </div>
                                             <div class="product_list padding-vertical-half">
                                                 <div class="row align-items-center padding-horizontal">
-                                                    <div class="col-60">
+                                                    <div class="col-100 large-60 medium-50">
                                                         <div class="row">
                                                             <div class="col product-detail">Chhas</div>
                                                             <div class="col text-align-right product-detail">₹ 70.00</div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-40">
+                                                    <div class="col-100 large-40 medium-50">
                                                         <div class="row">
                                                             <div class="col-50">
                                                                 <button class="button text-color-black padding height-36 option-button  popup-open"
@@ -219,13 +219,13 @@
                                             </div>
                                             <div class="product_list padding-vertical-half">
                                                 <div class="row align-items-center padding-horizontal">
-                                                    <div class="col-60">
+                                                    <div class="col-100 large-60 medium-50">
                                                         <div class="row">
                                                             <div class="col product-detail">Sabji</div>
                                                             <div class="col text-align-right product-detail">₹ 70.00</div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-40">
+                                                    <div class="col-100 large-40 medium-50">
                                                         <div class="row">
                                                             <div class="col-50">
                                                                 <button class="button text-color-black padding height-36 option-button  popup-open"
@@ -251,13 +251,13 @@
                                         <div class="card-content padding-top">
                                             <div class="product_list padding-vertical-half">
                                                 <div class="row align-items-center padding-horizontal">
-                                                    <div class="col-60">
+                                                    <div class="col-100 large-60 medium-50">
                                                         <div class="row">
                                                             <div class="col product-detail">Rice</div>
                                                             <div class="col text-align-right product-detail">₹ 70.00</div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-40">
+                                                    <div class="col-100 large-40 medium-50">
                                                         <div class="row">
                                                             <div class="col-50">
                                                                 <button class="button text-color-black padding height-36 option-button  popup-open"
@@ -272,13 +272,13 @@
                                             </div>
                                             <div class="product_list padding-vertical-half">
                                                 <div class="row align-items-center padding-horizontal">
-                                                    <div class="col-60">
+                                                    <div class="col-100 large-60 medium-50">
                                                         <div class="row">
                                                             <div class="col product-detail">Dal</div>
                                                             <div class="col text-align-right product-detail">₹ 70.00</div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-40">
+                                                    <div class="col-100 large-40 medium-50">
                                                         <div class="row">
                                                             <div class="col-50">
                                                                 <button class="button text-color-black padding height-36 option-button  popup-open"
@@ -293,13 +293,13 @@
                                             </div>
                                             <div class="product_list padding-vertical-half">
                                                 <div class="row align-items-center padding-horizontal">
-                                                    <div class="col-60">
+                                                    <div class="col-100 large-60 medium-50">
                                                         <div class="row">
                                                             <div class="col product-detail">Roti</div>
                                                             <div class="col text-align-right product-detail">₹ 70.00</div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-40">
+                                                    <div class="col-100 large-40 medium-50">
                                                         <div class="row">
                                                             <div class="col-50">
                                                                 <button class="button text-color-black padding height-36 option-button  popup-open"
@@ -314,13 +314,13 @@
                                             </div>
                                             <div class="product_list padding-vertical-half">
                                                 <div class="row align-items-center padding-horizontal">
-                                                    <div class="col-60">
+                                                    <div class="col-100 large-60 medium-50">
                                                         <div class="row">
                                                             <div class="col product-detail">Sabji</div>
                                                             <div class="col text-align-right product-detail">₹ 70.00</div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-40">
+                                                    <div class="col-100 large-40 medium-50">
                                                         <div class="row">
                                                             <div class="col-50">
                                                                 <button class="button text-color-black padding height-36 option-button  popup-open"
@@ -335,13 +335,13 @@
                                             </div>
                                             <div class="product_list padding-vertical-half">
                                                 <div class="row align-items-center padding-horizontal">
-                                                    <div class="col-60">
+                                                    <div class="col-100 large-60 medium-50">
                                                         <div class="row">
                                                             <div class="col product-detail">Chhas</div>
                                                             <div class="col text-align-right product-detail">₹ 70.00</div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-40">
+                                                    <div class="col-100 large-40 medium-50">
                                                         <div class="row">
                                                             <div class="col-50">
                                                                 <button class="button text-color-black padding height-36 option-button  popup-open"
@@ -371,13 +371,13 @@
                                         <div class="card-content padding-top">
                                             <div class="product_list padding-vertical-half">
                                                 <div class="row align-items-center padding-horizontal">
-                                                    <div class="col-60">
+                                                    <div class="col-100 large-60 medium-50">
                                                         <div class="row">
                                                             <div class="col product-detail">Rice</div>
                                                             <div class="col text-align-right product-detail">₹ 70.00</div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-40">
+                                                    <div class="col-100 large-40 medium-50">
                                                         <div class="row">
                                                             <div class="col-50">
                                                                 <button class="button text-color-black padding height-36 option-button  popup-open"
@@ -392,13 +392,13 @@
                                             </div>
                                             <div class="product_list padding-vertical-half">
                                                 <div class="row align-items-center padding-horizontal">
-                                                    <div class="col-60">
+                                                    <div class="col-100 large-60 medium-50">
                                                         <div class="row">
                                                             <div class="col product-detail">Dal</div>
                                                             <div class="col text-align-right product-detail">₹ 70.00</div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-40">
+                                                    <div class="col-100 large-40 medium-50">
                                                         <div class="row">
                                                             <div class="col-50">
                                                                 <button class="button text-color-black padding height-36 option-button  popup-open"
@@ -413,13 +413,13 @@
                                             </div>
                                             <div class="product_list padding-vertical-half">
                                                 <div class="row align-items-center padding-horizontal">
-                                                    <div class="col-60">
+                                                    <div class="col-100 large-60 medium-50">
                                                         <div class="row">
                                                             <div class="col product-detail">Roti</div>
                                                             <div class="col text-align-right product-detail">₹ 70.00</div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-40">
+                                                    <div class="col-100 large-40 medium-50">
                                                         <div class="row">
                                                             <div class="col-50">
                                                                 <button class="button text-color-black padding height-36 option-button  popup-open"
@@ -434,13 +434,13 @@
                                             </div>
                                             <div class="product_list padding-vertical-half">
                                                 <div class="row align-items-center padding-horizontal">
-                                                    <div class="col-60">
+                                                    <div class="col-100 large-60 medium-50">
                                                         <div class="row">
                                                             <div class="col product-detail">Sabji</div>
                                                             <div class="col text-align-right product-detail">₹ 70.00</div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-40">
+                                                    <div class="col-100 large-40 medium-50">
                                                         <div class="row">
                                                             <div class="col-50">
                                                                 <button class="button text-color-black padding height-36 option-button  popup-open"
@@ -455,13 +455,13 @@
                                             </div>
                                             <div class="product_list padding-vertical-half">
                                                 <div class="row align-items-center padding-horizontal">
-                                                    <div class="col-60">
+                                                    <div class="col-100 large-60 medium-50">
                                                         <div class="row">
                                                             <div class="col product-detail">Chhas</div>
                                                             <div class="col text-align-right product-detail">₹ 70.00</div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-40">
+                                                    <div class="col-100 large-40 medium-50">
                                                         <div class="row">
                                                             <div class="col-50">
                                                                 <button class="button text-color-black padding height-36 option-button  popup-open"
@@ -487,13 +487,13 @@
                                         <div class="card-content padding-top">
                                             <div class="product_list padding-vertical-half">
                                                 <div class="row align-items-center padding-horizontal">
-                                                    <div class="col-60">
+                                                    <div class="col-100 large-60 medium-50">
                                                         <div class="row">
                                                             <div class="col product-detail">Rice</div>
                                                             <div class="col text-align-right product-detail">₹ 70.00</div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-40">
+                                                    <div class="col-100 large-40 medium-50">
                                                         <div class="row">
                                                             <div class="col-50">
                                                                 <button class="button text-color-black padding height-36 option-button  popup-open"
@@ -508,13 +508,13 @@
                                             </div>
                                             <div class="product_list padding-vertical-half">
                                                 <div class="row align-items-center padding-horizontal">
-                                                    <div class="col-60">
+                                                    <div class="col-100 large-60 medium-50">
                                                         <div class="row">
                                                             <div class="col product-detail">Dal</div>
                                                             <div class="col text-align-right product-detail">₹ 70.00</div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-40">
+                                                    <div class="col-100 large-40 medium-50">
                                                         <div class="row">
                                                             <div class="col-50">
                                                                 <button class="button text-color-black padding height-36 option-button  popup-open"
@@ -529,13 +529,13 @@
                                             </div>
                                             <div class="product_list padding-vertical-half">
                                                 <div class="row align-items-center padding-horizontal">
-                                                    <div class="col-60">
+                                                    <div class="col-100 large-60 medium-50">
                                                         <div class="row">
                                                             <div class="col product-detail">Roti</div>
                                                             <div class="col text-align-right product-detail">₹ 70.00</div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-40">
+                                                    <div class="col-100 large-40 medium-50">
                                                         <div class="row">
                                                             <div class="col-50">
                                                                 <button class="button text-color-black padding height-36 option-button  popup-open"
@@ -550,13 +550,13 @@
                                             </div>
                                             <div class="product_list padding-vertical-half">
                                                 <div class="row align-items-center padding-horizontal">
-                                                    <div class="col-60">
+                                                    <div class="col-100 large-60 medium-50">
                                                         <div class="row">
                                                             <div class="col product-detail">Sabji</div>
                                                             <div class="col text-align-right product-detail">₹ 70.00</div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-40">
+                                                    <div class="col-100 large-40 medium-50">
                                                         <div class="row">
                                                             <div class="col-50">
                                                                 <button class="button text-color-black padding height-36 option-button  popup-open"
@@ -571,13 +571,13 @@
                                             </div>
                                             <div class="product_list padding-vertical-half">
                                                 <div class="row align-items-center padding-horizontal">
-                                                    <div class="col-60">
+                                                    <div class="col-100 large-60 medium-50">
                                                         <div class="row">
                                                             <div class="col product-detail">Chhas</div>
                                                             <div class="col text-align-right product-detail">₹ 70.00</div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-40">
+                                                    <div class="col-100 large-40 medium-50">
                                                         <div class="row">
                                                             <div class="col-50">
                                                                 <button class="button text-color-black padding height-36 option-button  popup-open"
@@ -724,6 +724,9 @@ export default {
 .menu-item-dropdown .menu-item-content .f7-icons{
     font-size: 15px;
     margin-left: 10px;
+}
+.product-list-section{
+    margin-top: 70px;
 }
 .product-list-section .product_list_card.card{
     background-color: #ffffff;
@@ -894,7 +897,7 @@ export default {
     }
     @media screen and (max-width:820px) {
         .left {
-            width: 30%;
+            width: 5%;
         }
     }
 </style>

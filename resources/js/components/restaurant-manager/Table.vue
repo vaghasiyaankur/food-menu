@@ -1,12 +1,48 @@
 <template>
     <f7-page color="bg-color-white">
             <div class="header-links display-flex align-items-center padding-right">
-                <div class="row header-link justify-content-flex-end align-items-center">
+                <!--========= SMALL SCREEN MENU BAR=========== -->
+                <!-- <div class="hamburger__button">
+                    <a href="#" class="link icon-only panel-open" data-panel=".panel-right-1"><i class="icon f7-icons if-not-md">menu</i></a>
+                </div>
+                <div class="panel panel-right panel-right-1 panel-cover panel-resizable panel-init">
+                    <div class="block">
+                        <div class=" padding-left-half padding-right-half height-40 nav-button">
+                            <a href="/Reservation/" class="link nav-link padding">
+                                Reservation</a>
+                        </div>
+                        <div class="menu-item menu-item-dropdown margin-top bg-white">
+                            <div class="menu-item-content padding-left-half padding-right-half">Menu management
+                                <i class="f7-icons">chevron_down</i>
+                            </div>
+                            <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
+                                <div class="menu-dropdown-content bg-color-white no-padding">
+                                    <a href="#" class="menu-dropdown-link menu-close margin-horizontal no-padding"></a>
+                                    <a href="/food-category/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food Category</a>
+                                    <a href="/food-subcategory/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food SubCategory</a>
+                                    <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food Menu</a>
+                                    <a href="/digital-menu/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Digital Menu</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="padding-left-half padding-right-half height-40">
+                            <a href="/Reporting/" class="margin-top link nav-link padding">Reporting</a>
+                        </div>
+                        <div class=" padding-left-half padding-right-half height-40">
+                            <button class="col nav-link padding closeReservation" @click="$root.closeReservation()">Close reservation</button>
+                        </div>
+                        <div class="padding-left-half padding-right-half height-40">
+                            <a href="/settings/" class="col link nav-link padding">Settings</a>
+                        </div>
+                    </div>
+                </div> -->
+                <!--========= SMALL SCREEN MENU BAR END=========== -->                           
+                <div class="row header-link justify-content-flex-end align-items-center tablate_view_menu">
                     <div class=" padding-left-half padding-right-half height-40 nav-button">
                         <a href="/Reservation/" class="col link nav-link button button-raised bg-dark text-color-white padding">
                             Reservation</a>
                     </div>
-                    <div class="col-20 nav-button">
+                    <div class="col-20 large-20 medium-25 nav-button">
                         <div class="menu-item menu-item-dropdown">
                             <div class="menu-item-content button button-raised bg-dark text-color-white padding-left-half padding-right-half">Menu management
                                 <i class="f7-icons">chevron_down</i>
@@ -27,13 +63,14 @@
                     <div class=" padding-left-half padding-right-half height-40 nav-button"><a href="/settings/" class="col link nav-link button button-raised bg-dark text-color-white padding">Settings</a></div>
                 </div>
             </div>
-
+             
+            
         <div class="table_main">
             <!-- ============= TABLE FLOOR SWIPER ============= -->
            <div class="table_floor_swiper">
                 <div class="row">
-                    <div class="col-80">
-                        <div data-pagination='{"el":".swiper-pagination"}' data-navigation="{'el':'.swiper-navigation'}" data-space-between="10" data-slides-per-view="5"
+                    <div class="col-100 large-80 medium-75">
+                        <div data-pagination='{"el":".swiper-pagination"}' data-navigation="{'el':'.swiper-navigation'}" data-space-between="10" data-slides-per-view="4"
                             class="swiper swiper-init demo-swiper margin-top margin-bottom floor_swiper_inner  swiper-navigation">
                             <!-- <div class="swiper-pagination"></div> -->
                             <div class="swiper-wrapper padding-left-half">
@@ -152,7 +189,7 @@
                             </f7-swiper>
                         </div> -->
                     </div>
-                    <div class="col-20">
+                    <div class="col-100 large-20 medium-25">
                         <div class="current_capacity">
                             <div class="current_capacity_card card display-flex align-items-center no-margin-vertical justify_content_between">
                                 <div class="card_img padding-left">
@@ -2312,7 +2349,7 @@
                     <!-- ======= TABLE 10 START ========== -->
                     <div class="col-100 no-padding margin-bottom table-card">
                         <!--======= TABLE CHAIR ========= -->
-                        <div class="row table_top_chair">
+                        <div class="row table_top_chair table_9_chair">
                             <div class="col">
                                 <div class="table_card_img text-align-center">
                                     <img src="/images/table/table10.svg" alt="table">
@@ -2472,7 +2509,7 @@
                             </div>
                         </div>
                         <!--======= TABLE CHAIR ========= -->
-                        <div class="row table_bottom_chair">
+                        <div class="row table_bottom_chair table_9_chair">
                             <div class="col">
                                 <div class="table_card_img text-align-center">
                                     <img src="/images/table/table10-1.svg" alt="table">
@@ -2645,7 +2682,7 @@
                         </div>
                     </div>
                     <!-- ========= TABLE 9 START ========= -->
-                    <div class="col-20 no-padding margin-bottom table-card">
+                    <div class="col-20 no-padding margin-bottom table-card margin_right margin_left">
                         <!--======= TABLE CHAIR ========= -->
                         <div class="row table_top_chair">
                             <div class="col">
@@ -2849,7 +2886,7 @@
                         </div>
                     </div>
                     <!-- ======== TABLE 2 START ======= -->
-                    <div class="col-30 no-padding margin-bottom table-card">
+                    <div class="col-30 no-padding margin-bottom table-card margin_left">
                         <!--======= TABLE CHAIR ========= -->
                         <div class="row table_top_chair">
                             <div class="col">
@@ -3123,7 +3160,7 @@
                         </div>
                     </div>
                     <!-- ======== TABLE 2 START ======= -->
-                    <div class="col-30 no-padding margin-bottom table-card">
+                    <div class="col-30 no-padding margin-bottom table-card margin_right margin_left">
                         <!--======= TABLE CHAIR ========= -->
                         <div class="row table_top_chair">
                             <div class="col">
@@ -3514,7 +3551,7 @@
                         </div>
                     </div>
                     <!-- ======== TABLE 2 START ======= -->
-                    <div class="col-30 no-padding margin-bottom table-card">
+                    <div class="col-30 no-padding margin-bottom table-card margin_right margin_left">
                         <!--======= TABLE CHAIR ========= -->
                         <div class="row table_top_chair">
                             <div class="col">
@@ -3755,7 +3792,7 @@
                     <!-- ======= TABLE 10 START ========== -->
                     <div class="col-100 no-padding margin-bottom table-card">
                         <!--======= TABLE CHAIR ========= -->
-                        <div class="row table_top_chair">
+                        <div class="row table_top_chair table_9_chair">
                             <div class="col">
                                 <div class="table_card_img text-align-center">
                                     <img src="/images/table/table10.svg" alt="table">
@@ -3915,7 +3952,7 @@
                             </div>
                         </div>
                         <!--======= TABLE CHAIR ========= -->
-                        <div class="row table_bottom_chair">
+                        <div class="row table_bottom_chair table_9_chair">
                             <div class="col">
                                 <div class="table_card_img text-align-center">
                                     <img src="/images/table/table10-1.svg" alt="table">
@@ -4026,7 +4063,10 @@ export default {
 </script>
 
 <style scoped>
-
+.current_capacity_card .card-content{
+    padding-right:8px !important;
+    padding-left:0px !important;
+}
 .menu-item-dropdown .menu-item-content .f7-icons{
     font-size: 15px;
     margin-left: 10px;
@@ -4163,7 +4203,7 @@ export default {
     flex-wrap: wrap !important;
 }
 .table_card_right_margin{
-    margin-right: 82px;
+    margin-right: 72px;
 }
 .table1__details{
     width: 100%;
@@ -4266,13 +4306,39 @@ export default {
     align-items: center;
     margin-left: 5px;
 }
+.hamburger__button{
+    display:none;
+}
 @media screen and (max-width : 820px) {
-    .nav-button {
-        width : 25% !important;
+    .table_9_chair{
+        width:100%;
+        min-width:1120px;
+    }
+    .margin_right{
+        margin-right: 45px;
+    }
+    .margin_left{
+        margin-left: 45px;
     }
     .table-card{
-        width : 33.33% !important;
+        width : 100% !important;
     }
+    /*.closeReservation{
+        border: none;
+        background-color: transparent;
+        text-align:start;
+    }
+    .tablate_view_menu{
+        display:none;
+    }
+    .hamburger__button{
+        display: block;
+        text-align:end;
+        width:100%;
+    }
+    .menu-dropdown-content{
+        z-index:2;
+    }*/
 }
 </style>
 

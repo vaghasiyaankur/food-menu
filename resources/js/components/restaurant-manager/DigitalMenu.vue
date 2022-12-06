@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <div class="digital_menu_swiper padding">
-                    <div data-pagination='{"el":".swiper-pagination"}' data-space-between="20" data-slides-per-view="11"
+                    <div data-pagination='{"el":".swiper-pagination"}' data-space-between="20" data-slides-per-view="11"            
                     class="swiper swiper-init demo-swiper margin-top margin-bottom" style="height : 135px">
                         <div class="swiper-pagination"></div>
                         <div class="swiper-wrapper">
@@ -483,7 +483,7 @@
       }
     @media screen and (max-width:820px) {
         .left {
-            width: 30%;
+            width: 5%;
         }
     }
     </style>

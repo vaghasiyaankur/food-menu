@@ -85,14 +85,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-content card-content-padding">
+                <div class="card-content card-content-padding categorey_card">
                     <div class="category-list border-bottom padding-top padding-bottom"
                         v-for="(category,index) in categories" :key="category">
                         <div class="row align-items-center">
                             <div class="col-5 category-count">
                                 <span>{{ index + 1 }}.</span>
                             </div>
-                            <div class="col-60">
+                            <div class="col-100 medium-50 large-60 ">
                                 <div class="display-flex align-items-center">
                                     <div class="category_image">
                                         <img :src="'/storage'+category.image" alt="">
@@ -100,7 +100,7 @@
                                     <p class="padding-left-half category_name">{{ category.name }}</p>
                                 </div>
                             </div>
-                            <div class="col-35 action-buttons">
+                            <div class="col-100 medium-45 large-35 action-buttons">
                                 <div class="row align-items-center">
                                     <div class="col-50">
                                         <button class="button text-color-black padding height-36 border__right popup-open" data-popup="#subCategory_popup"
@@ -460,9 +460,21 @@ export default {
     height: 100%;
     object-fit: cover;
 }
+/*.categorey_card{
+    height: calc(100vh - 150px);
+    overflow: auto;
+}*/
+.category-list-section .card{
+    height: calc(100vh - 94px);
+    overflow:scroll;
+}
 @media screen and (max-width:820px) {
     .header-links {
         width: 100%;
+    }
+    .category-list-section .card{
+        height: calc(100vh - 400px);
+        overflow: scroll;
     }
 }
 </style>
@@ -558,14 +570,17 @@ export default {
 .popup {
     width: 378px !important;
     height:auto !important;
-    top: 28% !important;
+    top: 20% !important;
     left: 35% !important;
     margin : 0 !important;
 }
-
-@media screen and (max-width:820px) {
-    .left {
-        width: 30%;
-    }
+.dialog{
+    top: 36%;
 }
+
+/*@media screen and (max-width:820px) {
+    .left {
+        width: 50%;
+    }
+}*/
 </style>

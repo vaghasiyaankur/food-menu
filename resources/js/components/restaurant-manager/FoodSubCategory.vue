@@ -61,12 +61,12 @@
                 <div class="main-category text-color-pink padding-left-half">Indian</div>
                 <div class="category-list border-bottom padding-vertical-half">
                     <div class="row align-items-center">
-                        <div class="col-60">
+                        <div class="col-100 large-60 medium-55">
                             <div class="display-flex align-items-center">
                                 <span class="padding-left-half sub_category_name">Kathiyavadi thali</span>
                             </div>
                         </div>
-                        <div class="col-40 action-buttons">
+                        <div class="col-100 large-40 medium-45 action-buttons">
                             <div class="row align-items-center">
                                 <div class="col-50">
                                     <button class="button text-color-black padding height-36 popup-open" data-popup="#product_popup" @click="addProduct"><i class="f7-icons font-22">plus_square</i> Add Product</button>
@@ -83,12 +83,12 @@
                 </div>
                 <div class="category-list border-bottom padding-vertical-half">
                     <div class="row align-items-center">
-                        <div class="col-60">
+                        <div class="col-100 large-60 medium-55">
                             <div class="display-flex align-items-center">
                                 <span class="padding-left-half sub_category_name">Dal</span>
                             </div>
                         </div>
-                        <div class="col-40 action-buttons">
+                        <div class="col-100 large-40 medium-45 action-buttons">
                             <div class="row align-items-center">
                                 <div class="col-50">
                                     <button class="button text-color-black padding height-36 popup-open" data-popup="#product_popup" @click="addProduct"><i class="f7-icons font-22">plus_square</i> Add Product</button>
@@ -105,12 +105,12 @@
                 </div>
                 <div class="category-list border-bottom padding-vertical-half">
                     <div class="row align-items-center">
-                        <div class="col-60">
+                        <div class="col-100 large-60 medium-55">
                             <div class="display-flex align-items-center">
                                 <span class="padding-left-half sub_category_name">Roti</span>
                             </div>
                         </div>
-                        <div class="col-40 action-buttons">
+                        <div class="col-100 large-40 medium-45 action-buttons">
                             <div class="row align-items-center">
                                 <div class="col-50">
                                     <button class="button text-color-black padding height-36 popup-open" data-popup="#product_popup" @click="addProduct"><i class="f7-icons font-22">plus_square</i> Add Product</button>
@@ -128,12 +128,12 @@
                 <div class="main-category text-color-pink padding-left-half margin-top padding-top-half">Panjabi</div>
                 <div class="category-list border-bottom padding-vertical-half">
                     <div class="row align-items-center">
-                        <div class="col-60">
+                        <div class="col-100 large-60 medium-55">
                             <div class="display-flex align-items-center">
                                 <span class="padding-left-half sub_category_name">Paratha</span>
                             </div>
                         </div>
-                        <div class="col-40 action-buttons">
+                        <div class="col-100 large-40 medium-45 action-buttons">
                             <div class="row align-items-center">
                                 <div class="col-50">
                                     <button class="button text-color-black padding height-36 popup-open" data-popup="#product_popup" @click="addProduct"><i class="f7-icons font-22">plus_square</i> Add Product</button>
@@ -150,12 +150,12 @@
                 </div>
                 <div class="category-list padding-vertical-half">
                     <div class="row align-items-center">
-                        <div class="col-60">
+                        <div class="col-100 large-60 medium-55">
                             <div class="display-flex align-items-center">
                                 <span class="padding-left-half sub_category_name">Panjabi sabji</span>
                             </div>
                         </div>
-                        <div class="col-40 action-buttons">
+                        <div class="col-100 large-40 medium-45 action-buttons">
                             <div class="row align-items-center">
                                 <div class="col-50">
                                     <button class="button text-color-black padding height-36 popup-open" data-popup="#product_popup" @click="addProduct"><i class="f7-icons font-22">plus_square</i> Add Product</button>
@@ -173,12 +173,12 @@
                 <div class="main-category text-color-pink padding-left-half margin-top padding-top-half">Fast Food</div>
                 <div class="category-list border-bottom padding-vertical-half">
                     <div class="row align-items-center">
-                        <div class="col-60">
+                        <div class="col-100 large-60 medium-55">
                             <div class="display-flex align-items-center">
                                 <span class="padding-left-half sub_category_name">Sandwich</span>
                             </div>
                         </div>
-                        <div class="col-40 action-buttons">
+                        <div class="col-100 large-40 medium-45 action-buttons">
                             <div class="row align-items-center">
                                 <div class="col-50">
                                     <button class="button text-color-black padding height-36 popup-open" data-popup="#product_popup" @click="addProduct"><i class="f7-icons font-22">plus_square</i> Add Product</button>
@@ -195,12 +195,12 @@
                 </div>
                 <div class="category-list padding-vertical-half">
                     <div class="row align-items-center">
-                        <div class="col-60">
+                        <div class="col-100 large-60 medium-55">
                             <div class="display-flex align-items-center">
                                 <span class="padding-left-half sub_category_name">Pizza</span>
                             </div>
                         </div>
-                        <div class="col-40 action-buttons">
+                        <div class="col-100 large-40 medium-45 action-buttons">
                             <div class="row align-items-center">
                                 <div class="col-50">
                                     <button class="button text-color-black padding height-36 popup-open" data-popup="#product_popup" @click="addProduct"><i class="f7-icons font-22">plus_square</i> Add Product</button>
@@ -529,6 +529,10 @@ export default {
     .header-links {
         width: 100%;
     }
+    .subcategory-list-section .card{
+        height: calc(100vh - 400px);
+        overflow: auto;
+    }
 }
 </style>
 
@@ -540,7 +544,7 @@ export default {
 
 @media screen and (max-width:820px) {
     .left {
-        width: 30%;
+        width: 50%;
     }
 }
 </style>

@@ -41,7 +41,7 @@
                         <div class="col-50">
                             <div class="item-content item-input margin-bottom">
                                 <div class="item-inner">
-                                    <div class="block-title no-margin-top no-margin-left">Capacity of Person</div>
+                                    <div class="block-title no-margin-top no-margin-left">Table Color</div>
                                     <div class="item-input-wrap"><input type="text" name="number" class="padding margin-top-half" placeholder="Enter color name"></div>
                                 </div>
                             </div>

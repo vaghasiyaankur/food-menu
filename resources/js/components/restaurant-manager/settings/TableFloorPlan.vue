@@ -15,10 +15,10 @@
                       <tr>
                          <th>Table No.</th>
                          <th>Capacity of Person</th>
-                         <th>Floor No.</th>
-                         <th>Status</th>
+                         <th style="width:15%">Floor No.</th>
+                         <th style="width:20%;">Status</th>
                          <th>Table Color</th>
-                         <th>Action</th>
+                         <th style="width:15%;">Action</th>
                       </tr>
                    </thead>
                    <tbody>
@@ -182,6 +182,10 @@
     }
 </script>
 <style scoped>
+.card-content .data-table td{
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
 .add_table_button button{
     background-color: #38373D;
     box-shadow: 0px 2px 4px rgba(172, 172, 172, 0.45);
@@ -206,6 +210,7 @@
     line-height: 26px;
     font-weight: 400;
     font-size: 12px;
+    width: 60%;
 
 }
 .status_info.status_active{
@@ -261,6 +266,11 @@
 }
 .data-table tbody tr:nth-child(even){
     background-color: #FAFAFA;
+}
+@media screen and (max-width:820px){
+    .status_info{
+        width: 100%;
+    }
 }
 </style>
 
