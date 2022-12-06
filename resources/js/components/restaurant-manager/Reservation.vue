@@ -5,12 +5,14 @@
                 <div class="header-links display-flex align-items-center padding-right">
                     <div class="row header-link justify-content-flex-end align-items-center">
                         <div class=" padding-left-half padding-right-half height-40 nav-button">
-                            <a href="/reservation/" class="col link nav-link button button-raised bg-dark text-color-white padding">
+                            <a href="/reservation/" class="col link nav-link button button-raised bg-pink text-color-white padding">
                                 Reservation</a>
                         </div>
-                        <div class="nav-button col-20">
+                        <div class="nav-button col-25">
                             <div class="menu-item menu-item-dropdown">
-                                <div class="menu-item-content button button-raised bg-pink text-color-white padding-left-half padding-right-half">Menu management</div>
+                                <div class="menu-item-content button button-raised text-color-white padding-left-half padding-right-half">Menu management
+                                    <i class="f7-icons">chevron_down</i>
+                                </div>
                                 <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
                                     <div class="menu-dropdown-content bg-color-white no-padding">
                                         <a href="#" class="menu-dropdown-link menu-close"></a>
@@ -34,7 +36,7 @@
                 <div class="row height_100 align-items-center">
                     <div class="col-50">
                         <div class="text-align-center padding-top">
-                            <img src="/images/registerImage.png" alt="">
+                            <img src="/images/reservationbg.png" style="width:100%;height:auto">
                         </div>
                     </div>
                     <div class="col-50">                        
@@ -376,6 +378,14 @@ export default {
 }
 </script>
 <style scoped>
+.menu-item-dropdown .menu-item-content .f7-icons{
+    font-size: 15px;
+    margin-left: 10px;
+}
+.popover-inner{
+    background-color: #fff;
+    border-radius: 10px;
+}
 /*========== FOOD MENU MODAL CSS =============*/
 .close-menu{
     position: absolute;
@@ -411,6 +421,47 @@ export default {
 }
 .font-18 {
     font-size: 18px !important;
+}
+.position-relative{
+    position: relative;
+}
+.menu-title, .menu-list-title {
+    text-align: center;
+    font-size: 18px;
+    padding: 0 10px;
+}
+.menu-title::before {
+    position: absolute;
+    content: '';
+    border: 1px dashed #000;
+    left: 0;
+    width: 100%;
+    height: 0px;
+    top: 11px;
+    z-index: -1;
+}
+.menu-lists{
+    height: 100%;
+    max-height: 500px;
+    overflow: auto;
+}
+.menu-title span{
+    background: white;
+    padding: 0 10px;
+}
+.add-favlist i {
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.dots{
+    flex: 1;
+    border-bottom: 2px dotted #000;
+    height: 1em;
 }
 /*============ RESERVATION CARD ============*/
 
@@ -529,6 +580,9 @@ label.item-checkbox input[type='checkbox']:checked ~ .icon-checkbox:after, label
 .menu-dropdown-link:nth-child(2) {
     border-bottom: 1px solid #EFEFEF;
 }
+.menu-dropdown-link{
+    border-bottom: 1px solid #EFEFEF;
+}
 
 .bg-pink {
     background: #F33E3E;
@@ -542,10 +596,15 @@ label.item-checkbox input[type='checkbox']:checked ~ .icon-checkbox:after, label
     font-size: 22px;
 }
 
-.nav-bar {
+.nav-bar{
     border-radius: 8px 8px 0px 0px;
+    position: fixed;
+    width: 100%;
+    z-index: 99;
 }
-
+.reservation_card{
+    margin-top:80px;
+}
 .page-content {
     padding-top: 0px !important;
 }

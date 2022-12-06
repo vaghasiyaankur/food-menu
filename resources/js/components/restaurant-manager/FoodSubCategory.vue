@@ -8,9 +8,11 @@
                         <a href="/Reservation/" class="col link nav-link button button-raised bg-dark text-color-white padding">
                             Reservation</a>
                     </div>
-                    <div class="nav-button col-20">
+                    <div class="nav-button col-25">
                         <div class="menu-item menu-item-dropdown">
-                            <div class="menu-item-content button button-raised bg-pink text-color-white padding-left-half padding-right-half">Menu management</div>
+                            <div class="menu-item-content button button-raised bg-pink text-color-white padding-left-half padding-right-half">Menu management
+                                <i class="f7-icons">chevron_down</i>
+                            </div>
                             <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
                                 <div class="menu-dropdown-content bg-color-white no-padding">
                                     <a href="#" class="menu-dropdown-link menu-close"></a>
@@ -253,6 +255,10 @@ export default {
     border-right: 1px solid #D8D8D8;
     border-radius: 0;
 }
+.menu-item-dropdown .menu-item-content .f7-icons{
+    font-size: 15px;
+    margin-left: 10px;
+}
 .page-food-category {
     background: #f1f1f1;
 }
@@ -310,6 +316,9 @@ export default {
 .menu-dropdown-link:nth-child(2) {
     border-bottom: 1px solid #EFEFEF;
 }
+.menu-dropdown-link{
+    border-bottom: 1px solid #EFEFEF;
+}
 
 .bg-pink {
     background: #F33E3E;
@@ -325,6 +334,12 @@ export default {
 
 .nav-bar {
     border-radius: 8px 8px 0px 0px;
+    position: fixed;
+    width: 100%;
+    z-index: 99;
+}
+.subcategory-list-section{
+    margin-top:75px;
 }
 
 .page-content {

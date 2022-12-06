@@ -9,14 +9,15 @@
                                 class="col link nav-link button button-raised bg-dark text-color-white padding">
                                 Reservation</a>
                         </div>
-                        <div class="col-20 nav-button">
+                        <div class="col-25 nav-button">
                             <div class="menu-item menu-item-dropdown">
-                                <div
-                                    class="menu-item-content button button-raised bg-dark text-color-white padding-left-half padding-right-half">
-                                    Menu management</div>
+                                <div class="menu-item-content button button-raised bg-pink text-color-white padding-left-half padding-right-half">
+                                    Menu management
+                                    <i class="f7-icons">chevron_down</i>
+                                </div>
                                 <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
                                     <div class="menu-dropdown-content bg-color-white no-padding">
-                                        <a href="#" class="menu-dropdown-link menu-close"></a>
+                                        <a href="#" class="menu-dropdown-link menu-close margin-horizontal no-padding"></a>
                                         <a href="/food-category/"
                                             class="menu-dropdown-link menu-close text-color-black">Food Category</a>
                                         <a href="/food-subcategory/"
@@ -24,7 +25,7 @@
                                         <a href="/food-product/"
                                             class="menu-dropdown-link menu-close text-color-black">Food Menu</a>
                                         <a href="/digital-menu/"
-                                            class="menu-dropdown-link menu-close text-color-black">Digital Menu</a>
+                                            class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Digital Menu</a>
                                     </div>
                                 </div>
                             </div>
@@ -324,6 +325,10 @@ export default {
 </script>
 
 <style scoped>
+.menu-item-dropdown .menu-item-content .f7-icons{
+    font-size: 15px;
+    margin-left: 10px;
+}
 .nav-bar {
     position: fixed;
     width: 100%;

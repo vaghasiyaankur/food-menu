@@ -8,17 +8,19 @@
                             <a href="/Reservation/" class="col link nav-link button button-raised bg-dark text-color-white padding">
                                 Reservation</a>
                         </div>
-                        <div class="nav-button col-20">
+                        <div class="nav-button col-25">
                             <div class="menu-item menu-item-dropdown">
-                                <div class="menu-item-content button button-raised bg-dark text-color-white padding-left-half padding-right-half">Menu management</div>
+                                <div class="menu-item-content button button-raised bg-dark text-color-white padding-left-half padding-right-half">Menu management
+                                    <i class="f7-icons">chevron_down</i>
+                                </div>
                                 <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
                                     <div class="menu-dropdown-content bg-color-white no-padding">
-                                        <a href="#" class="menu-dropdown-link menu-close"></a>
-                                        <a href="/food-category/" class="menu-dropdown-link menu-close text-color-pink">Food Category</a>
-                                        <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black">Food Menu                                            
+                                        <a href="#" class="menu-dropdown-link menu-close margin-horizontal no-padding"></a>
+                                        <a href="/food-category/" class="menu-dropdown-link menu-close text-color-pink margin-horizontal no-padding">Food Category</a>
+                                        <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food Menu                                            
                                         </a>                                            
-                                        <a href="/food-subcategory/" class="menu-dropdown-link menu-close text-color-black">Food SubCategory</a>
-                                        <a href="/digital-menu/" class="menu-dropdown-link menu-close text-color-black">Digital Menu</a>
+                                        <a href="/food-subcategory/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food SubCategory</a>
+                                        <a href="/digital-menu/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Digital Menu</a>
                                     </div>
                                 </div>
                             </div>
@@ -97,164 +99,165 @@ export default {
 </script>
 
 <style scoped>
+.menu-item-dropdown .menu-item-content .f7-icons{
+    font-size: 15px;
+    margin-left: 10px;
+}
 .product-list-section{
     margin-top:70px;
 }
 .product-list-section .tabs-animated-wrap .card{
     box-shadow:none;
 }
-/*.product-list-section .card{
-    height: calc(100vh - 95px);
-}*/
-    .page-food-category {
-        background: #f1f1f1;
-    }
+.page-food-category {
+    background: #f1f1f1;
+}
 
-    .navbar-menu {
-        box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.15);
-        height: 60px !important;
-        position: relative;
-        z-index: 99;
-    }
+.navbar-menu {
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.15);
+    height: 60px !important;
+    position: relative;
+    z-index: 99;
+}
 
-    .height-40 {
-        height: 40px;
-    }
+.height-40 {
+    height: 40px;
+}
 
-    .nav-link,.menu-item-content {
-        height: 100%;
-        text-transform: capitalize;
-    }
+.nav-link,.menu-item-content {
+    height: 100%;
+    text-transform: capitalize;
+}
 
-    .menu-item-content {
-        position: relative;
-        z-index: 9;
-    }
+.menu-item-content {
+    position: relative;
+    z-index: 9;
+}
 
-    .menu-dropdown-content {
-        box-shadow: 0px 0.5px 12px rgba(0, 0, 0, 0.2);
-        min-width: 100% !important;
-        top: -30px;
-    }
+.menu-dropdown-content {
+    box-shadow: 0px 0.5px 12px rgba(0, 0, 0, 0.2);
+    min-width: 100% !important;
+    top: -30px;
+}
 
-    .menu-dropdown-center:before,
-    .menu-dropdown-center:after {
-        content: none;
-    }
+.menu-dropdown-center:before,
+.menu-dropdown-center:after {
+    content: none;
+}
 
-    .bg-dark {
-        background: #38373D;
-    }
+.bg-dark {
+    background: #38373D;
+}
 
-    .menu-item-dropdown-opened .menu-item-content {
-        background: #F33E3E;
-    }
+.menu-item-dropdown-opened .menu-item-content {
+    background: #F33E3E;
+}
 
-    .menu-dropdown-link:nth-child(2) {
-        border-bottom: 1px solid #EFEFEF;
-    }
+.menu-dropdown-link:nth-child(2) {
+    border-bottom: 1px solid #EFEFEF;
+}
+.menu-dropdown-link{
+    border-bottom: 1px solid #EFEFEF;
+}
 
-    .color-pink {
-        background: #F33E3E;
-    }
 
-    .nav-bar {
-        border-radius: 8px 8px 0px 0px;
-        position:fixed;
-        width:100%;
-        z-index: 99;
-    }
+.color-pink {
+    background: #F33E3E;
+}
 
-    .page-content {
-        padding-top: 0px !important;
-    }
+.nav-bar {
+    border-radius: 8px 8px 0px 0px;
+    position:fixed;
+    width:100%;
+    z-index: 99;
+}
 
-    .icon-only {
-        width: 100% !important;
-        height: 100% !important;
-    }
+.page-content {
+    padding-top: 0px !important;
+}
 
-    .border-bottom {
-        border-bottom: 1px solid #EAEAEA;
-    }
+.icon-only {
+    width: 100% !important;
+    height: 100% !important;
+}
 
-    .padding-icon {
-        padding: 3px;
-    }
+.border-bottom {
+    border-bottom: 1px solid #EAEAEA;
+}
 
-    .border-right {
-        border-right: 1px solid #F3F3F3 !important;
-    }
+.padding-icon {
+    padding: 3px;
+}
 
+.border-right {
+    border-right: 1px solid #F3F3F3 !important;
+}
+
+.header-links {
+    width: 75%;
+}
+
+.bg-pink {
+    background: #F33E3E;
+}
+
+.bg-karaka-orange{
+    background: #EE4925;
+}
+
+.text-color-pink {
+    color: #F33E3E;
+}
+
+.font-22 {
+    font-size: 22px;
+}
+.card-title{
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: #38373D;
+
+}
+.tab-link{
+    background-image: url('/images/tab_bg.png');
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    margin: 5px;
+}
+.tab-link-active{
+    background-image: url('/images/active_tab_bg.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    color:#fff !important;
+    background-color: transparent;
+}
+
+.toolbar{
+    background-color: transparent !important;
+    z-index: 98;
+}
+
+.toolbar-inner{
+    width:50%;
+}
+
+@media screen and (max-width:820px) {
     .header-links {
-        width: 75%;
+        width: 100%;
     }
-
-    .bg-pink {
-        background: #F33E3E;
-    }
-
-    .bg-karaka-orange{
-        background: #EE4925;
-    }
-
-    .text-color-pink {
-        color: #F33E3E;
-    }
-
-    .font-22 {
-        font-size: 22px;
-    }
-    .card-title{
-        font-weight: 600;
-        font-size: 20px;
-        line-height: 24px;
-        color: #38373D;
-
-    }
-    /*.product-list-section .tabs-animated-wrap,.product-list-section .tabs-animated-wrap > .tabs{
-        height: calc(100vh - 211px);
-    }*/
-
-    .tab-link{
-        background-image: url('/images/tab_bg.png');
-        background-color: transparent;
-        background-repeat: no-repeat;
-        background-size: 100% 100%;
-        margin: 5px;
-    }
-    .tab-link-active{
-        background-image: url('/images/active_tab_bg.png');
-        background-repeat: no-repeat;
-        background-size: 100% 100%;
-        color:#fff !important;
-        background-color: transparent;
-    }
-
-    .toolbar{
-        background-color: transparent !important;
-        z-index: 98;
-    }
-
-    .toolbar-inner{
-        width:50%;
-    }
-
-    @media screen and (max-width:820px) {
-        .header-links {
-            width: 100%;
-        }
-    }
+}
 </style>
 
 <style>
+.left {
+    width: 20%;
+    margin-left: 20px;
+}
+@media screen and (max-width:820px) {
     .left {
-        width: 20%;
-        margin-left: 20px;
+        width: 30%;
     }
-    @media screen and (max-width:820px) {
-        .left {
-            width: 30%;
-        }
-    }
+}
 </style>

@@ -27,7 +27,7 @@
                             </div>
                         </div>
                         <div class="col-50">
-                            <div class="block-title no-margin-top no-margin-left padding-left">Select Floor</div>
+                            <div class="block-title no-margin-top no-margin-left padding-left padding-top-half">Select Floor</div>
                             <div class="item-inner padding-left">
                                 <div class="item-input-wrap input-dropdown-wrap">
                                     <select placeholder="Please choose..." class="padding-left padding-right">
