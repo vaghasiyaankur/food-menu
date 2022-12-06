@@ -34,12 +34,12 @@
         <div class="reservation_card">
             <div class="card">
                 <div class="row height_100 align-items-center">
-                    <div class="col-50">
-                        <div class="text-align-center padding-top">
+                    <div class="col-100 medium-100 large-50 margin-bottom padding-bottom">
+                        <div class="text-align-center padding-top reservation_banner">
                             <img src="/images/reservationbg.png" style="width:100%;height:auto">
                         </div>
                     </div>
-                    <div class="col-50">                        
+                    <div class="col-100 medium-100 large-50">                        
                         <div class="reservation_form">
                             <div class="text-color-gray register-text padding-left">
                                 <h3 class="card-title">Registration</h3>
@@ -89,7 +89,7 @@
                                     </div>
                                     <div class="text-align-center margin-top">
                                         <a class="link text-underline text-color-black" @click="(display = false)" href="javascript:;">Check Time</a>
-                                        <div class="countdown_section position-relative" :class="{ 'display-none' : display }">
+                                        <div class="countdown_section position-relative margin-horizontal" :class="{ 'display-none' : display }">
                                             <div style="background : url('/images/dots.png')">
                                                 <img src="/images/clock.png" alt="">
                                                 <i class="f7-icons font-13 padding-half margin-bottom close-countdown" @click="display = true">xmark</i>
@@ -378,6 +378,9 @@ export default {
 }
 </script>
 <style scoped>
+.sheet-modal{
+    height: 92% !important;
+}
 .menu-item-dropdown .menu-item-content .f7-icons{
     font-size: 15px;
     margin-left: 10px;
@@ -637,11 +640,27 @@ label.item-checkbox input[type='checkbox']:checked ~ .icon-checkbox:after, label
     .header-links {
         width: 100%;
     }
+    .reservation_form{
+        height: calc(100vh - 730px);
+    }
+    .reservation_card .card .row{
+       height: auto !important;
+    }
+    .reservation_card .card .reservation_banner img{
+        width:100%;
+        max-width:350px;
+    }
+    
 }
 </style>
 <style>
 .register-button:hover, .register-button:active, .active {
     background: #F33E3E !important;
     color: #fff !important;
+}
+@media screen and (max-width:820px){
+    .dialog{
+        top: 38% !important;
+    }
 }
 </style>

@@ -46,7 +46,7 @@
                         <div class="toolbar-inner">
                             <a href="#tab-1" class="tab-link tab-link-active">General</a>
                             <a href="#tab-2" class="tab-link">Table Management</a>
-                            <a href="#tab-3" class="tab-link">Next</a>
+                            <!-- <a href="#tab-3" class="tab-link">Next</a> -->
                         </div>
                     </div>
                     <div class="tabs-animated-wrap">
@@ -58,9 +58,9 @@
                                 <TableFloorPlan v-if="tableShow" @tablehide="tableShow = false" />
                                 <AddTable v-if="!tableShow" @tableshow="tableShow = true" />
                             </div>
-                            <div id="tab-3" class="tab">
+                            <!-- <div id="tab-3" class="tab">
                                 <h2>Tab 3</h2>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -240,12 +240,15 @@ export default {
 }
 
 .toolbar-inner{
-    width:50%;
+    width:40%;
 }
 
 @media screen and (max-width:820px) {
     .header-links {
         width: 100%;
+    }
+    .toolbar-inner{
+        width:50%;
     }
 }
 </style>
@@ -257,7 +260,7 @@ export default {
 }
 @media screen and (max-width:820px) {
     .left {
-        width: 30%;
+        width: 5%;
     }
 }
 </style>

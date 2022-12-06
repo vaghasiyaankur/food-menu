@@ -426,6 +426,10 @@ export default {
     .header-links {
         width: 100%;
     }
+    .subcategory-list-section .card{
+        height: calc(100vh - 400px);
+        overflow: auto;
+    }
 }
 </style>
 
@@ -441,7 +445,7 @@ export default {
 
 @media screen and (max-width:820px) {
     .left {
-        width: 30%;
+        width: 50%;
     }
 }
 </style>

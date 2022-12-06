@@ -432,6 +432,7 @@
     line-height: 24px;
     color: #38373D;
 }
+
 </style>
 <style>
 .picker-items{
@@ -448,5 +449,17 @@
     margin:0 auto;
     justify-content: space-between !important;
     -webkit-mask-box-image: none !important;
+}
+.tabs-animated-wrap{
+    position: relative;
+    width: 100%;
+    overflow-x: hidden !important;
+    height: calc(100% - 200px) !important;
+    overflow-y: scroll !important;
+}
+@media screen and (max-width:820px){
+    .tabs-animated-wrap{
+    height: calc(100% - 500px) !important;
+    }
 }
 </style>

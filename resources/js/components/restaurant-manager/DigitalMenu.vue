@@ -314,7 +314,7 @@ export default {
       }
     @media screen and (max-width:820px) {
         .left {
-            width: 30%;
+            width: 5%;
         }
     }
 </style>
