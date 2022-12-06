@@ -57,3 +57,5 @@ Route::get('/sub-categories',[SubCategoryController::class, 'get_Subcategories']
 Route::post('/add-product',[ProductController::class, 'addSubCategory']);
 
 Route::get('/get-category-products/{id}',[ProductController::class, 'getCategoryProduct']);
+
+Route::post('get-products',[ProductController::class, 'getProducts']);

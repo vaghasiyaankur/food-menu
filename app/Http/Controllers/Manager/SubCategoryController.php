@@ -23,7 +23,9 @@ class SubCategoryController extends Controller
     {
         $subCategories = Category::with(['subCategory' => function($q) use ($req){
             $q->where('name','LIKE','%'.$req->search.'%');
-        }])->whereHas('subCategory')->get();
+        }])->whereHas('subCategory',function($q) use ($req){
+            $q->where('name','LIKE','%'.$req->search.'%');
+        })->get();
         return response()->json($subCategories);
     }
 

@@ -17,8 +17,8 @@
                                     <div class="menu-dropdown-content bg-color-white no-padding">
                                         <a href="#" class="menu-dropdown-link menu-close margin-horizontal no-padding"></a>
                                         <a href="/food-category/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food Category</a>
-                                        <a href="/food-product/" class="menu-dropdown-link menu-close text-color-pink margin-horizontal no-padding">Food Menu</a>                                        
                                         <a href="/food-subcategory/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food SubCategory</a>
+                                        <a href="/food-product/" class="menu-dropdown-link menu-close text-color-pink margin-horizontal no-padding">Food Menu</a>
                                         <a href="/digital-menu/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Digital Menu</a>
                                     </div>
                                 </div>
@@ -45,7 +45,7 @@
                                         <div class="item-inner">
                                             <div class="item-input-wrap row padding-half">
                                                 <i class="f7-icons font-22 search-icon">search</i>
-                                                <input type="search" name="search" id="searchData">
+                                                <input type="search" v-model="search" name="search" @input="getProducts()" id="searchData">
                                             </div>
                                         </div>
                                     </div>
@@ -60,295 +60,32 @@
                 </div>
                 <div class="card-content card-content-padding">
                     <div class="row">
-                        <div class="col-50">
-                            <div class="row">                                
+                        <div class="col-50" v-for="subproduct in subCategoryProduct" :key="subproduct">
+                            <div class="row">
                                 <div class="col-100">
                                     <div class="card product_lists">
                                         <div class="card_header padding-horizontal padding-top text-align-center">
                                             <div class="border-bottom padding-bottom">
-                                                <span class="card-title">Kathiyavadi thali</span>
+                                                <span class="card-title">{{ subproduct.name }}</span>
                                             </div>
                                         </div>
                                         <div class="card-content padding-top">
-                                            <div class="product_list padding-vertical-half">
+                                            <div class="product_list padding-vertical-half" v-for="product in subproduct.products" :key="product">
                                                 <div class="row align-items-center padding-horizontal">
                                                     <div class="col-100 large-60 medium-50">
                                                         <div class="row">
-                                                            <div class="col product-detail">Rice</div>
-                                                            <div class="col text-align-right product-detail">₹ 70.00</div>
+                                                            <div class="col product-detail">{{ product.name }}</div>
+                                                            <div class="col text-align-right product-detail">₹ {{ product.price.toFixed(2) }}</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-100 large-40 medium-50">
                                                         <div class="row">
                                                             <div class="col-50">
                                                                 <button class="button text-color-black padding height-36 option-button  popup-open"
-                                                                data-popup="#product_popup" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
+                                                                data-popup="#product_popup" @click="editProduct(product.id)"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
                                                             </div>
                                                             <div class="col-50">
-                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product_list padding-vertical-half">
-                                                <div class="row align-items-center padding-horizontal">
-                                                    <div class="col-100 large-60 medium-50">
-                                                        <div class="row">
-                                                            <div class="col product-detail">Dal</div>
-                                                            <div class="col text-align-right product-detail">₹ 70.00</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-100 large-40 medium-50">
-                                                        <div class="row">
-                                                            <div class="col-50">
-                                                                <button class="button text-color-black padding height-36 option-button  popup-open"
-                                                                data-popup="#product_popup" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
-                                                            </div>
-                                                            <div class="col-50">
-                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product_list padding-vertical-half">
-                                                <div class="row align-items-center padding-horizontal">
-                                                    <div class="col-100 large-60 medium-50">
-                                                        <div class="row">
-                                                            <div class="col product-detail">Roti</div>
-                                                            <div class="col text-align-right product-detail">₹ 70.00</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-100 large-40 medium-50">
-                                                        <div class="row">
-                                                            <div class="col-50">
-                                                                <button class="button text-color-black padding height-36 option-button  popup-open"
-                                                                data-popup="#product_popup" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
-                                                            </div>
-                                                            <div class="col-50">
-                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product_list padding-vertical-half">
-                                                <div class="row align-items-center padding-horizontal">
-                                                    <div class="col-100 large-60 medium-50">
-                                                        <div class="row">
-                                                            <div class="col product-detail">Sabji</div>
-                                                            <div class="col text-align-right product-detail">₹ 70.00</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-100 large-40 medium-50">
-                                                        <div class="row">
-                                                            <div class="col-50">
-                                                                <button class="button text-color-black padding height-36 option-button  popup-open"
-                                                                data-popup="#product_popup" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
-                                                            </div>
-                                                            <div class="col-50">
-                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product_list padding-vertical-half">
-                                                <div class="row align-items-center padding-horizontal">
-                                                    <div class="col-100 large-60 medium-50">
-                                                        <div class="row">
-                                                            <div class="col product-detail">Chhas</div>
-                                                            <div class="col text-align-right product-detail">₹ 70.00</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-100 large-40 medium-50">
-                                                        <div class="row">
-                                                            <div class="col-50">
-                                                                <button class="button text-color-black padding height-36 option-button  popup-open"
-                                                                data-popup="#product_popup" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
-                                                            </div>
-                                                            <div class="col-50">
-                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product_list padding-vertical-half">
-                                                <div class="row align-items-center padding-horizontal">
-                                                    <div class="col-100 large-60 medium-50">
-                                                        <div class="row">
-                                                            <div class="col product-detail">Sabji</div>
-                                                            <div class="col text-align-right product-detail">₹ 70.00</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-100 large-40 medium-50">
-                                                        <div class="row">
-                                                            <div class="col-50">
-                                                                <button class="button text-color-black padding height-36 option-button  popup-open"
-                                                                data-popup="#product_popup" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
-                                                            </div>
-                                                            <div class="col-50">
-                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product_list padding-vertical-half">
-                                                <div class="row align-items-center padding-horizontal">
-                                                    <div class="col-100 large-60 medium-50">
-                                                        <div class="row">
-                                                            <div class="col product-detail">Chhas</div>
-                                                            <div class="col text-align-right product-detail">₹ 70.00</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-100 large-40 medium-50">
-                                                        <div class="row">
-                                                            <div class="col-50">
-                                                                <button class="button text-color-black padding height-36 option-button  popup-open"
-                                                                data-popup="#product_popup" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
-                                                            </div>
-                                                            <div class="col-50">
-                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product_list padding-vertical-half">
-                                                <div class="row align-items-center padding-horizontal">
-                                                    <div class="col-100 large-60 medium-50">
-                                                        <div class="row">
-                                                            <div class="col product-detail">Sabji</div>
-                                                            <div class="col text-align-right product-detail">₹ 70.00</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-100 large-40 medium-50">
-                                                        <div class="row">
-                                                            <div class="col-50">
-                                                                <button class="button text-color-black padding height-36 option-button  popup-open"
-                                                                data-popup="#product_popup" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
-                                                            </div>
-                                                            <div class="col-50">
-                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-100">
-                                    <div class="card product_lists">
-                                        <div class="card_header padding-horizontal padding-top text-align-center">
-                                            <div class="border-bottom padding-bottom">
-                                                <span class="card-title">Paratha</span>
-                                            </div>
-                                        </div>
-                                        <div class="card-content padding-top">
-                                            <div class="product_list padding-vertical-half">
-                                                <div class="row align-items-center padding-horizontal">
-                                                    <div class="col-100 large-60 medium-50">
-                                                        <div class="row">
-                                                            <div class="col product-detail">Rice</div>
-                                                            <div class="col text-align-right product-detail">₹ 70.00</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-100 large-40 medium-50">
-                                                        <div class="row">
-                                                            <div class="col-50">
-                                                                <button class="button text-color-black padding height-36 option-button  popup-open"
-                                                                data-popup="#product_popup" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
-                                                            </div>
-                                                            <div class="col-50">
-                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product_list padding-vertical-half">
-                                                <div class="row align-items-center padding-horizontal">
-                                                    <div class="col-100 large-60 medium-50">
-                                                        <div class="row">
-                                                            <div class="col product-detail">Dal</div>
-                                                            <div class="col text-align-right product-detail">₹ 70.00</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-100 large-40 medium-50">
-                                                        <div class="row">
-                                                            <div class="col-50">
-                                                                <button class="button text-color-black padding height-36 option-button  popup-open"
-                                                                data-popup="#product_popup" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
-                                                            </div>
-                                                            <div class="col-50">
-                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product_list padding-vertical-half">
-                                                <div class="row align-items-center padding-horizontal">
-                                                    <div class="col-100 large-60 medium-50">
-                                                        <div class="row">
-                                                            <div class="col product-detail">Roti</div>
-                                                            <div class="col text-align-right product-detail">₹ 70.00</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-100 large-40 medium-50">
-                                                        <div class="row">
-                                                            <div class="col-50">
-                                                                <button class="button text-color-black padding height-36 option-button  popup-open"
-                                                                data-popup="#product_popup" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
-                                                            </div>
-                                                            <div class="col-50">
-                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product_list padding-vertical-half">
-                                                <div class="row align-items-center padding-horizontal">
-                                                    <div class="col-100 large-60 medium-50">
-                                                        <div class="row">
-                                                            <div class="col product-detail">Sabji</div>
-                                                            <div class="col text-align-right product-detail">₹ 70.00</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-100 large-40 medium-50">
-                                                        <div class="row">
-                                                            <div class="col-50">
-                                                                <button class="button text-color-black padding height-36 option-button  popup-open"
-                                                                data-popup="#product_popup" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
-                                                            </div>
-                                                            <div class="col-50">
-                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product_list padding-vertical-half">
-                                                <div class="row align-items-center padding-horizontal">
-                                                    <div class="col-100 large-60 medium-50">
-                                                        <div class="row">
-                                                            <div class="col product-detail">Chhas</div>
-                                                            <div class="col text-align-right product-detail">₹ 70.00</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-100 large-40 medium-50">
-                                                        <div class="row">
-                                                            <div class="col-50">
-                                                                <button class="button text-color-black padding height-36 option-button  popup-open"
-                                                                data-popup="#product_popup" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
-                                                            </div>
-                                                            <div class="col-50">
-                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
+                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct(product.id)"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -359,242 +96,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-50">
-                            <div class="row">
-                                <div class="col-100">
-                                    <div class="card product_lists">
-                                        <div class="card_header padding-horizontal padding-top text-align-center">
-                                            <div class="border-bottom padding-bottom">
-                                                <span class="card-title">Pizza</span>
-                                            </div>
-                                        </div>
-                                        <div class="card-content padding-top">
-                                            <div class="product_list padding-vertical-half">
-                                                <div class="row align-items-center padding-horizontal">
-                                                    <div class="col-100 large-60 medium-50">
-                                                        <div class="row">
-                                                            <div class="col product-detail">Rice</div>
-                                                            <div class="col text-align-right product-detail">₹ 70.00</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-100 large-40 medium-50">
-                                                        <div class="row">
-                                                            <div class="col-50">
-                                                                <button class="button text-color-black padding height-36 option-button  popup-open"
-                                    data-popup="#product_popup" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
-                                                            </div>
-                                                            <div class="col-50">
-                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product_list padding-vertical-half">
-                                                <div class="row align-items-center padding-horizontal">
-                                                    <div class="col-100 large-60 medium-50">
-                                                        <div class="row">
-                                                            <div class="col product-detail">Dal</div>
-                                                            <div class="col text-align-right product-detail">₹ 70.00</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-100 large-40 medium-50">
-                                                        <div class="row">
-                                                            <div class="col-50">
-                                                                <button class="button text-color-black padding height-36 option-button  popup-open"
-                                    data-popup="#product_popup" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
-                                                            </div>
-                                                            <div class="col-50">
-                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product_list padding-vertical-half">
-                                                <div class="row align-items-center padding-horizontal">
-                                                    <div class="col-100 large-60 medium-50">
-                                                        <div class="row">
-                                                            <div class="col product-detail">Roti</div>
-                                                            <div class="col text-align-right product-detail">₹ 70.00</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-100 large-40 medium-50">
-                                                        <div class="row">
-                                                            <div class="col-50">
-                                                                <button class="button text-color-black padding height-36 option-button  popup-open"
-                                    data-popup="#product_popup" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
-                                                            </div>
-                                                            <div class="col-50">
-                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product_list padding-vertical-half">
-                                                <div class="row align-items-center padding-horizontal">
-                                                    <div class="col-100 large-60 medium-50">
-                                                        <div class="row">
-                                                            <div class="col product-detail">Sabji</div>
-                                                            <div class="col text-align-right product-detail">₹ 70.00</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-100 large-40 medium-50">
-                                                        <div class="row">
-                                                            <div class="col-50">
-                                                                <button class="button text-color-black padding height-36 option-button  popup-open"
-                                    data-popup="#product_popup" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
-                                                            </div>
-                                                            <div class="col-50">
-                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product_list padding-vertical-half">
-                                                <div class="row align-items-center padding-horizontal">
-                                                    <div class="col-100 large-60 medium-50">
-                                                        <div class="row">
-                                                            <div class="col product-detail">Chhas</div>
-                                                            <div class="col text-align-right product-detail">₹ 70.00</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-100 large-40 medium-50">
-                                                        <div class="row">
-                                                            <div class="col-50">
-                                                                <button class="button text-color-black padding height-36 option-button  popup-open"
-                                    data-popup="#product_popup" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
-                                                            </div>
-                                                            <div class="col-50">
-                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-100">
-                                    <div class="card product_lists">
-                                        <div class="card_header padding-horizontal padding-top text-align-center">
-                                            <div class="border-bottom padding-bottom">
-                                                <span class="card-title">Sandwich</span>
-                                            </div>
-                                        </div>
-                                        <div class="card-content padding-top">
-                                            <div class="product_list padding-vertical-half">
-                                                <div class="row align-items-center padding-horizontal">
-                                                    <div class="col-100 large-60 medium-50">
-                                                        <div class="row">
-                                                            <div class="col product-detail">Rice</div>
-                                                            <div class="col text-align-right product-detail">₹ 70.00</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-100 large-40 medium-50">
-                                                        <div class="row">
-                                                            <div class="col-50">
-                                                                <button class="button text-color-black padding height-36 option-button  popup-open"
-                                    data-popup="#product_popup" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
-                                                            </div>
-                                                            <div class="col-50">
-                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product_list padding-vertical-half">
-                                                <div class="row align-items-center padding-horizontal">
-                                                    <div class="col-100 large-60 medium-50">
-                                                        <div class="row">
-                                                            <div class="col product-detail">Dal</div>
-                                                            <div class="col text-align-right product-detail">₹ 70.00</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-100 large-40 medium-50">
-                                                        <div class="row">
-                                                            <div class="col-50">
-                                                                <button class="button text-color-black padding height-36 option-button  popup-open"
-                                    data-popup="#product_popup" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
-                                                            </div>
-                                                            <div class="col-50">
-                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product_list padding-vertical-half">
-                                                <div class="row align-items-center padding-horizontal">
-                                                    <div class="col-100 large-60 medium-50">
-                                                        <div class="row">
-                                                            <div class="col product-detail">Roti</div>
-                                                            <div class="col text-align-right product-detail">₹ 70.00</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-100 large-40 medium-50">
-                                                        <div class="row">
-                                                            <div class="col-50">
-                                                                <button class="button text-color-black padding height-36 option-button  popup-open"
-                                    data-popup="#product_popup" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
-                                                            </div>
-                                                            <div class="col-50">
-                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product_list padding-vertical-half">
-                                                <div class="row align-items-center padding-horizontal">
-                                                    <div class="col-100 large-60 medium-50">
-                                                        <div class="row">
-                                                            <div class="col product-detail">Sabji</div>
-                                                            <div class="col text-align-right product-detail">₹ 70.00</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-100 large-40 medium-50">
-                                                        <div class="row">
-                                                            <div class="col-50">
-                                                                <button class="button text-color-black padding height-36 option-button  popup-open"
-                                    data-popup="#product_popup" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
-                                                            </div>
-                                                            <div class="col-50">
-                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product_list padding-vertical-half">
-                                                <div class="row align-items-center padding-horizontal">
-                                                    <div class="col-100 large-60 medium-50">
-                                                        <div class="row">
-                                                            <div class="col product-detail">Chhas</div>
-                                                            <div class="col text-align-right product-detail">₹ 70.00</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-100 large-40 medium-50">
-                                                        <div class="row">
-                                                            <div class="col-50">
-                                                                <button class="button text-color-black padding height-36 option-button  popup-open"
-                                    data-popup="#product_popup" @click="editProduct"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
-                                                            </div>
-                                                            <div class="col-50">
-                                                                <button class="button text-color-red padding height-36 option-button" @click="removeProduct"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>  
-                            </div>
-                        </div>                        
                     </div>
                 </div>
             </div>
@@ -604,27 +105,23 @@
             <div class="category-add padding">
                 <div class="categoryForm text-align-left no-padding">
                     <label for="" class="add_category_name">Add product</label>
-                    <input type="text" name="name" class="category-name margin-top-half padding-left-half padding-right-half" placeholder="Add Product name">
+                    <input type="text" name="name" v-model="product.name" class="category-name margin-top-half padding-left-half padding-right-half" placeholder="Add Product name">
                 </div>
                 <div class="categoryForm text-align-left margin-top">
-                    <label for="" class="add_category_name">Parent category</label>
+                    <label for="" class="add_category_name">Choose Sub category</label>
                     <div class="item-input-wrap input-dropdown-wrap category-name margin-top-half no-padding">
-                        <select placeholder="Please choose..." class="selectCategory padding-left-half">
-                            <option value="indian">indian</option>
-                            <option value="chinese">chinese</option>
-                            <option value="panjabi">panjabi</option>
-                            <option value="dessert">dessert</option>
-                            <option value="fast_food">fast food</option>
+                        <select placeholder="Please choose..." v-model="product.sub_category" class="selectCategory padding-left-half">
+                            <option v-for="(subCat,key) in subCategoryOption" :key="subCat" :value="key">{{ subCat }}</option>
                         </select>
                     </div>
                 </div>
                 <div class="categoryForm margin-top text-align-left no-padding">
                     <label for="" class="add_category_name">Price</label>
-                    <input type="text" name="name" class="category-name margin-top-half padding-left-half padding-right-half" placeholder="Add product price">
+                    <input type="text" name="price" v-model="product.price" class="category-name margin-top-half padding-left-half padding-right-half" placeholder="Add product price">
                 </div>
                 <div class="margin-top no-margin-bottom display-flex justify-content-center padding-top popup_button">
-                    <button type="button" class="button button-raised text-color-black button-large popup-close margin-right">Cancel</button>
-                    <button type="button" class="button button-raised button-large bg-karaka-orange" style="background-color: rgb(243, 62, 62); color: rgb(255, 255, 255);" @click="addCategory">Ok</button>
+                    <button type="button" class="button button-raised text-color-black button-large popup-close margin-right popup-button">Cancel</button>
+                    <button type="button" class="button button-raised button-large bg-karaka-orange text-color-white popup-button" style="background-color: rgb(243, 62, 62);" @click="addProduct">Ok</button>
                 </div>
             </div>
             <div><img src="/images/flow.png" style="width:100%"></div>
@@ -634,6 +131,7 @@
 <script>
 import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Input,f7ListItem,f7AccordionContent,f7List,f7AccordionToggle,f7AccordionItem } from 'framework7-vue';
 import $ from 'jquery';
+import axios from 'axios';
 export default {
     name : 'FoodProduct',
     components: {
@@ -649,37 +147,45 @@ export default {
         f7List,
         f7AccordionItem
     },
+    data() {
+        return {
+            product: {
+                id : 0,
+                name: '',
+                sub_category: null,
+                price: '',
+            },
+            subCategoryOption: [],
+            subCategoryProduct:[],
+            search : '',
+        }
+    },
     mounted() {
         $('.page-content').css('background', '#F0F0F0');
+        this.getAllSubCategories();
+        this.getProducts();
     },
     methods: {
         addProduct(){
-            // var product = f7.dialog.create({
-            //     title: 'Add Product',
-            //     content: document.getElementById('product_popup').innerHTML,
-            //     buttons: [{
-            //             text: 'Cancel',
-            //             class: 'button'
-            //         },
-            //         {
-            //             text: 'Ok',
-            //             class: 'button'
-            //         },
-            //     ],
-            // });
+            var formData = new FormData();
+            formData.append('name', this.product.name);
+            formData.append('price', this.product.price);
+            formData.append('sub_category_id', this.product.sub_category);
 
-            // product.open(false)
+            if (!this.product.name || !this.product.price || !this.product.sub_category) {
+                this.notification('Please fill the form details.');
+                return false;
+            }
 
-            // setTimeout(() => {
-            //     $('.category-title').remove();
-            //     $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });
-            //     $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
-            //     $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
-            //     $('.dialog-button').eq(1).removeClass('text-color-black');
-            //     $('.dialog-buttons').addClass('margin-top no-margin-bottom')
-            // }, 200);
+            axios.post('/api/add-product', formData)
+            .then((res) => {
+                f7.popup.close(`#product_popup`);
+                this.product.name = '';
+                this.product.price = '';
+                this.product.sub_category = null;
+            })
         },
-        removeProduct(){
+        removeProduct(id){
             f7.dialog.confirm('Are you sure delete the product?');
             setTimeout(() => {
                 $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });
@@ -690,31 +196,19 @@ export default {
                 $('.dialog-buttons').addClass('margin-top no-margin-bottom')
             }, 200);
         },
-        editProduct(){
-            // var product = f7.dialog.create({
-            //     title: 'Edit Product',
-            //     content: document.getElementById('product_popup').innerHTML,
-            //     buttons: [{
-            //             text: 'Cancel',
-            //             class: 'button'
-            //         },
-            //         {
-            //             text: 'Ok',
-            //             class: 'button'
-            //         },
-            //     ],
-            // });
-
-            // product.open(false)
-
-            // setTimeout(() => {
-            //     $('.category-title').remove();
-            //     $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });
-            //     $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
-            //     $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
-            //     $('.dialog-button').eq(1).removeClass('text-color-black');
-            //     $('.dialog-buttons').addClass('margin-top no-margin-bottom')
-            // }, 200);
+        editProduct(id){
+        },
+        getAllSubCategories() {
+            axios.get('/api/sub-categories')
+            .then((res) => {
+                this.subCategoryOption = res.data;
+            })
+        },
+        getProducts() {
+            axios.post('/api/get-products',{search : this.search})
+            .then((res) => {
+                this.subCategoryProduct = res.data;
+            })
         }
     },
 }
