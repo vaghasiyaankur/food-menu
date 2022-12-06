@@ -30,13 +30,17 @@ class CategorySeeder extends Seeder
             ]
         ];
 
+        $check_folder= is_dir(storage_path('app/public/category'));
+        if(!$check_folder) mkdir(storage_path('app/public/category'));
+
         foreach ($categories as $cate) {
             $cat = new Category();
             $cat->name = $cate['name'];
             $cat->image = $cate['image'];
             $cat->save();
-
-            File::copy(public_path('images'.$cate['image']), storage_path('app/public'. $cate['image']));
+            
+            
+            File::copy(public_path('images'.$cate['image']), public_path('storage/'. $cate['image']));
 
             foreach ($cate['sub_categories'] as $subCat) {
                 $subCate = new SubCategory();
