@@ -19,10 +19,10 @@
                                         <a href="#" class="menu-dropdown-link menu-close"></a>
                                         <a href="/food-category/"
                                             class="menu-dropdown-link menu-close text-color-black">Food Category</a>
+                                        <a href="/food-subcategory/"
+                                                class="menu-dropdown-link menu-close text-color-black">Food SubCategory</a>
                                         <a href="/food-product/"
                                             class="menu-dropdown-link menu-close text-color-black">Food Menu</a>
-                                        <a href="/food-subcategory/"
-                                            class="menu-dropdown-link menu-close text-color-black">Food SubCategory</a>
                                         <a href="/digital-menu/"
                                             class="menu-dropdown-link menu-close text-color-black">Digital Menu</a>
                                     </div>
@@ -68,16 +68,16 @@
                                 <div class="col">
                                     <div class="item-content item-input">
                                         <div class="item-inner">
-                                            <div class="item-input-wrap row padding-half">
+                                            <div class="item-input-wrap searchData row padding-half">
                                                 <i class="f7-icons font-22 search-icon">search</i>
-                                                <input type="search" name="search" id="searchData">
+                                                <input type="search" v-model="search" name="search" id="searchData" @input="getCategories()">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col padding-left-half padding-right-half">
                                     <button class="button button-raised bg-dark text-color-white padding height-36 popup-open"
-                                        data-popup=".categoryPopup"><i class="f7-icons font-22">plus_square</i> Add
+                                        data-popup=".categoryPopup" @click="category_title = 'Add Category'; category_placeholder = 'Add Category name'; category.id = null"><i class="f7-icons font-22">plus_square</i> Add
                                         category</button>
                                 </div>
                             </div>
@@ -103,7 +103,7 @@
                                 <div class="row align-items-center">
                                     <div class="col-50">
                                         <button class="button text-color-black padding height-36 border__right popup-open" data-popup="#subCategory_popup"
-                                            @click="addSubCategory(category.id)">
+                                            @click="subCategory.category = category.id">
                                             <i class="f7-icons font-22">plus_square</i>Add sub category
                                         </button>
                                     </div>
@@ -126,13 +126,13 @@
         </div>
         <div id="category_popup" class="popup categoryPopup" style="position: fixed; display: block; border-radius: 15px;">
             <div class="category-form">
-                <div class="text-align-center padding popup_title">Add Category</div>
+                <div class="text-align-center padding popup_title">{{ category_title }}</div>
                 <div class="category-add padding">
                     <label class="add_category_name">Category name</label>
                     <div class="categoryForm text-align-left">
                         <input type="text" v-model="category.name" name="name"
                             class="category-name margin-top-half padding-left-half padding-right-half"
-                            placeholder="Add category name">
+                            :placeholder="category_placeholder">
                     </div>
                     <div class="category-image-selection margin-top">
                         <input type="file" class="add-category-image" @change="addimageChange" id="categoryImage" />
@@ -151,53 +151,33 @@
                         </label>
                     </div>
                     <div class="margin-top no-margin-bottom display-flex justify-content-center padding-top popup_button">
-                        <button type="button" class="button button-raised text-color-black button-large popup-close margin-right">Cancel</button>
-                        <button type="button" class="button button-raised button-large bg-karaka-orange" style="background-color: rgb(243, 62, 62); color: rgb(255, 255, 255);" @click="addCategory">Ok</button>
+                        <button type="button" class="button button-raised text-color-black button-large popup-close margin-right popup-button">Cancel</button>
+                        <button type="button" class="button button-raised button-large popup-button" style="background-color: rgb(243, 62, 62); color: rgb(255, 255, 255);" @click="addCategory">Ok</button>
                     </div>
                 </div>
                 <div><img src="/images/flow.png" style="width:100%"></div>
             </div>
         </div>
-        <div id="subCategory_popup" class="popup categoryPopup" style="position: fixed; display: block; border-radius: 15px;">
+        <div id="subCategory_popup" class="popup subCategoryPopup" style="position: fixed; display: block; border-radius: 15px;">
             <div class="text-align-center padding popup_title">Add Sub category</div>
             <div class="category-add padding">
                 <div class="categoryForm text-align-left no-padding margin-bottom">
                     <label class="add_category_name">Sub category name</label>
-                    <input type="text" name="name"
+                    <input type="text" name="name" v-model="subCategory.name"
                         class="category-name margin-top-half padding-left-half padding-right-half"
                         placeholder="Add sub category name">
                 </div>
-                <!-- <div class="categoryForm text-align-left margin-bottom">
+                <div class="categoryForm text-align-left margin-bottom">
                     <label for="" class="add_category_name">Parent category</label>
                     <div class="item-input-wrap input-dropdown-wrap category-name margin-top-half no-padding">
-                        <select placeholder="Please choose..." class="selectCategory padding-left-half">
-                            <option value="indian">indian</option>
-                            <option value="chinese">chinese</option>
-                            <option value="panjabi">panjabi</option>
-                            <option value="dessert">dessert</option>
-                            <option value="fast_food">fast food</option>
+                        <select placeholder="Please choose..." v-model="subCategory.category" class="selectCategory padding-left-half">
+                            <option v-for="(category,key) in categoryOption" :key="category" :value="key">{{ category }}</option>
                         </select>
                     </div>
-                </div> -->
-                <div class="category-image-selection margin-top">
-                    <input type="file" class="add-category-image" @change="addimageChange" id="categoryImage" />
-                    <label class="category-image text-align-center" for="categoryImage">
-                        <div v-if="image_url" class="popup_img">
-                            <img :src="image_url" alt="" />
-                        </div>
-                        <div v-else>
-                            <div class="margin-bottom">
-                                <img src="/images/add-image.png" />
-                            </div>
-                            <div>
-                                <span class="add-image-text">Select Image</span>
-                            </div>
-                        </div>
-                    </label>
                 </div>
                 <div class="margin-top no-margin-bottom display-flex justify-content-center padding-top popup_button">
-                    <button type="button" class="button button-raised text-color-black button-large popup-close margin-right">Cancel</button>
-                    <button type="button" class="button button-raised button-large bg-karaka-orange" style="background-color: rgb(243, 62, 62); color: rgb(255, 255, 255);" @click="addCategory">Ok</button>
+                    <button type="button" class="button button-raised text-color-black button-large popup-close margin-right popup-button">Cancel</button>
+                    <button type="button" class="button button-raised button-large text-color-white popup-button" style="background-color: #f33e3e" @click="addSubCategory">Ok</button>
                 </div>
             </div>
             <div><img src="/images/flow.png" style="width:100%"></div>
@@ -216,12 +196,20 @@ export default {
         return {
             test: 'indian',
             categories: [],
+            categoryOption : [],
             category: {
-                id : '',
+                id : null,
                 name: '',
                 image: '',
             },
+            subCategory: {
+                name: '',
+                category: null,
+            },
+            category_title: 'Add Category',
+            category_placeholder: 'Add Category name',
             image_url: null,
+            search : '',
         }
     },
     components: {
@@ -235,6 +223,7 @@ export default {
     mounted() {
         $('.page-content').css('background', '#FFF');
         this.getCategories();
+        this.getAllCategories();
     },
     methods: {
         addimageChange(e) {
@@ -242,14 +231,17 @@ export default {
             this.image_url = URL.createObjectURL(this.category.image);
         },
         getCategories() {
-            axios.get('/api/get-categories')
+            axios.post('/api/get-categories', { search: this.search})
             .then((res) => {
                 this.categories = res.data;
             })
         },
-        removeCategory() {
+        removeCategory(id) {
             f7.dialog.confirm('Are you sure delete the category?', () => {
-                $('.closeReservation').css('background-color', '');
+                axios.post('/api/delete-category', { id: id })
+                .then((res) => {
+                    this.getCategories();
+                })
             });
             setTimeout(() => {
                 $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });
@@ -267,18 +259,66 @@ export default {
             var formData = new FormData();
             formData.append('name', this.category.name);
             formData.append('image', this.category.image);
-            axios.post('/api/add-category', formData, config)
-            .then((res) => {
-                this.categories.push(res.data);
-                f7.popup.close(`#category_popup`);
+            if (!this.category.name || !this.category.image) {
+                this.notification('Please fill the form details.');
+                return false;
+            }
+            if (this.category.id) {
+                formData.append('id', this.category.id);
+                axios.post('/api/update-category', formData, config)
+                .then((res) => {
+                    this.getCategories();
+                    f7.popup.close(`#category_popup`);
+                })
+            } else {
+                axios.post('/api/add-category', formData, config)
+                .then((res) => {
+                    this.categories.push(res.data);
+                    f7.popup.close(`#category_popup`);
+                })
+            }
+        },
+        editCategory(id) {
+            this.category_title = 'Edit Category';
+            this.category_placeholder = 'Edit Category name';
+            axios.get('/api/get-category/'+id)
+                .then((res) => {
+                this.category.id = res.data.id;
+                this.category.name = res.data.name;
+                this.category.image = res.data.image;
+                if (res.data.image) {
+                    this.image_url = '/storage' + res.data.image;
+                }
             })
         },
-        editCategory() {
-
-        },
         addSubCategory() {
-            
+            var formData = new FormData();
+            formData.append('name', this.subCategory.name);
+            formData.append('category_id', this.subCategory.category);
+
+            if (!this.subCategory.name || !this.subCategory.category) {
+                this.notification('Please fill the form details.');
+                return false;
+            }
+
+            axios.post('/api/add-sub-category', formData)
+            .then((res) => {
+                f7.popup.close(`#subCategory_popup`);
+            })
         },
+        notification(notice) {
+            var notificationFull = f7.notification.create({
+                subtitle: notice,
+                closeTimeout: 3000,
+            });
+            notificationFull.open();
+        },
+        getAllCategories() {
+            axios.get('/api/categories')
+            .then((res) => {
+                this.categoryOption = res.data;
+            })
+        }
     },
 };
 </script>
@@ -453,7 +493,7 @@ export default {
 .category-image-selection .popup_img img{
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: none;
 }
 @media screen and (max-width:820px) {
     .header-links {
@@ -556,6 +596,10 @@ export default {
     top: 28% !important;
     left: 35% !important;
     margin : 0 !important;
+}
+
+.popup-button{
+    text-transform: capitalize !important;
 }
 
 @media screen and (max-width:820px) {
