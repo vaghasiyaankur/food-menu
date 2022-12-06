@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Manager\CategoryController;
 use App\Http\Controllers\Manager\ProductController;
 use App\Http\Controllers\Manager\SubCategoryController;
+use App\Http\Controllers\Manager\SettingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -51,6 +52,24 @@ Route::post('update-sub-category',[SubCategoryController::class, 'updateSubCateg
 Route::post('/delete-sub-category',[SubCategoryController::class, 'deleteSubCategory']);
 
 Route::get('/sub-categories',[SubCategoryController::class, 'get_Subcategories']);
+
+
+// ------------------------Setting Page Routes ------------------------ //
+
+Route::get('setting-data',[SettingController::class, 'settingData']);
+
+Route::post('update-setting',[SettingController::class, 'updateSetting']);
+
+Route::get('table-list',[SettingController::class, 'tableList']);
+
+Route::get('table-data/{id}',[SettingController::class, 'tableData']);
+
+Route::post('add-update-table',[SettingController::class, 'addUpdateTable']);
+
+Route::post('/delete-table',[SettingController::class, 'deleteTable']);
+
+Route::post('/change-table-status',[SettingController::class, 'changeTableStatus']);
+
 
 // ------------------------ Product Routes ------------------------ //
 

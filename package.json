@@ -17,6 +17,7 @@
         "framework7": "^7.0.8",
         "framework7-vue": "^7.0.8",
         "jquery": "^3.6.1",
+        "laravel-vue-pagination": "^4.0.0",
         "vue": "^3.2.40",
         "vue-loader": "^17.0.0"
     }
