@@ -243,8 +243,6 @@ export default {
 </script>
 
 <style scoped>
-
-
 .border-popup{
     width: 40px;
     height: 5px;
@@ -315,9 +313,8 @@ export default {
     width: 67px;
     height: 67px;
   }
-  .menu-lists{
-    height: 100%;
-    max-height: 500px;
-    overflow: auto;
+  .menu-lists {
+      height: calc(100vh - 430px);
+      overflow: auto;
   }
 </style>

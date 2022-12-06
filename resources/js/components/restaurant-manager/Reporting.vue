@@ -54,7 +54,7 @@
             </div>
             <div class="reporting_card">
                 <div class="row">
-                    <div class="col-25">
+                    <div class="col-100 large-25 medium-50">
                         <div class="card border__radius_10 elevation-2">
                             <div class="card-content">
                                 <h3 class="card__heading no-margin-top">Total Orders</h3>
@@ -65,7 +65,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-25">
+                    <div class="col-100 large-25 medium-50">
                         <div class="card border__radius_10 elevation-2">
                             <div class="card-content">
                                 <h3 class="card__heading no-margin-top">Completed Orders</h3>
@@ -76,7 +76,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-25">
+                    <div class="col-100 large-25 medium-50">
                         <div class="card border__radius_10 elevation-2">
                             <div class="card-content">
                                 <h3 class="card__heading no-margin-top">Ongoing Orders</h3>
@@ -87,7 +87,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-25">
+                    <div class="col-100 large-25 medium-50">
                         <div class="card border__radius_10 elevation-2">
                             <div class="card-content">
                                 <h3 class="card__heading no-margin-top">Most Reservation Table</h3>
@@ -167,7 +167,7 @@ export default {
             inputEl: '#demo-calendar-range',
             rangePicker: true,
             numbers:true
-        });
+        });          
     },
     setup() {
         const numbers = [];
@@ -202,9 +202,6 @@ export default {
 .menu-item-dropdown .menu-item-content .f7-icons{
     font-size: 15px;
     margin-left: 10px;
-}
-.page-content{
-    background: #fff !important;
 }
 /*========= CHART CSS =========*/
 .area-chart{
@@ -367,6 +364,11 @@ export default {
 }
 </style>
 <style>
+
+.page-content{
+    background: #fff !important;
+}
+
 .calendar-day-number{
     border-radius: 3px !important;
 }

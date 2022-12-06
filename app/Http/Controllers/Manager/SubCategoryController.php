@@ -23,11 +23,7 @@ class SubCategoryController extends Controller
     {
         $subCategories = Category::with(['subCategory' => function($q) use ($req){
             $q->where('name','LIKE','%'.$req->search.'%');
-            $q->whereNotNull('name');
-        }])->whereHas('subCategory',function($q) use ($req){
-            $q->where('name','LIKE','%'.$req->search.'%');
-            $q->whereNotNull('name');
-        })->get();
+        }])->whereHas('subCategory')->get();
         return response()->json($subCategories);
     }
 
@@ -54,5 +50,12 @@ class SubCategoryController extends Controller
         $subCat->delete();
 
         return response()->json(['sucess'=>'category Deleted Sucessfully.']);
+    }
+
+    public function get_Subcategories()
+    {
+        $subCat = SubCategory::pluck('name','id');
+
+        return response()->json($subCat);
     }
 }
