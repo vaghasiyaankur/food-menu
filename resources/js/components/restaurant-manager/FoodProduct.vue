@@ -374,7 +374,24 @@ export default {
         width: 130px;
         border-radius: 10px;
     }
-
+    .arrow_button {
+        width: 30px;
+        height: 30px;
+        background: #ffffff;
+        box-shadow: 0px 1px 10px rgb(51 51 51 / 10%);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .scroll__arrow{
+        position:absolute;
+        bottom: 0;
+        left: 50%;
+    }
+    .position-relative{
+        position: relative;
+    }
     @media screen and (max-width:820px) {
         .header-links {
             width: 100%;
