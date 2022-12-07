@@ -31,7 +31,7 @@
                             </div>
                         </div>
                         <div class="col-50">
-                            <div class="block-title no-margin-top no-margin-left padding-left padding-top-half">Select Floor</div>
+                            <div class="block-title no-margin-top no-margin-left padding-left">Select Floor</div>
                             <div class="item-inner padding-left">
                                 <div class="item-input-wrap input-dropdown-wrap">
                                     <select placeholder="Please choose..." class="padding-left padding-right" v-model="floor_number">
@@ -46,10 +46,10 @@
                             </div>
                         </div>
                         <div class="col-50">
+                            <div class="block-title no-margin-top no-margin-left padding-left">Table Color</div>
                             <div class="item-content item-input margin-bottom">
                                 <div class="item-inner">
-                                    <div class="block-title no-margin-top no-margin-left">Table Color</div>
-                                    <div class="item-input-wrap">
+                                    <div class="item-input-wrap input-dropdown-wrap">
                                         <!-- <input type="text" name="number" class="padding margin-top-half" placeholder="Enter color name"> -->
                                         <select placeholder="Please choose table color..." class="padding-left padding-right" v-model="color">
                                             <option value="Green">Green</option>
