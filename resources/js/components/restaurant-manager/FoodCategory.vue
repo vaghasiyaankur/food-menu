@@ -18,6 +18,7 @@
                                 <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
                                     <div class="menu-dropdown-content bg-color-white no-padding">
                                         <a href="#" class="menu-dropdown-link menu-close margin-horizontal no-padding"></a>
+                                        <a href="/" class="menu-dropdown-link menu-close text-color-pink">Table</a>lavender
                                         <a href="/food-category/"
                                             class="menu-dropdown-link menu-close text-color-black">Food Category</a>
                                         <a href="/food-subcategory/"

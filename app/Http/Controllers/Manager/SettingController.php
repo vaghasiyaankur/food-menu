@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Manager;
 
 use App\Http\Controllers\Controller;
 use App\Models\Setting;
+use App\Models\Color;
 use App\Models\Table;
 use Illuminate\Http\Request;
 use App\Helper\ImageHelper;
@@ -77,6 +78,32 @@ class SettingController extends Controller
     }
 
     /**
+     * To pass all table color list from database to frontend
+     * 
+     * @return @json ($colors)
+     * 
+     */
+    public function colorList()
+    {
+        $colors = Color::all();
+
+        return response()->json([ 'colors' => $colors ] , 200);
+    }
+
+    /**
+     * To check the color of the table from above the capacity of person
+     * 
+     * @return @json (suceess message and color id)
+     * 
+     */
+    public function checkColor($capacity)
+    {
+        $table = Table::where('capacity_of_person', intval($capacity))->first();
+        if($table) return response()->json([ 'success' => true, 'color_id' => $table->color_id ] , 200);
+        else return response()->json([ 'success' => false ] , 200);
+    }
+
+    /**
      * To pass Single table data from database to frontend
      * 
      * @return @json ($table)
@@ -101,7 +128,7 @@ class SettingController extends Controller
             'table_number' => $request->table_number,
             'capacity_of_person' => $request->capacity_of_person,
             'floor_number' => $request->floor_number,
-            'color' => $request->color,
+            'color_id' => $request->color,
         ];
 
         Table::updateOrCreate(['id' => $request->id], $data);

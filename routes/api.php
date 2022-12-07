@@ -5,6 +5,7 @@ use App\Http\Controllers\Manager\CategoryController;
 use App\Http\Controllers\Manager\ProductController;
 use App\Http\Controllers\Manager\SubCategoryController;
 use App\Http\Controllers\Manager\SettingController;
+use App\Http\Controllers\Manager\TableController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -62,6 +63,10 @@ Route::post('update-setting',[SettingController::class, 'updateSetting']);
 
 Route::get('table-list',[SettingController::class, 'tableList']);
 
+Route::get('color-list',[SettingController::class, 'colorList']);
+
+Route::get('check-color/{capacity}',[SettingController::class, 'checkColor']);
+
 Route::get('table-data/{id}',[SettingController::class, 'tableData']);
 
 Route::post('add-update-table',[SettingController::class, 'addUpdateTable']);
@@ -78,3 +83,7 @@ Route::post('/add-product',[ProductController::class, 'addSubCategory']);
 Route::get('/get-category-products/{id}',[ProductController::class, 'getCategoryProduct']);
 
 Route::post('get-products',[ProductController::class, 'getProducts']);
+
+// ------------------------Manager Table Page Routes ------------------------ //
+
+Route::get('table-list-with-order',[TableController::class, 'tableList']);

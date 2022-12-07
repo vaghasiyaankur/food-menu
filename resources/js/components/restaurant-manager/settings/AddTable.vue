@@ -25,7 +25,7 @@
                                 <div class="item-inner">
                                     <div class="block-title no-margin-top no-margin-left">Capacity of Person</div>
                                     <div class="item-input-wrap">
-                                        <input type="number" name="number" class="padding margin-top-half" placeholder="Enter Capacity" v-model="capacity_of_person">
+                                        <input type="number" name="number" class="padding margin-top-half" placeholder="Enter Capacity" v-model="capacity_of_person" @keyup="checkColor()">
                                     </div>
                                 </div>
                             </div>
@@ -52,13 +52,7 @@
                                     <div class="item-input-wrap">
                                         <!-- <input type="text" name="number" class="padding margin-top-half" placeholder="Enter color name"> -->
                                         <select placeholder="Please choose table color..." class="padding-left padding-right" v-model="color">
-                                            <option value="Green">Green</option>
-                                            <option value="Yellow">Yellow</option>
-                                            <option value="Red">Red</option>
-                                            <option value="Orange">Orange</option>
-                                            <option value="Blue">Blue</option>
-                                            <option value="Pink">Pink</option>
-                                            <option value="Grey">Grey</option>
+                                            <option v-for="color in colors" :key="color.id" :value="color.id">{{color.color.replace("_", " ")}}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -88,21 +82,29 @@
                 table_number : '',
                 capacity_of_person : '',
                 floor_number : '',
+                colors : [],
                 color: '',
             }
         },
         created() {
-            if(this.tableId == 0) return false;
-            this.tableData();
+            this.colorList();
         },
         methods: {
+            colorList() {
+                axios.get('/api/color-list')
+                .then((res) => {
+                    this.colors = res.data.colors;
+                    if(this.tableId == 0) return false;
+                    this.tableData();
+                })
+            },
             tableData() {
                 axios.get('/api/table-data/'+this.tableId)
                 .then((res) => {
                     this.table_number = res.data.table.table_number;
                     this.capacity_of_person = res.data.table.capacity_of_person;
                     this.floor_number = res.data.table.floor_number;
-                    this.color = res.data.table.color;
+                    this.color = res.data.table.color_id;
                 })
             },
             addUpdateTable() {
@@ -138,6 +140,12 @@
                     closeTimeout: 3000,
                 });
                 notificationFull.open();
+            },
+            checkColor() {
+                axios.get('/api/check-color/'+this.capacity_of_person)
+                .then((res) => {
+                    if(res.data.success) this.color = res.data.color_id;
+                })
             }
         }    
     }
