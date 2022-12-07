@@ -56,21 +56,21 @@
                 <div class="position-relative">
                     <div class="menu-title"><span>{{ categoryName }} Menu</span></div>
                 </div>
-                    <div class="menu-details margin-top">
-                        <div class="menu-lists">
-                            <div class="row" v-if="product_subcategory.length">
-                                <div class="col-50" v-for="subcate in product_subcategory" :key="subcate">
-                                    <div class="menu-list">
-                                        <div class="font-18 text-align-center menu-list-title text-color-black"><u>{{ subcate.name }}</u></div>
-                                        <div class="list row margin-half align-items-center" v-for="product in subcate.products" :key="product">
-                                            <div class="col-80 display-flex">{{ product.name }} <span class="dots"></span></div>
-                                            <div class="col-20">{{ product.price.toFixed(2) }}</div>
-                                        </div>
+                <div class="menu-details margin-top">
+                    <div class="menu-lists">
+                        <div class="row" v-if="product_subcategory.length">
+                            <div class="col-50" v-for="subcate in product_subcategory" :key="subcate">
+                                <div class="menu-list">
+                                    <div class="font-18 text-align-center menu-list-title text-color-black"><u>{{ subcate.name }}</u></div>
+                                    <div class="list row margin-half align-items-center" v-for="product in subcate.products" :key="product">
+                                        <div class="col-80 display-flex">{{ product.name }} <span class="dots"></span></div>
+                                        <div class="col-20">{{ product.price.toFixed(2) }}</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
         </div>
 </f7-page>
@@ -102,7 +102,7 @@ export default {
         }
     },
     created() {
-        $('.page-content').css('background', '#FFF');
+        $('.page-content').css('background', '#F7F7F7');
         this.getCategories();
     },
     methods: {
@@ -126,12 +126,12 @@ export default {
 </script>
 
 <style scoped>
-    .menu-item-dropdown .menu-item-content .f7-icons{
+.menu-item-dropdown .menu-item-content .f7-icons{
         font-size: 15px;
         margin-left: 10px;
     }
     .page-content{
-        background-color: #fff !important;
+        background-color: #F7F7F7 !important;
     }
     .nav-bar{
         position: fixed;
@@ -296,7 +296,7 @@ export default {
             width: 100%;
         }
     }
-    </style>
+</style>
 
 <style>
     .slide-active .menu-image{

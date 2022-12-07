@@ -78,3 +78,9 @@ Route::post('/add-product',[ProductController::class, 'addSubCategory']);
 Route::get('/get-category-products/{id}',[ProductController::class, 'getCategoryProduct']);
 
 Route::post('get-products',[ProductController::class, 'getProducts']);
+
+Route::get('product/{id}',[ProductController::class, 'editProduct']);
+
+Route::post('update-product',[ProductController::class, 'updateProduct']);
+
+Route::post('/delete-product',[ProductController::class, 'deleteProduct']);

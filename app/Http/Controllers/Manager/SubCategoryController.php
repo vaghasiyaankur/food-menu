@@ -16,7 +16,7 @@ class SubCategoryController extends Controller
         $subCat->category_id = $req->category_id;
         $subCat->save();
 
-        return response()->json(['sucess'=>'category Added Sucessfully.']);
+        return response()->json(['success'=>'Sub Category Added Successfully.']);
     }
 
     public function getSubCategories(Request $req)
@@ -42,7 +42,7 @@ class SubCategoryController extends Controller
         $subCat->category_id = $req->category_id;
         $subCat->save();
 
-        return response()->json(['sucess'=>'category Updated Sucessfully.']);
+        return response()->json(['success'=>'Sub Category Updated Successfully.']);
     }
 
     public function deleteSubCategory(Request $req)
@@ -51,7 +51,7 @@ class SubCategoryController extends Controller
 
         $subCat->delete();
 
-        return response()->json(['sucess'=>'category Deleted Sucessfully.']);
+        return response()->json(['success'=>'Sub Category Deleted Successfully.']);
     }
 
     public function get_Subcategories()

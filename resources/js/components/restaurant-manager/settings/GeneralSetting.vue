@@ -55,13 +55,13 @@
                                 <span class="drop-down__name">
                                     <input type="text" class="toggle-event-check" placeholder="Date Time" v-model="open_time" readonly="readonly" id="start-picker-date" />
                                     <input type="hidden" readonly="readonly" id="start-picker-date-hidden" />
-                                </span>                                             
+                                </span>
                                 <span classs="down__icon">
                                     <i class="f7-icons toggle-event-check">arrowtriangle_down_fill</i>
                                 </span>
                             </div>
                         </div>
-                        
+
                         <div class="drop-down__menu-box">
                             <div class="drop-down__menu">
                                 <div class="block-title margin-top">Set Open Time</div>
@@ -80,14 +80,14 @@
                                     </div> -->
                                 <div class="block block-strong no-padding no-margin margin-bottom time_piker_inner">
                                     <div id="start-picker-date-container"></div>
-                                </div>  
+                                </div>
                                 <div class="display-flex justify-content-end padding-bottom time__button">
                                     <a class="padding-right text-color-black toggle-event-check" href="javascript:;">Cancel</a>
-                                    <a class="text-color-red" href="javascript:;" @click="opentimeshow()">OK</a>   
-                                </div>                              
+                                    <a class="text-color-red" href="javascript:;" @click="opentimeshow()">OK</a>
+                                </div>
                             </div>
                         </div>
-                    </div>                    
+                    </div>
                 </div>
                 <div class="col padding-left">
                     <div class="block-title no-margin-top no-margin-left">Close Time:</div>
@@ -97,16 +97,16 @@
                                 <span class="drop-down__name">
                                     <input type="text" class="toggle-event-check" placeholder="Date Time" v-model="close_time" readonly="readonly" id="end-picker-date" />
                                     <input type="hidden" readonly="readonly" id="end-picker-date-hidden" />
-                                </span>                                             
+                                </span>
                                 <span classs="down__icon">
                                     <i class="f7-icons toggle-event-check">arrowtriangle_down_fill</i>
                                 </span>
                             </div>
                         </div>
-                        
+
                         <div class="drop-down__menu-box">
                             <div class="drop-down__menu">
-                                <div class="block-title margin-top">Set Close Time</div>                                                                    
+                                <div class="block-title margin-top">Set Close Time</div>
                                     <!-- <div class="list no-margin">
                                         <ul>
                                             <li>
@@ -125,11 +125,11 @@
                                 </div>
                                 <div class="display-flex justify-content-end padding-bottom time__button">
                                     <a class="padding-right text-color-black toggle-event-check" href="javascript:;">Cancel</a>
-                                    <a class="text-color-red" href="javascript:;" @click="endtimeshow()">OK</a>   
-                                </div>  
+                                    <a class="text-color-red" href="javascript:;" @click="endtimeshow()">OK</a>
+                                </div>
                             </div>
                         </div>
-                    </div>  
+                    </div>
                 </div>
             </div>
             <div class="submit__button margin-top padding-top">
@@ -142,7 +142,7 @@
 <script>
     import { f7 } from 'framework7-vue';
     import $ from 'jquery';
-    import axios from 'axios';  
+    import axios from 'axios';
     export default {
         name : 'GeneralSetting',
         components : {
@@ -173,7 +173,7 @@
                     this.open_time = res.data.setting.open_time_12_format;
                     this.close_time = res.data.setting.close_time_12_format;
                 })
-            }, 
+            },
             onRestaurantLogoChange(e){
                 this.restaurant_logo = e.target.files[0];
                 this.restaurant_logo_preview = URL.createObjectURL(this.restaurant_logo);
@@ -181,7 +181,7 @@
             openTimePopupToggle(e){
                 if(!e.target.classList.contains('toggle-event-check')) return false;
                 $('.drop-down').toggleClass('drop-down--active');
-                
+
                 var otime = this.open_time;
                 var ohours = Number(otime.match(/^(\d+)/)[1]);
                 var ominutes = Number(otime.match(/:(\d+)/)[1]);
@@ -231,7 +231,7 @@
                     {
                         values: (function () {
                         var arr = ['AM','PM'];
-                        
+
                         return arr;
                         })(),
                     }
@@ -296,7 +296,7 @@
                     {
                         values: (function () {
                         var arr = ['AM','PM'];
-                        
+
                         return arr;
                         })(),
                     }
@@ -323,9 +323,9 @@
                 var formData = new FormData();
 
                 if(!this.restaurant_name || !this.phone_number || !this.manager_name){
-                    this.notification('Please Fill All Data in Form')  
+                    this.notification('Please Fill All Data in Form')
                     return false;
-                } 
+                }
 
                 formData.append('restaurant_name' , this.restaurant_name);
                 formData.append('phone_number' , this.phone_number);
@@ -347,6 +347,7 @@
                 var notificationFull = f7.notification.create({
                     subtitle: notice,
                     closeTimeout: 3000,
+                    closeButton: true,
                 });
                 notificationFull.open();
             }
@@ -400,7 +401,7 @@ img.restaurant_logo{
       position: relative;
       width: 100%;
   }
-  
+
   .drop-down__button{
     background:#FAFAFA;
     display: inline-block;
@@ -409,7 +410,7 @@ img.restaurant_logo{
     box-shadow: 0px 4px 6px 0px rgba(0,0,0,0.2);
     width:100%
   }
-   
+
   .drop-down__name input{
     font-weight: 500;
     font-size: 14px;
@@ -417,7 +418,7 @@ img.restaurant_logo{
     letter-spacing: 2px;
     width: 100%;
   }
-  
+
   .drop-down__menu-box {
     position: absolute;
     width: 100%;
@@ -425,7 +426,7 @@ img.restaurant_logo{
     background-color: #fff;
     border-radius: 4px;
     box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.11);
-    transition: all 0.3s;    
+    transition: all 0.3s;
     visibility: hidden;
     opacity: 0;
     margin-top: 5px;
@@ -434,12 +435,12 @@ img.restaurant_logo{
     max-width: 378px;
     border-radius: 10px;
   }
-  
+
   .drop-down__menu {
       margin: 0;
       padding: 0 13px;
       list-style: none;
-    
+
   }
   .drop-down__menu-box:before{
     content: '';
@@ -451,7 +452,7 @@ img.restaurant_logo{
     border-top: 15px solid transparent;
     top: -30px;
     right: 50%;
-  
+
   }
     .drop-down__item {
       font-size: 13px;
@@ -463,7 +464,7 @@ img.restaurant_logo{
       position: relative;
       border-bottom: 1px solid #e0e2e9;
   }
-  
+
   .drop-down--active .drop-down__menu-box, .drop-down--active-1 .drop-down__menu-box{
     visibility: visible;
     opacity: 1;

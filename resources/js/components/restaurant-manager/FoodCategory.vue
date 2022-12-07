@@ -78,7 +78,7 @@
                                 </div>
                                 <div class="col padding-left-half padding-right-half">
                                     <button class="button button-raised bg-dark text-color-white padding height-36 popup-open"
-                                        data-popup=".categoryPopup" @click="category_title = 'Add Category'; category_placeholder = 'Add Category name'; category.id = null"><i class="f7-icons font-22">plus_square</i> Add
+                                        data-popup=".categoryPopup" @click="blankForm"><i class="f7-icons font-22">plus_square</i> Add
                                         category</button>
                                 </div>
                             </div>
@@ -104,7 +104,7 @@
                                 <div class="row align-items-center">
                                     <div class="col-50">
                                         <button class="button text-color-black padding height-36 border__right popup-open" data-popup="#subCategory_popup"
-                                            @click="subCategory.category = category.id">
+                                            @click="getAllCategories(category.id)">
                                             <i class="f7-icons font-22">plus_square</i>Add sub category
                                         </button>
                                     </div>
@@ -222,9 +222,8 @@ export default {
         f7Input
     },
     mounted() {
-        $('.page-content').css('background', '#FFF');
+        $('.page-content').css('background', '#F7F7F7');
         this.getCategories();
-        this.getAllCategories();
     },
     methods: {
         addimageChange(e) {
@@ -232,7 +231,7 @@ export default {
             this.image_url = URL.createObjectURL(this.category.image);
         },
         getCategories() {
-            axios.post('/api/get-categories', { search: this.search})
+            axios.post('/api/get-categories', { search: this.search })
             .then((res) => {
                 this.categories = res.data;
             })
@@ -242,6 +241,7 @@ export default {
                 axios.post('/api/delete-category', { id: id })
                 .then((res) => {
                     this.getCategories();
+                    this.$root.notification(res.data.success);
                 })
             });
             setTimeout(() => {
@@ -261,20 +261,24 @@ export default {
             formData.append('name', this.category.name);
             formData.append('image', this.category.image);
             if (!this.category.name || !this.category.image) {
-                this.notification('Please fill the form details.');
+                this.$root.notification('Please fill the form details.');
                 return false;
             }
             if (this.category.id) {
                 formData.append('id', this.category.id);
                 axios.post('/api/update-category', formData, config)
                 .then((res) => {
+                    this.$root.notification(res.data.success);
                     this.getCategories();
+                    this.blankForm();
                     f7.popup.close(`#category_popup`);
                 })
             } else {
                 axios.post('/api/add-category', formData, config)
                 .then((res) => {
-                    this.categories.push(res.data);
+                    this.$root.notification(res.data.success);
+                    this.getCategories();
+                    this.blankForm();
                     f7.popup.close(`#category_popup`);
                 })
             }
@@ -298,27 +302,28 @@ export default {
             formData.append('category_id', this.subCategory.category);
 
             if (!this.subCategory.name || !this.subCategory.category) {
-                this.notification('Please fill the form details.');
+                this.$root.notification('Please fill the form details.');
                 return false;
             }
 
             axios.post('/api/add-sub-category', formData)
             .then((res) => {
+                this.$root.notification(res.data.success);
                 f7.popup.close(`#subCategory_popup`);
             })
         },
-        notification(notice) {
-            var notificationFull = f7.notification.create({
-                subtitle: notice,
-                closeTimeout: 3000,
-            });
-            notificationFull.open();
-        },
-        getAllCategories() {
+        getAllCategories(id) {
             axios.get('/api/categories')
             .then((res) => {
                 this.categoryOption = res.data;
+                this.subCategory.category = id;
             })
+        },
+        blankForm() {
+            this.category.id = null;
+            this.category.name = '';
+            this.category.image = '';
+            this.image_url = null;
         }
     },
 };
@@ -392,7 +397,7 @@ export default {
 
 .page-content {
     padding-top: 0px !important;
-    background-color: #fff !important;
+    background-color: #F7F7F7 !important;
 }
 
 .icon-only {

@@ -1,6 +1,6 @@
 <template>
 <f7-app v-bind="f7Params">
-    <f7-view url="/" :main="true" class="safe-areas" :master-detail-breakpoint="768"></f7-view>
+    <f7-view url="/" :main="true" class="safe-areas" :master-detail-breakpoint="768" @notification="notification"></f7-view>
 </f7-app>
 </template>
 
@@ -58,10 +58,18 @@ export default {
                 $('.dialog-title').html("<img src='/images/close.png'>");
                 $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
                 $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
-                $('.dialog-button').eq(1).removeClass('text-color-black');                
+                $('.dialog-button').eq(1).removeClass('text-color-black');
                 $('.dialog-text').addClass('margin-top');
                 $('.dialog-buttons').addClass('margin-top no-margin-bottom')
             }, 200);
+        },
+        notification(notice) {
+            var notificationFull = f7.notification.create({
+                subtitle: notice,
+                closeTimeout: 3000,
+                closeButton: true,
+            });
+            notificationFull.open();
         }
     },
     computed: {
