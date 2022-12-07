@@ -92,7 +92,7 @@
                             <div class="card-content">
                                 <h3 class="card__heading no-margin-top">Most Reservation Table</h3>
                                 <p class="total__number no-margin">23</p>
-                                <div class="card__icon">
+                                <div class="card__icon card__icon_2">
                                     <img src="/images/report-4.png" alt="">
                                 </div>
                             </div>
@@ -234,6 +234,9 @@ export default {
     position: absolute;
     right: 0;
     bottom: 0;
+}
+.reporting_card .card .card-content .card__icon.card__icon_2{
+    right: 10px;
 }
 .reporting_card .card .card-content .card__heading{
     font-weight: 600;

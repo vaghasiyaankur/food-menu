@@ -16,6 +16,7 @@
                             <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
                                 <div class="menu-dropdown-content bg-color-white no-padding">
                                     <a href="#" class="menu-dropdown-link menu-close"></a>
+                                    <a href="/" class="menu-dropdown-link menu-close text-color-pink">Table</a>
                                     <a href="/food-category/" class="menu-dropdown-link menu-close text-color-pink">Food Category</a>
                                     <a href="/food-subcategory/" class="menu-dropdown-link menu-close text-color-black">Food subCategory</a>
                                     <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black">Food Menu</a>
@@ -57,7 +58,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card-content card-content-padding">
+            <div class="card-content card-content-padding" v-if="subCategories.length">
                 <div v-for="subcategory in subCategories" :key="subcategory">
                     <div class="main-category text-color-pink padding-left-half margin-top padding-top-half">{{ subcategory.name }}</div>
                     <div class="category-list border-bottom padding-vertical-half" v-for="subcat in subcategory.sub_category" :key="subcat">
@@ -83,6 +84,9 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div v-else>
+                <NoValueFound />
             </div>
         </div>
     </div>
@@ -141,7 +145,7 @@
 import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Input } from 'framework7-vue';
 import $ from 'jquery';
 import axios from 'axios';
-
+import NoValueFound from './NoValueFound.vue'
 export default {
     name: 'FoodSubCategory',
     components: {
@@ -150,7 +154,8 @@ export default {
         f7BlockTitle,
         f7Block,
         f7,
-        f7Input
+        f7Input,
+        NoValueFound
     },
     data() {
         return {

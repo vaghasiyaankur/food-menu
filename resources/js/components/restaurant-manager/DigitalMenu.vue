@@ -68,6 +68,9 @@
                                     </div>
                                 </div>
                             </div>
+                            <div v-else>
+                                <NoValueFound />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -81,6 +84,8 @@ import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Input,f7Sheet,f7PageCont
 import $ from 'jquery';
 import axios from 'axios';
 
+import NoValueFound from './NoValueFound.vue'
+
 export default {
     name: 'FoodSubCategory',
     components: {
@@ -91,7 +96,8 @@ export default {
         f7,
         f7Input,
         f7Sheet,
-        f7PageContent
+        f7PageContent,
+        NoValueFound
     },
     data() {
         return{
@@ -294,6 +300,10 @@ export default {
     @media screen and (max-width:820px) {
         .header-links {
             width: 100%;
+        }
+        .digital_menu_card{
+            margin-top: 77px;
+            height: calc(100vh - 400px);
         }
     }
 </style>
