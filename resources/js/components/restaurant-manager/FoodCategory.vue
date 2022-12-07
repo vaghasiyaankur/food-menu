@@ -86,7 +86,7 @@
                     </div>
                 </div>
                 <div class="card-content card-content-padding categorey_card">
-                    <div class="category-list border-bottom padding-top padding-bottom"
+                    <div class="category-list border-bottom padding-top padding-bottom" v-if="categories.length"
                         v-for="(category,index) in categories" :key="category">
                         <div class="row align-items-center">
                             <div class="col-5 category-count">
@@ -121,6 +121,9 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div v-else>
+                        <NoValueFound />
                     </div>
                 </div>
             </div>
@@ -190,6 +193,7 @@
 import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Input } from 'framework7-vue';
 import $ from 'jquery';
 import axios from "axios";
+import NoValueFound from './NoValueFound.vue'
 
 export default {
     name: 'Favourite',
@@ -219,7 +223,8 @@ export default {
         f7BlockTitle,
         f7Block,
         f7,
-        f7Input
+        f7Input,
+        NoValueFound
     },
     mounted() {
         $('.page-content').css('background', '#FFF');

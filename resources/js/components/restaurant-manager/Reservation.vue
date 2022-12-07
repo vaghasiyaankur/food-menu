@@ -115,6 +115,9 @@
                         </div>
                     </div>
                 </div>  
+                <div>
+
+                </div>
             </div>          
         </div>
         <f7-sheet class="demo-sheet-swipe-to-close" style="height:auto; --f7-sheet-bg-color: #fff;" backdrop>
@@ -334,6 +337,7 @@ import $ from "jquery";
 import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Input, f7Button, f7Sheet, f7PageContent} from 'framework7-vue';
 import VueCountdown from '@chenfengyuan/vue-countdown';
 import axios from "axios";
+
 export default {
     name : 'Reservation',
     components: {
