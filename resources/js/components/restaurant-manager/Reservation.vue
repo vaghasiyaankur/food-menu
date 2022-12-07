@@ -106,6 +106,9 @@
                         <div class="padding bottom-bar">
                             <div class="row justify-content-start">
                                 <div class="col bottom-button margin-right">
+                                    <a href="/waiting/" class="button bg-color-white register-button button-raised text-color-black button-large text-transform-capitalize" id="book_table">Book Table</a>
+                                </div>
+                                <div class="col bottom-button margin-right">
                                     <f7-button class="button bg-color-white register-button button-raised text-color-black button-large text-transform-capitalize" @click="register" id="book_table">Book Table</f7-button>
                                 </div>
                                 <div class="col bottom-button">

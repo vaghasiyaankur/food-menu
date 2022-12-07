@@ -7,6 +7,7 @@ import Setting from "./components/restaurant-manager/settings/SettingsTab.vue";
 import DigitalMenu from "./components/restaurant-manager/DigitalMenu.vue";
 import Reporting from "./components/restaurant-manager/Reporting.vue";
 import Reservation from "./components/restaurant-manager/Reservation.vue";
+import Waiting from "./components/restaurant-manager/Waiting.vue";
 // Pages
 export default [
   // Index page
@@ -55,6 +56,11 @@ export default [
     name : 'Reservation',
     path: '/reservation/',
     component: Reservation,
+  },
+  {
+    name : 'Waiting',
+    path: '/waiting/',
+    component: Waiting,
   },
 
 ]
