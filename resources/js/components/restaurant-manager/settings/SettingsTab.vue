@@ -55,8 +55,8 @@
                                 <GeneralSetting />
                             </div>
                             <div id="tab-2" class="tab">
-                                <TableFloorPlan v-if="tableShow" @tablehide="tableShow = false" />
-                                <AddTable v-if="!tableShow" @tableshow="tableShow = true" />
+                                <TableFloorPlan v-if="tableShow" @tablehide="addEditTableShow" :page="page"/>
+                                <AddTable v-if="!tableShow" @tableshow="tableShow = true" :tableId="tableId"/>
                             </div>
                             <!-- <div id="tab-3" class="tab">
                                 <h2>Tab 3</h2>
@@ -90,11 +90,20 @@ export default {
     data(){
         return {
             tableShow : true,
+            tableId : 0,
+            page : 1,
         }
     },
     mounted() {
         $('.page-content').css('background', '#FFF');
     },
+    methods: {
+        addEditTableShow(id, page) {
+            this.tableId = id;
+            this.page = page;
+            this.tableShow = false;
+        }
+    }
 }
 </script>
 

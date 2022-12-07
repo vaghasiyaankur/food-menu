@@ -5,7 +5,7 @@
                 <h3 class="card-title no-margin">Table List</h3>
             </div>
             <div class="add_table_button">
-                <button class="button" @click="$emit('tablehide')"><i class="f7-icons margin-right-half">plus_square</i> Add Table</button>
+                <button class="button" @click="$emit('tablehide', 0, page_number)"><i class="f7-icons margin-right-half">plus_square</i> Add Table</button>
             </div>
         </div>
         <div class="card-content">
@@ -22,163 +22,105 @@
                       </tr>
                    </thead>
                    <tbody>
-                      <tr>
-                         <td class="label-cell">01.</td>
-                         <td>04 Person Capacity</td>
-                         <td>1<sup>st</sup> Floor</td>
+                      <tr v-for="table in tables" :key="table.id">
+                         <td class="label-cell">{{ table.table_number }}.</td>
+                         <td>{{ table.capacity_of_person }} Person Capacity</td>
+                         <td>{{ table.floor_number == 0 ? 'Ground' : table.floor_number }}<sup>{{ table.floor_number == 0 ? '' : table.floor_number == 1 ? 'st' : table.floor_number == 2 ? 'nd' : table.floor_number == 3 ? 'rd' : 'th' }}</sup> Floor</td>
                          <td>                            
-                            <span class="status_info status_active">Active</span>
+                            <span class="status_info status_active" v-if=" table.status" @click="changeStatus(table.id, 0)">Active</span>
+                            <span class="status_info status_deactive" v-else @click="changeStatus(table.id, 1)">Deactive</span>
                             
                          </td>
                          <td>
                             <div class="table_color">
-                                <span class="green_bg color__dot"></span>Green
+                                <span class="green_bg color__dot" :style="('background: '+table.color+ ';opacity: 0.5')"></span>{{ table.color }}
                             </div>
                          </td>
                          <td>
                             <div class="display-flex">
-                                <a href="#" class="button text-color-black font-13 no-padding-left"><i class="f7-icons font-13 margin-right-half">square_pencil</i> Edit</a>
-                                <a href="#" class="button text-color-red font-13"><i class="f7-icons font-13 margin-right-half">trash</i> Delete</a>
+                                <a href="javascript:;" class="button text-color-black font-13 no-padding-left" @click="$emit('tablehide', table.id, page_number)"><i class="f7-icons font-13 margin-right-half">square_pencil</i> Edit</a>
+                                <a href="javascript:;" class="button text-color-red font-13" @click="removeTable(table.id)"><i class="f7-icons font-13 margin-right-half">trash</i> Delete</a>
                             </div>
                          </td>
-                      </tr>
-                      <tr>
-                         <td class="label-cell">02.</td>
-                         <td>02 Person Capacity</td>
-                         <td>2<sup>nd</sup> Floor</td>
-                         <td>                            
-                            <span class="status_info status_deactive">Deactive</span>
-                            
-                         </td>
-                         <td>
-                            <div class="table_color">
-                                <span class="yellow_bg color__dot"></span>Yellow
-                            </div>
-                         </td>
-                         <td> <div class="display-flex">
-                            <a href="#" class="button text-color-black font-13 no-padding-left"><i class="f7-icons font-13 margin-right-half">square_pencil</i> Edit</a>
-                            <a href="#" class="button text-color-red font-13"><i class="f7-icons font-13 margin-right-half">trash</i> Delete</a>
-                        </div></td>
-                      </tr>
-                      <tr>
-                        <td class="label-cell">03.</td>
-                        <td>06 Person Capacity</td>
-                        <td>3<sup>rd</sup> Floor</td>
-                        <td>                            
-                           <span class="status_info status_active">Active</span>
-                           
-                        </td>
-                        <td>
-                           <div class="table_color">
-                               <span class="red_bg color__dot"></span>Red
-                           </div>
-                        </td>
-                        <td> <div class="display-flex">
-                           <a href="#" class="button text-color-black font-13 no-padding-left"><i class="f7-icons font-13 margin-right-half">square_pencil</i> Edit</a>
-                           <a href="#" class="button text-color-red font-13"><i class="f7-icons font-13 margin-right-half">trash</i> Delete</a>
-                       </div></td>
-                     </tr>
-                      <tr>
-                         <td class="label-cell">04.</td>
-                         <td>08 Person Capacity</td>
-                         <td>4<sup>th</sup> Floor</td>
-                         <td>                            
-                            <span class="status_info status_active">Active</span>
-                            
-                         </td>
-                         <td>
-                            <div class="table_color">
-                                <span class="orange_bg color__dot"></span>Orange
-                            </div>
-                         </td>
-                         <td> <div class="display-flex">
-                            <a href="#" class="button text-color-black font-13 no-padding-left"><i class="f7-icons font-13  margin-right-half">square_pencil</i> Edit</a>
-                            <a href="#" class="button text-color-red font-13"><i class="f7-icons font-13  margin-right-half">trash</i> Delete</a>
-                        </div></td>
-                      </tr>                                           
-                      <tr>
-                         <td class="label-cell">05.</td>
-                         <td>12 Person Capacity</td>
-                         <td>4<sup>th</sup> Floor</td>
-                         <td>                            
-                            <span class="status_info status_active">Active</span>
-                            
-                         </td>
-                         <td>
-                            <div class="table_color">
-                                <span class="blue_bg color__dot"></span>Blue
-                            </div>
-                         </td>
-                         <td> <div class="display-flex">
-                            <a href="#" class="button text-color-black font-13 no-padding-left"><i class="f7-icons font-13 margin-right-half">square_pencil</i> Edit</a>
-                            <a href="#" class="button text-color-red font-13"><i class="f7-icons font-13 margin-right-half">trash</i> Delete</a>
-                        </div></td>
-                      </tr>                                           
-                      <tr>
-                         <td class="label-cell">06.</td>
-                         <td>10 Person Capacity</td>
-                         <td>2<sup>nd</sup> Floor</td>
-                         <td>                            
-                            <span class="status_info status_deactive">Deactive</span>
-                            
-                         </td>
-                         <td>
-                            <div class="table_color">
-                                <span class="pink_bg color__dot"></span>Pink
-                            </div>
-                         </td>
-                         <td> <div class="display-flex">
-                            <a href="#" class="button text-color-black font-13 no-padding-left"><i class="f7-icons font-13 margin-right-half">square_pencil</i> Edit</a>
-                            <a href="#" class="button text-color-red font-13"><i class="f7-icons font-13 margin-right-half">trash</i> Delete</a>
-                        </div></td>
-                      </tr>                                           
-                      <tr>
-                         <td class="label-cell">07.</td>
-                         <td>26 Person Capacity</td>
-                         <td>3<sup>rd</sup> Floor</td>
-                         <td>                            
-                            <span class="status_info status_active">Active</span>
-                            
-                         </td>
-                         <td>
-                            <div class="table_color">
-                                <span class="grey_bg color__dot"></span>Grey
-                            </div>
-                         </td>
-                         <td> <div class="display-flex">
-                            <a href="#" class="button text-color-black font-13 no-padding-left"><i class="f7-icons font-13 margin-right-half">square_pencil</i> Edit</a>
-                            <a href="#" class="button text-color-red font-13"><i class="f7-icons font-13 margin-right-half">trash</i> Delete</a>
-                        </div></td>
-                      </tr>                                           
-                      <tr>
-                         <td class="label-cell">08.</td>
-                         <td>8 Person Capacity</td>
-                         <td>4<sup>th</sup> Floor</td>
-                         <td>                            
-                            <span class="status_info status_active">Active</span>
-                            
-                         </td>
-                         <td>
-                            <div class="table_color">
-                                <span class="orange_bg color__dot"></span>Orange
-                            </div>
-                         </td>
-                         <td> <div class="display-flex">
-                            <a href="#" class="button text-color-black font-13 no-padding-left"><i class="f7-icons font-13 margin-right-half">square_pencil</i> Edit</a>
-                            <a href="#" class="button text-color-red font-13"><i class="f7-icons font-13 margin-right-half">trash</i> Delete</a>
-                        </div></td>
-                      </tr>                                           
+                      </tr>                                          
                    </tbody>
                 </table>
-             </div>
+                <div class="data-table-pagination">
+                    <span class="data-table-pagination-label">{{from}}-{{to}} of {{total}}</span>
+                    <a href="javascript:;" @click="prev_page_number != 0 ? tableList(prev_page_number) : 'javascript:;'" class="link" :class="{'disabled' : prev_page_number == 0}">
+                      <i class="icon icon-prev color-gray"></i>
+                    </a>
+                    <a href="javascript:;" @click="next_page_number != 0 ? tableList(next_page_number) : 'javascript:;'" class="link" :class="{'disabled' : next_page_number == 0}">
+                      <i class="icon icon-next color-gray"></i>
+                    </a>
+                  </div>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
+    import { f7 } from 'framework7-vue';
+    import $ from 'jquery';
+    import axios from 'axios';  
+
     export default {
         name : 'AddFloorPlan',
-            
+        props : ['page'],
+        data() {
+            return {
+                tables: [],
+                from : 0,
+                to : 0,
+                total : 0,
+                prev_page_number : 0,
+                next_page_number : 0,
+                page_number : 1,
+            }
+        },
+        created() {
+            this.page_number = this.page;
+            this.tableList(this.page_number);
+        },
+        methods: {
+            tableList(page = 1) {
+                this.page_number = page;
+                axios.get('/api/table-list?page=' + page)
+                .then((res) => {
+                    this.tables = res.data.tables.data;
+                    this.from = res.data.tables.from;
+                    this.to = res.data.tables.to;
+                    this.total = res.data.tables.total;
+                    this.prev_page_number = res.data.tables.prev_page_url ? res.data.tables.current_page - 1 : 0; 
+                    this.next_page_number = res.data.tables.next_page_url ? res.data.tables.current_page + 1 : 0;
+                })
+            },
+            removeTable(id) {
+                f7.dialog.confirm('Are you sure delete the table?', () => {
+                axios.post('/api/delete-table', { id: id })
+                .then((res) => {
+                    this.notification(res.data.success);
+                    this.tableList();
+                })
+            });
+            },
+            changeStatus(id, status){
+                f7.dialog.confirm('Are you sure Change status of the table?', () => {
+                axios.post('/api/change-table-status', { id : id , status: status })
+                .then((res) => {
+                    this.notification(res.data.success);
+                    this.tableList();
+                })
+                });
+            },
+            notification(notice) {
+                var notificationFull = f7.notification.create({
+                    subtitle: notice,
+                    closeTimeout: 3000,
+                });
+                notificationFull.open();
+            }
+        }    
     }
 </script>
 <style scoped>

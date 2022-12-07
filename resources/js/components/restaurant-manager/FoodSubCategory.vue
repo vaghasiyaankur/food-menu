@@ -35,10 +35,10 @@
         <div class="card elevation-2">
             <div class="card_header">
                 <div class="row padding-left padding-right align-items-center">
-                    <div class="col-50">
+                    <div class="col-100 large-50 medium-40">
                         <h3>Sub Category</h3>
                     </div>
-                    <div class="col-50">
+                    <div class="col-100 large-50 medium-60">
                         <div class="row align-items-center">
                             <div class="col">
                                 <div class="item-content item-input">
@@ -231,7 +231,7 @@ export default {
                 $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
                 $('.dialog-button').eq(1).removeClass('text-color-black');
                 $('.dialog-buttons').addClass('margin-top no-margin-bottom')
-            }, 200);
+            }, 50       );
         },
         editSubCategory(id) {
             this.subCategory_title = 'Edit Sub Category';

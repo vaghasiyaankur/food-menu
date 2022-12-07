@@ -9,21 +9,23 @@
                               <div class="item-inner">
                                  <div class=" block-title no-margin-top">Restaurant Name</div>
                                  <div class="item-input-wrap">
-                                    <input type="text" name="name" class="padding margin-top-half" placeholder="Enter restaurant name">
+                                    <input type="text" name="name" class="padding margin-top-half" placeholder="Enter restaurant name" v-model="restaurant_name">
                                 </div>
                               </div>
                            </div>
                            <div class="item-content item-input margin-bottom no-padding-left">
                               <div class="item-inner">
                                  <div class="block-title no-margin-top">Phone Number</div>
-                                 <div class="item-input-wrap"><input type="number" name="number" class="padding margin-top-half" placeholder="Enter phone number"></div>
+                                 <div class="item-input-wrap">
+                                    <input type="number" name="number" class="padding margin-top-half" placeholder="Enter phone number" v-model="phone_number">
+                                </div>
                               </div>
                            </div>
                            <div class="item-content item-input margin-bottom no-padding-left">
                               <div class="item-inner">
                                  <div class="block-title no-margin-top">Manager Name</div>
                                  <div class="item-input-wrap">
-                                    <input type="text" name="member" class="padding margin-top-half" placeholder="Enter manager name">
+                                    <input type="text" name="member" class="padding margin-top-half" placeholder="Enter manager name"  v-model="manager_name">
                                 </div>
                               </div>
                            </div>
@@ -33,10 +35,11 @@
                 <div class="col">
                     <div class="formbold-mb-5 formbold-file-input margin-vertical">
                         <div class="block-title no-margin-top padding-top-half no-margin-left">Restaurant Logo</div>
-                        <input type="file" name="file" id="file">
+                        <input type="file" name="file" id="file" @change="onRestaurantLogoChange">
                         <label for="file">
                           <div>
-                            <img src="/images/imageuploader.svg">
+                            <!-- <img src="/images/imageuploader.svg"> -->
+                            <img :src="restaurant_logo_preview" alt="" class="restaurant_logo">
                           </div>
                         </label>
                     </div>
@@ -46,14 +49,15 @@
             <div class="row">
                 <div class="col padding-right">
                     <div class="block-title no-margin-top no-margin-left">Open Time:</div>
-                    <div class="drop-down"  @click="addClass()">
+                    <div class="drop-down"  @click="openTimePopupToggle($event)">
                         <div id="dropDown" class="drop-down__button">
-                            <div class="drop-down__store display-flex justify_content_between padding align-items-center">
+                            <div class="drop-down__store display-flex justify_content_between padding align-items-center toggle-event-check">
                                 <span class="drop-down__name">
-                                    <input type="text" placeholder="Date Time" v-model="opentime" readonly="readonly" id="start-picker-date" />
+                                    <input type="text" class="toggle-event-check" placeholder="Date Time" v-model="open_time" readonly="readonly" id="start-picker-date" />
+                                    <input type="hidden" readonly="readonly" id="start-picker-date-hidden" />
                                 </span>                                             
                                 <span classs="down__icon">
-                                    <i class="f7-icons">arrowtriangle_down_fill</i>
+                                    <i class="f7-icons toggle-event-check">arrowtriangle_down_fill</i>
                                 </span>
                             </div>
                         </div>
@@ -78,7 +82,7 @@
                                     <div id="start-picker-date-container"></div>
                                 </div>  
                                 <div class="display-flex justify-content-end padding-bottom time__button">
-                                    <a class="padding-right text-color-black" href="javascript:;">Cancel</a>
+                                    <a class="padding-right text-color-black toggle-event-check" href="javascript:;">Cancel</a>
                                     <a class="text-color-red" href="javascript:;" @click="opentimeshow()">OK</a>   
                                 </div>                              
                             </div>
@@ -86,15 +90,16 @@
                     </div>                    
                 </div>
                 <div class="col padding-left">
-                    <div class="block-title no-margin-top no-margin-left">Open Time:</div>
-                    <div class="drop-down-1"  @click="addClass1()">
+                    <div class="block-title no-margin-top no-margin-left">Close Time:</div>
+                    <div class="drop-down-1"  @click="closeTimePopupToggle($event)">
                         <div id="dropDown" class="drop-down__button">
-                            <div class="drop-down__store display-flex justify_content_between padding align-items-center">
+                            <div class="drop-down__store display-flex justify_content_between padding align-items-center toggle-event-check">
                                 <span class="drop-down__name">
-                                    <input type="text" placeholder="Date Time" v-model="closetime" readonly="readonly" id="end-picker-date" />
+                                    <input type="text" class="toggle-event-check" placeholder="Date Time" v-model="close_time" readonly="readonly" id="end-picker-date" />
+                                    <input type="hidden" readonly="readonly" id="end-picker-date-hidden" />
                                 </span>                                             
                                 <span classs="down__icon">
-                                    <i class="f7-icons">arrowtriangle_down_fill</i>
+                                    <i class="f7-icons toggle-event-check">arrowtriangle_down_fill</i>
                                 </span>
                             </div>
                         </div>
@@ -119,7 +124,7 @@
                                     <div id="end-picker-date-container"></div>
                                 </div>
                                 <div class="display-flex justify-content-end padding-bottom time__button">
-                                    <a class="padding-right text-color-black" href="javascript:;">Cancel</a>
+                                    <a class="padding-right text-color-black toggle-event-check" href="javascript:;">Cancel</a>
                                     <a class="text-color-red" href="javascript:;" @click="endtimeshow()">OK</a>   
                                 </div>  
                             </div>
@@ -128,7 +133,7 @@
                 </div>
             </div>
             <div class="submit__button margin-top padding-top">
-                <button class="col button button-large button-fill">Save</button>
+                <button class="col button button-large button-fill" @click="updateSetting()">Save</button>
             </div>
         </div>
     </div>
@@ -137,6 +142,7 @@
 <script>
     import { f7 } from 'framework7-vue';
     import $ from 'jquery';
+    import axios from 'axios';  
     export default {
         name : 'GeneralSetting',
         components : {
@@ -144,27 +150,60 @@
         },
         data() {
             return {
-                opentime: '',
-                closetime : '',
-                opentimepicker : '',
-                closetimepicker : '',
+                open_time: '',
+                close_time : '',
+                restaurant_name : '',
+                phone_number : '',
+                manager_name : '',
+                restaurant_logo_preview : '',
+                restaurant_logo : '',
             }
         },
+        created() {
+            this.settingData();
+        },
         methods: {
-            addClass(){
+            settingData() {
+                axios.get('/api/setting-data')
+                .then((res) => {
+                    this.restaurant_name = res.data.setting.restaurant_name;
+                    this.phone_number = res.data.setting.phone_number;
+                    this.manager_name = res.data.setting.manager_name;
+                    this.restaurant_logo_preview = '/storage/' + res.data.setting.restaurant_logo;
+                    this.open_time = res.data.setting.open_time_12_format;
+                    this.close_time = res.data.setting.close_time_12_format;
+                })
+            }, 
+            onRestaurantLogoChange(e){
+                this.restaurant_logo = e.target.files[0];
+                this.restaurant_logo_preview = URL.createObjectURL(this.restaurant_logo);
+            },
+            openTimePopupToggle(e){
+                if(!e.target.classList.contains('toggle-event-check')) return false;
                 $('.drop-down').toggleClass('drop-down--active');
-                var today = new Date();
+                
+                var otime = this.open_time;
+                var ohours = Number(otime.match(/^(\d+)/)[1]);
+                var ominutes = Number(otime.match(/:(\d+)/)[1]);
+                var OAMPM = otime.match(/\s(.*)$/)[1];
+                if(OAMPM == "PM" && ohours<12) ohours = ohours+12;
+                if(OAMPM == "AM" && ohours==12) ohours = ohours-12;
+                var osHours = ohours.toString();
+                var osMinutes = ominutes.toString();
+                if(ohours<10) osHours = "0" + osHours;
+                if(ominutes<10) osMinutes = "0" + osMinutes;
+
                 f7.picker.create({
                     containerEl: '#start-picker-date-container',
-                    inputEl: '#start-picker-date',
+                    inputEl: '#start-picker-date-hidden',
                     toolbar: false,
                     rotateEffect: true,
                     value: [
-                    today.getHours() < 10 ? '0' + today.getHours() : today.getHours(),
-                    today.getMinutes() < 10 ? '0' + today.getMinutes() : today.getMinutes()
+                        osHours,
+                        osMinutes
                     ],
                     formatValue: function (values, displayValues) {
-                    return displayValues[0] + ' : ' + values[1]  + ' ' +  values[2];
+                    return displayValues[0] + ':' + values[1]  + ' ' +  values[2];
                     },
                     cols: [
                     // Hours
@@ -200,26 +239,36 @@
                     on: {
                     change: function (picker, values, displayValues) {
                         var daysInMonth = picker.value[0] + ' : ' + picker.value[1] + ' ' + picker.value[2];
-                        // picker.cols[0].setValue(daysInMonth);
-                        this.opentimepicker = daysInMonth;
                     },
                     }
                 })
             },
-            addClass1(){
+            closeTimePopupToggle(e){
+                if(!e.target.classList.contains('toggle-event-check')) return false;
                 $('.drop-down-1').toggleClass('drop-down--active');
-                var today = new Date();
+
+                var ctime = this.close_time;
+                var chours = Number(ctime.match(/^(\d+)/)[1]);
+                var cminutes = Number(ctime.match(/:(\d+)/)[1]);
+                var CAMPM = ctime.match(/\s(.*)$/)[1];
+                if(CAMPM == "PM" && chours<12) chours = chours+12;
+                if(CAMPM == "AM" && chours==12) chours = chours-12;
+                var csHours = chours.toString();
+                var csMinutes = cminutes.toString();
+                if(chours<10) csHours = "0" + csHours;
+                if(cminutes<10) csMinutes = "0" + csMinutes;
+
                 f7.picker.create({
                     containerEl: '#end-picker-date-container',
-                    inputEl: '#end-picker-date',
+                    inputEl: '#end-picker-date-hidden',
                     toolbar: false,
                     rotateEffect: true,
                     value: [
-                    today.getHours() < 10 ? '0' + today.getHours() : today.getHours(),
-                    today.getMinutes() < 10 ? '0' + today.getMinutes() : today.getMinutes()
+                        csHours,
+                        csMinutes
                     ],
                     formatValue: function (values, displayValues) {
-                    return displayValues[0] + ' : ' + values[1]  + ' ' +  values[2];
+                    return displayValues[0] + ':' + values[1]  + ' ' +  values[2];
                     },
                     cols: [
                     // Hours
@@ -254,31 +303,61 @@
                     ],
                     on: {
                     change: function (picker, values, displayValues) {
-                        var daysInMonth = picker.value[0] + ' : ' + picker.value[1]  + ' ' + picker.value[2];
-                        // picker.cols[0].setValue(daysInMonth);
-                        this.closetimepicker = daysInMonth;
-                    },
+                            var daysInMonth = picker.value[0] + ' : ' + picker.value[1]  + ' ' + picker.value[2];
+                        }
                     }
-                })
+                });
             },
             opentimeshow(){
-                this.opentime = this.opentimepicker;
-                console.log(this.opentime);
+                this.open_time = $("#start-picker-date-hidden").val();
+                $('.drop-down').removeClass('drop-down--active');
             },
             endtimeshow(){
-                this.closetime = this.closetimepicker;
-                console.log(this.closetime);
+                this.close_time = $("#end-picker-date-hidden").val();
+                $('.drop-down-1').removeClass('drop-down--active');
+            },
+            updateSetting() {
+                const config = {
+                    headers: { 'content-type': 'multipart/form-data' }
+                }
+                var formData = new FormData();
+
+                if(!this.restaurant_name || !this.phone_number || !this.manager_name){
+                    this.notification('Please Fill All Data in Form')  
+                    return false;
+                } 
+
+                formData.append('restaurant_name' , this.restaurant_name);
+                formData.append('phone_number' , this.phone_number);
+                formData.append('manager_name' , this.manager_name);
+                formData.append('restaurant_logo' , this.restaurant_logo);
+                formData.append('open_time' , this.open_time);
+                formData.append('close_time' , this.close_time);
+
+                axios
+                .post("/api/update-setting", formData, config)
+                .then((res) => {
+                    this.notification(res.data.success);
+                }).catch((error) => {
+                    this.notification('Something Went Wrong !!!');
+                    return false;
+                });
+            },
+            notification(notice) {
+                var notificationFull = f7.notification.create({
+                    subtitle: notice,
+                    closeTimeout: 3000,
+                });
+                notificationFull.open();
             }
         }
     }
-    // $(document).ready(function(){
-    //     $('#dropDown').click(function(){
-    //         $('.drop-down').toggleClass('drop-down--active');
-    //     });
-    // });
 </script>
 <style scoped>
-
+img.restaurant_logo{
+    width: 160px;
+    height: 160px;
+}
 .justify_content_between{
     justify-content:space-between
 }

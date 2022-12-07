@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Manager;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -26,5 +27,13 @@ class ProductController extends Controller
             $q->whereHas('products');
         },'subCategory.products'])->whereHas('subCategory')->find($id);
         return response()->json($products);
+    }
+
+    public function getProducts(Request $req)
+    {
+        $sub_product = SubCategory::with(['products' => function($q) use ($req){
+            $q->where('name','LIKE','%'.$req->search.'%');
+        }])->whereHas('products')->get();
+        return response()->json($sub_product);
     }
 }
