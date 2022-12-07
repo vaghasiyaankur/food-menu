@@ -15,7 +15,7 @@ class TableSeeder extends Seeder
      */
     public function run()
     {
-        $colors = ['Green', 'Yellow', 'Red', 'Orange', 'Blue', 'Pink', 'Grey', 'Orange', 'Grey', 'Orange'];
+        $colors = [1, 2, 3, 4, 5, 6, 7, 4, 7, 4];
 
         $c_o_p = ['04', '02', '06', '08', '12', '10', '26', '08', '26', '08'];
 
@@ -26,7 +26,7 @@ class TableSeeder extends Seeder
             $table->table_number = $key + 1;
             $table->capacity_of_person = $c_o_p[$key];
             $table->floor_number = $floor[$key];
-            $table->color = $color;
+            $table->color_id = $color;
             $table->status = ($key == 1 || $key == 5 ? 0 : 1);
             $table->save();  
         }

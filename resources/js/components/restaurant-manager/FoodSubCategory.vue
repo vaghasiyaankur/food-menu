@@ -16,6 +16,7 @@
                             <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
                                 <div class="menu-dropdown-content bg-color-white no-padding">
                                     <a href="#" class="menu-dropdown-link menu-close"></a>
+                                    <a href="/" class="menu-dropdown-link menu-close text-color-pink">Table</a>
                                     <a href="/food-category/" class="menu-dropdown-link menu-close text-color-pink">Food Category</a>
                                     <a href="/food-subcategory/" class="menu-dropdown-link menu-close text-color-black">Food subCategory</a>
                                     <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black">Food Menu</a>
