@@ -18,8 +18,8 @@
                                         <a href="#" class="menu-dropdown-link menu-close margin-horizontal no-padding"></a>
                                         <a href="/" class="menu-dropdown-link menu-close text-color-pink">Table</a>
                                         <a href="/food-category/" class="menu-dropdown-link menu-close text-color-pink margin-horizontal no-padding">Food Category</a>
-                                        <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food Menu                                            
-                                        </a>                                            
+                                        <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food Menu
+                                        </a>
                                         <a href="/food-subcategory/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food SubCategory</a>
                                         <a href="/digital-menu/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Digital Menu</a>
                                     </div>
@@ -96,7 +96,7 @@ export default {
         }
     },
     mounted() {
-        $('.page-content').css('background', '#FFF');
+        $('.page-content').css('background', '#F7F7F7');
     },
     methods: {
         addEditTableShow(id, page) {

@@ -36,7 +36,7 @@
                         </div>
                     </div>
                 </div> -->
-                <!--========= SMALL SCREEN MENU BAR END=========== -->                           
+                <!--========= SMALL SCREEN MENU BAR END=========== -->
                 <div class="row header-link justify-content-flex-end align-items-center tablate_view_menu">
                     <div class=" padding-left-half padding-right-half height-40 nav-button">
                         <a href="/Reservation/" class="col link nav-link button button-raised bg-dark text-color-white padding">
@@ -63,8 +63,8 @@
                     <div class=" padding-left-half padding-right-half height-40 nav-button"><a href="/settings/" class="col link nav-link button button-raised bg-dark text-color-white padding">Settings</a></div>
                 </div>
             </div>
-             
-            
+
+
         <div class="table_main">
             <!-- ============= TABLE FLOOR SWIPER ============= -->
            <div class="table_floor_swiper">

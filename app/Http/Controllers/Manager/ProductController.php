@@ -18,7 +18,7 @@ class ProductController extends Controller
         $pro->sub_category_id = $req->sub_category_id;
         $pro->save();
 
-        return response()->json(['sucess'=>'Product Added Sucessfully.']);
+        return response()->json(['success'=>'Product Added Successfully.']);
     }
 
     public function getCategoryProduct($id)
@@ -33,7 +33,32 @@ class ProductController extends Controller
     {
         $sub_product = SubCategory::with(['products' => function($q) use ($req){
             $q->where('name','LIKE','%'.$req->search.'%');
-        }])->whereHas('products')->get();
+        }])->whereHas('products',function($q) use ($req){
+            $q->where('name','LIKE','%'.$req->search.'%');
+        })->get();
         return response()->json($sub_product);
     }
+
+    public function editProduct($id){
+        $products = Product::find($id);
+        return response()->json($products);
+    }
+
+    public function updateProduct(Request $req)
+    {
+        $pro = Product::find($req->id);
+        $pro->name = $req->name;
+        $pro->price = $req->price;
+        $pro->sub_category_id = $req->sub_category_id;
+        $pro->save();
+
+        return response()->json(['success'=>'Product Updated Successfully.']);
+    }
+
+    public function deleteProduct(Request $req)
+    {
+        Product::find($req->id)->delete();
+        return response()->json(['success'=>'Product Deleted Successfully.']);
+    }
+
 }
