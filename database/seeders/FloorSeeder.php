@@ -32,8 +32,8 @@ class FloorSeeder extends Seeder
         foreach ($floors as $floor) {
             $fl = new Floor();
             $fl->number = $floor['number'];
-            $fl->number = $floor['name'];
-            $fl->number = $floor['ac'];
+            $fl->name = $floor['name'];
+            $fl->ac = $floor['ac'];
             $fl->save();
         }
     }

@@ -51,48 +51,46 @@
                                         <div class="item-inner">
                                             <div class="item-title item-label">Name</div>
                                             <div class="item-input-wrap">
-                                                <input type="text" name="name" class="padding" placeholder="Enter Your name">
+                                                <input type="text" v-model="reservation.name" name="name" class="padding" placeholder="Enter Your name">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="item-content item-input">
                                         <div class="item-inner">
                                             <div class="item-title item-label">Phone number</div>
-                                            <div class="item-input-wrap"><input type="number" name="number" class="padding" placeholder="Phone number"></div>
+                                            <div class="item-input-wrap"><input type="number" v-model="reservation.number" name="number" class="padding" placeholder="Phone number"></div>
                                         </div>
                                     </div>
                                     <div class="item-content item-input">
                                         <div class="item-inner">
-                                            <div class="item-title item-label">Family member member</div>
-                                            <div class="item-input-wrap"><input type="number" name="member" class="padding" placeholder="5 Family member"></div>
+                                            <div class="item-title item-label">Family member number</div>
+                                            <div class="item-input-wrap"><input type="number" v-model="reservation.member" name="member" class="padding" placeholder="5 Family member"></div>
                                         </div>
                                     </div>
                                     <div class="item-content item-input">
                                         <div class="item-inner">
                                             <div class="item-title item-label">Location type</div>
                                             <div class="item-input-wrap input-dropdown-wrap">
-                                                <select placeholder="Please choose..." class="padding-left padding-right">
-                                                <option value="Male">Ground floor (Non-AC)</option>
-                                                <option value="Female">First floor (AC)</option>
-                                                <option value="Female">Second floor (AC)</option>
+                                                <select v-model="reservation.floor" placeholder="Please choose..." class="padding-left padding-right">
+                                                    <option v-for="floor in floors" :key="floor" value="Male">{{ floor.name }} Floor ({{ floor.ac == 1 ? 'AC' : 'Non-AC' }})</option>
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="no-padding-left">
                                         <label class="item-checkbox item-content">
-                                            <input type="checkbox" name="demo-checkbox" value="Books"><i class="icon icon-checkbox"></i>
+                                            <input type="checkbox" v-model="reservation.agree_condition" name="demo-checkbox" value="1"><i class="icon icon-checkbox"></i>
                                             <div class="item-inner">
                                                 <div class="item-title no-margin">I agree with the terms &amp; conditions</div>
                                             </div>
                                         </label>
                                     </div>
                                     <div class="text-align-center margin-top">
-                                        <a class="link text-underline text-color-black" @click="(display = false)" href="javascript:;">Check Time</a>
-                                        <div class="countdown_section position-relative margin-horizontal" :class="{ 'display-none' : display }">
+                                        <a class="link text-underline text-color-black" :class="{ 'display-none': checkWaitingTime }" @click="checkTime" href="javascript:;">Check Time</a>
+                                        <div class="countdown_section position-relative margin-horizontal" :class="{ 'display-none' : !checkWaitingTime }">
                                             <div style="background : url('/images/dots.png')">
                                                 <img src="/images/clock.png" alt="">
-                                                <i class="f7-icons font-13 padding-half margin-bottom close-countdown" @click="display = true">xmark</i>
+                                                <i class="f7-icons font-13 padding-half margin-bottom close-countdown" @click="(checkWaitingTime = false)">xmark</i>
                                                 <vue-countdown :time="60 * 60 * 1000" v-slot="{ hours, minutes, seconds }">
                                                     <p class="no-margin font-30">{{ hours }} : {{ minutes }} : {{ seconds }}</p>
                                                 </vue-countdown>
@@ -105,9 +103,6 @@
 
                         <div class="padding bottom-bar">
                             <div class="row justify-content-start">
-                                <div class="col bottom-button margin-right">
-                                    <a href="/waiting/" class="button bg-color-white register-button button-raised text-color-black button-large text-transform-capitalize" id="book_table">Book Table</a>
-                                </div>
                                 <div class="col bottom-button margin-right">
                                     <f7-button class="button bg-color-white register-button button-raised text-color-black button-large text-transform-capitalize" @click="register" id="book_table">Book Table</f7-button>
                                 </div>
@@ -354,8 +349,20 @@ export default {
     },
     data() {
         return {
-            display : true
+            display: true,
+            floors: [],
+            reservation: {
+                name: '',
+                number: '',
+                member: 0,
+                floor: '',
+                agree_condition: 0,
+            },
+            checkWaitingTime: false,
         }
+    },
+    created() {
+        this.getFloors();
     },
     methods: {
         closePopup(){
@@ -363,11 +370,30 @@ export default {
             this.$emit('textChange');
         },
         register() {
+            if (!this.reservation.name || !this.reservation.number || !this.reservation.member || !this.reservation.floor || !this.reservation.agree_condition) {
+                this.$root.notification('Please fill the form details.');
+                return false;
+            }
+
             f7.dialog.confirm('Are you confirm to register?', () => {
+
+                var formData = new FormData();
+                formData.append('customer_name', this.reservation.name);
+                formData.append('customer_number', this.reservation.number);
+                formData.append('person', this.reservation.member);
+                formData.append('floor', this.reservation.floor);
+                formData.append('role', 'manager');
+
+                axios.post('/api/add-reservation', formData)
+                .then((res) => {
+                    console.log(res);
+                });
+
                 f7.dialog.alert('Success!', () => {
                     document.getElementById('book_table').classList.remove('active');
                     f7.view.main.router.navigate({ url: '/waiting/' });
                 });
+
                 setTimeout(() => {
                     $('.dialog-title').html("<img src='/images/success.png'>");
                     $('.dialog-button').addClass('col button button-raised button-large text-transform-capitalize');
@@ -384,9 +410,20 @@ export default {
                 $('.dialog-inner').addClass('margin-top');
                 $('.dialog-buttons').css({ 'margin-top': '25px', 'margin-bottom': '35px' });
             });
-        }
-
-
+        },
+        getFloors() {
+            axios.get('/api/get-floors')
+            .then((res) => {
+                this.floors = res.data;
+            })
+        },
+        checkTime() {
+            if (!this.reservation.name || !this.reservation.number || !this.reservation.member || !this.reservation.floor || !this.reservation.agree_condition) {
+                this.$root.notification('Please fill the form details.');
+            } else {
+                this.checkWaitingTime = true;
+            }
+        },
     }
 
 }
@@ -671,6 +708,9 @@ label.item-checkbox input[type='checkbox']:checked ~ .icon-checkbox:after, label
 .register-button:hover, .register-button:active, .active {
     background: #F33E3E !important;
     color: #fff !important;
+}
+.sheet-modal-inner .page-content{
+    background: #fff !important;
 }
 @media screen and (max-width:820px){
     .dialog{

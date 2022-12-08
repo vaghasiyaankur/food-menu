@@ -19,14 +19,10 @@
                                     <div class="menu-dropdown-content bg-color-white no-padding">
                                         <a href="#" class="menu-dropdown-link menu-close margin-horizontal no-padding"></a>
                                         <a href="/" class="menu-dropdown-link menu-close text-color-pink">Table</a>
-                                        <a href="/food-category/"
-                                            class="menu-dropdown-link menu-close text-color-black">Food Category</a>
-                                        <a href="/food-subcategory/"
-                                                class="menu-dropdown-link menu-close text-color-black">Food SubCategory</a>
-                                        <a href="/food-product/"
-                                            class="menu-dropdown-link menu-close text-color-black">Food Menu</a>
-                                        <a href="/digital-menu/"
-                                            class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Digital Menu</a>
+                                        <a href="/food-category/" class="menu-dropdown-link menu-close text-color-black">Food Category</a>
+                                        <a href="/food-subcategory/" class="menu-dropdown-link menu-close text-color-black">Food SubCategory</a>
+                                        <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black">Food Menu</a>
+                                        <a href="/digital-menu/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Digital Menu</a>
                                     </div>
                                 </div>
                             </div>
