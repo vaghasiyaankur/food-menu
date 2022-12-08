@@ -231,6 +231,8 @@
                                 <div class="table_reservation">
                                     <!-- <h3 class="no-margin-top">Reserved</h3> -->
                                     <div class="display-flex drop-target" :data-id="table.id">
+                                        
+                                        <draggable :scroll-sensitivity="250"  :force-fallback="true" class="dragArea list-group w-full" :list="list" @change="log">
                                         <div class="table_reservation_info" draggable="true" @dragstart="startDrag(table.id)" >
                                             <div class="person-info popover-open" data-popover=".popover-table"  @click="removebackdrop">
                                                 <div class="person_info_name border__bottom padding-bottom-half margin-bottom-half">
@@ -619,6 +621,9 @@
                                                 </div>
                                             </div>
                                         </div>
+
+                                    </draggable>
+
                                     </div>
                                 </div>
                             </div>
@@ -643,6 +648,7 @@
 import { f7,f7Page, f7Navbar, f7BlockTitle, f7Block, f7Swiper, f7SwiperSlide} from 'framework7-vue';
 import $ from 'jquery';
 import axios from 'axios'; 
+import { VueDraggableNext } from 'vue-draggable-next';
 
 export default {
     name : 'RegisterPage',
@@ -663,7 +669,7 @@ export default {
     }
   },
     components : {
-        f7,f7Page, f7Navbar, f7BlockTitle, f7Block,f7Swiper,f7SwiperSlide
+        f7,f7Page, f7Navbar, f7BlockTitle, f7Block,f7Swiper,f7SwiperSlide,draggable: VueDraggableNext
     },
     mounted() {
         this.equal_height();
