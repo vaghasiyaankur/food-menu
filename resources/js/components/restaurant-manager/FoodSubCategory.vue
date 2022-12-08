@@ -181,7 +181,7 @@ export default {
         this.getSubCategories();
     },
     mounted() {
-        $('.page-content').css('background', '#FFF');
+        $('.page-content').css('background', '#F7F7F7');
         this.getAllCategories();
         this.getAllSubCategories();
     },
@@ -198,7 +198,7 @@ export default {
             formData.append('category_id', this.subCategory.category);
 
             if (!this.subCategory.name || !this.subCategory.category) {
-                this.notification('Please fill the form details.');
+                this.$root.notification('Please fill the form details.');
                 return false;
             }
 
@@ -206,7 +206,8 @@ export default {
                 formData.append('id', this.subCategory.id);
 
                 axios.post('/api/update-sub-category', formData)
-                    .then((res) => {
+                .then((res) => {
+                    this.$root.notification(res.data.success);
                     this.getSubCategories();
                     f7.popup.close(`#sub_category_popup`);
                 })
@@ -214,6 +215,7 @@ export default {
                 axios.post('/api/add-sub-category', formData)
                 .then((res) => {
                     this.getSubCategories();
+                    this.$root.notification(res.data.success);
                     f7.popup.close(`#sub_category_popup`);
                 })
             }
@@ -232,7 +234,7 @@ export default {
                 $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
                 $('.dialog-button').eq(1).removeClass('text-color-black');
                 $('.dialog-buttons').addClass('margin-top no-margin-bottom')
-            }, 50       );
+            }, 50);
         },
         editSubCategory(id) {
             this.subCategory_title = 'Edit Sub Category';
@@ -251,12 +253,13 @@ export default {
             formData.append('sub_category_id', this.product.sub_category);
 
             if (!this.product.name || !this.product.price || !this.product.sub_category) {
-                this.notification('Please fill the form details.');
+                this.$root.notification('Please fill the form details.');
                 return false;
             }
 
             axios.post('/api/add-product', formData)
                 .then((res) => {
+                    this.$root.notification(res.data.success);
                     f7.popup.close(`#product_popup`);
                     this.product.name = '';
                     this.product.price = '';
@@ -274,14 +277,7 @@ export default {
             .then((res) => {
                 this.subCategoryOption = res.data;
             })
-        },
-        notification(notice) {
-            var notificationFull = f7.notification.create({
-                subtitle: notice,
-                closeTimeout: 3000,
-            });
-            notificationFull.open();
-        },
+        }
     },
 }
 </script>

@@ -84,6 +84,12 @@ Route::get('/get-category-products/{id}',[ProductController::class, 'getCategory
 
 Route::post('get-products',[ProductController::class, 'getProducts']);
 
+Route::get('product/{id}',[ProductController::class, 'editProduct']);
+
+Route::post('update-product',[ProductController::class, 'updateProduct']);
+
+Route::post('/delete-product',[ProductController::class, 'deleteProduct']);
+
 // ------------------------Manager Table Page Routes ------------------------ //
 
 Route::get('table-list-with-order',[TableController::class, 'tableList']);

@@ -17,7 +17,7 @@
                                     <div class="menu-dropdown-content bg-color-white no-padding">
                                         <a href="#" class="menu-dropdown-link menu-close margin-horizontal no-padding"></a>
                                         <a href="/food-category/" class="menu-dropdown-link menu-close text-color-pink margin-horizontal no-padding">Food Category</a>
-                                        <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food Menu</a>                                    
+                                        <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food Menu</a>
                                         <a href="/food-subcategory/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food subCategory</a>
                                         <a href="/digital-menu/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Digital Menu</a>
                                     </div>
@@ -92,7 +92,7 @@
                             <div class="card-content">
                                 <h3 class="card__heading no-margin-top">Most Reservation Table</h3>
                                 <p class="total__number no-margin">23</p>
-                                <div class="card__icon">
+                                <div class="card__icon card__icon_2">
                                     <img src="/images/report-4.png" alt="">
                                 </div>
                             </div>
@@ -143,7 +143,7 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </f7-page>
@@ -167,14 +167,14 @@ export default {
             inputEl: '#demo-calendar-range',
             rangePicker: true,
             numbers:true
-        });          
+        });
     },
     setup() {
         const numbers = [];
         for (let i = 1; i <= 8; i++) {
             numbers.push(i);
         }
-       
+
         // helpers data for axis
         const dates = [];
         const today = new Date();
@@ -197,7 +197,7 @@ export default {
 
 <style scoped>
 .reporting_section{
-    margin-top:70px;    
+    margin-top:70px;
 }
 .menu-item-dropdown .menu-item-content .f7-icons{
     font-size: 15px;
@@ -234,6 +234,9 @@ export default {
     position: absolute;
     right: 0;
     bottom: 0;
+}
+.reporting_card .card .card-content .card__icon.card__icon_2{
+    right: 10px;
 }
 .reporting_card .card .card-content .card__heading{
     font-weight: 600;
@@ -364,11 +367,9 @@ export default {
 }
 </style>
 <style>
-
-.page-content{
-    background: #fff !important;
+.page-content {
+    background: #f7f7f7 !important;
 }
-
 .calendar-day-number{
     border-radius: 3px !important;
 }
@@ -387,5 +388,4 @@ export default {
     background-color: #FFE1E1 !important;
     opacity: 1 !important;
 }
-
 </style>

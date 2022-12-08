@@ -17,7 +17,7 @@
                                     <div class="menu-dropdown-content bg-color-white no-padding">
                                         <a href="#" class="menu-dropdown-link menu-close"></a>
                                         <a href="/food-category/" class="menu-dropdown-link menu-close text-color-pink">Food Category</a>
-                                        <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black">Food Menu</a>                                    
+                                        <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black">Food Menu</a>
                                         <a href="/food-subcategory/" class="menu-dropdown-link menu-close text-color-black">Food subCategory</a>
                                         <a href="/digital-menu/" class="menu-dropdown-link menu-close text-color-black">Digital Menu</a>
                                     </div>
@@ -39,7 +39,7 @@
                             <img src="/images/reservationbg.png" style="width:100%;height:auto">
                         </div>
                     </div>
-                    <div class="col-100 medium-100 large-50">                        
+                    <div class="col-100 medium-100 large-50">
                         <div class="reservation_form">
                             <div class="text-color-gray register-text padding-left">
                                 <h3 class="card-title">Registration</h3>
@@ -102,9 +102,12 @@
                                 </form>
                             </div>
                         </div>
-                        
+
                         <div class="padding bottom-bar">
                             <div class="row justify-content-start">
+                                <div class="col bottom-button margin-right">
+                                    <a href="/waiting/" class="button bg-color-white register-button button-raised text-color-black button-large text-transform-capitalize" id="book_table">Book Table</a>
+                                </div>
                                 <div class="col bottom-button margin-right">
                                     <f7-button class="button bg-color-white register-button button-raised text-color-black button-large text-transform-capitalize" @click="register" id="book_table">Book Table</f7-button>
                                 </div>
@@ -114,11 +117,8 @@
                             </div>
                         </div>
                     </div>
-                </div>  
-                <div>
-
                 </div>
-            </div>          
+            </div>
         </div>
         <f7-sheet class="demo-sheet-swipe-to-close" style="height:auto; --f7-sheet-bg-color: #fff;" backdrop>
             <f7-page-content>
@@ -363,19 +363,29 @@ export default {
             this.$emit('textChange');
         },
         register() {
-            f7.dialog.confirm('', () => {
+            f7.dialog.confirm('Are you confirm to register?', () => {
+                f7.dialog.alert('Success!', () => {
+                    document.getElementById('book_table').classList.remove('active');
+                    f7.view.main.router.navigate({ url: '/waiting/' });
+                });
+                setTimeout(() => {
+                    $('.dialog-title').html("<img src='/images/success.png'>");
+                    $('.dialog-button').addClass('col button button-raised button-large text-transform-capitalize');
+                    $('.dialog-button').addClass('active');
+                    $('.dialog-button').css('width', '50%');
+                }, 50);
             });
 
             setTimeout(() => {
-                $('.dialog-title').text("Are you confirm to register?").css('font-size','20px');
+                $('.dialog-title').text("").css('font-size','20px');
                 $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
                 $('.dialog-button').eq(1).removeClass('text-color-black');
-                $('.dialog-button').eq(1).addClass('active');                
+                $('.dialog-button').eq(1).addClass('active');
                 $('.dialog-inner').addClass('margin-top');
                 $('.dialog-buttons').css({ 'margin-top': '25px', 'margin-bottom': '35px' });
             });
         }
-       
+
 
     }
 
@@ -493,7 +503,7 @@ export default {
     margin-bottom: 10px;
 }
 .reservation_form{
-    
+
     height: calc(100vh - 250px);
     overflow-y: auto;
 
@@ -654,7 +664,7 @@ label.item-checkbox input[type='checkbox']:checked ~ .icon-checkbox:after, label
         width:100%;
         max-width:350px;
     }
-    
+
 }
 </style>
 <style>

@@ -47,7 +47,7 @@ class CategoryController extends Controller
         $cat->image = $image_name;
         $cat->save();
 
-        return response()->json($cat);
+        return response()->json(['success'=>'category Added Successfully.']);
 
     }
 
@@ -97,7 +97,7 @@ class CategoryController extends Controller
         $category->image = $image_name;
         $category->save();
 
-        return response()->json(['sucess'=>'category Updated Sucessfully.']);
+        return response()->json(['success'=>'category Updated Successfully.']);
     }
 
     public function deleteCategory(Request $req)
@@ -113,7 +113,7 @@ class CategoryController extends Controller
         }
 
         $category->delete();
-        return response()->json(['sucess'=>'category Deleted Sucessfully.']);
+        return response()->json(['success'=>'category Deleted Successfully.']);
     }
 
     public function get_categories()

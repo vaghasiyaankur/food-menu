@@ -44,7 +44,7 @@
                                 <div class="col">
                                     <div class="item-content item-input">
                                         <div class="item-inner">
-                                            <div class="item-input-wrap row padding-half">
+                                            <div class="item-input-wrap searchData row padding-half">
                                                 <i class="f7-icons font-22 search-icon">search</i>
                                                 <input type="search" v-model="search" name="search" @input="getProducts()" id="searchData">
                                             </div>
@@ -53,7 +53,7 @@
                                 </div>
                                 <div class="col padding-left-half padding-right-half">
                                     <button class="button bg-dark text-color-white padding height-36 popup-open"
-                                    data-popup="#product_popup" @click="addProduct"><i class="f7-icons font-22 margin-right-half">plus_square</i> Add Product</button>
+                                    data-popup="#product_popup" @click="blankform"><i class="f7-icons font-22 margin-right-half">plus_square</i> Add Product</button>
                                 </div>
                             </div>
                         </div>
@@ -63,7 +63,7 @@
                     <div class="row">
                         <div class="col-50" v-for="subproduct in subCategoryProduct" :key="subproduct">
                             <div class="row">
-                                <div class="col-100">
+                                <div class="col-100 position-relative">
                                     <div class="card product_lists">
                                         <div class="card_header padding-horizontal padding-top text-align-center">
                                             <div class="border-bottom padding-bottom">
@@ -71,7 +71,7 @@
                                             </div>
                                         </div>
                                         <div class="card-content padding-top">
-                                            <div class="product_list padding-vertical-half" v-for="product in subproduct.products" :key="product">
+                                            <div class="product_list padding-vertical-half" :class="{ 'display-none showData' : index >= 5 }" v-for="(product,index) in subproduct.products" :key="product">
                                                 <div class="row align-items-center padding-horizontal">
                                                     <div class="col-100 large-60 medium-50">
                                                         <div class="row">
@@ -94,7 +94,13 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="scroll__arrow"  @click="showAllData" v-if="(subproduct.products.length >= 6)">
+                                        <div class="arrow_button">
+                                            <a href="javascript:;"><i class="f7-icons scroll_change_arrow">eject_fill</i></a>
+                                        </div>
+                                    </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -151,18 +157,19 @@ export default {
     data() {
         return {
             product: {
-                id : 0,
+                id : null,
                 name: '',
                 sub_category: null,
                 price: '',
             },
+            productTitle : 'Add Product',
             subCategoryOption: [],
             subCategoryProduct:[],
             search : '',
         }
     },
     mounted() {
-        $('.page-content').css('background', '#F0F0F0');
+        $('.page-content').css('background', '#F7F7F7');
         this.getAllSubCategories();
         this.getProducts();
     },
@@ -174,20 +181,38 @@ export default {
             formData.append('sub_category_id', this.product.sub_category);
 
             if (!this.product.name || !this.product.price || !this.product.sub_category) {
-                this.notification('Please fill the form details.');
+                this.$root.notification('Please fill the form details.');
                 return false;
             }
 
-            axios.post('/api/add-product', formData)
-            .then((res) => {
-                f7.popup.close(`#product_popup`);
-                this.product.name = '';
-                this.product.price = '';
-                this.product.sub_category = null;
-            })
+            if (this.product.id) {
+                formData.append('id', this.product.id);
+                axios.post('/api/update-product', formData)
+                .then((res) => {
+                    this.$root.notification(res.data.success);
+                    this.getProducts();
+                    f7.popup.close(`#product_popup`);
+                    this.blankform();
+                })
+            } else {
+                axios.post('/api/add-product', formData)
+                .then((res) => {
+                    this.$root.notification(res.data.success);
+                    this.getProducts();
+                    f7.popup.close(`#product_popup`);
+                    this.blankform();
+                })
+            }
         },
         removeProduct(id){
-            f7.dialog.confirm('Are you sure delete the product?');
+            f7.dialog.confirm('Are you sure delete the product?', () => {
+                axios.post('/api/delete-product', { id: id })
+                    .then((res) => {
+                        this.$root.notification(res.data.success);
+                        this.getProducts();
+                    })
+            });
+
             setTimeout(() => {
                 $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });
                 $('.dialog-title').html("<img src='/images/cross.png'>");
@@ -197,7 +222,15 @@ export default {
                 $('.dialog-buttons').addClass('margin-top no-margin-bottom')
             }, 200);
         },
-        editProduct(id){
+        editProduct(id) {
+            this.productTitle = 'Edit Product';
+            axios.get('/api/product/'+id)
+                .then((res) => {
+                this.product.id = res.data.id;
+                this.product.name = res.data.name;
+                this.product.price = res.data.price;
+                this.product.sub_category = res.data.sub_category_id;
+            })
         },
         getAllSubCategories() {
             axios.get('/api/sub-categories')
@@ -210,12 +243,55 @@ export default {
             .then((res) => {
                 this.subCategoryProduct = res.data;
             })
+        },
+        blankform() {
+            this.product.id = null;
+            this.product.name = '';
+            this.product.price = '';
+            this.product.sub_category = null;
+            this.productTitle = 'Add Product';
+        },
+        showAllData(e) {
+            e.target.classList.toggle('scroll_change_arrow');
+            var loadAllData = e.target.parentNode.parentNode.parentNode.previousSibling.querySelectorAll('.showData');
+            for (let i = 0; i < loadAllData.length; i++) {
+                loadAllData[i].classList.toggle('display-none');
+            }
         }
     },
 }
 </script>
 
 <style scoped>
+.arrow_button {
+      width: 30px;
+      height: 30px;
+      background: #ffffff;
+      box-shadow: 0px 1px 10px rgb(51 51 51 / 10%);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+
+  .scroll__arrow {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+  }
+  .scroll__arrow .arrow_button i {
+    font-size: 18px;
+    color: #999999;
+    transition: all 0.5s ease;
+  }
+
+  .scroll_change_arrow{
+    transform: rotate(180deg);
+  }
+
+  .position-relative {
+      position: relative;
+  }
 .menu-item-dropdown .menu-item-content .f7-icons{
     font-size: 15px;
     margin-left: 10px;
@@ -224,7 +300,7 @@ export default {
     margin-top: 70px;
 }
 .product-list-section .product_list_card.card{
-    background-color: #ffffff;
+    background-color: transparent;
     box-shadow:none;
 }
 .product-list-section .product_list_card .card.product_lists{
