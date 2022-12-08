@@ -19,6 +19,7 @@
         "jquery": "^3.6.1",
         "laravel-vue-pagination": "^4.0.0",
         "vue": "^3.2.40",
-        "vue-loader": "^17.0.0"
+        "vue-loader": "^17.0.0",
+        "vuedraggable": "^2.24.3"
     }
 }

@@ -1,6 +1,6 @@
 <template>
     <f7-page color="bg-color-white">
-            <div class="header-links display-flex align-items-center padding-right">
+            <div class="header-links display-flex align-items-center padding-right" v-bind="dragOptions">
                 <!--========= SMALL SCREEN MENU BAR=========== -->
                 <!-- <div class="hamburger__button">
                     <a href="#" class="link icon-only panel-open" data-panel=".panel-right-1"><i class="icon f7-icons if-not-md">menu</i></a>
@@ -217,7 +217,7 @@
                             </div>
                         </div>
 
-                        <div class="card no-margin table_1 equal-height-table" :style="('border-left : 10px solid rgb('+table.color.rgb)+')'">
+                        <div class="card no-margin table_1 equal-height-table" :style="('border-left : 10px solid rgb('+table.color.rgb)+')'"  @dragover.prevent @drop.prevent="onDrop(table.id)">
                             <div class="card-header no-padding">
                                 <div class="row header_detail">
                                     <div class="table-number padding-half"> <p class="no-margin">Table No.</p>
@@ -230,9 +230,9 @@
                             <div class="card-content card-content-padding padding-horizontal-half table1__details" :style="'max-width : '+(table.width - 20 )+'px'">
                                 <div class="table_reservation">
                                     <!-- <h3 class="no-margin-top">Reserved</h3> -->
-                                    <div class="display-flex ">
-                                        <div class="table_reservation_info">
-                                            <div class="person-info popover-open" data-popover=".popover-table" @click="removebackdrop">
+                                    <div class="display-flex drop-target" :data-id="table.id">
+                                        <div class="table_reservation_info" draggable="true" @dragstart="startDrag(table.id)" >
+                                            <div class="person-info popover-open" data-popover=".popover-table"  @click="removebackdrop">
                                                 <div class="person_info_name border__bottom padding-bottom-half margin-bottom-half">
                                                     <p class="no-margin text-align-center">By Manager</p>
                                                 </div>
@@ -361,7 +361,7 @@
 
                                             </div>
                                         </div>
-                                        <div class="table_reservation_info margin-bottom">
+                                        <div class="table_reservation_info margin-bottom" draggable="true" @dragstart="startDrag(table.id)">
                                             <div class="person-info popover-open" data-popover=".popover-table1-1"  @click="removebackdrop">
                                                 <div class="person_info_name border__bottom padding-bottom-half margin-bottom-half">
                                                     <p class="no-margin text-align-center">By Guest</p>
@@ -490,7 +490,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="table_reservation_info margin-bottom">
+                                        <div class="table_reservation_info margin-bottom" draggable="true" @dragstart="startDrag(table.id)">
                                             <div class="person-info popover-open" data-popover=".popover-table1-3"  @click="removebackdrop">
                                                 <div class="person_info_name border__bottom padding-bottom-half margin-bottom-half">
                                                     <p class="no-margin text-align-center">By Guest</p>
@@ -651,6 +651,17 @@ export default {
             row_tables: [],
         }
     },
+    computed: {
+    dragOptions() {
+      return {
+        group: {
+          name: 'g1'
+        },
+        scrollSensitivity: 200,
+        forceFallback: true
+      };
+    }
+  },
     components : {
         f7,f7Page, f7Navbar, f7BlockTitle, f7Block,f7Swiper,f7SwiperSlide
     },
@@ -725,11 +736,17 @@ export default {
                         cal_of_capacity = parseInt(cal_of_capacity) + parseInt(table.capacity_of_person);
                     });
                     this.row_tables = row_tables;
-                    console.log(this.row_tables);
 
                 })
+        },
+        startDrag(id) {
+            console.log(id);
+        },
+        onDrop(id) {
+            console.log(id);
+            // console.log(event.target.closest('.drop-target'));
         }
-    },
+    }
 }
 </script>
 
