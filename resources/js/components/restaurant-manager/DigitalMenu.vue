@@ -68,9 +68,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div v-else>
-                                <NoValueFound />
-                            </div>
+                        </div>
+                        <div v-else>
+                            <NoValueFound />
                         </div>
                     </div>
                 </div>
