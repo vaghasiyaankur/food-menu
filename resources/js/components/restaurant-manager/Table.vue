@@ -232,7 +232,7 @@
                                     <!-- <h3 class="no-margin-top">Reserved</h3> -->
                                     <div class="display-flex drop-target" :data-id="table.id">
                                     <draggable :scroll-sensitivity="250"  :force-fallback="true" class="dragArea list-group w-full" :list="list" @change="log">
-                                        
+
                                         <div class="table_reservation_info" draggable="true" @dragstart="startDrag(table.id)" >
                                             <div class="person-info popover-open" data-popover=".popover-table"  @click="removebackdrop">
                                                 <div class="person_info_name border__bottom padding-bottom-half margin-bottom-half">
@@ -366,7 +366,7 @@
                                     </draggable>
                                     <draggable :scroll-sensitivity="250"  :force-fallback="true" class="dragArea list-group w-full" :list="list" @change="log">
 
-                                    
+
                                         <div class="table_reservation_info margin-bottom" draggable="true" @dragstart="startDrag(table.id)">
                                             <div class="person-info popover-open" data-popover=".popover-table1-1"  @click="removebackdrop">
                                                 <div class="person_info_name border__bottom padding-bottom-half margin-bottom-half">
@@ -622,14 +622,14 @@
                                                                 </li>
                                                             </ul>
                                                         </div>
-                                                        
+
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </draggable>
                                     <draggable :scroll-sensitivity="250"  :force-fallback="true" class="dragArea list-group w-full" :list="list" @change="log">
-                                        
+
                                         <div class="table_reservation_info" draggable="true" @dragstart="startDrag(table.id)" >
                                             <div class="person-info popover-open" data-popover=".popover-table"  @click="removebackdrop">
                                                 <div class="person_info_name border__bottom padding-bottom-half margin-bottom-half">
@@ -763,7 +763,7 @@
                                     </draggable>
                                     <draggable :scroll-sensitivity="250"  :force-fallback="true" class="dragArea list-group w-full" :list="list" @change="log">
 
-                                    
+
                                         <div class="table_reservation_info margin-bottom" draggable="true" @dragstart="startDrag(table.id)">
                                             <div class="person-info popover-open" data-popover=".popover-table1-1"  @click="removebackdrop">
                                                 <div class="person_info_name border__bottom padding-bottom-half margin-bottom-half">
@@ -1019,14 +1019,14 @@
                                                                 </li>
                                                             </ul>
                                                         </div>
-                                                        
+
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </draggable>
                                     <draggable :scroll-sensitivity="250"  :force-fallback="true" class="dragArea list-group w-full" :list="list" @change="log">
-                                        
+
                                         <div class="table_reservation_info" draggable="true" @dragstart="startDrag(table.id)" >
                                             <div class="person-info popover-open" data-popover=".popover-table"  @click="removebackdrop">
                                                 <div class="person_info_name border__bottom padding-bottom-half margin-bottom-half">
@@ -1160,7 +1160,7 @@
                                     </draggable>
                                     <draggable :scroll-sensitivity="250"  :force-fallback="true" class="dragArea list-group w-full" :list="list" @change="log">
 
-                                    
+
                                         <div class="table_reservation_info margin-bottom" draggable="true" @dragstart="startDrag(table.id)">
                                             <div class="person-info popover-open" data-popover=".popover-table1-1"  @click="removebackdrop">
                                                 <div class="person_info_name border__bottom padding-bottom-half margin-bottom-half">
@@ -1416,14 +1416,14 @@
                                                                 </li>
                                                             </ul>
                                                         </div>
-                                                        
+
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </draggable>
                                     <draggable :scroll-sensitivity="250"  :force-fallback="true" class="dragArea list-group w-full" :list="list" @change="log">
-                                        
+
                                         <div class="table_reservation_info" draggable="true" @dragstart="startDrag(table.id)" >
                                             <div class="person-info popover-open" data-popover=".popover-table"  @click="removebackdrop">
                                                 <div class="person_info_name border__bottom padding-bottom-half margin-bottom-half">
@@ -1557,7 +1557,7 @@
                                     </draggable>
                                     <draggable :scroll-sensitivity="250"  :force-fallback="true" class="dragArea list-group w-full" :list="list" @change="log">
 
-                                    
+
                                         <div class="table_reservation_info margin-bottom" draggable="true" @dragstart="startDrag(table.id)">
                                             <div class="person-info popover-open" data-popover=".popover-table1-1"  @click="removebackdrop">
                                                 <div class="person_info_name border__bottom padding-bottom-half margin-bottom-half">
@@ -1813,13 +1813,13 @@
                                                                 </li>
                                                             </ul>
                                                         </div>
-                                                        
+
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </draggable>
-                                    
+
 
 
                                     </div>
@@ -1845,7 +1845,7 @@
 <script>
 import { f7,f7Page, f7Navbar, f7BlockTitle, f7Block, f7Swiper, f7SwiperSlide} from 'framework7-vue';
 import $ from 'jquery';
-import axios from 'axios'; 
+import axios from 'axios';
 import { VueDraggableNext } from 'vue-draggable-next';
 
 export default {
@@ -1911,7 +1911,7 @@ export default {
 
 
                         if(parseInt(table.capacity_of_person) % 2 != 0){
-                            var cap = parseInt(table.capacity_of_person - 1);  
+                            var cap = parseInt(table.capacity_of_person - 1);
                             var up_table = (parseInt(table.capacity_of_person) + 1) / 2;
                             var down_table = (parseInt(table.capacity_of_person) - 1)/ 2;
                         } else{
@@ -1919,7 +1919,7 @@ export default {
                             var up_table = parseInt(table.capacity_of_person) / 2;
                             var down_table = parseInt(table.capacity_of_person) / 2;
                         }
-                        
+
 
                         var col = (cap / 2) * 5 + 20;
 
@@ -2238,6 +2238,10 @@ export default {
 </style>
 
 <style>
+.demo-swiper .swiper-slide,
+.demo-swiper-multiple .swiper-slide {
+    background: transparent;
+}
 .popover-move .popover-angle:after{
     background: #f33e3e !important;
     border:  0.5px solid transparent !important
@@ -2351,5 +2355,4 @@ export default {
 .table_row .card{
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.11);
     }
-
 </style>
