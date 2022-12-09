@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Color;
+use App\Models\Order;
+
 
 class Table extends Model
 {
@@ -15,6 +17,11 @@ class Table extends Model
     public function color()
     {
         return $this->belongsTo(Color::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 
 }
