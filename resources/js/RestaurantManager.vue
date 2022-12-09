@@ -65,11 +65,12 @@ export default {
         },
         notification(notice) {
             var notificationFull = f7.notification.create({
-                subtitle: notice,
-                closeTimeout: 3000,
+                title: notice,
+                closeTimeout: 10000,
                 closeButton: true,
             });
             notificationFull.open();
+            $('.notification-content').remove();
         }
     },
     computed: {
