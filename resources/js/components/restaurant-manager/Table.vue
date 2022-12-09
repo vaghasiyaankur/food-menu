@@ -217,7 +217,7 @@
                             </div>
                         </div>
 
-                        <div class="card no-margin table_1 equal-height-table drop-target"  :data-id="table.id" :data-name="table.floor.name" :style="('border-left : 10px solid rgb('+table.color.rgb)+')'" >
+                        <div class="card no-margin table_1 equal-height-table drop-target"  :data-id="table.id" :data-name="table.floor.name" :data-tnumber="table.table_number" :style="('border-left : 10px solid rgb('+table.color.rgb)+')'" >
                             <div class="card-header no-padding">
                                 <div class="row header_detail">
                                     <div class="table-number padding-half"> <p class="no-margin">Table No.</p>
@@ -500,7 +500,24 @@ export default {
             if(table) var tableId = $(table).data('id');
 
             if(!tableId || !this.dragOrderTableId ||  tableId == this.dragOrderTableId) return false;
-            console.log($(table).data('name'));
+
+            var order_id = this.dragOrderId;
+            var floor_name = $(table).data('name');
+            var table_number = $(table).data('tnumber');
+
+            f7.dialog.confirm('Are you sure to order transfer to '+floor_name+'(Table Number : '+table_number+') ?', () => {
+                axios.post('/api/change-order-table', { table_number: table_number , id : order_id})
+                .then((res) => {
+                    if(res.data.success)  this.tableList();
+                })
+            });
+
+            setTimeout(() => {
+                    $('.dialog-title').html("<img src='/images/success.png'>");
+                    $('.dialog-button').addClass('col button button-raised button-large text-transform-capitalize');
+                    $('.dialog-button').eq(1).addClass('active');
+                    $('.dialog-button').css('width', '50%');
+                }, 50);
         }
     }
 }
