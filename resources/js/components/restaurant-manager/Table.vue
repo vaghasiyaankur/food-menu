@@ -231,16 +231,16 @@
                                 <div class="table_reservation">
                                     <!-- <h3 class="no-margin-top">Reserved</h3> -->
                                     <div class="display-flex">
-                                        <draggable :scroll-sensitivity="250"  :force-fallback="true" class="dragArea list-group w-full" :class="'dragger'+table.id" :list="order[index]" @start="startDrag(order.id, table.id)" @touchend.prevent="onDrop" v-for="(order,index) in table.orders" :key="order.id">
+                                        <!-- <draggable :scroll-sensitivity="250"  :force-fallback="true" class="dragArea list-group w-full" :class="'dragger'+table.id" :list="order[index]" @start="startDrag(order.id, table.id)" @touchend.prevent="onDrop" v-for="(order,index) in table.orders" :key="order.id"> -->
 
-                                            <div class="table_reservation_info" :class="'test'+order.id" draggable="true" @dragstart="startDrag(table.id)" >
+                                            <div class="table_reservation_info" :class="'test'+order.id" v-for="(order,index) in table.orders" :key="order.id" >
                                                 <div class="person-info popover-open" data-popover=".popover-table"  @click="removebackdrop">
                                                     <div class="person_info_name border__bottom padding-bottom-half margin-bottom-half">
-                                                        <p class="no-margin text-align-center">By Manager</p>
+                                                        <p class="no-margin text-align-center">By {{ order.role }}</p>
                                                     </div>
                                                     <div class="text-align-center person">
                                                         <i class="f7-icons size-22">person_fill</i>
-                                                        <span>&nbsp;4</span>
+                                                        <span>&nbsp;{{order.person}}</span>
                                                         <span class="waiting-time margin-top-half text-align-center">
                                                             <i class="f7-icons size-22">clock_fill</i>
                                                             <span>2:47</span>
@@ -268,7 +268,7 @@
                                                                 <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_2_fill</i>
                                                                 <span class="text-color-black">5 family member</span>
                                                             </div>
-                                                            <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="addClass()">
+                                                            <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="openFloorList()">
                                                                 <h3 class="text-color-red">Change Floor</h3>
 
                                                             </div>
@@ -363,7 +363,7 @@
 
                                                 </div>
                                             </div>
-                                        </draggable>
+                                        <!-- </draggable> -->
                                     </div>
                                 </div>
                             </div>
@@ -433,7 +433,7 @@ export default {
             }
             document.querySelectorAll(".equal-height-table").forEach(node => node.style.height = highestBox + "px");
         },
-        addClass(){
+        openFloorList(){
             $('.floor_dropdwon').toggleClass('floor_dropdown_visible');
         },
         removebackdrop(){
