@@ -1,6 +1,6 @@
 <template>
     <f7-page color="bg-color-white">
-            <div class="header-links display-flex align-items-center padding-right" :scroll-sensitivity="250"  :force-fallback="true" v-bind="dragOptions">
+            <div class="header-links display-flex align-items-center padding-right" v-bind="dragOptions">
                 <!--========= SMALL SCREEN MENU BAR=========== -->
                 <!-- <div class="hamburger__button">
                     <a href="#" class="link icon-only panel-open" data-panel=".panel-right-1"><i class="icon f7-icons if-not-md">menu</i></a>
@@ -217,7 +217,7 @@
                             </div>
                         </div>
 
-                        <div class="card no-margin table_1 equal-height-table" :style="('border-left : 10px solid rgb('+table.color.rgb)+')'"  @dragover.prevent @drop.prevent="startDrag(table.id)">
+                        <div class="card no-margin table_1 equal-height-table drop-target"  :data-id="table.id" :style="('border-left : 10px solid rgb('+table.color.rgb)+')'" >
                             <div class="card-header no-padding"  @dragover.prevent @drop.prevent="startDrag(table.id)">
                                 <div class="row header_detail">
                                     <div class="table-number padding-half"> <p class="no-margin">Table No.</p>
@@ -230,20 +230,10 @@
                             <div class="card-content card-content-padding padding-horizontal-half table1__details" :style="'max-width : '+(table.width - 20 )+'px'">
                                 <div class="table_reservation">
                                     <!-- <h3 class="no-margin-top">Reserved</h3> -->
-                                    <div class="display-flex drop-target" :data-id="table.id">
-                                        <!-- <draggable  class="dragArea list-group w-full" :list="table.orders" @start="onDrop"> -->
-                                            <!-- <div
-                                              class="list-group-item bg-gray-300 m-1 p-3 rounded-md text-center draggable"
-                                              v-for="element in table.orders"
-                                              :key="element.id"
-                                              draggable="true"
-                                              :scroll-sensitivity="250"  :force-fallback="true"
-                                              
-                                            >
-                                              {{ element.id }}
-                                            </div> -->
-                                            <div class="table_reservation_info" :class="'tbl'+element.id" :id="element.id" :data-id="element.id" v-for="element in table.orders"
-                                            :key="element.id" draggable="true" >
+                                    <div class="display-flex">
+                                        <draggable :scroll-sensitivity="250"  :force-fallback="true" class="dragArea list-group w-full" :class="'dragger'+table.id" :list="order[index]" @start="startDrag(table.id)" @end.prevent="onDrop" v-for="(order,index) in table.orders" :key="order.id">
+
+                                            <div class="table_reservation_info" :class="'test'+order.id" draggable="true" @dragstart="startDrag(table.id)" >
                                                 <div class="person-info popover-open" data-popover=".popover-table"  @click="removebackdrop">
                                                     <div class="person_info_name border__bottom padding-bottom-half margin-bottom-half">
                                                         <p class="no-margin text-align-center">By Manager</p>
@@ -282,8 +272,7 @@
                                                                 <h3 class="text-color-red">Change Floor</h3>
 
                                                             </div>
-
-
+                                                            <!-- ============FLOOR DROP DOWN  ============= -->
                                                             <div class="list simple-list floor_dropdwon">
                                                                 <ul>
                                                                     <li>
@@ -374,7 +363,7 @@
 
                                                 </div>
                                             </div>
-                                          <!-- </draggable> -->
+                                        </draggable>
                                     </div>
                                 </div>
                             </div>
@@ -406,12 +395,6 @@ export default {
     data() {
         return {
             row_tables: [],
-            list: [
-          { name: 'John', id: 1 },
-          { name: 'Joao', id: 2 },
-          { name: 'Jean', id: 3 },
-          { name: 'Gerard', id: 4 },
-        ],
         }
     },
     computed: {
@@ -506,13 +489,15 @@ export default {
             console.log(id);
         },
         onDrop(event) {
-            console.log(event.item);
-            // console.log(event.target.closest('.drop-target'));
+            console.log(event.originalEvent);
+            var table = event.originalEvent.target.closest('.drop-target');
+            if(table) var tableId = $(table).data('id');
+            if(!tableId) return false;
+            alert(tableId)
+            // console.log(tableId);
         }
     }
 }
-
-
 </script>
 
 <style scoped>
