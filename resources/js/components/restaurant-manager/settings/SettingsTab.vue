@@ -37,8 +37,8 @@
             <div class="card elevation-2">
                 <div class="card_header">
                     <div class="row padding-left padding-right align-items-center">
-                        <div class="col-50">
-                            <h3 class="card-title">Settings</h3>
+                        <div class="col-50"> 
+                            <h3 class="card-title"><a href="javscript:;" class="text-color-black"><i class="f7-icons font-22" style="vertical-align: bottom;">arrow_left</i></a> Settings</h3>
                         </div>
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                         <div class="toolbar-inner">
                             <a href="#tab-1" class="tab-link tab-link-active">General</a>
                             <a href="#tab-2" class="tab-link">Table Management</a>
-                            <!-- <a href="#tab-3" class="tab-link">Next</a> -->
+                            <a href="#tab-3" class="tab-link">Floor Plan</a>
                         </div>
                     </div>
                     <div class="tabs-animated-wrap">
@@ -59,9 +59,10 @@
                                 <TableFloorPlan v-if="tableShow" @tablehide="addEditTableShow" :page="page"/>
                                 <AddTable v-if="!tableShow" @tableshow="tableShow = true" :tableId="tableId"/>
                             </div>
-                            <!-- <div id="tab-3" class="tab">
-                                <h2>Tab 3</h2>
-                            </div> -->
+                            <div id="tab-3" class="tab">
+                                <FloorList v-if="floorlistShow" @floorlisthide="floorlistShow = false" />
+                                <FloorPlan v-if="!floorlistShow"  @floorlistshow="floorlistShow = true" />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -73,7 +74,9 @@
 import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Input } from 'framework7-vue';
 import GeneralSetting from './GeneralSetting.vue';
 import TableFloorPlan from './TableFloorPlan.vue';
+import FloorPlan from './FloorPlan.vue';
 import AddTable from './AddTable.vue';
+import FloorList from './FloorList.vue';
 import $ from 'jquery';
 export default {
     name : 'SettingsTab',
@@ -87,10 +90,13 @@ export default {
         GeneralSetting,
         TableFloorPlan,
         AddTable,
+        FloorPlan,
+        FloorList
     },
     data(){
         return {
             tableShow : true,
+            floorlistShow : true,
             tableId : 0,
             page : 1,
         }
@@ -250,7 +256,7 @@ export default {
 }
 
 .toolbar-inner{
-    width:40%;
+    width:60%;
 }
 
 @media screen and (max-width:820px) {
@@ -258,7 +264,7 @@ export default {
         width: 100%;
     }
     .toolbar-inner{
-        width:50%;
+        width:70%;
     }
 }
 </style>

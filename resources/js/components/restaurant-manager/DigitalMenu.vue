@@ -16,6 +16,7 @@
                                 <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
                                     <div class="menu-dropdown-content bg-color-white no-padding">
                                         <a href="#" class="menu-dropdown-link menu-close margin-horizontal no-padding"></a>
+                                        <a href="/" class="menu-dropdown-link menu-close text-color-pink">Table</a>
                                         <a href="/food-category/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food Category</a>
                                         <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food Menu</a>
                                         <a href="/food-subcategory/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food subCategory</a>
@@ -34,7 +35,10 @@
         <div class="card digital_menu_card elevation-2">
             <div class="row padding-horizontal no-padding-vertical">
                 <div class="col">
-                    <h3 class="card-title margin-bottom-half">Food Menu</h3>
+                    <h3 class="card-title margin-bottom-half">
+                        <a href="javscript:;" class="text-color-black padding-right-half"><i class="f7-icons font-22" style="vertical-align: bottom;">arrow_left</i></a>    
+                        <span> Food Menu </span> 
+                    </h3>
                     <p class="no-margin"> Select your favourite food and enjoy with family</p>
                 </div>
             </div>

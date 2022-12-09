@@ -16,6 +16,7 @@
                                 <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
                                     <div class="menu-dropdown-content bg-color-white no-padding">
                                         <a href="#" class="menu-dropdown-link menu-close"></a>
+                                        <a href="/" class="menu-dropdown-link menu-close text-color-pink">Table</a>
                                         <a href="/food-category/" class="menu-dropdown-link menu-close text-color-pink">Food Category</a>
                                         <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black">Food Menu</a>
                                         <a href="/food-subcategory/" class="menu-dropdown-link menu-close text-color-black">Food subCategory</a>
@@ -42,7 +43,10 @@
                     <div class="col-100 medium-100 large-50">
                         <div class="reservation_form">
                             <div class="text-color-gray register-text padding-left">
-                                <h3 class="card-title">Registration</h3>
+                                <h3 class="card-title">
+                                    <a href="javscript:;" class="text-color-black padding-right-half"><i class="f7-icons font-22" style="vertical-align: bottom;">arrow_left</i></a>
+                                    <span>Registration</span>
+                                </h3>
                                 <p> Please fill in the form below. <br> We will contact you as soon as possible </p>
                             </div>
                             <div>

@@ -59,7 +59,10 @@
                 <div class="card_header">
                     <div class="row padding-left padding-right align-items-center">
                         <div class="col-50">
-                            <h3>Category</h3>
+                            <h3>
+                                <a href="javscript:;" class="text-color-black padding-right-half" ><i class="f7-icons font-22" style="vertical-align: bottom;">arrow_left</i></a>
+                                <span> Category</span>
+                            </h3>
                         </div>
                         <div class="col-50">
                             <div class="row align-items-center">
