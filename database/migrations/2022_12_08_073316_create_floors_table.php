@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('floors', function (Blueprint $table) {
             $table->id();
-            $table->integer('number')->default(0);
+            $table->string('short_cut')->default(0);
             $table->string('name')->nullable();
             $table->timestamps();
         });
