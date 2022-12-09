@@ -17,8 +17,6 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('customer_id')->unsigned();
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
-            $table->unsignedBigInteger('floor_id')->unsigned();
-            $table->foreign('floor_id')->references('id')->on('floors')->onDelete('cascade');
             $table->unsignedBigInteger('table_id')->unsigned();
             $table->foreign('table_id')->references('id')->on('tables')->onDelete('cascade');
             $table->integer('person')->default(0);

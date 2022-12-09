@@ -16,24 +16,24 @@ class FloorSeeder extends Seeder
     public function run()
     {
         $floors = [
-            ['number' => '0', 'name' => 'Ground' , 'ac' => 0],
-            ['number' => '1', 'name' => 'First' , 'ac' => 1],
-            ['number' => '2', 'name' => 'Second' , 'ac' => 1],
-            ['number' => '3', 'name' => 'Third' , 'ac' => 0],
-            ['number' => '4', 'name' => 'Fourth' , 'ac' => 1],
-            ['number' => '5', 'name' => 'Fifth' , 'ac' => 0],
-            ['number' => '6', 'name' => 'Sixth' , 'ac' => 1],
-            ['number' => '7', 'name' => 'Seventh' , 'ac' => 0],
-            ['number' => '8', 'name' => 'Eighth' , 'ac' => 1],
-            ['number' => '9', 'name' => 'Ninth' , 'ac' => 0],
-            ['number' => '10', 'name' => 'Tenth' , 'ac' => 1],
+            ['short_cut' => 'F0(Non-Ac)', 'name' => 'Ground Floor(Non Ac)'],
+            ['short_cut' => 'F1(Ac)', 'name' => 'First Floor(Ac)'],
+            ['short_cut' => 'F2(Ac)', 'name' => 'Second Floor(Ac)'],
+            ['short_cut' => 'F3(Ac)', 'name' => 'Third Floor(Ac)'],
+            ['short_cut' => 'F4(Ac)', 'name' => 'Fourth Floor(Ac)'],
+            ['short_cut' => 'F5(Ac)', 'name' => 'Fifth Floor(Ac)'],
+            ['short_cut' => 'F6(Ac)', 'name' => 'Sixth Floor(Ac)'],
+            ['short_cut' => 'F7(Ac)', 'name' => 'Seventh Floor(Ac)'],
+            ['short_cut' => 'F8(Ac)', 'name' => 'Eighth Floor(Ac)'],
+            ['short_cut' => 'F9(Ac)', 'name' => 'Ninth Floor(Ac)'],
+            ['short_cut' => 'F10(Ac)', 'name' => 'Tenth Floor(Ac)'],
         ];
 
+        
         foreach ($floors as $floor) {
             $fl = new Floor();
-            $fl->number = $floor['number'];
+            $fl->short_cut = $floor['short_cut'];
             $fl->name = $floor['name'];
-            $fl->ac = $floor['ac'];
             $fl->save();
         }
     }

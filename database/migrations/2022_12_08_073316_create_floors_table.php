@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->integer('number')->default(0);
             $table->string('name')->nullable();
-            $table->boolean('ac')->default(0);
             $table->timestamps();
         });
     }

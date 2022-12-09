@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Order;
+use App\Models\Table;
 
 
 class Floor extends Model
@@ -13,8 +13,8 @@ class Floor extends Model
 
     protected $table = 'floors';
 
-    public function orders()
+    public function tables()
     {
-        return $this->hasMany(Order::class);
+        return $this->hasMany(Table::class);
     }
 }

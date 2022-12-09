@@ -18,10 +18,10 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             SettingSeeder::class,
             ColorSeeder::class,
-            TableSeeder::class,
             ProductSeeder::class,
             CustomerSeeder::class,
             FloorSeeder::class,
+            TableSeeder::class,
             OrderSeeder::class
         ]);
     }

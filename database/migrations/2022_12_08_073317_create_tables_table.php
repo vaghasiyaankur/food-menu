@@ -17,9 +17,10 @@ return new class extends Migration
             $table->id();
             $table->integer('table_number')->nullable();
             $table->String('capacity_of_person')->nullable();
-            $table->integer('floor_number')->nullable();
             $table->unsignedBigInteger('color_id')->unsigned();
             $table->foreign('color_id')->references('id')->on('colors');
+            $table->unsignedBigInteger('floor_id')->unsigned();
+            $table->foreign('floor_id')->references('id')->on('floors')->onDelete('cascade');
             $table->boolean('status')->default(1);
             $table->timestamps();
         });

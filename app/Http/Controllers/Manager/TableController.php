@@ -22,7 +22,7 @@ class TableController extends Controller
      */
     public function tableList()
     {
-        $tables = Table::with('color')->with('orders')->get();
+        $tables = Table::with('color')->with('orders', 'floor')->get();
         
         return response()->json([ 'tables' => $tables ] , 200);
     }

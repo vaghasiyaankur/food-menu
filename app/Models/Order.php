@@ -23,9 +23,4 @@ class Order extends Model
     {
         return $this->belongsTo(Table::class);
     }
-
-    public function floor()
-    {
-        return $this->belongsTo(Floor::class);
-    }
 }

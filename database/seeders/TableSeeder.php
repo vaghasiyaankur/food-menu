@@ -19,14 +19,14 @@ class TableSeeder extends Seeder
 
         $c_o_p = ['04', '02', '06', '08', '12', '10', '26', '08', '26', '08'];
 
-        $floor = [1, 2, 3, 4, 4, 2, 3, 4, 3, 4];
+        $floor = [1,1,1,1,2,2,2,2,3,3];
 
         foreach($colors as $key=>$color){
             $table = new Table();
             $table->id = $key + 1;
             $table->table_number = $key + 1;
             $table->capacity_of_person = $c_o_p[$key];
-            $table->floor_number = $floor[$key];
+            $table->floor_id = $floor[$key];
             $table->color_id = $color;
             $table->status = ($key == 1 || $key == 5 ? 0 : 1);
             $table->save();  

@@ -217,8 +217,8 @@
                             </div>
                         </div>
 
-                        <div class="card no-margin table_1 equal-height-table drop-target"  :data-id="table.id" :style="('border-left : 10px solid rgb('+table.color.rgb)+')'" >
-                            <div class="card-header no-padding"  @dragover.prevent @drop.prevent="startDrag(table.id)">
+                        <div class="card no-margin table_1 equal-height-table drop-target"  :data-id="table.id" :data-name="table.floor.name" :style="('border-left : 10px solid rgb('+table.color.rgb)+')'" >
+                            <div class="card-header no-padding">
                                 <div class="row header_detail">
                                     <div class="table-number padding-half"> <p class="no-margin">Table No.</p>
                                     <p class=" text-align-center no-margin"> 01</p>
@@ -231,7 +231,7 @@
                                 <div class="table_reservation">
                                     <!-- <h3 class="no-margin-top">Reserved</h3> -->
                                     <div class="display-flex">
-                                        <draggable :scroll-sensitivity="250"  :force-fallback="true" class="dragArea list-group w-full" :class="'dragger'+table.id" :list="order[index]" @start="startDrag(table.id)" @touchend.prevent="onDrop" v-for="(order,index) in table.orders" :key="order.id">
+                                        <draggable :scroll-sensitivity="250"  :force-fallback="true" class="dragArea list-group w-full" :class="'dragger'+table.id" :list="order[index]" @start="startDrag(order.id, table.id)" @touchend.prevent="onDrop" v-for="(order,index) in table.orders" :key="order.id">
 
                                             <div class="table_reservation_info" :class="'test'+order.id" draggable="true" @dragstart="startDrag(table.id)" >
                                                 <div class="person-info popover-open" data-popover=".popover-table"  @click="removebackdrop">
@@ -395,13 +395,15 @@ export default {
     data() {
         return {
             row_tables: [],
+            dragOrderId: '',
+            dragOrderTableId: ''
         }
     },
     computed: {
     dragOptions() {
       return {
         group: {
-          name: 'g1'
+          name: 'table'
         },
         scrollSensitivity: 200,
         forceFallback: true
@@ -485,8 +487,9 @@ export default {
 
                 })
         },
-        startDrag(id) {
-            console.log(id);
+        startDrag(id, tableId) {
+            this.dragOrderId = id;
+            this.dragOrderTableId = tableId;
         },
         onDrop(event) {
             var endTarget = document.elementFromPoint(
@@ -495,9 +498,9 @@ export default {
             );
             var table = endTarget.closest('.drop-target');
             if(table) var tableId = $(table).data('id');
-            if(!tableId) return false;
-            alert(tableId);
-            console.log(tableId);
+
+            if(!tableId || !this.dragOrderTableId ||  tableId == this.dragOrderTableId) return false;
+            console.log($(table).data('name'));
         }
     }
 }
@@ -783,6 +786,9 @@ export default {
     .menu-dropdown-content{
         z-index:2;
     }*/
+}
+.table_reservation {
+    height: 60px;
 }
 </style>
 
