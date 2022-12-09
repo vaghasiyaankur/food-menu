@@ -99,6 +99,8 @@ Route::get('table-list-with-order',[TableController::class, 'tableList']);
 
 Route::get('get-floors',[FloorController::class , 'getFloors']);
 
+Route::post('add-floor',[FloorController::class , 'addFloor']);
+
 // ------------------------ Reservation Routes ------------------------ //
 
 Route::post('/add-reservation',[ReservationController::class, 'addReservation']);

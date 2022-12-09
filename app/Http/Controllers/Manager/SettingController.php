@@ -13,16 +13,16 @@ use App\Helper\ImageHelper;
 class SettingController extends Controller
 {
     /**
-    * This controller is used for the Settings tab 
+    * This controller is used for the Settings tab
     * in the Manage panel
     */
 
 
     /**
      * To pass website setting data from database to frontend
-     * 
+     *
      * @return @json ($setting)
-     * 
+     *
      */
     public function settingData()
     {
@@ -36,9 +36,9 @@ class SettingController extends Controller
 
      /**
      * Update webiste common setting Data in database
-     * 
+     *
      * @return @json (success message)
-     * 
+     *
      */
     public function updateSetting(Request $request)
     {
@@ -66,22 +66,22 @@ class SettingController extends Controller
 
     /**
      * To pass all table list from database to frontend
-     * 
+     *
      * @return @json ($tables)
-     * 
+     *
      */
     public function tableList(Request $request)
     {
-        $tables = Table::paginate(10);
+        $tables = Table::with('color','orders', 'floor')->paginate(10);
 
         return response()->json([ 'tables' => $tables ] , 200);
     }
 
     /**
      * To pass all table color list from database to frontend
-     * 
+     *
      * @return @json ($colors)
-     * 
+     *
      */
     public function colorList()
     {
@@ -92,9 +92,9 @@ class SettingController extends Controller
 
     /**
      * To check the color of the table from above the capacity of person
-     * 
+     *
      * @return @json (suceess message and color id)
-     * 
+     *
      */
     public function checkColor($capacity)
     {
@@ -105,9 +105,9 @@ class SettingController extends Controller
 
     /**
      * To pass Single table data from database to frontend
-     * 
+     *
      * @return @json ($table)
-     * 
+     *
      */
     public function tableData($id)
     {
@@ -118,9 +118,9 @@ class SettingController extends Controller
 
     /**
      * Add Table Or Update Table Data In Database
-     * 
+     *
      * @return @json (success message)
-     * 
+     *
      */
     public function addUpdateTable(Request $request)
     {
@@ -132,7 +132,7 @@ class SettingController extends Controller
         ];
 
         Table::updateOrCreate(['id' => $request->id], $data);
-        
+
         if($request->id == 0) $message = 'created';
         else $message = "Updated";
 
@@ -141,9 +141,9 @@ class SettingController extends Controller
 
     /**
      * Remove Table Data In Database
-     * 
+     *
      * @return @json (success message)
-     * 
+     *
      */
     public function deleteTable(Request $request)
     {
@@ -154,9 +154,9 @@ class SettingController extends Controller
 
     /**
      * Change Table Status In Database
-     * 
+     *
      * @return @json (success message)
-     * 
+     *
      */
     public function changeTableStatus(Request $request)
     {

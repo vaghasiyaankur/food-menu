@@ -25,15 +25,15 @@
                       <tr v-for="table in tables" :key="table.id">
                          <td class="label-cell">{{ table.table_number }}.</td>
                          <td>{{ table.capacity_of_person }} Person Capacity</td>
-                         <td>{{ table.floor_number == 0 ? 'Ground' : table.floor_number }}<sup>{{ table.floor_number == 0 ? '' : table.floor_number == 1 ? 'st' : table.floor_number == 2 ? 'nd' : table.floor_number == 3 ? 'rd' : 'th' }}</sup> Floor</td>
-                         <td>                            
+                         <td>{{ table.floor_number == 0 ? 'Ground' : table.floor.short_cut }} Floor</td>
+                         <td>
                             <span class="status_info status_active" v-if=" table.status" @click="changeStatus(table.id, 0)">Active</span>
                             <span class="status_info status_deactive" v-else @click="changeStatus(table.id, 1)">Deactive</span>
-                            
+
                          </td>
                          <td>
                             <div class="table_color">
-                                <span class="green_bg color__dot" :style="('background: '+table.color+ ';opacity: 0.5')"></span>{{ table.color }}
+                                <span class="green_bg color__dot" :style="{'background-color': 'rgb('+table.color.rgb+')'}"></span>{{ table.color.color.replace("_", " ") }}
                             </div>
                          </td>
                          <td>
@@ -42,7 +42,7 @@
                                 <a href="javascript:;" class="button text-color-red font-13" @click="removeTable(table.id)"><i class="f7-icons font-13 margin-right-half">trash</i> Delete</a>
                             </div>
                          </td>
-                      </tr>                                          
+                      </tr>
                    </tbody>
                 </table>
                 <div class="data-table-pagination">
@@ -62,7 +62,7 @@
 <script>
     import { f7 } from 'framework7-vue';
     import $ from 'jquery';
-    import axios from 'axios';  
+    import axios from 'axios';
 
     export default {
         name : 'AddFloorPlan',
@@ -91,27 +91,43 @@
                     this.from = res.data.tables.from;
                     this.to = res.data.tables.to;
                     this.total = res.data.tables.total;
-                    this.prev_page_number = res.data.tables.prev_page_url ? res.data.tables.current_page - 1 : 0; 
+                    this.prev_page_number = res.data.tables.prev_page_url ? res.data.tables.current_page - 1 : 0;
                     this.next_page_number = res.data.tables.next_page_url ? res.data.tables.current_page + 1 : 0;
                 })
             },
             removeTable(id) {
                 f7.dialog.confirm('Are you sure delete the table?', () => {
                 axios.post('/api/delete-table', { id: id })
-                .then((res) => {
-                    this.notification(res.data.success);
-                    this.tableList();
-                })
-            });
+                    .then((res) => {
+                        this.notification(res.data.success);
+                        this.tableList();
+                    })
+                });
+                setTimeout(() => {
+                    $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });
+                    $('.dialog-title').html("<img src='/images/cross.png'>");
+                    $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
+                    $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
+                    $('.dialog-button').eq(1).removeClass('text-color-black');
+                    $('.dialog-buttons').addClass('margin-top no-margin-bottom')
+                }, 50);
             },
             changeStatus(id, status){
                 f7.dialog.confirm('Are you sure Change status of the table?', () => {
-                axios.post('/api/change-table-status', { id : id , status: status })
-                .then((res) => {
-                    this.notification(res.data.success);
-                    this.tableList();
-                })
+                    axios.post('/api/change-table-status', { id : id , status: status })
+                    .then((res) => {
+                        this.notification(res.data.success);
+                        this.tableList();
+                    })
                 });
+                setTimeout(() => {
+                    $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });
+                    $('.dialog-title').html("");
+                    $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
+                    $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
+                    $('.dialog-button').eq(1).removeClass('text-color-black');
+                    $('.dialog-buttons').addClass('margin-top no-margin-bottom');
+                }, 50);
             },
             notification(notice) {
                 var notificationFull = f7.notification.create({
@@ -120,7 +136,7 @@
                 });
                 notificationFull.open();
             }
-        }    
+        }
     }
 </script>
 <style scoped>
@@ -160,7 +176,7 @@
     color: #3D833C;
 }
 .status_info.status_deactive{
-    background-color: #FFE9E9;        
+    background-color: #FFE9E9;
     color: #AE4444;
 }
 .table_color .color__dot{
@@ -170,6 +186,7 @@
     display: inline-block;
     vertical-align: middle;
     margin-right: 5px;
+    opacity: 0.5;
 }
 .green_bg{
     background-color: #0FC963;

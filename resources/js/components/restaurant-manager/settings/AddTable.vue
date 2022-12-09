@@ -4,7 +4,7 @@
             <div class="back_link">
                 <a class="link back text-color-black" href="javascript:;" @click="$emit('tableshow')"><i class="icon icon-back"> </i>
                     <span class="margin-left-half">Back to List</span>
-                </a>        
+                </a>
                 <!-- <h2 @click="$emit('tableshow')">dcsfhczsdnvghasdf</h2> -->
             </div>
             <div class="add_table_field">
@@ -35,12 +35,7 @@
                             <div class="item-inner padding-left">
                                 <div class="item-input-wrap input-dropdown-wrap">
                                     <select placeholder="Please choose..." class="padding-left padding-right" v-model="floor_number">
-                                        <option value="0">Ground floor (Non-AC)</option>
-                                        <option value="1">First floor (AC)</option>
-                                        <option value="2">Second floor (AC)</option>
-                                        <option value="3">Third floor (AC)</option>
-                                        <option value="4">Fourth floor (AC)</option>
-                                        <option value="5">Fifth floor (AC)</option>
+                                        <option v-for="floor in floors" :key="floor.id" :value="floor.id">{{ floor.name }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -58,10 +53,10 @@
                                 </div>
                             </div>
                         </div>
-                    </div> 
+                    </div>
                     <div class="submit__button margin-top padding-top">
                         <button type="button" class="col button button-large button-fill" @click="addUpdateTable">Save</button>
-                    </div>                                                          
+                    </div>
                 </form>
             </div>
         </div>
@@ -70,7 +65,7 @@
 
 <script>
     import { f7 } from 'framework7-vue';
-    import axios from 'axios';  
+    import axios from 'axios';
     export default {
         name : 'AddTable',
         props: ['tableId'],
@@ -84,10 +79,12 @@
                 floor_number : '',
                 colors : [],
                 color: '',
+                floors : [],
             }
         },
         created() {
             this.colorList();
+            this.getFloors();
         },
         methods: {
             colorList() {
@@ -114,7 +111,7 @@
                 var formData = new FormData();
 
                 if(!this.table_number || !this.capacity_of_person || !this.floor_number || !this.color){
-                    this.notification('Please Fill All Data in Form')  
+                    this.notification('Please Fill All Data in Form')
                     return false;
                 }
 
@@ -122,7 +119,7 @@
                 formData.append('table_number' , this.table_number);
                 formData.append('capacity_of_person' , this.capacity_of_person);
                 formData.append('floor_number' , this.floor_number);
-                formData.append('color' , this.color);  
+                formData.append('color' , this.color);
 
                 axios
                 .post("/api/add-update-table", formData, config)
@@ -146,8 +143,14 @@
                 .then((res) => {
                     if(res.data.success) this.color = res.data.color_id;
                 })
-            }
-        }    
+            },
+            getFloors() {
+                axios.get('/api/get-floors')
+                    .then((res) => {
+                        this.floors = res.data;
+                    })
+            },
+        }
     }
 </script>
 <style scoped>
@@ -170,9 +173,9 @@
     .add_table_field .submit__button button{
         width:100%;
         max-width:160px;
-        margin:0 auto;   
-        border-radius:10px;  
-        background-color: #F33E3E;   
+        margin:0 auto;
+        border-radius:10px;
+        background-color: #F33E3E;
     }
     .input-dropdown-wrap:before, .input-dropdown:before{
         right:13px;
