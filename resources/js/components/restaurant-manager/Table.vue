@@ -231,7 +231,7 @@
                                 <div class="table_reservation">
                                     <!-- <h3 class="no-margin-top">Reserved</h3> -->
                                     <div class="display-flex">
-                                        <draggable :scroll-sensitivity="250"  :force-fallback="true" class="dragArea list-group w-full" :class="'dragger'+table.id" :list="order[index]" @start="startDrag(table.id)" @end.prevent="onDrop" v-for="(order,index) in table.orders" :key="order.id">
+                                        <draggable :scroll-sensitivity="250"  :force-fallback="true" class="dragArea list-group w-full" :class="'dragger'+table.id" :list="order[index]" @start="startDrag(table.id)" @touchend.prevent="onDrop" v-for="(order,index) in table.orders" :key="order.id">
 
                                             <div class="table_reservation_info" :class="'test'+order.id" draggable="true" @dragstart="startDrag(table.id)" >
                                                 <div class="person-info popover-open" data-popover=".popover-table"  @click="removebackdrop">
@@ -489,12 +489,15 @@ export default {
             console.log(id);
         },
         onDrop(event) {
-            console.log(event.originalEvent);
-            var table = event.originalEvent.target.closest('.drop-target');
+            var endTarget = document.elementFromPoint(
+                event.changedTouches[0].pageX,
+                event.changedTouches[0].pageY
+            );
+            var table = endTarget.closest('.drop-target');
             if(table) var tableId = $(table).data('id');
             if(!tableId) return false;
-            alert(tableId)
-            // console.log(tableId);
+            alert(tableId);
+            console.log(tableId);
         }
     }
 }
@@ -649,6 +652,7 @@ export default {
 }
 .table1__details{
     width: 100%;
+    overflow-x:auto;
 }
 
 .table2__details{
