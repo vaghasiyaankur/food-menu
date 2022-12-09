@@ -16,6 +16,7 @@
                                 <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
                                     <div class="menu-dropdown-content bg-color-white no-padding">
                                         <a href="#" class="menu-dropdown-link menu-close margin-horizontal no-padding"></a>
+                                        <a href="/" class="menu-dropdown-link menu-close text-color-pink">Table</a>
                                         <a href="/food-category/" class="menu-dropdown-link menu-close text-color-pink margin-horizontal no-padding">Food Category</a>
                                         <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food Menu</a>
                                         <a href="/food-subcategory/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food subCategory</a>
@@ -34,7 +35,10 @@
         <div class="reporting_section">
             <div class="row padding-vertical margin-horizontal align-items-center">
                 <div class="col-60">
-                    <h3 class="card-title no-margin">Reporting</h3>
+                    <h3 class="card-title no-margin">
+                        <a href="javscript:;" class="text-color-black padding-right-half"><i class="f7-icons font-22" style="vertical-align: bottom;">arrow_left</i></a>                            
+                        <span> Reporting</span>
+                     </h3>
                 </div>
                 <div class="col-40">
                     <div class="list no-hairlines reporting_calander no-margin">
@@ -197,7 +201,7 @@ export default {
 
 <style scoped>
 .reporting_section{
-    margin-top:70px;
+    margin-top:50px;
 }
 .menu-item-dropdown .menu-item-content .f7-icons{
     font-size: 15px;

@@ -33,11 +33,14 @@
             </f7-navbar>
         </div>
         <div class="product-list-section">
-            <div class="card product_list_card no-margin">
+            <div class="product_list_card no-margin">
                 <div class="card_header">
                     <div class="row padding-horizontal margin-horizontal align-items-center">
                         <div class="col-50">
-                            <h3 class="card-title">Product</h3>
+                            <h3 class="card-title">
+                                <a href="javscript:;" class="text-color-black padding-right-half"><i class="f7-icons font-22" style="vertical-align: bottom;">arrow_left</i></a>                                
+                                <span>Product</span> 
+                            </h3>
                         </div>
                         <div class="col-50">
                             <div class="row align-items-center">
@@ -60,7 +63,7 @@
                     </div>
                 </div>
                 <div class="card-content card-content-padding">
-                    <div class="row">
+                    <div class="row" v-if="subCategoryProduct.length">
                         <div class="col-50" v-for="subproduct in subCategoryProduct" :key="subproduct">
                             <div class="row">
                                 <div class="col-100 position-relative">
@@ -104,6 +107,9 @@
                             </div>
                         </div>
                     </div>
+                    <div v-else>
+                        <NoValueFound />
+                    </div>
                 </div>
             </div>
         </div>
@@ -139,6 +145,7 @@
 import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Input,f7ListItem,f7AccordionContent,f7List,f7AccordionToggle,f7AccordionItem } from 'framework7-vue';
 import $ from 'jquery';
 import axios from 'axios';
+import NoValueFound from './NoValueFound.vue'
 export default {
     name : 'FoodProduct',
     components: {
@@ -152,7 +159,8 @@ export default {
         f7AccordionContent,
         f7AccordionToggle,
         f7List,
-        f7AccordionItem
+        f7AccordionItem,
+        NoValueFound
     },
     data() {
         return {

@@ -18,7 +18,7 @@
                                 <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
                                     <div class="menu-dropdown-content bg-color-white no-padding">
                                         <a href="#" class="menu-dropdown-link menu-close margin-horizontal no-padding"></a>
-                                        <a href="/" class="menu-dropdown-link menu-close text-color-pink">Table</a>lavender
+                                        <a href="/" class="menu-dropdown-link menu-close text-color-pink">Table</a>
                                         <a href="/food-category/"
                                             class="menu-dropdown-link menu-close text-color-black">Food Category</a>
                                         <a href="/food-subcategory/"
@@ -63,7 +63,10 @@
                 <div class="card_header">
                     <div class="row padding-left padding-right align-items-center">
                         <div class="col-50">
-                            <h3>Category</h3>
+                            <h3>
+                                <a href="javscript:;" class="text-color-black padding-right-half" ><i class="f7-icons font-22" style="vertical-align: bottom;">arrow_left</i></a>
+                                <span> Category</span>
+                            </h3>
                         </div>
                         <div class="col-50">
                             <div class="row align-items-center">
