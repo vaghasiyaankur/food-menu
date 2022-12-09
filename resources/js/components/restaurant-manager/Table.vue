@@ -649,7 +649,6 @@ export default {
 }
 .table1__details{
     width: 100%;
-    overflow-x:auto;
 }
 
 .table2__details{
