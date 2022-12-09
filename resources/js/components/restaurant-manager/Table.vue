@@ -217,8 +217,8 @@
                             </div>
                         </div>
 
-                        <div class="card no-margin table_1 equal-height-table" :style="('border-left : 10px solid rgb('+table.color.rgb)+')'"  @dragover.prevent @drop.prevent="onDrop(table.id)">
-                            <div class="card-header no-padding">
+                        <div class="card no-margin table_1 equal-height-table drop-target"  :data-id="table.id" :style="('border-left : 10px solid rgb('+table.color.rgb)+')'" >
+                            <div class="card-header no-padding"  @dragover.prevent @drop.prevent="startDrag(table.id)">
                                 <div class="row header_detail">
                                     <div class="table-number padding-half"> <p class="no-margin">Table No.</p>
                                     <p class=" text-align-center no-margin"> 01</p>
@@ -230,1598 +230,140 @@
                             <div class="card-content card-content-padding padding-horizontal-half table1__details" :style="'max-width : '+(table.width - 20 )+'px'">
                                 <div class="table_reservation">
                                     <!-- <h3 class="no-margin-top">Reserved</h3> -->
-                                    <div class="display-flex drop-target" :data-id="table.id">
-                                    <draggable :scroll-sensitivity="250"  :force-fallback="true" class="dragArea list-group w-full" :list="list" @change="log">
-                                        
-                                        <div class="table_reservation_info" draggable="true" @dragstart="startDrag(table.id)" >
-                                            <div class="person-info popover-open" data-popover=".popover-table"  @click="removebackdrop">
-                                                <div class="person_info_name border__bottom padding-bottom-half margin-bottom-half">
-                                                    <p class="no-margin text-align-center">By Manager</p>
-                                                </div>
-                                                <div class="text-align-center person">
-                                                    <i class="f7-icons size-22">person_fill</i>
-                                                    <span>&nbsp;4</span>
-                                                    <span class="waiting-time margin-top-half text-align-center">
-                                                        <i class="f7-icons size-22">clock_fill</i>
-                                                        <span>2:47</span>
-                                                    </span>
-                                                </div>
-                                                <div class="popover popover-table padding-half">
-                                                    <div class="user-info popover-inner">
-                                                        <div class="display-flex padding-left-half padding-top-half align-items-center">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_fill</i>
-                                                            <span class="text-color-black">John Smith</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top align-items-center">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">clock</i>
-                                                            <span class="text-color-black">3:00pm</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top align-items-center">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">phone</i>
-                                                            <span class="text-color-black">+91 12345 12345</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top-half align-items-center padding-bottom">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_2_fill</i>
-                                                            <span class="text-color-black">5 family member</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top-half align-items-center padding-bottom">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_2_fill</i>
-                                                            <span class="text-color-black">5 family member</span>
-                                                        </div>
-                                                        <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="addClass()">
-                                                            <h3 class="text-color-red">Change Floor</h3>
+                                    <div class="display-flex">
+                                        <draggable :scroll-sensitivity="250"  :force-fallback="true" class="dragArea list-group w-full" :class="'dragger'+table.id" :list="order[index]" @start="startDrag(table.id)" @touchend.prevent="onDrop" v-for="(order,index) in table.orders" :key="order.id">
 
-                                                        </div>
-                                                         <!-- ============FLOOR DROP DOWN  ============= -->
-                                                         <div class="list simple-list floor_dropdwon">
-                                                            <ul>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>1<sup>st</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">20</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>2<sup>nd</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">12</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>3<sup>rd</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">16</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>4<sup>th</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">15</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>5<sup>th</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">08</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>6<sup>th</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">13</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">18</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">18</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-
+                                            <div class="table_reservation_info" :class="'test'+order.id" draggable="true" @dragstart="startDrag(table.id)" >
+                                                <div class="person-info popover-open" data-popover=".popover-table"  @click="removebackdrop">
+                                                    <div class="person_info_name border__bottom padding-bottom-half margin-bottom-half">
+                                                        <p class="no-margin text-align-center">By Manager</p>
                                                     </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </draggable>
-                                    <draggable :scroll-sensitivity="250"  :force-fallback="true" class="dragArea list-group w-full" :list="list" @change="log">
-
-                                    
-                                        <div class="table_reservation_info margin-bottom" draggable="true" @dragstart="startDrag(table.id)">
-                                            <div class="person-info popover-open" data-popover=".popover-table1-1"  @click="removebackdrop">
-                                                <div class="person_info_name border__bottom padding-bottom-half margin-bottom-half">
-                                                    <p class="no-margin text-align-center">By Guest</p>
-                                                </div>
-                                                <div class="text-align-center person">
-                                                    <i class="f7-icons size-22">person_fill</i>
-                                                    <span>&nbsp;4</span>
-                                                    <span class="waiting-time margin-top-half text-align-center">
-                                                        <i class="f7-icons size-22">clock_fill</i>
-                                                        <span>2:47</span>
-                                                    </span>
-                                                </div>
-                                                <div class="popover popover-table1-1 padding-half">
-                                                    <div class="user-info popover-inner">
-                                                        <div class="display-flex padding-left-half padding-top-half align-items-center">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_fill</i>
-                                                            <span class="text-color-black">John Smith</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top align-items-center">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">clock</i>
-                                                            <span class="text-color-black">3:00pm</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top align-items-center">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">phone</i>
-                                                            <span class="text-color-black">+91 12345 12345</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top-half align-items-center padding-bottom">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_2_fill</i>
-                                                            <span class="text-color-black">5 family member</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top-half align-items-center padding-bottom">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_2_fill</i>
-                                                            <span class="text-color-black">5 family member</span>
-                                                        </div>
-                                                        <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="addClass()">
-                                                            <h3 class="text-color-red">Change Floor</h3>
-
-                                                        </div>
-                                                         <!-- ============FLOOR DROP DOWN  ============= -->
-                                                         <div class="list simple-list floor_dropdwon">
-                                                            <ul>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>1<sup>st</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">20</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>2<sup>nd</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">12</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>3<sup>rd</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">16</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>4<sup>th</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">15</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>5<sup>th</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">08</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>6<sup>th</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">13</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">18</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">18</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-
+                                                    <div class="text-align-center person">
+                                                        <i class="f7-icons size-22">person_fill</i>
+                                                        <span>&nbsp;4</span>
+                                                        <span class="waiting-time margin-top-half text-align-center">
+                                                            <i class="f7-icons size-22">clock_fill</i>
+                                                            <span>2:47</span>
+                                                        </span>
                                                     </div>
+                                                    <div class="popover popover-table padding-half">
+                                                        <div class="user-info popover-inner">
+                                                            <div class="display-flex padding-left-half padding-top-half align-items-center">
+                                                                <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_fill</i>
+                                                                <span class="text-color-black">John Smith</span>
+                                                            </div>
+                                                            <div class="display-flex padding-left-half padding-top align-items-center">
+                                                                <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">clock</i>
+                                                                <span class="text-color-black">3:00pm</span>
+                                                            </div>
+                                                            <div class="display-flex padding-left-half padding-top align-items-center">
+                                                                <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">phone</i>
+                                                                <span class="text-color-black">+91 12345 12345</span>
+                                                            </div>
+                                                            <div class="display-flex padding-left-half padding-top-half align-items-center padding-bottom">
+                                                                <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_2_fill</i>
+                                                                <span class="text-color-black">5 family member</span>
+                                                            </div>
+                                                            <div class="display-flex padding-left-half padding-top-half align-items-center padding-bottom">
+                                                                <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_2_fill</i>
+                                                                <span class="text-color-black">5 family member</span>
+                                                            </div>
+                                                            <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="addClass()">
+                                                                <h3 class="text-color-red">Change Floor</h3>
+
+                                                            </div>
+                                                            <!-- ============FLOOR DROP DOWN  ============= -->
+                                                            <div class="list simple-list floor_dropdwon">
+                                                                <ul>
+                                                                    <li>
+                                                                        <div class="floor_number display-flex align-items-center justify_content_between w-100">
+                                                                            <div class="floor_name">
+                                                                                <span>1<sup>st</sup> Floor (AC)</span>
+                                                                            </div>
+                                                                            <div class="floor_room_available">
+                                                                                <span class="room_available">20</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li>
+                                                                        <div class="floor_number display-flex align-items-center justify_content_between w-100">
+                                                                            <div class="floor_name">
+                                                                                <span>2<sup>nd</sup> Floor (AC)</span>
+                                                                            </div>
+                                                                            <div class="floor_room_available">
+                                                                                <span class="room_available">12</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li>
+                                                                        <div class="floor_number display-flex align-items-center justify_content_between w-100">
+                                                                            <div class="floor_name">
+                                                                                <span>3<sup>rd</sup> Floor (AC)</span>
+                                                                            </div>
+                                                                            <div class="floor_room_available">
+                                                                                <span class="room_available">16</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li>
+                                                                        <div class="floor_number display-flex align-items-center justify_content_between w-100">
+                                                                            <div class="floor_name">
+                                                                                <span>4<sup>th</sup> Floor (AC)</span>
+                                                                            </div>
+                                                                            <div class="floor_room_available">
+                                                                                <span class="room_available">15</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li>
+                                                                        <div class="floor_number display-flex align-items-center justify_content_between w-100">
+                                                                            <div class="floor_name">
+                                                                                <span>5<sup>th</sup> Floor (AC)</span>
+                                                                            </div>
+                                                                            <div class="floor_room_available">
+                                                                                <span class="room_available">08</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li>
+                                                                        <div class="floor_number display-flex align-items-center justify_content_between w-100">
+                                                                            <div class="floor_name">
+                                                                                <span>6<sup>th</sup> Floor (AC)</span>
+                                                                            </div>
+                                                                            <div class="floor_room_available">
+                                                                                <span class="room_available">13</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li>
+                                                                        <div class="floor_number display-flex align-items-center justify_content_between w-100">
+                                                                            <div class="floor_name">
+                                                                                <span>7<sup>th</sup> Floor (Non-AC)</span>
+                                                                            </div>
+                                                                            <div class="floor_room_available">
+                                                                                <span class="room_available">18</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li>
+                                                                        <div class="floor_number display-flex align-items-center justify_content_between w-100">
+                                                                            <div class="floor_name">
+                                                                                <span>7<sup>th</sup> Floor (Non-AC)</span>
+                                                                            </div>
+                                                                            <div class="floor_room_available">
+                                                                                <span class="room_available">18</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
                                                 </div>
                                             </div>
-                                        </div>
-                                    </draggable>
-                                    <draggable :scroll-sensitivity="250"  :force-fallback="true" class="dragArea list-group w-full" :list="list" @change="log">
-                                        <div class="table_reservation_info margin-bottom" draggable="true" @dragstart="startDrag(table.id)">
-                                            <div class="person-info popover-open" data-popover=".popover-table1-3"  @click="removebackdrop">
-                                                <div class="person_info_name border__bottom padding-bottom-half margin-bottom-half">
-                                                    <p class="no-margin text-align-center">By Guest</p>
-                                                </div>
-                                                <div class="text-align-center person">
-                                                    <i class="f7-icons size-22">person_fill</i>
-                                                    <span>&nbsp;4</span>
-                                                    <span class="waiting-time margin-top-half text-align-center">
-                                                        <i class="f7-icons size-22">clock_fill</i>
-                                                        <span>2:47</span>
-                                                    </span>
-                                                </div>
-                                                <div class="popover popover-table1-3 padding-half">
-                                                    <div class="user-info popover-inner">
-                                                        <div class="display-flex padding-left-half padding-top-half align-items-center">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_fill</i>
-                                                            <span class="text-color-black">John Smith</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top align-items-center">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">clock</i>
-                                                            <span class="text-color-black">3:00pm</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top align-items-center">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">phone</i>
-                                                            <span class="text-color-black">+91 12345 12345</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top-half align-items-center padding-bottom">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_2_fill</i>
-                                                            <span class="text-color-black">5 family member</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top-half align-items-center padding-bottom">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_2_fill</i>
-                                                            <span class="text-color-black">5 family member</span>
-                                                        </div>
-                                                        <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="addClass()">
-                                                            <h3 class="text-color-red">Change Floor</h3>
-
-                                                        </div>
-                                                         <!-- ============FLOOR DROP DOWN  ============= -->
-                                                         <div class="list simple-list floor_dropdwon">
-                                                            <ul>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>1<sup>st</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">20</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>2<sup>nd</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">12</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>3<sup>rd</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">16</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>4<sup>th</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">15</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>5<sup>th</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">08</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>6<sup>th</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">13</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">18</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">18</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </draggable>
-                                    <draggable :scroll-sensitivity="250"  :force-fallback="true" class="dragArea list-group w-full" :list="list" @change="log">
-                                        
-                                        <div class="table_reservation_info" draggable="true" @dragstart="startDrag(table.id)" >
-                                            <div class="person-info popover-open" data-popover=".popover-table"  @click="removebackdrop">
-                                                <div class="person_info_name border__bottom padding-bottom-half margin-bottom-half">
-                                                    <p class="no-margin text-align-center">By Manager</p>
-                                                </div>
-                                                <div class="text-align-center person">
-                                                    <i class="f7-icons size-22">person_fill</i>
-                                                    <span>&nbsp;4</span>
-                                                    <span class="waiting-time margin-top-half text-align-center">
-                                                        <i class="f7-icons size-22">clock_fill</i>
-                                                        <span>2:47</span>
-                                                    </span>
-                                                </div>
-                                                <div class="popover popover-table padding-half">
-                                                    <div class="user-info popover-inner">
-                                                        <div class="display-flex padding-left-half padding-top-half align-items-center">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_fill</i>
-                                                            <span class="text-color-black">John Smith</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top align-items-center">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">clock</i>
-                                                            <span class="text-color-black">3:00pm</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top align-items-center">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">phone</i>
-                                                            <span class="text-color-black">+91 12345 12345</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top-half align-items-center padding-bottom">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_2_fill</i>
-                                                            <span class="text-color-black">5 family member</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top-half align-items-center padding-bottom">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_2_fill</i>
-                                                            <span class="text-color-black">5 family member</span>
-                                                        </div>
-                                                        <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="addClass()">
-                                                            <h3 class="text-color-red">Change Floor</h3>
-
-                                                        </div>
-                                                         <!-- ============FLOOR DROP DOWN  ============= -->
-                                                         <div class="list simple-list floor_dropdwon">
-                                                            <ul>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>1<sup>st</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">20</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>2<sup>nd</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">12</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>3<sup>rd</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">16</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>4<sup>th</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">15</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>5<sup>th</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">08</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>6<sup>th</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">13</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">18</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">18</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </draggable>
-                                    <draggable :scroll-sensitivity="250"  :force-fallback="true" class="dragArea list-group w-full" :list="list" @change="log">
-
-                                    
-                                        <div class="table_reservation_info margin-bottom" draggable="true" @dragstart="startDrag(table.id)">
-                                            <div class="person-info popover-open" data-popover=".popover-table1-1"  @click="removebackdrop">
-                                                <div class="person_info_name border__bottom padding-bottom-half margin-bottom-half">
-                                                    <p class="no-margin text-align-center">By Guest</p>
-                                                </div>
-                                                <div class="text-align-center person">
-                                                    <i class="f7-icons size-22">person_fill</i>
-                                                    <span>&nbsp;4</span>
-                                                    <span class="waiting-time margin-top-half text-align-center">
-                                                        <i class="f7-icons size-22">clock_fill</i>
-                                                        <span>2:47</span>
-                                                    </span>
-                                                </div>
-                                                <div class="popover popover-table1-1 padding-half">
-                                                    <div class="user-info popover-inner">
-                                                        <div class="display-flex padding-left-half padding-top-half align-items-center">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_fill</i>
-                                                            <span class="text-color-black">John Smith</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top align-items-center">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">clock</i>
-                                                            <span class="text-color-black">3:00pm</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top align-items-center">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">phone</i>
-                                                            <span class="text-color-black">+91 12345 12345</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top-half align-items-center padding-bottom">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_2_fill</i>
-                                                            <span class="text-color-black">5 family member</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top-half align-items-center padding-bottom">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_2_fill</i>
-                                                            <span class="text-color-black">5 family member</span>
-                                                        </div>
-                                                        <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="addClass()">
-                                                            <h3 class="text-color-red">Change Floor</h3>
-
-                                                        </div>
-                                                         <!-- ============FLOOR DROP DOWN  ============= -->
-                                                         <div class="list simple-list floor_dropdwon">
-                                                            <ul>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>1<sup>st</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">20</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>2<sup>nd</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">12</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>3<sup>rd</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">16</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>4<sup>th</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">15</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>5<sup>th</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">08</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>6<sup>th</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">13</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">18</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">18</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </draggable>
-                                    <draggable :scroll-sensitivity="250"  :force-fallback="true" class="dragArea list-group w-full" :list="list" @change="log">
-                                        <div class="table_reservation_info margin-bottom" draggable="true" @dragstart="startDrag(table.id)">
-                                            <div class="person-info popover-open" data-popover=".popover-table1-3"  @click="removebackdrop">
-                                                <div class="person_info_name border__bottom padding-bottom-half margin-bottom-half">
-                                                    <p class="no-margin text-align-center">By Guest</p>
-                                                </div>
-                                                <div class="text-align-center person">
-                                                    <i class="f7-icons size-22">person_fill</i>
-                                                    <span>&nbsp;4</span>
-                                                    <span class="waiting-time margin-top-half text-align-center">
-                                                        <i class="f7-icons size-22">clock_fill</i>
-                                                        <span>2:47</span>
-                                                    </span>
-                                                </div>
-                                                <div class="popover popover-table1-3 padding-half">
-                                                    <div class="user-info popover-inner">
-                                                        <div class="display-flex padding-left-half padding-top-half align-items-center">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_fill</i>
-                                                            <span class="text-color-black">John Smith</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top align-items-center">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">clock</i>
-                                                            <span class="text-color-black">3:00pm</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top align-items-center">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">phone</i>
-                                                            <span class="text-color-black">+91 12345 12345</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top-half align-items-center padding-bottom">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_2_fill</i>
-                                                            <span class="text-color-black">5 family member</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top-half align-items-center padding-bottom">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_2_fill</i>
-                                                            <span class="text-color-black">5 family member</span>
-                                                        </div>
-                                                        <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="addClass()">
-                                                            <h3 class="text-color-red">Change Floor</h3>
-
-                                                        </div>
-                                                         <!-- ============FLOOR DROP DOWN  ============= -->
-                                                         <div class="list simple-list floor_dropdwon">
-                                                            <ul>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>1<sup>st</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">20</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>2<sup>nd</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">12</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>3<sup>rd</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">16</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>4<sup>th</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">15</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>5<sup>th</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">08</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>6<sup>th</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">13</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">18</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">18</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </draggable>
-                                    <draggable :scroll-sensitivity="250"  :force-fallback="true" class="dragArea list-group w-full" :list="list" @change="log">
-                                        
-                                        <div class="table_reservation_info" draggable="true" @dragstart="startDrag(table.id)" >
-                                            <div class="person-info popover-open" data-popover=".popover-table"  @click="removebackdrop">
-                                                <div class="person_info_name border__bottom padding-bottom-half margin-bottom-half">
-                                                    <p class="no-margin text-align-center">By Manager</p>
-                                                </div>
-                                                <div class="text-align-center person">
-                                                    <i class="f7-icons size-22">person_fill</i>
-                                                    <span>&nbsp;4</span>
-                                                    <span class="waiting-time margin-top-half text-align-center">
-                                                        <i class="f7-icons size-22">clock_fill</i>
-                                                        <span>2:47</span>
-                                                    </span>
-                                                </div>
-                                                <div class="popover popover-table padding-half">
-                                                    <div class="user-info popover-inner">
-                                                        <div class="display-flex padding-left-half padding-top-half align-items-center">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_fill</i>
-                                                            <span class="text-color-black">John Smith</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top align-items-center">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">clock</i>
-                                                            <span class="text-color-black">3:00pm</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top align-items-center">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">phone</i>
-                                                            <span class="text-color-black">+91 12345 12345</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top-half align-items-center padding-bottom">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_2_fill</i>
-                                                            <span class="text-color-black">5 family member</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top-half align-items-center padding-bottom">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_2_fill</i>
-                                                            <span class="text-color-black">5 family member</span>
-                                                        </div>
-                                                        <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="addClass()">
-                                                            <h3 class="text-color-red">Change Floor</h3>
-
-                                                        </div>
-                                                         <!-- ============FLOOR DROP DOWN  ============= -->
-                                                         <div class="list simple-list floor_dropdwon">
-                                                            <ul>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>1<sup>st</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">20</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>2<sup>nd</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">12</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>3<sup>rd</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">16</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>4<sup>th</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">15</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>5<sup>th</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">08</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>6<sup>th</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">13</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">18</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">18</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </draggable>
-                                    <draggable :scroll-sensitivity="250"  :force-fallback="true" class="dragArea list-group w-full" :list="list" @change="log">
-
-                                    
-                                        <div class="table_reservation_info margin-bottom" draggable="true" @dragstart="startDrag(table.id)">
-                                            <div class="person-info popover-open" data-popover=".popover-table1-1"  @click="removebackdrop">
-                                                <div class="person_info_name border__bottom padding-bottom-half margin-bottom-half">
-                                                    <p class="no-margin text-align-center">By Guest</p>
-                                                </div>
-                                                <div class="text-align-center person">
-                                                    <i class="f7-icons size-22">person_fill</i>
-                                                    <span>&nbsp;4</span>
-                                                    <span class="waiting-time margin-top-half text-align-center">
-                                                        <i class="f7-icons size-22">clock_fill</i>
-                                                        <span>2:47</span>
-                                                    </span>
-                                                </div>
-                                                <div class="popover popover-table1-1 padding-half">
-                                                    <div class="user-info popover-inner">
-                                                        <div class="display-flex padding-left-half padding-top-half align-items-center">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_fill</i>
-                                                            <span class="text-color-black">John Smith</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top align-items-center">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">clock</i>
-                                                            <span class="text-color-black">3:00pm</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top align-items-center">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">phone</i>
-                                                            <span class="text-color-black">+91 12345 12345</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top-half align-items-center padding-bottom">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_2_fill</i>
-                                                            <span class="text-color-black">5 family member</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top-half align-items-center padding-bottom">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_2_fill</i>
-                                                            <span class="text-color-black">5 family member</span>
-                                                        </div>
-                                                        <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="addClass()">
-                                                            <h3 class="text-color-red">Change Floor</h3>
-
-                                                        </div>
-                                                         <!-- ============FLOOR DROP DOWN  ============= -->
-                                                         <div class="list simple-list floor_dropdwon">
-                                                            <ul>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>1<sup>st</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">20</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>2<sup>nd</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">12</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>3<sup>rd</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">16</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>4<sup>th</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">15</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>5<sup>th</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">08</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>6<sup>th</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">13</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">18</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">18</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </draggable>
-                                    <draggable :scroll-sensitivity="250"  :force-fallback="true" class="dragArea list-group w-full" :list="list" @change="log">
-                                        <div class="table_reservation_info margin-bottom" draggable="true" @dragstart="startDrag(table.id)">
-                                            <div class="person-info popover-open" data-popover=".popover-table1-3"  @click="removebackdrop">
-                                                <div class="person_info_name border__bottom padding-bottom-half margin-bottom-half">
-                                                    <p class="no-margin text-align-center">By Guest</p>
-                                                </div>
-                                                <div class="text-align-center person">
-                                                    <i class="f7-icons size-22">person_fill</i>
-                                                    <span>&nbsp;4</span>
-                                                    <span class="waiting-time margin-top-half text-align-center">
-                                                        <i class="f7-icons size-22">clock_fill</i>
-                                                        <span>2:47</span>
-                                                    </span>
-                                                </div>
-                                                <div class="popover popover-table1-3 padding-half">
-                                                    <div class="user-info popover-inner">
-                                                        <div class="display-flex padding-left-half padding-top-half align-items-center">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_fill</i>
-                                                            <span class="text-color-black">John Smith</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top align-items-center">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">clock</i>
-                                                            <span class="text-color-black">3:00pm</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top align-items-center">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">phone</i>
-                                                            <span class="text-color-black">+91 12345 12345</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top-half align-items-center padding-bottom">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_2_fill</i>
-                                                            <span class="text-color-black">5 family member</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top-half align-items-center padding-bottom">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_2_fill</i>
-                                                            <span class="text-color-black">5 family member</span>
-                                                        </div>
-                                                        <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="addClass()">
-                                                            <h3 class="text-color-red">Change Floor</h3>
-
-                                                        </div>
-                                                         <!-- ============FLOOR DROP DOWN  ============= -->
-                                                         <div class="list simple-list floor_dropdwon">
-                                                            <ul>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>1<sup>st</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">20</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>2<sup>nd</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">12</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>3<sup>rd</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">16</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>4<sup>th</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">15</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>5<sup>th</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">08</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>6<sup>th</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">13</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">18</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">18</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </draggable>
-                                    <draggable :scroll-sensitivity="250"  :force-fallback="true" class="dragArea list-group w-full" :list="list" @change="log">
-                                        
-                                        <div class="table_reservation_info" draggable="true" @dragstart="startDrag(table.id)" >
-                                            <div class="person-info popover-open" data-popover=".popover-table"  @click="removebackdrop">
-                                                <div class="person_info_name border__bottom padding-bottom-half margin-bottom-half">
-                                                    <p class="no-margin text-align-center">By Manager</p>
-                                                </div>
-                                                <div class="text-align-center person">
-                                                    <i class="f7-icons size-22">person_fill</i>
-                                                    <span>&nbsp;4</span>
-                                                    <span class="waiting-time margin-top-half text-align-center">
-                                                        <i class="f7-icons size-22">clock_fill</i>
-                                                        <span>2:47</span>
-                                                    </span>
-                                                </div>
-                                                <div class="popover popover-table padding-half">
-                                                    <div class="user-info popover-inner">
-                                                        <div class="display-flex padding-left-half padding-top-half align-items-center">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_fill</i>
-                                                            <span class="text-color-black">John Smith</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top align-items-center">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">clock</i>
-                                                            <span class="text-color-black">3:00pm</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top align-items-center">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">phone</i>
-                                                            <span class="text-color-black">+91 12345 12345</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top-half align-items-center padding-bottom">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_2_fill</i>
-                                                            <span class="text-color-black">5 family member</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top-half align-items-center padding-bottom">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_2_fill</i>
-                                                            <span class="text-color-black">5 family member</span>
-                                                        </div>
-                                                        <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="addClass()">
-                                                            <h3 class="text-color-red">Change Floor</h3>
-
-                                                        </div>
-                                                         <!-- ============FLOOR DROP DOWN  ============= -->
-                                                         <div class="list simple-list floor_dropdwon">
-                                                            <ul>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>1<sup>st</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">20</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>2<sup>nd</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">12</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>3<sup>rd</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">16</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>4<sup>th</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">15</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>5<sup>th</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">08</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>6<sup>th</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">13</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">18</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">18</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </draggable>
-                                    <draggable :scroll-sensitivity="250"  :force-fallback="true" class="dragArea list-group w-full" :list="list" @change="log">
-
-                                    
-                                        <div class="table_reservation_info margin-bottom" draggable="true" @dragstart="startDrag(table.id)">
-                                            <div class="person-info popover-open" data-popover=".popover-table1-1"  @click="removebackdrop">
-                                                <div class="person_info_name border__bottom padding-bottom-half margin-bottom-half">
-                                                    <p class="no-margin text-align-center">By Guest</p>
-                                                </div>
-                                                <div class="text-align-center person">
-                                                    <i class="f7-icons size-22">person_fill</i>
-                                                    <span>&nbsp;4</span>
-                                                    <span class="waiting-time margin-top-half text-align-center">
-                                                        <i class="f7-icons size-22">clock_fill</i>
-                                                        <span>2:47</span>
-                                                    </span>
-                                                </div>
-                                                <div class="popover popover-table1-1 padding-half">
-                                                    <div class="user-info popover-inner">
-                                                        <div class="display-flex padding-left-half padding-top-half align-items-center">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_fill</i>
-                                                            <span class="text-color-black">John Smith</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top align-items-center">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">clock</i>
-                                                            <span class="text-color-black">3:00pm</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top align-items-center">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">phone</i>
-                                                            <span class="text-color-black">+91 12345 12345</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top-half align-items-center padding-bottom">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_2_fill</i>
-                                                            <span class="text-color-black">5 family member</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top-half align-items-center padding-bottom">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_2_fill</i>
-                                                            <span class="text-color-black">5 family member</span>
-                                                        </div>
-                                                        <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="addClass()">
-                                                            <h3 class="text-color-red">Change Floor</h3>
-
-                                                        </div>
-                                                         <!-- ============FLOOR DROP DOWN  ============= -->
-                                                         <div class="list simple-list floor_dropdwon">
-                                                            <ul>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>1<sup>st</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">20</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>2<sup>nd</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">12</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>3<sup>rd</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">16</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>4<sup>th</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">15</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>5<sup>th</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">08</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>6<sup>th</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">13</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">18</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">18</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </draggable>
-                                    <draggable :scroll-sensitivity="250"  :force-fallback="true" class="dragArea list-group w-full" :list="list" @change="log">
-                                        <div class="table_reservation_info margin-bottom" draggable="true" @dragstart="startDrag(table.id)">
-                                            <div class="person-info popover-open" data-popover=".popover-table1-3"  @click="removebackdrop">
-                                                <div class="person_info_name border__bottom padding-bottom-half margin-bottom-half">
-                                                    <p class="no-margin text-align-center">By Guest</p>
-                                                </div>
-                                                <div class="text-align-center person">
-                                                    <i class="f7-icons size-22">person_fill</i>
-                                                    <span>&nbsp;4</span>
-                                                    <span class="waiting-time margin-top-half text-align-center">
-                                                        <i class="f7-icons size-22">clock_fill</i>
-                                                        <span>2:47</span>
-                                                    </span>
-                                                </div>
-                                                <div class="popover popover-table1-3 padding-half">
-                                                    <div class="user-info popover-inner">
-                                                        <div class="display-flex padding-left-half padding-top-half align-items-center">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_fill</i>
-                                                            <span class="text-color-black">John Smith</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top align-items-center">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">clock</i>
-                                                            <span class="text-color-black">3:00pm</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top align-items-center">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">phone</i>
-                                                            <span class="text-color-black">+91 12345 12345</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top-half align-items-center padding-bottom">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_2_fill</i>
-                                                            <span class="text-color-black">5 family member</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top-half align-items-center padding-bottom">
-                                                            <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_2_fill</i>
-                                                            <span class="text-color-black">5 family member</span>
-                                                        </div>
-                                                        <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="addClass()">
-                                                            <h3 class="text-color-red">Change Floor</h3>
-
-                                                        </div>
-                                                         <!-- ============FLOOR DROP DOWN  ============= -->
-                                                         <div class="list simple-list floor_dropdwon">
-                                                            <ul>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>1<sup>st</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">20</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>2<sup>nd</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">12</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>3<sup>rd</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">16</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>4<sup>th</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">15</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>5<sup>th</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">08</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>6<sup>th</sup> Floor (AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">13</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">18</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                        <div class="floor_name">
-                                                                            <span>7<sup>th</sup> Floor (Non-AC)</span>
-                                                                        </div>
-                                                                        <div class="floor_room_available">
-                                                                            <span class="room_available">18</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </draggable>
-                                    
-
-
+                                        </draggable>
                                     </div>
                                 </div>
                             </div>
@@ -1845,7 +387,7 @@
 <script>
 import { f7,f7Page, f7Navbar, f7BlockTitle, f7Block, f7Swiper, f7SwiperSlide} from 'framework7-vue';
 import $ from 'jquery';
-import axios from 'axios'; 
+import axios from 'axios';
 import { VueDraggableNext } from 'vue-draggable-next';
 
 export default {
@@ -1911,7 +453,7 @@ export default {
 
 
                         if(parseInt(table.capacity_of_person) % 2 != 0){
-                            var cap = parseInt(table.capacity_of_person - 1);  
+                            var cap = parseInt(table.capacity_of_person - 1);
                             var up_table = (parseInt(table.capacity_of_person) + 1) / 2;
                             var down_table = (parseInt(table.capacity_of_person) - 1)/ 2;
                         } else{
@@ -1919,7 +461,7 @@ export default {
                             var up_table = parseInt(table.capacity_of_person) / 2;
                             var down_table = parseInt(table.capacity_of_person) / 2;
                         }
-                        
+
 
                         var col = (cap / 2) * 5 + 20;
 
@@ -1946,9 +488,16 @@ export default {
         startDrag(id) {
             console.log(id);
         },
-        onDrop(id) {
-            console.log(id);
-            // console.log(event.target.closest('.drop-target'));
+        onDrop(event) {
+            var endTarget = document.elementFromPoint(
+                event.changedTouches[0].pageX,
+                event.changedTouches[0].pageY
+            );
+            var table = endTarget.closest('.drop-target');
+            if(table) var tableId = $(table).data('id');
+            if(!tableId) return false;
+            alert(tableId);
+            console.log(tableId);
         }
     }
 }
@@ -2238,6 +787,10 @@ export default {
 </style>
 
 <style>
+.demo-swiper .swiper-slide,
+.demo-swiper-multiple .swiper-slide {
+    background: transparent;
+}
 .popover-move .popover-angle:after{
     background: #f33e3e !important;
     border:  0.5px solid transparent !important
@@ -2351,5 +904,4 @@ export default {
 .table_row .card{
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.11);
     }
-
 </style>

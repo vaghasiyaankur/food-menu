@@ -23,6 +23,7 @@ class TableSeeder extends Seeder
 
         foreach($colors as $key=>$color){
             $table = new Table();
+            $table->id = $key + 1;
             $table->table_number = $key + 1;
             $table->capacity_of_person = $c_o_p[$key];
             $table->floor_number = $floor[$key];

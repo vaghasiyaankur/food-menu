@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\Manager\CategoryController;
+use App\Http\Controllers\Manager\FloorController;
 use App\Http\Controllers\Manager\ProductController;
 use App\Http\Controllers\Manager\SubCategoryController;
 use App\Http\Controllers\Manager\SettingController;
@@ -24,7 +25,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/register', [AuthController::class, 'register']);
+Route::post('/register', [ReservationController::class, 'register']);
 
 // ------------------------ Category Routes ------------------------ //
 
@@ -90,6 +91,14 @@ Route::post('update-product',[ProductController::class, 'updateProduct']);
 
 Route::post('/delete-product',[ProductController::class, 'deleteProduct']);
 
-// ------------------------Manager Table Page Routes ------------------------ //
+// ------------------------ Manager Table Page Routes ------------------------ //
 
 Route::get('table-list-with-order',[TableController::class, 'tableList']);
+
+// ------------------------ Floor Routes ------------------------ //
+
+Route::get('get-floors',[FloorController::class , 'getFloors']);
+
+// ------------------------ Reservation Routes ------------------------ //
+
+Route::post('/add-reservation',[ReservationController::class, 'addReservation']);

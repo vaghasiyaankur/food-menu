@@ -4,24 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Color;
 use App\Models\Order;
 
-
-class Table extends Model
+class Customer extends Model
 {
     use HasFactory;
 
-    protected $guarded = ['id']; 
-
-    public function color()
-    {
-        return $this->belongsTo(Color::class);
-    }
+    protected $table = 'customers';
 
     public function orders()
     {
         return $this->hasMany(Order::class);
     }
-
 }

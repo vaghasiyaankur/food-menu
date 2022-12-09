@@ -19,14 +19,10 @@
                                     <div class="menu-dropdown-content bg-color-white no-padding">
                                         <a href="#" class="menu-dropdown-link menu-close margin-horizontal no-padding"></a>
                                         <a href="/" class="menu-dropdown-link menu-close text-color-pink">Table</a>
-                                        <a href="/food-category/"
-                                            class="menu-dropdown-link menu-close text-color-black">Food Category</a>
-                                        <a href="/food-subcategory/"
-                                                class="menu-dropdown-link menu-close text-color-black">Food SubCategory</a>
-                                        <a href="/food-product/"
-                                            class="menu-dropdown-link menu-close text-color-black">Food Menu</a>
-                                        <a href="/digital-menu/"
-                                            class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Digital Menu</a>
+                                        <a href="/food-category/" class="menu-dropdown-link menu-close text-color-black">Food Category</a>
+                                        <a href="/food-subcategory/" class="menu-dropdown-link menu-close text-color-black">Food SubCategory</a>
+                                        <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black">Food Menu</a>
+                                        <a href="/digital-menu/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Digital Menu</a>
                                     </div>
                                 </div>
                             </div>
@@ -90,37 +86,38 @@
                     </div>
                 </div>
                 <div class="card-content card-content-padding categorey_card">
-                    <div class="category-list border-bottom padding-top padding-bottom" v-if="categories.length"
-                        v-for="(category,index) in categories" :key="category">
-                        <div class="row align-items-center">
-                            <div class="col-5 category-count">
-                                <span>{{ index + 1 }}.</span>
-                            </div>
-                            <div class="col-100 medium-50 large-60 ">
-                                <div class="display-flex align-items-center">
-                                    <div class="category_image">
-                                        <img :src="'/storage'+category.image" alt="">
-                                    </div>
-                                    <p class="padding-left-half category_name">{{ category.name }}</p>
+                    <div v-if="categories.length">
+                        <div class="category-list border-bottom padding-top padding-bottom" v-for="(category,index) in categories" :key="category">
+                            <div class="row align-items-center">
+                                <div class="col-5 category-count">
+                                    <span>{{ index + 1 }}.</span>
                                 </div>
-                            </div>
-                            <div class="col-100 medium-45 large-35 action-buttons">
-                                <div class="row align-items-center">
-                                    <div class="col-50">
-                                        <button class="button text-color-black padding height-36 border__right popup-open" data-popup="#subCategory_popup"
-                                            @click="getAllCategories(category.id)">
-                                            <i class="f7-icons font-22">plus_square</i>Add sub category
-                                        </button>
+                                <div class="col-100 medium-50 large-60 ">
+                                    <div class="display-flex align-items-center">
+                                        <div class="category_image">
+                                            <img :src="'/storage'+category.image" alt="">
+                                        </div>
+                                        <p class="padding-left-half category_name">{{ category.name }}</p>
                                     </div>
-                                    <div class="col-25">
-                                        <button class="button text-color-black padding height-36 popup-open" data-popup=".categoryPopup"
-                                            @click="editCategory(category.id)"><i
-                                                class="f7-icons font-22">square_pencil</i> Edit</button>
-                                    </div>
-                                    <div class="col-25">
-                                        <button class="button text-color-red padding height-36"
-                                            @click="removeCategory(category.id)"><i class="f7-icons font-22">trash</i>
-                                            Delete</button>
+                                </div>
+                                <div class="col-100 medium-45 large-35 action-buttons">
+                                    <div class="row align-items-center">
+                                        <div class="col-50">
+                                            <button class="button text-color-black padding height-36 border__right popup-open" data-popup="#subCategory_popup"
+                                                @click="getAllCategories(category.id)">
+                                                <i class="f7-icons font-22">plus_square</i>Add sub category
+                                            </button>
+                                        </div>
+                                        <div class="col-25">
+                                            <button class="button text-color-black padding height-36 popup-open" data-popup=".categoryPopup"
+                                                @click="editCategory(category.id)"><i
+                                                    class="f7-icons font-22">square_pencil</i> Edit</button>
+                                        </div>
+                                        <div class="col-25">
+                                            <button class="button text-color-red padding height-36"
+                                                @click="removeCategory(category.id)"><i class="f7-icons font-22">trash</i>
+                                                Delete</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

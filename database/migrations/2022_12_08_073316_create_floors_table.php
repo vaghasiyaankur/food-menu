@@ -13,12 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('hotel_registrations', function (Blueprint $table) {
+        Schema::create('floors', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('number');
-            $table->string('member');
-            $table->string('floor_location');
+            $table->integer('number')->default(0);
+            $table->string('name')->nullable();
+            $table->boolean('ac')->default(0);
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hotel_registrations');
+        Schema::dropIfExists('floors');
     }
 };
