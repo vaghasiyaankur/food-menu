@@ -1,6 +1,6 @@
 <template>
 <f7-page>
-        <div class="nav-bar">
+        <!-- <div class="nav-bar">
             <f7-navbar class="navbar-menu bg-color-white" large transparent back-link="Back">
                 <div class="header-links display-flex align-items-center padding-right">
                     <div class="row header-link justify-content-flex-end align-items-center">
@@ -31,7 +31,7 @@
                     </div>
                 </div>
             </f7-navbar>
-        </div>
+        </div> -->
         <div class="card digital_menu_card elevation-2">
             <div class="row padding-horizontal no-padding-vertical">
                 <div class="col">
@@ -136,20 +136,8 @@ export default {
 </script>
 
 <style scoped>
-.menu-item-dropdown .menu-item-content .f7-icons{
-        font-size: 15px;
-        margin-left: 10px;
-    }
-    .page-content{
-        background-color: #F7F7F7 !important;
-    }
-    .nav-bar{
-        position: fixed;
-        width: 100%;
-        z-index: 100;
-    }
     .digital_menu_card{
-        margin-top: 77px;
+        margin-top: 70px;
         height: calc(100vh - 100px);
     }
     .card-title{
@@ -158,12 +146,7 @@ export default {
         line-height: 24px;
         color: #38373D;
     }
-    .navbar-menu {
-        box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.15);
-        height: 60px !important;
-        position: relative;
-        z-index: 99;
-    }
+
     .font-13{
         font-size: 13px;
         font-weight: 500;
@@ -177,37 +160,13 @@ export default {
         height: 100%;
     }
 
-    .menu-item-content {
-        position: relative;
-        z-index: 9;
-    }
 
-    .menu-dropdown-content {
-        box-shadow: 0px 0.5px 12px rgba(0, 0, 0, 0.2);
-        min-width: 100% !important;
-        top: -30px;
-    }
-
-    .header-links {
-        width: 75%;
-    }
-
-    .menu-dropdown-center:before,
-    .menu-dropdown-center:after {
-        content: none;
-    }
 
     .bg-dark {
         background: #38373D;
     }
 
-    .menu-item-dropdown-opened .menu-item-content {
-        background: #F33E3E;
-    }
-
-    .menu-dropdown-link:nth-child(2) {
-        border-bottom: 1px solid #EFEFEF;
-    }
+ 
     .menu-dropdown-link{
         border-bottom: 1px solid #EFEFEF;
     }
@@ -223,14 +182,7 @@ export default {
         font-size: 22px;
     }
 
-    .nav-bar {
-        border-radius: 8px 8px 0px 0px;
-    }
-    .nav-link,
-    .menu-item-content {
-        height: 100% !important;
-        text-transform: capitalize !important;
-    }
+
 
     /*<!-- =======MENU CSS ========== -->*/
     .demo-swiper .swiper-slide {
