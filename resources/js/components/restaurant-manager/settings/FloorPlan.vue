@@ -42,23 +42,39 @@
 import axios from 'axios';
     export default {
         name: 'FloorList',
+        props: ['floorId'],
         data() {
             return {
+                id : 0,
                 floor_name : '',
                 short_cut : '',
             }
         },
+        created() {
+            console.log(this.floorId);
+            if (this.floorId) this.tableData();
+        },
         methods: {
             addFloor() {
                 var formData = new FormData();
+                formData.append('id', this.id);
                 formData.append('floor_name', this.floor_name);
                 formData.append('short_cut', this.short_cut);
 
                 axios.post('/api/add-floor', formData)
                 .then((res) => {
                     this.$root.notification(res.data.success);
+                    this.$emit('floorlistshow');
                 });
-            }
+            },
+            tableData() {
+                axios.get('/api/floor-data/' + this.floorId)
+                .then((res) => {
+                    this.id = res.data.id;
+                    this.floor_name = res.data.name;
+                    this.short_cut = res.data.short_cut;
+                })
+            },
         },
     }
 </script>

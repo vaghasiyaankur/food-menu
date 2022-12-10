@@ -1,6 +1,6 @@
 <template>
     <f7-page>
-        <div class="nav-bar">
+        <!-- <div class="nav-bar">
             <f7-navbar class="navbar-menu bg-color-white" large transparent back-link="Back">
                 <div class="header-links display-flex align-items-center padding-right">
                     <div class="row header-link justify-content-flex-end align-items-center">
@@ -30,7 +30,7 @@
                     </div>
                 </div>
             </f7-navbar>
-        </div>
+        </div> -->
         <div class="reservation_card">
             <div class="card">
                 <div class="row height_100 align-items-center">
@@ -71,7 +71,7 @@
                                             <div class="item-title item-label">Location type</div>
                                             <div class="item-input-wrap input-dropdown-wrap">
                                                 <select v-model="reservation.floor" placeholder="Please choose..." class="padding-left padding-right">
-                                                    <option v-for="floor in floors" :key="floor" :value="floor.id">{{ floor.name }} Floor ({{ floor.ac == 1 ? 'AC' : 'Non-AC' }})</option>
+                                                    <option v-for="(floor,key) in floors" :key="floor" :value="key">{{ floor }}</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -141,6 +141,9 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="menu-lists" v-else>
+                            <NoValueFound />
+                        </div>
                     </div>
                 </div>
             </f7-page-content>
@@ -151,6 +154,7 @@
 import $ from "jquery";
 import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Input, f7Button, f7Sheet, f7PageContent} from 'framework7-vue';
 import VueCountdown from '@chenfengyuan/vue-countdown';
+import NoValueFound from './NoValueFound.vue';
 import axios from "axios";
 
 export default {
@@ -165,7 +169,8 @@ export default {
         f7Button,
         f7Sheet,
         f7PageContent,
-        VueCountdown
+        VueCountdown,
+        NoValueFound
     },
     data() {
         return {
@@ -257,7 +262,7 @@ export default {
             });
         },
         getFloors() {
-            axios.get('/api/get-floors')
+            axios.get('/api/get-floors-data')
             .then((res) => {
                 this.floors = res.data;
             })
@@ -283,10 +288,7 @@ export default {
 .sheet-modal{
     height: 92% !important;
 }
-.menu-item-dropdown .menu-item-content .f7-icons{
-    font-size: 15px;
-    margin-left: 10px;
-}
+
 .popover-inner{
     background-color: #fff;
     border-radius: 10px;
@@ -438,12 +440,6 @@ label.item-checkbox input[type='checkbox']:checked ~ .icon-checkbox:after, label
 .text-underline {
     text-decoration: underline;
 }
-.navbar-menu {
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.15);
-    height: 60px !important;
-    position: relative;
-    z-index: 99;
-}
 
 .height-40 {
     height: 40px;
@@ -457,41 +453,13 @@ label.item-checkbox input[type='checkbox']:checked ~ .icon-checkbox:after, label
     height: 100%;
 }
 
-.menu-item-content {
-    position: relative;
-    z-index: 9;
-}
-
-.menu-dropdown-content {
-    box-shadow: 0px 0.5px 12px rgba(0, 0, 0, 0.2);
-    min-width: 100% !important;
-    top: -30px;
-}
-
-.header-links {
-    width: 75%;
-}
-
-.menu-dropdown-center:before,
-.menu-dropdown-center:after {
-    content: none;
-}
-
 .bg-dark {
     background: #38373D;
 }
 
-.menu-item-dropdown-opened .menu-item-content {
-    background: #F33E3E;
-}
-
-.menu-dropdown-link:nth-child(2) {
+/*.menu-dropdown-link:nth-child(2) {
     border-bottom: 1px solid #EFEFEF;
-}
-.menu-dropdown-link{
-    border-bottom: 1px solid #EFEFEF;
-}
-
+}*/
 .bg-pink {
     background: #F33E3E;
 }
@@ -504,19 +472,9 @@ label.item-checkbox input[type='checkbox']:checked ~ .icon-checkbox:after, label
     font-size: 22px;
 }
 
-.nav-bar{
-    border-radius: 8px 8px 0px 0px;
-    position: fixed;
-    width: 100%;
-    z-index: 99;
-}
 .reservation_card{
     margin-top:80px;
 }
-.page-content {
-    padding-top: 0px !important;
-}
-
 
 .item-input-wrap {
     width: 100%;
@@ -532,13 +490,7 @@ label.item-checkbox input[type='checkbox']:checked ~ .icon-checkbox:after, label
 }
 
 #searchData {
-    width: 90%;
-}
-
-.nav-link,
-.menu-item-content {
-    height: 100% !important;
-    text-transform: capitalize !important;
+    width: 85%;
 }
 
 @media screen and (max-width:820px) {

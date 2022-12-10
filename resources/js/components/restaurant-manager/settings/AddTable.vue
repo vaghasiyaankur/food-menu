@@ -35,7 +35,7 @@
                             <div class="item-inner padding-left">
                                 <div class="item-input-wrap input-dropdown-wrap">
                                     <select placeholder="Please choose..." class="padding-left padding-right" v-model="floor_number">
-                                        <option v-for="floor in floors" :key="floor.id" :value="floor.id">{{ floor.name }}</option>
+                                        <option v-for="floor in floors" :key="floor" :value="floor.id">{{ floor.name }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -100,7 +100,7 @@
                 .then((res) => {
                     this.table_number = res.data.table.table_number;
                     this.capacity_of_person = res.data.table.capacity_of_person;
-                    this.floor_number = res.data.table.floor_number;
+                    this.floor_number = res.data.table.floor_id;
                     this.color = res.data.table.color_id;
                 })
             },
@@ -147,7 +147,7 @@
             getFloors() {
                 axios.get('/api/get-floors')
                     .then((res) => {
-                        this.floors = res.data;
+                        this.floors = res.data.data;
                     })
             },
         }

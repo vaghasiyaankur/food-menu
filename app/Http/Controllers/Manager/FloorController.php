@@ -10,19 +10,42 @@ class FloorController extends Controller
 {
     public function getFloors()
     {
-        $floors = Floor::all();
+        $floors = Floor::paginate(10);
 
         return response()->json($floors);
     }
 
     public function addFloor(Request $req)
     {
-        $fl = new Floor();
-        $fl->short_cut = $req->short_cut;
-        $fl->name = $req->floor_name;
-        $fl->save();
+        Floor::updateOrCreate(
+            ['id' => $req->id],
+            ['short_cut' => $req->short_cut,'name' => $req->floor_name]
+        );
 
-        return response()->json(['success'=>'Floor Added Successfully.']);
+        if($req->id == 0) $message = 'Added';
+        else $message = "Updated";
 
+        return response()->json(['success'=>'Floor '.$message.' Successfully.']);
+
+    }
+
+    public function editFloorDetail($id)
+    {
+        $floor = Floor::find($id);
+        return response()->json($floor);
+    }
+
+    public function deleteFloor(Request $req)
+    {
+        Floor::find($req->id)->delete();
+
+        return response()->json(['success'=>'Floor Deleted Successfully.']);
+    }
+
+    public function getFloorsData()
+    {
+        $floors = Floor::pluck('name','id');
+
+        return response()->json($floors);
     }
 }
