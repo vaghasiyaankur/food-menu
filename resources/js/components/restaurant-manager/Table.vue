@@ -64,6 +64,7 @@
                 </div>
             </div>
 
+          
 
         <div class="table_main">
             <!-- ============= TABLE FLOOR SWIPER ============= -->
@@ -73,52 +74,27 @@
                         <div data-pagination='{"el":".swiper-pagination"}' data-navigation="{'el':'.swiper-navigation'}" data-space-between="10" data-slides-per-view="4"
                             class="swiper swiper-init demo-swiper margin-top margin-bottom floor_swiper_inner  swiper-navigation">
                             <!-- <div class="swiper-pagination"></div> -->
-                            <div class="swiper-wrapper padding-left-half">
-                                <div class="swiper-slide slide-active">
-                                    <p class="no-margin text-align-center margin-top-half swiper_text display-flex">Ground Floor (Non-AC)
-                                        <span class="room_available color-blue">20</span>
+                           <div class="swiper-wrapper padding-left-half">
+                                 <div class="swiper-slide" :class="{'active' : floor.id == active_floor_id}"  v-for="floor in floorlist" :key="floor.id" @click="tableListFloorWise(floor.id)">
+                                    <p class="no-margin text-align-center margin-top-half swiper_text display-flex">{{ floor.name }}
+                                        <span class="room_available color-blue">{{ floor.tables_count }}</span>
                                     </p>
                                 </div>
-                                <div class="swiper-slide">
-                                    <p class="no-margin text-align-center margin-top-half swiper_text display-flex">First Floor (AC)
-                                        <span class="room_available color-blue">20</span>
-                                    </p>
-                                </div>
-                                <div class="swiper-slide">
-                                    <p class="no-margin text-align-center margin-top-half swiper_text display-flex">Second Floor (AC)
-                                        <span class="room_available color-blue">20</span>
-                                    </p>
-                                </div>
-                                <div class="swiper-slide">
-                                    <p class="no-margin text-align-center margin-top-half swiper_text display-flex">Third Floor (AC)
-                                        <span class="room_available color-blue">20</span>
-                                    </p>
-                                </div>
-                                <div class="swiper-slide">
-                                    <p class="no-margin text-align-center margin-top-half swiper_text display-flex">Fourth Floor (AC)
-                                        <span class="room_available color-blue">20</span>
-                                    </p>
-                                </div>
-                                <div class="swiper-slide">
-                                    <p class="no-margin text-align-center margin-top-half swiper_text display-flex">Fifth Floor (AC)
-                                        <span class="room_available color-blue">20</span>
-                                    </p>
-                                </div>
-                                <div class="swiper-slide">
-                                    <p class="no-margin text-align-center margin-top-half swiper_text display-flex">Sixth Floor (AC)
-                                        <span class="room_available color-blue">20</span>
-                                    </p>
-                                </div>
-                                <div class="swiper-slide">
-                                    <p class="no-margin text-align-center margin-top-half swiper_text display-flex">Seventh Floor (AC)
-                                        <span class="room_available color-blue">20</span>
-                                    </p>
-                                </div>
-                                <div class="swiper-slide">
-                                    <p class="no-margin text-align-center margin-top-half swiper_text display-flex">Eighth Floor (AC)
-                                        <span class="room_available color-blue">20</span>
-                                    </p>
-                                </div>
+                           
+                            <!-- <carousel :items-to-show="3">
+                                <slide v-for="floor in floorlist" :key="floor.id">
+                                    <div class="swiper-slide slide-active">
+                                        <p class="no-margin text-align-center margin-top-half swiper_text display-flex">{{ floor.name }}
+                                            <span class="room_available color-blue">{{ floor.total_order }}</span>
+                                        </p>
+                                    </div>
+                                </slide>
+                            
+                                <template #addons>
+                                  <navigation />
+                                  <pagination />
+                                </template>
+                              </carousel> -->
                             </div>
                         </div>
                         <!-- <div class="margin-top margin-bottom floor_swiper_inner">
@@ -221,7 +197,7 @@
                             <div class="card-header no-padding">
                                 <div class="row header_detail">
                                     <div class="table-number padding-half"> <p class="no-margin">Table No.</p>
-                                    <p class=" text-align-center no-margin"> 01</p>
+                                    <p class=" text-align-center no-margin"> {{ table.table_number }}</p>
                                     </div>
                                     <div class="table-capacity text-align-right padding-half">
                                         <p class="no-margin"> Capacity </p> <p class="text-align-center no-margin">{{ table.capacity_of_person }}</p> </div>
@@ -250,7 +226,7 @@
                                                         <div class="user-info popover-inner">
                                                             <div class="display-flex padding-left-half padding-top-half align-items-center">
                                                                 <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_fill</i>
-                                                                <span class="text-color-black">John Smith</span>
+                                                                <span class="text-color-black">{{ order.customer.name }}</span>
                                                             </div>
                                                             <div class="display-flex padding-left-half padding-top align-items-center">
                                                                 <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">clock</i>
@@ -258,15 +234,11 @@
                                                             </div>
                                                             <div class="display-flex padding-left-half padding-top align-items-center">
                                                                 <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">phone</i>
-                                                                <span class="text-color-black">+91 12345 12345</span>
+                                                                <span class="text-color-black">{{ order.customer.number }}</span>
                                                             </div>
                                                             <div class="display-flex padding-left-half padding-top-half align-items-center padding-bottom">
                                                                 <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_2_fill</i>
-                                                                <span class="text-color-black">5 family member</span>
-                                                            </div>
-                                                            <div class="display-flex padding-left-half padding-top-half align-items-center padding-bottom">
-                                                                <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_2_fill</i>
-                                                                <span class="text-color-black">5 family member</span>
+                                                                <span class="text-color-black">{{ order.customer.number }} family member</span>
                                                             </div>
                                                             <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="openFloorList()">
                                                                 <h3 class="text-color-red">Change Floor</h3>
@@ -389,6 +361,9 @@ import { f7,f7Page, f7Navbar, f7BlockTitle, f7Block, f7Swiper, f7SwiperSlide} fr
 import $ from 'jquery';
 import axios from 'axios';
 import { VueDraggableNext } from 'vue-draggable-next';
+import 'vue3-carousel/dist/carousel.css'
+import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
+
 
 export default {
     name : 'RegisterPage',
@@ -396,7 +371,9 @@ export default {
         return {
             row_tables: [],
             dragOrderId: '',
-            dragOrderTableId: ''
+            dragOrderTableId: '',
+            floorlist: [],
+            active_floor_id : 0
         }
     },
     computed: {
@@ -411,7 +388,7 @@ export default {
     }
   },
     components : {
-        f7,f7Page, f7Navbar, f7BlockTitle, f7Block,f7Swiper,f7SwiperSlide,draggable: VueDraggableNext
+        f7,f7Page, f7Navbar, f7BlockTitle, f7Block,f7Swiper,f7SwiperSlide,draggable: VueDraggableNext,Carousel,Slide,Pagination,Navigation
     },
     mounted() {
         this.equal_height();
@@ -442,6 +419,56 @@ export default {
         },
         tableList() {
             axios.get('/api/table-list-with-order')
+                .then((res) => {
+                    this.floorlist = res.data.floorlist;
+                    this.active_floor_id = res.data.floorlist[0].id;
+                    var row_tables = [];
+                    var cal_of_capacity = 0;
+                    var single_row_data = [];
+                    res.data.tables.forEach((table, index) => {
+                        if(parseInt(cal_of_capacity) > 18){
+                            row_tables.push(single_row_data);
+                            single_row_data = [];
+                            cal_of_capacity = 0;
+                        }
+
+
+                        if(parseInt(table.capacity_of_person) % 2 != 0){
+                            var cap = parseInt(table.capacity_of_person - 1);
+                            var up_table = (parseInt(table.capacity_of_person) + 1) / 2;
+                            var down_table = (parseInt(table.capacity_of_person) - 1)/ 2;
+                        } else{
+                            var cap = parseInt(table.capacity_of_person) - 2;
+                            var up_table = parseInt(table.capacity_of_person) / 2;
+                            var down_table = parseInt(table.capacity_of_person) / 2;
+                        }
+
+
+                        var col = (cap / 2) * 5 + 20;
+
+
+                        table['col'] = col > 100 ? 100 : col;
+                        table['up_table'] = up_table;
+                        table['down_table'] = down_table;
+
+                        table['width'] = 182 + ((up_table - 1)* 80)
+                        single_row_data.push(table);
+
+                        if(index == res.data.tables.length - 1){
+                            row_tables.push(single_row_data);
+                            single_row_data = [];
+                            cal_of_capacity = 0;
+                        }
+
+                        cal_of_capacity = parseInt(cal_of_capacity) + parseInt(table.capacity_of_person);
+                    });
+                    this.row_tables = row_tables;
+
+                })
+        },
+        tableListFloorWise(id) {
+            this.active_floor_id = id;
+            axios.get('/api/table-list-floor-wise/'+id)
                 .then((res) => {
                     var row_tables = [];
                     var cal_of_capacity = 0;
