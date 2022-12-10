@@ -95,11 +95,15 @@ Route::post('/delete-product',[ProductController::class, 'deleteProduct']);
 
 Route::get('table-list-with-order',[TableController::class, 'tableList']);
 
+Route::get('table-list-floor-wise/{id}',[TableController::class, 'tableListFloorWise']);
+
 Route::post('change-order-table',[TableController::class, 'changeOrderTable']);
 
 // ------------------------ Floor Routes ------------------------ //
 
 Route::get('get-floors',[FloorController::class , 'getFloors']);
+
+Route::post('add-floor',[FloorController::class , 'addFloor']);
 
 // ------------------------ Reservation Routes ------------------------ //
 

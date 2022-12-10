@@ -12,7 +12,7 @@
                                 <div class="item-inner">
                                     <div class="block-title no-margin-top">Add Floor</div>
                                     <div class="item-input-wrap">
-                                        <input type="number" name="number" class="padding margin-top-half" placeholder="Enter floor name">
+                                        <input type="text" v-model="floor_name" name="number" class="padding margin-top-half" placeholder="Enter floor name">
                                     </div>
                                 </div>
                             </div>
@@ -24,7 +24,7 @@
                                 <div class="item-inner">
                                     <div class="block-title no-margin-top no-margin-left">Shortcut Floor Name</div>
                                     <div class="item-input-wrap">
-                                        <input type="text" name="text" class="padding margin-top-half" placeholder="Enter shortcut floor name">
+                                        <input type="text" v-model="short_cut" name="text" class="padding margin-top-half" placeholder="Enter shortcut floor name">
                                     </div>
                                 </div>
                             </div>
@@ -32,15 +32,34 @@
                     </div>
                 </div>
                 <div class="submit__button margin-top padding-top">
-                    <button class="col button button-large button-fill" >Save</button>
+                    <button class="col button button-large button-fill" @click="addFloor()">Save</button>
                 </div>
             </div>
         </div>
     </div>
 </template>
 <script>
+import axios from 'axios';
     export default {
-        name : 'FloorList',
+        name: 'FloorList',
+        data() {
+            return {
+                floor_name : '',
+                short_cut : '',
+            }
+        },
+        methods: {
+            addFloor() {
+                var formData = new FormData();
+                formData.append('floor_name', this.floor_name);
+                formData.append('short_cut', this.short_cut);
+
+                axios.post('/api/add-floor', formData)
+                .then((res) => {
+                    this.$root.notification(res.data.success);
+                });
+            }
+        },
     }
 </script>
 <style scoped>

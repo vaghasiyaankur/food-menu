@@ -37,7 +37,7 @@
             <div class="card elevation-2">
                 <div class="card_header">
                     <div class="row padding-left padding-right align-items-center">
-                        <div class="col-50"> 
+                        <div class="col-50">
                             <h3 class="card-title"><a href="javscript:;" class="text-color-black"><i class="f7-icons font-22" style="vertical-align: bottom;">arrow_left</i></a> Settings</h3>
                         </div>
                     </div>
@@ -46,8 +46,8 @@
                     <div class="toolbar tabbar toolbar-top">
                         <div class="toolbar-inner">
                             <a href="#tab-1" class="tab-link tab-link-active">General</a>
-                            <a href="#tab-2" class="tab-link">Table Management</a>
-                            <a href="#tab-3" class="tab-link">Floor Plan</a>
+                            <a href="#tab-2" class="tab-link" @click="tableShow = true">Table Management</a>
+                            <a href="#tab-3" class="tab-link" @click="floorlistShow = true">Floor Plan</a>
                         </div>
                     </div>
                     <div class="tabs-animated-wrap">
@@ -56,7 +56,7 @@
                                 <GeneralSetting />
                             </div>
                             <div id="tab-2" class="tab">
-                                <TableFloorPlan v-if="tableShow" @tablehide="addEditTableShow" :page="page"/>
+                                <TablePlan v-if="tableShow" @tablehide="addEditTableShow" :page="page"/>
                                 <AddTable v-if="!tableShow" @tableshow="tableShow = true" :tableId="tableId"/>
                             </div>
                             <div id="tab-3" class="tab">
@@ -67,13 +67,13 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>  
     </f7-page>
 </template>
 <script>
 import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Input } from 'framework7-vue';
 import GeneralSetting from './GeneralSetting.vue';
-import TableFloorPlan from './TableFloorPlan.vue';
+import TablePlan from './TablePlan.vue';
 import FloorPlan from './FloorPlan.vue';
 import AddTable from './AddTable.vue';
 import FloorList from './FloorList.vue';
@@ -88,7 +88,7 @@ export default {
         f7,
         f7Input,
         GeneralSetting,
-        TableFloorPlan,
+        TablePlan,
         AddTable,
         FloorPlan,
         FloorList

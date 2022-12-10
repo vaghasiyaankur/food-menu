@@ -16,7 +16,6 @@
                                 <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
                                     <div class="menu-dropdown-content bg-color-white no-padding">
                                         <a href="#" class="menu-dropdown-link menu-close"></a>
-                                        <a href="/" class="menu-dropdown-link menu-close text-color-pink">Table</a>
                                         <a href="/food-category/" class="menu-dropdown-link menu-close text-color-pink">Food Category</a>
                                         <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black">Food Menu</a>
                                         <a href="/food-subcategory/" class="menu-dropdown-link menu-close text-color-black">Food subCategory</a>
@@ -43,11 +42,7 @@
                     <div class="col-100 medium-100 large-50">
                         <div class="reservation_form">
                             <div class="text-color-gray register-text padding-left">
-                                <h3 class="card-title">
-                                    <a href="javscript:;" class="text-color-black padding-right-half"><i class="f7-icons font-22" style="vertical-align: bottom;">arrow_left</i></a>
-                                    <span>Registration</span>
-                                </h3>
-                                <p> Please fill in the form below. <br> We will contact you as soon as possible </p>
+                                <h3 class="card-title text-align-center">Registration</h3>
                             </div>
                             <div>
                                 <form class="list margin-vertical" id="my-form">
@@ -80,14 +75,6 @@
                                                 </select>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="no-padding-left">
-                                        <label class="item-checkbox item-content">
-                                            <input type="checkbox" v-model="reservation.agree_condition" name="demo-checkbox" value="1"><i class="icon icon-checkbox"></i>
-                                            <div class="item-inner">
-                                                <div class="item-title no-margin">I agree with the terms &amp; conditions</div>
-                                            </div>
-                                        </label>
                                     </div>
                                     <div class="text-align-center margin-top">
                                         <a class="link text-underline text-color-black" :class="{ 'display-none': checkWaitingTime }" @click="checkTime" href="javascript:;">Check Time</a>
@@ -149,12 +136,7 @@
                             <div class="menu-list" v-for="subcate in product_subcategory" :key="subcate">
                                 <div class="font-18 text-align-center menu-list-title text-color-black"><u>{{ subcate.name }}</u></div>
                                 <div class="list row margin-half align-items-center" v-for="product in subcate.products" :key="product">
-                                    <div class="col-10">
-                                        <span class="add-favlist">
-                                            <i class="f7-icons size-22 bg-color-white text-color-red padding-half font-13">heart</i>
-                                        </span>
-                                    </div>
-                                    <div class="col-80 display-flex">{{ product.name }} <span class="dots"></span></div>
+                                    <div class="col-90 display-flex">{{ product.name }}&nbsp; <span class="dots"></span></div>
                                     <div class="col-10">{{ product.price.toFixed(2) }}</div>
                                 </div>
                             </div>
@@ -193,8 +175,7 @@ export default {
                 name: '',
                 number: '',
                 member: 0,
-                floor: '',
-                agree_condition: 0,
+                floor: ''
             },
             checkWaitingTime: false,
             product_category: [],
@@ -228,7 +209,7 @@ export default {
             this.$emit('textChange');
         },
         register() {
-            if (!this.reservation.name || !this.reservation.number || !this.reservation.member || !this.reservation.floor || !this.reservation.agree_condition) {
+            if (!this.reservation.name || !this.reservation.number || !this.reservation.member || !this.reservation.floor) {
                 this.$root.notification('Please fill the form details.');
                 return false;
             }
@@ -274,7 +255,7 @@ export default {
             })
         },
         checkTime() {
-            if (!this.reservation.name || !this.reservation.number || !this.reservation.member || !this.reservation.floor || !this.reservation.agree_condition) {
+            if (!this.reservation.name || !this.reservation.number || !this.reservation.member || !this.reservation.floor) {
                 this.$root.notification('Please fill the form details.');
             } else {
                 this.checkWaitingTime = true;

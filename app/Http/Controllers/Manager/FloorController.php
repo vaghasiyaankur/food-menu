@@ -14,4 +14,15 @@ class FloorController extends Controller
 
         return response()->json($floors);
     }
+
+    public function addFloor(Request $req)
+    {
+        $fl = new Floor();
+        $fl->short_cut = $req->short_cut;
+        $fl->name = $req->floor_name;
+        $fl->save();
+
+        return response()->json(['success'=>'Floor Added Successfully.']);
+
+    }
 }

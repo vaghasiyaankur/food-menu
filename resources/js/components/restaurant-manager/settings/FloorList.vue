@@ -6,43 +6,35 @@
                    <h3 class="card-title no-margin">Floor List</h3>
                 </div>
                 <div class="add_table_button"><button class="button"  @click="$emit('floorlisthide')"><i class="f7-icons margin-right-half">plus_square</i> Add Table</button></div>
-            </div>        
+            </div>
             <div class="card-content card-content-padding">
                 <div class="data-table">
                     <table>
                     <thead>
                         <tr>
-                            <th style="width:25%">Number</th>
-                            <th style="width:25%">Floor Name</th>
-                            <th style="width:25%">Shortcut Floor Name</th>                 
-                            <th style="width:25%;">Action</th>
+                            <th style="width:20%">Number</th>
+                            <th style="width:35%">Floor Name</th>
+                            <th style="width:25%">Shortcut Floor Name</th>
+                            <th style="width:20%;">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="label-cell">1.</td>
-                            <td>1<sup>st</sup> Floor (AC)</td>
-                            <td>F1 (AC)</td>                
+                        <tr v-for="(floor,index) in floors" :key="floor">
+                            <td class="label-cell">{{ index + 1 }}.</td>
+                            <td>{{ floor.name }}</td>
+                            <td>{{ floor.short_cut }}</td>
                             <td>
-                                <div class="display-flex"><a href="javascript:;" class="button text-color-black font-13 no-padding-left"><i class="f7-icons font-13 margin-right-half">square_pencil</i> Edit</a><a href="javascript:;" class="button text-color-red font-13"><i class="f7-icons font-13 margin-right-half">trash</i> Delete</a></div>
+                                <div class="display-flex"><a href="javascript:;" class="button text-color-black font-13 no-padding-left" @click="edit"><i class="f7-icons font-13 margin-right-half">square_pencil</i> Edit</a><a href="javascript:;" class="button text-color-red font-13"><i class="f7-icons font-13 margin-right-half">trash</i> Delete</a></div>
                             </td>
-                        </tr>                                    
-                        <tr>
-                            <td class="label-cell">1.</td>
-                            <td>1<sup>st</sup> Floor (AC)</td>
-                            <td>F1 (AC)</td>                
-                            <td>
-                                <div class="display-flex"><a href="javascript:;" class="button text-color-black font-13 no-padding-left"><i class="f7-icons font-13 margin-right-half">square_pencil</i> Edit</a><a href="javascript:;" class="button text-color-red font-13"><i class="f7-icons font-13 margin-right-half">trash</i> Delete</a></div>
-                            </td>
-                        </tr>                                    
+                        </tr>
                     </tbody>
-                    </table>           
+                    </table>
                 </div>
 
             </div>
         </div>
     </div>
-    
+
 </template>
 
 <script>
@@ -51,9 +43,23 @@
     import axios from 'axios';
     export default {
         name : 'FloorPlan',
-        components : {
-            f7
-        }
+        components : { f7 },
+        data() {
+            return {
+                floors : [],
+            }
+        },
+        created() {
+            this.getFloors();
+        },
+        methods: {
+            getFloors() {
+                axios.get('/api/get-floors')
+                .then((res) => {
+                    this.floors = res.data;
+                })
+            },
+        },
     }
 </script>
 <style scoped>
