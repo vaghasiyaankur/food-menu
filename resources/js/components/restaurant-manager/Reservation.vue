@@ -209,9 +209,16 @@ export default {
             this.$emit('textChange');
         },
         register() {
-            if (!this.reservation.name || !this.reservation.number || !this.reservation.member || !this.reservation.floor) {
-                this.$root.notification('Please fill the form details.');
-                return false;
+            if(!this.reservation.name){
+                this.$root.notification('Please Enter your name.'); return false;
+            }else if(!this.reservation.number){
+                this.$root.notification('Please Enter your number.'); return false;
+            }else if(!this.reservation.member){
+                this.$root.notification('Please Enter member number.'); return false;
+            }else if(!this.reservation.floor){
+                this.$root.notification('Please Select Floor.'); return false;
+            }else{
+                this.checkWaitingTime = true;
             }
 
             f7.dialog.confirm('Are you confirm to register?', () => {
@@ -222,6 +229,7 @@ export default {
                 formData.append('person', this.reservation.member);
                 formData.append('floor', this.reservation.floor);
                 formData.append('role', 'manager');
+                formData.append('agree_condition', 1);
 
                 axios.post('/api/add-reservation', formData)
                 .then((res) => {
@@ -255,9 +263,15 @@ export default {
             })
         },
         checkTime() {
-            if (!this.reservation.name || !this.reservation.number || !this.reservation.member || !this.reservation.floor) {
-                this.$root.notification('Please fill the form details.');
-            } else {
+            if(!this.reservation.name){
+                this.$root.notification('Please Enter your name.'); return false;
+            }else if(!this.reservation.number){
+                this.$root.notification('Please Enter your number.'); return false;
+            }else if(!this.reservation.member){
+                this.$root.notification('Please Enter member number.'); return false;
+            }else if(!this.reservation.floor){
+                this.$root.notification('Please Select Floor.'); return false;
+            }else{
                 this.checkWaitingTime = true;
             }
         },
@@ -279,7 +293,8 @@ export default {
 }
 /*========== FOOD MENU MODAL CSS =============*/
 .close-menu{
-    position: absolute;
+    position: absoludata
+    Datate;
     top: 10px;
     right: 10px;
 }

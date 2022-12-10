@@ -25,10 +25,14 @@ class TableController extends Controller
     public function tableList()
     {   
         $groundFloorId = Floor::first()->id;
-        $tables = Table::with('color','orders.customer', 'floor')->where('floor_id', $groundFloorId)->get();
+        $tables = Table::with('color','orders.customer', 'floor')->where('floor_id', $groundFloorId)->where('status', 1)->get();
 
         $floorlist = Floor::select('id', 'name')->withCount('tables')->get();
-        // dd($tables);
+        foreach($tables as $tkey=>$table){
+            foreach($table->orders as $okey=>$order){
+                $tables[$tkey]['orders'][$okey]['reservation_time'] = date('h:i', strtotime($order->created_at));
+            }
+        }
         return response()->json([ 'tables' => $tables , 'floorlist' => $floorlist] , 200);
     }
 
@@ -53,9 +57,13 @@ class TableController extends Controller
      */
     public function tableListFloorWise(Request $request)
     {   
-        $tables = Table::with('color','orders.customer', 'floor')->where('floor_id', $request->id)->get();
+        $tables = Table::with('color','orders.customer', 'floor')->where('floor_id', $request->id)->where('status', 1)->get();
 
-
+        foreach($tables as $tkey=>$table){
+            foreach($table->orders as $okey=>$order){
+                $tables[$tkey]['orders'][$okey]['reservation_time'] = date('h:i', strtotime($order->created_at));
+            }
+        }
         return response()->json([ 'tables' => $tables ] , 200);
     }
 

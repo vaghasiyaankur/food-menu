@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('number')->nullable();
+            $table->boolean('agree_condition')->default(0);
             $table->timestamps();
         });
     }

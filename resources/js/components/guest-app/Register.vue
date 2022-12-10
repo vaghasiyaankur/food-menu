@@ -53,43 +53,38 @@
             <form class="list margin-vertical" id="my-form">
                 <div class="item-content item-input">
                     <div class="item-inner">
-                        <div class="item-title item-label font-16 text-color-black">Enter your name</div>
+                        <div class="item-title item-label">Name</div>
                         <div class="item-input-wrap">
-                            <input type="text" v-model="name" name="name" class="padding" placeholder="Enter Your name" />
+                            <input type="text" v-model="reservation.name" name="name" class="padding" placeholder="Enter Your name">
                         </div>
+                    </div>
+                </div>
+               
+                <div class="item-content item-input">
+                    <div class="item-inner">
+                        <div class="item-title item-label">Phone number</div>
+                        <div class="item-input-wrap"><input type="number" v-model="reservation.number" name="number" class="padding" placeholder="Phone number"></div>
                     </div>
                 </div>
                 <div class="item-content item-input">
                     <div class="item-inner">
-                        <div class="item-title item-label font-16 text-color-black">Enter your phone number</div>
-                        <div class="item-input-wrap">
-                            <input type="number" v-model="number" name="number" class="padding" placeholder="Enter your phone number" />
-                        </div>
-                    </div>
-                </div>
-                <div class="item-content item-input">
-                    <div class="item-inner">
-                        <div class="item-title item-label font-16 text-color-black">Enter your family member member</div>
-                        <div class="item-input-wrap">
-                            <input type="number" v-model="member" name="member" class="padding" placeholder="5 family member" />
-                        </div>
+                        <div class="item-title item-label">Family member number</div>
+                        <div class="item-input-wrap"><input type="number" v-model="reservation.member" name="member" class="padding" placeholder="5 Family member"></div>
                     </div>
                 </div>
                 <div class="item-content item-input">
                     <div class="item-inner">
                         <div class="item-title item-label font-16 text-color-black">Location type</div>
                         <div class="item-input-wrap input-dropdown-wrap">
-                            <select placeholder="Please choose..." v-model="location" class="padding-left padding-right">
-                                <option value="Male">Ground floor (Non-AC)</option>
-                                <option value="Female">First floor (AC)</option>
-                                <option value="Female">Second floor (AC)</option>
+                            <select v-model="reservation.floor" placeholder="Please choose..." class="padding-left padding-right">
+                                <option v-for="floor in floors" :key="floor" :value="floor.id">{{ floor.name }} Floor ({{ floor.ac == 1 ? 'AC' : 'Non-AC' }})</option>
                             </select>
                         </div>
                     </div>
                 </div>
                 <div class="no-padding-left">
                     <label class="item-checkbox item-content">
-                        <input type="checkbox" name="demo-checkbox" value="Books" checked="checked" />
+                        <input type="checkbox" name="demo-checkbox" v-model="reservation.agree_condition" checked="checked" />
                         <i class="icon icon-checkbox"></i>
                         <div class="item-inner">
                             <div class="item-title">I agree with the terms & conditions</div>
@@ -98,12 +93,12 @@
                 </div>
             </form>
         </div>
-        <div class="text-align-center">
-            <a class="link text-underline text-color-black" :class="{ 'display-none' : !display }" href="javascript:;" @click="checkTime">Check Time</a>
-            <div class="countdown_section position-relative" :class="{ 'display-none' : display }">
+        <div class="text-align-center margin-top">
+            <a class="link text-underline text-color-black" :class="{ 'display-none': checkWaitingTime }" @click="checkTime" href="javascript:;">Check Time</a>
+            <div class="countdown_section position-relative margin-horizontal" :class="{ 'display-none' : !checkWaitingTime }">
                 <div style="background : url('/images/dots.png')">
                     <img src="/images/clock.png" alt="">
-                    <i class="f7-icons font-13 padding-half margin-bottom close-countdown" @click="display = true">xmark</i>
+                    <i class="f7-icons font-13 padding-half margin-bottom close-countdown" @click="(checkWaitingTime = false)">xmark</i>
                     <vue-countdown :time="60 * 60 * 1000" v-slot="{ hours, minutes, seconds }">
                         <p class="no-margin font-30">{{ hours }} : {{ minutes }} : {{ seconds }}</p>
                     </vue-countdown>
@@ -178,8 +173,20 @@ export default {
             number: '',
             member: '',
             location: '',
-            title: 'Registration'
+            title: 'Registration',
+            checkWaitingTime: false,
+            floors: [],
+            reservation: {
+                name: '',
+                number: '',
+                member: '',
+                floor: '',
+                agree_condition: false
+            },
         }
+    },
+    created() {
+        this.getFloors();
     },
     methods: {
         register() {
@@ -242,10 +249,16 @@ export default {
             if (self.sheet) self.sheet.destroy();
         },
         checkTime() {
-            if (this.name == '' || this.number == '' || this.member == '' || this.location == '') {
-                this.notification('Please fill the form details.');
-            } else {
-                this.display = false;
+            if(!this.reservation.name){
+                this.notification('Please Enter your name.'); return false;
+            }else if(!this.reservation.number){
+                this.notification('Please Enter your number.'); return false;
+            }else if(!this.reservation.member){
+                this.notification('Please Enter member number.'); return false;
+            }else if(!this.reservation.floor){
+                this.notification('Please Select Floor.'); return false;
+            }else{
+                this.checkWaitingTime = true;
             }
         },
         notification(notice) {
@@ -254,7 +267,63 @@ export default {
                 closeTimeout: 3000,
             });
             notificationFull.open();
-        }
+        },
+        getFloors() {
+            axios.get('/api/get-floors')
+            .then((res) => {
+                this.floors = res.data;
+            })
+        },
+        register() {
+            if(!this.reservation.name){
+                this.notification('Please Enter your name.'); return false;
+            }else if(!this.reservation.number){
+                this.notification('Please Enter your number.'); return false;
+            }else if(!this.reservation.member){
+                this.notification('Please Enter member number.'); return false;
+            }else if(!this.reservation.floor){
+                this.notification('Please Select Floor.'); return false;
+            }else{
+                this.checkWaitingTime = true;
+            }
+            if(this.reservation.agree_condition) var agree_condition = 1;
+            else var agree_condition = 0;
+
+            f7.dialog.confirm('Are you confirm to register?', () => {
+
+                var formData = new FormData();
+                formData.append('customer_name', this.reservation.name);
+                formData.append('customer_number', this.reservation.number);
+                formData.append('person', this.reservation.member);
+                formData.append('floor', this.reservation.floor);
+                formData.append('role', 'manager');
+                formData.append('agree_condition', agree_condition);
+
+                axios.post('/api/add-reservation', formData)
+                .then((res) => {
+                    f7.dialog.alert('Success!', () => {
+                        document.getElementById('book_table').classList.remove('active');
+                        f7.view.main.router.navigate({ url: '/waiting/' });
+                    });
+                });
+
+                setTimeout(() => {
+                    $('.dialog-title').html("<img src='/images/success.png'>");
+                    $('.dialog-button').addClass('col button button-raised button-large text-transform-capitalize');
+                    $('.dialog-button').addClass('active');
+                    $('.dialog-button').css('width', '50%');
+                }, 50);
+            });
+
+            setTimeout(() => {
+                $('.dialog-title').text("").css('font-size','20px');
+                $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
+                $('.dialog-button').eq(1).removeClass('text-color-black');
+                $('.dialog-button').eq(1).addClass('active');
+                $('.dialog-inner').addClass('margin-top');
+                $('.dialog-buttons').css({ 'margin-top': '25px', 'margin-bottom': '35px' });
+            });
+        },
     },
 }
     $(document).on('click', '.sheet-backdrop', function () {

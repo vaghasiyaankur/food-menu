@@ -29,6 +29,11 @@ class ProductController extends Controller
         return response()->json($products);
     }
 
+    public function toggleWishlist(Request $req)
+    {
+        
+    }
+    
     public function getProducts(Request $req)
     {
         $sub_product = SubCategory::with(['products' => function($q) use ($req){
