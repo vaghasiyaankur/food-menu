@@ -1,6 +1,6 @@
 <template>
     <f7-page>
-        <div class="nav-bar">
+        <!-- <div class="nav-bar">
             <f7-navbar class="navbar-menu bg-color-white" large transparent back-link="Back">
                 <div class="header-links display-flex align-items-center padding-right">
                     <div class="row header-link justify-content-flex-end align-items-center">
@@ -32,7 +32,7 @@
                     </div>
                 </div>
             </f7-navbar>
-        </div>
+        </div> -->
         <div class="product-list-section">
             <div class="card elevation-2">
                 <div class="card_header">
@@ -115,12 +115,9 @@ export default {
 </script>
 
 <style scoped>
-.menu-item-dropdown .menu-item-content .f7-icons{
-    font-size: 15px;
-    margin-left: 10px;
-}
+
 .product-list-section{
-    margin-top:70px;
+    margin-top:20px;
 }
 .product-list-section .tabs-animated-wrap .card{
     box-shadow:none;
@@ -129,69 +126,17 @@ export default {
     background: #f1f1f1;
 }
 
-.navbar-menu {
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.15);
-    height: 60px !important;
-    position: relative;
-    z-index: 99;
-}
-
 .height-40 {
     height: 40px;
-}
-
-.nav-link,.menu-item-content {
-    height: 100%;
-    text-transform: capitalize;
-}
-
-.menu-item-content {
-    position: relative;
-    z-index: 9;
-}
-
-.menu-dropdown-content {
-    box-shadow: 0px 0.5px 12px rgba(0, 0, 0, 0.2);
-    min-width: 100% !important;
-    top: -30px;
-}
-
-.menu-dropdown-center:before,
-.menu-dropdown-center:after {
-    content: none;
 }
 
 .bg-dark {
     background: #38373D;
 }
 
-.menu-item-dropdown-opened .menu-item-content {
-    background: #F33E3E;
-}
-
-.menu-dropdown-link:nth-child(2) {
-    border-bottom: 1px solid #EFEFEF;
-}
-.menu-dropdown-link{
-    border-bottom: 1px solid #EFEFEF;
-}
-
-
 .color-pink {
     background: #F33E3E;
 }
-
-.nav-bar {
-    border-radius: 8px 8px 0px 0px;
-    position:fixed;
-    width:100%;
-    z-index: 99;
-}
-
-.page-content {
-    padding-top: 0px !important;
-}
-
 .icon-only {
     width: 100% !important;
     height: 100% !important;
@@ -207,10 +152,6 @@ export default {
 
 .border-right {
     border-right: 1px solid #F3F3F3 !important;
-}
-
-.header-links {
-    width: 75%;
 }
 
 .bg-pink {
@@ -270,10 +211,6 @@ export default {
 </style>
 
 <style>
-.left {
-    width: 20%;
-    margin-left: 20px;
-}
 @media screen and (max-width:820px) {
     .left {
         width: 5%;

@@ -345,6 +345,7 @@
             },
             notification(notice) {
                 var notificationFull = f7.notification.create({
+                   
                     subtitle: notice,
                     closeTimeout: 3000,
                     closeButton: true,

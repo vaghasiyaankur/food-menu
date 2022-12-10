@@ -1,6 +1,108 @@
 <template>
 <f7-app v-bind="f7Params">
-    <f7-view url="/" :main="true" class="safe-areas" :master-detail-breakpoint="768" @notification="notification"></f7-view>
+    <f7-page>
+        <div class="nav-bar">
+            <f7-navbar class="navbar-menu bg-color-white">
+                <div class="left">
+
+                </div>
+                <div class="header-links display-flex align-items-center padding-right"> 
+                    <!--========= SMALL SCREEN MENU BAR=========== -->
+                    <div class="small_screen_menu">
+                        <div class="hamburger__button">
+                            <a href="#" class="link icon-only panel-open" data-panel=".panel-right-1"><i class="icon f7-icons if-not-md">menu</i></a>
+                        </div>
+                        <div class="panel panel-right panel-right-1 panel-cover panel-resizable panel-init">
+                            <div class="block">
+                                <div class=" padding-left-half padding-right-half height-40 nav-button">
+                                    <a href="/Reservation/" class="link nav-link padding">
+                                        Reservation</a>
+                                </div>
+                                <div class="menu-item menu-item-dropdown margin-top bg-white">
+                                    <div class="menu-item-content padding-left-half padding-right-half">Menu management
+                                        <i class="f7-icons">chevron_down</i>
+                                    </div>
+                                    <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
+                                        <div class="menu-dropdown-content bg-color-white no-padding">
+                                            <a href="#" class="menu-dropdown-link menu-close margin-horizontal no-padding"></a>
+                                            <a href="/food-category/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food Category</a>
+                                            <a href="/food-subcategory/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food SubCategory</a>
+                                            <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food Menu</a>
+                                            <a href="/digital-menu/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Digital Menu</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="padding-left-half padding-right-half height-40">
+                                    <a href="/Reporting/" class="margin-top link nav-link padding">Reporting</a>
+                                </div>
+                                <div class=" padding-left-half padding-right-half height-40">
+                                    <button class="col nav-link padding closeReservation" @click="$root.closeReservation()">Close reservation</button>
+                                </div>
+                                <div class="padding-left-half padding-right-half height-40">
+                                    <a href="/settings/" class="col link nav-link padding">Settings</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--========= SMALL SCREEN MENU BAR END=========== -->          
+                    <div class="row header-link justify-content-flex-end align-items-center tab_view_menu">
+                        <div class=" padding-left-half padding-right-half height-40 nav-button">
+                            <a href="/"
+                                class="col link nav-link button button-raised bg-dark text-color-white padding">
+                                waiting area</a>
+                        </div>
+                        <div class=" padding-left-half padding-right-half height-40 nav-button">
+                            <a href="/Reservation/"
+                                class="col link nav-link button button-raised bg-dark text-color-white padding">
+                                Reservation</a>
+                        </div>
+                        <div class="col-25 nav-button">
+                            <div class="menu-item menu-item-dropdown">
+                                <div class="menu-item-content button button-raised bg-pink text-color-white padding-left-half padding-right-half">
+                                    Menu management
+                                    <i class="f7-icons">chevron_down</i>
+                                </div>
+                                <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
+                                    <div class="menu-dropdown-content bg-color-white no-padding">
+                                        <a href="#" class="menu-dropdown-link menu-close margin-horizontal no-padding"></a>
+                                        <!-- <a href="/" class="menu-dropdown-link menu-close text-color-pink">Table</a> -->
+                                        <a href="/food-category/" class="menu-dropdown-link menu-close text-color-black">Food Category</a>
+                                        <a href="/food-subcategory/" class="menu-dropdown-link menu-close text-color-black">Food SubCategory</a>
+                                        <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black">Food Menu</a>
+                                        <a href="/digital-menu/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Digital Menu</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="nav-button">
+                        <div class="menu-item menu-item-dropdown">
+                            <div class="menu-item-content button button-raised bg-pink text-color-white padding-left-half padding-right-half">Menu management</div>
+                            <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
+                                <div class="menu-dropdown-content bg-color-white no-padding">
+                                    <a href="#" class="menu-dropdown-link menu-close"></a>
+                                    <a href="/food-category/" class="menu-dropdown-link menu-close text-color-pink">Food Category</a>
+                                    <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black">Food Menu</a>
+                                    <a href="/food-subcategory/" class="menu-dropdown-link menu-close text-color-black">Food SubCategory</a>
+                                    <a href="/digital-menu/" class="menu-dropdown-link menu-close text-color-black">Digital Menu</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                        <div class=" padding-left-half padding-right-half height-40 nav-button"><a href="/Reporting/"
+                                class="link nav-link button button-raised bg-dark text-color-white padding">Reporting</a>
+                        </div>
+                        <div class="padding-left-half padding-right-half height-40"><button
+                                class="nav-link button button-raised bg-dark text-color-white padding closeReservation"
+                                @click="$root.closeReservation()">Close reservation</button></div>
+                        <div class="padding-left-half padding-right-half height-40"><a href="/settings/"
+                                class="nav-link button button-raised bg-dark text-color-white padding">Settings</a>
+                        </div>
+                    </div>
+                </div>          
+            </f7-navbar>
+        </div>         
+        <f7-view url="/" :main="true" class="safe-areas" :master-detail-breakpoint="768" @notification="notification"></f7-view>
+    </f7-page>
 </f7-app>
 </template>
 
@@ -64,12 +166,15 @@ export default {
             }, 200);
         },
         notification(notice) {
-            var notificationFull = f7.notification.create({
-                title: notice,
-                closeTimeout: 10000,
-                closeButton: true,
+            var notificationFull = f7.notification.create({                
+                title: '<img src="/images/checkicon.png">' + notice ,               
+                closeTimeout: 1000,
+                closeOnClick: true,
+                // closeButton: true,
+                
             });
             notificationFull.open();
+            $('.notification-header').append('<div><i class="f7-icons">xmark</i></div>');
             $('.notification-content').remove();
         }
     },
@@ -81,3 +186,162 @@ export default {
     },
 };
 </script>
+<style>
+.notification-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.notification-title img{
+    margin-right: 8px;
+}
+.notification.modal-in{
+    background: linear-gradient(90deg, #91F4BE 0%, rgba(145, 244, 190, 0.2) 45.1%, rgba(145, 244, 190, 0.15) 100%);
+    border-radius: 10px;
+}
+.notification-header {
+    justify-content: space-between !important
+}
+/*====== NAVBAR CSS ======*/
+.small_screen_menu{
+    display: none;
+}
+.nav-link,
+.menu-item-content {
+    height: 100% !important;
+    text-transform: capitalize !important;
+}
+.navbars, .navbar{
+    z-index: 6000 !important;
+}
+.bg-dark {
+    background: #38373D !important;
+}
+.menu-item-dropdown .menu-item-content .f7-icons{
+    font-size: 15px;
+    margin-left: 10px;
+}
+.menu-dropdown-content {
+    box-shadow: 0px 0.5px 12px rgba(0, 0, 0, 0.2);
+    min-width: 100% !important;
+    top: -30px;
+}
+
+/*.category-list-section {
+    margin-top: 70px
+}*/
+
+.page-food-category {
+    background: #f1f1f1;
+}
+
+.navbar-menu {
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.15);
+    height: 60px !important;
+    position: relative;
+    z-index: 99;
+}
+
+.height-40 {
+    height: 40px;
+}
+
+.menu-item-content {
+    position: relative;
+    z-index: 9;
+}
+
+.menu-dropdown-content {
+    box-shadow: 0px 0.5px 12px rgba(0, 0, 0, 0.2);
+    min-width: 100% !important;
+    top: -30px !important;
+}
+
+.menu-dropdown-center:before,
+.menu-dropdown-center:after {
+    content: none !important;
+}
+
+.bg-dark {
+    background: #38373D;
+}
+
+.menu-item-dropdown-opened .menu-item-content {
+    background: #F33E3E;
+}
+
+.menu-dropdown-link {
+    border-bottom: 1px solid #EFEFEF;
+}
+
+.color-pink {
+    background: #F33E3E;
+}
+
+.nav-bar {
+    border-radius: 8px 8px 0px 0px;
+}
+
+.page-content {
+    padding-top: 0px !important;
+    background-color: #F7F7F7 !important;
+}
+
+.icon-only {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #EAEAEA;
+}
+
+.padding-icon {
+    padding: 3px;
+}
+
+.border-right {
+    border-right: 1px solid #F3F3F3 !important;
+}
+
+.header-links {
+    width: 75%;
+}
+
+.bg-pink {
+    background: #F33E3E;
+}
+
+.bg-karaka-orange {
+    background: #EE4925;
+}
+
+.text-color-pink {
+    color: #F33E3E;
+}
+
+.font-22 {
+    font-size: 22px;
+}
+@media screen and (max-width:991px){
+    .small_screen_menu{
+        display: block;
+        width: 100%;
+        text-align: end;
+    }
+    .tab_view_menu{
+        display: none !important;
+    }
+    .menu-dropdown-content{
+        z-index:2;
+    }
+    .ios .navbar a.icon-only{
+        justify-content: end !important;
+    }
+    .closeReservation{
+        border: none;
+        background-color: transparent;
+        text-align:start;
+    }
+}
+</style>
