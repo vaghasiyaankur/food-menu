@@ -71,7 +71,7 @@
                                             <div class="item-title item-label">Location type</div>
                                             <div class="item-input-wrap input-dropdown-wrap">
                                                 <select v-model="reservation.floor" placeholder="Please choose..." class="padding-left padding-right">
-                                                    <option v-for="floor in floors" :key="floor" :value="floor.id">{{ floor.name }} Floor ({{ floor.ac == 1 ? 'AC' : 'Non-AC' }})</option>
+                                                    <option v-for="(floor,key) in floors" :key="floor" :value="key">{{ floor }}</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -141,6 +141,9 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="menu-lists" v-else>
+                            <NoValueFound />
+                        </div>
                     </div>
                 </div>
             </f7-page-content>
@@ -151,6 +154,7 @@
 import $ from "jquery";
 import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Input, f7Button, f7Sheet, f7PageContent} from 'framework7-vue';
 import VueCountdown from '@chenfengyuan/vue-countdown';
+import NoValueFound from './NoValueFound.vue';
 import axios from "axios";
 
 export default {
@@ -165,7 +169,8 @@ export default {
         f7Button,
         f7Sheet,
         f7PageContent,
-        VueCountdown
+        VueCountdown,
+        NoValueFound
     },
     data() {
         return {
@@ -249,7 +254,7 @@ export default {
             });
         },
         getFloors() {
-            axios.get('/api/get-floors')
+            axios.get('/api/get-floors-data')
             .then((res) => {
                 this.floors = res.data;
             })

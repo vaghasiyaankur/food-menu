@@ -46,14 +46,12 @@
                    </tbody>
                 </table>
                 <div class="data-table-pagination">
-                    <span class="data-table-pagination-label">{{from}}-{{to}} of {{total}}</span>
-                    <a href="javascript:;" @click="prev_page_number != 0 ? tableList(prev_page_number) : 'javascript:;'" class="link" :class="{'disabled' : prev_page_number == 0}">
-                      <i class="icon icon-prev color-gray"></i>
-                    </a>
-                    <a href="javascript:;" @click="next_page_number != 0 ? tableList(next_page_number) : 'javascript:;'" class="link" :class="{'disabled' : next_page_number == 0}">
-                      <i class="icon icon-next color-gray"></i>
-                    </a>
-                  </div>
+                    <div v-for="(link,index) in paginationData.links" :key="link">
+                        <a href="javascript:;" v-if="index == 0" @click="link.url != null ? tableList(link.url) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon icon-prev color-gray"></i></a>
+                        <a href="javascript:;" v-if="paginationData.links.length - 1 != index && index != 0" @click="link.url != null ? tableList(link.url) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}">{{ index }}</a>
+                        <a href="javascript:;" v-if="paginationData.links.length - 1 == index" @click="link.url != null ? tableList(link.url) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon icon-next color-gray"></i></a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -70,12 +68,8 @@
         data() {
             return {
                 tables: [],
-                from : 0,
-                to : 0,
-                total : 0,
-                prev_page_number : 0,
-                next_page_number : 0,
-                page_number : 1,
+                page_number: 1,
+                paginationData : [],
             }
         },
         created() {
@@ -83,16 +77,15 @@
             this.tableList(this.page_number);
         },
         methods: {
-            tableList(page = 1) {
+            tableList(page) {
+                if (page == undefined || page == 1) {
+                    page = '/api/table-list?page=1';
+                }
                 this.page_number = page;
-                axios.get('/api/table-list?page=' + page)
+                axios.get(page)
                 .then((res) => {
                     this.tables = res.data.tables.data;
-                    this.from = res.data.tables.from;
-                    this.to = res.data.tables.to;
-                    this.total = res.data.tables.total;
-                    this.prev_page_number = res.data.tables.prev_page_url ? res.data.tables.current_page - 1 : 0;
-                    this.next_page_number = res.data.tables.next_page_url ? res.data.tables.current_page + 1 : 0;
+                    this.paginationData = res.data.tables;
                 })
             },
             removeTable(id) {
@@ -225,6 +218,9 @@
 }
 .data-table tbody tr:nth-child(even){
     background-color: #FAFAFA;
+}
+.data-table .data-table-pagination{
+    justify-content: end;
 }
 @media screen and (max-width:820px){
     .status_info{

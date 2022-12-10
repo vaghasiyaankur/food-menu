@@ -101,7 +101,13 @@ Route::post('change-order-table',[TableController::class, 'changeOrderTable']);
 
 Route::get('get-floors',[FloorController::class , 'getFloors']);
 
+Route::get('get-floors-data',[FloorController::class , 'getFloorsData']);
+
 Route::post('add-floor',[FloorController::class , 'addFloor']);
+
+Route::get('floor-data/{id}',[FloorController::class, 'editFloorDetail']);
+
+Route::post('delete-floor',[FloorController::class, 'deleteFloor']);
 
 // ------------------------ Reservation Routes ------------------------ //
 

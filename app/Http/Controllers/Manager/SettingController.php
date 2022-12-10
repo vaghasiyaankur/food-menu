@@ -127,7 +127,7 @@ class SettingController extends Controller
         $data = [
             'table_number' => $request->table_number,
             'capacity_of_person' => $request->capacity_of_person,
-            'floor_number' => $request->floor_number,
+            'floor_id' => $request->floor_number,
             'color_id' => $request->color,
         ];
 

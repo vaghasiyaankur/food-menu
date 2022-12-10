@@ -60,14 +60,14 @@
                                 <AddTable v-if="!tableShow" @tableshow="tableShow = true" :tableId="tableId"/>
                             </div>
                             <div id="tab-3" class="tab">
-                                <FloorList v-if="floorlistShow" @floorlisthide="floorlistShow = false" />
-                                <FloorPlan v-if="!floorlistShow"  @floorlistshow="floorlistShow = true" />
+                                <FloorList v-if="floorlistShow" @floorlisthide="addEditFloorShow" :page="floorpage" />
+                                <FloorPlan v-if="!floorlistShow"  @floorlistshow="floorlistShow = true" :floorId="floorId" />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>  
+        </div>
     </f7-page>
 </template>
 <script>
@@ -98,7 +98,9 @@ export default {
             tableShow : true,
             floorlistShow : true,
             tableId : 0,
-            page : 1,
+            page: 1,
+            floorId: 0,
+            floorpage : 1,
         }
     },
     mounted() {
@@ -109,7 +111,12 @@ export default {
             this.tableId = id;
             this.page = page;
             this.tableShow = false;
-        }
+        },
+        addEditFloorShow(id, page) {
+            this.floorId = id;
+            this.floorpage = page;
+            this.floorlistShow = false;
+        },
     }
 }
 </script>
