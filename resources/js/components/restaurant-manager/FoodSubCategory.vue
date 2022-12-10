@@ -329,7 +329,7 @@ export default {
 }
 
 .subcategory-list-section{
-    margin-top:20px;
+    margin-top:77px;
 }
 
 
@@ -360,7 +360,7 @@ export default {
 }
 
 #searchData {
-    width: 90%;
+    width: 85%;
 }
 
 

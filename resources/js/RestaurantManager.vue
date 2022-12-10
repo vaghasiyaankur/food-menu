@@ -10,18 +10,42 @@
                     <!--========= SMALL SCREEN MENU BAR=========== -->
                     <div class="small_screen_menu">
                         <div class="hamburger__button">
-                            <a href="#" class="link icon-only panel-open" data-panel=".panel-right-1"><i class="icon f7-icons if-not-md">menu</i></a>
+                            <a href="#" class="link icon-only panel-open" data-panel=".panel-right-1"><i class="f7-icons">bars</i></a>
                         </div>
                         <div class="panel panel-right panel-right-1 panel-cover panel-resizable panel-init">
-                            <div class="block">
-                                <div class=" padding-left-half padding-right-half height-40 nav-button">
-                                    <a href="/Reservation/" class="link nav-link padding">
+                            <div class="pannel_header padding-horizontal text-align-right">
+                                <p><a href="#" class="panel-close text-color-black"><i class="f7-icons">xmark</i></a></p>
+                            </div>
+                            <div class="block no-margin-top">
+                                <div class=" padding-left-half padding-right-half height-40">
+                                    <a href="/Reservation/" class="link nav-link text-color-black font-16">
                                         Reservation</a>
                                 </div>
-                                <div class="menu-item menu-item-dropdown margin-top bg-white">
+                                <div class="list accordion-list inset no-margin">
+                                    <ul>
+                                        <li class="accordion-item">
+                                            <a href="#" class="item-link item-content padding-left-half">
+                                                <div class="item-inner">
+                                                    <div class="item-title font-16">Menu management</div>
+                                                </div>
+                                            </a>
+                                            <div class="accordion-item-content" aria-hidden="true">
+                                                <div class="block">
+                                                    <div class=" bg-color-white no-padding">                                                        
+                                                        <a href="/food-category/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food Category</a>
+                                                        <a href="/food-subcategory/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food SubCategory</a>
+                                                        <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food Menu</a>
+                                                        <a href="/digital-menu/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Digital Menu</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- <div class="menu-item menu-item-dropdown bg-white">
                                     <div class="menu-item-content padding-left-half padding-right-half">Menu management
                                         <i class="f7-icons">chevron_down</i>
-                                    </div>
+                                    </div>                                    
                                     <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
                                         <div class="menu-dropdown-content bg-color-white no-padding">
                                             <a href="#" class="menu-dropdown-link menu-close margin-horizontal no-padding"></a>
@@ -31,15 +55,15 @@
                                             <a href="/digital-menu/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Digital Menu</a>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="padding-left-half padding-right-half height-40">
-                                    <a href="/Reporting/" class="margin-top link nav-link padding">Reporting</a>
+                                    <a href="/Reporting/" class="link nav-link text-color-black font-16">Reporting</a>
                                 </div>
                                 <div class=" padding-left-half padding-right-half height-40">
-                                    <button class="col nav-link padding closeReservation" @click="$root.closeReservation()">Close reservation</button>
+                                    <button class="col nav-link close_reservation no-padding font-16" @click="$root.closeReservation()">Close reservation</button>
                                 </div>
                                 <div class="padding-left-half padding-right-half height-40">
-                                    <a href="/settings/" class="col link nav-link padding">Settings</a>
+                                    <a href="/settings/" class="col link nav-link text-color-black font-16">Settings</a>
                                 </div>
                             </div>
                         </div>
@@ -168,7 +192,7 @@ export default {
         notification(notice) {
             var notificationFull = f7.notification.create({                
                 title: '<img src="/images/checkicon.png">' + notice ,               
-                closeTimeout: 1000,
+                closeTimeout: 2000,
                 closeOnClick: true,
                 // closeButton: true,
                 
@@ -213,6 +237,8 @@ export default {
 }
 .navbars, .navbar{
     z-index: 6000 !important;
+    position: fixed !important;
+    top: 0;
 }
 .bg-dark {
     background: #38373D !important;
@@ -323,6 +349,9 @@ export default {
 .font-22 {
     font-size: 22px;
 }
+.font-16{
+    font-size: 16px;
+}
 @media screen and (max-width:991px){
     .small_screen_menu{
         display: block;
@@ -338,10 +367,16 @@ export default {
     .ios .navbar a.icon-only{
         justify-content: end !important;
     }
-    .closeReservation{
+    .close_reservation{
         border: none;
         background-color: transparent;
         text-align:start;
+    }
+    .list .item-link .item-inner:before{
+        color: #000000 !important;
+    }
+    .panel-backdrop{
+        background-color: rgb(17 24 39 / 30%) !important;
     }
 }
 </style>

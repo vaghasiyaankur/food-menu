@@ -305,8 +305,7 @@ export default {
     margin-left: 10px;
 }
 .product-list-section{
-    margin-top: 20px;
-    height: 100%;
+    margin-top: 70px;
 }
 .product-list-section .product_list_card.card{
     background-color: transparent;
@@ -368,7 +367,7 @@ export default {
         line-height: 24px;
     }
     #searchData {
-        width: 90%;
+        width: 85%;
     }
     .product_list:nth-of-type(even){
         background-color:#f7f7f7

@@ -208,7 +208,9 @@ export default {
     padding: 20px;
 }
 /*<!--======= REPORTING CARD CSS ======== -->*/
-
+.reporting_section{
+    margin-top: 70px;
+}
 .reporting_calander ul{
     background-color: transparent;
 }
@@ -293,7 +295,7 @@ export default {
 }
 
 #searchData {
-    width: 90%;
+    width: 85%;
 }
 
 @media screen and (max-width:820px) {

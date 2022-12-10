@@ -535,12 +535,12 @@ img.restaurant_logo{
     position: relative;
     width: 100%;
     overflow-x: hidden !important;
-    height: calc(100% - 200px) !important;
-    overflow-y: scroll !important;
+    height: calc(100% - 147px) !important;
+    overflow-y: auto !important;
 }
 @media screen and (max-width:820px){
     .tabs-animated-wrap{
-    height: calc(100% - 500px) !important;
+    height: calc(100% - 456px) !important;
     }
 }
 </style>

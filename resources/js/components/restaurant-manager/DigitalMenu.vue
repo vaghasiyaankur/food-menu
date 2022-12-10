@@ -137,8 +137,7 @@ export default {
 
 <style scoped>
     .digital_menu_card{
-        margin-top: 20px;
-        margin-bottom: 20px;
+        margin-top: 70px;
         height: calc(100vh - 100px);
     }
     .card-title{

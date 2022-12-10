@@ -338,7 +338,7 @@ export default {
 }
 
 #searchData {
-    width: 90%;
+    width: 85%;
 }
 
 .height-36 {
@@ -401,6 +401,9 @@ export default {
 .category-list-section .card{
     height: calc(100vh - 94px);
     overflow:scroll;
+}
+.category-list-section{
+    margin-top: 77px;
 }
 @media screen and (max-width:820px) {
     .header-links {

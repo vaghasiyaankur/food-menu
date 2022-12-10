@@ -35,14 +35,14 @@
         </div> -->
         <div class="product-list-section">
             <div class="card elevation-2">
-                <div class="card_header">
+                <!-- <div class="card_header">
                     <div class="row padding-left padding-right align-items-center">
                         <div class="col-50">
                             <h3 class="card-title"><a href="javscript:;" class="text-color-black"><i class="f7-icons font-22" style="vertical-align: bottom;">arrow_left</i></a> Settings</h3>
                         </div>
                     </div>
-                </div>
-                <div class="card-content card-content-header">
+                </div> -->
+                <div class="card-content card-content-header padding-top">
                     <div class="toolbar tabbar toolbar-top">
                         <div class="toolbar-inner">
                             <a href="#tab-1" class="tab-link tab-link-active">General</a>
@@ -117,7 +117,7 @@ export default {
 <style scoped>
 
 .product-list-section{
-    margin-top:20px;
+    margin-top:70px;
 }
 .product-list-section .tabs-animated-wrap .card{
     box-shadow:none;

@@ -453,7 +453,7 @@ label.item-checkbox input[type='checkbox']:checked ~ .icon-checkbox:after, label
 }
 
 .reservation_card{
-    margin:20px 0;
+    margin-top:80px;
 }
 
 .item-input-wrap {
@@ -470,7 +470,7 @@ label.item-checkbox input[type='checkbox']:checked ~ .icon-checkbox:after, label
 }
 
 #searchData {
-    width: 90%;
+    width: 85%;
 }
 
 @media screen and (max-width:820px) {
