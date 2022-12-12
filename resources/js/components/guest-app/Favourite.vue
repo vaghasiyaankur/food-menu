@@ -21,18 +21,24 @@
             </div>
             <div class="card cart-list">
                 <div class="card-content card-content-padding">
-                    <div class="row padding-top" v-for="wishlist in wishlistData" :key="wishlist">
-                        <div class="col-20 padding-top" @click="removeWishlist(wishlist.id)">
-                            <i class="f7-icons size-22 padding-icon font-18 bg-color-dark-orange text-color-white fav-list-remove-icon">minus</i>
-                        </div>
-                        <div class="col-80 padding-bottom border-bottom row">
-                            <div class="col-75 border-right">
-                                <p>{{ wishlist.name }}</p>
+                    <div v-if="wishlistData.length != 0">
+                        <div class="row padding-top" v-for="wishlist in wishlistData" :key="wishlist">
+                            <div class="col-20 padding-top" @click="removeWishlist(wishlist.id)">
+                                <i class="f7-icons size-22 padding-icon font-18 bg-color-dark-orange text-color-white fav-list-remove-icon">minus</i>
                             </div>
-                            <div class="col-25">
-                                <p>{{ wishlist.price.toFixed(2) }}</p>
+                            <div class="col-80 padding-bottom border-bottom row">
+                                <div class="col-75 border-right">
+                                    <p>{{ wishlist.name }}</p>
+                                </div>
+                                <div class="col-25">
+                                    <p>{{ wishlist.price.toFixed(2) }}</p>
+                                </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="no_order_text text-align-center" v-else>
+                        <img src="/images/Empty-pana 1.png" alt="" style="width:100%">
+                        <p>Empty Favourite Menu List</p>
                     </div>
                 </div>
             </div>
@@ -136,7 +142,7 @@ export default {
 </style>
 
 <style>
-    .navbar .title{
+.navbar .title{
         left: -11px !important;
         font-weight: 600 !important;
         font-size: 19px !important;
@@ -164,5 +170,11 @@ export default {
         font-weight: 500;
         font-size: 15px;
         line-height: 18px;
+    }
+    .no_order_text p {
+        font-size: 20px;
+        line-height: 24px;
+        font-weight: 600;
+        color: #38373d;
     }
 </style>

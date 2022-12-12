@@ -86,11 +86,17 @@ export default {
     },
     mounted() {
         this.getCategories();
-        this.wishlist = JSON.parse(this.cookies.get('wishlist'));
+        if (this.cookies.get('wishlist')) {
+            this.wishlist = JSON.parse(this.cookies.get('wishlist'));
+        }
     },
     methods: {
         wishlistData() {
-            this.wishlist = JSON.parse(this.cookies.get('wishlist'));
+            if (this.cookies.get('wishlist')) {
+                this.wishlist = JSON.parse(this.cookies.get('wishlist'));
+            } else {
+                this.wishlist = [];
+            }
         },
         closePopup(){
             f7.popup.close('.demo-sheet-swipe-to-close');
@@ -112,7 +118,7 @@ export default {
             })
         },
         toggleWishlist(id) {
-            if (this.wishlist.includes(id)) {
+            if (this.wishlist && this.wishlist.includes(id)) {
                 var data = [];
                 this.wishlist.forEach(ele => {
                     if (ele != id) {
