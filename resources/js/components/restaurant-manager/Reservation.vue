@@ -295,8 +295,7 @@ export default {
 }
 /*========== FOOD MENU MODAL CSS =============*/
 .close-menu{
-    position: absoludata
-    Datate;
+    position: absolute;
     top: 10px;
     right: 10px;
 }

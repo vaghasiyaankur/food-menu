@@ -48,8 +48,5 @@ export default {
       },
     };
   },
-  mounted() {
-    console.log("tevdg");
-},
 };
 </script>

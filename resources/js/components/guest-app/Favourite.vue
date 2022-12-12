@@ -20,77 +20,17 @@
                 <p> See your favorite food list and place order </p>
             </div>
             <div class="card cart-list">
-                <div class="card-content card-content-padding no-padding-bottom">
-                    <div class="row">
-                        <div class="col-20 padding-top">
-                            <i class="f7-icons size-22 padding-icon font-18 bg-color-dark-orange text-color-white fav-list-remove-icon">minus</i>
-                        </div>
-                        <div class="col-80 padding-bottom border-bottom row">
-                            <div class="col-75 border-right">
-                                <p>Jini Dosa</p>
-                            </div>
-                            <div class="col-25">
-                                <p>110.00</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-content card-content-padding no-padding-bottom">
-                    <div class="row">
-                        <div class="col-20 padding-top">
-                            <i class="f7-icons size-22 padding-icon font-18 bg-color-dark-orange text-color-white fav-list-remove-icon">minus</i>
-                        </div>
-                        <div class="col-80 padding-bottom border-bottom row">
-                            <div class="col-75 border-right">
-                                <p>Cheese Paneer Chilli Dosa Chilli Dosa</p>
-                            </div>
-                            <div class="col-25">
-                                <p>110.00</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-content card-content-padding no-padding-bottom">
-                    <div class="row">
-                        <div class="col-20 padding-top">
-                            <i class="f7-icons size-22 padding-icon font-18 bg-color-dark-orange text-color-white fav-list-remove-icon">minus</i>
-                        </div>
-                        <div class="col-80 padding-bottom border-bottom row">
-                            <div class="col-75 border-right">
-                                <p>Jini Dosa</p>
-                            </div>
-                            <div class="col-25">
-                                <p>110.00</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-content card-content-padding no-padding-bottom">
-                    <div class="row">
-                        <div class="col-20 padding-top">
-                            <i class="f7-icons size-22 padding-icon font-18 bg-color-dark-orange text-color-white fav-list-remove-icon">minus</i>
-                        </div>
-                        <div class="col-80 padding-bottom border-bottom row">
-                            <div class="col-75 border-right">
-                                <p>Cheese Paneer Chilli Dosa Chilli Dosa</p>
-                            </div>
-                            <div class="col-25">
-                                <p>110.00</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="card-content card-content-padding">
-                    <div class="row">
-                        <div class="col-20 padding-top">
+                    <div class="row padding-top" v-for="wishlist in wishlistData" :key="wishlist">
+                        <div class="col-20 padding-top" @click="removeWishlist(wishlist.id)">
                             <i class="f7-icons size-22 padding-icon font-18 bg-color-dark-orange text-color-white fav-list-remove-icon">minus</i>
                         </div>
                         <div class="col-80 padding-bottom border-bottom row">
                             <div class="col-75 border-right">
-                                <p>Jini Dosa</p>
+                                <p>{{ wishlist.name }}</p>
                             </div>
                             <div class="col-25">
-                                <p>110.00</p>
+                                <p>{{ wishlist.price.toFixed(2) }}</p>
                             </div>
                         </div>
                     </div>
@@ -103,15 +43,53 @@
 <script>
 import { f7Page, f7Navbar, f7BlockTitle, f7Block } from 'framework7-vue';
 import $ from 'jquery';
+import { useCookies } from "vue3-cookies";
+import axios from "axios";
 
 export default {
     name : 'Favourite',
-  components: {
-    f7Page,
-    f7Navbar,
-    f7BlockTitle,
-    f7Block,
-  },
+    components: {
+        f7Page,
+        f7Navbar,
+        f7BlockTitle,
+        f7Block,
+    },
+    data() {
+        return {
+            wishlist: [],
+            wishlistData : [],
+        }
+    },
+    setup() {
+        const { cookies } = useCookies()
+        return { cookies };
+    },
+    created() {
+        this.wishlist = JSON.parse(this.cookies.get('wishlist'));
+        this.getwishlistData();
+    },
+    methods: {
+        getwishlistData() {
+            axios.post('/api/get-wishlist', { wishlist: this.wishlist })
+            .then((res) => {
+                this.wishlistData = res.data;
+            });
+        },
+        removeWishlist(id) {
+            if (this.wishlist.includes(id)) {
+                var data = [];
+                this.wishlist.forEach(ele => {
+                    if (ele != id) {
+                        data.push(ele);
+                    }
+                });
+                this.wishlist = data;
+            }
+            this.cookies.set("wishlist", JSON.stringify(this.wishlist), 60 * 60 * 24);
+            this.wishlist = JSON.parse(this.cookies.get('wishlist'));
+            this.getwishlistData();
+        }
+    },
 };
 </script>
 

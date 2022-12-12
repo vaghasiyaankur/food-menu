@@ -59,7 +59,7 @@
                         </div>
                     </div>
                 </div>
-               
+
                 <div class="item-content item-input">
                     <div class="item-inner">
                         <div class="item-title item-label">Phone number</div>
@@ -77,7 +77,7 @@
                         <div class="item-title item-label font-16 text-color-black">Location type</div>
                         <div class="item-input-wrap input-dropdown-wrap">
                             <select v-model="reservation.floor" placeholder="Please choose..." class="padding-left padding-right">
-                                <option v-for="floor in floors" :key="floor" :value="floor.id">{{ floor.name }} Floor ({{ floor.ac == 1 ? 'AC' : 'Non-AC' }})</option>
+                                <option v-for="(floor,key) in floors" :key="floor" :value="key">{{ floor }}</option>
                             </select>
                         </div>
                     </div>
@@ -112,11 +112,11 @@
                 <f7-button class="button bg-color-white register-button button-raised text-color-black button-large text-transform-capitalize" @click="register" id="book_table">Book Table</f7-button>
             </div>
             <div class="col bottom-button">
-                <f7-button class="button bg-color-white register-button button-raised text-color-black button-large text-transform-capitalize" fill sheet-open=".demo-sheet-swipe-to-close" @click="title = 'Menu'">Menu</f7-button>
+                <f7-button class="button bg-color-white register-button button-raised text-color-black button-large text-transform-capitalize" fill sheet-open=".demo-sheet-swipe-to-close" @click="title = 'Menu';showMenuData()" >Menu</f7-button>
             </div>
         </div>
     </div>
-    <Menu @textChange="title = 'Registration'"></Menu>
+    <Menu @textChange="title = 'Registration'" ref="menu"></Menu>
 </f7-page>
 </template>
 
@@ -269,7 +269,7 @@ export default {
             notificationFull.open();
         },
         getFloors() {
-            axios.get('/api/get-floors')
+            axios.get('/api/get-floors-data')
             .then((res) => {
                 this.floors = res.data;
             })
@@ -324,6 +324,11 @@ export default {
                 $('.dialog-buttons').css({ 'margin-top': '25px', 'margin-bottom': '35px' });
             });
         },
+        showMenuData() {
+            if (this.$refs.menu) {
+                this.$refs.menu.wishlistData();
+            }
+        }
     },
 }
     $(document).on('click', '.sheet-backdrop', function () {
