@@ -7,11 +7,13 @@
                     <div class="border-popup"></div>
                 </div>
             </div>
-            <i class="f7-icons font-30 close-menu" @click="closePopup">xmark</i>
+            <div @click="closePopup" class="close-menu">
+                <i class="f7-icons font-30">xmark</i>
+            </div>
             <f7-block-title class="text-align-center font-18 text-color-black margin-top-half">Food Menu</f7-block-title>
             <div class="margin">
                 <!-- <div class="text-align-center text-color-gray">Select your favourite food <br> and enjoy with family</div> -->
-                <div data-pagination='{"el":".swiper-pagination"}' data-space-between="10" data-slides-per-view="8" class="swiper swiper-init demo-swiper margin-top margin-bottom" style="height : 120px">
+                <div data-pagination='{"el":".swiper-pagination"}' data-space-between="10" data-slides-per-view="5" class="swiper swiper-init demo-swiper margin-top margin-bottom" style="height : 120px">
                     <div class="swiper-pagination"></div>
                     <div class="swiper-wrapper">
                         <div class="swiper-slide" :class="{ 'slide-active': category.id == sliderActive}" v-for="category in product_category" :key="category" @click="getProducts(category.id)">
@@ -32,7 +34,7 @@
                             <div class="list row margin-half align-items-center" v-for="product in subcate.products" :key="product">
                                 <div class="col-10">
                                     <span class="add-favlist" @click="toggleWishlist(product.id)">
-                                        <i class="f7-icons size-22 bg-color-white text-color-red padding-half font-13">heart</i>
+                                        <i class="f7-icons size-22 bg-color-white text-color-red padding-half font-13">{{ this.wishlist && this.wishlist.includes(product.id) ? 'heart_fill' : 'heart' }}</i>
                                     </span>
                                     </div>
                                 <div class="col-70 display-flex">{{ product.name }}&nbsp; <span class="dots"></span></div>
@@ -60,6 +62,7 @@ import VueCountdown from '@chenfengyuan/vue-countdown';
 import $ from 'jquery';
 import axios from "axios";
 import NoValueFound from '../restaurant-manager/NoValueFound.vue'
+import { useCookies } from "vue3-cookies";
 
 export default {
     components : {
@@ -73,14 +76,30 @@ export default {
         return {
             product_category: [],
             product_subcategory: [],
+            wishlistProducts: [],
+            wishlist: [],
         }
     },
-    created() {
-        this.getCategories();
+    setup() {
+        const { cookies } = useCookies();
+        return { cookies };
     },
-    methods : {
+    mounted() {
+        this.getCategories();
+        if (this.cookies.get('wishlist')) {
+            this.wishlist = JSON.parse(this.cookies.get('wishlist'));
+        }
+    },
+    methods: {
+        wishlistData() {
+            if (this.cookies.get('wishlist')) {
+                this.wishlist = JSON.parse(this.cookies.get('wishlist'));
+            } else {
+                this.wishlist = [];
+            }
+        },
         closePopup(){
-            document.querySelector('.sheet-backdrop').click();
+            f7.popup.close('.demo-sheet-swipe-to-close');
             this.$emit('textChange');
         },
         getCategories() {
@@ -99,11 +118,19 @@ export default {
             })
         },
         toggleWishlist(id) {
-
-            axios.post('/api/toggle-wishlist', { id: this.sliderActive })
-            .then((res) => {
-                this.subCategories = res.data;
-            })
+            if (this.wishlist && this.wishlist.includes(id)) {
+                var data = [];
+                this.wishlist.forEach(ele => {
+                    if (ele != id) {
+                        data.push(ele);
+                    }
+                });
+                this.wishlist = data;
+            } else {
+                this.wishlist.push(id);
+            }
+            this.cookies.set("wishlist", JSON.stringify(this.wishlist), 60 * 60 * 24);
+            this.wishlist = JSON.parse(this.cookies.get('wishlist'));
 
         }
     }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\Manager\CategoryController;
 use App\Http\Controllers\Manager\FloorController;
@@ -124,3 +125,7 @@ Route::get('/report-data',[ReportController::class, 'reportData']);
 // ------------------------ Reservation Routes ------------------------ //
 
 Route::post('/add-reservation',[ReservationController::class, 'addReservation']);
+
+// ------------------------ Wishlist Routes ------------------------ //
+
+Route::post('/get-wishlist',[FavoriteController::class, 'getWishlist']);
