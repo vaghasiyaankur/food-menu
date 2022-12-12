@@ -1016,7 +1016,7 @@ export default {
 .framework7-root {
     overflow: scroll !important;
     box-sizing: border-box;
-    background: #F7F7F7 !important;
+    background: rgb(0 0 0 / 41%) !important;
 }
 
 </style>

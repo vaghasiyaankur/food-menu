@@ -3,6 +3,7 @@
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\Manager\CategoryController;
 use App\Http\Controllers\Manager\FloorController;
+use App\Http\Controllers\Manager\ReportController;
 use App\Http\Controllers\Manager\ProductController;
 use App\Http\Controllers\Manager\SubCategoryController;
 use App\Http\Controllers\Manager\SettingController;
@@ -114,6 +115,11 @@ Route::post('add-floor',[FloorController::class , 'addFloor']);
 Route::get('floor-data/{id}',[FloorController::class, 'editFloorDetail']);
 
 Route::post('delete-floor',[FloorController::class, 'deleteFloor']);
+
+// ------------------------ Report Page Routes ------------------------ //
+
+Route::get('/report-data',[ReportController::class, 'reportData']);
+
 
 // ------------------------ Reservation Routes ------------------------ //
 

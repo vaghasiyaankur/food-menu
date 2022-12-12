@@ -47,7 +47,7 @@
                             <div class="item-content item-input">
                             <div class="item-inner no-padding-right   ">
                                 <div class="item-input-wrap input-dropdown-wrap">
-                                <input type="text" placeholder="Select date range" readonly="readonly" id="demo-calendar-range" />
+                                <input type="text" placeholder="Select date range" readonly="readonly" id="demo-calendar-range" @change="onChange()"/>
                                 </div>
                             </div>
                             </div>
@@ -62,7 +62,7 @@
                         <div class="card border__radius_10 elevation-2">
                             <div class="card-content">
                                 <h3 class="card__heading no-margin-top">Total Orders</h3>
-                                <p class="total__number no-margin">69</p>
+                                <p class="total__number no-margin">{{ total_order }}</p>
                                 <div class="card__icon">
                                     <img src="/images/report-1.png" alt="">
                                 </div>
@@ -73,7 +73,7 @@
                         <div class="card border__radius_10 elevation-2">
                             <div class="card-content">
                                 <h3 class="card__heading no-margin-top">Completed Orders</h3>
-                                <p class="total__number no-margin">47</p>
+                                <p class="total__number no-margin">{{ complete_order }}</p>
                                 <div class="card__icon">
                                     <img src="/images/report-2.png" alt="">
                                 </div>
@@ -84,7 +84,7 @@
                         <div class="card border__radius_10 elevation-2">
                             <div class="card-content">
                                 <h3 class="card__heading no-margin-top">Ongoing Orders</h3>
-                                <p class="total__number no-margin">22</p>
+                                <p class="total__number no-margin">{{ ongoing_order }}</p>
                                 <div class="card__icon">
                                     <img src="/images/report-3.png" alt="">
                                 </div>
@@ -95,7 +95,7 @@
                         <div class="card border__radius_10 elevation-2">
                             <div class="card-content">
                                 <h3 class="card__heading no-margin-top">Most Reservation Table</h3>
-                                <p class="total__number no-margin">23</p>
+                                <p class="total__number no-margin">{{ reservation_table }}</p>
                                 <div class="card__icon card__icon_2">
                                     <img src="/images/report-4.png" alt="">
                                 </div>
@@ -155,8 +155,18 @@
 
 <script>
 import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Input,f7AreaChart} from 'framework7-vue';
+import axios from 'axios';
+
 export default {
     name : 'Reporting',
+    data() {
+        return {
+            total_order : '',
+            complete_order : '',
+            ongoing_order : '',
+            reservation_table : ''
+        }
+    },
     components: {
         f7Page,
         f7Navbar,
@@ -170,8 +180,12 @@ export default {
     f7.calendar.create({
             inputEl: '#demo-calendar-range',
             rangePicker: true,
-            numbers:true
+            numbers:true,
+            footer: true
         });
+    },
+    created() {
+        this.report();
     },
     setup() {
         const numbers = [];
@@ -196,6 +210,21 @@ export default {
         numbers
         };
     },
+    methods : {
+        report() {
+            axios.get('/api/report-data')
+            .then((res) => {
+                console.log(res.data);
+                this.total_order = res.data.total_order;
+                this.complete_order = res.data.complete_order;
+                this.ongoing_order = res.data.ongoing_order;
+                this.reservation_table = res.data.reservation_table;
+            })
+        },
+        onChange() {
+            console.log('123');
+        }
+    }
 }
 </script>
 
