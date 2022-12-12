@@ -16,15 +16,19 @@
                             <div class="pannel_header padding-horizontal text-align-right">
                                 <p><a href="#" class="panel-close text-color-black"><i class="f7-icons">xmark</i></a></p>
                             </div>
-                            <div class="block no-margin-top">
-                                <div class=" padding-left-half padding-right-half height-40">
+                            <div class="block no-margin-top no-padding">
+                                <div class=" padding-horizontal height-40 border-bottom pannel_menu_link">
+                                    <a href="/" class="link nav-link text-color-black font-16">
+                                        Waiting area</a>
+                                </div>
+                                <div class=" padding-horizontal height-40 border-bottom pannel_menu_link">
                                     <a href="/Reservation/" class="link nav-link text-color-black font-16">
                                         Reservation</a>
                                 </div>
                                 <div class="list accordion-list inset no-margin">
                                     <ul>
                                         <li class="accordion-item">
-                                            <a href="#" class="item-link item-content padding-left-half">
+                                            <a href="#" class="item-link item-content border-bottom">
                                                 <div class="item-inner">
                                                     <div class="item-title font-16">Menu management</div>
                                                 </div>
@@ -43,7 +47,7 @@
                                     </ul>
                                 </div>
                                 <!-- <div class="menu-item menu-item-dropdown bg-white">
-                                    <div class="menu-item-content padding-left-half padding-right-half">Menu management
+                                    <div class="menu-item-content padding-horizontal">Menu management
                                         <i class="f7-icons">chevron_down</i>
                                     </div>                                    
                                     <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
@@ -56,13 +60,13 @@
                                         </div>
                                     </div>
                                 </div> -->
-                                <div class="padding-left-half padding-right-half height-40">
+                                <div class="padding-horizontal height-40 border-bottom">
                                     <a href="/Reporting/" class="link nav-link text-color-black font-16">Reporting</a>
                                 </div>
-                                <div class=" padding-left-half padding-right-half height-40">
-                                    <button class="col nav-link close_reservation no-padding font-16" @click="$root.closeReservation()">Close reservation</button>
+                                <div class=" padding-horizontal height-40 border-bottom">
+                                    <button class="col nav-link  button close_reservation no-padding font-16" @click="$root.closeReservation()">Close reservation</button>
                                 </div>
-                                <div class="padding-left-half padding-right-half height-40">
+                                <div class="padding-horizontal height-40 border-bottom">
                                     <a href="/settings/" class="col link nav-link text-color-black font-16">Settings</a>
                                 </div>
                             </div>
@@ -115,7 +119,8 @@
                         <div class=" padding-left-half padding-right-half height-40 nav-button"><a href="/Reporting/"
                                 class="link nav-link button button-raised bg-dark text-color-white padding">Reporting</a>
                         </div>
-                        <div class="padding-left-half padding-right-half height-40"><button
+                        <div class="padding-left-half padding-right-half height-40">
+                            <button
                                 class="nav-link button button-raised bg-dark text-color-white padding closeReservation"
                                 @click="$root.closeReservation()">Close reservation</button></div>
                         <div class="padding-left-half padding-right-half height-40"><a href="/settings/"
@@ -320,6 +325,7 @@ export default {
 
 .border-bottom {
     border-bottom: 1px solid #EAEAEA;
+    border-radius: 0 !important;
 }
 
 .padding-icon {
@@ -328,6 +334,7 @@ export default {
 
 .border-right {
     border-right: 1px solid #F3F3F3 !important;
+ 
 }
 
 .header-links {
@@ -350,7 +357,7 @@ export default {
     font-size: 22px;
 }
 .font-16{
-    font-size: 16px;
+    font-size: 16px !important;
 }
 @media screen and (max-width:991px){
     .small_screen_menu{
@@ -372,11 +379,27 @@ export default {
         background-color: transparent;
         text-align:start;
     }
-    .list .item-link .item-inner:before{
+    .panel.panel-right .list .item-link .item-inner:before{
         color: #000000 !important;
     }
-    .panel-backdrop{
+    .panel-backdrop {
         background-color: rgb(17 24 39 / 30%) !important;
     }
+    .panel.panel-right .menu-dropdown-link,.panel.panel-right .menu-dropdown-item{
+        border-bottom: none !important;
+        font-weight: 400 !important;
+    }
+    .panel.panel-right .link.nav-link, .panel.panel-right .item-title{
+        font-weight: 600 !important;
+    }
+    .panel.panel-right .close_reservation{
+        font-weight: 600 !important;
+        line-height:40px;
+        color: #000000;
+    }
+    .panel.panel-right .close_reservation.button{
+        justify-content: flex-start;
+    }
+   
 }
 </style>
