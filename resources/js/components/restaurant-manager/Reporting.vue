@@ -167,7 +167,7 @@ export default {
         f7AreaChart
     },
     mounted() {
-        f7.calendar.create({
+    f7.calendar.create({
             inputEl: '#demo-calendar-range',
             rangePicker: true,
             numbers:true

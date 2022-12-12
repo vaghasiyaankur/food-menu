@@ -17,4 +17,9 @@ class Floor extends Model
     {
         return $this->hasMany(Table::class);
     }
+
+    public function activetables()
+    {
+        return $this->tables()->where('status', 1);
+    }
 }

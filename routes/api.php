@@ -101,6 +101,8 @@ Route::get('table-list-floor-wise/{id}',[TableController::class, 'tableListFloor
 
 Route::post('change-order-table',[TableController::class, 'changeOrderTable']);
 
+Route::post('change-floor-order',[TableController::class, 'changeFloorOrder']);
+
 // ------------------------ Floor Routes ------------------------ //
 
 Route::get('get-floors',[FloorController::class , 'getFloors']);
