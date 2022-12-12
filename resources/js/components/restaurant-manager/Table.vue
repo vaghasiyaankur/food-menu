@@ -38,7 +38,7 @@
                            <div class="swiper-wrapper padding-left-half">
                                  <div class="swiper-slide" :class="{'active' : floor.id == active_floor_id}"  v-for="floor in floorlist" :key="floor.id" @click="tableListFloorWise(floor.id)">
                                     <p class="no-margin text-align-center margin-vertical-half swiper_text display-flex">{{ floor.name }}
-                                        <span class="room_available color-blue">{{ floor.tables_count }}</span>
+                                        <span class="room_available color-blue">{{ floor.activetables_count }}</span>
                                     </p>
                                 </div>
                            
@@ -134,7 +134,7 @@
                                 </div>
                                 <div class="card-content card-content-padding padding-vertical-half">
                                     <p class="no-margin">Current Capacity</p>
-                                    <span class="text-color-red">80% Full</span>
+                                    <span class="text-color-red">{{ current_capacity }}% Full</span>
                                 </div>
                             </div>
                         </div>
@@ -144,7 +144,7 @@
             <div class="tables margin-horizontal">
                 <div class=" table_row margin-horizontal padding-top margin-top" v-for="row  in row_tables" :key="row">
                     <!-- <div class="no-padding margin-bottom table-card" :class="[('col-'+table.col)]" v-for="table in row" :key="table.id"> -->
-                    <div class="no-padding margin-bottom table-card" :style="'min-width: '+table.width+'px'" :class="[{'ml-40' :  ind != 0}]" v-for="(table,ind) in row" :key="table.id">
+                    <div class="no-padding margin-bottom table-card mr-40" :style="'min-width: '+table.width+'px'"  v-for="(table,ind) in row" :key="table.id">
                         <!--======= TABLE CHAIR ========= -->
                         <div class="row table_top_chair">
                             <div class="col" v-for="index in table.up_table" :key="index">
@@ -171,7 +171,7 @@
                                         <!-- <draggable :scroll-sensitivity="250"  :force-fallback="true" class="dragArea list-group w-full" :class="'dragger'+table.id" :list="order[index]" @start="startDrag(order.id, table.id)" @touchend.prevent="onDrop" v-for="(order,index) in table.orders" :key="order.id"> -->
 
                                             <div class="table_reservation_info" :class="'test'+order.id" v-for="(order,index) in table.orders" :key="order.id" >
-                                                <div class="person-info popover-open" :data-popover="'.popover-table-'+order.id"  @click="removebackdrop">
+                                                <div class="person-info popover-open" :class="'popover-click-'+order.id" :data-popover="'.popover-table-'+order.id"  @click="removebackdrop">
                                                     <div class="person_info_name border__bottom padding-bottom-half margin-bottom-half">
                                                         <p class="no-margin text-align-center">By {{ order.role }}</p>
                                                     </div>
@@ -180,7 +180,7 @@
                                                         <span>&nbsp;{{order.person}}</span>
                                                         <span class="waiting-time margin-top-half text-align-center">
                                                             <i class="f7-icons size-22">clock_fill</i>
-                                                            <span>2:47</span>
+                                                            <span>{{ order.reservation_time }}</span>
                                                         </span>
                                                     </div>
                                                     <div class="popover  padding-half" :class="'popover-table-'+order.id">
@@ -191,7 +191,7 @@
                                                             </div>
                                                             <div class="display-flex padding-left-half padding-top align-items-center">
                                                                 <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">clock</i>
-                                                                <span class="text-color-black">3:00pm</span>
+                                                                <span class="text-color-black">{{ order.reservation_time_12_format }}</span>
                                                             </div>
                                                             <div class="display-flex padding-left-half padding-top align-items-center">
                                                                 <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">phone</i>
@@ -199,7 +199,7 @@
                                                             </div>
                                                             <div class="display-flex padding-left-half padding-top-half align-items-center padding-bottom">
                                                                 <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_2_fill</i>
-                                                                <span class="text-color-black">{{ order.customer.number }} family member</span>
+                                                                <span class="text-color-black">{{ order.person }} family member</span>
                                                             </div>
                                                             <div class="floor__list">
                                                                 <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="openFloorList()">
@@ -208,86 +208,16 @@
                                                                 <!-- ============FLOOR DROP DOWN  ============= -->
                                                                 <div class="list simple-list floor_dropdwon">
                                                                     <ul>
-                                                                        <li>
+                                                                        <li v-for="floor in floorlist" :key="floor.id" @click="changeFloor(order.id,floor.id,floor.name)" :class="(table.floor.id == floor.id) ? 'display-none' : ''">
                                                                             <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                                 <div class="floor_name">
-                                                                                    <span>1<sup>st</sup> Floor (AC)</span>
+                                                                                    <span>{{ floor.name }} </span>
                                                                                 </div>
                                                                                 <div class="floor_room_available">
-                                                                                    <span class="room_available">20</span>
+                                                                                    <span class="room_available">{{ floor.activetables_count }}</span>
                                                                                 </div>
                                                                             </div>
-                                                                        </li>
-                                                                        <li>
-                                                                            <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                                <div class="floor_name">
-                                                                                    <span>2<sup>nd</sup> Floor (AC)</span>
-                                                                                </div>
-                                                                                <div class="floor_room_available">
-                                                                                    <span class="room_available">12</span>
-                                                                                </div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li>
-                                                                            <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                                <div class="floor_name">
-                                                                                    <span>3<sup>rd</sup> Floor (AC)</span>
-                                                                                </div>
-                                                                                <div class="floor_room_available">
-                                                                                    <span class="room_available">16</span>
-                                                                                </div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li>
-                                                                            <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                                <div class="floor_name">
-                                                                                    <span>4<sup>th</sup> Floor (AC)</span>
-                                                                                </div>
-                                                                                <div class="floor_room_available">
-                                                                                    <span class="room_available">15</span>
-                                                                                </div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li>
-                                                                            <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                                <div class="floor_name">
-                                                                                    <span>5<sup>th</sup> Floor (AC)</span>
-                                                                                </div>
-                                                                                <div class="floor_room_available">
-                                                                                    <span class="room_available">08</span>
-                                                                                </div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li>
-                                                                            <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                                <div class="floor_name">
-                                                                                    <span>6<sup>th</sup> Floor (AC)</span>
-                                                                                </div>
-                                                                                <div class="floor_room_available">
-                                                                                    <span class="room_available">13</span>
-                                                                                </div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li>
-                                                                            <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                                <div class="floor_name">
-                                                                                    <span>7<sup>th</sup> Floor (Non-AC)</span>
-                                                                                </div>
-                                                                                <div class="floor_room_available">
-                                                                                    <span class="room_available">18</span>
-                                                                                </div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li>
-                                                                            <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                                <div class="floor_name">
-                                                                                    <span>7<sup>th</sup> Floor (Non-AC)</span>
-                                                                                </div>
-                                                                                <div class="floor_room_available">
-                                                                                    <span class="room_available">18</span>
-                                                                                </div>
-                                                                            </div>
-                                                                        </li>
+                                                                        </li>   
                                                                     </ul>
                                                                 </div>
                                                                 <!-- ============FLOOR DROP DOWN END ============= -->
@@ -299,84 +229,24 @@
                                                                 <!-- ============FLOOR DROP DOWN  ============= -->
                                                                 <div class="list simple-list table_dropdwon">
                                                                     <ul>
-                                                                        <li>
+                                                                        <li v-for="changetable in change_table_list" :key="changetable.id" :class="(changetable.id == table.id || changetable.capacity_of_person < table.capacity_of_person) ? 'display-none' : ''" @click="changeTable(order.id, changetable.id, table.floor.name)">
                                                                             <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                                 <div class="floor_name">
-                                                                                    <span>1<sup>st</sup> Floor (AC)</span>
+                                                                                    <span>Table No : {{ changetable.table_number }}</span>
                                                                                 </div>
-                                                                                <div class="floor_room_available">
+                                                                                <!-- <div class="floor_room_available">
                                                                                     <span class="room_available">20</span>
-                                                                                </div>
+                                                                                </div> -->
                                                                             </div>
                                                                         </li>
-                                                                        <li>
+                                                                        <li v-if="no_table_list_show && max_number_table_id == table.id">
                                                                             <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                                 <div class="floor_name">
-                                                                                    <span>2<sup>nd</sup> Floor (AC)</span>
+                                                                                    <span>Not above capacity table</span>
                                                                                 </div>
-                                                                                <div class="floor_room_available">
-                                                                                    <span class="room_available">12</span>
-                                                                                </div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li>
-                                                                            <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                                <div class="floor_name">
-                                                                                    <span>3<sup>rd</sup> Floor (AC)</span>
-                                                                                </div>
-                                                                                <div class="floor_room_available">
-                                                                                    <span class="room_available">16</span>
-                                                                                </div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li>
-                                                                            <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                                <div class="floor_name">
-                                                                                    <span>4<sup>th</sup> Floor (AC)</span>
-                                                                                </div>
-                                                                                <div class="floor_room_available">
-                                                                                    <span class="room_available">15</span>
-                                                                                </div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li>
-                                                                            <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                                <div class="floor_name">
-                                                                                    <span>5<sup>th</sup> Floor (AC)</span>
-                                                                                </div>
-                                                                                <div class="floor_room_available">
-                                                                                    <span class="room_available">08</span>
-                                                                                </div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li>
-                                                                            <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                                <div class="floor_name">
-                                                                                    <span>6<sup>th</sup> Floor (AC)</span>
-                                                                                </div>
-                                                                                <div class="floor_room_available">
-                                                                                    <span class="room_available">13</span>
-                                                                                </div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li>
-                                                                            <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                                <div class="floor_name">
-                                                                                    <span>7<sup>th</sup> Floor (Non-AC)</span>
-                                                                                </div>
-                                                                                <div class="floor_room_available">
-                                                                                    <span class="room_available">18</span>
-                                                                                </div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li>
-                                                                            <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                                <div class="floor_name">
-                                                                                    <span>7<sup>th</sup> Floor (Non-AC)</span>
-                                                                                </div>
-                                                                                <div class="floor_room_available">
-                                                                                    <span class="room_available">18</span>
-                                                                                </div>
+                                                                                <!-- <div class="floor_room_available">
+                                                                                    <span class="room_available">20</span>
+                                                                                </div> -->
                                                                             </div>
                                                                         </li>
                                                                     </ul>
@@ -402,6 +272,7 @@
                             </div>
                         </div>
                     </div>
+                    <!-- <div class="extra-div"></div> -->
 
                 </div>
             </div>
@@ -426,7 +297,11 @@ export default {
             dragOrderId: '',
             dragOrderTableId: '',
             floorlist: [],
-            active_floor_id : 0
+            active_floor_id : 0,
+            change_table_list : [],
+            current_capacity : 0,
+            max_number_table_id : 0,
+            no_table_list_show : true
         }
     },
     computed: {
@@ -473,17 +348,24 @@ export default {
         },
         removebackdrop(){
             $('.floor_dropdwon').removeClass('floor_dropdown_visible');
-            $(".popover-backdrop").remove();
+            $('.table_dropdwon').removeClass('floor_dropdown_visible');
+            // $(".popover-backdrop").remove();
         },
         tableList() {
             axios.get('/api/table-list-with-order')
                 .then((res) => {
+                    this.current_capacity = res.data.current_capacity;
                     this.floorlist = res.data.floorlist;
                     this.active_floor_id = res.data.floorlist[0].id;
                     var row_tables = [];
                     var cal_of_capacity = 0;
                     var single_row_data = [];
+                    var change_table_list_array = [];
+                    var max_number_table_id = 0;
+                    var max_number_table_cap = 0;
                     res.data.tables.forEach((table, index) => {
+
+                        // calculation of row wise table list
                         if(parseInt(cal_of_capacity) > 18){
                             row_tables.push(single_row_data);
                             single_row_data = [];
@@ -519,18 +401,46 @@ export default {
                         }
 
                         cal_of_capacity = parseInt(cal_of_capacity) + parseInt(table.capacity_of_person);
-                    });
-                    this.row_tables = row_tables;
 
+                        // set change table list upon capacity
+
+                        var obj = {
+                            id: table.id,
+                            capacity_of_person: parseInt(table.capacity_of_person),
+                            table_number: table.table_number
+                        };
+
+
+                        change_table_list_array.push(obj);
+
+                        // Max Number Capacity Table Id
+                        if(max_number_table_cap < parseInt(table.capacity_of_person)) {
+                            max_number_table_id = parseInt(table.id);
+                            max_number_table_cap = parseInt(table.capacity_of_person);
+                        }    
+                    });
+                    this.max_number_table_id = max_number_table_id;
+                    this.row_tables = row_tables;
+                    this.change_table_list = change_table_list_array;
+                    this.no_table_list_show = true;
+                    change_table_list_array.forEach((table, index) => {
+                        if(max_number_table_cap == table.capacity_of_person && table.id != max_number_table_id){
+                            this.no_table_list_show = false;
+                        }
+                    });
                 })
         },
         tableListFloorWise(id) {
             this.active_floor_id = id;
             axios.get('/api/table-list-floor-wise/'+id)
                 .then((res) => {
+                    this.current_capacity = res.data.current_capacity;
                     var row_tables = [];
                     var cal_of_capacity = 0;
                     var single_row_data = [];
+                    var change_table_list_array = [];
+                    var max_number_table_id = 0;
+                    var max_number_table_cap = 0;
                     res.data.tables.forEach((table, index) => {
                         if(parseInt(cal_of_capacity) > 18){
                             row_tables.push(single_row_data);
@@ -567,8 +477,33 @@ export default {
                         }
 
                         cal_of_capacity = parseInt(cal_of_capacity) + parseInt(table.capacity_of_person);
+
+                        // set change table list upon capacity
+
+                        var obj = {
+                            id: table.id,
+                            capacity_of_person: parseInt(table.capacity_of_person),
+                            table_number: table.table_number
+                        };
+
+
+                        change_table_list_array.push(obj);
+
+                        // Max Number Capacity Table Id
+                        if(max_number_table_cap < parseInt(table.capacity_of_person)) {
+                            max_number_table_id = parseInt(table.id);
+                            max_number_table_cap = parseInt(table.capacity_of_person);
+                        }    
                     });
+                    this.max_number_table_id = max_number_table_id;
                     this.row_tables = row_tables;
+                    this.change_table_list = change_table_list_array;
+                    this.no_table_list_show = true;
+                    change_table_list_array.forEach((table, index) => {
+                        if(max_number_table_cap == table.capacity_of_person && table.id != max_number_table_id){
+                            this.no_table_list_show = false;
+                        }
+                    });
 
                 })
         },
@@ -603,19 +538,56 @@ export default {
                     $('.dialog-button').eq(1).addClass('active');
                     $('.dialog-button').css('width', '50%');
                 }, 50);
+        },
+        changeTable(order_id, table_number, floor_name) {
+            f7.popover.close();
+            f7.dialog.confirm('Are you sure to order transfer to '+floor_name+'(Table Number : '+table_number+') ?', () => {
+                axios.post('/api/change-order-table', { table_number: table_number , id : order_id})
+                .then((res) => {
+                    if(res.data.success)  this.tableListFloorWise(this.active_floor_id);
+                })
+            });
+
+            setTimeout(() => {
+                    $('.dialog-title').html("<img src='/images/success.png'>");
+                    $('.dialog-button').addClass('col button button-raised button-large text-transform-capitalize');
+                    $('.dialog-button').eq(1).addClass('active');
+                    $('.dialog-button').css('width', '50%');
+                }, 50);
+        },
+        changeFloor(order_id, floor_id,floor_name) {
+            f7.popover.close();
+            f7.dialog.confirm('Are you sure to order transfer to '+floor_name+' ?', () => {
+                axios.post('/api/change-floor-order', { floor_id: floor_id , id : order_id})
+                .then((res) => {
+                    if(res.data.success) {
+                        this.tableListFloorWise(this.active_floor_id);
+                    }else{
+                        this.$root.notification(res.data.message); return false;
+                    }
+                })
+            });
+
+            setTimeout(() => {
+                    $('.dialog-title').html("<img src='/images/success.png'>");
+                    $('.dialog-button').addClass('col button button-raised button-large text-transform-capitalize');
+                    $('.dialog-button').eq(1).addClass('active');
+                    $('.dialog-button').css('width', '50%');
+                }, 50);
         }
     }
 }
 </script>
 
 <style scoped>
+
 *{
     box-sizing: border-box;
     padding: 0;
     margin: 0;
 }
-.ml-40{
-    margin-left : 40px;
+.mr-40{
+    margin-right : 40px;
 }
 .current_capacity_card .card-content{
     padding-right:8px !important;
@@ -824,7 +796,6 @@ export default {
     width: 220px;
     position:absolute;
     left: 100%;
-    bottom: -105%;
     background: white;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     opacity: 0;
@@ -834,7 +805,6 @@ export default {
     border: 0.5px solid #999999;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     transition: all 0.5s ease-in;
-    min-height: 360px;
     max-height: 360px;
     overflow-y: auto;
 }
@@ -842,7 +812,6 @@ export default {
     width: 220px;
     position:absolute;
     left: 100%;
-    bottom: -124%;
     background: white;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     opacity: 0;
@@ -852,7 +821,6 @@ export default {
     border: 0.5px solid #999999;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     transition: all 0.5s ease-in;
-    min-height: 360px;
     max-height: 360px;
     overflow-y: auto;
 }
@@ -918,6 +886,11 @@ export default {
 }
 .table_reservation {
     height: 60px;
+}
+.extra-div{
+    min-width: 300px;
+    visibility: hidden;
+
 }
 </style>
 
@@ -1039,4 +1012,11 @@ export default {
 .table_row .card{
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.11);
     }
+
+.framework7-root {
+    overflow: scroll !important;
+    box-sizing: border-box;
+    background: #F7F7F7 !important;
+}
+
 </style>
