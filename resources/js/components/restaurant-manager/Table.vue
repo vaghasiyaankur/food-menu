@@ -1,6 +1,6 @@
 <template>
     <f7-page color="bg-color-white">
-            <!-- <div class="header-links display-flex align-items-center padding-right" v-bind="dragOptions">               
+            <!-- <div class="header-links display-flex align-items-center padding-right" v-bind="dragOptions">
                 <div class="row header-link justify-content-flex-end align-items-center tablate_view_menu">
                     <div class=" padding-left-half padding-right-half height-40 nav-button">
                         <a href="/Reservation/" class="col link nav-link button button-raised bg-dark text-color-white padding">
@@ -26,7 +26,7 @@
                     <div class=" padding-left-half padding-right-half height-40 nav-button"><button class="col nav-link button button-raised bg-dark text-color-white padding closeReservation" @click="$root.closeReservation()">Close reservation</button></div>
                     <div class=" padding-left-half padding-right-half height-40 nav-button"><a href="/settings/" class="col link nav-link button button-raised bg-dark text-color-white padding">Settings</a></div>
                 </div>
-            </div> -->        
+            </div> -->
         <div class="table_main">
             <!-- ============= TABLE FLOOR SWIPER ============= -->
            <div class="table_floor_swiper">
@@ -41,7 +41,7 @@
                                         <span class="room_available color-blue">{{ floor.activetables_count }}</span>
                                     </p>
                                 </div>
-                           
+
                             <!-- <carousel :items-to-show="3">
                                 <slide v-for="floor in floorlist" :key="floor.id">
                                     <div class="swiper-slide slide-active">
@@ -50,7 +50,7 @@
                                         </p>
                                     </div>
                                 </slide>
-                            
+
                                 <template #addons>
                                   <navigation />
                                   <pagination />
@@ -171,7 +171,7 @@
                                         <!-- <draggable :scroll-sensitivity="250"  :force-fallback="true" class="dragArea list-group w-full" :class="'dragger'+table.id" :list="order[index]" @start="startDrag(order.id, table.id)" @touchend.prevent="onDrop" v-for="(order,index) in table.orders" :key="order.id"> -->
 
                                             <div class="table_reservation_info" :class="'test'+order.id" v-for="(order,index) in table.orders" :key="order.id" >
-                                                <div class="person-info popover-open"  :class="'popover-click-'+order.id" :data-popover="'.popover-table-'+order.id"  @click="removebackdrop">
+                                                <div class="person-info popover-open"  :class="'popover-click-'+order.id" :data-popover="'.popover-table-'+order.id"  @click="order_person = order.person;removebackdrop()">
                                                     <div class="person_info_name border__bottom padding-bottom-half margin-bottom-half">
                                                         <p class="no-margin text-align-center">By {{ order.role }}</p>
                                                     </div>
@@ -217,19 +217,19 @@
                                                                                     <span class="room_available">{{ floor.activetables_count }}</span>
                                                                                 </div>
                                                                             </div>
-                                                                        </li>   
+                                                                        </li>
                                                                     </ul>
                                                                 </div>
                                                                 <!-- ============FLOOR DROP DOWN END ============= -->
                                                             </div>
                                                             <div class="table__list">
-                                                                <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="openTableList(order.id)">
+                                                                <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="openTableList(order)">
                                                                     <h3 class="text-color-red">Change Table</h3>
                                                                 </div>
                                                                 <!-- ============FLOOR DROP DOWN  ============= -->
                                                                 <div class="list simple-list table_dropdwon" :class="'t_f'+order.id">
                                                                     <ul>
-                                                                        <li v-for="changetable in change_table_list" :key="changetable.id" :class="(changetable.id == table.id || changetable.capacity_of_person < table.capacity_of_person) ? 'display-none' : ''" @click="changeTable(order.id, changetable.id, table.floor.name)">
+                                                                        <li v-for="changetable in change_table_list" :key="changetable.id" :class="(changetable.id == table.id || changetable.capacity_of_person < order_person) ? 'display-none' : ''" @click="changeTable(order.id, changetable.id, table.floor.name)">
                                                                             <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                                 <div class="floor_name">
                                                                                     <span>Table No : {{ changetable.table_number }}</span>
@@ -301,7 +301,10 @@ export default {
             change_table_list : [],
             current_capacity : 0,
             max_number_table_id : 0,
-            no_table_list_show : true
+            no_table_list_show: true,
+            order_person: 0,
+            max_number_table_cap: 0,
+            max_number_table_data : [],
         }
     },
     computed: {
@@ -356,17 +359,32 @@ export default {
                 $(".f_f"+id).css('left', '-135%');
             }
         },
-        openTableList(id){
+        openTableList(order) {
             $('.floor_dropdwon').removeClass('floor_dropdown_visible');
             $('.table_dropdwon').toggleClass('floor_dropdown_visible');
-            var ele = document.querySelector(".popover-click-"+id);
+            var ele = document.querySelector(".popover-click-" +order.id);
             var bounding = ele.getBoundingClientRect();
             if(screen.width > (bounding.left + bounding.width + 285)) {
-                $(".t_f"+id).css('left', '100%');
+                $(".t_f" + order.id).css('left', '100%');
             }else{
-                $(".t_f"+id).css('left', '-135%');
+                $(".t_f" +order.id).css('left', '-135%');
             }
             $(".table_dropdwon").css('min-width', '240px');
+
+            if (order.person < this.max_number_table_cap) {
+                this.no_table_list_show = false;
+            }
+            var person = order.person;
+            if (parseInt(person) % 2 != 0 && order.table_id == this.max_number_table_id) {
+                person = parseInt(person) + 1;
+            }
+            console.log(person == this.max_number_table_cap);
+            console.log(order.table_id == this.max_number_table_id);
+            console.log(order.table_id);
+            console.log(this.max_number_table_id);
+            if (order.table_id == this.max_number_table_id && person == this.max_number_table_cap) {
+                this.no_table_list_show = true;
+            }
         },
         removebackdrop(){
             $('.floor_dropdwon').removeClass('floor_dropdown_visible');
@@ -388,9 +406,8 @@ export default {
                     var single_row_data = [];
                     var change_table_list_array = [];
                     var max_number_table_id = 0;
-                    var max_number_table_cap = 0;
                     res.data.tables.forEach((table, index) => {
-
+                        console.log(index);
                         // calculation of row wise table list
                         if(parseInt(cal_of_capacity) > 18){
                             row_tables.push(single_row_data);
@@ -440,17 +457,17 @@ export default {
                         change_table_list_array.push(obj);
 
                         // Max Number Capacity Table Id
-                        if(max_number_table_cap < parseInt(table.capacity_of_person)) {
+                        if(this.max_number_table_cap <= parseInt(table.capacity_of_person)) {
                             max_number_table_id = parseInt(table.id);
-                            max_number_table_cap = parseInt(table.capacity_of_person);
-                        }    
+                            this.max_number_table_cap = parseInt(table.capacity_of_person);
+                        }
                     });
                     this.max_number_table_id = max_number_table_id;
                     this.row_tables = row_tables;
                     this.change_table_list = change_table_list_array;
                     this.no_table_list_show = true;
                     change_table_list_array.forEach((table, index) => {
-                        if(max_number_table_cap == table.capacity_of_person && table.id != max_number_table_id){
+                        if (this.max_number_table_cap == table.capacity_of_person && table.id != max_number_table_id) {
                             this.no_table_list_show = false;
                         }
                     });
@@ -466,8 +483,8 @@ export default {
                     var single_row_data = [];
                     var change_table_list_array = [];
                     var max_number_table_id = 0;
-                    var max_number_table_cap = 0;
                     res.data.tables.forEach((table, index) => {
+                        console.log(index);
                         if(parseInt(cal_of_capacity) > 18){
                             row_tables.push(single_row_data);
                             single_row_data = [];
@@ -514,19 +531,19 @@ export default {
 
 
                         change_table_list_array.push(obj);
-
                         // Max Number Capacity Table Id
-                        if(max_number_table_cap < parseInt(table.capacity_of_person)) {
+                        if(this.max_number_table_cap <= parseInt(table.capacity_of_person)) {
                             max_number_table_id = parseInt(table.id);
-                            max_number_table_cap = parseInt(table.capacity_of_person);
-                        }    
+                            this.max_number_table_cap = parseInt(table.capacity_of_person);
+                        }
                     });
                     this.max_number_table_id = max_number_table_id;
+                    console.log(this.max_number_table_cap);
                     this.row_tables = row_tables;
                     this.change_table_list = change_table_list_array;
                     this.no_table_list_show = true;
                     change_table_list_array.forEach((table, index) => {
-                        if(max_number_table_cap == table.capacity_of_person && table.id != max_number_table_id){
+                        if(this.max_number_table_cap == table.capacity_of_person && table.id != max_number_table_id){
                             this.no_table_list_show = false;
                         }
                     });

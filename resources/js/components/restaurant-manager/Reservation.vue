@@ -242,14 +242,14 @@ export default {
                         document.getElementById('book_table').classList.remove('active');
                         f7.view.main.router.navigate({ url: '/waiting/' });
                     });
+                    setTimeout(() => {
+                        $('.dialog-title').html("<img src='/images/success.png'>");
+                        $('.dialog-button').addClass('col button button-raised button-large text-transform-capitalize');
+                        $('.dialog-button').addClass('active');
+                        $('.dialog-button').css('width', '50%');
+                    }, 50);
                 });
 
-                setTimeout(() => {
-                    $('.dialog-title').html("<img src='/images/success.png'>");
-                    $('.dialog-button').addClass('col button button-raised button-large text-transform-capitalize');
-                    $('.dialog-button').addClass('active');
-                    $('.dialog-button').css('width', '50%');
-                }, 50);
             });
 
             setTimeout(() => {
