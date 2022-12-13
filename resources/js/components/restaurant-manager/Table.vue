@@ -358,7 +358,7 @@ export default {
 
            $(".navbar").removeClass('bg-color-white');
            $(".navbar-bg").css('width', 0);
-           $(".navbar-bg").css('background', none);
+           $(".navbar-bg").css('background', 'none');
         },
         tableList() {
             axios.get('/api/table-list-with-order')
@@ -569,7 +569,7 @@ export default {
             $(".navbar").addClass('bg-color-white');
             $(".navbar-bg").css('width', '100%');
             $(".navbar-bg").css('background', 'var(--f7-navbar-bg-color)');
-            
+
             f7.dialog.confirm('Are you sure to order transfer to '+floor_name+' ?', () => {
                 axios.post('/api/change-floor-order', { floor_id: floor_id , id : order_id})
                 .then((res) => {
