@@ -15,11 +15,11 @@ class TableSeeder extends Seeder
      */
     public function run()
     {
-        $colors = [1, 2, 3, 4, 5, 6, 7, 4, 7, 4];
+        $colors = [1, 2, 3, 4, 5, 6, 7, 4, 7, 4 ,10 ,11 ,12 ,1 ,2 ,5 ,6 ,4 ,8 ,9,1,2,3,4,5,6,7,8];
 
-        $c_o_p = ['04', '02', '06', '08', '12', '10', '26', '08', '26', '08'];
+        $c_o_p = ['04', '02', '06', '08', '12', '10', '26', '08', '26', '08', '10', '12', '14', '16', '18', '20', '22', '24', '06', '04', '02', '06', '08', '10', '12','14','16','18'];
 
-        $floor = [1,1,1,1,2,2,2,2,3,3];
+        $floor = [1,1,1,1,2,2,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,9,10,10,11,11,11];
 
         foreach($colors as $key=>$color){
             $table = new Table();
@@ -29,7 +29,7 @@ class TableSeeder extends Seeder
             $table->floor_id = $floor[$key];
             $table->color_id = $color;
             $table->status = ($key == 1 || $key == 5 ? 0 : 1);
-            $table->save();  
+            $table->save();
         }
     }
 }

@@ -24,15 +24,17 @@ class TableController extends Controller
      *
      */
     public function tableList()
-    {   
+    {
         $groundFloorId = Floor::first()->id;
-        $tables = Table::with('color','orders.customer', 'floor')->where('floor_id', $groundFloorId)->where('status', 1)->get();
+        $tables = Table::with(['color','orders.customer', 'floor','orders'=>function($q){
+            $q->orderBy('updated_at', 'ASC');
+        }])->where('floor_id', $groundFloorId)->where('status', 1)->get();
 
         $floorlist = Floor::select('id', 'name')->withCount('activetables')->get();
         foreach($tables as $tkey=>$table){
             foreach($table->orders as $okey=>$order){
-                $tables[$tkey]['orders'][$okey]['reservation_time'] = date('h:i', strtotime($order->created_at));
-                $tables[$tkey]['orders'][$okey]['reservation_time_12_format'] = date('g:i a', strtotime($order->created_at));
+                $tables[$tkey]['orders'][$okey]['reservation_time'] = date('h:i', strtotime($order->updated_at));
+                $tables[$tkey]['orders'][$okey]['reservation_time_12_format'] = date('g:i a', strtotime($order->updated_at));
             }
         }
 
@@ -49,14 +51,14 @@ class TableController extends Controller
 
     /**
      * Order transfer to another table (same floor)
-     * 
+     *
      * @return @json (success message)
-     * 
+     *
      */
     public function changeOrderTable(Request $request)
     {
         $tables = Order::where('id', $request->id)->update(['table_id' => $request->table_number]);
-        
+
         return response()->json([ 'success' => 'Order Transfer Successfully' ] , 200);
     }
 
@@ -67,16 +69,18 @@ class TableController extends Controller
      *
      */
     public function tableListFloorWise(Request $request)
-    {   
-        $tables = Table::with('color','orders.customer', 'floor')->where('floor_id', $request->id)->where('status', 1)->get();
+    {
+        $tables = Table::with(['color','orders.customer', 'floor','orders'=>function($q){
+            $q->orderBy('updated_at', 'ASC');
+        }])->where('floor_id', $request->id)->where('status', 1)->get();
 
         foreach($tables as $tkey=>$table){
             foreach($table->orders as $okey=>$order){
-                $tables[$tkey]['orders'][$okey]['reservation_time'] = date('h:i', strtotime($order->created_at));
-                $tables[$tkey]['orders'][$okey]['reservation_time_12_format'] = date('g:i a', strtotime($order->created_at));
+                $tables[$tkey]['orders'][$okey]['reservation_time'] = date('h:i', strtotime($order->updated_at));
+                $tables[$tkey]['orders'][$okey]['reservation_time_12_format'] = date('g:i a', strtotime($order->updated_at));
             }
-        }        
-        
+        }
+
         $total_table_number = Table::where('status', 1)->count();
         $table_list_with_order = Table::select('id')->where('status', 1)->withCount('orders')->get();
         $count = 0;
@@ -95,7 +99,7 @@ class TableController extends Controller
      *
      */
     public function changeFloorOrder(Request $request)
-    {   
+    {
         $person = Order::where('id', $request->id)->first()->person;
 
         $table_id = ReservationHelper::takeTable($request->floor_id, $person);
