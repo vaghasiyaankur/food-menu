@@ -593,7 +593,7 @@ export default {
                     if(res.data.success) {
                         this.tableListFloorWise(this.active_floor_id);
                     }else{
-                        this.$root.notification(res.data.message); return false;
+                        this.$root.errornotification(res.data.message); return false;
                     }
                 })
             });

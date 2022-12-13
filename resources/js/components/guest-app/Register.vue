@@ -192,12 +192,12 @@ export default {
         register() {
 
             if(this.name == '' || this.number == '' || this.member == '' || this.location == ''){
-                this.notification('Please fill the form details.');
+                this.errornotification('Please fill the form details.');
                 return;
             }
 
             if(this.number.length > 10){
-                this.notification('Please check your number and enter your mobail number.');
+                this.errornotification('Please check your number and enter your mobail number.');
                 return;
             }
 
@@ -228,7 +228,7 @@ export default {
                 .catch((error) => {
                     var err = error.response.data.error;
                     if(err){
-                        this.notification('Please fill the form details.');
+                        this.errornotification('Please fill the form details.');
                     }
                 })
             });
@@ -250,23 +250,40 @@ export default {
         },
         checkTime() {
             if(!this.reservation.name){
-                this.notification('Please Enter your name.'); return false;
+                this.errornotification('Please Enter your name.'); return false;
             }else if(!this.reservation.number){
-                this.notification('Please Enter your number.'); return false;
+                this.errornotification('Please Enter your number.'); return false;
             }else if(!this.reservation.member){
-                this.notification('Please Enter member number.'); return false;
+                this.errornotification('Please Enter member number.'); return false;
             }else if(!this.reservation.floor){
-                this.notification('Please Select Floor.'); return false;
+                this.errornotification('Please Select Floor.'); return false;
             }else{
                 this.checkWaitingTime = true;
             }
         },
-        notification(notice) {
-            var notificationFull = f7.notification.create({
-                subtitle: notice,
-                closeTimeout: 3000,
+        successnotification(notice) {
+            var notificationFull = f7.notification.create({                
+                title: '<img src="/images/checkicon.png">' + notice ,               
+                closeTimeout: 2000,
+                closeOnClick: true,
+                cssClass: 'success--notification'
+                
             });
             notificationFull.open();
+            $('.notification-header').append('<div><i class="f7-icons">xmark</i></div>');
+            $('.notification-content').remove();
+        },
+        errornotification(notice) {
+            var notificationFull = f7.notification.create({                
+                title: '<img src="/images/crossicon.png">' + notice ,               
+                closeTimeout: 2000,
+                closeOnClick: true,
+                cssClass: 'error--notification'
+                
+            });
+            notificationFull.open();
+            $('.notification-header').append('<div><i class="f7-icons">xmark</i></div>');
+            $('.notification-content').remove();
         },
         getFloors() {
             axios.get('/api/get-floors-data')
@@ -276,13 +293,13 @@ export default {
         },
         register() {
             if(!this.reservation.name){
-                this.notification('Please Enter your name.'); return false;
+                this.errornotification('Please Enter your name.'); return false;
             }else if(!this.reservation.number){
-                this.notification('Please Enter your number.'); return false;
+                this.errornotification('Please Enter your number.'); return false;
             }else if(!this.reservation.member){
-                this.notification('Please Enter member number.'); return false;
+                this.errornotification('Please Enter member number.'); return false;
             }else if(!this.reservation.floor){
-                this.notification('Please Select Floor.'); return false;
+                this.errornotification('Please Select Floor.'); return false;
             }else{
                 this.checkWaitingTime = true;
             }
@@ -480,6 +497,27 @@ label.item-checkbox input[type='checkbox']:checked~.icon-checkbox{
 
 </style>
 <style>
+
+.notification-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.notification-title img{
+    margin-right: 8px;
+}
+.notification.success--notification.modal-in{
+    background: linear-gradient(90deg, #91F4BE 0%, rgb(252 253 252) 100%, rgb(145 244 190 / 54%) 100%);
+    border-radius: 10px;
+}
+.notification.error--notification.modal-in{
+    background: linear-gradient(90deg, #FFBBBB 0%, rgb(252 253 252) 100%, rgba(255, 187, 187, 0.9) 100%);
+    border-radius: 10px;
+}
+.notification-header {
+    justify-content: space-between !important
+}
+
 .swiper-pagination-bullet-active {
     background: #FC4B1A !important;
 }

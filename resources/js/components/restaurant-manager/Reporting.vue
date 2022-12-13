@@ -47,7 +47,7 @@
                             <div class="item-content item-input">
                             <div class="item-inner no-padding-right   ">
                                 <div class="item-input-wrap input-dropdown-wrap">
-                                <input type="text" placeholder="Select date range" readonly="readonly" id="demo-calendar-range" @change="onChange()"/>
+                                <input type="text" placeholder="Select date range" readonly="readonly" id="demo-calendar-range" />
                                 </div>
                             </div>
                             </div>
@@ -62,7 +62,7 @@
                         <div class="card border__radius_10 elevation-2">
                             <div class="card-content">
                                 <h3 class="card__heading no-margin-top">Total Orders</h3>
-                                <p class="total__number no-margin">{{ total_order }}</p>
+                                <p class="total__number no-margin" id="total_order">{{ total_order }}</p>
                                 <div class="card__icon">
                                     <img src="/images/report-1.png" alt="">
                                 </div>
@@ -73,7 +73,7 @@
                         <div class="card border__radius_10 elevation-2">
                             <div class="card-content">
                                 <h3 class="card__heading no-margin-top">Completed Orders</h3>
-                                <p class="total__number no-margin">{{ complete_order }}</p>
+                                <p class="total__number no-margin" id="complete_order">{{ complete_order }}</p>
                                 <div class="card__icon">
                                     <img src="/images/report-2.png" alt="">
                                 </div>
@@ -84,7 +84,7 @@
                         <div class="card border__radius_10 elevation-2">
                             <div class="card-content">
                                 <h3 class="card__heading no-margin-top">Ongoing Orders</h3>
-                                <p class="total__number no-margin">{{ ongoing_order }}</p>
+                                <p class="total__number no-margin" id="ongoing_order">{{ ongoing_order }}</p>
                                 <div class="card__icon">
                                     <img src="/images/report-3.png" alt="">
                                 </div>
@@ -95,7 +95,7 @@
                         <div class="card border__radius_10 elevation-2">
                             <div class="card-content">
                                 <h3 class="card__heading no-margin-top">Most Reservation Table</h3>
-                                <p class="total__number no-margin">{{ reservation_table }}</p>
+                                <p class="total__number no-margin" id="reservation_table">{{ reservation_table }}</p>
                                 <div class="card__icon card__icon_2">
                                     <img src="/images/report-4.png" alt="">
                                 </div>
@@ -119,7 +119,7 @@
                                     {
                                     label: 'Red data',
                                     color: '#f00',
-                                    values: [0, 300, 127, 47, 10, 20, 30, 40, 50, 11],
+                                    values: [0, 300, 127, 47, 10, 20, 30, 40],
                                     },
                                 ]"
                                 />
@@ -139,7 +139,7 @@
                                     {
                                     label: 'Red data',
                                     color: '#f00',
-                                    values: [0, 300, 127, 47, 10, 20, 30, 40, 50, 11],
+                                    values: [0, 300, 127, 47, 10, 20, 30, 40],
                                     },
                                 ]"
                                 />
@@ -156,6 +156,7 @@
 <script>
 import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Input,f7AreaChart} from 'framework7-vue';
 import axios from 'axios';
+import $ from 'jquery';
 
 export default {
     name : 'Reporting',
@@ -181,7 +182,28 @@ export default {
             inputEl: '#demo-calendar-range',
             rangePicker: true,
             numbers:true,
-            footer: true
+            footer: true,
+            on: {
+                close(daterange) {
+                    var dates = daterange.getValue();
+                    // var datefrom = dates[0] ? : '';
+                    // var dateto = dates[1];
+                    if(dates){
+                        var from_date = new Date(dates[0]).toLocaleDateString('sv-SE');
+                        if(dates[1]) var to_date = new Date(dates[1]).toLocaleDateString('sv-SE');
+                        else var to_date = '';
+
+                        axios.get('/api/report-data?from_date='+from_date+'&to_date='+to_date)
+                        .then((res) => {
+                            $("#total_order").text(res.data.total_order);
+                            $("#complete_order").text(res.data.complete_order);
+                            $("#ongoing_order").text(res.data.ongoing_order);
+                            $("#reservation_table").text(res.data.reservation_table);
+                        })
+                    
+                    }
+                }
+            }
         });
     },
     created() {
@@ -223,6 +245,9 @@ export default {
         },
         onChange() {
             console.log('123');
+        },
+        check(m) {
+            console.log(m);
         }
     }
 }

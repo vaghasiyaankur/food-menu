@@ -194,7 +194,7 @@ export default {
                 axios.post('/api/delete-category', { id: id })
                 .then((res) => {
                     this.getCategories();
-                    this.$root.notification(res.data.success);
+                    this.$root.successnotification(res.data.success);
                 })
             });
             setTimeout(() => {
@@ -214,14 +214,14 @@ export default {
             formData.append('name', this.category.name);
             formData.append('image', this.category.image);
             if (!this.category.name || !this.category.image) {
-                this.$root.notification('Please fill the form details.');
+                this.$root.errornotification('Please fill the form details.');
                 return false;
             }
             if (this.category.id) {
                 formData.append('id', this.category.id);
                 axios.post('/api/update-category', formData, config)
                 .then((res) => {
-                    this.$root.notification(res.data.success);
+                    this.$root.successnotification(res.data.success);
                     this.getCategories();
                     this.blankForm();
                     f7.popup.close(`#category_popup`);
@@ -229,7 +229,7 @@ export default {
             } else {
                 axios.post('/api/add-category', formData, config)
                 .then((res) => {
-                    this.$root.notification(res.data.success);
+                    this.$root.successnotification(res.data.success);
                     this.getCategories();
                     this.blankForm();
                     f7.popup.close(`#category_popup`);
@@ -255,13 +255,13 @@ export default {
             formData.append('category_id', this.subCategory.category);
 
             if (!this.subCategory.name || !this.subCategory.category) {
-                this.$root.notification('Please fill the form details.');
+                this.$root.errornotification('Please fill the form details.');
                 return false;
             }
 
             axios.post('/api/add-sub-category', formData)
             .then((res) => {
-                this.$root.notification(res.data.success);
+                this.$root.successnotification(res.data.success);
                 f7.popup.close(`#subCategory_popup`);
             })
         },

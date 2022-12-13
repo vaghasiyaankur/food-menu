@@ -215,13 +215,13 @@ export default {
         },
         register() {
             if(!this.reservation.name){
-                this.$root.notification('Please Enter your name.'); return false;
+                this.$root.errornotification('Please Enter your name.'); return false;
             }else if(!this.reservation.number){
-                this.$root.notification('Please Enter your number.'); return false;
+                this.$root.errornotification('Please Enter your number.'); return false;
             }else if(!this.reservation.member){
-                this.$root.notification('Please Enter member number.'); return false;
+                this.$root.errornotification('Please Enter member number.'); return false;
             }else if(!this.reservation.floor){
-                this.$root.notification('Please Select Floor.'); return false;
+                this.$root.errornotification('Please Select Floor.'); return false;
             }else{
                 this.checkWaitingTime = true;
             }
@@ -269,13 +269,13 @@ export default {
         },
         checkTime() {
             if(!this.reservation.name){
-                this.$root.notification('Please Enter your name.'); return false;
+                this.$root.errornotification('Please Enter your name.'); return false;
             }else if(!this.reservation.number){
-                this.$root.notification('Please Enter your number.'); return false;
+                this.$root.errornotification('Please Enter your number.'); return false;
             }else if(!this.reservation.member){
-                this.$root.notification('Please Enter member number.'); return false;
+                this.$root.errornotification('Please Enter member number.'); return false;
             }else if(!this.reservation.floor){
-                this.$root.notification('Please Select Floor.'); return false;
+                this.$root.errornotification('Please Select Floor.'); return false;
             }else{
                 this.checkWaitingTime = true;
             }

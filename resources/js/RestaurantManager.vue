@@ -194,12 +194,24 @@ export default {
                 $('.dialog-buttons').addClass('margin-top no-margin-bottom')
             }, 200);
         },
-        notification(notice) {
+        successnotification(notice) {
             var notificationFull = f7.notification.create({                
                 title: '<img src="/images/checkicon.png">' + notice ,               
                 closeTimeout: 2000,
                 closeOnClick: true,
-                // closeButton: true,
+                cssClass: 'success--notification'
+                
+            });
+            notificationFull.open();
+            $('.notification-header').append('<div><i class="f7-icons">xmark</i></div>');
+            $('.notification-content').remove();
+        },
+        errornotification(notice) {
+            var notificationFull = f7.notification.create({                
+                title: '<img src="/images/crossicon.png">' + notice ,               
+                closeTimeout: 2000,
+                closeOnClick: true,
+                cssClass: 'error--notification'
                 
             });
             notificationFull.open();
@@ -224,8 +236,12 @@ export default {
 .notification-title img{
     margin-right: 8px;
 }
-.notification.modal-in{
-    background: linear-gradient(90deg, #91F4BE 0%, rgba(145, 244, 190, 0.2) 45.1%, rgba(145, 244, 190, 0.15) 100%);
+.notification.success--notification.modal-in{
+    background: linear-gradient(90deg, #91F4BE 0%, rgb(252 253 252) 100%, rgb(145 244 190 / 54%) 100%);
+    border-radius: 10px;
+}
+.notification.error--notification.modal-in{
+    background: linear-gradient(90deg, #FFBBBB 0%, rgb(252 253 252) 100%, rgba(255, 187, 187, 0.9) 100%);
     border-radius: 10px;
 }
 .notification-header {

@@ -201,7 +201,7 @@ export default {
             formData.append('category_id', this.subCategory.category);
 
             if (!this.subCategory.name || !this.subCategory.category) {
-                this.$root.notification('Please fill the form details.');
+                this.$root.errornotification('Please fill the form details.');
                 return false;
             }
 
@@ -210,7 +210,7 @@ export default {
 
                 axios.post('/api/update-sub-category', formData)
                 .then((res) => {
-                    this.$root.notification(res.data.success);
+                    this.$root.successnotification(res.data.success);
                     this.getSubCategories();
                     f7.popup.close(`#sub_category_popup`);
                 })
@@ -218,7 +218,7 @@ export default {
                 axios.post('/api/add-sub-category', formData)
                 .then((res) => {
                     this.getSubCategories();
-                    this.$root.notification(res.data.success);
+                    this.$root.successnotification(res.data.success);
                     f7.popup.close(`#sub_category_popup`);
                 })
             }
@@ -256,13 +256,13 @@ export default {
             formData.append('sub_category_id', this.product.sub_category);
 
             if (!this.product.name || !this.product.price || !this.product.sub_category) {
-                this.$root.notification('Please fill the form details.');
+                this.$root.errornotification('Please fill the form details.');
                 return false;
             }
 
             axios.post('/api/add-product', formData)
                 .then((res) => {
-                    this.$root.notification(res.data.success);
+                    this.$root.successnotification(res.data.success);
                     f7.popup.close(`#product_popup`);
                     this.product.name = '';
                     this.product.price = '';

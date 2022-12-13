@@ -29,6 +29,14 @@
                                 </div>
                               </div>
                            </div>
+                           <!-- <div class="item-content item-input margin-bottom no-padding-left">
+                            <div class="item-inner">
+                               <div class="block-title no-margin-top">Capacity Of Member</div>
+                               <div class="item-input-wrap">
+                                  <input type="text" name="member" class="padding margin-top-half" placeholder="Enter manager name"  v-model="member_capacity">
+                              </div>
+                            </div>
+                         </div> -->
                         </form>
                      </div>
                 </div>
@@ -323,7 +331,7 @@
                 var formData = new FormData();
 
                 if(!this.restaurant_name || !this.phone_number || !this.manager_name){
-                    this.notification('Please Fill All Data in Form')
+                    this.$root.errornotification('Please Fill All Data in Form')
                     return false;
                 }
 
@@ -337,20 +345,11 @@
                 axios
                 .post("/api/update-setting", formData, config)
                 .then((res) => {
-                    this.notification(res.data.success);
+                    this.$root.successnotification(res.data.success);
                 }).catch((error) => {
-                    this.notification('Something Went Wrong !!!');
+                    this.$root.errornotification('Something Went Wrong !!!');
                     return false;
                 });
-            },
-            notification(notice) {
-                var notificationFull = f7.notification.create({
-                   
-                    subtitle: notice,
-                    closeTimeout: 3000,
-                    closeButton: true,
-                });
-                notificationFull.open();
             }
         }
     }

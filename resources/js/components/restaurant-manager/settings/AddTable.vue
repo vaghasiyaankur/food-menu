@@ -111,7 +111,7 @@
                 var formData = new FormData();
 
                 if(!this.table_number || !this.capacity_of_person || !this.floor_number || !this.color){
-                    this.notification('Please Fill All Data in Form')
+                    this.$root.errornotification('Please Fill All Data in Form')
                     return false;
                 }
 
@@ -124,19 +124,12 @@
                 axios
                 .post("/api/add-update-table", formData, config)
                 .then((res) => {
-                    this.notification(res.data.success);
+                    this.$root.successnotification(res.data.success);
                     this.$emit('tableshow')
                 }).catch((error) => {
-                    this.notification('Something Went Wrong !!!');
+                    this.$root.errornotification('Something Went Wrong !!!');
                     return false;
                 });
-            },
-            notification(notice) {
-                var notificationFull = f7.notification.create({
-                    subtitle: notice,
-                    closeTimeout: 3000,
-                });
-                notificationFull.open();
             },
             checkColor() {
                 axios.get('/api/check-color/'+this.capacity_of_person)

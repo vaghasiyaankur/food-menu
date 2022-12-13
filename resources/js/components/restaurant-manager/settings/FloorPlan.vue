@@ -63,7 +63,7 @@ import axios from 'axios';
 
                 axios.post('/api/add-floor', formData)
                 .then((res) => {
-                    this.$root.notification(res.data.success);
+                    this.$root.successnotification(res.data.success);
                     this.$emit('floorlistshow');
                 });
             },

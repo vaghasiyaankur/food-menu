@@ -189,7 +189,7 @@ export default {
             formData.append('sub_category_id', this.product.sub_category);
 
             if (!this.product.name || !this.product.price || !this.product.sub_category) {
-                this.$root.notification('Please fill the form details.');
+                this.$root.errornotification('Please fill the form details.');
                 return false;
             }
 
@@ -197,7 +197,7 @@ export default {
                 formData.append('id', this.product.id);
                 axios.post('/api/update-product', formData)
                 .then((res) => {
-                    this.$root.notification(res.data.success);
+                    this.$root.successnotification(res.data.success);
                     this.getProducts();
                     f7.popup.close(`#product_popup`);
                     this.blankform();
@@ -205,7 +205,7 @@ export default {
             } else {
                 axios.post('/api/add-product', formData)
                 .then((res) => {
-                    this.$root.notification(res.data.success);
+                    this.$root.successnotification(res.data.success);
                     this.getProducts();
                     f7.popup.close(`#product_popup`);
                     this.blankform();
@@ -216,7 +216,7 @@ export default {
             f7.dialog.confirm('Are you sure delete the product?', () => {
                 axios.post('/api/delete-product', { id: id })
                     .then((res) => {
-                        this.$root.notification(res.data.success);
+                        this.$root.successnotification(res.data.success);
                         this.getProducts();
                     })
             });

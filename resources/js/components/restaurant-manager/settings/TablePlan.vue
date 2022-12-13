@@ -92,7 +92,7 @@
                 f7.dialog.confirm('Are you sure delete the table?', () => {
                 axios.post('/api/delete-table', { id: id })
                     .then((res) => {
-                        this.notification(res.data.success);
+                        this.$root.successnotification(res.data.success);
                         this.tableList();
                     })
                 });
@@ -109,7 +109,7 @@
                 f7.dialog.confirm('Are you sure Change status of the table?', () => {
                     axios.post('/api/change-table-status', { id : id , status: status })
                     .then((res) => {
-                        this.notification(res.data.success);
+                        this.$root.successnotification(res.data.success);
                         this.tableList();
                     })
                 });
@@ -121,13 +121,6 @@
                     $('.dialog-button').eq(1).removeClass('text-color-black');
                     $('.dialog-buttons').addClass('margin-top no-margin-bottom');
                 }, 50);
-            },
-            notification(notice) {
-                var notificationFull = f7.notification.create({
-                    subtitle: notice,
-                    closeTimeout: 3000,
-                });
-                notificationFull.open();
             }
         }
     }
