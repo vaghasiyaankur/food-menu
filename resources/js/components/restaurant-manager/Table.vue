@@ -366,6 +366,7 @@ export default {
             }else{
                 $(".t_f"+id).css('left', '-135%');
             }
+            $(".table_dropdwon").css('min-width', '240px');
         },
         removebackdrop(){
             $('.floor_dropdwon').removeClass('floor_dropdown_visible');
