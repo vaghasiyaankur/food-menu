@@ -164,8 +164,8 @@
                                         <p class="no-margin"> Capacity </p> <p class="text-align-center no-margin">{{ table.capacity_of_person }}</p> </div>
                                 </div>
                             </div>
-                            <div class="card-content card-content-padding padding-horizontal-half table1__details" :style="'max-width : '+(table.width - 20 )+'px'">
-                                <div class="table_reservation">
+                            <div class="card-content padding-top     padding-horizontal-half table1__details" :style="'max-width : '+(table.width - 20 )+'px'">
+                                <div class="table_reservation margin-bottom">
                                     <!-- <h3 class="no-margin-top">Reserved</h3> -->
                                     <div class="display-flex">
                                         <!-- <draggable :scroll-sensitivity="250"  :force-fallback="true" class="dragArea list-group w-full" :class="'dragger'+table.id" :list="order[index]" @start="startDrag(order.id, table.id)" @touchend.prevent="onDrop" v-for="(order,index) in table.orders" :key="order.id"> -->
@@ -202,11 +202,11 @@
                                                                 <span class="text-color-black">{{ order.person }} family member</span>
                                                             </div>
                                                             <div class="floor__list">
-                                                                <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="openFloorList()">
+                                                                <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="openFloorList(order.id)">
                                                                     <h3 class="text-color-red">Change Floor</h3>
                                                                 </div>
                                                                 <!-- ============FLOOR DROP DOWN  ============= -->
-                                                                <div class="list simple-list floor_dropdwon">
+                                                                <div class="list simple-list floor_dropdwon" :class="'f_f'+order.id">
                                                                     <ul>
                                                                         <li v-for="floor in floorlist" :key="floor.id" @click="changeFloor(order.id,floor.id,floor.name)" :class="(table.floor.id == floor.id) ? 'display-none' : ''">
                                                                             <div class="floor_number display-flex align-items-center justify_content_between w-100">
@@ -223,11 +223,11 @@
                                                                 <!-- ============FLOOR DROP DOWN END ============= -->
                                                             </div>
                                                             <div class="table__list">
-                                                                <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="openTableList()">
+                                                                <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="openTableList(order.id)">
                                                                     <h3 class="text-color-red">Change Table</h3>
                                                                 </div>
                                                                 <!-- ============FLOOR DROP DOWN  ============= -->
-                                                                <div class="list simple-list table_dropdwon">
+                                                                <div class="list simple-list table_dropdwon" :class="'t_f'+order.id">
                                                                     <ul>
                                                                         <li v-for="changetable in change_table_list" :key="changetable.id" :class="(changetable.id == table.id || changetable.capacity_of_person < table.capacity_of_person) ? 'display-none' : ''" @click="changeTable(order.id, changetable.id, table.floor.name)">
                                                                             <div class="floor_number display-flex align-items-center justify_content_between w-100">
@@ -321,9 +321,11 @@ export default {
     mounted() {
         this.equal_height();
         $(document).on('click', '.popover-backdrop', function(){
-           $(".navbar").addClass('bg-color-white');
-           $(".navbar-bg").css('width', '100%');
+        //    $(".navbar").addClass('bg-color-white');
+        //    $(".navbar-bg").css('width', '100%');
            $(".navbar-bg").css('background', 'var(--f7-navbar-bg-color)');
+           $(".table_dropdwon").removeClass('floor_dropdown_visible');
+           $(".floor_dropdwon").removeClass('floor_dropdown_visible');
         });
     },
     updated() {
@@ -343,22 +345,36 @@ export default {
             }
             document.querySelectorAll(".equal-height-table").forEach(node => node.style.height = highestBox + "px");
         },
-        openFloorList(){
+        openFloorList(id){
             $('.table_dropdwon').removeClass('floor_dropdown_visible');
             $('.floor_dropdwon').toggleClass('floor_dropdown_visible');
+            var ele = document.querySelector(".popover-click-"+id);
+            var bounding = ele.getBoundingClientRect();
+            if(screen.width > (bounding.left + bounding.width + 285)) {
+                $(".f_f"+id).css('left', '100%');
+            }else{
+                $(".f_f"+id).css('left', '-135%');
+            }
         },
-        openTableList(){
+        openTableList(id){
             $('.floor_dropdwon').removeClass('floor_dropdown_visible');
             $('.table_dropdwon').toggleClass('floor_dropdown_visible');
+            var ele = document.querySelector(".popover-click-"+id);
+            var bounding = ele.getBoundingClientRect();
+            if(screen.width > (bounding.left + bounding.width + 285)) {
+                $(".t_f"+id).css('left', '100%');
+            }else{
+                $(".t_f"+id).css('left', '-135%');
+            }
         },
         removebackdrop(){
             $('.floor_dropdwon').removeClass('floor_dropdown_visible');
             $('.table_dropdwon').removeClass('floor_dropdown_visible');
             // $(".popover-backdrop").remove();
 
-           $(".navbar").removeClass('bg-color-white');
-           $(".navbar-bg").css('width', 0);
-           $(".navbar-bg").css('background', 'none');
+        //    $(".navbar").removeClass('bg-color-white');
+        //    $(".navbar-bg").css('width', 0);
+        //    $(".navbar-bg").css('background', 'none');
         },
         tableList() {
             axios.get('/api/table-list-with-order')
@@ -566,9 +582,9 @@ export default {
         },
         changeFloor(order_id, floor_id,floor_name) {
             f7.popover.close();
-            $(".navbar").addClass('bg-color-white');
-            $(".navbar-bg").css('width', '100%');
-            $(".navbar-bg").css('background', 'var(--f7-navbar-bg-color)');
+            // $(".navbar").addClass('bg-color-white');
+            // $(".navbar-bg").css('width', '100%');
+            // $(".navbar-bg").css('background', 'var(--f7-navbar-bg-color)');
 
             f7.dialog.confirm('Are you sure to order transfer to '+floor_name+' ?', () => {
                 axios.post('/api/change-floor-order', { floor_id: floor_id , id : order_id})
@@ -809,34 +825,32 @@ export default {
     border: 0.5px solid #999999;
 }
 .floor_dropdwon{
-    width: 220px;
+    min-width: 240px;
+    max-width: 240px;
     position:absolute;
     left: 100%;
     background: white;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     opacity: 0;
     visibility: hidden;
-    transition: 0.3s all ease-in-out;
     transform: translateY(2em);
     border: 0.5px solid #999999;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    transition: all 0.5s ease-in;
     max-height: 360px;
     overflow-y: auto;
 }
 .table_dropdwon{
-    width: 220px;
+    max-width: 240px;
+    min-width: 240px;
     position:absolute;
-    left: 100%;
     background: white;
+    left: 100%;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     opacity: 0;
     visibility: hidden;
-    transition: 0.3s all ease-in-out;
     transform: translateY(2em);
     border: 0.5px solid #999999;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    transition: all 0.5s ease-in;
     max-height: 360px;
     overflow-y: auto;
 }
@@ -1029,10 +1043,10 @@ export default {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.11);
     }
 
-.framework7-root {
+/*.framework7-root {
     overflow: scroll !important;
     box-sizing: border-box;
     background: rgb(0 0 0 / 41%) !important;
-}
+}*/
 
 </style>
