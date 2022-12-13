@@ -171,7 +171,7 @@
                                         <!-- <draggable :scroll-sensitivity="250"  :force-fallback="true" class="dragArea list-group w-full" :class="'dragger'+table.id" :list="order[index]" @start="startDrag(order.id, table.id)" @touchend.prevent="onDrop" v-for="(order,index) in table.orders" :key="order.id"> -->
 
                                             <div class="table_reservation_info" :class="'test'+order.id" v-for="(order,index) in table.orders" :key="order.id" >
-                                                <div class="person-info popover-open" :class="'popover-click-'+order.id" :data-popover="'.popover-table-'+order.id"  @click="removebackdrop">
+                                                <div class="person-info popover-open"  :class="'popover-click-'+order.id" :data-popover="'.popover-table-'+order.id"  @click="removebackdrop">
                                                     <div class="person_info_name border__bottom padding-bottom-half margin-bottom-half">
                                                         <p class="no-margin text-align-center">By {{ order.role }}</p>
                                                     </div>
@@ -183,7 +183,7 @@
                                                             <span>{{ order.reservation_time }}</span>
                                                         </span>
                                                     </div>
-                                                    <div class="popover  padding-half" :class="'popover-table-'+order.id">
+                                                    <div class="popover  padding-half" :class="'popover-table-'+order.id" @open="check('123')" @close="check('321')">
                                                         <div class="user-info popover-inner">
                                                             <div class="display-flex padding-left-half padding-top-half align-items-center">
                                                                 <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_fill</i>
@@ -320,6 +320,11 @@ export default {
     },
     mounted() {
         this.equal_height();
+        $(document).on('click', '.popover-backdrop', function(){
+           $(".navbar").addClass('bg-color-white');
+           $(".navbar-bg").css('width', '100%');
+           $(".navbar-bg").css('background', 'var(--f7-navbar-bg-color)');
+        });
     },
     updated() {
         this.equal_height();
@@ -350,6 +355,10 @@ export default {
             $('.floor_dropdwon').removeClass('floor_dropdown_visible');
             $('.table_dropdwon').removeClass('floor_dropdown_visible');
             // $(".popover-backdrop").remove();
+
+           $(".navbar").removeClass('bg-color-white');
+           $(".navbar-bg").css('width', 0);
+           $(".navbar-bg").css('background', none);
         },
         tableList() {
             axios.get('/api/table-list-with-order')
@@ -557,6 +566,10 @@ export default {
         },
         changeFloor(order_id, floor_id,floor_name) {
             f7.popover.close();
+            $(".navbar").addClass('bg-color-white');
+            $(".navbar-bg").css('width', '100%');
+            $(".navbar-bg").css('background', 'var(--f7-navbar-bg-color)');
+            
             f7.dialog.confirm('Are you sure to order transfer to '+floor_name+' ?', () => {
                 axios.post('/api/change-floor-order', { floor_id: floor_id , id : order_id})
                 .then((res) => {
@@ -574,6 +587,9 @@ export default {
                     $('.dialog-button').eq(1).addClass('active');
                     $('.dialog-button').css('width', '50%');
                 }, 50);
+        },
+        check(m){
+            console.log(m);
         }
     }
 }
