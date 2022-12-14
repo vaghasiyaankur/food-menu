@@ -6,7 +6,7 @@
                 <div class="left">
 
                 </div>
-                <div class="header-links display-flex align-items-center padding-right"> 
+                <div class="header-links display-flex align-items-center padding-right">
                     <!--========= SMALL SCREEN MENU BAR=========== -->
                     <div class="small_screen_menu">
                         <div class="hamburger__button">
@@ -35,7 +35,7 @@
                                             </a>
                                             <div class="accordion-item-content" aria-hidden="true">
                                                 <div class="block">
-                                                    <div class=" bg-color-white no-padding">                                                        
+                                                    <div class=" bg-color-white no-padding">
                                                         <a href="/food-category/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food Category</a>
                                                         <a href="/food-subcategory/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food SubCategory</a>
                                                         <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food Menu</a>
@@ -49,7 +49,7 @@
                                 <!-- <div class="menu-item menu-item-dropdown bg-white">
                                     <div class="menu-item-content padding-horizontal">Menu management
                                         <i class="f7-icons">chevron_down</i>
-                                    </div>                                    
+                                    </div>
                                     <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
                                         <div class="menu-dropdown-content bg-color-white no-padding">
                                             <a href="#" class="menu-dropdown-link menu-close margin-horizontal no-padding"></a>
@@ -72,7 +72,7 @@
                             </div>
                         </div>
                     </div>
-                    <!--========= SMALL SCREEN MENU BAR END=========== -->          
+                    <!--========= SMALL SCREEN MENU BAR END=========== -->
                     <div class="row header-link justify-content-flex-end align-items-center tab_view_menu">
                         <div class=" padding-left-half padding-right-half height-40 nav-button">
                             <a href="/"
@@ -127,9 +127,9 @@
                                 class="nav-link button button-raised bg-dark text-color-white padding">Settings</a>
                         </div>
                     </div>
-                </div>          
+                </div>
             </f7-navbar>
-        </div>         
+        </div>
         <f7-view url="/" :main="true" class="safe-areas" :master-detail-breakpoint="768" @notification="notification"></f7-view>
     </f7-page>
 </f7-app>
@@ -182,7 +182,7 @@ export default {
     },
     created() {
         this.checkreservation();
-    },  
+    },
     methods: {
         checkreservation() {
             axios.get('/api/check-reservation')
@@ -191,7 +191,7 @@ export default {
             });
         },
         closeReservation(reservation) {
-           
+
             $('.closeReservation').css('background-color', '#F33E3E');
             var openOrClose = this.close_reservation == 0 ? 'open' : 'close';
             f7.dialog.confirm('Are you sure '+openOrClose+' the reservation?',() => {
@@ -214,24 +214,24 @@ export default {
             }, 200);
         },
         successnotification(notice) {
-            var notificationFull = f7.notification.create({                
-                title: '<img src="/images/checkicon.png">' + notice ,               
+            var notificationFull = f7.notification.create({
+                title: '<img src="/images/checkicon.png">' + notice ,
                 closeTimeout: 2000,
                 closeOnClick: true,
                 cssClass: 'success--notification'
-                
+
             });
             notificationFull.open();
             $('.notification-header').append('<div><i class="f7-icons">xmark</i></div>');
             $('.notification-content').remove();
         },
         errornotification(notice) {
-            var notificationFull = f7.notification.create({                
-                title: '<img src="/images/crossicon.png">' + notice ,               
+            var notificationFull = f7.notification.create({
+                title: '<img src="/images/crossicon.png">' + notice ,
                 closeTimeout: 2000,
                 closeOnClick: true,
                 cssClass: 'error--notification'
-                
+
             });
             notificationFull.open();
             $('.notification-header').append('<div><i class="f7-icons">xmark</i></div>');
@@ -291,6 +291,7 @@ export default {
     box-shadow: 0px 0.5px 12px rgba(0, 0, 0, 0.2);
     min-width: 100% !important;
     top: -30px;
+    z-index: 999;
 }
 
 /*.category-list-section {
@@ -315,12 +316,6 @@ export default {
 .menu-item-content {
     position: relative;
     z-index: 9;
-}
-
-.menu-dropdown-content {
-    box-shadow: 0px 0.5px 12px rgba(0, 0, 0, 0.2);
-    min-width: 100% !important;
-    top: -30px !important;
 }
 
 .menu-dropdown-center:before,
@@ -369,7 +364,7 @@ export default {
 
 .border-right {
     border-right: 1px solid #F3F3F3 !important;
- 
+
 }
 
 .header-links {
@@ -435,6 +430,6 @@ export default {
     .panel.panel-right .close_reservation.button{
         justify-content: flex-start;
     }
-   
+
 }
 </style>

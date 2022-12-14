@@ -36,8 +36,8 @@
             <div class="row padding-horizontal no-padding-vertical">
                 <div class="col">
                     <h3 class="card-title margin-bottom-half">
-                        <a href="javscript:;" class="text-color-black padding-right-half"><i class="f7-icons font-22" style="vertical-align: bottom;">arrow_left</i></a>    
-                        <span> Food Menu </span> 
+                        <a href="javscript:;" class="text-color-black padding-right-half"><i class="f7-icons font-22" style="vertical-align: bottom;">arrow_left</i></a>
+                        <span> Food Menu </span>
                     </h3>
                     <p class="no-margin"> Select your favourite food and enjoy with family</p>
                 </div>
@@ -117,7 +117,7 @@ export default {
     },
     methods: {
         getCategories() {
-            axios.post('/api/get-categories')
+            axios.post('/api/get-categories-list')
             .then((res) => {
                 this.product_category = res.data;
                 this.getProducts(this.product_category[0].id);
@@ -166,7 +166,7 @@ export default {
         background: #38373D;
     }
 
- 
+
     .menu-dropdown-link{
         border-bottom: 1px solid #EFEFEF;
     }

@@ -31,9 +31,9 @@ class ProductController extends Controller
 
     public function toggleWishlist(Request $req)
     {
-        
+
     }
-    
+
     public function getProducts(Request $req)
     {
         $sub_product = SubCategory::with(['products' => function($q) use ($req){

@@ -121,4 +121,10 @@ class CategoryController extends Controller
         $category = Category::pluck('name','id');
         return response()->json($category);
     }
+
+    public function getCategoriesList()
+    {
+        $category = Category::whereHas('subCategory.products')->get();
+        return response()->json($category);
+    }
 }
