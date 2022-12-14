@@ -80,6 +80,8 @@ Route::post('/delete-table',[SettingController::class, 'deleteTable']);
 
 Route::post('/change-table-status',[SettingController::class, 'changeTableStatus']);
 
+Route::get('/member-limitation',[SettingController::class, 'memberLimitation']);
+
 
 // ------------------------ Product Routes ------------------------ //
 

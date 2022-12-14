@@ -53,8 +53,8 @@
             <form class="list margin-vertical" id="my-form">
                 <div class="item-content item-input">
                     <div class="item-inner">
-                        <div class="item-title item-label">Name</div>
-                        <div class="item-input-wrap">
+                        <!-- <div class="item-title item-label">Name</div> -->
+                        <div class="item-input-wrap margin-bottom-half margin-top-half">
                             <input type="text" v-model="reservation.name" name="name" class="padding" placeholder="Enter Your name">
                         </div>
                     </div>
@@ -62,21 +62,21 @@
 
                 <div class="item-content item-input">
                     <div class="item-inner">
-                        <div class="item-title item-label">Phone number</div>
-                        <div class="item-input-wrap"><input type="number" v-model="reservation.number" name="number" class="padding" placeholder="Phone number"></div>
+                        <!-- <div class="item-title item-label">Phone number</div> -->
+                        <div class="item-input-wrap margin-bottom-half"><input type="number" v-model="reservation.number" name="number" class="padding" placeholder="Phone number"></div>
                     </div>
                 </div>
                 <div class="item-content item-input">
                     <div class="item-inner">
-                        <div class="item-title item-label">Family member number</div>
-                        <div class="item-input-wrap"><input type="number" v-model="reservation.member" name="member" class="padding" placeholder="5 Family member"></div>
+                        <!-- <div class="item-title item-label">Family member number</div> -->
+                        <div class="item-input-wrap margin-bottom-half"><input type="number" v-model="reservation.member" name="member" class="padding" placeholder="Family member"></div>
                     </div>
                 </div>
                 <div class="item-content item-input">
                     <div class="item-inner">
-                        <div class="item-title item-label font-16 text-color-black">Location type</div>
-                        <div class="item-input-wrap input-dropdown-wrap">
-                            <select v-model="reservation.floor" placeholder="Please choose..." class="padding-left padding-right">
+                        <!-- <div class="item-title item-label font-16 text-color-black">Location type</div> -->
+                        <div class="item-input-wrap margin-bottom-half input-dropdown-wrap">
+                            <select v-model="reservation.floor" placeholder="floor" class="padding-left padding-right">
                                 <option v-for="(floor,key) in floors" :key="floor" :value="key">{{ floor }}</option>
                             </select>
                         </div>
@@ -180,63 +180,71 @@ export default {
                 name: '',
                 number: '',
                 member: '',
-                floor: '',
+                floor: 1,
                 agree_condition: false
             },
+            member_limit : 0,
         }
     },
     created() {
         this.getFloors();
+        this.memberLimitation();
     },
     methods: {
-        register() {
+        // register() {
 
-            if(this.name == '' || this.number == '' || this.member == '' || this.location == ''){
-                this.errornotification('Please fill the form details.');
-                return;
-            }
+        //     if(this.name == '' || this.number == '' || this.member == '' || this.location == ''){
+        //         this.errornotification('Please fill the form details.');
+        //         return;
+        //     }
 
-            if(this.number.length > 10){
-                this.errornotification('Please check your number and enter your mobail number.');
-                return;
-            }
+        //     if(this.number.length > 10){
+        //         this.errornotification('Please check your number and enter your mobail number.');
+        //         return;
+        //     }
 
-            f7.dialog.confirm('', () => {
+        //     f7.dialog.confirm('', () => {
 
 
 
-                var formData = new FormData();
-                formData.append('name' , this.name);
-                formData.append('number' , this.number);
-                formData.append('member' , this.member);
-                formData.append('floor_location' , this.location);
+        //         var formData = new FormData();
+        //         formData.append('name' , this.name);
+        //         formData.append('number' , this.number);
+        //         formData.append('member' , this.member);
+        //         formData.append('floor_location' , this.location);
 
-                axios.post('/api/register',formData)
-                .then((res) => {
-                    document.getElementById('book_table').classList.add('active');
-                    f7.dialog.alert('Success!',() => {
-                        document.getElementById('book_table').classList.remove('active');
-                        f7.view.main.router.navigate({ url: '/waiting/' });
-                    });
-                    setTimeout(() => {
-                    $('.dialog-title').html("<img src='/images/success.png'>");
-                    $('.dialog-button').addClass('col button button-raised button-large text-transform-capitalize');
-                    $('.dialog-button').addClass('active');
-                    $('.dialog-button').css('width','50%');
-                    }, 200);
-                })
-                .catch((error) => {
-                    var err = error.response.data.error;
-                    if(err){
-                        this.errornotification('Please fill the form details.');
-                    }
-                })
-            });
-            $('.dialog-title').text("Are you confirm to register?").css('font-size','20px');
-            $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
-            $('.dialog-button').eq(1).removeClass('text-color-black');
-            $('.dialog-button').eq(1).addClass('active');
+        //         axios.post('/api/register',formData)
+        //         .then((res) => {
+        //             document.getElementById('book_table').classList.add('active');
+        //             f7.dialog.alert('Success!',() => {
+        //                 document.getElementById('book_table').classList.remove('active');
+        //                 f7.view.main.router.navigate({ url: '/waiting/' });
+        //             });
+        //             setTimeout(() => {
+        //             $('.dialog-title').html("<img src='/images/success.png'>");
+        //             $('.dialog-button').addClass('col button button-raised button-large text-transform-capitalize');
+        //             $('.dialog-button').addClass('active');
+        //             $('.dialog-button').css('width','50%');
+        //             }, 200);
+        //         })
+        //         .catch((error) => {
+        //             var err = error.response.data.error;
+        //             if(err){
+        //                 this.errornotification('Please fill the form details.');
+        //             }
+        //         })
+        //     });
+        //     $('.dialog-title').text("Are you confirm to register?").css('font-size','20px');
+        //     $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
+        //     $('.dialog-button').eq(1).removeClass('text-color-black');
+        //     $('.dialog-button').eq(1).addClass('active');
 
+        // },
+        memberLimitation() {
+            axios.get('/api/member-limitation')
+            .then((res) => {
+                this.member_limit = res.data.member_capacity;
+            })
         },
         onPageBeforeOut() {
             const self = this;
@@ -249,14 +257,10 @@ export default {
             if (self.sheet) self.sheet.destroy();
         },
         checkTime() {
-            if(!this.reservation.name){
-                this.errornotification('Please Enter your name.'); return false;
-            }else if(!this.reservation.number){
-                this.errornotification('Please Enter your number.'); return false;
-            }else if(!this.reservation.member){
-                this.errornotification('Please Enter member number.'); return false;
-            }else if(!this.reservation.floor){
-                this.errornotification('Please Select Floor.'); return false;
+            if(!this.reservation.name || !this.reservation.number || !this.reservation.member || !this.reservation.floor){
+                this.errornotification('Please enter all the required details.'); return false;
+            }else if(parseInt(this.reservation.member) > parseInt(this.member_limit)){
+                this.errornotification('order create must be '+this.member_limit+' or less than member.'); return false;
             }else{
                 this.checkWaitingTime = true;
             }
@@ -292,14 +296,10 @@ export default {
             })
         },
         register() {
-            if(!this.reservation.name){
-                this.errornotification('Please Enter your name.'); return false;
-            }else if(!this.reservation.number){
-                this.errornotification('Please Enter your number.'); return false;
-            }else if(!this.reservation.member){
-                this.errornotification('Please Enter member number.'); return false;
-            }else if(!this.reservation.floor){
-                this.errornotification('Please Select Floor.'); return false;
+            if(!this.reservation.name || !this.reservation.number || !this.reservation.member || !this.reservation.floor){
+                this.errornotification('Please enter all the required details.'); return false;
+            }else if(parseInt(this.reservation.member) > parseInt(this.member_limit)){
+                this.errornotification('order create must be '+this.member_limit+' or less than member.'); return false;
             }else{
                 this.checkWaitingTime = true;
             }

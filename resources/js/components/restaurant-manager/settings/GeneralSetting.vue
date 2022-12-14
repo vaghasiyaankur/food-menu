@@ -29,14 +29,14 @@
                                 </div>
                               </div>
                            </div>
-                           <!-- <div class="item-content item-input margin-bottom no-padding-left">
+                           <div class="item-content item-input margin-bottom no-padding-left">
                             <div class="item-inner">
                                <div class="block-title no-margin-top">Capacity Of Member</div>
                                <div class="item-input-wrap">
-                                  <input type="text" name="member" class="padding margin-top-half" placeholder="Enter manager name"  v-model="member_capacity">
+                                  <input type="number" name="member" class="padding margin-top-half" placeholder="Enter manager name"  v-model="member_capacity">
                               </div>
                             </div>
-                         </div> -->
+                         </div>
                         </form>
                      </div>
                 </div>
@@ -165,10 +165,14 @@
                 manager_name : '',
                 restaurant_logo_preview : '',
                 restaurant_logo : '',
+                member_capacity : ''
             }
         },
         created() {
             this.settingData();
+        },
+        mounted() {
+            this.$root.activationMenu('setting');
         },
         methods: {
             settingData() {
@@ -180,6 +184,7 @@
                     this.restaurant_logo_preview = '/storage/' + res.data.setting.restaurant_logo;
                     this.open_time = res.data.setting.open_time_12_format;
                     this.close_time = res.data.setting.close_time_12_format;
+                    this.member_capacity = res.data.setting.member_capacity;
                 })
             },
             onRestaurantLogoChange(e){
@@ -341,6 +346,7 @@
                 formData.append('restaurant_logo' , this.restaurant_logo);
                 formData.append('open_time' , this.open_time);
                 formData.append('close_time' , this.close_time);
+                formData.append('member_capacity' , this.member_capacity);
 
                 axios
                 .post("/api/update-setting", formData, config)

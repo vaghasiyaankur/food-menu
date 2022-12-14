@@ -21,6 +21,8 @@ class TableSeeder extends Seeder
 
         $floor = [1,1,1,1,2,2,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,9,10,10,11,11,11];
 
+        $fot = [20, 15, 30, 35, 45, 40, 80, 35, 80, 35, 40, 45, 50, 55, 60, 65, 70, 75, 30, 20, 15, 30, 35, 40, 45,50,55,60];
+
         foreach($colors as $key=>$color){
             $table = new Table();
             $table->id = $key + 1;
@@ -29,6 +31,7 @@ class TableSeeder extends Seeder
             $table->floor_id = $floor[$key];
             $table->color_id = $color;
             $table->status = ($key == 1 || $key == 5 ? 0 : 1);
+            $table->finish_order_time = $fot[$key];
             $table->save();
         }
     }

@@ -48,29 +48,30 @@
                                 <form class="list margin-vertical" id="my-form">
                                     <div class="item-content item-input">
                                         <div class="item-inner">
-                                            <div class="item-title item-label">Name</div>
-                                            <div class="item-input-wrap">
+                                            <!-- <div class="item-title item-label">Name</div> -->
+                                            <div class="item-input-wrap margin-bottom-half margin-top-half">
                                                 <input type="text" v-model="reservation.name" name="name" class="padding" placeholder="Enter Your name">
                                             </div>
                                         </div>
                                     </div>
+                    
                                     <div class="item-content item-input">
                                         <div class="item-inner">
-                                            <div class="item-title item-label">Phone number</div>
-                                            <div class="item-input-wrap"><input type="number" v-model="reservation.number" name="number" class="padding" placeholder="Phone number"></div>
+                                            <!-- <div class="item-title item-label">Phone number</div> -->
+                                            <div class="item-input-wrap margin-bottom-half"><input type="number" v-model="reservation.number" name="number" class="padding" placeholder="Phone number"></div>
                                         </div>
                                     </div>
                                     <div class="item-content item-input">
                                         <div class="item-inner">
-                                            <div class="item-title item-label">Family member number</div>
-                                            <div class="item-input-wrap"><input type="number" v-model="reservation.member" name="member" class="padding" placeholder="5 Family member"></div>
+                                            <!-- <div class="item-title item-label">Family member number</div> -->
+                                            <div class="item-input-wrap margin-bottom-half"><input type="number" v-model="reservation.member" name="member" class="padding" placeholder="Family member"></div>
                                         </div>
                                     </div>
                                     <div class="item-content item-input">
                                         <div class="item-inner">
-                                            <div class="item-title item-label">Location type</div>
-                                            <div class="item-input-wrap input-dropdown-wrap">
-                                                <select v-model="reservation.floor" placeholder="Please choose..." class="padding-left padding-right">
+                                            <!-- <div class="item-title item-label font-16 text-color-black">Location type</div> -->
+                                            <div class="item-input-wrap margin-bottom-half input-dropdown-wrap">
+                                                <select v-model="reservation.floor" placeholder="floor" class="padding-left padding-right">
                                                     <option v-for="(floor,key) in floors" :key="floor" :value="key">{{ floor }}</option>
                                                 </select>
                                             </div>
@@ -179,19 +180,24 @@ export default {
             reservation: {
                 name: '',
                 number: '',
-                member: 0,
-                floor: ''
+                member: '',
+                floor: 1
             },
             checkWaitingTime: false,
             product_category: [],
             product_subcategory: [],
             categoryName: '',
             sliderActive : 0,
+            member_limit : 0,
         }
     },
     created() {
         this.getFloors();
         this.getCategories();
+        this.memberLimitation();
+    },
+    mounted() {
+        this.$root.activationMenu('reservation');
     },
     methods: {
         getCategories() {
@@ -206,7 +212,17 @@ export default {
             axios.get('/api/get-category-products/' + id)
             .then((res) => {
                 this.categoryName = res.data.name;
+                this.product_subcategory = res.data.sub_category;axios.get('/api/get-category-products/' + id)
+            .then((res) => {
+                this.categoryName = res.data.name;
                 this.product_subcategory = res.data.sub_category;
+            })
+            })
+        },
+        memberLimitation() {
+            axios.get('/api/member-limitation')
+            .then((res) => {
+                this.member_limit = res.data.member_capacity;
             })
         },
         closePopup(){
@@ -214,14 +230,10 @@ export default {
             this.$emit('textChange');
         },
         register() {
-            if(!this.reservation.name){
-                this.$root.errornotification('Please Enter your name.'); return false;
-            }else if(!this.reservation.number){
-                this.$root.errornotification('Please Enter your number.'); return false;
-            }else if(!this.reservation.member){
-                this.$root.errornotification('Please Enter member number.'); return false;
-            }else if(!this.reservation.floor){
-                this.$root.errornotification('Please Select Floor.'); return false;
+            if(!this.reservation.name || !this.reservation.number || !this.reservation.member || !this.reservation.floor){
+                this.$root.errornotification('Please enter all the required details.'); return false;
+            }else if(parseInt(this.reservation.member) > parseInt(this.member_limit)){
+                this.$root.errornotification('order create must be '+this.member_limit+' or less than member.'); return false;
             }else{
                 this.checkWaitingTime = true;
             }
@@ -268,14 +280,10 @@ export default {
             })
         },
         checkTime() {
-            if(!this.reservation.name){
-                this.$root.errornotification('Please Enter your name.'); return false;
-            }else if(!this.reservation.number){
-                this.$root.errornotification('Please Enter your number.'); return false;
-            }else if(!this.reservation.member){
-                this.$root.errornotification('Please Enter member number.'); return false;
-            }else if(!this.reservation.floor){
-                this.$root.errornotification('Please Select Floor.'); return false;
+            if(!this.reservation.name || !this.reservation.number || !this.reservation.member || !this.reservation.floor){
+                this.$root.errornotification('Please enter all the required details.'); return false;
+            }else if(parseInt(this.reservation.member) > parseInt(this.member_limit)){
+                this.$root.errornotification('order create must be '+this.member_limit+' or less than member.'); return false;
             }else{
                 this.checkWaitingTime = true;
             }

@@ -31,6 +31,7 @@ class SettingSeeder extends Seeder
         $setting->open_time = '09:00';
         $setting->close_time = '23:00';
         $setting->close_reservation = 0;
+        $setting->member_capacity = 45;
         $setting->save();
     }
 }

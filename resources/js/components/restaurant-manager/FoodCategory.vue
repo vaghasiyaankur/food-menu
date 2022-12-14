@@ -177,6 +177,7 @@ export default {
     mounted() {
         $('.page-content').css('background', '#F7F7F7');
         this.getCategories();
+        this.$root.activationMenu('menu_management');
     },
     methods: {
         addimageChange(e) {
