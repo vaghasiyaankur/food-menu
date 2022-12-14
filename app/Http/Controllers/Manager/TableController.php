@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\Floor;
 use Illuminate\Http\Request;
 use App\Helper\ReservationHelper;
+use Carbon;
 
 
 class TableController extends Controller
@@ -35,6 +36,8 @@ class TableController extends Controller
             foreach($table->orders as $okey=>$order){
                 $tables[$tkey]['orders'][$okey]['reservation_time'] = date('h:i', strtotime($order->updated_at));
                 $tables[$tkey]['orders'][$okey]['reservation_time_12_format'] = date('g:i a', strtotime($order->updated_at));
+                $tables[$tkey]['orders'][$okey]['is_order_moved'] = $order->updated_at->diffInSeconds(Carbon\Carbon::now()) > 60;
+                $tables[$tkey]['orders'][$okey]['order_moved'] = $order->updated_at->diffInSeconds(Carbon\Carbon::now());
             }
         }
 
@@ -78,6 +81,8 @@ class TableController extends Controller
             foreach($table->orders as $okey=>$order){
                 $tables[$tkey]['orders'][$okey]['reservation_time'] = date('h:i', strtotime($order->updated_at));
                 $tables[$tkey]['orders'][$okey]['reservation_time_12_format'] = date('g:i a', strtotime($order->updated_at));
+                $tables[$tkey]['orders'][$okey]['is_order_moved'] = $order->updated_at->diffInSeconds(Carbon\Carbon::now()) > 60;
+                $tables[$tkey]['orders'][$okey]['order_moved'] = $order->updated_at->diffInSeconds(Carbon\Carbon::now());
             }
         }
 
