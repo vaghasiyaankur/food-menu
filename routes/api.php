@@ -33,6 +33,8 @@ Route::post('/register', [ReservationController::class, 'register']);
 
 Route::post('/get-categories',[CategoryController::class, 'getCategories']);
 
+Route::post('/get-categories-list',[CategoryController::class, 'getCategoriesList']);
+
 Route::post('add-category',[CategoryController::class, 'addCategory']);
 
 Route::get('/get-category/{id}', [CategoryController::class, 'getCategory']);
