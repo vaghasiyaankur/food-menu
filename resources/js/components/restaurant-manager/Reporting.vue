@@ -205,6 +205,8 @@ export default {
                 }
             }
         });
+
+        this.$root.activationMenu('reporting');
     },
     created() {
         this.report();

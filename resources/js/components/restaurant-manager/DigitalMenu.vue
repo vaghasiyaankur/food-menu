@@ -115,6 +115,9 @@ export default {
         $('.page-content').css('background', '#F7F7F7');
         this.getCategories();
     },
+    mounted() {
+        this.$root.activationMenu('menu_management');
+    },
     methods: {
         getCategories() {
             axios.post('/api/get-categories')

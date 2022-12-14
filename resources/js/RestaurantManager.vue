@@ -76,17 +76,17 @@
                     <div class="row header-link justify-content-flex-end align-items-center tab_view_menu">
                         <div class=" padding-left-half padding-right-half height-40 nav-button">
                             <a href="/"
-                                class="col link nav-link button button-raised bg-dark text-color-white padding">
+                                class="col link nav-link button button-raised  text-color-white padding" :class="currentRoute == 'table' ? 'bg-pink' : 'bg-dark'">
                                 waiting area</a>
                         </div>
                         <div class=" padding-left-half padding-right-half height-40 nav-button">
                             <a href="/Reservation/"
-                                class="col link nav-link button button-raised bg-dark text-color-white padding">
+                                class="col link nav-link button button-raised text-color-white padding" :class="currentRoute == 'reservation' ? 'bg-pink' : 'bg-dark'">
                                 Reservation</a>
                         </div>
                         <div class="col-25 nav-button">
                             <div class="menu-item menu-item-dropdown">
-                                <div class="menu-item-content button button-raised bg-pink text-color-white padding-left-half padding-right-half">
+                                <div class="menu-item-content button button-raised text-color-white padding-left-half padding-right-half" :class="currentRoute == 'menu_management' ? 'bg-pink' : 'bg-dark'">
                                     Menu management
                                     <i class="f7-icons">chevron_down</i>
                                 </div>
@@ -117,14 +117,14 @@
                         </div>
                     </div> -->
                         <div class=" padding-left-half padding-right-half height-40 nav-button"><a href="/Reporting/"
-                                class="link nav-link button button-raised bg-dark text-color-white padding">Reporting</a>
+                                class="link nav-link button button-raised  text-color-white padding" :class="currentRoute == 'reporting' ? 'bg-pink' : 'bg-dark'">Reporting</a>
                         </div>
                         <div class="padding-left-half padding-right-half height-40">
                             <button
-                                class="nav-link button button-raised bg-dark text-color-white padding closeReservation"
+                                class="nav-link button button-raised text-color-white padding closeReservation" :class="currentRoute == 'close_reservation' ? 'bg-pink' : 'bg-dark'"
                                 @click="$root.closeReservation(close_reservation)">{{close_reservation == 1 ? 'Open' : 'Close'}} reservation</button></div>
                         <div class="padding-left-half padding-right-half height-40"><a href="/settings/"
-                                class="nav-link button button-raised bg-dark text-color-white padding">Settings</a>
+                                class="nav-link button button-raised text-color-white padding" :class="currentRoute == 'setting' ? 'bg-pink' : 'bg-dark'">Settings</a>
                         </div>
                     </div>
                 </div>          
@@ -149,7 +149,7 @@ export default {
         f7View,
         f7,
         f7Page,
-        f7Navbar
+        f7Navbar,
     },
     data() {
         // Demo Theme
@@ -177,12 +177,13 @@ export default {
                     closeOnEscape: true,
                 },
             },
-            close_reservation : 0
+            close_reservation : 0,
+            currentRoute : ''
         }
     },
     created() {
         this.checkreservation();
-    },  
+    }, 
     methods: {
         checkreservation() {
             axios.get('/api/check-reservation')
@@ -236,6 +237,9 @@ export default {
             notificationFull.open();
             $('.notification-header').append('<div><i class="f7-icons">xmark</i></div>');
             $('.notification-content').remove();
+        },
+        activationMenu(active) {
+            this.currentRoute = active;
         }
     },
     computed: {
@@ -340,10 +344,6 @@ export default {
     border-bottom: 1px solid #EFEFEF;
 }
 
-.color-pink {
-    background: #F33E3E;
-}
-
 .nav-bar {
     border-radius: 8px 8px 0px 0px;
 }
@@ -377,7 +377,7 @@ export default {
 }
 
 .bg-pink {
-    background: #F33E3E;
+    background: #F33E3E !important;
 }
 
 .bg-karaka-orange {

@@ -128,11 +128,11 @@
                     </div>
                     <div class="col-100 large-20 medium-25">
                         <div class="current_capacity">
-                            <div class="current_capacity_card card display-flex align-items-center no-margin-vertical justify_content_between">
+                            <div class="current_capacity_card card display-flex align-items-center no-margin-vertical">
                                 <div class="card_img padding-left">
                                     <img src="/images/capacity.png" alt="">
                                 </div>
-                                <div class="card-content card-content-padding padding-vertical-half">
+                                <div class="card-content card-content-padding padding-vertical-half padding-left">
                                     <p class="no-margin">Current Capacity</p>
                                     <span class="text-color-red">{{ current_capacity.toFixed(2) }}% Full</span>
                                 </div>
@@ -330,6 +330,7 @@ export default {
            $(".table_dropdwon").removeClass('floor_dropdown_visible');
            $(".floor_dropdwon").removeClass('floor_dropdown_visible');
         });
+        this.$root.activationMenu('table');
     },
     updated() {
         this.equal_height();
@@ -641,7 +642,7 @@ export default {
 }
 .current_capacity_card .card-content{
     padding-right:8px !important;
-    padding-left:0px !important;
+    padding-left:18px !important;
 }
 .menu-item-dropdown .menu-item-content .f7-icons{
     font-size: 15px;

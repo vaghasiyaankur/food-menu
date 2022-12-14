@@ -21,12 +21,12 @@ class CategorySeeder extends Seeder
             [
                 'name' => 'Indian',
                 'image' => '/category/indian_dish.png',
-                'sub_categories' => ['Kathiyavadi Thali','Roti','Dal']
+                'sub_categories' => ['Dosa','Gujarati Dish']
             ],
             [
                 'name' => 'Panjabi',
                 'image' => '/category/panjabi_dish.png',
-                'sub_categories' => ['Paratha','Punjabi Sabji']
+                'sub_categories' => ['Naan Or Roti', 'Sabji']
             ]
         ];
 

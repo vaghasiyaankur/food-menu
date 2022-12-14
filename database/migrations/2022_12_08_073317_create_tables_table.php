@@ -22,6 +22,7 @@ return new class extends Migration
             $table->unsignedBigInteger('floor_id')->unsigned();
             $table->foreign('floor_id')->references('id')->on('floors')->onDelete('cascade');
             $table->boolean('status')->default(1);
+            $table->integer('finish_order_time')->default(0);
             $table->timestamps();
         });
     }

@@ -76,6 +76,9 @@
             this.page_number = this.page;
             this.tableList(this.page_number);
         },
+        mounted() {
+            this.$root.activationMenu('setting');
+        },
         methods: {
             tableList(page) {
                 if (page == undefined || page == 1) {
