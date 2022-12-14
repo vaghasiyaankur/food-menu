@@ -402,6 +402,7 @@ export default {
 .menu-dropdown-content {
     top: -8px !important;
     left: 45% !important;
+    z-index: 999;
     min-width: calc(100% + 24px) !important;
 }
 

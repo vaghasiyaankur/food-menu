@@ -22,7 +22,9 @@ class DatabaseSeeder extends Seeder
             CustomerSeeder::class,
             FloorSeeder::class,
             TableSeeder::class,
-            OrderSeeder::class
+            OrderSeeder::class,
+            LanguageSeeder::class,
+            ContentSeeder::class
         ]);
     }
 }
