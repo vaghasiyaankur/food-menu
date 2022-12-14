@@ -100,7 +100,7 @@ export default {
 </script>
 
 <style scoped>
-.nav-bar{
+    .nav-bar{
         background: #38373D;
         border-radius: 8px 8px 0px 0px;
         transform: matrix(1, 0, 0, -1, 0, 0);
@@ -142,7 +142,13 @@ export default {
 </style>
 
 <style>
-.navbar .title{
+    .nav-bar{
+        width : 100%;
+    }
+    .navbar-inner.sliding{
+        justify-content: space-between !important;
+    }
+    .navbar .title{
         left: -11px !important;
         font-weight: 600 !important;
         font-size: 19px !important;
@@ -170,6 +176,7 @@ export default {
         font-weight: 500;
         font-size: 15px;
         line-height: 18px;
+        padding : 0 !important;
     }
     .no_order_text p {
         font-size: 20px;

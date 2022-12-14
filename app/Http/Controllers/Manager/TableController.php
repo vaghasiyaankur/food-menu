@@ -44,9 +44,9 @@ class TableController extends Controller
         foreach($table_list_with_order as $tlwo){
             if($tlwo->orders_count == 0) $count += 1;
         }
-
+        $max_table_cap = Table::where('floor_id', $groundFloorId)->where('status', 1)->max('capacity_of_person');
         $current_capacity = (100 - ($count / $total_table_number * 100));
-        return response()->json([ 'tables' => $tables , 'floorlist' => $floorlist, 'current_capacity' => $current_capacity] , 200);
+        return response()->json([ 'tables' => $tables , 'floorlist' => $floorlist, 'current_capacity' => $current_capacity,'max_table_cap'=>$max_table_cap] , 200);
     }
 
     /**
@@ -89,7 +89,8 @@ class TableController extends Controller
         }
 
         $current_capacity = (100 - ($count / $total_table_number * 100));
-        return response()->json([ 'tables' => $tables, 'current_capacity' => $current_capacity ] , 200);
+        $max_table_cap = Table::where('floor_id', $request->id)->where('status', 1)->max('capacity_of_person');
+        return response()->json([ 'tables' => $tables, 'current_capacity' => $current_capacity,'max_table_cap'=>$max_table_cap ] , 200);
     }
 
     /**

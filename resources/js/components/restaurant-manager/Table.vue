@@ -371,18 +371,15 @@ export default {
             }
             $(".table_dropdwon").css('min-width', '240px');
 
-            if (order.person < this.max_number_table_cap) {
+            if (order.person < parseInt(this.max_number_table_data.capacity_of_person)) {
                 this.no_table_list_show = false;
             }
             var person = order.person;
-            if (parseInt(person) % 2 != 0 && order.table_id == this.max_number_table_id) {
+            if (parseInt(person) % 2 != 0 && order.table_id == this.max_number_table_data.id) {
                 person = parseInt(person) + 1;
             }
-            console.log(person == this.max_number_table_cap);
-            console.log(order.table_id == this.max_number_table_id);
-            console.log(order.table_id);
-            console.log(this.max_number_table_id);
-            if (order.table_id == this.max_number_table_id && person == this.max_number_table_cap) {
+            console.log(parseInt(this.max_number_table_data.capacity_of_person));
+            if (order.table_id == this.max_number_table_data.id && person == parseInt(this.max_number_table_data.capacity_of_person)) {
                 this.no_table_list_show = true;
             }
         },
@@ -397,81 +394,81 @@ export default {
         },
         tableList() {
             axios.get('/api/table-list-with-order')
-                .then((res) => {
-                    this.current_capacity = res.data.current_capacity;
-                    this.floorlist = res.data.floorlist;
-                    this.active_floor_id = res.data.floorlist[0].id;
-                    var row_tables = [];
-                    var cal_of_capacity = 0;
-                    var single_row_data = [];
-                    var change_table_list_array = [];
-                    var max_number_table_id = 0;
-                    res.data.tables.forEach((table, index) => {
-                        console.log(index);
-                        // calculation of row wise table list
-                        if(parseInt(cal_of_capacity) > 18){
-                            row_tables.push(single_row_data);
-                            single_row_data = [];
-                            cal_of_capacity = 0;
-                        }
+            .then((res) => {
+                this.current_capacity = res.data.current_capacity;
+                this.floorlist = res.data.floorlist;
+                this.active_floor_id = res.data.floorlist[0].id;
+                var row_tables = [];
+                var cal_of_capacity = 0;
+                var single_row_data = [];
+                var change_table_list_array = [];
+                var max_number_table_id = 0;
+                res.data.tables.forEach((table, index) => {
+                    // calculation of row wise table list
+                    if(parseInt(cal_of_capacity) > 18){
+                        row_tables.push(single_row_data);
+                        single_row_data = [];
+                        cal_of_capacity = 0;
+                    }
 
 
-                        if(parseInt(table.capacity_of_person) % 2 != 0){
-                            var cap = parseInt(table.capacity_of_person - 1);
-                            var up_table = (parseInt(table.capacity_of_person) + 1) / 2;
-                            var down_table = (parseInt(table.capacity_of_person) - 1)/ 2;
-                        } else{
-                            var cap = parseInt(table.capacity_of_person) - 2;
-                            var up_table = parseInt(table.capacity_of_person) / 2;
-                            var down_table = parseInt(table.capacity_of_person) / 2;
-                        }
+                    if(parseInt(table.capacity_of_person) % 2 != 0){
+                        var cap = parseInt(table.capacity_of_person - 1);
+                        var up_table = (parseInt(table.capacity_of_person) + 1) / 2;
+                        var down_table = (parseInt(table.capacity_of_person) - 1)/ 2;
+                    } else{
+                        var cap = parseInt(table.capacity_of_person) - 2;
+                        var up_table = parseInt(table.capacity_of_person) / 2;
+                        var down_table = parseInt(table.capacity_of_person) / 2;
+                    }
 
 
-                        var col = (cap / 2) * 5 + 20;
+                    var col = (cap / 2) * 5 + 20;
 
 
-                        table['col'] = col > 100 ? 100 : col;
-                        table['up_table'] = up_table;
-                        table['down_table'] = down_table;
+                    table['col'] = col > 100 ? 100 : col;
+                    table['up_table'] = up_table;
+                    table['down_table'] = down_table;
 
-                        table['width'] = 182 + ((up_table - 1)* 80)
-                        single_row_data.push(table);
+                    table['width'] = 182 + ((up_table - 1)* 80)
+                    single_row_data.push(table);
 
-                        if(index == res.data.tables.length - 1){
-                            row_tables.push(single_row_data);
-                            single_row_data = [];
-                            cal_of_capacity = 0;
-                        }
+                    if(index == res.data.tables.length - 1){
+                        row_tables.push(single_row_data);
+                        single_row_data = [];
+                        cal_of_capacity = 0;
+                    }
 
-                        cal_of_capacity = parseInt(cal_of_capacity) + parseInt(table.capacity_of_person);
+                    cal_of_capacity = parseInt(cal_of_capacity) + parseInt(table.capacity_of_person);
 
-                        // set change table list upon capacity
+                    // set change table list upon capacity
 
-                        var obj = {
-                            id: table.id,
-                            capacity_of_person: parseInt(table.capacity_of_person),
-                            table_number: table.table_number
-                        };
+                    var obj = {
+                        id: table.id,
+                        capacity_of_person: parseInt(table.capacity_of_person),
+                        table_number: table.table_number
+                    };
 
 
-                        change_table_list_array.push(obj);
+                    change_table_list_array.push(obj);
 
-                        // Max Number Capacity Table Id
-                        if(this.max_number_table_cap <= parseInt(table.capacity_of_person)) {
-                            max_number_table_id = parseInt(table.id);
-                            this.max_number_table_cap = parseInt(table.capacity_of_person);
-                        }
-                    });
-                    this.max_number_table_id = max_number_table_id;
-                    this.row_tables = row_tables;
-                    this.change_table_list = change_table_list_array;
-                    this.no_table_list_show = true;
-                    change_table_list_array.forEach((table, index) => {
-                        if (this.max_number_table_cap == table.capacity_of_person && table.id != max_number_table_id) {
-                            this.no_table_list_show = false;
-                        }
-                    });
-                })
+                    // Max Number Capacity Table Id
+                    if (parseInt(res.data.max_table_cap) == parseInt(table.capacity_of_person)) {
+                        max_number_table_id = parseInt(table.id);
+                        this.max_number_table_cap = parseInt(table.capacity_of_person);
+                        this.max_number_table_data = table;
+                    }
+                });
+                this.max_number_table_id = max_number_table_id;
+                this.row_tables = row_tables;
+                this.change_table_list = change_table_list_array;
+                this.no_table_list_show = true;
+                change_table_list_array.forEach((table, index) => {
+                    if (this.max_number_table_cap == table.capacity_of_person && table.id != max_number_table_id) {
+                        this.no_table_list_show = false;
+                    }
+                });
+            })
         },
         tableListFloorWise(id) {
             this.active_floor_id = id;
@@ -484,7 +481,6 @@ export default {
                     var change_table_list_array = [];
                     var max_number_table_id = 0;
                     res.data.tables.forEach((table, index) => {
-                        console.log(index);
                         if(parseInt(cal_of_capacity) > 18){
                             row_tables.push(single_row_data);
                             single_row_data = [];
@@ -532,13 +528,17 @@ export default {
 
                         change_table_list_array.push(obj);
                         // Max Number Capacity Table Id
-                        if(this.max_number_table_cap <= parseInt(table.capacity_of_person)) {
+                        // if(this.max_number_table_cap <= parseInt(table.capacity_of_person)) {
+                        //     max_number_table_id = parseInt(table.id);
+                        //     this.max_number_table_cap = parseInt(table.capacity_of_person);
+                        // }
+                        if (parseInt(res.data.max_table_cap) == parseInt(table.capacity_of_person)) {
                             max_number_table_id = parseInt(table.id);
                             this.max_number_table_cap = parseInt(table.capacity_of_person);
+                            this.max_number_table_data = table;
                         }
                     });
                     this.max_number_table_id = max_number_table_id;
-                    console.log(this.max_number_table_cap);
                     this.row_tables = row_tables;
                     this.change_table_list = change_table_list_array;
                     this.no_table_list_show = true;
