@@ -262,24 +262,24 @@ export default {
             }
         },
         successnotification(notice) {
-            var notificationFull = f7.notification.create({                
-                title: '<img src="/images/checkicon.png">' + notice ,               
+            var notificationFull = f7.notification.create({
+                title: '<img src="/images/checkicon.png">' + notice ,
                 closeTimeout: 2000,
                 closeOnClick: true,
                 cssClass: 'success--notification'
-                
+
             });
             notificationFull.open();
             $('.notification-header').append('<div><i class="f7-icons">xmark</i></div>');
             $('.notification-content').remove();
         },
         errornotification(notice) {
-            var notificationFull = f7.notification.create({                
-                title: '<img src="/images/crossicon.png">' + notice ,               
+            var notificationFull = f7.notification.create({
+                title: '<img src="/images/crossicon.png">' + notice ,
                 closeTimeout: 2000,
                 closeOnClick: true,
                 cssClass: 'error--notification'
-                
+
             });
             notificationFull.open();
             $('.notification-header').append('<div><i class="f7-icons">xmark</i></div>');
@@ -354,6 +354,9 @@ export default {
 </script>
 
 <style scoped>
+.menu-dropdown-link:before{
+    content: none;
+}
 .menu-item-dropdown .menu-item-content:after {
     opacity: 0;
 }
@@ -494,10 +497,14 @@ label.item-checkbox input[type='checkbox']:checked~.icon-checkbox{
     left: -3px;
     top:-1px
 }*/
-
 </style>
 <style>
-
+.menu-dropdown-link.active,
+.menu-dropdown-link.active-state,
+.menu-dropdown-link:focus,
+.menu-dropdown-link:hover {
+    background: #fff !important;
+}
 .notification-title{
     display: flex;
     justify-content: center;
@@ -557,5 +564,4 @@ label.item-checkbox input[type='checkbox']:checked~.icon-checkbox{
 .font-30 {
     font-size: 30px;
 }
-
 </style>
