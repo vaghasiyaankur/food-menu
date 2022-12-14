@@ -134,7 +134,7 @@
                                 </div>
                                 <div class="card-content card-content-padding padding-vertical-half">
                                     <p class="no-margin">Current Capacity</p>
-                                    <span class="text-color-red">{{ current_capacity }}% Full</span>
+                                    <span class="text-color-red">{{ current_capacity.toFixed(2) }}% Full</span>
                                 </div>
                             </div>
                         </div>
@@ -178,7 +178,7 @@
                                                         <i class="f7-icons size-22">person_fill</i>
                                                         <span>&nbsp;{{order.person}}</span>
                                                         <span class="waiting-time margin-top-half text-align-center">
-                                                            <i class="f7-icons size-22">clock_fill</i>
+                                                            <!-- <i class="f7-icons size-22">clock_fill</i> -->
                                                             <span>{{ order.reservation_time }}</span>
                                                         </span>
                                                     </div>
