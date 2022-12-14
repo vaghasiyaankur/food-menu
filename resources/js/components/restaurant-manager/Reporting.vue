@@ -225,6 +225,10 @@ export default {
         }
         const axisDateFormat = Intl.DateTimeFormat(undefined, { month: 'short', year: 'numeric' });
         const tooltipDateFormat = Intl.DateTimeFormat(undefined, { month: 'long', year: 'numeric' });
+        console.log(dates);
+        console.log(axisDateFormat);
+        console.log(tooltipDateFormat);
+        console.log(numbers);
         return {
         dates,
         axisDateFormat,
@@ -236,7 +240,6 @@ export default {
         report() {
             axios.get('/api/report-data')
             .then((res) => {
-                console.log(res.data);
                 this.total_order = res.data.total_order;
                 this.complete_order = res.data.complete_order;
                 this.ongoing_order = res.data.ongoing_order;

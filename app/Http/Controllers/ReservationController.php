@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use App\Models\Order;
-use App\Models\Table;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use App\Helper\ReservationHelper;
 use Validator;
@@ -35,5 +35,33 @@ class ReservationController extends Controller
             return response()->json(['error' => 'Something Went Wrong.'], 401);
         }
 
+    }
+
+    /**
+     * Check Reservation is open or close
+     *
+     * @return @json ($close_reservation = 0 or 1)
+     *
+     */
+
+    public function checkReservation()
+    {
+        $close_reservation = Setting::first()->close_reservation;
+        return response()->json([ 'close_reservation' => $close_reservation ] , 200);
+    }
+
+    /**
+     * Check Reservation is open or close
+     *
+     * @return @json ($close_reservation = 0 or 1)
+     *
+     */
+
+    public function changeReservation(Request $request)
+    {
+        Setting::first()->update(['close_reservation' => $request->reservation]);
+        
+        $close_reservation = Setting::first()->close_reservation;
+        return response()->json([ 'close_reservation' => $close_reservation ] , 200);
     }
 }

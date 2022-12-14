@@ -21,6 +21,7 @@ return new class extends Migration
             $table->String('restaurant_logo')->nullable();
             $table->time('open_time')->nullable();
             $table->time('close_time')->nullable();
+            $table->boolean('close_reservation')->default(0);
             $table->timestamps();
         });
     }

@@ -64,7 +64,7 @@
                                     <a href="/Reporting/" class="link nav-link text-color-black font-16">Reporting</a>
                                 </div>
                                 <div class=" padding-horizontal height-40 border-bottom">
-                                    <button class="col nav-link  button close_reservation no-padding font-16" @click="$root.closeReservation()">Close reservation</button>
+                                    <button class="col nav-link  button close_reservation no-padding font-16" @click="$root.closeReservation(close_reservation)">{{close_reservation == 1 ? 'Open' : 'Close'}} reservation</button>
                                 </div>
                                 <div class="padding-horizontal height-40 border-bottom">
                                     <a href="/settings/" class="col link nav-link text-color-black font-16">Settings</a>
@@ -122,7 +122,7 @@
                         <div class="padding-left-half padding-right-half height-40">
                             <button
                                 class="nav-link button button-raised bg-dark text-color-white padding closeReservation"
-                                @click="$root.closeReservation()">Close reservation</button></div>
+                                @click="$root.closeReservation(close_reservation)">{{close_reservation == 1 ? 'Open' : 'Close'}} reservation</button></div>
                         <div class="padding-left-half padding-right-half height-40"><a href="/settings/"
                                 class="nav-link button button-raised bg-dark text-color-white padding">Settings</a>
                         </div>
@@ -140,6 +140,7 @@ import { f7App, f7Panel, f7View, f7,f7Page,f7Navbar } from 'framework7-vue';
 import routes from './restaurant-manager-routes';
 import store from './store';
 import $ from 'jquery';
+import axios from 'axios';
 
 export default {
     components: {
@@ -176,12 +177,30 @@ export default {
                     closeOnEscape: true,
                 },
             },
+            close_reservation : 0
         }
     },
+    created() {
+        this.checkreservation();
+    },  
     methods: {
-        closeReservation() {
+        checkreservation() {
+            axios.get('/api/check-reservation')
+            .then((res) => {
+                this.close_reservation = res.data.close_reservation;
+            });
+        },
+        closeReservation(reservation) {
+           
             $('.closeReservation').css('background-color', '#F33E3E');
-            f7.dialog.confirm('Are you sure close the reservation?',() => {
+            var openOrClose = this.close_reservation == 0 ? 'open' : 'close';
+            f7.dialog.confirm('Are you sure '+openOrClose+' the reservation?',() => {
+                if(reservation == 0) var changereservation = 1;
+                else var changereservation = 0;
+                axios.post('/api/change-reservation', {reservation : changereservation})
+                .then((res) => {
+                    this.close_reservation = res.data.close_reservation;
+                });
                 $('.closeReservation').css('background-color', '');
             });
             setTimeout(() => {
