@@ -133,6 +133,8 @@ Route::get('/check-reservation',[ReservationController::class, 'checkReservation
 
 Route::post('/change-reservation',[ReservationController::class, 'changeReservation']);
 
+Route::post('/check-time',[ReservationController::class, 'checkTime']);
+
 // ------------------------ Wishlist Routes ------------------------ //
 
 Route::post('/get-wishlist',[FavoriteController::class, 'getWishlist']);

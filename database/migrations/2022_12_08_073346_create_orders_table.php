@@ -21,7 +21,9 @@ return new class extends Migration
             $table->foreign('table_id')->references('id')->on('tables')->onDelete('cascade');
             $table->integer('person')->default(0);
             $table->string('role')->default('Guest');
-            $table->time('waiting_time')->nullable();
+            $table->timestamp('start_time')->nullable();
+            $table->integer('finish_time')->default(0);
+            $table->boolean('finished')->default(0);
             $table->timestamps();
         });
     }

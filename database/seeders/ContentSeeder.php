@@ -16,14 +16,7 @@ class ContentSeeder extends Seeder
     public function run()
     {
         $contents = [
-            ['language_id' => 1, 'title' => 'form_instruction', 'content' => 'Please fill in the form below.'],
-            ['language_id' => 2, 'title' => 'form_instruction', 'content' => 'કૃપા કરીને નીચેનું ફોર્મ ભરો.'],
-            ['language_id' => 3, 'title' => 'form_instruction', 'content' => 'कृपया इस अभिरूपक को भरें.'],
             
-            ['language_id' => 1, 'title' => 'contact_information', 'content' => 'We will contact you as soon as possible.'],
-            ['language_id' => 2, 'title' => 'contact_information', 'content' => 'અમે શક્ય તેટલી વહેલી તકે તમારો સંપર્ક કરીશું.'],
-            ['language_id' => 3, 'title' => 'contact_information', 'content' => 'हम जितनी जल्दी हो सके आपसे संपर्क करेंगे.'],
-
             ['language_id' => 1, 'title' => 'enter_name', 'content' => 'Enter Your Name'],
             ['language_id' => 2, 'title' => 'enter_name', 'content' => 'તમારું નામ દાખલ કરો'],
             ['language_id' => 3, 'title' => 'enter_name', 'content' => 'अपना नाम दर्ज करें'],

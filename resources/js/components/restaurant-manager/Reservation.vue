@@ -83,9 +83,9 @@
                                             <div style="background : url('/images/dots.png')">
                                                 <img src="/images/clock.png" alt="">
                                                 <i class="f7-icons font-13 padding-half margin-bottom close-countdown" @click="(checkWaitingTime = false)">xmark</i>
-                                                <vue-countdown :time="60 * 60 * 1000" v-slot="{ hours, minutes, seconds }">
-                                                    <p class="no-margin font-30">{{ hours }} : {{ minutes }} : {{ seconds }}</p>
-                                                </vue-countdown>
+                                                <!-- <vue-countdown :time="60 * 50 * 1000" v-slot="{ hours, minutes, seconds }"> -->
+                                                    <p class="no-margin font-30">{{ waiting_time }}</p>
+                                                <!-- </vue-countdown> -->
                                             </div>
                                         </div>
                                     </div>
@@ -189,6 +189,7 @@ export default {
             categoryName: '',
             sliderActive : 0,
             member_limit : 0,
+            waiting_time : '00:00',
         }
     },
     created() {
@@ -234,8 +235,6 @@ export default {
                 this.$root.errornotification('Please enter all the required details.'); return false;
             }else if(parseInt(this.reservation.member) > parseInt(this.member_limit)){
                 this.$root.errornotification('order create must be '+this.member_limit+' or less than member.'); return false;
-            }else{
-                this.checkWaitingTime = true;
             }
 
             f7.dialog.confirm('Are you sure you want to make a reservation? Your waiting time is appropriate '+ this.waiting_time +'.', () => {
@@ -285,7 +284,20 @@ export default {
             }else if(parseInt(this.reservation.member) > parseInt(this.member_limit)){
                 this.$root.errornotification('order create must be '+this.member_limit+' or less than member.'); return false;
             }else{
-                this.checkWaitingTime = true;
+                var formData = new FormData();
+                formData.append('person', this.reservation.member);
+                formData.append('floor', this.reservation.floor);
+
+                axios.post('/api/check-time', formData)
+                .then((res) => {
+                    if(res.data.success){
+                        this.waiting_time = res.data.waiting_time;
+                        this.checkWaitingTime = true;
+                    }
+                    else{
+                        this.errornotification(res.data.message); return false;
+                    }
+                });
             }
         },
         checknumbervalidate(evt) {
