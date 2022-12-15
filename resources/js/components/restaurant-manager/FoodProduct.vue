@@ -180,6 +180,7 @@ export default {
         $('.page-content').css('background', '#F7F7F7');
         this.getAllSubCategories();
         this.getProducts();
+        this.$root.activationMenu('menu_management');
     },
     methods: {
         addProduct(){

@@ -54,6 +54,9 @@ import axios from 'axios';
             console.log(this.floorId);
             if (this.floorId) this.tableData();
         },
+        mounted() {
+            this.$root.activationMenu('setting');
+        },
         methods: {
             addFloor() {
                 var formData = new FormData();

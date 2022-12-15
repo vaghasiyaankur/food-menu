@@ -11,7 +11,9 @@ class FavoriteController extends Controller
 {
     public function getWishlist(Request $req)
     {
-        $wishlist = Product::whereIn('id',$req->wishlist)->get();
+        $wishlist = $req->wishlist != null ? $req->wishlist : [];
+
+        $wishlist = Product::whereIn('id',$wishlist)->get();
 
         return response()->json($wishlist);
     }

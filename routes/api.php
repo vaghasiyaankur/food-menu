@@ -33,6 +33,8 @@ Route::post('/register', [ReservationController::class, 'register']);
 
 Route::post('/get-categories',[CategoryController::class, 'getCategories']);
 
+Route::post('/get-categories-list',[CategoryController::class, 'getCategoriesList']);
+
 Route::post('add-category',[CategoryController::class, 'addCategory']);
 
 Route::get('/get-category/{id}', [CategoryController::class, 'getCategory']);
@@ -77,6 +79,8 @@ Route::post('add-update-table',[SettingController::class, 'addUpdateTable']);
 Route::post('/delete-table',[SettingController::class, 'deleteTable']);
 
 Route::post('/change-table-status',[SettingController::class, 'changeTableStatus']);
+
+Route::get('/member-limitation',[SettingController::class, 'memberLimitation']);
 
 
 // ------------------------ Product Routes ------------------------ //
@@ -128,6 +132,8 @@ Route::post('/add-reservation',[ReservationController::class, 'addReservation'])
 Route::get('/check-reservation',[ReservationController::class, 'checkReservation']);
 
 Route::post('/change-reservation',[ReservationController::class, 'changeReservation']);
+
+Route::post('/check-time',[ReservationController::class, 'checkTime']);
 
 // ------------------------ Wishlist Routes ------------------------ //
 

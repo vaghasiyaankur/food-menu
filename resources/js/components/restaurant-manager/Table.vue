@@ -128,11 +128,11 @@
                     </div>
                     <div class="col-100 large-20 medium-25">
                         <div class="current_capacity">
-                            <div class="current_capacity_card card display-flex align-items-center no-margin-vertical justify_content_between">
+                            <div class="current_capacity_card card display-flex align-items-center no-margin-vertical">
                                 <div class="card_img padding-left">
                                     <img src="/images/capacity.png" alt="">
                                 </div>
-                                <div class="card-content card-content-padding padding-vertical-half">
+                                <div class="card-content card-content-padding padding-vertical-half padding-left">
                                     <p class="no-margin">Current Capacity</p>
                                     <span class="text-color-red">{{ current_capacity.toFixed(2) }}% Full</span>
                                 </div>
@@ -144,7 +144,7 @@
             <div class="tables margin-horizontal">
                 <div class=" table_row margin-horizontal padding-top margin-top" v-for="row  in row_tables" :key="row">
                     <!-- <div class="no-padding margin-bottom table-card" :class="[('col-'+table.col)]" v-for="table in row" :key="table.id"> -->
-                    <div class="no-padding margin-bottom table-card mr-72" :style="'min-width: '+table.width+'px'"  v-for="(table,ind) in row" :key="table.id">
+                    <div class="no-padding margin-bottom table-card mr-72" :style="'min-width: '+table.width+'px'"  v-for="(table,t_index) in row" :key="table.id">
                         <!--======= TABLE CHAIR ========= -->
                         <div class="row table_top_chair">
                             <div class="col" v-for="index in table.up_table" :key="index">
@@ -153,7 +153,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="card no-margin table_1 equal-height-table drop-target"  :data-id="table.id" :data-name="table.floor.name" :data-tnumber="table.table_number" :style="('border-left : 10px solid rgb('+table.color.rgb)+')'" >
                             <div class="card-header no-padding">
                                 <div class="row header_detail">
@@ -171,7 +170,7 @@
                                         <!-- <draggable :scroll-sensitivity="250"  :force-fallback="true" class="dragArea list-group w-full" :class="'dragger'+table.id" :list="order[index]" @start="startDrag(order.id, table.id)" @touchend.prevent="onDrop" v-for="(order,index) in table.orders" :key="order.id"> -->
 
                                             <div class="table_reservation_info" :class="'test'+order.id" v-for="(order,index) in table.orders" :key="order.id" >
-                                                <div class="person-info popover-open"  :class="'popover-click-'+order.id" :data-popover="'.popover-table-'+order.id"  @click="order_person = order.person;removebackdrop()">
+                                                <div class="person-info popover-open" :class="['popover-click-' + order.id, { 'person-info_move': !order.is_order_moved }]" :data-popover="'.popover-table-'+order.id"  @click="order_person = order.person; removebackdrop()">
                                                     <div class="person_info_name border__bottom padding-bottom-half margin-bottom-half">
                                                         <p class="no-margin text-align-center">By {{ order.role }}</p>
                                                     </div>
@@ -183,7 +182,7 @@
                                                             <span>{{ order.reservation_time }}</span>
                                                         </span>
                                                     </div>
-                                                    <div class="popover  padding-half" :class="'popover-table-'+order.id" @open="check('123')" @close="check('321')">
+                                                    <div class="popover  padding-half" v-if="order.is_order_moved" :class="'popover-table-' + order.id">
                                                         <div class="user-info popover-inner">
                                                             <div class="display-flex padding-left-half padding-top-half align-items-center">
                                                                 <i class="f7-icons size-18 text-color-black padding-right-half margin-right-half">person</i>
@@ -255,9 +254,40 @@
                                                             </div>
                                                         </div>
                                                     </div>
-
+                                                    <div v-else class="popover popover-move padding" :class="'popover-table-' + order.id">
+                                                        <div class="user-info popover-inner text-align-center">
+                                                            <p class="text-color-white no-margin">Moved</p>
+                                                            <p class="text-color-white no-margin">{{ order.order_moved }} seconds ago</p>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
+                                            <!-- <div class="table_reservation_info margin-bottom">
+                                                <div class="person-info person-info_move popover-open" data-popover=".popover-move" @click="removebackdrop">
+                                                    <div class="person_info_name border__bottom padding-bottom-half margin-bottom-half">
+                                                        <p class="no-margin text-align-center">By Guest</p>
+                                                    </div>
+                                                    <div class="text-align-center person">
+                                                        <i class="f7-icons size-22">person_fill</i>
+                                                        <span>&nbsp;5</span>
+                                                    </div>
+                                                    <div class="waiting-time margin-top-half text-align-center">
+                                                        <i class="f7-icons size-22">clock_fill</i>
+                                                        <span>2:47</span>
+                                                        <span>&nbsp;4</span>
+                                                        <span class="waiting-time margin-top-half text-align-center">
+                                                            <i class="f7-icons size-22">clock_fill</i>
+                                                            <span>2:47</span>
+                                                        </span>
+                                                    </div>
+                                                    <div class="popover popover-move padding">
+                                                        <div class="user-info popover-inner text-align-center">
+                                                            <p class="text-color-white no-margin">Moved</p>
+                                                            <p class="text-color-white no-margin">50 seconds ago</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> -->
                                         <!-- </draggable> -->
                                     </div>
                                 </div>
@@ -304,7 +334,9 @@ export default {
             no_table_list_show: true,
             order_person: 0,
             max_number_table_cap: 0,
-            max_number_table_data : [],
+            max_number_table_data: [],
+            intervalId : null,
+            checkCallInterval: 1,
         }
     },
     computed: {
@@ -330,6 +362,7 @@ export default {
            $(".table_dropdwon").removeClass('floor_dropdown_visible');
            $(".floor_dropdwon").removeClass('floor_dropdown_visible');
         });
+        this.$root.activationMenu('table');
     },
     updated() {
         this.equal_height();
@@ -386,11 +419,18 @@ export default {
         removebackdrop(){
             $('.floor_dropdwon').removeClass('floor_dropdown_visible');
             $('.table_dropdwon').removeClass('floor_dropdown_visible');
-            // $(".popover-backdrop").remove();
-
-        //    $(".navbar").removeClass('bg-color-white');
-        //    $(".navbar-bg").css('width', 0);
-        //    $(".navbar-bg").css('background', 'none');
+        },
+        secondIncrement(second, orderIndex, tableIndex) {
+            this.intervalId = setInterval(() => {
+                if (second < 60) {
+                    second++;
+                    this.row_tables[0][tableIndex].orders[orderIndex].order_moved = second;
+                } else {
+                    clearInterval(this.intervalId);
+                    this.tableListFloorWise(this.active_floor_id);
+                    f7.popover.close('.popover-move');
+                }
+            }, 1000);
         },
         tableList() {
             axios.get('/api/table-list-with-order')
@@ -410,7 +450,6 @@ export default {
                         single_row_data = [];
                         cal_of_capacity = 0;
                     }
-
 
                     if(parseInt(table.capacity_of_person) % 2 != 0){
                         var cap = parseInt(table.capacity_of_person - 1);
@@ -458,6 +497,11 @@ export default {
                         this.max_number_table_cap = parseInt(table.capacity_of_person);
                         this.max_number_table_data = table;
                     }
+                    table.orders.forEach((order, o_index) => {
+                        if (!order.is_order_moved) {
+                            this.secondIncrement(order.order_moved, o_index, index);
+                        }
+                    });
                 });
                 this.max_number_table_id = max_number_table_id;
                 this.row_tables = row_tables;
@@ -474,82 +518,92 @@ export default {
             this.active_floor_id = id;
             axios.get('/api/table-list-floor-wise/'+id)
                 .then((res) => {
-                    this.current_capacity = res.data.current_capacity;
-                    var row_tables = [];
-                    var cal_of_capacity = 0;
-                    var single_row_data = [];
-                    var change_table_list_array = [];
-                    var max_number_table_id = 0;
-                    res.data.tables.forEach((table, index) => {
-                        if(parseInt(cal_of_capacity) > 18){
-                            row_tables.push(single_row_data);
-                            single_row_data = [];
-                            cal_of_capacity = 0;
-                        }
+                clearInterval(this.intervalId);
+                this.current_capacity = res.data.current_capacity;
+                var row_tables = [];
+                var cal_of_capacity = 0;
+                var single_row_data = [];
+                var change_table_list_array = [];
+                var max_number_table_id = 0;
+                res.data.tables.forEach((table, index) => {
+
+                    if(parseInt(cal_of_capacity) > 18){
+                        row_tables.push(single_row_data);
+                        single_row_data = [];
+                        cal_of_capacity = 0;
+                    }
 
 
-                        if(parseInt(table.capacity_of_person) % 2 != 0){
-                            var cap = parseInt(table.capacity_of_person - 1);
-                            var up_table = (parseInt(table.capacity_of_person) + 1) / 2;
-                            var down_table = (parseInt(table.capacity_of_person) - 1)/ 2;
-                        } else{
-                            var cap = parseInt(table.capacity_of_person) - 2;
-                            var up_table = parseInt(table.capacity_of_person) / 2;
-                            var down_table = parseInt(table.capacity_of_person) / 2;
-                        }
+                    if(parseInt(table.capacity_of_person) % 2 != 0){
+                        var cap = parseInt(table.capacity_of_person - 1);
+                        var up_table = (parseInt(table.capacity_of_person) + 1) / 2;
+                        var down_table = (parseInt(table.capacity_of_person) - 1)/ 2;
+                    } else{
+                        var cap = parseInt(table.capacity_of_person) - 2;
+                        var up_table = parseInt(table.capacity_of_person) / 2;
+                        var down_table = parseInt(table.capacity_of_person) / 2;
+                    }
 
 
-                        var col = (cap / 2) * 5 + 20;
+                    var col = (cap / 2) * 5 + 20;
 
 
-                        table['col'] = col > 100 ? 100 : col;
-                        table['up_table'] = up_table;
-                        table['down_table'] = down_table;
+                    table['col'] = col > 100 ? 100 : col;
+                    table['up_table'] = up_table;
+                    table['down_table'] = down_table;
 
-                        table['width'] = 182 + ((up_table - 1)* 80)
-                        single_row_data.push(table);
+                    table['width'] = 182 + ((up_table - 1)* 80)
+                    single_row_data.push(table);
 
-                        if(index == res.data.tables.length - 1){
-                            row_tables.push(single_row_data);
-                            single_row_data = [];
-                            cal_of_capacity = 0;
-                        }
+                    if(index == res.data.tables.length - 1){
+                        row_tables.push(single_row_data);
+                        single_row_data = [];
+                        cal_of_capacity = 0;
+                    }
 
-                        cal_of_capacity = parseInt(cal_of_capacity) + parseInt(table.capacity_of_person);
+                    cal_of_capacity = parseInt(cal_of_capacity) + parseInt(table.capacity_of_person);
 
-                        // set change table list upon capacity
+                    // set change table list upon capacity
 
-                        var obj = {
-                            id: table.id,
-                            capacity_of_person: parseInt(table.capacity_of_person),
-                            table_number: table.table_number
-                        };
+                    var obj = {
+                        id: table.id,
+                        capacity_of_person: parseInt(table.capacity_of_person),
+                        table_number: table.table_number
+                    };
 
 
-                        change_table_list_array.push(obj);
-                        // Max Number Capacity Table Id
-                        // if(this.max_number_table_cap <= parseInt(table.capacity_of_person)) {
-                        //     max_number_table_id = parseInt(table.id);
-                        //     this.max_number_table_cap = parseInt(table.capacity_of_person);
-                        // }
-                        if (parseInt(res.data.max_table_cap) == parseInt(table.capacity_of_person)) {
-                            max_number_table_id = parseInt(table.id);
-                            this.max_number_table_cap = parseInt(table.capacity_of_person);
-                            this.max_number_table_data = table;
-                        }
-                    });
-                    this.max_number_table_id = max_number_table_id;
-                    this.row_tables = row_tables;
-                    this.change_table_list = change_table_list_array;
-                    this.no_table_list_show = true;
-                    change_table_list_array.forEach((table, index) => {
-                        if(this.max_number_table_cap == table.capacity_of_person && table.id != max_number_table_id){
-                            this.no_table_list_show = false;
+                    change_table_list_array.push(obj);
+                    // Max Number Capacity Table Id
+                    // if(this.max_number_table_cap <= parseInt(table.capacity_of_person)) {
+                    //     max_number_table_id = parseInt(table.id);
+                    //     this.max_number_table_cap = parseInt(table.capacity_of_person);
+                    // }
+                    if (parseInt(res.data.max_table_cap) == parseInt(table.capacity_of_person)) {
+                        max_number_table_id = parseInt(table.id);
+                        this.max_number_table_cap = parseInt(table.capacity_of_person);
+                        this.max_number_table_data = table;
+                    }
+
+                    table.orders.forEach((order, o_index) => {
+                        if (!order.is_order_moved) {
+                            this.secondIncrement(order.order_moved, o_index, index);
                         }
                     });
+                });
+                this.max_number_table_id = max_number_table_id;
+                this.row_tables = row_tables;
+                this.change_table_list = change_table_list_array;
+                this.no_table_list_show = true;
+                change_table_list_array.forEach((table, index) => {
+                    if(this.max_number_table_cap == table.capacity_of_person && table.id != max_number_table_id){
+                        this.no_table_list_show = false;
+                    }
+                });
 
-                })
+            })
         },
+
+
         startDrag(id, tableId) {
             this.dragOrderId = id;
             this.dragOrderTableId = tableId;
@@ -587,7 +641,9 @@ export default {
             f7.dialog.confirm('Are you sure to order transfer to '+floor_name+'(Table Number : '+table_number+') ?', () => {
                 axios.post('/api/change-order-table', { table_number: table_number , id : order_id})
                 .then((res) => {
-                    if(res.data.success)  this.tableListFloorWise(this.active_floor_id);
+                    if (res.data.success) {
+                        this.tableListFloorWise(this.active_floor_id)
+                    }
                 })
             });
 
@@ -641,7 +697,7 @@ export default {
 }
 .current_capacity_card .card-content{
     padding-right:8px !important;
-    padding-left:0px !important;
+    padding-left:18px !important;
 }
 .menu-item-dropdown .menu-item-content .f7-icons{
     font-size: 15px;
@@ -980,6 +1036,7 @@ p.count__text{
 }
 .header-link .menu-item{
     border-radius: 10px !important;
+    background: #38373D !important;
 }
 .nav-button{
     text-transform: capitalize;
@@ -1085,5 +1142,4 @@ p.count__text{
     box-sizing: border-box;
     background: rgb(0 0 0 / 41%) !important;
 }*/
-
 </style>

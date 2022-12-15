@@ -53,6 +53,16 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-50">
+                            <div class="item-content item-input margin-bottom">
+                                <div class="item-inner">
+                                    <div class="block-title no-margin-top no-margin-left">Finish Order Time(in Minute)</div>
+                                    <div class="item-input-wrap">
+                                        <input type="number" name="finish_order_time" class="padding margin-top-half" placeholder="Enter Capacity" v-model="finish_order_time">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="submit__button margin-top padding-top">
                         <button type="button" class="col button button-large button-fill" @click="addUpdateTable">Save</button>
@@ -80,11 +90,15 @@
                 colors : [],
                 color: '',
                 floors : [],
+                finish_order_time: 0
             }
         },
         created() {
             this.colorList();
             this.getFloors();
+        },
+        mounted() {
+            this.$root.activationMenu('setting');
         },
         methods: {
             colorList() {
@@ -102,6 +116,7 @@
                     this.capacity_of_person = res.data.table.capacity_of_person;
                     this.floor_number = res.data.table.floor_id;
                     this.color = res.data.table.color_id;
+                    this.finish_order_time = res.data.table.finish_order_time;
                 })
             },
             addUpdateTable() {
@@ -120,6 +135,7 @@
                 formData.append('capacity_of_person' , this.capacity_of_person);
                 formData.append('floor_number' , this.floor_number);
                 formData.append('color' , this.color);
+                formData.append('finish_order_time' , parseInt(this.finish_order_time));
 
                 axios
                 .post("/api/add-update-table", formData, config)

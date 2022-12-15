@@ -26,7 +26,7 @@ class SettingController extends Controller
      */
     public function settingData()
     {
-       $setting = Setting::select('restaurant_name', 'phone_number', 'manager_name', 'restaurant_logo', 'open_time', 'close_time')->first();
+       $setting = Setting::select('restaurant_name', 'phone_number', 'manager_name', 'restaurant_logo', 'open_time', 'close_time', 'member_capacity')->first();
 
        $setting['open_time_12_format'] = date("g:i a", strtotime($setting->open_time));
        $setting['close_time_12_format'] = date("g:i a", strtotime($setting->close_time));
@@ -57,6 +57,7 @@ class SettingController extends Controller
             'restaurant_logo' => $restaurant_logo_name,
             'open_time' => date("H:i", strtotime($request->open_time)),
             'close_time' => date("H:i", strtotime($request->close_time)),
+            'member_capacity' => $request->member_capacity,
         ];
 
        Setting::where('id', $setting->id)->update($settingData);
@@ -163,6 +164,19 @@ class SettingController extends Controller
         $table = Table::find($request->id)->update(['status' => $request->status]);
 
         return response()->json(['success'=>'Table Status Updated Successfully.']);
+    }
+
+    /**
+     * Member Limitation check for reservation
+     *
+     * @return @json (member capacity number)
+     *
+     */
+    public function memberLimitation(Request $request)
+    {
+        $member_capacity = Setting::first()->member_capacity;
+
+        return response()->json(['member_capacity'=>$member_capacity]);
     }
 
 }

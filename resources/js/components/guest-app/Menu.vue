@@ -1,6 +1,6 @@
 <template>
 
-    <f7-sheet class="demo-sheet-swipe-to-close" style="height:auto; --f7-sheet-bg-color: #fff;" backdrop>
+    <f7-sheet class="demo-sheet-swipe-to-close" swipe-to-close style="height:auto; --f7-sheet-bg-color: #fff;" backdrop>
         <f7-page-content>
             <div class="row">
                 <div class="col">
@@ -103,7 +103,7 @@ export default {
             this.$emit('textChange');
         },
         getCategories() {
-            axios.post('/api/get-categories')
+            axios.post('/api/get-categories-list')
             .then((res) => {
                 this.product_category = res.data;
                 this.getProducts(this.product_category[0].id);

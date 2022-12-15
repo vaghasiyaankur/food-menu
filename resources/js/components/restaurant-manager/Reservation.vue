@@ -45,32 +45,33 @@
                                 <h3 class="card-title text-align-center">Registration</h3>
                             </div>
                             <div>
-                                <form class="list margin-vertical" id="my-form">
-                                    <div class="item-content item-input margin-bottom">
+                                <form name="reservationForm" class="list margin-vertical" id="my-form">
+                                    <div class="item-content item-input">
                                         <div class="item-inner">
-                                            <div class="item-title item-label">Name</div>
-                                            <div class="item-input-wrap">
+                                            <!-- <div class="item-title item-label">Name</div> -->
+                                            <div class="item-input-wrap margin-bottom-half margin-top-half">
                                                 <input type="text" v-model="reservation.name" name="name" class="padding" placeholder="Enter Your name">
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="item-content item-input margin-bottom">
+
+                                    <div class="item-content item-input">
                                         <div class="item-inner">
-                                            <div class="item-title item-label">Phone number</div>
-                                            <div class="item-input-wrap"><input type="number" v-model="reservation.number" name="number" class="padding" placeholder="Phone number"></div>
+                                            <!-- <div class="item-title item-label">Phone number</div> -->
+                                            <div class="item-input-wrap margin-bottom-half"><input type="text" v-model.number="reservation.number" name="number" class="padding" placeholder="Phone number" maxlength="10" @keypress="checknumbervalidate"></div>
                                         </div>
                                     </div>
                                     <div class="item-content item-input margin-bottom">
                                         <div class="item-inner">
-                                            <div class="item-title item-label">Family member number</div>
-                                            <div class="item-input-wrap"><input type="number" v-model="reservation.member" name="member" class="padding" placeholder="5 Family member"></div>
+                                            <!-- <div class="item-title item-label">Family member number</div> -->
+                                            <div class="item-input-wrap margin-bottom-half"><input type="number" v-model="reservation.member" name="member" class="padding" placeholder="Family member"></div>
                                         </div>
                                     </div>
                                     <!-- <div class="item-content item-input margin-bottom">
                                         <div class="item-inner">
-                                            <div class="item-title item-label">Location type</div>
-                                            <div class="item-input-wrap input-dropdown-wrap">
-                                                <select v-model="reservation.floor" placeholder="Please choose..." class="padding-left padding-right">
+                                            <div class="item-title item-label font-16 text-color-black">Location type</div>
+                                            <div class="item-input-wrap margin-bottom-half input-dropdown-wrap">
+                                                <select v-model="reservation.floor" placeholder="floor" class="padding-left padding-right">
                                                     <option v-for="(floor,key) in floors" :key="floor" :value="key">{{ floor }}</option>
                                                 </select>
                                             </div>
@@ -94,9 +95,9 @@
                                             <div style="background : url('/images/dots.png')">
                                                 <img src="/images/clock.png" alt="">
                                                 <i class="f7-icons font-13 padding-half margin-bottom close-countdown" @click="(checkWaitingTime = false)">xmark</i>
-                                                <vue-countdown :time="60 * 60 * 1000" v-slot="{ hours, minutes, seconds }">
-                                                    <p class="no-margin font-30">{{ hours }} : {{ minutes }} : {{ seconds }}</p>
-                                                </vue-countdown>
+                                                <!-- <vue-countdown :time="60 * 50 * 1000" v-slot="{ hours, minutes, seconds }"> -->
+                                                    <p class="no-margin font-30">{{ waiting_time }}</p>
+                                                <!-- </vue-countdown> -->
                                             </div>
                                         </div>
                                     </div>
@@ -118,7 +119,7 @@
                 </div>
             </div>
         </div>
-        <f7-sheet class="demo-sheet-swipe-to-close" style="height:auto; --f7-sheet-bg-color: #fff;" backdrop>
+        <f7-sheet class="demo-sheet-swipe-to-close" swipe-to-close style="height:auto; --f7-sheet-bg-color: #fff;" backdrop>
             <f7-page-content>
                 <div class="row">
                     <div class="col">
@@ -191,19 +192,25 @@ export default {
             reservation: {
                 name: '',
                 number: '',
-                member: 0,
-                floor: ''
+                member: '',
+                floor: 1
             },
             checkWaitingTime: false,
             product_category: [],
             product_subcategory: [],
             categoryName: '',
             sliderActive : 0,
+            member_limit : 0,
+            waiting_time : '00:00',
         }
     },
     created() {
         this.getFloors();
         this.getCategories();
+        this.memberLimitation();
+    },
+    mounted() {
+        this.$root.activationMenu('reservation');
     },
     mounted(){
         $("#selection-concise").append(`
@@ -226,7 +233,7 @@ export default {
     },
     methods: {
         getCategories() {
-            axios.post('/api/get-categories')
+            axios.post('/api/get-categories-list')
             .then((res) => {
                 this.product_category = res.data;
                 this.getProducts(this.product_category[0].id);
@@ -237,7 +244,17 @@ export default {
             axios.get('/api/get-category-products/' + id)
             .then((res) => {
                 this.categoryName = res.data.name;
+                this.product_subcategory = res.data.sub_category;axios.get('/api/get-category-products/' + id)
+            .then((res) => {
+                this.categoryName = res.data.name;
                 this.product_subcategory = res.data.sub_category;
+            })
+            })
+        },
+        memberLimitation() {
+            axios.get('/api/member-limitation')
+            .then((res) => {
+                this.member_limit = res.data.member_capacity;
             })
         },
         closePopup(){
@@ -245,19 +262,13 @@ export default {
             this.$emit('textChange');
         },
         register() {
-            if(!this.reservation.name){
-                this.$root.errornotification('Please Enter your name.'); return false;
-            }else if(!this.reservation.number){
-                this.$root.errornotification('Please Enter your number.'); return false;
-            }else if(!this.reservation.member){
-                this.$root.errornotification('Please Enter member number.'); return false;
-            }else if(!this.reservation.floor){
-                this.$root.errornotification('Please Select Floor.'); return false;
-            }else{
-                this.checkWaitingTime = true;
+            if(!this.reservation.name || !this.reservation.number || !this.reservation.member || !this.reservation.floor){
+                this.$root.errornotification('Please enter all the required details.'); return false;
+            }else if(parseInt(this.reservation.member) > parseInt(this.member_limit)){
+                this.$root.errornotification('order create must be '+this.member_limit+' or less than member.'); return false;
             }
 
-            f7.dialog.confirm('Are you confirm to register?', () => {
+            f7.dialog.confirm('Are you sure you want to make a reservation? Your waiting time is appropriate '+ this.waiting_time +'.', () => {
 
                 var formData = new FormData();
                 formData.append('customer_name', this.reservation.name);
@@ -299,22 +310,40 @@ export default {
             })
         },
         checkTime() {
-            if(!this.reservation.name){
-                this.$root.errornotification('Please Enter your name.'); return false;
-            }else if(!this.reservation.number){
-                this.$root.errornotification('Please Enter your number.'); return false;
-            }else if(!this.reservation.member){
-                this.$root.errornotification('Please Enter member number.'); return false;
-            }else if(!this.reservation.floor){
-                this.$root.errornotification('Please Select Floor.'); return false;
+            if(!this.reservation.name || !this.reservation.number || !this.reservation.member || !this.reservation.floor){
+                this.$root.errornotification('Please enter all the required details.'); return false;
+            }else if(parseInt(this.reservation.member) > parseInt(this.member_limit)){
+                this.$root.errornotification('order create must be '+this.member_limit+' or less than member.'); return false;
             }else{
-                this.checkWaitingTime = true;
+                var formData = new FormData();
+                formData.append('person', this.reservation.member);
+                formData.append('floor', this.reservation.floor);
+
+                axios.post('/api/check-time', formData)
+                .then((res) => {
+                    if(res.data.success){
+                        this.waiting_time = res.data.waiting_time;
+                        this.checkWaitingTime = true;
+                    }
+                    else{
+                        this.errornotification(res.data.message); return false;
+                    }
+                });
             }
         },
         price() {
             
             $("#location-select-list").toggleClass('d-none');
         },
+        checknumbervalidate(evt) {
+            evt = (evt) ? evt : window.event;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+                evt.preventDefault();;
+            } else {
+                return true;
+            }
+        }
     }
 
 }

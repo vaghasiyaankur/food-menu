@@ -70,6 +70,9 @@
             this.page_number = this.page;
             this.getFloors(this.page_number);
         },
+        mounted() {
+            this.$root.activationMenu('setting');
+        },
         methods: {
             getFloors(page) {
                 if (page == undefined || page == 1) {

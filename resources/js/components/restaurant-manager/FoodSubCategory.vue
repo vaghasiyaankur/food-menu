@@ -187,6 +187,7 @@ export default {
         $('.page-content').css('background', '#F7F7F7');
         this.getAllCategories();
         this.getAllSubCategories();
+        this.$root.activationMenu('menu_management');
     },
     methods: {
         getSubCategories() {

@@ -42,10 +42,7 @@
             </div>
         </div>
     </div>
-    <div class="margin-left margin-right register-from">
-        <div class="text-align-center text-color-gray register-text">
-            <p> Please fill in the form below. <br> We will contact you as soon as possible </p>
-        </div>
+    <div class="margin-left margin-right register-from margin-top">
         <div class="text-align-center padding-top">
             <img src="/images/registerImage.png" alt="">
         </div>
@@ -53,8 +50,8 @@
             <form class="list margin-vertical" id="my-form">
                 <div class="item-content item-input">
                     <div class="item-inner">
-                        <div class="item-title item-label">Name</div>
-                        <div class="item-input-wrap">
+                        <!-- <div class="item-title item-label">Name</div> -->
+                        <div class="item-input-wrap margin-bottom-half margin-top-half">
                             <input type="text" v-model="reservation.name" name="name" class="padding" placeholder="Enter Your name">
                         </div>
                     </div>
@@ -62,21 +59,21 @@
 
                 <div class="item-content item-input">
                     <div class="item-inner">
-                        <div class="item-title item-label">Phone number</div>
-                        <div class="item-input-wrap"><input type="number" v-model="reservation.number" name="number" class="padding" placeholder="Phone number"></div>
+                        <!-- <div class="item-title item-label">Phone number</div> -->
+                        <div class="item-input-wrap margin-bottom-half"><input type="text" v-model.number="reservation.number" name="number" class="padding" placeholder="Phone number" minlength="10" maxlength="10" @focusout="checklength" @keypress="checknumbervalidate"></div>
                     </div>
                 </div>
                 <div class="item-content item-input">
                     <div class="item-inner">
-                        <div class="item-title item-label">Family member number</div>
-                        <div class="item-input-wrap"><input type="number" v-model="reservation.member" name="member" class="padding" placeholder="5 Family member"></div>
+                        <!-- <div class="item-title item-label">Family member number</div> -->
+                        <div class="item-input-wrap margin-bottom-half"><input type="number" v-model="reservation.member" name="member" class="padding" placeholder="Family member"></div>
                     </div>
                 </div>
                 <div class="item-content item-input">
                     <div class="item-inner">
-                        <div class="item-title item-label font-16 text-color-black">Location type</div>
-                        <div class="item-input-wrap input-dropdown-wrap">
-                            <select v-model="reservation.floor" placeholder="Please choose..." class="padding-left padding-right">
+                        <!-- <div class="item-title item-label font-16 text-color-black">Location type</div> -->
+                        <div class="item-input-wrap margin-bottom-half input-dropdown-wrap">
+                            <select v-model="reservation.floor" placeholder="floor" class="padding-left padding-right">
                                 <option v-for="(floor,key) in floors" :key="floor" :value="key">{{ floor }}</option>
                             </select>
                         </div>
@@ -146,9 +143,9 @@
                 <div style="background : url('/images/dots.png')">
                     <img src="/images/clock.png" alt="">
                     <i class="f7-icons font-13 padding-half margin-bottom close-countdown" @click="(checkWaitingTime = false)">xmark</i>
-                    <vue-countdown :time="60 * 60 * 1000" v-slot="{ hours, minutes, seconds }">
-                        <p class="no-margin font-30">{{ hours }} : {{ minutes }} : {{ seconds }}</p>
-                    </vue-countdown>
+                    <!-- <vue-countdown :time="60 * 60 * 1000" v-slot="{ hours, minutes, seconds }"> -->
+                        <p class="no-margin font-30">{{ waiting_time }}</p>
+                    <!-- </vue-countdown> -->
                 </div>
             </div>
         </div>
@@ -231,23 +228,24 @@ export default {
                 name: '',
                 number: '',
                 member: '',
-                floor: '',
+                floor: 1,
                 agree_condition: false
             },
+            member_limit : 0,
+            waiting_time : '00:00',
         }
     },
     created() {
         this.getFloors();
+        this.memberLimitation();
     },
     methods: {
-        
-        // register() {
-        //     f7.view.main.router.navigate({ url: '/waiting/' });
+        register() {
 
-        //     if(this.name == '' || this.number == '' || this.member == '' || this.location == ''){
-        //         this.errornotification('Please fill the form details.');
-        //         return;
-        //     }
+            if(this.name == '' || this.number == '' || this.member == '' || this.location == ''){
+                this.errornotification('Please fill the form details.');
+                return;
+            }
 
         //     if(this.number.length > 10){
         //         this.errornotification('Please check your number and enter your mobail number.');
@@ -258,40 +256,39 @@ export default {
 
 
 
-        //         var formData = new FormData();
-        //         formData.append('name' , this.name);
-        //         formData.append('number' , this.number);
-        //         formData.append('member' , this.member);
-        //         formData.append('floor_location' , this.location);
+                var formData = new FormData();
+                formData.append('name' , this.name);
+                formData.append('number' , this.number);
+                formData.append('member' , this.member);
+                formData.append('floor_location' , this.location);
 
-        //         axios.post('/api/register',formData)
-        //         .then((res) => {
-        //             document.getElementById('book_table').classList.add('active');
-        //             f7.dialog.alert('Success!',() => {
-        //                 document.getElementById('book_table').classList.remove('active');
-        //                 f7.view.main.router.navigate({ url: '/waiting/' });
-        //             });
-        //             setTimeout(() => {
-        //             $('.dialog-title').html("<img src='/images/success.png'>");
-        //             $('.dialog-button').addClass('col button button-raised button-large text-transform-capitalize');
-        //             $('.dialog-button').addClass('active');
-        //             $('.dialog-button').css('width','50%');
-        //             }, 200);
-        //         })
-        //         .catch((error) => {
-        //             var err = error.response.data.error;
-        //             if(err){
-        //                 this.errornotification('Please fill the form details.');
-        //             }
-        //         })
-        //     });
-        //     $('.dialog-title').text("Are you confirm to register?").css('font-size','20px');
-        //     $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
-        //     $('.dialog-button').eq(1).removeClass('text-color-black');
-        //     $('.dialog-button').eq(1).addClass('active');
-            
+                axios.post('/api/register',formData)
+                .then((res) => {
+                    document.getElementById('book_table').classList.add('active');
+                    f7.dialog.alert('Success!',() => {
+                        document.getElementById('book_table').classList.remove('active');
+                        f7.view.main.router.navigate({ url: '/waiting/' });
+                    });
+                    setTimeout(() => {
+                    $('.dialog-title').html("<img src='/images/success.png'>");
+                    $('.dialog-button').addClass('col button button-raised button-large text-transform-capitalize');
+                    $('.dialog-button').addClass('active');
+                    $('.dialog-button').css('width','50%');
+                    }, 200);
+                })
+                .catch((error) => {
+                    var err = error.response.data.error;
+                    if(err){
+                        this.errornotification('Please fill the form details.');
+                    }
+                })
+            });
+            $('.dialog-title').text("Are you confirm to register?").css('font-size','20px');
+            $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
+            $('.dialog-button').eq(1).removeClass('text-color-black');
+            $('.dialog-button').eq(1).addClass('active');
 
-        // },
+        },
         onPageBeforeOut() {
             const self = this;
             // Close opened sheets on page out
@@ -303,37 +300,49 @@ export default {
             if (self.sheet) self.sheet.destroy();
         },
         checkTime() {
-            if(!this.reservation.name){
-                this.errornotification('Please Enter your name.'); return false;
-            }else if(!this.reservation.number){
-                this.errornotification('Please Enter your number.'); return false;
-            }else if(!this.reservation.member){
-                this.errornotification('Please Enter member number.'); return false;
-            }else if(!this.reservation.floor){
-                this.errornotification('Please Select Floor.'); return false;
+            if(!this.reservation.name || !this.reservation.number || !this.reservation.member || !this.reservation.floor){
+                this.errornotification('Please enter all the required details.'); return false;
+            }else if(parseInt(this.reservation.member) > parseInt(this.member_limit)){
+                this.errornotification('order create must be '+this.member_limit+' or less than member.'); return false;
             }else{
-                this.checkWaitingTime = true;
+
+                var formData = new FormData();
+                formData.append('person', this.reservation.member);
+                formData.append('floor', this.reservation.floor);
+
+                axios.post('/api/check-time', formData)
+                .then((res) => {
+                    if(res.data.success){
+                        this.waiting_time = res.data.waiting_time;
+                        this.checkWaitingTime = true;
+                    }
+                    else{
+                        this.errornotification(res.data.message); return false;
+                    }
+                });
+
+
             }
         },
         successnotification(notice) {
-            var notificationFull = f7.notification.create({                
-                title: '<img src="/images/checkicon.png">' + notice ,               
+            var notificationFull = f7.notification.create({
+                title: '<img src="/images/checkicon.png">' + notice ,
                 closeTimeout: 2000,
                 closeOnClick: true,
                 cssClass: 'success--notification'
-                
+
             });
             notificationFull.open();
             $('.notification-header').append('<div><i class="f7-icons">xmark</i></div>');
             $('.notification-content').remove();
         },
         errornotification(notice) {
-            var notificationFull = f7.notification.create({                
-                title: '<img src="/images/crossicon.png">' + notice ,               
+            var notificationFull = f7.notification.create({
+                title: '<img src="/images/crossicon.png">' + notice ,
                 closeTimeout: 2000,
                 closeOnClick: true,
                 cssClass: 'error--notification'
-                
+
             });
             notificationFull.open();
             $('.notification-header').append('<div><i class="f7-icons">xmark</i></div>');
@@ -346,18 +355,12 @@ export default {
             })
         },
         register() {
-            // f7.view.main.router.navigate({ url: '/waiting/' });
-            if(!this.reservation.name){
-                this.errornotification('Please Enter your name.'); return false;
-            }else if(!this.reservation.number){
-                this.errornotification('Please Enter your number.'); return false;
-            }else if(!this.reservation.member){
-                this.errornotification('Please Enter member number.'); return false;
-            }else if(!this.reservation.floor){
-                this.errornotification('Please Select Floor.'); return false;
-            }else{
-                this.checkWaitingTime = true;
+            if(!this.reservation.name || !this.reservation.number || !this.reservation.member || !this.reservation.floor){
+                this.errornotification('Please enter all the required details.'); return false;
+            }else if(parseInt(this.reservation.member) > parseInt(this.member_limit)){
+                this.errornotification('order create must be '+this.member_limit+' or less than member.'); return false;
             }
+
             if(this.reservation.agree_condition) var agree_condition = 1;
             else var agree_condition = 0;
 
@@ -400,6 +403,21 @@ export default {
         showMenuData() {
             if (this.$refs.menu) {
                 this.$refs.menu.wishlistData();
+            }
+        },
+        checknumbervalidate(evt) {
+            evt = (evt) ? evt : window.event;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+                evt.preventDefault();;
+            } else {
+                return true;
+            }
+        },
+        checklength() {
+            var phone = event.target.value.length;
+            if (phone > 10 || phone < 10) {
+                this.errornotification('Please enter atleast 10 characters.');
             }
         }
     },
@@ -469,6 +487,9 @@ export default {
 .border_radius_10 {
     border-radius: 10px;
 }
+.menu-dropdown-link:before{
+    content: none;
+}
 .menu-item-dropdown .menu-item-content:after {
     opacity: 0;
 }
@@ -523,6 +544,7 @@ export default {
 .menu-dropdown-content {
     top: -8px !important;
     left: 45% !important;
+    z-index: 999;
     min-width: calc(100% + 24px) !important;
 }
 
@@ -618,17 +640,31 @@ label.item-checkbox input[type='checkbox']:checked~.icon-checkbox{
     left: -3px;
     top:-1px
 }*/
-
 </style>
 <style>
-
+.menu-dropdown-link.active,
+.menu-dropdown-link.active-state,
+.menu-dropdown-link:focus,
+.menu-dropdown-link:hover {
+    background: #fff !important;
+}
 .notification-title{
     display: flex;
     justify-content: center;
     align-items: center;
+    text-transform: capitalize !important;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
 }
 .notification-title img{
     margin-right: 8px;
+}
+.notification.success--notification .notification-title{
+    color: #0FC963;
+}
+.notification.error--notification .notification-title {
+    color: #FF6161;
 }
 .notification.success--notification.modal-in{
     background: linear-gradient(90deg, #91F4BE 0%, rgb(252 253 252) 100%, rgb(145 244 190 / 54%) 100%);
@@ -681,5 +717,4 @@ label.item-checkbox input[type='checkbox']:checked~.icon-checkbox{
 .font-30 {
     font-size: 30px;
 }
-
 </style>
