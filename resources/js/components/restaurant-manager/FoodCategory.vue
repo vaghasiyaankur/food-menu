@@ -2,13 +2,13 @@
     <f7-page>
        
         <div class="category-list-section">
-            <div class="card elevation-2">
+            <div class="card elevation-2 border_radius_10">
                 <div class="card_header">
-                    <div class="row padding-left padding-right align-items-center">
+                    <div class="row padding-left padding-right padding-top-half align-items-center">
                         <div class="col-50">
                             <h3>
                                 <a href="javscript:;" class="text-color-black padding-right-half" ><i class="f7-icons font-22" style="vertical-align: bottom;">arrow_left</i></a>
-                                <span> Category</span>
+                                <span class="page_heading"> Category</span>
                             </h3>
                         </div>
                         <div class="col-50">
@@ -346,9 +346,9 @@ export default {
     height: 36px;
 }
 
-.category-count {
+/*.category-count {
     border-right: 1px solid #D8D8D8;
-}
+}*/
 
 .category_image {
     background: #FFE3E3;
@@ -418,7 +418,15 @@ export default {
 </style>
 
 <style>
-
+.border_radius_10{
+    border-radius: 10px;
+}
+.page_heading{
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: #38373D;
+}
 .dialog-title {
     padding-bottom: 10px;
 }

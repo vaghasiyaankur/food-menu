@@ -32,7 +32,7 @@
            <div class="table_floor_swiper">
                 <div class="row">
                     <div class="col-100 large-80 medium-75">
-                        <div data-pagination='{"el":".swiper-pagination"}' data-navigation="{'el':'.swiper-navigation'}" data-space-between="10" data-slides-per-view="4"
+                        <div data-pagination='{"el":".swiper-pagination"}' data-navigation="{'el':'.swiper-navigation'}" data-space-between="10" data-slides-per-view="5"
                             class="swiper swiper-init demo-swiper margin-top margin-bottom floor_swiper_inner  swiper-navigation">
                             <!-- <div class="swiper-pagination"></div> -->
                            <div class="swiper-wrapper padding-left-half">
@@ -144,7 +144,7 @@
             <div class="tables margin-horizontal">
                 <div class=" table_row margin-horizontal padding-top margin-top" v-for="row  in row_tables" :key="row">
                     <!-- <div class="no-padding margin-bottom table-card" :class="[('col-'+table.col)]" v-for="table in row" :key="table.id"> -->
-                    <div class="no-padding margin-bottom table-card mr-40" :style="'min-width: '+table.width+'px'"  v-for="(table,t_index) in row" :key="table.id">
+                    <div class="no-padding margin-bottom table-card mr-72" :style="'min-width: '+table.width+'px'"  v-for="(table,t_index) in row" :key="table.id">
                         <!--======= TABLE CHAIR ========= -->
                         <div class="row table_top_chair">
                             <div class="col" v-for="index in table.up_table" :key="index">
@@ -156,11 +156,11 @@
                         <div class="card no-margin table_1 equal-height-table drop-target"  :data-id="table.id" :data-name="table.floor.name" :data-tnumber="table.table_number" :style="('border-left : 10px solid rgb('+table.color.rgb)+')'" >
                             <div class="card-header no-padding">
                                 <div class="row header_detail">
-                                    <div class="table-number padding-half"> <p class="no-margin">Table No.</p>
-                                    <p class=" text-align-center no-margin"> {{ table.table_number }}</p>
+                                    <div class="table-number padding-half"> <p class="no-margin table__text">Table No.</p>
+                                    <p class=" text-align-center no-margin count__text"> {{ table.table_number }}</p>
                                     </div>
                                     <div class="table-capacity text-align-right padding-half">
-                                        <p class="no-margin"> Capacity </p> <p class="text-align-center no-margin">{{ table.capacity_of_person }}</p> </div>
+                                        <p class="no-margin table__text"> Capacity </p> <p class="text-align-center no-margin count__text">{{ table.capacity_of_person }}</p> </div>
                                 </div>
                             </div>
                             <div class="card-content padding-top  padding-horizontal-half table1__details" :style="'max-width : '+(table.width - 20 )+'px'">
@@ -175,7 +175,7 @@
                                                         <p class="no-margin text-align-center">By {{ order.role }}</p>
                                                     </div>
                                                     <div class="text-align-center person">
-                                                        <i class="f7-icons size-22">person_fill</i>
+                                                        <i class="f7-icons size-22">person</i>
                                                         <span>&nbsp;{{order.person}}</span>
                                                         <span class="waiting-time margin-top-half text-align-center">
                                                             <!-- <i class="f7-icons size-22">clock_fill</i> -->
@@ -185,19 +185,19 @@
                                                     <div class="popover  padding-half" v-if="order.is_order_moved" :class="'popover-table-' + order.id">
                                                         <div class="user-info popover-inner">
                                                             <div class="display-flex padding-left-half padding-top-half align-items-center">
-                                                                <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_fill</i>
+                                                                <i class="f7-icons size-18 text-color-black padding-right-half margin-right-half">person</i>
                                                                 <span class="text-color-black">{{ order.customer.name }}</span>
                                                             </div>
                                                             <div class="display-flex padding-left-half padding-top align-items-center">
-                                                                <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">clock</i>
+                                                                <i class="f7-icons size-18 text-color-black padding-right-half margin-right-half">clock</i>
                                                                 <span class="text-color-black">{{ order.reservation_time_12_format }}</span>
                                                             </div>
                                                             <div class="display-flex padding-left-half padding-top align-items-center">
-                                                                <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">phone</i>
+                                                                <i class="f7-icons size-18 text-color-black padding-right-half margin-right-half">phone</i>
                                                                 <span class="text-color-black">{{ order.customer.number }}</span>
                                                             </div>
                                                             <div class="display-flex padding-left-half padding-top-half align-items-center padding-bottom">
-                                                                <i class="f7-icons size-12 text-color-black padding-right-half margin-right-half">person_2_fill</i>
+                                                                <i class="f7-icons size-18 text-color-black padding-right-half margin-right-half">person_2</i>
                                                                 <span class="text-color-black">{{ order.person }} family member</span>
                                                             </div>
                                                             <div class="floor__list">
@@ -692,8 +692,8 @@ export default {
     padding: 0;
     margin: 0;
 }
-.mr-40{
-    margin-right : 40px;
+.mr-72{
+    margin-right : 72px;
 }
 .current_capacity_card .card-content{
     padding-right:8px !important;
@@ -723,6 +723,7 @@ export default {
 .height-40{
     height: 40px;
 }
+
 .nav-link,.menu-item-content {
     height: 100%;
     text-transform: capitalize;
@@ -758,8 +759,19 @@ export default {
 .card {
     border-radius: 10px;
 }
-.size-12{
-    font-size :12px;
+.size-18{
+    font-size :18px;
+}
+p.table__text{
+    font-size: 14px;
+    line-height: 22px;
+    color: #555555;
+}
+p.count__text{
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    color: #555555;
 }
 .table_row {
     display: flex;
@@ -897,6 +909,7 @@ export default {
     box-shadow: 0px 0px 10px rgb(0 0 0 / 27%);
     background: #fff;
     border: 0.5px solid #999999;
+    border-radius: 7px;
 }
 .floor_dropdwon{
     min-width: 240px;
@@ -1069,8 +1082,14 @@ export default {
     padding: 7px 5px !important;
     font-size: 10px !important;
     width: 100%;
-    max-width: 94px;
-    margin-right: 23px;
+    max-width: 96px;
+    margin-right: 30px;
+}
+.person-info .person_info_name p{
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 12px;
+    color: #38373D;
 }
 .person-info_move{
     background: #fff;

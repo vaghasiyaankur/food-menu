@@ -282,6 +282,11 @@ export default {
     justify-content: space-between !important
 }
 /*====== NAVBAR CSS ======*/
+.header-links .tab_view_menu .button{
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: 400;
+}
 .small_screen_menu{
     display: none;
 }
