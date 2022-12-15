@@ -17,18 +17,18 @@ class LanguageSeeder extends Seeder
     {
 
         $language = new Language();
-        $language->id = 1;
         $language->name = 'English';
+        $language->status = 1;
         $language->save();
 
         $language = new Language();
-        $language->id = 2;
         $language->name = 'Gujarati';
+        $language->status = 1;
         $language->save();
 
         $language = new Language();
-        $language->id = 3;
         $language->name = 'Hindi';
+        $language->status = 1;
         $language->save();
     }
 }

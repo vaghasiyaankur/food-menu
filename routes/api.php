@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\Manager\CategoryController;
 use App\Http\Controllers\Manager\FloorController;
 use App\Http\Controllers\Manager\ReportController;
@@ -138,3 +139,9 @@ Route::post('/check-time',[ReservationController::class, 'checkTime']);
 // ------------------------ Wishlist Routes ------------------------ //
 
 Route::post('/get-wishlist',[FavoriteController::class, 'getWishlist']);
+
+// ------------------------ Lauguage Routes ------------------------ //
+
+Route::get('/get-languages',[LanguageController::class, 'getlangs']);
+
+Route::post('get-language-translation',[LanguageController::class, 'getLangTranslation']);

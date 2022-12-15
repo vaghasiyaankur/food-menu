@@ -1,11 +1,5 @@
 <template>
   <f7-app v-bind="f7Params">
-    <!-- <f7-panel left cover resizable>
-      <f7-view url="/panel-left/" links-view=".view-main"></f7-view>
-    </f7-panel> -->
-    <!-- <f7-panel right reveal resizable>
-      <f7-view url="/panel-right/"></f7-view>
-    </f7-panel> -->
     <f7-view url="/" :main="true" class="safe-areas" :master-detail-breakpoint="768"></f7-view>
   </f7-app>
 </template>
@@ -13,40 +7,71 @@
 import { f7App, f7Panel, f7View } from 'framework7-vue';
 import routes from './routes';
 import store from './store';
+import { useCookies } from "vue3-cookies";
+import axios from "axios";
 
 export default {
-  components: {
-    f7App,
-    f7Panel,
-    f7View,
-  },
-  data() {
-    // Demo Theme
-    let theme = 'auto';
-    if (document.location.search.indexOf('theme=') >= 0) {
-      theme = document.location.search.split('theme=')[1].split('&')[0];
-    }
+    components: {
+        f7App,
+        f7Panel,
+        f7View,
+    },
+    data() {
+        // Demo Theme
+        let theme = 'auto';
+        if (document.location.search.indexOf('theme=') >= 0) {
+        theme = document.location.search.split('theme=')[1].split('&')[0];
+        }
 
-    return {
-      f7Params: {
-        id: 'io.framework7.testapp',
-        theme,
-        routes,
-        store,
-        popup: {
-          closeOnEscape: true,
+        return {
+            f7Params: {
+                id: 'io.framework7.testapp',
+                theme,
+                routes,
+                store,
+                popup: {
+                    closeOnEscape: true,
+                },
+                sheet: {
+                    closeOnEscape: true,
+                },
+                popover: {
+                    closeOnEscape: true,
+                },
+                actions: {
+                    closeOnEscape: true,
+                },
+            },
+            langs: [],
+            trans : [],
+        };
+    },
+    setup() {
+        const { cookies } = useCookies();
+        return { cookies };
+    },
+    created() {
+        this.getLanguage();
+    },
+    methods: {
+        getLanguage() {
+            axios.get('/api/get-languages')
+            .then((res) => {
+                this.langs = res.data.langs;
+                res.data.langs.forEach(lang => {
+                    if (lang.name == 'English') {
+                        this.languageTranslation(lang.id, lang.name);
+                    }
+                });
+            })
         },
-        sheet: {
-          closeOnEscape: true,
-        },
-        popover: {
-          closeOnEscape: true,
-        },
-        actions: {
-          closeOnEscape: true,
-        },
-      },
-    };
-  },
+        languageTranslation(langId,langName) {
+            axios.post('/api/get-language-translation', { lang_id: langId, lang_name: langName })
+            .then((res) => {
+                this.trans = res.data.translations;
+            })
+        }
+
+    },
 };
 </script>

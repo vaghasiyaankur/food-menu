@@ -25,15 +25,14 @@
                         </div>
                         <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
                             <div class="card menu-dropdown-content bg-color-white margin-left no-margin-top">
-                                <a href="#" class="menu-dropdown-link menu-close justify-content-center text-color-black no-padding">Gujarati</a>
-                                <a href="#" class="menu-dropdown-link menu-close justify-content-center text-color-black no-padding">English</a>
+                                <a href="#" class="menu-dropdown-link menu-close justify-content-center text-color-black no-padding" v-for="lang in $root.langs" :key="lang" @click="$root.languageTranslation(lang.id, lang.name)">{{ lang.name }}</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-33 text-align-center">
-                <div class="registranstion text-color-white registraion-text">{{ title }}</div>
+                <div class="registranstion text-color-white registraion-text">{{ $root.trans.registration }}</div>
             </div>
             <div class="col-33 text-align-right">
                 <a class="link icon-only" href="/favourites/">
@@ -60,7 +59,7 @@
                 <div class="item-content item-input">
                     <div class="item-inner">
                         <!-- <div class="item-title item-label">Phone number</div> -->
-                        <div class="item-input-wrap margin-bottom-half"><input type="text" v-model.number="reservation.number" name="number" class="padding" placeholder="Phone number" minlength="10" maxlength="10" @focusout="checklength" @keypress="checknumbervalidate"></div>
+                        <div class="item-input-wrap margin-bottom-half"><input type="text" v-model.number="reservation.number" name="number" class="padding" placeholder="Phone number" minlength="10" maxlength="10" @keypress="checknumbervalidate"></div>
                     </div>
                 </div>
                 <div class="item-content item-input">
@@ -94,7 +93,7 @@
             <a class="link text-underline text-color-black" :class="{ 'display-none': checkWaitingTime }" @click="checkTime" href="javascript:;">Check Time</a>
             <div class="countdown_section position-relative margin-horizontal" :class="{ 'display-none' : !checkWaitingTime }">
                 <div style="background : url('/images/dots.png')">
-                    <img src="/images/clock.png" alt="">
+                    <img src="/images/clock.png" alt="clock">
                     <i class="f7-icons font-13 padding-half margin-bottom close-countdown" @click="(checkWaitingTime = false)">xmark</i>
                     <!-- <vue-countdown :time="60 * 60 * 1000" v-slot="{ hours, minutes, seconds }"> -->
                         <p class="no-margin font-30">{{ waiting_time }}</p>
@@ -113,7 +112,7 @@
             </div>
         </div>
     </div>
-    <Menu @textChange="title = 'Registration'" ref="menu"></Menu>
+    <Menu ref="menu"></Menu>
 </f7-page>
 </template>
 
@@ -140,6 +139,7 @@ import Framework7 from 'framework7/lite/bundle';
 import { onMounted } from 'vue';
 import VueCountdown from '@chenfengyuan/vue-countdown';
 import axios from "axios";
+
 export default {
     components: {
         Menu,
@@ -170,7 +170,6 @@ export default {
             number: '',
             member: '',
             location: '',
-            title: 'Registration',
             checkWaitingTime: false,
             floors: [],
             reservation: {
@@ -181,7 +180,7 @@ export default {
                 agree_condition: false
             },
             member_limit : 0,
-            waiting_time : '00:00',
+            waiting_time: '00:00',
         }
     },
     created() {
@@ -189,55 +188,6 @@ export default {
         this.memberLimitation();
     },
     methods: {
-        // register() {
-
-        //     if(this.name == '' || this.number == '' || this.member == '' || this.location == ''){
-        //         this.errornotification('Please fill the form details.');
-        //         return;
-        //     }
-
-        //     if(this.number.length > 10){
-        //         this.errornotification('Please check your number and enter your mobail number.');
-        //         return;
-        //     }
-
-        //     f7.dialog.confirm('', () => {
-
-
-
-        //         var formData = new FormData();
-        //         formData.append('name' , this.name);
-        //         formData.append('number' , this.number);
-        //         formData.append('member' , this.member);
-        //         formData.append('floor_location' , this.location);
-
-        //         axios.post('/api/register',formData)
-        //         .then((res) => {
-        //             document.getElementById('book_table').classList.add('active');
-        //             f7.dialog.alert('Success!',() => {
-        //                 document.getElementById('book_table').classList.remove('active');
-        //                 f7.view.main.router.navigate({ url: '/waiting/' });
-        //             });
-        //             setTimeout(() => {
-        //             $('.dialog-title').html("<img src='/images/success.png'>");
-        //             $('.dialog-button').addClass('col button button-raised button-large text-transform-capitalize');
-        //             $('.dialog-button').addClass('active');
-        //             $('.dialog-button').css('width','50%');
-        //             }, 200);
-        //         })
-        //         .catch((error) => {
-        //             var err = error.response.data.error;
-        //             if(err){
-        //                 this.errornotification('Please fill the form details.');
-        //             }
-        //         })
-        //     });
-        //     $('.dialog-title').text("Are you confirm to register?").css('font-size','20px');
-        //     $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
-        //     $('.dialog-button').eq(1).removeClass('text-color-black');
-        //     $('.dialog-button').eq(1).addClass('active');
-
-        // },
         memberLimitation() {
             axios.get('/api/member-limitation')
             .then((res) => {
@@ -258,7 +208,9 @@ export default {
             if(!this.reservation.name || !this.reservation.number || !this.reservation.member || !this.reservation.floor){
                 this.errornotification('Please enter all the required details.'); return false;
             }else if(parseInt(this.reservation.member) > parseInt(this.member_limit)){
-                this.errornotification('order create must be '+this.member_limit+' or less than member.'); return false;
+                this.errornotification('order create must be ' + this.member_limit + ' or less than member.'); return false;
+            } else if (this.reservation.number.toString().length != 10) {
+                this.errornotification('Please enter atleast 10 characters.');
             }else{
 
                 var formData = new FormData();
@@ -314,12 +266,14 @@ export default {
                 this.errornotification('Please enter all the required details.'); return false;
             }else if(parseInt(this.reservation.member) > parseInt(this.member_limit)){
                 this.errornotification('order create must be '+this.member_limit+' or less than member.'); return false;
+            } else if (this.reservation.number.toString().length != 10) {
+                this.errornotification('Please enter atleast 10 characters.'); return false;
             }
 
             if(this.reservation.agree_condition) var agree_condition = 1;
             else var agree_condition = 0;
 
-            f7.dialog.confirm('Are you confirm to register?', () => {
+            f7.dialog.confirm('Are you sure you want to make a reservation? Your waiting time is appropriate ' + this.waiting_time +'.', () => {
 
                 var formData = new FormData();
                 formData.append('customer_name', this.reservation.name);
@@ -368,17 +322,8 @@ export default {
                 return true;
             }
         },
-        checklength() {
-            var phone = event.target.value.length;
-            if (phone > 10 || phone < 10) {
-                this.errornotification('Please enter atleast 10 characters.');
-            }
-        }
     },
 }
-    $(document).on('click', '.sheet-backdrop', function () {
-        $('.registraion-text').text('Registration');
-    });
 </script>
 
 <style scoped>
