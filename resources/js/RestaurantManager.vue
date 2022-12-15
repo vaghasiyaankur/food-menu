@@ -251,13 +251,24 @@ export default {
 };
 </script>
 <style>
-.notification-title{
+.notification-title {
     display: flex;
     justify-content: center;
     align-items: center;
+    text-transform: capitalize !important;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
 }
 .notification-title img{
     margin-right: 8px;
+}
+.notification.success--notification .notification-title {
+    color: #0FC963;
+}
+
+.notification.error--notification .notification-title {
+    color: #FF6161;
 }
 .notification.success--notification.modal-in{
     background: linear-gradient(90deg, #91F4BE 0%, rgb(252 253 252) 100%, rgb(145 244 190 / 54%) 100%);

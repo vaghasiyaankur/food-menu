@@ -42,10 +42,7 @@
             </div>
         </div>
     </div>
-    <div class="margin-left margin-right register-from">
-        <div class="text-align-center text-color-gray register-text">
-            <p> Please fill in the form below. <br> We will contact you as soon as possible </p>
-        </div>
+    <div class="margin-left margin-right register-from margin-top">
         <div class="text-align-center padding-top">
             <img src="/images/registerImage.png" alt="">
         </div>
@@ -63,7 +60,7 @@
                 <div class="item-content item-input">
                     <div class="item-inner">
                         <!-- <div class="item-title item-label">Phone number</div> -->
-                        <div class="item-input-wrap margin-bottom-half"><input type="number" v-model="reservation.number" name="number" class="padding" placeholder="Phone number"></div>
+                        <div class="item-input-wrap margin-bottom-half"><input type="text" v-model.number="reservation.number" name="number" class="padding" placeholder="Phone number" minlength="10" maxlength="10" @focusout="checklength" @keypress="checknumbervalidate"></div>
                     </div>
                 </div>
                 <div class="item-content item-input">
@@ -99,9 +96,7 @@
                 <div style="background : url('/images/dots.png')">
                     <img src="/images/clock.png" alt="">
                     <i class="f7-icons font-13 padding-half margin-bottom close-countdown" @click="(checkWaitingTime = false)">xmark</i>
-                    <vue-countdown :time="60 * 60 * 1000" v-slot="{ hours, minutes, seconds }">
-                        <p class="no-margin font-30">{{ hours }} : {{ minutes }} : {{ seconds }}</p>
-                    </vue-countdown>
+                    <p class="no-margin font-30">01:30</p>
                 </div>
             </div>
         </div>
@@ -345,6 +340,21 @@ export default {
             if (this.$refs.menu) {
                 this.$refs.menu.wishlistData();
             }
+        },
+        checknumbervalidate(evt) {
+            evt = (evt) ? evt : window.event;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+                evt.preventDefault();;
+            } else {
+                return true;
+            }
+        },
+        checklength() {
+            var phone = event.target.value.length;
+            if (phone > 10 || phone < 10) {
+                this.errornotification('Please enter atleast 10 characters.');
+            }
         }
     },
 }
@@ -510,9 +520,19 @@ label.item-checkbox input[type='checkbox']:checked~.icon-checkbox{
     display: flex;
     justify-content: center;
     align-items: center;
+    text-transform: capitalize !important;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
 }
 .notification-title img{
     margin-right: 8px;
+}
+.notification.success--notification .notification-title{
+    color: #0FC963;
+}
+.notification.error--notification .notification-title {
+    color: #FF6161;
 }
 .notification.success--notification.modal-in{
     background: linear-gradient(90deg, #91F4BE 0%, rgb(252 253 252) 100%, rgb(145 244 190 / 54%) 100%);

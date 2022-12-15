@@ -45,7 +45,7 @@
                                 <h3 class="card-title text-align-center">Registration</h3>
                             </div>
                             <div>
-                                <form class="list margin-vertical" id="my-form">
+                                <form name="reservationForm" class="list margin-vertical" id="my-form">
                                     <div class="item-content item-input">
                                         <div class="item-inner">
                                             <!-- <div class="item-title item-label">Name</div> -->
@@ -54,11 +54,11 @@
                                             </div>
                                         </div>
                                     </div>
-                    
+
                                     <div class="item-content item-input">
                                         <div class="item-inner">
                                             <!-- <div class="item-title item-label">Phone number</div> -->
-                                            <div class="item-input-wrap margin-bottom-half"><input type="number" v-model="reservation.number" name="number" class="padding" placeholder="Phone number"></div>
+                                            <div class="item-input-wrap margin-bottom-half"><input type="text" v-model.number="reservation.number" name="number" class="padding" placeholder="Phone number" maxlength="10" @keypress="checknumbervalidate"></div>
                                         </div>
                                     </div>
                                     <div class="item-content item-input">
@@ -107,7 +107,7 @@
                 </div>
             </div>
         </div>
-        <f7-sheet class="demo-sheet-swipe-to-close" style="height:auto; --f7-sheet-bg-color: #fff;" backdrop>
+        <f7-sheet class="demo-sheet-swipe-to-close" swipe-to-close style="height:auto; --f7-sheet-bg-color: #fff;" backdrop>
             <f7-page-content>
                 <div class="row">
                     <div class="col">
@@ -238,7 +238,7 @@ export default {
                 this.checkWaitingTime = true;
             }
 
-            f7.dialog.confirm('Are you confirm to register?', () => {
+            f7.dialog.confirm('Are you sure you want to make a reservation? Your waiting time is appropriate '+ this.waiting_time +'.', () => {
 
                 var formData = new FormData();
                 formData.append('customer_name', this.reservation.name);
@@ -288,6 +288,15 @@ export default {
                 this.checkWaitingTime = true;
             }
         },
+        checknumbervalidate(evt) {
+            evt = (evt) ? evt : window.event;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+                evt.preventDefault();;
+            } else {
+                return true;
+            }
+        }
     }
 
 }
