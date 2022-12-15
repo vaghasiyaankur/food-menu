@@ -15,8 +15,8 @@
             <div class="countdown position-relative text-align-center margin">
                 <div style="background : url('/images/dots.png')">
                     <img src="/images/clock.png" alt="">
-                    <i class="f7-icons font-13 padding-half margin-bottom close-countdown" @click="display = true">xmark</i>
-                    <vue-countdown :time="60 * 60 * 1000" v-slot="{ hours, minutes, seconds }">
+                    <!-- <i class="f7-icons font-13 padding-half margin-bottom close-countdown" @click="display = true">xmark</i> -->
+                    <vue-countdown :time="time" v-slot="{ hours, minutes, seconds }">
                         <p class="no-margin font-30">{{ hours }} : {{ minutes }} : {{ seconds }}</p>
                     </vue-countdown>
                 </div>
@@ -33,7 +33,9 @@
 import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7Button,f7 } from 'framework7-vue';
 import $ from 'jquery';
 import VueCountdown from '@chenfengyuan/vue-countdown';
+import { useCookies } from "vue3-cookies";
 import Menu from './Menu.vue';
+import axios from "axios";
 
 export default {
     name : 'Favourite',
@@ -47,6 +49,18 @@ export default {
         f7,
         f7Button
     },
+    data() {
+        return {
+            time : 3600000,
+        }
+    },  
+    setup() {
+        const { cookies } = useCookies()
+        return { cookies };
+    },
+    created() {
+        this.getWaitingTime();
+    },  
     methods: {
         onPageBeforeOut() {
             const self = this;
@@ -58,6 +72,17 @@ export default {
             // Destroy sheet modal when page removed
             if (self.sheet) self.sheet.destroy();
         },
+        getWaitingTime() {
+
+            var ids = JSON.parse(this.cookies.get('orderId'));
+
+            axios.post('/api/waiting-time', {ids : ids})
+            .then((res) => {
+                this.time = res.data.time;
+            })
+            .catch((err) => {
+            });
+        }
     },
 };
 </script>

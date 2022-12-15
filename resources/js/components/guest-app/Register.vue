@@ -66,7 +66,7 @@
                 <div class="item-content item-input">
                     <div class="item-inner">
                         <!-- <div class="item-title item-label">Family member number</div> -->
-                        <div class="item-input-wrap margin-bottom-half"><input type="number" v-model="reservation.member" name="member" class="padding" placeholder="Family member"></div>
+                        <div class="item-input-wrap margin-bottom-half"><input type="number" v-model="reservation.member" name="member" class="padding" placeholder="Family member" @keyup="floorAvailable"></div>
                     </div>
                 </div>
                 <div class="item-content item-input">
@@ -74,6 +74,7 @@
                         <!-- <div class="item-title item-label font-16 text-color-black">Location type</div> -->
                         <div class="item-input-wrap margin-bottom-half input-dropdown-wrap">
                             <select v-model="reservation.floor" placeholder="floor" class="padding-left padding-right">
+                                <option value="0">As soon as earlier </option>
                                 <option v-for="(floor,key) in floors" :key="floor" :value="key">{{ floor }}</option>
                             </select>
                         </div>
@@ -119,6 +120,7 @@
 
 <script>
 import $ from "jquery";
+import { useCookies } from "vue3-cookies";
 import Menu from "./Menu.vue";
 import {
     f7Page,
@@ -161,6 +163,7 @@ export default {
     mounted() {
         $('.navbar-bg').remove();
         $(".page-content").css('padding-top', 0);
+        
     },
     data() {
         return {
@@ -177,15 +180,19 @@ export default {
                 name: '',
                 number: '',
                 member: '',
-                floor: 1,
+                floor: 0,
                 agree_condition: false
             },
             member_limit : 0,
             waiting_time : '00:00',
         }
     },
+    setup() {
+        const { cookies } = useCookies()
+        return { cookies };
+    },
     created() {
-        this.getFloors();
+        // this.getFloors();
         this.memberLimitation();
     },
     methods: {
@@ -255,7 +262,7 @@ export default {
             if (self.sheet) self.sheet.destroy();
         },
         checkTime() {
-            if(!this.reservation.name || !this.reservation.number || !this.reservation.member || !this.reservation.floor){
+            if(!this.reservation.name || !this.reservation.number || !this.reservation.member){
                 this.errornotification('Please enter all the required details.'); return false;
             }else if(parseInt(this.reservation.member) > parseInt(this.member_limit)){
                 this.errornotification('order create must be '+this.member_limit+' or less than member.'); return false;
@@ -310,7 +317,7 @@ export default {
             })
         },
         register() {
-            if(!this.reservation.name || !this.reservation.number || !this.reservation.member || !this.reservation.floor){
+            if(!this.reservation.name || !this.reservation.number || !this.reservation.member){
                 this.errornotification('Please enter all the required details.'); return false;
             }else if(parseInt(this.reservation.member) > parseInt(this.member_limit)){
                 this.errornotification('order create must be '+this.member_limit+' or less than member.'); return false;
@@ -331,10 +338,19 @@ export default {
 
                 axios.post('/api/add-reservation', formData)
                 .then((res) => {
+                    var orderId = res.data.orderId;
+                    var cookieArray = JSON.parse(this.cookies.get('orderId'));
+                    if(cookieArray == 'undefined' || !cookieArray) var cookieArray = [];
+                    cookieArray.push(orderId);
+                    this.cookies.set("orderId", JSON.stringify(cookieArray), 60 * 60 * 24);
+
                     f7.dialog.alert('Success!', () => {
                         document.getElementById('book_table').classList.remove('active');
                         f7.view.main.router.navigate({ url: '/waiting/' });
                     });
+                })
+                .catch((err) => {
+                    this.errornotification(err.response.data.error); return false;
                 });
 
                 setTimeout(() => {
@@ -373,8 +389,22 @@ export default {
             if (phone > 10 || phone < 10) {
                 this.errornotification('Please enter atleast 10 characters.');
             }
-        }
-    },
+        },
+        floorAvailable() {
+            if(this.reservation.member){
+                axios.post('/api/floor-available', {'member' : this.reservation.member})
+                .then((res) => {
+                    if(res.data.success){
+                        this.reservation.floor = 0;
+                        this.floors = res.data.floors;
+                    }
+                    else{
+
+                    }
+                });
+            }
+        }   
+    }
 }
     $(document).on('click', '.sheet-backdrop', function () {
         $('.registraion-text').text('Registration');
