@@ -247,12 +247,12 @@ export default {
                 return;
             }
 
-        //     if(this.number.length > 10){
-        //         this.errornotification('Please check your number and enter your mobail number.');
-        //         return;
-        //     }
+            if(this.number.length > 10){
+                this.errornotification('Please check your number and enter your mobail number.');
+                return;
+            }
 
-        //     f7.dialog.confirm('', () => {
+            f7.dialog.confirm('', () => {
 
 
 
