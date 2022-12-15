@@ -24,9 +24,9 @@
                             </div>
                         </div>
                         <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
-                            <div class="card menu-dropdown-content bg-color-white margin-left no-margin-top">
-                                <a href="#" class="menu-dropdown-link menu-close justify-content-center text-color-black no-padding">Gujarati</a>
-                                <a href="#" class="menu-dropdown-link menu-close justify-content-center text-color-black no-padding">English</a>
+                            <div class="card menu-dropdown-content bg-color-white margin-left no-margin-top no-padding">
+                                <a href="#" class="menu-dropdown-link active menu-close justify-content-center text-color-black no-padding-horizontal">Gujarati</a>
+                                <a href="#" class="menu-dropdown-link menu-close justify-content-center text-color-black no-padding-horizontal">English</a>
                             </div>
                         </div>
                     </div>
@@ -82,7 +82,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="no-padding-left">
+                <div class="no-padding-left d-flex align-items-center justify_content_between">
                     <label class="item-checkbox item-content">
                         <input type="checkbox" name="demo-checkbox" v-model="reservation.agree_condition" checked="checked" />
                         <i class="icon icon-checkbox"></i>
@@ -90,9 +90,56 @@
                             <div class="item-title">I agree with the terms & conditions</div>
                         </div>
                     </label>
+                    <div class="view_terms_condition padding-right">
+                        <f7-button fill sheet-open=".demo-sheet" class="view_terms_text">View</f7-button>                        
+                    </div>
                 </div>
             </form>
         </div>
+        <!-- ========VIEW TERMS AND CONDITION========= -->
+        <f7-sheet class="demo-sheet" :opened="sheetOpened" @sheet:closed="sheetOpened = false"  style="height:auto; border-radius: 20px 20px 0px 0px;" backdrop>
+            <!-- Scrollable sheet content -->
+            <f7-page-content>
+                <div class="card_header border_bottom">
+                    <div class="row">
+                        <div class="col">
+                            <div class="border-popup"></div>
+                        </div>
+                    </div>                    
+                    <div class="close-menu">
+                      <f7-link sheet-close><i class="f7-icons font-25 text-color-black">xmark</i></f7-link>
+                    </div>   
+                    <div class="block-title text-align-center font-18 text-color-black margin-top" medium="false">Food Menu</div>                          
+                </div> 
+              <f7-block class="no-margin terms_condition_main">
+                <p class="margin-top">Terms and Conditions agreements contain a broad range of guidelines for how you and your users can use your service or site.</p>
+                <p>Here’s what you should include in your terms and conditions agreements to prevent such misunderstandings and others:</p>
+                <div class="terms_condition">
+                    <div class="terms_lists">
+                        <h3 class="margin-bottom-half">1. Using our Services</h3>
+                        <p class="padding-left margin-top-half">Unlike a Privacy Policy, you aren't legally required to have a Terms and Conditions agreement. However, there are many reasons why you should draft one and display it on your website.</p>
+                    </div>
+                    <div class="terms_lists">
+                        <h3 class="margin-bottom-half">2. Your Account</h3>
+                        <p class="padding-left margin-top-half">Unlike a Privacy Policy, you aren't legally required to have a Terms and Conditions agreement. However, there are many reasons why you should draft one and display it on your website.</p>
+                    </div>
+                    <div class="terms_lists">
+                        <h3 class="margin-bottom-half">3. License</h3>
+                        <p class="padding-left margin-top-half">Unlike a Privacy Policy, you aren't legally required to have a Terms and Conditions agreement. However, there are many reasons why you should draft one and display it on your website.</p>
+                    </div>
+                    <div class="terms_lists">
+                        <h3 class="margin-bottom-half">4. Privacy Policy</h3>
+                        <p class="padding-left margin-top-half">Unlike a Privacy Policy, you aren't legally required to have a Terms and Conditions agreement. However, there are many reasons why you should draft one and display it on your website.</p>
+                    </div>
+                </div>
+                <div class="agree_button margin-bottom">
+                    <f7-button class="button border_radius_10 button-raised button-large">Agree  </f7-button>
+                </div>
+              </f7-block>
+            </f7-page-content>
+        </f7-sheet>
+        <!-- ========VIEW TERMS AND CONDITION END========= -->
+
         <div class="text-align-center margin-top">
             <a class="link text-underline text-color-black" :class="{ 'display-none': checkWaitingTime }" @click="checkTime" href="javascript:;">Check Time</a>
             <div class="countdown_section position-relative margin-horizontal" :class="{ 'display-none' : !checkWaitingTime }">
@@ -109,10 +156,10 @@
     <div class="padding bottom-bar">
         <div class="row justify-content-start">
             <div class="col bottom-button margin-right">
-                <f7-button class="button bg-color-white register-button button-raised text-color-black button-large text-transform-capitalize" @click="register" id="book_table">Book Table</f7-button>
+                <f7-button class="button border_radius_10 bg-color-white register-button button-raised text-color-black button-large text-transform-capitalize" @click="register" id="book_table">Book Table</f7-button>
             </div>
             <div class="col bottom-button">
-                <f7-button class="button bg-color-white register-button button-raised text-color-black button-large text-transform-capitalize" fill sheet-open=".demo-sheet-swipe-to-close" @click="title = 'Menu';showMenuData()" >Menu</f7-button>
+                <f7-button class="button border_radius_10 bg-color-white register-button button-raised text-color-black button-large text-transform-capitalize" fill sheet-open=".demo-sheet-swipe-to-close" @click="title = 'Menu';showMenuData()" >Menu</f7-button>
             </div>
         </div>
     </div>
@@ -137,7 +184,9 @@ import {
     f7MenuItem,
     f7MenuDropdown,
     f7MenuDropdownItem,
-    f7Sheet
+    f7Sheet,
+    f7Toolbar,
+    f7Link
 } from 'framework7-vue';
 import Framework7 from 'framework7/lite/bundle';
 import { onMounted } from 'vue';
@@ -159,7 +208,9 @@ export default {
         f7MenuDropdownItem,
         f7Sheet,
         f7PageContent,
-        VueCountdown
+        VueCountdown,
+        f7Toolbar,
+        f7Link  
     },
     mounted() {
         $('.navbar-bg').remove();
@@ -189,55 +240,58 @@ export default {
         this.getFloors();
     },
     methods: {
-        register() {
+        
+        // register() {
+        //     f7.view.main.router.navigate({ url: '/waiting/' });
 
-            if(this.name == '' || this.number == '' || this.member == '' || this.location == ''){
-                this.errornotification('Please fill the form details.');
-                return;
-            }
+        //     if(this.name == '' || this.number == '' || this.member == '' || this.location == ''){
+        //         this.errornotification('Please fill the form details.');
+        //         return;
+        //     }
 
-            if(this.number.length > 10){
-                this.errornotification('Please check your number and enter your mobail number.');
-                return;
-            }
+        //     if(this.number.length > 10){
+        //         this.errornotification('Please check your number and enter your mobail number.');
+        //         return;
+        //     }
 
-            f7.dialog.confirm('', () => {
+        //     f7.dialog.confirm('', () => {
 
 
 
-                var formData = new FormData();
-                formData.append('name' , this.name);
-                formData.append('number' , this.number);
-                formData.append('member' , this.member);
-                formData.append('floor_location' , this.location);
+        //         var formData = new FormData();
+        //         formData.append('name' , this.name);
+        //         formData.append('number' , this.number);
+        //         formData.append('member' , this.member);
+        //         formData.append('floor_location' , this.location);
 
-                axios.post('/api/register',formData)
-                .then((res) => {
-                    document.getElementById('book_table').classList.add('active');
-                    f7.dialog.alert('Success!',() => {
-                        document.getElementById('book_table').classList.remove('active');
-                        f7.view.main.router.navigate({ url: '/waiting/' });
-                    });
-                    setTimeout(() => {
-                    $('.dialog-title').html("<img src='/images/success.png'>");
-                    $('.dialog-button').addClass('col button button-raised button-large text-transform-capitalize');
-                    $('.dialog-button').addClass('active');
-                    $('.dialog-button').css('width','50%');
-                    }, 200);
-                })
-                .catch((error) => {
-                    var err = error.response.data.error;
-                    if(err){
-                        this.errornotification('Please fill the form details.');
-                    }
-                })
-            });
-            $('.dialog-title').text("Are you confirm to register?").css('font-size','20px');
-            $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
-            $('.dialog-button').eq(1).removeClass('text-color-black');
-            $('.dialog-button').eq(1).addClass('active');
+        //         axios.post('/api/register',formData)
+        //         .then((res) => {
+        //             document.getElementById('book_table').classList.add('active');
+        //             f7.dialog.alert('Success!',() => {
+        //                 document.getElementById('book_table').classList.remove('active');
+        //                 f7.view.main.router.navigate({ url: '/waiting/' });
+        //             });
+        //             setTimeout(() => {
+        //             $('.dialog-title').html("<img src='/images/success.png'>");
+        //             $('.dialog-button').addClass('col button button-raised button-large text-transform-capitalize');
+        //             $('.dialog-button').addClass('active');
+        //             $('.dialog-button').css('width','50%');
+        //             }, 200);
+        //         })
+        //         .catch((error) => {
+        //             var err = error.response.data.error;
+        //             if(err){
+        //                 this.errornotification('Please fill the form details.');
+        //             }
+        //         })
+        //     });
+        //     $('.dialog-title').text("Are you confirm to register?").css('font-size','20px');
+        //     $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
+        //     $('.dialog-button').eq(1).removeClass('text-color-black');
+        //     $('.dialog-button').eq(1).addClass('active');
+            
 
-        },
+        // },
         onPageBeforeOut() {
             const self = this;
             // Close opened sheets on page out
@@ -292,6 +346,7 @@ export default {
             })
         },
         register() {
+            // f7.view.main.router.navigate({ url: '/waiting/' });
             if(!this.reservation.name){
                 this.errornotification('Please Enter your name.'); return false;
             }else if(!this.reservation.number){
@@ -333,12 +388,13 @@ export default {
             });
 
             setTimeout(() => {
-                $('.dialog-title').text("").css('font-size','20px');
+                $('.dialog-title').eq().css({'font-size': '20px'});
+                $('.dialog-text').css({'font-size': '18px', 'line-height': '22px'});
+                $('.dialog-title').html("<img src='/images/usericon.png'>");
                 $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
                 $('.dialog-button').eq(1).removeClass('text-color-black');
                 $('.dialog-button').eq(1).addClass('active');
-                $('.dialog-inner').addClass('margin-top');
-                $('.dialog-buttons').css({ 'margin-top': '25px', 'margin-bottom': '35px' });
+                $('.dialog-buttons').addClass('margin-vertical padding-bottom');
             });
         },
         showMenuData() {
@@ -354,6 +410,65 @@ export default {
 </script>
 
 <style scoped>
+.border_bottom{
+    border-bottom: 1px solid #DBDBDB;
+}
+.d-flex{
+    display: flex;
+}
+.justify_content_between{
+    justify-content: space-between;
+}
+.terms_condition_main{
+    height: calc(100vh - 175px);
+    overflow-y: auto;
+}
+.terms_condition_main p{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    color: #555555;
+    text-align: justify;
+}
+.terms_condition .terms_lists h3{
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 18px;
+    color: #38373D;
+}
+.view_terms_condition .view_terms_text{
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    text-decoration-line: underline;
+    color: #38373D;
+    background-color: transparent;
+    text-transform: capitalize;
+}
+.agree_button a{
+    background: #F33E3E;
+    box-shadow: 1px 1px 4px rgba(143, 113, 100, 0.35), inset 2.5px -2.5px 2px rgba(134, 62, 32, 0.15);
+    color: #fff;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    text-transform: capitalize;
+}
+
+.close-menu {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+.border-popup{
+	width: 40px;
+	height: 5px;
+	background: #F3F3F3;
+	margin: 12px auto 0;
+}
+.border_radius_10 {
+    border-radius: 10px;
+}
 .menu-item-dropdown .menu-item-content:after {
     opacity: 0;
 }
@@ -376,7 +491,9 @@ export default {
 .font-18 {
     font-size: 18px;
 }
-
+.font-25{
+    font-size: 25px;
+}
 .close-countdown {
     position: absolute;
     top: 5px;
@@ -388,10 +505,17 @@ export default {
 
 .menu-dropdown-center:before,
 .menu-dropdown-center:after,
-.dialog-inner:after {
+.dialog-inner:after,.menu-dropdown-link:before {
     content: none !important;
 }
-
+.menu-dropdown .card.menu-dropdown-content .menu-dropdown-link{
+    padding: 5px 0;
+}
+.menu-dropdown-link.active{
+    background: #F33E3E !important;
+    border-radius: 3px 3px 0px 0px;
+    color: #fff !important;
+}
 .bg-color-transparent {
     background-color: transparent !important;
 }

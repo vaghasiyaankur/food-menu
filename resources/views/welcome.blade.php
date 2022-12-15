@@ -8,6 +8,8 @@
     <!-- ============GOOGLE FONTS LINK================== -->
     {{-- <link href="https://fonts.googleapis.com/css2?family=Abel&family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/fonts/Quentin.ttf"> --}}
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
 
     <!-- ============= CUSTOME CSS ===================== -->
     {{-- <link rel="stylesheet" href="{{ asset('css/framework7-bundle-rtl.css') }}"> --}}
@@ -15,6 +17,12 @@
     {{-- <link rel="stylesheet" href="{{ asset('css/framework7-bundle.min.css') }}" />  --}}
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/framework7/1.5.2/css/framework7.ios.colors.min.css" /> --}}
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/framework7/1.5.2/css/framework7.ios.min.css" /> --}}
+    <style>
+		*{
+			font-family: 'Inter', sans-serif;
+			font-weight: 400;			
+		}
+	</style>
 	@vite('resources/css/app.css')
 </head>
 <body>

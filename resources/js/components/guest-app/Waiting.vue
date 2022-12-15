@@ -22,8 +22,15 @@
                 </div>
             </div>
         </div>
-        <div class="menu-button">
-            <f7-button class="button button-raised open-menu-button button-large text-transform-capitalize margin" fill sheet-open=".demo-sheet-swipe-to-close">Open Menu</f7-button>
+        <div class="padding bottom-bar">
+            <div class="row">
+                <div class="col">
+                    <f7-button class="button button-raised open-menu-button active button-large text-transform-capitalize" fill sheet-open=".demo-sheet-swipe-to-close">Open Menu</f7-button>
+                </div>
+                <div class="col">
+                    <f7-button class="button button-raised open-menu-button button-large text-transform-capitalize" @click="cancelReservation(category.id)">Cancel Reservation</f7-button>
+                </div>
+            </div>
         </div>
         <Menu></Menu>
     </f7-page>
@@ -37,6 +44,15 @@ import Menu from './Menu.vue';
 
 export default {
     name : 'Favourite',
+    data(){
+        return {
+            category: {
+                    id : null,
+                    name: '',
+                    image: '',
+                }
+        }
+    },
     components: {
         f7Page,
         f7Navbar,
@@ -58,11 +74,33 @@ export default {
             // Destroy sheet modal when page removed
             if (self.sheet) self.sheet.destroy();
         },
+        cancelReservation(id) {
+            f7.dialog.confirm('Are you sure cancel registration?', () => {
+                axios.post('/api/delete-category', { id: id })
+                .then((res) => {
+                    this.getCategories();
+                    this.$root.successnotification(res.data.success);
+                })
+            });
+            setTimeout(() => {
+                $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });
+                $('.dialog-title').html("<img src='/images/cross.png'>");
+                $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
+                $('.dialog-button').eq(1).removeClass('text-color-black');
+                $('.dialog-buttons').addClass('margin-vertical padding-bottom');
+                $('.dialog-text').css({'font-size':'18px', 'line-height': '22px'});
+            }, 200);
+        },
     },
+
 };
 </script>
 
 <style scoped>
+
+.border_radius_10{
+    border-radius: 10px;
+}
 .nav-bar{
     background: #38373D;
     border-radius: 8px 8px 0px 0px;
@@ -91,7 +129,7 @@ export default {
     opacity: 0;
 }
 .countdown_section{
-    height: calc(100vh - 90px);
+    height: calc(100vh - 168px);
     display: flex;
     flex-wrap: wrap;
     align-content: center;
@@ -115,6 +153,14 @@ export default {
     position: relative;
 }
 .open-menu-button{
+    background: #ffffff !important;
+    color : #000000;
+    border-radius: 10px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+}
+.open-menu-button.active{
     background: #F33E3E !important;
     color : #fff;
 }
@@ -126,5 +172,15 @@ export default {
     bottom: 0;
     width: 100%;
     left: 0;
+}
+</style>
+<style>
+.ios-translucent-modals .dialog{
+    background-color: #fff !important;
+    width: 100%;
+    max-width: 350px;
+}
+.dialog{
+    left: 40% !important;
 }
 </style>

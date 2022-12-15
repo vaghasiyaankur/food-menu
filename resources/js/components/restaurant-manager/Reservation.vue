@@ -39,14 +39,14 @@
                             <img src="/images/reservationbg.png" style="width:100%;height:auto">
                         </div>
                     </div>
-                    <div class="col-100 medium-100 large-50">
+                    <div class="col-100 medium-100 large-50 reservation_details">
                         <div class="reservation_form">
                             <div class="text-color-gray register-text padding-left">
                                 <h3 class="card-title text-align-center">Registration</h3>
                             </div>
                             <div>
                                 <form class="list margin-vertical" id="my-form">
-                                    <div class="item-content item-input">
+                                    <div class="item-content item-input margin-bottom">
                                         <div class="item-inner">
                                             <div class="item-title item-label">Name</div>
                                             <div class="item-input-wrap">
@@ -54,25 +54,37 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="item-content item-input">
+                                    <div class="item-content item-input margin-bottom">
                                         <div class="item-inner">
                                             <div class="item-title item-label">Phone number</div>
                                             <div class="item-input-wrap"><input type="number" v-model="reservation.number" name="number" class="padding" placeholder="Phone number"></div>
                                         </div>
                                     </div>
-                                    <div class="item-content item-input">
+                                    <div class="item-content item-input margin-bottom">
                                         <div class="item-inner">
                                             <div class="item-title item-label">Family member number</div>
                                             <div class="item-input-wrap"><input type="number" v-model="reservation.member" name="member" class="padding" placeholder="5 Family member"></div>
                                         </div>
                                     </div>
-                                    <div class="item-content item-input">
+                                    <!-- <div class="item-content item-input margin-bottom">
                                         <div class="item-inner">
                                             <div class="item-title item-label">Location type</div>
                                             <div class="item-input-wrap input-dropdown-wrap">
                                                 <select v-model="reservation.floor" placeholder="Please choose..." class="padding-left padding-right">
                                                     <option v-for="(floor,key) in floors" :key="floor" :value="key">{{ floor }}</option>
                                                 </select>
+                                            </div>
+                                        </div>                                        
+                                    </div> -->
+                                    <div class="item-content item-input margin-bottom">
+                                        <div class="item-inner">
+                                            <div class="item-title item-label">Location type</div>
+                                            <div class="item-input-wrap">
+                                                <div class="f-concise position-relative">
+                                                    <div id="selection-concise">
+                                                        <div id="select-concise" class="input-dropdown-wrap" @click="price()"> USD ($)</div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -193,6 +205,25 @@ export default {
         this.getFloors();
         this.getCategories();
     },
+    mounted(){
+        $("#selection-concise").append(`
+            <ul id="location-select-list" class="d-none dropdown_list">
+                <li class="concise p-1 active" data-id="1"><span data-id="1">IND (₹)</span></li>
+                <li class="concise p-2" data-id="2"><span data-id="2">USD ($)</span></li>
+                <li class="concise p-3" data-id="3"><span data-id="3">EUR (€)</span></li>
+                <li class="concise p-4" data-id="4"><span data-id="3">rs (€)</span></li>
+                <li class="concise p-5" data-id="4"><span data-id="4">up (€)</span></li>
+            </ul>
+        `)
+
+        $(".concise").click(function(e) {
+            var dataId = $(e.target).data('id');    
+            $("#select-concise").html($('.p-'+dataId).html()); 
+            $(".concise").removeClass('active');
+            $('.p-'+dataId).addClass('active');
+            $("#location-select-list").toggleClass('d-none');
+        }); 
+    },
     methods: {
         getCategories() {
             axios.post('/api/get-categories')
@@ -280,11 +311,16 @@ export default {
                 this.checkWaitingTime = true;
             }
         },
+        price() {
+            
+            $("#location-select-list").toggleClass('d-none');
+        },
     }
 
 }
 </script>
 <style scoped>
+
 .sheet-modal{
     height: 92% !important;
 }
@@ -393,6 +429,10 @@ export default {
     line-height: 17px;
     color: #555555;
     margin-bottom: 10px;
+}
+.reservation_details{
+    padding-right: 30px;
+    padding-left: 30px;
 }
 .reservation_form{
 
@@ -510,6 +550,38 @@ label.item-checkbox input[type='checkbox']:checked ~ .icon-checkbox:after, label
 }
 </style>
 <style>
+/* Chrome, Safari, Edge, Opera */
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield !important;
+}
+#select-concise{
+    background-color: #fafafa;
+    border-radius: 10px;
+    width: 100%;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    padding: 16px;
+}
+#location-select-list{
+    position: absolute;
+    width: 100%;
+    z-index: 999;
+    background-color: #fff;
+    box-shadow: 0.7px 0.7px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+}
+#location-select-list li.concise{
+    padding: 10px;
+}
+#location-select-list li.concise:first-child{
+    border-radius: 3px 3px 0px 0px;
+}
+.d-none{
+    display: none;
+}
 .register-button:hover, .register-button:active, .active {
     background: #F33E3E !important;
     color: #fff !important;
