@@ -158,7 +158,7 @@ class ReservationController extends Controller
             if($firstOrderTime){
                 $started_time = $firstOrderTime->start_time;
             }else{
-                $firstOrderTime = $allOrder[0];
+                $firstOrderTime = @$allOrder[0];
                 $started_time = @$firstOrderTime->created_at;
             } 
             $start  = new Carbon($started_time);
@@ -168,7 +168,7 @@ class ReservationController extends Controller
             $start  = new Carbon($finalTime);
             $end    = new Carbon();
             $time = ($start->diffInHours($end) * 60) + ($start->diffInMinutes($end) * 60)+ ($start->diffInSeconds($end) * 1000);
-
+            
             return response()->json([ 'success' => true, 'time' => $time ] , 200);
         }else{
             return response()->json([ 'success' => false, 'message' => "We don't have the capacity table for that many people" ] , 200);
@@ -184,7 +184,6 @@ class ReservationController extends Controller
 
     public function checkOrder(Request $request)
     {   
-        // $table_id = ReservationHelper::takeTable($request->floor, $request->person);
         $orderIds = $request->orderIds;
         $orderId = @$orderIds[0];
         
@@ -199,6 +198,22 @@ class ReservationController extends Controller
             $orderremaining = false;
             return response()->json([ 'orderremaining' => $orderremaining ] , 200);
         }
+    }
+
+    /**
+     *  Cancel Reservation From user side
+     *
+     * @return @json (success message)
+     *
+     */
+
+    public function cancelReservation(Request $request)
+    {   
+        $orderIds = $request->ids;
+        foreach($orderIds as $orderId){
+            Order::where('id', $orderId)->delete();
+        }
+        return response()->json([ 'success' => true ] , 200);
     }
 
     

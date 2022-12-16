@@ -89,13 +89,18 @@ export default {
             if (self.sheet) self.sheet.destroy();
         },
         cancelReservation(){
+            var ids = JSON.parse(this.cookies.get('orderId'));
             f7.dialog.confirm('Are you sure cancel reservation?', () => {
-                // axios.post('/api/delete-category', { id: id })
-                // .then((res) => {
-                //     this.getCategories();
-                //     this.$root.successnotification(res.data.success);
-                // })
-            });
+
+                axios.post('/api/cancel-reservation', {ids : ids})
+                .then((res) => {
+                    this.cookies.remove("orderId");
+                    // f7.view.main.router.navigate({ url: '/', reloadCurrent: true });
+                    window.location.reload();
+                })
+                .catch((err) => {
+                });
+                            });
             setTimeout(() => {
                 $('.dialog-title').eq().css({'font-size': '20px'});
                 $('.dialog-text').css({'font-size': '18px', 'line-height': '22px'});

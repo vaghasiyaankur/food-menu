@@ -142,6 +142,8 @@ Route::post('/waiting-time',[ReservationController::class, 'waitingTime']);
 
 Route::post('/check-order',[ReservationController::class, 'checkOrder']);
 
+Route::post('/cancel-reservation',[ReservationController::class, 'cancelReservation']);
+
 // ------------------------ Wishlist Routes ------------------------ //
 
 Route::post('/get-wishlist',[FavoriteController::class, 'getWishlist']);
