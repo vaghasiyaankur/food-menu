@@ -273,17 +273,8 @@ export default {
         box-shadow: 0px 1px 3px #f33e3e59;
         border-radius: 7px;
       }
-    .left {
-        width: 20%;
-        margin-left: 20px;
-    }
 
     .swiper-pagination-bullet-active{
         background:#F33E3E !important;
       }
-    @media screen and (max-width:820px) {
-        .left {
-            width: 5%;
-        }
-    }
 </style>

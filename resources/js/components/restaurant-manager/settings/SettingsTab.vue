@@ -219,9 +219,4 @@ export default {
 </style>
 
 <style>
-@media screen and (max-width:820px) {
-    .left {
-        width: 5%;
-    }
-}
 </style>
