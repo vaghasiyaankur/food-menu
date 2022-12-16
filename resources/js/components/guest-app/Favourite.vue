@@ -5,8 +5,8 @@
             class="navbar-menu text-color-white"
             large
             transparent
-            title="My Favourite"
-            back-link="Back"
+            :title="$root.trans.my_favourite"
+            :back-link="$root.trans.back"
             >
                 <div class="favourites-card">
                     <a class="link icon-only" href="/favourites/">
@@ -17,7 +17,7 @@
         </div>
         <div class="margin-left margin-right">
             <div class="text-align-center text-color-gray">
-                <p> See your favorite food list and place order </p>
+                <p>{{ $root.trans.favourite_title }}</p>
             </div>
             <div class="card cart-list">
                 <div class="card-content card-content-padding">
@@ -38,7 +38,7 @@
                     </div>
                     <div class="no_order_text text-align-center" v-else>
                         <img src="/images/Empty-pana 1.png" alt="" style="width:100%">
-                        <p>Empty Favourite Menu List</p>
+                        <p>{{ $root.trans.favourite_error }}</p>
                     </div>
                 </div>
             </div>

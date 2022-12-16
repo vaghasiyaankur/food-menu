@@ -10,7 +10,7 @@
             <div @click="closePopup" class="close-menu">
                 <i class="f7-icons font-30">xmark</i>
             </div>
-            <f7-block-title class="text-align-center font-18 text-color-black margin-top-half">Food Menu</f7-block-title>
+            <f7-block-title class="text-align-center font-18 text-color-black margin-top-half">{{ $root.trans.food_menu }}</f7-block-title>
             <div class="margin">
                 <!-- <div class="text-align-center text-color-gray">Select your favourite food <br> and enjoy with family</div> -->
                 <div data-pagination='{"el":".swiper-pagination"}' data-space-between="10" data-slides-per-view="5" class="swiper swiper-init demo-swiper margin-top margin-bottom" style="height : 120px">
@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <div class="position-relative">
-                    <div class="menu-title"><span>{{ categoryName }} Menu</span></div>
+                    <div class="menu-title"><span>{{ categoryName }} {{ $root.trans.menu }}</span></div>
                 </div>
                 <div class="menu-details margin-top">
                     <div class="menu-lists" v-if="product_subcategory.length">

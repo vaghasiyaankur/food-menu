@@ -68,14 +68,18 @@
                         <div class="item-input-wrap margin-bottom-half"><input type="number" v-model="reservation.member" name="member" class="padding" :placeholder="$root.trans.family_member" @keyup="floorAvailable"></div>
                     </div>
                 </div>
-                <div class="item-content item-input">
+                <div class="item-content item-input floor-selection margin-bottom">
                     <div class="item-inner">
-                        <!-- <div class="item-title item-label font-16 text-color-black">Location type</div> -->
-                        <div class="item-input-wrap margin-bottom-half input-dropdown-wrap">
-                            <select v-model="reservation.floor" placeholder="floor" class="padding-left padding-right">
-                                <option value="0">As soon as earlier </option>
-                                <option v-for="(floor,key) in floors" :key="floor" :value="key">{{ floor }}</option>
-                            </select>
+                        <div class="item-input-wrap">
+                            <div class="f-concise position-relative">
+                                <div id="selection-concise">
+                                    <div id="select-concise" class="input-dropdown-wrap" @click="showFloorList = !showFloorList">{{ showFloorName }}</div>
+                                    <ul id="location-select-list" class="dropdown_list" :class="{ 'd-none' : showFloorList }">
+                                        <li class="concise p-1" :class="{ 'active': reservation.floor == 0 }" @click="reservation.floor = 0; showFloorName = 'As soon as earlier'; showFloorList = true">{{ $root.trans.earlier }}</li>
+                                        <li class="concise p-1" :class="{ 'active': reservation.floor == key }" @click="reservation.floor = key; showFloorName = floor; showFloorList = true" v-for="(floor,key) in floors" :key="floor" :data-id="key"><span :data-id="key">{{ floor }}</span></li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -249,6 +253,8 @@ export default {
             },
             member_limit : 0,
             waiting_time: '00:00',
+            showFloorList: true,
+            showFloorName: '',
         }
     },
     setup() {
@@ -462,6 +468,43 @@ export default {
 .justify_content_between{
     justify-content: space-between;
 }
+
+#select-concise {
+    background-color: #F7FAFF;
+    border-radius: 10px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 16px;
+}
+
+#location-select-list {
+    position: absolute;
+    width: 100%;
+    z-index: 999;
+    background-color: #fff;
+    box-shadow: 0.7px 0.7px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    height: 220px;
+    overflow: auto;
+}
+
+.floor-selection{
+    padding-right: 36px;
+}
+
+#location-select-list li.concise {
+    padding: 10px;
+}
+
+#location-select-list li.concise:first-child {
+    border-radius: 3px 3px 0px 0px;
+}
+
+.d-none {
+    display: none;
+}
+
 .terms_condition_main{
     height: calc(100vh - 171px);
     overflow-y: auto;

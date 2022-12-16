@@ -125,6 +125,10 @@ class ContentSeeder extends Seeder
             ['language_id' => 2, 'title' => 'cancel', 'content' => 'રદ કરો'],
             ['language_id' => 3, 'title' => 'cancel', 'content' => 'रद्द करें'],
 
+            ['language_id' => 1, 'title' => 'earlier', 'content' => 'As soon as earlier'],
+            ['language_id' => 2, 'title' => 'earlier', 'content' => 'વહેલી તકે'],
+            ['language_id' => 3, 'title' => 'earlier', 'content' => 'जितनी जल्दी हो सके'],
+
         ];
 
 
