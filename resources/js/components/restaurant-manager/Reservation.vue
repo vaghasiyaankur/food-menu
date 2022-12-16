@@ -1,36 +1,5 @@
 <template>
     <f7-page>
-        <!-- <div class="nav-bar">
-            <f7-navbar class="navbar-menu bg-color-white" large transparent back-link="Back">
-                <div class="header-links display-flex align-items-center padding-right">
-                    <div class="row header-link justify-content-flex-end align-items-center">
-                        <div class=" padding-left-half padding-right-half height-40 nav-button">
-                            <a href="/reservation/" class="col link nav-link button button-raised bg-pink text-color-white padding">
-                                Reservation</a>
-                        </div>
-                        <div class="nav-button col-25">
-                            <div class="menu-item menu-item-dropdown">
-                                <div class="menu-item-content button button-raised text-color-white padding-left-half padding-right-half">Menu management
-                                    <i class="f7-icons">chevron_down</i>
-                                </div>
-                                <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
-                                    <div class="menu-dropdown-content bg-color-white no-padding">
-                                        <a href="#" class="menu-dropdown-link menu-close"></a>
-                                        <a href="/food-category/" class="menu-dropdown-link menu-close text-color-pink">Food Category</a>
-                                        <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black">Food Menu</a>
-                                        <a href="/food-subcategory/" class="menu-dropdown-link menu-close text-color-black">Food subCategory</a>
-                                        <a href="/digital-menu/" class="menu-dropdown-link menu-close text-color-black">Digital Menu</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class=" padding-left-half padding-right-half height-40 nav-button"><a href="/reporting/" class="link nav-link button button-raised bg-dark text-color-white padding">Reporting</a></div>
-                        <div class="padding-left-half padding-right-half height-40"><button class="nav-botton button button-raised bg-dark text-color-white padding closeReservation" @click="$root.closeReservation()">Close reservation</button></div>
-                        <div class="padding-left-half padding-right-half height-40"><a href="/settings/" class="nav-link button button-raised bg-dark text-color-white padding">Settings</a></div>
-                    </div>
-                </div>
-            </f7-navbar>
-        </div> -->
         <div class="reservation_card">
             <div class="card">
                 <div class="row height_100 align-items-center">
@@ -61,29 +30,22 @@
                                             <div class="item-input-wrap margin-bottom-half"><input type="text" v-model.number="reservation.number" name="number" class="padding" placeholder="Phone number" maxlength="10" @keypress="checknumbervalidate"></div>
                                         </div>
                                     </div>
-                                    <div class="item-content item-input margin-bottom">
+                                    <div class="item-content item-input">
                                         <div class="item-inner">
                                             <!-- <div class="item-title item-label">Family member number</div> -->
-                                            <div class="item-input-wrap margin-bottom-half"><input type="number" v-model="reservation.member" name="member" class="padding" placeholder="Family member"></div>
+                                            <div class="item-input-wrap margin-bottom-half"><input type="number" v-model="reservation.member" name="member" class="padding" placeholder="Family member" @keyup="floorAvailable"></div>
                                         </div>
                                     </div>
-                                    <!-- <div class="item-content item-input margin-bottom">
-                                        <div class="item-inner">
-                                            <div class="item-title item-label font-16 text-color-black">Location type</div>
-                                            <div class="item-input-wrap margin-bottom-half input-dropdown-wrap">
-                                                <select v-model="reservation.floor" placeholder="floor" class="padding-left padding-right">
-                                                    <option v-for="(floor,key) in floors" :key="floor" :value="key">{{ floor }}</option>
-                                                </select>
-                                            </div>
-                                        </div>                                        
-                                    </div> -->
                                     <div class="item-content item-input margin-bottom">
                                         <div class="item-inner">
-                                            <div class="item-title item-label">Location type</div>
                                             <div class="item-input-wrap">
                                                 <div class="f-concise position-relative">
                                                     <div id="selection-concise">
-                                                        <div id="select-concise" class="input-dropdown-wrap" @click="price()"> USD ($)</div>
+                                                        <div id="select-concise" class="input-dropdown-wrap" @click="showFloorList = !showFloorList">{{ showFloorName }}</div>
+                                                        <ul id="location-select-list" class="dropdown_list" :class="{ 'd-none' : showFloorList }">
+                                                            <li class="concise p-1" :class="{ 'active': reservation.floor == 0 }" @click="reservation.floor = 0; showFloorName = 'As soon as earlier'; showFloorList = true">As soon as earlier</li>
+                                                            <li class="concise p-1" :class="{ 'active': reservation.floor == key }" @click="reservation.floor = key; showFloorName = floor; showFloorList = true" v-for="(floor,key) in floors" :key="floor" :data-id="key"><span :data-id="key">{{ floor }}</span></li>
+                                                        </ul>
                                                     </div>
                                                 </div>
                                             </div>
@@ -201,35 +163,19 @@ export default {
             categoryName: '',
             sliderActive : 0,
             member_limit : 0,
-            waiting_time : '00:00',
+            waiting_time: '00:00',
+            showFloorList: true,
+            showFloorName: '',
+            showFloorId: 0,
         }
     },
     created() {
-        this.getFloors();
+        // this.getFloors();
         this.getCategories();
         this.memberLimitation();
     },
     mounted() {
         this.$root.activationMenu('reservation');
-    },
-    mounted(){
-        $("#selection-concise").append(`
-            <ul id="location-select-list" class="d-none dropdown_list">
-                <li class="concise p-1 active" data-id="1"><span data-id="1">IND (₹)</span></li>
-                <li class="concise p-2" data-id="2"><span data-id="2">USD ($)</span></li>
-                <li class="concise p-3" data-id="3"><span data-id="3">EUR (€)</span></li>
-                <li class="concise p-4" data-id="4"><span data-id="3">rs (€)</span></li>
-                <li class="concise p-5" data-id="4"><span data-id="4">up (€)</span></li>
-            </ul>
-        `)
-
-        $(".concise").click(function(e) {
-            var dataId = $(e.target).data('id');    
-            $("#select-concise").html($('.p-'+dataId).html()); 
-            $(".concise").removeClass('active');
-            $('.p-'+dataId).addClass('active');
-            $("#location-select-list").toggleClass('d-none');
-        }); 
     },
     methods: {
         getCategories() {
@@ -331,10 +277,6 @@ export default {
                 });
             }
         },
-        price() {
-            
-            $("#location-select-list").toggleClass('d-none');
-        },
         checknumbervalidate(evt) {
             evt = (evt) ? evt : window.event;
             var charCode = (evt.which) ? evt.which : evt.keyCode;
@@ -342,6 +284,20 @@ export default {
                 evt.preventDefault();;
             } else {
                 return true;
+            }
+        },
+        floorAvailable() {
+            if (this.reservation.member) {
+                axios.post('/api/floor-available', { 'member': this.reservation.member })
+                .then((res) => {
+                    if (res.data.success) {
+                        this.reservation.floor = 0;
+                        this.floors = res.data.floors;
+                    }
+                    else {
+
+                    }
+                });
             }
         }
     }
@@ -601,6 +557,8 @@ input[type=number] {
     background-color: #fff;
     box-shadow: 0.7px 0.7px 5px rgba(0, 0, 0, 0.2);
     border-radius: 3px;
+    height: 220px;
+    overflow: auto;
 }
 #location-select-list li.concise{
     padding: 10px;

@@ -1,6 +1,6 @@
 <template>
     <f7-page>
-       
+
         <div class="category-list-section">
             <div class="card elevation-2 border_radius_10">
                 <div class="card_header">
@@ -81,10 +81,8 @@
                 <div class="text-align-center padding popup_title">{{ category_title }}</div>
                 <div class="category-add padding">
                     <label class="add_category_name">Category name</label>
-                    <div class="categoryForm text-align-left">
-                        <input type="text" v-model="category.name" name="name"
-                            class="category-name margin-top-half padding-left-half padding-right-half"
-                            :placeholder="category_placeholder">
+                    <div class="categoryForm text-align-left" v-for="lang in $root.langs" :key="lang.id">
+                        <input type="text" v-model="category.name[lang.id]" name="name" class="category-name margin-top-half padding-left-half padding-right-half" :placeholder="'Add '+lang.name+' Category name'">
                     </div>
                     <div class="category-image-selection margin-top">
                         <input type="file" class="add-category-image" @change="addimageChange" id="categoryImage" />
@@ -152,15 +150,14 @@ export default {
             categoryOption : [],
             category: {
                 id : null,
-                name: '',
+                name: [],
                 image: '',
             },
             subCategory: {
-                name: '',
+                name: [],
                 category: null,
             },
             category_title: 'Add Category',
-            category_placeholder: 'Add Category name',
             image_url: null,
             search : '',
         }
@@ -208,6 +205,7 @@ export default {
             }, 200);
         },
         addCategory() {
+            console.log(this.category.name);
             const config = {
                 headers: { 'content-type': 'multipart/form-data' }
             }
@@ -239,7 +237,6 @@ export default {
         },
         editCategory(id) {
             this.category_title = 'Edit Category';
-            this.category_placeholder = 'Edit Category name';
             axios.get('/api/get-category/'+id)
                 .then((res) => {
                 this.category.id = res.data.id;
@@ -275,7 +272,7 @@ export default {
         },
         blankForm() {
             this.category.id = null;
-            this.category.name = '';
+            this.category.name = [];
             this.category.image = '';
             this.image_url = null;
         }

@@ -28,7 +28,7 @@
                     <f7-button class="button button-raised open-menu-button active button-large text-transform-capitalize" fill sheet-open=".demo-sheet-swipe-to-close">{{ $root.trans.open_menu }}</f7-button>
                 </div>
                 <div class="col">
-                    <f7-button class="button button-raised open-menu-button button-large text-transform-capitalize" @click="cancelReservation()">Cancel Reservation</f7-button>
+                    <f7-button class="button button-raised open-menu-button button-large text-transform-capitalize" @click="cancelReservation()">{{ $root.trans.cancel_reservation }}</f7-button>
                 </div>
             </div>
         </div>
@@ -90,7 +90,7 @@ export default {
         },
         cancelReservation(){
             var ids = JSON.parse(this.cookies.get('orderId'));
-            f7.dialog.confirm('Are you sure cancel reservation?', () => {
+            f7.dialog.confirm(this.$root.trans.cancel_conformation_message, () => {
 
                 axios.post('/api/cancel-reservation', {ids : ids})
                 .then((res) => {
@@ -106,8 +106,8 @@ export default {
                 $('.dialog-text').css({'font-size': '18px', 'line-height': '22px'});
                 $('.dialog-title').html("<img src='/images/usericon.png'>");
                 $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
-                $('.dialog-button').eq(1).removeClass('text-color-black');
-                $('.dialog-button').eq(1).addClass('active');
+                $('.dialog-button').eq(0).text(this.$root.trans.cancel);
+                $('.dialog-button').eq(1).removeClass('text-color-black').addClass('active').text(this.$root.trans.ok);
                 $('.dialog-buttons').addClass('margin-vertical padding-bottom');
             });
         },

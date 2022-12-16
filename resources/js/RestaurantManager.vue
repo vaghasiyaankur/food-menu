@@ -188,13 +188,21 @@ export default {
                 },
             },
             close_reservation : 0,
-            currentRoute : ''
+            currentRoute: '',
+            langs : [],
         }
     },
     created() {
         this.checkreservation();
+        this.getLanguage();
     },
     methods: {
+        getLanguage() {
+            axios.get('/api/get-languages')
+                .then((res) => {
+                    this.langs = res.data.langs;
+                })
+        },
         checkreservation() {
             axios.get('/api/check-reservation')
             .then((res) => {
