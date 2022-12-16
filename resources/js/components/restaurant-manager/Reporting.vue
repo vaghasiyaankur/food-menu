@@ -107,9 +107,9 @@
             <div class="reporting__chart">
                 <div class="row">
                     <div class="col-100">
-                        <div class="card elevation-2" >
+                        <div class="card elevation-2">
                             <h3 class="card__heading margin padding-top">Total Orders</h3>
-                            <!-- <f7-block> -->
+                            <f7-block>
                                 <!-- <f7-area-chart
                                 tooltip
                                 axis
@@ -125,10 +125,8 @@
                                     },
                                 ]"
                                 /> -->
-                                <div style="width: 100%; height:500px">
-                                    <apexchart type="line" height="350" :options="chartOptions" :series="series"></apexchart>
-                                </div>
-                            <!-- </f7-block> -->
+                                <apexchart width="1100" height="310" type="line" :options="options" :series="series"></apexchart>
+                            </f7-block>
                         </div>
                     </div>
                 </div>
@@ -140,7 +138,6 @@
 
 <script>
 import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Input,f7AreaChart} from 'framework7-vue';
-
 import apexchart from "vue3-apexcharts";
 import axios from 'axios';
 import $ from 'jquery';
@@ -153,48 +150,20 @@ export default {
             complete_order : '',
             ongoing_order : '',
             reservation_table : '',
-            totalOrderNumber : [1, 2 ,3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27,28, 29, 30,31],
-            totalOrderValue  : [11, 21 ,13, 41, 15, 61, 17, 81, 19, 110, 111, 142, 113, 124, 215, 126, 127, 128, 129, 220, 221, 242, 232, 224, 245, 426, 227,248, 229, 730,311],
+            totalOrderValue  : [1, 2 ,3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27,28, 29, 30,31],
+            options: {
+                chart: {
+                id: 'total-order'
+                },
+                xaxis: {
+                    categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001],
+                    range : 7
+                }
+            },
             series: [{
-              name: "Desktops",
-              data: [10, 41, 35, 51, 49, 62, 69, 91, 148, 10, 41, 35, 51, 49, 62, 69, 91, 148,10, 41, 35, 51, 49, 62, 69, 91, 148,10, 41, 35, 51, 49, 62, 69, 91, 148,10, 41, 35, 51, 49, 62, 69, 91, 148, 10, 41, 35, 51, 49, 62, 69, 91, 148,10, 41, 35, 51, 49, 62, 69, 91, 148,10, 41, 35, 51, 49, 62, 69, 91, 148]
-          }],
-
-
-          
-          chartOptions: {
-            chart: {
-              height: 350,
-              type: 'line',
-              stacked: true
-            },
-            dataLabels: {
-              enabled: false
-            },
-            stroke: {
-              curve: 'straight'
-            },
-            title: {
-              text: 'Product Trends by Month',
-              align: 'left'
-            },
-            grid: {
-              row: {
-                colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-                opacity: 0.5
-              },
-            },
-            xaxis: {
-              categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep','Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep','Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep','Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep','Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep','Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep','Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep','Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
-            },
-            
-            toolbar: {
-    show: false
-  },
-            zoom: {
-                enabled: true,
-            }
-        }
+                name: 'total-order',
+                data: [30, 40, 45, 50, 49, 60, 70, 91,60, 70, 91]
+            }]
         }
     },
     components: {
@@ -415,8 +384,11 @@ export default {
     background-color: #FFE1E1 !important;
     opacity: 1 !important;
 }
-.apexcharts-zoomin-icon, .apexcharts-zoomout-icon, .apexcharts-reset-icon, .apexcharts-menu-icon{
+.apexcharts-canvas .apexcharts-element-hidden, .apexcharts-menu-icon, .apexcharts-reset-icon{
     display: none;
 }
-
+.apexcharts-zoomin-icon, .apexcharts-zoomout-icon {
+    transform: initial !important;
+    margin-right: 10px;
+}
 </style>

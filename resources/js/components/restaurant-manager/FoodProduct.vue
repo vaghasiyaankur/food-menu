@@ -427,16 +427,9 @@ export default {
 </style>
 
 <style>
-    .left {
-        width: 20%;
-        margin-left: 20px;
-    }
+   
     .search-icon{
         width : 10% !important;
     }
-    @media screen and (max-width:820px) {
-        .left {
-            width: 5%;
-        }
-    }
+
 </style>

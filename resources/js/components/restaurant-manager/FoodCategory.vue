@@ -517,11 +517,4 @@ export default {
     text-transform: capitalize !important;
 }
 
-@media screen and (max-width:820px) {
-    .left {
-        width: 30%;
-    }
-
-}
-
 </style>

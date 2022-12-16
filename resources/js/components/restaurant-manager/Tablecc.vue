@@ -841,10 +841,6 @@ export default {
 .navbar a.link{
     color : #000;
 }
-.left{
-    width: 60%;
-    margin-right: 0 !important;
-}
 .right{
     width : 40%;
     margin-left: 0 !important;
