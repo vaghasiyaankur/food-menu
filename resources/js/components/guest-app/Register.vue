@@ -24,8 +24,8 @@
                             </div>
                         </div>
                         <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
-                            <div class="card menu-dropdown-content bg-color-white margin-left no-margin-top">
-                                <a href="#" class="menu-dropdown-link menu-close justify-content-center text-color-black no-padding" v-for="lang in $root.langs" :key="lang" @click="$root.languageTranslation(lang.id, lang.name)">{{ lang.name }}</a>
+                            <div class="card menu-dropdown-content bg-color-white margin-left no-margin-top no-padding">
+                                <a href="#" class="menu-dropdown-link menu-close justify-content-center text-color-black no-padding" v-for="lang in $root.langs" :key="lang" @click="$root.languageTranslation(lang.id)">{{ lang.name }}</a>
                             </div>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                     <div class="item-inner">
                         <!-- <div class="item-title item-label">Name</div> -->
                         <div class="item-input-wrap margin-bottom-half margin-top-half">
-                            <input type="text" v-model="reservation.name" name="name" class="padding" placeholder="Enter Your name">
+                            <input type="text" v-model="reservation.name" name="name" class="padding" :placeholder="$root.trans.enter_name">
                         </div>
                     </div>
                 </div>
@@ -59,13 +59,13 @@
                 <div class="item-content item-input">
                     <div class="item-inner">
                         <!-- <div class="item-title item-label">Phone number</div> -->
-                        <div class="item-input-wrap margin-bottom-half"><input type="text" v-model.number="reservation.number" name="number" class="padding" placeholder="Phone number" minlength="10" maxlength="10" @keypress="checknumbervalidate"></div>
+                        <div class="item-input-wrap margin-bottom-half"><input type="text" v-model.number="reservation.number" name="number" class="padding" :placeholder="$root.trans.phone_number" minlength="10" maxlength="10" @keypress="checknumbervalidate"></div>
                     </div>
                 </div>
                 <div class="item-content item-input">
                     <div class="item-inner">
                         <!-- <div class="item-title item-label">Family member number</div> -->
-                        <div class="item-input-wrap margin-bottom-half"><input type="number" v-model="reservation.member" name="member" class="padding" placeholder="Family member" @keyup="floorAvailable"></div>
+                        <div class="item-input-wrap margin-bottom-half"><input type="number" v-model="reservation.member" name="member" class="padding" :placeholder="$root.trans.family_member" @keyup="floorAvailable"></div>
                     </div>
                 </div>
                 <div class="item-content item-input">
@@ -84,61 +84,18 @@
                         <input type="checkbox" name="demo-checkbox" v-model="reservation.agree_condition" checked="checked" />
                         <i class="icon icon-checkbox"></i>
                         <div class="item-inner">
-                            <div class="item-title">I agree with the terms & conditions</div>
+                            <div class="item-title">{{ $root.trans.agree_condition }}</div>
                         </div>
                     </label>
                     <div class="view_terms_condition padding-right">
-                        <f7-button fill sheet-open=".demo-sheet" class="view_terms_text">View</f7-button>
+                        <f7-button fill sheet-open=".demo-sheet" class="view_terms_text">{{ $root.trans.view }}</f7-button>
                     </div>
                 </div>
             </form>
         </div>
-        <!-- ========VIEW TERMS AND CONDITION========= -->
-        <f7-sheet class="demo-sheet" :opened="sheetOpened" @sheet:closed="sheetOpened = false"  style="height:auto; border-radius: 20px 20px 0px 0px;" backdrop>
-            <!-- Scrollable sheet content -->
-            <f7-page-content>
-                <div class="card_header border_bottom">
-                    <div class="row">
-                        <div class="col">
-                            <div class="border-popup"></div>
-                        </div>
-                    </div>
-                    <div class="close-menu">
-                      <f7-link sheet-close><i class="f7-icons font-25 text-color-black">xmark</i></f7-link>
-                    </div>
-                    <div class="block-title text-align-center font-18 text-color-black margin-top" medium="false">Food Menu</div>
-                </div>
-              <f7-block class="no-margin terms_condition_main">
-                <p class="margin-top">Terms and Conditions agreements contain a broad range of guidelines for how you and your users can use your service or site.</p>
-                <p>Here’s what you should include in your terms and conditions agreements to prevent such misunderstandings and others:</p>
-                <div class="terms_condition">
-                    <div class="terms_lists">
-                        <h3 class="margin-bottom-half">1. Using our Services</h3>
-                        <p class="padding-left margin-top-half">Unlike a Privacy Policy, you aren't legally required to have a Terms and Conditions agreement. However, there are many reasons why you should draft one and display it on your website.</p>
-                    </div>
-                    <div class="terms_lists">
-                        <h3 class="margin-bottom-half">2. Your Account</h3>
-                        <p class="padding-left margin-top-half">Unlike a Privacy Policy, you aren't legally required to have a Terms and Conditions agreement. However, there are many reasons why you should draft one and display it on your website.</p>
-                    </div>
-                    <div class="terms_lists">
-                        <h3 class="margin-bottom-half">3. License</h3>
-                        <p class="padding-left margin-top-half">Unlike a Privacy Policy, you aren't legally required to have a Terms and Conditions agreement. However, there are many reasons why you should draft one and display it on your website.</p>
-                    </div>
-                    <div class="terms_lists">
-                        <h3 class="margin-bottom-half">4. Privacy Policy</h3>
-                        <p class="padding-left margin-top-half">Unlike a Privacy Policy, you aren't legally required to have a Terms and Conditions agreement. However, there are many reasons why you should draft one and display it on your website.</p>
-                    </div>
-                </div>
-                <div class="agree_button margin-bottom">
-                    <f7-button class="button border_radius_10 button-raised button-large">Agree  </f7-button>
-                </div>
-              </f7-block>
-            </f7-page-content>
-        </f7-sheet>
-        <!-- ========VIEW TERMS AND CONDITION END========= -->
 
         <div class="text-align-center margin-top">
-            <a class="link text-underline text-color-black" :class="{ 'display-none': checkWaitingTime }" @click="checkTime" href="javascript:;">Check Time</a>
+            <a class="link text-underline text-color-black" :class="{ 'display-none': checkWaitingTime }" @click="checkTime" href="javascript:;">{{ $root.trans.check_time }}</a>
             <div class="countdown_section position-relative margin-horizontal" :class="{ 'display-none' : !checkWaitingTime }">
                 <div style="background : url('/images/dots.png')">
                     <img src="/images/clock.png" alt="clock">
@@ -153,14 +110,70 @@
     <div class="padding bottom-bar">
         <div class="row justify-content-start">
             <div class="col bottom-button margin-right">
-                <f7-button class="button border_radius_10 bg-color-white register-button button-raised text-color-black button-large text-transform-capitalize" @click="register" id="book_table">Book Table</f7-button>
+                <f7-button class="button border_radius_10 bg-color-white register-button button-raised text-color-black button-large text-transform-capitalize" @click="register" id="book_table">{{ $root.trans.book_table }}</f7-button>
             </div>
             <div class="col bottom-button">
-                <f7-button class="button border_radius_10 bg-color-white register-button button-raised text-color-black button-large text-transform-capitalize" fill sheet-open=".demo-sheet-swipe-to-close" @click="title = 'Menu';showMenuData()" >Menu</f7-button>
+                <f7-button class="button border_radius_10 bg-color-white register-button button-raised text-color-black button-large text-transform-capitalize" fill sheet-open=".demo-sheet-swipe-to-close" @click="title = 'Menu';showMenuData()" >{{ $root.trans.menu }}</f7-button>
             </div>
         </div>
     </div>
     <Menu ref="menu"></Menu>
+
+    <!-- ========VIEW TERMS AND CONDITION========= -->
+    <f7-sheet class="demo-sheet" swipe-to-close :opened="sheetOpened" @sheet:closed="sheetOpened = false"
+        style="height:auto; border-radius: 20px 20px 0px 0px;" backdrop>
+        <!-- Scrollable sheet content -->
+        <f7-page-content>
+            <div class="card_header border_bottom">
+                <div class="row">
+                    <div class="col">
+                        <div class="border-popup"></div>
+                    </div>
+                </div>
+                <div class="close-menu">
+                    <f7-link sheet-close><i class="f7-icons font-25 text-color-black">xmark</i></f7-link>
+                </div>
+                <div class="block-title text-align-center font-18 text-color-black margin-top" medium="false">{{ $root.trans.terms_conditions }}</div>
+            </div>
+            <f7-block class="no-margin terms_condition_main">
+                <p class="margin-top">Terms and Conditions agreements contain a broad range of guidelines for how you and
+                    your users can use your service or site.</p>
+                <p>Here’s what you should include in your terms and conditions agreements to prevent such misunderstandings
+                    and others:</p>
+                <div class="terms_condition">
+                    <div class="terms_lists">
+                        <h3 class="margin-bottom-half">1. Using our Services</h3>
+                        <p class="padding-left margin-top-half">Unlike a Privacy Policy, you aren't legally required to have
+                            a Terms and Conditions agreement. However, there are many reasons why you should draft one and
+                            display it on your website.</p>
+                    </div>
+                    <div class="terms_lists">
+                        <h3 class="margin-bottom-half">2. Your Account</h3>
+                        <p class="padding-left margin-top-half">Unlike a Privacy Policy, you aren't legally required to have
+                            a Terms and Conditions agreement. However, there are many reasons why you should draft one and
+                            display it on your website.</p>
+                    </div>
+                    <div class="terms_lists">
+                        <h3 class="margin-bottom-half">3. License</h3>
+                        <p class="padding-left margin-top-half">Unlike a Privacy Policy, you aren't legally required to have
+                            a Terms and Conditions agreement. However, there are many reasons why you should draft one and
+                            display it on your website.</p>
+                    </div>
+                    <div class="terms_lists">
+                        <h3 class="margin-bottom-half">4. Privacy Policy</h3>
+                        <p class="padding-left margin-top-half">Unlike a Privacy Policy, you aren't legally required to have
+                            a Terms and Conditions agreement. However, there are many reasons why you should draft one and
+                            display it on your website.</p>
+                    </div>
+                </div>
+                <div class="agree_button margin-bottom">
+                    <f7-button class="button border_radius_10 button-raised button-large">{{ $root.trans.agree }}</f7-button>
+                </div>
+            </f7-block>
+        </f7-page-content>
+    </f7-sheet>
+    <!-- ========VIEW TERMS AND CONDITION END========= -->
+
 </f7-page>
 </template>
 
@@ -264,11 +277,11 @@ export default {
         },
         checkTime() {
             if(!this.reservation.name || !this.reservation.number || !this.reservation.member){
-                this.errornotification('Please enter all the required details.'); return false;
-            }else if(parseInt(this.reservation.member) > parseInt(this.member_limit)){
-                this.errornotification('order create must be ' + this.member_limit + ' or less than member.'); return false;
+                this.errornotification(this.$root.trans.reservation_error); return false;
+            } else if (parseInt(this.reservation.member) > parseInt(this.member_limit)) {
+                this.errornotification(this.$root.trans.capacity_error.replace(/@person/g, this.member_limit)); return false;
             } else if (this.reservation.number.toString().length != 10) {
-                this.errornotification('Please enter atleast 10 characters.');
+                this.errornotification(this.$root.trans.number_error);
             }else{
 
                 var formData = new FormData();
@@ -321,17 +334,17 @@ export default {
         },
         register() {
             if(!this.reservation.name || !this.reservation.number || !this.reservation.member){
-                this.errornotification('Please enter all the required details.'); return false;
+                this.errornotification(this.$root.trans.reservation_error); return false;
             }else if(parseInt(this.reservation.member) > parseInt(this.member_limit)){
-                this.errornotification('order create must be '+this.member_limit+' or less than member.'); return false;
+                this.errornotification(this.$root.trans.capacity_error.replace(/@person/g, this.member_limit)); return false;
             } else if (this.reservation.number.toString().length != 10) {
-                this.errornotification('Please enter atleast 10 characters.'); return false;
+                this.errornotification(this.$root.trans.number_error); return false;
             }
 
             if(this.reservation.agree_condition) var agree_condition = 1;
             else var agree_condition = 0;
 
-            f7.dialog.confirm('Are you sure you want to make a reservation? Your waiting time is appropriate ' + this.waiting_time +'.', () => {
+            f7.dialog.confirm(this.$root.trans.conformation_message.replace('@waiting', this.waiting_time), () => {
 
                 var formData = new FormData();
                 formData.append('customer_name', this.reservation.name);
@@ -349,32 +362,31 @@ export default {
                     cookieArray.push(orderId);
                     this.cookies.set("orderId", JSON.stringify(cookieArray), 60 * 60 * 24);
 
-                    f7.dialog.alert('Success!', () => {
+                    f7.dialog.alert(this.$root.trans.success, () => {
                         document.getElementById('book_table').classList.remove('active');
                         f7.view.main.router.navigate({ url: '/waiting/' });
                     });
+
+                    setTimeout(() => {
+                        $('.dialog-title').html("<img src='/images/success.png'>");
+                        $('.dialog-button').addClass('col button button-raised button-large text-transform-capitalize active').text(this.$root.trans.ok);
+                        $('.dialog-button').css('width', '50%');
+                    }, 50);
                 })
                 .catch((err) => {
                     this.errornotification(err.response.data.error); return false;
                 });
-
-                setTimeout(() => {
-                    $('.dialog-title').html("<img src='/images/success.png'>");
-                    $('.dialog-button').addClass('col button button-raised button-large text-transform-capitalize');
-                    $('.dialog-button').addClass('active');
-                    $('.dialog-button').css('width', '50%');
-                }, 50);
             });
 
             setTimeout(() => {
-                $('.dialog-title').eq().css({'font-size': '20px'});
+                $('.dialog-title').css({'font-size': '20px'});
                 $('.dialog-text').css({'font-size': '18px', 'line-height': '22px'});
                 $('.dialog-title').html("<img src='/images/usericon.png'>");
                 $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
-                $('.dialog-button').eq(1).removeClass('text-color-black');
-                $('.dialog-button').eq(1).addClass('active');
+                $('.dialog-button').eq(0).text(this.$root.trans.cancel);
+                $('.dialog-button').eq(1).removeClass('text-color-black').addClass('active').text(this.$root.trans.ok);
                 $('.dialog-buttons').addClass('margin-vertical padding-bottom');
-            });
+            },50);
         },
         showMenuData() {
             if (this.$refs.menu) {
@@ -388,12 +400,6 @@ export default {
                 evt.preventDefault();;
             } else {
                 return true;
-            }
-        },
-        checklength() {
-            var phone = event.target.value.length;
-            if (phone > 10 || phone < 10) {
-                this.errornotification('Please enter atleast 10 characters.');
             }
         },
         floorAvailable() {
