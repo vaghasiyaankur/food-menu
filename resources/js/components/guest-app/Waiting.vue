@@ -28,7 +28,7 @@
                     <f7-button class="button button-raised open-menu-button active button-large text-transform-capitalize" fill sheet-open=".demo-sheet-swipe-to-close">Open Menu</f7-button>
                 </div>
                 <div class="col">
-                    <f7-button class="button button-raised open-menu-button button-large text-transform-capitalize" @click="cancelReservation(category.id)">Cancel Reservation</f7-button>
+                    <f7-button class="button button-raised open-menu-button button-large text-transform-capitalize" @click="cancelReservation()">Cancel Reservation</f7-button>
                 </div>
             </div>
         </div>
@@ -88,22 +88,23 @@ export default {
             // Destroy sheet modal when page removed
             if (self.sheet) self.sheet.destroy();
         },
-        cancelReservation(id) {
-            f7.dialog.confirm('Are you sure cancel registration?', () => {
-                axios.post('/api/delete-category', { id: id })
-                .then((res) => {
-                    this.getCategories();
-                    this.$root.successnotification(res.data.success);
-                })
+        cancelReservation(){
+            f7.dialog.confirm('Are you sure cancel reservation?', () => {
+                // axios.post('/api/delete-category', { id: id })
+                // .then((res) => {
+                //     this.getCategories();
+                //     this.$root.successnotification(res.data.success);
+                // })
             });
             setTimeout(() => {
-                $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });
-                $('.dialog-title').html("<img src='/images/cross.png'>");
+                $('.dialog-title').eq().css({'font-size': '20px'});
+                $('.dialog-text').css({'font-size': '18px', 'line-height': '22px'});
+                $('.dialog-title').html("<img src='/images/usericon.png'>");
                 $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
                 $('.dialog-button').eq(1).removeClass('text-color-black');
+                $('.dialog-button').eq(1).addClass('active');
                 $('.dialog-buttons').addClass('margin-vertical padding-bottom');
-                $('.dialog-text').css({'font-size':'18px', 'line-height': '22px'});
-            }, 200);
+            });
         },
         getWaitingTime() {
 

@@ -457,7 +457,7 @@ export default {
     justify-content: space-between;
 }
 .terms_condition_main{
-    height: calc(100vh - 175px);
+    height: calc(100vh - 171px);
     overflow-y: auto;
 }
 .terms_condition_main p{
@@ -629,7 +629,7 @@ export default {
   } */
 
 .register-from {
-    height: calc(100vh - 150px);
+    height: calc(100vh - 174px);
     overflow-y: auto;
 }
 /*.icon-checkbox,.checkbox i{
