@@ -1,7 +1,7 @@
 <template>
     <f7-page class="page-favourite bg-color-white" @page:beforeremove="onPageBeforeRemove" @page:beforeout="onPageBeforeOut">
         <div class="nav-bar">
-            <f7-navbar class="navbar-menu text-color-white" large transparent title="Time" back-link="Back">
+            <f7-navbar class="navbar-menu text-color-white" large transparent :title="$root.trans.waiting_time" :back-link="$root.trans.back">
                 <div class="favourites-card">
                     <a class="link icon-only" href="/favourites/">
                         <i class="f7-icons size-22 text-color-white padding-half font-18">heart_fill</i>
@@ -25,7 +25,7 @@
         <div class="padding bottom-bar">
             <div class="row">
                 <div class="col">
-                    <f7-button class="button button-raised open-menu-button active button-large text-transform-capitalize" fill sheet-open=".demo-sheet-swipe-to-close">Open Menu</f7-button>
+                    <f7-button class="button button-raised open-menu-button active button-large text-transform-capitalize" fill sheet-open=".demo-sheet-swipe-to-close">{{ $root.trans.open_menu }}</f7-button>
                 </div>
                 <div class="col">
                     <f7-button class="button button-raised open-menu-button button-large text-transform-capitalize" @click="cancelReservation()">Cancel Reservation</f7-button>
@@ -69,14 +69,14 @@ export default {
         return {
             time : 3600000,
         }
-    },  
+    },
     setup() {
         const { cookies } = useCookies()
         return { cookies };
     },
     created() {
         this.getWaitingTime();
-    },  
+    },
     methods: {
         onPageBeforeOut() {
             const self = this;
@@ -89,13 +89,18 @@ export default {
             if (self.sheet) self.sheet.destroy();
         },
         cancelReservation(){
+            var ids = JSON.parse(this.cookies.get('orderId'));
             f7.dialog.confirm('Are you sure cancel reservation?', () => {
-                // axios.post('/api/delete-category', { id: id })
-                // .then((res) => {
-                //     this.getCategories();
-                //     this.$root.successnotification(res.data.success);
-                // })
-            });
+
+                axios.post('/api/cancel-reservation', {ids : ids})
+                .then((res) => {
+                    this.cookies.remove("orderId");
+                    // f7.view.main.router.navigate({ url: '/', reloadCurrent: true });
+                    window.location.reload();
+                })
+                .catch((err) => {
+                });
+                            });
             setTimeout(() => {
                 $('.dialog-title').eq().css({'font-size': '20px'});
                 $('.dialog-text').css({'font-size': '18px', 'line-height': '22px'});

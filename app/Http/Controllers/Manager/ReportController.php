@@ -31,8 +31,8 @@ class ReportController extends Controller
         $to_date = $request->to_date ? date('Y-m-d', strtotime($request->to_date)) : $from_date;
         
         $total_order =  Order::whereDate('created_at', '>=', $from_date)->whereDate('created_at', '<=', $to_date)->count();
-        $complete_order = Order::whereDate('created_at', '>=', $from_date)->whereDate('created_at', '<=', $to_date)->count();
-        $ongoing_order = Order::whereDate('created_at', '>=', $from_date)->whereDate('created_at', '<=', $to_date)->count();    
+        $complete_order = Order::whereDate('created_at', '>=', $from_date)->whereDate('created_at', '<=', $to_date)->where('finished', 1)->count();
+        $ongoing_order = Order::whereDate('created_at', '>=', $from_date)->whereDate('created_at', '<=', $to_date)->where('finished', 0)->whereNotNull('start_time')->count();    
 
         if(!$total_order) $reservation_table = 0;
         else{

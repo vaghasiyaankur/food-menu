@@ -23,6 +23,8 @@ return new class extends Migration
             $table->time('close_time')->nullable();
             $table->boolean('close_reservation')->default(0);
             $table->integer('member_capacity')->nullable();
+            $table->unsignedBigInteger('language_id')->unsigned();
+            $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
             $table->timestamps();
         });
     }

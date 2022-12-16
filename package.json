@@ -14,13 +14,16 @@
     "dependencies": {
         "@chenfengyuan/vue-countdown": "^2.1.0",
         "@vitejs/plugin-vue": "^3.1.0",
+        "apexcharts": "^3.36.3",
         "framework7": "^7.0.8",
         "framework7-vue": "^7.0.8",
         "jquery": "^3.6.1",
         "laravel-vue-pagination": "^4.0.0",
         "vue": "^3.2.40",
+        "vue-apexcharts": "^1.6.2",
         "vue-draggable-next": "^2.1.1",
         "vue-loader": "^17.0.0",
+        "vue3-apexcharts": "^1.4.1",
         "vue3-carousel": "^0.2.8",
         "vue3-cookies": "^1.0.6",
         "vuedraggable": "^2.24.3"

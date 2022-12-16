@@ -52,21 +52,17 @@ export default {
     },
     created() {
         this.getLanguage();
+        this.languageTranslation();
     },
     methods: {
         getLanguage() {
             axios.get('/api/get-languages')
             .then((res) => {
                 this.langs = res.data.langs;
-                res.data.langs.forEach(lang => {
-                    if (lang.name == 'English') {
-                        this.languageTranslation(lang.id, lang.name);
-                    }
-                });
             })
         },
-        languageTranslation(langId,langName) {
-            axios.post('/api/get-language-translation', { lang_id: langId, lang_name: langName })
+        languageTranslation(langId) {
+            axios.post('/api/get-language-translation', { lang_id: langId })
             .then((res) => {
                 this.trans = res.data.translations;
             })

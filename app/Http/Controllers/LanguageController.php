@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Content;
 use App\Models\Language;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Session;
@@ -19,9 +20,10 @@ class LanguageController extends Controller
     public function getLangTranslation(Request $req)
     {
         $langId = $req->session()->get('lang');
-        $lang = Language::whereName($req->lang_name)->get();
-        if (!$langId || $langId != $req->lang_id ) {
-            $req->session()->put('lang',$req->lang_id);
+        $setting = Setting::first('language_id');
+        $lang = $req->lang_id ? $req->lang_id : $setting->language_id;
+        if (!$langId || $langId && $langId != $lang && $req->lang_id) {
+            $req->session()->put('lang',$lang);
             $req->session()->save();
             $langId = $req->session()->get('lang');
         }

@@ -318,8 +318,7 @@ export default {
 .menu-dropdown-content {
     box-shadow: 0px 0.5px 12px rgba(0, 0, 0, 0.2);
     min-width: 100% !important;
-    top: -30px;
-    z-index: 999;
+    top: -30px !important;
 }
 
 /*.category-list-section {

@@ -61,9 +61,9 @@ class ContentSeeder extends Seeder
             ['language_id' => 2, 'title' => 'favourite_title', 'content' => 'તમારી મનપસંદ ખોરાક લિસ્ટ જુઓ અને ઓર્ડર આપો'],
             ['language_id' => 3, 'title' => 'favourite_title', 'content' => 'अपनी पसंदीदा भोजन सूची देखें और ऑर्डर दें'],
 
-            ['language_id' => 1, 'title' => 'favourite_title', 'content' => 'Empty Favourite Menu List'],
-            ['language_id' => 2, 'title' => 'favourite_title', 'content' => 'ખાલી મનપસંદ મેનુ યાદી'],
-            ['language_id' => 3, 'title' => 'favourite_title', 'content' => 'खाली पसंदीदा मेनू सूची'],
+            ['language_id' => 1, 'title' => 'favourite_error', 'content' => 'Empty Favourite Menu List'],
+            ['language_id' => 2, 'title' => 'favourite_error', 'content' => 'ખાલી મનપસંદ મેનુ યાદી'],
+            ['language_id' => 3, 'title' => 'favourite_error', 'content' => 'खाली पसंदीदा मेनू सूची'],
 
             ['language_id' => 1, 'title' => 'back', 'content' => 'Back'],
             ['language_id' => 2, 'title' => 'back', 'content' => 'પાછળ'],
@@ -77,17 +77,13 @@ class ContentSeeder extends Seeder
             ['language_id' => 2, 'title' => 'reservation_error', 'content' => 'કૃપા કરીને બધી જરૂરી વિગતો દાખલ કરો'],
             ['language_id' => 3, 'title' => 'reservation_error', 'content' => 'कृपया सभी आवश्यक विवरण दर्ज करें'],
 
-            ['language_id' => 1, 'title' => 'conformation_message', 'content' => 'Are you sure you want to make a reservation? Your waiting time is appropriate @waiting'],
-            ['language_id' => 2, 'title' => 'conformation_message', 'content' => 'શું તમે ખરેખર આરક્ષણ કરવા માંગો છો? તમારો રાહ જોવાનો સમય યોગ્ય @waiting છે'],
-            ['language_id' => 3, 'title' => 'conformation_message', 'content' => 'क्या आप वाकई आरक्षण करना चाहते हैं? आपका प्रतीक्षा समय उपयुक्त @waiting है'],
+            ['language_id' => 1, 'title' => 'conformation_message', 'content' => 'Are you sure you want to make a reservation? Your waiting time is appropriate @waiting.'],
+            ['language_id' => 2, 'title' => 'conformation_message', 'content' => 'શું તમે ખરેખર આરક્ષણ કરવા માંગો છો? તમારો રાહ જોવાનો સમય યોગ્ય @waiting છે.'],
+            ['language_id' => 3, 'title' => 'conformation_message', 'content' => 'क्या आप वाकई आरक्षण करना चाहते हैं? आपका प्रतीक्षा समय उपयुक्त @waiting है|'],
 
             ['language_id' => 1, 'title' => 'success', 'content' => 'Successful!'],
             ['language_id' => 2, 'title' => 'success', 'content' => 'સફળ!'],
             ['language_id' => 3, 'title' => 'success', 'content' => 'सफल!'],
-
-            ['language_id' => 1, 'title' => 'success', 'content' => 'Success'],
-            ['language_id' => 2, 'title' => 'success', 'content' => 'સફળતા'],
-            ['language_id' => 3, 'title' => 'success', 'content' => 'सफलता'],
 
             ['language_id' => 1, 'title' => 'waiting_time', 'content' => 'Waiting Time'],
             ['language_id' => 2, 'title' => 'waiting_time', 'content' => 'રાહ સમય'],
@@ -112,6 +108,22 @@ class ContentSeeder extends Seeder
             ['language_id' => 1, 'title' => 'terms_conditions', 'content' => 'Terms & Conditions'],
             ['language_id' => 2, 'title' => 'terms_conditions', 'content' => 'શરતો અને નિયમો'],
             ['language_id' => 3, 'title' => 'terms_conditions', 'content' => 'नियम एवं शर्तें'],
+
+            ['language_id' => 1, 'title' => 'agree', 'content' => 'Agree'],
+            ['language_id' => 2, 'title' => 'agree', 'content' => 'સંમત'],
+            ['language_id' => 3, 'title' => 'agree', 'content' => 'सहमत'],
+
+            ['language_id' => 1, 'title' => 'capacity_error', 'content' => 'order create must be @person member or less than @person member.'],
+            ['language_id' => 2, 'title' => 'capacity_error', 'content' => 'ઓર્ડર બનાવવા માટે @person સભ્યો અથવા @person કરતા ઓછા સભ્યો હોવા જોઈએ.'],
+            ['language_id' => 3, 'title' => 'capacity_error', 'content' => 'ऑर्डर सृजन @person सदस्य या @person सदस्य से कम होना चाहिए।'],
+
+            ['language_id' => 1, 'title' => 'ok', 'content' => 'Ok'],
+            ['language_id' => 2, 'title' => 'ok', 'content' => 'બરાબર'],
+            ['language_id' => 3, 'title' => 'ok', 'content' => 'ठीक है'],
+
+            ['language_id' => 1, 'title' => 'cancel', 'content' => 'Cancel'],
+            ['language_id' => 2, 'title' => 'cancel', 'content' => 'રદ કરો'],
+            ['language_id' => 3, 'title' => 'cancel', 'content' => 'रद्द करें'],
 
         ];
 
