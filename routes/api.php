@@ -140,6 +140,8 @@ Route::post('/floor-available',[ReservationController::class, 'floorAvailable'])
 
 Route::post('/waiting-time',[ReservationController::class, 'waitingTime']);
 
+Route::post('/check-order',[ReservationController::class, 'checkOrder']);
+
 // ------------------------ Wishlist Routes ------------------------ //
 
 Route::post('/get-wishlist',[FavoriteController::class, 'getWishlist']);

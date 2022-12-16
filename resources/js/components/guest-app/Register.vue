@@ -153,7 +153,7 @@
     <div class="padding bottom-bar">
         <div class="row justify-content-start">
             <div class="col bottom-button margin-right">
-                <f7-button class="button border_radius_10 bg-color-white register-button button-raised text-color-black button-large text-transform-capitalize" @click="register" id="book_table">Book Table</f7-button>
+                <f7-button class="button border_radius_10 bg-color-white register-button button-raised text-color-black button-large text-transform-capitalize" @click="checkTimeForRegister" id="book_table">Book Table</f7-button>
             </div>
             <div class="col bottom-button">
                 <f7-button class="button border_radius_10 bg-color-white register-button button-raised text-color-black button-large text-transform-capitalize" fill sheet-open=".demo-sheet-swipe-to-close" @click="title = 'Menu';showMenuData()" >Menu</f7-button>
@@ -214,6 +214,7 @@ export default {
     mounted() {
         $('.navbar-bg').remove();
         $(".page-content").css('padding-top', 0);
+        this.checkOrder();
 
     },
     data() {
@@ -250,6 +251,20 @@ export default {
             axios.get('/api/member-limitation')
             .then((res) => {
                 this.member_limit = res.data.member_capacity;
+            })
+        },
+        checkOrder() {
+            var orderIds = JSON.parse(this.cookies.get('orderId'));
+            if(orderIds == 'undefined' || !orderIds)  var orderIds = [];
+
+            axios.post('/api/check-order', {orderIds : orderIds})
+            .then((res) => {
+                if(res.data.orderremaining) {
+                    f7.view.main.router.navigate({ url: '/waiting/' });
+                }else{
+                    this.cookies.remove("orderId")
+                }
+
             })
         },
         onPageBeforeOut() {
@@ -319,7 +334,7 @@ export default {
                 this.floors = res.data;
             })
         },
-        register() {
+        checkTimeForRegister() {
             if(!this.reservation.name || !this.reservation.number || !this.reservation.member){
                 this.errornotification('Please enter all the required details.'); return false;
             }else if(parseInt(this.reservation.member) > parseInt(this.member_limit)){
@@ -328,6 +343,23 @@ export default {
                 this.errornotification('Please enter atleast 10 characters.'); return false;
             }
 
+            var formData = new FormData();
+            formData.append('person', this.reservation.member);
+            formData.append('floor', this.reservation.floor);
+
+            axios.post('/api/check-time', formData)
+            .then((res) => {
+                if(res.data.success){
+                    this.waiting_time = res.data.waiting_time;
+                    this.register();
+                }
+                else{
+                    this.errornotification(res.data.message); return false;
+                }
+            });
+
+        },
+        register() {
             if(this.reservation.agree_condition) var agree_condition = 1;
             else var agree_condition = 0;
 

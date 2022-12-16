@@ -175,5 +175,33 @@ class ReservationController extends Controller
         }
     }
 
+    /**
+     *  Check Order available in cookie or not
+     *
+     * @return @json (availableorder (true or false))
+     *
+     */
+
+    public function checkOrder(Request $request)
+    {   
+        // $table_id = ReservationHelper::takeTable($request->floor, $request->person);
+        $orderIds = $request->orderIds;
+        $orderId = @$orderIds[0];
+        
+        if($orderId){
+            $order = Order::where('id', @$orderId)->where('finished', 0)->first();
+
+            if($order) $orderremaining = true;
+            else $orderremaining = false;
+
+            return response()->json([ 'orderremaining' => $orderremaining ] , 200);
+        }else{
+            $orderremaining = false;
+            return response()->json([ 'orderremaining' => $orderremaining ] , 200);
+        }
+    }
+
+    
+
     
 }
