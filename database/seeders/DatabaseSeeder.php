@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
+            LanguageSeeder::class,
             CategorySeeder::class,
             SettingSeeder::class,
             ColorSeeder::class,
@@ -23,7 +24,6 @@ class DatabaseSeeder extends Seeder
             FloorSeeder::class,
             TableSeeder::class,
             OrderSeeder::class,
-            LanguageSeeder::class,
             ContentSeeder::class
         ]);
     }
