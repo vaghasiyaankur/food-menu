@@ -79,8 +79,13 @@
                     <div class="row header-link justify-content-flex-end align-items-center tab_view_menu">
                         <div class=" padding-left-half padding-right-half height-40 nav-button">
                             <a href="/"
-                                class="col link nav-link button button-raised  text-color-white padding" :class="currentRoute == 'table' ? 'bg-pink' : 'bg-dark'">
+                                class="col link nav-link button button-raised text-color-white padding" :class="currentRoute == 'table' ? 'bg-pink' : 'bg-dark'">
                                 waiting area</a>
+                        </div>
+                        <div class=" padding-left-half padding-right-half height-40 nav-button">
+                            <a href="/all-reservation/"
+                                class="col link nav-link button button-raised text-color-white padding" :class="currentRoute == 'all-reservation' ? 'bg-pink' : 'bg-dark'">
+                                <img src="/images/reservation.png" alt="" class="padding-right-half">All Reservation</a>
                         </div>
                         <div class=" padding-left-half padding-right-half height-40 nav-button">
                             <a href="/Reservation/"
