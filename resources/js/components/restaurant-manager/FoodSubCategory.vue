@@ -388,18 +388,9 @@ export default {
 </style>
 
 <style>
-.left {
-    width: 20%;
-    margin-left: 20px;
-}
 
 .searchData{
     align-items: center !important;
 }
 
-@media screen and (max-width:820px) {
-    .left {
-        width: 50%;
-    }
-}
 </style>

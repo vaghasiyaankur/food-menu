@@ -16,7 +16,7 @@ class SettingSeeder extends Seeder
      */
     public function run()
     {
-        
+
         $check_folder= is_dir(storage_path('app/public/setting'));
         if(!$check_folder) mkdir(storage_path('app/public/setting'));
 
@@ -32,6 +32,7 @@ class SettingSeeder extends Seeder
         $setting->close_time = '23:00';
         $setting->close_reservation = 0;
         $setting->member_capacity = 45;
+        $setting->language_id = 1;
         $setting->save();
     }
 }

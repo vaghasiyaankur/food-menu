@@ -23,14 +23,16 @@
                                 </div>
                                 <div class=" padding-horizontal height-40 border-bottom pannel_menu_link">
                                     <a href="/Reservation/" class="link nav-link text-color-black font-16">
-                                        Reservation</a>
+                                        <img src="/images/pluse.png" alt="" class="padding-right-half" style="filter: invert(100%);">Reservation</a>
                                 </div>
                                 <div class="list accordion-list inset no-margin">
                                     <ul>
                                         <li class="accordion-item">
                                             <a href="#" class="item-link item-content border-bottom">
                                                 <div class="item-inner">
-                                                    <div class="item-title font-16">Menu management</div>
+                                                    <div class="item-title font-16">
+                                                        <img src="/images/menu.png" alt="" class="padding-right-half" style="filter: invert(100%);">Menu management
+                                                    </div>
                                                 </div>
                                             </a>
                                             <div class="accordion-item-content" aria-hidden="true">
@@ -61,13 +63,14 @@
                                     </div>
                                 </div> -->
                                 <div class="padding-horizontal height-40 border-bottom">
-                                    <a href="/Reporting/" class="link nav-link text-color-black font-16">Reporting</a>
+                                    <a href="/Reporting/" class="link nav-link text-color-black font-16"><img src="/images/reporting.png" alt="" class="padding-right-half" style="filter: invert(100%);">Reporting</a>
                                 </div>
                                 <div class=" padding-horizontal height-40 border-bottom">
-                                    <button class="col nav-link  button close_reservation no-padding font-16" @click="$root.closeReservation(close_reservation)">{{close_reservation == 1 ? 'Open' : 'Close'}} reservation</button>
+                                    <button class="col nav-link  button close_reservation no-padding font-16" @click="$root.closeReservation(close_reservation)"><img src="/images/close_1_.png" alt="" class="padding-right-half" style="filter: invert(100%);">{{close_reservation == 1 ? 'Open' : 'Close'}} reservation</button>
                                 </div>
                                 <div class="padding-horizontal height-40 border-bottom">
-                                    <a href="/settings/" class="col link nav-link text-color-black font-16">Settings</a>
+                                    <a href="/settings/" class="col link nav-link text-color-black font-16">
+                                        <img src="/images/setting.png" alt="" class="padding-right-half" style="filter: invert(100%);">Settings</a>
                                 </div>
                             </div>
                         </div>
@@ -82,12 +85,12 @@
                         <div class=" padding-left-half padding-right-half height-40 nav-button">
                             <a href="/Reservation/"
                                 class="col link nav-link button button-raised text-color-white padding" :class="currentRoute == 'reservation' ? 'bg-pink' : 'bg-dark'">
-                                Reservation</a>
+                                <img src="/images/pluse.png" alt="" class="padding-right-half"> New Reservation</a>
                         </div>
-                        <div class="col-25 nav-button">
+                        <div class="nav-button padding-left-half padding-right-half">
                             <div class="menu-item menu-item-dropdown">
-                                <div class="menu-item-content button button-raised text-color-white padding-left-half padding-right-half" :class="currentRoute == 'menu_management' ? 'bg-pink' : 'bg-dark'">
-                                    Menu management
+                                <div class="menu-item-content button button-raised text-color-white" :class="currentRoute == 'menu_management' ? 'bg-pink' : 'bg-dark'">
+                                    <img src="/images/menu.png" alt="" class="padding-right-half">Menu management
                                     <i class="f7-icons">chevron_down</i>
                                 </div>
                                 <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
@@ -117,14 +120,16 @@
                         </div>
                     </div> -->
                         <div class=" padding-left-half padding-right-half height-40 nav-button"><a href="/Reporting/"
-                                class="link nav-link button button-raised  text-color-white padding" :class="currentRoute == 'reporting' ? 'bg-pink' : 'bg-dark'">Reporting</a>
+                                class="link nav-link button button-raised  text-color-white padding" :class="currentRoute == 'reporting' ? 'bg-pink' : 'bg-dark'">
+                                <img src="/images/reporting.png" alt="" class="padding-right-half">Reporting</a>
                         </div>
                         <div class="padding-left-half padding-right-half height-40">
                             <button
                                 class="nav-link button button-raised text-color-white padding closeReservation" :class="currentRoute == 'close_reservation' ? 'bg-pink' : 'bg-dark'"
-                                @click="$root.closeReservation(close_reservation)">{{close_reservation == 1 ? 'Open' : 'Close'}} reservation</button></div>
+                                @click="$root.closeReservation(close_reservation)"><img src="/images/close_1_.png" alt="" class="padding-right-half">{{close_reservation == 1 ? 'Open' : 'Close'}} reservation</button></div>
                         <div class="padding-left-half padding-right-half height-40"><a href="/settings/"
-                                class="nav-link button button-raised text-color-white padding" :class="currentRoute == 'setting' ? 'bg-pink' : 'bg-dark'">Settings</a>
+                                class="nav-link button button-raised text-color-white padding" :class="currentRoute == 'setting' ? 'bg-pink' : 'bg-dark'">
+                                <img src="/images/setting.png" alt="" class="padding-right-half">Settings</a>
                         </div>
                     </div>
                 </div>
@@ -251,6 +256,9 @@ export default {
 };
 </script>
 <style>
+.tab_view_menu.row{
+    flex-wrap: nowrap !important;
+}
 .notification-title {
     display: flex;
     justify-content: center;
@@ -310,8 +318,7 @@ export default {
 .menu-dropdown-content {
     box-shadow: 0px 0.5px 12px rgba(0, 0, 0, 0.2);
     min-width: 100% !important;
-    top: -30px;
-    z-index: 999;
+    top: -30px !important;
 }
 
 /*.category-list-section {
@@ -384,7 +391,7 @@ export default {
 }
 
 .header-links {
-    width: 75%;
+    width: 85%;
 }
 
 .bg-pink {
