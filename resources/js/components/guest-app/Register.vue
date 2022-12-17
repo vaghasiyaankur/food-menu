@@ -4,7 +4,7 @@
         <div class="row align-items-center navbar-menu padding-vertical-half padding-horizontal justify-content-flex-start">
             <div class="menu col-33">
                 <div class="menu-inner color-black padding-left">
-                    <div class="menu-item menu-item-dropdown bg-color-transparent language_dropdown">                        
+                    <div class="menu-item menu-item-dropdown bg-color-transparent language_dropdown">
                         <div class="row menu-item-content no-margin-top no-margin-bottom justify-content-center">
                             <div class="margin-right-half">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
@@ -71,7 +71,7 @@
                                 <div id="selection-concise">
                                     <div id="select-concise" class="input-dropdown-wrap" @click="showFloorList = !showFloorList">{{ showFloorName }}</div>
                                     <ul id="location-select-list" class="dropdown_list" :class="{ 'd-none' : showFloorList }">
-                                        <li class="concise p-1" :class="{ 'active': reservation.floor == 0 }" @click="reservation.floor = 0; showFloorName = 'As soon as earlier'; showFloorList = true">{{ $root.trans.earlier }}</li>
+                                        <li class="concise p-1" :class="{ 'active': reservation.floor == 0 }" @click="reservation.floor = 0; showFloorName = $root.trans.earlier; showFloorList = true">{{ $root.trans.earlier }}</li>
                                         <li class="concise p-1" :class="{ 'active': reservation.floor == key }" @click="reservation.floor = key; showFloorName = floor; showFloorList = true" v-for="(floor,key) in floors" :key="floor" :data-id="key"><span :data-id="key">{{ floor }}</span></li>
                                     </ul>
                                 </div>
