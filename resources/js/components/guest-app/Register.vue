@@ -84,7 +84,7 @@
                         <input type="checkbox" name="demo-checkbox" v-model="reservation.agree_condition" checked="checked" />
                         <i class="icon icon-checkbox"></i>
                         <div class="item-inner">
-                            <div class="item-title">{{ $root.trans.agree_condition }}</div>
+                            <div class="item-title padding-vertical-half">{{ $root.trans.agree_condition }}</div>
                         </div>
                     </label>
                     <div class="view_terms_condition padding-right">
@@ -133,7 +133,7 @@
                 <div class="close-menu">
                     <f7-link sheet-close><i class="f7-icons font-25 text-color-black">xmark</i></f7-link>
                 </div>
-                <div class="block-title text-align-center font-18 text-color-black margin-top" medium="false">{{ $root.trans.terms_conditions }}</div>
+                <div class="block-title text-align-center font-18 text-color-black margin-top padding-vertical-half" medium="false">{{ $root.trans.terms_conditions }}</div>
             </div>
             <f7-block class="no-margin terms_condition_main">
                 <p class="margin-top">Terms and Conditions agreements contain a broad range of guidelines for how you and
@@ -414,7 +414,7 @@ export default {
 
             setTimeout(() => {
                 $('.dialog-title').css({'font-size': '20px'});
-                $('.dialog-text').css({'font-size': '18px', 'line-height': '22px'});
+                $('.dialog-text').css({'font-size': '18px', 'line-height': '22px', 'text-align':'center'});
                 $('.dialog-title').html("<img src='/images/usericon.png'>");
                 $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
                 $('.dialog-button').eq(0).text(this.$root.trans.cancel);
@@ -791,5 +791,24 @@ label.item-checkbox input[type='checkbox']:checked~.icon-checkbox{
 
 .font-30 {
     font-size: 30px;
+}
+.dialog-title{
+    display: flex;
+    justify-content: center;
+}
+.md .dialog-buttons{
+    justify-content: center !important;
+    
+}
+.md .dialog-button{
+    width: 100%;
+    border-radius: 10px;
+    
+}
+.md .dialog-title + .dialog-text{
+    margin-top: 5px;
+}
+.dialog{
+    border-radius: 10px !important;
 }
 </style>

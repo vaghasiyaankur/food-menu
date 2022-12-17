@@ -206,12 +206,12 @@ export default {
 }
 </style>
 <style>
-.ios-translucent-modals .dialog{
+/*.ios-translucent-modals .dialog{
     background-color: #fff !important;
     width: 100%;
     max-width: 350px;
 }
 .dialog{
     left: 40% !important;
-}
+}*/
 </style>

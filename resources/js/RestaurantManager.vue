@@ -425,6 +425,28 @@ export default {
 .font-16{
     font-size: 16px !important;
 }
+.dialog-title{
+    display: flex;
+    justify-content: center;
+}
+.dialog-title{
+    display: flex;
+    justify-content: center;
+}
+.md .dialog-buttons{
+    justify-content: center !important;
+}
+.md .dialog-button{
+    width: 100% !important;
+    border-radius: 10px !important;
+    
+}
+.md .dialog-title + .dialog-text{
+    margin-top: 5px;
+}
+.dialog{
+    border-radius: 10px !important;
+}
 @media screen and (max-width:991px){
     .small_screen_menu{
         display: block;

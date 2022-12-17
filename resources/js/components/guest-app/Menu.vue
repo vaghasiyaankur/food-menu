@@ -1,6 +1,6 @@
 <template>
 
-    <f7-sheet class="demo-sheet-swipe-to-close" swipe-to-close style="height:auto; --f7-sheet-bg-color: #fff;" backdrop>
+    <f7-sheet class="demo-sheet-swipe-to-close" style="height:auto; --f7-sheet-bg-color: #fff;" backdrop>        
         <f7-page-content>
             <div class="row">
                 <div class="col">
@@ -10,10 +10,9 @@
             <div @click="closePopup" class="close-menu">
                 <i class="f7-icons font-30">xmark</i>
             </div>
-            <f7-block-title class="text-align-center font-18 text-color-black margin-top-half">{{ $root.trans.food_menu }}</f7-block-title>
-            <div class="margin">
-                <!-- <div class="text-align-center text-color-gray">Select your favourite food <br> and enjoy with family</div> -->
-                <div data-pagination='{"el":".swiper-pagination"}' data-space-between="10" data-slides-per-view="5" class="swiper swiper-init demo-swiper margin-top margin-bottom" style="height : 120px">
+            <f7-block-title class="text-align-center font-18 text-color-black margin-top-half padding-vertical-half">{{ $root.trans.food_menu }}</f7-block-title>
+            <div class="margin">                
+                <div data-pagination='{"el":".swiper-pagination"}' data-space-between="10" data-slides-per-view="5" class="swiper swiper-init demo-swiper margin-top margin-bottom" style="height : 100px">
                     <div class="swiper-pagination"></div>
                     <div class="swiper-wrapper">
                         <div class="swiper-slide" :class="{ 'slide-active': category.id == sliderActive}" v-for="category in product_category" :key="category" @click="getProducts(category.id)">
@@ -210,7 +209,8 @@ export default {
     height: 67px;
   }
   .menu-lists {
-      height: calc(100vh - 430px);
-      overflow: auto;
+      height:100%;
+      max-height: 430px;
+      overflow-y : scroll;
   }
 </style>
