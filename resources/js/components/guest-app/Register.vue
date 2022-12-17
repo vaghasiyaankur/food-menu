@@ -38,9 +38,9 @@
         </div>
     </div>
     <div class="margin-left margin-right register-from margin-top">
-        <!-- <div class="text-align-center padding-top">
+        <div class="text-align-center padding-top">
             <img src="/images/registerImage.png" alt="">
-        </div> -->
+        </div>
         <div>
             <form class="list margin-vertical" id="my-form">
                 <div class="item-content item-input">
