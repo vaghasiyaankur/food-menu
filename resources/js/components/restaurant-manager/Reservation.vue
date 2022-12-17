@@ -557,7 +557,7 @@ input[type=number] {
     background-color: #fff;
     box-shadow: 0.7px 0.7px 5px rgba(0, 0, 0, 0.2);
     border-radius: 3px;
-    height: 220px;
+    max-height: 220px;
     overflow: auto;
 }
 #location-select-list li.concise{

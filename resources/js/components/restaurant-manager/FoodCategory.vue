@@ -44,7 +44,7 @@
                                         <div class="category_image">
                                             <img :src="'/storage'+category.image" alt="">
                                         </div>
-                                        <p class="padding-left-half category_name">{{ category.name }}</p>
+                                        <p class="padding-left-half category_name">{{ category.category_languages[0].name }}</p>
                                     </div>
                                 </div>
                                 <div class="col-100 medium-45 large-35 action-buttons">
@@ -238,9 +238,11 @@ export default {
         editCategory(id) {
             this.category_title = 'Edit Category';
             axios.get('/api/get-category/'+id)
-                .then((res) => {
+            .then((res) => {
                 this.category.id = res.data.id;
-                this.category.name = res.data.name;
+                res.data.category_languages.forEach(cat_lang => {
+                    this.category.name[cat_lang.language_id] = cat_lang.name;
+                });
                 this.category.image = res.data.image;
                 if (res.data.image) {
                     this.image_url = '/storage' + res.data.image;

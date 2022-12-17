@@ -51,11 +51,12 @@ class CategorySeeder extends Seeder
             foreach($languages as $k=>$lan){
                 $catlan = new CategoryLanguage();
                 $catlan->language_id = $lan->id;
+                $catlan->category_id = $cat->id;
                 $catlan->name = $cate['name'][$k];
                 $catlan->save();
             }
-            
-            
+
+
             File::copy(public_path('images'.$cate['image']), public_path('storage/'. $cate['image']));
 
             foreach ($cate['sub_categories'] as $key => $subCat) {

@@ -170,7 +170,7 @@
                                         <!-- <draggable :scroll-sensitivity="250"  :force-fallback="true" class="dragArea list-group w-full" :class="'dragger'+table.id" :list="order[index]" @start="startDrag(order.id, table.id)" @touchend.prevent="onDrop" v-for="(order,index) in table.orders" :key="order.id"> -->
 
                                             <div class="table_reservation_info" :class="'test'+order.id" v-for="(order,index) in table.orders" :key="order.id" >
-                                                <div class="person-info popover-open" :class="['popover-click-' + order.id, { 'person-info_move': !order.is_order_moved }]" :data-popover="'.popover-table-'+order.id"  @click="order_person = order.person; removebackdrop()">
+                                                <div class="person-info popover-open" :class="['popover-click-' + order.id, { 'person-info_move': order.is_order_moved }]" :data-popover="'.popover-table-'+order.id"  @click="order_person = order.person; removebackdrop()">
                                                     <div class="person_info_name border__bottom padding-bottom-half margin-bottom-half">
                                                         <p class="no-margin text-align-center">By {{ order.role }}</p>
                                                     </div>
@@ -182,7 +182,7 @@
                                                             <span>{{ order.reservation_time }}</span>
                                                         </span>
                                                     </div>
-                                                    <div class="popover  padding-half" v-if="order.is_order_moved" :class="'popover-table-' + order.id">
+                                                    <div class="popover padding-half" v-if="!order.is_order_moved" :class="'popover-table-' + order.id">
                                                         <div class="user-info popover-inner">
                                                             <div class="display-flex padding-left-half padding-top-half align-items-center">
                                                                 <i class="f7-icons size-18 text-color-black padding-right-half margin-right-half">person</i>
@@ -370,7 +370,7 @@ export default {
     created() {
         this.tableList();
     },
- 
+
     methods: {
         equal_height(){
             var highestBox = 0;
@@ -426,12 +426,14 @@ export default {
                 if (second < 60) {
                     second++;
                     this.row_tables[0][tableIndex].orders[orderIndex].order_moved = second;
-                } else {
-                    clearInterval(this.intervalId);
-                    this.tableListFloorWise(this.active_floor_id);
-                    f7.popover.close('.popover-move');
                 }
             }, 1000);
+
+            setTimeout(() => {
+                this.tableListFloorWise(this.active_floor_id);
+                f7.popover.close('.popover-move');
+                clearInterval(this.intervalId);
+             }, 60000);
         },
         tableList() {
             axios.get('/api/table-list-with-order')
@@ -499,7 +501,7 @@ export default {
                         this.max_number_table_data = table;
                     }
                     table.orders.forEach((order, o_index) => {
-                        if (!order.is_order_moved) {
+                        if (order.is_order_moved) {
                             this.secondIncrement(order.order_moved, o_index, index);
                         }
                     });
@@ -519,7 +521,6 @@ export default {
             this.active_floor_id = id;
             axios.get('/api/table-list-floor-wise/'+id)
                 .then((res) => {
-                clearInterval(this.intervalId);
                 this.current_capacity = res.data.current_capacity;
                 var row_tables = [];
                 var cal_of_capacity = 0;
@@ -527,7 +528,6 @@ export default {
                 var change_table_list_array = [];
                 var max_number_table_id = 0;
                 res.data.tables.forEach((table, index) => {
-
                     if(parseInt(cal_of_capacity) > 18){
                         row_tables.push(single_row_data);
                         single_row_data = [];
@@ -586,7 +586,7 @@ export default {
                     }
 
                     table.orders.forEach((order, o_index) => {
-                        if (!order.is_order_moved) {
+                        if (order.is_order_moved) {
                             this.secondIncrement(order.order_moved, o_index, index);
                         }
                     });

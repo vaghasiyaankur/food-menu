@@ -20,6 +20,9 @@ class Category extends Model
             $category->subCategory()->each(function($sub_category) {
                 $sub_category->delete();
             });
+            $category->categoryLanguages()->each(function($category_lang) {
+                $category_lang->delete();
+            });
         });
     }
 

@@ -6,13 +6,19 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use File;
+use App\Helper\SettingHelper;
+use App\Models\CategoryLanguage;
 use Validator;
 
 class CategoryController extends Controller
 {
     public function getCategories(Request $req)
     {
-        $categories = Category::where('name','LIKE','%'.$req->search.'%')->get();
+        $lang_id = SettingHelper::systemLang();
+        $categories = Category::with(['categoryLanguages' => function($q) use ($req,$lang_id){
+            $q->where('language_id',$lang_id);
+            $q->where('name','LIKE','%'.$req->search.'%');
+        }])->get();
         return response()->json($categories);
     }
 
@@ -41,11 +47,18 @@ class CategoryController extends Controller
             $image_name = '/category/'.rand(10000000,99999999).".".$imageFile->GetClientOriginalExtension();
             $imageFile->move(storage_path('app/public/category/'),$image_name);
         }
-
+        $name = explode(',',$req->name);
         $cat = new Category();
-        $cat->name = $req->name;
         $cat->image = $image_name;
-        $cat->save();
+        if($cat->save()){
+            for ($i=1; $i < count($name); $i++) {
+                $cat_lang = new CategoryLanguage();
+                $cat_lang->category_id = $cat->id;
+                $cat_lang->language_id = $i;
+                $cat_lang->name = $name[$i];
+                $cat_lang->save();
+            }
+        }
 
         return response()->json(['success'=>'category Added Successfully.']);
 
@@ -53,7 +66,7 @@ class CategoryController extends Controller
 
     public function getCategory($id)
     {
-        $category = Category::find($id);
+        $category = Category::with('categoryLanguages')->find($id);
         return response()->json($category);
     }
 
@@ -93,9 +106,14 @@ class CategoryController extends Controller
             $image_name = $req->image;
         }
 
-        $category->name = $req->name;
+        $name = explode(',',$req->name);
         $category->image = $image_name;
-        $category->save();
+
+        if($category->save()){
+            for ($i=1; $i < count($name); $i++) {
+                CategoryLanguage::where('category_id',$req->id)->where('language_id',$i)->update(['name'=>$name[$i]]);
+            }
+        }
 
         return response()->json(['success'=>'category Updated Successfully.']);
     }
