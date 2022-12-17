@@ -38,9 +38,9 @@
         </div>
     </div>
     <div class="margin-left margin-right register-from margin-top">
-        <div class="text-align-center padding-top">
+        <!-- <div class="text-align-center padding-top">
             <img src="/images/registerImage.png" alt="">
-        </div>
+        </div> -->
         <div>
             <form class="list margin-vertical" id="my-form">
                 <div class="item-content item-input">
@@ -571,6 +571,8 @@ export default {
 .nav-bar {
     border-radius: 8px 8px 0px 0px;
     transform: matrix(1, 0, 0, -1, 0, 0);
+    z-index: 99999;
+    position: relative;
 }
 
 .navbar-menu {
