@@ -11,7 +11,7 @@
                                         <div class="item-inner">
                                             <div class="item-input-wrap searchData row padding-half">
                                                 <i class="f7-icons font-22 search-icon">search</i>
-                                                <input type="search" name="search" id="searchData" placeholder="Search user name or reservation ID">
+                                                <input type="search" name="search" id="searchData" v-model="search" placeholder="Search user name or reservation ID">
                                             </div>
                                         </div>
                                     </div>
@@ -24,8 +24,9 @@
                                                     <div class="item-inner no-padding-right">
                                                         <div class="item-input-wrap input-dropdown-wrap">
                                                             <input type="text" placeholder="Select date range" class="padding-horizontal-half height_40" readonly="" id="calender-date-range">
-                                                            <input type="hidden" name="from-date" id="from-date" v-model="from_date">
-                                                            <input type="hidden" name="to-date" id="to-date" v-model="to_date">
+                                                            <input type="hidden" name="from-date" id="from-date">
+                                                            <input type="hidden" name="to-date" id="to-date">
+                                                            <button @click="calender" style="opacity: 0" id="date-set"></button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -75,7 +76,7 @@
                                             <div class="menu-dropdown menu-dropdown-right">
                                             <div class="menu-dropdown-content no-padding">
                                                 <a class="menu-dropdown-link menu-close padding-vertical" :href="'/reservation-view/'+data.id"><i class="f7-icons margin-right-half">eye</i>View </a> 
-                                                <a class="menu-dropdown-link menu-close padding-vertical" href="#"><i class="f7-icons margin-right-half">trash</i>Delete </a>                                                 
+                                                <a class="menu-dropdown-link menu-close padding-vertical" href="javascript:;" @click="removeReservation(data.id)"><i class="f7-icons margin-right-half">trash</i>Delete </a>                                                 
                                             </div>
                                             </div>
                                         </div>
@@ -166,12 +167,14 @@ export default {
                 close(daterange) {
                     var dates = daterange.getValue();
                     if(dates){
+                        console.log(dates);
                         var from_date = new Date(dates[0]).toLocaleDateString('sv-SE');
                         if(dates[1]) var to_date = new Date(dates[1]).toLocaleDateString('sv-SE');
                         else var to_date = '';
-
+                        console.log(to_date);
                         $("#from-date").val(from_date);
                         $("#to-date").val(to_date);
+                        $("#date-set").trigger('click');
                         // axios.get('/api/report-data?from_date='+from_date+'&to_date='+to_date)
                         // .then((res) => {
                         //     $("#total_order").text(res.data.total_order);
@@ -197,6 +200,25 @@ export default {
             .then((res) => {
                 this.reservation = res.data.reservation;
             })
+        },
+        removeReservation(id) {
+
+            f7.dialog.confirm('Are you sure delete this reservation?', () => {
+                axios.post('/api/remove-reservation', { id: id })
+                    .then((res) => {
+                        this.$root.successnotification(res.data.success);
+                        this.reservationData();
+                    })
+                });
+        },
+        calender(){
+           var from = $("#from-date").val();
+           var to = $("#to-date").val();
+           console.log($("#to-date").val());
+           if(from) this.from_date = new Date(from).toLocaleDateString('sv-SE');
+           else this.from_date = '';
+           if(to) this.to_date = new Date(to).toLocaleDateString('sv-SE');
+           else this.to_date = '';
         }
     }
 
