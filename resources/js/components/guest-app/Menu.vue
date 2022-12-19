@@ -1,6 +1,6 @@
 <template>
 
-    <f7-sheet class="demo-sheet-swipe-to-close" style="height:auto; --f7-sheet-bg-color: #fff;" backdrop>        
+    <f7-sheet class="demo-sheet-swipe-to-close" style="height:auto; --f7-sheet-bg-color: #fff;" backdrop>
         <f7-page-content>
             <div class="row">
                 <div class="col">
@@ -11,7 +11,7 @@
                 <i class="f7-icons font-30">xmark</i>
             </div>
             <f7-block-title class="text-align-center font-18 text-color-black margin-top-half padding-vertical-half">{{ $root.trans.food_menu }}</f7-block-title>
-            <div class="margin">                
+            <div class="margin">
                 <div data-pagination='{"el":".swiper-pagination"}' data-space-between="10" data-slides-per-view="5" class="swiper swiper-init demo-swiper margin-top margin-bottom" style="height : 100px">
                     <div class="swiper-pagination"></div>
                     <div class="swiper-wrapper">
@@ -19,7 +19,7 @@
                             <div class="menu-image col">
                                 <img :src="'/storage'+category.image" alt="">
                             </div>
-                            <p class="font-13 no-margin text-align-center margin-top-half">{{ category.name }}</p>
+                            <p class="font-13 no-margin text-align-center margin-top-half">{{ category.category_languages[0].name }}</p>
                         </div>
                     </div>
                 </div>
@@ -112,7 +112,7 @@ export default {
             this.sliderActive = id;
             axios.get('/api/get-category-products/' + id)
             .then((res) => {
-                this.categoryName = res.data.name;
+                this.categoryName = res.data.category_languages[0].name;
                 this.product_subcategory = res.data.sub_category;
             })
         },

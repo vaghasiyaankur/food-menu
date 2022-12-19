@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Manager;
 
+use App\Helper\SettingHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
@@ -23,9 +24,13 @@ class ProductController extends Controller
 
     public function getCategoryProduct($id)
     {
-        $products = Category::with(['subCategory' => function($q){
+        $lang_id = SettingHelper::getlanguage();
+        $products = Category::with(['subCategory' => function($q) use ($lang_id){
+            $q->where('language_id',$lang_id);
             $q->whereHas('products');
-        },'subCategory.products'])->whereHas('subCategory')->find($id);
+        },'subCategory.products','categoryLanguages' => function($q) use ($lang_id){
+            $q->where('language_id',$lang_id);
+        }])->whereHas('subCategory')->find($id);
         return response()->json($products);
     }
 

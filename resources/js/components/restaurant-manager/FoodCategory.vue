@@ -24,9 +24,7 @@
                                     </div>
                                 </div>
                                 <div class="col padding-left-half padding-right-half">
-                                    <button class="button button-raised bg-dark text-color-white padding height-36 popup-open"
-                                        data-popup=".categoryPopup" @click="blankForm"><i class="f7-icons font-22">plus_square</i> Add
-                                        category</button>
+                                    <button class="button button-raised bg-dark text-color-white padding height-36 popup-open" data-popup=".categoryPopup" @click="blankForm"><i class="f7-icons font-22">plus_square</i> Add category</button>
                                 </div>
                             </div>
                         </div>
@@ -113,7 +111,7 @@
             <div class="category-add padding">
                 <div class="categoryForm text-align-left no-padding margin-bottom">
                     <label class="add_category_name">Sub category name</label>
-                    <input type="text" name="name" v-model="subCategory.name"
+                    <input type="text" name="name" v-model="subCategory.name[lang.id]" v-for="lang in $root.langs" :key="lang.id"
                         class="category-name margin-top-half padding-left-half padding-right-half"
                         placeholder="Add sub category name">
                 </div>

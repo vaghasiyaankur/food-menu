@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\CategoryLanguage;
 use App\Models\SubCategory;
 use App\Models\Language;
+use App\Models\SubCategoryLanguage;
 use File;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -60,12 +61,15 @@ class CategorySeeder extends Seeder
             File::copy(public_path('images'.$cate['image']), public_path('storage/'. $cate['image']));
 
             foreach ($cate['sub_categories'] as $key => $subCat) {
+                $subCate = new SubCategory();
+                $subCate->category_id = $cat->id;
+                $subCate->save();
                 foreach($languages as $ke=>$lang){
-                    $subCate = new SubCategory();
-                    $subCate->name = $subCat[$ke];
-                    $subCate->category_id = $cat->id;
-                    $subCate->language_id = $lang->id;
-                    $subCate->save();
+                    $subcatlang = new SubCategoryLanguage();
+                    $subcatlang->name = $subCat[$ke];
+                    $subcatlang->language_id = $lang->id;
+                    $subcatlang->sub_category_id = $subCate->id;
+                    $subcatlang->save();
                 }
             }
 
