@@ -70,7 +70,7 @@
                             <div class="f-concise position-relative">
                                 <div id="selection-concise">
                                     <div id="select-concise" class="input-dropdown-wrap" @click="showFloorList = !showFloorList">{{ showFloorName }}</div>
-                                    <ul id="location-select-list" class="dropdown_list" :class="{ 'd-none' : showFloorList }">
+                                    <ul id="location-select-list" class="dropdown_list" :class="{ 'display-none' : showFloorList }">
                                         <li class="concise p-1" :class="{ 'active': reservation.floor == 0 }" @click="reservation.floor = 0; showFloorName = $root.trans.earlier; showFloorList = true">{{ $root.trans.earlier }}</li>
                                         <li class="concise p-1" :class="{ 'active': reservation.floor == key }" @click="reservation.floor = key; showFloorName = floor; showFloorList = true" v-for="(floor,key) in floors" :key="floor" :data-id="key"><span :data-id="key">{{ floor }}</span></li>
                                     </ul>
@@ -79,7 +79,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="no-padding-left d-flex align-items-center justify_content_between">
+                <div class="no-padding-left display-flex align-items-center justify-content-space-between">
                     <label class="item-checkbox item-content">
                         <input type="checkbox" name="demo-checkbox" v-model="reservation.agree_condition" checked="checked" />
                         <i class="icon icon-checkbox"></i>
@@ -95,7 +95,7 @@
         </div>
 
         <div class="text-align-center margin-top">
-            <a class="link text-underline text-color-black" :class="{ 'display-none': checkWaitingTime }" @click="checkTime" href="javascript:;">{{ $root.trans.check_time }}</a>
+            <a class="text-underline text-color-black" :class="{ 'display-none': checkWaitingTime }" @click="checkTime" href="javascript:;">{{ $root.trans.check_time }}</a>
             <div class="countdown_section position-relative margin-horizontal" :class="{ 'display-none' : !checkWaitingTime }">
                 <div style="background : url('/images/dots.png')">
                     <img src="/images/clock.png" alt="clock">
@@ -455,6 +455,9 @@ export default {
 </script>
 
 <style scoped>
+.position-relative{
+    position: relative;
+}
 /*=======NAVBAR =========*/
 .language_dropdown{
     background: #FFFFFF;
@@ -464,47 +467,35 @@ export default {
 .border_bottom{
     border-bottom: 1px solid #DBDBDB;
 }
-.d-flex{
+/*.d-flex{
     display: flex;
-}
-.justify_content_between{
+}*/
+/*.justify_content_between{
     justify-content: space-between;
-}
-
-#select-concise {
-    background-color: #F7FAFF;
+}*/
+#select-concise{
+    background-color: #F7FAFF !important;
     border-radius: 10px;
-    width: 100%;
+    height: 44px;
     display: flex;
     align-items: center;
-    padding: 16px;
+    padding-left: 16px;
 }
-
-#location-select-list {
+#location-select-list{
     position: absolute;
     width: 100%;
     z-index: 999;
     background-color: #fff;
     box-shadow: 0.7px 0.7px 5px rgba(0, 0, 0, 0.2);
     border-radius: 3px;
-    height: 220px;
+    max-height: 220px;
     overflow: auto;
 }
-
-.floor-selection{
-    padding-right: 36px;
-}
-
-#location-select-list li.concise {
+#location-select-list li.concise{
     padding: 10px;
 }
-
-#location-select-list li.concise:first-child {
+#location-select-list li.concise:first-child{
     border-radius: 3px 3px 0px 0px;
-}
-
-.d-none {
-    display: none;
 }
 
 .terms_condition_main{
