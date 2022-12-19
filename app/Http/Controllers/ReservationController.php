@@ -242,8 +242,8 @@ class ReservationController extends Controller
             });
         });
          
-
-        $reservation = $reservation->get();
+        $page = $request->page ? : 1;
+        $reservation = $reservation->paginate(10);
 
 
         return response()->json([ 'reservation' => $reservation ] , 200);

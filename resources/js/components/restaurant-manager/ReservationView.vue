@@ -41,14 +41,6 @@ export default {
 
                         $("#from-date").val(from_date);
                         $("#to-date").val(to_date);
-                        // axios.get('/api/report-data?from_date='+from_date+'&to_date='+to_date)
-                        // .then((res) => {
-                        //     $("#total_order").text(res.data.total_order);
-                        //     $("#complete_order").text(res.data.complete_order);
-                        //     $("#ongoing_order").text(res.data.ongoing_order);
-                        //     $("#reservation_table").text(res.data.reservation_table);
-                        // })
-                    
                     }
                 }
             }

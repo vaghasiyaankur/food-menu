@@ -45,13 +45,11 @@
                       </tr>
                    </tbody>
                 </table>
-                <div class="pagination_count">
-                    <div class="pagination_list">
-                        <div v-for="(link,index) in paginationData.links" :key="link">
-                            <a href="javascript:;" v-if="index == 0" @click="link.url != null ? tableList(link.url) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon-prev"></i></a>
-                            <a href="javascript:;" v-if="paginationData.links.length - 1 != index && index != 0" @click="link.url != null ? tableList(link.url) : 'javascript:;'" :class="{ 'disabled': link.url == null, 'active': paginationData.current_page == index}">{{ index }}</a>
-                            <a href="javascript:;" v-if="paginationData.links.length - 1 == index" @click="link.url != null ? tableList(link.url) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon-next"></i></a>
-                        </div>
+                <div class="data-table-pagination">
+                    <div v-for="(link,index) in paginationData.links" :key="link">
+                        <a href="javascript:;" v-if="index == 0" @click="link.url != null ? tableList(link.url) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon icon-prev color-gray"></i></a>
+                        <a href="javascript:;" v-if="paginationData.links.length - 1 != index && index != 0" @click="link.url != null ? tableList(link.url) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}">{{ index }}</a>
+                        <a href="javascript:;" v-if="paginationData.links.length - 1 == index" @click="link.url != null ? tableList(link.url) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon icon-next color-gray"></i></a>
                     </div>
                 </div>
             </div>
@@ -217,18 +215,8 @@
 .data-table tbody tr:nth-child(even){
     background-color: #FAFAFA;
 }
-
-.pagination_count .pagination_list {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-}
-.pagination_count .pagination_list a {
-    color: black;
-    float: left;
-    padding: 8px 16px;
-    text-decoration: none;
-    border-radius: 5px;
+.data-table .data-table-pagination{
+    justify-content: end;
 }
 @media screen and (max-width:820px){
     .status_info{

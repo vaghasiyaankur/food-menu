@@ -218,9 +218,10 @@ export default {
 
 }
 .bottom-bar{
-    position: absolute;
-    bottom: 17px;
-    background-color: transparent !important;
+    position: fixed;
+    bottom: 0;
+    background-color: #fff !important;
+    /*padding-top: 55px;*/
 }
  .toolbar .button{
     color: #38373D !important;
@@ -268,7 +269,6 @@ export default {
     opacity: 0;
 }
 .countdown_section{
-    height: calc(100vh - 540px);
     display: flex;
     flex-wrap: wrap;
     align-content: center;
