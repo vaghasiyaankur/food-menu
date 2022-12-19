@@ -210,7 +210,9 @@ class ReservationController extends Controller
     public function cancelReservation(Request $request)
     {   
         $orderIds = $request->ids;
+        $cancel = $request->cancelled_by ? : 'Manager';
         foreach($orderIds as $orderId){
+            Order::where('id', $orderId)->updated(['cancelled_by' => $cancel]);
             Order::where('id', $orderId)->delete();
         }
         return response()->json([ 'success' => true ] , 200);
@@ -242,8 +244,8 @@ class ReservationController extends Controller
             });
         });
          
-
-        $reservation = $reservation->get();
+        $page = $request->page ? : 1;
+        $reservation = $reservation->paginate(10);
 
 
         return response()->json([ 'reservation' => $reservation ] , 200);
@@ -260,6 +262,22 @@ class ReservationController extends Controller
     {   
         Order::where('id', $request->id)->forceDelete();
         return response()->json([ 'success' => 'Remove Reservation Successfully' ] , 200);
+    }
+
+    /**
+     *  Reservation Detail For reservation Page
+     *
+     * @return @json (reservation details)
+     *
+     */
+
+    public function reservationDetail(Request $request)
+    {   
+        $reservation = Order::where('id', $request->id)->with(['customer' => function($q) {
+            $q->select('id','name', 'number');
+        }])->select('id','customer_id','person','start_time','finish_time','finished','deleted_at')->selectRaw('DATE_FORMAT(created_at,"%d, %b %Y / %h:%i %p") as date')->first();
+
+        return response()->json([ 'reservation' => $reservation ] , 200);
     }
     
 }

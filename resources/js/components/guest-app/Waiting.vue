@@ -60,12 +60,12 @@
                     </div>
                 </div>
             </div>
-            <div class="margin countdown_section">
+            <div class="margin countdown_section padding-top">
                 <div class="text-align-center">
                     <h3>Waiting Time</h3>    
                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p> 
                 </div>
-                <div class="countdown position-relative text-align-center margin">
+                <div class="countdown position-relative text-align-center">
                     <div style="background : url('/images/dots.png')" class="display-flex justify-content-space-between align-items-center flex-direction-column">
                         <img src="/images/clock.png" alt="">
                         <!-- <i class="f7-icons font-13 padding-half margin-bottom close-countdown" @click="display = true">xmark</i> -->
@@ -146,7 +146,7 @@ export default {
             var ids = JSON.parse(this.cookies.get('orderId'));
             f7.dialog.confirm(this.$root.trans.cancel_conformation_message, () => {
 
-                axios.post('/api/cancel-reservation', {ids : ids})
+                axios.post('/api/cancel-reservation', {ids : ids, cancelled_by : 'Guest'})
                 .then((res) => {
                     this.cookies.remove("orderId");
                     // f7.view.main.router.navigate({ url: '/', reloadCurrent: true });
@@ -157,7 +157,7 @@ export default {
                             });
             setTimeout(() => {
                 $('.dialog-title').eq().css({'font-size': '20px'});
-                $('.dialog-text').css({'font-size': '18px', 'line-height': '22px'});
+                $('.dialog-text').css({'font-size': '18px', 'line-height': '22px', 'text-align':'center'});
                 $('.dialog-title').html("<img src='/images/usericon.png'>");
                 $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
                 $('.dialog-button').eq(0).text(this.$root.trans.cancel);
@@ -218,9 +218,11 @@ export default {
 
 }
 .bottom-bar{
-    position: absolute;
-    bottom: 17px;
-    background-color: transparent !important;
+    position: fixed;
+    bottom: 0;
+    background-color: #fff !important;
+    padding-bottom: 60px !important;
+    padding-top: 10px !important;
 }
  .toolbar .button{
     color: #38373D !important;
@@ -268,11 +270,7 @@ export default {
     opacity: 0;
 }
 .countdown_section{
-    height: calc(100vh - 540px);
-    display: flex;
-    flex-wrap: wrap;
-    align-content: center;
-    justify-content: center;
+    margin-bottom: 80px !important;
 }
 .countdown{
     background: #f88f721a;
@@ -300,7 +298,7 @@ export default {
     color : #000000;
     border-radius: 10px;
     font-weight: 500;
-    font-size: 16px;
+    font-size: 15px;
     line-height: 20px;
 }
 .open-menu-button.active{

@@ -148,6 +148,8 @@ Route::get('/reservation-list',[ReservationController::class, 'reservationList']
 
 Route::post('/remove-reservation',[ReservationController::class, 'removeReservation']);
 
+Route::get('/reservation-detail/{id}',[ReservationController::class, 'reservationDetail']);
+
 // ------------------------ Wishlist Routes ------------------------ //
 
 Route::post('/get-wishlist',[FavoriteController::class, 'getWishlist']);

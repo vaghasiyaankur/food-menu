@@ -74,7 +74,7 @@
                                         <div class="menu-item-dropdown">
                                             <div class=""><i class="f7-icons">ellipsis</i>  </div>
                                             <div class="menu-dropdown menu-dropdown-right">
-                                            <div class="menu-dropdown-content no-padding">
+                                            <div class="menu-dropdown-content no-padding">                                             
                                                 <a class="menu-dropdown-link menu-close padding-vertical" :href="'/reservation-view/'+data.id"><i class="f7-icons margin-right-half">eye</i>View </a> 
                                                 <a class="menu-dropdown-link menu-close padding-vertical" href="javascript:;" @click="removeReservation(data.id)"><i class="f7-icons margin-right-half">trash</i>Delete </a>                                                 
                                             </div>
@@ -82,53 +82,17 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <!-- <tr>
-                                    <td>#10663</td>
-                                    <td>Jannson Wasley</td>
-                                    <td>8258340744</td>
-                                    <td>04</td>
-                                    <td><span class="status_info status_waiting">Wating</span></td>
-                                    <td>24, Sep 2022 / 10:00 am</td>
-
-                                    <td><i class="f7-icons">ellipsis</i></td>
-                                </tr>
-                                <tr>
-                                    <td>#10663</td>
-                                    <td>Jannson Wasley</td>
-                                    <td>8258340744</td>
-                                    <td>04</td>
-                                    <td><span class="status_info status_ongoing">Ongoing</span></td>
-                                    <td>24, Sep 2022 / 10:00 am</td>
-                                    <td><i class="f7-icons">ellipsis</i></td>
-                                </tr>
-                                <tr>
-                                    <td>#10663</td>
-                                    <td>Jannson Wasley</td>
-                                    <td>8258340744</td>
-                                    <td>04</td>
-                                    <td><span class="status_info status_cancel">Cancel</span></td>
-                                    <td>24, Sep 2022 / 10:00 am</td>
-                                    <td><i class="f7-icons">ellipsis</i></td>
-                                </tr>             -->
                             </tbody>
                         </table>
                     </div>
-                    <div class="data-table-footer justify_content_between padding-horizontal padding-top-half">
-                        <div class="pagination_label">
-                            <span>Showing 15 of 220 Results</span> 
-                        </div>
-                       <div class="pagination_count">
+                    <div class="pagination_count">
                         <div class="pagination_list">
-                            <a href="#"><i class="f7-icons">chevron_left</i></a>
-                            <a href="#" class="active">1</a>
-                            <a href="#">2</a>
-                            <a href="#">3</a>
-                            <a href="#">4</a>
-                            <a href="#">5</a>
-                            <a href="#">6</a>
-                            <a href="#"><i class="f7-icons">chevron_right</i></a>
-                          </div>
-                       </div>
+                            <div v-for="(link,index) in paginationData.links" :key="link">
+                                <a href="javascript:;" v-if="index == 0" @click="link.url != null ? reservationData(paginationData.current_page - 1) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon-prev"></i></a>
+                                <a href="javascript:;" v-if="paginationData.links.length - 1 != index && index != 0" @click="link.url != null ? reservationData(link.label) : 'javascript:;'" :class="{ 'disabled': link.url == null, 'active': paginationData.current_page == index}">{{ index }}</a>
+                                <a href="javascript:;" v-if="paginationData.links.length - 1 == index" @click="link.url != null ? reservationData(paginationData.current_page + 1) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon-next"></i></a>
+                            </div>
+                        </div>
                     </div>
                   </div>
             </div>
@@ -147,7 +111,8 @@ export default {
             reservation : [],
             from_date : '',
             to_date: '',
-            search: ''
+            search: '',
+            paginationData : [],
         }
     },
     components: {
@@ -155,7 +120,8 @@ export default {
         f7,
     },
     created() {
-        this.reservationData();
+        this.page_number = this.page;
+        this.reservationData(this.page_number);
     },
     mounted() {
         f7.calendar.create({
@@ -191,14 +157,18 @@ export default {
         this.$root.activationMenu('all-reservation');
     },
     methods : {
-        reservationData() {
+        reservationData(page) {
+            if(page == undefined || page == '') page = 1;
             var search = this.search;
             var from_date = this.from_date;
             var to_date = this.to_date;
+            var page = page;
 
-            axios.get('/api/reservation-list?from_date='+from_date+'&to_date='+to_date+'&search='+search)
+            axios.get('/api/reservation-list?from_date='+from_date+'&to_date='+to_date+'&search='+search+'&page='+page)
             .then((res) => {
-                this.reservation = res.data.reservation;
+                this.reservation = res.data.reservation.data;
+                this.paginationData = res.data.reservation;
+                console.log(res.data.reservation);
             })
         },
         removeReservation(id) {
@@ -363,5 +333,24 @@ export default {
   .reservation_table .table_content .menu-dropdown-link{
     justify-content: flex-start !important;
   }
+.pagination_count .pagination_list {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.pagination_count .pagination_list a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+.menu-dropdown-link::before{
+    background-color: #F33E3E !important;
+}
+.active-state{
+    background-color: #F33E3E !important;
+    color: #fff !important;
+}
 </style>
 

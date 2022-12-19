@@ -385,7 +385,7 @@ export default {
                 formData.append('customer_number', this.reservation.number);
                 formData.append('person', this.reservation.member);
                 formData.append('floor', this.reservation.floor);
-                formData.append('role', 'manager');
+                formData.append('role', 'Manager');
                 formData.append('agree_condition', agree_condition);
 
                 axios.post('/api/add-reservation', formData)
@@ -405,6 +405,7 @@ export default {
                         $('.dialog-title').html("<img src='/images/success.png'>");
                         $('.dialog-button').addClass('col button button-raised button-large text-transform-capitalize active').text(this.$root.trans.ok);
                         $('.dialog-button').css('width', '50%');
+                        $('.dialog-text').css({'text-align': 'center'});
                     }, 50);
                 })
                 .catch((err) => {
@@ -476,7 +477,7 @@ export default {
 #select-concise{
     background-color: #F7FAFF !important;
     border-radius: 10px;
-    height: 44px;
+    height: 36px;
     display: flex;
     align-items: center;
     padding-left: 16px;
@@ -706,6 +707,9 @@ label.item-checkbox input[type='checkbox']:checked~.icon-checkbox{
     left: -3px;
     top:-1px
 }*/
+.md .item-input:not(.item-input-outline) .item-input-wrap::after, .md .input:not(.input-outline)::after {
+    background-color: transparent !important;
+}
 </style>
 <style>
 .menu-dropdown-link.active,
