@@ -1,37 +1,5 @@
 <template>
 <f7-page>
-    <!-- <div class="nav-bar">
-        <f7-navbar class="navbar-menu bg-color-white" large transparent back-link="Back">
-            <div class="header-links display-flex align-items-center padding-right">
-                <div class="row header-link justify-content-flex-end align-items-center">
-                    <div class=" padding-left-half padding-right-half height-40 nav-button">
-                        <a href="/Reservation/" class="col link nav-link button button-raised bg-dark text-color-white padding">
-                            Reservation</a>
-                    </div>
-                    <div class="nav-button col-25">
-                        <div class="menu-item menu-item-dropdown">
-                            <div class="menu-item-content button button-raised bg-pink text-color-white padding-left-half padding-right-half">Menu management
-                                <i class="f7-icons">chevron_down</i>
-                            </div>
-                            <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
-                                <div class="menu-dropdown-content bg-color-white no-padding">
-                                    <a href="#" class="menu-dropdown-link menu-close"></a>
-                                    <a href="/" class="menu-dropdown-link menu-close text-color-pink">Table</a>
-                                    <a href="/food-category/" class="menu-dropdown-link menu-close text-color-pink">Food Category</a>
-                                    <a href="/food-subcategory/" class="menu-dropdown-link menu-close text-color-black">Food subCategory</a>
-                                    <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black">Food Menu</a>
-                                    <a href="/digital-menu/" class="menu-dropdown-link menu-close text-color-black">Digital Menu</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class=" padding-left-half padding-right-half height-40 nav-button"><a href="/reporting/" class="link nav-link button button-raised bg-dark text-color-white padding">Reporting</a></div>
-                    <div class="padding-left-half padding-right-half height-40"><button class="nav-botton button button-raised bg-dark text-color-white padding closeReservation" @click="$root.closeReservation()">Close reservation</button></div>
-                    <div class="padding-left-half padding-right-half height-40"><a href="/settings/" class="nav-link button button-raised bg-dark text-color-white padding">Settings</a></div>
-                </div>
-            </div>
-        </f7-navbar>
-    </div> -->
     <div class="subcategory-list-section">
         <div class="card elevation-2">
             <div class="card_header">
@@ -63,7 +31,7 @@
             </div>
             <div class="card-content card-content-padding" v-if="subCategories.length">
                 <div v-for="subcategory in subCategories" :key="subcategory">
-                    <div class="main-category text-color-pink padding-left-half margin-top padding-top-half">{{ subcategory.name }}</div>
+                    <div class="main-category text-color-pink padding-left-half margin-top padding-top-half">{{ subcategory.category_languages[0].name }}</div>
                     <div class="category-list border-bottom padding-vertical-half" v-for="subcat in subcategory.sub_category" :key="subcat">
                         <div class="row align-items-center">
                             <div class="col-100 large-60 medium-55">
@@ -186,7 +154,6 @@ export default {
     mounted() {
         $('.page-content').css('background', '#F7F7F7');
         this.getAllCategories();
-        this.getAllSubCategories();
         this.$root.activationMenu('menu_management');
     },
     methods: {

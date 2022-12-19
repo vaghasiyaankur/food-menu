@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Content;
 use App\Models\CategoryLanguage;
-use App\Models\SubCategory;
+use App\Models\SubCategoryLanguage;
 
 class Language extends Model
 {
     use HasFactory;
 
-    protected $guarded = ['id']; 
+    protected $guarded = ['id'];
 
     public function contents()
     {
@@ -24,8 +24,8 @@ class Language extends Model
         return $this->hasMany(CategoryLanguage::class);
     }
 
-    public function subCategory()
+    public function subCategoryLanguages()
     {
-        return $this->hasMany(SubCategory::class);
+        return $this->hasMany(SubCategoryLanguage::class);
     }
 }
