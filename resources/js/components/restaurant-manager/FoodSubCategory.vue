@@ -36,13 +36,13 @@
                         <div class="row align-items-center">
                             <div class="col-100 large-60 medium-55">
                                 <div class="display-flex align-items-center">
-                                    <span class="padding-left-half sub_category_name">{{ subcat.name }}</span>
+                                    <span class="padding-left-half sub_category_name">{{ subcat.sub_category_language[0].name }}</span>
                                 </div>
                             </div>
                             <div class="col-100 large-40 medium-45 action-buttons">
                                 <div class="row align-items-center">
                                     <div class="col-50">
-                                        <button class="button text-color-black padding height-36 popup-open border__right" data-popup="#product_popup" @click="product.sub_category = subcat.id"><i class="f7-icons font-22">plus_square</i>&nbsp; Add Product</button>
+                                        <button class="button text-color-black padding height-36 popup-open border__right" data-popup="#product_popup" @click="getAllSubCategories(); product.sub_category = subcat.id"><i class="f7-icons font-22">plus_square</i>&nbsp; Add Product</button>
                                     </div>
                                     <div class="col-25">
                                         <button class="button text-color-black padding height-36 popup-open" data-popup="#sub_category_popup" @click="editSubCategory(subcat.id)"><i class="f7-icons font-22">square_pencil</i> Edit</button>
@@ -61,12 +61,13 @@
             </div>
         </div>
     </div>
+
     <div id="sub_category_popup" class="popup" style="position: fixed; display: block; border-radius: 15px;">
         <div class="text-align-center padding popup_title">{{ subCategory_title }}</div>
         <div class="category-add padding">
             <div class="categoryForm text-align-left no-padding">
                 <label for="" class="add_category_name">Sub category name</label>
-                <input type="text" name="name" v-model="subCategory.name" class="category-name margin-top-half padding-left-half padding-right-half" placeholder="Add sub category name">
+                <input type="text" name="name" v-model="subCategory.name[lang.id]" v-for="lang in $root.langs" :key="lang.id" class="category-name margin-top-half padding-left-half padding-right-half" :placeholder="'Add ' + lang.name + ' sub category name'">
             </div>
             <div class="categoryForm text-align-left margin-top">
                 <label for="" class="add_category_name">Parent category</label>
@@ -83,12 +84,13 @@
         </div>
         <div><img src="/images/flow.png" style="width:100%"></div>
     </div>
+
     <div id="product_popup" class="popup" style="position: fixed; display: block; border-radius: 15px;">
         <div class="text-align-center padding popup_title">Add Product</div>
         <div class="category-add padding">
             <div class="categoryForm text-align-left no-padding">
                 <label for="" class="add_category_name">Add product</label>
-                <input type="text" v-model="product.name" name="name" class="category-name margin-top-half padding-left-half padding-right-half" placeholder="Add Product name">
+                <input type="text" v-model="product.name[lang.id]" name="name" v-for="lang in $root.langs" :key="lang.id" class="category-name margin-top-half padding-left-half padding-right-half" :placeholder="'Add ' + lang.name + ' Product name'">
             </div>
             <div class="categoryForm text-align-left margin-top">
                 <label for="" class="add_category_name">Choose Sub category</label>
@@ -134,14 +136,14 @@ export default {
             categoryOption: [],
             subCategory: {
                 id : null,
-                name: '',
+                name: [],
                 category: null,
             },
             subCategory_title: 'Add Sub Category',
             search: '',
             subCategoryOption: [],
             product: {
-                name : '',
+                name : [],
                 sub_category : null,
                 price : '',
             }
@@ -212,8 +214,11 @@ export default {
             axios.get('/api/get-sub-category/'+id)
                 .then((res) => {
                 this.subCategory.id = res.data.id;
-                this.subCategory.name = res.data.name;
+                res.data.sub_category_language.forEach(subcat_lang => {
+                    this.subCategory.name[subcat_lang.language_id] = subcat_lang.name;
+                });
                 this.subCategory.category = res.data.category_id;
+                console.log(this.subCategory.category);
             })
         },
         addProduct() {

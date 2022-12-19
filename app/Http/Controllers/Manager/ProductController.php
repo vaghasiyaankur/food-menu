@@ -25,18 +25,19 @@ class ProductController extends Controller
     public function getCategoryProduct($id)
     {
         $lang_id = SettingHelper::getlanguage();
-        $products = Category::with(['subCategory' => function($q) use ($lang_id){
-            $q->where('language_id',$lang_id);
+        $products = Category::with(['subCategory' => function($q){
             $q->whereHas('products');
-        },'subCategory.products','categoryLanguages' => function($q) use ($lang_id){
+        },
+        'subCategory.subCategoryLanguage' => function($q) use ($lang_id){
+            $q->where('language_id',$lang_id);
+        },
+        'subCategory.products.productLanguage' => function($q) use ($lang_id){
+            $q->where('language_id',$lang_id);
+        },
+        'categoryLanguages' => function($q) use ($lang_id){
             $q->where('language_id',$lang_id);
         }])->whereHas('subCategory')->find($id);
         return response()->json($products);
-    }
-
-    public function toggleWishlist(Request $req)
-    {
-
     }
 
     public function getProducts(Request $req)

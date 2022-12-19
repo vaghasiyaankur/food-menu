@@ -28,7 +28,7 @@
                             </div>
                             <div class="col-80 padding-bottom border-bottom row">
                                 <div class="col-75 border-right">
-                                    <p>{{ wishlist.name }}</p>
+                                    <p>{{ wishlist.product_language[0].name }}</p>
                                 </div>
                                 <div class="col-25">
                                     <p>{{ wishlist.price.toFixed(2) }}</p>
@@ -73,6 +73,9 @@ export default {
     created() {
         this.wishlist = JSON.parse(this.cookies.get('wishlist'));
         this.getwishlistData();
+    },
+    mounted() {
+        $('.left').css({ 'opacity': '1', 'visibility': 'visible'})
     },
     methods: {
         getwishlistData() {

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use File;
 use App\Helper\SettingHelper;
 use App\Models\CategoryLanguage;
+use App\Models\Language;
 use Validator;
 
 class CategoryController extends Controller
@@ -48,14 +49,15 @@ class CategoryController extends Controller
             $imageFile->move(storage_path('app/public/category/'),$image_name);
         }
         $name = explode(',',$req->name);
+        $langs = Language::whereStatus(1)->get();
         $cat = new Category();
         $cat->image = $image_name;
         if($cat->save()){
-            for ($i=1; $i < count($name); $i++) {
+            foreach ($langs as $key => $lang) {
                 $cat_lang = new CategoryLanguage();
                 $cat_lang->category_id = $cat->id;
-                $cat_lang->language_id = $i;
-                $cat_lang->name = $name[$i];
+                $cat_lang->language_id = $lang->id;
+                $cat_lang->name = $name[$lang->id];
                 $cat_lang->save();
             }
         }
@@ -108,10 +110,10 @@ class CategoryController extends Controller
 
         $name = explode(',',$req->name);
         $category->image = $image_name;
-
+        $langs = Language::whereStatus(1)->get();
         if($category->save()){
-            for ($i=1; $i < count($name); $i++) {
-                CategoryLanguage::where('category_id',$req->id)->where('language_id',$i)->update(['name'=>$name[$i]]);
+            foreach ($langs as $key => $lang) {
+                CategoryLanguage::where('category_id',$req->id)->where('language_id',$lang->id)->update(['name'=>$name[$lang->id]]);
             }
         }
 

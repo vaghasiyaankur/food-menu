@@ -95,7 +95,7 @@
         </div>
 
         <div class="text-align-center margin-top">
-            <a class="text-underline text-color-black" :class="{ 'display-none': checkWaitingTime }" @click="checkTime" href="javascript:;">{{ $root.trans.check_time }}</a>
+            <a class="text-underline check-time-wait" :class="{ 'display-none': checkWaitingTime }" @click="checkTime" href="javascript:;">{{ $root.trans.check_time }}</a>
             <div class="countdown_section position-relative margin-horizontal" :class="{ 'display-none' : !checkWaitingTime }">
                 <div style="background : url('/images/dots.png')">
                     <img src="/images/clock.png" alt="clock">
@@ -768,6 +768,13 @@ label.item-checkbox input[type='checkbox']:checked~.icon-checkbox{
     color: #fff !important;
 }
 
+.check-time-wait{
+    color : #F33E3E !important;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+}
+
 .font-13 {
     font-size: 13px !important;
 }
@@ -789,12 +796,12 @@ label.item-checkbox input[type='checkbox']:checked~.icon-checkbox{
 }
 .md .dialog-buttons{
     justify-content: center !important;
-    
+
 }
 .md .dialog-button{
     width: 100%;
     border-radius: 10px;
-    
+
 }
 .md .dialog-title + .dialog-text{
     margin-top: 5px;

@@ -14,6 +14,25 @@ class Language extends Model
 
     protected $guarded = ['id'];
 
+    public static function boot() {
+        parent::boot();
+
+        self::deleting(function($language) {
+            $language->contents()->each(function($content) {
+                $content->delete();
+            });
+            $language->categoryLanguages()->each(function($categoryLang) {
+                $categoryLang->delete();
+            });
+            $language->subCategoryLanguages()->each(function($subcategoryLang) {
+                $subcategoryLang->delete();
+            });
+            $language->productLanguages()->each(function($productLang) {
+                $productLang->delete();
+            });
+        });
+    }
+
     public function contents()
     {
         return $this->hasMany(Content::class);
@@ -27,5 +46,10 @@ class Language extends Model
     public function subCategoryLanguages()
     {
         return $this->hasMany(SubCategoryLanguage::class);
+    }
+
+    public function productLanguages()
+    {
+        return $this->hasMany(ProductLanguage::class);
     }
 }

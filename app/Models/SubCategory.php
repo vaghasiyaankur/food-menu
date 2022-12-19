@@ -21,6 +21,9 @@ class SubCategory extends Model
             $category->products()->each(function($product) {
                 $product->delete();
             });
+            $category->subCategoryLanguage()->each(function($sub_category_lang) {
+                $sub_category_lang->delete();
+            });
         });
     }
 
@@ -29,7 +32,7 @@ class SubCategory extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function subCategories()
+    public function subCategoryLanguage()
     {
         return $this->hasMany(SubCategoryLanguage::class);
     }

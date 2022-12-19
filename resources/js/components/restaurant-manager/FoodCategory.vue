@@ -113,7 +113,7 @@
                     <label class="add_category_name">Sub category name</label>
                     <input type="text" name="name" v-model="subCategory.name[lang.id]" v-for="lang in $root.langs" :key="lang.id"
                         class="category-name margin-top-half padding-left-half padding-right-half"
-                        placeholder="Add sub category name">
+                        :placeholder="'Add ' + lang.name + ' sub category name'">
                 </div>
                 <div class="categoryForm text-align-left margin-bottom">
                     <label for="" class="add_category_name">Parent category</label>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\SettingHelper;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Cookie;
@@ -13,7 +14,11 @@ class FavoriteController extends Controller
     {
         $wishlist = $req->wishlist != null ? $req->wishlist : [];
 
-        $wishlist = Product::whereIn('id',$wishlist)->get();
+        $lang_id = SettingHelper::getlanguage();
+
+        $wishlist = Product::with(['productLanguage' => function($q) use ($lang_id){
+            $q->where('language_id',$lang_id);
+        }])->whereIn('id',$wishlist)->get();
 
         return response()->json($wishlist);
     }

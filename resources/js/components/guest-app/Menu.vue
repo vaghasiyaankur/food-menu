@@ -29,20 +29,27 @@
                 <div class="menu-details margin-top">
                     <div class="menu-lists" v-if="product_subcategory.length">
                         <div class="menu-list" v-for="subcate in product_subcategory" :key="subcate">
-                            <div class="font-18 text-align-center menu-list-title text-color-black"><u>{{ subcate.name }}</u></div>
+                            <div class="font-18 text-align-center menu-list-title text-color-black"><u>{{ subcate.sub_category_language[0].name }}</u></div>
                             <div class="list row margin-half align-items-center" v-for="product in subcate.products" :key="product">
                                 <div class="col-10">
                                     <span class="add-favlist" @click="toggleWishlist(product.id)">
                                         <i class="f7-icons size-22 bg-color-white text-color-red padding-half font-13">{{ this.wishlist && this.wishlist.includes(product.id) ? 'heart_fill' : 'heart' }}</i>
                                     </span>
                                     </div>
-                                <div class="col-70 display-flex">{{ product.name }}&nbsp; <span class="dots"></span></div>
+                                <div class="col-70 display-flex">{{ product.product_language[0].name }}&nbsp; <span class="dots"></span></div>
                                 <div class="col-20">{{ product.price.toFixed(2) }}</div>
                             </div>
                         </div>
                     </div>
                     <div class="menu-lists" v-else>
-                        <NoValueFound />
+                        <div class="no_order">
+                            <div class="search__img text-align-center">
+                                <img src="/images/Empty-pana 1.png" alt="serach">
+                            </div>
+                            <div class="no_order_text text-align-center">
+                                <p class="no-margin">{{ $root.trans.empty_menu }}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -130,7 +137,6 @@ export default {
             }
             this.cookies.set("wishlist", JSON.stringify(this.wishlist), 60 * 60 * 24);
             this.wishlist = JSON.parse(this.cookies.get('wishlist'));
-
         }
     }
 }
@@ -211,5 +217,26 @@ export default {
   .menu-lists {
       height:calc(100vh - 430px);
       overflow-y : scroll;
+  }
+  .no_order {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: calc(100% - 110px);
+  }
+
+  .no_order_text p {
+      font-size: 20px;
+      line-height: 24px;
+      font-weight: 600;
+      color: #38373D;
+  }
+
+  .search__img img {
+      width: 100%;
+      max-height: 320px;
+      height: 100%;
+      object-fit: cover;
   }
 </style>

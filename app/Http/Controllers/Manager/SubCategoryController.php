@@ -6,16 +6,27 @@ use App\Helper\SettingHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\SubCategory;
+use App\Models\SubCategoryLanguage;
 use Illuminate\Http\Request;
+use App\Models\Language;
 
 class SubCategoryController extends Controller
 {
     public function addSubCategory(Request $req)
     {
         $subCat = new SubCategory();
-        $subCat->name = $req->name;
         $subCat->category_id = $req->category_id;
-        $subCat->save();
+        $langs = Language::whereStatus(1)->get();
+        if($subCat->save()){
+            $name = explode(',',$req->name);
+            foreach ($langs as $key => $lang) {
+                $cat_lang = new SubCategoryLanguage();
+                $cat_lang->sub_category_id = $subCat->id;
+                $cat_lang->language_id = $lang->id;
+                $cat_lang->name = $name[$lang->id];
+                $cat_lang->save();
+            }
+        }
 
         return response()->json(['success'=>'Sub Category Added Successfully.']);
     }
@@ -25,9 +36,9 @@ class SubCategoryController extends Controller
         $lang_id = SettingHelper::systemLang();
         $subCategories = Category::with(['categoryLanguages' => function($q) use ($lang_id){
             $q->where('language_id',$lang_id);
-        },'subCategory' => function($q) use ($req,$lang_id){
+        },'subCategory.subCategoryLanguage' => function($q) use ($req,$lang_id){
             $q->where('name','LIKE','%'.$req->search.'%')->where('language_id',$lang_id);
-        }])->whereHas('subCategory',function($q) use ($req,$lang_id){
+        }])->whereHas('subCategory.subCategoryLanguage',function($q) use ($req,$lang_id){
             $q->where('name','LIKE','%'.$req->search.'%')->where('language_id',$lang_id);
         })->get();
         return response()->json($subCategories);
@@ -35,16 +46,21 @@ class SubCategoryController extends Controller
 
     public function getSubCategory($id)
     {
-        $subCategories = SubCategory::find($id);
+        $subCategories = SubCategory::with('subCategoryLanguage')->find($id);
         return response()->json($subCategories);
     }
 
     public function updateSubCategory(Request $req)
     {
         $subCat = SubCategory::find($req->id);
-        $subCat->name = $req->name;
         $subCat->category_id = $req->category_id;
-        $subCat->save();
+         if($subCat->save()){
+            $langs = Language::whereStatus(1)->get();
+            $name = explode(',',$req->name);
+            foreach ($langs as $key => $lang) {
+                SubCategoryLanguage::where('sub_category_id',$req->id)->where('language_id',$lang->id)->update(['name'=>$name[$lang->id]]);
+            }
+        }
 
         return response()->json(['success'=>'Sub Category Updated Successfully.']);
     }
@@ -60,7 +76,16 @@ class SubCategoryController extends Controller
 
     public function get_Subcategories()
     {
-        $subCat = SubCategory::pluck('name','id');
+        $lang_id = SettingHelper::systemLang();
+
+        $subCategories = SubCategory::with(['subCategoryLanguage' => function($q) use ($lang_id){
+            $q->where('language_id',$lang_id);
+        }])->get();
+
+        $subCat = [];
+        foreach ($subCategories as $key => $sub) {
+            $subCat[$sub->id] = $sub->subCategoryLanguage[0]->name;
+        }
 
         return response()->json($subCat);
     }
