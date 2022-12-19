@@ -75,7 +75,7 @@
                                             <div class=""><i class="f7-icons">ellipsis</i>  </div>
                                             <div class="menu-dropdown menu-dropdown-right">
                                             <div class="menu-dropdown-content no-padding">                                             
-                                                <a class="menu-dropdown-link menu-close padding-vertical active" :href="'/reservation-view/'+data.id"><i class="f7-icons margin-right-half">eye</i>View </a> 
+                                                <a class="menu-dropdown-link menu-close padding-vertical" :href="'/reservation-view/'+data.id"><i class="f7-icons margin-right-half">eye</i>View </a> 
                                                 <a class="menu-dropdown-link menu-close padding-vertical" href="javascript:;" @click="removeReservation(data.id)"><i class="f7-icons margin-right-half">trash</i>Delete </a>                                                 
                                             </div>
                                             </div>
@@ -344,6 +344,13 @@ export default {
     padding: 8px 16px;
     text-decoration: none;
     border-radius: 5px;
+}
+.menu-dropdown-link::before{
+    background-color: #F33E3E !important;
+}
+.active-state{
+    background-color: #F33E3E !important;
+    color: #fff !important;
 }
 </style>
 

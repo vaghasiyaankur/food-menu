@@ -14,19 +14,19 @@
                             <div class="card-content card-content-padding">
                                 <div class="single_content row margin-bottom">
                                     <div class="content_left_text no-margin col-50"><p class="no-margin">Reservation ID :</p> </div> 
-                                    <div class="content_right_text no-margin col-50"><span>#10663</span> </div> 
+                                    <div class="content_right_text no-margin col-50"><span>#{{ reservation.id }}</span> </div> 
                                 </div>
                                 <div class="single_content row margin-bottom">
                                     <div class="content_left_text no-margin col-50"><p class="no-margin">User Name :</p> </div> 
-                                    <div class="content_right_text no-margin col-50"><span>Jannson Wasley</span> </div> 
+                                    <div class="content_right_text no-margin col-50"><span>{{  reservation.customer ? reservation.customer.name : '' }}</span> </div> 
                                 </div>
                                 <div class="single_content row margin-bottom">
                                     <div class="content_left_text no-margin col-50"><p class="no-margin">Phone Number :</p> </div> 
-                                    <div class="content_right_text no-margin col-50"><span>8258340744</span> </div> 
+                                    <div class="content_right_text no-margin col-50"><span>{{  reservation.customer ? reservation.customer.number : '' }}</span> </div> 
                                 </div>
                                 <div class="single_content row margin-bottom">
                                     <div class="content_left_text no-margin col-50"><p class="no-margin">No. of Guest :</p> </div> 
-                                    <div class="content_right_text no-margin col-50"><span>04 </span> </div> 
+                                    <div class="content_right_text no-margin col-50"><span>{{  reservation.person }} </span> </div> 
                                 </div>
                             </div>
                         </div>
@@ -37,19 +37,24 @@
                             <div class="card-content card-content-padding">
                                 <div class="single_content row margin-bottom">
                                     <div class="content_left_text no-margin col-50"><p class="no-margin">Status :</p> </div> 
-                                    <div class="content_right_text no-margin col-50"><span class="status_info status_cancel">Cancel</span> </div> 
+                                    <div class="content_right_text no-margin col-50">
+                                        <span class="status_info status_cancel" v-if="reservation.deleted_at">Cancel</span>
+                                        <span class="status_info status_complete" v-else-if="reservation.finished">Complete</span>
+                                        <span class="status_info status_ongoing" v-else-if="reservation.start_time">Ongoing</span>
+                                        <span class="status_info status_waiting" v-else>Wating</span>
+                                    </div> 
                                 </div>
                                 <div class="single_content row margin-bottom">
                                     <div class="content_left_text no-margin col-50"><p class="no-margin">Cancel By :</p> </div> 
-                                    <div class="content_right_text no-margin col-50"><span>Manager</span> </div> 
+                                    <div class="content_right_text no-margin col-50"><span>{{ reservation.cancelled_by }}</span> </div> 
                                 </div>
                                 <div class="single_content row margin-bottom">
                                     <div class="content_left_text no-margin col-50"><p class="no-margin">Reservation By :</p> </div> 
-                                    <div class="content_right_text no-margin col-50"><span>Guest</span> </div> 
+                                    <div class="content_right_text no-margin col-50"><span>{{ reservation.role }}</span> </div> 
                                 </div>
                                 <div class="single_content row margin-bottom">
                                     <div class="content_left_text no-margin col-50"><p class="no-margin">Reservation Date & Time :</p> </div> 
-                                    <div class="content_right_text no-margin col-50"><span>24, Sep 2022 / 10:00 am</span> </div> 
+                                    <div class="content_right_text no-margin col-50"><span>{{  reservation.date }}</span> </div> 
                                 </div>
                             </div>
                         </div>
@@ -68,7 +73,7 @@
                                 </div>                                
                             </div>
                         </div>
-                    </div>                  
+                    </div>   
                     <div class="col-50">
                         <div class="card border_radius_10">
                             <div class="card-header"><h3 class="no-margin"> Floor shift Details</h3></div>
@@ -98,49 +103,25 @@ export default {
     name : 'ReservationView',
     data() {
         return {
-            reservation : [],
-            from_date : '',
-            to_date: '',
-            search: ''
+            id: '',
+            reservation : []
         }
     },
     components: {
         f7Page,
-        f7,
+        f7
     },
     created() {
-        this.reservationData();
     },
     mounted() {
-        f7.calendar.create({
-            inputEl: '#calender-date-range',
-            rangePicker: true,
-            numbers:true,
-            footer: true,
-            on: {
-                close(daterange) {
-                    var dates = daterange.getValue();
-                    if(dates){
-                        var from_date = new Date(dates[0]).toLocaleDateString('sv-SE');
-                        if(dates[1]) var to_date = new Date(dates[1]).toLocaleDateString('sv-SE');
-                        else var to_date = '';
-
-                        $("#from-date").val(from_date);
-                        $("#to-date").val(to_date);
-                    }
-                }
-            }
-        });
-
-        this.$root.activationMenu('all-reservation');
+        setTimeout(() => {
+            this.reservationDetail();
+        }, 500);
     },
     methods : {
-        reservationData() {
-            var search = this.search;
-            var from_date = this.from_date;
-            var to_date = this.to_date;
-
-            axios.get('/api/reservation-list?from_date='+from_date+'&to_date='+to_date+'&search='+search)
+        reservationDetail() {
+            this.id = f7.view.main.router.currentRoute.params.id;
+            axios.get('/api/reservation-detail/'+this.id)
             .then((res) => {
                 this.reservation = res.data.reservation;
             })
@@ -191,10 +172,24 @@ border-bottom:1px solid #DDE0E6;
     font-size: 12px;
     width: 100px;
 }
-.reservation_details .card-content .single_content .status_info.status_cancel{
-	background: #FFE7DD;
-	color: #E31A1A;
+.reservation_details .card-content .single_content  .status_info.status_complete{
+	background-color: #E9FBE7;
+	color: #3D833C;
 }
+.reservation_details .card-content .single_content  .status_info.status_waiting{
+    background: #FFE7DD;
+    color: #555555;
+}
+.reservation_details .card-content .single_content  .status_info.status_ongoing{
+    background: #FFF9E3;
+    color: #D39255;
+}
+.reservation_details .card-content .single_content  .status_info.status_cancel{
+    background: #FFE7DD;
+    color: #E31A1A;
+}
+
+
 .reservation_details .card-content .single_content .content_right_text .f7-icons{
     font-size: 20px;
     vertical-align: middle;

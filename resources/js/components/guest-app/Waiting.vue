@@ -146,7 +146,7 @@ export default {
             var ids = JSON.parse(this.cookies.get('orderId'));
             f7.dialog.confirm(this.$root.trans.cancel_conformation_message, () => {
 
-                axios.post('/api/cancel-reservation', {ids : ids})
+                axios.post('/api/cancel-reservation', {ids : ids, cancelled_by : 'Guest'})
                 .then((res) => {
                     this.cookies.remove("orderId");
                     // f7.view.main.router.navigate({ url: '/', reloadCurrent: true });

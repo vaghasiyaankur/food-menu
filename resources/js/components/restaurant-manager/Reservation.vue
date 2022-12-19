@@ -221,7 +221,7 @@ export default {
                 formData.append('customer_number', this.reservation.number);
                 formData.append('person', this.reservation.member);
                 formData.append('floor', this.reservation.floor);
-                formData.append('role', 'manager');
+                formData.append('role', 'Manager');
                 formData.append('agree_condition', 1);
 
                 axios.post('/api/add-reservation', formData)

@@ -68,6 +68,7 @@ export default [
     name : 'ReservationView',
     path: '/reservation-view/:id',
     component: ReservationView,
+    props: true
   },
   {
     name : 'Waiting',
