@@ -12,5 +12,11 @@ class SettingHelper{
 
         return $setting->language_id;
     }
+
+    public static function getlanguage()
+    {
+        return request()->session()->get('lang');
+
+    }
 }
 ?>

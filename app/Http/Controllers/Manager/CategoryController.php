@@ -136,13 +136,23 @@ class CategoryController extends Controller
 
     public function get_categories()
     {
-        $category = Category::pluck('name','id');
+        $lang_id = SettingHelper::systemLang();
+        $categories = Category::with(['categoryLanguages' => function($q) use ($lang_id){
+            $q->where('language_id',$lang_id);
+        }])->get();
+        $category = [];
+        foreach ($categories as $key => $cat) {
+            $category[$cat->id] = $cat->categoryLanguages[0]->name;
+        }
         return response()->json($category);
     }
 
     public function getCategoriesList()
     {
-        $category = Category::whereHas('subCategory.products')->get();
+        $lang_id = SettingHelper::getlanguage();
+        $category = Category::with(['categoryLanguages' => function($q) use ($lang_id){
+            $q->where('language_id',$lang_id);
+        }])->whereHas('subCategory.products')->get();
         return response()->json($category);
     }
 }

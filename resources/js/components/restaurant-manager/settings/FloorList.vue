@@ -36,15 +36,16 @@
                             </tr>
                         </tbody>
                     </table>
-                    <div class="data-table-pagination">
-                        <div v-for="(link,index) in paginationData.links" :key="link">
-                            <a href="javascript:;" v-if="index == 0" @click="link.url != null ? getFloors(link.url) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon icon-prev color-gray"></i></a>
-                            <a href="javascript:;" v-if="paginationData.links.length - 1 != index && index != 0" @click="link.url != null ? getFloors(link.url) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}">{{ index }}</a>
-                            <a href="javascript:;" v-if="paginationData.links.length - 1 == index" @click="link.url != null ? getFloors(link.url) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon icon-next color-gray"></i></a>
+                    <div class="pagination_count">
+                        <div class="pagination_list">
+                            <div v-for="(link,index) in paginationData.links" :key="link">
+                                <a href="javascript:;" v-if="index == 0" @click="link.url != null ? getFloors(link.url) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon-prev"></i></a>
+                                <a href="javascript:;" v-if="paginationData.links.length - 1 != index && index != 0" @click="link.url != null ? getFloors(link.url) : 'javascript:;'" :class="{ 'disabled': link.url == null, 'active': paginationData.current_page == index}">{{ index }}</a>
+                                <a href="javascript:;" v-if="paginationData.links.length - 1 == index" @click="link.url != null ? getFloors(link.url) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon-next"></i></a>
+                            </div>
                         </div>
                     </div>
-                </div>
-
+                </div>  
             </div>
         </div>
     </div>
@@ -149,8 +150,18 @@
 .font-13{
     font-size: 13px;
 }
-.data-table .data-table-pagination{
-    justify-content: end;
+.pagination_count .pagination_list {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.pagination_count .pagination_list a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 5px;
 }
 </style>
 

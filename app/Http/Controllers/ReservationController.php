@@ -217,7 +217,7 @@ class ReservationController extends Controller
     }
 
     /**
-     *  Shoe List reservation (with date and search wise filter)
+     *  Show List reservation (with date and search wise filter)
      *
      * @return @json (success message)
      *
@@ -227,13 +227,39 @@ class ReservationController extends Controller
     {   
         $from_date = $request->from_date ? date('Y-m-d', strtotime($request->from_date)) : date('Y-m-d', strtotime(Carbon::now()));
         $to_date = $request->to_date ? date('Y-m-d', strtotime($request->to_date)) : $from_date;
+        $search = $request->search;
 
-        $reservation = Order::withTrashed()->whereDate('created_at', '>=', $from_date)->whereDate('created_at', '<=', $to_date)->with(['customer' => function($q) {
+        $reservation = Order::withTrashed()->with(['customer' => function($q) {
             $q->select('id','name', 'number');
-        }])->select('id','customer_id','person','start_time','finish_time','finished','deleted_at')->selectRaw('DATE_FORMAT(created_at,"%d, %b %Y / %h:%i %p") as date')->get();  
+        }]);
+        
+        $reservation = $reservation->whereDate('created_at', '>=', $from_date)->whereDate('created_at', '<=', $to_date)->select('id','customer_id','person','start_time','finish_time','finished','deleted_at')->selectRaw('DATE_FORMAT(created_at,"%d, %b %Y / %h:%i %p") as date');
+        
+        if($request->search)
+         $reservation = $reservation->where('id', $request->search)->orWhere(function ($orWhere) use ($search) {
+            $orWhere->orWhereHas('customer',function($products) use ($search) {
+                $products->where('name', 'like', '%' . $search . '%');
+            });
+        });
+         
+
+        $reservation = $reservation->get();
 
 
         return response()->json([ 'reservation' => $reservation ] , 200);
+    }
+
+    /**
+     *  Hard Remove Reservation through id
+     *
+     * @return @json (success message)
+     *
+     */
+
+    public function removeReservation(Request $request)
+    {   
+        Order::where('id', $request->id)->forceDelete();
+        return response()->json([ 'success' => 'Remove Reservation Successfully' ] , 200);
     }
     
 }

@@ -29,9 +29,9 @@ class SubCategory extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function language()
+    public function subCategories()
     {
-        return $this->belongsTo(Language::class);
+        return $this->hasMany(SubCategoryLanguage::class);
     }
 
     public function products()

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Manager;
 
+use App\Helper\SettingHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\SubCategory;
@@ -21,10 +22,13 @@ class SubCategoryController extends Controller
 
     public function getSubCategories(Request $req)
     {
-        $subCategories = Category::with(['subCategory' => function($q) use ($req){
-            $q->where('name','LIKE','%'.$req->search.'%');
-        }])->whereHas('subCategory',function($q) use ($req){
-            $q->where('name','LIKE','%'.$req->search.'%');
+        $lang_id = SettingHelper::systemLang();
+        $subCategories = Category::with(['categoryLanguages' => function($q) use ($lang_id){
+            $q->where('language_id',$lang_id);
+        },'subCategory' => function($q) use ($req,$lang_id){
+            $q->where('name','LIKE','%'.$req->search.'%')->where('language_id',$lang_id);
+        }])->whereHas('subCategory',function($q) use ($req,$lang_id){
+            $q->where('name','LIKE','%'.$req->search.'%')->where('language_id',$lang_id);
         })->get();
         return response()->json($subCategories);
     }
