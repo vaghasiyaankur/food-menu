@@ -1,6 +1,92 @@
 <template>
     <f7-page>
-       <div>test</div>
+       <div class="reservation_view">
+            <div class="back_link padding">
+                <a class="link back" href="all-reservation"><i class="icon icon-back"></i>
+                    <span class="margin-left-half">Back to List</span>
+                </a>
+            </div>
+            <div class="block reservation_details no-margin-top">
+                <div class="row">
+                    <div class="col-50">
+                        <div class="card border_radius_10">
+                            <div class="card-header"><h3 class="no-margin"> Guest Details</h3></div>
+                            <div class="card-content card-content-padding">
+                                <div class="single_content row margin-bottom">
+                                    <div class="content_left_text no-margin col-50"><p class="no-margin">Reservation ID :</p> </div> 
+                                    <div class="content_right_text no-margin col-50"><span>#10663</span> </div> 
+                                </div>
+                                <div class="single_content row margin-bottom">
+                                    <div class="content_left_text no-margin col-50"><p class="no-margin">User Name :</p> </div> 
+                                    <div class="content_right_text no-margin col-50"><span>Jannson Wasley</span> </div> 
+                                </div>
+                                <div class="single_content row margin-bottom">
+                                    <div class="content_left_text no-margin col-50"><p class="no-margin">Phone Number :</p> </div> 
+                                    <div class="content_right_text no-margin col-50"><span>8258340744</span> </div> 
+                                </div>
+                                <div class="single_content row margin-bottom">
+                                    <div class="content_left_text no-margin col-50"><p class="no-margin">No. of Guest :</p> </div> 
+                                    <div class="content_right_text no-margin col-50"><span>04 </span> </div> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-50">
+                        <div class="card border_radius_10">
+                            <div class="card-header"><h3 class="no-margin"> Reservation Details</h3></div>
+                            <div class="card-content card-content-padding">
+                                <div class="single_content row margin-bottom">
+                                    <div class="content_left_text no-margin col-50"><p class="no-margin">Status :</p> </div> 
+                                    <div class="content_right_text no-margin col-50"><span class="status_info status_cancel">Cancel</span> </div> 
+                                </div>
+                                <div class="single_content row margin-bottom">
+                                    <div class="content_left_text no-margin col-50"><p class="no-margin">Cancel By :</p> </div> 
+                                    <div class="content_right_text no-margin col-50"><span>Manager</span> </div> 
+                                </div>
+                                <div class="single_content row margin-bottom">
+                                    <div class="content_left_text no-margin col-50"><p class="no-margin">Reservation By :</p> </div> 
+                                    <div class="content_right_text no-margin col-50"><span>Guest</span> </div> 
+                                </div>
+                                <div class="single_content row margin-bottom">
+                                    <div class="content_left_text no-margin col-50"><p class="no-margin">Reservation Date & Time :</p> </div> 
+                                    <div class="content_right_text no-margin col-50"><span>24, Sep 2022 / 10:00 am</span> </div> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-50">
+                        <div class="card border_radius_10">
+                            <div class="card-header"><h3 class="no-margin"> Table Shift Details</h3></div>
+                            <div class="card-content card-content-padding">
+                                <div class="single_content row margin-bottom">
+                                    <div class="content_left_text no-margin col-50"><p class="no-margin">Table shifted :</p> </div> 
+                                    <div class="content_right_text no-margin col-50"><span><span>Table 3</span> <i class="f7-icons margin-horizontal-half">arrow_right</i> <span>Table 8</span></span> </div> 
+                                </div>
+                                <div class="single_content row margin-bottom">
+                                    <div class="content_left_text no-margin col-50"><p class="no-margin">Message Sending Time :</p> </div> 
+                                    <div class="content_right_text no-margin col-50"><span>5 : 30 : 45 PM</span> </div> 
+                                </div>                                
+                            </div>
+                        </div>
+                    </div>                  
+                    <div class="col-50">
+                        <div class="card border_radius_10">
+                            <div class="card-header"><h3 class="no-margin"> Floor shift Details</h3></div>
+                            <div class="card-content card-content-padding">
+                                <div class="single_content row margin-bottom">
+                                    <div class="content_left_text no-margin col-50"><p class="no-margin">Floor shifted :</p> </div> 
+                                    <div class="content_right_text no-margin col-50"><span><span>First Floor </span> <i class="f7-icons margin-horizontal-half">arrow_right</i> <span>Second Floor</span></span> </div> 
+                                </div>
+                                <div class="single_content row margin-bottom">
+                                    <div class="content_left_text no-margin col-50"><p class="no-margin">Message Sending Time :</p> </div> 
+                                    <div class="content_right_text no-margin col-50"><span>5 : 30 : 45 PM</span> </div> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>                  
+                </div>
+            </div>
+       </div>
     </f7-page>
 </template>
 <script>
@@ -71,144 +157,60 @@ export default {
 
 }
 </script>
-<style scoped>
-.height_40{
-    height: 40px !important;
-}
-.justify_content_between{
-    justify-content:space-between !important;
-}
-.all_reservation{
-    margin-top: 59px;
-    background-color: #ffffff;
-    height: calc(100% - 60px);
-}
-.all_reservation .card{
-    box-shadow: none;
-    background-color: transparent;
-}
-.all_reservation #searchData{
-    width: 90%;
-}
-.all_reservation .item-input-wrap{
-    width: 100%;
-    background: #FFFFFF;
-    border: 0.5px solid #555555;
-    border-radius: 7px;
-    height: auto;
-}
-::placeholder{
-    color: #555555 !important;
-    opacity: 1;
-}
-
-.all_reservation .filters_button .button{
-    border: 1px solid #555555;
-    border-radius: 5px;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 17px;
-    color: #555555;
-}
-/*======== TABLE ==========*/
-.reservation_table thead tr{
-    background: #F4F4F4;
-}
-.reservation_table .table_content{
+<style>
+.page-content{
+    background-color: #fff !important;
     height: 100%;
-    max-height: 607px;
-    overflow-y: auto;
 }
-.reservation_table .table_content table tr td{
-    padding: 20px 16px;
+</style>
+<style scoped>
+.reservation_view{
+    margin-top:60px;
+}
+.reservation_view .back_link a.back {
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 19px;
+	color: #38373D;
+}
+.card-header{
+border-bottom:1px solid #DDE0E6;
+}
+.border_radius_10{
+    border-radius: 10px;
+}
+.reservation_details .card-content .single_content .content_left_text p,.reservation_details .card-content .single_content .content_right_text span{
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    color: #222222;
+    white-space: nowrap;
+}
+.reservation_details .card-content .single_content .content_right_text span{
     font-weight: 400;
-    font-size: 15px;
-    line-height: 18px;
-    color: #38373D;
 }
-.reservation_table .table_content table thead tr th{
-    font-weight: 600;
-        font-size: 15px;
-        line-height: 18px;
-        color: #555555;
-}
-.reservation_table .table_content table tbody tr:nth-child(even){
-    background-color:#FAFAFA;
-}
-.reservation_table .table_content .status_info{
-	display: flex;
-	justify-content: center;
-	border-radius: 5px;
-	height: 26px;
-	line-height: 26px;
-	font-weight: 400;
-	font-size: 12px;
-    width: 80%;
-}
-.reservation_table .table_content .status_info.status_complete{
-	background-color: #E9FBE7;
-	color: #3D833C;
-}
-.reservation_table .table_content .status_info.status_waiting{
-    background: #FFE7DD;
-    color: #555555;
-}
-.reservation_table .table_content .status_info.status_ongoing{
-    background: #FFF9E3;
-    color: #D39255;
-}
-.reservation_table .table_content .status_info.status_cancel{
-    background: #FFE7DD;
-    color: #E31A1A;
-}
-.pagination_count .pagination_list{
+.reservation_details .card-content .single_content .status_info{
     display: flex;
     justify-content: center;
-    align-items:center;
-  }
-  
-  .pagination_count .pagination_list a {
-    color: black;
-    float: left;
-    padding: 8px 16px;
-    text-decoration: none;
     border-radius: 5px;
-  }
-  
-  .pagination_count .pagination_list a:hover:not(.active) {
-    background-color: #ddd;
-    border-radius: 5px;
-  }
-  .menu-item-dropdown-right .menu-dropdown::before, .menu-item-dropdown-center .menu-dropdown::before, .menu-dropdown-right::before, .menu-dropdown-center::before {
-    content: none;
-  }
-  .reservation_table .table_content .menu-dropdown{
-    background-color: transparent;
-  }
-  .reservation_table .table_content .menu-dropdown-content{
-    top: -9px !important;
-  }
-  .reservation_table .table_content .menu-item-dropdown-right .menu-dropdown-content, .reservation_table .table_content .menu-dropdown-right .menu-dropdown-content{
-    right: 33px;
-    border-top-right-radius: 5px;
-    width: 180px;
-  }
-  .reservation_table .table_content .menu-dropdown-content{
-    background: #FFFFFF;
-    box-shadow: 0px 0px 14px rgba(34, 34, 34, 0.1);
-    z-index: 99;
+    height: 26px;
+    line-height: 26px !important;
+    font-weight: 400 !important;
+    font-size: 12px;
+    width: 100px;
 }
-.reservation_table .table_content .menu-dropdown-content a{
+.reservation_details .card-content .single_content .status_info.status_cancel{
+	background: #FFE7DD;
+	color: #E31A1A;
+}
+.reservation_details .card-content .single_content .content_right_text .f7-icons{
+    font-size: 20px;
+    vertical-align: middle;
+}
+.card-header h3{
     font-weight: 500;
-    font-size: 15px;
-    line-height: 18px;
-    color: #999999;   
-  }
-  .reservation_table .table_content .menu-dropdown-link:last-child{
-    border-bottom: none;
-  }
-  .reservation_table .table_content .menu-dropdown-link{
-    justify-content: flex-start !important;
-  }
+    font-size: 18px;
+    line-height: 25px;
+    color: #222222;
+}
 </style>
-
