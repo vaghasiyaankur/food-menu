@@ -4,25 +4,79 @@
             <f7-navbar class="navbar-menu text-color-white" large transparent :title="$root.trans.waiting_time" :back-link="$root.trans.back">
                 <div class="favourites-card">
                     <a class="link icon-only" href="/favourites/">
-                        <i class="f7-icons size-22 text-color-white padding-half font-18">heart_fill</i>
+                        <i class="f7-icons size-22 text-color-white padding-half font-18">heart</i>
                     </a>
                 </div>
             </f7-navbar>
         </div>
-
-        <div class="margin countdown_section">
-            <div class="text-align-center">Lorem Ipsum is simply dummy text of the printing and typesetting industry</div>
-            <div class="countdown position-relative text-align-center margin">
-                <div style="background : url('/images/dots.png')">
-                    <img src="/images/clock.png" alt="">
-                    <!-- <i class="f7-icons font-13 padding-half margin-bottom close-countdown" @click="display = true">xmark</i> -->
-                    <vue-countdown :time="time" v-slot="{ hours, minutes, seconds }">
-                        <p class="no-margin font-30">{{ hours }} : {{ minutes }} : {{ seconds }}</p>
-                    </vue-countdown>
+        <div class="waiting_area">
+            <div class="waiting_info">
+                <div class="padding margin-vertical table-card margin-horizontal-half">
+                    <!--======= TABLE CHAIR ========= -->
+                    <div class="row table_top_chair">
+                    <div class="col">
+                        <div class="table_card_img text-align-center"><img src="/images/table/Red.png" alt="table"></div>
+                    </div>
+                    <div class="col">
+                        <div class="table_card_img text-align-center"><img src="/images/table/Red.png" alt="table"></div>
+                    </div>
+                    <div class="col">
+                        <div class="table_card_img text-align-center"><img src="/images/table/Red.png" alt="table"></div>
+                    </div>
+                    </div>
+                    <div class="card no-margin table_1" >
+                    <div class="card-content display-flex justify-content-center align-items-center no-padding h_100">
+                        <div class="table_number table_inner">
+                            <p class="no-margin">Table No.</p>
+                            <span class="no-margin">03</span>
+                        </div>
+                        <div class="table_capacity table_inner">
+                            <p class="no-margin">Capacity</p>
+                            <span class="no-margin">05</span>
+                        </div>
+                    </div>                  
+                    </div>
+                    <!--======= TABLE CHAIR ========= -->
+                    <div class="row table_bottom_chair">
+                    <div class="col">
+                        <div class="table_card_img text-align-center"><img src="/images/table/Red.png" alt="table" style="transform: rotate(180deg);"></div>
+                    </div>
+                    <div class="col">
+                        <div class="table_card_img text-align-center"><img src="/images/table/Red.png" alt="table" style="transform: rotate(180deg);"></div>
+                    </div>
+                    <div class="col">
+                        <div class="table_card_img text-align-center"><img src="/images/table/Red.png" alt="table" style="transform: rotate(180deg);"></div>
+                    </div>
+                    </div>
+                </div>
+                <div class="table__information padding">
+                    <div class="guest_number">
+                        <span class="table_info_text">No. of Guest :</span>
+                        <span>5</span>
+                    </div>
+                    <div class="date_time margin-top-half margin-bottom">
+                        <span class="table_info_text">Date & Time :</span>
+                        <span>24, Sep 2022 / 10:00 am</span>
+                    </div>
                 </div>
             </div>
+            <div class="margin countdown_section">
+                <div class="text-align-center">
+                    <h3>Waiting Time</h3>    
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p> 
+                </div>
+                <div class="countdown position-relative text-align-center margin">
+                    <div style="background : url('/images/dots.png')" class="display-flex justify-content-space-between align-items-center flex-direction-column">
+                        <img src="/images/clock.png" alt="">
+                        <!-- <i class="f7-icons font-13 padding-half margin-bottom close-countdown" @click="display = true">xmark</i> -->
+                        <vue-countdown :time="time" v-slot="{ hours, minutes, seconds }">
+                            <p class="no-margin font-30">{{ hours }} : {{ minutes }} : {{ seconds }}</p>
+                        </vue-countdown>
+                    </div>
+                </div>
+            </div>           
         </div>
-        <div class="padding bottom-bar">
+        <div class="padding-horizontal bottom-bar toolbar">
             <div class="row">
                 <div class="col">
                     <f7-button class="button button-raised open-menu-button active button-large text-transform-capitalize" fill sheet-open=".demo-sheet-swipe-to-close">{{ $root.trans.open_menu }}</f7-button>
@@ -128,7 +182,61 @@ export default {
 </script>
 
 <style scoped>
+/*============ WAITING INFO =============*/
+.waiting_info{
+    border: 1px solid #999;
+    margin: 15px;
+    border-radius: 10px;
+}
+.waiting_info .table_1{
+    height: 145px;
+    border-left: 10px solid rgb(255, 97, 97);
+}
+.table_inner {
+	background: #fff4f1;
+	padding: 10px 16px;
+	margin-right: 20px;
+	border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.table_inner span{
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 21px;
+    text-align: center;
+    color: #555555;
+    margin-top: 5px !important;
+}
+.table__information .table_info_text{
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: #38373D;
 
+}
+.bottom-bar{
+    position: absolute;
+    bottom: 17px;
+    background-color: transparent !important;
+}
+ .toolbar .button{
+    color: #38373D !important;
+ }
+ .toolbar .button.active{
+    color: #fff !important;
+ }
+ h3{
+    font-weight: 500;
+        font-size: 18px;
+        line-height: 22px;
+        color: #38373D;
+ }
+.h_100{
+    height: 100%;
+}
 .border_radius_10{
     border-radius: 10px;
 }
@@ -160,7 +268,7 @@ export default {
     opacity: 0;
 }
 .countdown_section{
-    height: calc(100vh - 168px);
+    height: calc(100vh - 540px);
     display: flex;
     flex-wrap: wrap;
     align-content: center;
@@ -169,8 +277,12 @@ export default {
 .countdown{
     background: #f88f721a;
     border-radius: 7px;
-    padding: 18px;
     width: 100%;
+    height: 100%;
+    max-height: 138px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .close-countdown{
     position: absolute;
@@ -206,12 +318,8 @@ export default {
 }
 </style>
 <style>
-/*.ios-translucent-modals .dialog{
-    background-color: #fff !important;
-    width: 100%;
-    max-width: 350px;
+.left{
+    opacity: 0;
+    visibility: hidden;
 }
-.dialog{
-    left: 40% !important;
-}*/
 </style>

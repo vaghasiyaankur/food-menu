@@ -23,7 +23,9 @@
                                                 <div class="item-content item-input">
                                                     <div class="item-inner no-padding-right">
                                                         <div class="item-input-wrap input-dropdown-wrap">
-                                                            <input type="text" placeholder="Select date range" class="padding-horizontal-half height_40" readonly="" id="demo-calendar-range">
+                                                            <input type="text" placeholder="Select date range" class="padding-horizontal-half height_40" readonly="" id="calender-date-range">
+                                                            <input type="hidden" name="from-date" id="from-date" v-model="from_date">
+                                                            <input type="hidden" name="to-date" id="to-date" v-model="to_date">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -35,7 +37,7 @@
                         </div>
                         <div class="col-40">
                             <div class="filters_button row justify-content-end">
-                                <button class="col-40 button button-outline height_40 "><i class="f7-icons">funnel</i>Filters</button>
+                                <button class="col-40 button button-outline height_40" @click="reservationData()"><i class="f7-icons">funnel</i>Filters</button>
                             </div>
                         </div>
                     </div>
@@ -57,26 +59,29 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>#10663</td>
-                                    <td>Jannson Wasley</td>
-                                    <td>8258340744</td>
-                                    <td>04</td>
-                                    <td><span class="status_info status_complete">Complete</span></td>
-                                    <td>24, Sep 2022 / 10:00 am</td>
+                                <tr v-for="data in reservation" :key="data.id">
+                                    <td>#{{ data.id }}</td>
+                                    <td>{{ data.customer.name }}</td>
+                                    <td>{{ data.customer.number }}</td>
+                                    <td>{{ data.person }}</td>
+                                    <td v-if="data.deleted_at"><span class="status_info status_cancel">Cancel</span></td>
+                                    <td v-else-if="data.finished"><span class="status_info status_complete">Complete</span></td>
+                                    <td v-else-if="data.start_time"><span class="status_info status_ongoing">Ongoing</span></td>
+                                    <td v-else><span class="status_info status_waiting">Wating</span></td>
+                                    <td>{{ data.date }}</td>
                                     <td>
                                         <div class="menu-item-dropdown">
                                             <div class=""><i class="f7-icons">ellipsis</i>  </div>
                                             <div class="menu-dropdown menu-dropdown-right">
                                             <div class="menu-dropdown-content no-padding">
-                                                <a class="menu-dropdown-link menu-close padding-vertical" href="#"><i class="f7-icons margin-right-half">eye</i>View </a> 
-                                                <a class="menu-dropdown-link menu-close padding-vertical" href="#">Delete </a>                                                 
+                                                <a class="menu-dropdown-link menu-close padding-vertical" :href="'/reservation-view/'+data.id"><i class="f7-icons margin-right-half">eye</i>View </a> 
+                                                <a class="menu-dropdown-link menu-close padding-vertical" href="#"><i class="f7-icons margin-right-half">trash</i>Delete </a>                                                 
                                             </div>
                                             </div>
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
+                                <!-- <tr>
                                     <td>#10663</td>
                                     <td>Jannson Wasley</td>
                                     <td>8258340744</td>
@@ -103,7 +108,7 @@
                                     <td><span class="status_info status_cancel">Cancel</span></td>
                                     <td>24, Sep 2022 / 10:00 am</td>
                                     <td><i class="f7-icons">ellipsis</i></td>
-                                </tr>            
+                                </tr>             -->
                             </tbody>
                         </table>
                     </div>
@@ -131,12 +136,69 @@
 </template>
 <script>
 import $ from "jquery";
-import { f7Page} from 'framework7-vue';
+import { f7Page, f7 } from 'framework7-vue';
+import axios from 'axios';
+
 export default {
     name : 'AllReservation',
+    data() {
+        return {
+            reservation : [],
+            from_date : '',
+            to_date: '',
+            search: ''
+        }
+    },
     components: {
         f7Page,
+        f7,
     },
+    created() {
+        this.reservationData();
+    },
+    mounted() {
+        f7.calendar.create({
+            inputEl: '#calender-date-range',
+            rangePicker: true,
+            numbers:true,
+            footer: true,
+            on: {
+                close(daterange) {
+                    var dates = daterange.getValue();
+                    if(dates){
+                        var from_date = new Date(dates[0]).toLocaleDateString('sv-SE');
+                        if(dates[1]) var to_date = new Date(dates[1]).toLocaleDateString('sv-SE');
+                        else var to_date = '';
+
+                        $("#from-date").val(from_date);
+                        $("#to-date").val(to_date);
+                        // axios.get('/api/report-data?from_date='+from_date+'&to_date='+to_date)
+                        // .then((res) => {
+                        //     $("#total_order").text(res.data.total_order);
+                        //     $("#complete_order").text(res.data.complete_order);
+                        //     $("#ongoing_order").text(res.data.ongoing_order);
+                        //     $("#reservation_table").text(res.data.reservation_table);
+                        // })
+                    
+                    }
+                }
+            }
+        });
+
+        this.$root.activationMenu('all-reservation');
+    },
+    methods : {
+        reservationData() {
+            var search = this.search;
+            var from_date = this.from_date;
+            var to_date = this.to_date;
+
+            axios.get('/api/reservation-list?from_date='+from_date+'&to_date='+to_date+'&search='+search)
+            .then((res) => {
+                this.reservation = res.data.reservation;
+            })
+        }
+    }
 
 }
 </script>

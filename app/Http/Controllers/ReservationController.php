@@ -216,7 +216,24 @@ class ReservationController extends Controller
         return response()->json([ 'success' => true ] , 200);
     }
 
-    
+    /**
+     *  Shoe List reservation (with date and search wise filter)
+     *
+     * @return @json (success message)
+     *
+     */
 
+    public function reservationList(Request $request)
+    {   
+        $from_date = $request->from_date ? date('Y-m-d', strtotime($request->from_date)) : date('Y-m-d', strtotime(Carbon::now()));
+        $to_date = $request->to_date ? date('Y-m-d', strtotime($request->to_date)) : $from_date;
+
+        $reservation = Order::withTrashed()->whereDate('created_at', '>=', $from_date)->whereDate('created_at', '<=', $to_date)->with(['customer' => function($q) {
+            $q->select('id','name', 'number');
+        }])->select('id','customer_id','person','start_time','finish_time','finished','deleted_at')->selectRaw('DATE_FORMAT(created_at,"%d, %b %Y / %h:%i %p") as date')->get();  
+
+
+        return response()->json([ 'reservation' => $reservation ] , 200);
+    }
     
 }

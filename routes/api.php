@@ -144,6 +144,8 @@ Route::post('/check-order',[ReservationController::class, 'checkOrder']);
 
 Route::post('/cancel-reservation',[ReservationController::class, 'cancelReservation']);
 
+Route::get('/reservation-list',[ReservationController::class, 'reservationList']);
+
 // ------------------------ Wishlist Routes ------------------------ //
 
 Route::post('/get-wishlist',[FavoriteController::class, 'getWishlist']);
