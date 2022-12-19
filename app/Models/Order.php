@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Floor;
 use App\Models\Customer;
 use App\Models\Table;
@@ -12,7 +13,9 @@ class Order extends Model
 {
     use HasFactory;
 
-    protected $guarded = ['id']; 
+   protected $guarded = ['id']; 
+
+   use SoftDeletes;
 
     public function customer()
     {

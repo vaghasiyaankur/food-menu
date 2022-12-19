@@ -24,6 +24,7 @@ return new class extends Migration
             $table->timestamp('start_time')->nullable();
             $table->integer('finish_time')->default(0);
             $table->boolean('finished')->default(0);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

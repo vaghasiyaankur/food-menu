@@ -209,8 +209,7 @@ export default {
     height: 67px;
   }
   .menu-lists {
-      height:100%;
-      max-height: 430px;
+      height:calc(100vh - 430px);
       overflow-y : scroll;
   }
 </style>
