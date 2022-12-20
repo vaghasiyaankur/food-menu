@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Manager;
 use App\Http\Controllers\Controller;
 use App\Models\Table;
 use App\Models\Order;
+use App\Models\TableShiftHistory;
+use App\Models\FloorShiftHistory;
 use App\Models\Floor;
 use Illuminate\Http\Request;
 use App\Helper\ReservationHelper;
@@ -60,7 +62,15 @@ class TableController extends Controller
      */
     public function changeOrderTable(Request $request)
     {
-        $tables = Order::where('id', $request->id)->update(['table_id' => $request->table_number]);
+        $fromTableId = Order::where('id', $request->id)->first()->table_id;
+        $toTableId = $request->table_number;
+        $tableShiftHistory = new TableShiftHistory();
+        $tableShiftHistory->order_id = @$request->id;
+        $tableShiftHistory->from = $fromTableId;
+        $tableShiftHistory->to = $toTableId;
+        $tableShiftHistory->save();
+
+        Order::where('id', $request->id)->update(['table_id' => $request->table_number]);
 
         return response()->json([ 'success' => 'Order Transfer Successfully' ] , 200);
     }
@@ -111,6 +121,16 @@ class TableController extends Controller
         $table_id = ReservationHelper::takeTable($request->floor_id, $person);
 
         if($table_id == 0) return response()->json([ 'success' => false, 'message' => 'not compatible capacity table in this floor' ] , 200);
+
+        $fromTableId = Order::where('id', $request->id)->first()->table_id;
+        $fromFloorId = Table::where('id', $fromTableId)->with('floor')->first();
+        $toFloorId = Table::where('id', $table_id)->first();
+
+        $floorShiftHistory = new FloorShiftHistory();
+        $floorShiftHistory->order_id = @$request->id;
+        $floorShiftHistory->from = @$fromFloorId->floor->name;
+        $floorShiftHistory->to = @$toFloorId->floor->name;
+        $floorShiftHistory->save();
 
         Order::where('id', $request->id)->update(['table_id' => $table_id]);
 

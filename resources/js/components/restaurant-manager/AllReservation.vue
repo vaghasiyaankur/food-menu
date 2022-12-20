@@ -171,7 +171,7 @@ export default {
                 console.log(res.data.reservation);
             })
         },
-        removeReservation(id) {
+        removeReservation(id) {/manager/manager
 
             f7.dialog.confirm('Are you sure delete this reservation?', () => {
                 axios.post('/api/remove-reservation', { id: id })
@@ -180,6 +180,15 @@ export default {
                         this.reservationData();
                     })
                 });
+
+                setTimeout(() => {
+                    $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });
+                    $('.dialog-title').html("<img src='/images/cross.png'>");
+                    $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
+                    $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
+                    $('.dialog-button').eq(1).removeClass('text-color-black');
+                    $('.dialog-buttons').addClass('margin-top no-margin-bottom')
+                }, 50);
         },
         calender(){
            var from = $("#from-date").val();

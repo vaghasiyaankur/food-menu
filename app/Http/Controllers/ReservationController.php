@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use App\Models\Order;
+use App\Models\TableShiftHistory;
+use App\Models\FloorShiftHistory;
 use App\Models\Setting;
 use App\Models\Table;
 use App\Models\Floor;
@@ -212,7 +214,7 @@ class ReservationController extends Controller
         $orderIds = $request->ids;
         $cancel = $request->cancelled_by ? : 'Manager';
         foreach($orderIds as $orderId){
-            Order::where('id', $orderId)->updated(['cancelled_by' => $cancel]);
+            Order::where('id', $orderId)->update(['cancelled_by' => $cancel]);
             Order::where('id', $orderId)->delete();
         }
         return response()->json([ 'success' => true ] , 200);
@@ -260,6 +262,8 @@ class ReservationController extends Controller
 
     public function removeReservation(Request $request)
     {   
+        FloorShiftHistory::where('order_id', $request->id)->delete();
+        TableShiftHistory::where('order_id', $request->id)->delete();
         Order::where('id', $request->id)->forceDelete();
         return response()->json([ 'success' => 'Remove Reservation Successfully' ] , 200);
     }
@@ -273,11 +277,19 @@ class ReservationController extends Controller
 
     public function reservationDetail(Request $request)
     {   
-        $reservation = Order::where('id', $request->id)->with(['customer' => function($q) {
-            $q->select('id','name', 'number');
-        }])->select('id','customer_id','person','start_time','finish_time','finished','deleted_at')->selectRaw('DATE_FORMAT(created_at,"%d, %b %Y / %h:%i %p") as date')->first();
+            $order = Order::where('id', $request->id)->with(['customer' => function($q) {
+                $q->select('id','name', 'number');
+            } , 'floorShiftHistory', 'tableShiftHistory'])->select('id','customer_id','person','start_time','finish_time','finished','cancelled_by', 'role','deleted_at')->selectRaw('DATE_FORMAT(created_at,"%d, %b %Y / %h:%i %p") as date')->first();
 
-        return response()->json([ 'reservation' => $reservation ] , 200);
+            $floorHistory = FloorShiftHistory::where('order_id', $request->id)->select('id','order_id', 'from', 'to', 'updated_at')->selectRaw('DATE_FORMAT(updated_at,"%h:%i:%s %p") as time')->get();
+
+            $tableHistory = TableShiftHistory::where('order_id', $request->id)->select('id','order_id', 'from', 'to', 'updated_at')->selectRaw('DATE_FORMAT(updated_at,"%h:%i:%s %p") as time')->get();
+
+            $reservation['order'] = $order;
+            $reservation['floorHistory'] = $floorHistory;
+            $reservation['tableHistory'] = $tableHistory;
+
+            return response()->json([ 'reservation' => $reservation ] , 200);
     }
     
 }
