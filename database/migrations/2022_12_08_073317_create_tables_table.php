@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('tables', function (Blueprint $table) {
             $table->id();
             $table->integer('table_number')->nullable();
-            $table->String('capacity_of_person')->nullable();
+            $table->integer('capacity_of_person')->nullable();
             $table->unsignedBigInteger('color_id')->unsigned();
             $table->foreign('color_id')->references('id')->on('colors');
             $table->unsignedBigInteger('floor_id')->unsigned();

@@ -86,7 +86,7 @@ Route::get('/member-limitation',[SettingController::class, 'memberLimitation']);
 
 // ------------------------ Product Routes ------------------------ //
 
-Route::post('/add-product',[ProductController::class, 'addSubCategory']);
+Route::post('/add-product',[ProductController::class, 'addProduct']);
 
 Route::get('/get-category-products/{id}',[ProductController::class, 'getCategoryProduct']);
 

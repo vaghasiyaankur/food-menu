@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use App\Models\Order;
+use App\Models\TableShiftHistory;
+use App\Models\FloorShiftHistory;
 use App\Models\Setting;
 use App\Models\Table;
 use App\Models\Floor;
@@ -65,7 +67,7 @@ class ReservationController extends Controller
     public function changeReservation(Request $request)
     {
         Setting::first()->update(['close_reservation' => $request->reservation]);
-        
+
         $close_reservation = Setting::first()->close_reservation;
         return response()->json([ 'close_reservation' => $close_reservation ] , 200);
     }
@@ -108,7 +110,7 @@ class ReservationController extends Controller
      */
 
     public function floorAvailable(Request $request)
-    {   
+    {
         $table_id = ReservationHelper::takeTable($request->floor, $request->person);
 
         $table = Table::where('status', 1)->where('capacity_of_person', intval($request->member))->first();
@@ -135,13 +137,12 @@ class ReservationController extends Controller
      */
 
     public function waitingTime(Request $request)
-    {   
+    {
         // $table_id = ReservationHelper::takeTable($request->floor, $request->person);
         $orderIds = $request->ids;
         $orderId = $orderIds[0];
         $table_id = Order::where('id', $orderId)->first()->table_id;
         $updated_at = Order::where('id', $orderId)->first()->updated_at;
-
         if($table_id){
             $allOrder = Order::where('table_id', $table_id)->where('id', '!=', $orderId)->where('finished', 0)->where('updated_at', '<=', $updated_at)->select('id', 'table_id', 'start_time', 'finish_time', 'finished', 'updated_at')->get();
             $calculateTime = 0;
@@ -160,7 +161,7 @@ class ReservationController extends Controller
             }else{
                 $firstOrderTime = @$allOrder[0];
                 $started_time = @$firstOrderTime->created_at;
-            } 
+            }
             $start  = new Carbon($started_time);
             $time_format_date = strtotime(date("H:i:s",strtotime($start)));
             $finalTime = date("H:i:s",strtotime('+'.$calculateTime.' minutes',$time_format_date));
@@ -168,8 +169,10 @@ class ReservationController extends Controller
             $start  = new Carbon($finalTime);
             $end    = new Carbon();
             $time = ($start->diffInHours($end) * 60) + ($start->diffInMinutes($end) * 60)+ ($start->diffInSeconds($end) * 1000);
-            
-            return response()->json([ 'success' => true, 'time' => $time ] , 200);
+            $table = Table::with(['color','orders' => function($q) use ($orderId){
+                $q->where('id', $orderId);
+            }])->where('id', $table_id)->first();
+            return response()->json([ 'success' => true, 'time' => $time , 'table' => $table ] , 200);
         }else{
             return response()->json([ 'success' => false, 'message' => "We don't have the capacity table for that many people" ] , 200);
         }
@@ -183,10 +186,10 @@ class ReservationController extends Controller
      */
 
     public function checkOrder(Request $request)
-    {   
+    {
         $orderIds = $request->orderIds;
         $orderId = @$orderIds[0];
-        
+
         if($orderId){
             $order = Order::where('id', @$orderId)->where('finished', 0)->first();
 
@@ -208,11 +211,11 @@ class ReservationController extends Controller
      */
 
     public function cancelReservation(Request $request)
-    {   
+    {
         $orderIds = $request->ids;
         $cancel = $request->cancelled_by ? : 'Manager';
         foreach($orderIds as $orderId){
-            Order::where('id', $orderId)->updated(['cancelled_by' => $cancel]);
+            Order::where('id', $orderId)->update(['cancelled_by' => $cancel]);
             Order::where('id', $orderId)->delete();
         }
         return response()->json([ 'success' => true ] , 200);
@@ -226,7 +229,7 @@ class ReservationController extends Controller
      */
 
     public function reservationList(Request $request)
-    {   
+    {
         $from_date = $request->from_date ? date('Y-m-d', strtotime($request->from_date)) : date('Y-m-d', strtotime(Carbon::now()));
         $to_date = $request->to_date ? date('Y-m-d', strtotime($request->to_date)) : $from_date;
         $search = $request->search;
@@ -234,16 +237,16 @@ class ReservationController extends Controller
         $reservation = Order::withTrashed()->with(['customer' => function($q) {
             $q->select('id','name', 'number');
         }]);
-        
+
         $reservation = $reservation->whereDate('created_at', '>=', $from_date)->whereDate('created_at', '<=', $to_date)->select('id','customer_id','person','start_time','finish_time','finished','deleted_at')->selectRaw('DATE_FORMAT(created_at,"%d, %b %Y / %h:%i %p") as date');
-        
+
         if($request->search)
          $reservation = $reservation->where('id', $request->search)->orWhere(function ($orWhere) use ($search) {
             $orWhere->orWhereHas('customer',function($products) use ($search) {
                 $products->where('name', 'like', '%' . $search . '%');
             });
         });
-         
+
         $page = $request->page ? : 1;
         $reservation = $reservation->paginate(10);
 
@@ -260,6 +263,8 @@ class ReservationController extends Controller
 
     public function removeReservation(Request $request)
     {   
+        FloorShiftHistory::where('order_id', $request->id)->delete();
+        TableShiftHistory::where('order_id', $request->id)->delete();
         Order::where('id', $request->id)->forceDelete();
         return response()->json([ 'success' => 'Remove Reservation Successfully' ] , 200);
     }
@@ -273,11 +278,19 @@ class ReservationController extends Controller
 
     public function reservationDetail(Request $request)
     {   
-        $reservation = Order::where('id', $request->id)->with(['customer' => function($q) {
-            $q->select('id','name', 'number');
-        }])->select('id','customer_id','person','start_time','finish_time','finished','deleted_at')->selectRaw('DATE_FORMAT(created_at,"%d, %b %Y / %h:%i %p") as date')->first();
+            $order = Order::where('id', $request->id)->with(['customer' => function($q) {
+                $q->select('id','name', 'number');
+            } , 'floorShiftHistory', 'tableShiftHistory'])->select('id','customer_id','person','start_time','finish_time','finished','cancelled_by', 'role','deleted_at')->selectRaw('DATE_FORMAT(created_at,"%d, %b %Y / %h:%i %p") as date')->first();
 
-        return response()->json([ 'reservation' => $reservation ] , 200);
+            $floorHistory = FloorShiftHistory::where('order_id', $request->id)->select('id','order_id', 'from', 'to', 'updated_at')->selectRaw('DATE_FORMAT(updated_at,"%h:%i:%s %p") as time')->get();
+
+            $tableHistory = TableShiftHistory::where('order_id', $request->id)->select('id','order_id', 'from', 'to', 'updated_at')->selectRaw('DATE_FORMAT(updated_at,"%h:%i:%s %p") as time')->get();
+
+            $reservation['order'] = $order;
+            $reservation['floorHistory'] = $floorHistory;
+            $reservation['tableHistory'] = $tableHistory;
+
+            return response()->json([ 'reservation' => $reservation ] , 200);
     }
-    
+
 }

@@ -133,6 +133,10 @@ class ContentSeeder extends Seeder
             ['language_id' => 2, 'title' => 'empty_menu', 'content' => 'ખાલી ખોરાક મેનુ યાદી'],
             ['language_id' => 3, 'title' => 'empty_menu', 'content' => 'खाली भोजन मेनू सूची'],
 
+            ['language_id' => 1, 'title' => 'time', 'content' => 'Time'],
+            ['language_id' => 2, 'title' => 'time', 'content' => 'સમય'],
+            ['language_id' => 3, 'title' => 'time', 'content' => 'समय'],
+
         ];
 
 

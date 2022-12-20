@@ -1,5 +1,5 @@
 <template>
-    <f7-page>
+    <f7-page class="bg-color-white">
        <div class="reservation_view">
             <div class="back_link padding">
                 <a class="link back" href="all-reservation"><i class="icon icon-back"></i>
@@ -59,32 +59,32 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-50">
+                    <div class="col-50" v-if="table_shift_history.length">
                         <div class="card border_radius_10">
                             <div class="card-header"><h3 class="no-margin"> Table Shift Details</h3></div>
-                            <div class="card-content card-content-padding">
+                            <div class="card-content card-content-padding" v-for="tsh in table_shift_history" :key="tsh.id">
                                 <div class="single_content row margin-bottom">
                                     <div class="content_left_text no-margin col-50"><p class="no-margin">Table shifted :</p> </div> 
-                                    <div class="content_right_text no-margin col-50"><span><span>Table 3</span> <i class="f7-icons margin-horizontal-half">arrow_right</i> <span>Table 8</span></span> </div> 
+                                    <div class="content_right_text no-margin col-50"><span><span>Table {{tsh.from}}</span> <i class="f7-icons margin-horizontal-half">arrow_right</i> <span>Table {{tsh.to}}</span></span> </div> 
                                 </div>
                                 <div class="single_content row margin-bottom">
                                     <div class="content_left_text no-margin col-50"><p class="no-margin">Message Sending Time :</p> </div> 
-                                    <div class="content_right_text no-margin col-50"><span>5 : 30 : 45 PM</span> </div> 
+                                    <div class="content_right_text no-margin col-50"><span>{{  tsh.time }}</span> </div> 
                                 </div>                                
                             </div>
                         </div>
                     </div>   
-                    <div class="col-50">
+                    <div class="col-50" v-if="floor_shift_history.length">
                         <div class="card border_radius_10">
                             <div class="card-header"><h3 class="no-margin"> Floor shift Details</h3></div>
-                            <div class="card-content card-content-padding">
+                            <div class="card-content card-content-padding" v-for="fsh in floor_shift_history" :key="fsh.id">
                                 <div class="single_content row margin-bottom">
                                     <div class="content_left_text no-margin col-50"><p class="no-margin">Floor shifted :</p> </div> 
-                                    <div class="content_right_text no-margin col-50"><span><span>First Floor </span> <i class="f7-icons margin-horizontal-half">arrow_right</i> <span>Second Floor</span></span> </div> 
+                                    <div class="content_right_text no-margin col-50"><span><span>{{ fsh.from }} </span> <i class="f7-icons margin-horizontal-half">arrow_right</i> <span>{{  fsh.to }}</span></span> </div> 
                                 </div>
                                 <div class="single_content row margin-bottom">
                                     <div class="content_left_text no-margin col-50"><p class="no-margin">Message Sending Time :</p> </div> 
-                                    <div class="content_right_text no-margin col-50"><span>5 : 30 : 45 PM</span> </div> 
+                                    <div class="content_right_text no-margin col-50"><span>{{  fsh.time }} </span> </div> 
                                 </div>
                             </div>
                         </div>
@@ -104,7 +104,9 @@ export default {
     data() {
         return {
             id: '',
-            reservation : []
+            reservation : [],
+            floor_shift_history : [],
+            table_shift_history : [],
         }
     },
     components: {
@@ -123,19 +125,15 @@ export default {
             this.id = f7.view.main.router.currentRoute.params.id;
             axios.get('/api/reservation-detail/'+this.id)
             .then((res) => {
-                this.reservation = res.data.reservation;
+                this.reservation = res.data.reservation.order;
+                this.floor_shift_history = res.data.reservation.floorHistory;
+                this.table_shift_history = res.data.reservation.tableHistory;
             })
         }
     }
 
 }
 </script>
-<style>
-.page-content{
-    background-color: #fff !important;
-    height: 100%;
-}
-</style>
 <style scoped>
 .reservation_view{
     margin-top:60px;
@@ -199,5 +197,8 @@ border-bottom:1px solid #DDE0E6;
     font-size: 18px;
     line-height: 25px;
     color: #222222;
+}
+.reservation_details .card-content{
+    overflow: scroll;
 }
 </style>

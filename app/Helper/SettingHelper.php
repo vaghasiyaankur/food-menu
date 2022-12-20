@@ -15,8 +15,11 @@ class SettingHelper{
 
     public static function getlanguage()
     {
-        return request()->session()->get('lang');
-
+        if (request()->session()->get('lang')) {
+            return request()->session()->get('lang');
+        }else{
+            return SettingHelper::systemLang();
+        }
     }
 }
 ?>
