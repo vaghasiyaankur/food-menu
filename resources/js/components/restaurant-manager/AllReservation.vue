@@ -3,7 +3,7 @@
         <div class="all_reservation">
             <div class="card">
                 <div class="card_header padding-top-half">
-                    <div class="row padding-left padding-right padding-top align-items-center">                     
+                    <div class="row padding-left padding-right padding-top align-items-center">
                         <div class="col-60">
                             <div class="row align-items-center">
                                 <div class="col">
@@ -74,9 +74,9 @@
                                         <div class="menu-item-dropdown">
                                             <div class=""><i class="f7-icons">ellipsis</i>  </div>
                                             <div class="menu-dropdown menu-dropdown-right">
-                                            <div class="menu-dropdown-content no-padding">                                             
-                                                <a class="menu-dropdown-link menu-close padding-vertical" :href="'/reservation-view/'+data.id"><i class="f7-icons margin-right-half">eye</i>View </a> 
-                                                <a class="menu-dropdown-link menu-close padding-vertical" href="javascript:;" @click="removeReservation(data.id)"><i class="f7-icons margin-right-half">trash</i>Delete </a>                                                 
+                                            <div class="menu-dropdown-content no-padding">
+                                                <a class="menu-dropdown-link menu-close padding-vertical" :href="'/reservation-view/'+data.id"><i class="f7-icons margin-right-half">eye</i>View </a>
+                                                <a class="menu-dropdown-link menu-close padding-vertical" href="javascript:;" @click="removeReservation(data.id)"><i class="f7-icons margin-right-half">trash</i>Delete </a>
                                             </div>
                                             </div>
                                         </div>
@@ -148,7 +148,7 @@ export default {
                         //     $("#ongoing_order").text(res.data.ongoing_order);
                         //     $("#reservation_table").text(res.data.reservation_table);
                         // })
-                    
+
                     }
                 }
             }
@@ -171,7 +171,7 @@ export default {
                 console.log(res.data.reservation);
             })
         },
-        removeReservation(id) {/manager/manager
+        removeReservation(id) {
 
             f7.dialog.confirm('Are you sure delete this reservation?', () => {
                 axios.post('/api/remove-reservation', { id: id })
@@ -298,7 +298,7 @@ export default {
     justify-content: center;
     align-items:center;
   }
-  
+
   .pagination_count .pagination_list a {
     color: black;
     float: left;
@@ -306,7 +306,7 @@ export default {
     text-decoration: none;
     border-radius: 5px;
   }
-  
+
   .pagination_count .pagination_list a:hover:not(.active) {
     background-color: #ddd;
     border-radius: 5px;
@@ -334,7 +334,7 @@ export default {
     font-weight: 500;
     font-size: 15px;
     line-height: 18px;
-    color: #999999;   
+    color: #999999;
   }
   .reservation_table .table_content .menu-dropdown-link:last-child{
     border-bottom: none;
