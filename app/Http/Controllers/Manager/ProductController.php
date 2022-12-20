@@ -65,17 +65,22 @@ class ProductController extends Controller
     }
 
     public function editProduct($id){
-        $products = Product::find($id);
+        $products = Product::with('productLanguage')->find($id);
         return response()->json($products);
     }
 
     public function updateProduct(Request $req)
     {
         $pro = Product::find($req->id);
-        $pro->name = $req->name;
         $pro->price = $req->price;
         $pro->sub_category_id = $req->sub_category_id;
-        $pro->save();
+        $name = explode(',',$req->name);
+        $langs = Language::whereStatus(1)->get();
+        if($pro->save()){
+            foreach ($langs as $key => $lang) {
+                productLanguage::where('product_id',$req->id)->where('language_id',$lang->id)->update(['name'=>$name[$lang->id]]);
+            }
+        }
 
         return response()->json(['success'=>'Product Updated Successfully.']);
     }

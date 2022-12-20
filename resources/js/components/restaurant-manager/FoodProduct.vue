@@ -86,7 +86,7 @@
             <div class="category-add padding">
                 <div class="categoryForm text-align-left no-padding">
                     <label for="" class="add_category_name">Add product</label>
-                    <input type="text" name="name" v-model="product.name" class="category-name margin-top-half padding-left-half padding-right-half" placeholder="Add Product name">
+                    <input type="text" name="name" v-model="product.name[lang.id]" v-for="lang in $root.langs" :key="lang.id" class="category-name margin-top-half padding-left-half padding-right-half" :placeholder="'Add ' + lang.name + ' Product name'">
                 </div>
                 <div class="categoryForm text-align-left margin-top">
                     <label for="" class="add_category_name">Choose Sub category</label>
@@ -134,7 +134,7 @@ export default {
         return {
             product: {
                 id : null,
-                name: '',
+                name: [],
                 sub_category: null,
                 price: '',
             },
@@ -204,7 +204,9 @@ export default {
             axios.get('/api/product/'+id)
                 .then((res) => {
                 this.product.id = res.data.id;
-                this.product.name = res.data.name;
+                res.data.product_language.forEach(product_lang => {
+                    this.product.name[product_lang.language_id] = product_lang.name;
+                });
                 this.product.price = res.data.price;
                 this.product.sub_category = res.data.sub_category_id;
             })

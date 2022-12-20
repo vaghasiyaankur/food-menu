@@ -49,6 +49,7 @@
                             <div class="no_order_text text-align-center">
                                 <p class="no-margin">{{ $root.trans.empty_menu }}</p>
                             </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -81,9 +82,7 @@ export default {
     data() {
         return {
             product_category: [],
-            product_subcategory: {
-                product_language : [],
-            },
+            product_subcategory: [],
             wishlistProducts: [],
             wishlist: [],
         }
@@ -163,6 +162,7 @@ export default {
     display: block;
     background: #fff;
     color: #000;
+    padding-right: 15px;
   }
 
   .slide-active .menu-image{

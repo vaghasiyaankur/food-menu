@@ -1,85 +1,53 @@
 <template>
 <f7-page>
-        <!-- <div class="nav-bar">
-            <f7-navbar class="navbar-menu bg-color-white" large transparent back-link="Back">
-                <div class="header-links display-flex align-items-center padding-right">
-                    <div class="row header-link justify-content-flex-end align-items-center">
-                        <div class=" padding-left-half padding-right-half height-40 nav-button">
-                            <a href="/Reservation/" class="col link nav-link button button-raised bg-dark text-color-white padding">
-                                Reservation</a>
-                        </div>
-                        <div class="nav-button col-25">
-                            <div class="menu-item menu-item-dropdown">
-                                <div class="menu-item-content button button-raised bg-pink text-color-white padding-left-half padding-right-half">Menu management
-                                    <i class="f7-icons">chevron_down</i>
-                                </div>
-                                <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
-                                    <div class="menu-dropdown-content bg-color-white no-padding">
-                                        <a href="#" class="menu-dropdown-link menu-close margin-horizontal no-padding"></a>
-                                        <a href="/" class="menu-dropdown-link menu-close text-color-pink">Table</a>
-                                        <a href="/food-category/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food Category</a>
-                                        <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food Menu</a>
-                                        <a href="/food-subcategory/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food subCategory</a>
-                                        <a href="/digital-menu/" class="menu-dropdown-link menu-close text-color-pink margin-horizontal no-padding">Digital Menu</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class=" padding-left-half padding-right-half height-40 nav-button"><a href="/Reporting/" class="link nav-link button button-raised bg-dark text-color-white padding">Reporting</a></div>
-                        <div class="padding-left-half padding-right-half height-40"><button class="nav-botton button button-raised bg-dark text-color-white padding closeReservation" @click="$root.closeReservation()">Close reservation</button></div>
-                        <div class="padding-left-half padding-right-half height-40"><a href="/settings/" class="nav-link button button-raised bg-dark text-color-white padding">Settings</a></div>
-                    </div>
-                </div>
-            </f7-navbar>
-        </div> -->
-        <div class="card digital_menu_card elevation-2">
-            <div class="row padding-horizontal no-padding-vertical">
-                <div class="col">
-                    <h3 class="card-title margin-bottom-half">
-                        <a href="javscript:;" class="text-color-black padding-right-half"><i class="f7-icons font-22" style="vertical-align: bottom;">arrow_left</i></a>
-                        <span> Food Menu </span>
-                    </h3>
-                    <p class="no-margin"> Select your favourite food and enjoy with family</p>
-                </div>
+    <div class="card digital_menu_card elevation-2">
+        <div class="row padding-horizontal no-padding-vertical">
+            <div class="col">
+                <h3 class="card-title margin-bottom-half">
+                    <a href="javscript:;" class="text-color-black padding-right-half"><i class="f7-icons font-22" style="vertical-align: bottom;">arrow_left</i></a>
+                    <span> Food Menu </span>
+                </h3>
+                <p class="no-margin"> Select your favourite food and enjoy with family</p>
             </div>
-            <div class="digital_menu_swiper padding">
-                <div data-pagination='{"el":".swiper-pagination"}' data-space-between="20" data-slides-per-view="11"
-                class="swiper swiper-init demo-swiper margin-top margin-bottom" style="height : 135px">
-                    <div class="swiper-pagination"></div>
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide margin-right" :class="{ 'slide-active': category.id == sliderActive}" v-for="category in product_category" :key="category" @click="getProducts(category.id)">
-                            <div class="menu-image">
-                                <img :src="'/storage'+category.image" alt="">
-                            </div>
-                            <p class="font-13 no-margin text-align-center margin-top-half">{{ category.name }}</p>
+        </div>
+        <div class="digital_menu_swiper padding">
+            <div data-pagination='{"el":".swiper-pagination"}' data-space-between="20" data-slides-per-view="11"
+            class="swiper swiper-init demo-swiper margin-top margin-bottom" style="height : 135px">
+                <div class="swiper-pagination"></div>
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide margin-right" :class="{ 'slide-active': category.id == sliderActive}" v-for="category in product_category" :key="category" @click="getProducts(category.id)">
+                        <div class="menu-image">
+                            <img :src="'/storage'+category.image" alt="">
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="menu_list">
-                <div class="position-relative">
-                    <div class="menu-title"><span>{{ categoryName }} Menu</span></div>
-                </div>
-                <div class="menu-details margin-top">
-                    <div class="menu-lists">
-                        <div class="row" v-if="product_subcategory.length">
-                            <div class="col-50" v-for="subcate in product_subcategory" :key="subcate">
-                                <div class="menu-list">
-                                    <div class="font-18 text-align-center menu-list-title text-color-black"><u>{{ subcate.name }}</u></div>
-                                    <div class="list row margin-half align-items-center" v-for="product in subcate.products" :key="product">
-                                        <div class="col-80 display-flex">{{ product.name }} <span class="dots"></span></div>
-                                        <div class="col-20">{{ product.price.toFixed(2) }}</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div v-else>
-                            <NoValueFound />
-                        </div>
+                        <p class="font-13 no-margin text-align-center margin-top-half">{{ category.category_languages[0].name }}</p>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="menu_list">
+            <div class="position-relative">
+                <div class="menu-title"><span>{{ categoryName }} Menu</span></div>
+            </div>
+            <div class="menu-details margin-top">
+                <div class="menu-lists">
+                    <div class="row" v-if="product_subcategory.length">
+                        <div class="col-50" v-for="subcate in product_subcategory" :key="subcate">
+                            <div class="menu-list">
+                                <div class="font-18 text-align-center menu-list-title text-color-black"><u>{{ subcate.sub_category_language[0].name }}</u></div>
+                                <div class="list row margin-half align-items-center" v-for="product in subcate.products" :key="product">
+                                    <div class="col-80 display-flex">{{ product.product_language[0].name }} &nbsp;<span class="dots"></span></div>
+                                    <div class="col-20">{{ product.price.toFixed(2) }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div v-else>
+                        <NoValueFound />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </f7-page>
 </template>
 
@@ -130,7 +98,7 @@ export default {
             this.sliderActive = id;
             axios.get('/api/get-category-products/'+id)
             .then((res) => {
-                this.categoryName = res.data.name;
+                this.categoryName = res.data.category_languages[0].name;
                 this.product_subcategory = res.data.sub_category;
             })
         }

@@ -1,7 +1,7 @@
 <template>
     <f7-page class="page-waiting bg-color-white" @page:beforeremove="onPageBeforeRemove" @page:beforeout="onPageBeforeOut">
         <div class="nav-bar">
-            <f7-navbar class="navbar-menu text-color-white waiting-page" large transparent :title="$root.trans.waiting_time" :back-link="$root.trans.back">
+            <f7-navbar class="navbar-menu text-color-white waiting-page" large transparent :title="$root.trans.time" :back-link="$root.trans.back">
                 <div class="favourites-card">
                     <a class="link icon-only" href="/favourites/">
                         <i class="f7-icons size-22 text-color-white padding-half font-18">heart</i>
@@ -10,68 +10,81 @@
             </f7-navbar>
         </div>
         <div class="waiting_area">
+            <div class="margin countdown_section">
+                <div class="text-align-center">
+                    <h3>{{ $root.trans.waiting_time }}</h3>
+                    <!-- <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p> -->
+                </div>
+                <div class="countdown position-relative text-align-center">
+                    <div style="background : url('/images/dots.png')"
+                        class="display-flex justify-content-space-between align-items-center flex-direction-column">
+                        <img src="/images/clock.png" alt="">
+                        <vue-countdown :time="time" v-slot="{ hours, minutes, seconds }">
+                            <p class="no-margin font-30">{{ String(hours).padStart(2, '0') }} : {{ String(minutes).padStart(2, '0')
+                            }} : {{ String(seconds).padStart(2, '0') }}</p>
+                        </vue-countdown>
+                    </div>
+                </div>
+            </div>
             <div class="waiting_info">
                 <div class="padding margin-vertical table-card margin-horizontal-half">
                     <!--======= TABLE CHAIR ========= -->
                     <div class="row table_top_chair">
-                    <div class="col">
-                        <div class="table_card_img text-align-center"><img src="/images/table/Red.png" alt="table"></div>
-                    </div>
-                    <div class="col">
-                        <div class="table_card_img text-align-center"><img src="/images/table/Red.png" alt="table"></div>
-                    </div>
-                    <div class="col">
-                        <div class="table_card_img text-align-center"><img src="/images/table/Red.png" alt="table"></div>
-                    </div>
-                    </div>
-                    <div class="card no-margin table_1" >
-                    <div class="card-content display-flex justify-content-center align-items-center no-padding h_100">
-                        <div class="table_number table_inner">
-                            <p class="no-margin">Table No.</p>
-                            <span class="no-margin">03</span>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img v-if="order.color" :src="'/images/table/' + order.color.color +'.png'" alt="table">
+                            </div>
                         </div>
-                        <div class="table_capacity table_inner">
-                            <p class="no-margin">Capacity</p>
-                            <span class="no-margin">05</span>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img v-if="order.color" :src="'/images/table/' + order.color.color +'.png'" alt="table">
+                            </div>
+                        </div>
+                        <div class="col" v-if="windowWidth > 280">
+                            <div class="table_card_img text-align-center">
+                                <img v-if="order.color" :src="'/images/table/' + order.color.color +'.png'" alt="table">
+                            </div>
                         </div>
                     </div>
+                    <div class="card no-margin table_1" :style="('border-left-color : rgb(' + order.color.rgb + ')')">
+                        <div class="card-content display-flex justify-content-center align-items-center no-padding h_100 table_order_content">
+                            <div class="table_number table_inner" :style="('background : rgba(' + order.color.rgb + ', 0.3)')">
+                                <p class="no-margin">Table No.</p>
+                                <span class="no-margin">{{ String(order.table_number).padStart(2, '0') }}</span>
+                            </div>
+                            <div class="table_capacity table_inner" :style="('background : rgba(' + order.color.rgb + ', 0.3)')">
+                                <p class="no-margin">Capacity</p>
+                                <span class="no-margin">{{ order.orders ? String(order.orders[0].person).padStart(2, '0') : '' }}</span>
+                            </div>
+                        </div>
                     </div>
                     <!--======= TABLE CHAIR ========= -->
                     <div class="row table_bottom_chair">
-                    <div class="col">
-                        <div class="table_card_img text-align-center"><img src="/images/table/Red.png" alt="table" style="transform: rotate(180deg);"></div>
-                    </div>
-                    <div class="col">
-                        <div class="table_card_img text-align-center"><img src="/images/table/Red.png" alt="table" style="transform: rotate(180deg);"></div>
-                    </div>
-                    <div class="col">
-                        <div class="table_card_img text-align-center"><img src="/images/table/Red.png" alt="table" style="transform: rotate(180deg);"></div>
-                    </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img v-if="order.color" :src="'/images/table/' + order.color.color +'.png'" alt="table" style="transform: rotate(180deg);">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table_card_img text-align-center">
+                                <img v-if="order.color" :src="'/images/table/' + order.color.color +'.png'" alt="table" style="transform: rotate(180deg);">
+                            </div>
+                        </div>
+                        <div class="col" v-if="windowWidth > 280">
+                            <div class="table_card_img text-align-center">
+                                <img v-if="order.color" :src="'/images/table/' + order.color.color +'.png'" alt="table" style="transform: rotate(180deg);">
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="table__information padding">
                     <div class="guest_number">
-                        <span class="table_info_text">No. of Guest :</span>
-                        <span>5</span>
+                        <span class="table_info_text">No. of Guest : </span>
+                        <span>{{ order.orders ? String(order.orders[0].person).padStart(2, '0') : '' }}</span>
                     </div>
                     <div class="date_time margin-top-half margin-bottom">
-                        <span class="table_info_text">Date & Time :</span>
-                        <span>24, Sep 2022 / 10:00 am</span>
-                    </div>
-                </div>
-            </div>
-            <div class="margin countdown_section padding-top">
-                <div class="text-align-center">
-                    <h3>Waiting Time</h3>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
-                </div>
-                <div class="countdown position-relative text-align-center">
-                    <div style="background : url('/images/dots.png')" class="display-flex justify-content-space-between align-items-center flex-direction-column">
-                        <img src="/images/clock.png" alt="">
-                        <!-- <i class="f7-icons font-13 padding-half margin-bottom close-countdown" @click="display = true">xmark</i> -->
-                        <vue-countdown :time="time" v-slot="{ hours, minutes, seconds }">
-                            <p class="no-margin font-30">{{ hours }} : {{ minutes }} : {{ seconds }}</p>
-                        </vue-countdown>
+                        <span class="table_info_text">Date & Time : </span>
+                        <span>{{ dateFormat(this.order.created_at) }}</span>
                     </div>
                 </div>
             </div>
@@ -79,14 +92,14 @@
         <div class="padding-horizontal bottom-bar toolbar">
             <div class="row">
                 <div class="col">
-                    <f7-button class="button button-raised open-menu-button active button-large text-transform-capitalize" fill sheet-open=".demo-sheet-swipe-to-close">{{ $root.trans.open_menu }}</f7-button>
+                    <f7-button class="button button-raised open-menu-button active button-large text-transform-capitalize" fill sheet-open=".demo-sheet-swipe-to-close" @click="showMenuData()">{{ $root.trans.open_menu }}</f7-button>
                 </div>
                 <div class="col">
                     <f7-button class="button button-raised open-menu-button button-large text-transform-capitalize" @click="cancelReservation()">{{ $root.trans.cancel_reservation }}</f7-button>
                 </div>
             </div>
         </div>
-        <Menu></Menu>
+        <Menu ref="menu" />
     </f7-page>
 </template>
 
@@ -97,18 +110,10 @@ import VueCountdown from '@chenfengyuan/vue-countdown';
 import { useCookies } from "vue3-cookies";
 import Menu from './Menu.vue';
 import axios from "axios";
+import moment from 'moment'
 
 export default {
     name : 'Favourite',
-    data(){
-        return {
-            category: {
-                    id : null,
-                    name: '',
-                    image: '',
-                }
-        }
-    },
     components: {
         f7Page,
         f7Navbar,
@@ -121,7 +126,11 @@ export default {
     },
     data() {
         return {
-            time : 3600000,
+            time: 3600000,
+            order: {
+                color: [],
+            },
+            windowWidth : 0,
         }
     },
     setup() {
@@ -130,6 +139,7 @@ export default {
     },
     created() {
         this.getWaitingTime();
+        this.windowWidth = window.innerWidth;
     },
     methods: {
         onPageBeforeOut() {
@@ -158,7 +168,7 @@ export default {
             setTimeout(() => {
                 $('.dialog-title').eq().css({'font-size': '20px'});
                 $('.dialog-text').css({'font-size': '18px', 'line-height': '22px', 'text-align':'center'});
-                $('.dialog-title').html("<img src='/images/usericon.png'>");
+                $('.dialog-title').html("<img src='/images/cross.png'>");
                 $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
                 $('.dialog-button').eq(0).text(this.$root.trans.cancel);
                 $('.dialog-button').eq(1).removeClass('text-color-black').addClass('active').text(this.$root.trans.ok);
@@ -172,10 +182,31 @@ export default {
             axios.post('/api/waiting-time', {ids : ids})
             .then((res) => {
                 this.time = res.data.time;
+                this.order = res.data.table;
+                if (parseInt(this.order.capacity_of_person) % 2 != 0) {
+                    var cap = parseInt(this.order.capacity_of_person - 1);
+                    var up_table = (parseInt(this.order.capacity_of_person) + 1) / 2;
+                    var down_table = (parseInt(this.order.capacity_of_person) - 1) / 2;
+                } else {
+                    var cap = parseInt(this.order.capacity_of_person) - 2;
+                    var up_table = parseInt(this.order.capacity_of_person) / 2;
+                    var down_table = parseInt(this.order.capacity_of_person) / 2;
+                }
+                this.order['up_table'] = up_table;
+                this.order['down_table'] = down_table;
             })
             .catch((err) => {
             });
-        }
+        },
+        dateFormat(date) {
+            return moment(String(date)).format('DD, MMM YYYY / hh:mm a');
+        },
+        showMenuData() {
+            if (this.$refs.menu) {
+                this.$refs.menu.getCategories();
+                this.$refs.menu.wishlistData();
+            }
+        },
     },
 
 };
@@ -185,7 +216,7 @@ export default {
 /*============ WAITING INFO =============*/
 .waiting_info{
     border: 1px solid #999;
-    margin: 15px;
+    margin: 15px 15px 80px;
     border-radius: 10px;
 }
 .waiting_info .table_1{
@@ -195,7 +226,7 @@ export default {
 .table_inner {
 	background: #fff4f1;
 	padding: 10px 16px;
-	margin-right: 20px;
+	margin-right: 10px;
 	border-radius: 10px;
     display: flex;
     justify-content: center;
@@ -270,7 +301,7 @@ export default {
     opacity: 0;
 }
 .countdown_section{
-    margin-bottom: 80px !important;
+    margin-bottom: 40px !important;
 }
 .countdown{
     background: #f88f721a;
@@ -313,6 +344,23 @@ export default {
     bottom: 0;
     width: 100%;
     left: 0;
+}
+
+@media screen and (max-width : 280px){
+    .table_order_content{
+        justify-content: space-around !important;
+    }
+    .table_inner{
+        padding: 5px 7px;
+        margin-right: 0;
+    }
+}
+@media screen and (max-width:320px) {
+    .open-menu-button {
+            font-size: 12px;
+            line-height: 18px;
+            height: 40px !important;
+        }
 }
 </style>
 <style>

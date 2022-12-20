@@ -425,6 +425,7 @@ export default {
         },
         showMenuData() {
             if (this.$refs.menu) {
+                this.$refs.menu.getCategories();
                 this.$refs.menu.wishlistData();
             }
         },
