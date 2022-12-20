@@ -81,7 +81,9 @@ export default {
     data() {
         return {
             product_category: [],
-            product_subcategory: [],
+            product_subcategory: {
+                product_language : [],
+            },
             wishlistProducts: [],
             wishlist: [],
         }
@@ -90,7 +92,7 @@ export default {
         const { cookies } = useCookies();
         return { cookies };
     },
-    mounted() {
+    created() {
         this.getCategories();
         if (this.cookies.get('wishlist')) {
             this.wishlist = JSON.parse(this.cookies.get('wishlist'));

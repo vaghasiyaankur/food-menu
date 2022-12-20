@@ -1,7 +1,7 @@
 <template>
-    <f7-page class="page-favourite bg-color-white" @page:beforeremove="onPageBeforeRemove" @page:beforeout="onPageBeforeOut">
+    <f7-page class="page-waiting bg-color-white" @page:beforeremove="onPageBeforeRemove" @page:beforeout="onPageBeforeOut">
         <div class="nav-bar">
-            <f7-navbar class="navbar-menu text-color-white" large transparent :title="$root.trans.waiting_time" :back-link="$root.trans.back">
+            <f7-navbar class="navbar-menu text-color-white waiting-page" large transparent :title="$root.trans.waiting_time" :back-link="$root.trans.back">
                 <div class="favourites-card">
                     <a class="link icon-only" href="/favourites/">
                         <i class="f7-icons size-22 text-color-white padding-half font-18">heart</i>
@@ -34,7 +34,7 @@
                             <p class="no-margin">Capacity</p>
                             <span class="no-margin">05</span>
                         </div>
-                    </div>                  
+                    </div>
                     </div>
                     <!--======= TABLE CHAIR ========= -->
                     <div class="row table_bottom_chair">
@@ -62,8 +62,8 @@
             </div>
             <div class="margin countdown_section padding-top">
                 <div class="text-align-center">
-                    <h3>Waiting Time</h3>    
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p> 
+                    <h3>Waiting Time</h3>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
                 </div>
                 <div class="countdown position-relative text-align-center">
                     <div style="background : url('/images/dots.png')" class="display-flex justify-content-space-between align-items-center flex-direction-column">
@@ -74,7 +74,7 @@
                         </vue-countdown>
                     </div>
                 </div>
-            </div>           
+            </div>
         </div>
         <div class="padding-horizontal bottom-bar toolbar">
             <div class="row">
@@ -316,7 +316,7 @@ export default {
 }
 </style>
 <style>
-.left{
+.page-waiting .waiting-page .left{
     opacity: 0;
     visibility: hidden;
 }
