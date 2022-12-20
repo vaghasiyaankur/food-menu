@@ -74,9 +74,6 @@ export default {
         this.wishlist = JSON.parse(this.cookies.get('wishlist'));
         this.getwishlistData();
     },
-    mounted() {
-        $('.left').css({ 'opacity': '1', 'visibility': 'visible'})
-    },
     methods: {
         getwishlistData() {
             axios.post('/api/get-wishlist', { wishlist: this.wishlist })

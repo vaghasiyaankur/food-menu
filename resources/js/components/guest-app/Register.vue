@@ -120,7 +120,7 @@
     <Menu ref="menu"></Menu>
 
     <!-- ========VIEW TERMS AND CONDITION========= -->
-    <f7-sheet class="demo-sheet" swipe-to-close :opened="sheetOpened" @sheet:closed="sheetOpened = false"
+    <f7-sheet class="demo-sheet" :opened="sheetOpened" @sheet:closed="sheetOpened = false"
         style="height:auto; border-radius: 20px 20px 0px 0px;" backdrop>
         <!-- Scrollable sheet content -->
         <f7-page-content>
@@ -425,6 +425,7 @@ export default {
         },
         showMenuData() {
             if (this.$refs.menu) {
+                this.$refs.menu.getCategories();
                 this.$refs.menu.wishlistData();
             }
         },

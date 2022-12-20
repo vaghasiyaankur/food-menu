@@ -49,6 +49,7 @@
                             <div class="no_order_text text-align-center">
                                 <p class="no-margin">{{ $root.trans.empty_menu }}</p>
                             </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -90,7 +91,7 @@ export default {
         const { cookies } = useCookies();
         return { cookies };
     },
-    mounted() {
+    created() {
         this.getCategories();
         if (this.cookies.get('wishlist')) {
             this.wishlist = JSON.parse(this.cookies.get('wishlist'));
@@ -161,6 +162,7 @@ export default {
     display: block;
     background: #fff;
     color: #000;
+    padding-right: 15px;
   }
 
   .slide-active .menu-image{
