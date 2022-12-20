@@ -45,7 +45,7 @@
                       </tr>
                    </tbody>
                 </table>
-                <div class="data-table-pagination">
+                <div class="data-table-pagination padding-vertical-half">
                     <div v-for="(link,index) in paginationData.links" :key="link">
                         <a href="javascript:;" v-if="index == 0" @click="link.url != null ? tableList(link.url) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon icon-prev color-gray"></i></a>
                         <a href="javascript:;" v-if="paginationData.links.length - 1 != index && index != 0" @click="link.url != null ? tableList(link.url) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}">{{ index }}</a>
@@ -132,6 +132,7 @@
 .card-content .data-table td{
     padding-top: 15px;
     padding-bottom: 15px;
+    white-space: nowrap;
 }
 .add_table_button button{
     background-color: #38373D;
@@ -158,6 +159,7 @@
     font-weight: 400;
     font-size: 12px;
     width: 60%;
+    padding: 0 42px;
 
 }
 .status_info.status_active{
@@ -218,10 +220,6 @@
 .data-table .data-table-pagination{
     justify-content: end;
 }
-@media screen and (max-width:820px){
-    .status_info{
-        width: 100%;
-    }
-}
+
 </style>
 

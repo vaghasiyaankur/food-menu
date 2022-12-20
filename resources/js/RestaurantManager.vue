@@ -10,7 +10,7 @@
                     <!--========= SMALL SCREEN MENU BAR=========== -->
                     <div class="small_screen_menu">
                         <div class="hamburger__button">
-                            <a href="#" class="link icon-only panel-open" data-panel=".panel-right-1"><i class="f7-icons">bars</i></a>
+                            <a href="#" class="icon-only panel-open text-color-black" data-panel=".panel-right-1"><i class="f7-icons">bars</i></a>
                         </div>
                         <div class="panel panel-right panel-right-1 panel-cover panel-resizable panel-init">
                             <div class="pannel_header padding-horizontal text-align-right">
