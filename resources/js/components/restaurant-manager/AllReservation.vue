@@ -4,7 +4,7 @@
             <div class="card">
                 <div class="card_header padding-top-half">
                     <div class="row padding-left padding-right padding-top align-items-center">                     
-                        <div class="col-60">
+                        <div class="col-100 medium-80 large-60">
                             <div class="row align-items-center">
                                 <div class="col">
                                     <div class="item-content item-input">
@@ -20,7 +20,7 @@
                                     <div class="list no-hairlines reporting_calander no-margin">
                                         <ul>
                                             <li>
-                                                <div class="item-content item-input">
+                                                <div class="item-content item-input no-padding-left">
                                                     <div class="item-inner no-padding-right">
                                                         <div class="item-input-wrap input-dropdown-wrap">
                                                             <input type="text" placeholder="Select date range" class="padding-horizontal-half height_40" readonly="" id="calender-date-range">
@@ -36,9 +36,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-40">
+                        <div class="col-100 medium-20 large-40">
                             <div class="filters_button row justify-content-end">
-                                <button class="col-40 button button-outline height_40" @click="reservationData()"><i class="f7-icons">funnel</i>Filters</button>
+                                <button class="col-100 large-40 button button-outline height_40" @click="reservationData()"><i class="f7-icons">funnel</i>Filters</button>
                             </div>
                         </div>
                     </div>
@@ -85,7 +85,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="pagination_count">
+                    <div class="pagination_count padding-vertical-half">
                         <div class="pagination_list">
                             <div v-for="(link,index) in paginationData.links" :key="link">
                                 <a href="javascript:;" v-if="index == 0" @click="link.url != null ? reservationData(paginationData.current_page - 1) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon-prev"></i></a>
@@ -257,6 +257,7 @@ export default {
     font-size: 15px;
     line-height: 18px;
     color: #38373D;
+    white-space: nowrap;
 }
 .reservation_table .table_content table thead tr th{
     font-weight: 600;
@@ -276,6 +277,7 @@ export default {
 	font-weight: 400;
 	font-size: 12px;
     width: 80%;
+    padding: 0 42px;
 }
 .reservation_table .table_content .status_info.status_complete{
 	background-color: #E9FBE7;

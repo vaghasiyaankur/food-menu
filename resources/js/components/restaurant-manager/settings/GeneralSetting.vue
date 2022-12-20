@@ -518,7 +518,11 @@ img.restaurant_logo{
     line-height: 24px;
     color: #38373D;
 }
-
+@media screen and (max-width:991px){
+    .drop-down__menu-box{
+        left: 0;
+    }
+}
 </style>
 <style>
 .picker-items{

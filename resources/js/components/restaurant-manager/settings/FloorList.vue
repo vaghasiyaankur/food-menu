@@ -36,7 +36,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <div class="pagination_count">
+                    <div class="pagination_count padding-vertical-half">
                         <div class="pagination_list">
                             <div v-for="(link,index) in paginationData.links" :key="link">
                                 <a href="javascript:;" v-if="index == 0" @click="link.url != null ? getFloors(link.url) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon-prev"></i></a>
