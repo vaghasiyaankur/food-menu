@@ -11,6 +11,8 @@ class CategoryLanguage extends Model
 {
     use HasFactory;
 
+    protected $table = 'category_languages';
+
     protected $guarded = ['id']; 
 
     public function langauge()
