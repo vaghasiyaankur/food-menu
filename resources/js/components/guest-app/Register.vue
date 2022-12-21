@@ -395,9 +395,9 @@ export default {
                     if(cookieArray == 'undefined' || !cookieArray) var cookieArray = [];
                     cookieArray.push(orderId);
                     this.cookies.set("orderId", JSON.stringify(cookieArray), 60 * 60 * 24);
-                    console.log(res.data.user_id);
-                    this.setDeviceToken(res.data.user_id);
-                    console.log(this.setDeviceToken(res.data.user_id));
+                    // console.log(res.data.user_id);
+                    // this.setDeviceToken(res.data.user_id);
+                    // console.log(this.setDeviceToken(res.data.user_id));
 
                     f7.dialog.alert(this.$root.trans.success, () => {
                         document.getElementById('book_table').classList.remove('active');
