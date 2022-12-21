@@ -32,7 +32,7 @@
            <div class="table_floor_swiper">
                 <div class="row">
                     <div class="col-100 large-80 medium-75">
-                        <div data-pagination='{"el":".swiper-pagination"}' data-navigation="{'el':'.swiper-navigation'}" data-space-between="10" data-slides-per-view="5"
+                        <div data-pagination='{"el":".swiper-pagination"}' data-navigation="{'el':'.swiper-navigation'}" data-space-between="10" data-slides-per-view="4"
                             class="swiper swiper-init demo-swiper margin-top margin-bottom floor_swiper_inner  swiper-navigation">
                             <!-- <div class="swiper-pagination"></div> -->
                            <div class="swiper-wrapper padding-left-half">

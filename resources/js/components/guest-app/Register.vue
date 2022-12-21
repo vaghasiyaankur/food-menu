@@ -476,9 +476,9 @@ export default {
     justify-content: space-between;
 }*/
 #select-concise{
-    background-color: #F7FAFF !important;
+    background-color: #FAFAFA !important;
     border-radius: 10px;
-    height: 36px;
+    height: 40px;
     display: flex;
     align-items: center;
     padding-left: 16px;
@@ -642,8 +642,9 @@ export default {
 .list input[type='time'],
 .list input[type='number'],
 .list select {
-    background: #F7FAFF !important;
+    background: #FAFAFA !important;
     border-radius: 10px !important;
+    height: 40px;
 }
 
 .text-underline {

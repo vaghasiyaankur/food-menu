@@ -4,9 +4,9 @@
             <div class="card">
                 <div class="card_header padding-top-half">
                     <div class="row padding-left padding-right padding-top align-items-center">
-                        <div class="col-100 medium-80 large-60">
+                        <div class="col-100 medium-80 large-70">
                             <div class="row align-items-center">
-                                <div class="col">
+                                <div class="col-40">
                                     <div class="item-content item-input">
                                         <div class="item-inner">
                                             <div class="item-input-wrap searchData row padding-half">
@@ -16,17 +16,16 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col padding-left-half padding-right-half">
+                                <div class="col-40">
                                     <div class="list no-hairlines reporting_calander no-margin">
                                         <ul>
                                             <li>
-                                                <div class="item-content item-input no-padding-left">
-                                                    <div class="item-inner no-padding-right">
+                                                <div class="item-input no-padding-left">
+                                                    <div class=" no-padding-right">
                                                         <div class="item-input-wrap input-dropdown-wrap">
                                                             <input type="text" placeholder="Select date range" class="padding-horizontal-half height_40" readonly="" id="calender-date-range">
                                                             <input type="hidden" name="from-date" id="from-date">
-                                                            <input type="hidden" name="to-date" id="to-date">
-                                                            <button @click="calender" style="opacity: 0" id="date-set"></button>
+                                                            <input type="hidden" name="to-date" id="to-date">                                                            
                                                         </div>
                                                     </div>
                                                 </div>
@@ -34,13 +33,21 @@
                                         </ul>
                                     </div>
                                 </div>
-                            </div>
+                                <div class="col-20">
+                                    <div class="item-content item-input">
+                                        <div class="item-inner">
+                                            <button class="col button button-fill color-green height_40">Apply</button>
+                                        </div>
+                                    </div>                                    
+                                </div>
+                            </div>                            
                         </div>
-                        <div class="col-100 medium-20 large-40">
+                        <div class="col-100 medium-20 large-30">
                             <div class="filters_button row justify-content-end">
-                                <button class="col-100 large-40 button button-outline height_40" @click="reservationData()"><i class="f7-icons">funnel</i>Filters</button>
+                                <button class="col-100 large-50 button button-outline height_40" @click="reservationData()"><i class="f7-icons">funnel</i>Filters</button>
                             </div>
                         </div>
+                        <button @click="calender" style="opacity: 0" id="date-set"></button>
                     </div>
                 </div>
             </div>

@@ -21,6 +21,11 @@
                                     <a href="/" class="link nav-link text-color-black font-16">
                                         Waiting area</a>
                                 </div>
+                                <div class="padding-horizontal height-40 border-bottom pannel_menu_link">
+                                    <a href="/all-reservation/"
+                                        class="link nav-link text-color-black font-16">
+                                        <img src="/images/reservation.png" alt="" class="padding-right-half" style="filter: invert(100%);">All Reservation</a>
+                                </div>
                                 <div class=" padding-horizontal height-40 border-bottom pannel_menu_link">
                                     <a href="/Reservation/" class="link nav-link text-color-black font-16">
                                         <img src="/images/pluse.png" alt="" class="padding-right-half" style="filter: invert(100%);">Reservation</a>

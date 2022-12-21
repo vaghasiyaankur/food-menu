@@ -48,6 +48,7 @@
                             <a href="#tab-1" class="tab-link tab-link-active">General</a>
                             <a href="#tab-2" class="tab-link" @click="tableShow = true">Table Management</a>
                             <a href="#tab-3" class="tab-link" @click="floorlistShow = true">Floor Plan</a>
+                            <a href="#tab-4" class="tab-link" @click="floorlistShow = true">Language</a>
                         </div>
                     </div>
                     <div class="tabs-animated-wrap">
@@ -63,6 +64,10 @@
                                 <FloorList v-if="floorlistShow" @floorlisthide="addEditFloorShow" :page="floorpage" />
                                 <FloorPlan v-if="!floorlistShow"  @floorlistshow="floorlistShow = true" :floorId="floorId" />
                             </div>
+                            <div id="tab-4" class="tab tab-active">
+                                <Language v-if="language" @languagelisthide="language = false" />
+                                <LanguageTraslation  v-if="!language" @languagelistshow="language = true" />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -77,6 +82,8 @@ import TablePlan from './TablePlan.vue';
 import FloorPlan from './FloorPlan.vue';
 import AddTable from './AddTable.vue';
 import FloorList from './FloorList.vue';
+import Language from './Language.vue';
+import LanguageTraslation from './EditTranslations.vue';
 import $ from 'jquery';
 export default {
     name : 'SettingsTab',
@@ -91,7 +98,9 @@ export default {
         TablePlan,
         AddTable,
         FloorPlan,
-        FloorList
+        FloorList,
+        Language,
+        LanguageTraslation
     },
     data(){
         return {
@@ -101,6 +110,7 @@ export default {
             page: 1,
             floorId: 0,
             floorpage : 1,
+            language : 1,
         }
     },
     mounted() {
@@ -177,13 +187,7 @@ export default {
 .font-22 {
     font-size: 22px;
 }
-.card-title{
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 24px;
-    color: #38373D;
 
-}
 .tab-link{
     background-image: url('/images/tab_bg.png');
     background-color: transparent;
@@ -205,7 +209,7 @@ export default {
 }
 
 .toolbar-inner{
-    width:60%;
+    width:70%;
 }
 
 @media screen and (max-width:820px) {
@@ -213,10 +217,48 @@ export default {
         width: 100%;
     }
     .toolbar-inner{
-        width:70%;
+        width:100%;
     }
 }
 </style>
 
 <style>
+.text-underline{
+    text-decoration: underline;
+}
+.data-table thead th:not(.sortable-cell-active), .data-table thead td:not(.sortable-cell-active){
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 18px;
+    color: #555555;
+    background-color: #F4F4F4;
+}
+.icon-checkbox, .checkbox i{
+    border-radius: 3px !important;
+}
+label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox{
+    background-color: #F33E3E;
+    border-color: #F33E3E;
+  }
+.data-table tbody td::before, .data-table tbody th::before {
+	background-color: transparent !important;
+}
+.card-content .data-table td{
+	padding-top: 15px;
+	padding-bottom: 15px;
+	white-space: nowrap;
+}
+.data-table tbody tr:nth-child(even) {
+	background-color: #FAFAFA;
+}
+.card-title{
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: #38373D;
+
+}
+.data-table{
+    overflow-y: hidden;
+}
 </style>

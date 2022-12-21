@@ -137,7 +137,7 @@
 .floor_plan_list .card{
     box-shadow: none;
 }
-.data-table thead th:not(.sortable-cell-active), .data-table thead td:not(.sortable-cell-active) {
+/*.data-table thead th:not(.sortable-cell-active), .data-table thead td:not(.sortable-cell-active) {
     font-weight: 600;
     font-size: 15px;
     line-height: 18px;
@@ -146,7 +146,7 @@
 }
 .data-table tbody tr:nth-child(even) {
     background-color: #FAFAFA;
-}
+}*/
 .font-13{
     font-size: 13px;
 }

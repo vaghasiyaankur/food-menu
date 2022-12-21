@@ -45,8 +45,8 @@
                       </tr>
                    </tbody>
                 </table>
-                <div class="data-table-pagination padding-vertical-half">
-                    <div v-for="(link,index) in paginationData.links" :key="link">
+                <div class="data-table-pagination padding-vertical-half pagination_count ">
+                    <div v-for="(link,index) in paginationData.links" :key="link" class="pagination_list">
                         <a href="javascript:;" v-if="index == 0" @click="link.url != null ? tableList(link.url) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon icon-prev color-gray"></i></a>
                         <a href="javascript:;" v-if="paginationData.links.length - 1 != index && index != 0" @click="link.url != null ? tableList(link.url) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}">{{ index }}</a>
                         <a href="javascript:;" v-if="paginationData.links.length - 1 == index" @click="link.url != null ? tableList(link.url) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon icon-next color-gray"></i></a>
@@ -129,11 +129,11 @@
     }
 </script>
 <style scoped>
-.card-content .data-table td{
+/*.card-content .data-table td{
     padding-top: 15px;
     padding-bottom: 15px;
     white-space: nowrap;
-}
+}*/
 .add_table_button button{
     background-color: #38373D;
     box-shadow: 0px 2px 4px rgba(172, 172, 172, 0.45);
@@ -204,7 +204,7 @@
 .font-13{
     font-size: 13px;
 }
-.data-table thead th:not(.sortable-cell-active), .data-table thead td:not(.sortable-cell-active){
+/*.data-table thead th:not(.sortable-cell-active), .data-table thead td:not(.sortable-cell-active){
     font-weight: 600;
     font-size: 15px;
     line-height: 18px;
@@ -216,10 +216,22 @@
 }
 .data-table tbody tr:nth-child(even){
     background-color: #FAFAFA;
-}
+}*/
 .data-table .data-table-pagination{
     justify-content: end;
 }
+.pagination_count .pagination_list {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
 
+.pagination_count .pagination_list a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 5px;
+}
 </style>
 

@@ -23,7 +23,7 @@
                                 </div>
                             </div>
                             <div class="col padding-left-half padding-right-half">
-                                <button class="button button-raised bg-dark text-color-white padding height-36 popup-open" @click="subCategory_title = 'Add Sub Category'; subCategory.name = ''; subCategory.category = '';" data-popup="#sub_category_popup"><i class="f7-icons font-22">plus_square</i> Add Sub Category</button>
+                                <button class="button button-raised bg-dark text-color-white padding height-36 popup-open" @click="subCategory_title = 'Add Sub Category'; subCategory.name = ''; subCategory.category = '';" data-popup="#sub_category_popup"><i class="f7-icons font-22 margin-right-half">plus_square</i>Add Sub Category</button>
                             </div>
                         </div>
                     </div>
@@ -42,13 +42,13 @@
                             <div class="col-100 large-40 medium-45 action-buttons">
                                 <div class="row align-items-center">
                                     <div class="col-50">
-                                        <button class="button text-color-black padding height-36 popup-open border__right" data-popup="#product_popup" @click="getAllSubCategories(); product.sub_category = subcat.id"><i class="f7-icons font-22">plus_square</i>&nbsp; Add Product</button>
+                                        <button class="button text-color-black padding height-36 popup-open border__right" data-popup="#product_popup" @click="getAllSubCategories(); product.sub_category = subcat.id"><i class="f7-icons font-22 margin-right-half">plus_square</i>Add Product</button>
                                     </div>
                                     <div class="col-25">
-                                        <button class="button text-color-black padding height-36 popup-open" data-popup="#sub_category_popup" @click="editSubCategory(subcat.id)"><i class="f7-icons font-22">square_pencil</i> Edit</button>
+                                        <button class="button text-color-black padding height-36 popup-open" data-popup="#sub_category_popup" @click="editSubCategory(subcat.id)"><i class="f7-icons font-22 margin-right-half">square_pencil</i>Edit</button>
                                     </div>
                                     <div class="col-25">
-                                        <button class="button text-color-red padding height-36" @click="removeSubCategory(subcat.id)"><i class="f7-icons font-22">trash</i> Delete</button>
+                                        <button class="button text-color-red padding height-36" @click="removeSubCategory(subcat.id)"><i class="f7-icons font-22 margin-right-half">trash</i> Delete</button>
                                     </div>
                                 </div>
                             </div>

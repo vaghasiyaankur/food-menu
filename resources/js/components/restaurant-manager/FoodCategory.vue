@@ -24,7 +24,7 @@
                                     </div>
                                 </div>
                                 <div class="col padding-left-half padding-right-half">
-                                    <button class="button button-raised bg-dark text-color-white padding height-36 popup-open" data-popup=".categoryPopup" @click="blankForm"><i class="f7-icons font-22">plus_square</i> Add category</button>
+                                    <button class="button button-raised bg-dark text-color-white padding height-36 popup-open" data-popup=".categoryPopup" @click="blankForm"><i class="f7-icons font-22 margin-right-half">plus_square</i> Add category</button>
                                 </div>
                             </div>
                         </div>
@@ -50,17 +50,17 @@
                                         <div class="col-50">
                                             <button class="button text-color-black padding height-36 border__right popup-open" data-popup="#subCategory_popup"
                                                 @click="getAllCategories(category.id)">
-                                                <i class="f7-icons font-22">plus_square</i>Add sub category
+                                                <i class="f7-icons font-22 margin-right-half">plus_square</i>Add sub category
                                             </button>
                                         </div>
                                         <div class="col-25">
                                             <button class="button text-color-black padding height-36 popup-open" data-popup=".categoryPopup"
                                                 @click="editCategory(category.id)"><i
-                                                    class="f7-icons font-22">square_pencil</i> Edit</button>
+                                                    class="f7-icons font-22 margin-right-half">square_pencil</i> Edit</button>
                                         </div>
                                         <div class="col-25">
                                             <button class="button text-color-red padding height-36"
-                                                @click="removeCategory(category.id)"><i class="f7-icons font-22">trash</i>
+                                                @click="removeCategory(category.id)"><i class="f7-icons font-22 margin-right-half">trash</i>
                                                 Delete</button>
                                         </div>
                                     </div>
@@ -368,9 +368,9 @@ export default {
     box-shadow: none;
 }
 
-.action-buttons button {
+/*.action-buttons button {
     text-transform: capitalize;
-}
+}*/
 
 .border__right {
     border-right: 1px solid #D8D8D8;
