@@ -23,13 +23,13 @@ class ReservationController extends Controller
         $table_id = ReservationHelper::takeTable($request->floor, $request->person);
         if($table_id){
             $table = Table::where('id', $table_id)->first();
-            $regster = new Customer();
-            $regster->name = $request->customer_name;
-            $regster->number = $request->customer_number;
-            $regster->agree_condition = $request->agree_condition;
-            if($regster->save()){
+            $register = new Customer();
+            $register->name = $request->customer_name;
+            $register->number = $request->customer_number;
+            $register->agree_condition = $request->agree_condition;
+            if($register->save()){
                 $order = new Order();
-                $order->customer_id = $regster->id;
+                $order->customer_id = $register->id;
                 $order->table_id = $table_id;
                 $order->person = $request->person;
                 $order->role = $request->role;
@@ -37,7 +37,7 @@ class ReservationController extends Controller
                 $order->finished = 0;
                 $order->save();
             }
-            return response()->json(['success' => 'registration added successfully.', 'orderId' => $order->id]);
+            return response()->json(['success' => 'registration added successfully.', 'orderId' => $order->id, 'user_id' => $register->id]);
         }else{
             return response()->json(['error' => "We don't have the capacity table for that many people"], 401);
         }
@@ -291,6 +291,20 @@ class ReservationController extends Controller
             $reservation['tableHistory'] = $tableHistory;
 
             return response()->json([ 'reservation' => $reservation ] , 200);
+    }
+
+    /**
+     *  Store Dvice Token For Notification
+     *
+     * @return @json (reservation details)
+     *
+     */
+
+    public function setDeviceToken(Request $request)
+    {   
+           Customer::where('id', $request->user_id)->update(['device_token' => $request->token]);
+
+            return response()->json([ 'success' => true ] , 200);
     }
 
 }
