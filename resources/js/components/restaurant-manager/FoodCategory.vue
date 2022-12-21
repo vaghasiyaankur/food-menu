@@ -37,7 +37,7 @@
                                 <div class="col-5 category-count">
                                     <span>{{ index + 1 }}.</span>
                                 </div>
-                                <div class="col-100 medium-50 large-60 ">
+                                <div class="col-100 medium-40 large-60 ">
                                     <div class="display-flex align-items-center">
                                         <div class="category_image">
                                             <img :src="'/storage'+category.image" alt="">
@@ -45,7 +45,7 @@
                                         <p class="padding-left-half category_name">{{ category.category_languages[0].name }}</p>
                                     </div>
                                 </div>
-                                <div class="col-100 medium-45 large-35 action-buttons">
+                                <div class="col-100 medium-55 large-35 action-buttons">
                                     <div class="row align-items-center">
                                         <div class="col-50">
                                             <button class="button text-color-black padding height-36 border__right popup-open" data-popup="#subCategory_popup"

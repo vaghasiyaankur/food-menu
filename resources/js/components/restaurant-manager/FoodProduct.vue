@@ -32,7 +32,7 @@
                 </div>
                 <div class="card-content card-content-padding">
                     <div class="row" v-if="subCategoryProduct.length">
-                        <div class="col-50" v-for="subproduct in subCategoryProduct" :key="subproduct">
+                        <div class="col-100 medium-100 large-50" v-for="subproduct in subCategoryProduct" :key="subproduct">
                             <div class="row">
                                 <div class="col-100 position-relative">
                                     <div class="card product_lists">
@@ -44,14 +44,14 @@
                                         <div class="card-content padding-top">
                                             <div class="product_list padding-vertical-half" :class="{ 'display-none showData' : index >= 5 }" v-for="(product,index) in subproduct.products" :key="product">
                                                 <div class="row align-items-center padding-horizontal">
-                                                    <div class="col-100 large-60 medium-50">
-                                                        <div class="row">
+                                                    <div class="col-60">
+                                                        <div class="row align-items-center">
                                                             <div class="col product-detail">{{ product.product_language[0] ? product.product_language[0].name : '' }}</div>
                                                             <div class="col text-align-right product-detail">₹ {{ product.price.toFixed(2) }}</div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-100 large-40 medium-50">
-                                                        <div class="row">
+                                                    <div class="col-40">
+                                                        <div class="row align-items-center">
                                                             <div class="col-50">
                                                                 <button class="button text-color-black padding height-36 option-button  popup-open"
                                                                 data-popup="#product_popup" @click="editProduct(product.id)"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
