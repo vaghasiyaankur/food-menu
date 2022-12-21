@@ -46,7 +46,7 @@
                                                 <div class="row align-items-center padding-horizontal">
                                                     <div class="col-100 large-60 medium-50">
                                                         <div class="row">
-                                                            <div class="col product-detail">{{ product.product_language[0].name }}</div>
+                                                            <div class="col product-detail">{{ product.product_language[0] ? product.product_language[0].name : '' }}</div>
                                                             <div class="col text-align-right product-detail">₹ {{ product.price.toFixed(2) }}</div>
                                                         </div>
                                                     </div>
@@ -140,7 +140,11 @@ export default {
             },
             productTitle : 'Add Product',
             subCategoryOption: [],
-            subCategoryProduct:[],
+            subCategoryProduct: {
+                products: {
+                    product_language:[]
+                }
+            },
             search : '',
         }
     },
@@ -225,7 +229,7 @@ export default {
         },
         blankform() {
             this.product.id = null;
-            this.product.name = '';
+            this.product.name = [];
             this.product.price = '';
             this.product.sub_category = null;
             this.productTitle = 'Add Product';

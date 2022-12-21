@@ -23,7 +23,7 @@
                                 </div>
                             </div>
                             <div class="col padding-left-half padding-right-half">
-                                <button class="button button-raised bg-dark text-color-white padding height-36 popup-open" @click="subCategory_title = 'Add Sub Category'; subCategory.name = ''; subCategory.category = '';" data-popup="#sub_category_popup"><i class="f7-icons font-22 margin-right-half">plus_square</i>Add Sub Category</button>
+                                <button class="button button-raised bg-dark text-color-white padding height-36 popup-open" @click="subCategory_title = 'Add Sub Category'; subCategory.name = []; subCategory.category = '';" data-popup="#sub_category_popup"><i class="f7-icons font-22 margin-right-half">plus_square</i> Add Sub Category</button>
                             </div>
                         </div>
                     </div>

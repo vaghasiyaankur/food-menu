@@ -19,7 +19,10 @@ class CategoryController extends Controller
         $categories = Category::with(['categoryLanguages' => function($q) use ($req,$lang_id){
             $q->where('language_id',$lang_id);
             $q->where('name','LIKE','%'.$req->search.'%');
-        }])->get();
+        }])->whereHas('categoryLanguages',function($q) use ($req,$lang_id){
+            $q->where('language_id',$lang_id);
+            $q->where('name','LIKE','%'.$req->search.'%');
+        })->get();
         return response()->json($categories);
     }
 

@@ -45,13 +45,15 @@
                       </tr>
                    </tbody>
                 </table>
-                <div class="data-table-pagination padding-vertical-half pagination_count ">
-                    <div v-for="(link,index) in paginationData.links" :key="link" class="pagination_list">
-                        <a href="javascript:;" v-if="index == 0" @click="link.url != null ? tableList(link.url) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon icon-prev color-gray"></i></a>
-                        <a href="javascript:;" v-if="paginationData.links.length - 1 != index && index != 0" @click="link.url != null ? tableList(link.url) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}">{{ index }}</a>
-                        <a href="javascript:;" v-if="paginationData.links.length - 1 == index" @click="link.url != null ? tableList(link.url) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon icon-next color-gray"></i></a>
+                <div class="pagination_count padding-vertical-half data-table-pagination">
+                        <div class="pagination_list">
+                            <div v-for="(link,index) in paginationData.links" :key="link">
+                                <a href="javascript:;" v-if="index == 0" @click="link.url != null ? tableList(link.url) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon-prev"></i></a>
+                                <a href="javascript:;" v-if="paginationData.links.length - 1 != index && index != 0" @click="link.url != null ? tableList(link.url) : 'javascript:;'" :class="{ 'disabled': link.url == null, 'active': paginationData.current_page == index}">{{ index }}</a>
+                                <a href="javascript:;" v-if="paginationData.links.length - 1 == index" @click="link.url != null ? tableList(link.url) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon-next"></i></a>
+                            </div>
+                        </div>
                     </div>
-                </div>
             </div>
         </div>
     </div>
@@ -80,10 +82,13 @@
             this.$root.activationMenu('setting');
         },
         methods: {
-            tableList(page) {
-                if (page == undefined || page == 1) {
-                    page = '/api/table-list?page=1';
+            tableList(pagenumber) {
+                if (pagenumber == undefined || pagenumber == 1) {
+                    pagenumber = 1
+                } else {
+                    pagenumber = pagenumber.split('page=')[1];
                 }
+                var page = '/api/table-list?page=' + pagenumber;
                 this.page_number = page;
                 axios.get(page)
                 .then((res) => {
@@ -225,7 +230,6 @@
     justify-content: flex-end;
     align-items: center;
 }
-
 .pagination_count .pagination_list a {
     color: black;
     float: left;
