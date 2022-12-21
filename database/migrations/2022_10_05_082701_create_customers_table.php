@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('number')->nullable();
             $table->boolean('agree_condition')->default(0);
+            $table->string('device_token')->nullable();
             $table->timestamps();
         });
     }
