@@ -19,8 +19,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="(floor,index) in floors" :key="floor">
-                                <td class="label-cell">{{ index + 1 }}.</td>
+                            <tr v-for="floor in floors" :key="floor">
+                                <td class="label-cell">{{ floor.id }}.</td>
                                 <td>{{ floor.name }}</td>
                                 <td>{{ floor.short_cut }}</td>
                                 <td>
@@ -45,7 +45,7 @@
                             </div>
                         </div>
                     </div>
-                </div>  
+                </div>
             </div>
         </div>
     </div>
@@ -75,10 +75,13 @@
             this.$root.activationMenu('setting');
         },
         methods: {
-            getFloors(page) {
-                if (page == undefined || page == 1) {
-                    page = '/api/get-floors?page=1'
+            getFloors(pagenumber) {
+                if (pagenumber == undefined || pagenumber == 1) {
+                    pagenumber = 1
+                } else {
+                    pagenumber = pagenumber.split('page=')[1];
                 }
+                var page = '/api/get-floors?page=' + pagenumber;
                 this.page_number = page;
                 axios.get(page)
                 .then((res) => {

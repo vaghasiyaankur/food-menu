@@ -110,20 +110,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="nav-button">
-                        <div class="menu-item menu-item-dropdown">
-                            <div class="menu-item-content button button-raised bg-pink text-color-white padding-left-half padding-right-half">Menu management</div>
-                            <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
-                                <div class="menu-dropdown-content bg-color-white no-padding">
-                                    <a href="#" class="menu-dropdown-link menu-close"></a>
-                                    <a href="/food-category/" class="menu-dropdown-link menu-close text-color-pink">Food Category</a>
-                                    <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black">Food Menu</a>
-                                    <a href="/food-subcategory/" class="menu-dropdown-link menu-close text-color-black">Food SubCategory</a>
-                                    <a href="/digital-menu/" class="menu-dropdown-link menu-close text-color-black">Digital Menu</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
                         <div class=" padding-left-half padding-right-half height-40 nav-button"><a href="/Reporting/"
                                 class="link nav-link button button-raised  text-color-white padding" :class="currentRoute == 'reporting' ? 'bg-pink' : 'bg-dark'">
                                 <img src="/images/reporting.png" alt="" class="padding-right-half">Reporting</a>
@@ -439,7 +425,7 @@ export default {
 .md .dialog-button{
     width: 100% !important;
     border-radius: 10px !important;
-    
+
 }
 .md .dialog-title + .dialog-text{
     margin-top: 5px;

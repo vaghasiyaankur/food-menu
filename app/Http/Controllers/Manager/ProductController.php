@@ -39,6 +39,9 @@ class ProductController extends Controller
         $products = Category::with(['subCategory' => function($q){
             $q->whereHas('products');
         },
+        'subCategory.products' => function($q){
+            $q->whereHas('productLanguage');
+        },
         'subCategory.subCategoryLanguage' => function($q) use ($lang_id){
             $q->where('language_id',$lang_id);
         },
@@ -56,11 +59,19 @@ class ProductController extends Controller
         $lang_id = SettingHelper::systemLang();
         $sub_product = SubCategory::with(['subCategoryLanguage' => function($q) use ($lang_id){
             $q->where('language_id',$lang_id);
-        },'products.productLanguage' => function($q) use ($req){
+        },
+        'products' => function($q) use ($req,$lang_id) {
+            $q->whereHas('productLanguage',function($q) use ($req,$lang_id){
+                $q->where('language_id',$lang_id);
+                $q->where('name','LIKE','%'.$req->search.'%');
+            });
+        },'products.productLanguage'
+        ])
+        ->whereHas('products.productLanguage',function($q) use ($req,$lang_id){
+            $q->where('language_id',$lang_id);
             $q->where('name','LIKE','%'.$req->search.'%');
-        }])->whereHas('products.productLanguage',function($q) use ($req){
-            $q->where('name','LIKE','%'.$req->search.'%');
-        })->get();
+        })
+        ->whereHas('subCategoryLanguage')->whereHas('products')->get();
         return response()->json($sub_product);
     }
 
