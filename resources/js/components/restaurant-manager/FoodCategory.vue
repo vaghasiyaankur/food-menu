@@ -406,7 +406,7 @@ export default {
 }
 
 .category-list-section .card{
-    height: calc(100vh - 94px);
+    height: calc(100vh - 132px);
     overflow:scroll;
 }
 .category-list-section{
@@ -416,10 +416,7 @@ export default {
     .header-links {
         width: 100%;
     }
-    .category-list-section .card{
-        height: calc(100vh - 400px);
-        overflow: scroll;
-    }
+    
 }
 </style>
 
@@ -518,10 +515,6 @@ export default {
     left: 35% !important;
     margin : 0 !important;
 }
-.dialog{
-    top: 36%;
-}
-
 .popup-button{
     text-transform: capitalize !important;
 }

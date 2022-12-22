@@ -648,12 +648,12 @@ export default {
                 })
             });
 
-            setTimeout(() => {
+            // setTimeout(() => {
                     $('.dialog-title').html("<img src='/images/success.png'>");
                     $('.dialog-button').addClass('col button button-raised button-large text-transform-capitalize');
                     $('.dialog-button').eq(1).addClass('active');
                     $('.dialog-button').css('width', '50%');
-                }, 50);
+                // }, 50);
         },
         changeFloor(order_id, floor_id,floor_name) {
             f7.popover.close();
@@ -672,12 +672,12 @@ export default {
                 })
             });
 
-            setTimeout(() => {
+            // setTimeout(() => {
                     $('.dialog-title').html("<img src='/images/success.png'>");
                     $('.dialog-button').addClass('col button button-raised button-large text-transform-capitalize');
                     $('.dialog-button').eq(1).addClass('active');
                     $('.dialog-button').css('width', '50%');
-                }, 50);
+                // }, 50);
         },
         check(m){
             console.log(m);
@@ -1147,6 +1147,7 @@ content: '';
 .dialog {
     background-color: #fff !important;
     width: 378px !important;
+    transform: translate(-13%, -50%) !important;
 }
 
 .dialog-button {

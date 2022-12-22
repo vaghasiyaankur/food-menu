@@ -2,25 +2,27 @@
     <div class="card edit_tranaslation no-margin">
         <div class="card-header padding">
             <div class="heading translate_left">
-                <h3 class="card-title no-margin">Edit Translations - {{ $root.langs[this.langId - 1].name }}</h3>
+                <h3 class="no-margin"><span class="page_heading">Edit Translations - {{ $root.langs[this.langId - 1].name }}</span></h3>
             </div>
             <div class="translate_right display-flex align-items-center">
                 <!-- <div class="item-content item-input">
                     <div class="item-inner">
                         <div class="item-input-wrap searchData row padding-half height_40 search_data_wrap">
                             <i class="f7-icons font-18 search-icon">search</i>
-                            <input type="search" name="search" class="search__data" v-model="searchData" placeholder="Search Translation...">
+                            <input type="search" name="search" class="search__data" v-model="searchData" @change="getLangTraslation()" placeholder="Search Translation...">
                         </div>
                     </div>
                 </div> -->
                 <div class="item-content item-input margin-right">
-                    <div class="item-input-wrap search__data padding-half display-flex">
-                        <i class="f7-icons font-22 search-icon">search</i>
-                        <input type="search" name="search" v-model="searchData" placeholder="Search Translation...">
+                    <div class="item-inner">
+                        <div class="item-input-wrap searchData row padding-half height_40 search_data_wrap">
+                            <i class="f7-icons font-18 search-icon">search</i>
+                            <input type="search" name="search" class="search__data" v-model="searchData" @change="getLangTraslation()" placeholder="Search Translation...">
+                        </div>
                     </div>
                 </div>
                 <div class="filters_button">
-                    <button class="button button-outline height_40" @click="getLangTraslation()"><i class="f7-icons">funnel</i>Filters</button>
+                    <button class="button button-outline height_40"><i class="f7-icons">funnel</i>Filters</button>
                 </div>
             </div>
         </div>
@@ -62,10 +64,10 @@
             <div class="submit__button margin-top padding-top">
                 <button class="col button button-large button-fill" @click="updateTraslation()">Save Change</button>
             </div>
-            <div class="pagination_count padding display-flex justify-content-space-between align-items-center">
-                <div class="pagination__text">
+            <div class="pagination_count padding display-flex justify-content-end align-items-center">
+                <!-- <div class="pagination__text">
                     <p class="no-margin">Showing 15 of 220 Results</p>
-                </div>
+                </div> -->
                 <div class="pagination_list display-flex">
                     <div v-for="(link,index) in paginationData.links" :key="link">
                         <a href="javascript:;" v-if="index == 0" @click="link.url != null ? getLangTraslation(link.url) : 'javascript:;'"
@@ -135,13 +137,13 @@
     }
 </script>
 <style scoped>
-.edit_tranaslation .search__data{
+/*.edit_tranaslation .search__data{
     width: 100%;
     background: #FFFFFF;
     border:1px solid #555555;;
     border-radius: 5px;
     height: auto;
-  }
+  }*/
   .height_40{
     height: 40px;
   }

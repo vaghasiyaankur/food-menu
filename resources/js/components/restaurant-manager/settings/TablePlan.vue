@@ -1,6 +1,6 @@
 <template>
-    <div class="card">
-        <div class="card-header">
+    <div class="card no-margin-top">
+        <div class="card-header margin-vertical-half">
             <div class="table_mangment_heading">
                 <h3 class="no-margin"> 
                     <span class="page_heading">Table List</span>

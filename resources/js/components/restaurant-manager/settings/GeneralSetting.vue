@@ -544,12 +544,12 @@ img.restaurant_logo{
     position: relative;
     width: 100%;
     overflow-x: hidden !important;
-    height: calc(100% - 147px) !important;
+    height: calc(100% - 114px) !important;
     overflow-y: auto !important;
 }
-@media screen and (max-width:820px){
+/*@media screen and (max-width:820px){
     .tabs-animated-wrap{
     height: calc(100% - 456px) !important;
     }
-}
+}*/
 </style>

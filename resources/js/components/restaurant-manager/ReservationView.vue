@@ -1,14 +1,14 @@
 <template>
     <f7-page class="bg-color-white">
        <div class="reservation_view">
-            <div class="back_link padding">
+            <div class="back_link padding margin-horizontal">
                 <a class="link back" href="all-reservation"><i class="icon icon-back"></i>
                     <span class="margin-left-half">Back to List</span>
                 </a>
             </div>
             <div class="block reservation_details no-margin-top">
                 <div class="row">
-                    <div class="col-50">
+                    <div class="col-100 large-50 medium-100">
                         <div class="card border_radius_10">
                             <div class="card-header"><h3 class="no-margin"> Guest Details</h3></div>
                             <div class="card-content card-content-padding">
@@ -31,7 +31,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-50">
+                    <div class="col-100 large-50 medium-100">
                         <div class="card border_radius_10">
                             <div class="card-header"><h3 class="no-margin"> Reservation Details</h3></div>
                             <div class="card-content card-content-padding">
@@ -59,7 +59,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-50" v-if="table_shift_history.length">
+                    <div class="col-100 large-50 medium-100" v-if="table_shift_history.length">
                         <div class="card border_radius_10">
                             <div class="card-header"><h3 class="no-margin"> Table Shift Details</h3></div>
                             <div class="card-content card-content-padding" v-for="tsh in table_shift_history" :key="tsh.id">
@@ -74,7 +74,7 @@
                             </div>
                         </div>
                     </div>   
-                    <div class="col-50" v-if="floor_shift_history.length">
+                    <div class="col-100 large-50 medium-100" v-if="floor_shift_history.length">
                         <div class="card border_radius_10">
                             <div class="card-header"><h3 class="no-margin"> Floor shift Details</h3></div>
                             <div class="card-content card-content-padding" v-for="fsh in floor_shift_history" :key="fsh.id">
