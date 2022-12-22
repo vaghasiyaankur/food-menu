@@ -1,6 +1,7 @@
 <?php
 namespace App\Helper;
 
+use App\Models\Language;
 use App\Models\Setting;
 
 class SettingHelper{
@@ -15,8 +16,10 @@ class SettingHelper{
 
     public static function getlanguage()
     {
-        if (request()->session()->get('lang')) {
-            return request()->session()->get('lang');
+        $langs = Language::whereStatus(1)->pluck('id')->toarray();
+        $langId = request()->session()->get('lang');
+        if ($langId && in_array($langId, $langs)) {
+            return $langId;
         }else{
             return SettingHelper::systemLang();
         }

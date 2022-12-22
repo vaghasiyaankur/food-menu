@@ -48,7 +48,7 @@
                             <a href="#tab-1" class="tab-link tab-link-active">General</a>
                             <a href="#tab-2" class="tab-link" @click="tableShow = true">Table Management</a>
                             <a href="#tab-3" class="tab-link" @click="floorlistShow = true">Floor Plan</a>
-                            <a href="#tab-4" class="tab-link" @click="floorlistShow = true">Language</a>
+                            <a href="#tab-4" class="tab-link" @click="language = true">Language</a>
                         </div>
                     </div>
                     <div class="tabs-animated-wrap">
@@ -65,8 +65,8 @@
                                 <FloorPlan v-if="!floorlistShow"  @floorlistshow="floorlistShow = true" :floorId="floorId" />
                             </div>
                             <div id="tab-4" class="tab tab-active">
-                                <Language v-if="language" @languagelisthide="language = false" />
-                                <LanguageTraslation  v-if="!language" @languagelistshow="language = true" />
+                                <Language v-if="language" @languagelisthide="languagelisthide"/>
+                                <LanguageTraslation  v-if="!language" @languagelistshow="language = true" :langId="langId" />
                             </div>
                         </div>
                     </div>
@@ -110,7 +110,8 @@ export default {
             page: 1,
             floorId: 0,
             floorpage : 1,
-            language : 1,
+            language: true,
+            langId : 1,
         }
     },
     mounted() {
@@ -128,6 +129,10 @@ export default {
             this.floorpage = page;
             this.floorlistShow = false;
         },
+        languagelisthide(id) {
+            this.langId = id;
+            this.language = false;
+        }
     }
 }
 </script>
@@ -244,8 +249,8 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox{
 	background-color: transparent !important;
 }
 .card-content .data-table td{
-	padding-top: 15px;
-	padding-bottom: 15px;
+	padding-top: 12px;
+	padding-bottom: 12px;
 	white-space: nowrap;
 }
 .data-table tbody tr:nth-child(even) {

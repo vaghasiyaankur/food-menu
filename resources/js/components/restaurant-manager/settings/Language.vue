@@ -17,40 +17,20 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td><span>01.</span></td>
-                            <td><a href="javscript:;" class="text-underline text-color-black"  @click="$emit('languagelisthide')">Translate</a></td>
-                            <td><span>English</span></td>
+                        <tr v-for="lang in langs" :key="lang.id">
+                            <td><span>{{ lang.id }}.</span></td>
+                            <td><a href="javscript:;" class="text-underline text-color-black" @click="editTranslations(lang.id)">Translate</a></td>
+                            <td><label :for="'selectedLang_'+lang.id">{{ lang.name }}</label></td>
                             <td>
                                 <label class="item-checkbox item-content">
-                                    <input type="checkbox" name="demo-checkbox"><i class="icon icon-checkbox"></i>                                    
-                                </label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><span>02.</span></td>
-                            <td><a href="javscript:;" class="text-underline text-color-black">Translate</a></td>
-                            <td><span>Hindi</span></td>
-                            <td>
-                                <label class="item-checkbox item-content">
-                                    <input type="checkbox" name="demo-checkbox"><i class="icon icon-checkbox"></i>                                    
-                                </label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><span>03.</span></td>
-                            <td><a href="javscript:;" class="text-underline text-color-black">Translate</a></td>
-                            <td><span>Gujarati</span></td>
-                            <td>
-                                <label class="item-checkbox item-content">
-                                    <input type="checkbox" name="demo-checkbox"><i class="icon icon-checkbox"></i>                                    
+                                    <input type="checkbox" :id="'selectedLang_'+lang.id" name="demo-checkbox" class="select-language" v-model="selected_lang[lang.id]" value="1" @change="changeselectedlanguage($event)"><i class="icon icon-checkbox"></i>
                                 </label>
                             </td>
                         </tr>
                     </tbody>
                 </table>
                 <div class="submit__button margin-top padding-top">
-                    <button class="col button button-large button-fill">Save</button>
+                    <button class="col button button-large button-fill" @click="changeLangStatus">Save</button>
                 </div>
             </div>
         </div>
@@ -69,28 +49,43 @@
             return {
                 tables: [],
                 page_number: 1,
-                paginationData : [],
+                paginationData: [],
+                selected_lang: [],
+                langs : [],
             }
         },
         created() {
-            this.page_number = this.page;
-            this.tableList(this.page_number);
+            this.getLanguage();
         },
         mounted() {
             this.$root.activationMenu('setting');
         },
         methods: {
-            tableList(page) {
-                if (page == undefined || page == 1) {
-                    page = '/api/table-list?page=1';
-                }
-                this.page_number = page;
-                axios.get(page)
+            getLanguage() {
+                axios.get('/api/get-all-languages')
                 .then((res) => {
-                    this.tables = res.data.tables.data;
-                    this.paginationData = res.data.tables;
+                    this.langs = res.data.langs;
+                    this.langs.forEach((lang) => {
+                        this.selected_lang[lang.id] = lang.status ? true : false;
+                    });
                 })
             },
+            editTranslations(id) {
+                this.$emit('languagelisthide',id);
+            },
+            changeLangStatus() {
+                axios.post('/api/update-languages-status', { language: this.selected_lang })
+                .then((res) => {
+                    this.$root.successnotification(res.data.success);
+                    this.getLanguage();
+                })
+            },
+            changeselectedlanguage(event) {
+                var selected_lang = $('.select-language:checked').length;
+                if (selected_lang == 0) {
+                    event.target.checked = true;
+                }
+            }
         }
     }
 </script>

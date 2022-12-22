@@ -43,7 +43,8 @@ export default {
                 },
             },
             langs: [],
-            trans : [],
+            trans: [],
+            selected_lang : 0,
         };
     },
     setup() {
@@ -65,6 +66,7 @@ export default {
             axios.post('/api/get-language-translation', { lang_id: langId })
             .then((res) => {
                 this.trans = res.data.translations;
+                this.selected_lang = res.data.lang_id;
             })
         }
 
