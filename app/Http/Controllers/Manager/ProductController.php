@@ -56,7 +56,7 @@ class ProductController extends Controller
 
     public function getProducts(Request $req)
     {
-        $lang_id = SettingHelper::systemLang();
+        $lang_id = SettingHelper::managerLanguage();
         $sub_product = SubCategory::with(['subCategoryLanguage' => function($q) use ($lang_id){
             $q->where('language_id',$lang_id);
         },

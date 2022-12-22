@@ -15,7 +15,7 @@ class CategoryController extends Controller
 {
     public function getCategories(Request $req)
     {
-        $lang_id = SettingHelper::systemLang();
+        $lang_id = SettingHelper::managerLanguage();
         $categories = Category::with(['categoryLanguages' => function($q) use ($req,$lang_id){
             $q->where('language_id',$lang_id);
             $q->where('name','LIKE','%'.$req->search.'%');
@@ -141,7 +141,7 @@ class CategoryController extends Controller
 
     public function get_categories()
     {
-        $lang_id = SettingHelper::systemLang();
+        $lang_id = SettingHelper::managerLanguage();
         $categories = Category::with(['categoryLanguages' => function($q) use ($lang_id){
             $q->where('language_id',$lang_id);
         }])->get();
