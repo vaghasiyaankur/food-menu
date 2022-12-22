@@ -99,7 +99,7 @@
                 },
                 dataType: 'JSON',
                 success: function (response) {
-                    alert('Token saved successfully.');
+                    console.log('Token saved successfully.');
                 },
                 error: function (err) {
                     console.log('User Chat Token Error'+ err);
