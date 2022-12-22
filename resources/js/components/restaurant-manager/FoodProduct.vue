@@ -32,7 +32,7 @@
                 </div>
                 <div class="card-content card-content-padding">
                     <div class="row" v-if="subCategoryProduct.length">
-                        <div class="col-100 medium-100 large-50" v-for="subproduct in subCategoryProduct" :key="subproduct">
+                        <div class="col-100 medium-100 large-50" v-for="subproduct in subCategoryProduct" :key="subproduct"> 
                             <div class="row">
                                 <div class="col-100 position-relative">
                                     <div class="card product_lists">

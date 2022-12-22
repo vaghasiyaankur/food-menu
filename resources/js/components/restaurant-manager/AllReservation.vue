@@ -371,5 +371,11 @@ export default {
     background-color: #F33E3E !important;
     color: #fff !important;
 }
+::placeholder{
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #555555;
+}
 </style>
 
