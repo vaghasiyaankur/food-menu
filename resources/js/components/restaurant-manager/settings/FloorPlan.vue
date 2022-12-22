@@ -51,7 +51,6 @@ import axios from 'axios';
             }
         },
         created() {
-            console.log(this.floorId);
             if (this.floorId) this.tableData();
         },
         mounted() {

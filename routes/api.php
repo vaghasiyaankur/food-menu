@@ -160,4 +160,12 @@ Route::post('/get-wishlist',[FavoriteController::class, 'getWishlist']);
 
 Route::get('/get-languages',[LanguageController::class, 'getlangs']);
 
+Route::get('/get-all-languages',[LanguageController::class, 'getAlllangs']);
+
 Route::post('get-language-translation',[LanguageController::class, 'getLangTranslation']);
+
+Route::get('/get-lang-translation/{id}',[LanguageController::class, 'getLangTrans']);
+
+Route::post('update-lang-translation',[LanguageController::class, 'updateLangTrans']);
+
+Route::post('update-languages-status',[LanguageController::class, 'updateLangStatus']);

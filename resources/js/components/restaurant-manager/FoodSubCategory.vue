@@ -3,11 +3,11 @@
     <div class="subcategory-list-section">
         <div class="card elevation-2">
             <div class="card_header">
-                <div class="row padding-left padding-right align-items-center">
+                <div class="row padding-left padding-right align-items-center padding-top-half">
                     <div class="col-100 large-50 medium-40">
                         <h3>
-                            <a href="javscript:;" class="text-color-black padding-right-half" ><i class="f7-icons font-22" style="vertical-align: bottom;">arrow_left</i></a>
-                            <span> Sub Category</span>
+                            <!-- <a href="javscript:;" class="text-color-black padding-right-half" ><i class="f7-icons font-22" style="vertical-align: bottom;">arrow_left</i></a> -->
+                            <span class="page_heading"> Sub Category</span>
                         </h3>
                     </div>
                     <div class="col-100 large-50 medium-60">
@@ -15,15 +15,23 @@
                             <div class="col">
                                 <div class="item-content item-input">
                                     <div class="item-inner">
+                                        <div class="item-input-wrap searchData row padding-half height_40 search_data_wrap">
+                                            <i class="f7-icons font-18 search-icon">search</i>
+                                            <input type="search" name="search" class="search__data"  id="searchData" v-model="search" @input="getSubCategories()">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="item-content item-input">
+                                    <div class="item-inner">
                                         <div class="item-input-wrap searchData row padding-half">
                                             <i class="f7-icons font-22 search-icon">search</i>
                                             <input type="search" v-model="search" @input="getSubCategories()" name="search" id="searchData">
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="col padding-left-half padding-right-half">
-                                <button class="button button-raised bg-dark text-color-white padding height-36 popup-open" @click="subCategory_title = 'Add Sub Category'; subCategory.name = []; subCategory.category = '';" data-popup="#sub_category_popup"><i class="f7-icons font-22 margin-right-half">plus_square</i> Add Sub Category</button>
+                                <button class="button button-raised bg-dark text-color-white padding height_40 popup-open" @click="subCategory_title = 'Add Sub Category'; subCategory.name = []; subCategory.category = '';" data-popup="#sub_category_popup"><i class="f7-icons font-22 margin-right-half">plus_square</i> Add Sub Category</button>
                             </div>
                         </div>
                     </div>
@@ -306,13 +314,13 @@ export default {
 }
 
 
-.item-input-wrap {
+/*.item-input-wrap {
     width: 100%;
     background: #F0F0F0;
     border: 0.5px solid #DCDCDC;
     border-radius: 7px;
     height: auto;
-}
+}*/
 
 .bg-karaka-orange {
     background: #EE4925;
@@ -332,9 +340,9 @@ export default {
     line-height: 24px;
 }
 
-#searchData {
+/*#searchData {
     width: 85%;
-}
+}*/
 
 
 

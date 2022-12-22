@@ -121,11 +121,7 @@ export default {
 .border__radius_10{
     border-radius: 10px;
 }
-.card-title{
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 24px;
-}
+
 
 
 .height-40 {

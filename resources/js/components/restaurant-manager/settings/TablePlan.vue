@@ -2,13 +2,15 @@
     <div class="card">
         <div class="card-header">
             <div class="table_mangment_heading">
-                <h3 class="card-title no-margin">Table List</h3>
+                <h3 class="no-margin"> 
+                    <span class="page_heading">Table List</span>
+                </h3>
             </div>
             <div class="add_table_button">
                 <button class="button" @click="$emit('tablehide', 0, page_number)"><i class="f7-icons margin-right-half">plus_square</i> Add Table</button>
             </div>
         </div>
-        <div class="card-content">
+        <div class="card-content padding-vertical">
             <div class="data-table">
                 <table>
                    <thead>
@@ -148,12 +150,6 @@
     line-height: 17px;
     color: #FFFFFF;
     padding: 20px 36px !important;
-}
-.card-title{
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 24px;
-    color: #38373D;
 }
 .status_info{
     display: flex;
