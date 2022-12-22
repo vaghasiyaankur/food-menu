@@ -2,11 +2,8 @@
 <f7-app v-bind="f7Params">
     <f7-page>
         <div class="nav-bar">
-            <f7-navbar class="navbar-menu bg-color-white">
-                <div class="left">
-
-                </div>
-                <div class="header-links display-flex align-items-center padding-right">
+            <f7-navbar class="navbar-menu bg-color-white">            
+                <div class="header-links display-flex align-items-center">
                     <!--========= SMALL SCREEN MENU BAR=========== -->
                     <div class="small_screen_menu">
                         <div class="hamburger__button">
@@ -19,7 +16,7 @@
                             <div class="block no-margin-top no-padding">
                                 <div class=" padding-horizontal height-40 border-bottom pannel_menu_link">
                                     <a href="/" class="link nav-link text-color-black font-16">
-                                        Waiting area</a>
+                                        <i class="f7-icons font-14 margin-right-half">clock</i>Waiting area</a>
                                 </div>
                                 <div class="padding-horizontal height-40 border-bottom pannel_menu_link">
                                     <a href="/all-reservation/"
@@ -85,7 +82,7 @@
                         <div class=" padding-left-half padding-right-half height-40 nav-button">
                             <a href="/"
                                 class="col link nav-link button button-raised text-color-white padding" :class="currentRoute == 'table' ? 'bg-pink' : 'bg-dark'">
-                                waiting area</a>
+                                <i class="f7-icons font-14 margin-right-half">clock</i>waiting area</a>
                         </div>
                         <div class=" padding-left-half padding-right-half height-40 nav-button">
                             <a href="/all-reservation/"
@@ -110,7 +107,7 @@
                                         <a href="/food-category/" class="menu-dropdown-link menu-close text-color-black">Food Category</a>
                                         <a href="/food-subcategory/" class="menu-dropdown-link menu-close text-color-black">Food SubCategory</a>
                                         <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black">Food Menu</a>
-                                        <a href="/digital-menu/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Digital Menu</a>
+                                        <a href="/digital-menu/" class="menu-dropdown-link menu-close text-color-black">Digital Menu</a>
                                     </div>
                                 </div>
                             </div>
@@ -395,7 +392,7 @@ export default {
 }
 
 .header-links {
-    width: 85%;
+    width: 100%;
 }
 
 .bg-pink {
@@ -415,6 +412,9 @@ export default {
 }
 .font-16{
     font-size: 16px !important;
+}
+.font-14{
+    font-size: 14px !important;
 }
 .dialog-title{
     display: flex;

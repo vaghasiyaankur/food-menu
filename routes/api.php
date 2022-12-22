@@ -130,6 +130,8 @@ Route::get('/report-data',[ReportController::class, 'reportData']);
 
 Route::post('/add-reservation',[ReservationController::class, 'addReservation']);
 
+Route::post('/set-device-token',[ReservationController::class, 'setDeviceToken']);
+
 Route::get('/check-reservation',[ReservationController::class, 'checkReservation']);
 
 Route::post('/change-reservation',[ReservationController::class, 'changeReservation']);

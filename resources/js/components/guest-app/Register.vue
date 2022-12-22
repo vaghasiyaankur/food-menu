@@ -394,6 +394,9 @@ export default {
                     if(cookieArray == 'undefined' || !cookieArray) var cookieArray = [];
                     cookieArray.push(orderId);
                     this.cookies.set("orderId", JSON.stringify(cookieArray), 60 * 60 * 24);
+                    // console.log(res.data.user_id);
+                    // this.setDeviceToken(res.data.user_id);
+                    // console.log(this.setDeviceToken(res.data.user_id));
 
                     f7.dialog.alert(this.$root.trans.success, () => {
                         document.getElementById('book_table').classList.remove('active');
@@ -447,6 +450,40 @@ export default {
                     }
                 });
             }
+        },
+        setDeviceToken(userId) {
+            var firebaseConfig = {
+                apiKey: "AIzaSyBfphAIxpzsJDUuCCOhF6DtZKqUPxgj-wA",
+                authDomain: "fir-test-25564.firebaseapp.com",
+                projectId: "fir-test-25564",
+                storageBucket: "fir-test-25564.appspot.com",
+                messagingSenderId: "1064311492584",
+                appId: "1:1064311492584:web:4842b73ccef0b65aeade5d",
+                measurementId: "G-B3L0LYKB05"
+            };
+            firebase.initializeApp(firebaseConfig);
+
+            const messaging = firebase.messaging();
+
+
+            messaging
+            .requestPermission()
+            .then(function () {
+                return messaging.getToken()
+            })
+            .then(function(token) {
+                if(token){
+                    axios.post('/api/set-device-token', {'user_id' : userId, 'token' : token})
+                    .then((res) => {
+                        if(res.data.success){
+                            console.log('token saved succesfully');
+                        }
+                    });
+                }
+
+            }).catch(function (err) {
+                console.log('User Notification Token Error : '+ err);
+            });
         }
     }
 }

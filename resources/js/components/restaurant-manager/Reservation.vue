@@ -54,7 +54,7 @@
                                     <div class="text-align-center margin-top">
                                         <a class="link text-underline text-color-black" :class="{ 'display-none': checkWaitingTime }" @click="checkTime" href="javascript:;">Check Time</a>
                                         <div class="countdown_section position-relative margin-horizontal" :class="{ 'display-none' : !checkWaitingTime }">
-                                            <div style="background : url('/images/dots.png')">
+                                            <div style="background : url('/images/dots.png')" class="display-flex align-items-center justify-content-center flex-direction-column height_100">
                                                 <img src="/images/clock.png" alt="">
                                                 <i class="f7-icons font-13 padding-half margin-bottom close-countdown" @click="(checkWaitingTime = false)">xmark</i>
                                                 <!-- <vue-countdown :time="60 * 50 * 1000" v-slot="{ hours, minutes, seconds }"> -->
@@ -70,10 +70,10 @@
                         <div class="padding bottom-bar">
                             <div class="row justify-content-start">
                                 <div class="col bottom-button margin-right">
-                                    <f7-button class="button bg-color-white register-button button-raised text-color-black button-large text-transform-capitalize" @click="register" id="book_table">Book Table</f7-button>
+                                    <f7-button class="button bg-color-white register-button button-raised text-color-black button-large text-transform-capitalize border_radius_10" @click="register" id="book_table">Book Table</f7-button>
                                 </div>
                                 <div class="col bottom-button">
-                                    <f7-button class="button bg-color-white register-button button-raised text-color-black button-large text-transform-capitalize" fill sheet-open=".demo-sheet-swipe-to-close" @click="title = 'Menu'">Menu</f7-button>
+                                    <f7-button class="button bg-color-white register-button button-raised text-color-black button-large text-transform-capitalize border_radius_10" fill sheet-open=".demo-sheet-swipe-to-close" @click="title = 'Menu'">Menu</f7-button>
                                 </div>
                             </div>
                         </div>
@@ -272,7 +272,7 @@ export default {
                         this.checkWaitingTime = true;
                     }
                     else{
-                        this.errornotification(res.data.message); return false;
+                        this.$root.errornotification(res.data.message); return false;
                     }
                 });
             }
@@ -305,7 +305,9 @@ export default {
 }
 </script>
 <style scoped>
-
+.border_radius_10{
+    border-radius: 10px !important;
+}
 .sheet-modal{
     height: 92% !important;
 }
@@ -438,6 +440,8 @@ label.item-checkbox input[type='checkbox']:checked ~ .icon-checkbox:after, label
     border-radius: 7px;
     padding: 18px;
     position: relative;
+    height: 100%;
+    max-height: 125px;
 }
 .close-countdown{
     position: absolute;
@@ -472,7 +476,6 @@ label.item-checkbox input[type='checkbox']:checked ~ .icon-checkbox:after, label
 .height-36 {
     height: 36px;
 }
-
 .nav-botton {
     height: 100%;
 }

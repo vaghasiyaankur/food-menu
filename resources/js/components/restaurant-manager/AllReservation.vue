@@ -36,7 +36,7 @@
                                 <div class="col-20">
                                     <div class="item-content item-input">
                                         <div class="item-inner">
-                                            <button class="col button button-fill color-green height_40">Apply</button>
+                                            <button class="col button button-fill color-green height_40" style="border-radius: 7px;">Apply</button>
                                         </div>
                                     </div>                                    
                                 </div>
@@ -248,6 +248,7 @@ export default {
     font-size: 14px;
     line-height: 17px;
     color: #555555;
+    border-radius: 7px;
 }
 /*======== TABLE ==========*/
 .reservation_table thead tr{
@@ -369,6 +370,12 @@ export default {
 .active-state{
     background-color: #F33E3E !important;
     color: #fff !important;
+}
+::placeholder{
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #555555;
 }
 </style>
 

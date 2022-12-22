@@ -129,7 +129,7 @@
                     <div class="col-100 large-20 medium-25">
                         <div class="current_capacity">
                             <div class="current_capacity_card card display-flex align-items-center no-margin-vertical">
-                                <div class="card_img padding-left">
+                                <div class="card_img padding-left-half">
                                     <img src="/images/capacity.png" alt="">
                                 </div>
                                 <div class="card-content card-content-padding padding-vertical-half padding-left">
@@ -984,6 +984,13 @@ p.count__text{
     }
     .table-card{
         width : 100% !important;
+    }
+    .current_capacity_card .card-content{
+        padding-right:8px !important;
+        padding-left:8px !important;
+    }
+    .current_capacity_card .card-content p{
+        font-size: 13px;
     }
     /*.closeReservation{
         border: none;

@@ -29,7 +29,9 @@
 	<div id="app">
         <App></App>
     </div>
+
 	@vite('resources/js/app.js')
+    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase.js"></script>
 	<!--============ BOOTSTRAP JS LINK ===============-->
 
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/framework7/1.5.2/js/framework7.min.js"></script> --}}
