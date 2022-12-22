@@ -2,7 +2,9 @@
     <div class="card edit_tranaslation no-margin">        
         <div class="card-header padding">
             <div class="heading translate_left">
-                <h3 class="card-title no-margin">Edit Translations - English</h3>
+                <h3 class="no-margin">
+                    <span class="page_heading"> Edit Translations - English</span>
+                </h3>
             </div>
             <div class="translate_right display-flex align-items-center">
                 <div class="item-content item-input margin-right">

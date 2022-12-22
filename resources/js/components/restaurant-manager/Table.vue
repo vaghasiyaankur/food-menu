@@ -31,9 +31,9 @@
             <!-- ============= TABLE FLOOR SWIPER ============= -->
            <div class="table_floor_swiper">
                 <div class="row">
-                    <div class="col-100 large-80 medium-75">
+                    <div class="col-100">
                         <div data-pagination='{"el":".swiper-pagination"}' data-navigation="{'el':'.swiper-navigation'}" data-space-between="10" data-slides-per-view="4"
-                            class="swiper swiper-init demo-swiper margin-top margin-bottom floor_swiper_inner  swiper-navigation">
+                            class="swiper swiper-init demo-swiper margin-top margin-bottom floor_swiper_inner swiper-navigation">
                             <!-- <div class="swiper-pagination"></div> -->
                            <div class="swiper-wrapper padding-left-half">
                                  <div class="swiper-slide" :class="{'active' : floor.id == active_floor_id}"  v-for="floor in floorlist" :key="floor.id" @click="tableListFloorWise(floor.id)">
@@ -126,7 +126,7 @@
                             </f7-swiper>
                         </div> -->
                     </div>
-                    <div class="col-100 large-20 medium-25">
+                    <!-- <div class="col-100">
                         <div class="current_capacity">
                             <div class="current_capacity_card card display-flex align-items-center no-margin-vertical">
                                 <div class="card_img padding-left-half">
@@ -138,7 +138,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
            </div>
             <div class="tables margin-horizontal">
@@ -196,7 +196,7 @@
                                                                 <i class="f7-icons size-18 text-color-black padding-right-half margin-right-half">phone</i>
                                                                 <span class="text-color-black">{{ order.customer.number }}</span>
                                                             </div>
-                                                            <div class="display-flex padding-left-half padding-top-half align-items-center padding-bottom">
+                                                            <div class="display-flex padding-left-half padding-vertical align-items-center">
                                                                 <i class="f7-icons size-18 text-color-black padding-right-half margin-right-half">person_2</i>
                                                                 <span class="text-color-black">{{ order.person }} family member</span>
                                                             </div>
@@ -882,7 +882,7 @@ p.count__text{
 }
 .table_main .table_floor_swiper .floor_swiper_inner{
     border-bottom:1px solid #E0E0E0;
-    margin-left: 20px;
+    /*margin-left: 20px;*/
 }
 .table_main .table_floor_swiper .floor_swiper_inner .room_available{
     width:35px;
@@ -913,8 +913,8 @@ p.count__text{
     border-radius: 7px;
 }
 .floor_dropdwon{
-    min-width: 240px;
-    max-width: 240px;
+    min-width: 250px;
+    max-width: 250px;
     position:absolute;
     left: 100%;
     background: white;
@@ -926,6 +926,18 @@ p.count__text{
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     max-height: 360px;
     overflow-y: auto;
+    border-radius: 7px;
+}
+.floor_dropdwon::before{
+content: '';
+    background: var(--f7-popover-bg-color);
+    width: 26px;
+    height: 26px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 3px;
+    transform: rotate(45deg);
 }
 .table_dropdwon{
     max-width: 240px;
@@ -941,6 +953,7 @@ p.count__text{
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     max-height: 360px;
     overflow-y: auto;
+    border-radius: 7px;
 }
 .floor_dropdown_visible{
     opacity: 1;
@@ -967,6 +980,12 @@ p.count__text{
     justify-content: center;
     align-items: center;
     margin-left: 5px;
+}
+.floor_name{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 172px;
 }
 .hamburger__button{
     display:none;

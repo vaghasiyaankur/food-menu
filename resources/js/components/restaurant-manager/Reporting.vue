@@ -35,9 +35,9 @@
         <div class="reporting_section">
             <div class="row padding-vertical margin-horizontal align-items-center">
                 <div class="col-60">
-                    <h3 class="card-title no-margin">
-                        <a href="javscript:;" class="text-color-black padding-right-half"><i class="f7-icons font-22" style="vertical-align: bottom;">arrow_left</i></a>                            
-                        <span> Reporting</span>
+                    <h3 class="no-margin">
+                        <!-- <a href="javscript:;" class="text-color-black padding-right-half"><i class="f7-icons font-22" style="vertical-align: bottom;">arrow_left</i></a>                             -->
+                        <span class="page_heading"> Reporting</span>
                      </h3>
                 </div>
                 <div class="col-40">

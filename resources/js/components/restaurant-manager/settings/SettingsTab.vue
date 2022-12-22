@@ -251,13 +251,7 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox{
 .data-table tbody tr:nth-child(even) {
 	background-color: #FAFAFA;
 }
-.card-title{
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 24px;
-    color: #38373D;
 
-}
 .data-table{
     overflow-y: hidden;
 }

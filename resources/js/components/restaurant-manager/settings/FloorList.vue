@@ -7,7 +7,7 @@
                 </div>
                 <div class="add_table_button"><button class="button"  @click="$emit('floorlisthide', 0, page_number)"><i class="f7-icons margin-right-half">plus_square</i> Add Table</button></div>
             </div>
-            <div class="card-content card-content-padding">
+            <div class="card-content padding-vertical">
                 <div class="data-table">
                     <table>
                         <thead>

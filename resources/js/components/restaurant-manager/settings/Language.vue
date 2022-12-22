@@ -2,7 +2,9 @@
     <div class="card language_setting no-margin">
         <div class="card-header padding-vertical">
             <div class="language_heading">
-                <h3 class="card-title no-margin">Language</h3>
+                <h3 class="no-margin">
+                   <span class="page_heading">Language</span>
+                </h3>
             </div>
         </div>
         <div class="card-content">

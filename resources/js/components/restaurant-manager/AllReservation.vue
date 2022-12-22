@@ -9,9 +9,9 @@
                                 <div class="col-40">
                                     <div class="item-content item-input">
                                         <div class="item-inner">
-                                            <div class="item-input-wrap searchData row padding-half">
-                                                <i class="f7-icons font-22 search-icon">search</i>
-                                                <input type="search" name="search" id="searchData" v-model="search" placeholder="Search user name or reservation ID">
+                                            <div class="item-input-wrap searchData row padding-half height_40 search_data_wrap">
+                                                <i class="f7-icons font-18 search-icon">search</i>
+                                                <input type="search" name="search" class="search__data" id="searchData" v-model="search" placeholder="Search user name or reservation ID">
                                             </div>
                                         </div>
                                     </div>
@@ -211,9 +211,7 @@ export default {
 }
 </script>
 <style scoped>
-.height_40{
-    height: 40px !important;
-}
+
 .justify_content_between{
     justify-content:space-between !important;
 }
@@ -226,21 +224,14 @@ export default {
     box-shadow: none;
     background-color: transparent;
 }
-.all_reservation #searchData{
-    width: 90%;
-}
-.all_reservation .item-input-wrap{
+
+.all_reservation  .item-input-wrap {
     width: 100%;
     background: #FFFFFF;
     border: 0.5px solid #555555;
     border-radius: 7px;
     height: auto;
 }
-::placeholder{
-    color: #555555 !important;
-    opacity: 1;
-}
-
 .all_reservation .filters_button .button{
     border: 1px solid #555555;
     border-radius: 5px;
@@ -250,6 +241,8 @@ export default {
     color: #555555;
     border-radius: 7px;
 }
+
+
 /*======== TABLE ==========*/
 .reservation_table thead tr{
     background: #F4F4F4;
@@ -377,5 +370,28 @@ export default {
     line-height: 17px;
     color: #555555;
 }
+
+</style>
+<style>
+.height_40{
+    height: 40px !important;
+}
+.font-18{
+    font-size: 18px !important;
+}
+/*===== SERACH BOX CSS =======*/
+.search__data{
+    width: 92%;
+    line-height: 20px;
+    font-size: var(--f7-input-font-size);
+}
+.search_data_wrap{
+    width: 100%;
+    background: #FFFFFF;
+    border: 0.5px solid #555555;
+    border-radius: 7px;
+    height: auto;
+}
+/*===== SERACH BOX CSS END=======*/
 </style>
 

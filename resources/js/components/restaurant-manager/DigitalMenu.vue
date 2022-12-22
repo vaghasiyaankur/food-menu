@@ -3,9 +3,9 @@
     <div class="card digital_menu_card elevation-2">
         <div class="row padding-horizontal no-padding-vertical">
             <div class="col">
-                <h3 class="card-title margin-bottom-half">
-                    <a href="javscript:;" class="text-color-black padding-right-half"><i class="f7-icons font-22" style="vertical-align: bottom;">arrow_left</i></a>
-                    <span> Food Menu </span>
+                <h3 class="margin-bottom-half">
+                    <!-- <a href="javscript:;" class="text-color-black padding-right-half"><i class="f7-icons font-22" style="vertical-align: bottom;">arrow_left</i></a> -->
+                    <span class="page_heading"> Food Menu </span>
                 </h3>
                 <p class="no-margin"> Select your favourite food and enjoy with family</p>
             </div>
@@ -111,13 +111,6 @@ export default {
         margin-top: 70px;
         height: calc(100vh - 100px);
     }
-    .card-title{
-        font-weight: 600;
-        font-size: 20px;
-        line-height: 24px;
-        color: #38373D;
-    }
-
     .font-13{
         font-size: 13px;
         font-weight: 500;

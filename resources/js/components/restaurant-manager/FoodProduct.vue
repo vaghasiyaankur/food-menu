@@ -5,9 +5,9 @@
                 <div class="card_header">
                     <div class="row padding-horizontal margin-horizontal align-items-center">
                         <div class="col-50">
-                            <h3 class="card-title">
-                                <a href="javscript:;" class="text-color-black padding-right-half"><i class="f7-icons font-22" style="vertical-align: bottom;">arrow_left</i></a>
-                                <span>Product</span>
+                            <h3>
+                                <!-- <a href="javscript:;" class="text-color-black padding-right-half"><i class="f7-icons font-22" style="vertical-align: bottom;">arrow_left</i></a> -->
+                                <span class="page_heading">Product</span>
                             </h3>
                         </div>
                         <div class="col-50">
@@ -15,15 +15,23 @@
                                 <div class="col">
                                     <div class="item-content item-input">
                                         <div class="item-inner">
+                                            <div class="item-input-wrap searchData row padding-half height_40 search_data_wrap">
+                                                <i class="f7-icons font-18 search-icon">search</i>
+                                                <input type="search" name="search" class="search__data" v-model="search"  @input="getProducts()" id="searchData">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="item-content item-input">
+                                        <div class="item-inner">
                                             <div class="item-input-wrap searchData row padding-half">
                                                 <i class="f7-icons font-22 search-icon">search</i>
                                                 <input type="search" v-model="search" name="search" @input="getProducts()" id="searchData">
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="col padding-left-half padding-right-half">
-                                    <button class="button bg-dark text-color-white padding height-36 popup-open"
+                                    <button class="button bg-dark text-color-white padding height_40 popup-open"
                                     data-popup="#product_popup" @click="blankform"><i class="f7-icons font-22 margin-right-half">plus_square</i> Add Product</button>
                                 </div>
                             </div>
@@ -326,7 +334,7 @@ export default {
     .font-18{
         font-size: 18px;
     }
-    .item-input-wrap {
+    #product_popup .item-input-wrap {
         width: 100%;
         background: #F0F0F0;
         border: 0.5px solid #DCDCDC;
@@ -403,7 +411,7 @@ export default {
 <style>
 
     .search-icon{
-        width : 10% !important;
+        width : 5% !important;
     }
 
 </style>
