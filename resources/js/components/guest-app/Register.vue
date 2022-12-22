@@ -3,7 +3,7 @@
     <div class="nav-bar">
         <div class="row align-items-center navbar-menu padding-vertical-half padding-horizontal justify-content-flex-start">
             <div class="menu col-33">
-                <div class="menu-inner color-black padding-left">
+                <div class="menu-inner color-black padding-left" v-if="$root.langs.length > 1">
                     <div class="menu-item menu-item-dropdown bg-color-transparent language_dropdown">
                         <div class="row menu-item-content no-margin-top no-margin-bottom justify-content-center">
                             <div class="margin-right-half">
@@ -21,7 +21,7 @@
                         </div>
                         <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
                             <div class="card menu-dropdown-content bg-color-white margin-left no-margin-top no-padding">
-                                <a href="#" class="menu-dropdown-link menu-close justify-content-center text-color-black" v-for="lang in $root.langs" :key="lang" @click="$root.languageTranslation(lang.id)">{{ lang.name }}</a>
+                                <a href="#" class="menu-dropdown-link menu-close justify-content-center text-color-black" :class="{ 'active': $root.selected_lang == lang.id }" v-for="lang in $root.langs" :key="lang" @click="$root.languageTranslation(lang.id)">{{ lang.name }}</a>
                             </div>
                         </div>
                     </div>
@@ -228,7 +228,6 @@ export default {
         $('.navbar-bg').remove();
         $(".page-content").css('padding-top', 0);
         this.checkOrder();
-
     },
     data() {
         return {
@@ -449,9 +448,6 @@ export default {
                         this.reservation.floor = 0;
                         this.floors = res.data.floors;
                     }
-                    else{
-
-                    }
                 });
             }
         },
@@ -635,11 +631,9 @@ export default {
 }
 .menu-dropdown .card.menu-dropdown-content .menu-dropdown-link:not(:last-child){
     border-bottom: 1px solid #DBDBDB;
-    margin: 0 10px;
 }
 .menu-dropdown-link.active{
     background: #F33E3E !important;
-    border-radius: 3px 3px 0px 0px;
     color: #fff !important;
 }
 .bg-color-transparent {

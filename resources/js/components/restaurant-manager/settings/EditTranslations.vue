@@ -1,20 +1,26 @@
 <template>
-    <div class="card edit_tranaslation no-margin">        
+    <div class="card edit_tranaslation no-margin">
         <div class="card-header padding">
             <div class="heading translate_left">
-                <h3 class="no-margin">
-                    <span class="page_heading"> Edit Translations - English</span>
-                </h3>
+                <h3 class="card-title no-margin">Edit Translations - {{ $root.langs[this.langId - 1].name }}</h3>
             </div>
             <div class="translate_right display-flex align-items-center">
+                <!-- <div class="item-content item-input">
+                    <div class="item-inner">
+                        <div class="item-input-wrap searchData row padding-half height_40 search_data_wrap">
+                            <i class="f7-icons font-18 search-icon">search</i>
+                            <input type="search" name="search" class="search__data" v-model="searchData" placeholder="Search Translation...">
+                        </div>
+                    </div>
+                </div> -->
                 <div class="item-content item-input margin-right">
                     <div class="item-input-wrap search__data padding-half display-flex">
                         <i class="f7-icons font-22 search-icon">search</i>
-                        <input type="search" name="search" placeholder="Search user name...">
+                        <input type="search" name="search" v-model="searchData" placeholder="Search Translation...">
                     </div>
                 </div>
                 <div class="filters_button">
-                    <button class="button button-outline height_40"><i class="f7-icons">funnel</i>Filters</button>
+                    <button class="button button-outline height_40" @click="getLangTraslation()"><i class="f7-icons">funnel</i>Filters</button>
                 </div>
             </div>
         </div>
@@ -24,131 +30,53 @@
                     <table style="border-bottom:1px solid #E1E1E1">
                         <thead>
                             <tr>
-                                <th style="width: 50%;">ID</th>
+                                <th style="width: 5%;">ID</th>
+                                <th style="width: 45%;"></th>
                                 <th style="width: 50%;">Label</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr v-for="(trans,index) in translations" :key="trans.id">
+                                <td>{{ index + 1 }}.</td>
                                 <td>
                                     <div class="translate__id display-flex align-items-center">
-                                        <span>01.</span>
                                         <div class="item-input-wrap margin-bottom-half margin-top-half width_100">
-                                            <input type="text" name="name" class="padding" value="1_business_day" readonly>
+                                            <input type="text" name="name" class="padding" :value="trans.title" readonly>
                                         </div>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="translate__label">
                                         <div class="item-input-wrap margin-bottom-half margin-top-half width_100 margin-right">
-                                            <input type="text" name="name" class="padding" placeholder="Ready to ship in 1 Business Day">
-                                        </div>
-                                    </div>
-                                </td>                           
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="translate__id display-flex align-items-center">
-                                        <span>02.</span>
-                                        <div class="item-input-wrap margin-bottom-half margin-top-half width_100">
-                                            <input type="text" name="name" class="padding" value="2_3_business_days" readonly>
+                                            <input type="text" name="translation" v-model="lang_trans[trans.id]" class="padding">
                                         </div>
                                     </div>
                                 </td>
-                                <td>
-                                    <div class="translate__label">
-                                        <div class="item-input-wrap margin-bottom-half margin-top-half width_100 ">
-                                            <input type="text" name="name" class="padding" placeholder="Ready to ship in 2-3 Business Days">
-                                        </div>
-                                    </div>
-                                </td>                           
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="translate__id display-flex align-items-center">
-                                        <span>03.</span>
-                                        <div class="item-input-wrap margin-bottom-half margin-top-half width_100">
-                                            <input type="text" name="name" class="padding" value="4_7_business_day" readonly>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="translate__label">
-                                        <div class="item-input-wrap margin-bottom-half margin-top-half width_100 ">
-                                            <input type="text" name="name" class="padding" placeholder="Ready to ship in 4-7 Business Day">
-                                        </div>
-                                    </div>
-                                </td>                           
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="translate__id display-flex align-items-center">
-                                        <span>04.</span>
-                                        <div class="item-input-wrap margin-bottom-half margin-top-half width_100">
-                                            <input type="text" name="name" class="padding" value="8_15_business_day" readonly>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="translate__label">
-                                        <div class="item-input-wrap margin-bottom-half margin-top-half width_100 ">
-                                            <input type="text" name="name" class="padding" placeholder="Ready to ship in 8-15 Business Day">
-                                        </div>
-                                    </div>
-                                </td>                           
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="translate__id display-flex align-items-center">
-                                        <span>05.</span>
-                                        <div class="item-input-wrap margin-bottom-half margin-top-half width_100">
-                                            <input type="text" name="name" class="padding" value="abuse_reports" readonly>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="translate__label">
-                                        <div class="item-input-wrap margin-bottom-half margin-top-half width_100">
-                                            <input type="text" name="name" class="padding" placeholder="Abuse Reports">
-                                        </div>
-                                    </div>
-                                </td>                           
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="translate__id display-flex align-items-center">
-                                        <span>06.</span>
-                                        <div class="item-input-wrap margin-bottom-half margin-top-half width_100">
-                                            <input type="text" name="name" class="padding" value="abuse_report_exp" readonly>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="translate__label">
-                                        <div class="item-input-wrap margin-bottom-half margin-top-half width_100">
-                                            <input type="text" name="name" class="padding" placeholder="Briefly describe the issue you're facing">
-                                        </div>
-                                    </div>
-                                </td>                           
                             </tr>
                         </tbody>
-                    </table>                
-                </div> 
-            </div>          
+                    </table>
+                </div>
+            </div>
         </div>
         <div class="bottom__bar">
             <div class="submit__button margin-top padding-top">
-                <button class="col button button-large button-fill">Save Change</button>
+                <button class="col button button-large button-fill" @click="updateTraslation()">Save Change</button>
             </div>
             <div class="pagination_count padding display-flex justify-content-space-between align-items-center">
                 <div class="pagination__text">
-                    <p class="no-margin">Showing 15 of 220 Results</p> 
+                    <p class="no-margin">Showing 15 of 220 Results</p>
                 </div>
-                <div class="pagination_list">
-                    <a href="javascript:;" class="link disabled"><i class="icon-prev"></i></a>
-                    <a href="javascript:;" class="active">1</a>
-                    <a href="javascript:;" class="">2</a>
-                    <a href="javascript:;" class="link"><i class="icon-next"></i></a>
+                <div class="pagination_list display-flex">
+                    <div v-for="(link,index) in paginationData.links" :key="link">
+                        <a href="javascript:;" v-if="index == 0" @click="link.url != null ? getLangTraslation(link.url) : 'javascript:;'"
+                            class="link" :class="{ 'disabled': link.url == null}"><i class="icon-prev"></i></a>
+                        <a href="javascript:;" v-if="paginationData.links.length - 1 != index && index != 0"
+                            @click="link.url != null ? getLangTraslation(link.url) : 'javascript:;'"
+                            :class="{ 'disabled': link.url == null, 'active': paginationData.current_page == index}">{{ index }}</a>
+                        <a href="javascript:;" v-if="paginationData.links.length - 1 == index"
+                            @click="link.url != null ? getLangTraslation(link.url) : 'javascript:;'" class="link"
+                            :class="{ 'disabled': link.url == null}"><i class="icon-next"></i></a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -160,91 +88,53 @@
     import axios from 'axios';
     export default {
         name : 'EditTranslations',
-        props: ['tableId'],
+        props: ['langId'],
         components : {
             f7
         },
         data() {
             return {
-                table_number : '',
-                capacity_of_person : '',
-                floor_number : '',
-                colors : [],
-                color: '',
-                floors : [],
-                finish_order_time: 0
+                translations: [],
+                paginationData: [],
+                lang_trans: [],
+                pagenumber: 1,
+                searchData : '',
             }
         },
         created() {
-            this.colorList();
-            this.getFloors();
+            this.getLangTraslation();
         },
         mounted() {
             this.$root.activationMenu('setting');
         },
         methods: {
-            colorList() {
-                axios.get('/api/color-list')
-                .then((res) => {
-                    this.colors = res.data.colors;
-                    if(this.tableId == 0) return false;
-                    this.tableData();
-                })
-            },
-            tableData() {
-                axios.get('/api/table-data/'+this.tableId)
-                .then((res) => {
-                    this.table_number = res.data.table.table_number;
-                    this.capacity_of_person = res.data.table.capacity_of_person;
-                    this.floor_number = res.data.table.floor_id;
-                    this.color = res.data.table.color_id;
-                    this.finish_order_time = res.data.table.finish_order_time;
-                })
-            },
-            addUpdateTable() {
-                const config = {
-                    headers: { 'content-type': 'multipart/form-data' }
+            getLangTraslation(pagenumber) {
+                if (pagenumber == undefined || pagenumber == 1) {
+                    pagenumber = 1
+                } else {
+                    pagenumber = pagenumber.split('page=')[1];
                 }
-                var formData = new FormData();
-
-                if(!this.table_number || !this.capacity_of_person || !this.floor_number || !this.color){
-                    this.$root.errornotification('Please Fill All Data in Form')
-                    return false;
-                }
-
-                formData.append('id', this.tableId);
-                formData.append('table_number' , this.table_number);
-                formData.append('capacity_of_person' , this.capacity_of_person);
-                formData.append('floor_number' , this.floor_number);
-                formData.append('color' , this.color);
-                formData.append('finish_order_time' , parseInt(this.finish_order_time));
-
-                axios
-                .post("/api/add-update-table", formData, config)
+                var page = '/api/get-lang-translation/' + this.langId + '?page=' + pagenumber + '&q=' + this.searchData;
+                axios.get(page)
                 .then((res) => {
-                    this.$root.successnotification(res.data.success);
-                    this.$emit('tableshow')
-                }).catch((error) => {
-                    this.$root.errornotification('Something Went Wrong !!!');
-                    return false;
+                    this.translations = res.data.translations.data;
+                    this.translations.forEach(trans => {
+                        this.lang_trans[trans.id] = trans.content;
+                    });
+                    this.paginationData = res.data.translations;
                 });
             },
-            checkColor() {
-                axios.get('/api/check-color/'+this.capacity_of_person)
+            updateTraslation() {
+                axios.post('/api/update-lang-translation', { lang_trans: this.lang_trans })
                 .then((res) => {
-                    if(res.data.success) this.color = res.data.color_id;
-                })
-            },
-            getFloors() {
-                axios.get('/api/get-floors')
-                    .then((res) => {
-                        this.floors = res.data.data;
-                    })
-            },
+                    this.$root.successnotification(res.data.success);
+                    this.getLangTraslation(this.pagenumber)
+                });
+            }
         }
     }
 </script>
-<style scoped> 
+<style scoped>
 .edit_tranaslation .search__data{
     width: 100%;
     background: #FFFFFF;
@@ -303,7 +193,7 @@
     background: #FFFFFF ;
 }
 .edit_translate_table .item-input-wrap input{
-	width: 100%;	
+	width: 100%;
 	border: 0.5px solid #DCDCDC;
 	border-radius: 5px;
     height: 36px;
