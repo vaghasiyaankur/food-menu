@@ -12,6 +12,7 @@ use App\Models\Floor;
 use Illuminate\Http\Request;
 use App\Helper\ReservationHelper;
 use Carbon\Carbon;
+use Kutia\Larafirebase\Facades\Larafirebase;
 use Validator;
 
 class ReservationController extends Controller
@@ -27,6 +28,7 @@ class ReservationController extends Controller
             $register->name = $request->customer_name;
             $register->number = $request->customer_number;
             $register->agree_condition = $request->agree_condition;
+            $register->device_token = @$request->session()->get('device_token');
             if($register->save()){
                 $order = new Order();
                 $order->customer_id = $register->id;
@@ -37,11 +39,72 @@ class ReservationController extends Controller
                 $order->finished = 0;
                 $order->save();
             }
+
+            // $token = $request->session()->get('device_token');
+            // // dd($token);
+            // if($token){
+            //     $fcmTokens = ['c16H1_gwueT8jzmm2w_cTn:APA91bGjH092huMhvCN4Cejb84y1Y_CxzdbLrxIwyLucbUCyX4v1gl2O6oYcVaSm0ncnYhD9mbFlKVmvAgVzeePzLN5yhn0PG1esfjo0P1mrR0RUXb_W4sQII_GfcZoXodUmsqc-Kg0m'];
+        
+            //     //Notification::send(null,new SendPushNotification($request->title,$request->message,$fcmTokens));
+        
+            //     /* or */
+        
+            //     //auth()->user()->notify(new SendPushNotification($title,$message,$fcmTokens));
+        
+            //     /* or */
+        
+            //     $test = Larafirebase::withTitle('Food-menu Restaurant')
+            //         ->withBody('Your Turn Now !!!')
+            //         ->sendMessage($fcmTokens);
+
+            //     // return redirect()->back()->with('success','Notification Sent Successfully!!');
+            // }
+
             return response()->json(['success' => 'registration added successfully.', 'orderId' => $order->id, 'user_id' => $register->id]);
         }else{
             return response()->json(['error' => "We don't have the capacity table for that many people"], 401);
         }
 
+    }
+
+    /**
+     * Set Notification for order 
+     *
+     * @return @json ($close_reservation = 0 or 1)
+     *
+     */
+    public function notification(Request $request){
+        // $request->validate([
+        //     'title'=>'required',
+        //     'message'=>'required'
+        // ]);
+    
+        try{
+            $token = $request->session()->put('device_token',$request->token);
+
+            if($token){
+                $fcmTokens = ['c16H1_gwueT8jzmm2w_cTn:APA91bGjH092huMhvCN4Cejb84y1Y_CxzdbLrxIwyLucbUCyX4v1gl2O6oYcVaSm0ncnYhD9mbFlKVmvAgVzeePzLN5yhn0PG1esfjo0P1mrR0RUXb_W4sQII_GfcZoXodUmsqc-Kg0m'];
+        
+                //Notification::send(null,new SendPushNotification($request->title,$request->message,$fcmTokens));
+        
+                /* or */
+        
+                //auth()->user()->notify(new SendPushNotification($title,$message,$fcmTokens));
+        
+                /* or */
+        
+                Larafirebase::withTitle('Food-menu Restaurant')
+                    ->withBody('Your Turn Now !!!')
+                    ->sendMessage($fcmTokens);
+                // dd($test);
+                // return redirect()->back()->with('success','Notification Sent Successfully!!');
+            }
+    
+        }catch(\Exception $e){
+            report($e);
+            dd($e);
+            // return redirect()->back()->with('error','Something goes wrong while sending notification.');
+        }
     }
 
     /**
