@@ -275,7 +275,7 @@ export default {
     background: #f1f1f1;
 }
 .subcategory-list-section .card{
-    height: calc(100vh - 94px);
+    height: calc(100vh - 132px);
     overflow: auto;
 }
 
@@ -359,10 +359,6 @@ export default {
 @media screen and (max-width:820px) {
     .header-links {
         width: 100%;
-    }
-    .subcategory-list-section .card{
-        height: calc(100vh - 400px);
-        overflow: auto;
     }
 }
 </style>

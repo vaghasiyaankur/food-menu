@@ -1,13 +1,15 @@
 <template>
     <div class="floor_plan_list">
-        <div class="card">
-            <div class="card-header">
+        <div class="card no-margin-top">
+            <div class="card-header margin-vertical-half">
                 <div class="table_mangment_heading">
-                   <h3 class="card-title no-margin">Floor List</h3>
+                   <h3 class="no-margin">
+                        <span class="page_heading">Floor List</span>
+                    </h3>
                 </div>
                 <div class="add_table_button"><button class="button"  @click="$emit('floorlisthide', 0, page_number)"><i class="f7-icons margin-right-half">plus_square</i> Add Table</button></div>
             </div>
-            <div class="card-content padding-vertical">
+            <div class="card-content">
                 <div class="data-table">
                     <table>
                         <thead>

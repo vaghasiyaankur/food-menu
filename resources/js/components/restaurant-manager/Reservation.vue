@@ -398,7 +398,7 @@ export default {
 /*============ RESERVATION CARD ============*/
 
 .reservation_card .card{
-    height: calc(100vh - 100px);
+    height: calc(100vh - 132px);
 }
 .height_100{
     height: 100%;

@@ -1,107 +1,110 @@
 <template>
     <f7-page>
         <div class="all_reservation">
-            <div class="card">
-                <div class="card_header padding-top-half">
-                    <div class="row padding-left padding-right padding-top align-items-center">
-                        <div class="col-100 medium-80 large-70">
-                            <div class="row align-items-center">
-                                <div class="col-40">
-                                    <div class="item-content item-input">
-                                        <div class="item-inner">
-                                            <div class="item-input-wrap searchData row padding-half height_40 search_data_wrap">
-                                                <i class="f7-icons font-18 search-icon">search</i>
-                                                <input type="search" name="search" class="search__data" id="searchData" v-model="search" placeholder="Search user name or reservation ID">
+            <div class="all_reservation_inner">
+                <div class="card">
+                    <div class="card_header padding-top-half">
+                        <div class="row padding-left padding-right padding-top align-items-center">
+                            <div class="col-100 medium-80 large-70">
+                                <div class="row align-items-center">
+                                    <div class="col-40">
+                                        <div class="item-content item-input">
+                                            <div class="item-inner">
+                                                <div class="item-input-wrap searchData row padding-half height_40 search_data_wrap">
+                                                    <i class="f7-icons font-18 search-icon">search</i>
+                                                    <input type="search" name="search" class="search__data" id="searchData" v-model="search" placeholder="Search user name or reservation ID">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-40">
-                                    <div class="list no-hairlines reporting_calander no-margin">
-                                        <ul>
-                                            <li>
-                                                <div class="item-input no-padding-left">
-                                                    <div class=" no-padding-right">
-                                                        <div class="item-input-wrap input-dropdown-wrap">
-                                                            <input type="text" placeholder="Select date range" class="padding-horizontal-half height_40" readonly="" id="calender-date-range">
-                                                            <input type="hidden" name="from-date" id="from-date">
-                                                            <input type="hidden" name="to-date" id="to-date">                                                            
+                                    <div class="col-40">
+                                        <div class="list no-hairlines reporting_calander no-margin">
+                                            <ul>
+                                                <li>
+                                                    <div class="item-input no-padding-left">
+                                                        <div class=" no-padding-right">
+                                                            <div class="item-input-wrap input-dropdown-wrap">
+                                                                <input type="text" placeholder="Select date range" class="padding-horizontal-half height_40" readonly="" id="calender-date-range">
+                                                                <input type="hidden" name="from-date" id="from-date">
+                                                                <input type="hidden" name="to-date" id="to-date">                                                            
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-20">
-                                    <div class="item-content item-input">
-                                        <div class="item-inner">
-                                            <button class="col button button-fill color-green height_40" style="border-radius: 7px;">Apply</button>
+                                                </li>
+                                            </ul>
                                         </div>
-                                    </div>                                    
-                                </div>
-                            </div>                            
-                        </div>
-                        <div class="col-100 medium-20 large-30">
-                            <div class="filters_button row justify-content-end">
-                                <button class="col-100 large-50 button button-outline height_40" @click="reservationData()"><i class="f7-icons">funnel</i>Filters</button>
+                                    </div>
+                                    <div class="col-20">
+                                        <div class="item-content item-input">
+                                            <div class="item-inner">
+                                                <button class="col button button-fill color-green height_40" style="border-radius: 7px;">Apply</button>
+                                            </div>
+                                        </div>                                    
+                                    </div>
+                                </div>                            
                             </div>
+                            <div class="col-100 medium-20 large-30">
+                                <div class="filters_button row justify-content-end">
+                                    <button class="col-100 large-50 button button-outline height_40" @click="reservationData()"><i class="f7-icons">funnel</i>Filters</button>
+                                </div>
+                            </div>
+                            <button @click="calender" style="opacity: 0" id="date-set"></button>
                         </div>
-                        <button @click="calender" style="opacity: 0" id="date-set"></button>
                     </div>
                 </div>
-            </div>
-            <div class="reservation_table">
-                <div class="card data-table no-margin-horizontal">
-                    <div class="table_content">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Reservation ID</th>
-                                    <th>User Name</th>
-                                    <th>Phone Number</th>
-                                    <th>No. of Guest</th>
-                                    <th style="width:15%;">Status</th>
-                                    <th>Reservation Date & Time</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="data in reservation" :key="data.id">
-                                    <td>#{{ data.id }}</td>
-                                    <td>{{ data.customer.name }}</td>
-                                    <td>{{ data.customer.number }}</td>
-                                    <td>{{ data.person }}</td>
-                                    <td v-if="data.deleted_at"><span class="status_info status_cancel">Cancel</span></td>
-                                    <td v-else-if="data.finished"><span class="status_info status_complete">Complete</span></td>
-                                    <td v-else-if="data.start_time"><span class="status_info status_ongoing">Ongoing</span></td>
-                                    <td v-else><span class="status_info status_waiting">Wating</span></td>
-                                    <td>{{ data.date }}</td>
-                                    <td>
-                                        <div class="menu-item-dropdown">
-                                            <div class=""><i class="f7-icons">ellipsis</i>  </div>
-                                            <div class="menu-dropdown menu-dropdown-right">
-                                            <div class="menu-dropdown-content no-padding">
-                                                <a class="menu-dropdown-link menu-close padding-vertical" :href="'/reservation-view/'+data.id"><i class="f7-icons margin-right-half">eye</i>View </a>
-                                                <a class="menu-dropdown-link menu-close padding-vertical" href="javascript:;" @click="removeReservation(data.id)"><i class="f7-icons margin-right-half">trash</i>Delete </a>
+                <div class="reservation_table">
+                    <div class="card data-table no-margin-horizontal">
+                        <div class="table_content">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Reservation ID</th>
+                                        <th>User Name</th>
+                                        <th>Phone Number</th>
+                                        <th>No. of Guest</th>
+                                        <th style="width:15%;">Status</th>
+                                        <th>Reservation Date & Time</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="data in reservation" :key="data.id">
+                                        <td>#{{ data.id }}</td>
+                                        <td>{{ data.customer.name }}</td>
+                                        <td>{{ data.customer.number }}</td>
+                                        <td>{{ data.person }}</td>
+                                        <td v-if="data.deleted_at"><span class="status_info status_cancel">Cancel</span></td>
+                                        <td v-else-if="data.finished"><span class="status_info status_complete">Complete</span></td>
+                                        <td v-else-if="data.start_time"><span class="status_info status_ongoing">Ongoing</span></td>
+                                        <td v-else><span class="status_info status_waiting">Wating</span></td>
+                                        <td>{{ data.date }}</td>
+                                        <td>
+                                            <div class="menu-item-dropdown">
+                                                <div class=""><i class="f7-icons">ellipsis</i>  </div>
+                                                <div class="menu-dropdown menu-dropdown-right">
+                                                <div class="menu-dropdown-content no-padding">
+                                                    <a class="menu-dropdown-link menu-close padding-vertical" :href="'/reservation-view/'+data.id"><i class="f7-icons margin-right-half">eye</i>View </a>
+                                                    <a class="menu-dropdown-link menu-close padding-vertical" href="javascript:;" @click="removeReservation(data.id)"><i class="f7-icons margin-right-half">trash</i>Delete </a>
+                                                </div>
+                                                </div>
                                             </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="pagination_count padding-vertical-half">
-                        <div class="pagination_list">
-                            <div v-for="(link,index) in paginationData.links" :key="link">
-                                <a href="javascript:;" v-if="index == 0" @click="link.url != null ? reservationData(paginationData.current_page - 1) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon-prev"></i></a>
-                                <a href="javascript:;" v-if="paginationData.links.length - 1 != index && index != 0" @click="link.url != null ? reservationData(link.label) : 'javascript:;'" :class="{ 'disabled': link.url == null, 'active': paginationData.current_page == index}">{{ index }}</a>
-                                <a href="javascript:;" v-if="paginationData.links.length - 1 == index" @click="link.url != null ? reservationData(paginationData.current_page + 1) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon-next"></i></a>
-                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
+                
+                    </div>               
+                </div>
+            </div>
+            <div class="pagination_count padding-vertical-half">
+                <div class="pagination_list">
+                    <div v-for="(link,index) in paginationData.links" :key="link">
+                        <a href="javascript:;" v-if="index == 0" @click="link.url != null ? reservationData(paginationData.current_page - 1) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon-prev"></i></a>
+                        <a href="javascript:;" v-if="paginationData.links.length - 1 != index && index != 0" @click="link.url != null ? reservationData(link.label) : 'javascript:;'" :class="{ 'disabled': link.url == null, 'active': paginationData.current_page == index}">{{ index }}</a>
+                        <a href="javascript:;" v-if="paginationData.links.length - 1 == index" @click="link.url != null ? reservationData(paginationData.current_page + 1) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon-next"></i></a>
                     </div>
-                  </div>
+                </div>
             </div>
         </div>
     </f7-page>
@@ -218,7 +221,10 @@ export default {
 .all_reservation{
     margin-top: 59px;
     background-color: #ffffff;
-    height: calc(100% - 60px);
+}
+.all_reservation_inner{
+    height: calc(100vh - 135px);
+    overflow: auto;
 }
 .all_reservation .card{
     box-shadow: none;
@@ -247,11 +253,11 @@ export default {
 .reservation_table thead tr{
     background: #F4F4F4;
 }
-.reservation_table .table_content{
+/*.reservation_table .table_content{
     height: 100%;
     max-height: 607px;
     overflow-y: auto;
-}
+}*/
 .reservation_table .table_content table tr td{
     padding: 20px 16px;
     font-weight: 400;
@@ -296,10 +302,20 @@ export default {
     background: #FFE7DD;
     color: #E31A1A;
 }
+.pagination_count{
+    position: fixed;
+    bottom: 15px;
+    width: 100%;
+    z-index: 9999999;
+    height: 50px;
+    background-color: #fff;
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.2);
+}
 .pagination_count .pagination_list{
     display: flex;
     justify-content: center;
     align-items:center;
+    height: 100%;
   }
 
   .pagination_count .pagination_list a {

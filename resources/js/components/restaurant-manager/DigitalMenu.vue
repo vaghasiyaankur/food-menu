@@ -109,7 +109,7 @@ export default {
 <style scoped>
     .digital_menu_card{
         margin-top: 70px;
-        height: calc(100vh - 100px);
+        height: calc(100vh - 132px);
     }
     .font-13{
         font-size: 13px;
@@ -221,10 +221,7 @@ export default {
         .header-links {
             width: 100%;
         }
-        .digital_menu_card{
-            margin-top: 77px;
-            height: calc(100vh - 400px);
-        }
+
     }
 </style>
 

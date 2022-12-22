@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('/fcm-token', [\App\Http\Controllers\NotificationController::class, 'updateToken'])->name('fcmToken');
+Route::post('/send-notification',[\App\Http\Controllers\NotificationController::class,'notification'])->name('notification');
+Route::get('/test', [\App\Http\Controllers\NotificationController::class,'notification']);
 Route::get('/manager', function () {
     return view('restaurant_manager');
 })->where('any', '.*');
