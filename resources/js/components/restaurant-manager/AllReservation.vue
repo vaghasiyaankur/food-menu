@@ -5,9 +5,9 @@
                 <div class="card">
                     <div class="card_header padding-top-half">
                         <div class="row padding-left padding-right padding-top align-items-center">
-                            <div class="col-100 medium-80 large-70">
-                                <div class="row align-items-center">
-                                    <div class="col-40">
+                            <div class="col-85">
+                                <div class="row align-items-center" :class="{ 'display-none': !showFilter }">
+                                    <div class="col-30">
                                         <div class="item-content item-input">
                                             <div class="item-inner">
                                                 <div class="item-input-wrap searchData row padding-half height_40 search_data_wrap">
@@ -17,16 +17,16 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-40">
+                                    <div class="col-30">
                                         <div class="list no-hairlines reporting_calander no-margin">
                                             <ul>
                                                 <li>
                                                     <div class="item-input no-padding-left">
                                                         <div class=" no-padding-right">
                                                             <div class="item-input-wrap input-dropdown-wrap">
-                                                                <input type="text" placeholder="Select date range" class="padding-horizontal-half height_40" readonly="" id="calender-date-range">
+                                                                <input type="text" placeholder="Select date range" class="padding-horizontal-half height_40 date-range" readonly="" id="calender-date-range">
                                                                 <input type="hidden" name="from-date" id="from-date">
-                                                                <input type="hidden" name="to-date" id="to-date">                                                            
+                                                                <input type="hidden" name="to-date" id="to-date">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -34,18 +34,19 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    <div class="col-20">
+                                    <div class="col-40">
                                         <div class="item-content item-input">
-                                            <div class="item-inner">
-                                                <button class="col button button-fill color-green height_40" style="border-radius: 7px;">Apply</button>
+                                            <div class="row">
+                                                <button class="col button button-fill button-raised bg-dark height_40" style="border-radius: 7px;" @click="reservationData()">Apply</button>
+                                                <button class="col button button-fill button-raised bg-pink height_40" @click="resetFilter()">Reset</button>
                                             </div>
-                                        </div>                                    
+                                        </div>
                                     </div>
-                                </div>                            
+                                </div>
                             </div>
-                            <div class="col-100 medium-20 large-30">
+                            <div class="col-15">
                                 <div class="filters_button row justify-content-end">
-                                    <button class="col-100 large-50 button button-outline height_40" @click="reservationData()"><i class="f7-icons">funnel</i>Filters</button>
+                                    <button class="col-100 large-50 button button-outline height_40" @click="showFilter = true"><i class="f7-icons">funnel</i>Filters</button>
                                 </div>
                             </div>
                             <button @click="calender" style="opacity: 0" id="date-set"></button>
@@ -93,8 +94,8 @@
                                 </tbody>
                             </table>
                         </div>
-                
-                    </div>               
+
+                    </div>
                 </div>
             </div>
             <div class="pagination_count padding-vertical-half">
@@ -122,7 +123,8 @@ export default {
             from_date : '',
             to_date: '',
             search: '',
-            paginationData : [],
+            paginationData: [],
+            showFilter : false,
         }
     },
     components: {
@@ -143,11 +145,9 @@ export default {
                 close(daterange) {
                     var dates = daterange.getValue();
                     if(dates){
-                        console.log(dates);
                         var from_date = new Date(dates[0]).toLocaleDateString('sv-SE');
                         if(dates[1]) var to_date = new Date(dates[1]).toLocaleDateString('sv-SE');
                         else var to_date = '';
-                        console.log(to_date);
                         $("#from-date").val(from_date);
                         $("#to-date").val(to_date);
                         $("#date-set").trigger('click');
@@ -203,11 +203,18 @@ export default {
         calender(){
            var from = $("#from-date").val();
            var to = $("#to-date").val();
-           console.log($("#to-date").val());
            if(from) this.from_date = new Date(from).toLocaleDateString('sv-SE');
            else this.from_date = '';
            if(to) this.to_date = new Date(to).toLocaleDateString('sv-SE');
            else this.to_date = '';
+        },
+        resetFilter() {
+            this.from_date = '';
+            this.to_date = '';
+            this.search = '';
+            $(".date-range").val('');
+            this.reservationData();
+            this.showFilter = false;
         }
     }
 
@@ -240,12 +247,12 @@ export default {
 }
 .all_reservation .filters_button .button{
     border: 1px solid #555555;
-    border-radius: 5px;
     font-weight: 500;
     font-size: 14px;
     line-height: 17px;
     color: #555555;
     border-radius: 7px;
+    width: 100%;
 }
 
 
@@ -397,7 +404,7 @@ export default {
 }
 /*===== SERACH BOX CSS =======*/
 .search__data{
-    width: 92%;
+    width: 90%;
     line-height: 20px;
     font-size: var(--f7-input-font-size);
 }
