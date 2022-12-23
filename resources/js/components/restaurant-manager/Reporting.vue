@@ -183,6 +183,12 @@ export default {
             numbers:true,
             footer: true,
             on: {
+                open() {
+                    setTimeout(() => {
+                        $('.popover-angle').css({ 'left': '147px' });
+                        $('.calendar-popover').css({ 'top': '144px', 'left': '787.406px' });
+                    }, 1);
+                },
                 close(daterange) {
                     var dates = daterange.getValue();
                     // var datefrom = dates[0] ? : '';
@@ -199,7 +205,7 @@ export default {
                             $("#ongoing_order").text(res.data.ongoing_order);
                             $("#reservation_table").text(res.data.reservation_table);
                         })
-                    
+
                     }
                 }
             }
