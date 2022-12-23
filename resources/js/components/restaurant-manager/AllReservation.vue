@@ -29,6 +29,7 @@
                                                                 <input type="hidden" name="to-date" id="to-date">
                                                             </div>
                                                         </div>
+                                                    </div>
                                                     </li>
                                                 </ul>
                                             </div>
