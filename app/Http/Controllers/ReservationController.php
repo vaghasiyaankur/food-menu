@@ -60,6 +60,27 @@ class ReservationController extends Controller
             //     // return redirect()->back()->with('success','Notification Sent Successfully!!');
             // }
 
+
+            // try {
+  
+                // $basic  = new \Vonage\Client\Credentials\Basic(getenv("NEXMO_KEY"), getenv("NEXMO_SECRET"));
+                // $client = new \Vonage\Client($basic);
+      
+                // $receiverNumber = "447498173567";
+                // $message = "Food-Menu : Your Turn Now!!";
+      
+                // $message = $client->message()->send([
+                //     'to' => $receiverNumber,
+                //     'from' => 'Vonage APIs',
+                //     'text' => $message
+                // ]);
+                  
+            // } catch (Exception $e) {
+            //     dd("Error: ". $e->getMessage());
+            // }
+
+
+
             return response()->json(['success' => 'registration added successfully.', 'orderId' => $order->id, 'user_id' => $register->id]);
         }else{
             return response()->json(['error' => "We don't have the capacity table for that many people"], 401);
