@@ -80,7 +80,7 @@ class ProductController extends Controller
         },'products.productLanguage'])
         ->whereHas('products.productLanguage',function($q) use ($req,$lang_id){
             $q->where('language_id',$lang_id);
-            $q->where('name','LIKE','%'.$req->search.'%');
+            $q->where('name','LIKE','%'.$req->search.'%'); 
         })
         ->whereHas('subCategoryLanguage')->whereHas('products');
 
