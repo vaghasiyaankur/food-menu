@@ -25,9 +25,9 @@
                                 <div class="col-25">
                                     <div class="f-concise position-relative">
                                         <div id="selection-concise" class="list no-margin">
-                                            <div id="select-concise" class="input-dropdown-wrap" @click="showCategoryList = !showCategoryList">Category</div>
-                                            <ul id="category--list" class="dropdown_list" :class="{ 'd-none' : showCategoryList }">
-                                                <li class="concise p-1" :class="{ 'active': active_category == key }" v-for="(category,key) in categoryList" :key="category" @click="getSubCategoryList(key)"><span>{{ category }}</span></li>
+                                            <div id="select-concise" class="input-dropdown-wrap" @click="showCategoryList = !showCategoryList">{{ catgorySelect }}</div>
+                                            <ul id="category--list" class="dropdown_list category__list" :class="{ 'd-none' : showCategoryList }">
+                                                <li class="concise p-1 padding-half" :class="{ 'active': active_category == key }" v-for="(category,key) in categoryList" :key="category" @click="getSubCategoryList(key, $event)"><span>{{ category }}</span></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -35,9 +35,9 @@
                                 <div class="col-25">
                                     <div class="f-concise position-relative">
                                         <div id="selection-concise" class="list no-margin">
-                                            <div id="select-concise" class="input-dropdown-wrap" @click="showSubCategoryList = !showSubCategoryList">Sub Category</div>
-                                            <ul id="subcategory--list" class="dropdown_list" :class="{ 'd-none' : showSubCategoryList }">
-                                                <li class="concise p-1" :class="{ 'active': active_sub_category == key }" v-for="(subCategory,key) in subCategoryList" :key="subCategory" @click="getProductList(key)"><span>{{ subCategory }}</span></li>
+                                            <div id="select-concise" class="input-dropdown-wrap" @click="showSubCategoryList = !showSubCategoryList">{{ subCatgorySelect }}</div>
+                                            <ul id="subcategory--list" class="dropdown_list subcategory__list" :class="{ 'd-none' : showSubCategoryList }">
+                                                <li class="concise p-1 padding-half" :class="{ 'active': active_sub_category == key }" v-for="(subCategory,key) in subCategoryList" :key="subCategory" @click="getProductList(key)"><span>{{ subCategory }}</span></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -172,6 +172,8 @@ export default {
             subCategoryList: [],
             active_category: 0,
             active_sub_category: 0,
+            catgorySelect : 'Category',
+            subCatgorySelect: 'Sub Category'
         }
     },
     mounted() {
@@ -276,7 +278,7 @@ export default {
                 this.categoryList = res.data;
             })
         },
-        getSubCategoryList(id) {
+        getSubCategoryList(id, e) {
             this.active_category = id;
             this.active_sub_category = 0;
             this.showCategoryList = true;
@@ -449,6 +451,16 @@ export default {
     }
     .position-relative{
         position: relative;
+    }
+    .subcategory__list ,.category__list{
+        position: absolute;
+        width: 100%;
+        z-index: 999;
+        background-color: #fff;
+        box-shadow: 0.7px 0.7px 5px rgb(0 0 0 / 20%);
+        border-radius: 7px;
+        max-height: 220px;
+        overflow: auto;
     }
     @media screen and (max-width:820px) {
         .header-links {
