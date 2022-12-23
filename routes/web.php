@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\QrCodeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/qrcode', [QrCodeController::class, 'index']);
 Route::post('/fcm-token', [\App\Http\Controllers\NotificationController::class, 'updateToken'])->name('fcmToken');
 Route::post('/send-notification',[\App\Http\Controllers\NotificationController::class,'notification'])->name('notification');
 Route::get('/test', [\App\Http\Controllers\NotificationController::class,'notification']);
