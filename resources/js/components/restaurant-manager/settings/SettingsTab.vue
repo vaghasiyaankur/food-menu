@@ -9,6 +9,7 @@
                             <a href="#tab-2" class="tab-link" @click="tableShow = true">Table Management</a>
                             <a href="#tab-3" class="tab-link" @click="floorlistShow = true">Floor Plan</a>
                             <a href="#tab-4" class="tab-link" @click="language = true">Language</a>
+                            <a href="#tab-5" class="tab-link">QR Code Generate</a>
                         </div>
                     </div>
                     <div class="tabs-animated-wrap">
@@ -24,9 +25,12 @@
                                 <FloorList v-if="floorlistShow" @floorlisthide="addEditFloorShow" :page="floorpage" />
                                 <FloorPlan v-if="!floorlistShow"  @floorlistshow="floorlistShow = true" :floorId="floorId" />
                             </div>
-                            <div id="tab-4" class="tab tab-active">
+                            <div id="tab-4" class="tab">
                                 <Language v-if="language" @languagelisthide="languagelisthide"/>
                                 <LanguageTraslation  v-if="!language" @languagelistshow="language = true" :langId="langId" />
+                            </div>
+                            <div id="tab-5" class="tab">
+                                <QrCodeGenerate />
                             </div>
                         </div>
                     </div>
@@ -44,6 +48,7 @@ import AddTable from './AddTable.vue';
 import FloorList from './FloorList.vue';
 import Language from './Language.vue';
 import LanguageTraslation from './EditTranslations.vue';
+import QrCodeGenerate from './QrCodeGenerate.vue';
 import $ from 'jquery';
 export default {
     name : 'SettingsTab',
@@ -60,7 +65,8 @@ export default {
         FloorPlan,
         FloorList,
         Language,
-        LanguageTraslation
+        LanguageTraslation,
+        QrCodeGenerate
     },
     data(){
         return {
@@ -174,7 +180,7 @@ export default {
 }
 
 .toolbar-inner{
-    width:70%;
+    width:85%;
 }
 
 @media screen and (max-width:820px) {
@@ -216,5 +222,9 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox{
 .data-table tbody tr:nth-child(even) {
 	background-color: #FAFAFA;
 }
-
+@media screen and (max-width:991px) {
+    .product-list-section .toolbar-inner a.tab-link{
+        font-size: 14px;
+    }    
+}
 </style>
