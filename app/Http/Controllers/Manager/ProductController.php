@@ -57,6 +57,18 @@ class ProductController extends Controller
     public function getProducts(Request $req)
     {
         $lang_id = SettingHelper::managerLanguage();
+
+        $categoryId = $req->categoryId != 0 ? intval($req->categoryId) : '';
+        $subcategoryId = $req->subcategoryId != 0 ? intval($req->subcategoryId) : '';
+
+        $subCategories = SubCategory::with(['subCategoryLanguage' => function($q) use ($lang_id){
+            $q->where('language_id',$lang_id);
+        }])->where('category_id',$req->categoryId)->get();
+        $subCategory = [];
+        foreach ($subCategories as $key => $sub_category) {
+            $subCategory[$sub_category->id] = $sub_category->subCategoryLanguage[0]->name;
+        }
+
         $sub_product = SubCategory::with(['subCategoryLanguage' => function($q) use ($lang_id){
             $q->where('language_id',$lang_id);
         },
@@ -65,14 +77,24 @@ class ProductController extends Controller
                 $q->where('language_id',$lang_id);
                 $q->where('name','LIKE','%'.$req->search.'%');
             });
-        },'products.productLanguage'
-        ])
+        },'products.productLanguage'])
         ->whereHas('products.productLanguage',function($q) use ($req,$lang_id){
             $q->where('language_id',$lang_id);
-            $q->where('name','LIKE','%'.$req->search.'%');
+            $q->where('name','LIKE','%'.$req->search.'%'); 
         })
-        ->whereHas('subCategoryLanguage')->whereHas('products')->get();
-        return response()->json($sub_product);
+        ->whereHas('subCategoryLanguage')->whereHas('products');
+
+        if ($categoryId) {
+            $sub_product = $sub_product->whereCategoryId($categoryId);
+        }
+
+        if ($subcategoryId) {
+            $sub_product = $sub_product->whereId($subcategoryId);
+        }
+
+        $sub_product = $sub_product->get();
+
+        return response()->json(['sub_category_product' => $sub_product,'sub_category' => $subCategory]);
     }
 
     public function editProduct($id){
@@ -101,6 +123,22 @@ class ProductController extends Controller
         $product = Product::find($req->id);
         $product->delete();
         return response()->json(['success'=>'Product Deleted Successfully.']);
+    }
+
+    public function getsubCategoryProduct($id)
+    {
+        $lang_id = SettingHelper::managerLanguage();
+        $subCategories = SubCategory::with(['subCategoryLanguage' => function($q) use ($lang_id){
+            $q->where('language_id',$lang_id);
+        }])->whereCategoryId($id)->get();
+        $subCategory = [];
+        foreach ($subCategories as $key => $sub_category) {
+            $subCategory[$sub_category->id] = $sub_category->subCategoryLanguage[0]->name;
+        }
+
+        $products = Product::with('productLanguage')->get();
+
+        return response()->json(['sub_category' => $subCategory]);
     }
 
 }

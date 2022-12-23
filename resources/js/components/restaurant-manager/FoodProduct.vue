@@ -20,15 +20,14 @@
                                                 <input type="search" name="search" class="search__data" v-model="search"  @input="getProducts()" id="searchData">
                                             </div>
                                         </div>
-                                    </div>                                    
+                                    </div>
                                 </div>
                                 <div class="col-25">
                                     <div class="f-concise position-relative">
                                         <div id="selection-concise" class="list no-margin">
-                                            <div id="select-concise" class="input-dropdown-wrap" @click="showFloorList = !showFloorList">Sub Category</div>
-                                            <ul id="location-select-list" class="dropdown_list" :class="{ 'd-none' : showFloorList }">
-                                                <li class="concise p-1"><span>Indian</span></li>
-                                                <li class="concise p-1"><span>Punjabi</span></li>
+                                            <div id="select-concise" class="input-dropdown-wrap" @click="showCategoryList = !showCategoryList">Category</div>
+                                            <ul id="category--list" class="dropdown_list" :class="{ 'd-none' : showCategoryList }">
+                                                <li class="concise p-1" :class="{ 'active': active_category == key }" v-for="(category,key) in categoryList" :key="category" @click="getSubCategoryList(key)"><span>{{ category }}</span></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -36,10 +35,9 @@
                                 <div class="col-25">
                                     <div class="f-concise position-relative">
                                         <div id="selection-concise" class="list no-margin">
-                                            <div id="select-concise" class="input-dropdown-wrap" @click="showFloorList = !showFloorList">Category</div>
-                                            <ul id="location-select-list" class="dropdown_list" :class="{ 'd-none' : showFloorList }">
-                                                <li class="concise p-1 active"><span>Indian</span></li>
-                                                <li class="concise p-1"><span>Punjabi</span></li>
+                                            <div id="select-concise" class="input-dropdown-wrap" @click="showSubCategoryList = !showSubCategoryList">Sub Category</div>
+                                            <ul id="subcategory--list" class="dropdown_list" :class="{ 'd-none' : showSubCategoryList }">
+                                                <li class="concise p-1" :class="{ 'active': active_sub_category == key }" v-for="(subCategory,key) in subCategoryList" :key="subCategory" @click="getProductList(key)"><span>{{ subCategory }}</span></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -54,7 +52,7 @@
                 </div>
                 <div class="card-content card-content-padding">
                     <div class="row" v-if="subCategoryProduct.length">
-                        <div class="col-100 medium-100 large-50" v-for="subproduct in subCategoryProduct" :key="subproduct"> 
+                        <div class="col-100 medium-100 large-50" v-for="subproduct in subCategoryProduct" :key="subproduct">
                             <div class="row">
                                 <div class="col-100 position-relative">
                                     <div class="card product_lists no-margin-horizontal">
@@ -168,7 +166,12 @@ export default {
                 }
             },
             search : '',
-            showFloorList: true,
+            showCategoryList : true,
+            showSubCategoryList: true,
+            categoryList: [],
+            subCategoryList: [],
+            active_category: 0,
+            active_sub_category: 0,
         }
     },
     mounted() {
@@ -176,8 +179,9 @@ export default {
         this.getAllSubCategories();
         this.getProducts();
         this.$root.activationMenu('menu_management');
+        this.getAllCategories();
     },
-   
+
     methods: {
         addProduct(){
             var formData = new FormData();
@@ -246,9 +250,10 @@ export default {
             })
         },
         getProducts() {
-            axios.post('/api/get-products',{search : this.search})
+            axios.post('/api/get-products', { search: this.search, categoryId: this.active_category , subcategoryId : this.active_sub_category})
             .then((res) => {
-                this.subCategoryProduct = res.data;
+                this.subCategoryProduct = res.data.sub_category_product;
+                this.subCategoryList = res.data.sub_category;
             })
         },
         blankform() {
@@ -265,6 +270,27 @@ export default {
                 loadAllData[i].classList.toggle('display-none');
             }
         },
+        getAllCategories() {
+            axios.get('/api/categories', { search: this.search })
+            .then((res) => {
+                this.categoryList = res.data;
+            })
+        },
+        getSubCategoryList(id) {
+            this.active_category = id;
+            this.active_sub_category = 0;
+            this.showCategoryList = true;
+            const hasClass = e.target.classList.contains('check-list-options');
+            if (!hasClass) {
+                this.openListMenu = -1
+            }
+            this.getProducts();
+        },
+        getProductList(id) {
+            this.active_sub_category = id;
+            this.showSubCategoryList = true;
+            this.getProducts();
+        }
     },
 }
 </script>
