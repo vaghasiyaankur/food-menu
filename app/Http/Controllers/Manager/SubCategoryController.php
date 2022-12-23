@@ -33,7 +33,7 @@ class SubCategoryController extends Controller
 
     public function getSubCategories(Request $req)
     {
-        $lang_id = SettingHelper::systemLang();
+        $lang_id = SettingHelper::managerLanguage();
         $subCategories = Category::with(['categoryLanguages' => function($q) use ($lang_id){
             $q->where('language_id',$lang_id);
         },'subCategory.subCategoryLanguage' => function($q) use ($req,$lang_id){
@@ -76,7 +76,7 @@ class SubCategoryController extends Controller
 
     public function get_Subcategories()
     {
-        $lang_id = SettingHelper::systemLang();
+        $lang_id = SettingHelper::managerLanguage();
 
         $subCategories = SubCategory::with(['subCategoryLanguage' => function($q) use ($lang_id){
             $q->where('language_id',$lang_id);

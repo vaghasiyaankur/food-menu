@@ -24,5 +24,12 @@ class SettingHelper{
             return SettingHelper::systemLang();
         }
     }
+
+    public static function managerLanguage()
+    {
+        $lang = Language::whereName('English')->first();
+
+        return $lang->id;
+    }
 }
 ?>

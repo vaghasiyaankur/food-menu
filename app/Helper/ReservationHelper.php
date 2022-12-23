@@ -27,7 +27,7 @@ class ReservationHelper{
         if(!count($tableIds)) return 0;
         else{
             $ordersTableIds = Order::whereIn('table_id', $tableIds)->pluck('table_id')->toArray();
-            
+
             foreach ($tableIds as $tableId) {
                 if(!in_array($tableId, $ordersTableIds)) return $tableId;
             }
@@ -37,7 +37,7 @@ class ReservationHelper{
                 $lastOrdersId = Order::where('table_id', $tableId)->orderBy('created_at', 'desc')->first()->id;
                 array_push($time, $lastOrdersId);
             }
-            
+
             return Order::whereIn('id', $time)->orderBy('created_at', 'ASC')->first()->table_id;
         }
         // return $tableIds ? $tableIds->id : 0;

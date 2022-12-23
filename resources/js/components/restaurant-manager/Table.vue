@@ -421,7 +421,6 @@ export default {
             if (parseInt(person) % 2 != 0 && order.table_id == this.max_number_table_data.id) {
                 person = parseInt(person) + 1;
             }
-            console.log(parseInt(this.max_number_table_data.capacity_of_person));
             if (order.table_id == this.max_number_table_data.id && person == parseInt(this.max_number_table_data.capacity_of_person)) {
                 this.no_table_list_show = true;
             }
@@ -430,11 +429,13 @@ export default {
             $('.floor_dropdwon').removeClass('floor_dropdown_visible');
             $('.table_dropdwon').removeClass('floor_dropdown_visible');
         },
-        secondIncrement(second, orderIndex, tableIndex) {
+        secondIncrement(second, orderIndex, tableIndex,rowIndex) {
             this.intervalId = setInterval(() => {
                 if (second < 60) {
                     second++;
-                    this.row_tables[0][tableIndex].orders[orderIndex].order_moved = second;
+                    if (this.row_tables[rowIndex] != undefined && this.row_tables[rowIndex][tableIndex] != undefined && this.row_tables[rowIndex][tableIndex].orders[orderIndex] != undefined) {
+                        this.row_tables[rowIndex][tableIndex].orders[orderIndex].order_moved = second;
+                    }
                 }
             }, 1000);
 
@@ -509,14 +510,18 @@ export default {
                         this.max_number_table_cap = parseInt(table.capacity_of_person);
                         this.max_number_table_data = table;
                     }
-                    table.orders.forEach((order, o_index) => {
-                        if (order.is_order_moved) {
-                            this.secondIncrement(order.order_moved, o_index, index);
-                        }
-                    });
                 });
                 this.max_number_table_id = max_number_table_id;
                 this.row_tables = row_tables;
+                this.row_tables.forEach((tables, row_index) => {
+                    tables.forEach((table, t_index) => {
+                        table.orders.forEach((order, o_index) => {
+                            if (order.is_order_moved) {
+                                this.secondIncrement(order.order_moved, o_index, t_index, row_index);
+                            }
+                        });
+                    });
+                });
                 this.change_table_list = change_table_list_array;
                 this.no_table_list_show = true;
                 change_table_list_array.forEach((table, index) => {
@@ -593,15 +598,19 @@ export default {
                         this.max_number_table_cap = parseInt(table.capacity_of_person);
                         this.max_number_table_data = table;
                     }
-
-                    table.orders.forEach((order, o_index) => {
-                        if (order.is_order_moved) {
-                            this.secondIncrement(order.order_moved, o_index, index);
-                        }
-                    });
                 });
                 this.max_number_table_id = max_number_table_id;
                 this.row_tables = row_tables;
+
+                this.row_tables.forEach((tables, row_index) => {
+                    tables.forEach((table, t_index) => {
+                        table.orders.forEach((order, o_index) => {
+                            if (order.is_order_moved) {
+                                this.secondIncrement(order.order_moved, o_index, t_index, row_index);
+                            }
+                        });
+                    });
+                });
                 this.change_table_list = change_table_list_array;
                 this.no_table_list_show = true;
                 change_table_list_array.forEach((table, index) => {
@@ -640,11 +649,12 @@ export default {
             });
 
             setTimeout(() => {
-                    $('.dialog-title').html("<img src='/images/success.png'>");
-                    $('.dialog-button').addClass('col button button-raised button-large text-transform-capitalize');
-                    $('.dialog-button').eq(1).addClass('active');
-                    $('.dialog-button').css('width', '50%');
-                }, 50);
+                $('.dialog-title').html("<img src='/images/success.png'>");
+                $('.dialog-button').addClass('col button button-raised button-large text-transform-capitalize');
+                $('.dialog-button').eq(0).addClass('text-color-black');
+                $('.dialog-button').eq(1).addClass('active');
+                $('.dialog-button').css('width', '50%');
+            }, 50);
         },
         changeTable(order_id, table_number, floor_name) {
             f7.popover.close();
@@ -660,6 +670,7 @@ export default {
             // setTimeout(() => {
                     $('.dialog-title').html("<img src='/images/success.png'>");
                     $('.dialog-button').addClass('col button button-raised button-large text-transform-capitalize');
+                    $('.dialog-button').eq(0).addClass('text-color-black');
                     $('.dialog-button').eq(1).addClass('active');
                     $('.dialog-button').css('width', '50%');
                 // }, 50);
@@ -674,7 +685,7 @@ export default {
                 axios.post('/api/change-floor-order', { floor_id: floor_id , id : order_id})
                 .then((res) => {
                     if(res.data.success) {
-                        this.tableListFloorWise(this.active_floor_id);
+                        this.tableListFloorWise(floor_id);
                     }else{
                         this.$root.errornotification(res.data.message); return false;
                     }
@@ -684,6 +695,7 @@ export default {
             // setTimeout(() => {
                     $('.dialog-title').html("<img src='/images/success.png'>");
                     $('.dialog-button').addClass('col button button-raised button-large text-transform-capitalize');
+                    $('.dialog-button').eq(0).addClass('text-color-black');
                     $('.dialog-button').eq(1).addClass('active');
                     $('.dialog-button').css('width', '50%');
                 // }, 50);
