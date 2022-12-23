@@ -3,16 +3,16 @@
         <div class="product-list-section">
             <div class="product_list_card no-margin">
                 <div class="card_header">
-                    <div class="row margin-horizontal align-items-center">
-                        <div class="col-20">
+                    <div class="row padding-horizontal margin-horizontal align-items-center">
+                        <div class="col-50">
                             <h3>
-                                <!-- <a href="javscript:;" class="text-color-black padding-right-half"><i class="f7-icons font-22" style="vertical-align: bottom;">arrow_left</i></a> -->
-                                <span class="page_heading">Product</span>
+                                <a href="javscript:;" class="text-color-black padding-right-half"><i class="f7-icons font-22">arrow_left</i></a>
+                                <span class="page_heading">Indain</span>
                             </h3>
                         </div>
-                        <div class="col-80">
-                            <div class="row align-items-center">
-                                <div class="col-30">
+                        <div class="col-50">
+                            <div class="row align-items-center justify-content-end">
+                                <div class="col">
                                     <div class="item-content item-input">
                                         <div class="item-inner">
                                             <div class="item-input-wrap searchData row padding-half height_40 search_data_wrap">
@@ -20,31 +20,17 @@
                                                 <input type="search" name="search" class="search__data" v-model="search"  @input="getProducts()" id="searchData">
                                             </div>
                                         </div>
-                                    </div>                                    
-                                </div>
-                                <div class="col-25">
-                                    <div class="f-concise position-relative">
-                                        <div id="selection-concise" class="list no-margin">
-                                            <div id="select-concise" class="input-dropdown-wrap" @click="showFloorList = !showFloorList">Sub Category</div>
-                                            <ul id="location-select-list" class="dropdown_list" :class="{ 'd-none' : showFloorList }">
-                                                <li class="concise p-1"><span>Indian</span></li>
-                                                <li class="concise p-1"><span>Punjabi</span></li>
-                                            </ul>
-                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-25">
-                                    <div class="f-concise position-relative">
-                                        <div id="selection-concise" class="list no-margin">
-                                            <div id="select-concise" class="input-dropdown-wrap" @click="showFloorList = !showFloorList">Category</div>
-                                            <ul id="location-select-list" class="dropdown_list" :class="{ 'd-none' : showFloorList }">
-                                                <li class="concise p-1 active"><span>Indian</span></li>
-                                                <li class="concise p-1"><span>Punjabi</span></li>
-                                            </ul>
+                                    <!-- <div class="item-content item-input">
+                                        <div class="item-inner">
+                                            <div class="item-input-wrap searchData row padding-half">
+                                                <i class="f7-icons font-22 search-icon">search</i>
+                                                <input type="search" v-model="search" name="search" @input="getProducts()" id="searchData">
+                                            </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
-                                <div class="col-20 padding-left-half padding-right-half">
+                                <div class="col-40 padding-left-half padding-right-half">
                                     <button class="button bg-dark text-color-white padding height_40 popup-open"
                                     data-popup="#product_popup" @click="blankform"><i class="f7-icons font-22 margin-right-half">plus_square</i> Add Product</button>
                                 </div>
@@ -57,7 +43,7 @@
                         <div class="col-100 medium-100 large-50" v-for="subproduct in subCategoryProduct" :key="subproduct"> 
                             <div class="row">
                                 <div class="col-100 position-relative">
-                                    <div class="card product_lists no-margin-horizontal">
+                                    <div class="card product_lists">
                                         <div class="card_header padding-horizontal padding-top text-align-center">
                                             <div class="border-bottom padding-bottom">
                                                 <span class="card-title">{{ subproduct.sub_category_language[0].name }}</span>
@@ -137,7 +123,7 @@ import $ from 'jquery';
 import axios from 'axios';
 import NoValueFound from './NoValueFound.vue'
 export default {
-    name : 'FoodProduct',
+    name : 'SingleCategoryProducts',
     components: {
         f7Page,
         f7Navbar,
@@ -168,7 +154,6 @@ export default {
                 }
             },
             search : '',
-            showFloorList: true,
         }
     },
     mounted() {
@@ -177,7 +162,6 @@ export default {
         this.getProducts();
         this.$root.activationMenu('menu_management');
     },
-   
     methods: {
         addProduct(){
             var formData = new FormData();
@@ -264,19 +248,12 @@ export default {
             for (let i = 0; i < loadAllData.length; i++) {
                 loadAllData[i].classList.toggle('display-none');
             }
-        },
+        }
     },
 }
 </script>
 
 <style scoped>
-.product_list_card .f-concise #select-concise{
-    border: 1px solid #555555;
-    border-radius: 7px;
-}
-.product_list_card #select-concise{
-    height: 40px;
-}
 .arrow_button {
       width: 30px;
       height: 30px;
@@ -373,7 +350,7 @@ export default {
         line-height: 24px;
     }
     /*#searchData {
-        width: 87%;
+        width: 85%;
     }*/
     .product_list:nth-of-type(even){
         background-color:#f7f7f7

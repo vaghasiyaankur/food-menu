@@ -51,7 +51,10 @@
                                         <div class="category_image">
                                             <img :src="'/storage'+category.image" alt="">
                                         </div>
-                                        <p class="padding-left-half category_name">{{ category.category_languages[0].name }}</p>
+                                        
+                                    <a class="menu-dropdown-link menu-close padding-vertical" :href="'/single-category-products/'+category.id">
+                                        <span class="padding-left-half category_name text-color-black">{{ category.category_languages[0].name }}</span>
+                                    </a>
                                     </div>
                                 </div>
                                 <div class="col-100 medium-50 large-40 action-buttons">
@@ -89,7 +92,7 @@
                 <div class="category-add padding">
                     <label class="add_category_name">Category name</label>
                     <div class="categoryForm text-align-left" v-for="lang in $root.langs" :key="lang.id">
-                        <input type="text" v-model="category.name[lang.id]" name="name" class="category-name margin-top-half padding-left-half padding-right-half" :placeholder="'Add '+lang.name+' Category name'">
+                            <input type="text" v-model="category.name[lang.id]" name="name" class="category-name margin-top-half padding-left-half padding-right-half" :placeholder="'Add '+lang.name+' Category name'">
                     </div>
                     <div class="category-image-selection margin-top">
                         <input type="file" class="add-category-image" @change="addimageChange" id="categoryImage" />
@@ -411,6 +414,9 @@ export default {
 }
 .category-list-section{
     margin-top: 77px;
+}
+.category-list-section .category-list .menu-dropdown-link{
+    border-bottom: none !important;
 }
 @media screen and (max-width:820px) {
     .header-links {

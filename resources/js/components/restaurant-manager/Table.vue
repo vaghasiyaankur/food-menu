@@ -200,6 +200,15 @@
                                                                 <i class="f7-icons size-18 text-color-black padding-right-half margin-right-half">person_2</i>
                                                                 <span class="text-color-black">{{ order.person }} family member</span>
                                                             </div>
+                                                            <div class="finish_popup">
+                                                                <div class="card-footer no-margin no-padding justify-content-center">
+                                                                    <h3>
+                                                                        <a href="javascript:;" class="text-color-red" @click="removeorder(order.id)">
+                                                                            Finish & Next
+                                                                        </a>                                                                        
+                                                                    </h3>
+                                                                </div>
+                                                            </div>
                                                             <div class="floor__list">
                                                                 <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="openFloorList(order.id)">
                                                                     <h3 class="text-color-red">Change Floor</h3>
@@ -390,7 +399,7 @@ export default {
             if(screen.width > (bounding.left + bounding.width + 285)) {
                 $(".f_f"+id).css('left', '100%');
             }else{
-                $(".f_f"+id).css('left', '-135%');
+                $(".f_f"+id).css('left', '-140.5%');
             }
         },
         openTableList(order) {
@@ -681,7 +690,21 @@ export default {
         },
         check(m){
             console.log(m);
-        }
+        },
+        removeorder(id) {
+                f7.popover.close();
+                f7.dialog.confirm('Are you sure close the reservation?', () => {
+                });
+                setTimeout(() => {
+                    $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });
+                    $('.dialog-title').html("<img src='/images/cross.png'>");
+                    $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
+                    $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
+                    $('.dialog-button').eq(1).removeClass('text-color-black');
+                    $('.dialog-buttons').addClass('margin-top no-margin-bottom')
+                }, 50);
+        },
+       
     }
 }
 </script>

@@ -176,6 +176,7 @@ export default {
     },
     mounted() {
         this.$root.activationMenu('reservation');
+        
     },
     methods: {
         getCategories() {
@@ -305,6 +306,7 @@ export default {
 }
 </script>
 <style scoped>
+
 .border_radius_10{
     border-radius: 10px !important;
 }

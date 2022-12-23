@@ -2,7 +2,10 @@
     <div class="card edit_tranaslation no-margin">
         <div class="card-header padding">
             <div class="heading translate_left">
-                <h3 class="no-margin"><span class="page_heading">Edit Translations - {{ $root.langs[this.langId - 1].name }}</span></h3>
+                <h3 class="no-margin">
+                    <a href="/Language/" class=" text-color-black" @click="$emit('languagelistshow')"><i class="f7-icons font-22 margin-right-half">arrow_left</i></a> 
+                    <span class="page_heading">Edit Translations - {{ $root.langs[this.langId - 1].name }}</span>
+                </h3>
             </div>
             <div class="translate_right display-flex align-items-center">
                 <!-- <div class="item-content item-input">
@@ -17,13 +20,16 @@
                     <div class="item-inner">
                         <div class="item-input-wrap searchData row padding-half height_40 search_data_wrap">
                             <i class="f7-icons font-18 search-icon">search</i>
-                            <input type="search" name="search" class="search__data" v-model="searchData" @change="getLangTraslation()" placeholder="Search Translation...">
+                            <input type="search" name="search" class="search__data" v-model="searchData" @input="getLangTraslation()" placeholder="Search Translation...">
                         </div>
                     </div>
                 </div>
-                <div class="filters_button">
-                    <button class="button button-outline height_40"><i class="f7-icons">funnel</i>Filters</button>
+                <div class="submit__button">
+                    <button class=" button button-large button-fill height_40 padding-horizontal" @click="updateTraslation()">Save Change</button>
                 </div>
+                <!-- <div class="filters_button">
+                    <button class="button button-outline height_40"><i class="f7-icons">funnel</i>Filters</button>
+                </div> -->
             </div>
         </div>
         <div class="card-content">
@@ -60,10 +66,7 @@
                 </div>
             </div>
         </div>
-        <div class="bottom__bar">
-            <div class="submit__button margin-top padding-top">
-                <button class="col button button-large button-fill" @click="updateTraslation()">Save Change</button>
-            </div>
+        <div class="bottom__bar">           
             <div class="pagination_count padding display-flex justify-content-end align-items-center">
                 <!-- <div class="pagination__text">
                     <p class="no-margin">Showing 15 of 220 Results</p>
@@ -185,7 +188,7 @@
     border-top: 1px solid #999999;
 }
 .edit_tranaslation .card-content .edit_translate_table{
-    height: calc(100% - 225px);
+    height: calc(100% - 141px);
     overflow: auto;
 }
 .edit_translate_table .translate__id .item-input-wrap input{
