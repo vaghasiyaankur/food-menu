@@ -44,15 +44,15 @@ class ReservationController extends Controller
             // // dd($token);
             // if($token){
             //     $fcmTokens = ['c16H1_gwueT8jzmm2w_cTn:APA91bGjH092huMhvCN4Cejb84y1Y_CxzdbLrxIwyLucbUCyX4v1gl2O6oYcVaSm0ncnYhD9mbFlKVmvAgVzeePzLN5yhn0PG1esfjo0P1mrR0RUXb_W4sQII_GfcZoXodUmsqc-Kg0m'];
-        
+
             //     //Notification::send(null,new SendPushNotification($request->title,$request->message,$fcmTokens));
-        
+
             //     /* or */
-        
+
             //     //auth()->user()->notify(new SendPushNotification($title,$message,$fcmTokens));
-        
+
             //     /* or */
-        
+
             //     $test = Larafirebase::withTitle('Food-menu Restaurant')
             //         ->withBody('Your Turn Now !!!')
             //         ->sendMessage($fcmTokens);
@@ -89,7 +89,7 @@ class ReservationController extends Controller
     }
 
     /**
-     * Set Notification for order 
+     * Set Notification for order
      *
      * @return @json ($close_reservation = 0 or 1)
      *
@@ -99,28 +99,28 @@ class ReservationController extends Controller
         //     'title'=>'required',
         //     'message'=>'required'
         // ]);
-    
+
         try{
             $token = $request->session()->put('device_token',$request->token);
 
             if($token){
                 $fcmTokens = ['c16H1_gwueT8jzmm2w_cTn:APA91bGjH092huMhvCN4Cejb84y1Y_CxzdbLrxIwyLucbUCyX4v1gl2O6oYcVaSm0ncnYhD9mbFlKVmvAgVzeePzLN5yhn0PG1esfjo0P1mrR0RUXb_W4sQII_GfcZoXodUmsqc-Kg0m'];
-        
+
                 //Notification::send(null,new SendPushNotification($request->title,$request->message,$fcmTokens));
-        
+
                 /* or */
-        
+
                 //auth()->user()->notify(new SendPushNotification($title,$message,$fcmTokens));
-        
+
                 /* or */
-        
+
                 Larafirebase::withTitle('Food-menu Restaurant')
                     ->withBody('Your Turn Now !!!')
                     ->sendMessage($fcmTokens);
                 // dd($test);
                 // return redirect()->back()->with('success','Notification Sent Successfully!!');
             }
-    
+
         }catch(\Exception $e){
             report($e);
             dd($e);
@@ -314,7 +314,8 @@ class ReservationController extends Controller
 
     public function reservationList(Request $request)
     {
-        $from_date = $request->from_date ? date('Y-m-d', strtotime($request->from_date)) : date('Y-m-d', strtotime(Carbon::now()));
+        // $from_date = $request->from_date ? date('Y-m-d', strtotime($request->from_date)) : date('Y-m-d', strtotime(Carbon::now()));
+        $from_date = $request->from_date ? date('Y-m-d', strtotime($request->from_date)) : '';
         $to_date = $request->to_date ? date('Y-m-d', strtotime($request->to_date)) : $from_date;
         $search = $request->search;
 
@@ -322,10 +323,14 @@ class ReservationController extends Controller
             $q->select('id','name', 'number');
         }]);
 
-        $reservation = $reservation->whereDate('created_at', '>=', $from_date)->whereDate('created_at', '<=', $to_date)->select('id','customer_id','person','start_time','finish_time','finished','deleted_at')->selectRaw('DATE_FORMAT(created_at,"%d, %b %Y / %h:%i %p") as date');
+        if ($from_date && $to_date) {
+            $reservation = $reservation->whereDate('created_at', '>=', $from_date)->whereDate('created_at', '<=', $to_date);
+        }
+
+        $reservation = $reservation->select('id','customer_id','person','start_time','finish_time','finished','deleted_at')->selectRaw('DATE_FORMAT(created_at,"%d, %b %Y / %h:%i %p") as date');
 
         if($request->search)
-         $reservation = $reservation->where('id', $request->search)->orWhere(function ($orWhere) use ($search) {
+        $reservation = $reservation->where('id', $request->search)->orWhere(function ($orWhere) use ($search) {
             $orWhere->orWhereHas('customer',function($products) use ($search) {
                 $products->where('name', 'like', '%' . $search . '%');
             });
@@ -346,7 +351,7 @@ class ReservationController extends Controller
      */
 
     public function removeReservation(Request $request)
-    {   
+    {
         FloorShiftHistory::where('order_id', $request->id)->delete();
         TableShiftHistory::where('order_id', $request->id)->delete();
         Order::where('id', $request->id)->forceDelete();
@@ -361,7 +366,7 @@ class ReservationController extends Controller
      */
 
     public function reservationDetail(Request $request)
-    {   
+    {
             $order = Order::where('id', $request->id)->with(['customer' => function($q) {
                 $q->select('id','name', 'number');
             } , 'floorShiftHistory', 'tableShiftHistory'])->select('id','customer_id','person','start_time','finish_time','finished','cancelled_by', 'role','deleted_at')->selectRaw('DATE_FORMAT(created_at,"%d, %b %Y / %h:%i %p") as date')->first();
@@ -385,7 +390,7 @@ class ReservationController extends Controller
      */
 
     public function setDeviceToken(Request $request)
-    {   
+    {
            Customer::where('id', $request->user_id)->update(['device_token' => $request->token]);
 
             return response()->json([ 'success' => true ] , 200);

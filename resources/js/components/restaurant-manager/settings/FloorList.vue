@@ -30,7 +30,7 @@
                                         <a href="javascript:;" class="button text-color-black font-13 no-padding-left" @click="$emit('floorlisthide', floor.id, page_number)">
                                             <i class="f7-icons font-13 margin-right-half">square_pencil</i> Edit
                                         </a>
-                                        <a href="javascript:;" class="button text-color-red font-13" @click="removeFloor(floor.id)">
+                                        <a href="javascript:;" class="button text-color-red font-13 " @click="removeFloor(floor.id)">
                                             <i class="f7-icons font-13 margin-right-half">trash</i> Delete
                                         </a>
                                     </div>

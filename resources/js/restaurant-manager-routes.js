@@ -3,6 +3,7 @@ import Table from "./components/restaurant-manager/Table.vue";
 import FoodCategory from "./components/restaurant-manager/FoodCategory.vue";
 import FoodSubCategory from "./components/restaurant-manager/FoodSubCategory.vue";
 import FoodProduct from "./components/restaurant-manager/FoodProduct.vue";
+import SingleCategoryProducts from "./components/restaurant-manager/SingleCategoryProducts.vue";
 import Setting from "./components/restaurant-manager/settings/SettingsTab.vue";
 import DigitalMenu from "./components/restaurant-manager/DigitalMenu.vue";
 import Reporting from "./components/restaurant-manager/Reporting.vue";
@@ -36,6 +37,13 @@ export default [
     name : 'FoodProduct',
     path: '/food-product/',
     component: FoodProduct,
+  },
+
+  {
+    name : 'SingleCategoryProducts',
+    path: '/single-category-products/:id',
+    component: SingleCategoryProducts,
+    props: true
   },
 
   {

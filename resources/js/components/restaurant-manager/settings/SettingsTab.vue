@@ -1,47 +1,7 @@
 <template>
     <f7-page>
-        <!-- <div class="nav-bar">
-            <f7-navbar class="navbar-menu bg-color-white" large transparent back-link="Back">
-                <div class="header-links display-flex align-items-center padding-right">
-                    <div class="row header-link justify-content-flex-end align-items-center">
-                        <div class=" padding-left-half padding-right-half height-40 nav-button">
-                            <a href="/Reservation/" class="col link nav-link button button-raised bg-dark text-color-white padding">
-                                Reservation</a>
-                        </div>
-                        <div class="nav-button col-25">
-                            <div class="menu-item menu-item-dropdown">
-                                <div class="menu-item-content button button-raised bg-dark text-color-white padding-left-half padding-right-half">Menu management
-                                    <i class="f7-icons">chevron_down</i>
-                                </div>
-                                <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
-                                    <div class="menu-dropdown-content bg-color-white no-padding">
-                                        <a href="#" class="menu-dropdown-link menu-close margin-horizontal no-padding"></a>
-                                        <a href="/" class="menu-dropdown-link menu-close text-color-pink">Table</a>
-                                        <a href="/food-category/" class="menu-dropdown-link menu-close text-color-pink margin-horizontal no-padding">Food Category</a>
-                                        <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food Menu
-                                        </a>
-                                        <a href="/food-subcategory/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food SubCategory</a>
-                                        <a href="/digital-menu/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Digital Menu</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class=" padding-left-half padding-right-half height-40 nav-button"><a href="/Reporting/" class="col link nav-link button button-raised bg-dark text-color-white padding">Reporting</a></div>
-                        <div class="padding-left-half padding-right-half height-40"><button class="nav-link button button-raised bg-dark text-color-white padding closeReservation" @click="$root.closeReservation()">Close reservation</button></div>
-                        <div class="padding-left-half padding-right-half height-40"><a href="/settings/" class="nav-link button button-raised bg-pink text-color-white padding">Settings</a></div>
-                    </div>
-                </div>
-            </f7-navbar>
-        </div> -->
         <div class="product-list-section">
             <div class="card elevation-2">
-                <!-- <div class="card_header">
-                    <div class="row padding-left padding-right align-items-center">
-                        <div class="col-50">
-                            <h3 class="card-title"><a href="javscript:;" class="text-color-black"><i class="f7-icons font-22" style="vertical-align: bottom;">arrow_left</i></a> Settings</h3>
-                        </div>
-                    </div>
-                </div> -->
                 <div class="card-content card-content-header padding-top">
                     <div class="toolbar tabbar toolbar-top">
                         <div class="toolbar-inner">
@@ -257,7 +217,4 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox{
 	background-color: #FAFAFA;
 }
 
-.data-table{
-    overflow-y: hidden;
-}
 </style>
