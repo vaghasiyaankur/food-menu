@@ -290,7 +290,7 @@ export default {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 100000000;
+    z-index: 999999;
   }
   .overlay .overlayDoor:before, .overlay .overlayDoor:after {
     content: "";
@@ -328,7 +328,7 @@ export default {
     transition: 0.5s cubic-bezier(0.77, 0, 0.18, 1);
     background-color:#FFFFFF;
   }
- /* .overlay .overlayContent .skip {
+  .overlay .overlayContent .skip {
     display: block;
     width: 130px;
     text-align: center;
@@ -346,9 +346,9 @@ export default {
     background: #ddd;
     color: #444;
     border-color: #ddd;
-  }*/
+  }
   
-  /*.loader {
+  .loader {
     width: 128px;
     height: 128px;
     border: 3px solid #0ab39c;
@@ -404,7 +404,7 @@ export default {
     100% {
       transform: rotate(-720deg);
     }
-  }*/
+  }
   /*======= LOPADER CSS END ===========*/
 .tab_view_menu.row{
     flex-wrap: nowrap !important;
