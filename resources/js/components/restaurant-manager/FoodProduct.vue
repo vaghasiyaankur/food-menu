@@ -1,6 +1,6 @@
 <template>
     <f7-page>
-        <div class="product-list-section">
+        <div class="product-list-section" @click="clickout">
             <div class="product_list_card no-margin">
                 <div class="card_header">
                     <div class="row margin-horizontal align-items-center">
@@ -24,20 +24,20 @@
                                 </div>
                                 <div class="col-25">
                                     <div class="f-concise position-relative">
-                                        <div id="selection-concise" class="list no-margin">
-                                            <div id="select-concise" class="input-dropdown-wrap" @click="showCategoryList = !showCategoryList">{{ catgorySelect }}</div>
-                                            <ul id="category--list" class="dropdown_list category__list" :class="{ 'd-none' : showCategoryList }">
-                                                <li class="concise p-1 padding-half" :class="{ 'active': active_category == key }" v-for="(category,key) in categoryList" :key="category" @click="getSubCategoryList(key, $event)"><span>{{ category }}</span></li>
+                                        <div id="selection-concise" class="list no-margin category--list">
+                                            <div id="select-concise" class="input-dropdown-wrap" @click="showCategoryList = !showCategoryList">{{ active_category_name }}</div>
+                                            <ul id="category--list" class="dropdown_list" :class="{ 'd-none' : showCategoryList }">
+                                                <li class="concise p-1" :class="{ 'active': active_category == key }" v-for="(category,key) in categoryList" :key="category" @click="getSubCategoryList(key); active_category_name = category;"><span>{{ category }}</span></li>
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-25">
                                     <div class="f-concise position-relative">
-                                        <div id="selection-concise" class="list no-margin">
-                                            <div id="select-concise" class="input-dropdown-wrap" @click="showSubCategoryList = !showSubCategoryList">{{ subCatgorySelect }}</div>
-                                            <ul id="subcategory--list" class="dropdown_list subcategory__list" :class="{ 'd-none' : showSubCategoryList }">
-                                                <li class="concise p-1 padding-half" :class="{ 'active': active_sub_category == key }" v-for="(subCategory,key) in subCategoryList" :key="subCategory" @click="getProductList(key)"><span>{{ subCategory }}</span></li>
+                                        <div id="selection-concise" class="list no-margin subcategory--list">
+                                            <div id="select-concise" class="input-dropdown-wrap" @click="showSubCategoryList = !showSubCategoryList">{{ active_sub_category_name }}</div>
+                                            <ul id="subcategory--list" class="dropdown_list" :class="{ 'd-none' : showSubCategoryList }">
+                                                <li class="concise p-1" :class="{ 'active': active_sub_category == key }" v-for="(subCategory,key) in subCategoryList" :key="subCategory" @click="getProductList(key); active_sub_category_name = subCategory;"><span>{{ subCategory }}</span></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -172,8 +172,8 @@ export default {
             subCategoryList: [],
             active_category: 0,
             active_sub_category: 0,
-            catgorySelect : 'Category',
-            subCatgorySelect: 'Sub Category'
+            active_category_name: 'Category',
+            active_sub_category_name: 'Sub Category',
         }
     },
     mounted() {
@@ -282,16 +282,22 @@ export default {
             this.active_category = id;
             this.active_sub_category = 0;
             this.showCategoryList = true;
-            const hasClass = e.target.classList.contains('check-list-options');
-            if (!hasClass) {
-                this.openListMenu = -1
-            }
             this.getProducts();
         },
         getProductList(id) {
             this.active_sub_category = id;
             this.showSubCategoryList = true;
             this.getProducts();
+        },
+        clickout() {
+            const category_list = event.target.parentNode.classList.contains('category--list');
+            if (!category_list) {
+                this.showCategoryList = true;
+            }
+            const subcategory_list = event.target.parentNode.classList.contains('subcategory--list');
+            if (!subcategory_list) {
+                this.showSubCategoryList = true;
+            }
         }
     },
 }

@@ -2,7 +2,7 @@
 <f7-app v-bind="f7Params">
     <f7-page>
         <div class="nav-bar">
-            <f7-navbar class="navbar-menu bg-color-white">            
+            <f7-navbar class="navbar-menu bg-color-white">
                 <div class="header-links display-flex align-items-center">
                     <!--========= SMALL SCREEN MENU BAR=========== -->
                     <div class="small_screen_menu">
@@ -208,7 +208,7 @@ export default {
     },
     methods: {
         getLanguage() {
-            axios.get('/api/get-languages')
+            axios.get('/api/get-all-languages')
                 .then((res) => {
                     this.langs = res.data.langs;
                 })

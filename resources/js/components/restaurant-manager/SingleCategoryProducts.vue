@@ -6,8 +6,8 @@
                     <div class="row padding-horizontal margin-horizontal align-items-center">
                         <div class="col-50">
                             <h3>
-                                <a href="javscript:;" class="text-color-black padding-right-half"><i class="f7-icons font-22">arrow_left</i></a>
-                                <span class="page_heading">Indain</span>
+                                <a href="javscript:;" class="text-color-black padding-right-half" @click="f7router.back()"><i class="f7-icons font-22">arrow_left</i></a>
+                                <span class="page_heading">Indian</span>
                             </h3>
                         </div>
                         <div class="col-50">
@@ -21,14 +21,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- <div class="item-content item-input">
-                                        <div class="item-inner">
-                                            <div class="item-input-wrap searchData row padding-half">
-                                                <i class="f7-icons font-22 search-icon">search</i>
-                                                <input type="search" v-model="search" name="search" @input="getProducts()" id="searchData">
-                                            </div>
-                                        </div>
-                                    </div> -->
                                 </div>
                                 <div class="col-40 padding-left-half padding-right-half">
                                     <button class="button bg-dark text-color-white padding height_40 popup-open"
@@ -40,7 +32,7 @@
                 </div>
                 <div class="card-content card-content-padding">
                     <div class="row" v-if="subCategoryProduct.length">
-                        <div class="col-100 medium-100 large-50" v-for="subproduct in subCategoryProduct" :key="subproduct"> 
+                        <div class="col-100 medium-100 large-50" v-for="subproduct in subCategoryProduct" :key="subproduct">
                             <div class="row">
                                 <div class="col-100 position-relative">
                                     <div class="card product_lists">
@@ -123,7 +115,10 @@ import $ from 'jquery';
 import axios from 'axios';
 import NoValueFound from './NoValueFound.vue'
 export default {
-    name : 'SingleCategoryProducts',
+    name: 'SingleCategoryProducts',
+    props: {
+        f7router: Object,
+    },
     components: {
         f7Page,
         f7Navbar,
@@ -140,30 +135,34 @@ export default {
     },
     data() {
         return {
+            search: '',
+            id: 0,
             product: {
-                id : null,
+                id: null,
                 name: [],
                 sub_category: null,
                 price: '',
             },
-            productTitle : 'Add Product',
+            productTitle: 'Add Product',
             subCategoryOption: [],
             subCategoryProduct: {
                 products: {
-                    product_language:[]
+                    product_language: []
                 }
             },
-            search : '',
+
         }
     },
     mounted() {
         $('.page-content').css('background', '#F7F7F7');
         this.getAllSubCategories();
-        this.getProducts();
         this.$root.activationMenu('menu_management');
+        setTimeout(() => {
+            this.getProducts();
+        }, 400);
     },
     methods: {
-        addProduct(){
+        addProduct() {
             var formData = new FormData();
             formData.append('name', this.product.name);
             formData.append('price', this.product.price);
@@ -177,23 +176,23 @@ export default {
             if (this.product.id) {
                 formData.append('id', this.product.id);
                 axios.post('/api/update-product', formData)
-                .then((res) => {
-                    this.$root.successnotification(res.data.success);
-                    this.getProducts();
-                    f7.popup.close(`#product_popup`);
-                    this.blankform();
-                })
+                    .then((res) => {
+                        this.$root.successnotification(res.data.success);
+                        this.getProducts();
+                        f7.popup.close(`#product_popup`);
+                        this.blankform();
+                    })
             } else {
                 axios.post('/api/add-product', formData)
-                .then((res) => {
-                    this.$root.successnotification(res.data.success);
-                    this.getProducts();
-                    f7.popup.close(`#product_popup`);
-                    this.blankform();
-                })
+                    .then((res) => {
+                        this.$root.successnotification(res.data.success);
+                        this.getProducts();
+                        f7.popup.close(`#product_popup`);
+                        this.blankform();
+                    })
             }
         },
-        removeProduct(id){
+        removeProduct(id) {
             f7.dialog.confirm('Are you sure delete the product?', () => {
                 axios.post('/api/delete-product', { id: id })
                     .then((res) => {
@@ -213,14 +212,21 @@ export default {
         },
         editProduct(id) {
             this.productTitle = 'Edit Product';
-            axios.get('/api/product/'+id)
+            axios.get('/api/product/' + id)
                 .then((res) => {
-                this.product.id = res.data.id;
-                res.data.product_language.forEach(product_lang => {
-                    this.product.name[product_lang.language_id] = product_lang.name;
-                });
-                this.product.price = res.data.price;
-                this.product.sub_category = res.data.sub_category_id;
+                    this.product.id = res.data.id;
+                    res.data.product_language.forEach(product_lang => {
+                        this.product.name[product_lang.language_id] = product_lang.name;
+                    });
+                    this.product.price = res.data.price;
+                    this.product.sub_category = res.data.sub_category_id;
+                })
+        },
+        getProducts() {
+            this.id = f7.view.main.router.currentRoute.params.id;
+            axios.post('/api/get-products', { search: this.search, categoryId: this.id })
+            .then((res) => {
+                this.subCategoryProduct = res.data.sub_category_product;
             })
         },
         getAllSubCategories() {
@@ -229,26 +235,13 @@ export default {
                 this.subCategoryOption = res.data;
             })
         },
-        getProducts() {
-            axios.post('/api/get-products',{search : this.search})
-            .then((res) => {
-                this.subCategoryProduct = res.data;
-            })
-        },
-        blankform() {
-            this.product.id = null;
-            this.product.name = [];
-            this.product.price = '';
-            this.product.sub_category = null;
-            this.productTitle = 'Add Product';
-        },
         showAllData(e) {
             e.target.classList.toggle('scroll_change_arrow');
             var loadAllData = e.target.parentNode.parentNode.parentNode.previousSibling.querySelectorAll('.showData');
             for (let i = 0; i < loadAllData.length; i++) {
                 loadAllData[i].classList.toggle('display-none');
             }
-        }
+        },
     },
 }
 </script>

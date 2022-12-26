@@ -120,6 +120,7 @@
         name : 'AllReservation',
         data() {
             return {
+                id : '',
                 reservation : [],
                 from_date : '',
                 to_date: '',
@@ -185,7 +186,6 @@
                 .then((res) => {
                     this.reservation = res.data.reservation.data;
                     this.paginationData = res.data.reservation;
-                    console.log(res.data.reservation);
                 })
             },
             removeReservation(id) {
