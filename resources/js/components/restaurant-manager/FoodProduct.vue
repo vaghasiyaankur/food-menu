@@ -278,7 +278,7 @@ export default {
                 this.categoryList = res.data;
             })
         },
-        getSubCategoryList(id) {
+        getSubCategoryList(id, e) {
             this.active_category = id;
             this.active_sub_category = 0;
             this.showCategoryList = true;
@@ -457,6 +457,16 @@ export default {
     }
     .position-relative{
         position: relative;
+    }
+    .subcategory__list ,.category__list{
+        position: absolute;
+        width: 100%;
+        z-index: 999;
+        background-color: #fff;
+        box-shadow: 0.7px 0.7px 5px rgb(0 0 0 / 20%);
+        border-radius: 7px;
+        max-height: 220px;
+        overflow: auto;
     }
     @media screen and (max-width:820px) {
         .header-links {
