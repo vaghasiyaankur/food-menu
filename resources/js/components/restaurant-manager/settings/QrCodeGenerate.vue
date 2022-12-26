@@ -56,7 +56,7 @@
                                     <div><i class="f7-icons">ellipsis</i></div>
                                     <div class="menu-dropdown menu-dropdown-right">
                                         <div class="menu-dropdown-content no-padding">
-                                            <button class="menu-dropdown-link font-13 height-40 button text-color-black"><img src="/images/downlaod.png" style="margin-right:12px;"> Download </button>
+                                            <button class="menu-dropdown-link font-13 height-40 button text-color-black"><img src="/images/downlaod.png" style="margin-right:11px;"> Download </button>
                                             <button class="menu-dropdown-link font-13 height-40 active_text button" @click="removeqr()"><i class="f7-icons margin-right-half">trash</i>Delete </button>
                                             <button class="menu-dropdown-link font-13 height-40 button text-color-black"><i class="f7-icons margin-right-half">arrow_counterclockwise</i>Regenerate </button>
                                         </div>
@@ -75,7 +75,7 @@
                                     <div><i class="f7-icons">ellipsis</i></div>
                                     <div class="menu-dropdown menu-dropdown-right">
                                         <div class="menu-dropdown-content no-padding">
-                                            <button class="menu-dropdown-link font-13 height-40 button text-color-black"><img src="/images/downlaod.png" style="margin-right:12px;"> Download </button>
+                                            <button class="menu-dropdown-link font-13 height-40 button text-color-black"><img src="/images/downlaod.png" style="margin-right:11px;"> Download </button>
                                             <button class="menu-dropdown-link font-13 height-40 active_text button" @click="removeqr()"><i class="f7-icons margin-right-half">trash</i>Delete </button>
                                             <button class="menu-dropdown-link font-13 height-40 button text-color-black"><i class="f7-icons margin-right-half">arrow_counterclockwise</i>Regenerate </button>
                                         </div>
@@ -94,7 +94,7 @@
                                     <div><i class="f7-icons">ellipsis</i></div>
                                     <div class="menu-dropdown menu-dropdown-right">
                                         <div class="menu-dropdown-content no-padding">
-                                            <button class="menu-dropdown-link font-13 height-40 button text-color-black"><img src="/images/downlaod.png" style="margin-right:12px;"> Download </button>
+                                            <button class="menu-dropdown-link font-13 height-40 button text-color-black"><img src="/images/downlaod.png" style="margin-right:11px;"> Download </button>
                                             <button class="menu-dropdown-link font-13 height-40 active_text button open-confirm" @click="removeqr()"><i class="f7-icons margin-right-half">trash</i>Delete </button>
                                             <button class="menu-dropdown-link font-13 height-40 button text-color-black"><i class="f7-icons margin-right-half">arrow_counterclockwise</i>Regenerate </button>
                                         </div>
@@ -113,7 +113,7 @@
                                     <div><i class="f7-icons">ellipsis</i></div>
                                     <div class="menu-dropdown menu-dropdown-right">
                                         <div class="menu-dropdown-content no-padding">
-                                            <button class="menu-dropdown-link font-13 height-40 button text-color-black"><img src="/images/downlaod.png" style="margin-right:12px;"> Download </button>
+                                            <button class="menu-dropdown-link font-13 height-40 button text-color-black"><img src="/images/downlaod.png" style="margin-right:11px;"> Download </button>
                                             <button class="menu-dropdown-link font-13 height-40 active_text button"><i class="f7-icons margin-right-half">trash</i>Delete </button>
                                             <button class="menu-dropdown-link font-13 height-40 button text-color-black"><i class="f7-icons margin-right-half">arrow_counterclockwise</i>Regenerate </button>
                                         </div>

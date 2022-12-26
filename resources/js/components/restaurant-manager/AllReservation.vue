@@ -423,5 +423,9 @@
     height: auto;
 }
 /*===== SERACH BOX CSS END=======*/
+.calendar .calendar-range{
+    background-color: #FFFFFF !important;
+    border-radius: 10px !important;
+}
 </style>
 

@@ -130,16 +130,16 @@
         </div>
         <f7-view url="/" :main="true" class="safe-areas" :master-detail-breakpoint="768" @notification="notification"></f7-view>
         
-        <!-- <div class="overlay">
+        <div class="overlay">
             <div class="overlayDoor"></div>
-            <div class="overlayContent">
-                <div class="loader">
+            <div class="overlayContent">            
                     <div class="inner">
                         <img src="/images/loading.gif" alt="Loading..">
                     </div>
-                </div>
+                <!-- <div class="skip">
+                </div> -->
             </div>
-        </div> -->
+        </div>
     </f7-page>
 </f7-app>
 </template>
@@ -198,13 +198,13 @@ export default {
             $('.overlay, body').addClass('loaded');
             setTimeout(function() {
                 $('.overlay').css({'display':'none'})
-            }, 20000)
+            }, 200000)
         });
 
         
         setTimeout(function() {
             $('.overlay, body').addClass('loaded');
-        }, 10000);
+        }, 100000);
     },
     methods: {
         getLanguage() {
@@ -290,14 +290,14 @@ export default {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 999999;
+    z-index: 100000000;
   }
   .overlay .overlayDoor:before, .overlay .overlayDoor:after {
     content: "";
     position: absolute;
     width: 50%;
     height: 100%;
-    background: #111;
+    background: #fff;
     transition: 0.5s cubic-bezier(0.77, 0, 0.18, 1);
     transition-delay: 0.8s;
   }
@@ -326,9 +326,8 @@ export default {
     align-items: center;
     flex-direction: column;
     transition: 0.5s cubic-bezier(0.77, 0, 0.18, 1);
-    background-color:#FFFFFF;
   }
-  .overlay .overlayContent .skip {
+  /*.overlay .overlayContent .skip {
     display: block;
     width: 130px;
     text-align: center;
@@ -346,12 +345,12 @@ export default {
     background: #ddd;
     color: #444;
     border-color: #ddd;
-  }
+  }*/
   
-  .loader {
+  /*.loader {
     width: 128px;
     height: 128px;
-    border: 3px solid #0ab39c;
+    border: 3px solid #fff;
     border-bottom: 3px solid transparent;
     border-radius: 50%;
     position: relative;
@@ -361,18 +360,17 @@ export default {
     justify-content: center;
     align-items: center;
   }
-  
   .loader .inner {
     width: 64px;
     height: 64px;
     border: 3px solid transparent;
-    border-top: 3px solid #0ab39c;
+    border-top: 3px solid #fff;
     border-radius: 50%;
     -webkit-animation: spinInner 1s linear infinite;
             animation: spinInner 1s linear infinite;
-  }
+  }*/
   
-  @-webkit-keyframes spin {
+  /*@-webkit-keyframes spin {
     0% {
       transform: rotate(0deg);
     }
@@ -404,7 +402,7 @@ export default {
     100% {
       transform: rotate(-720deg);
     }
-  }
+  }*/
   /*======= LOPADER CSS END ===========*/
 .tab_view_menu.row{
     flex-wrap: nowrap !important;
