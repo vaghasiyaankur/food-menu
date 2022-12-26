@@ -36,6 +36,8 @@ Route::post('/get-categories',[CategoryController::class, 'getCategories']);
 
 Route::post('/get-categories-list',[CategoryController::class, 'getCategoriesList']);
 
+Route::post('/get-category-list',[CategoryController::class, 'getCategoryList']);
+
 Route::post('add-category',[CategoryController::class, 'addCategory']);
 
 Route::get('/get-category/{id}', [CategoryController::class, 'getCategory']);
@@ -89,6 +91,8 @@ Route::get('/member-limitation',[SettingController::class, 'memberLimitation']);
 Route::post('/add-product',[ProductController::class, 'addProduct']);
 
 Route::get('/get-category-products/{id}',[ProductController::class, 'getCategoryProduct']);
+
+Route::get('/get-category-wise-products/{id}',[ProductController::class, 'getCategoryWiseProduct']);
 
 Route::get('/toggle-wishlist',[ProductController::class, 'toggleWishlist']);
 

@@ -1,5 +1,5 @@
 <template>
-    <div class="card no-margin-top qrcode_generate">
+    <div class="card no-margin-top qrcode_generate height_100">
         <div class="row margin-vertical-half align-items-center padding">
             <div class="table_mangment_heading col-40">
                 <h3 class="no-margin"> 
@@ -31,8 +31,8 @@
                 </div>
             </div>
         </div>
-        <div class="card-content">
-            <div class="data-table">
+        <div class="card-content height_100">
+            <div class="data-table height_100">
                 <table>
                    <thead>
                       <tr>
@@ -49,16 +49,16 @@
                             <td class="label-cell">01.</td>
                             <td>24, Sep 2022</td>
                             <td>24, Sep 2022</td>
-                            <td><img src="/images/ORcode.png" alt="Orcode"></td>
+                            <td><img src="/images/ORcode.png" alt="Orcode" ></td>
                             <td><span class="status_info status_expired">Expired</span></td>                       
                             <td>
                                 <div class="menu-item-dropdown">
                                     <div><i class="f7-icons">ellipsis</i></div>
                                     <div class="menu-dropdown menu-dropdown-right">
                                         <div class="menu-dropdown-content no-padding">
-                                            <a class="menu-dropdown-link menu-close padding-vertical" href="javascript:;"><img src="/images/downlaod.png" class="margin-right-half"> Download </a>
-                                            <a class="menu-dropdown-link menu-close padding-vertical active_text" href="javascript:;"><i class="f7-icons margin-right-half">trash</i>Delete </a>
-                                            <a class="menu-dropdown-link menu-close padding-vertical active_text" href="javascript:;"><i class="f7-icons">arrow_counterclockwise</i>Regenerate </a>
+                                            <button class="menu-dropdown-link font-13 height-40 button text-color-black"><img src="/images/downlaod.png" style="margin-right:11px;"> Download </button>
+                                            <button class="menu-dropdown-link font-13 height-40 active_text button" @click="removeqr()"><i class="f7-icons margin-right-half">trash</i>Delete </button>
+                                            <button class="menu-dropdown-link font-13 height-40 button text-color-black"><i class="f7-icons margin-right-half">arrow_counterclockwise</i>Regenerate </button>
                                         </div>
                                     </div>
                                 </div>
@@ -75,33 +75,14 @@
                                     <div><i class="f7-icons">ellipsis</i></div>
                                     <div class="menu-dropdown menu-dropdown-right">
                                         <div class="menu-dropdown-content no-padding">
-                                            <a class="menu-dropdown-link menu-close padding-vertical" href="javascript:;"><img src="/images/downlaod.png" class="margin-right-half"> Download </a>
-                                            <a class="menu-dropdown-link menu-close padding-vertical active_text" href="javascript:;"><i class="f7-icons margin-right-half">trash</i>Delete </a>
-                                            <a class="menu-dropdown-link menu-close padding-vertical active_text" href="javascript:;"><i class="f7-icons">arrow_counterclockwise</i>Regenerate </a>
+                                            <button class="menu-dropdown-link font-13 height-40 button text-color-black"><img src="/images/downlaod.png" style="margin-right:11px;"> Download </button>
+                                            <button class="menu-dropdown-link font-13 height-40 active_text button" @click="removeqr()"><i class="f7-icons margin-right-half">trash</i>Delete </button>
+                                            <button class="menu-dropdown-link font-13 height-40 button text-color-black"><i class="f7-icons margin-right-half">arrow_counterclockwise</i>Regenerate </button>
                                         </div>
                                     </div>
                                 </div>
                             </td>
-                        </tr>
-                        <tr>
-                            <td class="label-cell">03.</td>
-                            <td>24, Sep 2022</td>
-                            <td>24, Sep 2022</td>
-                            <td><img src="/images/ORcode.png" alt="Orcode"></td>
-                            <td><span class="status_info status_ongoing">Ongoing</span></td>                       
-                            <td>
-                                <div class="menu-item-dropdown">
-                                    <div><i class="f7-icons">ellipsis</i></div>
-                                    <div class="menu-dropdown menu-dropdown-right">
-                                        <div class="menu-dropdown-content no-padding">
-                                            <a class="menu-dropdown-link menu-close padding-vertical" href="javascript:;"><img src="/images/downlaod.png" class="margin-right-half"> Download </a>
-                                            <a class="menu-dropdown-link menu-close padding-vertical active_text" href="javascript:;"><i class="f7-icons margin-right-half">trash</i>Delete </a>
-                                            <a class="menu-dropdown-link menu-close padding-vertical active_text" href="javascript:;"><i class="f7-icons">arrow_counterclockwise</i>Regenerate </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
+                        </tr>                        
                         <tr>
                             <td class="label-cell">04.</td>
                             <td>24, Sep 2022</td>
@@ -113,14 +94,34 @@
                                     <div><i class="f7-icons">ellipsis</i></div>
                                     <div class="menu-dropdown menu-dropdown-right">
                                         <div class="menu-dropdown-content no-padding">
-                                            <a class="menu-dropdown-link menu-close padding-vertical" href="javascript:;"><img src="/images/downlaod.png" class="margin-right-half"> Download </a>
-                                            <a class="menu-dropdown-link menu-close padding-vertical active_text" href="javascript:;"><i class="f7-icons margin-right-half">trash</i>Delete </a>
-                                            <a class="menu-dropdown-link menu-close padding-vertical active_text" href="javascript:;"><i class="f7-icons">arrow_counterclockwise</i>Regenerate </a>
+                                            <button class="menu-dropdown-link font-13 height-40 button text-color-black"><img src="/images/downlaod.png" style="margin-right:11px;"> Download </button>
+                                            <button class="menu-dropdown-link font-13 height-40 active_text button open-confirm" @click="removeqr()"><i class="f7-icons margin-right-half">trash</i>Delete </button>
+                                            <button class="menu-dropdown-link font-13 height-40 button text-color-black"><i class="f7-icons margin-right-half">arrow_counterclockwise</i>Regenerate </button>
                                         </div>
                                     </div>
                                 </div>
                             </td>
-                        </tr>
+                        </tr>                       
+                        <tr>
+                            <td class="label-cell">04.</td>
+                            <td>24, Sep 2022</td>
+                            <td>24, Sep 2022</td>
+                            <td><img src="/images/ORcode.png" alt="Orcode"></td>
+                            <td><span class="status_info status_ongoing">Ongoing</span></td>                       
+                            <td>
+                                <div class="menu-item-dropdown">
+                                    <div><i class="f7-icons">ellipsis</i></div>
+                                    <div class="menu-dropdown menu-dropdown-right">
+                                        <div class="menu-dropdown-content no-padding">
+                                            <button class="menu-dropdown-link font-13 height-40 button text-color-black"><img src="/images/downlaod.png" style="margin-right:11px;"> Download </button>
+                                            <button class="menu-dropdown-link font-13 height-40 active_text button"><i class="f7-icons margin-right-half">trash</i>Delete </button>
+                                            <button class="menu-dropdown-link font-13 height-40 button text-color-black"><i class="f7-icons margin-right-half">arrow_counterclockwise</i>Regenerate </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr> 
+              
                    </tbody>
                 </table>             
             </div>
@@ -130,29 +131,31 @@
         <div class="qrcode-form">           
             <div class="padding margin-top">
                 <div class="list no-hairlines no-margin">
-                    <ul>
-                      <li class="item-content item-input margin-bottom-half no-padding">
-                        <div class="item-inner no-padding">
-                          <div class="item-input-wrap">
-                            <input type="text" placeholder="Start Date - Sep 2022" />                            
-                          </div>
-                        </div>
-                      </li>
-                      <li class="item-content item-input margin-bottom-half no-padding">
-                        <div class="item-inner no-padding">
-                          <div class="item-input-wrap">
-                            <input type="text" placeholder="End Date - Aug 2022" />
-                          </div>
-                        </div>
-                      </li>
-                      <li class="item-content item-input no-padding">
-                        <div class="item-inner no-padding">
-                          <div class="item-input-wrap" style="border-radius:10px">
-                            <button type="button" class="button button-raised button-large popup-button" style="background-color: rgb(243, 62, 62); color: rgb(255, 255, 255); border-radius:10px">Apply</button>
-                          </div>
-                        </div>
-                      </li>
-                    </ul>
+                    <form action="">
+                        <ul>
+                        <li class="item-content item-input margin-bottom-half no-padding">
+                            <div class="item-inner no-padding">
+                                <div class="item-input-wrap">
+                                    <input type="month" placeholder="Start Date - Sep 2022" />                            
+                                </div>
+                            </div>
+                        </li>
+                        <li class="item-content item-input margin-bottom-half no-padding">
+                            <div class="item-inner no-padding">
+                                <div class="item-input-wrap">
+                                    <input type="month" value="2014-04-30"  class="input-with-value" placeholder="Please choose..." />
+                                  </div>
+                            </div>
+                        </li>
+                        <li class="item-content item-input no-padding">
+                            <div class="item-inner no-padding">
+                                <div class="item-input-wrap" style="border-radius:10px">
+                                    <button type="button" class="button button-raised button-large popup-button" style="background-color: rgb(243, 62, 62); color: rgb(255, 255, 255); border-radius:10px">Apply</button>
+                                </div>
+                            </div>
+                        </li>
+                        </ul>
+                    </form>
                 </div>                
             </div>            
         </div>
@@ -220,11 +223,39 @@ export default {
 
         this.$root.activationMenu('reporting');
     },
+    methods:{
+        removeqr(){
+            console.log("hello")
+            f7.dialog.confirm('Are you sure delete the category?', () => {
+               
+            });
+            setTimeout(() => {
+                $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });
+                $('.dialog-title').html("<img src='/images/cross.png'>");
+                $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
+                $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
+                $('.dialog-button').eq(1).removeClass('text-color-black');
+                $('.dialog-buttons').addClass('margin-top no-margin-bottom')
+            }, 200);
+        }
+       
+    }
     
 }
 </script>
 <style scoped>
-
+.font-13{
+    font-size: 13px;
+}
+.height-40 {
+    height: 40px;
+}
+.qrcode_generate.card{
+    box-shadow: none !important;
+}
+.height_100{
+    height: 100%;
+}
 .qrcode_generate_popup .button{
     box-shadow: none;
     border: 0.5px solid #999999;
@@ -297,6 +328,15 @@ export default {
 }
 .active_text{
     color: rgba(243, 62, 62, 1) !important;
+}
+.qrcode_popup .simple-list li:after, .qrcode_popup .links-list a:after, .qrcode_popup .list .item-inner:after{
+    background-color: transparent !important;
+}
+.menu-dropdown-link::before{
+    content: none !important;
+}
+.active-state{
+    background-color: transparent !important;
 }
 @media screen and (max-width:991px) {
     .qrcode_generate .menu-item-dropdown-right .menu-dropdown-content, .qrcode_generate .menu-dropdown-right .menu-dropdown-content{

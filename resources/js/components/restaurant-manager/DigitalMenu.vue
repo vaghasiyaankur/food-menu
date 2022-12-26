@@ -88,7 +88,7 @@ export default {
     },
     methods: {
         getCategories() {
-            axios.post('/api/get-categories-list')
+            axios.post('/api/get-category-list')
             .then((res) => {
                 this.product_category = res.data;
                 this.getProducts(this.product_category[0].id);
@@ -96,7 +96,7 @@ export default {
         },
         getProducts(id) {
             this.sliderActive = id;
-            axios.get('/api/get-category-products/'+id)
+            axios.get('/api/get-category-wise-products/'+id)
             .then((res) => {
                 this.categoryName = res.data.category_languages[0].name;
                 this.product_subcategory = res.data.sub_category;
