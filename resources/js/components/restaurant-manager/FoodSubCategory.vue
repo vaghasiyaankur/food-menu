@@ -312,16 +312,6 @@ export default {
 .subcategory-list-section{
     margin-top:77px;
 }
-
-
-/*.item-input-wrap {
-    width: 100%;
-    background: #F0F0F0;
-    border: 0.5px solid #DCDCDC;
-    border-radius: 7px;
-    height: auto;
-}*/
-
 .bg-karaka-orange {
     background: #EE4925;
 }
@@ -339,13 +329,6 @@ export default {
     font-size: 20px;
     line-height: 24px;
 }
-
-/*#searchData {
-    width: 85%;
-}*/
-
-
-
 .popup_title{
     font-weight: 500;
     font-size: 18px;

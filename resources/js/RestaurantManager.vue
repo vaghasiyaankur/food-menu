@@ -128,13 +128,14 @@
                 </div>
             </f7-navbar>
         </div>
-        <f7-view url="/" :main="true" class="safe-areas" :master-detail-breakpoint="768" @notification="notification"></f7-view>
-        
+        <f7-view url="/" :main="true" class="safe-areas" :master-detail-breakpoint="768" @notification="notification"></f7-view>                
         <div class="overlay">
             <div class="overlayDoor"></div>
             <div class="overlayContent">            
-                    <div class="inner">
+                    <div class="inner text-align-center">
                         <img src="/images/loading.gif" alt="Loading..">
+                        <p class="text-align-center font__bold font-22">Loading....</p>
+                        <p class="text-align-center font-18">Please wait,it take a few seconds.</p>
                     </div>
                 <!-- <div class="skip">
                 </div> -->
@@ -283,14 +284,21 @@ export default {
 /*body.loaded {
     overflow-y: auto;
   }*/
-  
+  .font__bold{
+    font-weight: 700;
+  }
   .overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 100000000;
+    z-index: 9999;
+  }
+  .overlay.loaded{
+    z-index: -1;
+    transition: 0.5s cubic-bezier(0.77, 0, 0.18, 1);
+    transition-delay: 0.8s;
   }
   .overlay .overlayDoor:before, .overlay .overlayDoor:after {
     content: "";
@@ -327,25 +335,6 @@ export default {
     flex-direction: column;
     transition: 0.5s cubic-bezier(0.77, 0, 0.18, 1);
   }
-  /*.overlay .overlayContent .skip {
-    display: block;
-    width: 130px;
-    text-align: center;
-    margin: 50px auto 0;
-    cursor: pointer;
-    color: #fff;
-    font-family: "Nunito";
-    font-weight: 700;
-    padding: 12px 0;
-    border: 2px solid #fff;
-    border-radius: 3px;
-    transition: 0.2s ease;
-  }
-  .overlay .overlayContent .skip:hover {
-    background: #ddd;
-    color: #444;
-    border-color: #ddd;
-  }*/
   
   /*.loader {
     width: 128px;

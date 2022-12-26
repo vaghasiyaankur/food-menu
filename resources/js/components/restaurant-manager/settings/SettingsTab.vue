@@ -158,20 +158,68 @@ export default {
 .font-22 {
     font-size: 22px;
 }
-
-.tab-link{
-    background-image: url('/images/tab_bg.png');
-    background-color: transparent;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    margin: 5px;
+.tabbar .tab-link, .tabbar-labels .tab-link, .tabbar .link, .tabbar-labels .link{
+	position: relative;
+	width: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color:  #E1E1E1;
+	margin: 0 auto;
+	border-top-right-radius: 15px;
+	border-top-left-radius: 15px;
+	padding: 12px;
+    overflow: inherit;
+    flex: 1;
+    margin: 15px;
+    color: #555555;
 }
-.tab-link-active{
-    background-image: url('/images/active_tab_bg.png');
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    color:#fff !important;
-    background-color: transparent;
+.tabbar .tab-link-active, .tabbar-labels .tab-link-active{
+    background-color:  #F33E3E;
+    color: #ffffff;
+}
+.tab-link.tab-link-active::after{
+    content: "";
+	position: absolute;
+	right: -9px;
+	bottom: 0px;
+	background: none;
+	width: 1.125rem;
+	height: 1.125rem;
+    background: radial-gradient(circle at 0 0, transparent 1.125rem, #F33E3E 1.25rem);
+}
+.tab-link.tab-link-active::before{
+    content: "";
+	position: absolute;
+	right: -18px;
+	bottom: 0px;
+	background: none;
+	width: 1.125rem;
+	height: 1.125rem;
+    background: radial-gradient(circle at 100% 0, transparent 1.125rem, #F33E3E 1.25rem);
+}
+.toolbar-inner{
+    overflow: inherit !important;
+}
+.tab-link::after {
+	content: "";
+	position: absolute;
+	left: -18px;
+	bottom: 0px;
+	background: none;
+    width: 1.125rem;
+    height: 1.125rem;
+    background: radial-gradient(circle at 0 0, transparent 1.125rem, #e1e1e1 1.25rem);
+}
+.tab-link::before {
+	content: "";
+	position: absolute;
+	right: -18px;
+	bottom: 0px;
+	background: none;
+    width: 1.125rem;
+    height: 1.125rem;
+    background: radial-gradient(circle at 100% 0, transparent 1.125rem, #e1e1e1 1.25rem);
 }
 
 .toolbar{

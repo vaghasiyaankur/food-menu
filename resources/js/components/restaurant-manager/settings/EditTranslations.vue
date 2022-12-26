@@ -140,13 +140,6 @@
     }
 </script>
 <style scoped>
-/*.edit_tranaslation .search__data{
-    width: 100%;
-    background: #FFFFFF;
-    border:1px solid #555555;;
-    border-radius: 5px;
-    height: auto;
-  }*/
   .height_40{
     height: 40px;
   }

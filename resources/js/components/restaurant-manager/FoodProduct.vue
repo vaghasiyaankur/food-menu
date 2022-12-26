@@ -4,15 +4,15 @@
             <div class="product_list_card no-margin">
                 <div class="card_header">
                     <div class="row margin-horizontal align-items-center">
-                        <div class="col-20">
+                        <div class="col-100 large-20 medium-15">
                             <h3>
                                 <!-- <a href="javscript:;" class="text-color-black padding-right-half"><i class="f7-icons font-22" style="vertical-align: bottom;">arrow_left</i></a> -->
                                 <span class="page_heading">Product</span>
                             </h3>
                         </div>
-                        <div class="col-80">
+                        <div class="col-100 large-80 medium-85">
                             <div class="row align-items-center">
-                                <div class="col-30">
+                                <div class="col-100 large-30 medium-25">
                                     <div class="item-content item-input">
                                         <div class="item-inner">
                                             <div class="item-input-wrap searchData row padding-half height_40 search_data_wrap">
@@ -27,7 +27,7 @@
                                         <div id="selection-concise" class="list no-margin category--list">
                                             <div id="select-concise" class="input-dropdown-wrap" @click="showCategoryList = !showCategoryList">{{ active_category_name }}</div>
                                             <ul id="category--list" class="dropdown_list" :class="{ 'd-none' : showCategoryList }">
-                                                <li class="concise p-1" :class="{ 'active': active_category == key }" v-for="(category,key) in categoryList" :key="category" @click="getSubCategoryList(key); active_category_name = category;"><span>{{ category }}</span></li>
+                                                <li class="concise p-1 padding-half" :class="{ 'active': active_category == key }" v-for="(category,key) in categoryList" :key="category" @click="getSubCategoryList(key); active_category_name = category;"><span>{{ category }}</span></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -37,12 +37,12 @@
                                         <div id="selection-concise" class="list no-margin subcategory--list">
                                             <div id="select-concise" class="input-dropdown-wrap" @click="showSubCategoryList = !showSubCategoryList">{{ active_sub_category_name }}</div>
                                             <ul id="subcategory--list" class="dropdown_list" :class="{ 'd-none' : showSubCategoryList }">
-                                                <li class="concise p-1" :class="{ 'active': active_sub_category == key }" v-for="(subCategory,key) in subCategoryList" :key="subCategory" @click="getProductList(key); active_sub_category_name = subCategory;"><span>{{ subCategory }}</span></li>
+                                                <li class="concise p-1 padding-half" :class="{ 'active': active_sub_category == key }" v-for="(subCategory,key) in subCategoryList" :key="subCategory" @click="getProductList(key); active_sub_category_name = subCategory;"><span>{{ subCategory }}</span></li>
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-20 padding-left-half padding-right-half">
+                                <div class="col-100 large-20 medium-25 padding-left-half padding-right-half">
                                     <button class="button bg-dark text-color-white padding height_40 popup-open"
                                     data-popup="#product_popup" @click="blankform"><i class="f7-icons font-22 margin-right-half">plus_square</i> Add Product</button>
                                 </div>
@@ -304,6 +304,16 @@ export default {
 </script>
 
 <style scoped>
+.product_list_card .dropdown_list{
+    position: absolute;
+    width: 100%;
+    box-shadow: 0px 0px 14px rgba(34, 34, 34, 0.1);
+    border-radius: 5px;
+}
+.list ul::before {
+    background-color: #fff !important;
+    height: 0;
+}
 .product_list_card .f-concise #select-concise{
     border: 1px solid #555555;
     border-radius: 7px;
@@ -322,18 +332,18 @@ export default {
       align-items: center;
   }
 
-  .scroll__arrow {
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-  }
+.scroll__arrow {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+}
   .scroll__arrow .arrow_button i {
     font-size: 18px;
     color: #999999;
     transition: all 0.5s ease;
   }
 
-  .scroll_change_arrow{
+.scroll_change_arrow{
     transform: rotate(180deg);
   }
 
@@ -358,121 +368,118 @@ export default {
 .product-list-section .product_list_card .card.product_lists .product_list .button{
     box-shadow:none;
 }
-    .page-food-category {
-        background: #f1f1f1;
-    }
+.page-food-category {
+    background: #f1f1f1;
+}
 
-    .height-40 {
-        height: 40px;
-    }
+.height-40 {
+    height: 40px;
+}
 
-    .height-36 {
-        height: 36px;
-    }
+.height-36 {
+    height: 36px;
+}
 
-    .bg-dark {
-        background: #38373D;
-    }
-    .border-bottom {
-        border-bottom: 1px solid #EAEAEA;
-    }
+.bg-dark {
+    background: #38373D;
+}
+.border-bottom {
+    border-bottom: 1px solid #EAEAEA;
+}
 
-    .bg-pink {
-        background: #F33E3E;
-    }
+.bg-pink {
+    background: #F33E3E;
+}
 
-    .text-color-pink {
-        color: #F33E3E;
-    }
+.text-color-pink {
+    color: #F33E3E;
+}
 
-    .font-22 {
-        font-size: 22px;
-    }
-    .font-18{
-        font-size: 18px;
-    }
-    #product_popup .item-input-wrap {
+.font-22 {
+    font-size: 22px;
+}
+.font-18{
+    font-size: 18px;
+}
+#product_popup .item-input-wrap {
+    width: 100%;
+    background: #F0F0F0;
+    border: 0.5px solid #DCDCDC;
+    border-radius: 7px;
+    height: auto;
+}
+.bg-karaka-orange{
+    background: #EE4925;
+}
+.card-title{
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+}
+.product_list:nth-of-type(even){
+    background-color:#f7f7f7
+}
+.product_lists{
+    position: relative;
+}
+.according_button{
+    position: absolute;
+    bottom: -26px;
+    left: 48%;
+}
+.product-detail{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+}
+.option-button{
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 17px;
+}
+.popup_title{
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: #38373D;
+}
+.popup_button .button{
+    width: 130px;
+    border-radius: 10px;
+}
+.arrow_button {
+    width: 30px;
+    height: 30px;
+    background: #ffffff;
+    box-shadow: 0px 1px 10px rgb(51 51 51 / 10%);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.scroll__arrow{
+    position:absolute;
+    bottom: 0;
+    left: 50%;
+}
+.position-relative{
+    position: relative;
+}
+.subcategory__list ,.category__list{
+    position: absolute;
+    width: 100%;
+    z-index: 999;
+    background-color: #fff;
+    box-shadow: 0.7px 0.7px 5px rgb(0 0 0 / 20%);
+    border-radius: 7px;
+    max-height: 220px;
+    overflow: auto;
+}
+@media screen and (max-width:820px) {
+    .header-links {
         width: 100%;
-        background: #F0F0F0;
-        border: 0.5px solid #DCDCDC;
-        border-radius: 7px;
-        height: auto;
     }
-    .bg-karaka-orange{
-        background: #EE4925;
-    }
-    .card-title{
-        font-weight: 600;
-        font-size: 20px;
-        line-height: 24px;
-    }
-    /*#searchData {
-        width: 87%;
-    }*/
-    .product_list:nth-of-type(even){
-        background-color:#f7f7f7
-    }
-    .product_lists{
-        position: relative;
-    }
-    .according_button{
-        position: absolute;
-        bottom: -26px;
-        left: 48%;
-    }
-    .product-detail{
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 19px;
-    }
-    .option-button{
-        font-weight: 400;
-        font-size: 13px;
-        line-height: 17px;
-    }
-    .popup_title{
-        font-weight: 500;
-        font-size: 18px;
-        line-height: 22px;
-        color: #38373D;
-    }
-    .popup_button .button{
-        width: 130px;
-        border-radius: 10px;
-    }
-    .arrow_button {
-        width: 30px;
-        height: 30px;
-        background: #ffffff;
-        box-shadow: 0px 1px 10px rgb(51 51 51 / 10%);
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .scroll__arrow{
-        position:absolute;
-        bottom: 0;
-        left: 50%;
-    }
-    .position-relative{
-        position: relative;
-    }
-    .subcategory__list ,.category__list{
-        position: absolute;
-        width: 100%;
-        z-index: 999;
-        background-color: #fff;
-        box-shadow: 0.7px 0.7px 5px rgb(0 0 0 / 20%);
-        border-radius: 7px;
-        max-height: 220px;
-        overflow: auto;
-    }
-    @media screen and (max-width:820px) {
-        .header-links {
-            width: 100%;
-        }
-    }
+}
 </style>
 
 <style>

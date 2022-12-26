@@ -136,11 +136,6 @@
     }
 </script>
 <style scoped>
-/*.card-content .data-table td{
-    padding-top: 15px;
-    padding-bottom: 15px;
-    white-space: nowrap;
-}*/
 .add_table_button button{
     background-color: #38373D;
     box-shadow: 0px 2px 4px rgba(172, 172, 172, 0.45);
@@ -205,19 +200,6 @@
 .font-13{
     font-size: 13px;
 }
-/*.data-table thead th:not(.sortable-cell-active), .data-table thead td:not(.sortable-cell-active){
-    font-weight: 600;
-    font-size: 15px;
-    line-height: 18px;
-    color: #555555;
-    background-color: #F4F4F4;
-}
-.data-table tbody td:before, .data-table tbody th:before{
-    background-color: transparent !important;
-}
-.data-table tbody tr:nth-child(even){
-    background-color: #FAFAFA;
-}*/
 .data-table .data-table-pagination{
     justify-content: end;
 }

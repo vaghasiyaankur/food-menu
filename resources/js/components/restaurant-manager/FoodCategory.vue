@@ -338,27 +338,9 @@ export default {
 .font-22 {
     font-size: 22px;
 }
-
-/*.item-input-wrap {
-    width: 100%;
-    background: #F0F0F0;
-    border: 0.5px solid #DCDCDC;
-    border-radius: 7px;
-    height: auto;
-}*/
-
-/*  #searchData {
-    width: 85%;
-}*/
-
 .height-36 {
     height: 36px;
 }
-
-/*.category-count {
-    border-right: 1px solid #D8D8D8;
-}*/
-
 .category_image {
     background: #FFE3E3;
     filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.2));
@@ -379,11 +361,6 @@ export default {
 .category-list-section .category-list .button {
     box-shadow: none;
 }
-
-/*.action-buttons button {
-    text-transform: capitalize;
-}*/
-
 .border__right {
     border-right: 1px solid #D8D8D8;
     border-radius: 0;
@@ -524,5 +501,9 @@ export default {
 .popup-button{
     text-transform: capitalize !important;
 }
-
+@media screen and (max-width:991px) {
+    .popup {
+        left: 27% !important;
+    }
+}
 </style>

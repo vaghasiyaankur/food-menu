@@ -127,7 +127,7 @@
             </div>
         </div>
     </div>
-    <div id="qrcode_popup" class="popup qrcode_popup" style="position: fixed; display: block; border-radius: 15px; top:37% !important; left:34% !important;">
+    <div id="qrcode_popup" class="popup qrcode_popup" style="position:fixed; border-radius: 15px; top:37% !important; left:34% !important;">
         <div class="qrcode-form">           
             <div class="padding margin-top">
                 <div class="list no-hairlines no-margin">
@@ -261,6 +261,7 @@ export default {
     border: 0.5px solid #999999;
     color:  #999999;
     font-weight: 500;
+    border-radius: 7px;
 }
 
 .qrcode_generate .menu-dropdown-content a{
@@ -289,6 +290,10 @@ export default {
 	border-top-right-radius: 5px;
 	width: 180px;
 }
+.qrcode_popup .qrcode-form .button.active-state{
+    background-color: rgb(243, 62, 62) !important;
+    color: rgb(255, 255, 255) !important;
+}
 .status_info{
     display: flex;
     justify-content: center;
@@ -316,7 +321,6 @@ export default {
 .item-input-wrap{
 	width: 100%;
 	background: #ffffff;
-	border: 0.5px solid #DCDCDC;
 	border-radius: 7px;
 	height: auto;
 }
@@ -324,7 +328,8 @@ export default {
 	background-color: #fff;
 	border-radius: 8px;
 	padding: 12px;
-    height: 40px;
+    height: 40px;    
+	border: 0.5px solid #999999;
 }
 .active_text{
     color: rgba(243, 62, 62, 1) !important;
@@ -341,6 +346,9 @@ export default {
 @media screen and (max-width:991px) {
     .qrcode_generate .menu-item-dropdown-right .menu-dropdown-content, .qrcode_generate .menu-dropdown-right .menu-dropdown-content{
         right: 31px;
+    }
+    #qrcode_popup{
+        transform: translate(-18%);
     }
 }
 </style>
