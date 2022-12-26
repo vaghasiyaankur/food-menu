@@ -160,4 +160,13 @@ class CategoryController extends Controller
         }])->whereHas('subCategory.products')->get();
         return response()->json($category);
     }
+
+    public function getCategoryList()
+    {
+        $lang_id = SettingHelper::managerLanguage();
+        $category = Category::with(['categoryLanguages' => function($q) use ($lang_id){
+            $q->where('language_id',$lang_id);
+        }])->whereHas('subCategory.products')->get();
+        return response()->json($category);
+    }
 }
