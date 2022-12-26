@@ -481,7 +481,6 @@ export default {
     }
 }
 </style>
-
 <style>
 
     .search-icon{
