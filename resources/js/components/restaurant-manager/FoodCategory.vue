@@ -216,7 +216,7 @@ export default {
                 $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
                 $('.dialog-button').eq(1).removeClass('text-color-black');
                 $('.dialog-buttons').addClass('margin-top no-margin-bottom')
-            }, 200);
+            }, 50);
         },
         addCategory() {
             console.log(this.category.name);

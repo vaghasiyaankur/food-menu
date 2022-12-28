@@ -182,50 +182,36 @@ export default {
     background-color:  #F33E3E;
     color: #ffffff;
 }
-.tab-link.tab-link-active::after{
-    content: "";
-	position: absolute;
-	right: -9px;
-	bottom: 0px;
-	background: none;
-	width: 1.125rem;
-	height: 1.125rem;
-    background: radial-gradient(circle at 0 0, transparent 1.125rem, #F33E3E 1.25rem);
-}
-.tab-link.tab-link-active::before{
-    content: "";
-	position: absolute;
-	right: -18px;
-	bottom: 0px;
-	background: none;
-	width: 1.125rem;
-	height: 1.125rem;
-    background: radial-gradient(circle at 100% 0, transparent 1.125rem, #F33E3E 1.25rem);
-}
+
 .toolbar-inner{
     overflow: inherit !important;
 }
 .tab-link::after {
 	content: "";
 	position: absolute;
-	left: -18px;
-	bottom: 0px;
-	background: none;
-    width: 1.125rem;
-    height: 1.125rem;
-    background: radial-gradient(circle at 0 0, transparent 1.125rem, #e1e1e1 1.25rem);
-}
-.tab-link::before {
-	content: "";
-	position: absolute;
-	right: -18px;
+	right: -17px;
 	bottom: 0px;
 	background: none;
     width: 1.125rem;
     height: 1.125rem;
     background: radial-gradient(circle at 100% 0, transparent 1.125rem, #e1e1e1 1.25rem);
 }
-
+.tab-link::before {
+	content: "";
+	position: absolute;
+	left: -17px;
+	bottom: 0px;
+	background: none;
+    width: 1.125rem;
+    height: 1.125rem;
+    background: radial-gradient(circle at 0 0, transparent 1.125rem, #e1e1e1 1.25rem);
+}
+.tab-link.tab-link-active::after{
+    background: radial-gradient(circle at 100% 0, transparent 1.125rem, #F33E3E 1.25rem);
+}
+.tab-link.tab-link-active::before{
+    background: radial-gradient(circle at 0 0, transparent 1.125rem, #F33E3E 1.25rem);
+}
 .toolbar{
     background-color: transparent !important;
     z-index: 98;

@@ -586,7 +586,7 @@ input[type=number] {
 }
 @media screen and (max-width:820px){
     .dialog{
-        top: 38% !important;
+        top: 50% !important;
     }
 }
 </style>
