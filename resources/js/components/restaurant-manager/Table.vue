@@ -126,7 +126,7 @@
                                                                         </div>
                                                                     </li>
                                                                     <li v-if="no_table_list_show && max_number_table_id == table.id">
-                                                                        <div class="floor_number display-flex align-items-center justify_content_between w-100">
+                                                                        <div class="floor_number display-flex align-items-center justify_content_between w-100 no-cap">
                                                                             <div class="floor_name">
                                                                                 <span>Not above capacity table</span>
                                                                             </div>
@@ -248,26 +248,44 @@ export default {
         },
         openFloorList(id){
             $('.table_dropdwon').removeClass('floor_dropdown_visible');
+            $(".table__list").removeClass('add_left_before');
+            $(".table__list").removeClass('add_right_before');
             $('.floor_dropdwon').toggleClass('floor_dropdown_visible');
             var ele = document.querySelector(".popover-click-"+id);
             var bounding = ele.getBoundingClientRect();
             if(screen.width > (bounding.left + bounding.width + 285)) {
-                $(".f_f"+id).css('left', '100%');
+                $(".f_f"+id).css('left', '189px');
+                $(".floor__list").removeClass('add_left_before');
+                $(".floor__list").toggleClass('add_right_before');
             }else{
-                $(".f_f"+id).css('left', '-140.5%');
+                $(".f_f"+id).css('left', '-260px');
+                $(".floor__list").removeClass('add_right_before');
+                $(".floor__list").toggleClass('add_left_before');
             }
+            var height = (parseInt($(".f_f"+id).height())/2) + 22;
+            $(".f_f"+id).css('transform', 'translateY(-'+height+'px');
+            // console.log($(".f_f"+id).height());
+            // transform: translateY(-1em);
         },
         openTableList(order) {
             $('.floor_dropdwon').removeClass('floor_dropdown_visible');
+            $(".floor__list").removeClass('add_left_before');
+            $(".floor__list").removeClass('add_right_before');
             $('.table_dropdwon').toggleClass('floor_dropdown_visible');
             var ele = document.querySelector(".popover-click-" +order.id);
             var bounding = ele.getBoundingClientRect();
             if(screen.width > (bounding.left + bounding.width + 285)) {
-                $(".t_f" + order.id).css('left', '100%');
+                $(".t_f" + order.id).css('left', '190px');
+                $(".table__list").removeClass('add_left_before');
+                $(".table__list").toggleClass('add_right_before');
             }else{
-                $(".t_f" +order.id).css('left', '-135%');
+                $(".t_f" +order.id).css('left', '-249px');
+                $(".table__list").removeClass('add_right_before');
+                $(".table__list").toggleClass('add_left_before');
             }
             $(".table_dropdwon").css('min-width', '240px');
+
+        
 
             if (order.person < parseInt(this.max_number_table_data.capacity_of_person)) {
                 this.no_table_list_show = false;
@@ -279,10 +297,18 @@ export default {
             if (order.table_id == this.max_number_table_data.id && person == parseInt(this.max_number_table_data.capacity_of_person)) {
                 this.no_table_list_show = true;
             }
+            
+            var height = (parseInt($(".t_f"+order.id).height())/2) + 22;
+            console.log(height);
+            $(".t_f"+order.id).css('transform', 'translateY(-'+height+'px');
         },
         removebackdrop(){
-            $('.floor_dropdwon').removeClass('floor_dropdown_visible');
-            $('.table_dropdwon').removeClass('floor_dropdown_visible');
+        $(".floor__list").removeClass('add_left_before');
+        $('.floor__list').removeClass('add_right_before');
+        $(".table__list").removeClass('add_left_before');
+        $('.table__list').removeClass('add_right_before');
+        $('.floor_dropdwon').removeClass('floor_dropdown_visible');
+        $('.table_dropdwon').removeClass('floor_dropdown_visible');
         },
         secondIncrement(second, orderIndex, tableIndex,rowIndex) {
             this.intervalId = setInterval(() => {
@@ -819,7 +845,7 @@ p.count__text{
     overflow-y: auto;
     border-radius: 7px;
 }
-.floor_dropdwon::before{
+/*.floor_dropdwon::before{
 content: '';
     background: var(--f7-popover-bg-color);
     width: 26px;
@@ -829,7 +855,7 @@ content: '';
     top: 0;
     border-radius: 3px;
     transform: rotate(45deg);
-}
+}*/
 .table_dropdwon{
     max-width: 240px;
     min-width: 240px;
@@ -845,6 +871,54 @@ content: '';
     max-height: 360px;
     overflow-y: auto;
     border-radius: 7px;
+}
+.floor__list.add_right_before::before {
+    position: absolute;
+    content: "";
+    width: 19px;
+    height: 19px;
+    border-radius: 3px;
+    background: #fff;
+    right: -9px;
+    bottom: 63px;
+    transform: rotate(45deg);
+    opacity: 1;
+}
+.floor__list.add_left_before::before {
+    position: absolute;
+    content: "";
+    width: 19px;
+    height: 19px;
+    border-radius: 3px;
+    background: #fff;
+    left: -9px;
+    bottom: 63px;
+    transform: rotate(45deg);
+    opacity: 1;
+}
+.table__list.add_right_before::before {
+    position: absolute;
+    content: "";
+    width: 19px;
+    height: 19px;
+    border-radius: 3px;
+    background: #fff;
+    right: -9px;
+    bottom: 21px;
+    transform: rotate(45deg);
+    opacity: 1;
+}
+.table__list.add_left_before::before {
+    position: absolute;
+    content: "";
+    width: 19px;
+    height: 19px;
+    border-radius: 3px;
+    background: #fff;
+    left: -9px;
+    bottom: 21px;
+    transform: rotate(45deg);
+    opacity: 1;
 }
 .floor_dropdown_visible{
     opacity: 1;
