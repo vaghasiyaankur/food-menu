@@ -1,37 +1,5 @@
 <template>
     <f7-page>
-        <!-- <div class="nav-bar">
-            <f7-navbar class="navbar-menu bg-color-white" large transparent back-link="Back">
-                <div class="header-links display-flex align-items-center padding-right">
-                    <div class="row header-link justify-content-flex-end align-items-center">
-                        <div class=" padding-left-half padding-right-half height-40 nav-button">
-                            <a href="/reservation/" class="col link nav-link button button-raised bg-dark text-color-white padding">
-                                Reservation</a>
-                        </div>
-                        <div class="nav-button col-25">
-                            <div class="menu-item menu-item-dropdown">
-                                <div class="menu-item-content button button-raised text-color-white padding-left-half padding-right-half">Menu management
-                                    <i class="f7-icons">chevron_down</i>
-                                </div>
-                                <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
-                                    <div class="menu-dropdown-content bg-color-white no-padding">
-                                        <a href="#" class="menu-dropdown-link menu-close margin-horizontal no-padding"></a>
-                                        <a href="/" class="menu-dropdown-link menu-close text-color-pink">Table</a>
-                                        <a href="/food-category/" class="menu-dropdown-link menu-close text-color-pink margin-horizontal no-padding">Food Category</a>
-                                        <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food Menu</a>
-                                        <a href="/food-subcategory/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food subCategory</a>
-                                        <a href="/digital-menu/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Digital Menu</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class=" padding-left-half padding-right-half height-40 nav-button"><a href="/reporting/" class="link nav-link button button-raised text-color-white padding  bg-pink">Reporting</a></div>
-                        <div class="padding-left-half padding-right-half height-40"><button class="nav-botton button button-raised bg-dark text-color-white padding closeReservation" @click="$root.closeReservation()">Close reservation</button></div>
-                        <div class="padding-left-half padding-right-half height-40"><a href="/settings/" class="nav-link button button-raised bg-dark text-color-white padding">Settings</a></div>
-                    </div>
-                </div>
-            </f7-navbar>
-        </div> -->
         <div class="reporting_section">
             <div class="row padding-vertical margin-horizontal align-items-center">
                 <div class="col-60">
@@ -43,15 +11,15 @@
                 <div class="col-40">
                     <div class="list no-hairlines reporting_calander no-margin">
                         <ul>
-                        <li>
-                            <div class="item-content item-input">
-                            <div class="item-inner no-padding-right   ">
-                                <div class="item-input-wrap input-dropdown-wrap">
-                                <input type="text" placeholder="Select date range" readonly="readonly" id="demo-calendar-range" />
+                            <li>
+                                <div class="item-content item-input">
+                                    <div class="item-inner no-padding-right   ">
+                                        <div class="item-input-wrap input-dropdown-wrap">
+                                            <input type="text" placeholder="Select date range" readonly="readonly" id="demo-calendar-range" />
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            </div>
-                        </li>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -110,27 +78,11 @@
                         <div class="card elevation-2">
                             <h3 class="card__heading margin padding-top">Total Orders</h3>
                             <f7-block>
-                                <!-- <f7-area-chart
-                                tooltip
-                                axis
-                                :axis-labels="totalOrderNumber"
-                                line-chart
-                                width="1000"
-                                height="1000"
-                                :datasets="[
-                                    {
-                                    label: 'Red data',
-                                    color: '#f00',
-                                    values: totalOrderValue,
-                                    },
-                                ]"
-                                /> -->
                                 <apexchart width="1100" height="310" type="line" :options="options" :series="series"></apexchart>
                             </f7-block>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </f7-page>
@@ -176,8 +128,11 @@ export default {
         f7AreaChart,
         apexchart
     },
+    beforeCreate() {
+        this.$root.addLoader();
+    },
     mounted() {
-    f7.calendar.create({
+        f7.calendar.create({
             inputEl: '#demo-calendar-range',
             rangePicker: true,
             numbers:true,
@@ -212,6 +167,7 @@ export default {
         });
 
         this.$root.activationMenu('reporting');
+        this.$root.removeLoader();
     },
     created() {
         this.report();

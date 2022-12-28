@@ -133,6 +133,9 @@
             f7Page,
             f7,
         },
+        beforeCreate() {
+            this.$root.addLoader();
+        },
         created() {
             this.page_number = this.page;
             this.reservationData(this.page_number);
@@ -173,6 +176,7 @@
             });
 
             this.$root.activationMenu('all-reservation');
+            this.$root.removeLoader();
         },
         methods : {
             reservationData(page) {
@@ -228,7 +232,6 @@
     }
 </script>
 <style scoped>
-
 .justify_content_between{
     justify-content:space-between !important;
 }
@@ -389,15 +392,14 @@
     background-color: #F33E3E !important;
     color: #fff !important;
 }
-::placeholder{
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 17px;
-    color: #555555;
-}
-
 </style>
 <style>
+::placeholder {
+    font-weight: 500 !important;
+    font-size: 14px;
+    line-height: 17px;
+    color: #555555 !important;
+}
 .height_40{
     height: 40px !important;
 }

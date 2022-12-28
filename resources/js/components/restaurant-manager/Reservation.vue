@@ -169,6 +169,9 @@ export default {
             showFloorId: 0,
         }
     },
+    beforeCreate() {
+        this.$root.addLoader();
+    },
     created() {
         // this.getFloors();
         this.getCategories();
@@ -176,7 +179,7 @@ export default {
     },
     mounted() {
         this.$root.activationMenu('reservation');
-        
+        this.$root.removeLoader();
     },
     methods: {
         getCategories() {

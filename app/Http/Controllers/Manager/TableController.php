@@ -33,7 +33,16 @@ class TableController extends Controller
             $q->orderBy('updated_at', 'ASC');
         }])->where('floor_id', $groundFloorId)->where('status', 1)->get();
 
-        $floorlist = Floor::select('id', 'name')->withCount('activetables')->get();
+        $floorlist = Floor::with(['activetables' => function($q){
+            $q->withCount('orders');
+        }])->select('id', 'name')->get();
+
+        foreach ($floorlist as $key => $floors) {
+            foreach ($floors->activetables as $key => $table) {
+                $floors['orders_count'] = $floors['orders_count'] + $table->orders_count;
+            }
+        }
+
         foreach($tables as $tkey=>$table){
             foreach($table->orders as $okey=>$order){
                 $tables[$tkey]['orders'][$okey]['reservation_time'] = date('h:i', strtotime($order->updated_at));
@@ -96,6 +105,16 @@ class TableController extends Controller
             }
         }
 
+        $floorlist = Floor::with(['activetables' => function($q){
+            $q->withCount('orders');
+        }])->select('id', 'name')->get();
+
+        foreach ($floorlist as $key => $floors) {
+            foreach ($floors->activetables as $key => $table) {
+                $floors['orders_count'] = $floors['orders_count'] + $table->orders_count;
+            }
+        }
+
         $total_table_number = Table::where('status', 1)->count();
         $table_list_with_order = Table::select('id')->where('status', 1)->withCount('orders')->get();
         $count = 0;
@@ -105,7 +124,7 @@ class TableController extends Controller
 
         $current_capacity = (100 - ($count / $total_table_number * 100));
         $max_table_cap = Table::where('floor_id', $request->id)->where('status', 1)->max('capacity_of_person');
-        return response()->json([ 'tables' => $tables, 'current_capacity' => $current_capacity,'max_table_cap'=>$max_table_cap ] , 200);
+        return response()->json([ 'tables' => $tables, 'current_capacity' => $current_capacity,'max_table_cap'=>$max_table_cap, 'floorlist' => $floorlist ] , 200);
     }
 
     /**

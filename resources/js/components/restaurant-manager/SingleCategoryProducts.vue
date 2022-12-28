@@ -153,6 +153,9 @@ export default {
 
         }
     },
+    beforeCreate() {
+        this.$root.addLoader();
+    },
     mounted() {
         $('.page-content').css('background', '#F7F7F7');
         this.getAllSubCategories();
@@ -160,6 +163,7 @@ export default {
         setTimeout(() => {
             this.getProducts();
         }, 400);
+        this.$root.removeLoader();
     },
     methods: {
         addProduct() {

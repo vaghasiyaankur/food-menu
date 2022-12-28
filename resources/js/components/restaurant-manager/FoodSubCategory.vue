@@ -158,6 +158,9 @@ export default {
 
         }
     },
+    beforeCreate() {
+        this.$root.addLoader();
+    },
     created() {
         this.getSubCategories();
     },
@@ -165,6 +168,7 @@ export default {
         $('.page-content').css('background', '#F7F7F7');
         this.getAllCategories();
         this.$root.activationMenu('menu_management');
+        this.$root.removeLoader();
     },
     methods: {
         getSubCategories() {

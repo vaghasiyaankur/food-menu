@@ -79,12 +79,16 @@ export default {
             product_subcategory : [],
         }
     },
+    beforeCreate() {
+        this.$root.addLoader();
+    },
     created() {
         $('.page-content').css('background', '#F7F7F7');
         this.getCategories();
     },
     mounted() {
         this.$root.activationMenu('menu_management');
+        this.$root.removeLoader();
     },
     methods: {
         getCategories() {

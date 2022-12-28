@@ -1,32 +1,5 @@
 <template>
     <f7-page color="bg-color-white">
-            <!-- <div class="header-links display-flex align-items-center padding-right" v-bind="dragOptions">
-                <div class="row header-link justify-content-flex-end align-items-center tablate_view_menu">
-                    <div class=" padding-left-half padding-right-half height-40 nav-button">
-                        <a href="/Reservation/" class="col link nav-link button button-raised bg-dark text-color-white padding">
-                            Reservation</a>
-                    </div>
-                    <div class="col-20 large-20 medium-25 nav-button">
-                        <div class="menu-item menu-item-dropdown">
-                            <div class="menu-item-content button button-raised bg-dark text-color-white padding-left-half padding-right-half">Menu management
-                                <i class="f7-icons">chevron_down</i>
-                            </div>
-                            <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
-                                <div class="menu-dropdown-content bg-color-white no-padding">
-                                    <a href="#" class="menu-dropdown-link menu-close margin-horizontal no-padding"></a>
-                                    <a href="/food-category/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food Category</a>
-                                    <a href="/food-subcategory/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food SubCategory</a>
-                                    <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food Menu</a>
-                                    <a href="/digital-menu/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Digital Menu</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class=" padding-left-half padding-right-half height-40 nav-button"><a href="/Reporting/" class="col link nav-link button button-raised bg-dark text-color-white padding">Reporting</a></div>
-                    <div class=" padding-left-half padding-right-half height-40 nav-button"><button class="col nav-link button button-raised bg-dark text-color-white padding closeReservation" @click="$root.closeReservation()">Close reservation</button></div>
-                    <div class=" padding-left-half padding-right-half height-40 nav-button"><a href="/settings/" class="col link nav-link button button-raised bg-dark text-color-white padding">Settings</a></div>
-                </div>
-            </div> -->
         <div class="table_main">
             <!-- ============= TABLE FLOOR SWIPER ============= -->
            <div class="table_floor_swiper">
@@ -38,107 +11,12 @@
                            <div class="swiper-wrapper padding-left-half">
                                  <div class="swiper-slide" :class="{'active' : floor.id == active_floor_id}"  v-for="floor in floorlist" :key="floor.id" @click="tableListFloorWise(floor.id)">
                                     <p class="no-margin text-align-center margin-vertical-half swiper_text display-flex">{{ floor.name }}
-                                        <span class="room_available color-blue">{{ floor.activetables_count }}</span>
+                                        <span class="room_available color-blue">{{ floor.orders_count }}</span>
                                     </p>
                                 </div>
-
-                            <!-- <carousel :items-to-show="3">
-                                <slide v-for="floor in floorlist" :key="floor.id">
-                                    <div class="swiper-slide slide-active">
-                                        <p class="no-margin text-align-center margin-top-half swiper_text display-flex">{{ floor.name }}
-                                            <span class="room_available color-blue">{{ floor.total_order }}</span>
-                                        </p>
-                                    </div>
-                                </slide>
-
-                                <template #addons>
-                                  <navigation />
-                                  <pagination />
-                                </template>
-                              </carousel> -->
                             </div>
                         </div>
-                        <!-- <div class="margin-top margin-bottom floor_swiper_inner">
-                            <f7-swiper navigation :speed="500" :slidesPerView="5" :spaceBetween="5">
-                                <f7-swiper-slide>
-                                    <div class="swiper-slide slide-active">
-                                        <p class="no-margin text-align-center margin-top-half swiper_text display-flex">Ground Floor (Non-AC)
-                                            <span class="room_available color-blue">20</span>
-                                        </p>
-                                    </div>
-                                </f7-swiper-slide>
-                                <f7-swiper-slide>
-                                    <div class="swiper-slide">
-                                        <p class="no-margin text-align-center margin-top-half swiper_text display-flex">First Floor (AC)
-                                            <span class="room_available color-blue">20</span>
-                                        </p>
-                                    </div>
-                                </f7-swiper-slide>
-                                <f7-swiper-slide>
-                                    <div class="swiper-slide">
-                                        <p class="no-margin text-align-center margin-top-half swiper_text display-flex">Second Floor (AC)
-                                            <span class="room_available color-blue">20</span>
-                                        </p>
-                                    </div>
-                                </f7-swiper-slide>
-                                <f7-swiper-slide>
-                                    <div class="swiper-slide">
-                                        <p class="no-margin text-align-center margin-top-half swiper_text display-flex">Third Floor (AC)
-                                            <span class="room_available color-blue">20</span>
-                                        </p>
-                                    </div>
-                                </f7-swiper-slide>
-                                <f7-swiper-slide>
-                                    <div class="swiper-slide">
-                                        <p class="no-margin text-align-center margin-top-half swiper_text display-flex">Fourth Floor (AC)
-                                            <span class="room_available color-blue">20</span>
-                                        </p>
-                                    </div>
-                                </f7-swiper-slide>
-                                <f7-swiper-slide>
-                                    <div class="swiper-slide">
-                                        <p class="no-margin text-align-center margin-top-half swiper_text display-flex">Fifth Floor (AC)
-                                            <span class="room_available color-blue">20</span>
-                                        </p>
-                                    </div>
-                                </f7-swiper-slide>
-                                <f7-swiper-slide>
-                                    <div class="swiper-slide">
-                                        <p class="no-margin text-align-center margin-top-half swiper_text display-flex">Sixth Floor (AC)
-                                            <span class="room_available color-blue">20</span>
-                                        </p>
-                                    </div>
-                                </f7-swiper-slide>
-                                <f7-swiper-slide>
-                                    <div class="swiper-slide">
-                                        <p class="no-margin text-align-center margin-top-half swiper_text display-flex">Seventh Floor (AC)
-                                            <span class="room_available color-blue">20</span>
-                                        </p>
-                                    </div>
-                                </f7-swiper-slide>
-                                <f7-swiper-slide>
-                                    <div class="swiper-slide">
-                                        <p class="no-margin text-align-center margin-top-half swiper_text display-flex">Eighth Floor (AC)
-                                            <span class="room_available color-blue">20</span>
-                                        </p>
-                                    </div>
-                                </f7-swiper-slide>
-                            </f7-swiper>
-                        </div> -->
                     </div>
-                    <!-- <div class="col-100">
-                        <div class="current_capacity">
-                            <div class="current_capacity_card card display-flex align-items-center no-margin-vertical">
-                                <div class="card_img padding-left-half">
-                                    <img src="/images/capacity.png" alt="">
-                                </div>
-                                <div class="card-content card-content-padding padding-vertical-half padding-left">
-                                    <p class="no-margin">Current Capacity</p>
-                                    <span class="text-color-red">{{ current_capacity.toFixed(2) }}% Full</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
                 </div>
            </div>
             <div class="tables margin-horizontal">
@@ -169,135 +47,108 @@
                                     <div class="display-flex">
                                         <!-- <draggable :scroll-sensitivity="250"  :force-fallback="true" class="dragArea list-group w-full" :class="'dragger'+table.id" :list="order[index]" @start="startDrag(order.id, table.id)" @touchend.prevent="onDrop" v-for="(order,index) in table.orders" :key="order.id"> -->
 
-                                            <div class="table_reservation_info" :class="'test'+order.id" v-for="(order,index) in table.orders" :key="order.id" >
-                                                <div class="person-info popover-open" :class="['popover-click-' + order.id, { 'person-info_move': order.is_order_moved }]" :data-popover="'.popover-table-'+order.id"  @click="order_person = order.person; removebackdrop()">
-                                                    <div class="person_info_name border__bottom padding-bottom-half margin-bottom-half">
-                                                        <p class="no-margin text-align-center">By {{ order.role }}</p>
-                                                    </div>
-                                                    <div class="text-align-center person">
-                                                        <i class="f7-icons size-22">person</i>
-                                                        <span>&nbsp;{{order.person}}</span>
-                                                        <span class="waiting-time margin-top-half text-align-center">
-                                                            <!-- <i class="f7-icons size-22">clock_fill</i> -->
-                                                            <span>{{ order.reservation_time }}</span>
-                                                        </span>
-                                                    </div>
-                                                    <div class="popover padding-half" v-if="!order.is_order_moved" :class="'popover-table-' + order.id">
-                                                        <div class="user-info popover-inner">
-                                                            <div class="display-flex padding-left-half padding-top-half align-items-center">
-                                                                <i class="f7-icons size-18 text-color-black padding-right-half margin-right-half">person</i>
-                                                                <span class="text-color-black">{{ order.customer.name }}</span>
-                                                            </div>
-                                                            <div class="display-flex padding-left-half padding-top align-items-center">
-                                                                <i class="f7-icons size-18 text-color-black padding-right-half margin-right-half">clock</i>
-                                                                <span class="text-color-black">{{ order.reservation_time_12_format }}</span>
-                                                            </div>
-                                                            <div class="display-flex padding-left-half padding-top align-items-center">
-                                                                <i class="f7-icons size-18 text-color-black padding-right-half margin-right-half">phone</i>
-                                                                <span class="text-color-black">{{ order.customer.number }}</span>
-                                                            </div>
-                                                            <div class="display-flex padding-left-half padding-vertical align-items-center">
-                                                                <i class="f7-icons size-18 text-color-black padding-right-half margin-right-half">person_2</i>
-                                                                <span class="text-color-black">{{ order.person }} family member</span>
-                                                            </div>
-                                                            <div class="finish_popup">
-                                                                <div class="card-footer no-margin no-padding justify-content-center">
-                                                                    <h3>
-                                                                        <a href="javascript:;" class="text-color-red" @click="removeorder(order.id)">
-                                                                            Finish & Next
-                                                                        </a>                                                                        
-                                                                    </h3>
-                                                                </div>
-                                                            </div>
-                                                            <div class="floor__list">
-                                                                <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="openFloorList(order.id)">
-                                                                    <h3 class="text-color-red">Change Floor</h3>
-                                                                </div>
-                                                                <!-- ============FLOOR DROP DOWN  ============= -->
-                                                                <div class="list simple-list floor_dropdwon" :class="'f_f'+order.id">
-                                                                    <ul>
-                                                                        <li v-for="floor in floorlist" :key="floor.id" @click="changeFloor(order.id,floor.id,floor.name)" :class="(table.floor.id == floor.id) ? 'display-none' : ''">
-                                                                            <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                                <div class="floor_name">
-                                                                                    <span>{{ floor.name }} </span>
-                                                                                </div>
-                                                                                <div class="floor_room_available">
-                                                                                    <span class="room_available">{{ floor.activetables_count }}</span>
-                                                                                </div>
-                                                                            </div>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                                <!-- ============FLOOR DROP DOWN END ============= -->
-                                                            </div>
-                                                            <div class="table__list">
-                                                                <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="openTableList(order)">
-                                                                    <h3 class="text-color-red">Change Table</h3>
-                                                                </div>
-                                                                <!-- ============FLOOR DROP DOWN  ============= -->
-                                                                <div class="list simple-list table_dropdwon" :class="'t_f'+order.id">
-                                                                    <ul>
-                                                                        <li v-for="changetable in change_table_list" :key="changetable.id" :class="(changetable.id == table.id || changetable.capacity_of_person < order_person) ? 'display-none' : ''" @click="changeTable(order.id, changetable.id, table.floor.name)">
-                                                                            <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                                <div class="floor_name">
-                                                                                    <span>Table No : {{ changetable.table_number }}</span>
-                                                                                </div>
-                                                                                <!-- <div class="floor_room_available">
-                                                                                    <span class="room_available">20</span>
-                                                                                </div> -->
-                                                                            </div>
-                                                                        </li>
-                                                                        <li v-if="no_table_list_show && max_number_table_id == table.id">
-                                                                            <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                                <div class="floor_name">
-                                                                                    <span>Not above capacity table</span>
-                                                                                </div>
-                                                                                <!-- <div class="floor_room_available">
-                                                                                    <span class="room_available">20</span>
-                                                                                </div> -->
-                                                                            </div>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                                <!-- ============FLOOR DROP DOWN END ============= -->
+                                        <div class="table_reservation_info" :class="'test'+order.id" v-for="(order,index) in table.orders" :key="order.id" >
+                                            <div class="person-info popover-open" :class="['popover-click-' + order.id, { 'person-info_move': order.is_order_moved }]" :data-popover="'.popover-table-'+order.id"  @click="order_person = order.person; removebackdrop()">
+                                                <div class="person_info_name border__bottom padding-bottom-half margin-bottom-half">
+                                                    <p class="no-margin text-align-center">By {{ order.role }}</p>
+                                                </div>
+                                                <div class="text-align-center person">
+                                                    <i class="f7-icons size-22">person</i>
+                                                    <span>&nbsp;{{order.person}}</span>
+                                                    <span class="waiting-time margin-top-half text-align-center">
+                                                        <!-- <i class="f7-icons size-22">clock_fill</i> -->
+                                                        <span>{{ order.reservation_time }}</span>
+                                                    </span>
+                                                </div>
+                                                <div class="popover padding-half" v-if="!order.is_order_moved" :class="'popover-table-' + order.id">
+                                                    <div class="user-info popover-inner">
+                                                        <div class="display-flex padding-left-half padding-top-half align-items-center">
+                                                            <i class="f7-icons size-18 text-color-black padding-right-half margin-right-half">person</i>
+                                                            <span class="text-color-black">{{ order.customer.name }}</span>
+                                                        </div>
+                                                        <div class="display-flex padding-left-half padding-top align-items-center">
+                                                            <i class="f7-icons size-18 text-color-black padding-right-half margin-right-half">clock</i>
+                                                            <span class="text-color-black">{{ order.reservation_time_12_format }}</span>
+                                                        </div>
+                                                        <div class="display-flex padding-left-half padding-top align-items-center">
+                                                            <i class="f7-icons size-18 text-color-black padding-right-half margin-right-half">phone</i>
+                                                            <span class="text-color-black">{{ order.customer.number }}</span>
+                                                        </div>
+                                                        <div class="display-flex padding-left-half padding-vertical align-items-center">
+                                                            <i class="f7-icons size-18 text-color-black padding-right-half margin-right-half">person_2</i>
+                                                            <span class="text-color-black">{{ order.person }} family member</span>
+                                                        </div>
+                                                        <div class="finish_popup">
+                                                            <div class="card-footer no-margin no-padding justify-content-center">
+                                                                <h3>
+                                                                    <a href="javascript:;" class="text-color-red" @click="removeorder(order.id)">
+                                                                        Finish & Next
+                                                                    </a>
+                                                                </h3>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div v-else class="popover popover-move padding" :class="'popover-table-' + order.id">
-                                                        <div class="user-info popover-inner text-align-center">
-                                                            <p class="text-color-white no-margin">Moved</p>
-                                                            <p class="text-color-white no-margin">{{ order.order_moved }} seconds ago</p>
+                                                        <div class="floor__list">
+                                                            <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="openFloorList(order.id)">
+                                                                <h3 class="text-color-red">Change Floor</h3>
+                                                            </div>
+                                                            <!-- ============FLOOR DROP DOWN  ============= -->
+                                                            <div class="list simple-list floor_dropdwon" :class="'f_f'+order.id">
+                                                                <ul>
+                                                                    <li v-for="floor in floorlist" :key="floor.id" @click="changeFloor(order.id,floor.id,floor.name)" :class="(table.floor.id == floor.id) ? 'display-none' : ''">
+                                                                        <div class="floor_number display-flex align-items-center justify_content_between w-100">
+                                                                            <div class="floor_name">
+                                                                                <span>{{ floor.name }} </span>
+                                                                            </div>
+                                                                            <div class="floor_room_available">
+                                                                                <span class="room_available">{{ floor.orders_count }}</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <!-- ============FLOOR DROP DOWN END ============= -->
                                                         </div>
+                                                        <div class="table__list">
+                                                            <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="openTableList(order)">
+                                                                <h3 class="text-color-red">Change Table</h3>
+                                                            </div>
+                                                            <!-- ============FLOOR DROP DOWN  ============= -->
+                                                            <div class="list simple-list table_dropdwon" :class="'t_f'+order.id">
+                                                                <ul>
+                                                                    <li v-for="changetable in change_table_list" :key="changetable.id" :class="(changetable.id == table.id || changetable.capacity_of_person < order_person) ? 'display-none' : ''" @click="changeTable(order.id, changetable.id, table.floor.name)">
+                                                                        <div class="floor_number display-flex align-items-center justify_content_between w-100">
+                                                                            <div class="floor_name">
+                                                                                <span>Table No : {{ changetable.table_number }}</span>
+                                                                            </div>
+                                                                            <!-- <div class="floor_room_available">
+                                                                                <span class="room_available">20</span>
+                                                                            </div> -->
+                                                                        </div>
+                                                                    </li>
+                                                                    <li v-if="no_table_list_show && max_number_table_id == table.id">
+                                                                        <div class="floor_number display-flex align-items-center justify_content_between w-100">
+                                                                            <div class="floor_name">
+                                                                                <span>Not above capacity table</span>
+                                                                            </div>
+                                                                            <!-- <div class="floor_room_available">
+                                                                                <span class="room_available">20</span>
+                                                                            </div> -->
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <!-- ============FLOOR DROP DOWN END ============= -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div v-else class="popover popover-move padding" :class="'popover-table-' + order.id">
+                                                    <div class="user-info popover-inner text-align-center">
+                                                        <p class="text-color-white no-margin">Moved</p>
+                                                        <p class="text-color-white no-margin">{{ order.order_moved }} seconds ago</p>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- <div class="table_reservation_info margin-bottom">
-                                                <div class="person-info person-info_move popover-open" data-popover=".popover-move" @click="removebackdrop">
-                                                    <div class="person_info_name border__bottom padding-bottom-half margin-bottom-half">
-                                                        <p class="no-margin text-align-center">By Guest</p>
-                                                    </div>
-                                                    <div class="text-align-center person">
-                                                        <i class="f7-icons size-22">person_fill</i>
-                                                        <span>&nbsp;5</span>
-                                                    </div>
-                                                    <div class="waiting-time margin-top-half text-align-center">
-                                                        <i class="f7-icons size-22">clock_fill</i>
-                                                        <span>2:47</span>
-                                                        <span>&nbsp;4</span>
-                                                        <span class="waiting-time margin-top-half text-align-center">
-                                                            <i class="f7-icons size-22">clock_fill</i>
-                                                            <span>2:47</span>
-                                                        </span>
-                                                    </div>
-                                                    <div class="popover popover-move padding">
-                                                        <div class="user-info popover-inner text-align-center">
-                                                            <p class="text-color-white no-margin">Moved</p>
-                                                            <p class="text-color-white no-margin">50 seconds ago</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div> -->
-                                        <!-- </draggable> -->
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -372,9 +223,13 @@ export default {
            $(".floor_dropdwon").removeClass('floor_dropdown_visible');
         });
         this.$root.activationMenu('table');
+        this.$root.removeLoader();
     },
     updated() {
         this.equal_height();
+    },
+    beforeCreate() {
+        this.$root.addLoader();
     },
     created() {
         this.tableList();
@@ -536,6 +391,7 @@ export default {
             axios.get('/api/table-list-floor-wise/'+id)
                 .then((res) => {
                 this.current_capacity = res.data.current_capacity;
+                this.floorlist = res.data.floorlist;
                 var row_tables = [];
                 var cal_of_capacity = 0;
                 var single_row_data = [];
@@ -716,7 +572,7 @@ export default {
                     $('.dialog-buttons').addClass('margin-top no-margin-bottom')
                 }, 50);
         },
-       
+
     }
 }
 </script>

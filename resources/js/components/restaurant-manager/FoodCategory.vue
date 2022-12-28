@@ -42,8 +42,8 @@
                 <div class="card-content card-content-padding categorey_card">
                     <div v-if="categories.length">
                         <div class="category-list border-bottom padding-top padding-bottom" v-for="(category,index) in categories" :key="category">
-                            <div class="row align-items-center">                               
-                                <div class="col-100 medium-50 large-60 ">                                    
+                            <div class="row align-items-center">
+                                <div class="col-100 medium-50 large-60 ">
                                     <div class="display-flex align-items-center">
                                         <div class="category-count padding-right">
                                             <span>{{ index + 1 }}.</span>
@@ -51,7 +51,7 @@
                                         <div class="category_image">
                                             <img :src="'/storage'+category.image" alt="">
                                         </div>
-                                        
+
                                     <a class="menu-dropdown-link menu-close padding-vertical" :href="'/single-category-products/'+category.id">
                                         <span class="padding-left-half category_name text-color-black">{{ category.category_languages[0].name }}</span>
                                     </a>
@@ -181,10 +181,14 @@ export default {
         f7Input,
         NoValueFound
     },
+    beforeCreate() {
+        this.$root.addLoader();
+    },
     mounted() {
         $('.page-content').css('background', '#F7F7F7');
         this.getCategories();
         this.$root.activationMenu('menu_management');
+        this.$root.removeLoader();
     },
     methods: {
         addimageChange(e) {
@@ -399,7 +403,7 @@ export default {
     .header-links {
         width: 100%;
     }
-    
+
 }
 </style>
 

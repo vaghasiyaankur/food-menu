@@ -176,14 +176,17 @@ export default {
             active_sub_category_name: 'Sub Category',
         }
     },
+    beforeCreate() {
+        this.$root.addLoader();
+    },
     mounted() {
         $('.page-content').css('background', '#F7F7F7');
         this.getAllSubCategories();
         this.getProducts();
         this.$root.activationMenu('menu_management');
         this.getAllCategories();
+        this.$root.removeLoader();
     },
-
     methods: {
         addProduct(){
             var formData = new FormData();

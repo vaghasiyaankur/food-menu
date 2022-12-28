@@ -128,10 +128,10 @@
                 </div>
             </f7-navbar>
         </div>
-        <f7-view url="/" :main="true" class="safe-areas" :master-detail-breakpoint="768" @notification="notification"></f7-view>                
+        <f7-view url="/" :main="true" class="safe-areas" :master-detail-breakpoint="768" @notification="notification"></f7-view>
         <div class="overlay">
             <div class="overlayDoor"></div>
-            <div class="overlayContent">            
+            <div class="overlayContent">
                     <div class="inner text-align-center">
                         <img src="/images/loading.gif" alt="Loading..">
                         <p class="text-align-center font__bold font-22">Loading....</p>
@@ -199,13 +199,8 @@ export default {
             $('.overlay, body').addClass('loaded');
             setTimeout(function() {
                 $('.overlay').css({'display':'none'})
-            }, 200000)
+            }, 2000)
         });
-
-        
-        setTimeout(function() {
-            $('.overlay, body').addClass('loaded');
-        }, 100000);
     },
     methods: {
         getLanguage() {
@@ -269,7 +264,19 @@ export default {
         },
         activationMenu(active) {
             this.currentRoute = active;
-        }
+        },
+        addLoader() {
+            $('.overlay, body').removeClass('loaded');
+            $('.overlay').css({ 'display': '' });
+        },
+        removeLoader() {
+            setTimeout(function () {
+                $('.overlay, body').addClass('loaded');
+                setTimeout(function () {
+                    $('.overlay').css({ 'display': 'none' })
+                }, 3000)
+            }, 2000);
+        },
     },
     computed: {
         manager() {
@@ -335,7 +342,7 @@ export default {
     flex-direction: column;
     transition: 0.5s cubic-bezier(0.77, 0, 0.18, 1);
   }
-  
+
   /*.loader {
     width: 128px;
     height: 128px;
@@ -358,7 +365,7 @@ export default {
     -webkit-animation: spinInner 1s linear infinite;
             animation: spinInner 1s linear infinite;
   }*/
-  
+
   /*@-webkit-keyframes spin {
     0% {
       transform: rotate(0deg);
@@ -367,7 +374,7 @@ export default {
       transform: rotate(360deg);
     }
   }
-  
+
   @keyframes spin {
     0% {
       transform: rotate(0deg);

@@ -80,9 +80,13 @@ export default {
             langId : 1,
         }
     },
+    beforeCreate() {
+        this.$root.addLoader();
+    },
     mounted() {
         $('.page-content').css('background', '#F7F7F7');
         this.$root.activationMenu('setting');
+        this.$root.removeLoader();
     },
     methods: {
         addEditTableShow(id, page) {
@@ -273,6 +277,6 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox{
 @media screen and (max-width:991px) {
     .product-list-section .toolbar-inner a.tab-link{
         font-size: 14px;
-    }    
+    }
 }
 </style>
