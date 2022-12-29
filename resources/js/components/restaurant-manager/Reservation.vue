@@ -99,7 +99,7 @@
                                 <div class="menu-image col">
                                     <img :src="'/storage'+category.image" alt="">
                                 </div>
-                                <p class="font-13 no-margin text-align-center margin-top-half">{{ category.name }}</p>
+                                <p class="font-13 no-margin text-align-center margin-top-half">{{ category.category_languages[0].name }}</p>
                             </div>
                         </div>
                     </div>
@@ -109,9 +109,9 @@
                     <div class="menu-details margin-top">
                         <div class="menu-lists" v-if="product_subcategory.length">
                             <div class="menu-list" v-for="subcate in product_subcategory" :key="subcate">
-                                <div class="font-18 text-align-center menu-list-title text-color-black"><u>{{ subcate.name }}</u></div>
+                                <div class="font-18 text-align-center menu-list-title text-color-black"><u>{{ subcate.sub_category_language[0].name }}</u></div>
                                 <div class="list row margin-half align-items-center" v-for="product in subcate.products" :key="product">
-                                    <div class="col-90 display-flex">{{ product.name }}&nbsp; <span class="dots"></span></div>
+                                    <div class="col-90 display-flex">{{ product.product_language[0].name }}&nbsp; <span class="dots"></span></div>
                                     <div class="col-10">{{ product.price.toFixed(2) }}</div>
                                 </div>
                             </div>
@@ -183,7 +183,7 @@ export default {
     },
     methods: {
         getCategories() {
-            axios.post('/api/get-categories-list')
+            axios.post('/api/get-category-list')
             .then((res) => {
                 this.product_category = res.data;
                 this.getProducts(this.product_category[0].id);
@@ -191,14 +191,10 @@ export default {
         },
         getProducts(id) {
             this.sliderActive = id;
-            axios.get('/api/get-category-products/' + id)
+            axios.get('/api/get-category-wise-products/' + id)
             .then((res) => {
-                this.categoryName = res.data.name;
-                this.product_subcategory = res.data.sub_category;axios.get('/api/get-category-products/' + id)
-            .then((res) => {
-                this.categoryName = res.data.name;
+                this.categoryName = res.data.category_languages[0].name;
                 this.product_subcategory = res.data.sub_category;
-            })
             })
         },
         memberLimitation() {
