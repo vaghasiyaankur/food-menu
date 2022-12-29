@@ -7,6 +7,7 @@ use QrCode;
 use App\Models\QrCodeToken;
 use ParagonIE\ConstantTime\Encoding;
 use Carbon\Carbon;
+use PDF;
 
 class QrCodeController extends Controller
 {
@@ -29,11 +30,10 @@ class QrCodeController extends Controller
         $fromDate = $req->from_date ? Carbon::parse($req->from_date)->format('Y-m-d') : '';
         $toDate = $req->to_date ? Carbon::parse($req->to_date)->format('Y-m-d') : $fromDate;
         $qrcodes = new QrCodeToken;
-        if ($req->from_date) {
-            $qrcodes = $qrcodes->where([
-                ['start_date','>=',$fromDate],
-                ['end_date','<=',$toDate]
-            ]);
+        if ($req->from_date && $req->to_date) {
+            $qrcodes = $qrcodes->whereDate('start_date','>=',$fromDate)->whereDate('end_date','<=',$toDate);
+        }elseif($req->from_date && !$req->to_date){
+            $qrcodes = $qrcodes->whereDate('start_date','<=',$fromDate)->whereDate('end_date','>=',$fromDate);
         }
         $qrcodes = $qrcodes->paginate(10);
         $qrcodexml = [];
@@ -48,7 +48,8 @@ class QrCodeController extends Controller
             }
             $qr->start_date = Carbon::parse($qr['start_date'])->format('d, M Y');
             $qr->end_date = Carbon::parse($qr['end_date'])->format('d, M Y');
-            $qrcodexml[$qr->id] = QrCode::size(50)->generate($qr->token)->toHtml();
+
+            $qrcodexml[$qr->id] = QrCode::size(50)->generate(url('/').'?qrcode='.$qr->token)->toHtml();
         }
 
         return response()->json(['qrcodes' => $qrcodes , 'qrcodexml' => $qrcodexml]);
@@ -101,5 +102,27 @@ class QrCodeController extends Controller
         QrCodeToken::where('id', $req->id)->delete();
 
         return response()->json(['success' => 'Qr Code deleted successfully.']);
+    }
+    public function qrCodereGenerate(Request $req)
+    {
+        $qrcode = QrCodeToken::find($req->id);
+        $data = random_bytes(32);
+        $encode = Encoding::base64Encode($data);
+        $qrcode->update(['token'=>$encode]);
+        return response()->json(['success' => 'Qr Code Regenerated successfully.']);
+    }
+    public function qrCodereDownload($id)
+    {
+        $qrcode = QrCodeToken::find($id);
+
+        $qrCode = base64_encode(QrCode::size(150)->generate(url('/').'?qrcode='.$qrcode->token));
+
+        $pdf = PDF::loadView('qrcode', compact('qrCode'));
+
+        $headers = [
+            'Content-Type' => 'application/pdf',
+        ];
+
+        return $pdf->download('qrcode.pdf');
     }
 }

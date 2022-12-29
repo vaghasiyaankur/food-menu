@@ -37,21 +37,21 @@
         <div class="card-content height_100">
             <div class="data-table height_100">
                 <table>
-                   <thead>
-                      <tr>
-                         <th>ID</th>
-                         <th>Date</th>
-                         <th>Generate Date</th>
-                         <th>QR Code</th>
-                         <th>Status</th>
-                         <th>Action</th>
-                      </tr>
-                   </thead>
-                   <tbody>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Date</th>
+                            <th>Generate Date</th>
+                            <th>QR Code</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                         <tr v-for="qrcode in qrcodes" :key="qrcode">
                             <td class="label-cell">{{ qrcode.id }}.</td>
                             <td>{{ qrcode.start_date }} - {{ qrcode.end_date }}</td>
-                            <td>{{ date_format(qrcode.created_at) }}</td>
+                            <td>{{ date_format(qrcode.updated_at) }}</td>
                             <td><div v-html="qrcodexml[qrcode.id]"></div></td>
                             <td><span class="status_info" :class="[{ 'status_expired': qrcode.status == 'Expired' }, { 'status_ongoing': qrcode.status == 'Ongoing' }, { 'status_upcoming': qrcode.status == 'Upcoming' }]">{{ qrcode.status }}</span></td>
                             <td>
@@ -59,30 +59,23 @@
                                     <div><i class="f7-icons">ellipsis</i></div>
                                     <div class="menu-dropdown menu-dropdown-right">
                                         <div class="menu-dropdown-content no-padding">
-                                            <button class="menu-dropdown-link font-13 height-40 button text-color-black"><img src="/images/downlaod.png" style="margin-right:11px;"> Download </button>
-                                            <button class="menu-dropdown-link font-13 height-40 active_text button" @click="removeqr(qrcode.id)" v-if="qrcode.status == 'Expired'"><i class="f7-icons margin-right-half">trash</i>Delete </button>
-                                            <button class="menu-dropdown-link font-13 height-40 button text-color-black"><i class="f7-icons margin-right-half">arrow_counterclockwise</i>Regenerate </button>
+                                            <button class="menu-dropdown-link font-13 height-40 button text-color-black menu-close" @click="downloadQrCode(qrcode.id)"><img src="/images/downlaod.png" style="margin-right:11px;"> Download </button>
+                                            <button class="menu-dropdown-link font-13 height-40 active_text button menu-close" @click="removeqr(qrcode.id)" v-if="qrcode.status == 'Expired'"><i class="f7-icons margin-right-half">trash</i>Delete </button>
+                                            <button class="menu-dropdown-link font-13 height-40 button text-color-black menu-close" @click="regenerateQrCode(qrcode.id)" v-if="qrcode.status != 'Expired'"><i class="f7-icons margin-right-half">arrow_counterclockwise</i>Regenerate </button>
                                         </div>
                                     </div>
                                 </div>
                             </td>
                         </tr>
-                   </tbody>
+                    </tbody>
                 </table>
                 <div class="bottom__bar">
                     <div class="pagination_count padding display-flex justify-content-end align-items-center">
                         <div class="pagination_list display-flex">
                             <div v-for="(link,index) in paginationData.links" :key="link">
-                                <a href="javascript:;" v-if="index == 0"
-                                    @click="link.url != null ? listQrCodes(link.url) : 'javascript:;'" class="link"
-                                    :class="{ 'disabled': link.url == null}"><i class="icon-prev"></i></a>
-                                <a href="javascript:;" v-if="paginationData.links.length - 1 != index && index != 0"
-                                    @click="link.url != null ? listQrCodes(link.url) : 'javascript:;'"
-                                    :class="{ 'disabled': link.url == null, 'active': paginationData.current_page == index}">{{ index
-                                    }}</a>
-                                <a href="javascript:;" v-if="paginationData.links.length - 1 == index"
-                                    @click="link.url != null ? listQrCodes(link.url) : 'javascript:;'" class="link"
-                                    :class="{ 'disabled': link.url == null}"><i class="icon-next"></i></a>
+                                <a href="javascript:;" v-if="index == 0" @click="link.url != null ? listQrCodes(link.url) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon-prev"></i></a>
+                                <a href="javascript:;" v-if="paginationData.links.length - 1 != index && index != 0" @click="link.url != null ? listQrCodes(link.url) : 'javascript:;'" :class="{ 'disabled': link.url == null, 'active': paginationData.current_page == index}">{{ index }}</a>
+                                <a href="javascript:;" v-if="paginationData.links.length - 1 == index" @click="link.url != null ? listQrCodes(link.url) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon-next"></i></a>
                             </div>
                         </div>
                     </div>
@@ -108,8 +101,7 @@
                             </li>
                             <li class="item-input no-padding">
                                 <div class="item-input-wrap" style="border-radius:10px">
-                                    <button type="button" class="button button-raised button-large popup-button" @click="generateQrCode()"
-                                        style="background-color: rgb(243, 62, 62); color: rgb(255, 255, 255); border-radius:10px">Apply</button>
+                                    <button type="button" class="button button-raised button-large popup-button" @click="generateQrCode()" style="background-color: rgb(243, 62, 62); color: rgb(255, 255, 255); border-radius:10px">Apply</button>
                                 </div>
                             </li>
                         </ul>
@@ -164,6 +156,12 @@ export default {
             numbers:true,
             footer: true,
             on: {
+                open() {
+                    setTimeout(() => {
+                        $('.popover-angle').css({ 'left': '147px' });
+                        $('.calendar-popover').css({ 'top': '206px', 'left': '525px' });
+                    }, 1);
+                },
                 close(daterange) {
                     var dates = daterange.getValue();
                     // var datefrom = dates[0] ? : '';
@@ -206,11 +204,13 @@ export default {
         },
         listQrCodes(pagenumber) {
             if (pagenumber == undefined || pagenumber == 1) {
-                pagenumber = 1;
+                this.pagenumber = 1;
+            } else if (Number(pagenumber)) {
+                this.pagenumber = Number(this.pagenumber);
             } else {
-                pagenumber = pagenumber.split('page=')[1];
+                this.pagenumber = pagenumber.split('page=')[1];
             }
-            var page = '/api/qrcode?page=' + pagenumber + '&from_date=' + this.from_date + '&to_date=' + this.to_date;
+            var page = '/api/qrcode?page=' + this.pagenumber + '&from_date=' + this.from_date + '&to_date=' + this.to_date;
             axios.get(page)
             .then((res) => {
                 this.qrcodes = res.data.qrcodes.data;
@@ -233,6 +233,25 @@ export default {
                 this.$root.successnotification(res.data.success);
                 f7.popup.close(`#qrcode_popup`);
                 this.listQrCodes();
+            })
+        },
+        regenerateQrCode(id) {
+            axios.post('/api/regenerate-qrcode', { id: id })
+            .then((res) => {
+                this.$root.successnotification(res.data.success);
+                this.listQrCodes(this.pagenumber);
+            })
+        },
+        downloadQrCode(id) {
+            axios({ url: '/api/download-qrcode/' + id, method: 'GET', responseType: 'arraybuffer', })
+            .then((response) => {
+                let blob = new Blob([response.data], {
+                    type: 'application/pdf'
+                })
+                let link = document.createElement('a')
+                link.href = window.URL.createObjectURL(blob)
+                link.download = 'qrcode.pdf'
+                link.click()
             })
         }
     }

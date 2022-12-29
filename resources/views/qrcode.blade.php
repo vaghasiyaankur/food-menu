@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>How to Generate QR Code in Laravel 8</title>
+    <title>QR Code Download</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
 </head>
@@ -14,13 +14,11 @@
 
         <div class="card">
             <div class="card-header">
-                <h2>Simple QR Code</h2>
+                <h2>QR Code</h2>
             </div>
-            @foreach($qrcodexml as $qcx)
             <div class="card-body">
-                {!! $qcx !!}
+                <img src="data:image/png;base64, {{ $qrCode }}">
             </div>
-            @endforeach
         </div>
 
     </div>

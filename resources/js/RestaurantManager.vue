@@ -199,7 +199,7 @@ export default {
             $('.overlay, body').addClass('loaded');
             setTimeout(function() {
                 $('.overlay').css({'display':'none'})
-            }, 2000)
+            }, 1000)
         });
     },
     methods: {
@@ -274,7 +274,7 @@ export default {
                 $('.overlay, body').addClass('loaded');
                 setTimeout(function () {
                     $('.overlay').css({ 'display': 'none' })
-                }, 2000)
+                }, 1000)
             }, 2000);
         },
     },

@@ -184,3 +184,7 @@ Route::get('/qrcode', [QrCodeController::class, 'index']);
 Route::post('/delete-qrcode', [QrCodeController::class, 'deleteQrCode']);
 
 Route::post('/generate-qrcode', [QrCodeController::class, 'setqrCodeGenerate']);
+
+Route::post('/regenerate-qrcode', [QrCodeController::class, 'qrCodereGenerate']);
+
+Route::get('/download-qrcode/{id}', [QrCodeController::class, 'qrCodereDownload']);
