@@ -40,25 +40,60 @@ class ReservationController extends Controller
                 $order->save();
             }
 
-            // $token = $request->session()->get('device_token');
-            // // dd($token);
-            // if($token){
-            //     $fcmTokens = ['c16H1_gwueT8jzmm2w_cTn:APA91bGjH092huMhvCN4Cejb84y1Y_CxzdbLrxIwyLucbUCyX4v1gl2O6oYcVaSm0ncnYhD9mbFlKVmvAgVzeePzLN5yhn0PG1esfjo0P1mrR0RUXb_W4sQII_GfcZoXodUmsqc-Kg0m'];
+            $count = Order::where('table_id', $order->table_id)->whereNotNull('start_time')->where('finished', 0)->count();
+            if(!$count){
+                $next = Order::where('table_id', $table_id)->whereNull('start_time')->where('finished', 0)->orderBy('updated_at', 'ASC')->first();
+                $update_date = @$next->updated_at;
+                if($next)  $next->update(['start_time' => \Carbon\Carbon::now()]);
+                if($next)  $next->update(['updated_at' => $update_date]);
 
-            //     //Notification::send(null,new SendPushNotification($request->title,$request->message,$fcmTokens));
 
-            //     /* or */
+                // $token = $request->session()->get('device_token');
+                $customer_id = @$next->customer_id;
+                $customer = Customer::where('id', @$customer_id)->first();
+                $token = @$customer->device_token;
 
-            //     //auth()->user()->notify(new SendPushNotification($title,$message,$fcmTokens));
+                if($token){
+                // $fcmTokens = ['c16H1_gwueT8jzmm2w_cTn:APA91bGjH092huMhvCN4Cejb84y1Y_CxzdbLrxIwyLucbUCyX4v1gl2O6oYcVaSm0ncnYhD9mbFlKVmvAgVzeePzLN5yhn0PG1esfjo0P1mrR0RUXb_W4sQII_GfcZoXodUmsqc-Kg0m'];
+                $fcmTokens = [$token];
 
-            //     /* or */
+                //Notification::send(null,new SendPushNotification($request->title,$request->message,$fcmTokens));
 
-            //     $test = Larafirebase::withTitle('Food-menu Restaurant')
-            //         ->withBody('Your Turn Now !!!')
-            //         ->sendMessage($fcmTokens);
+                /* or */
 
-            //     // return redirect()->back()->with('success','Notification Sent Successfully!!');
-            // }
+                //auth()->user()->notify(new SendPushNotification($title,$message,$fcmTokens));
+
+                /* or */
+                
+                Larafirebase::withTitle('Food-menu Restaurant')
+                ->withBody('Your Turn Now !!!')
+                ->sendMessage($fcmTokens);
+                // // return redirect()->back()->with('success','Notification Sent Successfully!!');
+
+                try {
+
+                $basic  = new \Vonage\Client\Credentials\Basic(getenv("NEXMO_KEY"), getenv("NEXMO_SECRET"));
+                $client = new \Vonage\Client($basic);
+    
+                $receiverNumber = "447498173567";     // link : https://receive-smss.com/sms/447498173567/
+                // $receiverNumber = $customer->number;
+                $message = "Food-Menu : Your Turn Now!!";
+    
+                $message = $client->message()->send([
+                    'to' => $receiverNumber,
+                    'from' => 'Food-Menu Restaurent',
+                    'text' => $message
+                ]);
+                
+                }
+                 catch (Exception $e) {
+                    // dd("Error: ". $e->getMessage());
+                }
+
+
+                }
+            }
+
 
 
             // try {

@@ -78,10 +78,10 @@
                                                             <i class="f7-icons size-18 text-color-black padding-right-half margin-right-half">person_2</i>
                                                             <span class="text-color-black">{{ order.person }} family member</span>
                                                         </div>
-                                                        <div class="finish_popup">
+                                                        <div class="finish_popup" v-if="order.start_time && order.finished == 0">
                                                             <div class="card-footer no-margin no-padding justify-content-center">
                                                                 <h3>
-                                                                    <a href="javascript:;" class="text-color-red" @click="removeorder(order.id)">
+                                                                    <a href="javascript:;" class="text-color-red" @click="finishNext(order.id)">
                                                                         Finish & Next
                                                                     </a>
                                                                 </h3>
@@ -125,7 +125,7 @@
                                                                             </div> -->
                                                                         </div>
                                                                     </li>
-                                                                    <li v-if="no_table_list_show && max_number_table_id == table.id">
+                                                                    <li class="no-available-list" v-if="no_table_list_show && max_number_table_id == table.id">
                                                                         <div class="floor_number display-flex align-items-center justify_content_between w-100 no-cap">
                                                                             <div class="floor_name">
                                                                                 <span>Not above capacity table</span>
@@ -221,6 +221,10 @@ export default {
            $(".navbar-bg").css('background', 'var(--f7-navbar-bg-color)');
            $(".table_dropdwon").removeClass('floor_dropdown_visible');
            $(".floor_dropdwon").removeClass('floor_dropdown_visible');
+           $(".floor__list").removeClass('add_left_before');
+            $('.floor__list').removeClass('add_right_before');
+            $(".table__list").removeClass('add_left_before');
+            $('.table__list').removeClass('add_right_before');
         });
         this.$root.activationMenu('table');
         this.$root.removeLoader();
@@ -263,8 +267,8 @@ export default {
                 $(".floor__list").toggleClass('add_left_before');
             }
             var height = (parseInt($(".f_f"+id).height())/2) + 22;
+            console.log(height);
             $(".f_f"+id).css('transform', 'translateY(-'+height+'px');
-            // console.log($(".f_f"+id).height());
             // transform: translateY(-1em);
         },
         openTableList(order) {
@@ -299,16 +303,17 @@ export default {
             }
             
             var height = (parseInt($(".t_f"+order.id).height())/2) + 22;
-            console.log(height);
+            // if(parseInt($(".t_f"+order.id).height()) == 0) var height = height + 22;
+
             $(".t_f"+order.id).css('transform', 'translateY(-'+height+'px');
         },
         removebackdrop(){
-        $(".floor__list").removeClass('add_left_before');
-        $('.floor__list').removeClass('add_right_before');
-        $(".table__list").removeClass('add_left_before');
-        $('.table__list').removeClass('add_right_before');
-        $('.floor_dropdwon').removeClass('floor_dropdown_visible');
-        $('.table_dropdwon').removeClass('floor_dropdown_visible');
+            $('.floor_dropdwon').removeClass('floor_dropdown_visible');
+            $('.table_dropdwon').removeClass('floor_dropdown_visible');
+            $(".floor__list").removeClass('add_left_before');
+            $('.floor__list').removeClass('add_right_before');
+            $(".table__list").removeClass('add_left_before');
+            $('.table__list').removeClass('add_right_before');
         },
         secondIncrement(second, orderIndex, tableIndex,rowIndex) {
             this.intervalId = setInterval(() => {
@@ -503,8 +508,6 @@ export default {
 
             })
         },
-
-
         startDrag(id, tableId) {
             this.dragOrderId = id;
             this.dragOrderTableId = tableId;
@@ -585,9 +588,13 @@ export default {
         check(m){
             console.log(m);
         },
-        removeorder(id) {
+        finishNext(id) {
                 f7.popover.close();
-                f7.dialog.confirm('Are you sure close the reservation?', () => {
+                f7.dialog.confirm('Are you sure to finish this order and going to next?', () => {
+                    axios.post('/api/finish-next', { id: id })
+                    .then((res) => {
+                        this.tableListFloorWise(this.active_floor_id);
+                    })
                 });
                 setTimeout(() => {
                     $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });

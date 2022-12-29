@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Manager;
 
 use App\Http\Controllers\Controller;
 use App\Models\Table;
+use App\Models\Customer;
 use App\Models\Order;
 use App\Models\TableShiftHistory;
 use App\Models\FloorShiftHistory;
 use App\Models\Floor;
 use Illuminate\Http\Request;
 use App\Helper\ReservationHelper;
+use Kutia\Larafirebase\Facades\Larafirebase;
 use Carbon;
 
 
@@ -30,11 +32,15 @@ class TableController extends Controller
     {
         $groundFloorId = Floor::first()->id;
         $tables = Table::with(['color','orders.customer', 'floor','orders'=>function($q){
-            $q->orderBy('updated_at', 'ASC');
+            $q->where('finished', 0)->orderBy('updated_at', 'ASC');
         }])->where('floor_id', $groundFloorId)->where('status', 1)->get();
 
         $floorlist = Floor::with(['activetables' => function($q){
-            $q->withCount('orders');
+            $q->withCount([
+                'orders' => function ($z){
+                    $z->where('finished', 0);
+                }
+            ]);
         }])->select('id', 'name')->get();
 
         foreach ($floorlist as $key => $floors) {
@@ -93,7 +99,7 @@ class TableController extends Controller
     public function tableListFloorWise(Request $request)
     {
         $tables = Table::with(['color','orders.customer', 'floor','orders'=>function($q){
-            $q->orderBy('updated_at', 'ASC');
+            $q->where('finished', 0)->orderBy('updated_at', 'ASC');
         }])->where('floor_id', $request->id)->where('status', 1)->get();
 
         foreach($tables as $tkey=>$table){
@@ -106,7 +112,11 @@ class TableController extends Controller
         }
 
         $floorlist = Floor::with(['activetables' => function($q){
-            $q->withCount('orders');
+            $q->withCount([
+                'orders' => function ($z){
+                    $z->where('finished', 0);
+                }
+            ]);
         }])->select('id', 'name')->get();
 
         foreach ($floorlist as $key => $floors) {
@@ -154,6 +164,70 @@ class TableController extends Controller
         Order::where('id', $request->id)->update(['table_id' => $table_id]);
 
         return response()->json([ 'success' => true, 'message' => 'success' ] , 200);
+    }
+
+    /**
+     * order transfer to another floor
+     *
+     * @return @json ($tables)
+     *
+     */
+    public function finishNext(Request $request)
+    {
+        Order::where('id', $request->id)->update(['finished' => 1]);
+
+        $table_id = Order::where('id', $request->id)->first()->table_id;
+
+        
+        $next = Order::where('table_id', $table_id)->whereNull('start_time')->where('finished', 0)->orderBy('updated_at', 'ASC')->first();
+        $update_date = @$next->updated_at;
+        if($next)  $next->update(['start_time' => \Carbon\Carbon::now()]);
+        if($next)  $next->update(['updated_at' => $update_date]);
+
+        // $token = $request->session()->get('device_token');
+        $customer_id = @$next->customer_id;
+        $customer = Customer::where('id', @$customer_id)->first();
+        $token = @$customer->device_token;
+        if($token){
+            // $fcmTokens = ['c16H1_gwueT8jzmm2w_cTn:APA91bGjH092huMhvCN4Cejb84y1Y_CxzdbLrxIwyLucbUCyX4v1gl2O6oYcVaSm0ncnYhD9mbFlKVmvAgVzeePzLN5yhn0PG1esfjo0P1mrR0RUXb_W4sQII_GfcZoXodUmsqc-Kg0m'];
+            $fcmTokens = [$token];
+
+            //Notification::send(null,new SendPushNotification($request->title,$request->message,$fcmTokens));
+
+            /* or */
+
+            //auth()->user()->notify(new SendPushNotification($title,$message,$fcmTokens));
+
+            /* or */
+            
+            Larafirebase::withTitle('Food-menu Restaurant')
+            ->withBody('Your Turn Now !!!')
+            ->sendMessage($fcmTokens);
+           // // return redirect()->back()->with('success','Notification Sent Successfully!!');
+
+           try {
+
+            $basic  = new \Vonage\Client\Credentials\Basic(getenv("NEXMO_KEY"), getenv("NEXMO_SECRET"));
+            $client = new \Vonage\Client($basic);
+
+            $receiverNumber = "447498173567";     // link : https://receive-smss.com/sms/447498173567/
+            // $receiverNumber = $customer->number;
+            $message = "Food-Menu : Your Turn Now!!";
+
+            $message = $client->message()->send([
+                'to' => $receiverNumber,
+                'from' => 'Food-Menu Restaurent',
+                'text' => $message
+            ]);
+            
+            }
+            catch (Exception $e) {
+                // dd("Error: ". $e->getMessage());
+            }
+    
+        }
+
+        return response()->json(['success' => true] , 200);
     }
 
 }
