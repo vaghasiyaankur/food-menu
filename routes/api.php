@@ -10,6 +10,7 @@ use App\Http\Controllers\Manager\ProductController;
 use App\Http\Controllers\Manager\SubCategoryController;
 use App\Http\Controllers\Manager\SettingController;
 use App\Http\Controllers\Manager\TableController;
+use App\Http\Controllers\QrCodeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -175,3 +176,11 @@ Route::get('/get-lang-translation/{id}',[LanguageController::class, 'getLangTran
 Route::post('update-lang-translation',[LanguageController::class, 'updateLangTrans']);
 
 Route::post('update-languages-status',[LanguageController::class, 'updateLangStatus']);
+
+// ------------------------ Qrcode Routes ------------------------ //
+
+Route::get('/qrcode', [QrCodeController::class, 'index']);
+
+Route::post('/delete-qrcode', [QrCodeController::class, 'deleteQrCode']);
+
+Route::post('/generate-qrcode', [QrCodeController::class, 'setqrCodeGenerate']);

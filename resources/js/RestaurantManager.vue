@@ -14,18 +14,18 @@
                                 <p><a href="#" class="panel-close text-color-black"><i class="f7-icons">xmark</i></a></p>
                             </div>
                             <div class="block no-margin-top no-padding">
-                                <div class=" padding-horizontal height-40 border-bottom pannel_menu_link">
+                                <div class="padding-horizontal height-40 border-bottom pannel_menu_link panel-close">
                                     <a href="/" class="link nav-link text-color-black font-16">
                                         <i class="f7-icons font-14 margin-right-half">clock</i>Waiting area</a>
                                 </div>
-                                <div class="padding-horizontal height-40 border-bottom pannel_menu_link">
+                                <div class="padding-horizontal height-40 border-bottom pannel_menu_link panel-close">
                                     <a href="/all-reservation/"
                                         class="link nav-link text-color-black font-16">
-                                        <img src="/images/reservation.png" alt="" class="padding-right-half" style="filter: invert(100%);">All Reservation</a>
+                                        <img src="/images/reservation.png" alt="" class="padding-right-half" style="filter: invert(100%); height:13px;">All Reservation</a>
                                 </div>
-                                <div class=" padding-horizontal height-40 border-bottom pannel_menu_link">
+                                <div class=" padding-horizontal height-40 border-bottom pannel_menu_link panel-close">
                                     <a href="/Reservation/" class="link nav-link text-color-black font-16">
-                                        <img src="/images/pluse.png" alt="" class="padding-right-half" style="filter: invert(100%);">Reservation</a>
+                                        <img src="/images/pluse.png" alt="" class="padding-right-half" style="filter: invert(100%); height:13px;">Reservation</a>
                                 </div>
                                 <div class="list accordion-list inset no-margin">
                                     <ul>
@@ -33,17 +33,17 @@
                                             <a href="#" class="item-link item-content border-bottom">
                                                 <div class="item-inner">
                                                     <div class="item-title font-16">
-                                                        <img src="/images/menu.png" alt="" class="padding-right-half" style="filter: invert(100%);">Menu management
+                                                        <img src="/images/menu.png" alt="" class="padding-right-half" style="filter: invert(100%); height:13px;">Menu management
                                                     </div>
                                                 </div>
                                             </a>
                                             <div class="accordion-item-content" aria-hidden="true">
                                                 <div class="block">
                                                     <div class=" bg-color-white no-padding">
-                                                        <a href="/food-category/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food Category</a>
-                                                        <a href="/food-subcategory/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food SubCategory</a>
-                                                        <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food Menu</a>
-                                                        <a href="/digital-menu/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Digital Menu</a>
+                                                        <a href="/food-category/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding panel-close">Food Category</a>
+                                                        <a href="/food-subcategory/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding panel-close">Food SubCategory</a>
+                                                        <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding panel-close">Food Menu</a>
+                                                        <a href="/digital-menu/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding panel-close">Digital Menu</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -65,14 +65,14 @@
                                     </div>
                                 </div> -->
                                 <div class="padding-horizontal height-40 border-bottom">
-                                    <a href="/Reporting/" class="link nav-link text-color-black font-16"><img src="/images/reporting.png" alt="" class="padding-right-half" style="filter: invert(100%);">Reporting</a>
+                                    <a href="/Reporting/" class="link nav-link text-color-black font-16 panel-close"><img src="/images/reporting.png" alt="" class="padding-right-half" style="filter: invert(100%); height:13px;">Reporting</a>
                                 </div>
                                 <div class=" padding-horizontal height-40 border-bottom">
-                                    <button class="col nav-link  button close_reservation no-padding font-16" @click="$root.closeReservation(close_reservation)"><img src="/images/close_1_.png" alt="" class="padding-right-half" style="filter: invert(100%);">{{close_reservation == 1 ? 'Open' : 'Close'}} reservation</button>
+                                    <button class="col nav-link  button close_reservation no-padding font-16 panel-close" @click="$root.closeReservation(close_reservation)"><img src="/images/close_1_.png" alt="" class="padding-right-half" style="filter: invert(100%); height:13px;">{{close_reservation == 1 ? 'Open' : 'Close'}} reservation</button>
                                 </div>
                                 <div class="padding-horizontal height-40 border-bottom">
-                                    <a href="/settings/" class="col link nav-link text-color-black font-16">
-                                        <img src="/images/setting.png" alt="" class="padding-right-half" style="filter: invert(100%);">Settings</a>
+                                    <a href="/settings/" class="col link nav-link text-color-black font-16 panel-close">
+                                        <img src="/images/setting.png" alt="" class="padding-right-half" style="filter: invert(100%); height:13px;">Settings</a>
                                 </div>
                             </div>
                         </div>
@@ -236,7 +236,7 @@ export default {
                 $('.dialog-button').eq(1).removeClass('text-color-black');
                 $('.dialog-text').addClass('margin-top');
                 $('.dialog-buttons').addClass('margin-top no-margin-bottom')
-            }, 200);
+            }, 50);
         },
         successnotification(notice) {
             var notificationFull = f7.notification.create({
@@ -274,7 +274,7 @@ export default {
                 $('.overlay, body').addClass('loaded');
                 setTimeout(function () {
                     $('.overlay').css({ 'display': 'none' })
-                }, 3000)
+                }, 2000)
             }, 2000);
         },
     },

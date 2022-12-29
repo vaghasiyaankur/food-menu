@@ -1,7 +1,7 @@
 {
     "private": true,
     "scripts": {
-        "dev": "vite --host=192.168.29.168",
+        "dev": "vite",
         "build": "vite build"
     },
     "devDependencies": {
@@ -13,6 +13,7 @@
     },
     "dependencies": {
         "@chenfengyuan/vue-countdown": "^2.1.0",
+        "@chenfengyuan/vue-qrcode": "^2.0.0",
         "@syncfusion/ej2-vue-charts": "^20.3.60",
         "@vitejs/plugin-vue": "^3.1.0",
         "apexcharts": "^3.36.3",
@@ -21,7 +22,9 @@
         "jquery": "^3.6.1",
         "laravel-vue-pagination": "^4.0.0",
         "moment": "^2.29.4",
-        "vue": "^3.2.40",
+        "qrcode": "^1.5.1",
+        "qrcode.vue": "^3.3.3",
+        "vue": "^3.2.45",
         "vue-apexcharts": "^1.6.2",
         "vue-draggable-next": "^2.1.1",
         "vue-loader": "^17.0.0",
