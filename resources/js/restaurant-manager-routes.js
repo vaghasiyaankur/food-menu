@@ -1,4 +1,6 @@
 
+import LockScreen from "./components/restaurant-manager/LockScreen.vue";
+import Login from "./components/restaurant-manager/Login.vue";
 import Table from "./components/restaurant-manager/Table.vue";
 import FoodCategory from "./components/restaurant-manager/FoodCategory.vue";
 import FoodSubCategory from "./components/restaurant-manager/FoodSubCategory.vue";
@@ -14,6 +16,17 @@ import ReservationView from "./components/restaurant-manager/ReservationView.vue
 // Pages
 export default [
   // Index page
+
+  {
+    name : 'LockScreen',
+    path: 'lockscreen',
+    component: LockScreen,
+  }, 
+  {
+    name : 'Login',
+    path: 'login',
+    component: Login,
+  },
   {
     name : 'Table',
     path: '/',

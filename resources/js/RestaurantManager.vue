@@ -1,7 +1,7 @@
 <template>
 <f7-app v-bind="f7Params">
     <f7-page>
-        <div class="nav-bar">
+        <div class="nav-bar" v-if="currentRoute != 'login'">
             <f7-navbar class="navbar-menu bg-color-white">
                 <div class="header-links display-flex align-items-center">
                     <!--========= SMALL SCREEN MENU BAR=========== -->
