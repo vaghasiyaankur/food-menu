@@ -1,6 +1,16 @@
 <template>
   <f7-app v-bind="f7Params">
     <f7-view url="/" :main="true" class="safe-areas" :master-detail-breakpoint="768"></f7-view>
+    <div class="overlay">
+        <div class="overlayDoor"></div>
+        <div class="overlayContent">
+            <div class="inner text-align-center">
+                <img src="/images/loading.gif" alt="Loading..">
+                <p class="text-align-center font__bold font-22">Loading....</p>
+                <p class="text-align-center font-18">Please wait,it take a few seconds.</p>
+            </div>
+        </div>
+    </div>
   </f7-app>
 </template>
 <script>
@@ -54,6 +64,12 @@ export default {
     created() {
         this.getLanguage();
         this.languageTranslation();
+        $(window).bind('load', function () {
+            $('.overlay, body').addClass('loaded');
+            setTimeout(function () {
+                $('.overlay').css({ 'display': 'none' })
+            }, 1000)
+        });
     },
     methods: {
         getLanguage() {
@@ -68,8 +84,79 @@ export default {
                 this.trans = res.data.translations;
                 this.selected_lang = res.data.lang_id;
             })
-        }
-
+        },
+        addLoader() {
+            $('.overlay, body').removeClass('loaded');
+            $('.overlay').css({ 'display': '' });
+        },
+        removeLoader() {
+            setTimeout(function () {
+                $('.overlay, body').addClass('loaded');
+                setTimeout(function () {
+                    $('.overlay').css({ 'display': 'none' })
+                }, 1000)
+            }, 2000);
+        },
     },
 };
 </script>
+
+<style>
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+}
+
+.overlay.loaded {
+    z-index: -1;
+    transition: 0.5s cubic-bezier(0.77, 0, 0.18, 1);
+    transition-delay: 0.8s;
+}
+
+.overlay .overlayDoor:before,
+.overlay .overlayDoor:after {
+    content: "";
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    background: #fff;
+    transition: 0.5s cubic-bezier(0.77, 0, 0.18, 1);
+    transition-delay: 0.8s;
+}
+
+.overlay .overlayDoor:before {
+    left: 0;
+}
+
+.overlay .overlayDoor:after {
+    right: 0;
+}
+
+.overlay.loaded .overlayDoor:before {
+    left: -50%;
+}
+
+.overlay.loaded .overlayDoor:after {
+    right: -50%;
+}
+
+.overlay.loaded .overlayContent {
+    opacity: 0;
+    margin-top: -15px;
+}
+
+.overlay .overlayContent {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transition: 0.5s cubic-bezier(0.77, 0, 0.18, 1);
+}
+</style>

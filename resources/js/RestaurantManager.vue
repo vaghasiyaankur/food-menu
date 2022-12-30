@@ -132,13 +132,11 @@
         <div class="overlay">
             <div class="overlayDoor"></div>
             <div class="overlayContent">
-                    <div class="inner text-align-center">
-                        <img src="/images/loading.gif" alt="Loading..">
-                        <p class="text-align-center font__bold font-22">Loading....</p>
-                        <p class="text-align-center font-18">Please wait,it take a few seconds.</p>
-                    </div>
-                <!-- <div class="skip">
-                </div> -->
+                <div class="inner text-align-center">
+                    <img src="/images/loading.gif" alt="Loading..">
+                    <p class="text-align-center font__bold font-22">Loading....</p>
+                    <p class="text-align-center font-18">Please wait,it take a few seconds.</p>
+                </div>
             </div>
         </div>
     </f7-page>

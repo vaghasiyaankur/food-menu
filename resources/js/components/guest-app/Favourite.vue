@@ -70,9 +70,13 @@ export default {
         const { cookies } = useCookies()
         return { cookies };
     },
+    beforeCreate() {
+        this.$root.addLoader();
+    },
     created() {
         this.wishlist = JSON.parse(this.cookies.get('wishlist'));
         this.getwishlistData();
+        this.$root.removeLoader();
     },
     methods: {
         getwishlistData() {

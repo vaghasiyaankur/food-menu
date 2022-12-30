@@ -3,7 +3,7 @@
         <div class="row margin-vertical-half align-items-center padding">
             <div class="table_mangment_heading col-40">
                 <h3 class="no-margin">
-                    <span class="page_heading">QR Code Generate</span>
+                    <span class="page_heading">QR Code Generation</span>
                 </h3>
             </div>
             <div class="col-60">
@@ -27,7 +27,7 @@
                     </div>
                     <div class="col-40">
                         <div class="qrcode_generate_popup">
-                            <button class="button button-raised padding height_40 popup-open" data-popup=".qrcode_popup">Generate QR Code</button>
+                            <button class="button button-raised padding height_40 popup-open" @click="blankform" data-popup=".qrcode_popup">Generate QR Code</button>
                         </div>
                     </div>
                     <button @click="calender" style="opacity: 0" id="date-set"></button>
@@ -91,12 +91,12 @@
                         <ul>
                             <li class="item-input margin-bottom no-padding">
                                 <div class="item-input-wrap">
-                                    <input type="month" v-model="start_qrcode" placeholder="Start Date - Sep 2022" class="no-padding-vertical" />
+                                    <input type="month" v-model="start_qrcode" placeholder="Please choose..." :min="start_mindate" :max="start_maxdate" class="no-padding-vertical" @change="startChangeDate" />
                                 </div>
                             </li>
                             <li class="item-input margin-bottom no-padding">
                                 <div class="item-input-wrap">
-                                    <input type="month" v-model="end_qrcode" class="no-padding-vertical" placeholder="Please choose..." />
+                                    <input type="month" v-model="end_qrcode" class="no-padding-vertical" :min="end_mindate" :max="end_maxdate" placeholder="Please choose..." @change="endChangeDate" />
                                 </div>
                             </li>
                             <li class="item-input no-padding">
@@ -137,7 +137,11 @@ export default {
             from_date: '',
             to_date: '',
             start_qrcode: '',
-            end_qrcode : '',
+            end_qrcode: '',
+            start_mindate: '',
+            start_maxdate : '',
+            end_mindate: '',
+            end_maxdate : '',
         }
     },
     components: {
@@ -229,8 +233,12 @@ export default {
         },
         generateQrCode() {
             axios.post('/api/generate-qrcode', { start_qrcode: this.start_qrcode, end_qrcode: this.end_qrcode })
-            .then((res) => {
-                this.$root.successnotification(res.data.success);
+                .then((res) => {
+                if (res.data.success) {
+                    this.$root.successnotification(res.data.success);
+                } else {
+                    this.$root.errornotification(res.data.error);
+                }
                 f7.popup.close(`#qrcode_popup`);
                 this.listQrCodes();
             })
@@ -253,6 +261,21 @@ export default {
                 link.download = 'qrcode.pdf'
                 link.click()
             })
+        },
+        startChangeDate() {
+            this.end_mindate = this.start_qrcode;
+        },
+        endChangeDate() {
+            this.start_maxdate = this.end_qrcode
+        },
+        blankform() {
+            const current = new Date();
+            this.start_qrcode = '';
+            this.end_qrcode = '';
+            this.start_mindate = `${current.getFullYear()}-${current.getMonth() + 1}`;
+            this.start_maxdate = '';
+            this.end_mindate = `${current.getFullYear()}-${current.getMonth() + 1}`;
+            this.end_maxdate = '';
         }
     }
 

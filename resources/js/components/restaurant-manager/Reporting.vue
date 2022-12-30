@@ -78,9 +78,14 @@
                         <div class="card elevation-2">
                             <h3 class="card__heading margin padding-top">Total Orders</h3>
                             <f7-block>
-                                <apexchart width="1100" height="310" type="line" :options="options" :series="series"></apexchart>
+                                <div id="chart">
+                                    <div id="chart-timeline">
+                                        <apexchart type="area" height="350" ref="chart" :options="chartOptions" :series="series"></apexchart>
+                                    </div>
+                                </div>
                             </f7-block>
                         </div>
+                        <input type="hidden" v-model="series[0].data" id="apexchart" @change="onChange">
                     </div>
                 </div>
             </div>
@@ -102,20 +107,73 @@ export default {
             complete_order : '',
             ongoing_order : '',
             reservation_table : '',
-            totalOrderValue  : [1, 2 ,3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27,28, 29, 30,31],
-            options: {
+            series: [{
+                data: []
+            }],
+            chartOptions: {
                 chart: {
-                id: 'total-order'
+                    id: 'area-datetime',
+                    type: 'area',
+                    height: 350,
+                    zoom: {
+                        autoScaleYaxis: true
+                    }
+                },
+                colors: ['#F33E3E'],
+                annotations: {
+                    yaxis: [{
+                        y: 30,
+                        borderColor: '#999',
+                        label: {
+                            show: true,
+                            text: 'Support',
+                            style: {
+                                color: "#fff",
+                                background: '#00E396'
+                            }
+                        }
+                    }],
+                    xaxis: [{
+                        x: new Date('14 Nov 2012').getTime(),
+                        borderColor: '#999',
+                        yAxisIndex: 0,
+                        label: {
+                            show: true,
+                            style: {
+                                color: "#fff",
+                                background: '#775DD0'
+                            }
+                        }
+                    }]
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                markers: {
+                    size: 0,
+                    style: 'hollow',
                 },
                 xaxis: {
-                    categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001],
-                    range : 7
-                }
+                    type: 'datetime',
+                    min: new Date('01 Mar 2012').getTime(),
+                    tickAmount: 6,
+                },
+                tooltip: {
+                    x: {
+                        format: 'dd MMM yyyy'
+                    }
+                },
+                fill: {
+                    type: 'gradient',
+                    gradient: {
+                        shadeIntensity: 1,
+                        opacityFrom: 0.7,
+                        opacityTo: 0.9,
+                        stops: [0, 100]
+                    }
+                },
             },
-            series: [{
-                name: 'total-order',
-                data: [30, 40, 45, 50, 49, 60, 70, 91,60, 70, 91]
-            }]
+            selection: 'one_year',
         }
     },
     components: {
@@ -159,8 +217,12 @@ export default {
                             $("#complete_order").text(res.data.complete_order);
                             $("#ongoing_order").text(res.data.ongoing_order);
                             $("#reservation_table").text(res.data.reservation_table);
+                            const all_orders = Object.keys(res.data.all_orders).map(function (key) {
+                                return [res.data.all_orders[key].date, res.data.all_orders[key].orders];
+                            });
+                            console.log(all_orders);
+                            $('#apexchart').val(all_orders);
                         })
-
                     }
                 }
             }
@@ -184,19 +246,15 @@ export default {
         const year = today.getFullYear();
         const month = today.getMonth();
         for (let i = 0; i < 12; i += 1) {
-        dates.push(new Date(year, month - (3 - i)));
+            dates.push(new Date(year, month - (3 - i)));
         }
         const axisDateFormat = Intl.DateTimeFormat(undefined, { month: 'short', year: 'numeric' });
         const tooltipDateFormat = Intl.DateTimeFormat(undefined, { month: 'long', year: 'numeric' });
-        console.log(dates);
-        console.log(axisDateFormat);
-        console.log(tooltipDateFormat);
-        console.log(numbers);
         return {
-        dates,
-        axisDateFormat,
-        tooltipDateFormat,
-        numbers
+            dates,
+            axisDateFormat,
+            tooltipDateFormat,
+            numbers
         };
     },
     methods : {
@@ -207,14 +265,15 @@ export default {
                 this.complete_order = res.data.complete_order;
                 this.ongoing_order = res.data.ongoing_order;
                 this.reservation_table = res.data.reservation_table;
+                const all_orders = Object.keys(res.data.all_orders).map(function (key) {
+                    return [res.data.all_orders[key]];
+                });
+                this.series[0].data = all_orders;
             })
         },
         onChange() {
             console.log('123');
         },
-        check(m) {
-            console.log(m);
-        }
     }
 }
 </script>

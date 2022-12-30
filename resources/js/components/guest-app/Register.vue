@@ -43,8 +43,8 @@
         </div>
         <div>
             <form class="list margin-vertical" id="my-form">
-                <div class="item-content item-input">
-                    <div class="item-inner">
+                <div class="item-content item-input no-padding-left">
+                    <div class="item-inner no-padding-right">
                         <!-- <div class="item-title item-label">Name</div> -->
                         <div class="item-input-wrap margin-bottom-half margin-top-half">
                             <input type="text" v-model="reservation.name" name="name" class="padding" :placeholder="$root.trans.enter_name">
@@ -52,20 +52,20 @@
                     </div>
                 </div>
 
-                <div class="item-content item-input">
-                    <div class="item-inner">
+                <div class="item-content item-input no-padding-left">
+                    <div class="item-inner no-padding-right">
                         <!-- <div class="item-title item-label">Phone number</div> -->
                         <div class="item-input-wrap margin-bottom-half"><input type="text" v-model.number="reservation.number" name="number" class="padding" :placeholder="$root.trans.phone_number" minlength="10" maxlength="10" @keypress="checknumbervalidate"></div>
                     </div>
                 </div>
-                <div class="item-content item-input">
-                    <div class="item-inner">
+                <div class="item-content item-input no-padding-left">
+                    <div class="item-inner no-padding-right">
                         <!-- <div class="item-title item-label">Family member number</div> -->
                         <div class="item-input-wrap margin-bottom-half"><input type="number" v-model="reservation.member" name="member" class="padding" :placeholder="$root.trans.family_member" @keyup="floorAvailable"></div>
                     </div>
                 </div>
-                <div class="item-content item-input floor-selection margin-bottom">
-                    <div class="item-inner">
+                <div class="item-content item-input no-padding-left floor-selection">
+                    <div class="item-inner no-padding-right">
                         <div class="item-input-wrap">
                             <div class="f-concise position-relative">
                                 <div id="selection-concise">
@@ -80,16 +80,13 @@
                     </div>
                 </div>
                 <div class="no-padding-left display-flex align-items-center justify-content-space-between">
-                    <label class="item-checkbox item-content">
+                    <label class="no-padding-left item-checkbox item-content">
                         <input type="checkbox" name="demo-checkbox" v-model="reservation.agree_condition" checked="checked" />
-                        <i class="icon icon-checkbox"></i>
+                        <i class="icon icon-checkbox margin-right-half"></i>
                         <div class="item-inner">
-                            <div class="item-title padding-vertical-half">{{ $root.trans.agree_condition }}</div>
+                            <div class="item-title padding-vertical-half">I agree to&nbsp;<f7-button class="no-padding term_condition" sheet-open=".demo-sheet">terms of service&nbsp;</f7-button> & <f7-button class="no-padding term_condition" sheet-open=".demo-sheet">&nbsp;Privacy Policy</f7-button></div>
                         </div>
                     </label>
-                    <div class="view_terms_condition padding-right">
-                        <f7-button fill sheet-open=".demo-sheet" class="view_terms_text">{{ $root.trans.view }}</f7-button>
-                    </div>
                 </div>
             </form>
         </div>
@@ -167,7 +164,7 @@
                     </div>
                 </div>
                 <div class="agree_button margin-bottom">
-                    <f7-button class="button border_radius_10 button-raised button-large">{{ $root.trans.agree }}</f7-button>
+                    <f7-button class="button border_radius_10 button-raised button-large" sheet-close @click="agreewithcondition()">{{ $root.trans.agree }}</f7-button>
                 </div>
             </f7-block>
         </f7-page-content>
@@ -228,6 +225,7 @@ export default {
         $('.navbar-bg').remove();
         $(".page-content").css('padding-top', 0);
         this.checkOrder();
+        this.$root.removeLoader();
     },
     data() {
         return {
@@ -255,6 +253,9 @@ export default {
     setup() {
         const { cookies } = useCookies()
         return { cookies };
+    },
+    beforeCreate() {
+        this.$root.addLoader();
     },
     created() {
         // this.getFloors();
@@ -299,7 +300,6 @@ export default {
             } else if (this.reservation.number.toString().length != 10) {
                 this.errornotification(this.$root.trans.number_error);
             }else{
-
                 var formData = new FormData();
                 formData.append('person', this.reservation.member);
                 formData.append('floor', this.reservation.floor);
@@ -314,8 +314,6 @@ export default {
                         this.errornotification(res.data.message); return false;
                     }
                 });
-
-
             }
         },
         successnotification(notice) {
@@ -484,12 +482,23 @@ export default {
             }).catch(function (err) {
                 console.log('User Notification Token Error : '+ err);
             });
+        },
+        agreewithcondition() {
+            this.reservation.agree_condition = true;
         }
     }
 }
 </script>
 
 <style scoped>
+.list .item-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+}
 .position-relative{
     position: relative;
 }
@@ -550,14 +559,14 @@ export default {
     line-height: 18px;
     color: #38373D;
 }
-.view_terms_condition .view_terms_text{
+.term_condition{
     font-weight: 500;
     font-size: 14px;
     line-height: 17px;
     text-decoration-line: underline;
-    color: #38373D;
+    color: #005ECC;
     background-color: transparent;
-    text-transform: capitalize;
+    text-transform: lowercase;
 }
 .agree_button a{
     background: #F33E3E;

@@ -7,6 +7,7 @@ use QrCode;
 use App\Models\QrCodeToken;
 use ParagonIE\ConstantTime\Encoding;
 use Carbon\Carbon;
+use Illuminate\Support\Arr;
 use PDF;
 
 class QrCodeController extends Controller
@@ -61,6 +62,28 @@ class QrCodeController extends Controller
 
         $end = Carbon::create($req->end_qrcode);
 
+        $qrcodes = QrCodeToken::whereDate('start_date', '>=' ,$start)->whereDate('start_date', '<=' ,$end)->get();
+
+        if ($qrcodes) {
+            if(Carbon::create($qrcodes->first()->start_date)->format('Y-m') == $start->format('Y-m') && Carbon::create($qrcodes->last()->start_date)->format('Y-m') == $end->format('Y-m')){
+                return response()->json(['error' => 'Qr Code already added.']);
+            }else{
+                foreach ($qrcodes as $key => $qrcode) {
+                    if(Carbon::create($qrcode->start_date)->format('Y-m') >= $start->format('Y-m') && Carbon::create($qrcode->start_date)->format('Y-m') <= $start->format('Y-m')){
+                        $date = date('Y-m-d', strtotime(Carbon::create($qrcode->start_date)->addMonth(1)));
+                        dump(Carbon::create($qrcode->start_date)->format('Y-m') >= $start->format('Y-m') && Carbon::create($qrcode->start_date)->format('Y-m') <= $start->format('Y-m'));
+                        // $this->setQrCodeMonthly($date);
+                    }
+                }
+
+                $start = Carbon::create($qrcodes->last()->start_date)->format('Y-m');
+
+                $start = Carbon::create($start);
+                $start = date('Y-m-d', strtotime($start->addMonth(1)));
+                $start = Carbon::create($start);
+            }
+        }
+
         $diff = $start->diffInMonths($end);
 
         for($i=0; $i<$diff; $i++){
@@ -70,6 +93,7 @@ class QrCodeController extends Controller
             $date = date('Y-m-d', strtotime($start->addMonth(1)));
             $this->setQrCodeMonthly($date);
         }
+        return response()->json(['success' => 'Qr Code added successfully.']);
     }
 
     public function setQrCodeMonthly($date)
@@ -95,7 +119,6 @@ class QrCodeController extends Controller
             $qr->token = $encode;
             $qr->save();
         }
-        return response()->json(['success' => 'Qr Code added successfully.']);
     }
     public function deleteQrCode(Request $req)
     {
