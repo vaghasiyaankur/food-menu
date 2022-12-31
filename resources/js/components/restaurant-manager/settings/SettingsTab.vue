@@ -9,7 +9,7 @@
                             <a href="#tab-2" class="tab-link" @click="tableShow = true">Table Management</a>
                             <a href="#tab-3" class="tab-link" @click="floorlistShow = true">Floor Plan</a>
                             <a href="#tab-4" class="tab-link" @click="language = true">Language</a>
-                            <a href="#tab-5" class="tab-link">QR Code Generate</a>
+                            <a href="#tab-5" class="tab-link">QR Code</a>
                         </div>
                     </div>
                     <div class="tabs-animated-wrap">

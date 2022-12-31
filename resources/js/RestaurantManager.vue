@@ -1,7 +1,7 @@
 <template>
 <f7-app v-bind="f7Params">
     <f7-page>
-        <div class="nav-bar">
+        <div class="nav-bar" v-if="currentRoute != 'login'">
             <f7-navbar class="navbar-menu bg-color-white">
                 <div class="header-links display-flex align-items-center">
                     <!--========= SMALL SCREEN MENU BAR=========== -->
@@ -132,13 +132,11 @@
         <div class="overlay">
             <div class="overlayDoor"></div>
             <div class="overlayContent">
-                    <div class="inner text-align-center">
-                        <img src="/images/loading.gif" alt="Loading..">
-                        <p class="text-align-center font__bold font-22">Loading....</p>
-                        <p class="text-align-center font-18">Please wait,it take a few seconds.</p>
-                    </div>
-                <!-- <div class="skip">
-                </div> -->
+                <div class="inner text-align-center">
+                    <img src="/images/loading.gif" alt="Loading..">
+                    <p class="text-align-center font__bold font-22">Loading....</p>
+                    <p class="text-align-center font-18">Please wait,it take a few seconds.</p>
+                </div>
             </div>
         </div>
     </f7-page>

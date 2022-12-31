@@ -23,6 +23,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make('123456789'),
             'email_verified_at' => \Carbon\Carbon::now(),
             'remember_token' => Str::random(10),
+            'lock_pin' => 1234
         ]);
 
         User::create([
@@ -31,6 +32,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make('123456789'),
             'email_verified_at' => \Carbon\Carbon::now(),
             'remember_token' => Str::random(10),
+            'lock_pin' => 5678
         ]);
 
         User::create([
@@ -39,6 +41,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make('123456789'),
             'email_verified_at' => \Carbon\Carbon::now(),
             'remember_token' => Str::random(10),
+            'lock_pin' => 9101
         ]);
 
         User::create([
@@ -47,6 +50,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make('123456789'),
             'email_verified_at' => \Carbon\Carbon::now(),
             'remember_token' => Str::random(10),
+            'lock_pin' => 1011
         ]);
 
         User::create([
@@ -55,6 +59,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make('123456789'),
             'email_verified_at' => \Carbon\Carbon::now(),
             'remember_token' => Str::random(10),
+            'lock_pin' => 1112
         ]);
     }
 }

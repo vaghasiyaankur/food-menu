@@ -68,7 +68,7 @@ class ReservationController extends Controller
                 //auth()->user()->notify(new SendPushNotification($title,$message,$fcmTokens));
 
                 /* or */
-                
+
                 Larafirebase::withTitle('Food-menu Restaurant')
                 ->withBody('Your Turn Now !!!')
                 ->sendMessage($fcmTokens);
@@ -78,17 +78,17 @@ class ReservationController extends Controller
 
                 $basic  = new \Vonage\Client\Credentials\Basic(getenv("NEXMO_KEY"), getenv("NEXMO_SECRET"));
                 $client = new \Vonage\Client($basic);
-    
+
                 $receiverNumber = "447498173567";     // link : https://receive-smss.com/sms/447498173567/
                 // $receiverNumber = $customer->number;
-                $message = "Food-Menu : Your Turn Now!!";
-    
+                $messageNotification = "Food-Menu : Your Turn Now!!";
+
                 $message = $client->message()->send([
                     'to' => $receiverNumber,
                     'from' => 'Food-Menu Restaurent',
-                    'text' => $message
+                    'text' => $messageNotification
                 ]);
-                
+
                 }
                  catch (Exception $e) {
                     // dd("Error: ". $e->getMessage());
@@ -101,19 +101,19 @@ class ReservationController extends Controller
 
 
             // try {
-  
+
                 // $basic  = new \Vonage\Client\Credentials\Basic(getenv("NEXMO_KEY"), getenv("NEXMO_SECRET"));
                 // $client = new \Vonage\Client($basic);
-      
+
                 // $receiverNumber = "447498173567";
                 // $message = "Food-Menu : Your Turn Now!!";
-      
+
                 // $message = $client->message()->send([
                 //     'to' => $receiverNumber,
                 //     'from' => 'Vonage APIs',
                 //     'text' => $message
                 // ]);
-                  
+
             // } catch (Exception $e) {
             //     dd("Error: ". $e->getMessage());
             // }

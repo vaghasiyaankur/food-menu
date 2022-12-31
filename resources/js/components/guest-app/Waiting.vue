@@ -137,9 +137,13 @@ export default {
         const { cookies } = useCookies()
         return { cookies };
     },
+    beforeCreate() {
+        this.$root.addLoader();
+    },
     created() {
         this.getWaitingTime();
         this.windowWidth = window.innerWidth;
+        this.$root.removeLoader();
     },
     methods: {
         onPageBeforeOut() {
