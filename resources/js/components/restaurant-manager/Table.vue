@@ -228,17 +228,26 @@ export default {
         });
         this.$root.activationMenu('table');
         this.$root.removeLoader();
+        let vm = this;
+        window.Echo.channel("reservation")
+        .listen('NewReservation' , e => {
+            vm.tableListFloorWise(this.active_floor_id);
+        });
     },
     updated() {
         this.equal_height();
+    },
+    deactivated() {
+        console.log('end');
+        window.Echo.leave('reservation');
     },
     beforeCreate() {
         this.$root.addLoader();
     },
     created() {
         this.tableList();
+        // this.connect();
     },
-
     methods: {
         equal_height(){
             var highestBox = 0;

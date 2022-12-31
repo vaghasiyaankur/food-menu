@@ -14,6 +14,8 @@ use App\Helper\ReservationHelper;
 use Carbon\Carbon;
 use Kutia\Larafirebase\Facades\Larafirebase;
 use Validator;
+use App\Events\NewReservation;
+use League\CommonMark\Parser\Inline\NewlineParser;
 
 class ReservationController extends Controller
 {
@@ -38,6 +40,8 @@ class ReservationController extends Controller
                 $order->finish_time = $table->finish_order_time;
                 $order->finished = 0;
                 $order->save();
+
+                broadcast(new NewReservation( $order ))->toOthers();
             }
 
             $count = Order::where('table_id', $order->table_id)->whereNotNull('start_time')->where('finished', 0)->count();

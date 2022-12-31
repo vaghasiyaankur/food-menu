@@ -28,8 +28,8 @@ class SettingController extends Controller
     {
        $setting = Setting::select('restaurant_name', 'phone_number', 'manager_name', 'restaurant_logo', 'open_time', 'close_time', 'member_capacity')->first();
 
-       $setting['open_time_12_format'] = date("g:i a", strtotime($setting->open_time));
-       $setting['close_time_12_format'] = date("g:i a", strtotime($setting->close_time));
+       $setting['open_time_12_format'] = date("g:i A", strtotime($setting->open_time));
+       $setting['close_time_12_format'] = date("g:i A", strtotime($setting->close_time));
 
         return response()->json([ 'setting' => $setting ] , 200);
     }
