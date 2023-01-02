@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Manager;
 use App\Http\Controllers\Controller;
 use App\Models\Table;
 use App\Models\Customer;
+use App\Models\Setting;
 use App\Models\Order;
 use App\Models\TableShiftHistory;
 use App\Models\FloorShiftHistory;
@@ -29,7 +30,12 @@ class TableController extends Controller
      *
      */
     public function tableList()
-    {
+    {   
+        $setting = Setting::first();
+        $highlight_time = @$setting->highlight_on_off ? @$setting->highlight_time : 0;
+        $highlight_time_on_off = @$setting->highlight_on_off;
+
+
         $groundFloorId = Floor::first()->id;
         $tables = Table::with(['color','orders.customer', 'floor','orders'=>function($q){
             $q->where('finished', 0)->orderBy('updated_at', 'ASC');
@@ -53,7 +59,7 @@ class TableController extends Controller
             foreach($table->orders as $okey=>$order){
                 $tables[$tkey]['orders'][$okey]['reservation_time'] = date('h:i', strtotime($order->updated_at));
                 $tables[$tkey]['orders'][$okey]['reservation_time_12_format'] = date('g:i a', strtotime($order->updated_at));
-                $tables[$tkey]['orders'][$okey]['is_order_moved'] = strtotime($order->created_at) != strtotime($order->updated_at) && $order->updated_at->diffInSeconds(Carbon::now()) < 60;
+                $tables[$tkey]['orders'][$okey]['is_order_moved'] = strtotime($order->created_at) != strtotime($order->updated_at) && $order->updated_at->diffInSeconds(Carbon::now()) < ($highlight_time * 60);
                 $tables[$tkey]['orders'][$okey]['order_moved'] = $order->updated_at->diffInSeconds(Carbon::now());
             }
         }
@@ -66,7 +72,10 @@ class TableController extends Controller
         }
         $max_table_cap = Table::where('floor_id', $groundFloorId)->where('status', 1)->max('capacity_of_person');
         $current_capacity = (100 - ($count / $total_table_number * 100));
-        return response()->json([ 'tables' => $tables , 'floorlist' => $floorlist, 'current_capacity' => $current_capacity,'max_table_cap'=>$max_table_cap] , 200);
+
+      
+
+        return response()->json([ 'tables' => $tables , 'floorlist' => $floorlist, 'current_capacity' => $current_capacity,'max_table_cap'=>$max_table_cap, 'highlight_time' => $highlight_time, 'highlight_time_on_off' => $highlight_time_on_off] , 200);
     }
 
     /**
@@ -98,6 +107,11 @@ class TableController extends Controller
      */
     public function tableListFloorWise(Request $request)
     {
+
+        $setting = Setting::first();
+        $highlight_time = @$setting->highlight_on_off ? @$setting->highlight_time : 0;
+        // $highlight_time_on_off = @$setting->highlight_on_off;
+
         $tables = Table::with(['color','orders.customer', 'floor','orders'=>function($q){
             $q->where('finished', 0)->orderBy('updated_at', 'ASC');
         }])->where('floor_id', $request->id)->where('status', 1)->get();
@@ -106,7 +120,7 @@ class TableController extends Controller
             foreach($table->orders as $okey=>$order){
                 $tables[$tkey]['orders'][$okey]['reservation_time'] = date('h:i', strtotime($order->updated_at));
                 $tables[$tkey]['orders'][$okey]['reservation_time_12_format'] = date('g:i a', strtotime($order->updated_at));
-                $tables[$tkey]['orders'][$okey]['is_order_moved'] = strtotime($order->created_at) != strtotime($order->updated_at) && $order->updated_at->diffInSeconds(Carbon::now()) < 60;
+                $tables[$tkey]['orders'][$okey]['is_order_moved'] = strtotime($order->created_at) != strtotime($order->updated_at) && $order->updated_at->diffInSeconds(Carbon::now()) < ($highlight_time * 60);
                 $tables[$tkey]['orders'][$okey]['order_moved'] = $order->updated_at->diffInSeconds(Carbon::now());
             }
         }

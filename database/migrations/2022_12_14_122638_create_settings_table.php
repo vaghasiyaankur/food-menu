@@ -24,7 +24,7 @@ return new class extends Migration
             $table->boolean('close_reservation')->default(0);
             $table->integer('member_capacity')->nullable();
             $table->boolean('highlight_on_off')->default(0);
-            $table->integer('highlight_time')->default(0);
+            $table->float('highlight_time')->default(0);
             $table->unsignedBigInteger('language_id')->unsigned();
             $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
             $table->timestamps();

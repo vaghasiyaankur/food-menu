@@ -232,7 +232,8 @@ export default {
             });
             setTimeout(() => {
                 $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });
-                $('.dialog-title').html("<img src='/images/close.png'>");
+                if(this.close_reservation == 0) $('.dialog-title').html("<img src='/images/open_reservation.png'>");
+                else $('.dialog-title').html("<img src='/images/close_reservation.png'>");
                 $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
                 $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
                 $('.dialog-button').eq(1).removeClass('text-color-black');
