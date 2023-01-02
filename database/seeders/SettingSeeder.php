@@ -32,6 +32,8 @@ class SettingSeeder extends Seeder
         $setting->close_time = '23:00';
         $setting->close_reservation = 0;
         $setting->member_capacity = 45;
+        $setting->highlight_on_off = 1;
+        $setting->highlight_time = 0;
         $setting->language_id = 1;
         $setting->save();
     }

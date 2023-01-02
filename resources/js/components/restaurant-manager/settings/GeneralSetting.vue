@@ -165,7 +165,9 @@
                 manager_name : '',
                 restaurant_logo_preview : '',
                 restaurant_logo : '',
-                member_capacity : ''
+                member_capacity : '',
+                highlight_on_off : '',
+                highlight_time : '',
             }
         },
         created() {
@@ -185,6 +187,8 @@
                     this.open_time = res.data.setting.open_time_12_format;
                     this.close_time = res.data.setting.close_time_12_format;
                     this.member_capacity = res.data.setting.member_capacity;
+                    this.highlight_on_off = res.data.setting.highlight_on_off;
+                    this.highlight_time = res.data.setting.highlight_time;
                 })
             },
             onRestaurantLogoChange(e){
@@ -347,6 +351,8 @@
                 formData.append('open_time' , this.open_time);
                 formData.append('close_time' , this.close_time);
                 formData.append('member_capacity' , this.member_capacity);
+                formData.append('highlight_on_off' , this.highlight_on_off);
+                formData.append('highlight_time' , this.highlight_time);
 
                 axios
                 .post("/api/update-setting", formData, config)

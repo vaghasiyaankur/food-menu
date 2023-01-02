@@ -12,7 +12,7 @@ use App\Models\Floor;
 use Illuminate\Http\Request;
 use App\Helper\ReservationHelper;
 use Kutia\Larafirebase\Facades\Larafirebase;
-use Carbon;
+use \Carbon\Carbon;
 
 
 class TableController extends Controller
@@ -53,8 +53,8 @@ class TableController extends Controller
             foreach($table->orders as $okey=>$order){
                 $tables[$tkey]['orders'][$okey]['reservation_time'] = date('h:i', strtotime($order->updated_at));
                 $tables[$tkey]['orders'][$okey]['reservation_time_12_format'] = date('g:i a', strtotime($order->updated_at));
-                $tables[$tkey]['orders'][$okey]['is_order_moved'] = strtotime($order->created_at) != strtotime($order->updated_at) && $order->updated_at->diffInSeconds(Carbon\Carbon::now()) < 60;
-                $tables[$tkey]['orders'][$okey]['order_moved'] = $order->updated_at->diffInSeconds(Carbon\Carbon::now());
+                $tables[$tkey]['orders'][$okey]['is_order_moved'] = strtotime($order->created_at) != strtotime($order->updated_at) && $order->updated_at->diffInSeconds(Carbon::now()) < 60;
+                $tables[$tkey]['orders'][$okey]['order_moved'] = $order->updated_at->diffInSeconds(Carbon::now());
             }
         }
 
@@ -106,8 +106,8 @@ class TableController extends Controller
             foreach($table->orders as $okey=>$order){
                 $tables[$tkey]['orders'][$okey]['reservation_time'] = date('h:i', strtotime($order->updated_at));
                 $tables[$tkey]['orders'][$okey]['reservation_time_12_format'] = date('g:i a', strtotime($order->updated_at));
-                $tables[$tkey]['orders'][$okey]['is_order_moved'] = strtotime($order->created_at) != strtotime($order->updated_at) && $order->updated_at->diffInSeconds(Carbon\Carbon::now()) < 60;
-                $tables[$tkey]['orders'][$okey]['order_moved'] = $order->updated_at->diffInSeconds(Carbon\Carbon::now());
+                $tables[$tkey]['orders'][$okey]['is_order_moved'] = strtotime($order->created_at) != strtotime($order->updated_at) && $order->updated_at->diffInSeconds(Carbon::now()) < 60;
+                $tables[$tkey]['orders'][$okey]['order_moved'] = $order->updated_at->diffInSeconds(Carbon::now());
             }
         }
 
@@ -181,7 +181,7 @@ class TableController extends Controller
         
         $next = Order::where('table_id', $table_id)->whereNull('start_time')->where('finished', 0)->orderBy('updated_at', 'ASC')->first();
         $update_date = @$next->updated_at;
-        if($next)  $next->update(['start_time' => \Carbon\Carbon::now()]);
+        if($next)  $next->update(['start_time' => Carbon::now()]);
         if($next)  $next->update(['updated_at' => $update_date]);
 
         // $token = $request->session()->get('device_token');
@@ -228,6 +228,56 @@ class TableController extends Controller
         }
 
         return response()->json(['success' => true] , 200);
+    }
+
+    /**
+     * Use For calculate the time for order turn using ($request->id)
+     *
+     * @return @json ($time)
+     *
+     */
+    public function getRemainigTime(Request $request)
+    {
+        $orderId = $request->id;
+
+        $table_id = Order::where('id', $orderId)->first()->table_id;
+        $updated_at = Order::where('id', $orderId)->first()->updated_at;
+
+        if($table_id){
+            $allOrder = Order::where('table_id', $table_id)->where('id', '!=', $orderId)->where('finished', 0)->where('updated_at', '<=', $updated_at)->select('id', 'table_id', 'start_time', 'finish_time', 'finished', 'updated_at')->get();
+
+            $calculateTime = 0;
+
+            foreach($allOrder as $order){
+                $calculateTime += $order->finish_time;
+            }
+
+            $firstOrderTime = Order::where('table_id', $table_id)->where('id', '!=', $orderId)->where('finished', 0)->where('updated_at', '<=', $updated_at)->whereNotNull('start_time')->first();
+
+
+            if($firstOrderTime){
+                $started_time = $firstOrderTime->start_time;
+            }else{
+                $firstOrderTime = @$allOrder[0];
+                $started_time = @$firstOrderTime->created_at;
+                return response()->json([ 'success' => true, 'time' => 0 ] , 200);
+            }
+
+            $start  = new Carbon($started_time);
+            $time_format_date = strtotime(date("H:i:s",strtotime($start)));
+            $finalTime = date("H:i:s",strtotime('+'.$calculateTime.' minutes',$time_format_date));
+
+            $start  = new Carbon($finalTime);
+            $end    = new Carbon();
+
+            if($start < $end)  return response()->json([ 'success' => true, 'time' => 0 ] , 200);
+            
+            $time = ($start->diffInHours($end) * 60) + ($start->diffInMinutes($end) * 60)+ ($start->diffInSeconds($end) * 1000);
+
+            return response()->json([ 'success' => true, 'time' => $time ] , 200);
+        }else{
+            return response()->json([ 'success' => false, 'time' => 0 ] , 200);
+        }
     }
 
 }
