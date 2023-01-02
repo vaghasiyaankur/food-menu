@@ -1,7 +1,7 @@
 <template>
     <f7-page color="bg-color-white">
         <div class="table_main">
-            <!-- ============= TABLE FLOOR SWIPER ============= -->
+            <!-- ============= TABLE FLOOR SWIPER ============= -->            
            <div class="table_floor_swiper">
                 <div class="row">
                     <div class="col-100">
@@ -206,7 +206,9 @@ export default {
             max_number_table_data: [],
             intervalId : null,
             checkCallInterval: 1,
-            popup_remaining_time : 0
+            popup_remaining_time : 0,
+            highlight_time: 0,
+            highlight_time_on_off: 0,
         }
     },
     computed: {
@@ -337,23 +339,26 @@ export default {
         },
         secondIncrement(second, orderIndex, tableIndex,rowIndex) {
             this.intervalId = setInterval(() => {
-                if (second < 60) {
+                if (second < (60 * parseInt(this.highlight_time))) {
                     second++;
                     if (this.row_tables[rowIndex] != undefined && this.row_tables[rowIndex][tableIndex] != undefined && this.row_tables[rowIndex][tableIndex].orders[orderIndex] != undefined) {
                         this.row_tables[rowIndex][tableIndex].orders[orderIndex].order_moved = second;
                     }
                 }
             }, 1000);
-
+            var highlight_time = parseInt(this.highlight_time) * 60 * 1000;
             setTimeout(() => {
                 this.tableListFloorWise(this.active_floor_id);
                 f7.popover.close('.popover-move');
                 clearInterval(this.intervalId);
-             }, 60000);
+             }, highlight_time);
         },
         tableList() {
             axios.get('/api/table-list-with-order')
             .then((res) => {
+                this.highlight_time_on_off = res.data.highlight_time_on_off;
+                this.highlight_time =res.data.highlight_time;
+
                 this.current_capacity = res.data.current_capacity;
                 this.floorlist = res.data.floorlist;
                 this.active_floor_id = res.data.floorlist[0].id;
@@ -363,6 +368,9 @@ export default {
                 var change_table_list_array = [];
                 var max_number_table_id = 0;
                 res.data.tables.forEach((table, index) => {
+
+                    // Highlight Time get for setting 
+
                     // calculation of row wise table list
                     if(parseInt(cal_of_capacity) > 18){
                         row_tables.push(single_row_data);
@@ -419,10 +427,11 @@ export default {
                 });
                 this.max_number_table_id = max_number_table_id;
                 this.row_tables = row_tables;
+                
                 this.row_tables.forEach((tables, row_index) => {
                     tables.forEach((table, t_index) => {
                         table.orders.forEach((order, o_index) => {
-                            if (order.is_order_moved) {
+                            if (order.is_order_moved && this.highlight_time_on_off == 1) {
                                 this.secondIncrement(order.order_moved, o_index, t_index, row_index);
                             }
                         });
@@ -512,7 +521,7 @@ export default {
                 this.row_tables.forEach((tables, row_index) => {
                     tables.forEach((table, t_index) => {
                         table.orders.forEach((order, o_index) => {
-                            if (order.is_order_moved) {
+                            if (order.is_order_moved && this.highlight_time_on_off == 1) {
                                 this.secondIncrement(order.order_moved, o_index, t_index, row_index);
                             }
                         });

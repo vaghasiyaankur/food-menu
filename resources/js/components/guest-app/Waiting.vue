@@ -22,7 +22,13 @@
                         <vue-countdown :time="time" v-slot="{ hours, minutes, seconds }">
                             <p class="no-margin font-30">{{ String(hours).padStart(2, '0') }} : {{ String(minutes).padStart(2, '0')
                             }} : {{ String(seconds).padStart(2, '0') }}</p>
-                        </vue-countdown>
+                        </vue-countdown>My TicketsNew Ticket + 
+Action	Ticket ID	Domain	Raised On	Subject	Status	Main Product
+Close	915912	codetrinity.com	02-Jan-2023 02:28 pm	change the php version quick	open	codetrinity.com : VPS Hosting
+377567	codetrinity.com	02-Jan-2023 02:00 pm	SSH progect directory can not find	closed	codetrinity.com : VPS Hosting
+949368	codetrinity.com	02-Jan-2023 01:56 pm	The firewall on this server is blocking your PC/Mobile public IP	closed	codetrinity.com : VPS Hosting
+797558	codetrinity.com	01-Jan-2023 12:06 pm	Want to migrate the site	closed	codetrinity.com : VPS Hosting
+919408	codetrinity.com	01-Jan-2023 11:31 am	want to migrate the site	closed	
                     </div>
                 </div>
             </div>
