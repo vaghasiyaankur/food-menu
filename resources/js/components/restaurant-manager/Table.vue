@@ -48,7 +48,7 @@
                                         <!-- <draggable :scroll-sensitivity="250"  :force-fallback="true" class="dragArea list-group w-full" :class="'dragger'+table.id" :list="order[index]" @start="startDrag(order.id, table.id)" @touchend.prevent="onDrop" v-for="(order,index) in table.orders" :key="order.id"> -->
 
                                         <div class="table_reservation_info" :class="'test'+order.id" v-for="(order,index) in table.orders" :key="order.id" >
-                                            <div class="person-info popover-open" :class="['popover-click-' + order.id, { 'person-info_move': order.is_order_moved }]" :data-popover="'.popover-table-'+order.id"  @click="order_person = order.person; removebackdrop()">
+                                            <div class="person-info popover-open" :class="['popover-click-' + order.id, { 'person-info_move': order.is_order_moved }]" :data-popover="'.popover-table-'+order.id"  @click="getRemainingTime(order.id); order_person = order.person; removebackdrop(); ">
                                                 <div class="person_info_name border__bottom padding-bottom-half margin-bottom-half">
                                                     <p class="no-margin text-align-center">By {{ order.role }}</p>
                                                 </div>
@@ -69,6 +69,14 @@
                                                         <div class="display-flex padding-left-half padding-top align-items-center">
                                                             <i class="f7-icons size-18 text-color-black padding-right-half margin-right-half">clock</i>
                                                             <span class="text-color-black">{{ order.reservation_time_12_format }}</span>
+                                                        </div>
+                                                        <div class="display-flex padding-left-half padding-top align-items-center">
+                                                            <i class="f7-icons size-18 text-color-black padding-right-half margin-right-half">timer</i>
+                                                            <span class="text-color-black" v-if="popup_remaining_time == 0">Ongoing</span>
+                                                            <vue-countdown  v-else :time="popup_remaining_time" v-slot="{ hours, minutes, seconds }">
+                                                                <p class="no-margin font-30">{{ String(hours).padStart(2, '0') }} : {{ String(minutes).padStart(2, '0')
+                                                                }} : {{ String(seconds).padStart(2, '0') }}</p>
+                                                            </vue-countdown>
                                                         </div>
                                                         <div class="display-flex padding-left-half padding-top align-items-center">
                                                             <i class="f7-icons size-18 text-color-black padding-right-half margin-right-half">phone</i>
@@ -175,6 +183,7 @@ import { f7,f7Page, f7Navbar, f7BlockTitle, f7Block, f7Swiper, f7SwiperSlide} fr
 import $ from 'jquery';
 import axios from 'axios';
 import { VueDraggableNext } from 'vue-draggable-next';
+import VueCountdown from '@chenfengyuan/vue-countdown';
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
 
@@ -197,6 +206,7 @@ export default {
             max_number_table_data: [],
             intervalId : null,
             checkCallInterval: 1,
+            popup_remaining_time : 0
         }
     },
     computed: {
@@ -211,7 +221,8 @@ export default {
     }
   },
     components : {
-        f7,f7Page, f7Navbar, f7BlockTitle, f7Block,f7Swiper,f7SwiperSlide,draggable: VueDraggableNext,Carousel,Slide,Pagination,Navigation
+        f7,f7Page, f7Navbar, f7BlockTitle, f7Block,f7Swiper,f7SwiperSlide,draggable: VueDraggableNext,Carousel,Slide,
+        VueCountdown,Pagination,Navigation
     },
     mounted() {
         this.equal_height();
@@ -614,6 +625,13 @@ export default {
                     $('.dialog-buttons').addClass('margin-top no-margin-bottom')
                 }, 50);
         },
+        /* For get every order time when open the detail-popup*/
+        getRemainingTime(id) {
+            axios.post('/api/get-remainig-time', { id : id})
+                .then((res) => {
+                    this.popup_remaining_time = res.data.time;
+            })
+        }
 
     }
 }

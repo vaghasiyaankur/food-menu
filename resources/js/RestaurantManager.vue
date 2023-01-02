@@ -119,7 +119,11 @@
                         <div class="padding-left-half padding-right-half height-40">
                             <button
                                 class="nav-link button button-raised text-color-white padding closeReservation" :class="currentRoute == 'close_reservation' ? 'bg-pink' : 'bg-dark'"
-                                @click="$root.closeReservation(close_reservation)"><img src="/images/close_1_.png" alt="" class="padding-right-half">{{close_reservation == 1 ? 'Open' : 'Close'}} reservation</button></div>
+                                @click="$root.closeReservation(close_reservation)">
+                                <img :src="close_reservation == 1 ? '/images/open_1_.png' : '/images/close_1_.png'" alt="" class="padding-right-half">
+                                {{close_reservation == 1 ? 'Open' : 'Close'}} reservation
+                            </button>
+                        </div>
                         <div class="padding-left-half padding-right-half height-40"><a href="/settings/"
                                 class="nav-link button button-raised text-color-white padding" :class="currentRoute == 'setting' ? 'bg-pink' : 'bg-dark'">
                                 <img src="/images/setting.png" alt="" class="padding-right-half">Settings</a>

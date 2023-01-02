@@ -26,7 +26,7 @@ class SettingController extends Controller
      */
     public function settingData()
     {
-       $setting = Setting::select('restaurant_name', 'phone_number', 'manager_name', 'restaurant_logo', 'open_time', 'close_time', 'member_capacity')->first();
+       $setting = Setting::select('restaurant_name', 'phone_number', 'manager_name', 'restaurant_logo', 'open_time', 'close_time', 'member_capacity', 'highlight_on_off', 'highlight_time')->first();
 
        $setting['open_time_12_format'] = date("g:i A", strtotime($setting->open_time));
        $setting['close_time_12_format'] = date("g:i A", strtotime($setting->close_time));
@@ -58,6 +58,8 @@ class SettingController extends Controller
             'open_time' => date("H:i", strtotime($request->open_time)),
             'close_time' => date("H:i", strtotime($request->close_time)),
             'member_capacity' => $request->member_capacity,
+            'highlight_on_off' => $request->highlight_on_off,
+            'highlight_time' => $request->highlight_time
         ];
 
        Setting::where('id', $setting->id)->update($settingData);

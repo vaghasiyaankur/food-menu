@@ -32,7 +32,7 @@ class OrderSeeder extends Seeder
             ['customer_id' => 3, 'table_id' => 18, 'person' => 24, 'role' => 'Guest', 'finish_time' => 75, 'start_time' => \Carbon\Carbon::now()],
             ['customer_id' => 4, 'table_id' => 13, 'person' => 14, 'role' => 'Guest', 'finish_time' => 50, 'start_time' => \Carbon\Carbon::now()],
             ['customer_id' => 5, 'table_id' => 15, 'person' => 17, 'role' => 'Guest', 'finish_time' => 60, 'start_time' => \Carbon\Carbon::now()],
-            ['customer_id' => 1, 'table_id' => 17, 'person' => 4, 'role' => 'Guest', 'finish_time' => 70, 'start_time' => \Carbon\Carbon::now()],
+            ['customer_id' => 1, 'table_id' => 17, 'person' => 22, 'role' => 'Guest', 'finish_time' => 70, 'start_time' => \Carbon\Carbon::now()],
             ['customer_id' => 2, 'table_id' => 21, 'person' => 2, 'role' => 'Manager', 'finish_time' => 15, 'start_time' => \Carbon\Carbon::now()],
             ['customer_id' => 3, 'table_id' => 22, 'person' => 6, 'role' => 'Guest', 'finish_time' => 30, 'start_time' => \Carbon\Carbon::now()],
             ['customer_id' => 4, 'table_id' => 17, 'person' => 22, 'role' => 'Guest', 'finish_time' => 70],
