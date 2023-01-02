@@ -3,6 +3,7 @@
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\Manager\AuthController;
 use App\Http\Controllers\Manager\CategoryController;
 use App\Http\Controllers\Manager\FloorController;
 use App\Http\Controllers\Manager\ReportController;
@@ -192,3 +193,13 @@ Route::post('/generate-qrcode', [QrCodeController::class, 'setqrCodeGenerate']);
 Route::post('/regenerate-qrcode', [QrCodeController::class, 'qrCodereGenerate']);
 
 Route::get('/download-qrcode/{id}', [QrCodeController::class, 'qrCodereDownload']);
+
+// ------------------------ Auth Routes ------------------------ //
+
+Route::get('/checkLogin', [AuthController::class, 'checklogin']);
+
+Route::post('/login-user', [AuthController::class, 'loginUser']);
+
+Route::post('lockenabledisable', [AuthController::class , 'lockEnableDisable']);
+
+Route::get('getuserpasscode', [AuthController::class , 'userPasscode']);

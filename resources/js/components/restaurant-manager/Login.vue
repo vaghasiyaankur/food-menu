@@ -20,10 +20,10 @@
                                <div class="item-inner no-padding-right">
                                   <div class="item-title item-label">Email Address*</div>
                                   <div class="item-input-wrap">
-                                    <input type="email" placeholder="Email Address" class="padding-left-half">
+                                    <input type="email" placeholder="Email Address" v-model="email" class="padding-left-half">
                                     <span class="input-clear-button"></span>
                                     <!-- ====== ERROR SYMBOL ========= -->
-                                    <span class="input_error_symbol display-none"><i class="f7-icons font-18">exclamationmark_triangle</i></span> 
+                                    <span class="input_error_symbol display-none"><i class="f7-icons font-18">exclamationmark_triangle</i></span>
                                 </div>
                                  <!-- ======= ERROR MESSAGE =======-->
                                  <p class="error_message no-margin-bottom display-none">Please enter valid Email Address</p>
@@ -33,18 +33,17 @@
                                <div class="item-inner no-padding-right">
                                   <div class="item-title item-label">Password*</div>
                                   <div class="item-input-wrap">
-                                    <input type="password" placeholder="Enter your password" class="padding-left-half"><span class="input-clear-button"></span>
+                                    <input type="password" placeholder="Enter your password" v-model="password" class="padding-left-half"><span class="input-clear-button"></span>
                                 </div>
                                </div>
                             </li>
                             <li class="item-content item-input no-padding-left padding-bottom">
                                <div class="item-inner no-padding-right">
                                   <div class="item-input-wrap">
-                                    <a class="button button-fill button border_radius_10 button-raised bg_red text-color-white button-large text-transform-capitalize" href="#">Login</a>
+                                    <button class="button button-fill button border_radius_10 button-raised bg_red text-color-white button-large text-transform-capitalize" @click="loginAuthUser">Login</button>
                                 </div>
                                </div>
                             </li>
-
                         </ul>
                     </div>
                 </div>
@@ -66,6 +65,8 @@ export default {
     name : 'Login',
     data() {
         return {
+            email: '',
+            password : '',
         }
     },
     components : {
@@ -74,7 +75,25 @@ export default {
     mounted() {
         this.$root.activationMenu('login');
         this.$root.removeLoader();
-    }
+    },
+    methods: {
+        loginAuthUser() {
+            if (!this.email) {
+                this.$root.errornotification("Please enter your email"); return;
+            } else if (!this.password) {
+                this.$root.errornotification("Please enter your password"); return;
+            }
+            axios.post('/api/login-user', { email: this.email, password: this.password })
+            .then((res) => {
+                if (res.data.success) {
+                    this.$root.successnotification(res.data.success);
+                    f7.view.main.router.navigate({ url: '/lock-screen/' });
+                } else {
+                    this.$root.errornotification(res.data.error);
+                }
+            })
+        }
+    },
 }
 </script>
 <style scoped>
@@ -128,7 +147,7 @@ export default {
 .simple-list li:after, .links-list a:after, .list .item-inner:after{
     background-color: transparent !important;
 }
-.login_screen .login_form .item-input-wrap{        
+.login_screen .login_form .item-input-wrap{
     background: #FAFAFA;
     border-radius: 10px;
 }

@@ -191,8 +191,22 @@ export default {
             },
             close_reservation : 0,
             currentRoute: '',
-            langs : [],
+            langs: [],
+            events: ['click', 'mousemove', 'mousedown', 'scroll', 'keypress', 'load'],
+            warningTimer: null,
         }
+    },
+    beforeCreate() {
+        axios.get('/api/checkLogin')
+            .then((res) => {
+            if (res.data.check_auth && res.data.lock) {
+                f7.view.main.router.navigate({ url: '/lock-screen/' });
+            } else if (res.data.check_auth) {
+                f7.view.main.router.navigate({ url: '/' });
+            } else {
+                f7.view.main.router.navigate({ url: '/login/' });
+            }
+        })
     },
     created() {
         this.checkreservation();
@@ -204,12 +218,18 @@ export default {
             }, 1000)
         });
     },
+    mounted() {
+        this.events.forEach(function (event) {
+            window.addEventListener(event, this.resetTimer);
+        }, this);
+        this.setTimer();
+    },
     methods: {
         getLanguage() {
             axios.get('/api/get-all-languages')
-                .then((res) => {
-                    this.langs = res.data.langs;
-                })
+            .then((res) => {
+                this.langs = res.data.langs;
+            })
         },
         checkreservation() {
             axios.get('/api/check-reservation')
@@ -218,7 +238,6 @@ export default {
             });
         },
         closeReservation(reservation) {
-
             $('.closeReservation').css('background-color', '#F33E3E');
             var openOrClose = this.close_reservation == 0 ? 'open' : 'close';
             f7.dialog.confirm('Are you sure '+openOrClose+' the reservation?',() => {
@@ -279,6 +298,26 @@ export default {
                 }, 1000)
             }, 2000);
         },
+        setTimer() {
+            this.warningTimer = setTimeout(this.warningMessage, 15 * 60 * 1000);
+        },
+        warningMessage() {
+            f7.view.main.router.navigate({ url: '/lock-screen/' });
+            this.lockScreenEnable();
+        },
+        resetTimer() {
+            clearTimeout(this.warningTimer);
+            this.setTimer();
+        },
+        lockScreenEnable() {
+            const config = {
+                headers: { 'content-type': 'multipart/form-data' }
+            }
+            axios.post('/api/lockenabledisable', { lock: 1 }, config)
+            .then(res => {
+            }).catch(err => {
+            })
+        }
     },
     computed: {
         manager() {

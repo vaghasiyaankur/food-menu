@@ -177,7 +177,6 @@ export default {
                         $("#from-date").val(from_date);
                         $("#to-date").val(to_date);
                         $("#date-set").trigger('click');
-
                     }
                 }
             }

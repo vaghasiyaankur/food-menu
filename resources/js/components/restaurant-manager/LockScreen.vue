@@ -3,18 +3,18 @@
         <div class="lock-screen" :style="{background: 'url(' + '\'/images/lock_screen.png\'' + ') no-repeat center/cover'}">
             <div class="lock-screen-main ">
                 <div class="lock-screen-inner">
-                    <div class="lock-screen-right">                       
-                        <div class="lockscreen-right-heading mt-3">
-                            <h6 class=" no-margin"><img src="/images/lockimg.png" alt=""></h6> 
+                    <div class="lock-screen-right">
+                        <div class="lockscreen-right-heading password_waiting mt-3">
+                            <h6 class=" no-margin"><img src="/images/lockimg.png" alt=""></h6>
                             <h1>Enter passcode</h1>
                         </div>
                         <!--======== WRONG PASSCORD TEXT =========-->
                         <div class="lockscreen-right-heading wrong_passcord mt-3 display-none">
-                            <h6 class="no-margin-bottom"><img src="/images/wornpinimg.png"></h6> 
+                            <h6 class="no-margin-bottom"><img src="/images/wornpinimg.png"></h6>
                             <h1>Wrong Password! Please Enter Right Password</h1>
                         </div>
                         <div id="fields">
-                            <div class="grid">
+                            <div class="grid pin_show">
                                 <div class="grid__col numberfield" id="position-1"><span></span></div>
                                 <div class="grid__col numberfield" id="position-2"><span></span></div>
                                 <div class="grid__col numberfield" id="position-3"><span></span></div>
@@ -41,13 +41,13 @@
                                 <div class="grid__col grid__col--1-of-3"><button @click="removeLockPin()" class="delete_text"><i class="f7-icons">delete_left</i></button></div>
 
                             </div>
-                        </div>                        
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="lockscreen_bottom">
-                <h2 class="text-color-white no-margin-bottom">8:53 AM</h2>
-                <h6 class="text-color-white no-margin">Wednesday June 1, 2022</h6> 
+                <h2 class="text-color-white no-margin-bottom">{{ dateTime }}</h2>
+                <h6 class="text-color-white no-margin">{{ dateFormat() }}</h6>
             </div>
         </div>
     </f7-page>
@@ -60,6 +60,7 @@ import axios from 'axios';
 import { VueDraggableNext } from 'vue-draggable-next';
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
+import moment from 'moment';
 
 
 export default {
@@ -68,7 +69,8 @@ export default {
         return {
             pinposition : 0,
             pin: '',
-            indexper : 0,
+            passcode: 0,
+            dateTime : null,
         }
     },
     components : {
@@ -78,86 +80,180 @@ export default {
         this.$root.activationMenu('login');
         this.$root.removeLoader();
     },
+    created() {
+        this.getusepasscode();
+        this.timeformat();
+    },
     methods: {
+        timeformat: function () {
+            this.dateTime = moment().format('hh:mm A');
+            setInterval(() => {
+                this.dateTime = moment().format('hh:mm A');
+            }, 60000);
+        },
+        dateFormat : function () {
+            return moment().format('dddd MMMM d, Y')
+        },
          /* verify user passcode */
-        passwordVerify(){
-                if(this.pin.length == 4 && (parseInt(this.passcode) == parseInt(this.pin))){
-                    $('.lock-screen').addClass('scale-out-ver-top');
-                    // var routes = this.$router;
-                    $(".numberfield").removeClass('number_active');
-                    this.pinposition = 0;
-                    this.pin = '';
-                    var indexper = this.indexper
-                    this.lockScreenDisable();
-                }else{
-                    $(".numberfield").removeClass('number_active');
-                    this.pinposition = 0;
-                    this.pin = '';
-                    $("#fields").addClass('miss');
-                    setTimeout(function() {
-                        $("#fields").removeClass('miss');
-                    }, 500);
-                }
+        passwordVerify() {
+            if(this.pin.length == 4 && (parseInt(this.passcode) == parseInt(this.pin))){
+                $('.lock-screen').addClass('scale-out-ver-top');
+                // var routes = this.$router;
+                $(".numberfield").removeClass('number_active');
+                this.pinposition = 0;
+                this.pin = '';
+                setTimeout(function () {
+                    f7.view.main.router.navigate({ url: '/' });
+                }, 500);
+                this.lockScreenDisable();
+            }else{
+                $(".numberfield").removeClass('number_active');
+                this.pinposition = 0;
+                this.pin = '';
+                $("#fields").addClass('miss');
+                $('.password_waiting').addClass('display-none');
+                $('.wrong_passcord').removeClass('display-none');
+                $('.pin_show').addClass('wrong_password');
+                setTimeout(function() {
+                    $("#fields").removeClass('miss');
+                }, 500);
+                setTimeout(function () {
+                    $('.wrong_passcord').addClass('display-none');
+                    $('.password_waiting').removeClass('display-none');
+                    $('.pin_show').removeClass('wrong_password');
+                }, 2000);
+            }
         },
 
-            /* Pin number set */
-            addLockPin(number){
-                
-                var element = event.target;
-                element.classList.add("number_active");
-                
-                setTimeout(function() {
-                    element.classList.remove("number_active")
-                }, 500);
+        /* Pin number set */
+        addLockPin(number){
 
-                if(this.pin.length <= 4){
-                    console.log("here");
-                    var pos = this.pinposition + 1;
-                    $("#position-"+pos).addClass('number_active');
-                    this.position = this.pinposition++;
-                    let newpin = '' + this.pin + number;
-                    this.pin = newpin;
-                    // if(newpin.length == 4){
-                    //     this.passwordVerify();
-                    // }
+            var element = event.target;
+            element.classList.add("number_active");
+
+            setTimeout(function() {
+                element.classList.remove("number_active")
+            }, 500);
+
+            if(this.pin.length <= 4){
+                console.log("here");
+                var pos = this.pinposition + 1;
+                $("#position-"+pos).addClass('number_active');
+                this.position = this.pinposition++;
+                let newpin = '' + this.pin + number;
+                this.pin = newpin;
+                if(newpin.length == 4){
+                    this.passwordVerify();
                 }
-            },
-
-            /* Remove last number of the pin*/
-            removeLockPin() {
-                if(this.pin.length > 0){
-
-                    var pos = this.pinposition;
-                    $("#position-"+pos).removeClass('number_active');
-                    this.position = this.pinposition--;
-
-                    let newpin = this.pin.slice(0, -1);
-                    this.pin = newpin;
-
-                }
-            },
-
-            /* Lock Screen Disable for backend side */
-            lockScreenDisable(){
-                const config = {
-                    headers: { 'content-type': 'multipart/form-data' }
-                }
-                axios.post('/api/lockenabledisable',{lock : 0},config)
-                .then(res => {
-                }).catch(err => {
-                })
             }
+        },
+
+        /* Remove last number of the pin*/
+        removeLockPin() {
+            if(this.pin.length > 0){
+
+                var pos = this.pinposition;
+                $("#position-"+pos).removeClass('number_active');
+                this.position = this.pinposition--;
+
+                let newpin = this.pin.slice(0, -1);
+                this.pin = newpin;
+
+            }
+        },
+
+        /* Lock Screen Disable for backend side */
+        lockScreenDisable(){
+            const config = {
+                headers: { 'content-type': 'multipart/form-data' }
+            }
+            axios.post('/api/lockenabledisable',{lock : 0},config)
+            .then(res => {
+            }).catch(err => {
+            })
+        },
+        /* User Passcode catch from database */
+        getusepasscode(){
+            axios.get('/api/getuserpasscode')
+            .then(res => {
+                this.passcode = res.data.passcode;
+            })
+            .catch(err => {
+                console.log(err);
+            });
+        },
     }
 }
 </script>
 <style scoped>
+.miss {
+    -webkit-animation: miss .8s ease-out 1;
+    animation: miss .8s ease-out 1;
+    animation-iteration-count: 2;
+}
+
+@keyframes miss {
+    0% {
+        -webkit-transform: translate(0, 0);
+        transform: translate(0, 0);
+    }
+
+    10% {
+        -webkit-transform: translate(-25px, 0);
+        transform: translate(-25px, 0);
+    }
+
+    20% {
+        -webkit-transform: translate(25px, 0);
+        transform: translate(25px, 0);
+    }
+
+    30% {
+        -webkit-transform: translate(-20px, 0);
+        transform: translate(-20px, 0);
+    }
+
+    40% {
+        -webkit-transform: translate(20px, 0);
+        transform: translate(20px, 0);
+    }
+
+    50% {
+        -webkit-transform: translate(-10px, 0);
+        transform: translate(-10px, 0);
+    }
+
+    60% {
+        -webkit-transform: translate(10px, 0);
+        transform: translate(10px, 0);
+    }
+
+    70% {
+        -webkit-transform: translate(-5px, 0);
+        transform: translate(-5px, 0);
+    }
+
+    80% {
+        -webkit-transform: translate(5px, 0);
+        transform: translate(5px, 0);
+    }
+
+    100% {
+        -webkit-transform: translate(0, 0);
+        transform: translate(0, 0);
+    }
+}
 /************* LOCK SCREEEN CSS *******************/
+
+.lock-screen .lock-screen-right #fields .wrong_password .numberfield span{
+    border: 1px solid #F33E3E;
+}
 .lock-screen{
     height:100vh;
     overflow: hidden;
     z-index: 1100;
 }
-.lock-screen-main{    
+.lock-screen-main{
     position: absolute;
     top: 50%;
     left: 50%;
@@ -172,7 +268,7 @@ export default {
 .lock-screen .lock-screen-right .lockscreen-right-heading h1{
     font-weight: 500;
     font-size: 21px;
-    line-height: 25px;    
+    line-height: 25px;
     color: #FFFFFF;
 }
 .lock-screen .lock-screen-right #fields {
@@ -270,7 +366,7 @@ export default {
 .lock-screen .lock-screen-right .lockscreen-right-heading.wrong_passcord h1{
     color: #F33E3E;
 }
-/************** RESPONSIVE CSS ****************/    
+/************** RESPONSIVE CSS ****************/
 /*@media screen and (max-width:820px){
     .lock-screen{
         height: 98vh;

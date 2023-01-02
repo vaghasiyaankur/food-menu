@@ -19,13 +19,13 @@ export default [
 
   {
     name : 'LockScreen',
-    path: 'lockscreen',
+    path: '/lock-screen/',
     component: LockScreen,
-  }, 
+  },
   {
     name : 'Login',
-    path: 'login',
-    component: Login,
+    path: '/login',
+    component: Login
   },
   {
     name : 'Table',
