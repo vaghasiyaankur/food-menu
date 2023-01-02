@@ -232,6 +232,11 @@ export default {
             this.listQrCodes();
         },
         generateQrCode() {
+            if (!this.start_qrcode) {
+                this.$root.errornotification("Please enter start month."); return;
+            } else if (!this.end_qrcode) {
+                this.$root.errornotification("Please enter end month."); return;
+            }
             axios.post('/api/generate-qrcode', { start_qrcode: this.start_qrcode, end_qrcode: this.end_qrcode })
                 .then((res) => {
                 if (res.data.success) {
@@ -272,9 +277,9 @@ export default {
             const current = new Date();
             this.start_qrcode = '';
             this.end_qrcode = '';
-            this.start_mindate = `${current.getFullYear()}-${current.getMonth() + 1}`;
+            this.start_mindate = `${current.getFullYear()}-${String(current.getMonth() + 1).padStart(2, '0')}`;
             this.start_maxdate = '';
-            this.end_mindate = `${current.getFullYear()}-${current.getMonth() + 1}`;
+            this.end_mindate = `${current.getFullYear()}-${String(current.getMonth() + 1).padStart(2, '0')}`;
             this.end_maxdate = '';
         }
     }

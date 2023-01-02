@@ -40,7 +40,7 @@ class QrCodeController extends Controller
         $qrcodexml = [];
         foreach($qrcodes as $key=>$qr){
             $qr->status = '';
-            if (Carbon::parse($qr['start_date']) <= Carbon::now() && Carbon::parse($qr['end_date']) >= Carbon::now()) {
+            if (Carbon::parse($qr['start_date'])->format('Y-m-d') <= Carbon::now()->format('Y-m-d') && Carbon::parse($qr['end_date'])->format('Y-m-d') >= Carbon::now()->format('Y-m-d')) {
                $qr->status = 'Ongoing';
             }else if(Carbon::parse($qr['start_date']) >= Carbon::now()){
                 $qr->status = 'Upcoming';
@@ -62,37 +62,27 @@ class QrCodeController extends Controller
 
         $end = Carbon::create($req->end_qrcode);
 
-        $qrcodes = QrCodeToken::whereDate('start_date', '>=' ,$start)->whereDate('start_date', '<=' ,$end)->get();
-
-        if ($qrcodes) {
-            if(Carbon::create($qrcodes->first()->start_date)->format('Y-m') == $start->format('Y-m') && Carbon::create($qrcodes->last()->start_date)->format('Y-m') == $end->format('Y-m')){
-                return response()->json(['error' => 'Qr Code already added.']);
-            }else{
-                foreach ($qrcodes as $key => $qrcode) {
-                    if(Carbon::create($qrcode->start_date)->format('Y-m') >= $start->format('Y-m') && Carbon::create($qrcode->start_date)->format('Y-m') <= $start->format('Y-m')){
-                        $date = date('Y-m-d', strtotime(Carbon::create($qrcode->start_date)->addMonth(1)));
-                        dump(Carbon::create($qrcode->start_date)->format('Y-m') >= $start->format('Y-m') && Carbon::create($qrcode->start_date)->format('Y-m') <= $start->format('Y-m'));
-                        // $this->setQrCodeMonthly($date);
-                    }
-                }
-
-                $start = Carbon::create($qrcodes->last()->start_date)->format('Y-m');
-
-                $start = Carbon::create($start);
-                $start = date('Y-m-d', strtotime($start->addMonth(1)));
-                $start = Carbon::create($start);
-            }
-        }
-
         $diff = $start->diffInMonths($end);
 
-        for($i=0; $i<$diff; $i++){
+        $exsitsData = 0;
+
+        for($i=0; $i<=$diff; $i++){
             if($i == 0){
-                $this->setQrCodeMonthly(date('Y-m-d', strtotime($start)));
+                $date = date('Y-m-d', strtotime($start));
+            }else{
+                $date = date('Y-m-d', strtotime($start->addMonth(1)));
             }
-            $date = date('Y-m-d', strtotime($start->addMonth(1)));
-            $this->setQrCodeMonthly($date);
+            $qrcode = QrCodeToken::whereDate('start_date',$date)->doesntExist();
+            if ($qrcode) {
+                $this->setQrCodeMonthly($date);
+                $exsitsData = 1;
+            }
         }
+
+        if($exsitsData == 0){
+            return response()->json(['error' => 'Qr Code already added.']);
+        }
+
         return response()->json(['success' => 'Qr Code added successfully.']);
     }
 
