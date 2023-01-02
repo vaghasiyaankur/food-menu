@@ -1,7 +1,7 @@
 <template>
     <f7-page color="bg-color-white">
         <div class="table_main">
-            <!-- ============= TABLE FLOOR SWIPER ============= -->
+            <!-- ============= TABLE FLOOR SWIPER ============= -->            
            <div class="table_floor_swiper">
                 <div class="row">
                     <div class="col-100">

@@ -53,8 +53,44 @@
                     </div>
                 </div>
             </div>
+            <div class="time_onoff">
+                <h3 class="card-title">Time ON /OFF</h3>
+                <div class="row align-items-center">
+                    <div class="col-50">
+                        <label class="switch">
+                            <input type="checkbox" class="switch-input">
+                            <span class="switch-label" data-on="On" data-off="Off"></span>
+                            <span class="switch-handle"></span>
+                        </label>
+                    </div>
+                    <div class="col-50 padding-left list">
+                        <div class="item-content item-input">
+                            <div class="item-inner">
+                               <div class="item-input-wrap">
+                                  <div class="f-concise position-relative">
+                                     <div id="selection-concise">
+                                        <div id="select-concise" class="input-dropdown-wrap"  @click="timerOnOff = !timerOnOff">{{ showTiming }}</div>
+                                        <ul id="location-select-list" class="dropdown_list" :class="{ 'display-none' : !timerOnOff }">
+                                           <li class="concise p-1" :class="{ 'active' : showTiming == '10 second'}" @click="timerOnOff = false;showTiming = '10 second'">10 second</li>
+                                           <li class="concise p-1" :class="{ 'active' : showTiming == '20 second'}" @click="timerOnOff = false;showTiming = '20 second'">20 second</li>
+                                           <li class="concise p-1" :class="{ 'active' : showTiming == '30 second'}" @click="timerOnOff = false;showTiming = '30 second'">30 second</li>
+                                           <li class="concise p-1" :class="{ 'active' : showTiming == '40 second'}" @click="timerOnOff = false;showTiming = '40 second'">40 second</li>
+                                           <li class="concise p-1" :class="{ 'active' : showTiming == '50 second'}" @click="timerOnOff = false;showTiming = '50 second'">50 second</li>
+                                           <li class="concise p-1" :class="{ 'active' : showTiming == '60 second'}" @click="timerOnOff = false;showTiming = '60 second'">60 second</li>
+                                           <li class="concise p-1" :class="{ 'active' : showTiming == '1 minute'}" @click="timerOnOff = false;showTiming = '1 minute'">1 minute</li>
+                                           <li class="concise p-1" :class="{ 'active' : showTiming == '2 minute'}" @click="timerOnOff = false;showTiming = '2 minute'">2 minute</li>
+                                           <li class="concise p-1" :class="{ 'active' : showTiming == '3 minute'}" @click="timerOnOff = false;showTiming = '3 minute'">3 minute</li>
+                                        </ul>
+                                     </div>
+                                  </div>
+                               </div>
+                            </div>
+                         </div>
+                    </div>
+                </div>
+            </div>
             <h3 class="card-title">Time Zone</h3>
-            <div class="row">
+            <div class="row margin-bottom">
                 <div class="col padding-right">
                     <div class="block-title no-margin-top no-margin-left">Open Time:</div>
                     <div class="drop-down"  @click="openTimePopupToggle($event)">
@@ -139,7 +175,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>            
             <div class="submit__button margin-top padding-top">
                 <button class="col button button-large button-fill" @click="updateSetting()">Save</button>
             </div>
@@ -168,6 +204,8 @@
                 member_capacity : '',
                 highlight_on_off : '',
                 highlight_time : '',
+                timerOnOff : false,
+                showTiming : '',
             }
         },
         created() {
@@ -367,6 +405,43 @@
     }
 </script>
 <style scoped>
+.position-relative{
+    position: relative;
+}
+/*======== SELECT OPTION CSS =======*/
+/*.time_onoff #select-concise {
+    background-color: #fafafa;
+    border-radius: 10px;
+    width: 100%;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    padding: 16px;
+}*/
+.time_onoff .item-input-wrap{
+    width: 100%;
+    background: #F0F0F0;
+    border: 0.5px solid #DCDCDC;
+    border-radius: 7px;
+    height: auto;
+}
+/*.time_onoff #location-select-list {
+    position: absolute;
+    width: 100%;
+    z-index: 999;
+    background-color: #fff;
+    box-shadow: 0.7px 0.7px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    max-height: 220px;
+    overflow: auto;
+}
+.time_onoff #location-select-list li.concise:first-child {
+    border-radius: 3px 3px 0px 0px;
+}
+.time_onoff .register-button:hover, .time_onoff .register-button:active, .active {
+    background: #F33E3E !important;
+    color: #fff !important;
+}*/
 img.restaurant_logo{
     width: 160px;
     height: 160px;
@@ -523,6 +598,106 @@ img.restaurant_logo{
     font-size: 20px;
     line-height: 24px;
     color: #38373D;
+}
+.items_input_wrap input[data-v-ecf91fa0] {
+    width: 100%;
+    height: auto;
+    background-color: #FAFAFA;
+    border-radius: 10px;
+    padding: 15px 10px;
+}
+/*========= SWITCH ON OFF CSS ===========*/
+.time_onoff .switch {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    width: 80px;
+    height: 31px;
+    padding: 3px;
+    background-color: white;
+    border-radius: 7px;
+    /*box-shadow: inset 0 -1px white, inset 0 1px 1px rgba(0, 0, 0, 0.05);*/
+    cursor: pointer;
+   /* background-image: -webkit-linear-gradient(top, #eeeeee, white 25px);
+    background-image: -moz-linear-gradient(top, #eeeeee, white 25px);
+    background-image: -o-linear-gradient(top, #eeeeee, white 25px);
+    background-image: linear-gradient(to bottom, #eeeeee, white 25px);*/
+}
+.time_onoff .switch-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+.time_onoff .switch-input:checked ~ .switch-label {
+    background: #f33e3e;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+.time_onoff .switch-label {
+    position: relative;
+    display: block;
+    height: inherit;
+    font-size: 14px;
+    text-transform: uppercase;
+    background: #f5f5f5;
+    border-radius: inherit;
+    -webkit-transition: 0.15s ease-out;
+    -moz-transition: 0.15s ease-out;
+    -o-transition: 0.15s ease-out;
+    transition: 0.15s ease-out;
+    -webkit-transition-property: opacity background;
+    -moz-transition-property: opacity background;
+    -o-transition-property: opacity background;
+    transition-property: opacity background;
+}
+.time_onoff .switch-label:before,.time_onoff .switch-label:after {
+    position: absolute;
+    top: 50%;
+    margin-top: -.5em;
+    line-height: 1;
+    -webkit-transition: inherit;
+    -moz-transition: inherit;
+    -o-transition: inherit;
+    transition: inherit;
+}
+.time_onoff .switch-label:before {
+    content: attr(data-off);
+    right: 11px;
+    color: #999999;
+    text-shadow: 0 1px rgba(255, 255, 255, 0.5);
+}
+.time_onoff .switch-input:checked ~.switch-label:before {
+    opacity: 0;
+}
+.time_onoff .switch-label:after {
+    content: attr(data-on);
+    left: 11px;
+    color: white;
+    text-shadow: 0 1px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+}
+.time_onoff .switch-input:checked ~.switch-label:after {
+    opacity: 1;
+}
+.time_onoff .switch-handle {
+    position: absolute;
+    top: 7px;
+    left: 4px;
+    width: 22px;
+    height: 22px;
+    background: #999999;
+    border-radius: 7px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);    
+    -webkit-transition: left 0.15s ease-out;
+    -moz-transition: left 0.15s ease-out;
+    -o-transition: left 0.15s ease-out;
+    transition: left 0.15s ease-out;
+}
+.time_onoff .switch-input:checked ~.switch-handle {
+    left: 53px;
+    box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
 }
 @media screen and (max-width:991px){
     .drop-down__menu-box{
