@@ -95,7 +95,7 @@
                                                                 </h3>
                                                             </div>
                                                         </div>
-                                                        <div class="floor__list">
+                                                        <div class="floor__list" :class="order.start_time && order.finished == 0 ? 'display-none' : ''">
                                                             <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="openFloorList(order.id)">
                                                                 <h3 class="text-color-red">Change Floor</h3>
                                                             </div>
@@ -116,7 +116,7 @@
                                                             </div>
                                                             <!-- ============FLOOR DROP DOWN END ============= -->
                                                         </div>
-                                                        <div class="table__list">
+                                                        <div class="table__list" :class="order.start_time && order.finished == 0 ? 'display-none' : ''">
                                                             <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="openTableList(order)">
                                                                 <h3 class="text-color-red">Change Table</h3>
                                                             </div>
@@ -339,15 +339,16 @@ export default {
         },
         secondIncrement(second, orderIndex, tableIndex,rowIndex) {
             this.intervalId = setInterval(() => {
-                if (second < (60 * parseInt(this.highlight_time))) {
+                if (second < (60 * parseFloat(this.highlight_time))) {
                     second++;
                     if (this.row_tables[rowIndex] != undefined && this.row_tables[rowIndex][tableIndex] != undefined && this.row_tables[rowIndex][tableIndex].orders[orderIndex] != undefined) {
                         this.row_tables[rowIndex][tableIndex].orders[orderIndex].order_moved = second;
                     }
                 }
             }, 1000);
-            var highlight_time = parseInt(this.highlight_time) * 60 * 1000;
+            var highlight_time = parseFloat(this.highlight_time) * 60 * 1000;
             setTimeout(() => {
+                // console.log('checktest');
                 this.tableListFloorWise(this.active_floor_id);
                 f7.popover.close('.popover-move');
                 clearInterval(this.intervalId);

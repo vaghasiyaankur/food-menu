@@ -234,22 +234,25 @@ class ReservationController extends Controller
 
     public function floorAvailable(Request $request)
     {
-        $table_id = ReservationHelper::takeTable($request->floor, $request->person);
+        // $table_id = ReservationHelper::takeTable($request->floor, $request->person);
 
-        $table = Table::where('status', 1)->where('capacity_of_person', intval($request->member))->first();
-        if(!$table) {
-            $table = Table::where('status', 1)->orderBy('capacity_of_person','ASC')->where('capacity_of_person', '>' , intval($request->member))->first();
-        }
-        if($table){
-            $table_capacity = $table->capacity_of_person;
-            $floors = Floor::whereHas('tables', function($q) use($table_capacity){
-                    $q->where('capacity_of_person', $table_capacity);
-                })->pluck('name','id');
+        // $table = Table::where('status', 1)->where('capacity_of_person', intval($request->member))->first();
+        $from_cap = intval($request->member);
+        if($from_cap < 4) $to_cap = intval(ceil($request->member * 2));
+        else $to_cap = intval(ceil($request->member * 1.5));
+        // if(!$table) {
+        //     $table = Table::where('status', 1)->orderBy('capacity_of_person','ASC')->where('capacity_of_person', '>' , intval($request->member))->first();
+        // }
+        // if($table){
+        //     $table_capacity = $table->capacity_of_person;
+        $floors = Floor::whereHas('tables', function($q) use($from_cap,$to_cap){
+                $q->where('capacity_of_person', '>=', $from_cap)->where('capacity_of_person', '<=', $to_cap)->where('status', 1);
+            })->pluck('name','id');
 
-            return response()->json([ 'success' => true, 'floors' => $floors ] , 200);
-        }else{
-            return response()->json([ 'success' => true, 'floors' => []] , 200);
-        }
+        return response()->json([ 'success' => true, 'floors' => $floors ] , 200);
+        // }else{
+        //     return response()->json([ 'success' => true, 'floors' => []] , 200);
+        // }
     }
 
     /**

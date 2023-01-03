@@ -54,16 +54,16 @@
                 </div>
             </div>
             <div class="time_onoff">
-                <h3 class="card-title">Time ON /OFF</h3>
+                <h3 class="card-title">Highlight Time ON /OFF</h3>
                 <div class="row align-items-center">
                     <div class="col-50">
                         <label class="switch">
-                            <input type="checkbox" class="switch-input">
+                            <input type="checkbox" class="switch-input" @change="highlight_on_off = !highlight_on_off" :checked="highlight_on_off">
                             <span class="switch-label" data-on="On" data-off="Off"></span>
                             <span class="switch-handle"></span>
                         </label>
                     </div>
-                    <div class="col-50 padding-left list">
+                    <div class="col-50 padding-left list"  :class="{ 'display-none' : !highlight_on_off }">
                         <div class="item-content item-input">
                             <div class="item-inner">
                                <div class="item-input-wrap">
@@ -71,15 +71,14 @@
                                      <div id="selection-concise">
                                         <div id="select-concise" class="input-dropdown-wrap"  @click="timerOnOff = !timerOnOff">{{ showTiming }}</div>
                                         <ul id="location-select-list" class="dropdown_list" :class="{ 'display-none' : !timerOnOff }">
-                                           <li class="concise p-1" :class="{ 'active' : showTiming == '10 second'}" @click="timerOnOff = false;showTiming = '10 second'">10 second</li>
-                                           <li class="concise p-1" :class="{ 'active' : showTiming == '20 second'}" @click="timerOnOff = false;showTiming = '20 second'">20 second</li>
-                                           <li class="concise p-1" :class="{ 'active' : showTiming == '30 second'}" @click="timerOnOff = false;showTiming = '30 second'">30 second</li>
-                                           <li class="concise p-1" :class="{ 'active' : showTiming == '40 second'}" @click="timerOnOff = false;showTiming = '40 second'">40 second</li>
-                                           <li class="concise p-1" :class="{ 'active' : showTiming == '50 second'}" @click="timerOnOff = false;showTiming = '50 second'">50 second</li>
-                                           <li class="concise p-1" :class="{ 'active' : showTiming == '60 second'}" @click="timerOnOff = false;showTiming = '60 second'">60 second</li>
-                                           <li class="concise p-1" :class="{ 'active' : showTiming == '1 minute'}" @click="timerOnOff = false;showTiming = '1 minute'">1 minute</li>
-                                           <li class="concise p-1" :class="{ 'active' : showTiming == '2 minute'}" @click="timerOnOff = false;showTiming = '2 minute'">2 minute</li>
-                                           <li class="concise p-1" :class="{ 'active' : showTiming == '3 minute'}" @click="timerOnOff = false;showTiming = '3 minute'">3 minute</li>
+                                           <li class="concise p-1" :class="{ 'active' : showTiming == '10 second'}" @click="timerOnOff = false;showTiming = '10 second'; this.highlight_time='0.166666667'">10 second</li>
+                                           <li class="concise p-1" :class="{ 'active' : showTiming == '20 second'}" @click="timerOnOff = false;showTiming = '20 second'; this.highlight_time='0.333333333'">20 second</li>
+                                           <li class="concise p-1" :class="{ 'active' : showTiming == '30 second'}" @click="timerOnOff = false;showTiming = '30 second'; this.highlight_time='0.5'">30 second</li>
+                                           <li class="concise p-1" :class="{ 'active' : showTiming == '40 second'}" @click="timerOnOff = false;showTiming = '40 second'; this.highlight_time='0.666666667'">40 second</li>
+                                           <li class="concise p-1" :class="{ 'active' : showTiming == '50 second'}" @click="timerOnOff = false;showTiming = '50 second'; this.highlight_time='0.833333333'">50 second</li>
+                                           <li class="concise p-1" :class="{ 'active' : showTiming == '1 minute'}" @click="timerOnOff = false;showTiming = '1 minute'; this.highlight_time='1'">1 minute</li>
+                                           <li class="concise p-1" :class="{ 'active' : showTiming == '2 minute'}" @click="timerOnOff = false;showTiming = '2 minute'; this.highlight_time='2'">2 minute</li>
+                                           <li class="concise p-1" :class="{ 'active' : showTiming == '3 minute'}" @click="timerOnOff = false;showTiming = '3 minute'; this.highlight_time='3'">3 minute</li>
                                         </ul>
                                      </div>
                                   </div>
@@ -202,8 +201,8 @@
                 restaurant_logo_preview : '',
                 restaurant_logo : '',
                 member_capacity : '',
-                highlight_on_off : '',
-                highlight_time : '',
+                highlight_on_off : false,
+                highlight_time : 0,
                 timerOnOff : false,
                 showTiming : '',
             }
@@ -225,8 +224,9 @@
                     this.open_time = res.data.setting.open_time_12_format;
                     this.close_time = res.data.setting.close_time_12_format;
                     this.member_capacity = res.data.setting.member_capacity;
-                    this.highlight_on_off = res.data.setting.highlight_on_off;
+                    this.highlight_on_off = res.data.setting.highlight_on_off == 1 ? true : false;
                     this.highlight_time = res.data.setting.highlight_time;
+                    this.showTiming = res.data.setting.select_highlight_time;
                 })
             },
             onRestaurantLogoChange(e){
@@ -382,6 +382,7 @@
                     return false;
                 }
 
+                var highlight_on_off_check =  this.highlight_on_off ? 1 : 0;
                 formData.append('restaurant_name' , this.restaurant_name);
                 formData.append('phone_number' , this.phone_number);
                 formData.append('manager_name' , this.manager_name);
@@ -389,7 +390,7 @@
                 formData.append('open_time' , this.open_time);
                 formData.append('close_time' , this.close_time);
                 formData.append('member_capacity' , this.member_capacity);
-                formData.append('highlight_on_off' , this.highlight_on_off);
+                formData.append('highlight_on_off' , highlight_on_off_check);
                 formData.append('highlight_time' , this.highlight_time);
 
                 axios

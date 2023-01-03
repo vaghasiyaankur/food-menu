@@ -228,7 +228,12 @@ export default {
                 .then((res) => {
                     f7.dialog.alert('Success!', () => {
                         document.getElementById('book_table').classList.remove('active');
-                        f7.view.main.router.navigate({ url: '/waiting/' });
+                        // f7.view.main.router.navigate({ url: '/waiting/' });
+                        this.reservation.name = '';
+                        this.reservation.number = '';
+                        this.reservation.member = '';
+                        this.floors = [];
+                        this.reservation.floor = 1;
                     });
                     setTimeout(() => {
                         $('.dialog-title').html("<img src='/images/success.png'>");
@@ -256,7 +261,7 @@ export default {
             })
         },
         checkTime() {
-            if(!this.reservation.name || !this.reservation.number || !this.reservation.member || !this.reservation.floor){
+            if(!this.reservation.name || !this.reservation.number || !this.reservation.member){
                 this.$root.errornotification('Please enter all the required details.'); return false;
             }else if(parseInt(this.reservation.member) > parseInt(this.member_limit)){
                 this.$root.errornotification('order create must be '+this.member_limit+' or less than member.'); return false;
