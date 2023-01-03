@@ -13,7 +13,8 @@ class ReservationHelper{
         // $tableIds = $tableIds->where('capacity_of_person', intval($person))->pluck('id');
         // if(!count($tableIds)) {
             $from_cap = intval($person);
-            $to_cap = intval(ceil($person * 1.5));
+            if($from_cap < 4) $to_cap = intval(ceil($person * 2));
+            else $to_cap = intval(ceil($person * 1.5));
             // $nexttable = Table::where('status', 1);
             // if($floor) $nexttable = $nexttable->where('floor_id', $floor);
             // $nexttable = $nexttable->orderBy('capacity_of_person','ASC')->whereIn('capacity_of_person', '>' , [$from_cap, $to_cap])->first();

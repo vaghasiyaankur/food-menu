@@ -2,7 +2,7 @@
     <f7-page class="bg-color-white">
        <div class="reservation_view">
             <div class="back_link padding margin-horizontal">
-                <a class="link back" href="all-reservation"><i class="icon icon-back"></i>
+                <a class="link back" href="/all-reservation/"><i class="icon icon-back"></i>
                     <span class="margin-left-half">Back to List</span>
                 </a>
             </div>

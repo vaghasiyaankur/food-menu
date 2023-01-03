@@ -73,9 +73,15 @@
                                                         <div class="display-flex padding-left-half padding-top align-items-center">
                                                             <i class="f7-icons size-18 text-color-black padding-right-half margin-right-half">timer</i>
                                                             <span class="text-color-black" v-if="popup_remaining_time == 0">Ongoing</span>
+                                                            <vue-countdown  v-else-if="popup_remaining_time_over" :time="popup_remaining_time" v-slot="{ hours, minutes, seconds }">
+                                                                <p class="no-margin font-30" v-if="String(hours).padStart(2, '0') != 0">Time Over <span class="time-over">{{ String(hours).padStart(2, '0')+' hour'}}</span></p>
+                                                                <p class="no-margin font-30" v-else-if="String(minutes).padStart(2, '0') != 0">Time Over <span class="time-over">{{ String(minutes).padStart(2, '0')+' mins'}}</span></p>
+                                                                <p class="no-margin font-30" v-else>Time Over <span class="time-over">{{ String(seconds).padStart(2, '0')+' second'}}</span></p>
+                                                            </vue-countdown>
                                                             <vue-countdown  v-else :time="popup_remaining_time" v-slot="{ hours, minutes, seconds }">
-                                                                <p class="no-margin font-30">{{ String(hours).padStart(2, '0') }} : {{ String(minutes).padStart(2, '0')
-                                                                }} : {{ String(seconds).padStart(2, '0') }}</p>
+                                                                <p class="no-margin font-30" v-if="String(hours).padStart(2, '0') != 0">{{ String(hours).padStart(2, '0')+' hr & '+String(minutes).padStart(2, '0')+' M'}}</p>
+                                                                <p class="no-margin font-30" v-else-if="String(minutes).padStart(2, '0') != 0">{{ String(minutes).padStart(2, '0')+' mins'}}</p>
+                                                                <p class="no-margin font-30" v-else>{{ String(seconds).padStart(2, '0')+' secs'}}</p>
                                                             </vue-countdown>
                                                         </div>
                                                         <div class="display-flex padding-left-half padding-top align-items-center">
@@ -95,7 +101,7 @@
                                                                 </h3>
                                                             </div>
                                                         </div>
-                                                        <div class="floor__list">
+                                                        <div class="floor__list" :class="order.start_time && order.finished == 0 ? 'display-none' : ''">
                                                             <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="openFloorList(order.id)">
                                                                 <h3 class="text-color-red">Change Floor</h3>
                                                             </div>
@@ -116,7 +122,7 @@
                                                             </div>
                                                             <!-- ============FLOOR DROP DOWN END ============= -->
                                                         </div>
-                                                        <div class="table__list">
+                                                        <div class="table__list" :class="order.start_time && order.finished == 0 ? 'display-none' : ''">
                                                             <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="openTableList(order)">
                                                                 <h3 class="text-color-red">Change Table</h3>
                                                             </div>
@@ -152,7 +158,7 @@
                                                 <div v-else class="popover popover-move padding" :class="'popover-table-' + order.id">
                                                     <div class="user-info popover-inner text-align-center">
                                                         <p class="text-color-white no-margin">Moved</p>
-                                                        <p class="text-color-white no-margin">{{ order.order_moved }} seconds ago</p>
+                                                        <p class="text-color-white no-margin">{{ order.order_moved_text }}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -207,6 +213,7 @@ export default {
             intervalId : null,
             checkCallInterval: 1,
             popup_remaining_time : 0,
+            popup_remaining_time_over : false,
             highlight_time: 0,
             highlight_time_on_off: 0,
         }
@@ -339,14 +346,27 @@ export default {
         },
         secondIncrement(second, orderIndex, tableIndex,rowIndex) {
             this.intervalId = setInterval(() => {
-                if (second < (60 * parseInt(this.highlight_time))) {
+                if (second < (60 * parseFloat(this.highlight_time))) {
                     second++;
                     if (this.row_tables[rowIndex] != undefined && this.row_tables[rowIndex][tableIndex] != undefined && this.row_tables[rowIndex][tableIndex].orders[orderIndex] != undefined) {
                         this.row_tables[rowIndex][tableIndex].orders[orderIndex].order_moved = second;
+                        if(second > 60){
+                            var minutes = parseInt(Math.floor(second / 60), 10);
+                            var extraSeconds = second % 60;
+                            minutes = minutes < 10 ? "0" + minutes : minutes;
+                            extraSeconds = extraSeconds < 10 ? "0" + extraSeconds : extraSeconds;
+                            this.row_tables[rowIndex][tableIndex].orders[orderIndex].order_moved_text = minutes+' minute '+extraSeconds+' second     ago';
+                        }else{
+                            this.row_tables[rowIndex][tableIndex].orders[orderIndex].order_moved_text = second+' seconds ago';
+                        }
                     }
+                }else{
+                    this.tableListFloorWise(this.active_floor_id);
+                    f7.popover.close('.popover-move');
+                    clearInterval(this.intervalId);
                 }
             }, 1000);
-            var highlight_time = parseInt(this.highlight_time) * 60 * 1000;
+            var highlight_time = parseFloat(this.highlight_time) * 60 * 1000;
             setTimeout(() => {
                 this.tableListFloorWise(this.active_floor_id);
                 f7.popover.close('.popover-move');
@@ -639,6 +659,8 @@ export default {
             axios.post('/api/get-remainig-time', { id : id})
                 .then((res) => {
                     this.popup_remaining_time = res.data.time;
+                    console.log(res.data.time_over);
+                    this.popup_remaining_time_over = res.data.time_over;
             })
         }
 
@@ -1043,6 +1065,9 @@ content: '';
     min-width: 300px;
     visibility: hidden;
 
+}
+.time-over{
+    border : 1px solid #000;
 }
 </style>
 
