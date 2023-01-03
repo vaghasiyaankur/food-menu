@@ -284,13 +284,13 @@ class TableController extends Controller
             $start  = new Carbon($finalTime);
             $end    = new Carbon();
 
-            if($start < $end)  return response()->json([ 'success' => true, 'time' => 0 ] , 200);
             
             $time = ($start->diffInHours($end) * 60) + ($start->diffInMinutes($end) * 60)+ ($start->diffInSeconds($end) * 1000);
-
-            return response()->json([ 'success' => true, 'time' => $time ] , 200);
+            
+            if($start < $end)  return response()->json([ 'success' => true, 'time' => $time, 'time_over' => true] , 200);
+            return response()->json([ 'success' => true, 'time' => $time, 'time_over' => false] , 200);
         }else{
-            return response()->json([ 'success' => false, 'time' => 0 ] , 200);
+            return response()->json([ 'success' => false, 'time' => 0, 'time_over' => false ] , 200);
         }
     }
 

@@ -208,7 +208,7 @@ export default {
             this.$emit('textChange');
         },
         register() {
-            if(!this.reservation.name || !this.reservation.number || !this.reservation.member || !this.reservation.floor){
+            if(!this.reservation.name || !this.reservation.number || !this.reservation.member){
                 this.$root.errornotification('Please enter all the required details.'); return false;
             }else if(parseInt(this.reservation.member) > parseInt(this.member_limit)){
                 this.$root.errornotification('order create must be '+this.member_limit+' or less than member.'); return false;
