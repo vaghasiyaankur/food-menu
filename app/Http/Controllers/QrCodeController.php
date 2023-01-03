@@ -8,6 +8,7 @@ use App\Models\QrCodeToken;
 use ParagonIE\ConstantTime\Encoding;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 use PDF;
 
 class QrCodeController extends Controller
@@ -30,7 +31,7 @@ class QrCodeController extends Controller
 
         $fromDate = $req->from_date ? Carbon::parse($req->from_date)->format('Y-m-d') : '';
         $toDate = $req->to_date ? Carbon::parse($req->to_date)->format('Y-m-d') : $fromDate;
-        $qrcodes = new QrCodeToken;
+        $qrcodes = QrCodeToken::whereUserId(Auth::id());
         if ($req->from_date && $req->to_date) {
             $qrcodes = $qrcodes->whereDate('start_date','>=',$fromDate)->whereDate('end_date','<=',$toDate);
         }elseif($req->from_date && !$req->to_date){

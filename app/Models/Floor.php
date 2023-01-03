@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Table;
-
+use Illuminate\Support\Facades\Auth;
 
 class Floor extends Model
 {
@@ -20,6 +20,6 @@ class Floor extends Model
 
     public function activetables()
     {
-        return $this->tables()->where('status', 1);
+        return $this->tables()->where('status', 1)->whereUserId(Auth::id());
     }
 }

@@ -9,6 +9,7 @@ use App\Models\SubCategory;
 use App\Models\SubCategoryLanguage;
 use Illuminate\Http\Request;
 use App\Models\Language;
+use Illuminate\Support\Facades\Auth;
 
 class SubCategoryController extends Controller
 {
@@ -36,11 +37,14 @@ class SubCategoryController extends Controller
         $lang_id = SettingHelper::managerLanguage();
         $subCategories = Category::with(['categoryLanguages' => function($q) use ($lang_id){
             $q->where('language_id',$lang_id);
+        },'subCategory' => function($q){
+            $q->whereHas('subCategoryLanguage');
         },'subCategory.subCategoryLanguage' => function($q) use ($req,$lang_id){
             $q->where('name','LIKE','%'.$req->search.'%')->where('language_id',$lang_id);
-        }])->whereHas('subCategory.subCategoryLanguage',function($q) use ($req,$lang_id){
+        }])
+        ->whereHas('subCategory.subCategoryLanguage',function($q) use ($req,$lang_id){
             $q->where('name','LIKE','%'.$req->search.'%')->where('language_id',$lang_id);
-        })->get();
+        })->whereUserId(Auth::id())->get();
         return response()->json($subCategories);
     }
 
@@ -80,7 +84,7 @@ class SubCategoryController extends Controller
 
         $subCategories = SubCategory::with(['subCategoryLanguage' => function($q) use ($lang_id){
             $q->where('language_id',$lang_id);
-        }])->get();
+        }])->whereUserId(Auth::id())->get();
 
         $subCat = [];
         foreach ($subCategories as $key => $sub) {

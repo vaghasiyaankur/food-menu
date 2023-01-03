@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 use App\Helper\ReservationHelper;
 use Kutia\Larafirebase\Facades\Larafirebase;
 use \Carbon\Carbon;
-
+use Illuminate\Support\Facades\Auth;
 
 class TableController extends Controller
 {
@@ -30,24 +30,24 @@ class TableController extends Controller
      *
      */
     public function tableList()
-    {   
-        $setting = Setting::first();
+    {
+        $setting = Setting::whereUserId(Auth::id())->first();
         $highlight_time = @$setting->highlight_on_off ? @$setting->highlight_time : 0;
         $highlight_time_on_off = @$setting->highlight_on_off;
 
+        $groundFloorId = Floor::whereUserId(Auth::id())->first()->id;
 
-        $groundFloorId = Floor::first()->id;
         $tables = Table::with(['color','orders.customer', 'floor','orders'=>function($q){
-            $q->where('finished', 0)->orderBy('updated_at', 'ASC');
-        }])->where('floor_id', $groundFloorId)->where('status', 1)->get();
+            $q->where('finished', 0)->whereUserId(Auth::id())->orderBy('updated_at', 'ASC');
+        }])->whereUserId(Auth::id())->where('floor_id', $groundFloorId)->where('status', 1)->get();
 
         $floorlist = Floor::with(['activetables' => function($q){
             $q->withCount([
                 'orders' => function ($z){
-                    $z->where('finished', 0);
+                    $z->where('finished', 0)->whereUserId(Auth::id());
                 }
             ]);
-        }])->select('id', 'name')->get();
+        }])->whereHas('activetables')->whereUserId(Auth::id())->select('id', 'name')->get();
 
         foreach ($floorlist as $key => $floors) {
             foreach ($floors->activetables as $key => $table) {
@@ -64,16 +64,16 @@ class TableController extends Controller
             }
         }
 
-        $total_table_number = Table::where('status', 1)->count();
-        $table_list_with_order = Table::select('id')->where('status', 1)->withCount('orders')->get();
+        $total_table_number = Table::whereUserId(Auth::id())->where('status', 1)->count();
+        $table_list_with_order = Table::whereUserId(Auth::id())->select('id')->where('status', 1)->withCount('orders')->get();
         $count = 0;
         foreach($table_list_with_order as $tlwo){
             if($tlwo->orders_count == 0) $count += 1;
         }
-        $max_table_cap = Table::where('floor_id', $groundFloorId)->where('status', 1)->max('capacity_of_person');
+        $max_table_cap = Table::whereUserId(Auth::id())->where('floor_id', $groundFloorId)->where('status', 1)->max('capacity_of_person');
         $current_capacity = (100 - ($count / $total_table_number * 100));
 
-      
+
 
         return response()->json([ 'tables' => $tables , 'floorlist' => $floorlist, 'current_capacity' => $current_capacity,'max_table_cap'=>$max_table_cap, 'highlight_time' => $highlight_time, 'highlight_time_on_off' => $highlight_time_on_off] , 200);
     }
@@ -108,13 +108,13 @@ class TableController extends Controller
     public function tableListFloorWise(Request $request)
     {
 
-        $setting = Setting::first();
+        $setting = Setting::whereUserId(Auth::id())->first();
         $highlight_time = @$setting->highlight_on_off ? @$setting->highlight_time : 0;
         // $highlight_time_on_off = @$setting->highlight_on_off;
 
         $tables = Table::with(['color','orders.customer', 'floor','orders'=>function($q){
-            $q->where('finished', 0)->orderBy('updated_at', 'ASC');
-        }])->where('floor_id', $request->id)->where('status', 1)->get();
+            $q->where('finished', 0)->whereUserId(Auth::id())->orderBy('updated_at', 'ASC');
+        }])->where('floor_id', $request->id)->whereUserId(Auth::id())->where('status', 1)->get();
 
         foreach($tables as $tkey=>$table){
             foreach($table->orders as $okey=>$order){
@@ -128,10 +128,10 @@ class TableController extends Controller
         $floorlist = Floor::with(['activetables' => function($q){
             $q->withCount([
                 'orders' => function ($z){
-                    $z->where('finished', 0);
+                    $z->whereUserId(Auth::id())->where('finished', 0);
                 }
             ]);
-        }])->select('id', 'name')->get();
+        }])->whereHas('activetables')->select('id', 'name')->whereUserId(Auth::id())->get();
 
         foreach ($floorlist as $key => $floors) {
             foreach ($floors->activetables as $key => $table) {
@@ -139,15 +139,15 @@ class TableController extends Controller
             }
         }
 
-        $total_table_number = Table::where('status', 1)->count();
-        $table_list_with_order = Table::select('id')->where('status', 1)->withCount('orders')->get();
+        $total_table_number = Table::whereUserId(Auth::id())->where('status', 1)->count();
+        $table_list_with_order = Table::whereUserId(Auth::id())->select('id')->where('status', 1)->withCount('orders')->get();
         $count = 0;
         foreach($table_list_with_order as $tlwo){
             if($tlwo->orders_count == 0) $count += 1;
         }
 
         $current_capacity = (100 - ($count / $total_table_number * 100));
-        $max_table_cap = Table::where('floor_id', $request->id)->where('status', 1)->max('capacity_of_person');
+        $max_table_cap = Table::whereUserId(Auth::id())->where('floor_id', $request->id)->where('status', 1)->max('capacity_of_person');
         return response()->json([ 'tables' => $tables, 'current_capacity' => $current_capacity,'max_table_cap'=>$max_table_cap, 'floorlist' => $floorlist ] , 200);
     }
 
@@ -192,7 +192,7 @@ class TableController extends Controller
 
         $table_id = Order::where('id', $request->id)->first()->table_id;
 
-        
+
         $next = Order::where('table_id', $table_id)->whereNull('start_time')->where('finished', 0)->orderBy('updated_at', 'ASC')->first();
         $update_date = @$next->updated_at;
         if($next)  $next->update(['start_time' => Carbon::now()]);
@@ -213,7 +213,7 @@ class TableController extends Controller
             //auth()->user()->notify(new SendPushNotification($title,$message,$fcmTokens));
 
             /* or */
-            
+
             Larafirebase::withTitle('Food-menu Restaurant')
             ->withBody('Your Turn Now !!!')
             ->sendMessage($fcmTokens);
@@ -233,12 +233,12 @@ class TableController extends Controller
                 'from' => 'Food-Menu Restaurent',
                 'text' => $message
             ]);
-            
+
             }
             catch (Exception $e) {
                 // dd("Error: ". $e->getMessage());
             }
-    
+
         }
 
         return response()->json(['success' => true] , 200);
@@ -285,7 +285,7 @@ class TableController extends Controller
             $end    = new Carbon();
 
             if($start < $end)  return response()->json([ 'success' => true, 'time' => 0 ] , 200);
-            
+
             $time = ($start->diffInHours($end) * 60) + ($start->diffInMinutes($end) * 60)+ ($start->diffInSeconds($end) * 1000);
 
             return response()->json([ 'success' => true, 'time' => $time ] , 200);

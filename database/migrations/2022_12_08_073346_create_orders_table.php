@@ -19,6 +19,8 @@ return new class extends Migration
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->unsignedBigInteger('table_id')->unsigned();
             $table->foreign('table_id')->references('id')->on('tables')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('person')->default(0);
             $table->string('role')->default('Guest');
             $table->string('cancelled_by')->default('Guest');

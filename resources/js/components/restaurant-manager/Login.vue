@@ -87,7 +87,7 @@ export default {
             .then((res) => {
                 if (res.data.success) {
                     this.$root.successnotification(res.data.success);
-                    f7.view.main.router.navigate({ url: '/lock-screen/' });
+                    f7.view.main.router.navigate({ url: '/' });
                 } else {
                     this.$root.errornotification(res.data.error);
                 }

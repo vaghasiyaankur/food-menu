@@ -198,10 +198,8 @@ export default {
     },
     beforeCreate() {
         axios.get('/api/checkLogin')
-            .then((res) => {
-            if (res.data.check_auth && res.data.lock) {
-                f7.view.main.router.navigate({ url: '/lock-screen/' });
-            } else if (res.data.check_auth) {
+        .then((res) => {
+            if (res.data.check_auth) {
                 f7.view.main.router.navigate({ url: '/' });
             } else {
                 f7.view.main.router.navigate({ url: '/login/' });

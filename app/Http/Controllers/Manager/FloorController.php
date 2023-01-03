@@ -5,12 +5,13 @@ namespace App\Http\Controllers\Manager;
 use App\Http\Controllers\Controller;
 use App\Models\Floor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FloorController extends Controller
 {
     public function getFloors()
     {
-        $floors = Floor::paginate(10);
+        $floors = Floor::whereUserId(Auth::id())->paginate(10);
 
         return response()->json($floors);
     }
@@ -44,7 +45,7 @@ class FloorController extends Controller
 
     public function getFloorsData()
     {
-        $floors = Floor::pluck('name','id');
+        $floors = Floor::whereUserId(Auth::id())->pluck('name','id');
 
         return response()->json($floors);
     }

@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('number')->nullable();
             $table->boolean('agree_condition')->default(0);
             $table->string('device_token')->nullable();
+            $table->unsignedBigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

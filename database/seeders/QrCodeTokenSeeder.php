@@ -21,24 +21,29 @@ class QrCodeTokenSeeder extends Seeder
         else if(Carbon::now()->daysInMonth == '30') $duration = [8,8,7,7];
         else if(Carbon::now()->daysInMonth == '29') $duration = [8,7,7,7];
         else $duration = [7,7,7,7];
-        
-        foreach($duration as $key=>$dur){
 
-            $cal_of_start = 0;
-            if($key != 0) $cal_of_start = $key * $duration[$key - 1];  
-            $startDate = Carbon::now()->startOfMonth()->addDays($cal_of_start);
-            $startDuration = Carbon::now()->startOfMonth()->addDays($cal_of_start);
-            
-            $endDuration = $startDate->addDays($dur - 1);
+        $user_ids = [1,2,3,4,5];
 
-            $data = random_bytes(32);
-            $encode = Encoding::base64Encode($data);
+        foreach ($user_ids as $key => $user_id) {
+            foreach($duration as $key=>$dur){
 
-            $qr = new QrCodeToken();
-            $qr->start_date = date('Y-m-d', strtotime($startDuration));
-            $qr->end_date = date('Y-m-d', strtotime($endDuration));
-            $qr->token = $encode;
-            $qr->save();
+                $cal_of_start = 0;
+                if($key != 0) $cal_of_start = $key * $duration[$key - 1];
+                $startDate = Carbon::now()->startOfMonth()->addDays($cal_of_start);
+                $startDuration = Carbon::now()->startOfMonth()->addDays($cal_of_start);
+
+                $endDuration = $startDate->addDays($dur - 1);
+
+                $data = random_bytes(32);
+                $encode = Encoding::base64Encode($data);
+
+                $qr = new QrCodeToken();
+                $qr->start_date = date('Y-m-d', strtotime($startDuration));
+                $qr->end_date = date('Y-m-d', strtotime($endDuration));
+                $qr->token = $encode;
+                $qr->user_id = $user_id;
+                $qr->save();
+            }
         }
     }
 }

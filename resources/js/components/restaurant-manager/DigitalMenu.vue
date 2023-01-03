@@ -35,8 +35,8 @@
                             <div class="menu-list">
                                 <div class="font-18 text-align-center menu-list-title text-color-black"><u>{{ subcate.sub_category_language[0].name }}</u></div>
                                 <div class="list row margin-half align-items-center" v-for="product in subcate.products" :key="product">
-                                    <div class="col-80 display-flex">{{ product.product_language[0].name }} &nbsp;<span class="dots"></span></div>
-                                    <div class="col-20">{{ product.price.toFixed(2) }}</div>
+                                    <div class="col-85 display-flex">{{ product.product_language[0].name }}&nbsp;<span class="dots"></span></div>
+                                    <div class="col-15">{{ product.price.toFixed(2) }}</div>
                                 </div>
                             </div>
                         </div>

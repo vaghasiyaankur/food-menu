@@ -15,6 +15,7 @@ use Carbon\Carbon;
 use Kutia\Larafirebase\Facades\Larafirebase;
 use Validator;
 use App\Events\NewReservation;
+use Illuminate\Support\Facades\Auth;
 use League\CommonMark\Parser\Inline\NewlineParser;
 
 class ReservationController extends Controller
@@ -176,7 +177,7 @@ class ReservationController extends Controller
 
     public function checkReservation()
     {
-        $close_reservation = Setting::first()->close_reservation;
+        $close_reservation = Setting::whereUserId(Auth::id())->first()->close_reservation;
         return response()->json([ 'close_reservation' => $close_reservation ] , 200);
     }
 
@@ -359,14 +360,14 @@ class ReservationController extends Controller
         $search = $request->search;
 
         $reservation = Order::withTrashed()->with(['customer' => function($q) {
-            $q->select('id','name', 'number');
+            $q->select('id','name', 'number','user_id')->whereUserId(Auth::id());
         }]);
 
         if ($from_date && $to_date) {
             $reservation = $reservation->whereDate('created_at', '>=', $from_date)->whereDate('created_at', '<=', $to_date);
         }
 
-        $reservation = $reservation->select('id','customer_id','person','start_time','finish_time','finished','deleted_at')->selectRaw('DATE_FORMAT(created_at,"%d, %b %Y / %h:%i %p") as date');
+        $reservation = $reservation->select('id','customer_id','person','start_time','finish_time','finished','deleted_at','user_id')->selectRaw('DATE_FORMAT(created_at,"%d, %b %Y / %h:%i %p") as date');
 
         if($request->search)
         $reservation = $reservation->where('id', $request->search)->orWhere(function ($orWhere) use ($search) {
@@ -374,9 +375,8 @@ class ReservationController extends Controller
                 $products->where('name', 'like', '%' . $search . '%');
             });
         });
-
         $page = $request->page ? : 1;
-        $reservation = $reservation->paginate(10);
+        $reservation = $reservation->whereUserId(Auth::id())->paginate(10);
 
 
         return response()->json([ 'reservation' => $reservation ] , 200);

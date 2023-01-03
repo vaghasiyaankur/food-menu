@@ -39,16 +39,21 @@ class OrderSeeder extends Seeder
             ['customer_id' => 5, 'table_id' => 14, 'person' => 15, 'role' => 'Guest', 'finish_time' => 55, 'start_time' => \Carbon\Carbon::now()]
         ];
 
-        foreach ($orders as $order) {
-            $ord = new Order();
-            $ord->customer_id = $order['customer_id'];
-            $ord->table_id = $order['table_id'];
-            $ord->person = $order['person'];
-            $ord->role = $order['role'];
-            $ord->start_time = @$order['start_time'];
-            $ord->finished = 0;
-            $ord->finish_time = $order['finish_time'];
-            $ord->save();
+        $user_ids = [1,2,3,4,5];
+
+        foreach ($user_ids as $key => $user_id) {
+            foreach ($orders as $order) {
+                $ord = new Order();
+                $ord->customer_id = $order['customer_id'];
+                $ord->table_id = $order['table_id'];
+                $ord->person = $order['person'];
+                $ord->role = $order['role'];
+                $ord->start_time = @$order['start_time'];
+                $ord->finished = 0;
+                $ord->finish_time = $order['finish_time'];
+                $ord->user_id = $user_id;
+                $ord->save();
+            }
         }
     }
 }

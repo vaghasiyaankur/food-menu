@@ -40,23 +40,25 @@
             <div class="card-content card-content-padding" v-if="subCategories.length">
                 <div v-for="subcategory in subCategories" :key="subcategory">
                     <div class="main-category text-color-pink padding-left-half margin-top padding-top-half">{{ subcategory.category_languages[0].name }}</div>
-                    <div class="category-list border-bottom padding-vertical-half" v-for="subcat in subcategory.sub_category" :key="subcat">
-                        <div class="row align-items-center">
-                            <div class="col-100 large-60 medium-50">
-                                <div class="display-flex align-items-center">
-                                    <span class="padding-left-half sub_category_name">{{ subcat.sub_category_language[0].name }}</span>
+                    <div v-for="subcat in subcategory.sub_category" :key="subcat">
+                        <div class="category-list border-bottom padding-vertical-half" v-if="subcat.sub_category_language[0]">
+                            <div class="row align-items-center">
+                                <div class="col-100 large-60 medium-50">
+                                    <div class="display-flex align-items-center">
+                                        <span class="padding-left-half sub_category_name">{{ subcat.sub_category_language[0].name }}</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-100 large-40 medium-50 action-buttons">
-                                <div class="row align-items-center">
-                                    <div class="col-50">
-                                        <button class="button text-color-black padding height-36 popup-open border__right" data-popup="#product_popup" @click="getAllSubCategories(); product.sub_category = subcat.id"><i class="f7-icons font-22 margin-right-half">plus_square</i>Add Product</button>
-                                    </div>
-                                    <div class="col-25">
-                                        <button class="button text-color-black padding height-36 popup-open" data-popup="#sub_category_popup" @click="editSubCategory(subcat.id)"><i class="f7-icons font-22 margin-right-half">square_pencil</i>Edit</button>
-                                    </div>
-                                    <div class="col-25">
-                                        <button class="button text-color-red padding height-36" @click="removeSubCategory(subcat.id)"><i class="f7-icons font-22 margin-right-half">trash</i> Delete</button>
+                                <div class="col-100 large-40 medium-50 action-buttons">
+                                    <div class="row align-items-center">
+                                        <div class="col-50">
+                                            <button class="button text-color-black padding height-36 popup-open border__right" data-popup="#product_popup" @click="getAllSubCategories(); product.sub_category = subcat.id"><i class="f7-icons font-22 margin-right-half">plus_square</i>Add Product</button>
+                                        </div>
+                                        <div class="col-25">
+                                            <button class="button text-color-black padding height-36 popup-open" data-popup="#sub_category_popup" @click="editSubCategory(subcat.id)"><i class="f7-icons font-22 margin-right-half">square_pencil</i>Edit</button>
+                                        </div>
+                                        <div class="col-25">
+                                            <button class="button text-color-red padding height-36" @click="removeSubCategory(subcat.id)"><i class="f7-icons font-22 margin-right-half">trash</i> Delete</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -1,7 +1,7 @@
 <template>
     <f7-page color="bg-color-white">
         <div class="table_main">
-            <!-- ============= TABLE FLOOR SWIPER ============= -->            
+            <!-- ============= TABLE FLOOR SWIPER ============= -->
            <div class="table_floor_swiper">
                 <div class="row">
                     <div class="col-100">
@@ -311,7 +311,7 @@ export default {
             }
             $(".table_dropdwon").css('min-width', '240px');
 
-        
+
 
             if (order.person < parseInt(this.max_number_table_data.capacity_of_person)) {
                 this.no_table_list_show = false;
@@ -323,7 +323,7 @@ export default {
             if (order.table_id == this.max_number_table_data.id && person == parseInt(this.max_number_table_data.capacity_of_person)) {
                 this.no_table_list_show = true;
             }
-            
+
             var height = (parseInt($(".t_f"+order.id).height())/2) + 22;
             // if(parseInt($(".t_f"+order.id).height()) == 0) var height = height + 22;
 
@@ -361,7 +361,7 @@ export default {
 
                 this.current_capacity = res.data.current_capacity;
                 this.floorlist = res.data.floorlist;
-                this.active_floor_id = res.data.floorlist[0].id;
+                this.active_floor_id = res.data.floorlist[0] ? res.data.floorlist[0].id : 0;
                 var row_tables = [];
                 var cal_of_capacity = 0;
                 var single_row_data = [];
@@ -369,7 +369,7 @@ export default {
                 var max_number_table_id = 0;
                 res.data.tables.forEach((table, index) => {
 
-                    // Highlight Time get for setting 
+                    // Highlight Time get for setting
 
                     // calculation of row wise table list
                     if(parseInt(cal_of_capacity) > 18){
@@ -427,7 +427,7 @@ export default {
                 });
                 this.max_number_table_id = max_number_table_id;
                 this.row_tables = row_tables;
-                
+
                 this.row_tables.forEach((tables, row_index) => {
                     tables.forEach((table, t_index) => {
                         table.orders.forEach((order, o_index) => {

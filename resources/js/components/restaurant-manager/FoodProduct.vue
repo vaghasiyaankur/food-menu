@@ -285,6 +285,7 @@ export default {
             this.active_category = id;
             this.active_sub_category = 0;
             this.showCategoryList = true;
+            this.active_sub_category_name = 'Sub Category';
             this.getProducts();
         },
         getProductList(id) {

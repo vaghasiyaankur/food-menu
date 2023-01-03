@@ -9,6 +9,7 @@ use File;
 use App\Helper\SettingHelper;
 use App\Models\CategoryLanguage;
 use App\Models\Language;
+use Illuminate\Support\Facades\Auth;
 use Validator;
 
 class CategoryController extends Controller
@@ -22,7 +23,7 @@ class CategoryController extends Controller
         }])->whereHas('categoryLanguages',function($q) use ($req,$lang_id){
             $q->where('language_id',$lang_id);
             $q->where('name','LIKE','%'.$req->search.'%');
-        })->get();
+        })->whereUserId(Auth::id())->get();
         return response()->json($categories);
     }
 
@@ -144,7 +145,7 @@ class CategoryController extends Controller
         $lang_id = SettingHelper::managerLanguage();
         $categories = Category::with(['categoryLanguages' => function($q) use ($lang_id){
             $q->where('language_id',$lang_id);
-        }])->get();
+        }])->whereUserId(Auth::id())->get();
         $category = [];
         foreach ($categories as $key => $cat) {
             $category[$cat->id] = $cat->categoryLanguages[0]->name;
@@ -157,7 +158,7 @@ class CategoryController extends Controller
         $lang_id = SettingHelper::getlanguage();
         $category = Category::with(['categoryLanguages' => function($q) use ($lang_id){
             $q->where('language_id',$lang_id);
-        }])->whereHas('subCategory.products')->get();
+        }])->whereHas('subCategory.products')->whereUserId(Auth::id())->get();
         return response()->json($category);
     }
 
@@ -166,7 +167,7 @@ class CategoryController extends Controller
         $lang_id = SettingHelper::managerLanguage();
         $category = Category::with(['categoryLanguages' => function($q) use ($lang_id){
             $q->where('language_id',$lang_id);
-        }])->whereHas('subCategory.products')->get();
+        }])->whereHas('subCategory.products')->whereUserId(Auth::id())->get();
         return response()->json($category);
     }
 }

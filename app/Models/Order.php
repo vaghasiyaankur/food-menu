@@ -14,7 +14,9 @@ class Order extends Model
 {
     use HasFactory;
 
-    protected $guarded = ['id']; 
+    protected $table = 'orders';
+
+    protected $guarded = ['id'];
 
     use SoftDeletes;
 
@@ -26,6 +28,11 @@ class Order extends Model
     public function table()
     {
         return $this->belongsTo(Table::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function floorShiftHistory()

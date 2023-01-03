@@ -8,7 +8,7 @@ use App\Models\Color;
 use App\Models\Table;
 use Illuminate\Http\Request;
 use App\Helper\ImageHelper;
-
+use Illuminate\Support\Facades\Auth;
 
 class SettingController extends Controller
 {
@@ -26,7 +26,7 @@ class SettingController extends Controller
      */
     public function settingData()
     {
-       $setting = Setting::select('restaurant_name', 'phone_number', 'manager_name', 'restaurant_logo', 'open_time', 'close_time', 'member_capacity', 'highlight_on_off', 'highlight_time')->first();
+       $setting = Setting::select('restaurant_name', 'phone_number', 'manager_name', 'restaurant_logo', 'open_time', 'close_time', 'member_capacity', 'highlight_on_off', 'highlight_time')->whereUserId(Auth::id())->first();
 
        $setting['open_time_12_format'] = date("g:i A", strtotime($setting->open_time));
        $setting['close_time_12_format'] = date("g:i A", strtotime($setting->close_time));
@@ -42,7 +42,7 @@ class SettingController extends Controller
      */
     public function updateSetting(Request $request)
     {
-        $setting = Setting::first();
+        $setting = Setting::whereUserId(Auth::id())->first();
 
         $restaurant_logo_name = $setting->restaurant_logo;
         if($request->file('restaurant_logo')){
@@ -75,7 +75,7 @@ class SettingController extends Controller
      */
     public function tableList(Request $request)
     {
-        $tables = Table::with('color','orders', 'floor')->paginate(10);
+        $tables = Table::with('color','orders', 'floor')->whereUserId(Auth::id())->paginate(10);
 
         return response()->json([ 'tables' => $tables ] , 200);
     }
@@ -101,7 +101,7 @@ class SettingController extends Controller
      */
     public function checkColor($capacity)
     {
-        $table = Table::where('capacity_of_person', intval($capacity))->first();
+        $table = Table::where('capacity_of_person', intval($capacity))->whereUserId(Auth::id())->first();
         if($table) return response()->json([ 'success' => true, 'color_id' => $table->color_id ] , 200);
         else return response()->json([ 'success' => false ] , 200);
     }
@@ -114,7 +114,7 @@ class SettingController extends Controller
      */
     public function tableData($id)
     {
-        $table = Table::where('id', $id)->first();
+        $table = Table::where('id', $id)->whereUserId(Auth::id())->first();
 
         return response()->json([ 'table' => $table ] , 200);
     }
@@ -132,6 +132,7 @@ class SettingController extends Controller
             'capacity_of_person' => $request->capacity_of_person,
             'floor_id' => $request->floor_number,
             'color_id' => $request->color,
+            'user_id' => Auth::id(),
         ];
 
         Table::updateOrCreate(['id' => $request->id], $data);
@@ -176,7 +177,7 @@ class SettingController extends Controller
      */
     public function memberLimitation(Request $request)
     {
-        $member_capacity = Setting::first()->member_capacity;
+        $member_capacity = Setting::whereUserId(Auth::id())->first()->member_capacity;
 
         return response()->json(['member_capacity'=>$member_capacity]);
     }

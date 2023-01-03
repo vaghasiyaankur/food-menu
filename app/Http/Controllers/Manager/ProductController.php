@@ -10,6 +10,7 @@ use App\Models\Product;
 use App\Models\ProductLanguage;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -50,7 +51,7 @@ class ProductController extends Controller
         },
         'categoryLanguages' => function($q) use ($lang_id){
             $q->where('language_id',$lang_id);
-        }])->whereHas('subCategory')->find($id);
+        }])->whereHas('subCategory')->whereUserId(Auth::id())->find($id);
         return response()->json($products);
     }
 
@@ -92,7 +93,7 @@ class ProductController extends Controller
             $sub_product = $sub_product->whereId($subcategoryId);
         }
 
-        $sub_product = $sub_product->get();
+        $sub_product = $sub_product->whereUserId(Auth::id())->get();
 
         return response()->json(['sub_category_product' => $sub_product,'sub_category' => $subCategory]);
     }
@@ -130,7 +131,7 @@ class ProductController extends Controller
         $lang_id = SettingHelper::managerLanguage();
         $subCategories = SubCategory::with(['subCategoryLanguage' => function($q) use ($lang_id){
             $q->where('language_id',$lang_id);
-        }])->whereCategoryId($id)->get();
+        }])->whereCategoryId($id)->whereUserId(Auth::id())->get();
         $subCategory = [];
         foreach ($subCategories as $key => $sub_category) {
             $subCategory[$sub_category->id] = $sub_category->subCategoryLanguage[0]->name;
@@ -145,7 +146,7 @@ class ProductController extends Controller
     {
         $lang_id = SettingHelper::managerLanguage();
         $products = Category::with(['subCategory' => function($q){
-            $q->whereHas('products');
+            $q->whereUserId(Auth::id())->whereHas('products');
         },
         'subCategory.products' => function($q){
             $q->whereHas('productLanguage');
@@ -158,7 +159,7 @@ class ProductController extends Controller
         },
         'categoryLanguages' => function($q) use ($lang_id){
             $q->where('language_id',$lang_id);
-        }])->whereHas('subCategory')->find($id);
+        }])->whereHas('subCategory')->whereUserId(Auth::id())->find($id);
         return response()->json($products);
     }
 

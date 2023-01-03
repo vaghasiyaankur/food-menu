@@ -23,6 +23,8 @@ return new class extends Migration
             $table->foreign('floor_id')->references('id')->on('floors')->onDelete('cascade');
             $table->boolean('status')->default(1);
             $table->integer('finish_order_time')->default(0);
+            $table->unsignedBigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

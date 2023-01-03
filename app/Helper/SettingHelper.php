@@ -3,13 +3,14 @@ namespace App\Helper;
 
 use App\Models\Language;
 use App\Models\Setting;
+use Illuminate\Support\Facades\Auth;
 
 class SettingHelper{
 
     /* Choose language */
     public static function systemLang()
     {
-        $setting = Setting::first('language_id');
+        $setting = Setting::whereUserId(Auth::id())->first('language_id');
 
         return $setting->language_id;
     }
