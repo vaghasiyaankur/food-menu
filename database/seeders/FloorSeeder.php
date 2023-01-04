@@ -57,16 +57,18 @@ class FloorSeeder extends Seeder
                         $table->user_id = $user_id;
                         if($table->save()){
                             foreach ($orders as $order) {
-                                $ord = new Order();
-                                $ord->customer_id = $order['customer_id'];
-                                $ord->table_id = $table->id;
-                                $ord->person = $order['person'];
-                                $ord->role = $order['role'];
-                                $ord->start_time = @$order['start_time'];
-                                $ord->finished = 0;
-                                $ord->finish_time = $order['finish_time'];
-                                $ord->user_id = $user_id;
-                                $ord->save();
+                                if ($table->capacity_of_person == $order['person']) {
+                                    $ord = new Order();
+                                    $ord->customer_id = $order['customer_id'];
+                                    $ord->table_id = $table->id;
+                                    $ord->person = $order['person'];
+                                    $ord->role = $order['role'];
+                                    $ord->start_time = @$order['start_time'];
+                                    $ord->finished = 0;
+                                    $ord->finish_time = $order['finish_time'];
+                                    $ord->user_id = $user_id;
+                                    $ord->save();
+                                }
                             }
                         }
                     }
