@@ -43,12 +43,21 @@
                             </div>
                             <div class="card-content padding-top  padding-horizontal-half table1__details" :style="'max-width : '+(table.width - 20 )+'px'">
                                 <div class="table_reservation margin-bottom">
+                                    
                                     <!-- <h3 class="no-margin-top">Reserved</h3> -->
                                     <div class="display-flex">
                                         <!-- <draggable :scroll-sensitivity="250"  :force-fallback="true" class="dragArea list-group w-full" :class="'dragger'+table.id" :list="order[index]" @start="startDrag(order.id, table.id)" @touchend.prevent="onDrop" v-for="(order,index) in table.orders" :key="order.id"> -->
-
+                                            
                                         <div class="table_reservation_info" :class="'test'+order.id" v-for="(order,index) in table.orders" :key="order.id" >
-                                            <div class="person-info popover-open" :class="['popover-click-' + order.id, { 'person-info_move': order.is_order_moved }]" :data-popover="'.popover-table-'+order.id"  @click="getRemainingTime(order.id); order_person = order.person; removebackdrop(); ">
+                                            
+                                            <div class="person-info popover-open" :class="['popover-click-' + order.id, { 'person-info_move': order.is_order_moved, 'ongoing_popover' : 1 == 0 , 'neworder_add' : 1 == 0 }]" :data-popover="'.popover-table-'+order.id"  @click="getRemainingTime(order.id); order_person = order.person; removebackdrop(); "> 
+                                                <div class="neworder_tooltip" v-if="1 == 2">
+                                                    <div class="tooltip_text">
+                                                        <p class="no-margin">New Reservation</p>
+                                                        <p class="no-margin">2 minutes ago</p>
+                                                    </div>
+                                                </div>
+                                                                                           
                                                 <div class="person_info_name border__bottom padding-bottom-half margin-bottom-half">
                                                     <p class="no-margin text-align-center">By {{ order.role }}</p>
                                                 </div>
@@ -166,6 +175,7 @@
                                     </div>
                                 </div>
                             </div>
+                           
                         </div>
                         <!--======= TABLE CHAIR ========= -->
                         <div class="row table_bottom_chair">
@@ -762,6 +772,7 @@ p.count__text{
 .table_row .table_1{
     border-left: 10px solid #0FC963;
     width: 100%;
+    height: 190px;
 }
 .table_row .table_2{
     border-left: 10px solid #FF6161;
@@ -831,7 +842,13 @@ p.count__text{
 .table1__details{
     width: 100%;
     overflow-x: auto;
+    height: 100%;
+    max-height: 122px;
+    display: flex;
+    align-items: end;
+
 }
+
 
 .table2__details{
     width: 100%;
@@ -1017,6 +1034,44 @@ content: '';
         text-overflow: ellipsis;
         width: 172px;
 }
+/*=========== ONGOING POPOVER =============*/
+.ongoing_popover{
+    background: #E2E2E2;
+    border: 1px solid #C4C4C4;   
+}
+/*========= NEW ORDER ADD ========*/
+.neworder_add{
+    background-image: url(/images/blinking.gif);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+}
+.neworder_tooltip {
+    background: #F33E3E;
+    color: #fff;
+    position: absolute;
+    padding: 5px;
+    top: -44px;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 96px;
+    left: 0;
+    text-align: center;
+    font-weight: 500;
+}
+.neworder_tooltip::before{
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #f33e3e transparent transparent transparent
+}
+/*========= NEW ORDER ADD END ========*/
+
 .hamburger__button{
     display:none;
 }
@@ -1141,6 +1196,7 @@ content: '';
     width: 100%;
     max-width: 96px;
     margin-right: 30px;
+    position: relative;
 }
 .person-info .person_info_name p{
     font-weight: 500;

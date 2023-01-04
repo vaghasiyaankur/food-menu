@@ -56,7 +56,7 @@
             <div class="time_onoff">
                 <h3 class="card-title">Highlight Time ON /OFF</h3>
                 <div class="row align-items-center">
-                    <div class="col-50">
+                    <div class="col-50 height_46">
                         <label class="switch">
                             <input type="checkbox" class="switch-input" @change="highlight_on_off = !highlight_on_off" :checked="highlight_on_off">
                             <span class="switch-label" data-on="On" data-off="Off"></span>
@@ -612,6 +612,9 @@ img.restaurant_logo{
     background-color: #FAFAFA;
     border-radius: 10px;
     padding: 15px 10px;
+}
+.height_46{
+    height:46px;
 }
 /*========= SWITCH ON OFF CSS ===========*/
 .time_onoff .switch {
