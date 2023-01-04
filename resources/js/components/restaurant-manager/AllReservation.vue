@@ -212,12 +212,12 @@
                 }, 50);
             },
             calender(){
-            var from = $("#from-date").val();
-            var to = $("#to-date").val();
-            if(from) this.from_date = new Date(from).toLocaleDateString('sv-SE');
-            else this.from_date = '';
-            if(to) this.to_date = new Date(to).toLocaleDateString('sv-SE');
-            else this.to_date = '';
+                var from = $("#from-date").val();
+                var to = $("#to-date").val();
+                if(from) this.from_date = new Date(from).toLocaleDateString('sv-SE');
+                else this.from_date = '';
+                if(to) this.to_date = new Date(to).toLocaleDateString('sv-SE');
+                else this.to_date = '';
             },
             resetFilter() {
                 this.from_date = '';
@@ -227,7 +227,6 @@
                 this.reservationData();
                 this.showFilter = false;
             }
-
         }
     }
 </script>

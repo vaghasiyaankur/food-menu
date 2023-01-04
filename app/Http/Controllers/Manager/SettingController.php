@@ -135,7 +135,7 @@ class SettingController extends Controller
             'capacity_of_person' => $request->capacity_of_person,
             'floor_id' => $request->floor_number,
             'color_id' => $request->color,
-            'user_id' => Auth::id(),
+            'user_id' => Auth::id(),    
         ];
 
         Table::updateOrCreate(['id' => $request->id], $data);

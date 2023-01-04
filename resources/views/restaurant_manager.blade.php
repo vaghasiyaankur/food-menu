@@ -8,7 +8,7 @@
 	<style>
 		*{
 			font-family: 'Inter', sans-serif;
-			font-weight: 400;			
+			font-weight: 400;
 		}
 	</style>
 	@vite('resources/css/app.css')

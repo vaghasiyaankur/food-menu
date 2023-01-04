@@ -1,5 +1,5 @@
 <template>
-<f7-page color="bg-color-white" @page:beforeremove="onPageBeforeRemove" @page:beforeout="onPageBeforeOut">
+<f7-page color="bg-color-white" @click="clickout" @page:beforeremove="onPageBeforeRemove" @page:beforeout="onPageBeforeOut">
     <div class="nav-bar">
         <div class="row align-items-center navbar-menu padding-vertical-half padding-horizontal justify-content-flex-start">
             <div class="menu col-33">
@@ -68,7 +68,7 @@
                     <div class="item-inner no-padding-right">
                         <div class="item-input-wrap">
                             <div class="f-concise position-relative">
-                                <div id="selection-concise">
+                                <div id="selection-concise" class="floor--list">
                                     <div id="select-concise" class="input-dropdown-wrap" @click="showFloorList = !showFloorList">{{ showFloorName }}</div>
                                     <ul id="location-select-list" class="dropdown_list" :class="{ 'display-none' : showFloorList }">
                                         <li class="concise p-1" :class="{ 'active': reservation.floor == 0 }" @click="reservation.floor = 0; showFloorName = $root.trans.earlier; showFloorList = true">{{ $root.trans.earlier }}</li>
@@ -226,6 +226,10 @@ export default {
         $(".page-content").css('padding-top', 0);
         this.checkOrder();
         this.$root.removeLoader();
+        setTimeout(() => {
+            this.qrToken = f7.view.current.router.currentRoute.query.qrcode;
+        },500);
+
     },
     data() {
         return {
@@ -248,6 +252,7 @@ export default {
             waiting_time: '00:00',
             showFloorList: true,
             showFloorName: '',
+            qrToken : '',
         }
     },
     setup() {
@@ -382,8 +387,9 @@ export default {
                 formData.append('customer_number', this.reservation.number);
                 formData.append('person', this.reservation.member);
                 formData.append('floor', this.reservation.floor);
-                formData.append('role', 'Manager');
+                formData.append('role', 'Guest');
                 formData.append('agree_condition', agree_condition);
+                formData.append('qrToken', this.qrToken);
 
                 axios.post('/api/add-reservation', formData)
                 .then((res) => {
@@ -482,6 +488,12 @@ export default {
         },
         agreewithcondition() {
             this.reservation.agree_condition = true;
+        },
+        clickout(){
+            const floor_list = event.target.parentNode.classList.contains('floor--list');
+            if (!floor_list) {
+                this.showFloorList = true;
+            }
         }
     }
 }

@@ -12,7 +12,6 @@ class FloorController extends Controller
     public function getFloors()
     {
         $floors = Floor::whereUserId(Auth::id())->paginate(10);
-
         return response()->json($floors);
     }
 
@@ -20,7 +19,7 @@ class FloorController extends Controller
     {
         Floor::updateOrCreate(
             ['id' => $req->id],
-            ['short_cut' => $req->short_cut,'name' => $req->floor_name]
+            ['short_cut' => $req->short_cut,'name' => $req->floor_name,'user_id' => Auth::id()]
         );
 
         if($req->id == 0) $message = 'Added';

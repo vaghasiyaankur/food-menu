@@ -31,7 +31,7 @@ class ColorSeeder extends Seeder
             ['color' => 'Moccasin','rgb' => '244,184,117'],
             ['color' => 'Green','rgb' => '85,148,98'],
             ['color' => 'Violet','rgb' => '142,120,187'],
-            ['color' => 'Periwinkle_Green','rgb' => '115,129,175'],
+            ['color' => 'Periwinkle','rgb' => '115,129,175'],
             ['color' => 'Lavender','rgb' => '216,150,255'],
             ['color' => 'Light pink','rgb' => '255,135,193'],
             ['color' => 'Steel_Blue','rgb' => ' 111,157,177'],

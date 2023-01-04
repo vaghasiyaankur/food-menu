@@ -1,5 +1,5 @@
 <template>
-    <div class="card general_setting_card">
+    <div class="card general_setting_card" @click="clickout">
         <div class="card-content card-content-padding">
             <div class="row border__bottom">
                 <div class="col">
@@ -63,12 +63,12 @@
                             <span class="switch-handle"></span>
                         </label>
                     </div>
-                    <div class="col-50 padding-left list"  :class="{ 'display-none' : !highlight_on_off }">
+                    <div class="col-50 padding-left list" :class="{ 'display-none' : !highlight_on_off }">
                         <div class="item-content item-input">
                             <div class="item-inner">
                                <div class="item-input-wrap">
                                   <div class="f-concise position-relative">
-                                     <div id="selection-concise">
+                                     <div id="selection-concise" class="timer--list">
                                         <div id="select-concise" class="input-dropdown-wrap"  @click="timerOnOff = !timerOnOff">{{ showTiming }}</div>
                                         <ul id="location-select-list" class="dropdown_list" :class="{ 'display-none' : !timerOnOff }">
                                            <li class="concise p-1" :class="{ 'active' : showTiming == '10 second'}" @click="timerOnOff = false;showTiming = '10 second'; this.highlight_time='0.166666667'">10 second</li>
@@ -174,7 +174,7 @@
                         </div>
                     </div>
                 </div>
-            </div>            
+            </div>
             <div class="submit__button margin-top padding-top">
                 <button class="col button button-large button-fill" @click="updateSetting()">Save</button>
             </div>
@@ -401,6 +401,12 @@
                     this.$root.errornotification('Something Went Wrong !!!');
                     return false;
                 });
+            },
+            clickout(){
+                const timer_list = event.target.parentNode.classList.contains('timer--list');
+                if (!timer_list) {
+                    this.timerOnOff = false;
+                }
             }
         }
     }
@@ -689,7 +695,7 @@ img.restaurant_logo{
     height: 22px;
     background: #999999;
     border-radius: 7px;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);    
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
     -webkit-transition: left 0.15s ease-out;
     -moz-transition: left 0.15s ease-out;
     -o-transition: left 0.15s ease-out;

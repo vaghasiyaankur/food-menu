@@ -22,8 +22,8 @@ class DatabaseSeeder extends Seeder
             ProductSeeder::class,
             CustomerSeeder::class,
             FloorSeeder::class,
-            // TableSeeder::class,
-            // OrderSeeder::class,
+            TableSeeder::class,
+            OrderSeeder::class,
             SettingSeeder::class,
             ContentSeeder::class,
             QrCodeTokenSeeder::class

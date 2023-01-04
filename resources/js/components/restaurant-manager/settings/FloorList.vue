@@ -21,8 +21,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="floor in floors" :key="floor">
-                                <td class="label-cell">{{ floor.id }}.</td>
+                            <tr v-for="(floor,index) in floors" :key="floor">
+                                <td class="label-cell">{{ index + 1 }}.</td>
                                 <td>{{ floor.name }}</td>
                                 <td>{{ floor.short_cut }}</td>
                                 <td>

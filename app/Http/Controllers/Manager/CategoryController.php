@@ -56,6 +56,7 @@ class CategoryController extends Controller
         $langs = Language::whereStatus(1)->get();
         $cat = new Category();
         $cat->image = $image_name;
+        $cat->user_id = Auth::id();
         if($cat->save()){
             foreach ($langs as $key => $lang) {
                 $cat_lang = new CategoryLanguage();

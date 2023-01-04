@@ -12,7 +12,9 @@ class Table extends Model
 {
     use HasFactory;
 
-    protected $guarded = ['id']; 
+    protected $table = 'tables';
+
+    protected $guarded = ['id'];
 
     public function color()
     {

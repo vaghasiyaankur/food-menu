@@ -15,22 +15,47 @@ use Carbon\Carbon;
 use Kutia\Larafirebase\Facades\Larafirebase;
 use Validator;
 use App\Events\NewReservation;
+use App\Models\QrCodeToken;
 use Illuminate\Support\Facades\Auth;
 use League\CommonMark\Parser\Inline\NewlineParser;
+use Mockery\Undefined;
 
 class ReservationController extends Controller
 {
     public function addReservation(Request $request)
     {
-        $order = Order::wherePerson($request->person)->pluck('table_id');
+        // $order = Order::wherePerson($request->person)->pluck('table_id');
+
+        $checkrole = 0;
+
+        if ($request->qrToken == 'undefined' && $request->role == 'Guest') {
+            $qrcode_token = $request->qrToken;
+
+            $qrcode = QrCodeToken::whereToken($qrcode_token)->first();
+            if ($qrcode) {
+                if ($qrcode->start_date >= Carbon::now()->format('Y-m-d') || $qrcode->end_date <= Carbon::now()->format('Y-m-d'))
+                return response()->json(['error' => 'Reservation Fail.'], 401);
+
+                $userId = $qrcode->user_id;
+                $checkrole = 1;
+            }
+
+        }else if($request->role == 'Manager'){
+            $userId = Auth::id();
+            $checkrole = 1;
+        }
+
+        if($checkrole == 0) return response()->json(['error' => 'Reservation Fail.'], 401);
 
         $table_id = ReservationHelper::takeTable($request->floor, $request->person);
+
         if($table_id){
             $table = Table::where('id', $table_id)->first();
             $register = new Customer();
             $register->name = $request->customer_name;
             $register->number = $request->customer_number;
             $register->agree_condition = $request->agree_condition;
+            $register->user_id = $userId;
             $register->device_token = @$request->session()->get('device_token');
             if($register->save()){
                 $order = new Order();
@@ -40,6 +65,7 @@ class ReservationController extends Controller
                 $order->role = $request->role;
                 $order->finish_time = $table->finish_order_time;
                 $order->finished = 0;
+                $order->user_id = $userId;
                 $order->save();
 
                 broadcast(new NewReservation( $order ))->toOthers();
@@ -91,7 +117,7 @@ class ReservationController extends Controller
                 ]);
 
                 }
-                 catch (Exception $e) {
+                    catch (Exception $e) {
                     // dd("Error: ". $e->getMessage());
                 }
 
@@ -125,7 +151,6 @@ class ReservationController extends Controller
         }else{
             return response()->json(['error' => "We don't have the capacity table for that many people"], 401);
         }
-
     }
 
     /**
@@ -248,7 +273,7 @@ class ReservationController extends Controller
         //     $table_capacity = $table->capacity_of_person;
         $floors = Floor::whereHas('tables', function($q) use($from_cap,$to_cap){
                 $q->where('capacity_of_person', '>=', $from_cap)->where('capacity_of_person', '<=', $to_cap)->where('status', 1);
-            })->pluck('name','id');
+            })->whereUserId(Auth::id())->pluck('name','id');
 
         return response()->json([ 'success' => true, 'floors' => $floors ] , 200);
         // }else{

@@ -7,9 +7,9 @@ use QrCode;
 use App\Models\QrCodeToken;
 use ParagonIE\ConstantTime\Encoding;
 use Carbon\Carbon;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use PDF;
+use Illuminate\Support\Facades\Crypt;
 
 class QrCodeController extends Controller
 {
@@ -43,9 +43,9 @@ class QrCodeController extends Controller
             $qr->status = '';
             if (Carbon::parse($qr['start_date'])->format('Y-m-d') <= Carbon::now()->format('Y-m-d') && Carbon::parse($qr['end_date'])->format('Y-m-d') >= Carbon::now()->format('Y-m-d')) {
                $qr->status = 'Ongoing';
-            }else if(Carbon::parse($qr['start_date']) >= Carbon::now()){
+            }else if(Carbon::parse($qr['start_date'])->format('Y-m-d') >= Carbon::now()->format('Y-m-d')){
                 $qr->status = 'Upcoming';
-            }else if(Carbon::parse($qr['end_date']) <= Carbon::now()){
+            }else if(Carbon::parse($qr['end_date'])->format('Y-m-d') <= Carbon::now()->format('Y-m-d')){
                 $qr->status = 'Expired';
             }
             $qr->start_date = Carbon::parse($qr['start_date'])->format('d, M Y');

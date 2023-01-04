@@ -1,6 +1,6 @@
 <template>
     <f7-page>
-        <div class="reservation_card">
+        <div class="reservation_card" @click="clickout">
             <div class="card">
                 <div class="row height_100 align-items-center">
                     <div class="col-100 medium-100 large-50 margin-bottom padding-bottom">
@@ -40,7 +40,7 @@
                                         <div class="item-inner">
                                             <div class="item-input-wrap">
                                                 <div class="f-concise position-relative">
-                                                    <div id="selection-concise">
+                                                    <div id="selection-concise" class="floor--list">
                                                         <div id="select-concise" class="input-dropdown-wrap" @click="showFloorList = !showFloorList">{{ showFloorName }}</div>
                                                         <ul id="location-select-list" class="dropdown_list" :class="{ 'd-none' : showFloorList }">
                                                             <li class="concise p-1" :class="{ 'active': reservation.floor == 0 }" @click="reservation.floor = 0; showFloorName = 'As soon as earlier'; showFloorList = true">As soon as earlier</li>
@@ -303,6 +303,12 @@ export default {
 
                     }
                 });
+            }
+        },
+        clickout(){
+            const floor_list = event.target.parentNode.classList.contains('floor--list');
+            if (!floor_list) {
+                this.showFloorList = true;
             }
         }
     }

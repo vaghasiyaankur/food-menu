@@ -22,7 +22,7 @@
     <style>
 		*{
 			font-family: 'Inter', sans-serif;
-			font-weight: 400;			
+			font-weight: 400;
 		}
 	</style>
 	@vite('resources/css/app.css')
@@ -44,7 +44,7 @@
 
 <script>
 
-    
+
     // Your web app's Firebase configuration
     var firebaseConfig = {
         apiKey: "AIzaSyBfphAIxpzsJDUuCCOhF6DtZKqUPxgj-wA",
@@ -65,7 +65,7 @@
         messaging.requestPermission().then(function () {
             return messaging.getToken()
         }).then(function(token) {
-            
+
             const tokens = document.head.querySelector('meta[name="csrf-token"]');
 
             const headers = {
@@ -112,7 +112,7 @@
     }
 
     initFirebaseMessagingRegistration();
-  
+
     messaging.onMessage(function({data:{body,title}}){
         new Notification(title, {body});
     });

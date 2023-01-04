@@ -17,6 +17,7 @@ class SubCategoryController extends Controller
     {
         $subCat = new SubCategory();
         $subCat->category_id = $req->category_id;
+        $subCat->user_id = Auth::id();
         $langs = Language::whereStatus(1)->get();
         if($subCat->save()){
             $name = explode(',',$req->name);

@@ -267,8 +267,6 @@ class TableController extends Controller
             }
 
             $firstOrderTime = Order::where('table_id', $table_id)->where('id', '!=', $orderId)->where('finished', 0)->where('updated_at', '<=', $updated_at)->whereNotNull('start_time')->first();
-
-
             if($firstOrderTime){
                 $started_time = $firstOrderTime->start_time;
             }else{
@@ -277,13 +275,13 @@ class TableController extends Controller
                 return response()->json([ 'success' => true, 'time' => 0 ] , 200);
             }
 
+
             $start  = new Carbon($started_time);
             $time_format_date = strtotime(date("H:i:s",strtotime($start)));
             $finalTime = date("H:i:s",strtotime('+'.$calculateTime.' minutes',$time_format_date));
 
             $start  = new Carbon($finalTime);
             $end    = new Carbon();
-
 
             $time = ($start->diffInHours($end) * 60) + ($start->diffInMinutes($end) * 60)+ ($start->diffInSeconds($end) * 1000);
 
