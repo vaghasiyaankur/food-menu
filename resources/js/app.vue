@@ -24,7 +24,7 @@ export default {
     components: {
         f7App,
         f7Panel,
-        f7View,
+        f7View
     },
     data() {
         // Demo Theme

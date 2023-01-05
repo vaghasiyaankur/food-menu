@@ -137,6 +137,34 @@ class ContentSeeder extends Seeder
             ['language_id' => 2, 'title' => 'time', 'content' => 'સમય'],
             ['language_id' => 3, 'title' => 'time', 'content' => 'समय'],
 
+            ['language_id' => 1, 'title' => 'hour_and', 'content' => 'hour and'],
+            ['language_id' => 2, 'title' => 'hour_and', 'content' => 'કલાક અને'],
+            ['language_id' => 3, 'title' => 'hour_and', 'content' => 'घंटा और'],
+
+            ['language_id' => 1, 'title' => 'min_left', 'content' => 'min. left'],
+            ['language_id' => 2, 'title' => 'min_left', 'content' => 'મિનિટ બાકી'],
+            ['language_id' => 3, 'title' => 'min_left', 'content' => 'मिनट शेष'],
+
+            ['language_id' => 1, 'title' => 'second_left', 'content' => 'seconds left'],
+            ['language_id' => 2, 'title' => 'second_left', 'content' => 'સેકન્ડ બાકી'],
+            ['language_id' => 3, 'title' => 'second_left', 'content' => 'सेकंड शेष'],
+
+            ['language_id' => 1, 'title' => 'number_guest', 'content' => 'No. of Guest'],
+            ['language_id' => 2, 'title' => 'number_guest', 'content' => 'મહેમાનની સંખ્યા'],
+            ['language_id' => 3, 'title' => 'number_guest', 'content' => 'अतिथि की संख्या'],
+
+            ['language_id' => 1, 'title' => 'date_time', 'content' => 'Date & Time'],
+            ['language_id' => 2, 'title' => 'date_time', 'content' => 'તારીખ અને સમય'],
+            ['language_id' => 3, 'title' => 'date_time', 'content' => 'तिथि और समय'],
+
+            ['language_id' => 1, 'title' => 'table_no', 'content' => 'Table No.'],
+            ['language_id' => 2, 'title' => 'table_no', 'content' => 'ટેબલ નંબર'],
+            ['language_id' => 3, 'title' => 'table_no', 'content' => 'मेज संख्या'],
+
+            ['language_id' => 1, 'title' => 'capacity', 'content' => 'Capacity'],
+            ['language_id' => 2, 'title' => 'capacity', 'content' => 'ક્ષમતા'],
+            ['language_id' => 3, 'title' => 'capacity', 'content' => 'क्षमता'],
+
         ];
 
 

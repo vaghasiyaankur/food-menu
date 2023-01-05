@@ -194,12 +194,14 @@ export default {
             langs: [],
             events: ['click', 'mousemove', 'mousedown', 'scroll', 'keypress', 'load'],
             warningTimer: null,
+            checklogin: false,
         }
     },
     beforeCreate() {
         axios.get('/api/checkLogin')
         .then((res) => {
             if (res.data.check_auth) {
+                this.checklogin = true;
                 f7.view.main.router.navigate({ url: '/' });
             } else {
                 f7.view.main.router.navigate({ url: '/login/' });
@@ -220,7 +222,10 @@ export default {
         this.events.forEach(function (event) {
             window.addEventListener(event, this.resetTimer);
         }, this);
-        this.setTimer();
+
+        if(this.checklogin){
+            this.setTimer();
+        }
     },
     methods: {
         getLanguage() {

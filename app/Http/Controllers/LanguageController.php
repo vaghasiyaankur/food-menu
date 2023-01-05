@@ -9,7 +9,6 @@ use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Session;
-
 class LanguageController extends Controller
 {
     public function getlangs()

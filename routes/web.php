@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QrCodeController;
 use Illuminate\Support\Facades\Auth;
 use App\Events\NewReservation;
+use App\Helper\SettingHelper;
 use App\Models\Order;
 
 /*
@@ -19,10 +20,9 @@ use App\Models\Order;
 Route::get('login', function() {
  Auth::attempt(['email' => 'manager1@gmail.com', 'password' => '123456789']);
 });
-Route::any('/abc', function() { 
+Route::any('/abc', function() {
     $order = Order::first();
     $a = broadcast(new NewReservation( $order ))->toOthers();
-    dd($a);
 
 });
 Route::get('/qrcode', [QrCodeController::class, 'index']);

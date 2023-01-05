@@ -1,106 +1,113 @@
 <template>
     <f7-page class="page-waiting bg-color-white" @page:beforeremove="onPageBeforeRemove" @page:beforeout="onPageBeforeOut">
-        <div class="nav-bar">
-            <f7-navbar class="navbar-menu text-color-white waiting-page" large transparent :title="$root.trans.time" :back-link="$root.trans.back">
-                <div class="favourites-card">
-                    <a class="link icon-only" href="/favourites/">
-                        <i class="f7-icons size-22 text-color-white padding-half font-18">heart</i>
-                    </a>
+        <div v-if="qrcode">
+            <div class="nav-bar">
+                <f7-navbar class="navbar-menu text-color-white waiting-page" large transparent :title="$root.trans.time" :back-link="$root.trans.back">
+                    <div class="favourites-card">
+                        <a class="link icon-only" href="/favourites/">
+                            <i class="f7-icons size-22 text-color-white padding-half font-18">heart</i>
+                        </a>
+                    </div>
+                </f7-navbar>
+            </div>
+            <div class="waiting_area">
+                <div class="margin countdown_section">
+                    <div class="text-align-center">
+                        <h3>{{ $root.trans.waiting_time }}</h3>
+                        <!-- <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p> -->
+                    </div>
+                    <div class="countdown position-relative text-align-center">
+                        <div style="background : url('/images/dots.png')"
+                            class="display-flex justify-content-space-between align-items-center flex-direction-column">
+                            <img src="/images/clock.png" alt="">
+                            <vue-countdown :time="time" v-slot="{ hours, minutes, seconds }">
+                                <p class="no-margin margin-top-half font-20" v-if="String(hours).padStart(2, '0') != 0">{{ String(hours).padStart(2, '0') +' '+ $root.trans.hour_and + ' ' +String(minutes).padStart(2, '0')+' '+$root.trans.min_left}}</p>
+                                <p class="no-margin margin-top-half font-20" v-else-if="String(minutes).padStart(2, '0') != 0">{{ String(minutes).padStart(2, '0')+' '+$root.trans.min_left}}</p>
+                                <p class="no-margin margin-top-half font-20" v-else>{{ String(seconds).padStart(2, '0')+' '+$root.trans.second_left}}</p>
+                            </vue-countdown>
+                        </div>
+                    </div>
                 </div>
-            </f7-navbar>
-        </div>
-        <div class="waiting_area">
-            <div class="margin countdown_section">
-                <div class="text-align-center">
-                    <h3>{{ $root.trans.waiting_time }}</h3>
-                    <!-- <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p> -->
-                </div>
-                <div class="countdown position-relative text-align-center">
-                    <div style="background : url('/images/dots.png')"
-                        class="display-flex justify-content-space-between align-items-center flex-direction-column">
-                        <img src="/images/clock.png" alt="">
-                        <vue-countdown :time="time" v-slot="{ hours, minutes, seconds }">
-                            <p class="no-margin font-30" v-if="String(hours).padStart(2, '0') != 0">{{ String(hours).padStart(2, '0')+' hour and '+String(minutes).padStart(2, '0')+' minutes left'}}</p>
-                            <p class="no-margin font-30" v-else-if="String(minutes).padStart(2, '0') != 0">{{ String(minutes).padStart(2, '0')+' minutes left'}}</p>
-                            <p class="no-margin font-30" v-else>{{ String(seconds).padStart(2, '0')+' seconds left'}}</p>
-                        </vue-countdown>
+                <div class="waiting_info">
+                    <div class="padding margin-vertical table-card margin-horizontal-half">
+                        <!--======= TABLE CHAIR ========= -->
+                        <div class="row table_top_chair">
+                            <div class="col">
+                                <div class="table_card_img text-align-center">
+                                    <img v-if="order.color" :src="'/images/table/' + order.color.color +'.png'" alt="table">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="table_card_img text-align-center">
+                                    <img v-if="order.color" :src="'/images/table/' + order.color.color +'.png'" alt="table">
+                                </div>
+                            </div>
+                            <div class="col" v-if="windowWidth > 280">
+                                <div class="table_card_img text-align-center">
+                                    <img v-if="order.color" :src="'/images/table/' + order.color.color +'.png'" alt="table">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card no-margin table_1" :style="('border-left-color : rgb(' + order.color.rgb + ')')">
+                            <div class="card-content display-flex justify-content-center align-items-center no-padding h_100 table_order_content">
+                                <div class="table_number table_inner" :style="('background : rgba(' + order.color.rgb + ', 0.3)')">
+                                    <p class="no-margin">{{ $root.trans.table_no }}</p>
+                                    <span class="no-margin">{{ String(order.table_number).padStart(2, '0') }}</span>
+                                </div>
+                                <div class="table_capacity table_inner" :style="('background : rgba(' + order.color.rgb + ', 0.3)')">
+                                    <p class="no-margin">{{ $root.trans.capacity }}</p>
+                                    <span class="no-margin">{{ order.orders ? String(order.orders[0].person).padStart(2, '0') : '' }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!--======= TABLE CHAIR ========= -->
+                        <div class="row table_bottom_chair">
+                            <div class="col">
+                                <div class="table_card_img text-align-center">
+                                    <img v-if="order.color" :src="'/images/table/' + order.color.color +'.png'" alt="table" style="transform: rotate(180deg);">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="table_card_img text-align-center">
+                                    <img v-if="order.color" :src="'/images/table/' + order.color.color +'.png'" alt="table" style="transform: rotate(180deg);">
+                                </div>
+                            </div>
+                            <div class="col" v-if="windowWidth > 280">
+                                <div class="table_card_img text-align-center">
+                                    <img v-if="order.color" :src="'/images/table/' + order.color.color +'.png'" alt="table" style="transform: rotate(180deg);">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table__information padding">
+                        <div class="guest_number">
+                            <span class="table_info_text">{{ $root.trans.number_guest }}  : </span>
+                            <span>{{ order.orders ? String(order.orders[0].person).padStart(2, '0') : '' }}</span>
+                        </div>
+                        <div class="date_time margin-top-half margin-bottom">
+                            <span class="table_info_text">{{ $root.trans.date_time }} : </span>
+                            <span>{{ dateFormat(this.order.created_at) }}</span>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="waiting_info">
-                <div class="padding margin-vertical table-card margin-horizontal-half">
-                    <!--======= TABLE CHAIR ========= -->
-                    <div class="row table_top_chair">
-                        <div class="col">
-                            <div class="table_card_img text-align-center">
-                                <img v-if="order.color" :src="'/images/table/' + order.color.color +'.png'" alt="table">
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="table_card_img text-align-center">
-                                <img v-if="order.color" :src="'/images/table/' + order.color.color +'.png'" alt="table">
-                            </div>
-                        </div>
-                        <div class="col" v-if="windowWidth > 280">
-                            <div class="table_card_img text-align-center">
-                                <img v-if="order.color" :src="'/images/table/' + order.color.color +'.png'" alt="table">
-                            </div>
-                        </div>
+            <div class="padding-horizontal bottom-bar toolbar">
+                <div class="row">
+                    <div class="col">
+                        <f7-button class="button button-raised open-menu-button active button-large text-transform-capitalize" fill sheet-open=".demo-sheet-swipe-to-close" @click="showMenuData()">{{ $root.trans.open_menu }}</f7-button>
                     </div>
-                    <div class="card no-margin table_1" :style="('border-left-color : rgb(' + order.color.rgb + ')')">
-                        <div class="card-content display-flex justify-content-center align-items-center no-padding h_100 table_order_content">
-                            <div class="table_number table_inner" :style="('background : rgba(' + order.color.rgb + ', 0.3)')">
-                                <p class="no-margin">Table No.</p>
-                                <span class="no-margin">{{ String(order.table_number).padStart(2, '0') }}</span>
-                            </div>
-                            <div class="table_capacity table_inner" :style="('background : rgba(' + order.color.rgb + ', 0.3)')">
-                                <p class="no-margin">Capacity</p>
-                                <span class="no-margin">{{ order.orders ? String(order.orders[0].person).padStart(2, '0') : '' }}</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!--======= TABLE CHAIR ========= -->
-                    <div class="row table_bottom_chair">
-                        <div class="col">
-                            <div class="table_card_img text-align-center">
-                                <img v-if="order.color" :src="'/images/table/' + order.color.color +'.png'" alt="table" style="transform: rotate(180deg);">
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="table_card_img text-align-center">
-                                <img v-if="order.color" :src="'/images/table/' + order.color.color +'.png'" alt="table" style="transform: rotate(180deg);">
-                            </div>
-                        </div>
-                        <div class="col" v-if="windowWidth > 280">
-                            <div class="table_card_img text-align-center">
-                                <img v-if="order.color" :src="'/images/table/' + order.color.color +'.png'" alt="table" style="transform: rotate(180deg);">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="table__information padding">
-                    <div class="guest_number">
-                        <span class="table_info_text">No. of Guest : </span>
-                        <span>{{ order.orders ? String(order.orders[0].person).padStart(2, '0') : '' }}</span>
-                    </div>
-                    <div class="date_time margin-top-half margin-bottom">
-                        <span class="table_info_text">Date & Time : </span>
-                        <span>{{ dateFormat(this.order.created_at) }}</span>
+                    <div class="col">
+                        <f7-button class="button button-raised open-menu-button button-large text-transform-capitalize" @click="cancelReservation()">{{ $root.trans.cancel_reservation }}</f7-button>
                     </div>
                 </div>
             </div>
+            <Menu ref="menu" />
         </div>
-        <div class="padding-horizontal bottom-bar toolbar">
-            <div class="row">
-                <div class="col">
-                    <f7-button class="button button-raised open-menu-button active button-large text-transform-capitalize" fill sheet-open=".demo-sheet-swipe-to-close" @click="showMenuData()">{{ $root.trans.open_menu }}</f7-button>
-                </div>
-                <div class="col">
-                    <f7-button class="button button-raised open-menu-button button-large text-transform-capitalize" @click="cancelReservation()">{{ $root.trans.cancel_reservation }}</f7-button>
-                </div>
-            </div>
+        <div v-else class="not_found">
+            <img src="/images/Empty-pana 1.png" alt="" style="width:100%">
+            <h1 class="no-margin"> 404 </h1>
+            <p class="no-margin"> Page Not Found</p>
         </div>
-        <Menu ref="menu" />
     </f7-page>
 </template>
 
@@ -132,6 +139,7 @@ export default {
                 color: [],
             },
             windowWidth : 0,
+            qrcode : '',
         }
     },
     setup() {
@@ -142,9 +150,15 @@ export default {
         this.$root.addLoader();
     },
     created() {
-        this.getWaitingTime();
         this.windowWidth = window.innerWidth;
-        this.$root.removeLoader();
+        setTimeout(() => {
+            this.qrcode = f7.view.current.router.initialUrl.split('/?qrcode=')[1];
+            if(this.qrcode){
+                this.cookies.set("qrcode", this.qrcode, 60 * 60 * 24);
+                this.getWaitingTime();
+            }
+            this.$root.removeLoader();
+        }, 1000);
     },
     methods: {
         onPageBeforeOut() {
@@ -219,6 +233,10 @@ export default {
 
 <style scoped>
 /*============ WAITING INFO =============*/
+
+.font-20{
+    font-size: 20px;
+}
 .waiting_info{
     border: 1px solid #999;
     margin: 15px 15px 80px;
@@ -268,9 +286,9 @@ export default {
  }
  h3{
     font-weight: 500;
-        font-size: 18px;
-        line-height: 22px;
-        color: #38373D;
+    font-size: 18px;
+    line-height: 22px;
+    color: #38373D;
  }
 .h_100{
     height: 100%;
@@ -350,7 +368,24 @@ export default {
     width: 100%;
     left: 0;
 }
-
+.not_found{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.not_found h1{
+    font-weight: 700;
+    color: #F33E3E;
+    font-size: 35px;
+}
+.not_found p{
+    font-size: 17px;
+    line-height: 18px;
+    font-weight: 500;
+    color: #F33E3E;;
+}
 @media screen and (max-width : 280px){
     .table_order_content{
         justify-content: space-around !important;
@@ -362,10 +397,10 @@ export default {
 }
 @media screen and (max-width:320px) {
     .open-menu-button {
-            font-size: 12px;
-            line-height: 18px;
-            height: 40px !important;
-        }
+        font-size: 12px;
+        line-height: 18px;
+        height: 40px !important;
+    }
 }
 </style>
 <style>

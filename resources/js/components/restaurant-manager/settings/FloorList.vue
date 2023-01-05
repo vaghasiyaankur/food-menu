@@ -22,7 +22,7 @@
                         </thead>
                         <tbody>
                             <tr v-for="(floor,index) in floors" :key="floor">
-                                <td class="label-cell">{{ index + 1 }}.</td>
+                                <td class="label-cell">{{ (paginationData.per_page * (page_count - 1)) + (index + 1) }}.</td>
                                 <td>{{ floor.name }}</td>
                                 <td>{{ floor.short_cut }}</td>
                                 <td>
@@ -66,6 +66,7 @@
             return {
                 floors: [],
                 paginationData: [],
+                page_count : 1,
                 page_number : 1,
             }
         },
@@ -83,6 +84,7 @@
                 } else {
                     pagenumber = pagenumber.split('page=')[1];
                 }
+                this.page_count = pagenumber;
                 var page = '/api/get-floors?page=' + pagenumber;
                 this.page_number = page;
                 axios.get(page)

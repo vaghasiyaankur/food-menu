@@ -48,8 +48,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="qrcode in qrcodes" :key="qrcode">
-                            <td class="label-cell">{{ qrcode.id }}.</td>
+                        <tr v-for="(qrcode,index) in qrcodes" :key="qrcode">
+                            <td class="label-cell">{{ (paginationData.per_page * (pagenumber - 1)) + (index + 1) }}.</td>
                             <td>{{ qrcode.start_date }} - {{ qrcode.end_date }}</td>
                             <td>{{ date_format(qrcode.updated_at) }}</td>
                             <td><div v-html="qrcodexml[qrcode.id]"></div></td>

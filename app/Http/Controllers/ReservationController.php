@@ -15,6 +15,7 @@ use Carbon\Carbon;
 use Kutia\Larafirebase\Facades\Larafirebase;
 use Validator;
 use App\Events\NewReservation;
+use App\Helper\SettingHelper;
 use App\Models\QrCodeToken;
 use Illuminate\Support\Facades\Auth;
 use League\CommonMark\Parser\Inline\NewlineParser;
@@ -28,7 +29,7 @@ class ReservationController extends Controller
 
         $checkrole = 0;
 
-        if ($request->qrToken == 'undefined' && $request->role == 'Guest') {
+        if ($request->qrToken != 'undefined' && $request->role == 'Guest') {
             $qrcode_token = $request->qrToken;
 
             $qrcode = QrCodeToken::whereToken($qrcode_token)->first();
@@ -264,6 +265,10 @@ class ReservationController extends Controller
 
         // $table = Table::where('status', 1)->where('capacity_of_person', intval($request->member))->first();
         $from_cap = intval($request->member);
+
+        $userId = SettingHelper::getUserIdUsingQrcode();
+        $user_id = $userId ? $userId : Auth::id();
+
         if($from_cap < 4) $to_cap = intval(ceil($request->member * 2));
         else $to_cap = intval(ceil($request->member * 1.5));
         // if(!$table) {
@@ -273,7 +278,7 @@ class ReservationController extends Controller
         //     $table_capacity = $table->capacity_of_person;
         $floors = Floor::whereHas('tables', function($q) use($from_cap,$to_cap){
                 $q->where('capacity_of_person', '>=', $from_cap)->where('capacity_of_person', '<=', $to_cap)->where('status', 1);
-            })->whereUserId(Auth::id())->pluck('name','id');
+            })->whereUserId($user_id)->pluck('name','id');
 
         return response()->json([ 'success' => true, 'floors' => $floors ] , 200);
         // }else{
@@ -458,9 +463,9 @@ class ReservationController extends Controller
 
     public function setDeviceToken(Request $request)
     {
-           Customer::where('id', $request->user_id)->update(['device_token' => $request->token]);
+        Customer::where('id', $request->user_id)->update(['device_token' => $request->token]);
 
-            return response()->json([ 'success' => true ] , 200);
+        return response()->json([ 'success' => true ] , 200);
     }
 
 }

@@ -107,6 +107,7 @@ class QrCodeController extends Controller
             $qr = new QrCodeToken();
             $qr->start_date = date('Y-m-d', strtotime($startDuration));
             $qr->end_date = date('Y-m-d', strtotime($endDuration));
+            $qr->user_id = Auth::id();
             $qr->token = $encode;
             $qr->save();
         }
@@ -138,5 +139,16 @@ class QrCodeController extends Controller
         ];
 
         return $pdf->download('qrcode.pdf');
+    }
+
+    public function checkQrcodeExists(Request $request)
+    {
+        $qrToken = $request->qrToken;
+
+        $date = Carbon::now()->format('Y-m-d');
+
+        $qrcode = QrCodeToken::whereToken($qrToken)->whereDate('start_date', '<=', $date)->whereDate('end_date', '>=', $date)->exists();
+
+        return response()->json(['qrcode_exist' => $qrcode]);
     }
 }

@@ -157,9 +157,11 @@ class CategoryController extends Controller
     public function getCategoriesList()
     {
         $lang_id = SettingHelper::getlanguage();
+        $userId = SettingHelper::getUserIdUsingQrcode();
+        $user_id = $userId ? $userId : Auth::id();
         $category = Category::with(['categoryLanguages' => function($q) use ($lang_id){
             $q->where('language_id',$lang_id);
-        }])->whereHas('subCategory.products')->whereUserId(Auth::id())->get();
+        }])->whereHas('subCategory.products')->whereUserId($user_id)->get();
         return response()->json($category);
     }
 

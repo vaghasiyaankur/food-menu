@@ -69,8 +69,8 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-for="data in reservation" :key="data.id">
-                                            <td>#{{ data.id }}</td>
+                                        <tr v-for="(data,index) in reservation" :key="data.id">
+                                            <td>#{{ (paginationData.per_page * (page - 1)) + (index + 1) }}</td>
                                             <td>{{ data.customer.name }}</td>
                                             <td>{{ data.customer.number }}</td>
                                             <td>{{ data.person }}</td>
@@ -81,7 +81,7 @@
                                             <td>{{ data.date }}</td>
                                             <td>
                                                 <div class="menu-item-dropdown">
-                                                    <div class=""><i class="f7-icons">ellipsis</i>  </div>
+                                                    <div class=""><i class="f7-icons">ellipsis</i></div>
                                                     <div class="menu-dropdown menu-dropdown-right">
                                                     <div class="menu-dropdown-content no-padding">
                                                         <a class="menu-dropdown-link menu-close padding-vertical" :href="'/reservation-view/'+data.id"><i class="f7-icons margin-right-half">eye</i>View </a>
@@ -127,6 +127,7 @@
                 search: '',
                 paginationData: [],
                 showFilter : false,
+                page : 1,
             }
         },
         components: {
@@ -184,7 +185,7 @@
                 var search = this.search;
                 var from_date = this.from_date;
                 var to_date = this.to_date;
-                var page = page;
+                this.page = page;
 
                 axios.get('/api/reservation-list?from_date='+from_date+'&to_date='+to_date+'&search='+search+'&page='+page)
                 .then((res) => {

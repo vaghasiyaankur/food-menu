@@ -8,6 +8,7 @@ use App\Models\Color;
 use App\Models\Table;
 use Illuminate\Http\Request;
 use App\Helper\ImageHelper;
+use App\Helper\SettingHelper;
 use Illuminate\Support\Facades\Auth;
 
 class SettingController extends Controller
@@ -135,7 +136,7 @@ class SettingController extends Controller
             'capacity_of_person' => $request->capacity_of_person,
             'floor_id' => $request->floor_number,
             'color_id' => $request->color,
-            'user_id' => Auth::id(),    
+            'user_id' => Auth::id(),
         ];
 
         Table::updateOrCreate(['id' => $request->id], $data);
@@ -180,7 +181,8 @@ class SettingController extends Controller
      */
     public function memberLimitation(Request $request)
     {
-        $member_capacity = Setting::whereUserId(Auth::id())->first()->member_capacity;
+        $user_id = SettingHelper::getUserIdUsingQrcode();
+        $member_capacity = Setting::whereUserId($user_id)->first()->member_capacity;
 
         return response()->json(['member_capacity'=>$member_capacity]);
     }

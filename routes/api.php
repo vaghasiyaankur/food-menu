@@ -194,6 +194,8 @@ Route::post('/regenerate-qrcode', [QrCodeController::class, 'qrCodereGenerate'])
 
 Route::get('/download-qrcode/{id}', [QrCodeController::class, 'qrCodereDownload']);
 
+Route::post('/check-qrcode-exists', [QrCodeController::class, 'checkQrcodeExists']);
+
 // ------------------------ Auth Routes ------------------------ //
 
 Route::get('/checkLogin', [AuthController::class, 'checklogin']);

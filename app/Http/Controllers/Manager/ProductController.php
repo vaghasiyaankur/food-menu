@@ -37,6 +37,8 @@ class ProductController extends Controller
     public function getCategoryProduct($id)
     {
         $lang_id = SettingHelper::getlanguage();
+        $userId = SettingHelper::getUserIdUsingQrcode();
+        $user_id = $userId ? $userId : Auth::id();
         $products = Category::with(['subCategory' => function($q){
             $q->whereHas('products');
         },
@@ -51,7 +53,7 @@ class ProductController extends Controller
         },
         'categoryLanguages' => function($q) use ($lang_id){
             $q->where('language_id',$lang_id);
-        }])->whereHas('subCategory')->whereUserId(Auth::id())->find($id);
+        }])->whereHas('subCategory')->whereUserId($user_id)->find($id);
         return response()->json($products);
     }
 
