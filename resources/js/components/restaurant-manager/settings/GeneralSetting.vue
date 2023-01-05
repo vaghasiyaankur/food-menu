@@ -64,8 +64,8 @@
                         </label>
                     </div>
                     <div class="col-50 padding-left list" :class="{ 'display-none' : !highlight_on_off }">
-                        <div class="item-content item-input">
-                            <div class="item-inner">
+                        <div class="item-content item-input no-padding">
+                            <div class="item-inner no-padding-right">
                                <div class="item-input-wrap">
                                   <div class="f-concise position-relative">
                                      <div id="selection-concise" class="timer--list">

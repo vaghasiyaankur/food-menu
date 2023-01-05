@@ -298,6 +298,7 @@ export default {
 .height_100{
     height: 100%;
 }
+
 .qrcode_generate_popup .button{
     box-shadow: none;
     border: 0.5px solid #999999;
@@ -413,5 +414,6 @@ export default {
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
 }
+
 </style>
 
