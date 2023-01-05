@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="col-40 text-align-center">
-                    <div class="registranstion registraion-text">{{ $root.trans.registration }}</div>
+                    <div class="text-color-white registraion-text">{{ $root.trans.registration }}</div>
                 </div>
                 <!-- <div class="col-33 text-align-right">
                     <a class="link icon-only" href="/favourites/">
