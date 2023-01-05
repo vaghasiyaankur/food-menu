@@ -400,6 +400,7 @@ export default {
 }
 .calendar-day-today .calendar-day-number{
     background-color: #F33E3E !important;
+    color: #fff !important;
 }
 .calendar-day-selected-range:before, .calendar-day-selected-left:before, .calendar-day-selected-right:before{
     background-color: #FFE1E1 !important;

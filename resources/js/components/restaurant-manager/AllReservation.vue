@@ -54,7 +54,7 @@
                         </div>
                     </div>
                     <div class="reservation_table">
-                        <div class="card data-table no-margin-horizontal">
+                        <div class="card data-table no-margin-horizontal overflow_x_inherit">
                             <div class="table_content">
                                 <table>
                                     <thead>
@@ -232,6 +232,9 @@
     }
 </script>
 <style scoped>
+.overflow_x_inherit{
+    overflow-x: inherit;
+}
 .justify_content_between{
     justify-content:space-between !important;
 }

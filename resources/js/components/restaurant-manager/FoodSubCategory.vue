@@ -17,7 +17,7 @@
                                     <div class="item-inner">
                                         <div class="item-input-wrap searchData row padding-half height_40 search_data_wrap">
                                             <i class="f7-icons font-18 search-icon">search</i>
-                                            <input type="search" name="search" class="search__data"  id="searchData" v-model="search" @input="getSubCategories()">
+                                            <input type="search" name="search" class="search__data" placeholder="Search SubCategory" id="searchData" v-model="search" @input="getSubCategories()">
                                         </div>
                                     </div>
                                 </div>
