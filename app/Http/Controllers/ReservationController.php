@@ -26,7 +26,6 @@ class ReservationController extends Controller
     public function addReservation(Request $request)
     {
         // $order = Order::wherePerson($request->person)->pluck('table_id');
-
         $checkrole = 0;
 
         if ($request->qrToken != 'undefined' && $request->role == 'Guest') {
@@ -170,7 +169,9 @@ class ReservationController extends Controller
             $token = $request->session()->put('device_token',$request->token);
 
             if($token){
-                $fcmTokens = ['c16H1_gwueT8jzmm2w_cTn:APA91bGjH092huMhvCN4Cejb84y1Y_CxzdbLrxIwyLucbUCyX4v1gl2O6oYcVaSm0ncnYhD9mbFlKVmvAgVzeePzLN5yhn0PG1esfjo0P1mrR0RUXb_W4sQII_GfcZoXodUmsqc-Kg0m'];
+                // $fcmTokens = ['c16H1_gwueT8jzmm2w_cTn:APA91bGjH092huMhvCN4Cejb84y1Y_CxzdbLrxIwyLucbUCyX4v1gl2O6oYcVaSm0ncnYhD9mbFlKVmvAgVzeePzLN5yhn0PG1esfjo0P1mrR0RUXb_W4sQII_GfcZoXodUmsqc-Kg0m'];
+
+                $fcmTokens = [$token];
 
                 //Notification::send(null,new SendPushNotification($request->title,$request->message,$fcmTokens));
 
@@ -441,7 +442,7 @@ class ReservationController extends Controller
     {
             $order = Order::where('id', $request->id)->with(['customer' => function($q) {
                 $q->select('id','name', 'number');
-            } , 'floorShiftHistory', 'tableShiftHistory'])->select('id','customer_id','person','start_time','finish_time','finished','cancelled_by', 'role','deleted_at')->selectRaw('DATE_FORMAT(created_at,"%d, %b %Y / %h:%i %p") as date')->first();
+            } , 'floorShiftHistory', 'tableShiftHistory'])->select('id','customer_id','person','start_time','finish_time','finished','cancelled_by', 'role','deleted_at')->selectRaw('DATE_FORMAT(created_at,"%d, %b %Y / %h:%i %p") as date')->withTrashed()->findOrFail($request->id);
 
             $floorHistory = FloorShiftHistory::where('order_id', $request->id)->select('id','order_id', 'from', 'to', 'updated_at')->selectRaw('DATE_FORMAT(updated_at,"%h:%i:%s %p") as time')->get();
 

@@ -65,6 +65,15 @@
                         </div>
                     </div>
                 </div>
+                <div class="pagination_count padding-vertical-half">
+                    <div class="pagination_list">
+                        <div v-for="(link,index) in paginationData.links" :key="link">
+                            <a href="javascript:;" v-if="index == 0" @click="link.url != null ? getFloors(link.url) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon-prev"></i></a>
+                            <a href="javascript:;" v-if="paginationData.links.length - 1 != index && index != 0" @click="link.url != null ? getFloors(link.url) : 'javascript:;'" :class="{ 'disabled': link.url == null, 'active': paginationData.current_page == index}">{{ index }}</a>
+                            <a href="javascript:;" v-if="paginationData.links.length - 1 == index" @click="link.url != null ? getFloors(link.url) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon-next"></i></a>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div v-else>
                 <NoValueFound />
@@ -156,8 +165,8 @@ export default {
                 name : [],
                 sub_category : null,
                 price : '',
-            }
-
+            },
+            paginationData : [],
         }
     },
     beforeCreate() {
@@ -176,7 +185,8 @@ export default {
         getSubCategories() {
             axios.post('/api/get-sub-categories', { search: this.search })
             .then((res) => {
-                this.subCategories = res.data;
+                this.subCategories = res.data.sub_category.data;
+                this.paginationData = res.data.sub_category;
             })
         },
         addUpdateSubCategory() {

@@ -23,8 +23,8 @@ class CategoryController extends Controller
         }])->whereHas('categoryLanguages',function($q) use ($req,$lang_id){
             $q->where('language_id',$lang_id);
             $q->where('name','LIKE','%'.$req->search.'%');
-        })->whereUserId(Auth::id())->get();
-        return response()->json($categories);
+        })->whereUserId(Auth::id())->paginate(10);
+        return response()->json(['category' => $categories]);
     }
 
     public function addCategory(Request $req)

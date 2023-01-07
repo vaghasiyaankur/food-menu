@@ -214,7 +214,13 @@ export default {
                 this.$root.errornotification('order create must be '+this.member_limit+' or less than member.'); return false;
             }
 
-            f7.dialog.confirm('Are you sure you want to make a reservation? Your waiting time is appropriate '+ this.waiting_time +'.', () => {
+            if(this.waiting_time == '00:00'){
+                var conformation_message = this.$root.trans.no_waiting_message;
+            }else{
+                var conformation_message = this.$root.trans.conformation_message.replace('@waiting', this.waiting_time);
+            }
+
+            f7.dialog.confirm(conformation_message, () => {
 
                 var formData = new FormData();
                 formData.append('customer_name', this.reservation.name);

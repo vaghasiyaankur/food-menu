@@ -95,7 +95,7 @@ class ProductController extends Controller
             $sub_product = $sub_product->whereId($subcategoryId);
         }
 
-        $sub_product = $sub_product->whereUserId(Auth::id())->get();
+        $sub_product = $sub_product->whereUserId(Auth::id())->paginate(6);
 
         return response()->json(['sub_category_product' => $sub_product,'sub_category' => $subCategory]);
     }

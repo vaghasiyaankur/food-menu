@@ -386,7 +386,13 @@ export default {
             if(this.reservation.agree_condition) var agree_condition = 1;
             else var agree_condition = 0;
 
-            f7.dialog.confirm(this.$root.trans.conformation_message.replace('@waiting', this.waiting_time), () => {
+            if(this.waiting_time == '00:00'){
+                var conformation_message = this.$root.trans.no_waiting_message;
+            }else{
+                var conformation_message = this.$root.trans.conformation_message.replace('@waiting', this.waiting_time);
+            }
+
+            f7.dialog.confirm(conformation_message, () => {
 
                 var formData = new FormData();
                 formData.append('customer_name', this.reservation.name);

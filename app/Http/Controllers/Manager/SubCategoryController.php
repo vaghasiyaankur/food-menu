@@ -45,8 +45,8 @@ class SubCategoryController extends Controller
         }])
         ->whereHas('subCategory.subCategoryLanguage',function($q) use ($req,$lang_id){
             $q->where('name','LIKE','%'.$req->search.'%')->where('language_id',$lang_id);
-        })->whereUserId(Auth::id())->get();
-        return response()->json($subCategories);
+        })->whereUserId(Auth::id())->paginate(5);
+        return response()->json(['sub_category' => $subCategories]);
     }
 
     public function getSubCategory($id)

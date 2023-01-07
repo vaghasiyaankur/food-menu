@@ -51,7 +51,7 @@ class QrCodeController extends Controller
             $qr->start_date = Carbon::parse($qr['start_date'])->format('d, M Y');
             $qr->end_date = Carbon::parse($qr['end_date'])->format('d, M Y');
 
-            $qrcodexml[$qr->id] = QrCode::size(50)->generate(url('/').'?qrcode='.$qr->token)->toHtml();
+            $qrcodexml[$qr->id] = QrCode::size(50)->generate(url('/').'/?qrcode='.$qr->token)->toHtml();
         }
 
         return response()->json(['qrcodes' => $qrcodes , 'qrcodexml' => $qrcodexml]);
@@ -130,7 +130,7 @@ class QrCodeController extends Controller
     {
         $qrcode = QrCodeToken::find($id);
 
-        $qrCode = base64_encode(QrCode::size(150)->generate(url('/').'?qrcode='.$qrcode->token));
+        $qrCode = base64_encode(QrCode::size(150)->generate(url('/').'/?qrcode='.$qrcode->token));
 
         $pdf = PDF::loadView('qrcode', compact('qrCode'));
 

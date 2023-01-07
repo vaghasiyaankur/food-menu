@@ -306,7 +306,7 @@
     color: #3D833C;
 }
 .reservation_table .table_content .status_info.status_waiting{
-    background: #FFE7DD;
+    background: #E7E7E7;
     color: #555555;
 }
 .reservation_table .table_content .status_info.status_ongoing{

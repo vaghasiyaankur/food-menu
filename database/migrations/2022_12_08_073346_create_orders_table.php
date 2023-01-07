@@ -23,10 +23,11 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('person')->default(0);
             $table->string('role')->default('Guest');
-            $table->string('cancelled_by')->default('Guest');
+            $table->string('cancelled_by')->nullable();
             $table->timestamp('start_time')->nullable();
             $table->integer('finish_time')->default(0);
             $table->boolean('finished')->default(0);
+            $table->timestamp('finish_at')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

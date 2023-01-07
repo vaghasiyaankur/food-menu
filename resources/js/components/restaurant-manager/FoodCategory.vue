@@ -66,9 +66,7 @@
                                             </button>
                                         </div>
                                         <div class="col-25">
-                                            <button class="button text-color-black padding height-36 popup-open" data-popup=".categoryPopup"
-                                                @click="editCategory(category.id)"><i
-                                                    class="f7-icons font-22 margin-right-half">square_pencil</i> Edit</button>
+                                            <button class="button text-color-black padding height-36 popup-open" data-popup=".categoryPopup" @click="editCategory(category.id)"><i class="f7-icons font-22 margin-right-half">square_pencil</i> Edit</button>
                                         </div>
                                         <div class="col-25">
                                             <button class="button text-color-red padding height-36"
@@ -76,6 +74,15 @@
                                                 Delete</button>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pagination_count padding-vertical-half">
+                            <div class="pagination_list">
+                                <div v-for="(link,index) in paginationData.links" :key="link">
+                                    <a href="javascript:;" v-if="index == 0" @click="link.url != null ? getFloors(link.url) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon-prev"></i></a>
+                                    <a href="javascript:;" v-if="paginationData.links.length - 1 != index && index != 0" @click="link.url != null ? getFloors(link.url) : 'javascript:;'" :class="{ 'disabled': link.url == null, 'active': paginationData.current_page == index}">{{ index }}</a>
+                                    <a href="javascript:;" v-if="paginationData.links.length - 1 == index" @click="link.url != null ? getFloors(link.url) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon-next"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -170,6 +177,7 @@ export default {
             category_title: 'Add Category',
             image_url: null,
             search : '',
+            paginationData : [],
         }
     },
     components: {
@@ -198,7 +206,8 @@ export default {
         getCategories() {
             axios.post('/api/get-categories', { search: this.search })
             .then((res) => {
-                this.categories = res.data;
+                this.categories = res.data.category.data;
+                this.paginationData = res.data.category;
             })
         },
         removeCategory(id) {
@@ -399,6 +408,7 @@ export default {
 .category-list-section .category-list .menu-dropdown-link{
     border-bottom: none !important;
 }
+
 @media screen and (max-width:820px) {
     .header-links {
         width: 100%;
@@ -504,6 +514,18 @@ export default {
 }
 .popup-button{
     text-transform: capitalize !important;
+}
+.pagination_count .pagination_list {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.pagination_count .pagination_list a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 5px;
 }
 @media screen and (max-width:991px) {
     .popup {

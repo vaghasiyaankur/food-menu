@@ -39,7 +39,11 @@ class TableController extends Controller
 
         $tables = Table::with(['color','orders.customer', 'floor','orders'=>function($q){
             $q->where('finished', 0)->whereUserId(Auth::id())->orderBy('updated_at', 'ASC');
-        }])->whereUserId(Auth::id())->where('floor_id', $groundFloorId)->where('status', 1)->get();
+        }])->withCount([
+            'orders' => function ($z){
+                $z->where('finished', 0)->whereUserId(Auth::id());
+            }
+        ])->whereUserId(Auth::id())->where('floor_id', $groundFloorId)->where('status', 1)->orderBy('orders_count', 'DESC')->get();
 
         $floorlist = Floor::with(['activetables' => function($q){
             $q->withCount([
@@ -117,7 +121,11 @@ class TableController extends Controller
 
         $tables = Table::with(['color','orders.customer', 'floor','orders'=>function($q){
             $q->where('finished', 0)->whereUserId(Auth::id())->orderBy('updated_at', 'ASC');
-        }])->where('floor_id', $request->id)->whereUserId(Auth::id())->where('status', 1)->get();
+        }])->withCount([
+            'orders' => function ($z){
+                $z->where('finished', 0)->whereUserId(Auth::id());
+            }
+        ])->where('floor_id', $request->id)->whereUserId(Auth::id())->where('status', 1)->orderBy('orders_count', 'DESC')->get();
 
         foreach($tables as $tkey=>$table){
             foreach($table->orders as $okey=>$order){
@@ -194,7 +202,7 @@ class TableController extends Controller
      */
     public function finishNext(Request $request)
     {
-        Order::where('id', $request->id)->update(['finished' => 1]);
+        Order::where('id', $request->id)->update(['finished' => 1,'finish_at' => Carbon::now()]);
 
         $userId = Auth::id();
 

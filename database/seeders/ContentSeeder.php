@@ -169,8 +169,19 @@ class ContentSeeder extends Seeder
             ['language_id' => 2, 'title' => 'accept_term_cond', 'content' => 'કૃપા કરીને અમારી શરતો સ્વીકારો'],
             ['language_id' => 3, 'title' => 'accept_term_cond', 'content' => 'कृपया हमारे नियमों और शर्तों को स्वीकार करें'],
 
-        ];
+            ['language_id' => 1, 'title' => 'no_waiting_message', 'content' => 'Are you sure you want to make a reservation? You have no waiting queue.'],
+            ['language_id' => 2, 'title' => 'no_waiting_message', 'content' => 'શું તમે ખરેખર આરક્ષણ કરવા માંગો છો? તમારી પાસે રાહ જોવાની કતાર નથી.'],
+            ['language_id' => 3, 'title' => 'no_waiting_message', 'content' => 'क्या आप वाकई आरक्षण करना चाहते हैं? आपके पास कोई प्रतीक्षा कतार नहीं है।'],
 
+            ['language_id' => 1, 'title' => 'your_turn', 'content' => "Now It's your turn"],
+            ['language_id' => 2, 'title' => 'your_turn', 'content' => 'હવે તમારો વારો છે'],
+            ['language_id' => 3, 'title' => 'your_turn', 'content' => 'अब आपकी बारी है'],
+
+            ['language_id' => 1, 'title' => 'booked', 'content' => "Booked"],
+            ['language_id' => 2, 'title' => 'booked', 'content' => 'બુક કરેલ'],
+            ['language_id' => 3, 'title' => 'booked', 'content' => 'बुक'],
+
+        ];
 
         foreach ($contents as $content) {
             $cnt = new Content();

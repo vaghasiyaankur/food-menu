@@ -13,14 +13,18 @@
             <div class="waiting_area">
                 <div class="margin countdown_section">
                     <div class="text-align-center">
-                        <h3>{{ $root.trans.waiting_time }}</h3>
+                        <h3><svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
+<path d="M15.5711 3.05069C15.3504 2.82964 14.9924 2.82926 14.7717 3.04975L7.98967 9.81387L5.54274 7.15626C5.33131 6.92675 4.97383 6.91187 4.74393 7.12328C4.51422 7.33471 4.49951 7.69237 4.71094 7.92208L7.55643 11.0123C7.66064 11.1256 7.80648 11.1914 7.96026 11.1946C7.96439 11.1947 7.96838 11.1947 7.97233 11.1947C8.12177 11.1947 8.26553 11.1354 8.37144 11.0299L15.5699 3.85023C15.7912 3.62977 15.7915 3.27173 15.5711 3.05069Z" fill="#555555" stroke="#555555" stroke-width="0.3"/>
+<path d="M15.4347 7.93466C15.1224 7.93466 14.8693 8.18772 14.8693 8.5C14.8693 12.0122 12.0122 14.8693 8.5 14.8693C4.98801 14.8693 2.13065 12.0122 2.13065 8.5C2.13065 4.98801 4.98801 2.13065 8.5 2.13065C8.81225 2.13065 9.06534 1.87759 9.06534 1.56534C9.06534 1.25307 8.81225 1 8.5 1C4.36445 1 1 4.36445 1 8.5C1 12.6354 4.36445 16 8.5 16C12.6354 16 16 12.6354 16 8.5C16 8.18775 15.7469 7.93466 15.4347 7.93466Z" fill="#555555" stroke="#555555" stroke-width="0.3"/>
+</svg> {{ time == 0 ? $root.trans.booked : $root.trans.waiting_time }}</h3>
                         <!-- <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p> -->
                     </div>
                     <div class="countdown position-relative text-align-center">
                         <div style="background : url('/images/dots.png')"
                             class="display-flex justify-content-space-between align-items-center flex-direction-column">
                             <img src="/images/clock.png" alt="">
-                            <vue-countdown :time="time" v-slot="{ hours, minutes, seconds }">
+                            <p v-if="time == 0" class="no-margin margin-top-half font-20">{{ $root.trans.your_turn }}</p>
+                            <vue-countdown v-else :time="time" v-slot="{ hours, minutes, seconds }">
                                 <p class="no-margin margin-top-half font-20" v-if="String(hours).padStart(2, '0') != 0">{{ String(hours).padStart(2, '0') +' '+ $root.trans.hour_and + ' ' +String(minutes).padStart(2, '0')+' '+$root.trans.min_left}}</p>
                                 <p class="no-margin margin-top-half font-20" v-else-if="String(minutes).padStart(2, '0') != 0">{{ String(minutes).padStart(2, '0')+' '+$root.trans.min_left}}</p>
                                 <p class="no-margin margin-top-half font-20" v-else>{{ String(seconds).padStart(2, '0')+' '+$root.trans.second_left}}</p>
@@ -53,10 +57,6 @@
                                 <div class="table_number table_inner" :style="('background : rgba(' + order.color.rgb + ', 0.3)')">
                                     <p class="no-margin">{{ $root.trans.table_no }}</p>
                                     <span class="no-margin">{{ String(order.table_number).padStart(2, '0') }}</span>
-                                </div>
-                                <div class="table_capacity table_inner" :style="('background : rgba(' + order.color.rgb + ', 0.3)')">
-                                    <p class="no-margin">{{ $root.trans.capacity }}</p>
-                                    <span class="no-margin">{{ order.orders ? String(order.orders[0].person).padStart(2, '0') : '' }}</span>
                                 </div>
                             </div>
                         </div>
