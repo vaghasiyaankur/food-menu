@@ -103,10 +103,8 @@
             </div>
             <Menu ref="menu" />
         </div>
-        <div v-else class="not_found">
-            <img src="/images/Empty-pana 1.png" alt="" style="width:100%">
-            <h1 class="no-margin"> 404 </h1>
-            <p class="no-margin"> Page Not Found</p>
+        <div v-else >
+           <NotFound />
         </div>
     </f7-page>
 </template>
@@ -118,7 +116,9 @@ import VueCountdown from '@chenfengyuan/vue-countdown';
 import { useCookies } from "vue3-cookies";
 import Menu from './Menu.vue';
 import axios from "axios";
-import moment from 'moment'
+import moment from 'moment';
+import NotFound from './NotFound.vue';
+
 
 export default {
     name : 'Favourite',
@@ -130,7 +130,8 @@ export default {
         VueCountdown,
         Menu,
         f7,
-        f7Button
+        f7Button,
+        NotFound
     },
     data() {
         return {

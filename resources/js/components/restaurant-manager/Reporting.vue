@@ -390,6 +390,9 @@ export default {
 .calendar-day-number{
     border-radius: 3px !important;
 }
+.calendar-day-selected .calendar-day-number{
+    background-color: #F33E3E !important;
+}
 .calendar-day-selected-right .calendar-day-number{
     background-color: #F33E3E !important;
 
@@ -399,8 +402,12 @@ export default {
 
 }
 .calendar-day-today .calendar-day-number{
-    background-color: #F33E3E !important;
-    color: #fff !important;
+    background-color: transparent;
+    color: #000;
+}
+.calendar-day-selected-range .calendar-day-number{
+    background-color: transparent !important;
+    color: inherit !important;
 }
 .calendar-day-selected-range:before, .calendar-day-selected-left:before, .calendar-day-selected-right:before{
     background-color: #FFE1E1 !important;

@@ -12,26 +12,24 @@
                             <a href="#tab-5" class="tab-link">QR Code</a>
                         </div>
                     </div>
-                    <div class="tabs-animated-wrap">
-                        <div class="tabs">
-                            <div id="tab-1" class="tab tab-active">
-                                <GeneralSetting />
-                            </div>
-                            <div id="tab-2" class="tab">
-                                <TablePlan v-if="tableShow" @tablehide="addEditTableShow" :page="page"/>
-                                <AddTable v-if="!tableShow" @tableshow="tableShow = true" :tableId="tableId"/>
-                            </div>
-                            <div id="tab-3" class="tab">
-                                <FloorList v-if="floorlistShow" @floorlisthide="addEditFloorShow" :page="floorpage" />
-                                <FloorPlan v-if="!floorlistShow"  @floorlistshow="floorlistShow = true" :floorId="floorId" />
-                            </div>
-                            <div id="tab-4" class="tab">
-                                <Language v-if="language" @languagelisthide="languagelisthide"/>
-                                <LanguageTraslation  v-if="!language" @languagelistshow="language = true" :langId="langId" />
-                            </div>
-                            <div id="tab-5" class="tab">
-                                <QrCodeGenerate />
-                            </div>
+                    <div class="tabs">
+                        <div id="tab-1" class="tab tab-active">
+                            <GeneralSetting />
+                        </div>
+                        <div id="tab-2" class="tab">
+                            <TablePlan v-if="tableShow" @tablehide="addEditTableShow" :page="page"/>
+                            <AddTable v-if="!tableShow" @tableshow="tableShow = true" :tableId="tableId"/>
+                        </div>
+                        <div id="tab-3" class="tab">
+                            <FloorList v-if="floorlistShow" @floorlisthide="addEditFloorShow" :page="floorpage" />
+                            <FloorPlan v-if="!floorlistShow"  @floorlistshow="floorlistShow = true" :floorId="floorId" />
+                        </div>
+                        <div id="tab-4" class="tab">
+                            <Language v-if="language" @languagelisthide="languagelisthide"/>
+                            <LanguageTraslation  v-if="!language" @languagelistshow="language = true" :langId="langId" />
+                        </div>
+                        <div id="tab-5" class="tab">
+                            <QrCodeGenerate />
                         </div>
                     </div>
                 </div>
@@ -84,7 +82,7 @@ export default {
         this.$root.addLoader();
     },
     mounted() {
-        $('.page-content').css('background', '#F7F7F7');
+        $('.page-content').css({'background': '#F7F7F7', 'overflow-y': 'auto','overflow-x': 'hidden'});
         this.$root.activationMenu('setting');
         this.$root.removeLoader();
     },
@@ -109,6 +107,10 @@ export default {
 
 <style scoped>
 
+.product-list-section .card{
+    box-shadow: none !important;
+
+}
 .product-list-section{
     margin-top:70px;
 }
@@ -232,6 +234,10 @@ export default {
 </style>
 
 <style>
+.page-content{
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}
 .text-underline{
     text-decoration: underline;
 }

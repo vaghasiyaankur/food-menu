@@ -1,5 +1,5 @@
 <template>
-    <div class="card no-margin-top qrcode_generate height_100">
+    <div class="card no-margin-top qrcode_generate">
         <div class="row margin-vertical-half align-items-center padding">
             <div class="table_mangment_heading col-40">
                 <h3 class="no-margin">
@@ -34,8 +34,8 @@
                 </div>
             </div>
         </div>
-        <div class="card-content height_100">
-            <div class="data-table height_100">
+        <div class="card-content">
+            <div class="data-table">
                 <table>
                     <thead>
                         <tr>
