@@ -42,9 +42,9 @@ class SettingHelper{
     public static function getUserIdUsingQrcode()
     {
         $date = Carbon::now()->format('Y-m-d');
-        $qrcode_exstis = explode('?qrcode=',request()->header()['referer'][0]);
-        if($qrcode_exstis[1]){
-            $qrcode_token = $qrcode_exstis[1];
+        $qrcode_exists = explode('?qrcode=',request()->header()['referer'][0]);
+        if(array_key_exists('1', $qrcode_exists)){
+            $qrcode_token = $qrcode_exists[1];
             $qrcode = QrCodeToken::whereToken($qrcode_token)->where('start_date', '<=', $date)->where('end_date', '>=', $date)->first();
             if($qrcode) return $qrcode->user_id;
         }

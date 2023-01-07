@@ -165,6 +165,10 @@ class ContentSeeder extends Seeder
             ['language_id' => 2, 'title' => 'capacity', 'content' => 'ક્ષમતા'],
             ['language_id' => 3, 'title' => 'capacity', 'content' => 'क्षमता'],
 
+            ['language_id' => 1, 'title' => 'accept_term_cond', 'content' => 'Please accept our term & condition'],
+            ['language_id' => 2, 'title' => 'accept_term_cond', 'content' => 'કૃપા કરીને અમારી શરતો સ્વીકારો'],
+            ['language_id' => 3, 'title' => 'accept_term_cond', 'content' => 'कृपया हमारे नियमों और शर्तों को स्वीकार करें'],
+
         ];
 
 

@@ -43,21 +43,21 @@
                             </div>
                             <div class="card-content padding-top  padding-horizontal-half table1__details" :style="'max-width : '+(table.width - 20 )+'px'">
                                 <div class="table_reservation margin-bottom">
-                                    
+
                                     <!-- <h3 class="no-margin-top">Reserved</h3> -->
                                     <div class="display-flex">
                                         <!-- <draggable :scroll-sensitivity="250"  :force-fallback="true" class="dragArea list-group w-full" :class="'dragger'+table.id" :list="order[index]" @start="startDrag(order.id, table.id)" @touchend.prevent="onDrop" v-for="(order,index) in table.orders" :key="order.id"> -->
-                                            
+
                                         <div class="table_reservation_info" :class="'test'+order.id" v-for="(order,index) in table.orders" :key="order.id" >
-                                            
-                                            <div class="person-info popover-open" :class="['popover-click-' + order.id, { 'person-info_move': order.is_order_moved, 'ongoing_popover' : 1 == 0 , 'neworder_add' : 1 == 0 }]" :data-popover="'.popover-table-'+order.id"  @click="getRemainingTime(order.id); order_person = order.person; removebackdrop(); "> 
-                                                <div class="neworder_tooltip" v-if="1 == 2">
+
+                                            <div class="person-info popover-open" :class="['popover-click-' + order.id, { 'person-info_move': order.is_order_moved, 'ongoing_popover' : order.is_ongoing_order , 'neworder_add' : order.is_new_order_timing }]" :data-popover="'.popover-table-'+order.id"  @click="getRemainingTime(order.id); order_person = order.person; removebackdrop(); ">
+                                                <div class="neworder_tooltip" v-if="order.is_new_order_timing">
                                                     <div class="tooltip_text">
                                                         <p class="no-margin">New Reservation</p>
-                                                        <p class="no-margin">2 minutes ago</p>
+                                                        <p class="no-margin">{{ order.new_order_timing_text }}</p>
                                                     </div>
                                                 </div>
-                                                                                           
+
                                                 <div class="person_info_name border__bottom padding-bottom-half margin-bottom-half">
                                                     <p class="no-margin text-align-center">By {{ order.role }}</p>
                                                 </div>
@@ -175,7 +175,7 @@
                                     </div>
                                 </div>
                             </div>
-                           
+
                         </div>
                         <!--======= TABLE CHAIR ========= -->
                         <div class="row table_bottom_chair">
@@ -365,7 +365,7 @@ export default {
                             var extraSeconds = second % 60;
                             minutes = minutes < 10 ? "0" + minutes : minutes;
                             extraSeconds = extraSeconds < 10 ? "0" + extraSeconds : extraSeconds;
-                            this.row_tables[rowIndex][tableIndex].orders[orderIndex].order_moved_text = minutes+' minute '+extraSeconds+' second     ago';
+                            this.row_tables[rowIndex][tableIndex].orders[orderIndex].order_moved_text = minutes+' minute '+extraSeconds+' second ago';
                         }else{
                             this.row_tables[rowIndex][tableIndex].orders[orderIndex].order_moved_text = second+' seconds ago';
                         }
@@ -381,7 +381,35 @@ export default {
                 this.tableListFloorWise(this.active_floor_id);
                 f7.popover.close('.popover-move');
                 clearInterval(this.intervalId);
-             }, highlight_time);
+            }, highlight_time);
+        },
+        newOrdersecondIncrement(second, orderIndex, tableIndex,rowIndex){
+            this.intervalId = setInterval(() => {
+                if (second < (60 * parseFloat(this.highlight_time))) {
+                    second++;
+                    if (this.row_tables[rowIndex] != undefined && this.row_tables[rowIndex][tableIndex] != undefined && this.row_tables[rowIndex][tableIndex].orders[orderIndex] != undefined) {
+                        this.row_tables[rowIndex][tableIndex].orders[orderIndex].new_order_timing = second;
+                        if(second > 60){
+                            var minutes = parseInt(Math.floor(second / 60), 10);
+                            var extraSeconds = second % 60;
+                            minutes = minutes < 10 ? "0" + minutes : minutes;
+                            extraSeconds = extraSeconds < 10 ? "0" + extraSeconds : extraSeconds;
+                            this.row_tables[rowIndex][tableIndex].orders[orderIndex].new_order_timing_text = minutes+' minute '+extraSeconds+' second ago';
+                        }else{
+                            this.row_tables[rowIndex][tableIndex].orders[orderIndex].new_order_timing_text = second+' seconds ago';
+                        }
+                    }
+                }else{
+                    this.tableListFloorWise(this.active_floor_id);
+                    clearInterval(this.intervalId);
+                }
+            }, 1000);
+            var highlight_time = parseFloat(this.highlight_time) * 60 * 1000;
+            setTimeout(() => {
+                this.tableListFloorWise(this.active_floor_id);
+                f7.popover.close('.popover-move');
+                clearInterval(this.intervalId);
+            }, highlight_time);
         },
         tableList() {
             axios.get('/api/table-list-with-order')
@@ -463,6 +491,10 @@ export default {
                         table.orders.forEach((order, o_index) => {
                             if (order.is_order_moved && this.highlight_time_on_off == 1) {
                                 this.secondIncrement(order.order_moved, o_index, t_index, row_index);
+                            }
+
+                            if(order.is_new_order_timing && this.highlight_time_on_off == 1){
+                                this.newOrdersecondIncrement(order.new_order_timing, o_index, t_index, row_index);
                             }
                         });
                     });
@@ -553,6 +585,9 @@ export default {
                         table.orders.forEach((order, o_index) => {
                             if (order.is_order_moved && this.highlight_time_on_off == 1) {
                                 this.secondIncrement(order.order_moved, o_index, t_index, row_index);
+                            }
+                            if(order.is_new_order_timing && this.highlight_time_on_off == 1){
+                                this.newOrdersecondIncrement(order.new_order_timing, o_index, t_index, row_index);
                             }
                         });
                     });
@@ -1037,7 +1072,7 @@ content: '';
 /*=========== ONGOING POPOVER =============*/
 .ongoing_popover{
     background: #E2E2E2;
-    border: 1px solid #C4C4C4;   
+    border: 1px solid #C4C4C4;
 }
 /*========= NEW ORDER ADD ========*/
 .neworder_add{

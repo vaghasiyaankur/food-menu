@@ -59,6 +59,9 @@ class TableController extends Controller
             foreach($table->orders as $okey=>$order){
                 $tables[$tkey]['orders'][$okey]['reservation_time'] = date('h:i', strtotime($order->updated_at));
                 $tables[$tkey]['orders'][$okey]['reservation_time_12_format'] = date('g:i a', strtotime($order->updated_at));
+                $tables[$tkey]['orders'][$okey]['is_ongoing_order'] = $okey == 0;
+                $tables[$tkey]['orders'][$okey]['is_new_order_timing'] = $okey != 0 && strtotime($order->created_at) == strtotime($order->updated_at) && $order->created_at->diffInSeconds(Carbon::now()) < ($highlight_time * 60);
+                $tables[$tkey]['orders'][$okey]['new_order_timing'] = $order->updated_at->diffInSeconds(Carbon::now());
                 $tables[$tkey]['orders'][$okey]['is_order_moved'] = strtotime($order->created_at) != strtotime($order->updated_at) && $order->updated_at->diffInSeconds(Carbon::now()) < ($highlight_time * 60);
                 $tables[$tkey]['orders'][$okey]['order_moved'] = $order->updated_at->diffInSeconds(Carbon::now());
             }
@@ -120,6 +123,9 @@ class TableController extends Controller
             foreach($table->orders as $okey=>$order){
                 $tables[$tkey]['orders'][$okey]['reservation_time'] = date('h:i', strtotime($order->updated_at));
                 $tables[$tkey]['orders'][$okey]['reservation_time_12_format'] = date('g:i a', strtotime($order->updated_at));
+                $tables[$tkey]['orders'][$okey]['is_ongoing_order'] = $okey == 0;
+                $tables[$tkey]['orders'][$okey]['is_new_order_timing'] = $okey != 0 && strtotime($order->created_at) == strtotime($order->updated_at) && $order->created_at->diffInSeconds(Carbon::now()) < ($highlight_time * 60);
+                $tables[$tkey]['orders'][$okey]['new_order_timing'] = $order->updated_at->diffInSeconds(Carbon::now());
                 $tables[$tkey]['orders'][$okey]['is_order_moved'] = strtotime($order->created_at) != strtotime($order->updated_at) && $order->updated_at->diffInSeconds(Carbon::now()) < ($highlight_time * 60);
                 $tables[$tkey]['orders'][$okey]['order_moved'] = $order->updated_at->diffInSeconds(Carbon::now());
             }
@@ -190,10 +196,12 @@ class TableController extends Controller
     {
         Order::where('id', $request->id)->update(['finished' => 1]);
 
-        $table_id = Order::where('id', $request->id)->first()->table_id;
+        $userId = Auth::id();
+
+        $table_id = Order::where('id', $request->id)->whereUserId($userId)->first()->table_id;
 
 
-        $next = Order::where('table_id', $table_id)->whereNull('start_time')->where('finished', 0)->orderBy('updated_at', 'ASC')->first();
+        $next = Order::where('table_id', $table_id)->whereNull('start_time')->whereUserId($userId)->where('finished', 0)->orderBy('updated_at', 'ASC')->first();
         $update_date = @$next->updated_at;
         if($next)  $next->update(['start_time' => Carbon::now()]);
         if($next)  $next->update(['updated_at' => $update_date]);
@@ -257,8 +265,10 @@ class TableController extends Controller
         $table_id = Order::where('id', $orderId)->first()->table_id;
         $updated_at = Order::where('id', $orderId)->first()->updated_at;
 
+        $userId = Auth::id();
+
         if($table_id){
-            $allOrder = Order::where('table_id', $table_id)->where('id', '!=', $orderId)->where('finished', 0)->where('updated_at', '<=', $updated_at)->select('id', 'table_id', 'start_time', 'finish_time', 'finished', 'updated_at')->get();
+            $allOrder = Order::where('table_id', $table_id)->where('id', '!=', $orderId)->where('finished', 0)->where('updated_at', '<=', $updated_at)->select('id', 'table_id', 'start_time', 'finish_time', 'finished', 'updated_at')->whereUserId($userId)->get();
 
             $calculateTime = 0;
 
@@ -266,7 +276,7 @@ class TableController extends Controller
                 $calculateTime += $order->finish_time;
             }
 
-            $firstOrderTime = Order::where('table_id', $table_id)->where('id', '!=', $orderId)->where('finished', 0)->where('updated_at', '<=', $updated_at)->whereNotNull('start_time')->first();
+            $firstOrderTime = Order::where('table_id', $table_id)->where('id', '!=', $orderId)->whereUserId($userId)->where('finished', 0)->where('updated_at', '<=', $updated_at)->whereNotNull('start_time')->first();
             if($firstOrderTime){
                 $started_time = $firstOrderTime->start_time;
             }else{
