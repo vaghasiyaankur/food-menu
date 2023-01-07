@@ -1,6 +1,6 @@
 <template>
     <div class="card general_setting_card" @click="clickout">
-        <div class="card-content card-content-padding">
+        <div class="card-content card-content-padding height_100">
             <div class="row border__bottom">
                 <div class="col">
                     <div class="general_info_form">
@@ -415,6 +415,10 @@
 .position-relative{
     position: relative;
 }
+.general_setting_card{
+    position: relative;
+    height: calc(100vh - -121px);
+}
 /*======== SELECT OPTION CSS =======*/
 /*.time_onoff #select-concise {
     background-color: #fafafa;
@@ -455,6 +459,13 @@ img.restaurant_logo{
 }
 .justify_content_between{
     justify-content:space-between
+}
+.submit__button{
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 .submit__button button{
     width: 100%;

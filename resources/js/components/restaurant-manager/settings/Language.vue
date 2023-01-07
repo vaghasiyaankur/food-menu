@@ -95,14 +95,14 @@
 .submit__button button {
 	width: 100%;
 	max-width: 160px;
-	margin: 0 auto;
+	margin: 0 auto 10px;
 	border-radius: 10px;
 	background-color: #F33E3E;
 }
-.submit__button{
+/*.submit__button{
     position: fixed;
     top: 50%;
     width: 100%;
-}
+}*/
 </style>
 

@@ -412,9 +412,7 @@ export default {
 .reservation_card .card{
     height: calc(100vh - 132px);
 }
-.height_100{
-    height: 100%;
-}
+
 .simple-list li:after, .links-list a:after, .list .item-inner:after{
     background-color: transparent !important;
 }
@@ -550,6 +548,9 @@ label.item-checkbox input[type='checkbox']:checked ~ .icon-checkbox:after, label
 }
 </style>
 <style>
+.height_100{
+    height: 100%;
+}
 /* Chrome, Safari, Edge, Opera */
 
 /* Firefox */

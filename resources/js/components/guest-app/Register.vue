@@ -175,10 +175,8 @@
         <!-- ========VIEW TERMS AND CONDITION END========= -->
     </div>
 
-    <div v-else class="not_found">
-        <img src="/images/Empty-pana 1.png" alt="" style="width:100%">
-        <h1 class="no-margin"> 404 </h1>
-        <p class="no-margin"> Page Not Found</p>
+    <div v-else>
+        <NotFound />
     </div>
 
 </f7-page>
@@ -188,6 +186,7 @@
 import $ from "jquery";
 import { useCookies } from "vue3-cookies";
 import Menu from "./Menu.vue";
+import NotFound from './NotFound.vue';
 import {
     f7Page,
     f7Navbar,
@@ -229,7 +228,8 @@ export default {
         f7PageContent,
         VueCountdown,
         f7Toolbar,
-        f7Link
+        f7Link,
+        NotFound
     },
     mounted() {
         $('.navbar-bg').remove();
@@ -519,24 +519,10 @@ export default {
 </script>
 
 <style scoped>
-.not_found{
+.height_100{
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
 }
-.not_found h1{
-    font-weight: 700;
-    color: #F33E3E;
-    font-size: 35px;
-}
-.not_found p{
-    font-size: 17px;
-    line-height: 18px;
-    font-weight: 500;
-    color: #F33E3E;;
-}
+
 .list .item-title{
     display: flex;
     justify-content: center;

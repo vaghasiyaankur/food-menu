@@ -175,13 +175,14 @@
 	color: #fff !important;
 }
 .bottom__bar{
-    position: fixed;
+    /*position: fixed;
     width: 100%;
-    bottom: 0;
+    bottom: 0;*/
     border-top: 1px solid #999999;
+    background-color: #ffffff;
 }
 .edit_tranaslation .card-content .edit_translate_table{
-    height: calc(100% - 141px);
+    height: calc(100% - 287px);
     overflow: auto;
 }
 .edit_translate_table .translate__id .item-input-wrap input{

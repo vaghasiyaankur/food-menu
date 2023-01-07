@@ -22,7 +22,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-40 padding-left-half padding-right-half">
+                                <div class="col-45 padding-left-half padding-right-half">
                                     <button class="button bg-dark text-color-white padding height_40 popup-open"
                                     data-popup="#product_popup" @click="blankform"><i class="f7-icons font-22 margin-right-half">plus_square</i> Add Product</button>
                                 </div>
