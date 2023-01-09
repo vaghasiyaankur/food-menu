@@ -256,7 +256,7 @@ export default {
             $(".table__list").removeClass('add_left_before');
             $('.table__list').removeClass('add_right_before');
         });
-        this.$root.activationMenu('table');
+        this.$root.activationMenu('table', '');
         this.$root.removeLoader();
         let vm = this;
         window.Echo.channel("reservation")
@@ -1271,7 +1271,12 @@ content: '';
 .dialog {
     background-color: #fff !important;
     width: 378px !important;
-    transform: translate(-13%, -50%) !important;
+    /*transform: translate(-13%, -50%) !important;*/
+    transform: translateY(100%) !important;
+    left: 45% !important;
+}
+.dialog.modal-in{
+    transform: translateY(-50%) !important;
 }
 
 .dialog-button {
@@ -1291,4 +1296,13 @@ content: '';
     box-sizing: border-box;
     background: rgb(0 0 0 / 41%) !important;
 }*/
+@media screen and (max-width:820px) {
+    .dialog {
+        transform: translateY(100%) !important;
+        left: 43% !important;
+    }
+    .dialog.modal-in{
+        transform: translateY(-100%) !important;
+    }
+}
 </style>

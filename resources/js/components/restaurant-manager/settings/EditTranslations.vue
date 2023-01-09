@@ -110,7 +110,7 @@
             this.getLangTraslation();
         },
         mounted() {
-            this.$root.activationMenu('setting');
+            this.$root.activationMenu('setting', '');
         },
         methods: {
             getLangTraslation(pagenumber) {

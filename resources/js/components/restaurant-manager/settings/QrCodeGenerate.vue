@@ -182,7 +182,7 @@ export default {
             }
         });
         this.listQrCodes();
-        this.$root.activationMenu('setting');
+        this.$root.activationMenu('setting', '');
     },
     methods: {
         date_format(date) {

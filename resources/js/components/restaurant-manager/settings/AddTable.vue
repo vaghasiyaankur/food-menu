@@ -98,7 +98,7 @@
             this.getFloors();
         },
         mounted() {
-            this.$root.activationMenu('setting');
+            this.$root.activationMenu('setting', '');
         },
         methods: {
             colorList() {

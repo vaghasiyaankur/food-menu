@@ -199,7 +199,8 @@ export default {
                 open() {
                     setTimeout(() => {
                         $('.popover-angle').css({ 'left': '147px' });
-                        $('.calendar-popover').css({ 'top': '144px', 'left': '787.406px' });
+                        if($('body').width() > $('body').height())  $('.calendar-popover').css({ 'top': '144px', 'left': '787.406px' });
+                        else $('.calendar-popover').css({ 'top': '144px', 'left': '493.406px' });
                     }, 1);
                 },
                 close(daterange) {
@@ -228,7 +229,7 @@ export default {
             }
         });
 
-        this.$root.activationMenu('reporting');
+        this.$root.activationMenu('reporting', '');
         this.$root.removeLoader();
     },
     created() {

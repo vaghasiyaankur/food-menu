@@ -35,7 +35,7 @@
                                 <div class="col-25">
                                     <div class="f-concise position-relative">
                                         <div id="selection-concise" class="list no-margin subcategory--list">
-                                            <div id="select-concise" class="input-dropdown-wrap" @click="showSubCategoryList = !showSubCategoryList">{{ active_sub_category_name }}</div>
+                                            <div id="select-concise" class="input-dropdown-wrap" :class="{ 'deactive_dropdown' : active_category_name == 'Category' }" @click="showSubCategoryList = !showSubCategoryList">{{ active_sub_category_name }} </div>
                                             <ul id="subcategory--list" class="dropdown_list" :class="{ 'd-none' : showSubCategoryList }">
                                                 <li class="concise p-1 padding-half" :class="{ 'active': active_sub_category == key }" v-for="(subCategory,key) in subCategoryList" :key="subCategory" @click="getProductList(key); active_sub_category_name = subCategory;"><span>{{ subCategory }}</span></li>
                                             </ul>
@@ -193,7 +193,7 @@ export default {
         $('.page-content').css('background', '#F7F7F7');
         this.getAllSubCategories();
         this.getProducts();
-        this.$root.activationMenu('menu_management');
+        this.$root.activationMenu('menu_management', 'product');
         this.getAllCategories();
         this.$root.removeLoader();
     },
@@ -319,6 +319,9 @@ export default {
 </script>
 
 <style scoped>
+.deactive_dropdown{
+    background-color: #dddddd !important;
+}
 .product_list_card .dropdown_list{
     position: absolute;
     width: 100%;

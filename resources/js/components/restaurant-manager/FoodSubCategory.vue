@@ -43,12 +43,12 @@
                     <div v-for="subcat in subcategory.sub_category" :key="subcat">
                         <div class="category-list border-bottom padding-vertical-half" v-if="subcat.sub_category_language[0]">
                             <div class="row align-items-center">
-                                <div class="col-100 large-60 medium-50">
+                                <div class="col-100 large-60 medium-40">
                                     <div class="display-flex align-items-center">
                                         <span class="padding-left-half sub_category_name">{{ subcat.sub_category_language[0].name }}</span>
                                     </div>
                                 </div>
-                                <div class="col-100 large-40 medium-50 action-buttons">
+                                <div class="col-100 large-40 medium-60 action-buttons">
                                     <div class="row align-items-center">
                                         <div class="col-50">
                                             <button class="button text-color-black padding height-36 popup-open border__right" data-popup="#product_popup" @click="getAllSubCategories(); product.sub_category = subcat.id"><i class="f7-icons font-22 margin-right-half">plus_square</i>Add Product</button>
@@ -108,7 +108,7 @@
         <div class="text-align-center padding popup_title">Add Product</div>
         <div class="category-add padding">
             <div class="categoryForm text-align-left no-padding">
-                <label for="" class="add_category_name">Add product</label>
+                <label for="" class="add_category_name">Product Name</label>
                 <input type="text" v-model="product.name[lang.id]" name="name" v-for="lang in $root.langs" :key="lang.id" class="category-name margin-top-half padding-left-half padding-right-half" :placeholder="'Add ' + lang.name + ' Product name'">
             </div>
             <div class="categoryForm text-align-left margin-top">
@@ -121,7 +121,7 @@
             </div>
             <div class="categoryForm margin-top text-align-left no-padding">
                 <label for="" class="add_category_name">Price</label>
-                <input type="text" name="name" v-model="product.price" class="category-name margin-top-half padding-left-half padding-right-half" placeholder="Add product price">
+                <input type="number" name="name" v-model="product.price" class="category-name margin-top-half padding-left-half padding-right-half" placeholder="Add product price">
             </div>
             <div class="margin-top no-margin-bottom display-flex justify-content-center padding-top popup_button">
                 <button type="button" class="button button-raised text-color-black button-large popup-close margin-right poup-button">Cancel</button>
@@ -178,7 +178,7 @@ export default {
     mounted() {
         $('.page-content').css('background', '#F7F7F7');
         this.getAllCategories();
-        this.$root.activationMenu('menu_management');
+        this.$root.activationMenu('menu_management', 'subcategory');
         this.$root.removeLoader();
     },
     methods: {

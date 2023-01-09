@@ -83,7 +83,7 @@ export default {
     },
     mounted() {
         $('.page-content').css({'background': '#F7F7F7', 'overflow-y': 'auto','overflow-x': 'hidden'});
-        this.$root.activationMenu('setting');
+        this.$root.activationMenu('setting', '');
         this.$root.removeLoader();
     },
     methods: {

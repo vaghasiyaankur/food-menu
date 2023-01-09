@@ -4,25 +4,25 @@
             <div class="product_list_card no-margin">
                 <div class="card_header">
                     <div class="row padding-horizontal margin-horizontal align-items-center">
-                        <div class="col-50">
+                        <div class="col-100 large-50 medium-40">
                             <h3>
                                 <a href="javscript:;" class="text-color-black padding-right-half" @click="f7router.back()"><i class="f7-icons font-22">arrow_left</i></a>
                                 <span class="page_heading">Indian</span>
                             </h3>
                         </div>
-                        <div class="col-50">
+                        <div class="col-100 large-50 medium-60">
                             <div class="row align-items-center justify-content-end">
                                 <div class="col">
                                     <div class="item-content item-input">
                                         <div class="item-inner">
                                             <div class="item-input-wrap searchData row padding-half height_40 search_data_wrap">
                                                 <i class="f7-icons font-18 search-icon">search</i>
-                                                <input type="search" name="search" class="search__data" v-model="search"  @input="getProducts()" id="searchData">
+                                                <input type="search" name="search" class="search__data" placeholder="Search Category" v-model="search"  @input="getProducts()" id="searchData">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-45 padding-left-half padding-right-half">
+                                <div class="col padding-left-half padding-right-half">
                                     <button class="button bg-dark text-color-white padding height_40 popup-open"
                                     data-popup="#product_popup" @click="blankform"><i class="f7-icons font-22 margin-right-half">plus_square</i> Add Product</button>
                                 </div>
@@ -168,7 +168,7 @@ export default {
     mounted() {
         $('.page-content').css('background', '#F7F7F7');
         this.getAllSubCategories();
-        this.$root.activationMenu('menu_management');
+        this.$root.activationMenu('menu_management', '');
         setTimeout(() => {
             this.getProducts();
         }, 400);

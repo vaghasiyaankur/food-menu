@@ -178,7 +178,7 @@ export default {
         this.memberLimitation();
     },
     mounted() {
-        this.$root.activationMenu('reservation');
+        this.$root.activationMenu('reservation', '');
         this.$root.removeLoader();
     },
     methods: {
@@ -416,7 +416,7 @@ export default {
 /*============ RESERVATION CARD ============*/
 
 .reservation_card .card{
-    height: calc(100vh - 132px);
+    height: calc(100vh - 142px);
 }
 
 .simple-list li:after, .links-list a:after, .list .item-inner:after{
@@ -543,9 +543,9 @@ label.item-checkbox input[type='checkbox']:checked ~ .icon-checkbox:after, label
     .reservation_form{
         height: calc(100vh - 730px);
     }
-    .reservation_card .card .row{
+    /*.reservation_card .card .row{
        height: auto !important;
-    }
+    }*/
     .reservation_card .card .reservation_banner img{
         width:100%;
         max-width:350px;

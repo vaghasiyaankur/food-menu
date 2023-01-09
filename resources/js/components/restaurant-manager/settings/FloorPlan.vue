@@ -54,7 +54,7 @@ import axios from 'axios';
             if (this.floorId) this.tableData();
         },
         mounted() {
-            this.$root.activationMenu('setting');
+            this.$root.activationMenu('setting', '');
         },
         methods: {
             addFloor() {

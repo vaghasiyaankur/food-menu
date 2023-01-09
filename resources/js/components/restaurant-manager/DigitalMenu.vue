@@ -87,7 +87,7 @@ export default {
         this.getCategories();
     },
     mounted() {
-        this.$root.activationMenu('menu_management');
+        this.$root.activationMenu('menu_management', 'digitalmenu');
         this.$root.removeLoader();
     },
     methods: {

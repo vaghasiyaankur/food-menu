@@ -73,7 +73,7 @@ export default {
         f7,f7Page, f7Navbar, f7BlockTitle, f7Block,f7Swiper,f7SwiperSlide,draggable: VueDraggableNext,Carousel,Slide,Pagination,Navigation
     },
     mounted() {
-        this.$root.activationMenu('login');
+        this.$root.activationMenu('login', '');
         this.$root.removeLoader();
     },
     methods: {

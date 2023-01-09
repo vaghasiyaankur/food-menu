@@ -5,14 +5,14 @@
             <div class="card elevation-2 border_radius_10">
                 <div class="card_header">
                     <div class="row padding-left padding-right padding-top-half align-items-center">
-                        <div class="col-50">
+                        <div class="col-100 large-50 medium-40">
                             <h3>
                                 <!-- <a href="javscript:;" class="text-color-black padding-right-half" >
                                     <i class="f7-icons font-22" style="vertical-align: bottom;">arrow_left</i></a> -->
                                 <span class="page_heading"> Category</span>
                             </h3>
                         </div>
-                        <div class="col-50">
+                        <div class="col-100 large-50 medium-60">
                             <div class="row align-items-center">
                                 <div class="col">
                                     <div class="item-content item-input">
@@ -43,7 +43,7 @@
                     <div v-if="categories.length">
                         <div class="category-list border-bottom padding-top padding-bottom" v-for="(category,index) in categories" :key="category">
                             <div class="row align-items-center">
-                                <div class="col-100 medium-50 large-60 ">
+                                <div class="col-100 medium-40 large-60 ">
                                     <div class="display-flex align-items-center">
                                         <div class="category-count padding-right">
                                             <span>{{ index + 1 }}.</span>
@@ -57,7 +57,7 @@
                                     </a>
                                     </div>
                                 </div>
-                                <div class="col-100 medium-50 large-40 action-buttons">
+                                <div class="col-100 medium-60 large-40 action-buttons">
                                     <div class="row align-items-center">
                                         <div class="col-50">
                                             <button class="button text-color-black padding height-36 border__right popup-open" data-popup="#subCategory_popup"
@@ -195,7 +195,7 @@ export default {
     mounted() {
         $('.page-content').css('background', '#F7F7F7');
         this.getCategories();
-        this.$root.activationMenu('menu_management');
+        this.$root.activationMenu('menu_management', 'category');
         this.$root.removeLoader();
     },
     methods: {
@@ -225,7 +225,7 @@ export default {
                 $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
                 $('.dialog-button').eq(1).removeClass('text-color-black');
                 $('.dialog-buttons').addClass('margin-top no-margin-bottom')
-            }, 50);
+            }, 20);
         },
         addCategory() {
             console.log(this.category.name);
@@ -529,7 +529,8 @@ export default {
 }
 @media screen and (max-width:991px) {
     .popup {
-        left: 27% !important;
+        left: 28% !important;
+        top: 28% !important;
     }
 }
 </style>

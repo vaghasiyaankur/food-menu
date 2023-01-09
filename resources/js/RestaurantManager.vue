@@ -104,10 +104,10 @@
                                     <div class="menu-dropdown-content bg-color-white no-padding">
                                         <a href="#" class="menu-dropdown-link menu-close margin-horizontal no-padding"></a>
                                         <!-- <a href="/" class="menu-dropdown-link menu-close text-color-pink">Table</a> -->
-                                        <a href="/food-category/" class="menu-dropdown-link menu-close text-color-black">Food Category</a>
-                                        <a href="/food-subcategory/" class="menu-dropdown-link menu-close text-color-black">Food SubCategory</a>
-                                        <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black">Food Menu</a>
-                                        <a href="/digital-menu/" class="menu-dropdown-link menu-close text-color-black">Digital Menu</a>
+                                        <a href="/food-category/" class="menu-dropdown-link menu-close" :class="CurrentsubmenuRoute == 'category' ? 'active_submenu' : 'text-color-black' ">Food Category</a>
+                                        <a href="/food-subcategory/" class="menu-dropdown-link menu-close" :class="CurrentsubmenuRoute == 'subcategory' ? 'active_submenu' : 'text-color-black' ">Food SubCategory</a>
+                                        <a href="/food-product/" class="menu-dropdown-link menu-close" :class="CurrentsubmenuRoute == 'product' ? 'active_submenu' : 'text-color-black' ">Food Menu</a>
+                                        <a href="/digital-menu/" class="menu-dropdown-link menu-close" :class="CurrentsubmenuRoute == 'digitalmenu' ? 'active_submenu' : 'text-color-black' ">Digital Menu</a>
                                     </div>
                                 </div>
                             </div>
@@ -191,6 +191,7 @@ export default {
             },
             close_reservation : 0,
             currentRoute: '',
+            CurrentsubmenuRoute : '',
             langs: [],
             events: ['click', 'mousemove', 'mousedown', 'scroll', 'keypress', 'load'],
             warningTimer: null,
@@ -287,8 +288,9 @@ export default {
             $('.notification-header').append('<div><i class="f7-icons">xmark</i></div>');
             $('.notification-content').remove();
         },
-        activationMenu(active) {
+        activationMenu(active, submenuactive) {
             this.currentRoute = active;
+            this.CurrentsubmenuRoute = submenuactive;
         },
         addLoader() {
             $('.overlay, body').removeClass('loaded');
@@ -303,9 +305,13 @@ export default {
             }, 2000);
         },
         setTimer() {
-            this.warningTimer = setTimeout(this.warningMessage, 15 * 60 * 1000);
+           
+
+            this.warningTimer = setTimeout(this.warningMessage, 1 * 30 * 1000);
         },
         warningMessage() {
+             f7.dialog.close();
+            f7.popup.close();
             f7.view.main.router.navigate({ url: '/lock-screen/' });
             this.lockScreenEnable();
         },
@@ -332,6 +338,12 @@ export default {
 };
 </script>
 <style>
+.active_submenu{
+    color: #f33e3e !important;
+}
+.menu-dropdown-link:before{
+    background-color: transparent !important;
+}
 /*========= LOADER CSS ==========*/
 /*body.loaded {
     overflow-y: auto;
@@ -626,6 +638,7 @@ export default {
 .dialog{
     border-radius: 10px !important;
 }
+
 @media screen and (max-width:991px){
     .small_screen_menu{
         display: block;
@@ -668,5 +681,10 @@ export default {
         justify-content: flex-start;
     }
 
+}
+</style>
+<style>
+.active-state{
+    background-color: transparent !important;
 }
 </style>

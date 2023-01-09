@@ -75,7 +75,7 @@
             this.getFloors(this.page_number);
         },
         mounted() {
-            this.$root.activationMenu('setting');
+            this.$root.activationMenu('setting', '');
         },
         methods: {
             getFloors(pagenumber) {

@@ -151,7 +151,8 @@
                 open() {
                     setTimeout(() => {
                         $('.popover-angle').css({ 'left': '147px' });
-                        $('.calendar-popover').css({ 'top': '152px', 'left': '293.312px' });
+                        if($('body').width() > $('body').height())  $('.calendar-popover').css({ 'top': '152px', 'left': '293.312px' });
+                        else  $('.calendar-popover').css({ 'top': '152px', 'left': '143.312px' });
                     }, 1);
                 },
                 close(daterange) {
@@ -176,7 +177,7 @@
                 },
             });
 
-            this.$root.activationMenu('all-reservation');
+            this.$root.activationMenu('all-reservation', '');
             this.$root.removeLoader();
         },
         methods : {
@@ -426,6 +427,11 @@
 .calendar.calendar-range{
     background-color: #FFFFFF !important;
     border-radius: 10px !important;
+}
+@media screen and (max-width:820px) {
+    .search__data{
+        width: 87%;     
+    }
 }
 </style>
 

@@ -251,7 +251,7 @@ export default {
 .lock-screen{
     height:100vh;
     overflow: hidden;
-    z-index: 1100;
+    /*z-index: 1100;*/
 }
 .lock-screen-main{
     position: absolute;
@@ -341,7 +341,7 @@ export default {
     transform: translateY(-4px);
 }*/
 .lockscreen_bottom{
-    position: fixed;
+    position: absolute;
     bottom: 45px;
     left: 60px;
 }

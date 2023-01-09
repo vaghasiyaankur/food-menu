@@ -60,7 +60,7 @@
             this.getLanguage();
         },
         mounted() {
-            this.$root.activationMenu('setting');
+            this.$root.activationMenu('setting', '');
         },
         methods: {
             getLanguage() {

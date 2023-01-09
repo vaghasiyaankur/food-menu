@@ -211,7 +211,7 @@
             this.settingData();
         },
         mounted() {
-            this.$root.activationMenu('setting');
+            this.$root.activationMenu('setting', '');
         },
         methods: {
             settingData() {
@@ -417,7 +417,7 @@
 }
 .general_setting_card{
     position: relative;
-    height: calc(100vh - -121px);
+    height: calc(100vh - -145px);
 }
 /*======== SELECT OPTION CSS =======*/
 /*.time_onoff #select-concise {
@@ -723,6 +723,10 @@ img.restaurant_logo{
 @media screen and (max-width:991px){
     .drop-down__menu-box{
         left: 0;
+    }
+    .general_setting_card{
+        position: relative;
+        height: calc(100vh - 200px);
     }
 }
 </style>
