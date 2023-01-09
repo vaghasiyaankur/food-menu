@@ -31,7 +31,7 @@
                                 </div> -->
                             </div>
                             <div class="col padding-left-half padding-right-half">
-                                <button class="button button-raised bg-dark text-color-white padding height_40 popup-open" @click="subCategory_title = 'Add Sub Category'; subCategory.name = []; subCategory.category = '';" data-popup="#sub_category_popup"><i class="f7-icons font-22 margin-right-half">plus_square</i> Add Sub Category</button>
+                                <button class="button button-raised bg-dark text-color-white padding height_40" @click="subCategory_title = 'Add Sub Category'; subCategory.name = []; subCategory.category = '';showSubCategoryPopup()" data-popup="#sub_category_popup"><i class="f7-icons font-22 margin-right-half">plus_square</i> Add Sub Category</button>
                             </div>
                         </div>
                     </div>
@@ -54,7 +54,7 @@
                                             <button class="button text-color-black padding height-36 popup-open border__right" data-popup="#product_popup" @click="getAllSubCategories(); product.sub_category = subcat.id"><i class="f7-icons font-22 margin-right-half">plus_square</i>Add Product</button>
                                         </div>
                                         <div class="col-25">
-                                            <button class="button text-color-black padding height-36 popup-open" data-popup="#sub_category_popup" @click="editSubCategory(subcat.id)"><i class="f7-icons font-22 margin-right-half">square_pencil</i>Edit</button>
+                                            <button class="button text-color-black padding height-36" data-popup="#sub_category_popup" @click="editSubCategory(subcat.id);showSubCategoryPopup()"><i class="f7-icons font-22 margin-right-half">square_pencil</i>Edit</button>
                                         </div>
                                         <div class="col-25">
                                             <button class="button text-color-red padding height-36" @click="removeSubCategory(subcat.id)"><i class="f7-icons font-22 margin-right-half">trash</i> Delete</button>
@@ -76,7 +76,12 @@
                 </div>
             </div>
             <div v-else>
-                <NoValueFound />
+                <div class="no_order">
+                    <NoValueFound />
+                    <div class="no_order_text text-align-center">
+                        <p class="no-margin">Empty Food Sub Category List</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -275,8 +280,12 @@ export default {
         getAllSubCategories() {
             axios.get('/api/sub-categories')
             .then((res) => {
+                f7.popup.open(`#product_popup`);
                 this.subCategoryOption = res.data;
             })
+        },
+        showSubCategoryPopup(){
+            f7.popup.open(`#sub_category_popup`);
         }
     },
 }

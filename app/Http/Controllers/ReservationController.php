@@ -27,19 +27,16 @@ class ReservationController extends Controller
     {
         // $order = Order::wherePerson($request->person)->pluck('table_id');
         $checkrole = 0;
-
         if ($request->qrToken != 'undefined' && $request->role == 'Guest') {
             $qrcode_token = $request->qrToken;
-
-            $qrcode = QrCodeToken::whereToken($qrcode_token)->first();
-            if ($qrcode) {
-                if ($qrcode->start_date >= Carbon::now()->format('Y-m-d') || $qrcode->end_date <= Carbon::now()->format('Y-m-d'))
+            $date = Carbon::now()->format('Y-m-d');
+            $qrcode = QrCodeToken::whereToken($qrcode_token)->where('start_date', '<=', $date)->where('end_date', '>=', $date)->first();
+            if (!$qrcode) {
                 return response()->json(['error' => 'Reservation Fail.'], 401);
-
+            }else{
                 $userId = $qrcode->user_id;
                 $checkrole = 1;
             }
-
         }else if($request->role == 'Manager'){
             $userId = Auth::id();
             $checkrole = 1;

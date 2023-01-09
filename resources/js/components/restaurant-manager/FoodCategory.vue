@@ -33,7 +33,7 @@
                                     </div> -->
                                 </div>
                                 <div class="col padding-left-half padding-right-half">
-                                    <button class="button button-raised bg-dark text-color-white padding height_40 popup-open" data-popup=".categoryPopup" @click="blankForm"><i class="f7-icons font-22 margin-right-half">plus_square</i> Add category</button>
+                                    <button class="button button-raised bg-dark text-color-white padding height_40" data-popup=".categoryPopup" @click="blankForm();showcategoryPopup()"><i class="f7-icons font-22 margin-right-half">plus_square</i> Add category</button>
                                 </div>
                             </div>
                         </div>
@@ -60,13 +60,13 @@
                                 <div class="col-100 medium-50 large-40 action-buttons">
                                     <div class="row align-items-center">
                                         <div class="col-50">
-                                            <button class="button text-color-black padding height-36 border__right popup-open" data-popup="#subCategory_popup"
+                                            <button class="button text-color-black padding height-36 border__right" data-popup="#subCategory_popup"
                                                 @click="getAllCategories(category.id)">
                                                 <i class="f7-icons font-22 margin-right-half">plus_square</i>Add sub category
                                             </button>
                                         </div>
                                         <div class="col-25">
-                                            <button class="button text-color-black padding height-36 popup-open" data-popup=".categoryPopup" @click="editCategory(category.id)"><i class="f7-icons font-22 margin-right-half">square_pencil</i> Edit</button>
+                                            <button class="button text-color-black padding height-36 popup-open" data-popup=".categoryPopup" @click="editCategory(category.id);showcategoryPopup()"><i class="f7-icons font-22 margin-right-half">square_pencil</i> Edit</button>
                                         </div>
                                         <div class="col-25">
                                             <button class="button text-color-red padding height-36"
@@ -88,7 +88,12 @@
                         </div>
                     </div>
                     <div v-else>
-                        <NoValueFound />
+                        <div class="no_order">
+                            <NoValueFound />
+                            <div class="no_order_text text-align-center">
+                                <p class="no-margin">Empty Food Category List</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -228,7 +233,6 @@ export default {
             }, 50);
         },
         addCategory() {
-            console.log(this.category.name);
             const config = {
                 headers: { 'content-type': 'multipart/form-data' }
             }
@@ -289,6 +293,7 @@ export default {
             })
         },
         getAllCategories(id) {
+            f7.popup.open(`.subCategoryPopup`);
             axios.get('/api/categories')
             .then((res) => {
                 this.categoryOption = res.data;
@@ -300,6 +305,9 @@ export default {
             this.category.name = [];
             this.category.image = '';
             this.image_url = null;
+        },
+        showcategoryPopup(){
+            f7.popup.open(`.categoryPopup`);
         }
     },
 };

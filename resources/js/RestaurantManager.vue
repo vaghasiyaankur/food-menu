@@ -209,8 +209,12 @@ export default {
         })
     },
     created() {
-        this.checkreservation();
-        this.getLanguage();
+        setTimeout(() => {
+            if(this.checklogin){
+                this.getLanguage();
+                this.checkreservation();
+            }
+        }, 500);
         $(window).bind('load', function() {
             $('.overlay, body').addClass('loaded');
             setTimeout(function() {
@@ -330,6 +334,12 @@ export default {
         },
     },
 };
+$("body").click(function(e){
+    if ($(e.target).hasClass('backdrop-in'))
+    {
+        f7.dialog.close();
+    }
+});
 </script>
 <style>
 /*========= LOADER CSS ==========*/

@@ -43,8 +43,7 @@
                                     </div>
                                 </div>
                                 <div class="col-100 large-20 medium-25 padding-left-half padding-right-half">
-                                    <button class="button bg-dark text-color-white padding height_40 popup-open"
-                                    data-popup="#product_popup" @click="blankform"><i class="f7-icons font-22 margin-right-half">plus_square</i> Add Product</button>
+                                    <button class="button bg-dark text-color-white padding height_40" data-popup="#product_popup" @click="blankform();showProductPopup()"><i class="f7-icons font-22 margin-right-half">plus_square</i> Add Product</button>
                                 </div>
                             </div>
                         </div>
@@ -74,7 +73,7 @@
                                                         <div class="row align-items-center">
                                                             <div class="col-50">
                                                                 <button class="button text-color-black padding height-36 option-button  popup-open"
-                                                                data-popup="#product_popup" @click="editProduct(product.id)"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
+                                                                data-popup="#product_popup" @click="editProduct(product.id);showProductPopup()"><i class="f7-icons font-18 margin-right-half">square_pencil</i> Edit</button>
                                                             </div>
                                                             <div class="col-50">
                                                                 <button class="button text-color-red padding height-36 option-button" @click="removeProduct(product.id)"><i class="f7-icons font-18 margin-right-half">trash</i> Delete</button>
@@ -105,7 +104,12 @@
                         </div>
                     </div>
                     <div v-else>
-                        <NoValueFound />
+                        <div class="no_order">
+                            <NoValueFound />
+                            <div class="no_order_text text-align-center">
+                                <p class="no-margin">Empty Food Menu List</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -313,6 +317,9 @@ export default {
             if (!subcategory_list) {
                 this.showSubCategoryList = true;
             }
+        },
+        showProductPopup(){
+            f7.popup.open(`#product_popup`);
         }
     },
 }
