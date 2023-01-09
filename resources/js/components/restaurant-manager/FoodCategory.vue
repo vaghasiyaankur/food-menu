@@ -289,6 +289,8 @@ export default {
             axios.post('/api/add-sub-category', formData)
             .then((res) => {
                 this.$root.successnotification(res.data.success);
+                this.subCategory.name = [];
+                this.subCategory.category = null;
                 f7.popup.close(`#subCategory_popup`);
             })
         },

@@ -309,9 +309,7 @@ export default {
             }, 2000);
         },
         setTimer() {
-           
-
-            this.warningTimer = setTimeout(this.warningMessage, 1 * 30 * 1000);
+            this.warningTimer = setTimeout(this.warningMessage, 15 * 60 * 1000);
         },
         warningMessage() {
              f7.dialog.close();

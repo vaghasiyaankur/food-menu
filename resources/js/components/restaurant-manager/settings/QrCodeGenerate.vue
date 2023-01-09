@@ -67,6 +67,9 @@
                                 </div>
                             </td>
                         </tr>
+                        <tr v-if="qrcodes.length == 0">
+                            <td colspan="4" class="text-align-center">No Data Found !!</td>
+                        </tr>
                     </tbody>
                 </table>
                 <div class="bottom__bar">

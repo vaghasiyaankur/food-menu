@@ -35,7 +35,8 @@ class TableController extends Controller
         $highlight_time = @$setting->highlight_on_off ? @$setting->highlight_time : 0;
         $highlight_time_on_off = @$setting->highlight_on_off;
 
-        $groundFloorId = Floor::whereUserId(Auth::id())->first()->id;
+        $groundfloor = Floor::whereUserId(Auth::id())->first();
+        $groundFloorId = @$groundfloor->id;
 
         $tables = Table::with(['color','orders.customer', 'floor','orders'=>function($q){
             $q->where('finished', 0)->whereUserId(Auth::id())->orderBy('updated_at', 'ASC');

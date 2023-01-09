@@ -91,6 +91,9 @@
                                                 </div>
                                             </td>
                                         </tr>
+                                        <tr v-if="reservation.length == 0">
+                                            <td colspan="7" class="text-align-center">No Data Found !!</td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -430,7 +433,7 @@
 }
 @media screen and (max-width:820px) {
     .search__data{
-        width: 87%;     
+        width: 87%;
     }
 }
 </style>

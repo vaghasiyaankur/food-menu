@@ -162,7 +162,7 @@ class CategoryController extends Controller
         $category = Category::with(['categoryLanguages' => function($q) use ($lang_id){
             $q->where('language_id',$lang_id);
         }])->whereHas('subCategory.products')->whereUserId($user_id)->get();
-        return response()->json($category);
+        return response()->json(['category' => $category]);
     }
 
     public function getCategoryList()

@@ -90,7 +90,7 @@
                 </div>
                 <i class="f7-icons font-30 close-menu" @click="closePopup">xmark</i>
                 <f7-block-title class="text-align-center font-18 text-color-black margin-top-half">Food Menu</f7-block-title>
-                <div class="margin">
+                <div class="margin" v-if="product_category">
                     <!-- <div class="text-align-center text-color-gray">Select your favourite food <br> and enjoy with family</div> -->
                     <div data-pagination='{"el":".swiper-pagination"}' data-space-between="10" data-slides-per-view="8" class="swiper swiper-init demo-swiper margin-top margin-bottom" style="height : 120px">
                         <div class="swiper-pagination"></div>
@@ -117,7 +117,20 @@
                             </div>
                         </div>
                         <div class="menu-lists" v-else>
-                            <NoValueFound />
+                            <div class="no_order">
+                                <NoValueFound />
+                                <div class="no_order_text text-align-center">
+                                    <p class="no-margin">Empty Food Menu List</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div v-else>
+                    <div class="no_order">
+                        <NoValueFound />
+                        <div class="no_order_text text-align-center">
+                            <p class="no-margin">Empty Food Menu List</p>
                         </div>
                     </div>
                 </div>
@@ -185,8 +198,8 @@ export default {
         getCategories() {
             axios.post('/api/get-category-list')
             .then((res) => {
-                this.product_category = res.data;
-                this.getProducts(this.product_category[0].id);
+                this.product_category = res.data.category;
+                if(this.product_category) this.getProducts(this.product_category[0].id);
             })
         },
         getProducts(id) {

@@ -36,6 +36,9 @@
                                     </div>
                                 </td>
                             </tr>
+                            <tr v-if="floors.length == 0">
+                                <td colspan="4" class="text-align-center">No Data Found !!</td>
+                            </tr>
                         </tbody>
                     </table>
                     <div class="pagination_count padding-vertical-half">

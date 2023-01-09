@@ -19,8 +19,8 @@
                     </div>
                 </div>
            </div>
-            <div class="tables margin-horizontal">
-                <div class=" table_row margin-horizontal padding-top margin-top" v-for="row  in row_tables" :key="row">
+            <div class="tables margin-horizontal" v-if="row_tables.length != 0">
+                <div class="table_row margin-horizontal padding-top margin-top" v-for="row  in row_tables" :key="row">
                     <!-- <div class="no-padding margin-bottom table-card" :class="[('col-'+table.col)]" v-for="table in row" :key="table.id"> -->
                     <div class="no-padding margin-bottom table-card mr-72" :style="'min-width: '+table.width+'px'"  v-for="(table,t_index) in row" :key="table.id">
                         <!--======= TABLE CHAIR ========= -->
@@ -190,6 +190,14 @@
 
                 </div>
             </div>
+            <div v-else>
+                <div class="no_order">
+                    <NoValueFound />
+                    <div class="no_order_text text-align-center">
+                        <p class="no-margin">Empty Food Category List</p>
+                    </div>
+                </div>
+            </div>
         </div>
         </f7-page>
 </template>
@@ -202,7 +210,7 @@ import { VueDraggableNext } from 'vue-draggable-next';
 import VueCountdown from '@chenfengyuan/vue-countdown';
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
-
+import NoValueFound from './NoValueFound.vue';
 
 export default {
     name : 'RegisterPage',
@@ -242,7 +250,7 @@ export default {
   },
     components : {
         f7,f7Page, f7Navbar, f7BlockTitle, f7Block,f7Swiper,f7SwiperSlide,draggable: VueDraggableNext,Carousel,Slide,
-        VueCountdown,Pagination,Navigation
+        VueCountdown,Pagination,Navigation,NoValueFound
     },
     mounted() {
         this.equal_height();

@@ -2,7 +2,7 @@
     <div class="card no-margin-top">
         <div class="card-header margin-vertical-half">
             <div class="table_mangment_heading">
-                <h3 class="no-margin"> 
+                <h3 class="no-margin">
                     <span class="page_heading">Table List</span>
                 </h3>
             </div>
@@ -45,6 +45,9 @@
                             </div>
                          </td>
                       </tr>
+                        <tr v-if="tables.length == 0">
+                            <td colspan="6" class="text-align-center">No Data Found !!</td>
+                        </tr>
                    </tbody>
                 </table>
                 <div class="pagination_count padding-vertical-half data-table-pagination">

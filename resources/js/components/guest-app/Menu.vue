@@ -11,7 +11,7 @@
                 <i class="f7-icons font-30">xmark</i>
             </div>
             <f7-block-title class="text-align-center font-18 text-color-black margin-top-half padding-vertical-half">{{ $root.trans.food_menu }}</f7-block-title>
-            <div class="margin">
+            <div class="margin" v-if="product_category.length != 0">
                 <div data-pagination='{"el":".swiper-pagination"}' data-space-between="10" data-slides-per-view="5" class="swiper swiper-init demo-swiper margin-top margin-bottom" style="height : 100px">
                     <div class="swiper-pagination"></div>
                     <div class="swiper-wrapper">
@@ -49,8 +49,17 @@
                             <div class="no_order_text text-align-center">
                                 <p class="no-margin">{{ $root.trans.empty_menu }}</p>
                             </div>
-                            
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-lists" v-else>
+                <div class="no_order">
+                    <div class="search__img text-align-center">
+                        <img src="/images/Empty-pana 1.png" alt="serach">
+                    </div>
+                    <div class="no_order_text text-align-center">
+                        <p class="no-margin">{{ $root.trans.empty_menu }}</p>
                     </div>
                 </div>
             </div>
@@ -112,7 +121,7 @@ export default {
         getCategories() {
             axios.post('/api/get-categories-list')
             .then((res) => {
-                this.product_category = res.data;
+                this.product_category = res.data.category;
                 this.getProducts(this.product_category[0].id);
             })
         },
