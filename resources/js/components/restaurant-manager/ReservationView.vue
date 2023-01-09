@@ -2,7 +2,7 @@
     <f7-page class="bg-color-white">
        <div class="reservation_view">
             <div class="back_link padding margin-horizontal">
-                <a class="link back" href="/all-reservation/"><i class="icon icon-back"></i>
+                <a class="link text-color-black" href="/all-reservation/"><i class="icon icon-back"></i>
                     <span class="margin-left-half">Back to List</span>
                 </a>
             </div>
@@ -113,6 +113,9 @@ export default {
         f7Page,
         f7
     },
+    beforeCreate() {
+        this.$root.addLoader();
+    },
     created() {
     },
     mounted() {
@@ -120,6 +123,7 @@ export default {
             this.reservationDetail();
         }, 500);
         this.equal_height();
+        this.$root.removeLoader();
     },
     methods : {
         reservationDetail() {

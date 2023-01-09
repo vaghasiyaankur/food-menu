@@ -117,7 +117,7 @@
                                                             <!-- ============FLOOR DROP DOWN  ============= -->
                                                             <div class="list simple-list floor_dropdwon" :class="'f_f'+order.id">
                                                                 <ul>
-                                                                    <li v-for="floor in floorlist" :key="floor.id" @click="changeFloor(order.id,floor.id,floor.name)" :class="(table.floor.id == floor.id) ? 'display-none' : ''">
+                                                                    <li v-for="floor in available_floorlist" :key="floor.id" @click="changeFloor(order.id,floor.id,floor.name)" :class="(table.floor.id == floor.id) ? 'display-none' : ''">
                                                                         <div class="floor_number display-flex align-items-center justify_content_between w-100">
                                                                             <div class="floor_name">
                                                                                 <span>{{ floor.name }} </span>
@@ -226,6 +226,7 @@ export default {
             popup_remaining_time_over : false,
             highlight_time: 0,
             highlight_time_on_off: 0,
+            available_floorlist : [],
         }
     },
     computed: {
@@ -246,12 +247,12 @@ export default {
     mounted() {
         this.equal_height();
         $(document).on('click', '.popover-backdrop', function(){
-        //    $(".navbar").addClass('bg-color-white');
-        //    $(".navbar-bg").css('width', '100%');
-           $(".navbar-bg").css('background', 'var(--f7-navbar-bg-color)');
-           $(".table_dropdwon").removeClass('floor_dropdown_visible');
-           $(".floor_dropdwon").removeClass('floor_dropdown_visible');
-           $(".floor__list").removeClass('add_left_before');
+            //    $(".navbar").addClass('bg-color-white');
+            //    $(".navbar-bg").css('width', '100%');
+            $(".navbar-bg").css('background', 'var(--f7-navbar-bg-color)');
+            $(".table_dropdwon").removeClass('floor_dropdown_visible');
+            $(".floor_dropdwon").removeClass('floor_dropdown_visible');
+            $(".floor__list").removeClass('add_left_before');
             $('.floor__list').removeClass('add_right_before');
             $(".table__list").removeClass('add_left_before');
             $('.table__list').removeClass('add_right_before');
@@ -275,7 +276,10 @@ export default {
         this.$root.addLoader();
     },
     created() {
-        this.tableList();
+        setTimeout(() => {
+            if(this.$root.checklogin)
+            this.tableList();
+        }, 500);
         // this.connect();
     },
     methods: {
@@ -290,6 +294,11 @@ export default {
             document.querySelectorAll(".equal-height-table").forEach(node => node.style.height = highestBox + "px");
         },
         openFloorList(id){
+            axios.post('/api/change-floor-list',{order_id:id})
+            .then((res) => {
+                this.available_floorlist = res.data.floorlist;
+            });
+
             $('.table_dropdwon').removeClass('floor_dropdown_visible');
             $(".table__list").removeClass('add_left_before');
             $(".table__list").removeClass('add_right_before');
@@ -306,8 +315,8 @@ export default {
                 $(".floor__list").toggleClass('add_left_before');
             }
             var height = (parseInt($(".f_f"+id).height())/2) + 22;
-            console.log(height);
             $(".f_f"+id).css('transform', 'translateY(-'+height+'px');
+
             // transform: translateY(-1em);
         },
         openTableList(order) {
@@ -702,10 +711,9 @@ export default {
         /* For get every order time when open the detail-popup*/
         getRemainingTime(id) {
             axios.post('/api/get-remainig-time', { id : id})
-                .then((res) => {
-                    this.popup_remaining_time = res.data.time;
-                    console.log(res.data.time_over);
-                    this.popup_remaining_time_over = res.data.time_over;
+            .then((res) => {
+                this.popup_remaining_time = res.data.time;
+                this.popup_remaining_time_over = res.data.time_over;
             })
         }
 

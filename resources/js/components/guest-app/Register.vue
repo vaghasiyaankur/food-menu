@@ -364,6 +364,8 @@ export default {
                 this.errornotification(this.$root.trans.capacity_error.replace(/@person/g, this.member_limit)); return false;
             } else if (this.reservation.number.toString().length != 10) {
                 this.errornotification(this.$root.trans.number_error); return false;
+            }else if(!this.reservation.agree_condition){
+                this.errornotification(this.$root.trans.accept_term_cond); return false;
             }
 
             var formData = new FormData();

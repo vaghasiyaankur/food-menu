@@ -1,11 +1,6 @@
 <template>
-    <div class="no_order">
-        <div class="search__img text-align-center">
-            <img src="/images/Empty-pana 1.png" alt="serach">
-        </div>
-        <div class="no_order_text text-align-center">
-            <p class="no-margin">Empty Food Menu List</p>
-        </div>
+    <div class="search__img text-align-center">
+        <img src="/images/Empty-pana 1.png" alt="serach">
     </div>
 </template>
 
@@ -14,7 +9,7 @@ export default {
     name : 'NoValueFound'
 }
 </script>
-<style scoped>
+<style>
 .no_order{
     display: flex;
     flex-direction: column;

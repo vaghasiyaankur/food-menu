@@ -80,9 +80,8 @@ class TableController extends Controller
         $max_table_cap = Table::whereUserId(Auth::id())->where('floor_id', $groundFloorId)->where('status', 1)->max('capacity_of_person');
         $current_capacity = (100 - ($count / $total_table_number * 100));
 
-
-
         return response()->json([ 'tables' => $tables , 'floorlist' => $floorlist, 'current_capacity' => $current_capacity,'max_table_cap'=>$max_table_cap, 'highlight_time' => $highlight_time, 'highlight_time_on_off' => $highlight_time_on_off] , 200);
+
     }
 
     /**
@@ -308,6 +307,40 @@ class TableController extends Controller
         }else{
             return response()->json([ 'success' => false, 'time' => 0, 'time_over' => false ] , 200);
         }
+    }
+
+    public function changeFloorList(Request $req)
+    {
+        $orderId = $req->order_id;
+
+        $order = Order::where('id', $orderId)->first();
+
+        $tableId = $order->table_id;
+
+        $floor_id = Table::find($tableId)->floor_id;
+
+        $person = $order->person;
+        $from_cap = intval($person);
+        if($from_cap < 4) $to_cap = intval(ceil($person * 2));
+        else $to_cap = intval(ceil($person * 1.5));
+
+        $floorId = Table::where('capacity_of_person','>=',$from_cap)->where('capacity_of_person','<=',$to_cap)->whereUserId(Auth::id())->where('floor_id','!=',$floor_id)->pluck('floor_id');
+
+        $floorlist = Floor::with(['activetables' => function($q){
+            $q->withCount([
+                'orders' => function ($z){
+                    $z->where('finished', 0)->whereUserId(Auth::id());
+                }
+            ]);
+        }])->whereHas('activetables')->whereUserId(Auth::id())->whereIn('id',$floorId)->select('id', 'name')->get();
+
+        foreach ($floorlist as $key => $floors) {
+            foreach ($floors->activetables as $key => $table) {
+                $floors['orders_count'] = $floors['orders_count'] + $table->orders_count;
+            }
+        }
+
+        return response()->json(['floorlist' => $floorlist]);
     }
 
 }

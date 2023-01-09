@@ -33,7 +33,7 @@ class ColorSeeder extends Seeder
             ['color' => 'Violet','rgb' => '142,120,187'],
             ['color' => 'Periwinkle','rgb' => '115,129,175'],
             ['color' => 'Lavender','rgb' => '216,150,255'],
-            ['color' => 'Light pink','rgb' => '255,135,193'],
+            ['color' => 'Light_pink','rgb' => '255,135,193'],
             ['color' => 'Steel_Blue','rgb' => ' 111,157,177'],
             ['color' => 'Brown','rgb' => '177,143,111']
         ];

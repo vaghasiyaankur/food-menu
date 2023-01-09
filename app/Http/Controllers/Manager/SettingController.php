@@ -182,7 +182,8 @@ class SettingController extends Controller
     public function memberLimitation(Request $request)
     {
         $user_id = SettingHelper::getUserIdUsingQrcode();
-        $member_capacity = Setting::whereUserId($user_id)->first()->member_capacity;
+        $userId = $user_id ? $user_id : Auth::id();
+        $member_capacity = Setting::whereUserId($userId)->first()->member_capacity;
 
         return response()->json(['member_capacity'=>$member_capacity]);
     }
