@@ -194,7 +194,7 @@
                 <div class="no_order">
                     <NoValueFound />
                     <div class="no_order_text text-align-center">
-                        <p class="no-margin">Empty Food Category List</p>
+                        <p class="no-margin">Empty Table List</p>
                     </div>
                 </div>
             </div>

@@ -85,7 +85,12 @@
                         </div>
                     </div>
                     <div v-else>
-                        <NoValueFound />
+                        <div class="no_order">
+                            <NoValueFound />
+                            <div class="no_order_text text-align-center">
+                                <p class="no-margin">Empty Food Menu List</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
