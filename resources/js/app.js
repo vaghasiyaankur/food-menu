@@ -7,23 +7,6 @@ import App from './app.vue';
 
 import 'framework7/css/bundle';
 
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-
-// Your web app's Firebase configuration
-const firebaseConfig = {
-    apiKey: "AIzaSyBJKAe1KTNC3dK65FfK-XDZ609tCYVjAYY",
-    authDomain: "ewaiting-notification.firebaseapp.com",
-    projectId: "ewaiting-notification",
-    storageBucket: "ewaiting-notification.appspot.com",
-    messagingSenderId: "229500280113",
-    appId: "1:229500280113:web:85a419c0bad44fc5ac2410",
-    measurementId: "G-LBC3XY97T0"
-};
-
-const firebase = initializeApp(firebaseConfig);
-const analytics = getAnalytics(firebase);
-
 // import '.././css/app.css';
 
 // Demo
