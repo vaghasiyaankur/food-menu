@@ -314,6 +314,8 @@ export default {
                 var formData = new FormData();
                 formData.append('person', this.reservation.member);
                 formData.append('floor', this.reservation.floor);
+                formData.append('role', 'Guest');
+                formData.append('qrToken', this.qrToken);
 
                 axios.post('/api/check-time', formData)
                 .then((res) => {
@@ -371,6 +373,8 @@ export default {
             var formData = new FormData();
             formData.append('person', this.reservation.member);
             formData.append('floor', this.reservation.floor);
+            formData.append('role', 'Guest');
+            formData.append('qrToken', this.qrToken);
 
             axios.post('/api/check-time', formData)
             .then((res) => {

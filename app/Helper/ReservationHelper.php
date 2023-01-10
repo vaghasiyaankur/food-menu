@@ -6,9 +6,9 @@ use App\Models\Order;
 class ReservationHelper{
 
     /* Choose Table on Reservation */
-    public static function takeTable($floor, $person)
+    public static function takeTable($floor, $person, $user_id)
     {
-        $tableIds = Table::where('status', 1);
+        $tableIds = Table::where('status', 1)->where('user_id', $user_id);
         if($floor) $tableIds = $tableIds->where('floor_id', $floor);
         // $tableIds = $tableIds->where('capacity_of_person', intval($person))->pluck('id');
         // if(!count($tableIds)) {
@@ -19,7 +19,7 @@ class ReservationHelper{
             // if($floor) $nexttable = $nexttable->where('floor_id', $floor);
             // $nexttable = $nexttable->orderBy('capacity_of_person','ASC')->whereIn('capacity_of_person', '>' , [$from_cap, $to_cap])->first();
             // dd($from_cap);
-            $tableIds = Table::where('status', 1);
+            $tableIds = Table::where('status', 1)->where('user_id', $user_id);
             if($floor) $tableIds = $tableIds->where('floor_id', $floor);
             $tableIds = $tableIds->orderBy('capacity_of_person','ASC')->where('capacity_of_person', '>=', $from_cap)->where('capacity_of_person', '<=', $to_cap)->pluck('id');
         // }

@@ -174,8 +174,8 @@ class TableController extends Controller
     public function changeFloorOrder(Request $request)
     {
         $person = Order::where('id', $request->id)->first()->person;
-
-        $table_id = ReservationHelper::takeTable($request->floor_id, $person);
+        $userId = Auth::id();
+        $table_id = ReservationHelper::takeTable($request->floor_id, $person, $userId);
 
         if($table_id == 0) return response()->json([ 'success' => false, 'message' => 'not compatible capacity table in this floor' ] , 200);
 

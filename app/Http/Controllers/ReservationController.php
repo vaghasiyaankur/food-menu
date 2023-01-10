@@ -44,7 +44,7 @@ class ReservationController extends Controller
 
         if($checkrole == 0) return response()->json(['error' => 'Reservation Fail.'], 401);
 
-        $table_id = ReservationHelper::takeTable($request->floor, $request->person);
+        $table_id = ReservationHelper::takeTable($request->floor, $request->person, $userId);
 
         if($table_id){
             $table = Table::where('id', $table_id)->first();
@@ -229,7 +229,21 @@ class ReservationController extends Controller
 
     public function checkTime(Request $request)
     {
-        $table_id = ReservationHelper::takeTable($request->floor, $request->person);
+        if ($request->qrToken != 'undefined' && $request->role == 'Guest') {
+            $qrcode_token = $request->qrToken;
+            $date = Carbon::now()->format('Y-m-d');
+            $qrcode = QrCodeToken::whereToken($qrcode_token)->where('start_date', '<=', $date)->where('end_date', '>=', $date)->first();
+            if (!$qrcode) {
+                return response()->json(['error' => 'Reservation Fail.'], 401);
+            }else{
+                $userId = $qrcode->user_id;
+            }
+        }else if($request->role == 'Manager'){
+            $userId = Auth::id();
+        }
+        
+        $table_id = ReservationHelper::takeTable($request->floor, $request->person, $userId);
+
         if($table_id){
             $allOrder = Order::where('table_id', $table_id)->where('finished', 0)->select('id', 'table_id', 'start_time', 'finish_time', 'finished')->get();
             $calculateTime = 0;

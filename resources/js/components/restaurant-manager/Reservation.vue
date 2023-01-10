@@ -226,7 +226,7 @@ export default {
             }else if(parseInt(this.reservation.member) > parseInt(this.member_limit)){
                 this.$root.errornotification('order create must be '+this.member_limit+' or less than member.'); return false;
             }
-
+            
             if(this.waiting_time == '00:00'){
                 var conformation_message = this.$root.trans.no_waiting_message;
             }else{
@@ -288,6 +288,7 @@ export default {
                 var formData = new FormData();
                 formData.append('person', this.reservation.member);
                 formData.append('floor', this.reservation.floor);
+                formData.append('role', 'Manager');
 
                 axios.post('/api/check-time', formData)
                 .then((res) => {
