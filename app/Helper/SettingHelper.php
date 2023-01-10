@@ -16,7 +16,8 @@ class SettingHelper{
     /* Choose language */
     public static function systemLang()
     {
-        $user_id = self::getUserIdUsingQrcode();
+        $userId = self::getUserIdUsingQrcode();
+        $user_id = $userId ? $userId : Auth::id();
         $setting = Setting::whereUserId($user_id)->first('language_id');
 
         return $setting->language_id;

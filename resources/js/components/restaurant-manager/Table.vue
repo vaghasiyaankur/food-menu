@@ -287,7 +287,7 @@ export default {
         setTimeout(() => {
             if(this.$root.checklogin)
             this.tableList();
-        }, 500);
+        }, 1000);
         // this.connect();
     },
     methods: {

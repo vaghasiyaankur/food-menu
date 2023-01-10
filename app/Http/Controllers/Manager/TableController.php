@@ -174,8 +174,8 @@ class TableController extends Controller
     public function changeFloorOrder(Request $request)
     {
         $person = Order::where('id', $request->id)->first()->person;
-
-        $table_id = ReservationHelper::takeTable($request->floor_id, $person);
+        $userId = Auth::id();
+        $table_id = ReservationHelper::takeTable($request->floor_id, $person, $userId);
 
         if($table_id == 0) return response()->json([ 'success' => false, 'message' => 'not compatible capacity table in this floor' ] , 200);
 
@@ -235,27 +235,27 @@ class TableController extends Controller
             ->sendMessage($fcmTokens);
            // // return redirect()->back()->with('success','Notification Sent Successfully!!');
 
-           try {
-
-            $basic  = new \Vonage\Client\Credentials\Basic(getenv("NEXMO_KEY"), getenv("NEXMO_SECRET"));
-            $client = new \Vonage\Client($basic);
-
-            $receiverNumber = "447498173567";     // link : https://receive-smss.com/sms/447498173567/
-            // $receiverNumber = $customer->number;
-            $message = "Food-Menu : Your Turn Now!!";
-
-            $message = $client->message()->send([
-                'to' => $receiverNumber,
-                'from' => 'Food-Menu Restaurent',
-                'text' => $message
-            ]);
-
-            }
-            catch (Exception $e) {
-                // dd("Error: ". $e->getMessage());
-            }
-
+           
         }
+        
+        try {
+
+         $basic  = new \Vonage\Client\Credentials\Basic(getenv("NEXMO_KEY"), getenv("NEXMO_SECRET"));
+         $client = new \Vonage\Client($basic);
+ //  $receiverNumber = ;     link : https://receive-smss.com/sms/447498173567/
+                // $receiverNumber = $customer->number;
+                $messageNotification = "Food-Menu : Your Turn Now!!";
+
+                $message = $client->message()->send([
+                    'to' => getenv("NEXMO_DEFAULT_NUMBER"),
+                    'from' => getenv('NEXMO_REGISTER_NUMBER'),
+                    'text' => $messageNotification
+                ]);
+
+         }
+         catch (Exception $e) {
+             // dd("Error: ". $e->getMessage());
+         }
 
         return response()->json(['success' => true] , 200);
     }
