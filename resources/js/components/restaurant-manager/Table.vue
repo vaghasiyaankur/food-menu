@@ -285,7 +285,6 @@ export default {
     },
     created() {
         setTimeout(() => {
-            console.log(this.$root.checklogin);
             if(this.$root.checklogin)
             this.tableList();
         }, 1000);

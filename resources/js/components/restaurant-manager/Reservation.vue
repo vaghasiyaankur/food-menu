@@ -70,7 +70,7 @@
                         <div class="padding bottom-bar">
                             <div class="row justify-content-start">
                                 <div class="col bottom-button margin-right">
-                                    <f7-button class="button bg-color-white register-button button-raised text-color-black button-large text-transform-capitalize border_radius_10" @click="register" id="book_table">Book Table</f7-button>
+                                    <f7-button class="button bg-color-white register-button button-raised text-color-black button-large text-transform-capitalize border_radius_10" @click="checkTimeForRegister" id="book_table">Book Table</f7-button>
                                 </div>
                                 <div class="col bottom-button">
                                     <f7-button class="button bg-color-white register-button button-raised text-color-black button-large text-transform-capitalize border_radius_10" fill sheet-open=".demo-sheet-swipe-to-close" @click="title = 'Menu'">Menu</f7-button>
@@ -220,13 +220,32 @@ export default {
             document.querySelector('.sheet-backdrop').click();
             this.$emit('textChange');
         },
-        register() {
+        checkTimeForRegister() {
             if(!this.reservation.name || !this.reservation.number || !this.reservation.member){
-                this.$root.errornotification('Please enter all the required details.'); return false;
+                this.$root.errornotification(this.$root.trans.reservation_error); return false;
             }else if(parseInt(this.reservation.member) > parseInt(this.member_limit)){
-                this.$root.errornotification('order create must be '+this.member_limit+' or less than member.'); return false;
+                this.$root.errornotification(this.$root.trans.capacity_error.replace(/@person/g, this.member_limit)); return false;
+            } else if (this.reservation.number.toString().length != 10) {
+                this.$root.errornotification(this.$root.trans.number_error); return false;
             }
 
+            var formData = new FormData();
+            formData.append('person', this.reservation.member);
+            formData.append('floor', this.reservation.floor);
+
+            axios.post('/api/check-time', formData)
+            .then((res) => {
+                if(res.data.success){
+                    this.waiting_time = res.data.waiting_time;
+                    this.register();
+                }
+                else{
+                    this.errornotification(res.data.message); return false;
+                }
+            });
+
+        },
+        register() {
             if(this.waiting_time == '00:00'){
                 var conformation_message = this.$root.trans.no_waiting_message;
             }else{
@@ -265,7 +284,7 @@ export default {
             });
 
             setTimeout(() => {
-                $('.dialog-title').text("").css('font-size','20px');
+                $('.dialog-title').text("").css('font-size','20px').html("<img src='/images/usericon.png'>");
                 $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
                 $('.dialog-button').eq(1).removeClass('text-color-black');
                 $('.dialog-button').eq(1).addClass('active');

@@ -196,6 +196,7 @@ export default {
             events: ['click', 'mousemove', 'mousedown', 'scroll', 'keypress', 'load'],
             warningTimer: null,
             checklogin: false,
+            trans: [],
         }
     },
     beforeCreate() {
@@ -227,7 +228,6 @@ export default {
         this.events.forEach(function (event) {
             window.addEventListener(event, this.resetTimer);
         }, this);
-
         if(this.checklogin){
             this.setTimer();
         }
@@ -237,6 +237,14 @@ export default {
             axios.get('/api/get-all-languages')
             .then((res) => {
                 this.langs = res.data.langs;
+                this.languageTranslation(this.langs[0].id);
+            })
+        },
+        languageTranslation(langId) {
+            axios.post('/api/get-language-translation', { lang_id: langId })
+            .then((res) => {
+                this.trans = res.data.translations;
+                this.selected_lang = res.data.lang_id;
             })
         },
         checkreservation() {
