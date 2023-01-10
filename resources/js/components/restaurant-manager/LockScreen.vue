@@ -251,8 +251,23 @@ export default {
 .lock-screen{
     height:100vh;
     overflow: hidden;
-    /*z-index: 1100;*/
+    position: relative;
+    z-index: 1100;
 }
+/*.lock-screen::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("/images/lock_screen.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100% 100%;
+}*/
 .lock-screen-main{
     position: absolute;
     top: 50%;

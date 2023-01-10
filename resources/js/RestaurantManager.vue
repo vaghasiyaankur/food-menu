@@ -693,6 +693,7 @@ $("body").click(function(e){
 </style>
 <style>
 .active-state{
-    background-color: transparent !important;
+    background-color: none !important;
+    opacity: 1 !important;
 }
 </style>

@@ -58,7 +58,7 @@
                                 <div class="menu-item-dropdown">
                                     <div><i class="f7-icons">ellipsis</i></div>
                                     <div class="menu-dropdown menu-dropdown-right">
-                                        <div class="menu-dropdown-content no-padding">
+                                        <div class="menu-dropdown-content padding-vertical">
                                             <button class="menu-dropdown-link font-13 height-40 button text-color-black menu-close" @click="downloadQrCode(qrcode.id)"><img src="/images/downlaod.png" style="margin-right:11px;"> Download </button>
                                             <button class="menu-dropdown-link font-13 height-40 active_text button menu-close" @click="removeqr(qrcode.id)" v-if="qrcode.status == 'Expired'"><i class="f7-icons margin-right-half">trash</i>Delete </button>
                                             <button class="menu-dropdown-link font-13 height-40 button text-color-black menu-close" @click="regenerateQrCode(qrcode.id)" v-if="qrcode.status != 'Expired'"><i class="f7-icons margin-right-half">arrow_counterclockwise</i>Regenerate </button>
@@ -301,7 +301,10 @@ export default {
 .height_100{
     height: 100%;
 }
-
+.qrcode_generate .data-table{
+    overflow-x: auto;
+    overflow-y: hidden;
+}
 .qrcode_generate_popup .button{
     box-shadow: none;
     border: 0.5px solid #999999;
@@ -387,7 +390,8 @@ export default {
     content: none !important;
 }
 .active-state{
-    background-color: transparent !important;
+    background-color: none !important;
+    opacity: 1 !important;
 }
 @media screen and (max-width:991px) {
     .qrcode_generate .menu-item-dropdown-right .menu-dropdown-content, .qrcode_generate .menu-dropdown-right .menu-dropdown-content{

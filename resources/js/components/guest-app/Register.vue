@@ -25,7 +25,7 @@
                 </div>
             </div>
         </div>
-        <div class="margin-left margin-right register-from margin-top">
+        <div class="padding-left padding-right register-from padding-top">
             <div class="text-align-center padding-top">
                 <img src="/images/registerImage.png" alt="">
             </div>
