@@ -31,33 +31,59 @@ class NotificationController extends Controller
         //     'title'=>'required',
         //     'message'=>'required'
         // ]);
-    
-        try{
-            $token = $request->session()->put('device_token',$request->token);
 
-            if($token){
-                $fcmTokens = ['c16H1_gwueT8jzmm2w_cTn:APA91bGjH092huMhvCN4Cejb84y1Y_CxzdbLrxIwyLucbUCyX4v1gl2O6oYcVaSm0ncnYhD9mbFlKVmvAgVzeePzLN5yhn0PG1esfjo0P1mrR0RUXb_W4sQII_GfcZoXodUmsqc-Kg0m'];
-        
-                //Notification::send(null,new SendPushNotification($request->title,$request->message,$fcmTokens));
-        
-                /* or */
-        
-                //auth()->user()->notify(new SendPushNotification($title,$message,$fcmTokens));
-        
-                /* or */
-        
-                Larafirebase::withTitle('Food-menu Restaurant')
-                    ->withBody('Your Turn Now !!!')
-                    ->sendMessage($fcmTokens);
-                // dd($test);
-                // return redirect()->back()->with('success','Notification Sent Successfully!!');
-            }
-    
+        try{
+            $fcmTokens = Customer::whereNotNull('device_token')->pluck('device_token')->toArray();
+
+            //Notification::send(null,new SendPushNotification($request->title,$request->message,$fcmTokens));
+
+            /* or */
+
+            //auth()->user()->notify(new SendPushNotification($title,$message,$fcmTokens));
+
+            /* or */
+
+            Larafirebase::withTitle('Food-menu Restaurant')
+            ->withBody('Your Turn Now !!!')
+            ->sendMessage($fcmTokens);
+
+            return redirect()->back()->with('success','Notification Sent Successfully!!');
+
         }catch(\Exception $e){
             report($e);
-            dd($e);
-            // return redirect()->back()->with('error','Something goes wrong while sending notification.');
+            return redirect()->back()->with('error','Something goes wrong while sending notification.');
         }
+        // $request->validate([
+        //     'title'=>'required',
+        //     'message'=>'required'
+        // ]);
+
+        // try{
+        //     $token = $request->session()->put('device_token',$request->token);
+
+        //     if($token){
+        //         $fcmTokens = ['c16H1_gwueT8jzmm2w_cTn:APA91bGjH092huMhvCN4Cejb84y1Y_CxzdbLrxIwyLucbUCyX4v1gl2O6oYcVaSm0ncnYhD9mbFlKVmvAgVzeePzLN5yhn0PG1esfjo0P1mrR0RUXb_W4sQII_GfcZoXodUmsqc-Kg0m'];
+
+        //         //Notification::send(null,new SendPushNotification($request->title,$request->message,$fcmTokens));
+
+        //         /* or */
+
+        //         //auth()->user()->notify(new SendPushNotification($title,$message,$fcmTokens));
+
+        //         /* or */
+
+        //         Larafirebase::withTitle('Food-menu Restaurant')
+        //             ->withBody('Your Turn Now !!!')
+        //             ->sendMessage($fcmTokens);
+        //         // dd($test);
+        //         // return redirect()->back()->with('success','Notification Sent Successfully!!');
+        //     }
+
+        // }catch(\Exception $e){
+        //     report($e);
+        //     dd($e);
+        //     // return redirect()->back()->with('error','Something goes wrong while sending notification.');
+        // }
     }
 
     public function notification1()

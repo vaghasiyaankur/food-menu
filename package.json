@@ -1,7 +1,7 @@
 {
     "private": true,
     "scripts": {
-        "dev": "vite" ,
+        "dev": "vite",
         "build": "vite build"
     },
     "devDependencies": {
@@ -17,6 +17,7 @@
         "@syncfusion/ej2-vue-charts": "^20.3.60",
         "@vitejs/plugin-vue": "^3.1.0",
         "apexcharts": "^3.36.3",
+        "firebase": "^9.15.0",
         "framework7": "^7.0.8",
         "framework7-vue": "^7.0.8",
         "jquery": "^3.6.1",
