@@ -35,28 +35,75 @@
 	@vite('resources/js/app.js')
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
+{{--  <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-messaging.js"></script>  --}}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-messaging.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 
 <!-- TODO: Add SDKs for Firebase products that you want to use
     https://firebase.google.com/docs/web/setup#available-libraries -->
 
 <script>
 
-
     // Your web app's Firebase configuration
-    var firebaseConfig = {
-        apiKey: "AIzaSyBfphAIxpzsJDUuCCOhF6DtZKqUPxgj-wA",
-        authDomain: "fir-test-25564.firebaseapp.com",
-        projectId: "fir-test-25564",
-        storageBucket: "fir-test-25564.appspot.com",
-        messagingSenderId: "1064311492584",
-        appId: "1:1064311492584:web:4842b73ccef0b65aeade5d",
-        measurementId: "G-B3L0LYKB05"
+    const firebaseConfig = {
+        apiKey: "AIzaSyBJKAe1KTNC3dK65FfK-XDZ609tCYVjAYY",
+        authDomain: "ewaiting-notification.firebaseapp.com",
+        projectId: "ewaiting-notification",
+        storageBucket: "ewaiting-notification.appspot.com",
+        messagingSenderId: "229500280113",
+        appId: "1:229500280113:web:85a419c0bad44fc5ac2410",
+        measurementId: "G-LBC3XY97T0"
     };
 
-    // Initialize Firebase
+    {{--  const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);  --}}
+
+    firebase.initializeApp(firebaseConfig);
+
+    const messaging = firebase.messaging();
+
+    function initFirebaseMessagingRegistration() {
+        messaging.requestPermission().then(function () {
+            return messaging.getToken()
+        }).then(function(token) {
+
+            const tokens = document.head.querySelector('meta[name="csrf-token"]');
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                url: '{{ route("fcmToken") }}',
+                type: 'POST',
+                data: {
+                    token: token
+                },
+                dataType: 'JSON',
+                success: function (response) {
+                    console.log('Token saved successfully.');
+                },
+                error: function (err) {
+                    console.log('User Chat Token Error'+ err);
+                },
+            });
+
+        }).catch(function (err) {
+            console.log(`Token Error :: ${err}`);
+        });
+    }
+
+    initFirebaseMessagingRegistration();
+
+    messaging.onMessage(function({data:{body,title}}){
+        new Notification(title, {body});
+    });
+
+    {{--  // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
 
     const messaging = firebase.messaging();
@@ -115,7 +162,7 @@
 
     messaging.onMessage(function({data:{body,title}}){
         new Notification(title, {body});
-    });
+    });  --}}
 </script>
 
 	<!--============ BOOTSTRAP JS LINK ===============-->
