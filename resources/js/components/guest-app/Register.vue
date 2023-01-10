@@ -231,11 +231,11 @@ export default {
             checkWaitingTime: false,
             floors: [],
             reservation: {
-                name: '',
-                number: '',
-                member: '',
-                floor: 0,
-                agree_condition: false
+                name: 'sdfsss',
+                number: '1234567890',
+                member: '2',
+                floor: 1,
+                agree_condition: true
             },
             member_limit : 0,
             waiting_time: '00:00',
@@ -314,6 +314,8 @@ export default {
                 var formData = new FormData();
                 formData.append('person', this.reservation.member);
                 formData.append('floor', this.reservation.floor);
+                formData.append('role', 'Guest');
+                formData.append('qrToken', this.qrToken);
 
                 axios.post('/api/check-time', formData)
                 .then((res) => {
@@ -371,6 +373,8 @@ export default {
             var formData = new FormData();
             formData.append('person', this.reservation.member);
             formData.append('floor', this.reservation.floor);
+            formData.append('role', 'Guest');
+            formData.append('qrToken', this.qrToken);
 
             axios.post('/api/check-time', formData)
             .then((res) => {

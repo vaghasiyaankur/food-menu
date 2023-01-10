@@ -44,7 +44,7 @@ class ReservationController extends Controller
 
         if($checkrole == 0) return response()->json(['error' => 'Reservation Fail.'], 401);
 
-        $table_id = ReservationHelper::takeTable($request->floor, $request->person);
+        $table_id = ReservationHelper::takeTable($request->floor, $request->person, $userId);
 
         if($table_id){
             $table = Table::where('id', $table_id)->first();
@@ -98,28 +98,28 @@ class ReservationController extends Controller
                 ->sendMessage($fcmTokens);
                 // // return redirect()->back()->with('success','Notification Sent Successfully!!');
 
-                try {
+                
+                
+            }
+            try {
 
-                $basic  = new \Vonage\Client\Credentials\Basic(getenv("NEXMO_KEY"), getenv("NEXMO_SECRET"));
-                $client = new \Vonage\Client($basic);
+            $basic  = new \Vonage\Client\Credentials\Basic(getenv("NEXMO_KEY"), getenv("NEXMO_SECRET"));
+            $client = new \Vonage\Client($basic);
+// dd(getenv('NEXMO_DEFAULT_NUMBER'));
+           //  $receiverNumber = ;     link : https://receive-smss.com/sms/447498173567/
+            // $receiverNumber = $customer->number;
+            $messageNotification = "Food-Menu : Your Turn Now!!";
 
-                $receiverNumber = getenv("NEXMO_DEFAULT_NUMBER");    //  link : https://receive-smss.com/sms/447498173567/
-                // $receiverNumber = $customer->number;
-                $messageNotification = "Food-Menu : Your Turn Now!!";
+            $message = $client->message()->send([
+                'to' => getenv("NEXMO_DEFAULT_NUMBER"),
+                'from' => getenv('NEXMO_REGISTER_NUMBER'),
+                'text' => $messageNotification
+            ]);
 
-                $message = $client->message()->send([
-                    'to' => $receiverNumber,
-                    'from' => 'Food-Menu Restaurent',
-                    'text' => $messageNotification
-                ]);
-
-                }
-                    catch (Exception $e) {
-                    // dd("Error: ". $e->getMessage());
-                }
-
-
-                }
+            }
+                catch (Exception $e) {
+                // dd("Error: ". $e->getMessage());
+            }
             }
 
 
@@ -229,7 +229,21 @@ class ReservationController extends Controller
 
     public function checkTime(Request $request)
     {
-        $table_id = ReservationHelper::takeTable($request->floor, $request->person);
+        if ($request->qrToken != 'undefined' && $request->role == 'Guest') {
+            $qrcode_token = $request->qrToken;
+            $date = Carbon::now()->format('Y-m-d');
+            $qrcode = QrCodeToken::whereToken($qrcode_token)->where('start_date', '<=', $date)->where('end_date', '>=', $date)->first();
+            if (!$qrcode) {
+                return response()->json(['error' => 'Reservation Fail.'], 401);
+            }else{
+                $userId = $qrcode->user_id;
+            }
+        }else if($request->role == 'Manager'){
+            $userId = Auth::id();
+        }
+        
+        $table_id = ReservationHelper::takeTable($request->floor, $request->person, $userId);
+
         if($table_id){
             $allOrder = Order::where('table_id', $table_id)->where('finished', 0)->select('id', 'table_id', 'start_time', 'finish_time', 'finished')->get();
             $calculateTime = 0;
