@@ -103,7 +103,7 @@ class ReservationController extends Controller
                 $basic  = new \Vonage\Client\Credentials\Basic(getenv("NEXMO_KEY"), getenv("NEXMO_SECRET"));
                 $client = new \Vonage\Client($basic);
 
-                $receiverNumber = "447498173567";    //  link : https://receive-smss.com/sms/447498173567/
+                $receiverNumber = getenv("NEXMO_DEFAULT_NUMBER");    //  link : https://receive-smss.com/sms/447498173567/
                 // $receiverNumber = $customer->number;
                 $messageNotification = "Food-Menu : Your Turn Now!!";
 
