@@ -41,6 +41,7 @@
                         <p>{{ $root.trans.favourite_error }}</p>
                     </div>
                 </div>
+               
             </div>
         </div>
     </f7-page>
@@ -156,7 +157,8 @@ export default {
         left: -11px !important;
         font-weight: 600 !important;
         font-size: 19px !important;
-        line-height: 23px !important;
+        line-height: 48px !important;
+        height: 44px;
     }
     .cart-list{
         box-shadow: 1px 2px 5px 2px rgb(0 0 0 / 20%);

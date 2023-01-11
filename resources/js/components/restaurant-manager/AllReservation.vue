@@ -50,7 +50,7 @@
                                     <button class="button button-outline height_40" @click="showFilter = true"><i class="f7-icons">funnel</i>Filters</button>
                                 </div>
                             </div>
-                            <button @click="calender" style="opacity: 0" id="date-set"></button>
+                            <button @click="calender" style="opacity: 0" id="date-set" class="data_set_btn"></button>
                         </div>
                     </div>
                     <div class="reservation_table">
@@ -83,9 +83,9 @@
                                                 <div class="menu-item-dropdown">
                                                     <div class=""><i class="f7-icons">ellipsis</i></div>
                                                     <div class="menu-dropdown menu-dropdown-right">
-                                                    <div class="menu-dropdown-content no-padding">
-                                                        <a class="menu-dropdown-link menu-close padding-vertical" :href="'/reservation-view/'+data.id"><i class="f7-icons margin-right-half">eye</i>View </a>
-                                                        <a class="menu-dropdown-link menu-close padding-vertical" href="javascript:;" @click="removeReservation(data.id)"><i class="f7-icons margin-right-half">trash</i>Delete </a>
+                                                    <div class="menu-dropdown-content padding-vertical">
+                                                        <a class="menu-dropdown-link menu-close padding-bottom" :href="'/reservation-view/'+data.id"><i class="f7-icons margin-right-half">eye</i>View </a>
+                                                        <a class="menu-dropdown-link menu-close padding-top" @click="removeReservation(data.id)"><i class="f7-icons margin-right-half">trash</i>Delete </a>
                                                     </div>
                                                     </div>
                                                 </div>
@@ -198,7 +198,6 @@
                 })
             },
             removeReservation(id) {
-
                 f7.dialog.confirm('Are you sure delete this reservation?', () => {
                     axios.post('/api/remove-reservation', { id: id })
                     .then((res) => {
@@ -236,6 +235,10 @@
     }
 </script>
 <style scoped>
+button.data_set_btn{
+    outline: none;
+    border: none;
+}
 .overflow_x_inherit{
     overflow-x: inherit;
 }
@@ -396,8 +399,8 @@
     background-color: #F33E3E !important;
 }
 .active-state{
-    background-color: #F33E3E !important;
-    color: #fff !important;
+    background-color: none !important;
+    opacity: 0 !important;
 }
 </style>
 <style>
