@@ -85,7 +85,9 @@
                                 </div>
                             </f7-block>
                         </div>
-                        <input type="hidden" v-model="series[0].data" id="apexchart" @change="onChange">
+                        <input type="hidden" id="fromDate">
+                        <input type="hidden" id="toDate">
+                        <button @click="report" style="opacity: 0" id="date-set"></button>
                     </div>
                 </div>
             </div>
@@ -108,9 +110,9 @@ export default {
             ongoing_order : '',
             reservation_table : '',
             series: [{
-                data: []
+                data:[]
             }],
-            chartOptions: {
+            chartOptions : {
                 chart: {
                     id: 'area-datetime',
                     type: 'area',
@@ -119,48 +121,11 @@ export default {
                         autoScaleYaxis: true
                     }
                 },
+                labels : [],
                 colors: ['#F33E3E'],
-                annotations: {
-                    yaxis: [{
-                        y: 30,
-                        borderColor: '#999',
-                        label: {
-                            show: true,
-                            text: 'Support',
-                            style: {
-                                color: "#fff",
-                                background: '#00E396'
-                            }
-                        }
-                    }],
-                    xaxis: [{
-                        x: new Date('14 Nov 2012').getTime(),
-                        borderColor: '#999',
-                        yAxisIndex: 0,
-                        label: {
-                            show: true,
-                            style: {
-                                color: "#fff",
-                                background: '#775DD0'
-                            }
-                        }
-                    }]
-                },
-                dataLabels: {
-                    enabled: false
-                },
-                markers: {
-                    size: 0,
-                    style: 'hollow',
-                },
-                xaxis: {
-                    type: 'datetime',
-                    min: new Date('01 Mar 2012').getTime(),
-                    tickAmount: 6,
-                },
                 tooltip: {
                     x: {
-                        format: 'dd MMM yyyy'
+                        format: 'yyyy-MMM-dd'
                     }
                 },
                 fill: {
@@ -172,8 +137,75 @@ export default {
                         stops: [0, 100]
                     }
                 },
-            },
-            selection: 'one_year',
+            }
+            // series: [{
+            //     data:[]
+            // }],
+            // chartOptions: {
+            //     chart: {
+            //         id: 'area-datetime',
+            //         type: 'area',
+            //         height: 350,
+            //         zoom: {
+            //             autoScaleYaxis: true
+            //         }
+            //     },
+            //     labels: [],
+            //     colors: ['#F33E3E'],
+            //     annotations: {
+            //         yaxis: [{
+            //             y: 30,
+            //             borderColor: '#999',
+            //             label: {
+            //                 show: true,
+            //                 text: 'Support',
+            //                 style: {
+            //                     color: "#fff",
+            //                     background: '#00E396'
+            //                 }
+            //             }
+            //         }],
+            //         xaxis: [{
+            //             x: new Date('14 Nov 2012').getTime(),
+            //             borderColor: '#999',
+            //             yAxisIndex: 0,
+            //             label: {
+            //                 show: true,
+            //                 style: {
+            //                     color: "#fff",
+            //                     background: '#775DD0'
+            //                 }
+            //             }
+            //         }]
+            //     },
+            //     dataLabels: {
+            //         enabled: false
+            //     },
+            //     markers: {
+            //         size: 0,
+            //         style: 'hollow',
+            //     },
+            //     xaxis: {
+            //         type: 'datetime',
+            //         min: new Date('01 Mar 2012').getTime(),
+            //         tickAmount: 6,
+            //     },
+            //     tooltip: {
+            //         x: {
+            //             format: 'yyyy-MMM-dd'
+            //         }
+            //     },
+            //     fill: {
+            //         type: 'gradient',
+            //         gradient: {
+            //             shadeIntensity: 1,
+            //             opacityFrom: 0.7,
+            //             opacityTo: 0.9,
+            //             stops: [0, 100]
+            //         }
+            //     },
+            // },
+            // selection: 'one_year',
         }
     },
     components: {
@@ -212,18 +244,10 @@ export default {
                         if(dates[1]) var to_date = new Date(dates[1]).toLocaleDateString('sv-SE');
                         else var to_date = '';
 
-                        axios.get('/api/report-data?from_date='+from_date+'&to_date='+to_date)
-                        .then((res) => {
-                            $("#total_order").text(res.data.total_order);
-                            $("#complete_order").text(res.data.complete_order);
-                            $("#ongoing_order").text(res.data.ongoing_order);
-                            $("#reservation_table").text(res.data.reservation_table);
-                            const all_orders = Object.keys(res.data.all_orders).map(function (key) {
-                                return [res.data.all_orders[key].date, res.data.all_orders[key].orders];
-                            });
-                            console.log(all_orders);
-                            $('#apexchart').val(all_orders);
-                        })
+                        $('#fromDate').val(from_date);
+                        $('#toDate').val(to_date);
+
+                        $("#date-set").trigger('click');
                     }
                 }
             }
@@ -234,6 +258,7 @@ export default {
     },
     created() {
         this.report();
+        this.apexchartData();
     },
     setup() {
         const numbers = [];
@@ -260,21 +285,27 @@ export default {
     },
     methods : {
         report() {
-            axios.get('/api/report-data')
+
+            var from_date = $('#fromDate').val() ? $('#fromDate').val() : '';
+            var to_date = $('#toDate').val() ? $('#toDate').val() : '';
+
+            axios.get('/api/report-data?from_date='+from_date+'&to_date='+to_date)
             .then((res) => {
                 this.total_order = res.data.total_order;
                 this.complete_order = res.data.complete_order;
                 this.ongoing_order = res.data.ongoing_order;
                 this.reservation_table = res.data.reservation_table;
-                const all_orders = Object.keys(res.data.all_orders).map(function (key) {
-                    return [res.data.all_orders[key]];
-                });
-                this.series[0].data = all_orders;
             })
         },
-        onChange() {
-            console.log('123');
-        },
+        apexchartData(){
+            axios.get('/api/report-chart-data')
+            .then((res) => {
+                res.data.all_orders.forEach((data) => {
+                    this.chartOptions.labels.push(data.date);
+                    this.series[0].data.push(data.orders);
+                });
+            })
+        }
     }
 }
 </script>

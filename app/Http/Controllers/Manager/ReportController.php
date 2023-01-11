@@ -28,7 +28,7 @@ class ReportController extends Controller
 
     public function reportData(Request $request)
     {
-        $from_date = $request->from_date ? date('Y-m-d', strtotime($request->from_date)) : date('Y-m-d', strtotime(Carbon::now()));
+        $from_date = $request->from_date ? date('Y-m-d', strtotime($request->from_date)) : Carbon::now()->format('Y-m-d');
         $to_date = $request->to_date ? date('Y-m-d', strtotime($request->to_date)) : $from_date;
 
         $total_order =  Order::whereUserId(Auth::id())->whereDate('created_at', '>=', $from_date)->whereDate('created_at', '<=', $to_date)->count();
@@ -41,8 +41,13 @@ class ReportController extends Controller
 
             $reservation_table = $most_table_order->table_id ? : 0;
         }
-        // $all_orders = Order::select('created_at', DB::raw('count(*) as total'))->groupBy('created_at')->get();
-        $all_orders = Order::whereUserId(Auth::id())->whereDate('created_at', '>=', $from_date)->whereDate('created_at', '<=', $to_date)->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as orders'))->groupBy('date')->get();
-        return response()->json([ 'total_order' => $total_order, 'complete_order' => $complete_order, 'ongoing_order' => $ongoing_order, 'reservation_table' => $reservation_table, 'all_orders' => $all_orders ] , 200);
+
+        return response()->json([ 'total_order' => $total_order, 'complete_order' => $complete_order, 'ongoing_order' => $ongoing_order, 'reservation_table' => $reservation_table] , 200);
+    }
+
+    public function reportChartData(Request $request)
+    {
+        $all_orders = Order::whereUserId(Auth::id())->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as orders'))->groupBy('date')->get();
+        return response()->json(['all_orders' => $all_orders ] , 200);
     }
 }

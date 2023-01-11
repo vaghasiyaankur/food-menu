@@ -268,10 +268,26 @@ export default {
         this.$root.activationMenu('table', '');
         this.$root.removeLoader();
         let vm = this;
+
+        window.Pusher = Pusher;
+
+        Pusher.logToConsole = true;
+
+        var pusherkey = import.meta.env.VITE_PUSHER_APP_KEY;
+
+        var pusher = new Pusher(pusherkey, {
+            cluster: 'ap2'
+        });
+
+        var channel = pusher.subscribe('reservation');
+        channel.bind('mousemove', function(data) {
+            vm.tableListFloorWise(this.active_floor_id);
+        });
         window.Echo.channel("reservation")
         .listen('NewReservation' , e => {
             vm.tableListFloorWise(this.active_floor_id);
         });
+
     },
     updated() {
         this.equal_height();
@@ -285,9 +301,10 @@ export default {
     },
     created() {
         setTimeout(() => {
+            console.log(this.$root.checklogin);
             if(this.$root.checklogin)
             this.tableList();
-        }, 1000);
+        }, 500);
         // this.connect();
     },
     methods: {

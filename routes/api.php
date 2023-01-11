@@ -140,6 +140,8 @@ Route::post('delete-floor',[FloorController::class, 'deleteFloor']);
 
 Route::get('/report-data',[ReportController::class, 'reportData']);
 
+Route::get('/report-chart-data',[ReportController::class, 'reportChartData']);
+
 // ------------------------ Reservation Routes ------------------------ //
 
 Route::post('/add-reservation',[ReservationController::class, 'addReservation']);

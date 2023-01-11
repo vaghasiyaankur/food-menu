@@ -22,7 +22,6 @@ if (window.parent && window.parent !== window) {
 Framework7.use(Framework7Vue);
 
 /* eslint-enable */
-window.Pusher = Pusher;
 
 window.Echo = new Echo({
     broadcaster: 'pusher',

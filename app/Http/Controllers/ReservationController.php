@@ -65,7 +65,7 @@ class ReservationController extends Controller
                 $order->user_id = $userId;
                 $order->save();
 
-                broadcast(new NewReservation( $order ))->toOthers();
+                broadcast(new NewReservation($order))->toOthers();
             }
 
             $count = Order::where('table_id', $order->table_id)->whereNotNull('start_time')->where('finished', 0)->count();
@@ -98,8 +98,8 @@ class ReservationController extends Controller
                 ->sendMessage($fcmTokens);
                 // // return redirect()->back()->with('success','Notification Sent Successfully!!');
 
-                
-                
+
+
             }
             try {
 
@@ -241,7 +241,7 @@ class ReservationController extends Controller
         }else if($request->role == 'Manager'){
             $userId = Auth::id();
         }
-        
+
         $table_id = ReservationHelper::takeTable($request->floor, $request->person, $userId);
 
         if($table_id){

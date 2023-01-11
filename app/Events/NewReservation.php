@@ -33,6 +33,12 @@ class NewReservation implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('reservation');
+        // return new Channel('reservation');
+        return 'reservation';
+    }
+
+    public function broadcastAs()
+    {
+        return 'mousemove';
     }
 }
