@@ -21,6 +21,6 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
 //     return '123';
 // });
 
-Broadcast::channel('reservation', function ($user) {
-    return Auth::check();
+Broadcast::channel('reservation', function () {
+    return true; //Always return true or false
 });

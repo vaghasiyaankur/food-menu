@@ -269,22 +269,8 @@ export default {
         this.$root.removeLoader();
         let vm = this;
 
-        window.Pusher = Pusher;
-
-        Pusher.logToConsole = true;
-
-        var pusherkey = import.meta.env.VITE_PUSHER_APP_KEY;
-
-        var pusher = new Pusher(pusherkey, {
-            cluster: 'ap2'
-        });
-
-        var channel = pusher.subscribe('reservation');
-        channel.bind('mousemove', function(data) {
-            vm.tableListFloorWise(this.active_floor_id);
-        });
-        window.Echo.channel("reservation")
-        .listen('NewReservation' , e => {
+        Echo.channel('reservation') //Should be Channel Name
+        .listen('NewReservation', (e) => {
             vm.tableListFloorWise(this.active_floor_id);
         });
 
