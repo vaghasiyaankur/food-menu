@@ -45,7 +45,7 @@ class ReservationController extends Controller
         if($checkrole == 0) return response()->json(['error' => 'Reservation Fail.'], 401);
 
         $table_id = ReservationHelper::takeTable($request->floor, $request->person, $userId);
-
+        $orderExists = Order::where('table_id', $table_id)->whereNotNull('start_time')->where('finished', 0)->doesntExist();
         if($table_id){
             $table = Table::where('id', $table_id)->first();
             $register = new Customer();
@@ -59,6 +59,9 @@ class ReservationController extends Controller
                 $order->customer_id = $register->id;
                 $order->table_id = $table_id;
                 $order->person = $request->person;
+                if ($orderExists) {
+                    $order->start_time = Carbon::now();
+                }
                 $order->role = $request->role;
                 $order->finish_time = $table->finish_order_time;
                 $order->finished = 0;
@@ -96,7 +99,7 @@ class ReservationController extends Controller
                 Larafirebase::withTitle('Food-menu Restaurant')
                 ->withBody('Your Turn Now !!!')
                 ->sendMessage($fcmTokens);
-                // // return redirect()->back()->with('success','Notification Sent Successfully!!');
+                // return redirect()->back()->with('success','Notification Sent Successfully!!');
 
 
 

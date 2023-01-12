@@ -50,7 +50,7 @@
 
                                         <div class="table_reservation_info" :class="'test'+order.id" v-for="(order,index) in table.orders" :key="order.id" >
 
-                                            <div class="person-info popover-open" :class="['popover-click-' + order.id, { 'person-info_move': order.is_order_moved, 'ongoing_popover' : order.is_ongoing_order , 'neworder_add' : order.is_new_order_timing }]" :data-popover="'.popover-table-'+order.id"  @click="getRemainingTime(order.id); order_person = order.person; removebackdrop(); ">
+                                            <div class="person-info popover-open" :class="['popover-click-' + order.id, { 'person-info_move': order.is_order_moved, 'ongoing_popover' : order.is_ongoing_order && !order.is_order_moved, 'neworder_add' : order.is_new_order_timing }]" :data-popover="'.popover-table-'+order.id"  @click="getRemainingTime(order.id); order_person = order.person; removebackdrop(); ">
                                                 <div class="neworder_tooltip" v-if="order.is_new_order_timing">
                                                     <div class="tooltip_text">
                                                         <p class="no-margin">New Reservation</p>
@@ -235,6 +235,8 @@ export default {
             highlight_time: 0,
             highlight_time_on_off: 0,
             available_floorlist : [],
+            timeoutId : null,
+            userId : 0,
         }
     },
     computed: {
@@ -269,7 +271,9 @@ export default {
         this.$root.removeLoader();
         let vm = this;
 
-        Echo.channel('reservation') //Should be Channel Name
+        this.userId = this.$root.user.id;
+
+        Echo.channel('reservation_' + this.userId) //Should be Channel Name
         .listen('NewReservation', (e) => {
             vm.tableListFloorWise(this.active_floor_id);
         });
@@ -279,18 +283,14 @@ export default {
         this.equal_height();
     },
     deactivated() {
-        console.log('end');
-        window.Echo.leave('reservation');
+        this.userId = this.$root.user.id;
+        window.Echo.leave('reservation_' + this.userId);
     },
     beforeCreate() {
         this.$root.addLoader();
     },
     created() {
-        setTimeout(() => {
-            console.log(this.$root.checklogin);
-            if(this.$root.checklogin)
-            this.tableList();
-        }, 500);
+        this.tableList();
         // this.connect();
     },
     methods: {
@@ -397,7 +397,7 @@ export default {
                 }
             }, 1000);
             var highlight_time = parseFloat(this.highlight_time) * 60 * 1000;
-            setTimeout(() => {
+            this.timeoutId = setTimeout(() => {
                 this.tableListFloorWise(this.active_floor_id);
                 f7.popover.close('.popover-move');
                 clearInterval(this.intervalId);
@@ -425,7 +425,7 @@ export default {
                 }
             }, 1000);
             var highlight_time = parseFloat(this.highlight_time) * 60 * 1000;
-            setTimeout(() => {
+            this.timeoutId = setTimeout(() => {
                 this.tableListFloorWise(this.active_floor_id);
                 f7.popover.close('.popover-move');
                 clearInterval(this.intervalId);
@@ -529,6 +529,7 @@ export default {
             })
         },
         tableListFloorWise(id) {
+            clearTimeout(this.timeoutId);
             this.active_floor_id = id;
             axios.get('/api/table-list-floor-wise/'+id)
                 .then((res) => {

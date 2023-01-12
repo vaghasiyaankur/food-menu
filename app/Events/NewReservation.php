@@ -10,6 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use App\Models\Order;
+use Illuminate\Support\Facades\Auth;
 
 class NewReservation implements ShouldBroadcast
 {
@@ -33,6 +34,6 @@ class NewReservation implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('reservation');
+        return new Channel('reservation_' . Auth::id());
     }
 }

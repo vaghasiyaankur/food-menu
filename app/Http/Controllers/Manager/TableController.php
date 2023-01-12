@@ -93,6 +93,13 @@ class TableController extends Controller
      */
     public function changeOrderTable(Request $request)
     {
+        $orderExists = Order::where('table_id', $request->table_number)->whereNotNull('start_time')->where('finished', 0)->doesntExist();
+        $data = [];
+        $data['table_id'] = $request->table_number;
+        if ($orderExists) {
+            $data['start_time'] = Carbon::now();
+        }
+
         $fromTableId = Order::where('id', $request->id)->first()->table_id;
         $toTableId = $request->table_number;
         $tableShiftHistory = new TableShiftHistory();
@@ -101,7 +108,7 @@ class TableController extends Controller
         $tableShiftHistory->to = $toTableId;
         $tableShiftHistory->save();
 
-        Order::where('id', $request->id)->update(['table_id' => $request->table_number]);
+        Order::where('id', $request->id)->update($data);
 
         return response()->json([ 'success' => 'Order Transfer Successfully' ] , 200);
     }
@@ -179,6 +186,13 @@ class TableController extends Controller
 
         if($table_id == 0) return response()->json([ 'success' => false, 'message' => 'not compatible capacity table in this floor' ] , 200);
 
+        $orderExists = Order::where('table_id', $request->table_number)->whereNotNull('start_time')->where('finished', 0)->doesntExist();
+        $data = [];
+        $data['table_id'] = $table_id;
+        if ($orderExists) {
+            $data['start_time'] = Carbon::now();
+        }
+
         $fromTableId = Order::where('id', $request->id)->first()->table_id;
         $fromFloorId = Table::where('id', $fromTableId)->with('floor')->first();
         $toFloorId = Table::where('id', $table_id)->first();
@@ -189,7 +203,7 @@ class TableController extends Controller
         $floorShiftHistory->to = @$toFloorId->floor->name;
         $floorShiftHistory->save();
 
-        Order::where('id', $request->id)->update(['table_id' => $table_id]);
+        Order::where('id', $request->id)->update($data);
 
         return response()->json([ 'success' => true, 'message' => 'success' ] , 200);
     }
@@ -233,11 +247,11 @@ class TableController extends Controller
             Larafirebase::withTitle('Food-menu Restaurant')
             ->withBody('Your Turn Now !!!')
             ->sendMessage($fcmTokens);
-           // // return redirect()->back()->with('success','Notification Sent Successfully!!');
+           // return redirect()->back()->with('success','Notification Sent Successfully!!');
 
-           
+
         }
-        
+
         try {
 
          $basic  = new \Vonage\Client\Credentials\Basic(getenv("NEXMO_KEY"), getenv("NEXMO_SECRET"));

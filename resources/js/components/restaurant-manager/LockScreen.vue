@@ -103,7 +103,7 @@ export default {
                 this.pinposition = 0;
                 this.pin = '';
                 setTimeout(function () {
-                    f7.view.main.router.navigate({ url: '/' });
+                    f7.view.main.router.navigate({ url: '/table/' });
                 }, 500);
                 this.lockScreenDisable();
             }else{

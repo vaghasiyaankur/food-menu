@@ -13,10 +13,12 @@ class AuthController extends Controller
     {
         $check_auth = Auth::check();
         $lock = 0;
+        $user = [];
         if ($check_auth) {
+            $user = Auth::user();
             $lock = Auth::user()->lock_enable;
         }
-        return response()->json(['check_auth' => $check_auth, 'lock' => $lock]);
+        return response()->json(['check_auth' => $check_auth, 'lock' => $lock, 'user' => $user]);
     }
 
     public function loginUser(Request $req)

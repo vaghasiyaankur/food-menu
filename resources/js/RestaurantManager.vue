@@ -15,7 +15,7 @@
                             </div>
                             <div class="block no-margin-top no-padding">
                                 <div class="padding-horizontal height-40 border-bottom pannel_menu_link panel-close">
-                                    <a href="/" class="link nav-link text-color-black font-16">
+                                    <a href="/table/" class="link nav-link text-color-black font-16">
                                         <i class="f7-icons font-14 margin-right-half">clock</i>Waiting area</a>
                                 </div>
                                 <div class="padding-horizontal height-40 border-bottom pannel_menu_link panel-close">
@@ -80,7 +80,7 @@
                     <!--========= SMALL SCREEN MENU BAR END=========== -->
                     <div class="row header-link justify-content-flex-end align-items-center tab_view_menu">
                         <div class=" padding-left-half padding-right-half height-40 nav-button">
-                            <a href="/"
+                            <a href="/table/"
                                 class="col link nav-link button button-raised text-color-white padding" :class="currentRoute == 'table' ? 'bg-pink' : 'bg-dark'">
                                 <i class="f7-icons font-14 margin-right-half">clock</i>waiting area</a>
                         </div>
@@ -197,6 +197,7 @@ export default {
             warningTimer: null,
             checklogin: false,
             trans: [],
+            user : [],
         }
     },
     beforeCreate() {
@@ -204,7 +205,8 @@ export default {
         .then((res) => {
             if (res.data.check_auth) {
                 this.checklogin = true;
-                f7.view.main.router.navigate({ url: '/' });
+                this.user = res.data.user;
+                f7.view.main.router.navigate({ url: '/table/' });
             } else {
                 f7.view.main.router.navigate({ url: '/login/' });
             }

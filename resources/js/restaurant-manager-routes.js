@@ -24,12 +24,12 @@ export default [
   },
   {
     name : 'Login',
-    path: '/login',
+    path: '/login/',
     component: Login
   },
   {
     name : 'Table',
-    path: '/',
+    path: '/table/',
     component: Table,
     master(f7) {
       return f7.theme === 'aurora';

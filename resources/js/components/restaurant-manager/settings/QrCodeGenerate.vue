@@ -58,10 +58,10 @@
                                 <div class="menu-item-dropdown">
                                     <div><i class="f7-icons">ellipsis</i></div>
                                     <div class="menu-dropdown menu-dropdown-right">
-                                        <div class="menu-dropdown-content padding-vertical">
-                                            <button class="menu-dropdown-link font-13 height-40 button text-color-black menu-close" @click="downloadQrCode(qrcode.id)"><img src="/images/downlaod.png" style="margin-right:11px;"> Download </button>
-                                            <button class="menu-dropdown-link font-13 height-40 active_text button menu-close" @click="removeqr(qrcode.id)" v-if="qrcode.status == 'Expired'"><i class="f7-icons margin-right-half">trash</i>Delete </button>
-                                            <button class="menu-dropdown-link font-13 height-40 button text-color-black menu-close" @click="regenerateQrCode(qrcode.id)" v-if="qrcode.status != 'Expired'"><i class="f7-icons margin-right-half">arrow_counterclockwise</i>Regenerate </button>
+                                        <div class="menu-dropdown-content padding-vertical-half">
+                                            <button class="menu-dropdown-link font-13 height-45 button text-color-black menu-close padding-bottom-half" @click="downloadQrCode(qrcode.id)"><img src="/images/downlaod.png" style="margin-right:11px;"> Download </button>
+                                            <button class="menu-dropdown-link font-13 height-45 active_text button menu-close " @click="removeqr(qrcode.id)" v-if="qrcode.status == 'Expired'"><i class="f7-icons margin-right-half">trash</i>Delete </button>
+                                            <button class="menu-dropdown-link font-13 height-45 button text-color-black menu-close" @click="regenerateQrCode(qrcode.id)" v-if="qrcode.status != 'Expired'"><i class="f7-icons margin-right-half">arrow_counterclockwise</i>Regenerate </button>
                                         </div>
                                     </div>
                                 </div>
@@ -295,8 +295,14 @@ export default {
 .height-40 {
     height: 40px;
 }
+.height-45{
+    height: 45px;
+}
 .qrcode_generate.card{
     box-shadow: none !important;
+}
+.menu-dropdown-link{
+    padding-left:25px
 }
 .height_100{
     height: 100%;
@@ -321,12 +327,17 @@ export default {
 }
 .qrcode_generate .menu-dropdown-link{
 	justify-content: flex-start !important;
+    margin-top: 5px;
 }
 .qrcode_generate .menu-dropdown{
 	background-color: transparent !important;
 }
 .qrcode_generate .menu-dropdown-right::before{
     background-image: none !important;
+}
+.qrcode_generate .menu-dropdown-link:first-child{
+    border-bottom: 0.5px solid #999999;
+    border-radius: 0;
 }
 .qrcode_generate .menu-dropdown-content{
 	background: #FFFFFF;
