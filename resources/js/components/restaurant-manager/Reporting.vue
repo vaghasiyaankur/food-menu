@@ -137,6 +137,17 @@ export default {
                         stops: [0, 100]
                     }
                 },
+            yaxis: {    
+                title: {
+                  text: 'Order'
+                },
+              },
+              xaxis: {
+                type: 'datetime',
+                title: {
+                  text: 'Order'
+                },
+              },
             }
             // series: [{
             //     data:[]
@@ -446,7 +457,7 @@ export default {
     opacity: 1 !important;
 }
 .apexcharts-canvas .apexcharts-element-hidden, .apexcharts-menu-icon, .apexcharts-reset-icon{
-    display: none;
+    /* display: none; */
 }
 .apexcharts-zoomin-icon, .apexcharts-zoomout-icon {
     transform: initial !important;
