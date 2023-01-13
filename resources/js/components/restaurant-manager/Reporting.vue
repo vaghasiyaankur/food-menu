@@ -80,7 +80,18 @@
                             <f7-block>
                                 <div id="chart">
                                     <div id="chart-timeline">
-                                        <apexchart type="area" height="350" ref="chart" :options="chartOptions" :series="series"></apexchart>
+                                        <Chart :pannable="true" :zoomable="true" :style="{ height: '400px'}">
+                                            <ChartTooltip :background="'#fff'" />
+                                            <ChartCategoryAxis>
+                                                <ChartCategoryAxisItem :max="categoryAxisMax" :max-divisions="categoryAxisMaxDivisions" :labels="{ color: '#686868',rotation: 'auto', }" :line="{ color: 'rgba(243, 62, 62, 1)' }" />
+                                            </ChartCategoryAxis>
+                                            <ChartValueAxis>
+                                                <ChartValueAxisItem :labels="{ visible: true ,color : '#686868'}" :line="{ color: 'rgba(243, 62, 62, 1)' }"/>
+                                            </ChartValueAxis>
+                                            <ChartSeries>
+                                                <ChartSeriesItem :type="'line'" :data-items="series" :category-field="'category'" :color="'rgba(243, 62, 62, 1)'" :markers="{ visible: false }" :line-style="'normal'" :field="'value'" />
+                                            </ChartSeries>
+                                        </Chart>
                                     </div>
                                 </div>
                             </f7-block>
@@ -100,123 +111,30 @@ import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Input,f7AreaChart} from 
 import apexchart from "vue3-apexcharts";
 import axios from 'axios';
 import $ from 'jquery';
+// import CanvasJSChart from '../../chart/CanvasJSVueComponent.vue';
+import {
+    Chart,
+    ChartSeries,
+    ChartSeriesItem,
+    ChartValueAxis,
+    ChartValueAxisItem,
+    ChartCategoryAxis,
+    ChartCategoryAxisItem,
+    ChartTooltip
+} from '@progress/kendo-vue-charts';
+import 'hammerjs';
 
 export default {
     name : 'Reporting',
     data() {
         return {
-            total_order : '',
-            complete_order : '',
-            ongoing_order : '',
-            reservation_table : '',
-            series: [{
-                data:[]
-            }],
-            chartOptions : {
-                chart: {
-                    id: 'area-datetime',
-                    type: 'area',
-                    height: 350,
-                    zoom: {
-                        autoScaleYaxis: true
-                    }
-                },
-                labels : [],
-                colors: ['#F33E3E'],
-                tooltip: {
-                    x: {
-                        format: 'yyyy-MMM-dd'
-                    }
-                },
-                fill: {
-                    type: 'gradient',
-                    gradient: {
-                        shadeIntensity: 1,
-                        opacityFrom: 0.7,
-                        opacityTo: 0.9,
-                        stops: [0, 100]
-                    }
-                },
-            yaxis: {    
-                title: {
-                  text: 'Order'
-                },
-              },
-              xaxis: {
-                type: 'datetime',
-                title: {
-                  text: 'Order'
-                },
-              },
-            }
-            // series: [{
-            //     data:[]
-            // }],
-            // chartOptions: {
-            //     chart: {
-            //         id: 'area-datetime',
-            //         type: 'area',
-            //         height: 350,
-            //         zoom: {
-            //             autoScaleYaxis: true
-            //         }
-            //     },
-            //     labels: [],
-            //     colors: ['#F33E3E'],
-            //     annotations: {
-            //         yaxis: [{
-            //             y: 30,
-            //             borderColor: '#999',
-            //             label: {
-            //                 show: true,
-            //                 text: 'Support',
-            //                 style: {
-            //                     color: "#fff",
-            //                     background: '#00E396'
-            //                 }
-            //             }
-            //         }],
-            //         xaxis: [{
-            //             x: new Date('14 Nov 2012').getTime(),
-            //             borderColor: '#999',
-            //             yAxisIndex: 0,
-            //             label: {
-            //                 show: true,
-            //                 style: {
-            //                     color: "#fff",
-            //                     background: '#775DD0'
-            //                 }
-            //             }
-            //         }]
-            //     },
-            //     dataLabels: {
-            //         enabled: false
-            //     },
-            //     markers: {
-            //         size: 0,
-            //         style: 'hollow',
-            //     },
-            //     xaxis: {
-            //         type: 'datetime',
-            //         min: new Date('01 Mar 2012').getTime(),
-            //         tickAmount: 6,
-            //     },
-            //     tooltip: {
-            //         x: {
-            //             format: 'yyyy-MMM-dd'
-            //         }
-            //     },
-            //     fill: {
-            //         type: 'gradient',
-            //         gradient: {
-            //             shadeIntensity: 1,
-            //             opacityFrom: 0.7,
-            //             opacityTo: 0.9,
-            //             stops: [0, 100]
-            //         }
-            //     },
-            // },
-            // selection: 'one_year',
+            total_order : 0,
+            complete_order : 0,
+            ongoing_order : 0,
+            reservation_table : 0,
+            series : [],
+            categoryAxisMax: new Date(2023, 1, 0),
+            categoryAxisMaxDivisions: 10,
         }
     },
     components: {
@@ -227,7 +145,16 @@ export default {
         f7,
         f7Input,
         f7AreaChart,
-        apexchart
+        apexchart,
+        // CanvasJSChart
+        Chart,
+        ChartSeries,
+        ChartTooltip,
+        ChartSeriesItem,
+        ChartValueAxis,
+        ChartValueAxisItem,
+        ChartCategoryAxis,
+        ChartCategoryAxisItem,
     },
     beforeCreate() {
         this.$root.addLoader();
@@ -295,6 +222,9 @@ export default {
         };
     },
     methods : {
+        chartInstance(chart) {
+            this.chart = chart;
+        },
         report() {
 
             var from_date = $('#fromDate').val() ? $('#fromDate').val() : '';
@@ -311,10 +241,13 @@ export default {
         apexchartData(){
             axios.get('/api/report-chart-data')
             .then((res) => {
-                res.data.all_orders.forEach((data) => {
-                    this.chartOptions.labels.push(data.date);
-                    this.series[0].data.push(data.orders);
+                res.data.all_orders.forEach((data,index) => {
+                    this.series.push({
+                        value: data.orders,
+                        category: new Date(data.date),
+                    });
                 });
+                console.log(this.series);
             })
         }
     }
@@ -462,5 +395,8 @@ export default {
 .apexcharts-zoomin-icon, .apexcharts-zoomout-icon {
     transform: initial !important;
     margin-right: 10px;
+}
+#chart{
+    height: 420px;
 }
 </style>
