@@ -168,7 +168,7 @@ export default {
                 name: '',
                 number: '',
                 member: '',
-                floor: 1
+                floor: null
             },
             checkWaitingTime: false,
             product_category: [],

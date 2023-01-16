@@ -48,13 +48,13 @@
                                         <div class="category-count padding-right">
                                             <span>{{ index + 1 }}.</span>
                                         </div>
-                                        <div class="category_image">
-                                            <img :src="'/storage'+category.image" alt="">
-                                        </div>
+                                        <a class="display-flex align-items-center" :href="'/single-category-products/'+category.id">
+                                            <div class="category_image">
+                                                <img :src="'/storage'+category.image" alt="">
+                                            </div>
 
-                                    <a class="menu-dropdown-link menu-close padding-vertical" :href="'/single-category-products/'+category.id">
-                                        <span class="padding-left-half category_name text-color-black">{{ category.category_languages[0].name }}</span>
-                                    </a>
+                                            <span class="padding-left-half category_name text-color-black">{{ category.category_languages[0].name }}</span>
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="col-100 medium-60 large-40 action-buttons">

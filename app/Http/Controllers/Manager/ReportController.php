@@ -47,7 +47,7 @@ class ReportController extends Controller
 
     public function reportChartData(Request $request)
     {
-        $all_orders = Order::withTrashed()->whereUserId(Auth::id())->select(DB::raw('created_at as date'), DB::raw('count(*) as orders'))->groupBy('date')->orderBy('date')->get();
+        $all_orders = Order::withTrashed()->whereUserId(Auth::id())->select('created_at', DB::raw('count(*) as orders'))->groupBy('created_at')->orderBy('created_at')->get();
         return response()->json(['all_orders' => $all_orders ] , 200);
     }
 }

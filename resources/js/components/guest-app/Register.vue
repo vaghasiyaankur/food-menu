@@ -231,10 +231,10 @@ export default {
             checkWaitingTime: false,
             floors: [],
             reservation: {
-                name: 'sdfsss',
-                number: '1234567890',
-                member: '2',
-                floor: 1,
+                name: '',
+                number: '',
+                member: '',
+                floor: null,
                 agree_condition: true
             },
             member_limit : 0,
@@ -464,7 +464,7 @@ export default {
                 axios.post('/api/floor-available', {'member' : this.reservation.member})
                 .then((res) => {
                     if(res.data.success){
-                        this.reservation.floor = 0;
+                        this.reservation.floor = null;
                         this.floors = res.data.floors;
                     }
                 });

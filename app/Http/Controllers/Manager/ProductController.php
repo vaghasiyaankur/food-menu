@@ -64,6 +64,10 @@ class ProductController extends Controller
         $categoryId = $req->categoryId != 0 ? intval($req->categoryId) : '';
         $subcategoryId = $req->subcategoryId != 0 ? intval($req->subcategoryId) : '';
 
+        $category_name = Category::with(['categoryLanguages' => function($q) use ($lang_id){
+            $q->where('language_id',$lang_id);
+        }])->find($req->categoryId);
+
         $subCategories = SubCategory::with(['subCategoryLanguage' => function($q) use ($lang_id){
             $q->where('language_id',$lang_id);
         }])->where('category_id',$req->categoryId)->get();
@@ -97,7 +101,7 @@ class ProductController extends Controller
 
         $sub_product = $sub_product->whereUserId(Auth::id())->paginate(6);
 
-        return response()->json(['sub_category_product' => $sub_product,'sub_category' => $subCategory]);
+        return response()->json(['sub_category_product' => $sub_product,'sub_category' => $subCategory,'category_name' =>  $category_name]);
     }
 
     public function editProduct($id){

@@ -110,6 +110,7 @@
 import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Input,f7AreaChart} from 'framework7-vue';
 import axios from 'axios';
 import $ from 'jquery';
+import moment from 'moment';
 import {
     Chart,
     ChartSeries,
@@ -238,9 +239,10 @@ export default {
             axios.get('/api/report-chart-data')
             .then((res) => {
                 res.data.all_orders.forEach((data,index) => {
+                    var category = moment(data.created_at,moment.defaultFormat).toDate();
                     this.series.push({
                         value: data.orders,
-                        category: new Date(data.date),
+                        category: category,
                     });
                 });
             })
@@ -275,6 +277,7 @@ export default {
     border-left: 7px solid #F33E3E;
     justify-content: space-between;
     align-items: end;
+    overflow: hidden;
 }
 .reporting_card .card .card-content{
     padding: 20px;

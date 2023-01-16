@@ -6,8 +6,8 @@
                     <div class="row padding-horizontal margin-horizontal align-items-center">
                         <div class="col-100 large-50 medium-40">
                             <h3>
-                                <a href="javscript:;" class="text-color-black padding-right-half" @click="f7router.back()"><i class="f7-icons font-22">arrow_left</i></a>
-                                <span class="page_heading">Indian</span>
+                                <a href="/food-category/" class="text-color-black padding-right-half"><i class="f7-icons font-22">arrow_left</i></a>
+                                <span class="page_heading">{{ category_name }}</span>
                             </h3>
                         </div>
                         <div class="col-100 large-50 medium-60">
@@ -165,6 +165,7 @@ export default {
                 }
             },
             paginationData : [],
+            category_name : '',
         }
     },
     beforeCreate() {
@@ -244,6 +245,7 @@ export default {
             this.id = f7.view.main.router.currentRoute.params.id;
             axios.post('/api/get-products', { search: this.search, categoryId: this.id })
             .then((res) => {
+                this.category_name = res.data.category_name.category_languages[0].name;
                 this.subCategoryProduct = res.data.sub_category_product.data;
                 this.paginationData = res.data.sub_category_product;
             })
