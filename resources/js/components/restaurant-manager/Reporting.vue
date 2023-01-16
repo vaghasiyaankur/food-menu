@@ -108,10 +108,8 @@
 
 <script>
 import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Input,f7AreaChart} from 'framework7-vue';
-import apexchart from "vue3-apexcharts";
 import axios from 'axios';
 import $ from 'jquery';
-// import CanvasJSChart from '../../chart/CanvasJSVueComponent.vue';
 import {
     Chart,
     ChartSeries,
@@ -145,8 +143,6 @@ export default {
         f7,
         f7Input,
         f7AreaChart,
-        apexchart,
-        // CanvasJSChart
         Chart,
         ChartSeries,
         ChartTooltip,
@@ -247,7 +243,6 @@ export default {
                         category: new Date(data.date),
                     });
                 });
-                console.log(this.series);
             })
         }
     }

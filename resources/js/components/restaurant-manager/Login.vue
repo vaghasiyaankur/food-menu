@@ -53,12 +53,9 @@
 </template>
 
 <script>
-import { f7,f7Page, f7Navbar, f7BlockTitle, f7Block, f7Swiper, f7SwiperSlide} from 'framework7-vue';
+import { f7,f7Page, f7Navbar, f7BlockTitle, f7Block} from 'framework7-vue';
 import $ from 'jquery';
 import axios from 'axios';
-import { VueDraggableNext } from 'vue-draggable-next';
-import 'vue3-carousel/dist/carousel.css'
-import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
 
 
 export default {
@@ -70,7 +67,7 @@ export default {
         }
     },
     components : {
-        f7,f7Page, f7Navbar, f7BlockTitle, f7Block,f7Swiper,f7SwiperSlide,draggable: VueDraggableNext,Carousel,Slide,Pagination,Navigation
+        f7,f7Page, f7Navbar, f7BlockTitle, f7Block
     },
     mounted() {
         this.$root.activationMenu('login', '');
