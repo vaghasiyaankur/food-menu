@@ -70,7 +70,7 @@
                                     </thead>
                                     <tbody>
                                         <tr v-for="(data,index) in reservation" :key="data.id">
-                                            <td>#{{ (paginationData.per_page * (page - 1)) + (index + 1) }}</td>
+                                            <td>#{{ (paginationData.per_page * (page_number - 1)) + (index + 1) }}</td>
                                             <td>{{ data.customer.name }}</td>
                                             <td>{{ data.customer.number }}</td>
                                             <td>{{ data.person }}</td>
@@ -105,7 +105,7 @@
                     <div class="pagination_list">
                         <div v-for="(link,index) in paginationData.links" :key="link">
                             <a href="javascript:;" v-if="index == 0" @click="link.url != null ? reservationData(paginationData.current_page - 1) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon-prev"></i></a>
-                            <a href="javascript:;" v-if="paginationData.links.length - 1 != index && index != 0" @click="link.url != null ? reservationData(link.label) : 'javascript:;'" :class="{ 'disabled': link.url == null, 'active': paginationData.current_page == index}">{{ index }}</a>
+                            <a href="javascript:;" v-if="paginationData.links.length - 1 != index && index != 0" @click="reservationData(link.url)" :class="{ 'disabled': link.url == null, 'active': paginationData.current_page == index}">{{ index }}</a>
                             <a href="javascript:;" v-if="paginationData.links.length - 1 == index" @click="link.url != null ? reservationData(paginationData.current_page + 1) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon-next"></i></a>
                         </div>
                     </div>
@@ -130,7 +130,7 @@
                 search: '',
                 paginationData: [],
                 showFilter : false,
-                page : 1,
+                page_number : 1,
             }
         },
         components: {
@@ -141,7 +141,6 @@
             this.$root.addLoader();
         },
         created() {
-            this.page_number = this.page;
             this.reservationData(this.page_number);
         },
         mounted() {
@@ -184,14 +183,20 @@
             this.$root.removeLoader();
         },
         methods : {
-            reservationData(page) {
-                if(page == undefined || page == '') page = 1;
+            reservationData(pagenumber) {
+                if (pagenumber == undefined || pagenumber == 1) {
+                    pagenumber = 1
+                } else {
+                    pagenumber = pagenumber.split('page=')[1];
+                }
+
                 var search = this.search;
                 var from_date = this.from_date;
                 var to_date = this.to_date;
-                this.page = page;
 
-                axios.get('/api/reservation-list?from_date='+from_date+'&to_date='+to_date+'&search='+search+'&page='+page)
+                this.page_number = pagenumber;
+                var page = '/api/reservation-list?from_date='+from_date+'&to_date='+to_date+'&search='+search+'&page='+pagenumber;
+                axios.get(page)
                 .then((res) => {
                     this.reservation = res.data.reservation.data;
                     this.paginationData = res.data.reservation;
@@ -326,7 +331,7 @@ button.data_set_btn{
 }
 .pagination_count{
     position: fixed;
-    bottom: 15px;
+    bottom: 0;
     width: 100%;
     z-index: 9999999;
     height: 50px;

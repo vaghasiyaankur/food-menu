@@ -22,6 +22,14 @@ class ReservationHelper{
             $tableIds = Table::where('status', 1)->where('user_id', $user_id);
             if($floor) $tableIds = $tableIds->where('floor_id', $floor);
             $tableIds = $tableIds->orderBy('capacity_of_person','ASC')->where('capacity_of_person', '>=', $from_cap)->where('capacity_of_person', '<=', $to_cap)->pluck('id');
+
+            $orderExists = Order::with(['table' => function($q) use ($from_cap,$user_id){
+                $q->where('capacity_of_person', $from_cap)->where('user_id',$user_id);
+            }])->whereNotNull('start_time')->where('finished', 0)->doesntExist();
+
+            $order_tableId = Table::where('status', 1)->where('user_id', $user_id);
+            if($floor) $order_tableId = $order_tableId->where('floor_id', $floor);
+            $order_tableId = $order_tableId->orderBy('capacity_of_person','ASC')->where('capacity_of_person', $from_cap)->pluck('id');
         // }
         // $cap = Table::where('id', $table)
         // dd($tableIds);
@@ -39,7 +47,12 @@ class ReservationHelper{
                 array_push($time, $lastOrdersId);
             }
 
-            return Order::whereIn('id', $time)->orderBy('created_at', 'ASC')->first()->table_id;
+            if($order_tableId && $orderExists){
+                $table_id = Order::whereIn('table_id', $order_tableId)->orderBy('created_at', 'ASC')->first()->table_id;
+            }else{
+                $table_id = Order::whereIn('id', $time)->orderBy('created_at', 'ASC')->first()->table_id;
+            }
+            return $table_id;
         }
         // return $tableIds ? $tableIds->id : 0;
     }

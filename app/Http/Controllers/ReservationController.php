@@ -45,7 +45,7 @@ class ReservationController extends Controller
         if($checkrole == 0) return response()->json(['error' => 'Reservation Fail.'], 401);
 
         $table_id = ReservationHelper::takeTable($request->floor, $request->person, $userId);
-        $orderExists = Order::where('table_id', $table_id)->whereNotNull('start_time')->where('finished', 0)->doesntExist();
+        $orderExists = Order::where('table_id', $table_id)->whereUserId($userId)->whereNotNull('start_time')->where('finished', 0)->doesntExist();
         if($table_id){
             $table = Table::where('id', $table_id)->first();
             $register = new Customer();
@@ -71,9 +71,9 @@ class ReservationController extends Controller
                 broadcast(new NewReservation($order))->toOthers();
             }
 
-            $count = Order::where('table_id', $order->table_id)->whereNotNull('start_time')->where('finished', 0)->count();
+            $count = Order::where('table_id', $order->table_id)->whereUserId($userId)->whereNotNull('start_time')->where('finished', 0)->count();
             if(!$count){
-                $next = Order::where('table_id', $table_id)->whereNull('start_time')->where('finished', 0)->orderBy('updated_at', 'ASC')->first();
+                $next = Order::where('table_id', $table_id)->whereUserId($userId)->whereNull('start_time')->where('finished', 0)->orderBy('updated_at', 'ASC')->first();
                 $update_date = @$next->updated_at;
                 if($next)  $next->update(['start_time' => \Carbon\Carbon::now()]);
                 if($next)  $next->update(['updated_at' => $update_date]);
@@ -248,7 +248,7 @@ class ReservationController extends Controller
         $table_id = ReservationHelper::takeTable($request->floor, $request->person, $userId);
 
         if($table_id){
-            $allOrder = Order::where('table_id', $table_id)->where('finished', 0)->select('id', 'table_id', 'start_time', 'finish_time', 'finished')->get();
+            $allOrder = Order::whereUserId($userId)->where('table_id', $table_id)->where('finished', 0)->select('id', 'table_id', 'start_time', 'finish_time', 'finished')->get();
             $calculateTime = 0;
             foreach($allOrder as $order){
                 if($order->start_time){
@@ -259,8 +259,12 @@ class ReservationController extends Controller
                     $calculateTime += $order->finish_time;
                 }
             }
-
-            $waiting_time = date('H:i', mktime(0,$calculateTime));
+            $checkTime = date('H', mktime(0,$calculateTime));
+            if($checkTime == "0"){
+                $waiting_time = date('H:i', mktime(0,$calculateTime)) . ' Minutes';
+            }else{
+                $waiting_time = date('H:i', mktime(0,$calculateTime)) . ' Hours';
+            }
             return response()->json([ 'success' => true, 'waiting_time' => $waiting_time ] , 200);
         }else{
             return response()->json([ 'success' => false, 'message' => "We don't have the capacity table for that many people" ] , 200);
@@ -389,6 +393,8 @@ class ReservationController extends Controller
         foreach($orderIds as $orderId){
             Order::where('id', $orderId)->update(['cancelled_by' => $cancel]);
             Order::where('id', $orderId)->delete();
+            $order = Order::withTrashed()->where('id', $orderId)->first();
+            broadcast(new NewReservation($order))->toOthers();
         }
         return response()->json([ 'success' => true ] , 200);
     }
@@ -425,7 +431,6 @@ class ReservationController extends Controller
         });
         $page = $request->page ? : 1;
         $reservation = $reservation->whereUserId(Auth::id())->paginate(10);
-
 
         return response()->json([ 'reservation' => $reservation ] , 200);
     }

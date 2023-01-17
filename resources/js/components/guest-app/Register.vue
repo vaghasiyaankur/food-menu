@@ -57,7 +57,7 @@
                             <div class="item-input-wrap">
                                 <div class="f-concise position-relative">
                                     <div id="selection-concise" class="floor--list">
-                                        <div id="select-concise" class="input-dropdown-wrap" @click="showFloorList = !showFloorList">{{ showFloorName }}</div>
+                                        <div id="select-concise" class="input-dropdown-wrap" :class="{ 'disable-text' : !reservation.member}" @click="reservation.member ? showFloorList = !showFloorList : ''">{{ reservation.member ? showFloorName : 'Select floor' }}</div>
                                         <ul id="location-select-list" class="dropdown_list" :class="{ 'display-none' : showFloorList }">
                                             <li class="concise p-1" :class="{ 'active': reservation.floor == 0 }" @click="reservation.floor = 0; showFloorName = $root.trans.earlier; showFloorList = true">{{ $root.trans.earlier }}</li>
                                             <li class="concise p-1" :class="{ 'active': reservation.floor == key }" @click="reservation.floor = key; showFloorName = floor; showFloorList = true" v-for="(floor,key) in floors" :key="floor" :data-id="key"><span :data-id="key">{{ floor }}</span></li>
@@ -86,7 +86,7 @@
                         <img src="/images/clock.png" alt="clock">
                         <i class="f7-icons font-13 padding-half margin-bottom close-countdown" @click="(checkWaitingTime = false)">xmark</i>
                         <!-- <vue-countdown :time="60 * 60 * 1000" v-slot="{ hours, minutes, seconds }"> -->
-                            <p class="no-margin font-30">{{ waiting_time }}</p>
+                            <p class="no-margin margin-top-half font-20">{{ waiting_time }}</p>
                         <!-- </vue-countdown> -->
                     </div>
                 </div>
@@ -240,7 +240,7 @@ export default {
             member_limit : 0,
             waiting_time: '00:00',
             showFloorList: true,
-            showFloorName: '',
+            showFloorName: 'Select Floor',
             qrToken : '',
             qr_token_exist : null,
         }
@@ -427,7 +427,7 @@ export default {
                         $('.dialog-button').addClass('col button button-raised button-large text-transform-capitalize active').text(this.$root.trans.ok);
                         $('.dialog-button').css('width', '50%');
                         $('.dialog-text').css({'text-align': 'center'});
-                    }, 50);
+                    }, 10);
                 })
                 .catch((err) => {
                     this.errornotification(err.response.data.error); return false;
@@ -442,7 +442,7 @@ export default {
                 $('.dialog-button').eq(0).text(this.$root.trans.cancel);
                 $('.dialog-button').eq(1).removeClass('text-color-black').addClass('active').text(this.$root.trans.ok);
                 $('.dialog-buttons').addClass('margin-vertical padding-bottom');
-            },50);
+            },10);
         },
         showMenuData() {
             if (this.$refs.menu) {
@@ -784,8 +784,15 @@ label.item-checkbox input[type='checkbox']:checked~.icon-checkbox{
 .md .item-input:not(.item-input-outline) .item-input-wrap::after, .md .input:not(.input-outline)::after {
     background-color: transparent !important;
 }
+.disable-text{
+    color: #999999;
+}
 </style>
 <style>
+.font-20{
+    font-size: 20px;
+}
+
 .menu-dropdown-link.active,
 .menu-dropdown-link.active-state,
 .menu-dropdown-link:focus,

@@ -25,7 +25,7 @@
                    </thead>
                    <tbody>
                       <tr v-for="table in tables" :key="table.id">
-                         <td class="label-cell">{{ table.table_number }}.</td>
+                         <td class="label-cell">{{ table.table_number }}</td>
                          <td>{{ table.capacity_of_person }} Person Capacity</td>
                          <td>{{ table.floor_number == 0 ? 'Ground' : table.floor.short_cut }} Floor</td>
                          <td>
@@ -54,7 +54,7 @@
                         <div class="pagination_list">
                             <div v-for="(link,index) in paginationData.links" :key="link">
                                 <a href="javascript:;" v-if="index == 0" @click="link.url != null ? tableList(link.url) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon-prev"></i></a>
-                                <a href="javascript:;" v-if="paginationData.links.length - 1 != index && index != 0" @click="link.url != null ? tableList(link.url) : 'javascript:;'" :class="{ 'disabled': link.url == null, 'active': paginationData.current_page == index}">{{ index }}</a>
+                                <a href="javascript:;" v-if="paginationData.links.length - 1 != index && index != 0" @click="tableList(link.url)" :class="{ 'disabled': link.url == null, 'active': paginationData.current_page == index}">{{ index }}</a>
                                 <a href="javascript:;" v-if="paginationData.links.length - 1 == index" @click="link.url != null ? tableList(link.url) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon-next"></i></a>
                             </div>
                         </div>
