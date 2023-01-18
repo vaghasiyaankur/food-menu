@@ -10,6 +10,8 @@
                             <!-- <div class="swiper-pagination"></div> -->
                            <div class="swiper-wrapper padding-left-half">
                                  <div class="swiper-slide" :class="{'active' : floor.id == active_floor_id}"  v-for="floor in floorlist" :key="floor.id" @click="tableListFloorWise(floor.id)">
+                                    <span v-if="floor.time_left"> <img src="/images/floor_blinking.gif" class="floor_blinking_img"> </span>
+
                                     <p class="no-margin text-align-center margin-vertical-half swiper_text display-flex">{{ floor.name }}
                                         <span class="room_available color-blue">{{ floor.orders_count }}</span>
                                     </p>
@@ -41,133 +43,140 @@
                                         <p class="no-margin table__text"> Capacity </p> <p class="text-align-center no-margin count__text">{{ table.capacity_of_person }}</p> </div>
                                 </div>
                             </div>
-                            <div class="card-content padding-top  padding-horizontal-half table1__details" :style="'max-width : '+(table.width - 20 )+'px'">
+                            <div class="card-content padding-top  padding-horizontal-half table1__details">
+                                <!-- :style="'max-width : '+(table.width - 20 )+'px'" -->
                                 <div class="table_reservation margin-bottom">
 
                                     <!-- <h3 class="no-margin-top">Reserved</h3> -->
                                     <div class="display-flex">
                                         <!-- <draggable :scroll-sensitivity="250"  :force-fallback="true" class="dragArea list-group w-full" :class="'dragger'+table.id" :list="order[index]" @start="startDrag(order.id, table.id)" @touchend.prevent="onDrop" v-for="(order,index) in table.orders" :key="order.id"> -->
 
-                                        <div class="table_reservation_info" :class="'test'+order.id" v-for="(order,index) in table.orders" :key="order.id" >
-
-                                            <div class="person-info popover-open" :class="['popover-click-' + order.id, { 'person-info_move': order.is_order_moved, 'ongoing_popover' : order.is_ongoing_order && !order.is_order_moved, 'neworder_add' : order.is_new_order_timing }]" :data-popover="'.popover-table-'+order.id"  @click="getRemainingTime(order.id); order_person = order.person; removebackdrop(); ">
-                                                <div class="neworder_tooltip" v-if="order.is_new_order_timing">
-                                                    <div class="tooltip_text">
-                                                        <p class="no-margin">New Reservation</p>
-                                                        <p class="no-margin">{{ order.new_order_timing_text }}</p>
-                                                    </div>
-                                                </div>
-
-                                                <div class="person_info_name border__bottom padding-bottom-half margin-bottom-half">
-                                                    <p class="no-margin text-align-center">By {{ order.role }}</p>
-                                                </div>
-                                                <div class="text-align-center person">
-                                                    <i class="f7-icons size-22">person</i>
-                                                    <span>&nbsp;{{order.person}}</span>
-                                                    <span class="waiting-time margin-top-half text-align-center">
-                                                        <!-- <i class="f7-icons size-22">clock_fill</i> -->
-                                                        <span>{{ order.reservation_time }}</span>
-                                                    </span>
-                                                </div>
-                                                <div class="popover padding-half" v-if="!order.is_order_moved" :class="'popover-table-' + order.id">
-                                                    <div class="user-info popover-inner">
-                                                        <div class="display-flex padding-left-half padding-top-half align-items-center">
-                                                            <i class="f7-icons size-18 text-color-black padding-right-half margin-right-half">person</i>
-                                                            <span class="text-color-black">{{ order.customer.name }}</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top align-items-center">
-                                                            <i class="f7-icons size-18 text-color-black padding-right-half margin-right-half">clock</i>
-                                                            <span class="text-color-black">{{ order.reservation_time_12_format }}</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top align-items-center">
-                                                            <i class="f7-icons size-18 text-color-black padding-right-half margin-right-half">timer</i>
-                                                            <span class="text-color-black" v-if="popup_remaining_time == 0">Ongoing</span>
-                                                            <vue-countdown  v-else-if="popup_remaining_time_over" :time="popup_remaining_time" v-slot="{ hours, minutes, seconds }">
-                                                                <p class="no-margin font-30" v-if="String(hours).padStart(2, '0') != 0">Time Over <span class="time-over">{{ String(hours).padStart(2, '0')+' hour'}}</span></p>
-                                                                <p class="no-margin font-30" v-else-if="String(minutes).padStart(2, '0') != 0">Time Over <span class="time-over">{{ String(minutes).padStart(2, '0')+' mins'}}</span></p>
-                                                                <p class="no-margin font-30" v-else>Time Over <span class="time-over">{{ String(seconds).padStart(2, '0')+' second'}}</span></p>
-                                                            </vue-countdown>
-                                                            <vue-countdown  v-else :time="popup_remaining_time" v-slot="{ hours, minutes, seconds }">
-                                                                <p class="no-margin font-30" v-if="String(hours).padStart(2, '0') != 0">{{ String(hours).padStart(2, '0')+' hr & '+String(minutes).padStart(2, '0')+' M'}}</p>
-                                                                <p class="no-margin font-30" v-else-if="String(minutes).padStart(2, '0') != 0">{{ String(minutes).padStart(2, '0')+' mins'}}</p>
-                                                                <p class="no-margin font-30" v-else>{{ String(seconds).padStart(2, '0')+' secs'}}</p>
-                                                            </vue-countdown>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-top align-items-center">
-                                                            <i class="f7-icons size-18 text-color-black padding-right-half margin-right-half">phone</i>
-                                                            <span class="text-color-black">{{ order.customer.number }}</span>
-                                                        </div>
-                                                        <div class="display-flex padding-left-half padding-vertical align-items-center">
-                                                            <i class="f7-icons size-18 text-color-black padding-right-half margin-right-half">person_2</i>
-                                                            <span class="text-color-black">{{ order.person }} family member</span>
-                                                        </div>
-                                                        <div class="finish_popup" v-if="order.start_time && order.finished == 0">
-                                                            <div class="card-footer no-margin no-padding justify-content-center">
-                                                                <h3>
-                                                                    <a href="javascript:;" class="text-color-red" @click="finishNext(order.id)">
-                                                                        Finish & Next
-                                                                    </a>
-                                                                </h3>
-                                                            </div>
-                                                        </div>
-                                                        <div class="floor__list" :class="order.start_time && order.finished == 0 ? 'display-none' : ''">
-                                                            <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="openFloorList(order.id)">
-                                                                <h3 class="text-color-red">Change Floor</h3>
-                                                            </div>
-                                                            <!-- ============FLOOR DROP DOWN  ============= -->
-                                                            <div class="list simple-list floor_dropdwon" :class="'f_f'+order.id">
-                                                                <ul>
-                                                                    <li v-for="floor in available_floorlist" :key="floor.id" @click="changeFloor(order.id,floor.id,floor.name)" :class="(table.floor.id == floor.id) ? 'display-none' : ''">
-                                                                        <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                            <div class="floor_name">
-                                                                                <span>{{ floor.name }} </span>
-                                                                            </div>
-                                                                            <div class="floor_room_available">
-                                                                                <span class="room_available">{{ floor.orders_count }}</span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                            <!-- ============FLOOR DROP DOWN END ============= -->
-                                                        </div>
-                                                        <div class="table__list" :class="order.start_time && order.finished == 0 ? 'display-none' : ''">
-                                                            <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="openTableList(order)">
-                                                                <h3 class="text-color-red">Change Table</h3>
-                                                            </div>
-                                                            <!-- ============FLOOR DROP DOWN  ============= -->
-                                                            <div class="list simple-list table_dropdwon" :class="'t_f'+order.id">
-                                                                <ul>
-                                                                    <li v-for="changetable in change_table_list" :key="changetable.id" :class="(changetable.id == table.id || changetable.capacity_of_person < order_person) ? 'display-none' : ''" @click="changeTable(order.id, changetable.id, table.floor.name)">
-                                                                        <div class="floor_number display-flex align-items-center justify_content_between w-100">
-                                                                            <div class="floor_name">
-                                                                                <span>Table No : {{ changetable.table_number }}</span>
-                                                                            </div>
-                                                                            <!-- <div class="floor_room_available">
-                                                                                <span class="room_available">20</span>
-                                                                            </div> -->
-                                                                        </div>
-                                                                    </li>
-                                                                    <li class="no-available-list" v-if="no_table_list_show && max_number_table_id == table.id">
-                                                                        <div class="floor_number display-flex align-items-center justify_content_between w-100 no-cap">
-                                                                            <div class="floor_name">
-                                                                                <span>Not above capacity table</span>
-                                                                            </div>
-                                                                            <!-- <div class="floor_room_available">
-                                                                                <span class="room_available">20</span>
-                                                                            </div> -->
-                                                                        </div>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                            <!-- ============FLOOR DROP DOWN END ============= -->
+                                        <div class="table_reservation_info " :class="'test'+order.id" v-for="(order,index) in table.orders" :key="order.id" >
+                                            <div :class="{'ongoing_blinking' : order.time_left}">
+                                                <div class="person-info popover-open" :class="['popover-click-' + order.id, { 'person-info_move': order.is_order_moved, 'ongoing_popover ' : order.is_ongoing_order && !order.is_order_moved, 'neworder_add' : order.is_new_order_timing }]" :data-popover="'.popover-table-'+order.id"  @click="getRemainingTime(order.id); order_person = order.person; removebackdrop(); ">
+                                                    <div class="neworder_tooltip order_tooltip" v-if="order.is_new_order_timing">
+                                                        <div class="tooltip_text">
+                                                            <p class="no-margin">New Reservation</p>
+                                                            <p class="no-margin">{{ order.new_order_timing_text }}</p>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div v-else class="popover popover-move padding" :class="'popover-table-' + order.id">
-                                                    <div class="user-info popover-inner text-align-center">
-                                                        <p class="text-color-white no-margin">Moved</p>
-                                                        <p class="text-color-white no-margin">{{ order.order_moved_text }}</p>
+                                                    <div class="order_tooltip finish_order_tooltip" v-if="order.time_left">
+                                                        <div class="tooltip_text">
+                                                            <p class="no-margin">2 min left</p>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="person_info_name border__bottom padding-bottom-half margin-bottom-half">
+                                                        <p class="no-margin text-align-center">By {{ order.role }}</p>
+                                                    </div>
+                                                    <div class="text-align-center person">
+                                                        <i class="f7-icons size-22">person</i>
+                                                        <span>&nbsp;{{order.person}}</span>
+                                                        <span class="waiting-time margin-top-half text-align-center">
+                                                            <!-- <i class="f7-icons size-22">clock_fill</i> -->
+                                                            <span>{{ order.reservation_time }}</span>
+                                                        </span>
+                                                    </div>
+                                                    <div class="popover padding-half" v-if="!order.is_order_moved" :class="'popover-table-' + order.id">
+                                                        <div class="user-info popover-inner">
+                                                            <div class="display-flex padding-left-half padding-top-half align-items-center">
+                                                                <i class="f7-icons size-18 text-color-black padding-right-half margin-right-half">person</i>
+                                                                <span class="text-color-black">{{ order.customer.name }}</span>
+                                                            </div>
+                                                            <div class="display-flex padding-left-half padding-top align-items-center">
+                                                                <i class="f7-icons size-18 text-color-black padding-right-half margin-right-half">clock</i>
+                                                                <span class="text-color-black">{{ order.reservation_time_12_format }}</span>
+                                                            </div>
+                                                            <div class="display-flex padding-left-half padding-top align-items-center">
+                                                                <i class="f7-icons size-18 text-color-black padding-right-half margin-right-half">timer</i>
+                                                                <span class="text-color-black" v-if="popup_remaining_time == 0">Ongoing</span>
+                                                                <vue-countdown  v-else-if="popup_remaining_time_over" :time="popup_remaining_time" v-slot="{ hours, minutes, seconds }">
+                                                                    <p class="no-margin font-30" v-if="String(hours).padStart(2, '0') != 0">Time Over <span class="time-over">{{ String(hours).padStart(2, '0')+' hour'}}</span></p>
+                                                                    <p class="no-margin font-30" v-else-if="String(minutes).padStart(2, '0') != 0">Time Over <span class="time-over">{{ String(minutes).padStart(2, '0')+' mins'}}</span></p>
+                                                                    <p class="no-margin font-30" v-else>Time Over <span class="time-over">{{ String(seconds).padStart(2, '0')+' second'}}</span></p>
+                                                                </vue-countdown>
+                                                                <vue-countdown  v-else :time="popup_remaining_time" v-slot="{ hours, minutes, seconds }">
+                                                                    <p class="no-margin font-30" v-if="String(hours).padStart(2, '0') != 0">{{ String(hours).padStart(2, '0')+' hr & '+String(minutes).padStart(2, '0')+' M'}}</p>
+                                                                    <p class="no-margin font-30" v-else-if="String(minutes).padStart(2, '0') != 0">{{ String(minutes).padStart(2, '0')+' mins'}}</p>
+                                                                    <p class="no-margin font-30" v-else>{{ String(seconds).padStart(2, '0')+' secs'}}</p>
+                                                                </vue-countdown>
+                                                            </div>
+                                                            <div class="display-flex padding-left-half padding-top align-items-center">
+                                                                <i class="f7-icons size-18 text-color-black padding-right-half margin-right-half">phone</i>
+                                                                <span class="text-color-black">{{ order.customer.number }}</span>
+                                                            </div>
+                                                            <div class="display-flex padding-left-half padding-vertical align-items-center">
+                                                                <i class="f7-icons size-18 text-color-black padding-right-half margin-right-half">person_2</i>
+                                                                <span class="text-color-black">{{ order.person }} family member</span>
+                                                            </div>
+                                                            <div class="finish_popup" v-if="order.start_time && order.finished == 0">
+                                                                <div class="card-footer no-margin no-padding justify-content-center">
+                                                                    <h3>
+                                                                        <a href="javascript:;" class="text-color-red" @click="finishNext(order.id)">
+                                                                            Finish & Next
+                                                                        </a>
+                                                                    </h3>
+                                                                </div>
+                                                            </div>
+                                                            <div class="floor__list" :class="order.start_time && order.finished == 0 ? 'display-none' : ''">
+                                                                <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="openFloorList(order.id)">
+                                                                    <h3 class="text-color-red">Change Floor</h3>
+                                                                </div>
+                                                                <!-- ============FLOOR DROP DOWN  ============= -->
+                                                                <div class="list simple-list floor_dropdwon" :class="'f_f'+order.id">
+                                                                    <ul>
+                                                                        <li v-for="floor in available_floorlist" :key="floor.id" @click="changeFloor(order.id,floor.id,floor.name)" :class="(table.floor.id == floor.id) ? 'display-none' : ''">
+                                                                            <div class="floor_number display-flex align-items-center justify_content_between w-100">
+                                                                                <div class="floor_name">
+                                                                                    <span>{{ floor.name }} </span>
+                                                                                </div>
+                                                                                <div class="floor_room_available">
+                                                                                    <span class="room_available">{{ floor.orders_count }}</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                                <!-- ============FLOOR DROP DOWN END ============= -->
+                                                            </div>
+                                                            <div class="table__list" :class="order.start_time && order.finished == 0 ? 'display-none' : ''">
+                                                                <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="openTableList(order)">
+                                                                    <h3 class="text-color-red">Change Table</h3>
+                                                                </div>
+                                                                <!-- ============FLOOR DROP DOWN  ============= -->
+                                                                <div class="list simple-list table_dropdwon" :class="'t_f'+order.id">
+                                                                    <ul>
+                                                                        <li v-for="changetable in change_table_list" :key="changetable.id" :class="(changetable.id == table.id || changetable.capacity_of_person < order_person) ? 'display-none' : ''" @click="changeTable(order.id, changetable.id, table.floor.name)">
+                                                                            <div class="floor_number display-flex align-items-center justify_content_between w-100">
+                                                                                <div class="floor_name">
+                                                                                    <span>Table No : {{ changetable.table_number }}</span>
+                                                                                </div>
+                                                                                <!-- <div class="floor_room_available">
+                                                                                    <span class="room_available">20</span>
+                                                                                </div> -->
+                                                                            </div>
+                                                                        </li>
+                                                                        <li class="no-available-list" v-if="no_table_list_show && max_number_table_id == table.id">
+                                                                            <div class="floor_number display-flex align-items-center justify_content_between w-100 no-cap">
+                                                                                <div class="floor_name">
+                                                                                    <span>Not above capacity table</span>
+                                                                                </div>
+                                                                                <!-- <div class="floor_room_available">
+                                                                                    <span class="room_available">20</span>
+                                                                                </div> -->
+                                                                            </div>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                                <!-- ============FLOOR DROP DOWN END ============= -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div v-else class="popover popover-move padding" :class="'popover-table-' + order.id">
+                                                        <div class="user-info popover-inner text-align-center">
+                                                            <p class="text-color-white no-margin">Moved</p>
+                                                            <p class="text-color-white no-margin">{{ order.order_moved_text }}</p>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -208,6 +217,7 @@ import $ from 'jquery';
 import axios from 'axios';
 import VueCountdown from '@chenfengyuan/vue-countdown';
 import NoValueFound from './NoValueFound.vue';
+import Pusher from 'pusher-js'
 
 export default {
     name : 'RegisterPage',
@@ -268,11 +278,24 @@ export default {
         let vm = this;
 
         this.userId = this.$root.user.id;
+        Pusher.logToConsole = true;
 
-        Echo.channel('reservation_' + this.userId) //Should be Channel Name
-        .listen('NewReservation', (e) => {
+        var pusher_key = import.meta.env.VITE_PUSHER_APP_KEY;
+
+        var pusher = new Pusher(pusher_key, {
+            cluster: 'ap2'
+        });
+
+        var channel = pusher.subscribe('reservation_' + this.userId);
+        console.log(channel);
+        channel.bind('NewReservation', function(data) {
             vm.tableListFloorWise(this.active_floor_id);
         });
+
+        // Echo.channel('reservation_' + this.userId) //Should be Channel Name
+        // .listen('NewReservation', (e) => {
+        //     vm.tableListFloorWise(this.active_floor_id);
+        // });
 
     },
     updated() {
@@ -1080,30 +1103,51 @@ content: '';
     margin-left: 5px;
 }
 .floor_name{
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        width: 172px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 172px;
 }
 /*=========== ONGOING POPOVER =============*/
 .ongoing_popover{
-    background: #E2E2E2;
+    background-color:  #E2E2E2;
+
     border: 1px solid #C4C4C4;
+    position: relative;
+}
+.table_reservation_info{
+    height: 70px;
+}
+ .ongoing_blinking{
+    position: relative;
+    height: 100%;
+}
+.ongoing_blinking::before{
+    position: absolute;
+    content: "";
+    top: -7px;
+    left: -9px;
+    background-image:url("/images/finish_blinking.gif");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 175px 220px;
+    width:100%;
+    height: 100%;
+    /* z-index: 9999; */
 }
 /*========= NEW ORDER ADD ========*/
 .neworder_add{
-    background-image: url(/images/blinking.gif);
+    background-image: url("/images/blinking.gif");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     position: relative;
 }
-.neworder_tooltip {
+.order_tooltip {
     background: #F33E3E;
     color: #fff;
     position: absolute;
     padding: 5px;
-    top: -44px;
     border-radius: 5px;
     width: 100%;
     max-width: 96px;
@@ -1111,7 +1155,15 @@ content: '';
     text-align: center;
     font-weight: 500;
 }
-.neworder_tooltip::before{
+.neworder_tooltip{
+    top: -44px;
+}
+.finish_order_tooltip{
+    top: -43px;
+    padding: 10px;
+    font-size: 12px;
+}
+.order_tooltip::before{
     content: "";
     position: absolute;
     top: 100%;
@@ -1312,6 +1364,13 @@ content: '';
     box-sizing: border-box;
     background: rgb(0 0 0 / 41%) !important;
 }*/
+.floor_blinking_img{
+    width: 100%;
+    height: 100%;
+    max-width: 20px;
+    max-height: 20px;
+    margin-right: 5px;
+}
 @media screen and (max-width:820px) {
     .dialog {
         transform: translateY(100%) !important;

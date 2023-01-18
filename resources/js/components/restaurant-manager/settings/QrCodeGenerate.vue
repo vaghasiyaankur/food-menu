@@ -72,7 +72,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <div class="bottom__bar">
+                <div class="bottom__bar padding-vertical margin-top">
                     <div class="pagination_count padding display-flex justify-content-end align-items-center">
                         <div class="pagination_list display-flex">
                             <div v-for="(link,index) in paginationData.links" :key="link">
@@ -343,7 +343,7 @@ export default {
 	background: #FFFFFF;
 	box-shadow: 0px 0px 14px rgba(34, 34, 34, 0.1);
 	z-index: 99;
-    top: -9px !important;
+    top: -7px !important;
 }
 .qrcode_generate .menu-item-dropdown-right .menu-dropdown-content, .qrcode_generate .menu-dropdown-right .menu-dropdown-content {
 	right: 72px;

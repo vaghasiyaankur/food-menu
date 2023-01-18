@@ -68,7 +68,7 @@ class ReservationController extends Controller
                 $order->user_id = $userId;
                 $order->save();
 
-                broadcast(new NewReservation($order))->toOthers();
+                broadcast(new NewReservation($order,$userId))->toOthers();
             }
 
             $count = Order::where('table_id', $order->table_id)->whereUserId($userId)->whereNotNull('start_time')->where('finished', 0)->count();
@@ -232,6 +232,7 @@ class ReservationController extends Controller
 
     public function checkTime(Request $request)
     {
+        $userId = Auth::id();
         if ($request->qrToken != 'undefined' && $request->role == 'Guest') {
             $qrcode_token = $request->qrToken;
             $date = Carbon::now()->format('Y-m-d');
@@ -241,8 +242,6 @@ class ReservationController extends Controller
             }else{
                 $userId = $qrcode->user_id;
             }
-        }else if($request->role == 'Manager'){
-            $userId = Auth::id();
         }
 
         $table_id = ReservationHelper::takeTable($request->floor, $request->person, $userId);
@@ -261,11 +260,12 @@ class ReservationController extends Controller
             }
             $checkTime = date('H', mktime(0,$calculateTime));
             if($checkTime == "0"){
-                $waiting_time = date('H:i', mktime(0,$calculateTime)) . ' Minutes';
+                $hour_min = 'Minutes';
             }else{
-                $waiting_time = date('H:i', mktime(0,$calculateTime)) . ' Hours';
+                $hour_min = 'Hours';
             }
-            return response()->json([ 'success' => true, 'waiting_time' => $waiting_time ] , 200);
+            $waiting_time = date('H:i', mktime(0,$calculateTime));
+            return response()->json([ 'success' => true, 'waiting_time' => $waiting_time , 'hour_min' => $hour_min ] , 200);
         }else{
             return response()->json([ 'success' => false, 'message' => "We don't have the capacity table for that many people" ] , 200);
         }
@@ -394,7 +394,7 @@ class ReservationController extends Controller
             Order::where('id', $orderId)->update(['cancelled_by' => $cancel]);
             Order::where('id', $orderId)->delete();
             $order = Order::withTrashed()->where('id', $orderId)->first();
-            broadcast(new NewReservation($order))->toOthers();
+            broadcast(new NewReservation($order,$order->user_id))->toOthers();
         }
         return response()->json([ 'success' => true ] , 200);
     }

@@ -22,7 +22,7 @@ Route::get('login', function() {
 });
 Route::any('/abc', function() {
     $order = Order::first();
-    $a = broadcast(new NewReservation( $order ))->toOthers();
+    $a = broadcast(new NewReservation( $order ,1 ))->toOthers();
 
 });
 Route::get('/qrcode', [QrCodeController::class, 'index']);

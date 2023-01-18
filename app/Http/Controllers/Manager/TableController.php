@@ -52,16 +52,34 @@ class TableController extends Controller
                     $z->where('finished', 0)->whereUserId(Auth::id());
                 }
             ]);
+        },'activetables.orders' => function ($q){
+            $q->where('finished', 0)->whereUserId(Auth::id());
         }])->whereHas('activetables')->whereUserId(Auth::id())->select('id', 'name')->get();
 
-        foreach ($floorlist as $key => $floors) {
-            foreach ($floors->activetables as $key => $table) {
+        foreach ($floorlist as $f_key => $floors) {
+            $floors['time_left'] = false;
+            foreach ($floors->activetables as $t_key => $table) {
                 $floors['orders_count'] = $floors['orders_count'] + $table->orders_count;
+                if($table->orders_count && $table->orders[0] && $floors['time_left'] == false){
+                    $start_time = $table->orders[0]->start_time;
+                    $finish_time = $table->orders[0]->finish_time;
+                    $start = Carbon::parse($start_time)->addMinute($finish_time);
+                    $end = Carbon::now();
+                    $floors['time_left'] = $start->diffInMinutes($end) <= 3 || $start < $end;
+                }
             }
         }
 
         foreach($tables as $tkey=>$table){
             foreach($table->orders as $okey=>$order){
+                $tables[$tkey]['orders'][$okey]['time_left'] = false;
+                if($table->orders_count){
+                    $start_time = $table->orders[0]->start_time;
+                    $finish_time = $table->orders[0]->finish_time;
+                    $start = Carbon::parse($start_time)->addMinute($finish_time);
+                    $end = Carbon::now();
+                    $tables[$tkey]['orders'][0]['time_left'] = $start->diffInMinutes($end) <= 3 || $start < $end;
+                }
                 $tables[$tkey]['orders'][$okey]['reservation_time'] = date('h:i', strtotime($order->updated_at));
                 $tables[$tkey]['orders'][$okey]['reservation_time_12_format'] = date('g:i a', strtotime($order->updated_at));
                 $tables[$tkey]['orders'][$okey]['is_ongoing_order'] = $okey == 0;
@@ -136,6 +154,14 @@ class TableController extends Controller
 
         foreach($tables as $tkey=>$table){
             foreach($table->orders as $okey=>$order){
+                $tables[$tkey]['orders'][$okey]['time_left'] = false;
+                if($table->orders_count){
+                    $start_time = $table->orders[0]->start_time;
+                    $finish_time = $table->orders[0]->finish_time;
+                    $start = Carbon::parse($start_time)->addMinute($finish_time);
+                    $end = Carbon::now();
+                    $tables[$tkey]['orders'][0]['time_left'] = $start->diffInMinutes($end) <= 3 || $start < $end;
+                }
                 $tables[$tkey]['orders'][$okey]['reservation_time'] = date('h:i', strtotime($order->updated_at));
                 $tables[$tkey]['orders'][$okey]['reservation_time_12_format'] = date('g:i a', strtotime($order->updated_at));
                 $tables[$tkey]['orders'][$okey]['is_ongoing_order'] = $okey == 0;
@@ -152,11 +178,21 @@ class TableController extends Controller
                     $z->whereUserId(Auth::id())->where('finished', 0);
                 }
             ]);
+        },'activetables.orders' => function ($q){
+            $q->where('finished', 0)->whereUserId(Auth::id());
         }])->whereHas('activetables')->select('id', 'name')->whereUserId(Auth::id())->get();
 
         foreach ($floorlist as $key => $floors) {
             foreach ($floors->activetables as $key => $table) {
                 $floors['orders_count'] = $floors['orders_count'] + $table->orders_count;
+                $floors['time_left'] = false;
+                if($table->orders_count){
+                    $start_time = $table->orders[0]->start_time;
+                    $finish_time = $table->orders[0]->finish_time;
+                    $start = Carbon::parse($start_time)->addMinute($finish_time);
+                    $end = Carbon::now();
+                    $floors['time_left'] = $start->diffInMinutes($end) <= 3 || $start < $end;
+                }
             }
         }
 
@@ -256,7 +292,7 @@ class TableController extends Controller
 
          $basic  = new \Vonage\Client\Credentials\Basic(getenv("NEXMO_KEY"), getenv("NEXMO_SECRET"));
          $client = new \Vonage\Client($basic);
- //  $receiverNumber = ;     link : https://receive-smss.com/sms/447498173567/
+            //  $receiverNumber = ;     link : https://receive-smss.com/sms/447498173567/
                 // $receiverNumber = $customer->number;
                 $messageNotification = "Food-Menu : Your Turn Now!!";
 

@@ -17,14 +17,17 @@ class NewReservation implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $order;
+
+    public $user_id;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Order $order)
+    public function __construct(Order $order,$user_id)
     {
         $this->order = $order;
+        $this->user_id = $user_id;
     }
 
     /**
@@ -34,6 +37,6 @@ class NewReservation implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('reservation_' . Auth::id());
+        return new Channel('reservation_' . $this->user_id);
     }
 }

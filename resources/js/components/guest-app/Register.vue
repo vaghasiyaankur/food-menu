@@ -86,7 +86,7 @@
                         <img src="/images/clock.png" alt="clock">
                         <i class="f7-icons font-13 padding-half margin-bottom close-countdown" @click="(checkWaitingTime = false)">xmark</i>
                         <!-- <vue-countdown :time="60 * 60 * 1000" v-slot="{ hours, minutes, seconds }"> -->
-                            <p class="no-margin margin-top-half font-20">{{ waiting_time }}</p>
+                            <p class="no-margin margin-top-half font-20">{{ waiting_time + " " + hour_min }}</p>
                         <!-- </vue-countdown> -->
                     </div>
                 </div>
@@ -243,6 +243,7 @@ export default {
             showFloorName: 'Select Floor',
             qrToken : '',
             qr_token_exist : null,
+            hour_min : 'Minutes',
         }
     },
     setup() {
@@ -321,6 +322,7 @@ export default {
                 .then((res) => {
                     if(res.data.success){
                         this.waiting_time = res.data.waiting_time;
+                        this.hour_min = res.data.hour_min;
                         this.checkWaitingTime = true;
                     }
                     else{

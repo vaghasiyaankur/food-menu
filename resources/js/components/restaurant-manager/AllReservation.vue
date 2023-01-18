@@ -331,10 +331,10 @@ button.data_set_btn{
 }
 .pagination_count{
     position: fixed;
-    bottom: 0;
+    bottom: 15;
     width: 100%;
     z-index: 9999999;
-    height: 50px;
+    height: 60px;
     background-color: #fff;
     box-shadow: 0px 0px 15px rgba(0,0,0,0.2);
 }

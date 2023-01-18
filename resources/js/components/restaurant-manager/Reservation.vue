@@ -41,7 +41,7 @@
                                             <div class="item-input-wrap">
                                                 <div class="f-concise position-relative">
                                                     <div id="selection-concise" class="floor--list">
-                                                        <div id="select-concise" class="input-dropdown-wrap" @click="showFloorList = !showFloorList">{{ showFloorName }}</div>
+                                                        <div id="select-concise" class="input-dropdown-wrap" :class="{ 'disable-text' : !reservation.member}" @click="reservation.member ? showFloorList = !showFloorList : ''">{{ reservation.member ? showFloorName : 'Select floor' }}</div>
                                                         <ul id="location-select-list" class="dropdown_list" :class="{ 'd-none' : showFloorList }">
                                                             <li class="concise p-1" :class="{ 'active': reservation.floor == 0 }" @click="reservation.floor = 0; showFloorName = 'As soon as earlier'; showFloorList = true">As soon as earlier</li>
                                                             <li class="concise p-1" :class="{ 'active': reservation.floor == key }" @click="reservation.floor = key; showFloorName = floor; showFloorList = true" v-for="(floor,key) in floors" :key="floor" :data-id="key"><span :data-id="key">{{ floor }}</span></li>
@@ -58,7 +58,7 @@
                                                 <img src="/images/clock.png" alt="">
                                                 <i class="f7-icons font-13 padding-half margin-bottom close-countdown" @click="(checkWaitingTime = false)">xmark</i>
                                                 <!-- <vue-countdown :time="60 * 50 * 1000" v-slot="{ hours, minutes, seconds }"> -->
-                                                    <p class="no-margin font-30">{{ waiting_time }}</p>
+                                                    <p class="no-margin font-30">{{ waiting_time + " " + hour_min }}</p>
                                                 <!-- </vue-countdown> -->
                                             </div>
                                         </div>
@@ -178,8 +178,9 @@ export default {
             member_limit : 0,
             waiting_time: '00:00',
             showFloorList: true,
-            showFloorName: '',
+            showFloorName: 'Select Floor',
             showFloorId: 0,
+            hour_min : 'Minutes',
         }
     },
     beforeCreate() {
@@ -236,6 +237,7 @@ export default {
             axios.post('/api/check-time', formData)
             .then((res) => {
                 if(res.data.success){
+                    this.hour_min = res.data.hour_min;
                     this.waiting_time = res.data.waiting_time;
                     this.register();
                 }
@@ -335,11 +337,8 @@ export default {
                 axios.post('/api/floor-available', { 'member': this.reservation.member })
                 .then((res) => {
                     if (res.data.success) {
-                        this.reservation.floor = 0;
+                        this.reservation.floor = null;
                         this.floors = res.data.floors;
-                    }
-                    else {
-
                     }
                 });
             }
@@ -567,6 +566,9 @@ label.item-checkbox input[type='checkbox']:checked ~ .icon-checkbox:after, label
 
 #searchData {
     width: 85%;
+}
+.disable-text, input::placeholder{
+    color: #464646;
 }
 
 @media screen and (max-width:820px) {
