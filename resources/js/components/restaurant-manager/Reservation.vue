@@ -233,6 +233,7 @@ export default {
             var formData = new FormData();
             formData.append('person', this.reservation.member);
             formData.append('floor', this.reservation.floor);
+            formData.append('role', 'Manager');
 
             axios.post('/api/check-time', formData)
             .then((res) => {

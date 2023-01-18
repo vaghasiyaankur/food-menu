@@ -24,7 +24,8 @@
             <div class="tables margin-horizontal" v-if="row_tables.length != 0">
                 <div class="table_row margin-horizontal padding-top margin-top" v-for="row  in row_tables" :key="row">
                     <!-- <div class="no-padding margin-bottom table-card" :class="[('col-'+table.col)]" v-for="table in row" :key="table.id"> -->
-                    <div class="no-padding margin-bottom table-card mr-72" :style="'min-width: '+table.width+'px'"  v-for="(table,t_index) in row" :key="table.id">
+                    <div class="no-padding margin-bottom table-card mr-72 -100"   v-for="(table,t_index) in row" :key="table.id">
+                        <!-- :style="'min-width: '+table.width+'px'" -->
                         <!--======= TABLE CHAIR ========= -->
                         <div class="row table_top_chair">
                             <div class="col" v-for="index in table.up_table" :key="index">
@@ -33,7 +34,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card no-margin table_1 equal-height-table drop-target"  :data-id="table.id" :data-name="table.floor.name" :data-tnumber="table.table_number" :style="('border-left : 10px solid rgb('+table.color.rgb)+')'" >
+                        <div class="card no-margin table_1 equal-height-table drop-target"  :data-id="table.id" :data-name="table.floor.name" :data-tnumber="table.table_number" :style="'border-left : 10px solid rgb('+table.color.rgb+'); min-width : '+table.width+'px'" >
                             <div class="card-header no-padding">
                                 <div class="row header_detail">
                                     <div class="table-number padding-half"> <p class="no-margin table__text">Table No.</p>
@@ -915,7 +916,7 @@ p.count__text{
 }
 .table1__details{
     width: 100%;
-    overflow-x: auto;
+    /* overflow-x: auto; */
     height: 100%;
     max-height: 122px;
     display: flex;
