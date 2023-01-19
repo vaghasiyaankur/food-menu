@@ -63,7 +63,7 @@
                                                     </div>
                                                     <div class="order_tooltip finish_order_tooltip" v-if="order.is_time_left">
                                                         <div class="tooltip_text">
-                                                            <p class="no-margin">{{ dateFormat(order.time_left) }}</p>
+                                                            <p class="no-margin">{{ timing_left }}</p>
                                                         </div>
                                                     </div>
 
@@ -246,6 +246,7 @@ export default {
             available_floorlist : [],
             timeoutId : null,
             userId : 0,
+            timing_left : '',
         }
     },
     computed: {
@@ -287,11 +288,11 @@ export default {
             cluster: 'ap2'
         });
 
-        // var channel = pusher.subscribe('reservation-' + this.userId);
-        // // console.log(channel);
-        // channel.bind('NewReservation', function(data) {
-        //     vm.tableListFloorWise(this.active_floor_id);
-        // });
+        var channel = pusher.subscribe('reservation-' + this.userId);
+        // console.log(channel);
+        channel.bind('NewReservation', function(data) {
+            vm.tableListFloorWise(this.active_floor_id);
+        });
 
         Echo.channel('reservation-' + this.userId) //Should be Channel Name
         .listen('NewReservation', (e) => {
@@ -316,17 +317,27 @@ export default {
     },
     methods: {
         dateFormat(date){
+            var timing = moment(date) - moment();
+            var duration = moment.duration(timing, "milliseconds");
+            var interval = 10000;
+            duration = moment.duration(duration - interval, 'milliseconds');
             setInterval(() => {
-                var timing = moment(date) - moment();
-                var duration = moment.duration(timing, "seconds").minutes();
-                console.log(duration);
-                if(duration <= 0){
-                    return 'Time over';
-                }else if(duration <= 3){
-                    return duration + " Min Left";
+                duration = moment.duration(duration - interval, 'milliseconds');
+                console.log(duration.minutes());
+                if(duration.minutes() <= 0){
+                    this.timing_left = 'Time over';
+                }else if(duration.minutes() <= 3){
+                    this.timing_left = duration.minutes() + " Min Left";
                 }
-            }, 10000);
-            return 'Time over';
+            }, interval);
+            console.log(duration.minutes());
+            if(duration.minutes() <= 0){
+                this.timing_left = 'Time over';
+            }else if(duration.minutes() <= 3){
+                this.timing_left = duration.minutes() + " Min Left";
+            }else{
+                this.timing_left = 'Time over';
+            }
         },
         equal_height(){
             var highestBox = 0;
@@ -408,14 +419,18 @@ export default {
             $(".table__list").removeClass('add_left_before');
             $('.table__list').removeClass('add_right_before');
         },
-        timingCountOrder(order,finish_time){
-            var timing = moment(order.start_time) - moment();
-            finish_time = (finish_time - 3) * 60 * 1000;
-            finish_time = (finish_time + timing);
+        timingCountOrder(finish_time, order_finish_time, orderIndex, tableIndex,rowIndex){
             console.log(finish_time);
+            var timing = moment(finish_time) - moment();
+            console.log(timing);
+            var finish_timing = (order_finish_time - 6) * 60 * 1000;
+            finish_timing = (finish_timing - timing);
+            this.dateFormat(finish_time);
             setTimeout(() => {
-                order.time_left = this.dateFormat(order.start_time);
-            }, finish_time);
+                this.row_tables[rowIndex][tableIndex].orders[orderIndex].is_time_left = true;
+                this.dateFormat(finish_time);
+                console.log("erews");
+            }, finish_timing);
         },
         secondIncrement(second, orderIndex, tableIndex,rowIndex) {
             this.intervalId = setInterval(() => {
@@ -555,7 +570,7 @@ export default {
                     tables.forEach((table, t_index) => {
                         table.orders.forEach((order, o_index) => {
                             if(o_index == 0){
-                                this.timingCountOrder(order,table.finish_order_time);
+                                this.timingCountOrder(order.time_left, order.finish_time,o_index, t_index, row_index);
                             }
                             if (order.is_order_moved && this.highlight_time_on_off == 1) {
                                 this.secondIncrement(order.order_moved, o_index, t_index, row_index);
@@ -653,6 +668,9 @@ export default {
                 this.row_tables.forEach((tables, row_index) => {
                     tables.forEach((table, t_index) => {
                         table.orders.forEach((order, o_index) => {
+                            if(o_index == 0){
+                                this.timingCountOrder(order.time_left, order.finish_time,o_index, t_index, row_index);
+                            }
                             if (order.is_order_moved && this.highlight_time_on_off == 1) {
                                 this.secondIncrement(order.order_moved, o_index, t_index, row_index);
                             }
