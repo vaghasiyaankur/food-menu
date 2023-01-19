@@ -277,7 +277,6 @@ export default {
         this.$root.activationMenu('table', '');
         this.$root.removeLoader();
         let vm = this;
-
         this.userId = this.$root.user.id;
         Pusher.logToConsole = true;
 
@@ -287,16 +286,17 @@ export default {
             cluster: 'ap2'
         });
 
-        var channel = pusher.subscribe('reservation_' + this.userId);
-        console.log(channel);
-        channel.bind('NewReservation', function(data) {
-            vm.tableListFloorWise(this.active_floor_id);
-        });
-
-        // Echo.channel('reservation_' + this.userId) //Should be Channel Name
-        // .listen('NewReservation', (e) => {
+        // var channel = pusher.subscribe('reservation-' + this.userId);
+        // // console.log(channel);
+        // channel.bind('NewReservation', function(data) {
         //     vm.tableListFloorWise(this.active_floor_id);
         // });
+
+        Echo.channel('reservation-' + this.userId) //Should be Channel Name
+        .listen('NewReservation', (e) => {
+            console.log('test');
+            vm.tableListFloorWise(this.active_floor_id);
+        });
 
     },
     updated() {
@@ -304,7 +304,7 @@ export default {
     },
     deactivated() {
         this.userId = this.$root.user.id;
-        window.Echo.leave('reservation_' + this.userId);
+        window.Echo.leave('reservation-' + this.userId);
     },
     beforeCreate() {
         this.$root.addLoader();
@@ -424,7 +424,7 @@ export default {
             }, highlight_time);
         },
         newOrdersecondIncrement(second, orderIndex, tableIndex,rowIndex){
-            this.intervalId = setInterval(() => {
+            const interval = setInterval(() => {
                 if (second < (60 * parseFloat(this.highlight_time))) {
                     second++;
                     if (this.row_tables[rowIndex] != undefined && this.row_tables[rowIndex][tableIndex] != undefined && this.row_tables[rowIndex][tableIndex].orders[orderIndex] != undefined) {
@@ -441,14 +441,14 @@ export default {
                     }
                 }else{
                     this.tableListFloorWise(this.active_floor_id);
-                    clearInterval(this.intervalId);
+                    clearInterval(interval);
                 }
             }, 1000);
             var highlight_time = parseFloat(this.highlight_time) * 60 * 1000;
             this.timeoutId = setTimeout(() => {
-                this.tableListFloorWise(this.active_floor_id);
+                // this.tableListFloorWise(this.active_floor_id);
                 f7.popover.close('.popover-move');
-                clearInterval(this.intervalId);
+                clearInterval(interval);
             }, highlight_time);
         },
         tableList() {
@@ -470,7 +470,8 @@ export default {
                     // Highlight Time get for setting
 
                     // calculation of row wise table list
-                    if(parseInt(cal_of_capacity) > 18){
+                    // if(parseInt(cal_of_capacity) > 18){
+                    if(parseInt(cal_of_capacity) > 6){
                         row_tables.push(single_row_data);
                         single_row_data = [];
                         cal_of_capacity = 0;
@@ -503,7 +504,8 @@ export default {
                         cal_of_capacity = 0;
                     }
 
-                    cal_of_capacity = parseInt(cal_of_capacity) + parseInt(table.capacity_of_person);
+                    // cal_of_capacity = parseInt(cal_of_capacity) + parseInt(table.capacity_of_person);
+                    cal_of_capacity = parseInt(cal_of_capacity) + parseInt(table.orders.length);
 
                     // set change table list upon capacity
 
@@ -561,7 +563,8 @@ export default {
                 var change_table_list_array = [];
                 var max_number_table_id = 0;
                 res.data.tables.forEach((table, index) => {
-                    if(parseInt(cal_of_capacity) > 18){
+                    // if(parseInt(cal_of_capacity) > 18){
+                    if(parseInt(cal_of_capacity) > 6){
                         row_tables.push(single_row_data);
                         single_row_data = [];
                         cal_of_capacity = 0;
@@ -595,7 +598,8 @@ export default {
                         cal_of_capacity = 0;
                     }
 
-                    cal_of_capacity = parseInt(cal_of_capacity) + parseInt(table.capacity_of_person);
+                    // cal_of_capacity = parseInt(cal_of_capacity) + parseInt(table.capacity_of_person);
+                    cal_of_capacity = parseInt(cal_of_capacity) + parseInt(table.orders.length);
 
                     // set change table list upon capacity
 

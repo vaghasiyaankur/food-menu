@@ -30,7 +30,8 @@ class AuthController extends Controller
 
         $credentials = $req->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            return response()->json(['success' => 'You are logged in successfully.']);
+            $id = Auth::user()->id;
+            return response()->json(['success' => 'You are logged in successfully.', 'id' => $id]);
         }else{
             return response()->json(['error' => 'Unable to access account, verify password.']);
         }
