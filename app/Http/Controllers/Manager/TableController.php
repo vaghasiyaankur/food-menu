@@ -60,7 +60,7 @@ class TableController extends Controller
             $floors['time_left'] = false;
             foreach ($floors->activetables as $t_key => $table) {
                 $floors['orders_count'] = $floors['orders_count'] + $table->orders_count;
-                if($table->orders_count && $table->orders[0] && $floors['time_left'] == false){
+                if(count($table->orders) && $table->orders[0] && $floors['time_left'] == false){
                     $start_time = $table->orders[0]->start_time;
                     $finish_time = $table->orders[0]->finish_time;
                     $start = Carbon::parse($start_time)->addMinute($finish_time);
@@ -72,13 +72,14 @@ class TableController extends Controller
 
         foreach($tables as $tkey=>$table){
             foreach($table->orders as $okey=>$order){
-                $tables[$tkey]['orders'][$okey]['time_left'] = false;
-                if($table->orders_count){
-                    $start_time = $table->orders[0]->start_time;
-                    $finish_time = $table->orders[0]->finish_time;
+                $tables[$tkey]['orders'][$okey]['is_time_left'] = false;
+                if($okey == 0){
+                    $start_time = $order->start_time;
+                    $finish_time = $order->finish_time;
                     $start = Carbon::parse($start_time)->addMinute($finish_time);
                     $end = Carbon::now();
-                    $tables[$tkey]['orders'][0]['time_left'] = $start->diffInMinutes($end) <= 3 || $start < $end;
+                    $tables[$tkey]['orders'][$okey]['is_time_left'] = $start->diffInMinutes($end) <= 3 || $start < $end;
+                    $tables[$tkey]['orders'][$okey]['time_left'] = $start;
                 }
                 $tables[$tkey]['orders'][$okey]['reservation_time'] = date('h:i', strtotime($order->updated_at));
                 $tables[$tkey]['orders'][$okey]['reservation_time_12_format'] = date('g:i a', strtotime($order->updated_at));
@@ -154,13 +155,14 @@ class TableController extends Controller
 
         foreach($tables as $tkey=>$table){
             foreach($table->orders as $okey=>$order){
-                $tables[$tkey]['orders'][$okey]['time_left'] = false;
-                if($table->orders_count){
-                    $start_time = $table->orders[0]->start_time;
-                    $finish_time = $table->orders[0]->finish_time;
+                $tables[$tkey]['orders'][$okey]['is_time_left'] = false;
+                if($okey == 0){
+                    $start_time = $order->start_time;
+                    $finish_time = $order->finish_time;
                     $start = Carbon::parse($start_time)->addMinute($finish_time);
                     $end = Carbon::now();
-                    $tables[$tkey]['orders'][0]['time_left'] = $start->diffInMinutes($end) <= 3 || $start < $end;
+                    $tables[$tkey]['orders'][$okey]['is_time_left'] = $start->diffInMinutes($end) <= 3 || $start < $end;
+                    $tables[$tkey]['orders'][$okey]['time_left'] = $start;
                 }
                 $tables[$tkey]['orders'][$okey]['reservation_time'] = date('h:i', strtotime($order->updated_at));
                 $tables[$tkey]['orders'][$okey]['reservation_time_12_format'] = date('g:i a', strtotime($order->updated_at));
@@ -183,10 +185,10 @@ class TableController extends Controller
         }])->whereHas('activetables')->select('id', 'name')->whereUserId(Auth::id())->get();
 
         foreach ($floorlist as $key => $floors) {
+            $floors['time_left'] = false;
             foreach ($floors->activetables as $key => $table) {
                 $floors['orders_count'] = $floors['orders_count'] + $table->orders_count;
-                $floors['time_left'] = false;
-                if($table->orders_count){
+                if($table->orders_count && $floors['time_left'] == false){
                     $start_time = $table->orders[0]->start_time;
                     $finish_time = $table->orders[0]->finish_time;
                     $start = Carbon::parse($start_time)->addMinute($finish_time);
@@ -280,9 +282,9 @@ class TableController extends Controller
 
             /* or */
 
-            Larafirebase::withTitle('Food-menu Restaurant')
-            ->withBody('Your Turn Now !!!')
-            ->sendMessage($fcmTokens);
+            // Larafirebase::withTitle('Food-menu Restaurant')
+            // ->withBody('Your Turn Now !!!')
+            // ->sendMessage($fcmTokens);
            // return redirect()->back()->with('success','Notification Sent Successfully!!');
 
 
@@ -296,11 +298,11 @@ class TableController extends Controller
                 // $receiverNumber = $customer->number;
                 $messageNotification = "Food-Menu : Your Turn Now!!";
 
-                $message = $client->message()->send([
-                    'to' => getenv("NEXMO_DEFAULT_NUMBER"),
-                    'from' => getenv('NEXMO_REGISTER_NUMBER'),
-                    'text' => $messageNotification
-                ]);
+                // $message = $client->message()->send([
+                //     'to' => getenv("NEXMO_DEFAULT_NUMBER"),
+                //     'from' => getenv('NEXMO_REGISTER_NUMBER'),
+                //     'text' => $messageNotification
+                // ]);
 
          }
          catch (Exception $e) {

@@ -39,4 +39,9 @@ class NewReservation implements ShouldBroadcast
     {
         return new Channel('reservation_' . $this->user_id);
     }
+
+    public function broadcastAs()
+    {
+        return 'NewReservation';
+    }
 }
