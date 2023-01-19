@@ -53,7 +53,7 @@
                                         <!-- <draggable :scroll-sensitivity="250"  :force-fallback="true" class="dragArea list-group w-full" :class="'dragger'+table.id" :list="order[index]" @start="startDrag(order.id, table.id)" @touchend.prevent="onDrop" v-for="(order,index) in table.orders" :key="order.id"> -->
 
                                         <div class="table_reservation_info " :class="'test'+order.id" v-for="(order,index) in table.orders" :key="order.id" >
-                                            <div :class="{'ongoing_blinking' : order.time_left}">
+                                            <div :class="{'ongoing_blinking' : order.is_time_left}">
                                                 <div class="person-info popover-open" :class="['popover-click-' + order.id, { 'person-info_move': order.is_order_moved, 'ongoing_popover ' : order.is_ongoing_order && !order.is_order_moved, 'neworder_add' : order.is_new_order_timing }]" :data-popover="'.popover-table-'+order.id"  @click="getRemainingTime(order.id); order_person = order.person; removebackdrop(); ">
                                                     <div class="neworder_tooltip order_tooltip" v-if="order.is_new_order_timing">
                                                         <div class="tooltip_text">
@@ -61,9 +61,9 @@
                                                             <p class="no-margin">{{ order.new_order_timing_text }}</p>
                                                         </div>
                                                     </div>
-                                                    <div class="order_tooltip finish_order_tooltip" v-if="order.time_left">
+                                                    <div class="order_tooltip finish_order_tooltip" v-if="order.is_time_left">
                                                         <div class="tooltip_text">
-                                                            <p class="no-margin">2 min left</p>
+                                                            <p class="no-margin">{{ dateFormat(order.time_left) }}</p>
                                                         </div>
                                                     </div>
 
@@ -247,6 +247,7 @@ import axios from 'axios';
 import VueCountdown from '@chenfengyuan/vue-countdown';
 import NoValueFound from './NoValueFound.vue';
 import Pusher from 'pusher-js'
+import moment from 'moment'
 
 export default {
     name : 'RegisterPage',
@@ -276,16 +277,16 @@ export default {
         }
     },
     computed: {
-    dragOptions() {
-      return {
-        group: {
-          name: 'table'
-        },
-        scrollSensitivity: 200,
-        forceFallback: true
-      };
-    }
-  },
+        dragOptions() {
+            return {
+                group: {
+                    name: 'table'
+                },
+                scrollSensitivity: 200,
+                forceFallback: true
+            };
+        }
+    },
     components : {
         f7,f7Page, f7Navbar, f7BlockTitle, f7Block,VueCountdown,NoValueFound
     },
@@ -305,7 +306,6 @@ export default {
         this.$root.activationMenu('table', '');
         this.$root.removeLoader();
         let vm = this;
-
         this.userId = this.$root.user.id;
         Pusher.logToConsole = true;
 
@@ -315,16 +315,17 @@ export default {
             cluster: 'ap2'
         });
 
-        var channel = pusher.subscribe('reservation_' + this.userId);
-        console.log(channel);
-        channel.bind('NewReservation', function(data) {
-            vm.tableListFloorWise(this.active_floor_id);
-        });
-
-        // Echo.channel('reservation_' + this.userId) //Should be Channel Name
-        // .listen('NewReservation', (e) => {
+        // var channel = pusher.subscribe('reservation-' + this.userId);
+        // // console.log(channel);
+        // channel.bind('NewReservation', function(data) {
         //     vm.tableListFloorWise(this.active_floor_id);
         // });
+
+        Echo.channel('reservation-' + this.userId) //Should be Channel Name
+        .listen('NewReservation', (e) => {
+            console.log('test');
+            vm.tableListFloorWise(this.active_floor_id);
+        });
 
     },
     updated() {
@@ -332,7 +333,7 @@ export default {
     },
     deactivated() {
         this.userId = this.$root.user.id;
-        window.Echo.leave('reservation_' + this.userId);
+        window.Echo.leave('reservation-' + this.userId);
     },
     beforeCreate() {
         this.$root.addLoader();
@@ -345,6 +346,19 @@ export default {
         addMintues(){
             f7.popover.close();
         },  
+        dateFormat(date){
+            setInterval(() => {
+                var timing = moment(date) - moment();
+                var duration = moment.duration(timing, "seconds").minutes();
+                console.log(duration);
+                if(duration <= 0){
+                    return 'Time over';
+                }else if(duration <= 3){
+                    return duration + " Min Left";
+                }
+            }, 10000);
+            return 'Time over';
+        },
         equal_height(){
             var highestBox = 0;
             var targetDiv = document.querySelectorAll('.equal-height-table');
@@ -425,6 +439,15 @@ export default {
             $(".table__list").removeClass('add_left_before');
             $('.table__list').removeClass('add_right_before');
         },
+        timingCountOrder(order,finish_time){
+            var timing = moment(order.start_time) - moment();
+            finish_time = (finish_time - 3) * 60 * 1000;
+            finish_time = (finish_time + timing);
+            console.log(finish_time);
+            setTimeout(() => {
+                order.time_left = this.dateFormat(order.start_time);
+            }, finish_time);
+        },
         secondIncrement(second, orderIndex, tableIndex,rowIndex) {
             this.intervalId = setInterval(() => {
                 if (second < (60 * parseFloat(this.highlight_time))) {
@@ -455,7 +478,7 @@ export default {
             }, highlight_time);
         },
         newOrdersecondIncrement(second, orderIndex, tableIndex,rowIndex){
-            this.intervalId = setInterval(() => {
+            const interval = setInterval(() => {
                 if (second < (60 * parseFloat(this.highlight_time))) {
                     second++;
                     if (this.row_tables[rowIndex] != undefined && this.row_tables[rowIndex][tableIndex] != undefined && this.row_tables[rowIndex][tableIndex].orders[orderIndex] != undefined) {
@@ -472,14 +495,14 @@ export default {
                     }
                 }else{
                     this.tableListFloorWise(this.active_floor_id);
-                    clearInterval(this.intervalId);
+                    clearInterval(interval);
                 }
             }, 1000);
             var highlight_time = parseFloat(this.highlight_time) * 60 * 1000;
             this.timeoutId = setTimeout(() => {
-                this.tableListFloorWise(this.active_floor_id);
+                // this.tableListFloorWise(this.active_floor_id);
                 f7.popover.close('.popover-move');
-                clearInterval(this.intervalId);
+                clearInterval(interval);
             }, highlight_time);
         },
         tableList() {
@@ -501,7 +524,8 @@ export default {
                     // Highlight Time get for setting
 
                     // calculation of row wise table list
-                    if(parseInt(cal_of_capacity) > 18){
+                    // if(parseInt(cal_of_capacity) > 18){
+                    if(parseInt(cal_of_capacity) > 6){
                         row_tables.push(single_row_data);
                         single_row_data = [];
                         cal_of_capacity = 0;
@@ -534,7 +558,8 @@ export default {
                         cal_of_capacity = 0;
                     }
 
-                    cal_of_capacity = parseInt(cal_of_capacity) + parseInt(table.capacity_of_person);
+                    // cal_of_capacity = parseInt(cal_of_capacity) + parseInt(table.capacity_of_person);
+                    cal_of_capacity = parseInt(cal_of_capacity) + parseInt(table.orders.length);
 
                     // set change table list upon capacity
 
@@ -560,10 +585,12 @@ export default {
                 this.row_tables.forEach((tables, row_index) => {
                     tables.forEach((table, t_index) => {
                         table.orders.forEach((order, o_index) => {
+                            if(o_index == 0){
+                                this.timingCountOrder(order,table.finish_order_time);
+                            }
                             if (order.is_order_moved && this.highlight_time_on_off == 1) {
                                 this.secondIncrement(order.order_moved, o_index, t_index, row_index);
                             }
-
                             if(order.is_new_order_timing && this.highlight_time_on_off == 1){
                                 this.newOrdersecondIncrement(order.new_order_timing, o_index, t_index, row_index);
                             }
@@ -581,8 +608,8 @@ export default {
         },
         tableListFloorWise(id) {
             clearTimeout(this.timeoutId);
-            this.active_floor_id = id;
-            axios.get('/api/table-list-floor-wise/'+id)
+            if(id != undefined) this.active_floor_id = id;
+            axios.get('/api/table-list-floor-wise/'+this.active_floor_id)
                 .then((res) => {
                 this.current_capacity = res.data.current_capacity;
                 this.floorlist = res.data.floorlist;
@@ -592,7 +619,8 @@ export default {
                 var change_table_list_array = [];
                 var max_number_table_id = 0;
                 res.data.tables.forEach((table, index) => {
-                    if(parseInt(cal_of_capacity) > 18){
+                    // if(parseInt(cal_of_capacity) > 18){
+                    if(parseInt(cal_of_capacity) > 6){
                         row_tables.push(single_row_data);
                         single_row_data = [];
                         cal_of_capacity = 0;
@@ -626,7 +654,8 @@ export default {
                         cal_of_capacity = 0;
                     }
 
-                    cal_of_capacity = parseInt(cal_of_capacity) + parseInt(table.capacity_of_person);
+                    // cal_of_capacity = parseInt(cal_of_capacity) + parseInt(table.capacity_of_person);
+                    cal_of_capacity = parseInt(cal_of_capacity) + parseInt(table.orders.length);
 
                     // set change table list upon capacity
 
@@ -719,12 +748,12 @@ export default {
             });
 
             // setTimeout(() => {
-                    $('.dialog-title').html("<img src='/images/success.png'>");
-                    $('.dialog-button').addClass('col button button-raised button-large text-transform-capitalize');
-                    $('.dialog-button').eq(0).addClass('text-color-black');
-                    $('.dialog-button').eq(1).addClass('active');
-                    $('.dialog-button').css('width', '50%');
-                // }, 50);
+                $('.dialog-title').html("<img src='/images/success.png'>");
+                $('.dialog-button').addClass('col button button-raised button-large text-transform-capitalize');
+                $('.dialog-button').eq(0).addClass('text-color-black');
+                $('.dialog-button').eq(1).addClass('active');
+                $('.dialog-button').css('width', '50%');
+            // }, 50);
         },
         changeFloor(order_id, floor_id,floor_name) {
             f7.popover.close();
@@ -755,21 +784,21 @@ export default {
             console.log(m);
         },
         finishNext(id) {
-                f7.popover.close();
-                f7.dialog.confirm('Are you sure to finish this order and going to next?', () => {
-                    axios.post('/api/finish-next', { id: id })
-                    .then((res) => {
-                        this.tableListFloorWise(this.active_floor_id);
-                    })
-                });
-                setTimeout(() => {
-                    $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });
-                    $('.dialog-title').html("<img src='/images/cross.png'>");
-                    $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
-                    $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
-                    $('.dialog-button').eq(1).removeClass('text-color-black');
-                    $('.dialog-buttons').addClass('margin-top no-margin-bottom')
-                }, 50);
+            f7.popover.close();
+            f7.dialog.confirm('Are you sure to finish this order and going to next?', () => {
+                axios.post('/api/finish-next', { id: id })
+                .then((res) => {
+                    this.tableListFloorWise(this.active_floor_id);
+                })
+            });
+            setTimeout(() => {
+                $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });
+                $('.dialog-title').html("<img src='/images/cross.png'>");
+                $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
+                $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
+                $('.dialog-button').eq(1).removeClass('text-color-black');
+                $('.dialog-buttons').addClass('margin-top no-margin-bottom')
+            }, 50);
         },
         /* For get every order time when open the detail-popup*/
         getRemainingTime(id) {
@@ -1161,7 +1190,7 @@ content: '';
 /*=========== ONGOING POPOVER =============*/
 .ongoing_popover{
     background-color:  #E2E2E2;
-
+    left : 3px;
     border: 1px solid #C4C4C4;
     position: relative;
 }
@@ -1216,7 +1245,7 @@ content: '';
 .order_tooltip::before{
     content: "";
     position: absolute;
-    top: 100%;
+    top: 99%;
     left: 50%;
     margin-left: -5px;
     border-width: 5px;

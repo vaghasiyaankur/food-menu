@@ -96,9 +96,9 @@ class ReservationController extends Controller
 
                 /* or */
 
-                Larafirebase::withTitle('Food-menu Restaurant')
-                ->withBody('Your Turn Now !!!')
-                ->sendMessage($fcmTokens);
+                // Larafirebase::withTitle('Food-menu Restaurant')
+                // ->withBody('Your Turn Now !!!')
+                // ->sendMessage($fcmTokens);
                 // return redirect()->back()->with('success','Notification Sent Successfully!!');
 
 
@@ -113,11 +113,11 @@ class ReservationController extends Controller
             // $receiverNumber = $customer->number;
             $messageNotification = "Food-Menu : Your Turn Now!!";
 
-            $message = $client->message()->send([
-                'to' => getenv("NEXMO_DEFAULT_NUMBER"),
-                'from' => getenv('NEXMO_REGISTER_NUMBER'),
-                'text' => $messageNotification
-            ]);
+            // $message = $client->message()->send([
+            //     'to' => getenv("NEXMO_DEFAULT_NUMBER"),
+            //     'from' => getenv('NEXMO_REGISTER_NUMBER'),
+            //     'text' => $messageNotification
+            // ]);
 
             }
                 catch (Exception $e) {

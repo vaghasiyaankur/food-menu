@@ -4,12 +4,12 @@
             <h3 class="text-align-center no-margin text-color-white padding">Page not found</h3>
         </div>
         <div class="not_found_img">
-            <img src="/images/404-page.png">            
+            <img src="/images/404-page.png">
         </div>
     </div>
 </template>
 <style>
-/*========PAGE NOT FOUND CSS ========*/    
+/*========PAGE NOT FOUND CSS ========*/
 .page_not_found .not_found_img{
     position: absolute;
     top: 50%;
@@ -25,7 +25,7 @@
     position: relative;
     height: 100%;
     width: 100%;
-    background-image: url("/images/404_bg.png");
+    background-color: #f33e3e08;
 }
 .not_found_header{
     background: #38373D;

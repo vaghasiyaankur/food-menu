@@ -84,6 +84,7 @@ export default {
             .then((res) => {
                 if (res.data.success) {
                     this.$root.successnotification(res.data.success);
+                    this.$root.user.id = res.data.id;
                     f7.view.main.router.navigate({ url: '/table/' });
                 } else {
                     this.$root.errornotification(res.data.error);
