@@ -110,6 +110,15 @@
                                                                 <i class="f7-icons size-18 text-color-black padding-right-half margin-right-half">person_2</i>
                                                                 <span class="text-color-black">{{ order.person }} family member</span>
                                                             </div>
+                                                            <div class="add_minutes">
+                                                                 <div class="card-footer no-margin no-padding justify-content-center">
+                                                                    <h3>
+                                                                        <a class="text-color-red popup-open" data-popup=".addMintuesPopup" @click="addMintues()">
+                                                                            Add Minutes
+                                                                        </a>
+                                                                    </h3>
+                                                                </div>
+                                                            </div>
                                                             <div class="finish_popup" v-if="order.start_time && order.finished == 0">
                                                                 <div class="card-footer no-margin no-padding justify-content-center">
                                                                     <h3>
@@ -207,6 +216,25 @@
                         <p class="no-margin">Empty Table List</p>
                     </div>
                 </div>
+            </div>
+        </div>
+        <!-- ======== ADD MINUTES POPUP===== -->
+        <div id="addMintuesPopup" class="popup addMintuesPopup" style="position: fixed; display: block; border-radius: 15px;">
+            <div class="addminutes-form">
+                <div class="padding margin-top">
+                    <label class="add_category_name">Add Minutes</label>
+                    <div class="minutes_input display-flex align-items-center margin-top">
+                        <input type="number" class="w-100 category-name padding-horizontal-half" name="" id="">
+                        <div class="minutes_text">
+                            Min
+                        </div>
+                    </div>
+                    <div class="margin-top no-margin-bottom display-flex justify-content-center padding-top popup_button">
+                        <button type="button" class="button button-raised text-color-black button-large popup-close margin-right popup-button">Cancel</button>
+                        <button type="button" class="button button-raised button-large popup-button" style="background-color: rgb(243, 62, 62); color: rgb(255, 255, 255);">Add Minutes</button>
+                    </div>
+                </div>
+                <div><img src="/images/flow.png" style="width:100%"></div>
             </div>
         </div>
         </f7-page>
@@ -316,6 +344,9 @@ export default {
         // this.connect();
     },
     methods: {
+        addMintues(){
+            f7.popover.close();
+        },  
         dateFormat(date){
             var timing = moment(date) - moment();
             var duration = moment.duration(timing, "milliseconds");
@@ -807,6 +838,24 @@ export default {
     padding: 0;
     margin: 0;
 }
+.addMintuesPopup .addminutes-form .minutes_input .category-name{
+ border-radius: 10px 0 0 10px !important;
+}
+.addMintuesPopup.popup{
+    top: 35% !important;
+    left: 34% !important;
+}
+.popup_button .button{
+    border-radius: 10px;
+}
+.minutes_text{
+    height: 40px;
+    line-height: 40px;
+    border: 1px solid #e7e7e7;
+    border-radius: 0 10px 10px 0;
+    padding: 0 10px;
+    background-color: #fafafa;
+}
 .mr-72{
     margin-right : 72px;
 }
@@ -1174,8 +1223,8 @@ content: '';
     position: absolute;
     content: "";
     top: -7px;
-    left: -7px;
-    background-image:url("/images/finish_blinking.gif");
+    left: -10px;
+    background-image:url("/images/finish_blinking2.gif");
     background-repeat: no-repeat;
     background-position: center;
     background-size: 175px 220px;

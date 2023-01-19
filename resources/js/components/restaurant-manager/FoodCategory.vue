@@ -98,6 +98,7 @@
                 </div>
             </div>
         </div>
+        <!-- ========= CATEGORY POPUP ========= -->
         <div id="category_popup" class="popup categoryPopup" style="position: fixed; display: block; border-radius: 15px;">
             <div class="category-form">
                 <div class="text-align-center padding popup_title">{{ category_title }}</div>
@@ -130,6 +131,7 @@
                 <div><img src="/images/flow.png" style="width:100%"></div>
             </div>
         </div>
+        <!-- ========= SUBCATEGORY POPUP ========= -->
         <div id="subCategory_popup" class="popup subCategoryPopup" style="position: fixed; display: block; border-radius: 15px;">
             <div class="text-align-center padding popup_title">Add Sub category</div>
             <div class="category-add padding">
