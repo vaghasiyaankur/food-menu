@@ -35,6 +35,8 @@ class TableController extends Controller
         $highlight_time = @$setting->highlight_on_off ? @$setting->highlight_time : 0;
         $highlight_time_on_off = @$setting->highlight_on_off;
 
+        $timing = $highlight_time * 60;
+
         $groundfloor = Floor::whereUserId(Auth::id())->first();
         $groundFloorId = @$groundfloor->id;
 
@@ -72,6 +74,16 @@ class TableController extends Controller
 
         foreach($tables as $tkey=>$table){
             foreach($table->orders as $okey=>$order){
+
+                $is_floor_shift = FloorShiftHistory::where('order_id',$order->id)->latest()->first();
+                $is_table_shift = TableShiftHistory::where('order_id',$order->id)->latest()->first();
+                $floor_start = Carbon::create(@$is_floor_shift->created_at);
+                $table_start = Carbon::create(@$is_floor_shift->created_at);
+                $end = Carbon::now();
+
+                $is_floor_shift = $floor_start->diffInSeconds($end) <  $timing;
+                $is_table_shift = $table_start->diffInSeconds($end) <  $timing;
+
                 $tables[$tkey]['orders'][$okey]['is_time_left'] = false;
                 if($okey == 0){
                     $start_time = $order->start_time;
@@ -81,12 +93,12 @@ class TableController extends Controller
                     $tables[$tkey]['orders'][$okey]['is_time_left'] = $start->diffInMinutes($end) <= 3 || $start < $end;
                     $tables[$tkey]['orders'][$okey]['time_left'] = $start;
                 }
-                $tables[$tkey]['orders'][$okey]['reservation_time'] = date('h:i', strtotime($order->updated_at));
-                $tables[$tkey]['orders'][$okey]['reservation_time_12_format'] = date('g:i a', strtotime($order->updated_at));
+                $tables[$tkey]['orders'][$okey]['reservation_time'] = date('h:i', strtotime($order->created_at));
+                $tables[$tkey]['orders'][$okey]['reservation_time_12_format'] = date('g:i a', strtotime($order->created_at));
                 $tables[$tkey]['orders'][$okey]['is_ongoing_order'] = $okey == 0;
                 $tables[$tkey]['orders'][$okey]['is_new_order_timing'] = $okey != 0 && strtotime($order->created_at) == strtotime($order->updated_at) && $order->created_at->diffInSeconds(Carbon::now()) < ($highlight_time * 60);
                 $tables[$tkey]['orders'][$okey]['new_order_timing'] = $order->updated_at->diffInSeconds(Carbon::now());
-                $tables[$tkey]['orders'][$okey]['is_order_moved'] = strtotime($order->created_at) != strtotime($order->updated_at) && $order->updated_at->diffInSeconds(Carbon::now()) < ($highlight_time * 60);
+                $tables[$tkey]['orders'][$okey]['is_order_moved'] = strtotime($order->created_at) != strtotime($order->updated_at) && $order->updated_at->diffInSeconds(Carbon::now()) < ($highlight_time * 60) && ($is_floor_shift || $is_table_shift);
                 $tables[$tkey]['orders'][$okey]['order_moved'] = $order->updated_at->diffInSeconds(Carbon::now());
             }
         }
@@ -152,24 +164,35 @@ class TableController extends Controller
                 $z->where('finished', 0)->whereUserId(Auth::id());
             }
         ])->where('floor_id', $request->id)->whereUserId(Auth::id())->where('status', 1)->orderBy('orders_count', 'DESC')->get();
-
+        $timing = $highlight_time * 60;
         foreach($tables as $tkey=>$table){
             foreach($table->orders as $okey=>$order){
+
+                $is_floor_shift = FloorShiftHistory::where('order_id',$order->id)->latest()->first();
+                $is_table_shift = TableShiftHistory::where('order_id',$order->id)->latest()->first();
+                $floor_start = Carbon::create(@$is_floor_shift->created_at);
+                $table_start = Carbon::create(@$is_floor_shift->created_at);
+                $end = Carbon::now();
+
+                $is_floor_shift = $floor_start->diffInSeconds($end) <  $timing;
+                $is_table_shift = $table_start->diffInSeconds($end) <  $timing;
+
                 $tables[$tkey]['orders'][$okey]['is_time_left'] = false;
                 if($okey == 0){
                     $start_time = $order->start_time;
                     $finish_time = $order->finish_time;
                     $start = Carbon::parse($start_time)->addMinute($finish_time);
                     $end = Carbon::now();
-                    $tables[$tkey]['orders'][$okey]['is_time_left'] = $start->diffInMinutes($end) <= 3 || $start < $end;
+                    $tables[$tkey]['orders'][$okey]['is_time_left'] = $start->diffInMinutes($end) <= 4 || $start < $end;
                     $tables[$tkey]['orders'][$okey]['time_left'] = $start;
                 }
-                $tables[$tkey]['orders'][$okey]['reservation_time'] = date('h:i', strtotime($order->updated_at));
-                $tables[$tkey]['orders'][$okey]['reservation_time_12_format'] = date('g:i a', strtotime($order->updated_at));
+
+                $tables[$tkey]['orders'][$okey]['reservation_time'] = date('h:i', strtotime($order->created_at));
+                $tables[$tkey]['orders'][$okey]['reservation_time_12_format'] = date('g:i a', strtotime($order->created_at));
                 $tables[$tkey]['orders'][$okey]['is_ongoing_order'] = $okey == 0;
                 $tables[$tkey]['orders'][$okey]['is_new_order_timing'] = $okey != 0 && strtotime($order->created_at) == strtotime($order->updated_at) && $order->created_at->diffInSeconds(Carbon::now()) < ($highlight_time * 60);
                 $tables[$tkey]['orders'][$okey]['new_order_timing'] = $order->updated_at->diffInSeconds(Carbon::now());
-                $tables[$tkey]['orders'][$okey]['is_order_moved'] = strtotime($order->created_at) != strtotime($order->updated_at) && $order->updated_at->diffInSeconds(Carbon::now()) < ($highlight_time * 60);
+                $tables[$tkey]['orders'][$okey]['is_order_moved'] = strtotime($order->created_at) != strtotime($order->updated_at) && $order->updated_at->diffInSeconds(Carbon::now()) < ($highlight_time * 60) && ($is_floor_shift || $is_table_shift);
                 $tables[$tkey]['orders'][$okey]['order_moved'] = $order->updated_at->diffInSeconds(Carbon::now());
             }
         }
@@ -193,7 +216,7 @@ class TableController extends Controller
                     $finish_time = $table->orders[0]->finish_time;
                     $start = Carbon::parse($start_time)->addMinute($finish_time);
                     $end = Carbon::now();
-                    $floors['time_left'] = $start->diffInMinutes($end) <= 3 || $start < $end;
+                    $floors['time_left'] = $start->diffInMinutes($end) <= 4 || $start < $end;
                 }
             }
         }
@@ -394,6 +417,16 @@ class TableController extends Controller
         }
 
         return response()->json(['floorlist' => $floorlist]);
+    }
+
+    public function addMinutesInOrder(Request $req)
+    {
+        $order = Order::find($req->orderId);
+        $tableId = $order->table_id;
+        $finish_time = $order->finish_time + $req->minutes;
+        $order->update(['finish_time' => $finish_time]);
+        Order::where('table_id',$tableId)->where('finished',0)->update(['finish_time' => $finish_time]);
+        return true;
     }
 
 }

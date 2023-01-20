@@ -54,7 +54,7 @@
 
                                         <div class="table_reservation_info " :class="'test'+order.id" v-for="(order,index) in table.orders" :key="order.id" >
                                             <div :class="{'ongoing_blinking' : order.is_time_left}">
-                                                <div class="person-info popover-open" :class="['popover-click-' + order.id, { 'person-info_move': order.is_order_moved, 'ongoing_popover ' : order.is_ongoing_order && !order.is_order_moved, 'neworder_add' : order.is_new_order_timing }]" :data-popover="'.popover-table-'+order.id"  @click="getRemainingTime(order.id); order_person = order.person; removebackdrop(); ">
+                                                <div class="person-info popover-open" :class="['popover-click-' + order.id, { 'person-info_move': order.is_order_moved, 'ongoing_popover ' : order.is_ongoing_order && !order.is_order_moved, 'neworder_add' : order.is_new_order_timing }]" :data-popover="'.popover-table-'+order.id"  @click="getRemainingTime(order.id); order_person = order.person; removebackdrop(); orderId = order.id">
                                                     <div class="neworder_tooltip order_tooltip" v-if="order.is_new_order_timing">
                                                         <div class="tooltip_text">
                                                             <p class="no-margin">New Reservation</p>
@@ -63,7 +63,7 @@
                                                     </div>
                                                     <div class="order_tooltip finish_order_tooltip" v-if="order.is_time_left">
                                                         <div class="tooltip_text">
-                                                            <p class="no-margin">{{ timing_left }}</p>
+                                                            <p class="no-margin">{{ order.time_left }}</p>
                                                         </div>
                                                     </div>
 
@@ -113,7 +113,7 @@
                                                             <div class="add_minutes">
                                                                  <div class="card-footer no-margin no-padding justify-content-center">
                                                                     <h3>
-                                                                        <a class="text-color-red popup-open" data-popup=".addMintuesPopup" @click="addMintues()">
+                                                                        <a class="text-color-red popup-open" data-popup=".addMinutesPopup" @click="addMinutesToClosepopover()">
                                                                             Add Minutes
                                                                         </a>
                                                                     </h3>
@@ -219,23 +219,24 @@
             </div>
         </div>
         <!-- ======== ADD MINUTES POPUP===== -->
-        <div id="addMintuesPopup" class="popup addMintuesPopup" style="position: fixed; display: block; border-radius: 15px;">
-            <div class="addminutes-form">
-                <div class="padding margin-top">
-                    <label class="add_category_name">Add Minutes</label>
+        <div id="addMinutesPopup" class="popup addMinutesPopup" style="position: fixed; display: block; border-radius: 15px;">
+            <div class="text-align-center padding popup_title">Change Time</div>
+            <div class="padding-horizontal">
+                <div class="addminutes-form padding-horizontal padding-top">
+                    <label class="add_minutes_text">Add Minutes</label>
                     <div class="minutes_input display-flex align-items-center margin-top">
-                        <input type="number" class="w-100 category-name padding-horizontal-half" name="" id="">
+                        <input type="number" v-model="minutes" class="w-100 add-minutes-input padding-horizontal-half" name="" id="">
                         <div class="minutes_text">
                             Min
                         </div>
                     </div>
                     <div class="margin-top no-margin-bottom display-flex justify-content-center padding-top popup_button">
                         <button type="button" class="button button-raised text-color-black button-large popup-close margin-right popup-button">Cancel</button>
-                        <button type="button" class="button button-raised button-large popup-button" style="background-color: rgb(243, 62, 62); color: rgb(255, 255, 255);">Add Minutes</button>
+                        <button type="button" class="button button-raised button-large popup-button" style="background-color: rgb(243, 62, 62); color: rgb(255, 255, 255);" @click="addMinutes()">Add Minutes</button>
                     </div>
                 </div>
-                <div><img src="/images/flow.png" style="width:100%"></div>
             </div>
+            <div><img src="/images/flow.png" style="width:100%"></div>
         </div>
         </f7-page>
 </template>
@@ -274,7 +275,8 @@ export default {
             available_floorlist : [],
             timeoutId : null,
             userId : 0,
-            timing_left : '',
+            minutes : '',
+            orderId : 0,
         }
     },
     computed: {
@@ -317,14 +319,12 @@ export default {
         });
 
         var channel = pusher.subscribe('reservation-' + this.userId);
-        // console.log(channel);
         channel.bind('NewReservation', function(data) {
             vm.tableListFloorWise(this.active_floor_id);
         });
 
         Echo.channel('reservation-' + this.userId) //Should be Channel Name
         .listen('NewReservation', (e) => {
-            console.log('test');
             vm.tableListFloorWise(this.active_floor_id);
         });
 
@@ -344,31 +344,8 @@ export default {
         // this.connect();
     },
     methods: {
-        addMintues(){
+        addMinutesToClosepopover(){
             f7.popover.close();
-        },  
-        dateFormat(date){
-            var timing = moment(date) - moment();
-            var duration = moment.duration(timing, "milliseconds");
-            var interval = 10000;
-            duration = moment.duration(duration - interval, 'milliseconds');
-            setInterval(() => {
-                duration = moment.duration(duration - interval, 'milliseconds');
-                console.log(duration.minutes());
-                if(duration.minutes() <= 0){
-                    this.timing_left = 'Time over';
-                }else if(duration.minutes() <= 3){
-                    this.timing_left = duration.minutes() + " Min Left";
-                }
-            }, interval);
-            console.log(duration.minutes());
-            if(duration.minutes() <= 0){
-                this.timing_left = 'Time over';
-            }else if(duration.minutes() <= 3){
-                this.timing_left = duration.minutes() + " Min Left";
-            }else{
-                this.timing_left = 'Time over';
-            }
         },
         equal_height(){
             var highestBox = 0;
@@ -451,17 +428,35 @@ export default {
             $('.table__list').removeClass('add_right_before');
         },
         timingCountOrder(finish_time, order_finish_time, orderIndex, tableIndex,rowIndex){
-            console.log(finish_time);
             var timing = moment(finish_time) - moment();
-            console.log(timing);
-            var finish_timing = (order_finish_time - 6) * 60 * 1000;
-            finish_timing = (finish_timing - timing);
-            this.dateFormat(finish_time);
-            setTimeout(() => {
-                this.row_tables[rowIndex][tableIndex].orders[orderIndex].is_time_left = true;
-                this.dateFormat(finish_time);
-                console.log("erews");
-            }, finish_timing);
+            var duration = moment.duration(timing, "milliseconds");
+            var interval = 60000;
+            duration = moment.duration(duration - interval, 'milliseconds');
+            setInterval(() => {
+                duration = moment.duration(duration - interval, 'milliseconds');
+                if(duration.minutes() == 3){
+                    this.tableListFloorWise(this.active_floor_id);
+                }
+                    if(duration.minutes() <= 0){
+                        this.row_tables[rowIndex][tableIndex].orders[orderIndex].time_left = 'Time over';
+                    }else if(duration.minutes() <= 3){
+                        this.row_tables[rowIndex][tableIndex].orders[orderIndex].time_left = duration.minutes() + " Min Left";
+                    }else{
+                        this.row_tables[rowIndex][tableIndex].orders[orderIndex].time_left = 'Time over';
+                    }
+            }, interval);
+            if(duration.minutes() <= 0){
+                this.row_tables[rowIndex][tableIndex].orders[orderIndex].time_left = 'Time over';
+            }else if(duration.minutes() <= 3){
+                this.row_tables[rowIndex][tableIndex].orders[orderIndex].time_left = duration.minutes() + " Min Left";
+            }else{
+                this.row_tables[rowIndex][tableIndex].orders[orderIndex].time_left = 'Time over';
+            }
+            // setTimeout(() => {
+            //     // this.row_tables[rowIndex][tableIndex].orders[orderIndex].is_time_left = true;
+            //     this.tableListFloorWise(this.active_floor_id);
+            //     this.dateFormat(finish_time);
+            // }, finish_timing);
         },
         secondIncrement(second, orderIndex, tableIndex,rowIndex) {
             this.intervalId = setInterval(() => {
@@ -798,9 +793,6 @@ export default {
                     $('.dialog-button').css('width', '50%');
                 // }, 50);
         },
-        check(m){
-            console.log(m);
-        },
         finishNext(id) {
             f7.popover.close();
             f7.dialog.confirm('Are you sure to finish this order and going to next?', () => {
@@ -825,6 +817,16 @@ export default {
                 this.popup_remaining_time = res.data.time;
                 this.popup_remaining_time_over = res.data.time_over;
             })
+        },
+        addMinutes(){
+            if(this.minutes == ''){
+                this.$root.errornotification("Please add minutes in order"); return false;
+            }
+            axios.post('/api/add-minutes-order', { minutes : this.minutes, orderId : this.orderId})
+            .then((res) => {
+                f7.popup.close();
+                this.tableListFloorWise(this.active_floor_id);
+            })
         }
 
     }
@@ -838,10 +840,12 @@ export default {
     padding: 0;
     margin: 0;
 }
-.addMintuesPopup .addminutes-form .minutes_input .category-name{
- border-radius: 10px 0 0 10px !important;
+.addMinutesPopup .addminutes-form .minutes_input .add-minutes-input{
+    border-radius: 10px 0 0 10px !important;
+    background: #FAFAFA;
+    height: 45px;
 }
-.addMintuesPopup.popup{
+.addMinutesPopup.popup{
     top: 35% !important;
     left: 34% !important;
 }
@@ -849,12 +853,22 @@ export default {
     border-radius: 10px;
 }
 .minutes_text{
-    height: 40px;
-    line-height: 40px;
+    height: 45px;
+    line-height: 45px;
     border: 1px solid #e7e7e7;
     border-radius: 0 10px 10px 0;
     padding: 0 10px;
     background-color: #fafafa;
+}
+
+.popup_title{
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: #38373D;
+}
+.addminutes-form {
+    border-top: 1px solid #D8D8D8;
 }
 .mr-72{
     margin-right : 72px;
@@ -1223,7 +1237,7 @@ content: '';
     position: absolute;
     content: "";
     top: -7px;
-    left: -10px;
+    left: -7px;
     background-image:url("/images/finish_blinking2.gif");
     background-repeat: no-repeat;
     background-position: center;

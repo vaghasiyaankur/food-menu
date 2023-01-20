@@ -124,6 +124,8 @@ Route::post('get-remainig-time',[TableController::class, 'getRemainigTime']);
 
 Route::post('change-floor-list',[TableController::class, 'changeFloorList']);
 
+Route::post('add-minutes-order',[TableController::class, 'addMinutesInOrder']);
+
 // ------------------------ Floor Routes ------------------------ //
 
 Route::get('get-floors',[FloorController::class , 'getFloors']);
