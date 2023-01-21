@@ -41,7 +41,7 @@ class TableController extends Controller
         $groundFloorId = @$groundfloor->id;
 
         $tables = Table::with(['color','orders.customer', 'floor','orders'=>function($q){
-            $q->where('finished', 0)->whereUserId(Auth::id())->orderBy('updated_at', 'ASC');
+            $q->where('finished', 0)->whereUserId(Auth::id())->orderBy('created_at', 'ASC')->orderBy('updated_at', 'ASC');
         }])->withCount([
             'orders' => function ($z){
                 $z->where('finished', 0)->whereUserId(Auth::id());
@@ -158,7 +158,7 @@ class TableController extends Controller
         // $highlight_time_on_off = @$setting->highlight_on_off;
 
         $tables = Table::with(['color','orders.customer', 'floor','orders'=>function($q){
-            $q->where('finished', 0)->whereUserId(Auth::id())->orderBy('updated_at', 'ASC');
+            $q->where('finished', 0)->whereUserId(Auth::id())->orderBy('created_at', 'ASC')->orderBy('updated_at', 'ASC');
         }])->withCount([
             'orders' => function ($z){
                 $z->where('finished', 0)->whereUserId(Auth::id());
@@ -346,12 +346,12 @@ class TableController extends Controller
         $orderId = $request->id;
 
         $table_id = Order::where('id', $orderId)->first()->table_id;
-        $updated_at = Order::where('id', $orderId)->first()->updated_at;
+        $created_at = Order::where('id', $orderId)->first()->created_at;
 
         $userId = Auth::id();
 
         if($table_id){
-            $allOrder = Order::where('table_id', $table_id)->where('id', '!=', $orderId)->where('finished', 0)->where('updated_at', '<=', $updated_at)->select('id', 'table_id', 'start_time', 'finish_time', 'finished', 'updated_at')->whereUserId($userId)->get();
+            $allOrder = Order::where('table_id', $table_id)->where('id', '!=', $orderId)->where('finished', 0)->where('created_at', '<=', $created_at)->select('id', 'table_id', 'start_time', 'finish_time', 'finished', 'updated_at')->whereUserId($userId)->get();
 
             $calculateTime = 0;
 
@@ -359,7 +359,7 @@ class TableController extends Controller
                 $calculateTime += $order->finish_time;
             }
 
-            $firstOrderTime = Order::where('table_id', $table_id)->where('id', '!=', $orderId)->whereUserId($userId)->where('finished', 0)->where('updated_at', '<=', $updated_at)->whereNotNull('start_time')->first();
+            $firstOrderTime = Order::where('table_id', $table_id)->where('id', '!=', $orderId)->whereUserId($userId)->where('finished', 0)->where('created_at', '<=', $created_at)->whereNotNull('start_time')->first();
             if($firstOrderTime){
                 $started_time = $firstOrderTime->start_time;
             }else{
@@ -422,10 +422,8 @@ class TableController extends Controller
     public function addMinutesInOrder(Request $req)
     {
         $order = Order::find($req->orderId);
-        $tableId = $order->table_id;
         $finish_time = $order->finish_time + $req->minutes;
         $order->update(['finish_time' => $finish_time]);
-        Order::where('table_id',$tableId)->where('finished',0)->update(['finish_time' => $finish_time]);
         return true;
     }
 

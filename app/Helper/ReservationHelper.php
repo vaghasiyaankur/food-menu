@@ -42,7 +42,7 @@ class ReservationHelper{
             foreach ($tableIds as $tableId) {
                 if(!in_array($tableId, $ordersTableIds)) return $tableId;
             }
-            
+
             $time = [];
             $tables_time_wise = [];
             foreach($tableIds as $tableId){
@@ -62,11 +62,7 @@ class ReservationHelper{
                 // $lastOrdersId = Order::where('table_id', $tableId)->orderBy('created_at', 'desc')->first()->id;
                 array_push($time, $calculateTime);
             }
-            if($order_tableId && $orderExists){
-                $table_id = Order::whereIn('table_id', $order_tableId)->orderBy('created_at', 'ASC')->first()->table_id;
-            }else{
-                $table_id = array_search(min($time), $tables_time_wise);
-            }
+            $table_id = array_search(min($time), $tables_time_wise);
             return $table_id;
         }
         // return $tableIds ? $tableIds->id : 0;

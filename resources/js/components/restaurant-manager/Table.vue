@@ -110,7 +110,7 @@
                                                                 <i class="f7-icons size-18 text-color-black padding-right-half margin-right-half">person_2</i>
                                                                 <span class="text-color-black">{{ order.person }} family member</span>
                                                             </div>
-                                                            <div class="add_minutes">
+                                                            <div class="add_minutes" v-if="popup_remaining_time == 0">
                                                                  <div class="card-footer no-margin no-padding justify-content-center">
                                                                     <h3>
                                                                         <a class="text-color-red popup-open" data-popup=".addMinutesPopup" @click="addMinutesToClosepopover()">
@@ -437,13 +437,13 @@ export default {
                 if(duration.minutes() == 3){
                     this.tableListFloorWise(this.active_floor_id);
                 }
-                    if(duration.minutes() <= 0){
-                        this.row_tables[rowIndex][tableIndex].orders[orderIndex].time_left = 'Time over';
-                    }else if(duration.minutes() <= 3){
-                        this.row_tables[rowIndex][tableIndex].orders[orderIndex].time_left = duration.minutes() + " Min Left";
-                    }else{
-                        this.row_tables[rowIndex][tableIndex].orders[orderIndex].time_left = 'Time over';
-                    }
+                if(duration.minutes() <= 0){
+                    this.row_tables[rowIndex][tableIndex].orders[orderIndex].time_left = 'Time over';
+                }else if(duration.minutes() <= 3){
+                    this.row_tables[rowIndex][tableIndex].orders[orderIndex].time_left = duration.minutes() + " Min Left";
+                }else{
+                    this.row_tables[rowIndex][tableIndex].orders[orderIndex].time_left = 'Time over';
+                }
             }, interval);
             if(duration.minutes() <= 0){
                 this.row_tables[rowIndex][tableIndex].orders[orderIndex].time_left = 'Time over';

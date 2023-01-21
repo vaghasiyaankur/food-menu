@@ -217,9 +217,9 @@ class ReservationController extends Controller
 
     public function changeReservation(Request $request)
     {
-        Setting::first()->update(['close_reservation' => $request->reservation]);
+        Setting::whereUserId(Auth::id())->update(['close_reservation' => $request->reservation]);
 
-        $close_reservation = Setting::first()->close_reservation;
+        $close_reservation = Setting::whereUserId(Auth::id())->first()->close_reservation;
         return response()->json([ 'close_reservation' => $close_reservation ] , 200);
     }
 
@@ -318,9 +318,9 @@ class ReservationController extends Controller
         $orderIds = $request->ids;
         $orderId = $orderIds[0];
         $table_id = Order::where('id', $orderId)->first()->table_id;
-        $updated_at = Order::where('id', $orderId)->first()->updated_at;
+        $created_at = Order::where('id', $orderId)->first()->created_at;
         if($table_id){
-            $allOrder = Order::where('table_id', $table_id)->where('id', '!=', $orderId)->where('finished', 0)->where('updated_at', '<=', $updated_at)->select('id', 'table_id', 'start_time', 'finish_time', 'finished', 'updated_at')->get();
+            $allOrder = Order::where('table_id', $table_id)->where('id', '!=', $orderId)->where('finished', 0)->where('created_at', '<=', $created_at)->select('id', 'table_id', 'start_time', 'finish_time', 'finished', 'updated_at')->get();
             $calculateTime = 0;
             foreach($allOrder as $order){
                 // if($order->start_time){
@@ -331,7 +331,7 @@ class ReservationController extends Controller
                     $calculateTime += $order->finish_time;
                 // }
             }
-            $firstOrderTime = Order::where('table_id', $table_id)->where('id', '!=', $orderId)->where('finished', 0)->where('updated_at', '<=', $updated_at)->whereNotNull('start_time')->first();
+            $firstOrderTime = Order::where('table_id', $table_id)->where('id', '!=', $orderId)->where('finished', 0)->where('created_at', '<=', $created_at)->whereNotNull('start_time')->first();
             if($firstOrderTime){
                 $started_time = $firstOrderTime->start_time;
             }else{
@@ -486,6 +486,30 @@ class ReservationController extends Controller
         Customer::where('id', $request->user_id)->update(['device_token' => $request->token]);
 
         return response()->json([ 'success' => true ] , 200);
+    }
+
+    public function checkReservationEnabled(Request $request)
+    {
+        $userId = Auth::id();
+        if ($request->qrToken != 'undefined') {
+            $qrcode_token = $request->qrToken;
+            $date = Carbon::now()->format('Y-m-d');
+            $qrcode = QrCodeToken::whereToken($qrcode_token)->where('start_date', '<=', $date)->where('end_date', '>=', $date)->first();
+            if ($qrcode) {
+                $userId = $qrcode->user_id;
+            }
+        }
+        $setting = Setting::whereUserId($userId)->first();
+        $close_reservation = $setting->close_reservation;
+        if ($close_reservation == 0) {
+            $open_time = Carbon::create($setting->open_time);
+            $close_time = Carbon::create($setting->close_time);
+            $current_time = Carbon::now();
+            if (!$current_time->isBetween($open_time, $close_time)) {
+                $close_reservation = 1;
+            }
+        }
+        return response()->json([ 'close_reservation' => $close_reservation ] , 200);
     }
 
 }

@@ -216,10 +216,6 @@ export default {
         f7Link,
         NotFound
     },
-    mounted() {
-        $('.navbar-bg').remove();
-        $(".page-content").css('padding-top', 0);
-    },
     data() {
         return {
             display: true,
@@ -244,6 +240,7 @@ export default {
             qrToken : '',
             qr_token_exist : null,
             hour_min : 'Minutes',
+            close_reservation : null,
         }
     },
     setup() {
@@ -271,7 +268,25 @@ export default {
             }
         },500);
     },
+    mounted() {
+        $('.navbar-bg').remove();
+        $(".page-content").css('padding-top', 0);
+        setTimeout(() => {
+            if(this.qr_token_exist){
+                this.checkreservation();
+            }
+        }, 2000);
+    },
     methods: {
+        checkreservation() {
+            axios.get('/api/check-reservation-enable?qrcode='+this.qrToken)
+            .then((res) => {
+                this.close_reservation = res.data.close_reservation;
+                if(res.data.close_reservation == 1){
+                    this.errornotification("Currently, the restaurant is closed");return false;
+                }
+            });
+        },
         memberLimitation() {
             axios.get('/api/member-limitation')
             .then((res) => {
@@ -303,33 +318,37 @@ export default {
             if (self.sheet) self.sheet.destroy();
         },
         checkTime() {
-            if(!this.reservation.name || !this.reservation.number || !this.reservation.member){
-                this.errornotification(this.$root.trans.reservation_error); return false;
-            } else if (parseInt(this.reservation.member) > parseInt(this.member_limit)) {
-                this.errornotification(this.$root.trans.capacity_error.replace(/@person/g, this.member_limit)); return false;
-            } else if (this.reservation.number.toString().length != 10) {
-                this.errornotification(this.$root.trans.number_error);
-            }else if(!this.reservation.agree_condition){
-                this.errornotification(this.$root.trans.accept_term_cond); return false;
-            }else{
-                var formData = new FormData();
-                formData.append('person', this.reservation.member);
-                formData.append('floor', this.reservation.floor);
-                formData.append('role', 'Guest');
-                formData.append('qrToken', this.qrToken);
+            this.checkreservation()
+            if(this.close_reservation == 0){
+                if(!this.reservation.name || !this.reservation.number || !this.reservation.member){
+                    this.errornotification(this.$root.trans.reservation_error); return false;
+                } else if (parseInt(this.reservation.member) > parseInt(this.member_limit)) {
+                    this.errornotification(this.$root.trans.capacity_error.replace(/@person/g, this.member_limit)); return false;
+                } else if (this.reservation.number.toString().length != 10) {
+                    this.errornotification(this.$root.trans.number_error);
+                }else if(!this.reservation.agree_condition){
+                    this.errornotification(this.$root.trans.accept_term_cond); return false;
+                }else{
+                    var formData = new FormData();
+                    formData.append('person', this.reservation.member);
+                    formData.append('floor', this.reservation.floor);
+                    formData.append('role', 'Guest');
+                    formData.append('qrToken', this.qrToken);
 
-                axios.post('/api/check-time', formData)
-                .then((res) => {
-                    if(res.data.success){
-                        this.waiting_time = res.data.waiting_time;
-                        this.hour_min = res.data.hour_min;
-                        this.checkWaitingTime = true;
-                    }
-                    else{
-                        this.errornotification(res.data.message); return false;
-                    }
-                });
+                    axios.post('/api/check-time', formData)
+                    .then((res) => {
+                        if(res.data.success){
+                            this.waiting_time = res.data.waiting_time;
+                            this.hour_min = res.data.hour_min;
+                            this.checkWaitingTime = true;
+                        }
+                        else{
+                            this.errornotification(res.data.message); return false;
+                        }
+                    });
+                }
             }
+
         },
         successnotification(notice) {
             var notificationFull = f7.notification.create({
@@ -362,33 +381,35 @@ export default {
             })
         },
         checkTimeForRegister() {
-            if(!this.reservation.name || !this.reservation.number || !this.reservation.member){
-                this.errornotification(this.$root.trans.reservation_error); return false;
-            }else if(parseInt(this.reservation.member) > parseInt(this.member_limit)){
-                this.errornotification(this.$root.trans.capacity_error.replace(/@person/g, this.member_limit)); return false;
-            } else if (this.reservation.number.toString().length != 10) {
-                this.errornotification(this.$root.trans.number_error); return false;
-            }else if(!this.reservation.agree_condition){
-                this.errornotification(this.$root.trans.accept_term_cond); return false;
+            this.checkreservation();
+            if(this.close_reservation == 0){
+                if(!this.reservation.name || !this.reservation.number || !this.reservation.member){
+                    this.errornotification(this.$root.trans.reservation_error); return false;
+                }else if(parseInt(this.reservation.member) > parseInt(this.member_limit)){
+                    this.errornotification(this.$root.trans.capacity_error.replace(/@person/g, this.member_limit)); return false;
+                } else if (this.reservation.number.toString().length != 10) {
+                    this.errornotification(this.$root.trans.number_error); return false;
+                }else if(!this.reservation.agree_condition){
+                    this.errornotification(this.$root.trans.accept_term_cond); return false;
+                }
+
+                var formData = new FormData();
+                formData.append('person', this.reservation.member);
+                formData.append('floor', this.reservation.floor);
+                formData.append('role', 'Guest');
+                formData.append('qrToken', this.qrToken);
+
+                axios.post('/api/check-time', formData)
+                .then((res) => {
+                    if(res.data.success){
+                        this.waiting_time = res.data.waiting_time;
+                        this.register();
+                    }
+                    else{
+                        this.errornotification(res.data.message); return false;
+                    }
+                });
             }
-
-            var formData = new FormData();
-            formData.append('person', this.reservation.member);
-            formData.append('floor', this.reservation.floor);
-            formData.append('role', 'Guest');
-            formData.append('qrToken', this.qrToken);
-
-            axios.post('/api/check-time', formData)
-            .then((res) => {
-                if(res.data.success){
-                    this.waiting_time = res.data.waiting_time;
-                    this.register();
-                }
-                else{
-                    this.errornotification(res.data.message); return false;
-                }
-            });
-
         },
         register() {
             if(this.reservation.agree_condition) var agree_condition = 1;

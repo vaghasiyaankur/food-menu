@@ -152,6 +152,8 @@ Route::post('/set-device-token',[ReservationController::class, 'setDeviceToken']
 
 Route::get('/check-reservation',[ReservationController::class, 'checkReservation']);
 
+Route::get('/check-reservation-enable',[ReservationController::class, 'checkReservationEnabled']);
+
 Route::post('/change-reservation',[ReservationController::class, 'changeReservation']);
 
 Route::post('/check-time',[ReservationController::class, 'checkTime']);
