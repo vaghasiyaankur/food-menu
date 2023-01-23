@@ -104,9 +104,9 @@
                 <div class="pagination_count padding-vertical-half">
                     <div class="pagination_list">
                         <div v-for="(link,index) in paginationData.links" :key="link">
-                            <a href="javascript:;" v-if="index == 0" @click="link.url != null ? reservationData(paginationData.current_page - 1) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon-prev"></i></a>
+                            <a href="javascript:;" v-if="index == 0" @click="link.url != null ? reservationData(link.url) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon-prev"></i></a>
                             <a href="javascript:;" v-if="paginationData.links.length - 1 != index && index != 0" @click="reservationData(link.url)" :class="{ 'disabled': link.url == null, 'active': paginationData.current_page == index}">{{ index }}</a>
-                            <a href="javascript:;" v-if="paginationData.links.length - 1 == index" @click="link.url != null ? reservationData(paginationData.current_page + 1) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon-next"></i></a>
+                            <a href="javascript:;" v-if="paginationData.links.length - 1 == index" @click="link.url != null ? reservationData(link.url) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon-next"></i></a>
                         </div>
                     </div>
                 </div>

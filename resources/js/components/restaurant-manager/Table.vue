@@ -49,7 +49,7 @@
                                 <div class="table_reservation margin-bottom">
 
                                     <!-- <h3 class="no-margin-top">Reserved</h3> -->
-                                    <div class="display-flex">
+                                    <div class="display-flex h-100">
                                         <!-- <draggable :scroll-sensitivity="250"  :force-fallback="true" class="dragArea list-group w-full" :class="'dragger'+table.id" :list="order[index]" @start="startDrag(order.id, table.id)" @touchend.prevent="onDrop" v-for="(order,index) in table.orders" :key="order.id"> -->
 
                                         <div class="table_reservation_info " :class="'test'+order.id" v-for="(order,index) in table.orders" :key="order.id" >
@@ -1090,6 +1090,9 @@ p.count__text{
     margin-left: 5px;
 
 }
+.h_100{
+    height:100%;
+}
 /*=============== POPOVER=================*/
 .popover.popover-move{
     background-color: #F33E3E;
@@ -1229,7 +1232,7 @@ content: '';
 /*=========== ONGOING POPOVER =============*/
 .ongoing_popover{
     background-color:  #E2E2E2;
-    left : 3px;
+    /* left : 5px; */
     border: 1px solid #C4C4C4;
     position: relative;
 }
@@ -1239,16 +1242,17 @@ content: '';
  .ongoing_blinking{
     position: relative;
     height: 100%;
+    left:5px;
 }
 .ongoing_blinking::before{
     position: absolute;
     content: "";
     top: -7px;
-    left: -7px;
+    left: -11px;
     background-image:url("/images/finish_blinking2.gif");
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 175px 220px;
+    background-size: 180px 220px;
     width:100%;
     height: 100%;
     /* z-index: 9999; */
@@ -1418,6 +1422,7 @@ content: '';
     max-width: 96px;
     margin-right: 30px;
     position: relative;
+    height:60px;
 }
 .person-info .person_info_name p{
     font-weight: 500;
