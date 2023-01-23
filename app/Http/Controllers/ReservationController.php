@@ -491,8 +491,8 @@ class ReservationController extends Controller
     public function checkReservationEnabled(Request $request)
     {
         $userId = Auth::id();
-        if ($request->qrToken != 'undefined') {
-            $qrcode_token = $request->qrToken;
+        if ($request->qrcode != 'undefined') {
+            $qrcode_token = $request->qrcode;
             $date = Carbon::now()->format('Y-m-d');
             $qrcode = QrCodeToken::whereToken($qrcode_token)->where('start_date', '<=', $date)->where('end_date', '>=', $date)->first();
             if ($qrcode) {

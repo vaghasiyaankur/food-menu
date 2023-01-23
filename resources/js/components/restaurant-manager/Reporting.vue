@@ -195,29 +195,6 @@ export default {
         this.report();
         this.apexchartData();
     },
-    setup() {
-        const numbers = [];
-        for (let i = 1; i <= 31; i++) {
-            numbers.push(i);
-        }
-
-        // helpers data for axis
-        const dates = [];
-        const today = new Date();
-        const year = today.getFullYear();
-        const month = today.getMonth();
-        for (let i = 0; i < 12; i += 1) {
-            dates.push(new Date(year, month - (3 - i)));
-        }
-        const axisDateFormat = Intl.DateTimeFormat(undefined, { month: 'short', year: 'numeric' });
-        const tooltipDateFormat = Intl.DateTimeFormat(undefined, { month: 'long', year: 'numeric' });
-        return {
-            dates,
-            axisDateFormat,
-            tooltipDateFormat,
-            numbers
-        };
-    },
     methods : {
         chartInstance(chart) {
             this.chart = chart;

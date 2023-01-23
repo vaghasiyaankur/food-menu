@@ -145,6 +145,13 @@
                                                                                 </div>
                                                                             </div>
                                                                         </li>
+                                                                        <li class="no-available-list" v-if="available_floorlist.length == 0">
+                                                                            <div class="floor_number display-flex align-items-center justify_content_between w-100 no-cap">
+                                                                                <div class="floor_name">
+                                                                                    <span>Not above capacity floor</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </li>
                                                                     </ul>
                                                                 </div>
                                                                 <!-- ============FLOOR DROP DOWN END ============= -->
