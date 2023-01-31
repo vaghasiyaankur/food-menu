@@ -41,8 +41,8 @@ class TableSeeder extends Seeder
         // }
 
         $tables = [
-            ['color_id' => 1, 'capacity_of_person' => 04,'user_id' => 1,'floor_id' => 1,'finish_order_time' => 20],
-            ['color_id' => 2, 'capacity_of_person' => '02','user_id' => 1,'floor_id' => 1,'finish_order_time' => 15],
+            ['color_id' => 1, 'capacity_of_person' => '04','user_id' => 1,'floor_id' => 1,'finish_order_time' => 20],
+            ['color_id' => 2, 'capacity_of_person' => '02','user_id' => 1,'floor_id' => 1,'finish_order_time' => 1],
             ['color_id' => 3, 'capacity_of_person' => '06','user_id' => 1,'floor_id' => 1,'finish_order_time' => 25],
 
             ['color_id' => 4, 'capacity_of_person' => '12','user_id' => 1,'floor_id' => 2,'finish_order_time' => 30],

@@ -1,14 +1,20 @@
 <template>
     <f7-page class="page-favourite bg-color-white">
         <div class="nav-bar">
+
+            <!-- :back-link="'/favourites/'" -->
             <f7-navbar
             class="navbar-menu text-color-white"
             large
             transparent
-            :title="$root.trans.my_favourite"
-            :back-link="$root.trans.back"
             >
-                <div class="favourites-card">
+                <div class="favourites-card padding-left">
+                    <a class="link icon-only" href="/waiting/">
+                        <i class="f7-icons">arrow_left</i>                    
+                    </a>
+                </div>
+                <div class="title">{{$root.trans.my_favourite}}</div>
+                <div class="favourites-card padding-right">
                     <a class="link icon-only" href="/favourites/">
                         <i class="f7-icons size-22 text-color-white padding-half font-18">heart_fill</i>
                     </a>
@@ -107,7 +113,7 @@ export default {
 <style scoped>
     .nav-bar{
         background: #38373D;
-        border-radius: 8px 8px 0px 0px;
+        /* border-radius: 8px 8px 0px 0px; */
         transform: matrix(1, 0, 0, -1, 0, 0);
     }
 

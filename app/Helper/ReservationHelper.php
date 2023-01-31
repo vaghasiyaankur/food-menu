@@ -21,10 +21,11 @@ class ReservationHelper{
             // $nexttable = $nexttable->orderBy('capacity_of_person','ASC')->whereIn('capacity_of_person', '>' , [$from_cap, $to_cap])->first();
             // dd($from_cap);
             $tableIds = Table::where('status', 1)->where('user_id', $user_id);
-            if($floor !== 'null') {
+
+            if($floor != 'null' && $floor != 0) {
                 $tableIds = $tableIds->where('floor_id', $floor);
             }
-            $tableIds = $tableIds->orderBy('capacity_of_person','ASC')->where('capacity_of_person', '>=', $from_cap)->where('capacity_of_person', '<=', $to_cap)->pluck('id');
+            $tableIds = $tableIds->orderBy('capacity_of_person','ASC')->where('capacity_of_person', '>=', $from_cap)->where('capacity_of_person', '<=', $to_cap)->pluck('id');     
             $orderExists = Order::with(['table' => function($q) use ($from_cap,$user_id){
                 $q->where('capacity_of_person', $from_cap)->where('user_id',$user_id);
             }])->whereNotNull('start_time')->where('finished', 0)->doesntExist();

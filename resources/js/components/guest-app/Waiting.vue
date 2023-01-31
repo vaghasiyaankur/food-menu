@@ -25,11 +25,13 @@
                             class="display-flex justify-content-space-between align-items-center flex-direction-column">
                             <img src="/images/clock.png" alt="">
                             <p v-if="time == 0" class="no-margin margin-top-half font-20">{{ $root.trans.your_turn }}</p>
-                            <vue-countdown v-else :time="time" v-slot="{ hours, minutes, seconds }">
+                            <p v-else-if="time != 0" class="no-margin margin-top-half font-20">{{ remainingWaitingTime }}</p>
+                            <!-- <vue-countdown v-else :time="time" v-slot="{ hours, minutes, seconds }">
                                 <p class="no-margin margin-top-half font-20" v-if="String(hours).padStart(2, '0') != 0">{{ String(hours).padStart(2, '0') +' '+ $root.trans.hour_and + ' ' +String(minutes).padStart(2, '0')+' '+$root.trans.min_left}}</p>
                                 <p class="no-margin margin-top-half font-20" v-else-if="String(minutes).padStart(2, '0') != 0">{{ String(minutes).padStart(2, '0')+' '+$root.trans.min_left}}</p>
-                                <p class="no-margin margin-top-half font-20" v-else>{{ String(seconds).padStart(2, '0')+' '+$root.trans.second_left}}</p>
-                            </vue-countdown>
+                                <p class="no-margin margin-top-half font-20" v-else-if="String(seconds).padStart(2, '0') != 0">{{ String(seconds).padStart(2, '0')+' '+$root.trans.second_left}}</p>
+                                 <p class="no-margin margin-top-half font-20" v-else>{{ $root.trans.your_turn }}</p>
+                            </vue-countdown> -->
                         </div>
                     </div>
                 </div>
@@ -85,9 +87,13 @@
                             <span class="table_info_text">{{ $root.trans.number_guest }}  : </span>
                             <span>{{ order.orders ? String(order.orders[0].person).padStart(2, '0') : '' }}</span>
                         </div>
-                        <div class="date_time margin-top-half margin-bottom">
+                        <div class="date_time margin-top-half">
                             <span class="table_info_text">{{ $root.trans.date_time }} : </span>
-                            <span>{{ dateFormat(this.order.created_at) }}</span>
+                            <span>{{ order.orders ? dateFormat(order.orders[0].created_at) :  dateFormat(order.created_at)}}</span>
+                        </div>
+                         <div class="margin-top-half margin-bottom">
+                            <span class="table_info_text">{{ $root.trans.floor_no }} : </span>
+                            <span>{{ this.order.floor ? this.order.floor.name : '' }}</span>
                         </div>
                     </div>
                 </div>
@@ -142,6 +148,8 @@ export default {
             },
             windowWidth : 0,
             qrcode : '',
+            remainingWaitingTime : '0 Second Left',
+            intervalId : null
         }
     },
     setup() {
@@ -157,10 +165,16 @@ export default {
             this.qrcode = f7.view.current.router.initialUrl.split('/?qrcode=')[1];
             if(this.qrcode){
                 this.cookies.set("qrcode", this.qrcode, 60 * 60 * 24);
+                this.getOrderData();
                 this.getWaitingTime();
             }
             this.$root.removeLoader();
         }, 1000);
+    },
+    mounted() {
+        this.intervalId = setInterval(() => {
+               this.getWaitingTime();
+        }, 60000);
     },
     methods: {
         onPageBeforeOut() {
@@ -196,13 +210,12 @@ export default {
                 $('.dialog-buttons').addClass('margin-vertical padding-bottom');
             });
         },
-        getWaitingTime() {
+        getOrderData() {
 
             var ids = JSON.parse(this.cookies.get('orderId'));
 
-            axios.post('/api/waiting-time', {ids : ids})
+            axios.post('/api/waiting-order-data', {ids : ids})
             .then((res) => {
-                this.time = res.data.time;
                 this.order = res.data.table;
                 if (parseInt(this.order.capacity_of_person) % 2 != 0) {
                     var cap = parseInt(this.order.capacity_of_person - 1);
@@ -218,6 +231,51 @@ export default {
             })
             .catch((err) => {
             });
+        },
+        getWaitingTime() {
+
+            var ids = JSON.parse(this.cookies.get('orderId'));
+
+            axios.post('/api/waiting-time', {ids : ids})
+            .then((res) => {
+                this.time = res.data.time;
+                let hours = Math.floor(this.time / 3600000);
+                let minutes = Math.floor((this.time % 3600000) / 60000);
+                let seconds = Math.floor(((this.time % 3600000) % 60000) / 1000);
+
+                if(hours > 0)  this.remainingWaitingTime = String(hours).padStart(2, '0') +' '+ this.$root.trans.hour_and + ' ' +String(minutes).padStart(2, '0')+' '+this.$root.trans.min_left;
+                else if(minutes > 0) this.remainingWaitingTime = String(minutes).padStart(2, '0')+' '+this.$root.trans.min_left;
+                else if(seconds > 0) this.remainingWaitingTime = String(seconds).padStart(2, '0')+' '+this.$root.trans.second_left;
+                else{
+                    this.remainingWaitingTime = '0 Second Left';
+                    this.time = 0;
+                    // clearInterval(this.intervalId);
+                }
+            })
+            .catch((err) => {
+            });
+            // this.intervalId = setInterval(() => {
+            //     this.getWaitingTime();
+            //     // if (second < (60 * parseFloat(this.highlight_time))) {
+            //     //     second++;
+            //     //     if (this.row_tables[rowIndex] != undefined && this.row_tables[rowIndex][tableIndex] != undefined && this.row_tables[rowIndex][tableIndex].orders[orderIndex] != undefined) {
+            //     //         this.row_tables[rowIndex][tableIndex].orders[orderIndex].order_moved = second;
+            //     //         if(second > 60){
+            //     //             var minutes = parseInt(Math.floor(second / 60), 10);
+                //             var extraSeconds = second % 60;
+                //             minutes = minutes < 10 ? "0" + minutes : minutes;
+                //             extraSeconds = extraSeconds < 10 ? "0" + extraSeconds : extraSeconds;
+                //             this.row_tables[rowIndex][tableIndex].orders[orderIndex].order_moved_text = minutes+' minute '+extraSeconds+' second ago';
+                //         }else{
+                //             this.row_tables[rowIndex][tableIndex].orders[orderIndex].order_moved_text = second+' seconds ago';
+                //         }
+                //     }
+                // }else{
+                //     this.tableListFloorWise(this.active_floor_id);
+                //     f7.popover.close('.popover-move');
+                //     clearInterval(this.intervalId);
+                // }
+            // }, 1000  );
         },
         dateFormat(date) {
             return moment(String(date)).format('DD, MMM YYYY / hh:mm a');
@@ -300,7 +358,7 @@ export default {
 }
 .nav-bar{
     background: #38373D;
-    border-radius: 8px 8px 0px 0px;
+    /* border-radius: 8px 8px 0px 0px; */
     transform: matrix(1, 0, 0, -1, 0, 0);
 }
 

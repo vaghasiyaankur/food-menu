@@ -162,6 +162,8 @@ Route::post('/floor-available',[ReservationController::class, 'floorAvailable'])
 
 Route::post('/waiting-time',[ReservationController::class, 'waitingTime']);
 
+Route::post('/waiting-order-data',[ReservationController::class, 'waitingOrderData']);
+
 Route::post('/check-order',[ReservationController::class, 'checkOrder']);
 
 Route::post('/cancel-reservation',[ReservationController::class, 'cancelReservation']);

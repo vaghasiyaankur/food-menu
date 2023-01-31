@@ -281,7 +281,7 @@ export default {
         successnotification(notice) {
             var notificationFull = f7.notification.create({
                 title: '<img src="/images/checkicon.png">' + notice ,
-                closeTimeout: 2000,
+                closeTimeout: 3000,
                 closeOnClick: true,
                 cssClass: 'success--notification'
 
@@ -293,7 +293,7 @@ export default {
         errornotification(notice) {
             var notificationFull = f7.notification.create({
                 title: '<img src="/images/crossicon.png">' + notice ,
-                closeTimeout: 2000,
+                closeTimeout: 3000,
                 closeOnClick: true,
                 cssClass: 'error--notification'
 

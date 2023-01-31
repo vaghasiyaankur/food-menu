@@ -33,34 +33,38 @@
                 <form class="list margin-vertical" id="my-form">
                     <div class="item-content item-input no-padding-left">
                         <div class="item-inner no-padding-right">
-                            <!-- <div class="item-title item-label">Name</div> -->
                             <div class="item-input-wrap margin-bottom-half margin-top-half">
-                                <input type="text" v-model="reservation.name" name="name" class="padding" :placeholder="$root.trans.enter_name">
+                                <input type="text" v-model="reservation.name" name="name" class="padding" :placeholder="$root.trans.enter_name" @keyup="removeTimer()">
                             </div>
                         </div>
                     </div>
 
                     <div class="item-content item-input no-padding-left">
                         <div class="item-inner no-padding-right">
-                            <!-- <div class="item-title item-label">Phone number</div> -->
-                            <div class="item-input-wrap margin-bottom-half"><input type="text" v-model.number="reservation.number" name="number" class="padding" :placeholder="$root.trans.phone_number" minlength="10" maxlength="10" @keypress="checknumbervalidate"></div>
+                            <div class="item-input-wrap margin-bottom-half">
+                                <input type="number" v-model.number="reservation.number" name="number" class="padding" :placeholder="$root.trans.phone_number" @keypress="checknumbervalidate;" @keyup="removeTimer()">
+                                </div>
                         </div>
                     </div>
                     <div class="item-content item-input no-padding-left">
                         <div class="item-inner no-padding-right">
-                            <!-- <div class="item-title item-label">Family member number</div> -->
-                            <div class="item-input-wrap margin-bottom-half"><input type="number" v-model="reservation.member" name="member" class="padding" :placeholder="$root.trans.family_member" @keyup="floorAvailable"></div>
-                        </div>
+                            <div class="item-input-wrap margin-bottom-half">
+                                <input type="number" v-model="reservation.member" name="member" class="padding" :placeholder="$root.trans.family_member" @keyup="floorAvailable(); removeTimer()"  @keypress="checknumbervalidate">
+                                </div>
+                         </div>
                     </div>
                     <div class="item-content item-input no-padding-left floor-selection">
                         <div class="item-inner no-padding-right">
                             <div class="item-input-wrap">
                                 <div class="f-concise position-relative">
                                     <div id="selection-concise" class="floor--list">
-                                        <div id="select-concise" class="input-dropdown-wrap" :class="{ 'disable-text' : !reservation.member}" @click="reservation.member ? showFloorList = !showFloorList : ''">{{ reservation.member ? showFloorName : 'Select floor' }}</div>
+                                        <div id="select-concise" class="input-dropdown-wrap" :class="{ 'disable-floor-list' : !Object.keys(this.floors).length}" @click="reservation.member ? showFloorList = !showFloorList : ''">{{ reservation.member ? showFloorName : 'Select floor' }}</div>
+                                        
                                         <ul id="location-select-list" class="dropdown_list" :class="{ 'display-none' : showFloorList }">
-                                            <li class="concise p-1" :class="{ 'active': reservation.floor == 0 }" @click="reservation.floor = 0; showFloorName = $root.trans.earlier; showFloorList = true">{{ $root.trans.earlier }}</li>
-                                            <li class="concise p-1" :class="{ 'active': reservation.floor == key }" @click="reservation.floor = key; showFloorName = floor; showFloorList = true" v-for="(floor,key) in floors" :key="floor" :data-id="key"><span :data-id="key">{{ floor }}</span></li>
+
+                                            <li class="concise p-1" :class="[{ 'active': reservation.floor == 0}, {'display-none' : Object.keys(this.floors).length < 2 }, {'display-block' : Object.keys(this.floors).length > 1 }]" @click="reservation.floor = 0; showFloorName = $root.trans.earlier; showFloorList = true; removeTimer()">{{ $root.trans.earlier }}</li>
+
+                                            <li class="concise p-1" :class="{ 'active': reservation.floor == key }" @click="reservation.floor = key; showFloorName = floor; showFloorList = true; removeTimer()" v-for="(floor,key) in floors" :key="floor" :data-id="key"><span :data-id="key">{{ floor }}</span></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -84,9 +88,9 @@
                 <div class="countdown_section position-relative margin-horizontal" :class="{ 'display-none' : !checkWaitingTime }">
                     <div style="background : url('/images/dots.png')">
                         <img src="/images/clock.png" alt="clock">
-                        <i class="f7-icons font-13 padding-half margin-bottom close-countdown" @click="(checkWaitingTime = false)">xmark</i>
+                        <i class="f7-icons font-13 padding-half margin-bottom close-countdown" @click="removeTimer()">xmark</i>
                         <!-- <vue-countdown :time="60 * 60 * 1000" v-slot="{ hours, minutes, seconds }"> -->
-                            <p class="no-margin margin-top-half font-20">{{ waiting_time + " " + hour_min }}</p>
+                            <p class="no-margin margin-top-half font-20">{{ waiting_time != "00:00" ? waiting_time + " " + hour_min : $root.trans.no_waiting_time}}</p>
                         <!-- </vue-countdown> -->
                     </div>
                 </div>
@@ -323,7 +327,8 @@ export default {
                 if(!this.reservation.name || !this.reservation.number || !this.reservation.member){
                     this.errornotification(this.$root.trans.reservation_error); return false;
                 } else if (parseInt(this.reservation.member) > parseInt(this.member_limit)) {
-                    this.errornotification(this.$root.trans.capacity_error.replace(/@person/g, this.member_limit)); return false;
+                    this.errornotification(this.$root.trans.capacity_error); return false;
+                    // this.errornotification(this.$root.trans.capacity_error.replace(/@person/g, this.member_limit)); return false;
                 } else if (this.reservation.number.toString().length != 10) {
                     this.errornotification(this.$root.trans.number_error);
                 }else if(!this.reservation.agree_condition){
@@ -353,7 +358,7 @@ export default {
         successnotification(notice) {
             var notificationFull = f7.notification.create({
                 title: '<img src="/images/checkicon.png">' + notice ,
-                closeTimeout: 2000,
+                closeTimeout: 3000,
                 closeOnClick: true,
                 cssClass: 'success--notification'
 
@@ -364,8 +369,8 @@ export default {
         },
         errornotification(notice) {
             var notificationFull = f7.notification.create({
-                title: '<img src="/images/crossicon.png">' + notice ,
-                closeTimeout: 2000,
+                title: '<img src="/images/crossicon.png">' + notice,
+                closeTimeout: 3000,
                 closeOnClick: true,
                 cssClass: 'error--notification'
 
@@ -386,7 +391,8 @@ export default {
                 if(!this.reservation.name || !this.reservation.number || !this.reservation.member){
                     this.errornotification(this.$root.trans.reservation_error); return false;
                 }else if(parseInt(this.reservation.member) > parseInt(this.member_limit)){
-                    this.errornotification(this.$root.trans.capacity_error.replace(/@person/g, this.member_limit)); return false;
+                    this.errornotification(this.$root.trans.capacity_error); return false;
+                    // this.errornotification(this.$root.trans.capacity_error.replace(/@person/g, this.member_limit)); return false;
                 } else if (this.reservation.number.toString().length != 10) {
                     this.errornotification(this.$root.trans.number_error); return false;
                 }else if(!this.reservation.agree_condition){
@@ -484,6 +490,7 @@ export default {
         },
         floorAvailable() {
             if(this.reservation.member){
+                this.showFloorName = 'Select Floor';
                 axios.post('/api/floor-available', {'member' : this.reservation.member})
                 .then((res) => {
                     if(res.data.success){
@@ -491,6 +498,9 @@ export default {
                         this.floors = res.data.floors;
                     }
                 });
+            }else{
+                this.showFloorName = 'Select Floor';
+                this.floors = {};
             }
         },
         setDeviceToken(userId) {
@@ -535,6 +545,9 @@ export default {
             if (!floor_list) {
                 this.showFloorList = true;
             }
+        },
+        removeTimer() {
+            this.checkWaitingTime = null;
         }
     }
 }
@@ -556,23 +569,11 @@ export default {
 .position-relative{
     position: relative;
 }
-/*=======NAVBAR =========*/
-/*.language_dropdown{
-    background: #FFFFFF;
-    box-shadow: 0.7px 0.7px 5px rgba(0, 0, 0, 0.2);
-    border-radius: 3px;
-}*/
 .border_bottom{
     border-bottom: 1px solid #DBDBDB;
 }
-/*.d-flex{
-    display: flex;
-}*/
-/*.justify_content_between{
-    justify-content: space-between;
-}*/
 #select-concise{
-    background-color: #FAFAFA !important;
+    background-color: #FAFAFA;
     border-radius: 10px;
     height: 40px;
     display: flex;
@@ -642,6 +643,7 @@ export default {
 	height: 5px;
 	background: #F3F3F3;
 	margin: 12px auto 0;
+    visibility: hidden !important;
 }
 .border_radius_10 {
     border-radius: 10px;
@@ -807,11 +809,52 @@ label.item-checkbox input[type='checkbox']:checked~.icon-checkbox{
 .md .item-input:not(.item-input-outline) .item-input-wrap::after, .md .input:not(.input-outline)::after {
     background-color: transparent !important;
 }
-.disable-text{
+.disable-floor-list{
     color: #999999;
+    background-color: #dcdcdc !important;
+}
+@media screen and (max-width:380px) {
+    .item-inner    {
+        padding-left: 0 !important;
+    }
+    .list .item-title{
+        font-size: 12px;
+    }
+    .term_condition{
+        font-size: 12px;
+
+    }
+}
+@media screen and (max-width:330px) {
+    .list .item-title{
+        font-size: 10px;
+    }
+    .term_condition{
+        font-size: 11px;
+
+    }
+}
+@media screen and (max-width:310px) {
+    .list .item-title{
+        font-size: 9px;
+    }
+    .term_condition{
+        font-size: 9px;
+
+    }
 }
 </style>
 <style>
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield !important;
+}
 .font-20{
     font-size: 20px;
 }
@@ -916,5 +959,12 @@ label.item-checkbox input[type='checkbox']:checked~.icon-checkbox{
 }
 .dialog{
     border-radius: 10px !important;
+}
+label.item-checkbox.active-state{
+    background: none !important;
+}
+ .ripple-wave{
+    display: none;
+    height: 0px !important;
 }
 </style>

@@ -378,6 +378,7 @@ export default {
     height: 5px;
     background: #F3F3F3;
     margin: 12px auto 0;
+    visibility: hidden !important;
 }
 .menu-image{
     box-sizing: border-box;

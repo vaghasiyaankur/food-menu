@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
             CustomerSeeder::class,
             FloorSeeder::class,
             TableSeeder::class,
-            OrderSeeder::class,
+            // OrderSeeder::class,
             SettingSeeder::class,
             ContentSeeder::class,
             QrCodeTokenSeeder::class

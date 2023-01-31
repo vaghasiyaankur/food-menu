@@ -8,6 +8,7 @@ use App\Models\TableShiftHistory;
 use App\Models\FloorShiftHistory;
 use App\Models\Setting;
 use App\Models\Table;
+use App\Models\Language;
 use App\Models\Floor;
 use Illuminate\Http\Request;
 use App\Helper\ReservationHelper;
@@ -16,6 +17,7 @@ use Kutia\Larafirebase\Facades\Larafirebase;
 use Validator;
 use App\Events\NewReservation;
 use App\Helper\SettingHelper;
+use App\Models\Content;
 use App\Models\QrCodeToken;
 use Illuminate\Support\Facades\Auth;
 use League\CommonMark\Parser\Inline\NewlineParser;
@@ -149,7 +151,12 @@ class ReservationController extends Controller
 
             return response()->json(['success' => 'registration added successfully.', 'orderId' => $order->id, 'user_id' => $register->id]);
         }else{
-            return response()->json(['error' => "We don't have the capacity table for that many people"], 401);
+            $langs = Language::whereStatus(1)->pluck('id')->toarray();
+            $lang_id = request()->session()->get('lang');
+            $langId = in_array($lang_id, $langs) ? $lang_id : SettingHelper::systemLang();
+            $content = Content::where('language_id', $langId)->where('title', 'capacity_error')->first();
+            $message = $content ? $content->content : "We don't have a table for that many people. Please contact the restaurant manager.";
+            return response()->json(['error' => $message], 401);
         }
     }
 
@@ -258,6 +265,7 @@ class ReservationController extends Controller
                     $calculateTime += $order->finish_time;
                 }
             }
+            if($calculateTime < 0) $calculateTime = 0;
             $checkTime = date('H', mktime(0,$calculateTime));
             if($checkTime == "0"){
                 $hour_min = 'Minutes';
@@ -267,7 +275,12 @@ class ReservationController extends Controller
             $waiting_time = date('H:i', mktime(0,$calculateTime));
             return response()->json([ 'success' => true, 'waiting_time' => $waiting_time , 'hour_min' => $hour_min ] , 200);
         }else{
-            return response()->json([ 'success' => false, 'message' => "We don't have the capacity table for that many people" ] , 200);
+            $langs = Language::whereStatus(1)->pluck('id')->toarray();
+            $lang_id = request()->session()->get('lang');
+            $langId = in_array($lang_id, $langs) ? $lang_id : SettingHelper::systemLang();
+            $content = Content::where('language_id', $langId)->where('title', 'capacity_error')->first();
+            $message = $content ? $content->content : "We don't have a table for that many people. Please contact the restaurant manager.";
+            return response()->json(['success' => false, 'message' => $message], 200);
         }
     }
 
@@ -308,7 +321,7 @@ class ReservationController extends Controller
     /**
      *  Show Waiting Time for order for user
      *
-     * @return @json ($floors)
+     * @return @json ($time)
      *
      */
 
@@ -344,13 +357,50 @@ class ReservationController extends Controller
 
             $start  = new Carbon($finalTime);
             $end    = new Carbon();
-            $time = ($start->diffInHours($end) * 60) + ($start->diffInMinutes($end) * 60)+ ($start->diffInSeconds($end) * 1000);
-            $table = Table::with(['color','orders' => function($q) use ($orderId){
+            if($start > $end) $time = ($start->diffInHours($end) * 60) + ($start->diffInMinutes($end) * 60)+ ($start->diffInSeconds($end) * 1000);
+            else $time = 0;
+
+            return response()->json([ 'success' => true, 'time' => $time ] , 200);
+        }else{
+            $langs = Language::whereStatus(1)->pluck('id')->toarray();
+            $lang_id = request()->session()->get('lang');
+            $langId = in_array($lang_id, $langs) ? $lang_id : SettingHelper::systemLang();
+            $content = Content::where('language_id', $langId)->where('title', 'capacity_error')->first();
+            $message = $content ? $content->content : "We don't have a table for that many people. Please contact the restaurant manager.";
+            return response()->json(['success' => false, 'message' => $message], 200);
+        }
+    }
+
+    /**
+     *  Show Waiting Order Data for order for user
+     *
+     * @return @json ($table)
+     *
+     */
+
+    public function waitingOrderData(Request $request)
+    {
+        // $table_id = ReservationHelper::takeTable($request->floor, $request->person);
+        $orderIds = $request->ids;
+        $orderId = $orderIds[0];
+        $table_id = Order::where('id', $orderId)->first()->table_id;
+        if($table_id){
+            $table = Table::with(['color',
+                'floor' => function($q){
+                    $q->select('id','name');
+                },
+                'orders' => function($q) use ($orderId){
                 $q->where('id', $orderId);
             }])->where('id', $table_id)->first();
-            return response()->json([ 'success' => true, 'time' => $time , 'table' => $table ] , 200);
+            
+            return response()->json([ 'success' => true, 'table' => $table ] , 200);
         }else{
-            return response()->json([ 'success' => false, 'message' => "We don't have the capacity table for that many people" ] , 200);
+            $langs = Language::whereStatus(1)->pluck('id')->toarray();
+            $lang_id = request()->session()->get('lang');
+            $langId = in_array($lang_id, $langs) ? $lang_id : SettingHelper::systemLang();
+            $content = Content::where('language_id', $langId)->where('title', 'capacity_error')->first();
+            $message = $content ? $content->content : "We don't have a table for that many people. Please contact the restaurant manager.";
+            return response()->json(['success' => false, 'message' => $message], 200);
         }
     }
 

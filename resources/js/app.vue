@@ -64,12 +64,12 @@ export default {
     created() {
         this.getLanguage();
         this.languageTranslation();
-        $(window).bind('load', function () {
-            $('.overlay, body').addClass('loaded');
-            setTimeout(function () {
-                $('.overlay').css({ 'display': 'none' })
-            }, 1000)
-        });
+        // $(window).bind('load', function () {
+        //     $('.overlay, body').addClass('loaded');
+        //     setTimeout(function () {
+        //         $('.overlay').css({ 'display': 'none' })
+        //     }, 1000)
+        // });
     },
     methods: {
         getLanguage() {

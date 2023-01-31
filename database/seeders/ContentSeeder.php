@@ -37,6 +37,11 @@ class ContentSeeder extends Seeder
             ['language_id' => 2, 'title' => 'check_time', 'content' => 'સમય તપાસો'],
             ['language_id' => 3, 'title' => 'check_time', 'content' => 'समय की जांच करें'],
 
+            ['language_id' => 1, 'title' => 'no_waiting_time', 'content' => 'You have no waiting time.'],
+            ['language_id' => 2, 'title' => 'no_waiting_time', 'content' => 'તમારે રાહ જોવાની જરૂર નથી.'],
+            ['language_id' => 3, 'title' => 'no_waiting_time', 'content' => 'आपको प्रतीक्षा करने की आवश्यकता नहीं है।'],
+            
+
             ['language_id' => 1, 'title' => 'registration', 'content' => 'Registration'],
             ['language_id' => 2, 'title' => 'registration', 'content' => 'નોંધણી'],
             ['language_id' => 3, 'title' => 'registration', 'content' => 'पंजीकरण'],
@@ -81,9 +86,9 @@ class ContentSeeder extends Seeder
             ['language_id' => 2, 'title' => 'conformation_message', 'content' => 'શું તમે ખરેખર આરક્ષણ કરવા માંગો છો? તમારો રાહ જોવાનો સમય યોગ્ય @waiting છે.'],
             ['language_id' => 3, 'title' => 'conformation_message', 'content' => 'क्या आप वाकई आरक्षण करना चाहते हैं? आपका प्रतीक्षा समय उपयुक्त @waiting है|'],
 
-            ['language_id' => 1, 'title' => 'success', 'content' => 'Successful!'],
-            ['language_id' => 2, 'title' => 'success', 'content' => 'સફળ!'],
-            ['language_id' => 3, 'title' => 'success', 'content' => 'सफल!'],
+            ['language_id' => 1, 'title' => 'success', 'content' => 'Your Reservation Successfully placed!'],
+            ['language_id' => 2, 'title' => 'success', 'content' => 'તમારું આરક્ષણ સફળતાપૂર્વક મૂકવામાં આવ્યું!            '],
+            ['language_id' => 3, 'title' => 'success', 'content' => 'आपका आरक्षण सफलतापूर्वक रखा गया!'],
 
             ['language_id' => 1, 'title' => 'waiting_time', 'content' => 'Waiting Time'],
             ['language_id' => 2, 'title' => 'waiting_time', 'content' => 'રાહ સમય'],
@@ -113,9 +118,13 @@ class ContentSeeder extends Seeder
             ['language_id' => 2, 'title' => 'agree', 'content' => 'સંમત'],
             ['language_id' => 3, 'title' => 'agree', 'content' => 'सहमत'],
 
-            ['language_id' => 1, 'title' => 'capacity_error', 'content' => 'order create must be @person member or less than @person member.'],
-            ['language_id' => 2, 'title' => 'capacity_error', 'content' => 'ઓર્ડર બનાવવા માટે @person સભ્યો અથવા @person કરતા ઓછા સભ્યો હોવા જોઈએ.'],
-            ['language_id' => 3, 'title' => 'capacity_error', 'content' => 'ऑर्डर सृजन @person सदस्य या @person सदस्य से कम होना चाहिए।'],
+            // ['language_id' => 1, 'title' => 'capacity_error', 'content' => 'order create must be @person member or less than @person member.'],
+            // ['language_id' => 2, 'title' => 'capacity_error', 'content' => 'ઓર્ડર બનાવવા માટે @person સભ્યો અથવા @person કરતા ઓછા સભ્યો હોવા જોઈએ.'],
+            // ['language_id' => 3, 'title' => 'capacity_error', 'content' => 'ऑर्डर सृजन @person सदस्य या @person सदस्य से कम होना चाहिए।'],
+
+            ['language_id' => 1, 'title' => 'capacity_error', 'content' => "We don't have a table for that many people. Please contact the restaurant manager."],
+            ['language_id' => 2, 'title' => 'capacity_error', 'content' => 'અમારી પાસે આટલા બધા લોકો માટે ટેબલ નથી. કૃપા કરીને રેસ્ટોરન્ટ મેનેજરનો સંપર્ક કરો.'],
+            ['language_id' => 3, 'title' => 'capacity_error', 'content' => 'हमारे पास इतने लोगों के लिए टेबल नहीं है। कृपया रेस्टोरेंट प्रबंधक से संपर्क करें।'],
 
             ['language_id' => 1, 'title' => 'ok', 'content' => 'Ok'],
             ['language_id' => 2, 'title' => 'ok', 'content' => 'બરાબર'],
@@ -156,6 +165,10 @@ class ContentSeeder extends Seeder
             ['language_id' => 1, 'title' => 'date_time', 'content' => 'Date & Time'],
             ['language_id' => 2, 'title' => 'date_time', 'content' => 'તારીખ અને સમય'],
             ['language_id' => 3, 'title' => 'date_time', 'content' => 'तिथि और समय'],
+
+            ['language_id' => 1, 'title' => 'floor_no', 'content' => 'Floor No.'],
+            ['language_id' => 2, 'title' => 'floor_no', 'content' => 'માળ નં.'],
+            ['language_id' => 3, 'title' => 'floor_no', 'content' => 'मंजिल नं.'],
 
             ['language_id' => 1, 'title' => 'table_no', 'content' => 'Table No.'],
             ['language_id' => 2, 'title' => 'table_no', 'content' => 'ટેબલ નંબર'],

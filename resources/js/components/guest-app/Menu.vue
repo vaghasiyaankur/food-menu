@@ -159,11 +159,13 @@ export default {
     height: 5px;
     background: #F3F3F3;
     margin: 12px auto 0;
+    visibility: hidden !important;
 }
 .close-menu{
     position: absolute;
     top: 10px;
     right: 10px;
+    z-index: 999;
   }
   .demo-swiper .swiper-slide {
     font-size: 25px;
