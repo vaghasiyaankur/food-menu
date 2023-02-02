@@ -108,7 +108,7 @@ class QrCodeController extends Controller
             $qr->start_date = date('Y-m-d', strtotime($startDuration));
             $qr->end_date = date('Y-m-d', strtotime($endDuration));
             $qr->user_id = Auth::id();
-            $qr->token = $encode;
+            $qr->token = str_replace("+", "0", $encode);
             $qr->save();
         }
     }
@@ -123,7 +123,7 @@ class QrCodeController extends Controller
         $qrcode = QrCodeToken::find($req->id);
         $data = random_bytes(32);
         $encode = Encoding::base64Encode($data);
-        $qrcode->update(['token'=>$encode]);
+        $qrcode->update(['token'=>str_replace("+", "0", $encode)]);
         return response()->json(['success' => 'Qr Code Regenerated successfully.']);
     }
     public function qrCodereDownload($id)
