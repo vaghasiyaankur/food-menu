@@ -40,7 +40,7 @@ class QrCodeTokenSeeder extends Seeder
                 $qr = new QrCodeToken();
                 $qr->start_date = date('Y-m-d', strtotime($startDuration));
                 $qr->end_date = date('Y-m-d', strtotime($endDuration));
-                $qr->token = $encode;
+                $qr->token = str_replace("+", "0", $encode);
                 $qr->user_id = $user_id;
                 $qr->save();
             }
