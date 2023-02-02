@@ -78,9 +78,8 @@ class TableController extends Controller
                 $is_floor_shift = FloorShiftHistory::where('order_id',$order->id)->latest()->first();
                 $is_table_shift = TableShiftHistory::where('order_id',$order->id)->latest()->first();
                 $floor_start = Carbon::create(@$is_floor_shift->created_at);
-                $table_start = Carbon::create(@$is_floor_shift->created_at);
+                $table_start = Carbon::create(@$is_table_shift->created_at);
                 $end = Carbon::now();
-
                 $is_floor_shift = $floor_start->diffInSeconds($end) <  $timing;
                 $is_table_shift = $table_start->diffInSeconds($end) <  $timing;
 
@@ -138,7 +137,8 @@ class TableController extends Controller
         $tableShiftHistory->from = $fromTableId;
         $tableShiftHistory->to = $toTableId;
         $tableShiftHistory->save();
-
+        $data['created_at'] = Carbon::now()->subSeconds(2);
+        $data['updated_at'] = Carbon::now();
         Order::where('id', $request->id)->update($data);
 
         return response()->json([ 'success' => 'Order Transfer Successfully' ] , 200);
@@ -171,7 +171,7 @@ class TableController extends Controller
                 $is_floor_shift = FloorShiftHistory::where('order_id',$order->id)->latest()->first();
                 $is_table_shift = TableShiftHistory::where('order_id',$order->id)->latest()->first();
                 $floor_start = Carbon::create(@$is_floor_shift->created_at);
-                $table_start = Carbon::create(@$is_floor_shift->created_at);
+                $table_start = Carbon::create(@$is_table_shift->created_at);
                 $end = Carbon::now();
 
                 $is_floor_shift = $floor_start->diffInSeconds($end) <  $timing;
@@ -264,13 +264,15 @@ class TableController extends Controller
         $floorShiftHistory->to = @$toFloorId->floor->name;
         $floorShiftHistory->save();
 
+        $data['created_at'] = Carbon::now()->subSeconds(2);
+        $data['updated_at'] = Carbon::now();
         Order::where('id', $request->id)->update($data);
 
         return response()->json([ 'success' => true, 'message' => 'success' ] , 200);
     }
 
     /**
-     * order transfer to another floor
+     * Finish Order And Move to next Order
      *
      * @return @json ($tables)
      *
@@ -336,6 +338,77 @@ class TableController extends Controller
     }
 
     /**
+     * Cancel Order And Move to next Order
+     *
+     * @return @json ($tables)
+     *
+     */
+    public function cancelNext(Request $request)
+    {
+
+        $orderId = $request->id;
+        $cancel = $request->cancelled_by ? : 'Manager';
+       
+        Order::where('id', $request->id)->update(['cancelled_by' => $cancel]);
+        
+        $userId = Auth::id();
+
+        $table_id = Order::where('id', $request->id)->whereUserId($userId)->first()->table_id;
+
+
+        $next = Order::where('table_id', $table_id)->whereNull('start_time')->whereUserId($userId)->where('finished', 0)->orderBy('updated_at', 'ASC')->first();
+        $update_date = @$next->updated_at;
+        if($next)  $next->update(['start_time' => Carbon::now()]);
+        if($next)  $next->update(['updated_at' => $update_date]);
+
+        // $token = $request->session()->get('device_token');
+        $customer_id = @$next->customer_id;
+        $customer = Customer::where('id', @$customer_id)->first();
+        $token = @$customer->device_token;
+        if($token){
+            // $fcmTokens = ['c16H1_gwueT8jzmm2w_cTn:APA91bGjH092huMhvCN4Cejb84y1Y_CxzdbLrxIwyLucbUCyX4v1gl2O6oYcVaSm0ncnYhD9mbFlKVmvAgVzeePzLN5yhn0PG1esfjo0P1mrR0RUXb_W4sQII_GfcZoXodUmsqc-Kg0m'];
+            $fcmTokens = [$token];
+
+            //Notification::send(null,new SendPushNotification($request->title,$request->message,$fcmTokens));
+
+            /* or */
+
+            //auth()->user()->notify(new SendPushNotification($title,$message,$fcmTokens));
+
+            /* or */
+
+            // Larafirebase::withTitle('Food-menu Restaurant')
+            // ->withBody('Your Turn Now !!!')
+            // ->sendMessage($fcmTokens);
+           // return redirect()->back()->with('success','Notification Sent Successfully!!');
+
+
+        }
+
+        try {
+
+         $basic  = new \Vonage\Client\Credentials\Basic(getenv("NEXMO_KEY"), getenv("NEXMO_SECRET"));
+         $client = new \Vonage\Client($basic);
+            //  $receiverNumber = ;     link : https://receive-smss.com/sms/447498173567/
+                // $receiverNumber = $customer->number;
+                $messageNotification = "Food-Menu : Your Turn Now!!";
+
+                // $message = $client->message()->send([
+                //     'to' => getenv("NEXMO_DEFAULT_NUMBER"),
+                //     'from' => getenv('NEXMO_REGISTER_NUMBER'),
+                //     'text' => $messageNotification
+                // ]);
+
+         }
+         catch (Exception $e) {
+             // dd("Error: ". $e->getMessage());
+         }
+
+         Order::where('id', $orderId)->delete();
+        return response()->json(['success' => true] , 200);
+    }
+
+    /**
      * Use For calculate the time for order turn using ($request->id)
      *
      * @return @json ($time)
@@ -376,6 +449,7 @@ class TableController extends Controller
             $start  = new Carbon($finalTime);
             $end    = new Carbon();
 
+            
             $time = ($start->diffInHours($end) * 60) + ($start->diffInMinutes($end) * 60)+ ($start->diffInSeconds($end) * 1000);
 
             if($start < $end)  return response()->json([ 'success' => true, 'time' => $time, 'time_over' => true] , 200);

@@ -120,6 +120,8 @@ Route::post('change-floor-order',[TableController::class, 'changeFloorOrder']);
 
 Route::post('finish-next',[TableController::class, 'finishNext']);
 
+Route::post('cancel-next',[TableController::class, 'cancelNext']);
+
 Route::post('get-remainig-time',[TableController::class, 'getRemainigTime']);
 
 Route::post('change-floor-list',[TableController::class, 'changeFloorList']);

@@ -47,122 +47,122 @@
 <script>
 
     // Your web app's Firebase configuration
-    const firebaseConfig = {
-        apiKey: "AIzaSyBJKAe1KTNC3dK65FfK-XDZ609tCYVjAYY",
-        authDomain: "ewaiting-notification.firebaseapp.com",
-        projectId: "ewaiting-notification",
-        storageBucket: "ewaiting-notification.appspot.com",
-        messagingSenderId: "229500280113",
-        appId: "1:229500280113:web:85a419c0bad44fc5ac2410",
-        measurementId: "G-LBC3XY97T0"
-    };
+    // const firebaseConfig = {
+    //     apiKey: "AIzaSyBJKAe1KTNC3dK65FfK-XDZ609tCYVjAYY",
+    //     authDomain: "ewaiting-notification.firebaseapp.com",
+    //     projectId: "ewaiting-notification",
+    //     storageBucket: "ewaiting-notification.appspot.com",
+    //     messagingSenderId: "229500280113",
+    //     appId: "1:229500280113:web:85a419c0bad44fc5ac2410",
+    //     measurementId: "G-LBC3XY97T0"
+    // };
 
-    {{--  const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);  --}}
+    // {{--  const app = initializeApp(firebaseConfig);
+    // const analytics = getAnalytics(app);  --}}
 
-    firebase.initializeApp(firebaseConfig);
+    // firebase.initializeApp(firebaseConfig);
 
-    const messaging = firebase.messaging();
+    // const messaging = firebase.messaging();
 
-    function initFirebaseMessagingRegistration() {
-        messaging.requestPermission().then(function () {
-            return messaging.getToken()
-        }).then(function(token) {
+    // function initFirebaseMessagingRegistration() {
+    //     messaging.requestPermission().then(function () {
+    //         return messaging.getToken()
+    //     }).then(function(token) {
 
-            const tokens = document.head.querySelector('meta[name="csrf-token"]');
+    //         const tokens = document.head.querySelector('meta[name="csrf-token"]');
 
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+    //         $.ajaxSetup({
+    //             headers: {
+    //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //             }
+    //         });
 
-            $.ajax({
-                url: '{{ route("fcmToken") }}',
-                type: 'POST',
-                data: {
-                    token: token
-                },
-                dataType: 'JSON',
-                success: function (response) {
-                    console.log('Token saved successfully.');
-                },
-                error: function (err) {
-                    console.log('User Chat Token Error'+ err);
-                },
-            });
+    //         $.ajax({
+    //             url: '{{ route("fcmToken") }}',
+    //             type: 'POST',
+    //             data: {
+    //                 token: token
+    //             },
+    //             dataType: 'JSON',
+    //             success: function (response) {
+    //                 console.log('Token saved successfully.');
+    //             },
+    //             error: function (err) {
+    //                 console.log('User Chat Token Error'+ err);
+    //             },
+    //         });
 
-        }).catch(function (err) {
-            console.log(`Token Error :: ${err}`);
-        });
-    }
+    //     }).catch(function (err) {
+    //         console.log(`Token Error :: ${err}`);
+    //     });
+    // }
 
-    initFirebaseMessagingRegistration();
+    // initFirebaseMessagingRegistration();
 
-    messaging.onMessage(function({data:{body,title}}){
-        new Notification(title, {body});
-    });
+    // messaging.onMessage(function({data:{body,title}}){
+    //     new Notification(title, {body});
+    // });
 
-    {{--  // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
+    // {{--  // Initialize Firebase
+    // firebase.initializeApp(firebaseConfig);
 
-    const messaging = firebase.messaging();
+    // const messaging = firebase.messaging();
 
-    function initFirebaseMessagingRegistration() {
-        messaging.requestPermission().then(function () {
-            return messaging.getToken()
-        }).then(function(token) {
+    // function initFirebaseMessagingRegistration() {
+    //     messaging.requestPermission().then(function () {
+    //         return messaging.getToken()
+    //     }).then(function(token) {
 
-            const tokens = document.head.querySelector('meta[name="csrf-token"]');
+    //         const tokens = document.head.querySelector('meta[name="csrf-token"]');
 
-            const headers = {
-            'X-CSRF-TOKEN': tokens.content,
-            'Access-Control-Allow-Origin': '*',
-            'X-Requested-With': 'XMLHttpRequest',
-            'Content-Type': 'application/json',
-            };
+    //         const headers = {
+    //         'X-CSRF-TOKEN': tokens.content,
+    //         'Access-Control-Allow-Origin': '*',
+    //         'X-Requested-With': 'XMLHttpRequest',
+    //         'Content-Type': 'application/json',
+    //         };
 
-            // axios.post("{{ route('fcmToken') }}",{
-            //     _method:"PATCH",
-            //     token,
-            // }, headers).then(({data})=>{
-            //     console.log(data)
-            // }).catch(({response:{data}})=>{
-            //     console.error(data)
-            // })
+    //         // axios.post("{{ route('fcmToken') }}",{
+    //         //     _method:"PATCH",
+    //         //     token,
+    //         // }, headers).then(({data})=>{
+    //         //     console.log(data)
+    //         // }).catch(({response:{data}})=>{
+    //         //     console.error(data)
+    //         // })
 
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+    //         $.ajaxSetup({
+    //             headers: {
+    //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //             }
+    //         });
 
 
-            $.ajax({
-                url: '{{ route("fcmToken") }}',
-                type: 'POST',
-                data: {
-                    token: token
-                },
-                dataType: 'JSON',
-                success: function (response) {
-                    console.log('Token saved successfully.');
-                },
-                error: function (err) {
-                    console.log('User Chat Token Error'+ err);
-                },
-            });
+    //         $.ajax({
+    //             url: '{{ route("fcmToken") }}',
+    //             type: 'POST',
+    //             data: {
+    //                 token: token
+    //             },
+    //             dataType: 'JSON',
+    //             success: function (response) {
+    //                 console.log('Token saved successfully.');
+    //             },
+    //             error: function (err) {
+    //                 console.log('User Chat Token Error'+ err);
+    //             },
+    //         });
 
-        }).catch(function (err) {
-            console.log(`Token Error :: ${err}`);
-        });
-    }
+    //     }).catch(function (err) {
+    //         console.log(`Token Error :: ${err}`);
+    //     });
+    // }
 
-    initFirebaseMessagingRegistration();
+    // initFirebaseMessagingRegistration();
 
-    messaging.onMessage(function({data:{body,title}}){
-        new Notification(title, {body});
-    });  --}}
+    // messaging.onMessage(function({data:{body,title}}){
+    //     new Notification(title, {body});
+    // });  --}}
 </script>
 
 	<!--============ BOOTSTRAP JS LINK ===============-->

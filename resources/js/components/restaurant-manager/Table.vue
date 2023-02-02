@@ -54,7 +54,10 @@
 
                                         <div class="table_reservation_info " :class="'test'+order.id" v-for="(order,index) in table.orders" :key="order.id" >
                                             <div :class="{'ongoing_blinking' : order.is_time_left}">
-                                                <div class="person-info popover-open" :class="['popover-click-' + order.id, { 'person-info_move': order.is_order_moved, 'ongoing_popover ' : order.is_ongoing_order && !order.is_order_moved, 'neworder_add' : order.is_new_order_timing }]" :data-popover="'.popover-table-'+order.id"  @click="getRemainingTime(order.id); order_person = order.person; removebackdrop(); orderId = order.id">
+                                                <!-- :data-popover="'.popover-table-'+order.id" -->
+                                                <!-- popover-open -->
+                                                <!-- :data-popover="'.popover-table-'+order.id" -->
+                                                <div class="person-info popover-open " :class="['popover-click-' + order.id, { 'person-info_move': order.is_order_moved, 'ongoing_popover ' : order.is_ongoing_order && !order.is_order_moved, 'neworder_add' : order.is_new_order_timing }]"   @click="getRemainingTime(order.id); order_person = order.person; removebackdrop(); orderId = order.id" :data-popover="'.popover-table-'+order.id">
                                                     <div class="neworder_tooltip order_tooltip" v-if="order.is_new_order_timing">
                                                         <div class="tooltip_text">
                                                             <p class="no-margin">New Reservation</p>
@@ -119,6 +122,16 @@
                                                                     </h3>
                                                                 </div>
                                                             </div>
+                                                            
+                                                            <div class="finish_popup" v-if="order.start_time && order.finished == 0">
+                                                            <div class="card-footer no-margin no-padding justify-content-center">
+                                                                <h3>
+                                                                    <a href="javascript:;" class="text-color-red" @click="cancelNext(order.id)">
+                                                                        Cancle & Next
+                                                                    </a>
+                                                                </h3>
+                                                            </div>
+                                                        </div>
                                                             <div class="finish_popup" v-if="order.start_time && order.finished == 0">
                                                                 <div class="card-footer no-margin no-padding justify-content-center">
                                                                     <h3>
@@ -232,7 +245,7 @@
                 <div class="addminutes-form padding-horizontal padding-top">
                     <label class="add_minutes_text">Add Minutes</label>
                     <div class="minutes_input display-flex align-items-center margin-top">
-                        <input type="number" v-model="minutes" class="w-100 add-minutes-input padding-horizontal-half" name="" id="">
+                        <input type="number" v-model="minutes" class="w-100 add-minutes-input padding-horizontal-half" name="" id=""  @keypress="checknumbervalidate">
                         <div class="minutes_text">
                             Min
                         </div>
@@ -273,7 +286,6 @@ export default {
             order_person: 0,
             max_number_table_cap: 0,
             max_number_table_data: [],
-            intervalId : null,
             checkCallInterval: 1,
             popup_remaining_time : 0,
             popup_remaining_time_over : false,
@@ -284,6 +296,8 @@ export default {
             userId : 0,
             minutes : '',
             orderId : 0,
+            intervalNewOrder : [],
+            intervaltransferOrder : []
         }
     },
     computed: {
@@ -352,6 +366,7 @@ export default {
     },
     methods: {
         addMinutesToClosepopover(){
+            this.minutes = '';
             f7.popover.close();
         },
         equal_height(){
@@ -466,61 +481,73 @@ export default {
             // }, finish_timing);
         },
         secondIncrement(second, orderIndex, tableIndex,rowIndex) {
-            this.intervalId = setInterval(() => {
-                if (second < (60 * parseFloat(this.highlight_time))) {
-                    second++;
-                    if (this.row_tables[rowIndex] != undefined && this.row_tables[rowIndex][tableIndex] != undefined && this.row_tables[rowIndex][tableIndex].orders[orderIndex] != undefined) {
-                        this.row_tables[rowIndex][tableIndex].orders[orderIndex].order_moved = second;
-                        if(second > 60){
-                            var minutes = parseInt(Math.floor(second / 60), 10);
-                            var extraSeconds = second % 60;
-                            minutes = minutes < 10 ? "0" + minutes : minutes;
-                            extraSeconds = extraSeconds < 10 ? "0" + extraSeconds : extraSeconds;
-                            this.row_tables[rowIndex][tableIndex].orders[orderIndex].order_moved_text = minutes+' minute '+extraSeconds+' second ago';
-                        }else{
-                            this.row_tables[rowIndex][tableIndex].orders[orderIndex].order_moved_text = second+' seconds ago';
+                const interval = setInterval(() => {
+                    if (second < (60 * parseFloat(this.highlight_time))) {
+                        second++;
+                        if (this.row_tables[rowIndex] != undefined && this.row_tables[rowIndex][tableIndex] != undefined && this.row_tables[rowIndex][tableIndex].orders[orderIndex] != undefined) {
+                            this.row_tables[rowIndex][tableIndex].orders[orderIndex].order_moved = second;
+                            if(second > 60){
+                                var minutes = parseInt(Math.floor(second / 60), 10);
+                                var extraSeconds = second % 60;
+                                minutes = minutes < 10 ? "0" + minutes : minutes;
+                                extraSeconds = extraSeconds < 10 ? "0" + extraSeconds : extraSeconds;
+                                this.row_tables[rowIndex][tableIndex].orders[orderIndex].order_moved_text = minutes+' minute '+extraSeconds+' second ago';
+                            }else{
+                                this.row_tables[rowIndex][tableIndex].orders[orderIndex].order_moved_text = second+' seconds ago';
+                            }
                         }
+                    }else{
+                        this.tableListFloorWise(this.active_floor_id);
+                        f7.popover.close('.popover-move');
                     }
-                }else{
-                    this.tableListFloorWise(this.active_floor_id);
-                    f7.popover.close('.popover-move');
-                    clearInterval(this.intervalId);
-                }
-            }, 1000);
-            var highlight_time = parseFloat(this.highlight_time) * 60 * 1000;
-            this.timeoutId = setTimeout(() => {
-                this.tableListFloorWise(this.active_floor_id);
-                f7.popover.close('.popover-move');
-                clearInterval(this.intervalId);
-            }, highlight_time);
+                }, 1000);
+                this.intervaltransferOrder.push(interval);
+            // }    
+            // var highlight_time = parseFloat(this.highlight_time) * 60 * 1000;
+            // this.timeoutId = setTimeout(() => {
+            //     this.tableListFloorWise(this.active_floor_id);
+            //     f7.popover.close('.popover-move');
+            //     clearInterval(this.intervalId);
+            // }, highlight_time);
         },
         newOrdersecondIncrement(second, orderIndex, tableIndex,rowIndex){
-            const interval = setInterval(() => {
-                if (second < (60 * parseFloat(this.highlight_time))) {
-                    second++;
-                    if (this.row_tables[rowIndex] != undefined && this.row_tables[rowIndex][tableIndex] != undefined && this.row_tables[rowIndex][tableIndex].orders[orderIndex] != undefined) {
-                        this.row_tables[rowIndex][tableIndex].orders[orderIndex].new_order_timing = second;
-                        if(second > 60){
-                            var minutes = parseInt(Math.floor(second / 60), 10);
-                            var extraSeconds = second % 60;
-                            minutes = minutes < 10 ? "0" + minutes : minutes;
-                            extraSeconds = extraSeconds < 10 ? "0" + extraSeconds : extraSeconds;
-                            this.row_tables[rowIndex][tableIndex].orders[orderIndex].new_order_timing_text = minutes+' minute '+extraSeconds+' second ago';
-                        }else{
-                            this.row_tables[rowIndex][tableIndex].orders[orderIndex].new_order_timing_text = second+' seconds ago';
+            // if(this.intervalNewOrder.indexOf(orderIndex + 'and' +  tableIndex) < 0) {
+            //     this.intervalNewOrder.push(orderIndex + 'and' +  tableIndex);
+                const interval = setInterval(() => {
+                    if (second < (60 * parseFloat(this.highlight_time))) {
+                        second++;
+                        if (this.row_tables[rowIndex] != undefined && this.row_tables[rowIndex][tableIndex] != undefined && this.row_tables[rowIndex][tableIndex].orders[orderIndex] != undefined) {
+                            this.row_tables[rowIndex][tableIndex].orders[orderIndex].new_order_timing = second;
+                            if(second > 60){
+                                var minutes = parseInt(Math.floor(second / 60), 10);
+                                var extraSeconds = second % 60;
+                                minutes = minutes < 10 ? "0" + minutes : minutes;
+                                extraSeconds = extraSeconds < 10 ? "0" + extraSeconds : extraSeconds;
+                                this.row_tables[rowIndex][tableIndex].orders[orderIndex].new_order_timing_text = minutes+' minute '+extraSeconds+' second ago';
+                            }else{
+                                this.row_tables[rowIndex][tableIndex].orders[orderIndex].new_order_timing_text = second+' seconds ago';
+                            }
                         }
+                    }else{
+                        // let index = this.intervalNewOrder.indexOf(orderIndex + 'and' +  tableIndex);
+                        // if (index !== -1) {
+                        //     console.log('remove'+ orderIndex + 'ta' + tableIndex);
+                        //     this.intervalNewOrder.splice(index, 1);
+                        // }
+                       
+                        this.tableListFloorWise(this.active_floor_id);
+                        // clearInterval(interval);
                     }
-                }else{
-                    this.tableListFloorWise(this.active_floor_id);
-                    clearInterval(interval);
-                }
-            }, 1000);
-            var highlight_time = parseFloat(this.highlight_time) * 60 * 1000;
-            this.timeoutId = setTimeout(() => {
-                // this.tableListFloorWise(this.active_floor_id);
-                f7.popover.close('.popover-move');
-                clearInterval(interval);
-            }, highlight_time);
+                }, 1000);
+                this.intervalNewOrder.push(interval);
+            // }
+            // var highlight_time = parseFloat(this.highlight_time) * 60 * 1000;
+            // this.timeoutId = setTimeout(() => {
+            //     console.log('settimeout'+interval);
+            //     // this.tableListFloorWise(this.active_floor_id);
+            //     f7.popover.close('.popover-move');
+            //     clearInterval(interval);
+            // }, highlight_time);
         },
         tableList() {
             axios.get('/api/table-list-with-order')
@@ -625,6 +652,13 @@ export default {
         },
         tableListFloorWise(id) {
             clearTimeout(this.timeoutId);
+            this.intervalNewOrder.forEach(function(element){
+                clearInterval(element);
+            });
+            this.intervaltransferOrder.forEach(function(element){
+                    clearInterval(element);
+            })
+
             if(id != undefined) this.active_floor_id = id;
             axios.get('/api/table-list-floor-wise/'+this.active_floor_id)
                 .then((res) => {
@@ -817,8 +851,29 @@ export default {
                 $('.dialog-buttons').addClass('margin-top no-margin-bottom')
             }, 50);
         },
+        cancelNext(id) {
+            f7.popover.close();
+            f7.dialog.confirm('Are you sure to cancel this order and going to next?', () => {
+
+                axios.post('/api/cancel-next', {id : id, cancelled_by : 'Manager'})
+                .then((res) => {
+                     this.tableListFloorWise(this.active_floor_id);
+                })
+            });
+            setTimeout(() => {
+                $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });
+                $('.dialog-title').html("<img src='/images/cross.png'>");
+                $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
+                $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
+                $('.dialog-button').eq(1).removeClass('text-color-black');
+                $('.dialog-buttons').addClass('margin-top no-margin-bottom')
+            }, 50);
+        },
         /* For get every order time when open the detail-popup*/
         getRemainingTime(id) {
+
+            // f7.popup.open('.popover-table-'+id);
+            // '.popover-table-'+order.id
             axios.post('/api/get-remainig-time', { id : id})
             .then((res) => {
                 this.popup_remaining_time = res.data.time;
@@ -832,9 +887,19 @@ export default {
             axios.post('/api/add-minutes-order', { minutes : this.minutes, orderId : this.orderId})
             .then((res) => {
                 f7.popup.close();
+                this.minutes = '';
                 this.tableListFloorWise(this.active_floor_id);
             })
-        }
+        },
+        checknumbervalidate(evt) {
+            evt = (evt) ? evt : window.event;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+                evt.preventDefault();
+            } else {
+                return true;
+            }
+        },
 
     }
 }

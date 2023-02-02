@@ -269,6 +269,8 @@ export default {
                     }
                     this.$root.removeLoader();
                 })
+            }else{
+                this.$root.removeLoader();
             }
         },500);
     },

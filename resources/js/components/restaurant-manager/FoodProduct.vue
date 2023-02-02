@@ -93,7 +93,7 @@
 
                             </div>
                         </div>
-                        <div class="pagination_count padding-vertical-half col-100">
+                        <!-- <div class="pagination_count padding-vertical-half col-100">
                             <div class="pagination_list">
                                 <div v-for="(link,index) in paginationData.links" :key="link">
                                     <a href="javascript:;" v-if="index == 0" @click="link.url != null ? getFloors(link.url) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon-prev"></i></a>
@@ -101,7 +101,7 @@
                                     <a href="javascript:;" v-if="paginationData.links.length - 1 == index" @click="link.url != null ? getFloors(link.url) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon-next"></i></a>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div v-else>
                         <div class="no_order">

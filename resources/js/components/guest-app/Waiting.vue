@@ -104,7 +104,8 @@
                         <f7-button class="button button-raised open-menu-button active button-large text-transform-capitalize" fill sheet-open=".demo-sheet-swipe-to-close" @click="showMenuData()">{{ $root.trans.open_menu }}</f7-button>
                     </div>
                     <div class="col">
-                        <f7-button class="button button-raised open-menu-button button-large text-transform-capitalize" @click="cancelReservation()">{{ $root.trans.cancel_reservation }}</f7-button>
+                        <f7-button class="button button-raised open-menu-button button-large text-transform-capitalize" v-if="time == 0" :style="'background : #a9a9a9 !important'">{{ $root.trans.cancel_reservation }}</f7-button>
+                        <f7-button class="button button-raised open-menu-button button-large text-transform-capitalize" v-else  @click="cancelReservation()">{{ $root.trans.cancel_reservation }}</f7-button>
                     </div>
                 </div>
             </div>
@@ -174,7 +175,7 @@ export default {
     mounted() {
         this.intervalId = setInterval(() => {
                this.getWaitingTime();
-        }, 60000);
+        }, 30000);
     },
     methods: {
         onPageBeforeOut() {
@@ -250,6 +251,13 @@ export default {
                     this.remainingWaitingTime = '0 Second Left';
                     this.time = 0;
                     // clearInterval(this.intervalId);
+                }
+
+                if(this.order.id !== res.data.table) this.getOrderData();
+                
+                if(res.data.finish){
+                    this.cookies.remove("orderId");
+                    window.location.reload();
                 }
             })
             .catch((err) => {

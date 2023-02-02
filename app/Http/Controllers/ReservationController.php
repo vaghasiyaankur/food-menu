@@ -330,8 +330,9 @@ class ReservationController extends Controller
         // $table_id = ReservationHelper::takeTable($request->floor, $request->person);
         $orderIds = $request->ids;
         $orderId = $orderIds[0];
-        $table_id = Order::where('id', $orderId)->first()->table_id;
-        $created_at = Order::where('id', $orderId)->first()->created_at;
+        $order = Order::where('id', $orderId)->first();
+        $table_id = @$order->table_id;
+        $created_at = @$order->created_at;
         if($table_id){
             $allOrder = Order::where('table_id', $table_id)->where('id', '!=', $orderId)->where('finished', 0)->where('created_at', '<=', $created_at)->select('id', 'table_id', 'start_time', 'finish_time', 'finished', 'updated_at')->get();
             $calculateTime = 0;
@@ -360,14 +361,18 @@ class ReservationController extends Controller
             if($start > $end) $time = ($start->diffInHours($end) * 60) + ($start->diffInMinutes($end) * 60)+ ($start->diffInSeconds($end) * 1000);
             else $time = 0;
 
-            return response()->json([ 'success' => true, 'time' => $time ] , 200);
+            $finish = false;
+            if($order->finish_at || $order->deleted_at) $finish = true;
+
+            return response()->json([ 'success' => true, 'time' => $time, 'finish' => $finish, 'table' => $table_id] , 200);
         }else{
             $langs = Language::whereStatus(1)->pluck('id')->toarray();
             $lang_id = request()->session()->get('lang');
             $langId = in_array($lang_id, $langs) ? $lang_id : SettingHelper::systemLang();
             $content = Content::where('language_id', $langId)->where('title', 'capacity_error')->first();
             $message = $content ? $content->content : "We don't have a table for that many people. Please contact the restaurant manager.";
-            return response()->json(['success' => false, 'message' => $message], 200);
+            $finish = true;
+            return response()->json(['success' => false, 'message' => $message, 'finish' => $finish], 200);
         }
     }
 
@@ -415,7 +420,6 @@ class ReservationController extends Controller
     {
         $orderIds = $request->orderIds;
         $orderId = @$orderIds[0];
-
         if($orderId){
             $order = Order::where('id', @$orderId)->where('finished', 0)->first();
 
