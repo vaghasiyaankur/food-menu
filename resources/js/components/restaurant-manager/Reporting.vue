@@ -72,7 +72,7 @@
                     </div>
                 </div>
             </div>
-            <div class="reporting__chart">
+            <!-- <div class="reporting__chart">
                 <div class="row">
                     <div class="col-100">
                         <div class="card elevation-2">
@@ -101,7 +101,7 @@
                         <button @click="report" style="opacity: 0" id="date-set"></button>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </f7-page>
 </template>
@@ -111,16 +111,16 @@ import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Input,f7AreaChart} from 
 import axios from 'axios';
 import $ from 'jquery';
 import moment from 'moment';
-import {
-    Chart,
-    ChartSeries,
-    ChartSeriesItem,
-    ChartValueAxis,
-    ChartValueAxisItem,
-    ChartCategoryAxis,
-    ChartCategoryAxisItem,
-    ChartTooltip
-} from '@progress/kendo-vue-charts';
+// import {
+//     Chart,
+//     ChartSeries,
+//     ChartSeriesItem,
+//     ChartValueAxis,
+//     ChartValueAxisItem,
+//     ChartCategoryAxis,
+//     ChartCategoryAxisItem,
+//     ChartTooltip
+// } from '@progress/kendo-vue-charts';
 import 'hammerjs';
 
 export default {
@@ -144,14 +144,14 @@ export default {
         f7,
         f7Input,
         f7AreaChart,
-        Chart,
-        ChartSeries,
-        ChartTooltip,
-        ChartSeriesItem,
-        ChartValueAxis,
-        ChartValueAxisItem,
-        ChartCategoryAxis,
-        ChartCategoryAxisItem,
+        // Chart,
+        // ChartSeries,
+        // ChartTooltip,
+        // ChartSeriesItem,
+        // ChartValueAxis,
+        // ChartValueAxisItem,
+        // ChartCategoryAxis,
+        // ChartCategoryAxisItem,
     },
     beforeCreate() {
         this.$root.addLoader();
@@ -193,7 +193,7 @@ export default {
     },
     created() {
         this.report();
-        this.apexchartData();
+        // this.apexchartData();
     },
     methods : {
         chartInstance(chart) {
