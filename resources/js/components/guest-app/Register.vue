@@ -42,7 +42,7 @@
                     <div class="item-content item-input no-padding-left">
                         <div class="item-inner no-padding-right">
                             <div class="item-input-wrap margin-bottom-half">
-                                <input type="number" v-model.number="reservation.number" name="number" class="padding" :placeholder="$root.trans.phone_number" @keypress="checknumbervalidate;" @keyup="removeTimer()">
+                                <input type="number" v-model.number="reservation.number" name="number" class="padding" :placeholder="$root.trans.phone_number" @keypress="checknumbervalidate" @keyup="removeTimer()">
                                 </div>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                             <div class="item-input-wrap margin-bottom-half">
                                 <input type="number" v-model="reservation.member" name="member" class="padding" :placeholder="$root.trans.family_member" @keyup="floorAvailable(); removeTimer()"  @keypress="checknumbervalidate">
                                 </div>
-                         </div>
+                        </div>
                     </div>
                     <div class="item-content item-input no-padding-left floor-selection">
                         <div class="item-inner no-padding-right">
