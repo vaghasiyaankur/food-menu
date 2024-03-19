@@ -37,6 +37,16 @@ Route::get('/manager/{any}', function () {
     return view('restaurant_manager');
 })->where('any', '.*');
 
+
+Route::get('/pos', function () {
+    return view('pos');
+})->where('any', '.*');
+
+Route::get('/pos/{any}', function () {
+    return view('pos');
+})->where('any', '.*');
+
+
 Route::get('/{any}', function () {
     return view('welcome');
 })->where('any', '.*');

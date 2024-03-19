@@ -5,14 +5,13 @@
         <f7-navbar class="navbar-menu bg-color-white">
           <div>
             <button
-              @click="MoveToPos"
+              @click="MoveToWaitingArea"
               class="col link button text-color-white padding-horizontal padding-vertical-half bg-dark"
             >
               <i class="f7-icons font-14 margin-right-half"> arrow_2_circlepath </i>
-              Switch Pos
+              Switch To Waiting Area
             </button>
           </div>
-          
           <div
             class="header-links display-flex align-items-center"
             v-if="CurrentsubmenuRoute != 'category'"
@@ -41,7 +40,7 @@
                   <div
                     class="padding-horizontal height-40 border-bottom pannel_menu_link panel-close"
                   >
-                    <a href="/table/" class="link nav-link text-color-black font-16">
+                    <a href="/table/" router class="link nav-link text-color-black font-16">
                       <i class="f7-icons font-14 margin-right-half">clock</i>Waiting
                       area</a
                     >
@@ -343,7 +342,7 @@
 
 <script>
 import { f7App, f7Panel, f7View, f7, f7Page, f7Navbar } from "framework7-vue";
-import routes from "./restaurant-manager-routes";
+import routes from "./pos-routes";
 import store from "./store";
 import $ from "jquery";
 import axios from "axios";
@@ -534,8 +533,8 @@ export default {
         .then((res) => {})
         .catch((err) => {});
     },
-    MoveToPos() {
-      window.open('/pos', '_blank');
+    MoveToWaitingArea() {
+      window.open('/manager', '_blank');
     }
   },
   computed: {
