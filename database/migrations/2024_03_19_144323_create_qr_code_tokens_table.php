@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('qr_code_tokens', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('restaurant_id')->nullable();
+            $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
-            $table->unsignedBigInteger('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('token')->nullable();
             $table->timestamps();
         });

@@ -23,7 +23,9 @@ class UserSeeder extends Seeder
             'password' => Hash::make('123456789'),
             'email_verified_at' => \Carbon\Carbon::now(),
             'remember_token' => Str::random(10),
-            'lock_pin' => 1234
+            'lock_pin' => 1234,
+            'role' => 'manager',
+            'restaurant_id' => 1
         ]);
 
         User::create([
@@ -32,7 +34,9 @@ class UserSeeder extends Seeder
             'password' => Hash::make('123456789'),
             'email_verified_at' => \Carbon\Carbon::now(),
             'remember_token' => Str::random(10),
-            'lock_pin' => 5678
+            'lock_pin' => 5678,
+            'role' => 'manager',
+            'restaurant_id' => 1
         ]);
 
         User::create([
@@ -41,7 +45,9 @@ class UserSeeder extends Seeder
             'password' => Hash::make('123456789'),
             'email_verified_at' => \Carbon\Carbon::now(),
             'remember_token' => Str::random(10),
-            'lock_pin' => 9101
+            'lock_pin' => 9101,
+            'role' => 'manager',
+            'restaurant_id' => 1
         ]);
 
         User::create([
@@ -50,7 +56,9 @@ class UserSeeder extends Seeder
             'password' => Hash::make('123456789'),
             'email_verified_at' => \Carbon\Carbon::now(),
             'remember_token' => Str::random(10),
-            'lock_pin' => 1011
+            'lock_pin' => 1011,
+            'role' => 'manager',
+            'restaurant_id' => 2
         ]);
 
         User::create([
@@ -59,7 +67,9 @@ class UserSeeder extends Seeder
             'password' => Hash::make('123456789'),
             'email_verified_at' => \Carbon\Carbon::now(),
             'remember_token' => Str::random(10),
-            'lock_pin' => 1112
+            'lock_pin' => 1112,
+            'role' => 'manager',
+            'restaurant_id' => 2
         ]);
     }
 }

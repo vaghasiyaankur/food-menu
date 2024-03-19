@@ -41,4 +41,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static function boot() {
+        parent::boot();
+
+        self::deleting(function($user) {
+            $user->restaurantManager()->each(function($rest_manag) {
+                $rest_manag->delete();
+            });
+        });
+    }
+
+    public function restaurantManager()
+    {
+        return $this->hasMany(RestaurantManager::class, 'manager_id');
+    }
+
 }

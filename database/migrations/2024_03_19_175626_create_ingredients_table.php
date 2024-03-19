@@ -13,13 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sub_category_languages', function (Blueprint $table) {
+        Schema::create('ingredients', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('language_id')->unsigned();
-            $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
-            $table->unsignedBigInteger('sub_category_id')->unsigned();
-            $table->foreign('sub_category_id')->references('id')->on('sub_categories')->onDelete('cascade');
             $table->string('name')->nullable();
+            $table->float('price')->nullable();
+            $table->string('image')->default(1);
+            // $table->unsignedBigInteger('ingredient_category_id');
+            // $table->foreign('ingredient_category_id')->references('id')->on('ingredient_categories');
+            $table->string('slug')->nullable();
+            $table->string('status')->default(1);
             $table->timestamps();
         });
     }
@@ -31,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sub_category_languages');
+        Schema::dropIfExists('ingredients');
     }
 };

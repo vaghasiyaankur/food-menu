@@ -22,7 +22,7 @@ class QrCodeTokenSeeder extends Seeder
         else if(Carbon::now()->daysInMonth == '29') $duration = [8,7,7,7];
         else $duration = [7,7,7,7];
 
-        $user_ids = [1,2,3,4,5];
+        $user_ids = [1,2];
 
         foreach ($user_ids as $key => $user_id) {
             foreach($duration as $key=>$dur){
@@ -41,7 +41,7 @@ class QrCodeTokenSeeder extends Seeder
                 $qr->start_date = date('Y-m-d', strtotime($startDuration));
                 $qr->end_date = date('Y-m-d', strtotime($endDuration));
                 $qr->token = str_replace("+", "0", $encode);
-                $qr->user_id = $user_id;
+                $qr->restaurant_id = $user_id;
                 $qr->save();
             }
         }

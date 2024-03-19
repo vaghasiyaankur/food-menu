@@ -13,12 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('floors', function (Blueprint $table) {
+        Schema::create('restaurants', function (Blueprint $table) {
             $table->id();
-            $table->string('short_cut')->default(0);
             $table->string('name')->nullable();
-            $table->unsignedBigInteger('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('location')->nullable();
+            $table->text('operating_start_hours')->nullable();
+            $table->text('operating_end_hours')->nullable();
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('floors');
+        Schema::dropIfExists('restaurants');
     }
 };

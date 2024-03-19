@@ -24,11 +24,12 @@ class CategorySeeder extends Seeder
             [
                 'name' => ['Indian','ભારતીય','भारतीय'],
                 'image' => '/category/indian_dish.png',
+                'restaurant_id' => 1,
                 'sub_categories' => [
                     ['Dosa', 'ઢોસા', 'ढोसा'],
                     ['Gujarati Dish', 'ગુજરાતી વાનગી', 'गुजराती डिश']
                 ],
-                'user_id' => 1
+                'added_by_id' => 1
             ],
             [
                 'name' => ['Panjabi', 'પંજાબી','पंजाबी'],
@@ -37,7 +38,8 @@ class CategorySeeder extends Seeder
                     ['Naan Or Roti', 'નાન કે રોટી', 'नान या रोटी'],
                     ['Sabji', 'સબજી', 'सब्जी']
                 ],
-                'user_id' => 1
+                'restaurant_id' => 1,
+                'added_by_id' => 1
             ],
             [
                 'name' => ['Indian','ભારતીય','भारतीय'],
@@ -46,7 +48,8 @@ class CategorySeeder extends Seeder
                     ['Dosa', 'ઢોસા', 'ढोसा'],
                     ['Gujarati Dish', 'ગુજરાતી વાનગી', 'गुजराती डिश']
                 ],
-                'user_id' => 2
+                'restaurant_id' => 2,
+                'added_by_id' => 4
             ],
             [
                 'name' => ['Panjabi', 'પંજાબી','पंजाबी'],
@@ -55,7 +58,8 @@ class CategorySeeder extends Seeder
                     ['Naan Or Roti', 'નાન કે રોટી', 'नान या रोटी'],
                     ['Sabji', 'સબજી', 'सब्जी']
                 ],
-                'user_id' => 2
+                'restaurant_id' => 2,
+                'added_by_id' => 4
             ]
         ];
 
@@ -67,7 +71,8 @@ class CategorySeeder extends Seeder
         foreach ($categories as $cate) {
             $cat = new Category();
             $cat->image = $cate['image'];
-            $cat->user_id = $cate['user_id'];
+            $cat->added_by_id = $cate['added_by_id'];
+            $cat->restaurant_id = $cate['restaurant_id'];
             $cat->save();
 
             foreach($languages as $k=>$lan){
@@ -84,7 +89,7 @@ class CategorySeeder extends Seeder
             foreach ($cate['sub_categories'] as $key => $subCat) {
                 $subCate = new SubCategory();
                 $subCate->category_id = $cat->id;
-                $subCate->user_id = $cate['user_id'];
+                $subCate->user_id = $cate['added_by_id'];
                 $subCate->save();
                 foreach($languages as $ke=>$lang){
                     $subcatlang = new SubCategoryLanguage();
