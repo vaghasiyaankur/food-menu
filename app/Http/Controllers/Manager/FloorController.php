@@ -11,7 +11,7 @@ class FloorController extends Controller
 {
     public function getFloors()
     {
-        $floors = Floor::whereUserId(Auth::id())->paginate(10);
+        $floors = Floor::whereRestaurantId(Auth::user()->restaurant_id)->paginate(10);
         return response()->json($floors);
     }
 
@@ -19,7 +19,7 @@ class FloorController extends Controller
     {
         Floor::updateOrCreate(
             ['id' => $req->id],
-            ['short_cut' => $req->short_cut,'name' => $req->floor_name,'user_id' => Auth::id()]
+            ['short_cut' => $req->short_cut,'name' => $req->floor_name,'user_id' => Auth::user()->restaurant_id]
         );
 
         if($req->id == 0) $message = 'Added';
@@ -44,7 +44,7 @@ class FloorController extends Controller
 
     public function getFloorsData()
     {
-        $floors = Floor::whereUserId(Auth::id())->pluck('name','id');
+        $floors = Floor::whereRestaurantId(Auth::user()->restaurant_id)->pluck('name','id');
 
         return response()->json($floors);
     }

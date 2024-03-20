@@ -24,10 +24,10 @@ class NewReservation implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct(Order $order,$user_id)
+    public function __construct(Order $order,$restaurant_id)
     {
         $this->order = $order;
-        $this->user_id = $user_id;
+        $this->restaurant_id = $restaurant_id;
     }
 
     /**
@@ -37,7 +37,7 @@ class NewReservation implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('reservation-' . $this->user_id);
+        return new Channel('reservation-' . $this->restaurant_id);
     }
 
     public function broadcastAs()

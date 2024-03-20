@@ -8,7 +8,6 @@ use App\Models\Category;
 use App\Models\Language;
 use App\Models\Product;
 use App\Models\ProductLanguage;
-use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -37,23 +36,11 @@ class ProductController extends Controller
     public function getCategoryProduct($id)
     {
         $lang_id = SettingHelper::getlanguage();
-        $userId = SettingHelper::getUserIdUsingQrcode();
-        $user_id = $userId ? $userId : Auth::id();
-        $products = Category::with(['subCategory' => function($q){
-            $q->whereHas('products');
-        },
-        'subCategory.products' => function($q){
-            $q->whereHas('productLanguage');
-        },
-        'subCategory.subCategoryLanguage' => function($q) use ($lang_id){
+        $restaurant_id = SettingHelper::getUserIdUsingQrcode();
+        $restaurant_id = $restaurant_id ? $restaurant_id : Auth::user()->restaurant_id;
+        $products = Category::with(['categoryLanguages' => function($q) use ($lang_id){
             $q->where('language_id',$lang_id);
-        },
-        'subCategory.products.productLanguage' => function($q) use ($lang_id){
-            $q->where('language_id',$lang_id);
-        },
-        'categoryLanguages' => function($q) use ($lang_id){
-            $q->where('language_id',$lang_id);
-        }])->whereHas('subCategory')->whereUserId($user_id)->find($id);
+        }])->whereRestaurantId($restaurant_id)->find($id);
         return response()->json($products);
     }
 
@@ -62,21 +49,20 @@ class ProductController extends Controller
         $lang_id = SettingHelper::managerLanguage();
 
         $categoryId = $req->categoryId != 0 ? intval($req->categoryId) : '';
-        $subcategoryId = $req->subcategoryId != 0 ? intval($req->subcategoryId) : '';
 
         $category_name = Category::with(['categoryLanguages' => function($q) use ($lang_id){
             $q->where('language_id',$lang_id);
         }])->find($req->categoryId);
 
-        $subCategories = SubCategory::with(['subCategoryLanguage' => function($q) use ($lang_id){
+        $subCategories = Category::with(['CategoryLanguage' => function($q) use ($lang_id){
             $q->where('language_id',$lang_id);
         }])->where('category_id',$req->categoryId)->get();
         $subCategory = [];
         foreach ($subCategories as $key => $sub_category) {
-            $subCategory[$sub_category->id] = $sub_category->subCategoryLanguage[0]->name;
+            $subCategory[$sub_category->id] = $sub_category->categoryLanguage[0]->name;
         }
 
-        $sub_product = SubCategory::with(['subCategoryLanguage' => function($q) use ($lang_id){
+        $sub_product = Category::with(['categoryLanguage' => function($q) use ($lang_id){
             $q->where('language_id',$lang_id);
         },
         'products' => function($q) use ($req,$lang_id) {
@@ -88,18 +74,13 @@ class ProductController extends Controller
         ->whereHas('products.productLanguage',function($q) use ($req,$lang_id){
             $q->where('language_id',$lang_id);
             $q->where('name','LIKE','%'.$req->search.'%');
-        })
-        ->whereHas('subCategoryLanguage')->whereHas('products');
+        })->whereHas('products');
 
         if ($categoryId) {
             $sub_product = $sub_product->whereCategoryId($categoryId);
         }
 
-        if ($subcategoryId) {
-            $sub_product = $sub_product->whereId($subcategoryId);
-        }
-
-        $sub_product = $sub_product->whereUserId(Auth::id())->paginate(6);
+        $sub_product = $sub_product->whereRestaurantId(Auth::user()->restaurant_id)->paginate(6);
 
         return response()->json(['sub_category_product' => $sub_product,'sub_category' => $subCategory,'category_name' =>  $category_name]);
     }
@@ -132,40 +113,12 @@ class ProductController extends Controller
         return response()->json(['success'=>'Product Deleted Successfully.']);
     }
 
-    public function getsubCategoryProduct($id)
-    {
-        $lang_id = SettingHelper::managerLanguage();
-        $subCategories = SubCategory::with(['subCategoryLanguage' => function($q) use ($lang_id){
-            $q->where('language_id',$lang_id);
-        }])->whereCategoryId($id)->whereUserId(Auth::id())->get();
-        $subCategory = [];
-        foreach ($subCategories as $key => $sub_category) {
-            $subCategory[$sub_category->id] = $sub_category->subCategoryLanguage[0]->name;
-        }
-
-        $products = Product::with('productLanguage')->get();
-
-        return response()->json(['sub_category' => $subCategory]);
-    }
-
     public function getCategoryWiseProduct($id)
     {
         $lang_id = SettingHelper::managerLanguage();
-        $products = Category::with(['subCategory' => function($q){
-            $q->whereUserId(Auth::id())->whereHas('products');
-        },
-        'subCategory.products' => function($q){
-            $q->whereHas('productLanguage');
-        },
-        'subCategory.subCategoryLanguage' => function($q) use ($lang_id){
+        $products = Category::with(['categoryLanguages' => function($q) use ($lang_id){
             $q->where('language_id',$lang_id);
-        },
-        'subCategory.products.productLanguage' => function($q) use ($lang_id){
-            $q->where('language_id',$lang_id);
-        },
-        'categoryLanguages' => function($q) use ($lang_id){
-            $q->where('language_id',$lang_id);
-        }])->whereHas('subCategory')->whereUserId(Auth::id())->find($id);
+        }])->whereRestaurantId(Auth::user()->restaurant_id)->find($id);
         return response()->json($products);
     }
 

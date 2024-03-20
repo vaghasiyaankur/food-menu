@@ -27,7 +27,7 @@ class SettingController extends Controller
      */
     public function settingData()
     {
-       $setting = Setting::select('restaurant_name', 'phone_number', 'manager_name', 'restaurant_logo', 'open_time', 'close_time', 'member_capacity', 'highlight_on_off', 'highlight_time')->whereUserId(Auth::id())->first();
+       $setting = Setting::select('restaurant_name', 'phone_number', 'manager_name', 'restaurant_logo', 'open_time', 'close_time', 'member_capacity', 'highlight_on_off', 'highlight_time')->whereRestaurantId(Auth::user()->restaurant_id)->first();
        $select_highlight_time = '';
        if(intval($setting->highlight_time * 60) < 60 && intval($setting->highlight_time * 60) > 0) $select_highlight_time = intval($setting->highlight_time * 60).' seconds';
        if(intval($setting->highlight_time * 60) >= 60) $select_highlight_time = intval($setting->highlight_time).' minute';
@@ -46,7 +46,7 @@ class SettingController extends Controller
      */
     public function updateSetting(Request $request)
     {
-        $setting = Setting::whereUserId(Auth::id())->first();
+        $setting = Setting::whereRestaurantId(Auth::user()->restaurant_id)->first();
 
         $restaurant_logo_name = $setting->restaurant_logo;
         if($request->file('restaurant_logo')){
@@ -79,7 +79,7 @@ class SettingController extends Controller
      */
     public function tableList(Request $request)
     {
-        $tables = Table::with('color','orders', 'floor')->whereUserId(Auth::id())->paginate(10);
+        $tables = Table::with('color','orders', 'floor')->whereRestaurantId(Auth::user()->restaurant_id)->paginate(10);
 
         return response()->json([ 'tables' => $tables ] , 200);
     }
@@ -105,7 +105,7 @@ class SettingController extends Controller
      */
     public function checkColor($capacity)
     {
-        $table = Table::where('capacity_of_person', intval($capacity))->whereUserId(Auth::id())->first();
+        $table = Table::where('capacity_of_person', intval($capacity))->whereRestaurantId(Auth::user()->restaurant_id)->first();
         if($table) return response()->json([ 'success' => true, 'color_id' => $table->color_id ] , 200);
         else return response()->json([ 'success' => false ] , 200);
     }
@@ -118,7 +118,7 @@ class SettingController extends Controller
      */
     public function tableData($id)
     {
-        $table = Table::where('id', $id)->whereUserId(Auth::id())->first();
+        $table = Table::where('id', $id)->whereRestaurantId(Auth::user()->restaurant_id)->first();
 
         return response()->json([ 'table' => $table ] , 200);
     }
@@ -136,7 +136,7 @@ class SettingController extends Controller
             'capacity_of_person' => $request->capacity_of_person,
             'floor_id' => $request->floor_number,
             'color_id' => $request->color,
-            'user_id' => Auth::id(),
+            'restaurant_id' => Auth::user()->restaurant_id,
         ];
 
         Table::updateOrCreate(['id' => $request->id], $data);
@@ -181,9 +181,9 @@ class SettingController extends Controller
      */
     public function memberLimitation(Request $request)
     {
-        $user_id = SettingHelper::getUserIdUsingQrcode();
-        $userId = $user_id ? $user_id : Auth::id();
-        $member_capacity = Setting::whereUserId($userId)->first()->member_capacity;
+        $restaurant_id = SettingHelper::getUserIdUsingQrcode();
+        $restaurant_id = $restaurant_id ? $restaurant_id : Auth::user()->restaurant_id;
+        $member_capacity = Setting::whereRestaurantId($restaurant_id)->first()->member_capacity;
 
         return response()->json(['member_capacity'=>$member_capacity]);
     }

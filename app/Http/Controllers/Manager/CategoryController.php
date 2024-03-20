@@ -23,7 +23,7 @@ class CategoryController extends Controller
         }])->whereHas('categoryLanguages',function($q) use ($req,$lang_id){
             $q->where('language_id',$lang_id);
             $q->where('name','LIKE','%'.$req->search.'%');
-        })->whereUserId(Auth::id())->paginate(10);
+        })->whereRestaurantId(Auth::user()->restaurant_id)->paginate(10);
         return response()->json(['category' => $categories]);
     }
 
@@ -56,7 +56,7 @@ class CategoryController extends Controller
         $langs = Language::whereStatus(1)->get();
         $cat = new Category();
         $cat->image = $image_name;
-        $cat->user_id = Auth::id();
+        $cat->restaurant_id = Auth::user()->restaurant_id;
         if($cat->save()){
             foreach ($langs as $key => $lang) {
                 $cat_lang = new CategoryLanguage();
@@ -146,7 +146,7 @@ class CategoryController extends Controller
         $lang_id = SettingHelper::managerLanguage();
         $categories = Category::with(['categoryLanguages' => function($q) use ($lang_id){
             $q->where('language_id',$lang_id);
-        }])->whereUserId(Auth::id())->get();
+        }])->whereRestaurantId(Auth::user()->restaurant_id)->get();
         $category = [];
         foreach ($categories as $key => $cat) {
             $category[$cat->id] = $cat->categoryLanguages[0]->name;
@@ -157,11 +157,11 @@ class CategoryController extends Controller
     public function getCategoriesList()
     {
         $lang_id = SettingHelper::getlanguage();
-        $userId = SettingHelper::getUserIdUsingQrcode();
-        $user_id = $userId ? $userId : Auth::id();
+        $restaurant_id = SettingHelper::getUserIdUsingQrcode();
+        $restaurant_id = $restaurant_id ? $restaurant_id : Auth::user()->restaurant_id;
         $category = Category::with(['categoryLanguages' => function($q) use ($lang_id){
             $q->where('language_id',$lang_id);
-        }])->whereHas('subCategory.products')->whereUserId($user_id)->get();
+        }])->whereHas('subCategory.products')->whereRestaurantId($restaurant_id)->get();
         return response()->json(['category' => $category]);
     }
 
@@ -170,7 +170,7 @@ class CategoryController extends Controller
         $lang_id = SettingHelper::managerLanguage();
         $category = Category::with(['categoryLanguages' => function($q) use ($lang_id){
             $q->where('language_id',$lang_id);
-        }])->whereHas('subCategory.products')->whereUserId(Auth::id())->get();
+        }])->whereRestaurantId(Auth::user()->restaurant_id)->get();
         return response()->json($category);
     }
 }

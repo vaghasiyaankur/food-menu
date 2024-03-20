@@ -31,32 +31,32 @@ class TableController extends Controller
      */
     public function tableList()
     {
-        $setting = Setting::whereUserId(Auth::id())->first();
+        $setting = Setting::whereRestaurantId(Auth::user()->restaurant_id)->first();
         $highlight_time = @$setting->highlight_on_off ? @$setting->highlight_time : 0;
         $highlight_time_on_off = @$setting->highlight_on_off;
 
         $timing = $highlight_time * 60;
 
-        $groundfloor = Floor::whereUserId(Auth::id())->first();
+        $groundfloor = Floor::whereRestaurantId(Auth::user()->restaurant_id)->first();
         $groundFloorId = @$groundfloor->id;
 
         $tables = Table::with(['color','orders.customer', 'floor','orders'=>function($q){
-            $q->where('finished', 0)->whereUserId(Auth::id())->orderBy('created_at', 'ASC')->orderBy('updated_at', 'ASC');
+            $q->where('finished', 0)->whereRestaurantId(Auth::user()->restaurant_id)->orderBy('created_at', 'ASC')->orderBy('updated_at', 'ASC');
         }])->withCount([
             'orders' => function ($z){
-                $z->where('finished', 0)->whereUserId(Auth::id());
+                $z->where('finished', 0)->whereRestaurantId(Auth::user()->restaurant_id);
             }
-        ])->whereUserId(Auth::id())->where('floor_id', $groundFloorId)->where('status', 1)->orderBy('orders_count', 'DESC')->get();
+        ])->whereRestaurantId(Auth::user()->restaurant_id)->where('floor_id', $groundFloorId)->where('status', 1)->orderBy('orders_count', 'DESC')->get();
 
         $floorlist = Floor::with(['activetables' => function($q){
             $q->withCount([
                 'orders' => function ($z){
-                    $z->where('finished', 0)->whereUserId(Auth::id());
+                    $z->where('finished', 0)->whereRestaurantId(Auth::user()->restaurant_id);
                 }
             ]);
         },'activetables.orders' => function ($q){
-            $q->where('finished', 0)->whereUserId(Auth::id());
-        }])->whereHas('activetables')->whereUserId(Auth::id())->select('id', 'name')->get();
+            $q->where('finished', 0)->whereRestaurantId(Auth::user()->restaurant_id);
+        }])->whereHas('activetables')->whereRestaurantId(Auth::user()->restaurant_id)->select('id', 'name')->get();
 
         foreach ($floorlist as $f_key => $floors) {
             $floors['time_left'] = false;
@@ -102,13 +102,13 @@ class TableController extends Controller
             }
         }
 
-        $total_table_number = Table::whereUserId(Auth::id())->where('status', 1)->count();
-        $table_list_with_order = Table::whereUserId(Auth::id())->select('id')->where('status', 1)->withCount('orders')->get();
+        $total_table_number = Table::whereRestaurantId(Auth::user()->restaurant_id)->where('status', 1)->count();
+        $table_list_with_order = Table::whereRestaurantId(Auth::user()->restaurant_id)->select('id')->where('status', 1)->withCount('orders')->get();
         $count = 0;
         foreach($table_list_with_order as $tlwo){
             if($tlwo->orders_count == 0) $count += 1;
         }
-        $max_table_cap = Table::whereUserId(Auth::id())->where('floor_id', $groundFloorId)->where('status', 1)->max('capacity_of_person');
+        $max_table_cap = Table::whereRestaurantId(Auth::user()->restaurant_id)->where('floor_id', $groundFloorId)->where('status', 1)->max('capacity_of_person');
         $current_capacity = (100 - ($count / $total_table_number * 100));
 
         return response()->json([ 'tables' => $tables , 'floorlist' => $floorlist, 'current_capacity' => $current_capacity,'max_table_cap'=>$max_table_cap, 'highlight_time' => $highlight_time, 'highlight_time_on_off' => $highlight_time_on_off] , 200);
@@ -153,17 +153,17 @@ class TableController extends Controller
     public function tableListFloorWise(Request $request)
     {
 
-        $setting = Setting::whereUserId(Auth::id())->first();
+        $setting = Setting::whereRestaurantId(Auth::user()->restaurant_id)->first();
         $highlight_time = @$setting->highlight_on_off ? @$setting->highlight_time : 0;
         // $highlight_time_on_off = @$setting->highlight_on_off;
 
         $tables = Table::with(['color','orders.customer', 'floor','orders'=>function($q){
-            $q->where('finished', 0)->whereUserId(Auth::id())->orderBy('created_at', 'ASC')->orderBy('updated_at', 'ASC');
+            $q->where('finished', 0)->whereRestaurantId(Auth::user()->restaurant_id)->orderBy('created_at', 'ASC')->orderBy('updated_at', 'ASC');
         }])->withCount([
             'orders' => function ($z){
-                $z->where('finished', 0)->whereUserId(Auth::id());
+                $z->where('finished', 0)->whereRestaurantId(Auth::user()->restaurant_id);
             }
-        ])->where('floor_id', $request->id)->whereUserId(Auth::id())->where('status', 1)->orderBy('orders_count', 'DESC')->get();
+        ])->where('floor_id', $request->id)->whereRestaurantId(Auth::user()->restaurant_id)->where('status', 1)->orderBy('orders_count', 'DESC')->get();
         $timing = $highlight_time * 60;
         foreach($tables as $tkey=>$table){
             foreach($table->orders as $okey=>$order){
@@ -200,12 +200,12 @@ class TableController extends Controller
         $floorlist = Floor::with(['activetables' => function($q){
             $q->withCount([
                 'orders' => function ($z){
-                    $z->whereUserId(Auth::id())->where('finished', 0);
+                    $z->whereRestaurantId(Auth::user()->restaurant_id)->where('finished', 0);
                 }
             ]);
         },'activetables.orders' => function ($q){
-            $q->where('finished', 0)->whereUserId(Auth::id());
-        }])->whereHas('activetables')->select('id', 'name')->whereUserId(Auth::id())->get();
+            $q->where('finished', 0)->whereRestaurantId(Auth::user()->restaurant_id);
+        }])->whereHas('activetables')->select('id', 'name')->whereRestaurantId(Auth::user()->restaurant_id)->get();
 
         foreach ($floorlist as $key => $floors) {
             $floors['time_left'] = false;
@@ -221,15 +221,15 @@ class TableController extends Controller
             }
         }
 
-        $total_table_number = Table::whereUserId(Auth::id())->where('status', 1)->count();
-        $table_list_with_order = Table::whereUserId(Auth::id())->select('id')->where('status', 1)->withCount('orders')->get();
+        $total_table_number = Table::whereRestaurantId(Auth::user()->restaurant_id)->where('status', 1)->count();
+        $table_list_with_order = Table::whereRestaurantId(Auth::user()->restaurant_id)->select('id')->where('status', 1)->withCount('orders')->get();
         $count = 0;
         foreach($table_list_with_order as $tlwo){
             if($tlwo->orders_count == 0) $count += 1;
         }
 
         $current_capacity = (100 - ($count / $total_table_number * 100));
-        $max_table_cap = Table::whereUserId(Auth::id())->where('floor_id', $request->id)->where('status', 1)->max('capacity_of_person');
+        $max_table_cap = Table::whereRestaurantId(Auth::user()->restaurant_id)->where('floor_id', $request->id)->where('status', 1)->max('capacity_of_person');
         return response()->json([ 'tables' => $tables, 'current_capacity' => $current_capacity,'max_table_cap'=>$max_table_cap, 'floorlist' => $floorlist ] , 200);
     }
 
@@ -242,8 +242,8 @@ class TableController extends Controller
     public function changeFloorOrder(Request $request)
     {
         $person = Order::where('id', $request->id)->first()->person;
-        $userId = Auth::id();
-        $table_id = ReservationHelper::takeTable($request->floor_id, $person, $userId);
+        $restaurant_id = Auth::user()->restaurant_id;
+        $table_id = ReservationHelper::takeTable($request->floor_id, $person, $restaurant_id);
 
         if($table_id == 0) return response()->json([ 'success' => false, 'message' => 'not compatible capacity table in this floor' ] , 200);
 
@@ -281,12 +281,12 @@ class TableController extends Controller
     {
         Order::where('id', $request->id)->update(['finished' => 1,'finish_at' => Carbon::now()]);
 
-        $userId = Auth::id();
+        $restaurant_id = Auth::user()->restaurant_id;
 
-        $table_id = Order::where('id', $request->id)->whereUserId($userId)->first()->table_id;
+        $table_id = Order::where('id', $request->id)->whereRestaurantId($restaurant_id)->first()->table_id;
 
 
-        $next = Order::where('table_id', $table_id)->whereNull('start_time')->whereUserId($userId)->where('finished', 0)->orderBy('updated_at', 'ASC')->first();
+        $next = Order::where('table_id', $table_id)->whereNull('start_time')->whereRestaurantId($restaurant_id)->where('finished', 0)->orderBy('updated_at', 'ASC')->first();
         $update_date = @$next->updated_at;
         if($next)  $next->update(['start_time' => Carbon::now()]);
         if($next)  $next->update(['updated_at' => $update_date]);
@@ -351,12 +351,12 @@ class TableController extends Controller
        
         Order::where('id', $request->id)->update(['cancelled_by' => $cancel]);
         
-        $userId = Auth::id();
+        $restaurant_id = Auth::user()->restaurant_id;
 
-        $table_id = Order::where('id', $request->id)->whereUserId($userId)->first()->table_id;
+        $table_id = Order::where('id', $request->id)->whereRestaurantId($restaurant_id)->first()->table_id;
 
 
-        $next = Order::where('table_id', $table_id)->whereNull('start_time')->whereUserId($userId)->where('finished', 0)->orderBy('updated_at', 'ASC')->first();
+        $next = Order::where('table_id', $table_id)->whereNull('start_time')->whereRestaurantId($restaurant_id)->where('finished', 0)->orderBy('updated_at', 'ASC')->first();
         $update_date = @$next->updated_at;
         if($next)  $next->update(['start_time' => Carbon::now()]);
         if($next)  $next->update(['updated_at' => $update_date]);
@@ -421,10 +421,10 @@ class TableController extends Controller
         $table_id = Order::where('id', $orderId)->first()->table_id;
         $created_at = Order::where('id', $orderId)->first()->created_at;
 
-        $userId = Auth::id();
+        $restaurant_id = Auth::user()->restaurant_id;
 
         if($table_id){
-            $allOrder = Order::where('table_id', $table_id)->where('id', '!=', $orderId)->where('finished', 0)->where('created_at', '<=', $created_at)->select('id', 'table_id', 'start_time', 'finish_time', 'finished', 'updated_at')->whereUserId($userId)->get();
+            $allOrder = Order::where('table_id', $table_id)->where('id', '!=', $orderId)->where('finished', 0)->where('created_at', '<=', $created_at)->select('id', 'table_id', 'start_time', 'finish_time', 'finished', 'updated_at')->whereRestaurantId($restaurant_id)->get();
 
             $calculateTime = 0;
 
@@ -432,7 +432,7 @@ class TableController extends Controller
                 $calculateTime += $order->finish_time;
             }
 
-            $firstOrderTime = Order::where('table_id', $table_id)->where('id', '!=', $orderId)->whereUserId($userId)->where('finished', 0)->where('created_at', '<=', $created_at)->whereNotNull('start_time')->first();
+            $firstOrderTime = Order::where('table_id', $table_id)->where('id', '!=', $orderId)->whereRestaurantId($restaurant_id)->where('finished', 0)->where('created_at', '<=', $created_at)->whereNotNull('start_time')->first();
             if($firstOrderTime){
                 $started_time = $firstOrderTime->start_time;
             }else{
@@ -474,15 +474,15 @@ class TableController extends Controller
         if($from_cap < 4) $to_cap = intval(ceil($person * 2));
         else $to_cap = intval(ceil($person * 1.5));
 
-        $floorId = Table::where('capacity_of_person','>=',$from_cap)->where('capacity_of_person','<=',$to_cap)->whereUserId(Auth::id())->where('floor_id','!=',$floor_id)->pluck('floor_id');
+        $floorId = Table::where('capacity_of_person','>=',$from_cap)->where('capacity_of_person','<=',$to_cap)->whereRestaurantId(Auth::user()->restaurant_id)->where('floor_id','!=',$floor_id)->pluck('floor_id');
 
         $floorlist = Floor::with(['activetables' => function($q){
             $q->withCount([
                 'orders' => function ($z){
-                    $z->where('finished', 0)->whereUserId(Auth::id());
+                    $z->where('finished', 0)->whereRestaurantId(Auth::user()->restaurant_id);
                 }
             ]);
-        }])->whereHas('activetables')->whereUserId(Auth::id())->whereIn('id',$floorId)->select('id', 'name')->get();
+        }])->whereHas('activetables')->whereRestaurantId(Auth::user()->restaurant_id)->whereIn('id',$floorId)->select('id', 'name')->get();
 
         foreach ($floorlist as $key => $floors) {
             foreach ($floors->activetables as $key => $table) {

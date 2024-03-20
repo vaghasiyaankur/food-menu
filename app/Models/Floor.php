@@ -20,6 +20,6 @@ class Floor extends Model
 
     public function activetables()
     {
-        return $this->tables()->where('status', 1)->whereUserId(Auth::id());
+        return $this->tables()->where('status', 1)->whereRestaurantId(Auth::user()->restaurant_id);
     }
 }

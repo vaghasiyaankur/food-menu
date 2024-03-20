@@ -36,25 +36,25 @@ class ReservationController extends Controller
             if (!$qrcode) {
                 return response()->json(['error' => 'Reservation Fail.'], 401);
             }else{
-                $userId = $qrcode->user_id;
+                $restaurant_id = $qrcode->restaurant_id;
                 $checkrole = 1;
             }
         }else if($request->role == 'Manager'){
-            $userId = Auth::id();
+            $restaurant_id = Auth::user()->restaurant_id;
             $checkrole = 1;
         }
 
         if($checkrole == 0) return response()->json(['error' => 'Reservation Fail.'], 401);
 
-        $table_id = ReservationHelper::takeTable($request->floor, $request->person, $userId);
-        $orderExists = Order::where('table_id', $table_id)->whereUserId($userId)->whereNotNull('start_time')->where('finished', 0)->doesntExist();
+        $table_id = ReservationHelper::takeTable($request->floor, $request->person, $restaurant_id);
+        $orderExists = Order::where('table_id', $table_id)->whereRestaurantId($restaurant_id)->whereNotNull('start_time')->where('finished', 0)->doesntExist();
         if($table_id){
             $table = Table::where('id', $table_id)->first();
             $register = new Customer();
             $register->name = $request->customer_name;
             $register->number = $request->customer_number;
             $register->agree_condition = $request->agree_condition;
-            $register->user_id = $userId;
+            $register->restaurant_id = $restaurant_id;
             $register->device_token = @$request->session()->get('device_token');
             if($register->save()){
                 $order = new Order();
@@ -67,15 +67,15 @@ class ReservationController extends Controller
                 $order->role = $request->role;
                 $order->finish_time = $table->finish_order_time;
                 $order->finished = 0;
-                $order->user_id = $userId;
+                $order->restaurant_id = $restaurant_id;
                 $order->save();
 
-                broadcast(new NewReservation($order,$userId))->toOthers();
+                broadcast(new NewReservation($order,$restaurant_id))->toOthers();
             }
 
-            $count = Order::where('table_id', $order->table_id)->whereUserId($userId)->whereNotNull('start_time')->where('finished', 0)->count();
+            $count = Order::where('table_id', $order->table_id)->whereRestaurantId($restaurant_id)->whereNotNull('start_time')->where('finished', 0)->count();
             if(!$count){
-                $next = Order::where('table_id', $table_id)->whereUserId($userId)->whereNull('start_time')->where('finished', 0)->orderBy('updated_at', 'ASC')->first();
+                $next = Order::where('table_id', $table_id)->whereRestaurantId($restaurant_id)->whereNull('start_time')->where('finished', 0)->orderBy('updated_at', 'ASC')->first();
                 $update_date = @$next->updated_at;
                 if($next)  $next->update(['start_time' => \Carbon\Carbon::now()]);
                 if($next)  $next->update(['updated_at' => $update_date]);
@@ -149,7 +149,7 @@ class ReservationController extends Controller
 
 
 
-            return response()->json(['success' => 'registration added successfully.', 'orderId' => $order->id, 'user_id' => $register->id]);
+            return response()->json(['success' => 'registration added successfully.', 'orderId' => $order->id, 'restaurant_id' => $register->id]);
         }else{
             $langs = Language::whereStatus(1)->pluck('id')->toarray();
             $lang_id = request()->session()->get('lang');
@@ -211,7 +211,7 @@ class ReservationController extends Controller
 
     public function checkReservation()
     {
-        $close_reservation = Setting::whereUserId(Auth::id())->first()->close_reservation;
+        $close_reservation = Setting::whereRestaurantId(Auth::user()->restaurant_id)->first()->close_reservation;
         return response()->json([ 'close_reservation' => $close_reservation ] , 200);
     }
 
@@ -224,9 +224,9 @@ class ReservationController extends Controller
 
     public function changeReservation(Request $request)
     {
-        Setting::whereUserId(Auth::id())->update(['close_reservation' => $request->reservation]);
+        Setting::whereRestaurantId(Auth::user()->restaurant_id)->update(['close_reservation' => $request->reservation]);
 
-        $close_reservation = Setting::whereUserId(Auth::id())->first()->close_reservation;
+        $close_reservation = Setting::whereRestaurantId(Auth::user()->restaurant_id)->first()->close_reservation;
         return response()->json([ 'close_reservation' => $close_reservation ] , 200);
     }
 
@@ -239,7 +239,7 @@ class ReservationController extends Controller
 
     public function checkTime(Request $request)
     {
-        $userId = Auth::id();
+        $restaurant_id = Auth::user()->restaurant_id;
         if ($request->qrToken != 'undefined' && $request->role == 'Guest') {
             $qrcode_token = $request->qrToken;
             $date = Carbon::now()->format('Y-m-d');
@@ -247,14 +247,14 @@ class ReservationController extends Controller
             if (!$qrcode) {
                 return response()->json(['error' => 'Reservation Fail.'], 401);
             }else{
-                $userId = $qrcode->user_id;
+                $restaurant_id = $qrcode->restaurant_id;
             }
         }
 
-        $table_id = ReservationHelper::takeTable($request->floor, $request->person, $userId);
+        $table_id = ReservationHelper::takeTable($request->floor, $request->person, $restaurant_id);
 
         if($table_id){
-            $allOrder = Order::whereUserId($userId)->where('table_id', $table_id)->where('finished', 0)->select('id', 'table_id', 'start_time', 'finish_time', 'finished')->get();
+            $allOrder = Order::whereRestaurantId($restaurant_id)->where('table_id', $table_id)->where('finished', 0)->select('id', 'table_id', 'start_time', 'finish_time', 'finished')->get();
             $calculateTime = 0;
             foreach($allOrder as $order){
                 if($order->start_time){
@@ -298,8 +298,8 @@ class ReservationController extends Controller
         // $table = Table::where('status', 1)->where('capacity_of_person', intval($request->member))->first();
         $from_cap = intval($request->member);
 
-        $userId = SettingHelper::getUserIdUsingQrcode();
-        $user_id = $userId ? $userId : Auth::id();
+        $restaurant_id = SettingHelper::getUserIdUsingQrcode();
+        $restaurant_id = $restaurant_id ? $restaurant_id : Auth::user()->restaurant_id;
 
         if($from_cap < 4) $to_cap = intval(ceil($request->member * 2));
         else $to_cap = intval(ceil($request->member * 1.5));
@@ -310,7 +310,7 @@ class ReservationController extends Controller
         //     $table_capacity = $table->capacity_of_person;
         $floors = Floor::whereHas('tables', function($q) use($from_cap,$to_cap){
                 $q->where('capacity_of_person', '>=', $from_cap)->where('capacity_of_person', '<=', $to_cap)->where('status', 1);
-            })->whereUserId($user_id)->pluck('name','id');
+            })->whereRestaurantId($restaurant_id)->pluck('name','id');
 
         return response()->json([ 'success' => true, 'floors' => $floors ] , 200);
         // }else{
@@ -448,7 +448,7 @@ class ReservationController extends Controller
             Order::where('id', $orderId)->update(['cancelled_by' => $cancel]);
             Order::where('id', $orderId)->delete();
             $order = Order::withTrashed()->where('id', $orderId)->first();
-            broadcast(new NewReservation($order,$order->user_id))->toOthers();
+            broadcast(new NewReservation($order,$order->restaurant_id))->toOthers();
         }
         return response()->json([ 'success' => true ] , 200);
     }
@@ -468,14 +468,14 @@ class ReservationController extends Controller
         $search = $request->search;
 
         $reservation = Order::withTrashed()->with(['customer' => function($q) {
-            $q->select('id','name', 'number','user_id')->whereUserId(Auth::id());
+            $q->select('id','name', 'number','restaurant_id')->whereRestaurantId(Auth::user()->restaurant_id);
         }]);
 
         if ($from_date && $to_date) {
             $reservation = $reservation->whereDate('created_at', '>=', $from_date)->whereDate('created_at', '<=', $to_date);
         }
 
-        $reservation = $reservation->select('id','customer_id','person','start_time','finish_time','finished','deleted_at','user_id')->selectRaw('DATE_FORMAT(created_at,"%d, %b %Y / %h:%i %p") as date');
+        $reservation = $reservation->select('id','customer_id','person','start_time','finish_time','finished','deleted_at','restaurant_id')->selectRaw('DATE_FORMAT(created_at,"%d, %b %Y / %h:%i %p") as date');
 
         if($request->search)
         $reservation = $reservation->where('id', $request->search)->orWhere(function ($orWhere) use ($search) {
@@ -484,7 +484,7 @@ class ReservationController extends Controller
             });
         });
         $page = $request->page ? : 1;
-        $reservation = $reservation->whereUserId(Auth::id())->paginate(10);
+        $reservation = $reservation->whereRestaurantId(Auth::user()->restaurant_id)->paginate(10);
 
         return response()->json([ 'reservation' => $reservation ] , 200);
     }
@@ -537,23 +537,23 @@ class ReservationController extends Controller
 
     public function setDeviceToken(Request $request)
     {
-        Customer::where('id', $request->user_id)->update(['device_token' => $request->token]);
+        Customer::where('id', $request->restaurant_id)->update(['device_token' => $request->token]);
 
         return response()->json([ 'success' => true ] , 200);
     }
 
     public function checkReservationEnabled(Request $request)
     {
-        $userId = Auth::id();
+        $restaurant_id = Auth::user()->restaurant_id;
         if ($request->qrcode != 'undefined') {
             $qrcode_token = $request->qrcode;
             $date = Carbon::now()->format('Y-m-d');
             $qrcode = QrCodeToken::whereToken($qrcode_token)->where('start_date', '<=', $date)->where('end_date', '>=', $date)->first();
             if ($qrcode) {
-                $userId = $qrcode->user_id;
+                $restaurant_id = $qrcode->restaurant_id;
             }
         }
-        $setting = Setting::whereUserId($userId)->first();
+        $setting = Setting::whereRestaurantId($restaurant_id)->first();
         $close_reservation = $setting->close_reservation;
         if ($close_reservation == 0) {
             $open_time = Carbon::create($setting->open_time);

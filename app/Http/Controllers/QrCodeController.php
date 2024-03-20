@@ -31,7 +31,7 @@ class QrCodeController extends Controller
 
         $fromDate = $req->from_date ? Carbon::parse($req->from_date)->format('Y-m-d') : '';
         $toDate = $req->to_date ? Carbon::parse($req->to_date)->format('Y-m-d') : $fromDate;
-        $qrcodes = QrCodeToken::whereUserId(Auth::id());
+        $qrcodes = QrCodeToken::whereRestaurantId(Auth::user()->restaurant_id);
         if ($req->from_date && $req->to_date) {
             $qrcodes = $qrcodes->whereDate('start_date','>=',$fromDate)->whereDate('end_date','<=',$toDate);
         }elseif($req->from_date && !$req->to_date){
@@ -107,7 +107,7 @@ class QrCodeController extends Controller
             $qr = new QrCodeToken();
             $qr->start_date = date('Y-m-d', strtotime($startDuration));
             $qr->end_date = date('Y-m-d', strtotime($endDuration));
-            $qr->user_id = Auth::id();
+            $qr->restaurant_id = Auth::user()->restaurant_id;
             $qr->token = str_replace("+", "0", $encode);
             $qr->save();
         }

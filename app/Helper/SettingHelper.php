@@ -16,9 +16,9 @@ class SettingHelper{
     /* Choose language */
     public static function systemLang()
     {
-        $userId = self::getUserIdUsingQrcode();
-        $user_id = $userId ? $userId : Auth::id();
-        $setting = Setting::whereUserId($user_id)->first('language_id');
+        $restaurant_id = self::getUserIdUsingQrcode();
+        $restaurant_id = $restaurant_id ? $restaurant_id : Auth::user()->restaurant_id;
+        $setting = Setting::whereRestaurantId($restaurant_id)->first('language_id');
 
         return $setting->language_id;
     }
@@ -47,7 +47,7 @@ class SettingHelper{
         if(array_key_exists('1', $qrcode_exists)){
             $qrcode_token = $qrcode_exists[1];
             $qrcode = QrCodeToken::whereToken($qrcode_token)->where('start_date', '<=', $date)->where('end_date', '>=', $date)->first();
-            if($qrcode) return $qrcode->user_id;
+            if($qrcode) return $qrcode->restaurant_id;
         }
     }
 }
