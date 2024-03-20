@@ -1,18 +1,18 @@
 
-import LockScreen from "./components/restaurant-manager/LockScreen.vue";
-import Login from "./components/restaurant-manager/Login.vue";
-import Table from "./components/restaurant-manager/Table.vue";
-import FoodCategory from "./components/restaurant-manager/FoodCategory.vue";
-import FoodSubCategory from "./components/restaurant-manager/FoodSubCategory.vue";
-import FoodProduct from "./components/restaurant-manager/FoodProduct.vue";
-import SingleCategoryProducts from "./components/restaurant-manager/SingleCategoryProducts.vue";
-import Setting from "./components/restaurant-manager/settings/SettingsTab.vue";
-import DigitalMenu from "./components/restaurant-manager/DigitalMenu.vue";
-import Reporting from "./components/restaurant-manager/Reporting.vue";
-import Reservation from "./components/restaurant-manager/Reservation.vue";
-import Waiting from "./components/restaurant-manager/Waiting.vue";
-import AllReservation from "./components/restaurant-manager/AllReservation.vue";
-import ReservationView from "./components/restaurant-manager/ReservationView.vue";
+import LockScreen from "./pages/restaurant-manager/LockScreen.vue";
+import Login from "./pages/restaurant-manager/Login.vue";
+import Table from "./pages/restaurant-manager/Table.vue";
+import FoodCategory from "./pages/restaurant-manager/FoodCategory.vue";
+import FoodSubCategory from "./pages/restaurant-manager/FoodSubCategory.vue";
+import FoodProduct from "./pages/restaurant-manager/FoodProduct.vue";
+import SingleCategoryProducts from "./pages/restaurant-manager/SingleCategoryProducts.vue";
+import Setting from "./pages/restaurant-manager/settings/SettingsTab.vue";
+import DigitalMenu from "./pages/restaurant-manager/DigitalMenu.vue";
+import Reporting from "./pages/restaurant-manager/Reporting.vue";
+import Reservation from "./pages/restaurant-manager/Reservation.vue";
+import Waiting from "./pages/restaurant-manager/Waiting.vue";
+import AllReservation from "./pages/restaurant-manager/AllReservation.vue";
+import ReservationView from "./pages/restaurant-manager/ReservationView.vue";
 // Pages
 export default [
   // Index page

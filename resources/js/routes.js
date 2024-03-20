@@ -1,6 +1,6 @@
-import Register from "./components/guest-app/Register.vue";
-import Favourite from "./components/guest-app/Favourite.vue";
-import Waiting from "./components/guest-app/Waiting.vue";
+import Register from "./pages/guest-app/Register.vue";
+import Favourite from "./pages/guest-app/Favourite.vue";
+import Waiting from "./pages/guest-app/Waiting.vue";
 // Pages
 export default [
   // Index page
