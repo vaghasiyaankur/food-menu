@@ -43,7 +43,7 @@ class LanguageController extends Controller
     {
         $trans = Content::whereLanguageId($id)->where(function($query) use ($req){
                             $query->where('content', 'LIKE', '%'.$req->q.'%')
-                                  ->orWhere('title', 'LIKE', '%'.$req->q.'%');
+                                    ->orWhere('title', 'LIKE', '%'.$req->q.'%');
                         })->paginate(10);
         return response()->json(['translations' => $trans]);
     }

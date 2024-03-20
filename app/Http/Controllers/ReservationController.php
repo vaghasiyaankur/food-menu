@@ -25,29 +25,30 @@ use Mockery\Undefined;
 
 class ReservationController extends Controller
 {
+    /**
+     * Add Reservation
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function addReservation(Request $request)
     {
-        // $order = Order::wherePerson($request->person)->pluck('table_id');
-        $checkrole = 0;
-        if ($request->qrToken != 'undefined' && $request->role == 'Guest') {
-            $qrcode_token = $request->qrToken;
-            $date = Carbon::now()->format('Y-m-d');
-            $qrcode = QrCodeToken::whereToken($qrcode_token)->where('start_date', '<=', $date)->where('end_date', '>=', $date)->first();
-            if (!$qrcode) {
-                return response()->json(['error' => 'Reservation Fail.'], 401);
-            }else{
-                $restaurant_id = $qrcode->restaurant_id;
-                $checkrole = 1;
-            }
-        }else if($request->role == 'Manager'){
-            $restaurant_id = Auth::user()->restaurant_id;
-            $checkrole = 1;
+        // Check permission for adding reservation
+        $checkPermission = ReservationHelper::checkPermissionForAdd($request->role, $request->qrToken);
+        if (!$checkPermission['status']) {
+            return response()->json(['error' => $checkPermission['message']], 401);
         }
 
-        if($checkrole == 0) return response()->json(['error' => 'Reservation Fail.'], 401);
+        $restaurant_id = $checkPermission['restaurant_id'];
 
         $table_id = ReservationHelper::takeTable($request->floor, $request->person, $restaurant_id);
-        $orderExists = Order::where('table_id', $table_id)->whereRestaurantId($restaurant_id)->whereNotNull('start_time')->where('finished', 0)->doesntExist();
+
+        $orderExists = Order::where('table_id', $table_id)
+                        ->whereRestaurantId($restaurant_id)
+                        ->whereNotNull('start_time')
+                        ->where('finished', 0)
+                        ->doesntExist();
+                        
         if($table_id){
             $table = Table::where('id', $table_id)->first();
             $register = new Customer();
@@ -110,7 +111,7 @@ class ReservationController extends Controller
 
             $basic  = new \Vonage\Client\Credentials\Basic(getenv("NEXMO_KEY"), getenv("NEXMO_SECRET"));
             $client = new \Vonage\Client($basic);
-// dd(getenv('NEXMO_DEFAULT_NUMBER'));
+            // dd(getenv('NEXMO_DEFAULT_NUMBER'));
            //  $receiverNumber = ;     link : https://receive-smss.com/sms/447498173567/
             // $receiverNumber = $customer->number;
             $messageNotification = "Food-Menu : Your Turn Now!!";
@@ -211,8 +212,10 @@ class ReservationController extends Controller
 
     public function checkReservation()
     {
-        $close_reservation = Setting::whereRestaurantId(Auth::user()->restaurant_id)->first()->close_reservation;
-        return response()->json([ 'close_reservation' => $close_reservation ] , 200);
+        $closeReservation = Setting::where('restaurant_id', auth()->user()->restaurant_id)
+                            ->value('close_reservation');
+                            
+        return response()->json(['close_reservation' => $closeReservation], 200);
     }
 
     /**
@@ -224,10 +227,14 @@ class ReservationController extends Controller
 
     public function changeReservation(Request $request)
     {
-        Setting::whereRestaurantId(Auth::user()->restaurant_id)->update(['close_reservation' => $request->reservation]);
+        // Update close_reservation setting for the current restaurant
+        Setting::where('restaurant_id', Auth::user()->restaurant_id)->update(['close_reservation' => $request->reservation]);
 
-        $close_reservation = Setting::whereRestaurantId(Auth::user()->restaurant_id)->first()->close_reservation;
-        return response()->json([ 'close_reservation' => $close_reservation ] , 200);
+        // Fetch the updated close_reservation setting for the current restaurant
+        $closeReservation = Setting::where('restaurant_id', Auth::user()->restaurant_id)->value('close_reservation');
+
+        // Return the close_reservation setting in the response
+        return response()->json(['close_reservation' => $closeReservation], 200);
     }
 
     /**
@@ -290,7 +297,6 @@ class ReservationController extends Controller
      * @return @json ($floors)
      *
      */
-
     public function floorAvailable(Request $request)
     {
         // $table_id = ReservationHelper::takeTable($request->floor, $request->person);
@@ -324,7 +330,6 @@ class ReservationController extends Controller
      * @return @json ($time)
      *
      */
-
     public function waitingTime(Request $request)
     {
         // $table_id = ReservationHelper::takeTable($request->floor, $request->person);
@@ -382,7 +387,6 @@ class ReservationController extends Controller
      * @return @json ($table)
      *
      */
-
     public function waitingOrderData(Request $request)
     {
         // $table_id = ReservationHelper::takeTable($request->floor, $request->person);

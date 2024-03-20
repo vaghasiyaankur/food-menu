@@ -19,6 +19,8 @@ class NewReservation implements ShouldBroadcast
     public $order;
 
     public $user_id;
+
+    public $restaurant_id;
     /**
      * Create a new event instance.
      *
