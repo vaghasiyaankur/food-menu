@@ -161,7 +161,7 @@ class CategoryController extends Controller
         $restaurant_id = $restaurant_id ? $restaurant_id : Auth::user()->restaurant_id;
         $category = Category::with(['categoryLanguages' => function($q) use ($lang_id){
             $q->where('language_id',$lang_id);
-        }])->whereHas('subCategory.products')->whereRestaurantId($restaurant_id)->get();
+        }])->whereRestaurantId($restaurant_id)->get();
         return response()->json(['category' => $category]);
     }
 
