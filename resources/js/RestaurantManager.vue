@@ -6,9 +6,9 @@
           <div>
             <button
               @click="MoveToPos"
-              class="col link button text-color-white padding-horizontal padding-vertical-half bg-dark"
+              class="col link button text-color-white padding-horizontal padding-vertical-half bg-pink height-40 text-transform-capitalize"
             >
-              <i class="f7-icons font-14 margin-right-half"> arrow_2_circlepath </i>
+              <i class="f7-icons font-14 margin-right-half"> arrow_right_arrow_left </i>
               Switch Pos
             </button>
           </div>
@@ -764,7 +764,7 @@ $("body").click(function (e) {
 }
 
 .height-40 {
-  height: 40px;
+  height: 40px !important;
 }
 
 .menu-item-content {
