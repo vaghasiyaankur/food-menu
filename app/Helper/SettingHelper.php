@@ -50,5 +50,27 @@ class SettingHelper{
             if($qrcode) return $qrcode->restaurant_id;
         }
     }
+
+    /**
+     * collect Particular Value from setting table
+     *
+     * @return Value of close_reservation in setting table
+     *
+     */
+    public static function getData($column){
+        return Setting::where('restaurant_id', auth()->user()->restaurant_id)
+                        ->value($column);
+    }
+
+    /**
+     * Update Data in setting table
+     *
+     * @return Value of close_reservation in setting table
+     *
+     */
+    public static function updateData($updateSettingData){
+        return Setting::where('restaurant_id', Auth::user()->restaurant_id)
+                        ->update($updateSettingData);;
+    }
 }
 ?>

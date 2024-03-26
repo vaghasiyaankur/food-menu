@@ -17,6 +17,9 @@ use Kutia\Larafirebase\Facades\Larafirebase;
 use Validator;
 use App\Events\NewReservation;
 use App\Helper\SettingHelper;
+use App\Helper\CustomerHelper;
+use App\Helper\LanguageHelper;
+use App\Helper\OrderHelper;
 use App\Models\Content;
 use App\Models\QrCodeToken;
 use Illuminate\Support\Facades\Auth;
@@ -51,117 +54,78 @@ class ReservationController extends Controller
                         
         if($table_id){
             $table = Table::where('id', $table_id)->first();
-            $register = new Customer();
-            $register->name = $request->customer_name;
-            $register->number = $request->customer_number;
-            $register->agree_condition = $request->agree_condition;
-            $register->restaurant_id = $restaurant_id;
-            $register->device_token = @$request->session()->get('device_token');
-            if($register->save()){
-                $order = new Order();
-                $order->customer_id = $register->id;
-                $order->table_id = $table_id;
-                $order->person = $request->person;
-                if ($orderExists) {
-                    $order->start_time = Carbon::now();
-                }
-                $order->role = $request->role;
-                $order->finish_time = $table->finish_order_time;
-                $order->finished = 0;
-                $order->restaurant_id = $restaurant_id;
-                $order->save();
 
-                broadcast(new NewReservation($order,$restaurant_id))->toOthers();
+            $customerData = [
+                'customer_name' => $request->customer_name,
+                'customer_number' => $request->customer_number,
+                'agree_condition' => $request->agree_condition,
+                'restaurant_id' => $restaurant_id,
+                'device_token' => $request->session()->get('device_token', null),
+            ];
+            
+            if($register = CustomerHelper::createCustomer($customerData)) {
+
+                $orderData = [
+                    'customer_id' => $register->id,
+                    'table_id' => $table_id,
+                    'person' => $request->person,
+                    'orderExists' => $orderExists, 
+                    'role' => $request->role,
+                    'finish_time' => $table->finish_order_time,
+                    'finished' => 0,
+                    'restaurant_id' => $restaurant_id,
+                ];
+
+                $order = OrderHelper::createOrder($orderData);
+
+                if($order)
+                    broadcast(new NewReservation($order,$restaurant_id))->toOthers();
+
             }
 
-            $count = Order::where('table_id', $order->table_id)->whereRestaurantId($restaurant_id)->whereNotNull('start_time')->where('finished', 0)->count();
-            if(!$count){
-                $next = Order::where('table_id', $table_id)->whereRestaurantId($restaurant_id)->whereNull('start_time')->where('finished', 0)->orderBy('updated_at', 'ASC')->first();
-                $update_date = @$next->updated_at;
-                if($next)  $next->update(['start_time' => \Carbon\Carbon::now()]);
-                if($next)  $next->update(['updated_at' => $update_date]);
+            $orderExist = OrderHelper::CheckOrderExistParticularTable($order->table_id, $restaurant_id); 
+            if(!$orderExist){
+                $nextOrder = OrderHelper::nextOrder($table_id, $restaurant_id);
+
+                $update_date = @$nextOrder->updated_at;
+
+                if($nextOrder)  
+                    $nextOrder->update(['start_time' => \Carbon\Carbon::now(), 'updated_at' => $update_date]);
 
 
                 // $token = $request->session()->get('device_token');
-                $customer_id = @$next->customer_id;
-                $customer = Customer::where('id', @$customer_id)->first();
+                $customerId = @$nextOrder->customer_id;
+                $customer = CustomerHelper::getCustomer($customerId);
+
                 $token = @$customer->device_token;
 
                 if($token){
-                // $fcmTokens = ['c16H1_gwueT8jzmm2w_cTn:APA91bGjH092huMhvCN4Cejb84y1Y_CxzdbLrxIwyLucbUCyX4v1gl2O6oYcVaSm0ncnYhD9mbFlKVmvAgVzeePzLN5yhn0PG1esfjo0P1mrR0RUXb_W4sQII_GfcZoXodUmsqc-Kg0m'];
-                $fcmTokens = [$token];
+                    $fcmTokens = [$token];
+                    OrderHelper::sendBrowserNotification($fcmTokens, $request->title, $request->message);
+                }
 
-                //Notification::send(null,new SendPushNotification($request->title,$request->message,$fcmTokens));
-
-                /* or */
-
-                //auth()->user()->notify(new SendPushNotification($title,$message,$fcmTokens));
-
-                /* or */
-
-                // Larafirebase::withTitle('Food-menu Restaurant')
-                // ->withBody('Your Turn Now !!!')
-                // ->sendMessage($fcmTokens);
-                // return redirect()->back()->with('success','Notification Sent Successfully!!');
-
-
-
-            }
-            try {
-
-            $basic  = new \Vonage\Client\Credentials\Basic(getenv("NEXMO_KEY"), getenv("NEXMO_SECRET"));
-            $client = new \Vonage\Client($basic);
-            // dd(getenv('NEXMO_DEFAULT_NUMBER'));
-           //  $receiverNumber = ;     link : https://receive-smss.com/sms/447498173567/
-            // $receiverNumber = $customer->number;
-            $messageNotification = "Food-Menu : Your Turn Now!!";
-
-            // $message = $client->message()->send([
-            //     'to' => getenv("NEXMO_DEFAULT_NUMBER"),
-            //     'from' => getenv('NEXMO_REGISTER_NUMBER'),
-            //     'text' => $messageNotification
-            // ]);
-
-            }
+                try {
+                    $messageNotification = "Food-Menu : Your Turn Now!!";
+                    OrderHelper::sendMobileNotification($messageNotification);
+                }
                 catch (Exception $e) {
-                // dd("Error: ". $e->getMessage());
+                    // dd("Error: ". $e->getMessage());
+                }
             }
-            }
+            
+            return response()->json([
+                'success' => 'registration added successfully.', 
+                'orderId' => $order->id, 
+                'restaurant_id' => $register->id
+            ]);
 
-
-
-            // try {
-
-                // $basic  = new \Vonage\Client\Credentials\Basic(getenv("NEXMO_KEY"), getenv("NEXMO_SECRET"));
-                // $client = new \Vonage\Client($basic);
-
-                // $receiverNumber = "447498173567";
-                // $message = "Food-Menu : Your Turn Now!!";
-
-                // $message = $client->message()->send([
-                //     'to' => $receiverNumber,
-                //     'from' => 'Vonage APIs',
-                //     'text' => $message
-                // ]);
-
-            // } catch (Exception $e) {
-            //     dd("Error: ". $e->getMessage());
-            // }
-
-
-
-            return response()->json(['success' => 'registration added successfully.', 'orderId' => $order->id, 'restaurant_id' => $register->id]);
         }else{
-            $langs = Language::whereStatus(1)->pluck('id')->toarray();
-            $lang_id = request()->session()->get('lang');
-            $langId = in_array($lang_id, $langs) ? $lang_id : SettingHelper::systemLang();
-            $content = Content::where('language_id', $langId)->where('title', 'capacity_error')->first();
-            $message = $content ? $content->content : "We don't have a table for that many people. Please contact the restaurant manager.";
+            $message = $this->doesNotHaveTableForThatManyPeopleError();
             return response()->json(['error' => $message], 401);
         }
     }
 
-    /**
+    /**   Testing Purpose
      * Set Notification for order
      *
      * @return @json ($close_reservation = 0 or 1)
@@ -209,11 +173,9 @@ class ReservationController extends Controller
      * @return @json ($close_reservation = 0 or 1)
      *
      */
-
     public function checkReservation()
     {
-        $closeReservation = Setting::where('restaurant_id', auth()->user()->restaurant_id)
-                            ->value('close_reservation');
+        $closeReservation = SettingHelper::getData('close_reservation');
                             
         return response()->json(['close_reservation' => $closeReservation], 200);
     }
@@ -224,16 +186,12 @@ class ReservationController extends Controller
      * @return @json ($close_reservation = 0 or 1)
      *
      */
-
     public function changeReservation(Request $request)
     {
-        // Update close_reservation setting for the current restaurant
-        Setting::where('restaurant_id', Auth::user()->restaurant_id)->update(['close_reservation' => $request->reservation]);
+        SettingHelper::updateData(['close_reservation', $request->reservation]);
 
-        // Fetch the updated close_reservation setting for the current restaurant
-        $closeReservation = Setting::where('restaurant_id', Auth::user()->restaurant_id)->value('close_reservation');
+        $closeReservation = SettingHelper::getData('close_reservation');
 
-        // Return the close_reservation setting in the response
         return response()->json(['close_reservation' => $closeReservation], 200);
     }
 
@@ -243,7 +201,6 @@ class ReservationController extends Controller
      * @return @json ($time = 1:00)
      *
      */
-
     public function checkTime(Request $request)
     {
         $restaurant_id = Auth::user()->restaurant_id;
@@ -282,13 +239,28 @@ class ReservationController extends Controller
             $waiting_time = date('H:i', mktime(0,$calculateTime));
             return response()->json([ 'success' => true, 'waiting_time' => $waiting_time , 'hour_min' => $hour_min ] , 200);
         }else{
-            $langs = Language::whereStatus(1)->pluck('id')->toarray();
-            $lang_id = request()->session()->get('lang');
-            $langId = in_array($lang_id, $langs) ? $lang_id : SettingHelper::systemLang();
-            $content = Content::where('language_id', $langId)->where('title', 'capacity_error')->first();
-            $message = $content ? $content->content : "We don't have a table for that many people. Please contact the restaurant manager.";
+            $message = $this->doesNotHaveTableForThatManyPeopleError();
             return response()->json(['success' => false, 'message' => $message], 200);
         }
+    }
+
+    /**
+     * Passed the error message for table not exist for that many people
+     *
+     * @return @string ($message)
+     *
+     */
+    public function doesNotHaveTableForThatManyPeopleError(){
+        $langs = LanguageHelper::languageIdArray();
+        $lang_id = request()->session()->get('lang');
+        $langId = in_array($lang_id, $langs) ? $lang_id : SettingHelper::systemLang();
+
+        $content = Content::where('language_id', $langId)
+                            ->where('title', 'capacity_error')
+                            ->first();
+
+        $message = $content->content ?? "We don't have a table for that many people. Please contact the restaurant manager.";
+        return $message;
     }
 
     /**
