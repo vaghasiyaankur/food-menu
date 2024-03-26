@@ -6,14 +6,14 @@
           <div>
             <button
               @click="MoveToWaitingArea"
-              class="col link button text-color-white padding-horizontal padding-vertical-half bg-dark"
+              class="col link button text-color-white padding-horizontal padding-vertical-half bg-pink height-40 text-transform-capitalize"
             >
-              <i class="f7-icons font-14 margin-right-half"> arrow_2_circlepath </i>
+              <i class="f7-icons font-14 margin-right-half"> arrow_right_arrow_left </i>
               Switch To Waiting Area
             </button>
           </div>
           <div
-            class="header-links display-flex align-items-center"
+            class="header-links display-flex justify-content-flex-end align-items-center"
             v-if="CurrentsubmenuRoute != 'category'"
           >
             <!--========= SMALL SCREEN MENU BAR=========== -->
@@ -40,42 +40,30 @@
                   <div
                     class="padding-horizontal height-40 border-bottom pannel_menu_link panel-close"
                   >
-                    <a href="/table/" router class="link nav-link text-color-black font-16">
-                      <i class="f7-icons font-14 margin-right-half">clock</i>Waiting
-                      area</a
+                    <a
+                      href="/table/"
+                      router
+                      class="link nav-link text-color-black font-16"
+                    >
+                      <Icon name="pos" color="#000" class="margin-right-half" />POS</a
                     >
                   </div>
                   <div
                     class="padding-horizontal height-40 border-bottom pannel_menu_link panel-close"
                   >
                     <a
-                      href="/all-reservation/"
+                      href="/table/"
+                      router
                       class="link nav-link text-color-black font-16"
                     >
-                      <img
-                        src="/images/reservation.png"
-                        alt=""
-                        class="padding-right-half"
-                        style="filter: invert(100%); height: 13px"
-                      />All Reservation</a
+                      <Icon
+                        name="dining_table"
+                        color="#000"
+                        class="margin-right-half"
+                      />Floorplan</a
                     >
                   </div>
-                  <div
-                    class="padding-horizontal height-40 border-bottom pannel_menu_link panel-close"
-                  >
-                    <a
-                      href="/Reservation/"
-                      class="link nav-link text-color-black font-16"
-                    >
-                      <img
-                        src="/images/pluse.png"
-                        alt=""
-                        class="padding-right-half"
-                        style="filter: invert(100%); height: 13px"
-                      />Reservation</a
-                    >
-                  </div>
-                  <!-- <div class="list accordion-list inset no-margin">
+                  <div class="list accordion-list inset no-margin">
                     <ul>
                       <li class="accordion-item">
                         <a href="#" class="item-link item-content border-bottom">
@@ -118,58 +106,6 @@
                         </div>
                       </li>
                     </ul>
-                  </div> -->
-                  <!-- <div class="menu-item menu-item-dropdown bg-white">
-                                    <div class="menu-item-content padding-horizontal">Menu management
-                                        <i class="f7-icons">chevron_down</i>
-                                    </div>
-                                    <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
-                                        <div class="menu-dropdown-content bg-color-white no-padding">
-                                            <a href="#" class="menu-dropdown-link menu-close margin-horizontal no-padding"></a>
-                                            <a href="/food-category/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food Category</a>
-                                            <a href="/food-subcategory/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food SubCategory</a>
-                                            <a href="/food-product/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Food Menu</a>
-                                            <a href="/digital-menu/" class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding">Digital Menu</a>
-                                        </div>
-                                    </div>
-                                </div> -->
-                  <div class="padding-horizontal height-40 border-bottom">
-                    <a
-                      href="/Reporting/"
-                      class="link nav-link text-color-black font-16 panel-close"
-                      ><img
-                        src="/images/reporting.png"
-                        alt=""
-                        class="padding-right-half"
-                        style="filter: invert(100%); height: 13px"
-                      />Reporting</a
-                    >
-                  </div>
-                  <div class="padding-horizontal height-40 border-bottom">
-                    <button
-                      class="col nav-link button close_reservation no-padding font-16 panel-close"
-                      @click="$root.closeReservation(close_reservation)"
-                    >
-                      <img
-                        src="/images/close_1_.png"
-                        alt=""
-                        class="padding-right-half"
-                        style="filter: invert(100%); height: 13px"
-                      />{{ close_reservation == 1 ? "Open" : "Close" }} reservation
-                    </button>
-                  </div>
-                  <div class="padding-horizontal height-40 border-bottom">
-                    <a
-                      href="/settings/"
-                      class="col link nav-link text-color-black font-16 panel-close"
-                    >
-                      <img
-                        src="/images/setting.png"
-                        alt=""
-                        class="padding-right-half"
-                        style="filter: invert(100%); height: 13px"
-                      />Settings</a
-                    >
                   </div>
                 </div>
               </div>
@@ -182,42 +118,31 @@
                 <a
                   href="/table/"
                   class="col link nav-link button button-raised text-color-white padding"
+                  :class="currentRoute == 'table' ? 'bg-dark' : 'bg-dark'"
+                >
+                  <Icon name="pos" color="#fff" class="margin-right-half" />POS</a
+                >
+              </div>
+              <div class="padding-left-half padding-right-half height-40 nav-button">
+                <a
+                  href="/table/"
+                  class="col link nav-link button button-raised text-color-white padding"
                   :class="currentRoute == 'table' ? 'bg-pink' : 'bg-dark'"
                 >
-                  <i class="f7-icons font-14 margin-right-half">clock</i>waiting area</a
+                  <Icon
+                    name="dining_table"
+                    color="#fff"
+                    class="margin-right-half"
+                  />Floorplan</a
                 >
               </div>
               <div class="padding-left-half padding-right-half height-40 nav-button">
-                <a
-                  href="/all-reservation/"
-                  class="col link nav-link button button-raised text-color-white padding"
-                  :class="currentRoute == 'all-reservation' ? 'bg-pink' : 'bg-dark'"
-                >
-                  <img
-                    src="/images/reservation.png"
-                    alt=""
-                    class="padding-right-half"
-                  />All Reservation</a
-                >
-              </div>
-              <div class="padding-left-half padding-right-half height-40 nav-button">
-                <a
-                  href="/Reservation/"
-                  class="col link nav-link button button-raised text-color-white padding"
-                  :class="currentRoute == 'reservation' ? 'bg-pink' : 'bg-dark'"
-                >
-                  <img src="/images/pluse.png" alt="" class="padding-right-half" /> New
-                  Reservation</a
-                >
-              </div>
-              <!-- <div class="nav-button padding-left-half padding-right-half">
-                <div class="menu-item menu-item-dropdown">
+                <div class="menu-item menu-item-dropdown bg-white">
                   <div
-                    class="menu-item-content button button-raised text-color-white"
-                    :class="currentRoute == 'menu_management' ? 'bg-pink' : 'bg-dark'"
+                    class="menu-item-content col link nav-link button button-raised bg-dark text-color-white padding-horizontal"
                   >
-                    <img src="/images/menu.png" alt="" class="padding-right-half" />Menu
-                    management
+                    <i class="f7-icons font-20 margin-right-half no-margin-left">bars</i
+                    >Menu management
                     <i class="f7-icons">chevron_down</i>
                   </div>
                   <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
@@ -226,94 +151,29 @@
                         href="#"
                         class="menu-dropdown-link menu-close margin-horizontal no-padding"
                       ></a>
-                       <a href="/" class="menu-dropdown-link menu-close text-color-pink">Table</a> 
                       <a
                         href="/food-category/"
-                        class="menu-dropdown-link menu-close"
-                        :class="
-                          CurrentsubmenuRoute == 'category'
-                            ? 'active_submenu'
-                            : 'text-color-black'
-                        "
+                        class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding"
                         >Food Category</a
                       >
                       <a
                         href="/food-subcategory/"
-                        class="menu-dropdown-link menu-close"
-                        :class="
-                          CurrentsubmenuRoute == 'subcategory'
-                            ? 'active_submenu'
-                            : 'text-color-black'
-                        "
+                        class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding"
                         >Food SubCategory</a
                       >
                       <a
                         href="/food-product/"
-                        class="menu-dropdown-link menu-close"
-                        :class="
-                          CurrentsubmenuRoute == 'product'
-                            ? 'active_submenu'
-                            : 'text-color-black'
-                        "
+                        class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding"
                         >Food Menu</a
                       >
                       <a
                         href="/digital-menu/"
-                        class="menu-dropdown-link menu-close"
-                        :class="
-                          CurrentsubmenuRoute == 'digitalmenu'
-                            ? 'active_submenu'
-                            : 'text-color-black'
-                        "
+                        class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding"
                         >Digital Menu</a
                       >
                     </div>
                   </div>
                 </div>
-              </div> -->
-              <div class="padding-left-half padding-right-half height-40 nav-button">
-                <a
-                  href="/Reporting/"
-                  class="link nav-link button button-raised text-color-white padding"
-                  :class="currentRoute == 'reporting' ? 'bg-pink' : 'bg-dark'"
-                >
-                  <img
-                    src="/images/reporting.png"
-                    alt=""
-                    class="padding-right-half"
-                  />Reporting</a
-                >
-              </div>
-              <div class="padding-left-half padding-right-half height-40">
-                <button
-                  class="nav-link button button-raised text-color-white padding closeReservation"
-                  :class="currentRoute == 'close_reservation' ? 'bg-pink' : 'bg-dark'"
-                  @click="$root.closeReservation(close_reservation)"
-                >
-                  <img
-                    :src="
-                      close_reservation == 1
-                        ? '/images/open_1_.png'
-                        : '/images/close_1_.png'
-                    "
-                    alt=""
-                    class="padding-right-half"
-                  />
-                  {{ close_reservation == 1 ? "Open" : "Close" }} reservation
-                </button>
-              </div>
-              <div class="padding-left-half padding-right-half height-40">
-                <a
-                  href="/settings/"
-                  class="nav-link button button-raised text-color-white padding"
-                  :class="currentRoute == 'setting' ? 'bg-pink' : 'bg-dark'"
-                >
-                  <img
-                    src="/images/setting.png"
-                    alt=""
-                    class="padding-right-half"
-                  />Settings</a
-                >
               </div>
             </div>
           </div>
@@ -324,7 +184,6 @@
         :main="true"
         class="safe-areas"
         :master-detail-breakpoint="768"
-        @notification="notification"
       ></f7-view>
       <div class="overlay">
         <div class="overlayDoor"></div>
@@ -346,6 +205,7 @@ import routes from "./pos-routes";
 import store from "./store";
 import $ from "jquery";
 import axios from "axios";
+import Icon from "./components/Icon.vue";
 
 export default {
   components: {
@@ -355,6 +215,7 @@ export default {
     f7,
     f7Page,
     f7Navbar,
+    Icon,
   },
   data() {
     // Demo Theme
@@ -534,8 +395,8 @@ export default {
         .catch((err) => {});
     },
     MoveToWaitingArea() {
-      window.open('/manager', '_blank');
-    }
+      window.open("/manager", "_blank");
+    },
   },
   computed: {
     manager() {
@@ -760,10 +621,6 @@ $("body").click(function (e) {
   height: 60px !important;
   position: relative;
   z-index: 99;
-}
-
-.height-40 {
-  height: 40px;
 }
 
 .menu-item-content {

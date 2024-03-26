@@ -722,3 +722,15 @@ code {
 .pie-chart svg {
   max-width: 320px;
 }
+
+.height-40{
+  height: 40px !important;
+}
+
+.text-transform-capitalize{
+  text-transform: capitalize !important;
+}
+
+.font-20{
+  font-size: 20px !important;
+}
