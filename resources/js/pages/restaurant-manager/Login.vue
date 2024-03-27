@@ -57,7 +57,6 @@ import { f7,f7Page, f7Navbar, f7BlockTitle, f7Block} from 'framework7-vue';
 import $ from 'jquery';
 import axios from 'axios';
 
-
 export default {
     name : 'Login',
     data() {
@@ -85,7 +84,8 @@ export default {
                 if (res.data.success) {
                     this.$root.successnotification(res.data.success);
                     this.$root.user.id = res.data.id;
-                    f7.view.main.router.navigate({ url: '/table/' });
+                    // f7.view.main.router.navigate({ url: '/pos' });
+                    location.reload();
                 } else {
                     this.$root.errornotification(res.data.error);
                 }
@@ -93,6 +93,7 @@ export default {
         }
     },
 }
+
 </script>
 <style scoped>
 .border_radius_10{

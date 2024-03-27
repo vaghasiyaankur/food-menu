@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('admins', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->string('email')->unique();
-            $table->text('password');
-            $table->string('phone_number')->unique();
+            $table->text('password')->nullable();
+            $table->string('phone_number')->nullable();
             $table->boolean('is_superadmin')->default(1);
             $table->timestamps();
         });

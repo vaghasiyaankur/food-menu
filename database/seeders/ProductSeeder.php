@@ -240,7 +240,8 @@ class ProductSeeder extends Seeder
             $pro->restaurant_id = $product['restaurant_id'];
             $pro->slug = Str::slug($product['name'][0]);
             if($pro->save()){
-                $langs = Language::whereStatus(1)->get();
+                // $langs = Language::whereStatus(1)->get();
+                $langs = Language::get();
                 foreach ($langs as $key => $lang) {
                     $pro_lang = new ProductLanguage();
                     $pro_lang->language_id = $lang->id;

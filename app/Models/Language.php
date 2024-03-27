@@ -52,4 +52,11 @@ class Language extends Model
     {
         return $this->hasMany(ProductLanguage::class);
     }
+
+    public function RestaurantLanguages()
+    {
+        return $this->hasMany(RestaurantLanguage::class, 'language_id');
+    }
+
+
 }

@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Content;
+use App\Models\Restaurant;
+use App\Models\RestaurantLanguage;
 
 class ContentSeeder extends Seeder
 {
@@ -196,12 +198,19 @@ class ContentSeeder extends Seeder
 
         ];
 
-        foreach ($contents as $content) {
-            $cnt = new Content();
-            $cnt->language_id = $content['language_id'];
-            $cnt->title = $content['title'];
-            $cnt->content = $content['content'];
-            $cnt->save();
+        $restaurants = Restaurant::get();
+        foreach($restaurants as $restaurant){
+            foreach ($contents as $content) {
+                $restaurant_lang_id = RestaurantLanguage::where('restaurant_id', $restaurant->id)->where('language_id',$content['language_id'])->value('id');
+                // if($restaurant_lang_id){
+                    $cnt = new Content();
+                    $cnt->restaurant_language_id = $restaurant_lang_id;
+                    $cnt->title = $content['title'];
+                    $cnt->content = $content['content'];
+                    $cnt->save();
+                // }
+            }
         }
     }
 }
+    
