@@ -1,3 +1,10 @@
 .pos-page{
     margin-top: 60px;
 }
+.product-section{
+    width: 65%;
+}
+.add-to-cart{
+    box-shadow: -1px 1px 15px 0px #3333330D;
+    width: 35%;
+}
