@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QrCodeController;
 use Illuminate\Support\Facades\Auth;
 use App\Events\NewReservation;
-use App\Helper\SettingHelper;
 use App\Models\Order;
 
 /*
@@ -17,6 +16,9 @@ use App\Models\Order;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Route::get('/abc', function() {
+//     return view('test');
+// });
 Route::get('login', function() {
  Auth::attempt(['email' => 'manager1@gmail.com', 'password' => '123456789']);
 });

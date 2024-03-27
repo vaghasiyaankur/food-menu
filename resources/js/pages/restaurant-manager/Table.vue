@@ -460,6 +460,7 @@ export default {
                     this.tableListFloorWise(this.active_floor_id);
                 }
                 if(duration.minutes() <= 0){
+                    console.log(this.row_tables);
                     this.row_tables[rowIndex][tableIndex].orders[orderIndex].time_left = 'Time over';
                 }else if(duration.minutes() <= 3){
                     this.row_tables[rowIndex][tableIndex].orders[orderIndex].time_left = duration.minutes() + " Min Left";
