@@ -1,9 +1,9 @@
 <template>
     <f7-page color="bg-color-white pos-page">
         <div class="grid grid-cols-2 grid-gap">
-            <div class="col">
-                <div data-pagination='{"el":".swiper-pagination"}' data-space-between="10" data-slides-per-view="6" class="swiper swiper-init demo-swiper margin-top margin-bottom">
-                    <div class="swiper-pagination"></div>
+            <div>
+                <div data-navigation='{"el":".swiper-navigation"}' data-space-between="25" data-slides-per-view="6" class="swiper swiper-init demo-swiper margin-top margin-bottom" style="height: 120px;">
+                    <div class="swiper-navigation"></div>
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
                             <div class="menu-image col">
