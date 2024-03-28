@@ -1,8 +1,10 @@
 <template>
     <f7-page color="bg-color-white pos-page">
         <div class="display-flex justify-content-space-between align-items-flex-start">
-            <div class="product-section flex-shrink-0 padding">
-                <Slider />
+            <div class="product-section flex-shrink-0">
+                <div class="category-search padding">
+                    <Slider />
+                </div>
             </div>
             <div class="add-to-cart padding">
                 <div class="display-flex justify-content-space-between align-items-flex-start">
@@ -21,9 +23,7 @@ import Slider from "../../components/Slider.vue"
 export default {
     name : "POS",
     components: {
-        f7Page,
-        f7,
-        Slider
+        f7Page, f7, Slider
     },
 }
 </script>
