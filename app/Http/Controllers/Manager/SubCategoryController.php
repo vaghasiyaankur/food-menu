@@ -9,6 +9,7 @@ use App\Models\SubCategory;
 use App\Models\SubCategoryLanguage;
 use Illuminate\Http\Request;
 use App\Models\Language;
+use App\Models\Restaurant;
 use Illuminate\Support\Facades\Auth;
 
 class SubCategoryController extends Controller
@@ -35,6 +36,12 @@ class SubCategoryController extends Controller
 
     public function getSubCategories(Request $req)
     {
+
+        if(Auth::user()){
+            $restaurant_id = Auth::user()->restaurant_id;
+        }else{
+            $restaurant_id = Restaurant::first()->id;
+        }
         $lang_id = SettingHelper::managerLanguage();
         $subCategories = Category::with(['categoryLanguages' => function($q) use ($lang_id){
             $q->where('language_id',$lang_id);
@@ -45,7 +52,32 @@ class SubCategoryController extends Controller
         }])
         ->whereHas('subCategory.subCategoryLanguage',function($q) use ($req,$lang_id){
             $q->where('name','LIKE','%'.$req->search.'%')->where('language_id',$lang_id);
-        })->whereUserId(Auth::id())->paginate(5);
+        })->whereRestaurantId($restaurant_id)->paginate(5);
+        return response()->json(['sub_category' => $subCategories]);
+    }
+
+    public function getSubCategoriesList()
+    {
+        if(Auth::user()){
+            $restaurant_id = Auth::user()->restaurant_id;
+        }else{
+            $restaurant_id = Restaurant::first()->id;
+        }
+        $lang_id = SettingHelper::managerLanguage();
+
+        $subCategories = SubCategory::with(['subCategoryLanguage' => function ($query) use ($lang_id) {
+            $query->where('language_id', $lang_id);
+        }])->withCount('products')->where('restaurant_id', $restaurant_id)->get();
+
+        $subCategories->transform(function ($subCategory) {
+            $name = $subCategory->subCategoryLanguage->isEmpty() ? null : $subCategory->subCategoryLanguage->first()->name;
+            return [
+                'id' => $subCategory->id,
+                'image' => $subCategory->image,
+                'name' => $name,
+                'product_count' => $subCategory->products_count
+            ];
+        });
         return response()->json(['sub_category' => $subCategories]);
     }
 

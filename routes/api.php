@@ -54,6 +54,8 @@ Route::get('/categories',[CategoryController::class, 'get_categories']);
 
 Route::post('/add-sub-category',[SubCategoryController::class, 'addSubCategory']);
 
+Route::get('/get-sub-categories-list',[SubCategoryController::class, 'getSubCategoriesList']);
+
 Route::post('/get-sub-categories',[SubCategoryController::class, 'getSubCategories']);
 
 Route::get('get-sub-category/{id}',[SubCategoryController::class, 'getSubCategory']);
