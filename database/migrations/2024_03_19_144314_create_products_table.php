@@ -17,11 +17,11 @@ return new class extends Migration
             $table->id();
             $table->text('image')->nullable();
             $table->bigInteger('price')->nullable();
-            $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->unsignedBigInteger('sub_category_id');
+            $table->foreign('sub_category_id')->references('id')->on('sub_categories');
             $table->unsignedBigInteger('restaurant_id');
             $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
-            $table->string('slug');
+            $table->string('slug')->nullable();
             $table->text('description')->nullable();
             $table->boolean('featured')->default(0);
             $table->boolean('status')->default(1);

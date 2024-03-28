@@ -24,6 +24,11 @@ class Category extends Model
         });
     }
 
+    public function subCategory()
+    {
+        return $this->hasMany(SubCategory::class);
+    }
+
     public function categoryLanguages()
     {
         return $this->hasMany(CategoryLanguage::class);

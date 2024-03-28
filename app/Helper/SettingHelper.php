@@ -3,6 +3,7 @@ namespace App\Helper;
 
 use App\Models\Language;
 use App\Models\QrCodeToken;
+use App\Models\Restaurant;
 use App\Models\Setting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -17,7 +18,14 @@ class SettingHelper{
     public static function systemLang()
     {
         $restaurant_id = self::getUserIdUsingQrcode();
-        $restaurant_id = $restaurant_id ? $restaurant_id : Auth::user()->restaurant_id;
+        if(!$restaurant_id){
+            if(Auth::user()){
+                $restaurant_id = Auth::user()->restaurant_id;
+            }else{
+                $restaurant_id = Restaurant::first()->id;
+            }
+        }
+
         $setting = Setting::whereRestaurantId($restaurant_id)->first('language_id');
 
         return $setting->language_id;
@@ -25,7 +33,9 @@ class SettingHelper{
 
     public static function getlanguage()
     {
-        $langs = Language::whereStatus(1)->pluck('id')->toarray();
+        $langs = Language::whereHas('RestaurantLanguages', function ($query) {
+            $query->where('status', 1);
+        })->pluck('id')->toarray();
         $langId = request()->session()->get('lang');
         if ($langId && in_array($langId, $langs)) {
             return $langId;

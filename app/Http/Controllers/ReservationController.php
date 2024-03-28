@@ -22,6 +22,7 @@ use App\Helper\LanguageHelper;
 use App\Helper\OrderHelper;
 use App\Models\Content;
 use App\Models\QrCodeToken;
+use App\Models\Restaurant;
 use Illuminate\Support\Facades\Auth;
 use League\CommonMark\Parser\Inline\NewlineParser;
 use Mockery\Undefined;
@@ -203,12 +204,12 @@ class ReservationController extends Controller
      */
     public function checkTime(Request $request)
     {
-        $restaurant_id = Auth::user()->restaurant_id;
+        $restaurant_id = @Auth::user()->restaurant_id;
         if ($request->qrToken != 'undefined' && $request->role == 'Guest') {
             $qrcode_token = $request->qrToken;
             $date = Carbon::now()->format('Y-m-d');
             $qrcode = QrCodeToken::whereToken($qrcode_token)->where('start_date', '<=', $date)->where('end_date', '>=', $date)->first();
-            if (!$qrcode) {
+            if (!$qrcode && !$restaurant_id) {
                 return response()->json(['error' => 'Reservation Fail.'], 401);
             }else{
                 $restaurant_id = $qrcode->restaurant_id;
