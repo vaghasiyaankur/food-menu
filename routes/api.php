@@ -184,7 +184,7 @@ Route::post('/get-wishlist',[FavoriteController::class, 'getWishlist']);
 
 Route::get('/get-languages',[LanguageController::class, 'getlangs']);
 
-Route::get('/get-all-languages',[LanguageController::class, 'getAlllangs']);
+Route::get('/get-all-languages',[LanguageController::class, 'getAllLangs']);
 
 Route::post('get-language-translation',[LanguageController::class, 'getLangTranslation']);
 

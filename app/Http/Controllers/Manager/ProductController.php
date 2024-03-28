@@ -38,9 +38,22 @@ class ProductController extends Controller
         $lang_id = SettingHelper::getlanguage();
         $restaurant_id = SettingHelper::getUserIdUsingQrcode();
         $restaurant_id = $restaurant_id ? $restaurant_id : Auth::user()->restaurant_id;
-        $products = Category::with(['categoryLanguages' => function($q) use ($lang_id){
+        $products = Category::with(['subCategory' => function($q) use($restaurant_id){
+            $q->where('restaurant_id', $restaurant_id)->whereHas('products');
+        },
+        'subCategory.products' => function($q) use($restaurant_id){
+            $q->where('restaurant_id', $restaurant_id)->whereHas('productLanguage');
+        },
+        'subCategory.subCategoryLanguage' => function($q) use ($lang_id){
+            $q->where('language_id',$lang_id);
+        },
+        'subCategory.products.productLanguage' => function($q) use ($lang_id){
+            $q->where('language_id',$lang_id);
+        },
+        'categoryLanguages' => function($q) use ($lang_id){
             $q->where('language_id',$lang_id);
         }])->whereRestaurantId($restaurant_id)->find($id);
+
         return response()->json($products);
     }
 

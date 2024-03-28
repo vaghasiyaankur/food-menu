@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('admins', function (Blueprint $table) {
+        Schema::create('sub_category_languages', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('language_id')->unsigned();
+            $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
+            $table->unsignedBigInteger('sub_category_id')->unsigned();
+            $table->foreign('sub_category_id')->references('id')->on('sub_categories')->onDelete('cascade');
             $table->string('name')->nullable();
-            $table->string('email')->unique();
-            $table->text('password')->nullable();
-            $table->string('phone_number')->nullable();
-            $table->boolean('is_superadmin')->default(1);
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admins');
+        Schema::dropIfExists('sub_category_languages');
     }
 };

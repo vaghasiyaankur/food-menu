@@ -17,8 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string('title')->nullable();
             $table->text('content')->nullable();
-            $table->unsignedBigInteger('language_id')->unsigned();
-            $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
+            // $table->unsignedBigInteger('language_id')->nullable();
+            // $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
+            $table->unsignedBigInteger('restaurant_language_id')->nullable();
+            $table->foreign('restaurant_language_id')->references('id')->on('restaurant_languages')->onDelete('cascade');
             $table->timestamps();
         });
     }

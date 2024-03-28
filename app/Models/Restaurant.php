@@ -26,4 +26,14 @@ class Restaurant extends Model
         return $this->hasMany(RestaurantManager::class, 'restaurant_id');
     }
 
+    public function user()
+    {
+        return $this->hasMany(User::class, 'restaurant_id');
+    }
+
+    public function RestaurantLanguages()
+    {
+        return $this->hasMany(RestaurantLanguage::class, 'language_id');
+    }
+
 }

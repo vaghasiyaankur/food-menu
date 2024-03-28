@@ -24,24 +24,40 @@ class CategorySeeder extends Seeder
             [
                 'name' => ['Indian','ભારતીય','भारतीय'],
                 'image' => '/category/indian_dish.png',
+                'sub_categories' => [
+                    ['Dosa', 'ઢોસા', 'ढोसा'],
+                    ['Gujarati Dish', 'ગુજરાતી વાનગી', 'गुजराती डिश']
+                ],
                 'restaurant_id' => 1,
                 'added_by_id' => 1
             ],
             [
                 'name' => ['Panjabi', 'પંજાબી','पंजाबी'],
                 'image' => '/category/panjabi_dish.png',
+                'sub_categories' => [
+                    ['Naan Or Roti', 'નાન કે રોટી', 'नान या रोटी'],
+                    ['Sabji', 'સબજી', 'सब्जी']
+                ],
                 'restaurant_id' => 1,
                 'added_by_id' => 1
             ],
             [
                 'name' => ['Indian','ભારતીય','भारतीय'],
                 'image' => '/category/indian_dish.png',
+                'sub_categories' => [
+                    ['Dosa', 'ઢોસા', 'ढोसा'],
+                    ['Gujarati Dish', 'ગુજરાતી વાનગી', 'गुजराती डिश']
+                ],
                 'restaurant_id' => 2,
                 'added_by_id' => 4
             ],
             [
                 'name' => ['Panjabi', 'પંજાબી','पंजाबी'],
                 'image' => '/category/panjabi_dish.png',
+                'sub_categories' => [
+                    ['Naan Or Roti', 'નાન કે રોટી', 'नान या रोटी'],
+                    ['Sabji', 'સબજી', 'सब्जी']
+                ],
                 'restaurant_id' => 2,
                 'added_by_id' => 4
             ]
@@ -69,6 +85,20 @@ class CategorySeeder extends Seeder
 
 
             File::copy(public_path('images'.$cate['image']), public_path('storage/'. $cate['image']));
+
+            foreach ($cate['sub_categories'] as $key => $subCat) {
+                $subCate = new SubCategory();
+                $subCate->category_id = $cat->id;
+                $subCate->restaurant_id = $cate['restaurant_id'];
+                $subCate->save();
+                foreach($languages as $ke=>$lang){
+                    $subcatlang = new SubCategoryLanguage();
+                    $subcatlang->name = $subCat[$ke];
+                    $subcatlang->language_id = $lang->id;
+                    $subcatlang->sub_category_id = $subCate->id;
+                    $subcatlang->save();
+                }
+            }
 
         }
     }

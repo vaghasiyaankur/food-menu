@@ -122,6 +122,7 @@ export default {
             axios.post('/api/get-categories-list')
             .then((res) => {
                 this.product_category = res.data.category;
+                console.log(this.product_category);
                 this.getProducts(this.product_category[0].id);
             })
         },
