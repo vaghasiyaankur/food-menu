@@ -3,6 +3,8 @@
 namespace App\Helper;
 
 use App\Models\Customer;
+use App\Models\Restaurant;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Helper class for handling customers.
@@ -40,5 +42,23 @@ class CustomerHelper
             return $customer;
         else
             return null; 
+    }
+
+
+    /**
+     * Get a restaurant Id .
+     *
+     * @param array $restaurantId The data for if pass id
+     * @return RestaurantId 
+     */
+    public static function getRestaurantId($restaurantId = null){
+        if(!$restaurantId){
+            if(Auth::user()){
+                $restaurantId = Auth::user()->restaurant_id;
+            }else{
+                $restaurantId = Restaurant::first()->id;
+            }
+        }
+        return $restaurantId;
     }
 }

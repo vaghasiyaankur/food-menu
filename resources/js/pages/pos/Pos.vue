@@ -6,6 +6,8 @@
                     <CategorySearch 
                         :categories="categories"
                         :productFetch="productFetch"
+                        :activeCategory="activeCategory"
+                        :productsCount="productsCount"
                     />
                 </div>
             </div>
@@ -28,17 +30,21 @@ import { ref } from 'vue'
 import axios from 'axios'
 
 const categories =  ref({});
+const activeCategory =  ref(0);
 const products =  ref({});
+const productsCount =  ref(0);
 
 const categoryFetch = axios.get('/api/get-sub-categories-list').then(response => {
-    categories.value = response.data.sub_category;
-    productFetch();
+    const subCategories = response.data.sub_category;
+    subCategories.length > 0 && productFetch(subCategories[0].id); // Fetch First category product data
+    categories.value = subCategories;
 })
 
-const productFetch = () => {
-    console.log('123');
-    // const categoryFetch = axios.get('/api/get-sub-categories-list').then(response => {
-    //     categories.value = response.data.sub_category;
-    // })
+const productFetch = (id) => {
+    activeCategory.value = id;
+    const categoryFetch = axios.get('/api/get-subcategory-wise-products/'+id).then(response => {
+        products.value = response.data.products;
+        productsCount.value = response.data.count;
+    })
 }
 </script>

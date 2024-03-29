@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Manager;
 
+use App\Helper\CustomerHelper;
 use App\Helper\SettingHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
@@ -36,12 +37,8 @@ class SubCategoryController extends Controller
 
     public function getSubCategories(Request $req)
     {
+        $restaurant_id = CustomerHelper::getRestaurantId();
 
-        if(Auth::user()){
-            $restaurant_id = Auth::user()->restaurant_id;
-        }else{
-            $restaurant_id = Restaurant::first()->id;
-        }
         $lang_id = SettingHelper::managerLanguage();
         $subCategories = Category::with(['categoryLanguages' => function($q) use ($lang_id){
             $q->where('language_id',$lang_id);
@@ -58,11 +55,9 @@ class SubCategoryController extends Controller
 
     public function getSubCategoriesList()
     {
-        if(Auth::user()){
-            $restaurant_id = Auth::user()->restaurant_id;
-        }else{
-            $restaurant_id = Restaurant::first()->id;
-        }
+        
+        $restaurant_id = CustomerHelper::getRestaurantId();
+
         $lang_id = SettingHelper::managerLanguage();
 
         $subCategories = SubCategory::with(['subCategoryLanguage' => function ($query) use ($lang_id) {

@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Manager;
 
+use App\Helper\CustomerHelper;
 use App\Helper\SettingHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Language;
 use App\Models\Product;
 use App\Models\ProductLanguage;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -126,6 +128,22 @@ class ProductController extends Controller
         return response()->json(['success'=>'Product Deleted Successfully.']);
     }
 
+    public function getSubCategoryProduct($id)
+    {
+        $lang_id = SettingHelper::managerLanguage();
+        $subCategories = SubCategory::with(['subCategoryLanguage' => function($q) use ($lang_id){
+            $q->where('language_id',$lang_id);
+        }])->whereCategoryId($id)->whereUserId(Auth::id())->get();
+        $subCategory = [];
+        foreach ($subCategories as $key => $sub_category) {
+            $subCategory[$sub_category->id] = $sub_category->subCategoryLanguage[0]->name;
+        }
+
+        $products = Product::with('productLanguage')->get();
+
+        return response()->json(['sub_category' => $subCategory]);
+    }
+
     public function getCategoryWiseProduct($id)
     {
         $lang_id = SettingHelper::managerLanguage();
@@ -134,5 +152,34 @@ class ProductController extends Controller
         }])->whereRestaurantId(Auth::user()->restaurant_id)->find($id);
         return response()->json($products);
     }
+
+    public function getSubcategoryWiseProduct($subCatId){
+
+        $restaurant_id = CustomerHelper::getRestaurantId();
+        
+        $lang_id = SettingHelper::managerLanguage();
+
+        $products = Product::with(['productLanguage' => function ($query) use ($lang_id) {
+            $query->where('language_id', $lang_id);
+        }]);
+        
+        if($subCatId){
+            $products = $products->where('sub_category_id', $subCatId);
+        }
+
+        $products = $products->where('restaurant_id', $restaurant_id)->get();
+        $products->transform(function ($product) {
+            $name = $product->productLanguage->isEmpty() ? null : $product->productLanguage->first()->name;
+            return [
+                'id' => $product->id,
+                'price' => $product->price,
+                'food_type' => $product->food_type,
+                'name' => $name,
+            ];
+        });
+        $productCount = $products->count();
+        return response()->json(['products' => $products, 'count'=>$productCount]);
+    }
+
 
 }
