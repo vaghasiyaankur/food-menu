@@ -3,16 +3,10 @@
     <f7-page>
       <div class="nav-bar" v-if="currentRoute != 'login'">
         <f7-navbar class="navbar-menu bg-color-white">
-          <div>
-            <button
-              @click="MoveToPos"
-              class="col link button text-color-white padding-horizontal padding-vertical-half bg-pink height-40 text-transform-capitalize"
-            >
-              <i class="f7-icons font-14 margin-right-half"> arrow_right_arrow_left </i>
-              Switch Pos
-            </button>
-          </div>
-          
+          <SwitchButton
+              :moveToMethod="moveToPos"
+              :title="'Switch Pos'"
+          />
           <div
             class="header-links display-flex align-items-center"
             v-if="CurrentsubmenuRoute != 'category'"
@@ -347,6 +341,7 @@ import routes from "./restaurant-manager-routes";
 import store from "./store";
 import $ from "jquery";
 import axios from "axios";
+import SwitchButton from "./components/SwitchButton.vue";
 
 export default {
   components: {
@@ -356,6 +351,7 @@ export default {
     f7,
     f7Page,
     f7Navbar,
+    SwitchButton
   },
   data() {
     // Demo Theme
@@ -534,7 +530,7 @@ export default {
         .then((res) => {})
         .catch((err) => {});
     },
-    MoveToPos() {
+    moveToPos() {
       window.open('/pos', '_blank');
     }
   },

@@ -2,7 +2,7 @@
     <f7-page color="bg-color-white pos-page">
         <div class="display-flex justify-content-space-between align-items-flex-start">
             <div class="product-section flex-shrink-0">
-                <div class="category-search padding">
+                <div class="product-section flex-shrink-0 category-search padding-horizontal padding-vertical-half">
                     <CategorySearch 
                         :categories="categories"
                         :productFetch="productFetch"
@@ -26,13 +26,22 @@
 <script setup>
 import { f7Page, f7 } from 'framework7-vue';
 import CategorySearch from "../../components/CategorySearch.vue"
-import { ref } from 'vue'
+import { ref, watchEffect } from 'vue'
 import axios from 'axios'
 
 const categories =  ref({});
 const activeCategory =  ref(0);
 const products =  ref({});
 const productsCount =  ref(0);
+
+
+// Use ref to make currentRoute reactive
+const currentRoute = ref('');
+
+// const onMounted = () => {
+//     this.$root.activationMenu('pos', '');
+//     this.$root.removeLoader();
+// }
 
 const categoryFetch = axios.get('/api/get-sub-categories-list').then(response => {
     const subCategories = response.data.sub_category;
@@ -42,9 +51,10 @@ const categoryFetch = axios.get('/api/get-sub-categories-list').then(response =>
 
 const productFetch = (id) => {
     activeCategory.value = id;
-    const categoryFetch = axios.get('/api/get-subcategory-wise-products/'+id).then(response => {
+    axios.get('/api/get-subcategory-wise-products/'+id).then(response => {
         products.value = response.data.products;
         productsCount.value = response.data.count;
     })
 }
+
 </script>

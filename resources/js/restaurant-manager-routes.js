@@ -35,22 +35,22 @@ export default [
       return f7.theme === 'aurora';
     },
   },
-  {
-    name : 'FoodCategory',
-    path: '/food-category/',
-    component: FoodCategory,
-  },
-  {
-    name : 'FoodSubCategory',
-    path: '/food-subcategory/',
-    component: FoodSubCategory,
-  },
+  // {
+  //   name : 'FoodCategory',
+  //   path: '/food-category/',
+  //   component: FoodCategory,
+  // },
+  // {
+  //   name : 'FoodSubCategory',
+  //   path: '/food-subcategory/',
+  //   component: FoodSubCategory,
+  // },
 
-  {
-    name : 'FoodProduct',
-    path: '/food-product/',
-    component: FoodProduct,
-  },
+  // {
+  //   name : 'FoodProduct',
+  //   path: '/food-product/',
+  //   component: FoodProduct,
+  // },
 
   {
     name : 'SingleCategoryProducts',
