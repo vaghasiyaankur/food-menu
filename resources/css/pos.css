@@ -99,3 +99,41 @@
 .text-red{
     color: #F33E3E;
 }
+
+.page-content{
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}
+.text-underline{
+    text-decoration: underline;
+}
+.data-table thead th:not(.sortable-cell-active), .data-table thead td:not(.sortable-cell-active){
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 18px;
+    color: #555555;
+    background-color: #F4F4F4;
+}
+.icon-checkbox, .checkbox i{
+    border-radius: 3px !important;
+}
+label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox{
+    background-color: #F33E3E;
+    border-color: #F33E3E;
+  }
+.data-table tbody td::before, .data-table tbody th::before {
+	background-color: transparent !important;
+}
+.card-content .data-table td{
+	padding-top: 12px;
+	padding-bottom: 12px;
+	white-space: nowrap;
+}
+.data-table tbody tr:nth-child(even) {
+	background-color: #FAFAFA;
+}
+@media screen and (max-width:991px) {
+    .product-list-section .toolbar-inner a.tab-link{
+        font-size: 14px;
+    }
+}
