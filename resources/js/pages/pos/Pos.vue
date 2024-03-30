@@ -2,7 +2,7 @@
     <f7-page color="bg-color-white pos-page">
         <div class="display-flex justify-content-space-between align-items-flex-start">
             <div class="product-section flex-shrink-0">
-                <div class="product-section flex-shrink-0 category-search padding-horizontal padding-vertical-half">
+                <div class="flex-shrink-0 category-search padding-horizontal padding-vertical-half">
                     <CategorySearch 
                         :categories="categories"
                         :productFetch="productFetch"

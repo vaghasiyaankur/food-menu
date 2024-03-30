@@ -13,6 +13,11 @@
 .category-slider-content{
     width: 90%;
 }
+
+.register-button:hover, .register-button:active, .active {
+    background: #F33E3E !important;
+    color: #fff !important;
+}
 .category-search{
     background: #FBFBFB;
     box-shadow: 0px 1px 3px 0px #00000026;
@@ -52,7 +57,7 @@
 }
 .demo-swiper .swiper-slide.active, .demo-swiper-multiple .swiper-slide.active{
     border : 1px solid #F33E3E;
-    background-color: #FFF0F0;
+    background-color: #FFF0F0 !important;
 }
 .category-image-slider{
     width: 43px;
@@ -72,9 +77,9 @@
     color: #38373D;
 }
 
-.demo-swiper .swiper-slide.active .slider-category-name, .demo-swiper-multiple .swiper-slide.active .slider-category-name{
+/* .demo-swiper .swiper-slide.active .slider-category-name, .demo-swiper-multiple .swiper-slide.active .slider-category-name{
     color: #F33E3E;
-}
+} */
 
 .swiper-wrapper{
     display: flex;
@@ -131,6 +136,67 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox{
 }
 .data-table tbody tr:nth-child(even) {
 	background-color: #FAFAFA;
+}
+.height_100{
+    height: 100%;
+}
+#select-concise {
+    background-color: #fafafa;
+    border-radius: 10px;
+    width: 97%;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    padding: 0 0 0 16px;
+}
+#location-select-list {
+    position: absolute;
+    width: 100%;
+    z-index: 999;
+    background-color: #fff;
+    box-shadow: 0.7px 0.7px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    max-height: 220px;
+    overflow: auto;
+}
+#location-select-list li.concise {
+    padding: 10px;
+}
+#location-select-list li.concise:first-child {
+    border-radius: 3px 3px 0px 0px;
+}
+.list ul:after {
+    content: '';
+    position: absolute;
+    background-color: var(--f7-list-border-color);
+    display: block;
+    z-index: 15;
+    top: auto;
+    right: auto;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    width: 100%;
+    transform-origin: 50% 100%;
+    transform: scaleY(calc(1 / var(--f7-device-pixel-ratio)));
+}
+.list ul:before {
+    content: '';
+    position: absolute;
+    background-color: var(--f7-list-border-color);
+    display: block;
+    z-index: 15;
+    top: 0;
+    right: auto;
+    bottom: auto;
+    left: 0;
+    height: 1px;
+    width: 100%;
+    transform-origin: 50% 0%;
+    transform: scaleY(calc(1 / var(--f7-device-pixel-ratio)));
+}
+.text-gray{
+    color: #999999;
 }
 @media screen and (max-width:991px) {
     .product-list-section .toolbar-inner a.tab-link{
