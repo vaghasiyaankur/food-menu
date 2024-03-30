@@ -4,6 +4,7 @@
             <div class="back_link padding-left">
                 <a class="link back text-color-black" href="javascript:;" @click="$emit('floorlistshow')"><i class="icon icon-back"></i><span class="margin-left-half">Back to List</span></a>
             </div>
+            <!-- <TabHeader title="Table List" :tablehide="floorlistshow" :back-table="'back'" /> -->
             <div class="card-content card-content-padding">
                 <div class="row">
                     <div class="col">
@@ -40,9 +41,13 @@
 </template>
 <script>
 import axios from 'axios';
+import TabHeader from '../../../components/TabHeader.vue';
     export default {
         name: 'FloorList',
-        props: ['floorId'],
+        props: ['floorId', 'floorlistshow'],
+        components : {
+            TabHeader
+        },
         data() {
             return {
                 id : 0,

@@ -1,10 +1,7 @@
 <template>
     <div class="floor_plan_list">
         <div class="card no-margin-top">
-            <div class="card-header margin-vertical-half">
-                <TabHeader title="Floor List" />
-                <div class="add_table_button"><button class="button"  @click="$emit('floorlisthide', 0, page_number)"><i class="f7-icons margin-right-half">plus_square</i> Add Table</button></div>
-            </div>
+            <TabHeader title="Floor List" :tablehide="floorlisthide" :table-id="'0'" :page-number="page_number" :toggle="true" />
             <div class="card-content">
                 <div class="data-table">
                     <table>
@@ -50,7 +47,7 @@
     export default {
         name : 'FloorPlan',
         components: { f7, TabHeader, TableHeader, Pagination },
-        props: ['page'],
+        props: ['page', 'floorlisthide'],
         data() {
             return {
                 floors: [],

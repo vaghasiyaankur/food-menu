@@ -1,11 +1,6 @@
 <template>
     <div class="card no-margin-top">
-        <div class="card-header margin-vertical-half">
-            <TabHeader title="Table List" />
-            <div class="add_table_button">
-                <button class="button" @click="$emit('tablehide', 0, page_number)"><i class="f7-icons margin-right-half">plus_square</i> Add Table</button>
-            </div>
-        </div>
+        <TabHeader title="Table List" :tablehide="tablehide" :table-id="'0'" :page-number="page_number" :toggle="true" />
         <div class="card-content padding-vertical">
             <div class="data-table">
                 <table>
@@ -39,13 +34,6 @@
                 </table>
                 <div class="pagination_count padding-vertical-half data-table-pagination">
                     <Pagination :function-name="tableList" :data="paginationData" />
-                        <!-- <div class="pagination_list">
-                            <div v-for="(link,index) in paginationData.links" :key="link">
-                                <a href="javascript:;" v-if="index == 0" @click="link.url != null ? tableList(link.url) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon-prev"></i></a>
-                                <a href="javascript:;" v-if="paginationData.links.length - 1 != index && index != 0" @click="tableList(link.url)" :class="{ 'disabled': link.url == null, 'active': paginationData.current_page == index}">{{ index }}</a>
-                                <a href="javascript:;" v-if="paginationData.links.length - 1 == index" @click="link.url != null ? tableList(link.url) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon-next"></i></a>
-                            </div>
-                        </div> -->
                     </div>
             </div>
         </div>
@@ -62,7 +50,7 @@
 
     export default {
         name : 'AddFloorPlan',
-        props : ['page'],
+        props : ['page', 'tablehide'],
         components : {
             TableHeader,
             TabHeader,
@@ -212,7 +200,7 @@
     text-decoration: none;
     border-radius: 5px;
 }
-.add_table_button button{
+/*.add_table_button button{
     background-color: #38373D;
     box-shadow: 0px 2px 4px rgba(172, 172, 172, 0.45);
     border-radius: 7px;
@@ -221,6 +209,6 @@
     line-height: 17px;
     color: #FFFFFF;
     padding: 20px 36px !important;
-}
+}*/
 </style>
 

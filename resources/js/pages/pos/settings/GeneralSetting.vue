@@ -175,21 +175,21 @@
                     </div>
                 </div>
             </div>
-            <div class="submit__button margin-top padding-top">
-                <button class="col button button-large button-fill" @click="updateSetting()">Save</button>
-            </div>
+            <SaveButton title="Save" :submit-event="updateSetting" />
         </div>
     </div>
 </template>
 
 <script>
     import { f7 } from 'framework7-vue';
+    import SaveButton from '../../../components/SaveButton.vue';
     import $ from 'jquery';
     import axios from 'axios';
     export default {
         name : 'GeneralSetting',
         components : {
-            f7
+            f7,
+            SaveButton
         },
         data() {
             return {
@@ -460,7 +460,7 @@ img.restaurant_logo{
 .justify_content_between{
     justify-content:space-between
 }
-.submit__button{
+/*.submit__button{
     position: absolute;
     width: 100%;
     bottom: 0px;
@@ -473,7 +473,7 @@ img.restaurant_logo{
     margin: 0 auto;
     border-radius: 10px;
     background-color: #F33E3E;
-}
+}*/
 /*=========TIMEPIKER DROPDOWN CSS =============*/
 
 .time_piker_inner{

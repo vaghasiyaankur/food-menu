@@ -22,7 +22,7 @@
                     <div class="category-image-slider col">
                         <img src="/images/dish.png" :alt="category.name">
                     </div>
-                    <p class="slider-category-name margin-left-half text-align-center">{{ `${category.name.substr(0, 5)} ${category.name.length > 5? '..' : ''}`}}</p>
+                    <p class="slider-category-name margin-left-half text-align-center">{{ `${category.name.substr(0, 5)} ${category.name.length > 5 ? '..' : ''}`}}</p>
                     <span class="category-item" v-if="activeCategory === category.id">{{ category.product_count }}</span>
                 </div>
             </div>
