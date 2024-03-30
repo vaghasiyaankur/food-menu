@@ -5,7 +5,7 @@
                 <div class="card-content card-content-header padding-top">
                     <div class="toolbar tabbar toolbar-top">
                         <div class="toolbar-inner">
-                            <NavigationTab />
+                            <NavigationTab :tableShow="tableShow" :floorlistShow="floorlistShow" :language="language" />
                         </div>
                     </div>
                     <div class="tabs">
@@ -13,11 +13,11 @@
                             <GeneralSetting />
                         </div>
                         <div id="tab-2" class="tab">
-                            <TablePlan v-if="tableShow" @tablehide="addEditTableShow" :page="page"/>
+                            <TablePlan v-if="tableShow" @tablehide="addEditTableShow" :tablehide="addEditTableShow" :page="page"/>
                             <AddTable v-if="!tableShow" @tableshow="tableShow = true" :tableId="tableId"/>
                         </div>
                         <div id="tab-3" class="tab">
-                            <FloorList v-if="floorlistShow" @floorlisthide="addEditFloorShow" :page="floorpage" />
+                            <FloorList v-if="floorlistShow" @floorlisthide="addEditFloorShow" :page="floorpage" :floorlisthide="addEditFloorShow" />
                             <FloorPlan v-if="!floorlistShow"  @floorlistshow="floorlistShow = true" :floorId="floorId" />
                         </div>
                         <div id="tab-4" class="tab">
@@ -39,9 +39,9 @@ import NavigationTab from './Tab.vue';
 import GeneralSetting from './GeneralSetting.vue';
 import TablePlan from './TablePlan.vue';
 import FloorList from './FloorList.vue';
+import Language from './Language.vue';
+import AddTable from './AddTable.vue';
 import FloorPlan from '../../restaurant-manager/settings/FloorPlan.vue';
-import AddTable from '../../restaurant-manager/settings/AddTable.vue';
-import Language from '../../restaurant-manager/settings/Language.vue';
 import LanguageTraslation from '../../restaurant-manager/settings/EditTranslations.vue';
 import QrCodeGenerate from '../../restaurant-manager/settings/QrCodeGenerate.vue';
 import { ref } from 'vue';

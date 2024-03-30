@@ -1,7 +1,7 @@
 <template>
     <a 
         v-for="(item, index) in items" 
-        :key="item.id" 
+        :key="index" 
 
         :href="'#tab-'+(index+1)" 
         
@@ -10,7 +10,7 @@
             'tab-link-active' : item.active
         }"
 
-        @click="setActiveItem(item)"
+        @click="handleTableHideShow(item.name)"
     > 
         {{ item.name }} 
     </a>
@@ -18,7 +18,11 @@
 <script setup>
     import { ref, defineProps } from 'vue';
 
-    const activeTab = ref(null);
+    const props = defineProps({
+        tableShow : Boolean,
+        floorlistShow : Boolean,
+        language : Boolean
+    });
 
     const items = ref([
         { active : true,  name : 'General' },
@@ -28,14 +32,17 @@
         { active : false, name : 'QR Code' }
     ]);
 
-    const setActiveItem = (item) => {
-        items.value.forEach(i => {
-            if (i === item) {
-                i.active = true;
-            } else {
-                i.active = false;
-            }
-        });
+    const handleTableHideShow = (tabName) => {
+        if(tabName == 'Table Management') {
+            props.tableShow = !props.tableShow;
+            console.log(props.tableShow);
+        } else if(tabName == 'Floor Plan') {
+            props.floorlistShow = !props.floorlistShow;
+            console.log(props.floorlistShow);
+        }else if(tabName == 'Language') {
+            props.language = !props.language;
+            console.log(props.language);
+        }
     }
 
 </script>
