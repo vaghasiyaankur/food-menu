@@ -4,6 +4,7 @@ import Login from "./pages/restaurant-manager/Login.vue";
 import FoodCategory from "./pages/restaurant-manager/FoodCategory.vue";
 import FoodSubCategory from "./pages/restaurant-manager/FoodSubCategory.vue";
 import FoodProduct from "./pages/restaurant-manager/FoodProduct.vue";
+import DigitalMenu from "./pages/restaurant-manager/DigitalMenu.vue";
 import Setting from "./pages/pos/settings/SettingsTab.vue";
 
 // Pages
@@ -35,6 +36,11 @@ export default [
     name : 'FoodProduct',
     path: '/food-product/',
     component: FoodProduct,
+  },
+  {
+    name : 'DigitalMenu',
+    path: '/digital-menu/',
+    component: DigitalMenu,
   },
   {
     name : 'Setting',

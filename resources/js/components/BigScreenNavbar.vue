@@ -1,0 +1,68 @@
+<template>
+    <div class="row header-link justify-content-flex-end align-items-center tab_view_menu">
+        <div v-for="(item, index) in navbarItems" :key="index" class="padding-left-half padding-right-half height-40 nav-button">
+            <template v-if="item.submenu">
+                <div class="menu-item menu-item-dropdown bg-white">
+                <div 
+                    class="menu-item-content col link nav-link button button-raised bg-dark text-color-white padding-horizontal"
+                    :class="item.routesName.includes(currentRouteName) ? 'bg-pink' : 'bg-dark'"
+                >
+                    <Icon
+                        :name="item.icon"
+                        :color="iconColor"
+                        class="margin-right-half"
+                    />
+                    {{ item.label }}
+                    <i class="f7-icons">chevron_down</i>
+                </div>
+                <div class="menu-dropdown menu-dropdown-center bg-color-transparent">
+                    <div class="menu-dropdown-content bg-color-white no-padding">
+                    <a 
+                        v-for="(submenuItem, submenuIndex) in item.submenu" 
+                        :key="submenuIndex" :href="submenuItem.href" 
+                        class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding"
+                        :class="[submenuItem.routeName == currentRouteName ? 'active_submenu' : 'text-color-black']"
+                    >
+                        {{ submenuItem.label }}
+                    </a>
+                    </div>
+                </div>
+                </div>
+            </template>
+            <template v-else>
+                <a
+                :href="item.href"
+                class="col link nav-link button button-raised text-color-white padding"
+                :class="currentRouteName === item.routeName ? 'bg-pink' : 'bg-dark'"
+                >
+                <Icon
+                    :name="item.icon"
+                    :color="iconColor"
+                    class="margin-right-half"
+                />
+                {{ item.label }}
+                </a>
+            </template>
+            </div>
+    </div>
+</template>
+
+<script setup>
+import { defineProps } from 'vue';
+import Icon from './Icon.vue';
+
+const props = defineProps({
+    currentRouteName   :   String,
+    navbarItems: {
+        type: Array,
+        default: () => []
+    },
+    iconColor: String
+});
+</script>
+
+<style scoped>
+.active_submenu {
+  color: #f33e3e !important;
+}
+</style>

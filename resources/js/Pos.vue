@@ -449,7 +449,7 @@ $("body").click(function (e) {
 .menu-dropdown-content {
   box-shadow: 0px 0.5px 12px rgba(0, 0, 0, 0.2);
   min-width: 100% !important;
-  top: -30px !important;
+  top: 0px !important;
 }
 
 /*.category-list-section {
@@ -585,6 +585,9 @@ $("body").click(function (e) {
   }
   .panel.panel-right .list .item-link .item-inner:before {
     color: #000000 !important;
+  }
+  .panel.panel-right .list .item-link.bg-pink .item-inner:before {
+    color: #fff !important;
   }
   .panel-backdrop {
     background-color: rgb(17 24 39 / 30%) !important;

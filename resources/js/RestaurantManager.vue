@@ -11,7 +11,7 @@
             class="header-links display-flex align-items-center"
             v-if="CurrentsubmenuRoute != 'category'"
           >
-            <!--========= SMALL SCREEN MENU BAR=========== -->
+            <!--========= MANAGER SMALL SCREEN NAVBAR =========== -->
             <div class="small_screen_menu">
               <div class="hamburger__button">
                 <a
@@ -169,7 +169,8 @@
                 </div>
               </div>
             </div>
-            <!--========= SMALL SCREEN MENU BAR END=========== -->
+            <!--========= MANAGER SMALL SCREEN NAVBAR END =========== -->
+            <!--========= MANAGER BIG SCREEN NAVBAR =========== -->
             <div
               class="row header-link justify-content-flex-end align-items-center tab_view_menu"
             >
@@ -311,6 +312,7 @@
                 >
               </div>
             </div>
+            <!--========= MANAGER BIG SCREEN NAVBAR END=========== -->
           </div>
         </f7-navbar>
       </div>
