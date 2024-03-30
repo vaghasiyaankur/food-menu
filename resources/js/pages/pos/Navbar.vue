@@ -215,14 +215,11 @@
 import { f7, f7Navbar } from "framework7-vue";
 import SwitchButton from "../../components/SwitchButton.vue";
 import { ref, onMounted, nextTick, watch } from "vue";
-import { useRouter } from 'vue-router'
-
 
 const props = defineProps({
     moveToWaitingArea: Function,
 });
 
-const router = useRouter();
 
 let currentRouteName = ref(null);
 // let currentRoute = f7.view.main.router.currentRoute.name;
