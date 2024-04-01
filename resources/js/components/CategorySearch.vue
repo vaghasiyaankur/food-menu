@@ -15,18 +15,21 @@
     </div>
     <div class="padding-vertical-half" v-show="showSearchBar">
         <div class="padding-horizontal padding-vertical display-flex justify-content-space-between align-items-center">
-            <div class="text-align-center display-flex justify-content-space-between align-items-center ">
-                <div class="display-flex justify-content-space-between align-items-center">
-                    <div>
-                        <i class="f7-icons text-gray" @click="showSearchBar = false">search</i>
+            <div class="text-align-center display-flex justify-content-space-between align-items-center w-100">
+                <div class="display-flex justify-content-space-between align-items-center product_search w-100">
+                    <div style="width:10%">
+                        <i class="f7-icons text-gray">search</i>
                     </div>
-                    <div class="item-content item-input no-padding-left">
+                    <div class="item-content item-input no-padding-left" style="width:90%">
                         <div class="item-inner">
-                            <div class="item-input-wrap">
-                                <input type="text" name="name" class="padding" placeholder="Search Food...">
+                            <div class="item-input-wrap w-100">
+                                <input type="search" class="padding w-100" placeholder="Search Food...">
                             </div>
                         </div>
                     </div>
+                </div>
+                <div>
+                    <i class="f7-icons text-gray" @click="showSearchBar = false">xmark</i>
                 </div>
             </div>
         </div>

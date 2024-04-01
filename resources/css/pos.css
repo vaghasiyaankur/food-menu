@@ -198,6 +198,13 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox{
 .text-gray{
     color: #999999;
 }
+.product_search{
+    border-bottom: 1px solid #999999;
+    padding-bottom: 5px;
+}
+.w-100{
+    width: 100%;
+}
 @media screen and (max-width:991px) {
     .product-list-section .toolbar-inner a.tab-link{
         font-size: 14px;

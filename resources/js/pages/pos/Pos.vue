@@ -10,6 +10,7 @@
                         :productsCount="productsCount"
                     />
                 </div>
+                <Product :categories="categories"/>
             </div>
             <div class="add-to-cart padding">
                 <div class="display-flex justify-content-space-between align-items-flex-start">
@@ -18,7 +19,6 @@
                     <div class="align-self-flex-end">Item 3</div>
                 </div>
             </div>
-            <product :categories="categories"/>
         </div>
     </f7-page>
 </template>
@@ -27,6 +27,7 @@
 import { f7Page, f7 } from 'framework7-vue';
 import CategorySearch from "../../components/CategorySearch.vue"
 import { ref, watchEffect } from 'vue'
+import Product from '../../components/Product.vue'
 import axios from 'axios'
 
 const categories =  ref({});
