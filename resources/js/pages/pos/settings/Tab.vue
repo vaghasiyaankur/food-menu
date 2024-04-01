@@ -9,8 +9,6 @@
         :class="{
             'tab-link-active' : item.active
         }"
-
-        @click="handleTableHideShow(item.name)"
     > 
         {{ item.name }} 
     </a>
@@ -31,20 +29,6 @@
         { active : false, name : 'Language' },
         { active : false, name : 'QR Code' }
     ]);
-
-    const handleTableHideShow = (tabName) => {
-        if(tabName == 'Table Management') {
-            props.tableShow = !props.tableShow;
-            console.log(props.tableShow);
-        } else if(tabName == 'Floor Plan') {
-            props.floorlistShow = !props.floorlistShow;
-            console.log(props.floorlistShow);
-        }else if(tabName == 'Language') {
-            props.language = !props.language;
-            console.log(props.language);
-        }
-    }
-
 </script>
 <style scoped>
 .tabbar .tab-link, .tabbar-labels .tab-link, .tabbar .link, .tabbar-labels .link{

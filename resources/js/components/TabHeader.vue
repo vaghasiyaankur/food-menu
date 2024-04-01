@@ -1,12 +1,12 @@
 <template>
-<!--     
+    
     <div class="back_link" v-if="backTable == 'back'">
         <a class="link back text-color-black" href="javascript:;" @click="tablehide"><i class="icon icon-back"> </i>
             <span class="margin-left-half">Back to List</span>
         </a>
-    </div> -->
+    </div>
 
-    <div class="card-header margin-vertical-half">
+    <div class="card-header margin-vertical-half" v-else>
         <div class="table_mangment_heading">
             <h3 class="no-margin">
                 <span class="page_heading">
@@ -30,7 +30,7 @@
 
     const props = defineProps({
         title      :  String,
-        tablehide  :  Function,
+        tablehide  :  [Function, String, Boolean],
         tableId    :  [String, Number],
         pageNumber :  Number,
         toggle     :  Boolean,

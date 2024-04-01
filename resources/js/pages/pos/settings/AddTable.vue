@@ -1,12 +1,12 @@
 <template>
     <div>
         <div class="add__table padding">
-            <div class="back_link">
+            <!-- <div class="back_link">
                 <a class="link back text-color-black" href="javascript:;" @click="$emit('tableshow')"><i class="icon icon-back"> </i>
                     <span class="margin-left-half">Back to List</span>
                 </a>
-            </div>
-            <!-- <TabHeader title="Back to List" :tablehide="tableshow" :back-table="'back'" /> -->
+            </div> -->
+            <TabHeader title="Back to List" :tablehide="tableshow" :back-table="'back'" />
             <div class="add_table_field">
                 <form class="list margin-vertical" id="my-form">
                     <div class="row padding-bottom margin-bottom">
