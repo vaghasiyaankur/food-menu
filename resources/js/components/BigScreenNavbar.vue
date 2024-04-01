@@ -21,7 +21,7 @@
                         v-for="(submenuItem, submenuIndex) in item.submenu" 
                         :key="submenuIndex" :href="submenuItem.href" 
                         class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding"
-                        :class="[submenuItem.routeName == currentRouteName ? 'active_submenu' : 'text-color-black']"
+                        :class="[submenuItem.routesName == currentRouteName ? 'active_submenu' : 'text-color-black']"
                     >
                         {{ submenuItem.label }}
                     </a>
@@ -29,11 +29,20 @@
                 </div>
                 </div>
             </template>
+            <div v-else-if="item.openCloseReservation" class="padding-horizontal height-40 border-bottom" >
+                <button
+                    class="col link nav-link button button-raised text-color-white padding bg-dark"
+                    @click="closeReservationEvent(!item.closeReservation)"
+                >
+                <Icon :name="item.icon" :color="item.routesName.includes(currentRouteName) ? '#fff' : iconColor" class="margin-right-half" />
+                {{ item.label }}
+                </button>
+            </div>
             <template v-else>
                 <a
                 :href="item.href"
                 class="col link nav-link button button-raised text-color-white padding"
-                :class="currentRouteName === item.routeName ? 'bg-pink' : 'bg-dark'"
+                :class="item.routesName.includes(currentRouteName) ? 'bg-pink' : 'bg-dark'"
                 >
                 <Icon
                     :name="item.icon"
@@ -57,7 +66,8 @@ const props = defineProps({
         type: Array,
         default: () => []
     },
-    iconColor: String
+    iconColor: String,
+    closeReservationEvent: Function
 });
 </script>
 

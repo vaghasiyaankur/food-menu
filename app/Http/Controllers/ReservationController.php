@@ -189,7 +189,8 @@ class ReservationController extends Controller
      */
     public function changeReservation(Request $request)
     {
-        SettingHelper::updateData(['close_reservation', $request->reservation]);
+        
+        SettingHelper::updateData(['close_reservation'=> $request->reservation]);
 
         $closeReservation = SettingHelper::getData('close_reservation');
 

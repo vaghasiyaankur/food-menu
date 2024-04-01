@@ -4,7 +4,6 @@
       <div class="nav-bar" v-if="currentRoute != 'login'">
         <Navbar 
           :MoveToWaitingArea="MoveToWaitingArea"
-          :f7Router="f7Router"
         />
       </div>
       <f7-view

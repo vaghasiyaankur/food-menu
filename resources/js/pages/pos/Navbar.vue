@@ -42,20 +42,20 @@ const props = defineProps({
 });
 
 const navbarItems = [
-  { label: 'POS', routeName: 'POS', href: '/', icon: 'pos' },
-  { label: 'Floorplan', routeName: 'TABLE', href: '/table/', icon: 'dining_table' },
+  { label: 'POS', routesName: ['POS'], href: '/', icon: 'pos' },
+  { label: 'Floorplan', routesName: ['TABLE'], href: '/table/', icon: 'dining_table' },
   {
     label: 'Menu Management',
     icon: 'bars',
     routesName: ['FoodCategory', 'FoodSubCategory', 'FoodProduct', 'DigitalMenu'],
     submenu: [
-      { label: 'Food Category', href: '/food-category/', routeName: 'FoodCategory'},
-      { label: 'Food Subcategory', href: '/food-subcategory/', routeName: 'FoodSubCategory'},
-      { label: 'Food Menu', href: '/food-product/', routeName: 'FoodProduct'},
-      { label: 'Digital Menu', href: '/digital-menu/', routeName: 'DigitalMenu'}
+      { label: 'Food Category', href: '/food-category/', routesName: 'FoodCategory'},
+      { label: 'Food Subcategory', href: '/food-subcategory/', routesName: 'FoodSubCategory'},
+      { label: 'Food Menu', href: '/food-product/', routesName: 'FoodProduct'},
+      { label: 'Digital Menu', href: '/digital-menu/', routesName: 'DigitalMenu'}
     ]
   },
-  { label: 'Settings', routeName: 'setting', href: '/settings/', icon: 'settings' }
+  { label: 'Settings', routesName: ['setting'], href: '/settings/', icon: 'settings' }
 ];
 
 
