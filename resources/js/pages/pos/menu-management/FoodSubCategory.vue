@@ -2,11 +2,10 @@
 <f7-page>
     <div class="subcategory-list-section">
         <div class="card elevation-2">
-            <div class="card_header">
+            <!-- <div class="card_header">
                 <div class="row padding-left padding-right align-items-center padding-top-half">
                     <div class="col-100 large-50 medium-40">
                         <h3>
-                            <!-- <a href="javscript:;" class="text-color-black padding-right-half" ><i class="f7-icons font-22" style="vertical-align: bottom;">arrow_left</i></a> -->
                             <span class="page_heading"> Sub Category</span>
                         </h3>
                     </div>
@@ -21,14 +20,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <div class="item-content item-input">
-                                    <div class="item-inner">
-                                        <div class="item-input-wrap searchData row padding-half">
-                                            <i class="f7-icons font-22 search-icon">search</i>
-                                            <input type="search" v-model="search" @input="getSubCategories()" name="search" id="searchData">
-                                        </div>
-                                    </div>
-                                </div> -->
                             </div>
                             <div class="col padding-left-half padding-right-half">
                                 <button class="button button-raised bg-dark text-color-white padding height_40" @click="subCategory_title = 'Add Sub Category'; subCategory.name = []; subCategory.category = null;showSubCategoryPopup()" data-popup="#sub_category_popup"><i class="f7-icons font-22 margin-right-half">plus_square</i> Add Sub Category</button>
@@ -36,7 +27,15 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
+
+            <MenuManagementHeader 
+                title="Sub Category"
+                @blank:action="blankForm" 
+                @add:popup="showSubCategoryPopup" 
+                @update:search="updateSearch"
+                @update:PopupTitle="updatePopupTitle"
+            />
             <div class="card-content card-content-padding" v-if="subCategories.length">
                 <div v-for="subcategory in subCategories" :key="subcategory">
                     <div class="main-category text-color-pink padding-left-half margin-top padding-top-half">{{ subcategory.category_languages[0].name }}</div>
@@ -142,7 +141,9 @@
 import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Input } from 'framework7-vue';
 import $ from 'jquery';
 import axios from 'axios';
-import NoValueFound from './NoValueFound.vue'
+import NoValueFound from '../../../components/NoValueFound.vue'
+import MenuManagementHeader from './MenuManagementHeader.vue'
+
 export default {
     name: 'FoodSubCategory',
     components: {
@@ -152,7 +153,8 @@ export default {
         f7Block,
         f7,
         f7Input,
-        NoValueFound
+        NoValueFound,
+        MenuManagementHeader
     },
     data() {
         return {
@@ -162,6 +164,7 @@ export default {
                 id : null,
                 name: [],
                 category: null,
+                image: '',
             },
             subCategory_title: 'Add Sub Category',
             search: '',
@@ -172,6 +175,7 @@ export default {
                 price : '',
             },
             paginationData : [],
+            image_url: null,
         }
     },
     beforeCreate() {
@@ -187,6 +191,10 @@ export default {
         this.$root.removeLoader();
     },
     methods: {
+        updateSearch(searchValue){
+            this.search = searchValue;
+            this.getSubCategories();
+        },
         getSubCategories() {
             axios.post('/api/get-sub-categories', { search: this.search })
             .then((res) => {
@@ -284,8 +292,17 @@ export default {
                 this.subCategoryOption = res.data;
             })
         },
+        blankForm() {
+            this.subCategory.id = null;
+            this.subCategory.name = [];
+            this.subCategory.category = '';
+            this.image_url = null;
+        },
         showSubCategoryPopup(){
             f7.popup.open(`#sub_category_popup`);
+        },
+        updatePopupTitle(title){
+            this.subCategory_title = title;
         }
     },
 }

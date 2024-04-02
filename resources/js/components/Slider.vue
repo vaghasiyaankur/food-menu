@@ -12,7 +12,6 @@
                     <p class="slider-category-name margin-left-half text-align-center">All Items</p>
                     <span class="category-item" v-if="activeCategory === 0">{{  productsCount }}</span>
                 </div>
-                
                 <div class="swiper-slide" 
                     v-for="(category, index) of categories"
                     :key="index"
@@ -20,7 +19,7 @@
                     @click="selectCategory(category.id)"
                 >
                     <div class="category-image-slider col">
-                        <img src="/images/dish.png" :alt="category.name">
+                        <img :src="'/storage/' + category.image" :alt="category.name" width="33" height="33"/>
                     </div>
                     <p class="slider-category-name margin-left-half text-align-center">{{ `${category.name.substr(0, 5)} ${category.name.length > 5 ? '..' : ''}`}}</p>
                     <span class="category-item" v-if="activeCategory === category.id">{{ category.product_count }}</span>

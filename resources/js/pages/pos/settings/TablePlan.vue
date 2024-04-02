@@ -1,6 +1,18 @@
 <template>
     <div class="card no-margin-top">
-        <TabHeader title="Table List" :tablehide="tablehide" :table-id="'0'" :page-number="page_number" :toggle="true" />
+        <!-- <TabHeader title="Table List" /> -->
+        <div class="card-header margin-vertical-half">
+        <div class="table_mangment_heading">
+            <h3 class="no-margin">
+                <span class="page_heading">
+                    Table List
+                </span>
+            </h3>
+        </div>
+        <div class="add_table_button">
+            <button class="button" @click="$emit('tablehide', 0, page_number)"><i class="f7-icons margin-right-half">plus_square</i> Add Table</button>
+        </div>
+    </div>
         <div class="card-content padding-vertical">
             <div class="data-table">
                 <table>
@@ -50,7 +62,7 @@
 
     export default {
         name : 'AddFloorPlan',
-        props : ['page', 'tablehide'],
+        props : ['page'],
         components : {
             TableHeader,
             TabHeader,
@@ -200,7 +212,7 @@
     text-decoration: none;
     border-radius: 5px;
 }
-/*.add_table_button button{
+.add_table_button button{
     background-color: #38373D;
     box-shadow: 0px 2px 4px rgba(172, 172, 172, 0.45);
     border-radius: 7px;
@@ -209,6 +221,6 @@
     line-height: 17px;
     color: #FFFFFF;
     padding: 20px 36px !important;
-}*/
+}
 </style>
 

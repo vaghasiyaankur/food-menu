@@ -109,10 +109,11 @@ class SubCategoryController extends Controller
     public function get_Subcategories()
     {
         $lang_id = SettingHelper::managerLanguage();
+        $restaurantId = CustomerHelper::getRestaurantId();
 
         $subCategories = SubCategory::with(['subCategoryLanguage' => function($q) use ($lang_id){
             $q->where('language_id',$lang_id);
-        }])->whereUserId(Auth::id())->get();
+        }])->whereRestaurantId($restaurantId)->get();
 
         $subCat = [];
         foreach ($subCategories as $key => $sub) {

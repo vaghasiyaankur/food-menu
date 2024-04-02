@@ -32,10 +32,10 @@
             <div v-else-if="item.openCloseReservation" class="padding-horizontal height-40 border-bottom" >
                 <button
                     class="col link nav-link button button-raised text-color-white padding bg-dark"
-                    @click="closeReservationEvent(!item.closeReservation)"
+                    @click="closeReservationEvent(closeReservation)"
                 >
-                <Icon :name="item.icon" :color="item.routesName.includes(currentRouteName) ? '#fff' : iconColor" class="margin-right-half" />
-                {{ item.label }}
+                <Icon :name="closeReservation == 1 ? 'true' : 'close'" :color="item.routesName.includes(currentRouteName) ? '#fff' : iconColor" class="margin-right-half" />
+                {{ closeReservation == 1 ? 'Open Reservation' : 'Close Reservation' }}
                 </button>
             </div>
             <template v-else>
@@ -52,7 +52,7 @@
                 {{ item.label }}
                 </a>
             </template>
-            </div>
+        </div>
     </div>
 </template>
 
@@ -67,6 +67,7 @@ const props = defineProps({
         default: () => []
     },
     iconColor: String,
+    closeReservation: Boolean,
     closeReservationEvent: Function
 });
 </script>

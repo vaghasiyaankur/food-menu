@@ -1,12 +1,12 @@
 <template>
     <div>
         <div class="add__table padding">
-            <!-- <div class="back_link">
+            <TabHeader title="Back to List" />
+            <div class="back_link">
                 <a class="link back text-color-black" href="javascript:;" @click="$emit('tableshow')"><i class="icon icon-back"> </i>
                     <span class="margin-left-half">Back to List</span>
                 </a>
-            </div> -->
-            <TabHeader title="Back to List" :tablehide="tableshow" :back-table="'back'" />
+            </div>
             <div class="add_table_field">
                 <form class="list margin-vertical" id="my-form">
                     <div class="row padding-bottom margin-bottom">
@@ -79,7 +79,7 @@
     import axios from 'axios';
     export default {
         name : 'AddTable',
-        props: ['tableId', 'tableshow'],
+        props: ['tableId'],
         components : {
             f7, TabHeader
         },

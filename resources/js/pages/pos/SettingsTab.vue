@@ -5,30 +5,30 @@
                 <div class="card-content card-content-header padding-top">
                     <div class="toolbar tabbar toolbar-top">
                         <div class="toolbar-inner">
-                            <a href="#tab-1" class="tab-link tab-link-active">General</a>
-                            <a href="#tab-2" class="tab-link" @click="tableShow = true">Table Management</a>
-                            <a href="#tab-3" class="tab-link" @click="floorlistShow = true">Floor Plan</a>
-                            <a href="#tab-4" class="tab-link" @click="language = true">Language</a>
-                            <a href="#tab-5" class="tab-link">QR Code</a>
+                            <a href="#tab-general" class="tab-link tab-link-active">General</a>
+                            <a href="#tab-table-management" class="tab-link" @click="tableShow = true">Table Management</a>
+                            <a href="#tab-floor-plan" class="tab-link" @click="floorlistShow = true">Floor Plan</a>
+                            <a href="#tab-language" class="tab-link" @click="language = true">Language</a>
+                            <a href="#tab-qr-code" class="tab-link">QR Code</a>
                         </div>
                     </div>
                     <div class="tabs">
-                        <div id="tab-1" class="tab tab-active">
+                        <div id="tab-general" class="tab tab-active">
                             <GeneralSetting />
                         </div>
-                        <div id="tab-2" class="tab">
-                            <TablePlan v-if="tableShow" @tablehide="addEditTableShow" :tablehide="addEditTableShow" :page="page"/>
-                            <AddTable v-if="!tableShow" @tableshow="tableShow = true" :tableId="tableId" :tableshow="!tableShow" />
+                        <div id="tab-table-management" class="tab">
+                            <TablePlan v-if="tableShow" @tablehide="addEditTableShow" :page="page"/>
+                            <AddTable v-if="!tableShow" @tableshow="tableShow = true" :tableId="tableId"/>
                         </div>
-                        <div id="tab-3" class="tab">
-                            <FloorList v-if="floorlistShow" @floorlisthide="addEditFloorShow" :page="floorpage" :floorlisthide="addEditFloorShow" />
+                        <div id="tab-floor-plan" class="tab">
+                            <FloorList v-if="floorlistShow" @floorlisthide="addEditFloorShow" :page="floorpage" />
                             <FloorPlan v-if="!floorlistShow"  @floorlistshow="floorlistShow = true" :floorId="floorId" />
                         </div>
-                        <div id="tab-4" class="tab">
+                        <div id="tab-language" class="tab">
                             <Language v-if="language" @languagelisthide="languagelisthide"/>
                             <LanguageTraslation  v-if="!language" @languagelistshow="language = true" :langId="langId" />
                         </div>
-                        <div id="tab-5" class="tab">
+                        <div id="tab-qr-code" class="tab">
                             <QrCodeGenerate />
                         </div>
                     </div>
@@ -39,15 +39,14 @@
 </template>
 <script>
 import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Input } from 'framework7-vue';
-// import NavigationTab from './Tab.vue';
-import GeneralSetting from './GeneralSetting.vue';
-import TablePlan from './TablePlan.vue';
-import FloorList from './FloorList.vue';
-import Language from './Language.vue';
-import AddTable from './AddTable.vue';
-import FloorPlan from '../../restaurant-manager/settings/FloorPlan.vue';
-import LanguageTraslation from '../../restaurant-manager/settings/EditTranslations.vue';
-import QrCodeGenerate from '../../restaurant-manager/settings/QrCodeGenerate.vue';
+import GeneralSetting from './settings/GeneralSetting.vue';
+import TablePlan from './settings/TablePlan.vue';
+import FloorList from './settings/FloorList.vue';
+import Language from './settings/Language.vue';
+import AddTable from './settings/AddTable.vue';
+import FloorPlan from './settings/FloorPlan.vue';
+import LanguageTraslation from '../restaurant-manager/settings/EditTranslations.vue';
+import QrCodeGenerate from '../restaurant-manager/settings/QrCodeGenerate.vue';
 import { ref } from 'vue';
 import $ from 'jquery';
 export default {

@@ -71,7 +71,7 @@ import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Input,f7Sheet,f7PageCont
 import $ from 'jquery';
 import axios from 'axios';
 
-import NoValueFound from './NoValueFound.vue'
+import NoValueFound from '../../../components/NoValueFound.vue'
 
 export default {
     name: 'FoodSubCategory',

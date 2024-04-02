@@ -10,22 +10,21 @@
   >
 
     <!--========= MANAGER SMALL SCREEN NAVBAR =========== -->
-
     <SmallScreenNavbar
         :current-route-name="currentRouteName"
         :navbar-items="navbarItems"
         :icon-color="'#000'"
         :close-reservation-event="closeReservationEvent"
+        :close-reservation="closeReservation"
     />
-    
     <!--========= MANAGER SMALL SCREEN NAVBAR END =========== -->
     <!--========= MANAGER BIG SCREEN NAVBAR =========== -->
-   
     <BigScreenNavbar 
             :current-route-name="currentRouteName"
             :navbar-items="navbarItems"
             :icon-color="'#fff'"
             :close-reservation-event="closeReservationEvent"
+            :close-reservation="closeReservation"
         />
     <!--========= MANAGER BIG SCREEN NAVBAR END=========== -->
   </div>
@@ -52,12 +51,11 @@ const navbarItems = [
   { label: 'New Reservation', routesName: ['Reservation'], href: '/reservation/', icon: 'plus' },
   { label: 'Reporting', routesName: ['Reporting'], href: '/reporting/', icon: 'reports' },
   { 
-    label: props.closeReservation ? 'Open Reservation' : 'Close Reservation',
+    label: 'Close Reservation',
     routesName: [], 
     href: '#', 
-    icon: props.closeReservation ? 'true' : 'close',
-    openCloseReservation: true,
-    closeReservation: props.closeReservation
+    icon: 'close',
+    openCloseReservation: true
   }
 ];
 

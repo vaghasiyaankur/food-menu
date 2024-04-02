@@ -8,7 +8,6 @@
         class="header-links display-flex justify-content-flex-end align-items-center"
     >
         <!--========= POS SMALL SCREEN NAVBAR =========== -->
-        
         <SmallScreenNavbar
             :current-route-name="currentRouteName"
             :navbar-items="navbarItems"
@@ -17,7 +16,6 @@
         <!--========= POS SMALL SCREEN NAVBAR  END=========== -->
 
         <!--========= POS BIG SCREEN NAVBAR =========== -->
-        
         <BigScreenNavbar 
             :current-route-name="currentRouteName"
             :navbar-items="navbarItems"
@@ -55,7 +53,7 @@ const navbarItems = [
       { label: 'Digital Menu', href: '/digital-menu/', routesName: 'DigitalMenu'}
     ]
   },
-  { label: 'Settings', routesName: ['setting'], href: '/settings/', icon: 'settings' }
+  { label: 'Settings', routesName: ['Setting'], href: '/settings/', icon: 'settings' }
 ];
 
 

@@ -127,7 +127,7 @@
 import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Input,f7ListItem,f7AccordionContent,f7List,f7AccordionToggle,f7AccordionItem } from 'framework7-vue';
 import $ from 'jquery';
 import axios from 'axios';
-import NoValueFound from './NoValueFound.vue'
+import NoValueFound from '../../components/NoValueFound.vue';
 export default {
     name: 'SingleCategoryProducts',
     props: {

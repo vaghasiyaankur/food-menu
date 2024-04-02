@@ -3,42 +3,13 @@
 
     <div class="category-list-section">
         <div class="card elevation-2 border_radius_10">
-            <div class="card_header">
-                <div class="row padding-left padding-right padding-top-half align-items-center">
-                    <div class="col-100 large-50 medium-40">
-                        <h3>
-                            <!-- <a href="javscript:;" class="text-color-black padding-right-half" >
-                                    <i class="f7-icons font-22" style="vertical-align: bottom;">arrow_left</i></a> -->
-                            <span class="page_heading"> Category</span>
-                        </h3>
-                    </div>
-                    <div class="col-100 large-50 medium-60">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <div class="item-content item-input">
-                                    <div class="item-inner">
-                                        <div class="item-input-wrap searchData row padding-half height_40 search_data_wrap">
-                                            <i class="f7-icons font-18 search-icon">search</i>
-                                            <input type="search" v-model="search" name="search" class="search__data" placeholder="Search Category" id="searchData" @input="getCategories()">
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- <div class="item-content item-input">
-                                        <div class="item-inner">
-                                            <div class="item-input-wrap searchData row padding-half">
-                                                <i class="f7-icons font-22 search-icon">search</i>
-                                                <input type="search" v-model="search" name="search" id="searchData" @input="getCategories()">
-                                            </div>
-                                        </div>
-                                    </div> -->
-                            </div>
-                            <div class="col padding-left-half padding-right-half">
-                                <button class="button button-raised bg-dark text-color-white padding height_40" data-popup=".categoryPopup" @click="blankForm();showcategoryPopup()"><i class="f7-icons font-22 margin-right-half">plus_square</i> Add category</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <MenuManagementHeader 
+                title="Category"
+                @blank:action="blankForm" 
+                @add:popup="showCategoryPopup" 
+                @update:search="updateSearch"
+                @update:PopupTitle="updatePopupTitle"
+            />
             <div class="card-content card-content-padding categorey_card">
                 <div v-if="categories.length">
                     <div class="category-list border-bottom padding-top padding-bottom" v-for="(category,index) in categories" :key="category">
@@ -65,7 +36,7 @@
                                         </button>
                                     </div>
                                     <div class="col-25">
-                                        <button class="button text-color-black padding height-36 popup-open" data-popup=".categoryPopup" @click="editCategory(category.id);showcategoryPopup()"><i class="f7-icons font-22 margin-right-half">square_pencil</i> Edit</button>
+                                        <button class="button text-color-black padding height-36 popup-open" data-popup=".categoryPopup" @click="editCategory(category.id);showCategoryPopup()"><i class="f7-icons font-22 margin-right-half">square_pencil</i> Edit</button>
                                     </div>
                                     <div class="col-25">
                                         <button class="button text-color-red padding height-36" @click="removeCategory(category.id)"><i class="f7-icons font-22 margin-right-half">trash</i>
@@ -166,7 +137,8 @@ import {
 } from 'framework7-vue';
 import $ from 'jquery';
 import axios from "axios";
-import NoValueFound from './NoValueFound.vue'
+import NoValueFound from '../../../components/NoValueFound.vue'
+import MenuManagementHeader from './MenuManagementHeader.vue'
 
 export default {
     name: 'Favourite',
@@ -197,7 +169,8 @@ export default {
         f7Block,
         f7,
         f7Input,
-        NoValueFound
+        NoValueFound,
+        MenuManagementHeader
     },
     beforeCreate() {
         this.$root.addLoader();
@@ -209,11 +182,16 @@ export default {
         this.$root.removeLoader();
     },
     methods: {
+        updateSearch(searchValue){
+            this.search = searchValue;
+            this.getCategories();
+        },
         addimageChange(e) {
             this.category.image = e.target.files[0];
             this.image_url = URL.createObjectURL(this.category.image);
         },
         getCategories() {
+            console.log(this.search);
             axios.post('/api/get-categories', {
                     search: this.search
                 })
@@ -322,8 +300,11 @@ export default {
             this.category.image = '';
             this.image_url = null;
         },
-        showcategoryPopup() {
+        showCategoryPopup() {
             f7.popup.open(`.categoryPopup`);
+        },
+        updatePopupTitle(title) {
+            this.category_title = title;
         }
     },
 };

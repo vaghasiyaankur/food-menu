@@ -266,7 +266,7 @@ import { f7,f7Page, f7Navbar, f7BlockTitle, f7Block} from 'framework7-vue';
 import $ from 'jquery';
 import axios from 'axios';
 import VueCountdown from '@chenfengyuan/vue-countdown';
-import NoValueFound from './NoValueFound.vue';
+import NoValueFound from '../../components/NoValueFound.vue';
 import Pusher from 'pusher-js'
 import moment from 'moment'
 

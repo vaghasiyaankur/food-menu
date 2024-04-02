@@ -1,11 +1,10 @@
-
 import Pos from "./pages/pos/Pos.vue";
 import Login from "./pages/restaurant-manager/Login.vue";
-import FoodCategory from "./pages/restaurant-manager/FoodCategory.vue";
-import FoodSubCategory from "./pages/restaurant-manager/FoodSubCategory.vue";
-import FoodProduct from "./pages/restaurant-manager/FoodProduct.vue";
-import DigitalMenu from "./pages/restaurant-manager/DigitalMenu.vue";
-import Setting from "./pages/pos/settings/SettingsTab.vue";
+import FoodCategory from "./pages/pos/menu-management/FoodCategory.vue";
+import FoodSubCategory from "./pages/pos/menu-management/FoodSubCategory.vue";
+import FoodProduct from "./pages/pos/menu-management/FoodProduct.vue";
+import DigitalMenu from "./pages/pos/menu-management/DigitalMenu.vue";
+import Setting from "./pages/pos/SettingsTab.vue";
 
 // Pages
 export default [

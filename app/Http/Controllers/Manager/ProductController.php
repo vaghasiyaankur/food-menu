@@ -62,22 +62,24 @@ class ProductController extends Controller
     public function getProducts(Request $req)
     {
         $lang_id = SettingHelper::managerLanguage();
+        $restaurantId = CustomerHelper::getRestaurantId();
 
         $categoryId = $req->categoryId != 0 ? intval($req->categoryId) : '';
+        $subcategoryId = $req->subcategoryId != 0 ? intval($req->subcategoryId) : '';
 
         $category_name = Category::with(['categoryLanguages' => function($q) use ($lang_id){
             $q->where('language_id',$lang_id);
         }])->find($req->categoryId);
 
-        $subCategories = Category::with(['CategoryLanguage' => function($q) use ($lang_id){
+        $subCategories = SubCategory::with(['subCategoryLanguage' => function($q) use ($lang_id){
             $q->where('language_id',$lang_id);
         }])->where('category_id',$req->categoryId)->get();
         $subCategory = [];
         foreach ($subCategories as $key => $sub_category) {
-            $subCategory[$sub_category->id] = $sub_category->categoryLanguage[0]->name;
+            $subCategory[$sub_category->id] = $sub_category->subCategoryLanguage[0]->name;
         }
 
-        $sub_product = Category::with(['categoryLanguage' => function($q) use ($lang_id){
+        $sub_product = SubCategory::with(['subCategoryLanguage' => function($q) use ($lang_id){
             $q->where('language_id',$lang_id);
         },
         'products' => function($q) use ($req,$lang_id) {
@@ -89,13 +91,18 @@ class ProductController extends Controller
         ->whereHas('products.productLanguage',function($q) use ($req,$lang_id){
             $q->where('language_id',$lang_id);
             $q->where('name','LIKE','%'.$req->search.'%');
-        })->whereHas('products');
+        })
+        ->whereHas('subCategoryLanguage')->whereHas('products');
 
         if ($categoryId) {
             $sub_product = $sub_product->whereCategoryId($categoryId);
         }
 
-        $sub_product = $sub_product->whereRestaurantId(Auth::user()->restaurant_id)->paginate(6);
+        if ($subcategoryId) {
+            $sub_product = $sub_product->whereId($subcategoryId);
+        }
+
+        $sub_product = $sub_product->whereRestaurantId($restaurantId)->paginate(6);
 
         return response()->json(['sub_category_product' => $sub_product,'sub_category' => $subCategory,'category_name' =>  $category_name]);
     }

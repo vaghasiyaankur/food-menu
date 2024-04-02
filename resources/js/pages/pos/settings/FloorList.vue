@@ -1,11 +1,25 @@
 <template>
     <div class="floor_plan_list">
         <div class="card no-margin-top">
-            <TabHeader title="Floor List" :tablehide="floorlisthide" :table-id="'0'" :page-number="page_number" :toggle="true" />
+            <div class="card-header margin-vertical-half">
+                <div class="table_mangment_heading">
+                   <h3 class="no-margin">
+                        <span class="page_heading">Floor List</span>
+                    </h3>
+                </div>
+                <div class="add_table_button"><button class="button"  @click="$emit('floorlisthide', 0, page_number)"><i class="f7-icons margin-right-half">plus_square</i> Add Table</button></div>
+            </div>
             <div class="card-content">
                 <div class="data-table">
                     <table>
-                        <TableHeader :items="headerItems" />
+                        <thead>
+                            <tr>
+                                <th style="width:20%">Number</th>
+                                <th style="width:35%">Floor Name</th>
+                                <th style="width:25%">Shortcut Floor Name</th>
+                                <th style="width:20%;">Action</th>
+                            </tr>
+                        </thead>
                         <tbody>
                             <tr v-for="(floor,index) in floors" :key="floor">
                                 <td class="label-cell">{{ (paginationData.per_page * (page_count - 1)) + (index + 1) }}.</td>
@@ -28,7 +42,13 @@
                         </tbody>
                     </table>
                     <div class="pagination_count padding-vertical-half">
-                        <Pagination :function-name="getFloors" :data="paginationData" />
+                        <div class="pagination_list">
+                            <div v-for="(link,index) in paginationData.links" :key="link">
+                                <a href="javascript:;" v-if="index == 0" @click="link.url != null ? getFloors(link.url) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon-prev"></i></a>
+                                <a href="javascript:;" v-if="paginationData.links.length - 1 != index && index != 0" @click="link.url != null ? getFloors(link.url) : 'javascript:;'" :class="{ 'disabled': link.url == null, 'active': paginationData.current_page == index}">{{ index }}</a>
+                                <a href="javascript:;" v-if="paginationData.links.length - 1 == index" @click="link.url != null ? getFloors(link.url) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon-next"></i></a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -39,27 +59,18 @@
 
 <script>
     import { f7 } from 'framework7-vue';
-    import TableHeader from '../../../components/TableHeader.vue';
-    import TabHeader from '../../../components/TabHeader.vue';
-    import Pagination from '../../../components/Pagination.vue';
     import $ from 'jquery';
     import axios from 'axios';
     export default {
         name : 'FloorPlan',
-        components: { f7, TabHeader, TableHeader, Pagination },
-        props: ['page', 'floorlisthide'],
+        components: { f7 },
+        props: ['page'],
         data() {
             return {
                 floors: [],
                 paginationData: [],
                 page_count : 1,
                 page_number : 1,
-                headerItems : [
-                    {'name' : 'floor_list', 'field' : 'Number', 'width' : '20%'},
-                    {'name' : 'floor_list', 'field' : 'Floor Name', 'width' : '35%'},
-                    {'name' : 'floor_list', 'field' : 'Shortcut Floor Name', 'width' : '25%'},
-                    {'name' : 'floor_list', 'field' : 'Action', 'width' : '20%'},
-                ]
             }
         },
         created() {

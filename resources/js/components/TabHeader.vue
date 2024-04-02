@@ -1,26 +1,11 @@
 <template>
-    
-    <div class="back_link" v-if="backTable == 'back'">
-        <a class="link back text-color-black" href="javascript:;" @click="tablehide"><i class="icon icon-back"> </i>
-            <span class="margin-left-half">Back to List</span>
-        </a>
-    </div>
-
-    <div class="card-header margin-vertical-half" v-else>
+    <div class="card-header margin-vertical-half">
         <div class="table_mangment_heading">
             <h3 class="no-margin">
                 <span class="page_heading">
                     {{ title }}
                 </span>
             </h3>
-        </div>
-        <div class="add_table_button" v-if="toggle">
-            <button 
-                class="button" 
-                @click="tablehide(tableId, pageNumber)"
-            >
-                <i class="f7-icons margin-right-half">plus_square</i> Add Table
-            </button>
         </div>
     </div>
 </template>
@@ -30,11 +15,6 @@
 
     const props = defineProps({
         title      :  String,
-        tablehide  :  [Function, String, Boolean],
-        tableId    :  [String, Number],
-        pageNumber :  Number,
-        toggle     :  Boolean,
-        backTable  :  String
     });
 </script>
 

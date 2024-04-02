@@ -2,12 +2,12 @@
 import LockScreen from "./pages/restaurant-manager/LockScreen.vue";
 import Login from "./pages/restaurant-manager/Login.vue";
 import Table from "./pages/restaurant-manager/Table.vue";
-import FoodCategory from "./pages/restaurant-manager/FoodCategory.vue";
-import FoodSubCategory from "./pages/restaurant-manager/FoodSubCategory.vue";
-import FoodProduct from "./pages/restaurant-manager/FoodProduct.vue";
+// import FoodCategory from "./pages/restaurant-manager/FoodCategory.vue";
+// import FoodSubCategory from "./pages/restaurant-manager/FoodSubCategory.vue";
+// import FoodProduct from "./pages/restaurant-manager/FoodProduct.vue";
 import SingleCategoryProducts from "./pages/restaurant-manager/SingleCategoryProducts.vue";
 import Setting from "./pages/restaurant-manager/settings/SettingsTab.vue";
-import DigitalMenu from "./pages/restaurant-manager/DigitalMenu.vue";
+// import DigitalMenu from "./pages/restaurant-manager/DigitalMenu.vue";
 import Reporting from "./pages/restaurant-manager/Reporting.vue";
 import Reservation from "./pages/restaurant-manager/Reservation.vue";
 import Waiting from "./pages/restaurant-manager/Waiting.vue";
@@ -65,11 +65,11 @@ export default [
     component: Setting,
   },
 
-  {
-    name : 'DigitalMenu',
-    path: '/digital-menu/',
-    component: DigitalMenu,
-  },
+  // {
+  //   name : 'DigitalMenu',
+  //   path: '/digital-menu/',
+  //   component: DigitalMenu,
+  // },
   {
     name : 'Reporting',
     path: '/reporting/',

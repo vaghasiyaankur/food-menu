@@ -7,7 +7,7 @@ use App\Models\CategoryLanguage;
 use App\Models\SubCategory;
 use App\Models\Language;
 use App\Models\SubCategoryLanguage;
-use File;
+use Illuminate\Support\Facades\File;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -63,31 +63,44 @@ class CategorySeeder extends Seeder
             ]
         ];
 
-        $check_folder= is_dir(storage_path('app/public/category'));
-        if(!$check_folder) mkdir(storage_path('app/public/category'));
+        $check_folder= is_dir(storage_path('app/public/sub_category'));
+        if(!$check_folder) mkdir(storage_path('app/public/sub_category'));
 
         $languages = Language::all();
 
-        foreach ($categories as $cate) {
+
+        foreach ($categories as $k => $cate) {
             $cat = new Category();
             $cat->image = $cate['image'];
             $cat->added_by_id = $cate['added_by_id'];
             $cat->restaurant_id = $cate['restaurant_id'];
             $cat->save();
 
-            foreach($languages as $k=>$lan){
+            foreach($languages as $lan_key=>$lan){
                 $catlan = new CategoryLanguage();
                 $catlan->language_id = $lan->id;
                 $catlan->category_id = $cat->id;
-                $catlan->name = $cate['name'][$k];
+                $catlan->name = $cate['name'][$lan_key];
                 $catlan->save();
             }
 
 
-            File::copy(public_path('images'.$cate['image']), public_path('storage/'. $cate['image']));
-
             foreach ($cate['sub_categories'] as $key => $subCat) {
+                $imageName = '';
+                if($subCat[0] == 'Dosa') $imageName = 'dosa';
+                else if($subCat[0] == 'Gujarati Dish') $imageName = 'gujarati_dish';
+                else if($subCat[0] == 'Sabji') $imageName = 'sabji';
+                else if($subCat[0] == 'Naan Or Roti') $imageName = 'naan_roti';
+
+                $sourcePath = public_path('assets/images/seederImages/sub_category/'.$imageName.'.webp');
+                $destinationPath = public_path('storage/sub_category/'.$cat->restaurant_id.'-'.$k.'-'.$key.'.webp');
+                if (File::exists($sourcePath)) {
+                    if(!File::exists($destinationPath)){
+                        File::copy($sourcePath, $destinationPath);
+                    }
+                }
                 $subCate = new SubCategory();
+                $subCate->image = 'sub_category/'.$cat->restaurant_id.'-'.$k.'-'.$key.'.webp';
                 $subCate->category_id = $cat->id;
                 $subCate->restaurant_id = $cate['restaurant_id'];
                 $subCate->save();
