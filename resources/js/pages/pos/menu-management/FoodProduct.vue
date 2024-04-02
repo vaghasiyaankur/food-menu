@@ -2,10 +2,11 @@
     <f7-page>
         <div class="product-list-section" @click="clickout">
             <div class="product_list_card no-margin">
-                <!-- <div class="card_header">
+                <div class="card_header">
                     <div class="row margin-horizontal align-items-center">
                         <div class="col-100 large-20 medium-15">
                             <h3>
+                                <!-- <a href="javscript:;" class="text-color-black padding-right-half"><i class="f7-icons font-22" style="vertical-align: bottom;">arrow_left</i></a> -->
                                 <span class="page_heading">Product</span>
                             </h3>
                         </div>
@@ -42,20 +43,12 @@
                                     </div>
                                 </div>
                                 <div class="col-100 large-20 medium-25 padding-left-half padding-right-half">
-                                    <button class="button bg-dark text-color-white padding height_40" data-popup="#product_popup" @click="blankForm();showProductPopup()"><i class="f7-icons font-22 margin-right-half">plus_square</i> Add Product</button>
+                                    <button class="button bg-dark text-color-white padding height_40" data-popup="#product_popup" @click="blankform();showProductPopup()"><i class="f7-icons font-22 margin-right-half">plus_square</i> Add Product</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div> -->
-
-                <MenuManagementHeader 
-                    title="Product"
-                    @blank:action="blankForm" 
-                    @add:popup="showProductPopup" 
-                    @update:search="updateSearch"
-                    @update:PopupTitle="updatePopupTitle"
-                />
+                </div>
                 <div class="card-content card-content-padding">
                     <div class="row" v-if="subCategoryProduct.length">
                         <div class="col-100 medium-100 large-50" v-for="subproduct in subCategoryProduct" :key="subproduct">
@@ -154,8 +147,6 @@ import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Input,f7ListItem,f7Accor
 import $ from 'jquery';
 import axios from 'axios';
 import NoValueFound from '../../../components/NoValueFound.vue'
-import MenuManagementHeader from './MenuManagementHeader.vue'
-
 export default {
     name : 'FoodProduct',
     components: {
@@ -170,8 +161,7 @@ export default {
         f7AccordionToggle,
         f7List,
         f7AccordionItem,
-        NoValueFound,
-        MenuManagementHeader
+        NoValueFound
     },
     data() {
         return {
@@ -212,10 +202,6 @@ export default {
         this.$root.removeLoader();
     },
     methods: {
-        updateSearch(searchValue){
-            this.search = searchValue;
-            this.getProducts();
-        },
         addProduct(){
             var formData = new FormData();
             formData.append('name', this.product.name);
@@ -234,7 +220,7 @@ export default {
                     this.$root.successnotification(res.data.success);
                     this.getProducts();
                     f7.popup.close(`#product_popup`);
-                    this.blankForm();
+                    this.blankform();
                 })
             } else {
                 axios.post('/api/add-product', formData)
@@ -242,7 +228,7 @@ export default {
                     this.$root.successnotification(res.data.success);
                     this.getProducts();
                     f7.popup.close(`#product_popup`);
-                    this.blankForm();
+                    this.blankform();
                 })
             }
         },
@@ -290,7 +276,7 @@ export default {
                 this.subCategoryList = res.data.sub_category;
             })
         },
-        blankForm() {
+        blankform() {
             this.product.id = null;
             this.product.name = [];
             this.product.price = '';
@@ -334,9 +320,6 @@ export default {
         },
         showProductPopup(){
             f7.popup.open(`#product_popup`);
-        },
-        updatePopupTitle(title){
-            this.productTitle = title;
         }
     },
 }
