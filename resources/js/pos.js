@@ -7,6 +7,7 @@ import Echo from 'laravel-echo';
 
 import 'framework7/css/bundle';
 import '.././css/pos.css';
+import '.././css/menu-management.css';
 
 // Demo
 /* eslint-disable */
