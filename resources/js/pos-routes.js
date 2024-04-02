@@ -3,8 +3,10 @@ import Login from "./pages/restaurant-manager/Login.vue";
 import FoodCategory from "./pages/pos/menu-management/FoodCategory.vue";
 import FoodSubCategory from "./pages/pos/menu-management/FoodSubCategory.vue";
 import FoodProduct from "./pages/pos/menu-management/FoodProduct.vue";
+import FoodCombo from "./pages/pos/menu-management/FoodCombo.vue";
 import DigitalMenu from "./pages/pos/menu-management/DigitalMenu.vue";
 import Setting from "./pages/pos/SettingsTab.vue";
+import NewSetting from "./pages/pos/NewSettingsTab.vue";
 
 // Pages
 export default [
@@ -37,6 +39,11 @@ export default [
     component: FoodProduct,
   },
   {
+    name : 'FoodCombo',
+    path: '/food-combo/',
+    component: FoodCombo,
+  },
+  {
     name : 'DigitalMenu',
     path: '/digital-menu/',
     component: DigitalMenu,
@@ -45,6 +52,11 @@ export default [
     name : 'Setting',
     path: '/settings/',
     component: Setting,
+  },
+  {
+    name : 'NewSetting',
+    path: '/new-settings/',
+    component: NewSetting,
   }
 
 ]

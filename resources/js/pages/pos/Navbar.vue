@@ -1,7 +1,7 @@
 <template>
 <f7-navbar class="navbar-menu bg-color-white">
     <SwitchButton 
-        :moveToMethod="moveToWaitingArea"
+        :moveToMethod="moveToMethod"
         :title="'Switch To Waiting Area'"
     />
     <div
@@ -36,7 +36,7 @@ import SmallScreenNavbar from "../../components/SmallScreenNavbar.vue"
 import BigScreenNavbar from "../../components/BigScreenNavbar.vue"
 
 const props = defineProps({
-    moveToWaitingArea: Function,
+    moveToMethod: Function,
 });
 
 const navbarItems = [

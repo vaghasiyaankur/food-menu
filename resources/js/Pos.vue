@@ -3,7 +3,7 @@
     <f7-page>
       <div class="nav-bar" v-if="currentRoute != 'login'">
         <Navbar 
-          :MoveToWaitingArea="MoveToWaitingArea"
+          :moveToMethod="MoveToWaitingArea"
         />
       </div>
       <f7-view
