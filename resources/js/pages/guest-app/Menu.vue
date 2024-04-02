@@ -77,7 +77,7 @@ import {
 import VueCountdown from '@chenfengyuan/vue-countdown';
 import $ from 'jquery';
 import axios from "axios";
-import NoValueFound from '../restaurant-manager/NoValueFound.vue'
+import NoValueFound from '../../components/NoValueFound.vue'
 import { useCookies } from "vue3-cookies";
 
 export default {
