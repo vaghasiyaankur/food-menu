@@ -12,12 +12,8 @@
                 </div>
                 <Product :categories="categories"/>
             </div>
-            <div class="add-to-cart padding">
-                <div class="display-flex justify-content-space-between align-items-flex-start">
-                    <div class="flex-shrink-0">Item 1</div>
-                    <div class="align-self-center">Item 2</div>
-                    <div class="align-self-flex-end">Item 3</div>
-                </div>
+            <div class="add-to-cart">
+                <AddToCart />
             </div>
         </div>
     </f7-page>
@@ -28,7 +24,9 @@ import { f7Page, f7 } from 'framework7-vue';
 import CategorySearch from "../../components/CategorySearch.vue"
 import { ref, watchEffect } from 'vue'
 import Product from '../../components/Product.vue'
+import AddToCart from '../../components/AddToCart.vue'
 import axios from 'axios'
+import AddToCartVue from '../../components/AddToCart.vue';
 
 const categories =  ref({});
 const activeCategory =  ref(0);
