@@ -113,7 +113,7 @@ export default {
 	width: auto;
 	display: flex;
 	justify-content: center;
-	align-items: center;
+	align-items: flex-start;
 	background-color:  #E1E1E1;
 	margin: 0 auto;
 	border-top-right-radius: 15px;
@@ -237,7 +237,7 @@ export default {
 	width: auto;
 	display: flex;
 	justify-content: center;
-	align-items: center;
+	align-items: flex-start;
 	background-color:  #E1E1E1;
 	margin: 0 auto;
 	border-top-right-radius: 15px;

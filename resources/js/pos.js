@@ -8,7 +8,20 @@ import Echo from 'laravel-echo';
 import 'framework7/css/bundle';
 import '.././css/pos.css';
 import '.././css/menu-management.css';
+import '.././css/settings.css';
 
+/* import font awesome icon component */
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+/* import specific icons */
+import { fas } from '@fortawesome/free-solid-svg-icons'
+
+import { faTwitter, faFontAwesome, fab } from '@fortawesome/free-brands-svg-icons'
+
+import { far } from '@fortawesome/free-regular-svg-icons'
+
+library.add(fas, faTwitter, faFontAwesome, far, fab)
 // Demo
 /* eslint-disable */
 if (window.parent && window.parent !== window) {
@@ -46,4 +59,5 @@ window.Echo = new Echo({
 // Init Vue App
 const app = createApp(Pos);
 // app.use(VueApexCharts);
+app.component('font-awesome-icon', FontAwesomeIcon)
 app.mount('#app');
