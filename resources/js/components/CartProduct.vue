@@ -2,7 +2,7 @@
     <div class="cart-products padding-half">
         <div class="product_detail padding display-flex justify-content-space-between align-items-center">
             <div class="delete-product">
-                <span><f7-icon f7="minus" class="font-16 delete-product-button"></f7-icon></span>
+                <span data-popup="#deleteCartItem_popup" @click="f7.popup.open(`.deleteCartItemPopup`);"><f7-icon f7="minus" class="font-16 delete-product-button"></f7-icon></span>
             </div>
             <div class="product-summary margin-horizontal-half">
                 <p class="no-margin margin-bottom-half">Margherita Pizza</p>
@@ -16,12 +16,12 @@
                 </div>
             </div>
             <div class="product-note-content text-align-center">
-                <div class="product-note"><Icon name="note" /></div>
+                <div class="product-note" data-popup="#note_popup" @click="f7.popup.open(`.notePopup`);"><Icon name="note" /></div>
             </div>
         </div>
         <div class="product_detail padding display-flex justify-content-space-between align-items-center">
             <div class="delete-product">
-                <span><f7-icon f7="minus" class="font-16 delete-product-button"></f7-icon></span>
+                <span data-popup="#deleteCartItem_popup" @click="f7.popup.open(`.deleteCartItemPopup`);"><f7-icon f7="minus" class="font-16 delete-product-button"></f7-icon></span>
             </div>
             <div class="product-summary margin-horizontal-half">
                 <p class="no-margin margin-bottom-half">Margherita Pizza</p>
@@ -35,12 +35,12 @@
                 </div>
             </div>
             <div class="product-note-content text-align-center">
-                <div class="product-note"><Icon name="note" /></div>
+                <div class="product-note" data-popup="#note_popup" @click="f7.popup.open(`.notePopup`);"><Icon name="note" /></div>
             </div>
         </div>
         <div class="product_detail padding display-flex justify-content-space-between align-items-center">
             <div class="delete-product">
-                <span><f7-icon f7="minus" class="font-16 delete-product-button"></f7-icon></span>
+                <span  data-popup="#deleteCartItem_popup" @click="f7.popup.open(`.deleteCartItemPopup`);"><f7-icon f7="minus" class="font-16 delete-product-button"></f7-icon></span>
             </div>
             <div class="product-summary margin-horizontal-half">
                 <p class="no-margin margin-bottom-half">Margherita Pizza</p>
@@ -54,12 +54,12 @@
                 </div>
             </div>
             <div class="product-note-content text-align-center">
-                <div class="product-note"><Icon name="note" /></div>
+                <div class="product-note" data-popup="#note_popup" @click="f7.popup.open(`.notePopup`);"><Icon name="note" /></div>
             </div>
         </div>
         <div class="product_detail padding display-flex justify-content-space-between align-items-center">
             <div class="delete-product">
-                <span><f7-icon f7="minus" class="font-16 delete-product-button"></f7-icon></span>
+                <span  data-popup="#deleteCartItem_popup" @click="f7.popup.open(`.deleteCartItemPopup`);"><f7-icon f7="minus" class="font-16 delete-product-button"></f7-icon></span>
             </div>
             <div class="product-summary margin-horizontal-half">
                 <p class="no-margin margin-bottom-half">Margherita Pizza</p>
@@ -73,12 +73,12 @@
                 </div>
             </div>
             <div class="product-note-content text-align-center">
-                <div class="product-note"><Icon name="note" /></div>
+                <div class="product-note" data-popup="#note_popup" @click="f7.popup.open(`.notePopup`);"><Icon name="note" /></div>
             </div>
         </div>
         <div class="product_detail padding display-flex justify-content-space-between align-items-center">
             <div class="delete-product">
-                <span><f7-icon f7="minus" class="font-16 delete-product-button"></f7-icon></span>
+                <span  data-popup="#deleteCartItem_popup" @click="f7.popup.open(`.deleteCartItemPopup`);"><f7-icon f7="minus" class="font-16 delete-product-button"></f7-icon></span>
             </div>
             <div class="product-summary margin-horizontal-half">
                 <p class="no-margin margin-bottom-half">Margherita Pizza</p>
@@ -92,12 +92,12 @@
                 </div>
             </div>
             <div class="product-note-content text-align-center">
-                <div class="product-note"><Icon name="note" /></div>
+                <div class="product-note" data-popup="#note_popup" @click="f7.popup.open(`.notePopup`);"><Icon name="note" /></div>
             </div>
         </div>
         <div class="product_detail padding display-flex justify-content-space-between align-items-center">
             <div class="delete-product">
-                <span><f7-icon f7="minus" class="font-16 delete-product-button"></f7-icon></span>
+                <span  data-popup="#deleteCartItem_popup" @click="f7.popup.open(`.deleteCartItemPopup`);"><f7-icon f7="minus" class="font-16 delete-product-button"></f7-icon></span>
             </div>
             <div class="product-summary margin-horizontal-half">
                 <p class="no-margin margin-bottom-half">Margherita Pizza</p>
@@ -111,12 +111,12 @@
                 </div>
             </div>
             <div class="product-note-content text-align-center">
-                <div class="product-note"><Icon name="note" /></div>
+                <div class="product-note" data-popup="#note_popup" @click="f7.popup.open(`.notePopup`);"><Icon name="note" /></div>
             </div>
         </div>
         <div class="product_detail padding display-flex justify-content-space-between align-items-center">
             <div class="delete-product">
-                <span><f7-icon f7="minus" class="font-16 delete-product-button"></f7-icon></span>
+                <span  data-popup="#deleteCartItem_popup" @click="f7.popup.open(`.deleteCartItemPopup`);"><f7-icon f7="minus" class="font-16 delete-product-button"></f7-icon></span>
             </div>
             <div class="product-summary margin-horizontal-half">
                 <p class="no-margin margin-bottom-half">Margherita Pizza</p>
@@ -130,12 +130,12 @@
                 </div>
             </div>
             <div class="product-note-content text-align-center">
-                <div class="product-note"><Icon name="note" /></div>
+                <div class="product-note" data-popup="#note_popup" @click="f7.popup.open(`.notePopup`);"><Icon name="note" /></div>
             </div>
         </div>
         <div class="product_detail padding display-flex justify-content-space-between align-items-center">
             <div class="delete-product">
-                <span><f7-icon f7="minus" class="font-16 delete-product-button"></f7-icon></span>
+                <span  data-popup="#deleteCartItem_popup" @click="f7.popup.open(`.deleteCartItemPopup`);"><f7-icon f7="minus" class="font-16 delete-product-button"></f7-icon></span>
             </div>
             <div class="product-summary margin-horizontal-half">
                 <p class="no-margin margin-bottom-half">Margherita Pizza</p>
@@ -149,12 +149,12 @@
                 </div>
             </div>
             <div class="product-note-content text-align-center">
-                <div class="product-note"><Icon name="note" /></div>
+                <div class="product-note" data-popup="#note_popup" @click="f7.popup.open(`.notePopup`);"><Icon name="note" /></div>
             </div>
         </div>
         <div class="product_detail padding display-flex justify-content-space-between align-items-center">
             <div class="delete-product">
-                <span><f7-icon f7="minus" class="font-16 delete-product-button"></f7-icon></span>
+                <span  data-popup="#deleteCartItem_popup" @click="f7.popup.open(`.deleteCartItemPopup`);"><f7-icon f7="minus" class="font-16 delete-product-button"></f7-icon></span>
             </div>
             <div class="product-summary margin-horizontal-half">
                 <p class="no-margin margin-bottom-half">Margherita Pizza</p>
@@ -168,22 +168,8 @@
                 </div>
             </div>
             <div class="product-note-content text-align-center">
-                <div class="product-note"><Icon name="note" /></div>
+                <div class="product-note" data-popup="#note_popup" @click="f7.popup.open(`.notePopup`);"><Icon name="note" /></div>
             </div>
-        </div>
-    </div>
-    <!-- ========= CATEGORY POPUP ========= -->
-    <div id="category_popup" class="popup categoryPopup" style="position: fixed; display: block; border-radius: 15px;">
-        <div class="category-form">
-            <div class="text-align-center padding popup_title"></div>
-            <div class="category-add padding">
-                <label class="add_category_name">Category name</label>
-                <div class="margin-top no-margin-bottom display-flex justify-content-center padding-top popup_button">
-                    <button type="button" class="button button-raised text-color-black button-large popup-close margin-right popup-button">Cancel</button>
-                    <button type="button" class="button button-raised button-large popup-button" style="background-color: rgb(243, 62, 62); color: rgb(255, 255, 255);" @click="addCategory">Ok</button>
-                </div>
-            </div>
-            <div><img src="/images/flow.png" style="width:100%"></div>
         </div>
     </div>
 </template>

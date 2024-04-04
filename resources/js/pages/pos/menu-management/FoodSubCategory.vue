@@ -105,7 +105,7 @@
                 <button type="button" class="button button-raised button-large bg-karaka-orange popup-button" style="background-color: rgb(243, 62, 62); color: rgb(255, 255, 255);" @click="addUpdateSubCategory">Ok</button>
             </div>
         </div>
-        <div><img src="/images/flow.png" style="width:100%"></div>
+        <div class="wave-image-content"><img src="/images/flow.png" style="width:100%"></div>
     </div>
 
     <div id="product_popup" class="popup" style="position: fixed; display: block; border-radius: 15px;">
@@ -132,7 +132,7 @@
                 <button type="button" class="button button-raised button-large bg-karaka-orange poup-button" style="background-color: rgb(243, 62, 62); color: rgb(255, 255, 255);" @click="addProduct">Ok</button>
             </div>
         </div>
-        <div><img src="/images/flow.png" style="width:100%"></div>
+        <div class="wave-image-content"><img src="/images/flow.png" style="width:100%"></div>
     </div>
 </f7-page>
 </template>

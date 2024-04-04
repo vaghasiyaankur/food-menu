@@ -744,3 +744,37 @@ code {
   left: 35% !important;
   margin: 0 !important;
 }
+.popup_button .button {
+  border-radius: 10px;
+}
+.wave-image-content{
+  margin-top: -15px;
+}
+.height_40{
+  height: 40px !important;
+}
+.grid-cols-3 {
+  grid-template-columns: repeat(3,minmax(0,1fr));
+}
+.grid.grid-gap {
+  gap: 16px;
+}
+.grid-gap-25 {
+  gap: 25px 25px;
+}
+.grid-gap-5 {
+  gap: 5px 5px;
+}
+@media screen and (min-width: 991px) {
+  .grid-cols-5 {
+      grid-template-columns: auto auto auto auto auto;
+  }
+}
+@media screen and (max-width: 991px) {
+  .medium-grid-cols-4 {
+      grid-template-columns: auto auto auto auto;
+  }
+}
+.grid-cols-2 {
+  grid-template-columns: auto auto;
+}

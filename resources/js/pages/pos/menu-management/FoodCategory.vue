@@ -12,8 +12,25 @@
             />
             <div class="card-content card-content-padding categorey_card">
                 <div v-if="categories.length">
-                    <div class="category-list border-bottom padding-top padding-bottom" v-for="(category,index) in categories" :key="category">
-                        <div class="row align-items-center">
+                    <div class="category-list padding-top padding-bottom" v-for="(category,index) in categories" :key="category">
+                        <f7-card class="no-margin">
+                            <f7-card-content>
+                                <div class="food-category">
+                                    <img src="/images/vegan-icon.png" alt="">
+                                </div>
+                                <div class="product-image">
+                                    <img src="/storage/product/1-3.webp" alt="" width="100" height="100">
+                                </div>
+                                <div class="product-summary">
+                                    <p class="product_name margin-bottom-half">Water Bottle</p>
+                                    <p class="product_price text-red margin-top-half">$0.00</p>
+                                </div>
+                                <div class="product-add-button">
+                                    <button class="button button-raised btn-add-product padding text-transform-capitalize" data-popup="#watter_popup" @click="f7.popup.open(`.watterPopup`);"><f7-icon f7="plus" class="font-16 margin-right-half"></f7-icon>Add</button>
+                                </div>
+                            </f7-card-content>
+                        </f7-card>
+                        <!-- <div class="row align-items-center">
                             <div class="col-100 medium-40 large-60 ">
                                 <div class="display-flex align-items-center">
                                     <div class="category-count padding-right">
@@ -44,17 +61,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <!-- <div class="pagination_count padding-vertical-half">
-                            <div class="pagination_list">
-                                <div v-for="(link,index) in paginationData.links" :key="link">
-                                    <a href="javascript:;" v-if="index == 0" @click="link.url != null ? getFloors(link.url) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon-prev"></i></a>
-                                    <a href="javascript:;" v-if="paginationData.links.length - 1 != index && index != 0" @click="link.url != null ? getFloors(link.url) : 'javascript:;'" :class="{ 'disabled': link.url == null, 'active': paginationData.current_page == index}">{{ index }}</a>
-                                    <a href="javascript:;" v-if="paginationData.links.length - 1 == index" @click="link.url != null ? getFloors(link.url) : 'javascript:;'" class="link" :class="{ 'disabled': link.url == null}"><i class="icon-next"></i></a>
-                                </div>
-                            </div>
                         </div> -->
+                    </div>
                 </div>
                 <div v-else>
                     <div class="no_order">
@@ -97,7 +105,7 @@
                     <button type="button" class="button button-raised button-large popup-button" style="background-color: rgb(243, 62, 62); color: rgb(255, 255, 255);" @click="addCategory">Ok</button>
                 </div>
             </div>
-            <div><img src="/images/flow.png" style="width:100%"></div>
+            <div class="wave-image-content"><img src="/images/flow.png" style="width:100%"></div>
         </div>
     </div>
     <!-- ========= SUBCATEGORY POPUP ========= -->
@@ -121,7 +129,7 @@
                 <button type="button" class="button button-raised button-large text-color-white popup-button" style="background-color: #f33e3e" @click="addSubCategory">Ok</button>
             </div>
         </div>
-        <div><img src="/images/flow.png" style="width:100%"></div>
+        <div class="wave-image-content"><img src="/images/flow.png" style="width:100%"></div>
     </div>
 </f7-page>
 </template>

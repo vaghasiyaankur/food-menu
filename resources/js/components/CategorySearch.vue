@@ -46,5 +46,8 @@ const props = defineProps({
     activeCategory: Number,
     productsCount: Number
 });
-const showSearchBar = ref(false);
+const showSearchBar = ref(true);
+setTimeout(() => {  
+    showSearchBar.value = false;    
+}, 10);
 </script>

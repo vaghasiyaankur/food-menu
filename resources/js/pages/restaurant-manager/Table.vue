@@ -251,12 +251,12 @@
                         </div>
                     </div>
                     <div class="margin-top no-margin-bottom display-flex justify-content-center padding-top popup_button">
-                        <button type="button" class="button button-raised text-color-black button-large popup-close margin-right popup-button">Cancel</button>
+                        <button type="button" class="button button-raised text-color-black bg-color-white button-large popup-close margin-right popup-button">Cancel</button>
                         <button type="button" class="button button-raised button-large popup-button" style="background-color: rgb(243, 62, 62); color: rgb(255, 255, 255);" @click="addMinutes()">Add Minutes</button>
                     </div>
                 </div>
             </div>
-            <div><img src="/images/flow.png" style="width:100%"></div>
+            <div class="wave-image-content"><img src="/images/flow.png" style="width:100%"></div>
         </div>
         </f7-page>
 </template>
@@ -908,11 +908,11 @@ export default {
 
 <style scoped>
 
-*{
+/* *{
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-}
+} */
 .addMinutesPopup .addminutes-form .minutes_input .add-minutes-input{
     border-radius: 10px 0 0 10px !important;
     background: #FAFAFA;

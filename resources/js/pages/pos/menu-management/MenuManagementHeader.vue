@@ -11,15 +11,19 @@
                 <div class="col">
                     <div class="item-content item-input">
                         <div class="item-inner">
-                            <div class="item-input-wrap searchData row padding-half height_40 search_data_wrap">
-                                <i class="f7-icons font-18 search-icon">search</i>
-                                <input type="search"  name="search" class="search__data" :placeholder="'Search '+title" id="searchData" @input="handleSearch">
+                            <div class="col-100 large-60 medium-65">
+                                <form class="searchbar combo-search-bar">
+                                    <input type="search" placeholder="Search" class="height_40">
+                                    <i class="searchbar-icon"></i>
+                                    <span class="input-clear-button"></span>
+                                    <span class="searchbar-disable-button">Cancel</span>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col padding-left-half padding-right-half">
-                    <button class="button button-raised bg-dark text-color-white padding height_40" data-popup=".categoryPopup" @click="handleButtonClick"><i class="f7-icons font-22 margin-right-half">plus_square</i> Add {{ title }}</button>
+                    <button class="button button-raised bg-dark text-color-white padding height_40 active" data-popup=".categoryPopup" @click="handleButtonClick"><i class="f7-icons font-22 margin-right-half">plus_square</i> Add {{ title }}</button>
                 </div>
             </div>
         </div>

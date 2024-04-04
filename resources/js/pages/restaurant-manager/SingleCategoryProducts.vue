@@ -119,7 +119,7 @@
                     <button type="button" class="button button-raised button-large bg-karaka-orange text-color-white popup-button" style="background-color: rgb(243, 62, 62);" @click="addProduct">Ok</button>
                 </div>
             </div>
-            <div><img src="/images/flow.png" style="width:100%"></div>
+            <div class="wave-image-content"><img src="/images/flow.png" style="width:100%"></div>
         </div>
     </f7-page>
 </template>

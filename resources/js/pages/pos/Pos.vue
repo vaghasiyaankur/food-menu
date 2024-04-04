@@ -16,6 +16,7 @@
                 <AddToCart />
             </div>
         </div>
+        <Modal />
     </f7-page>
 </template>
 
@@ -26,7 +27,7 @@ import { ref, watchEffect } from 'vue'
 import Product from '../../components/Product.vue'
 import AddToCart from '../../components/AddToCart.vue'
 import axios from 'axios'
-import AddToCartVue from '../../components/AddToCart.vue';
+import Modal from '../../components/PosModal.vue';
 
 const categories =  ref({});
 const activeCategory =  ref(0);
