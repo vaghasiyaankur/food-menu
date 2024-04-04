@@ -362,8 +362,17 @@
     border-radius: 10px;
     box-shadow: 1px 1px 4px 0px #8F716459;
 }
+.product_list_card{
+    margin-top: 70px !important;
+}
 
-
+.food-category{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    bottom: auto;
+    left: auto;
+}
 
 
 @media screen and (min-width: 991px) {
