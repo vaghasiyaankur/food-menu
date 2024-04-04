@@ -4,6 +4,7 @@ import FoodCategory from "./pages/pos/menu-management/FoodCategory.vue";
 import FoodSubCategory from "./pages/pos/menu-management/FoodSubCategory.vue";
 import FoodProduct from "./pages/pos/menu-management/FoodProduct.vue";
 import FoodCombo from "./pages/pos/menu-management/FoodCombo.vue";
+import AddCombo from "./pages/pos/menu-management/AddCombo.vue";
 import DigitalMenu from "./pages/pos/menu-management/DigitalMenu.vue";
 import Setting from "./pages/pos/SettingsTab.vue";
 import NewSetting from "./pages/pos/NewSettingsTab.vue";
@@ -42,6 +43,11 @@ export default [
     name : 'FoodCombo',
     path: '/food-combo/',
     component: FoodCombo,
+  },
+  {
+    name : 'AddCombo',
+    path: '/add-combo/',
+    component: AddCombo,
   },
   {
     name : 'DigitalMenu',
