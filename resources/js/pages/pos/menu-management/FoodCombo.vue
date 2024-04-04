@@ -8,7 +8,10 @@
 
                 <div class="card-content combo-list">
                     <div class="grid grid-cols-5 medium-grid-cols-4 grid-gap-25 align-items-center">
-                        <div class="card-type bg-color-white">
+                        <div class="card-type bg-color-white combo-card">
+                            <div class="food-category">
+                                <img src="/images/veg-icon.png" alt="">
+                            </div>
                             <div class="combo-image"><img src="/assets/images/seederImages/combo/1.png"></div>
                             <div class="text-align-center combo-name">
                                 <h4 class="no-margin no-padding">Combo 1</h4>
@@ -19,7 +22,10 @@
                                 <a class="delete-combo col-100 large-50 medium-50"><Icon name="deleteIcon" />Delete</a>
                             </div>
                         </div>
-                        <div class="card-type bg-color-white">
+                        <div class="card-type bg-color-white combo-card">
+                            <div class="food-category">
+                                <img src="/images/veg-icon.png" alt="">
+                            </div>
                             <div class="combo-image">
                                 <img src="/assets/images/seederImages/combo/2.png">
                             </div>
@@ -32,7 +38,10 @@
                                 <a class="delete-combo col-100 large-50 medium-50"><Icon name="deleteIcon" />Delete</a>
                             </div>
                         </div>
-                        <div class="card-type bg-color-white">
+                        <div class="card-type bg-color-white combo-card">
+                            <div class="food-category">
+                                <img src="/images/vegan-icon.png" alt="">
+                            </div>
                             <div class="combo-image">
                                 <img src="/assets/images/seederImages/combo/3.png">
                             </div>
@@ -45,7 +54,10 @@
                                 <a class="delete-combo col-100 large-50 medium-50"><Icon name="deleteIcon" />Delete</a>
                             </div>
                         </div>
-                        <div class="card-type bg-color-white">
+                        <div class="card-type bg-color-white combo-card">
+                            <div class="food-category">
+                                <img src="/images/non-veg-icon.png" alt="">
+                            </div>
                             <div class="combo-image"><img src="/assets/images/seederImages/combo/4.png"></div>
                             <div class="text-align-center combo-name">
                                 <h4 class="no-margin no-padding">Combo 4</h4>
@@ -56,7 +68,10 @@
                                 <a class="delete-combo col-100 large-50 medium-50"><Icon name="deleteIcon" />Delete</a>
                             </div>
                         </div>
-                        <div class="card-type bg-color-white">
+                        <div class="card-type bg-color-white combo-card">
+                            <div class="food-category">
+                                <img src="/images/veg-icon.png" alt="">
+                            </div>
                             <div class="combo-image"><img src="/assets/images/seederImages/combo/5.png"></div>
                             <div class="text-align-center combo-name">
                                 <h4 class="no-margin no-padding">Combo 5</h4>
@@ -67,7 +82,10 @@
                                 <a class="delete-combo col-100 large-50 medium-50"><Icon name="deleteIcon" />Delete</a>
                             </div>
                         </div>
-                        <div class="card-type bg-color-white">
+                        <div class="card-type bg-color-white combo-card">
+                            <div class="food-category">
+                                <img src="/images/veg-icon.png" alt="">
+                            </div>
                             <div class="combo-image"><img src="/assets/images/seederImages/combo/6.png"></div>
                             <div class="text-align-center combo-name">
                                 <h4 class="no-margin no-padding">Combo 6</h4>
@@ -78,7 +96,10 @@
                                 <a class="delete-combo col-100 large-50 medium-50"><Icon name="deleteIcon" />Delete</a>
                             </div>
                         </div>
-                        <div class="card-type bg-color-white">
+                        <div class="card-type bg-color-white combo-card">
+                            <div class="food-category">
+                                <img src="/images/non-veg-icon.png" alt="">
+                            </div>
                             <div class="combo-image">
                                 <img src="/assets/images/seederImages/combo/7.png">
                             </div>
@@ -91,7 +112,10 @@
                                 <a class="delete-combo col-100 large-50 medium-50"><Icon name="deleteIcon" />Delete</a>
                             </div>
                         </div>
-                        <div class="card-type bg-color-white">
+                        <div class="card-type bg-color-white combo-card">
+                            <div class="food-category">
+                                <img src="/images/vegan-icon.png" alt="">
+                            </div>
                             <div class="combo-image"><img src="/assets/images/seederImages/combo/8.png"></div>
                             <div class="text-align-center combo-name">
                                 <h4 class="no-margin no-padding">Combo 8</h4>
