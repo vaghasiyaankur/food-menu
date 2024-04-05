@@ -205,8 +205,9 @@ class ProductSeeder extends Seeder
         //  For Restaurant 1
         foreach ($products as $key=>$product) {
             $restaurant_id = 1;
-            $sourcePath = public_path('assets/images/seederImages/product/'.$key.'.webp');
-            $destinationPath = public_path('storage/product/'.$restaurant_id.'-'.$key.'.webp');
+            $newKey = $key + 1;
+            $sourcePath = public_path('assets/images/seederImages/product/'.$newKey.'.webp');
+            $destinationPath = public_path('storage/product/'.$restaurant_id.'-'.$newKey.'.webp');
             if (File::exists($sourcePath)) {
                 if(!File::exists($destinationPath)){
                     File::copy($sourcePath, $destinationPath);
@@ -216,8 +217,8 @@ class ProductSeeder extends Seeder
             $pro->price = $product['price'];
             $pro->sub_category_id = $product['sub_category_id'];
             $pro->restaurant_id = $restaurant_id;
-            $pro->slug = 'product-'.$restaurant_id.'-'.$key;
-            $pro->image = 'product/'.$restaurant_id.'-'.$key.'.webp';
+            $pro->slug = 'product-'.$restaurant_id.'-'.$newKey;
+            $pro->image = 'product/'.$restaurant_id.'-'.$newKey.'.webp';
             if($pro->save()){
                 $langs = Language::whereHas('RestaurantLanguages', function ($query) use($restaurant_id) {
                     $query->where('restaurant_id', $restaurant_id)->where('status', 1);
@@ -237,8 +238,9 @@ class ProductSeeder extends Seeder
         //  For Restaurant 2
         foreach ($products as $key=>$product) {
             $restaurant_id = 2;
-            $sourcePath = public_path('assets/images/seederImages/product/'.$key.'.webp');
-            $destinationPath = public_path('storage/product/'.$restaurant_id.'-'.$key.'.webp');
+            $newKey = $key + 1;
+            $sourcePath = public_path('assets/images/seederImages/product/'.$newKey.'.webp');
+            $destinationPath = public_path('storage/product/'.$restaurant_id.'-'.$newKey.'.webp');
             if (File::exists($sourcePath)) {
                 if(!File::exists($destinationPath)){
                     File::copy($sourcePath, $destinationPath);
@@ -248,8 +250,8 @@ class ProductSeeder extends Seeder
             $pro->price = $product['price'];
             $pro->sub_category_id = 4 + $product['sub_category_id'];
             $pro->restaurant_id = $restaurant_id;
-            $pro->slug = 'product-'.$restaurant_id.'-'.$key;
-            $pro->image = 'product/'.$restaurant_id.'-'.$key.'.webp';
+            $pro->slug = 'product-'.$restaurant_id.'-'.$newKey;
+            $pro->image = 'product/'.$restaurant_id.'-'.$newKey.'.webp';
             if($pro->save()){
                 $langs = Language::whereHas('RestaurantLanguages', function ($query) use($restaurant_id) {
                     $query->where('restaurant_id', $restaurant_id)->where('status', 1);
