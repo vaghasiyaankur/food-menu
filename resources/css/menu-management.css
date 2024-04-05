@@ -363,7 +363,7 @@
     box-shadow: 1px 1px 4px 0px #8F716459;
 }
 .product_list_card{
-    margin-top: 70px !important;
+    margin-top: 60px !important;
 }
 
 .food-category{
@@ -405,6 +405,7 @@
 @media screen and (max-width: 991px) {
     .add-combo-header {
         max-width: calc(100%);
+        z-index: -1;
     }
     .add-combo-list {
         padding: 0 25px 0 30px;
@@ -428,6 +429,6 @@
         right: 0;
         background-color: #ffffff;
         box-shadow: -1px 1px 15px 0px #3333330d;
-        z-index: 11;
+        z-index: 5;
     }
 }

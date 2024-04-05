@@ -130,7 +130,7 @@
                     </div>
                 </div>
 
-                <div class="add-combo-slider">
+                <div class="add-combo-slider no-margin">
                     <div class="added-combo-details">
                         <table class="added-combo-discr">
                             <tbody>
