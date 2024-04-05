@@ -3,7 +3,7 @@
         <div class="product-list-section" @click="clickout">
             <div class="product_list_card no-margin">
                 <MenuManagementHeader 
-                    title="Combo"
+                    title="Combo" @add:popup="showaddCombo"
                 />
 
                 <div class="card-content combo-list">
@@ -139,4 +139,10 @@ import NoValueFound from '../../../components/NoValueFound.vue'
 import Icon from '../../../components/Icon.vue'
 import MenuManagementHeader from './MenuManagementHeader.vue'
 import { ref } from 'vue';
+
+console.log(f7.view);
+
+const showaddCombo = () => {
+    f7.views.main.router.navigate('/add-combo/');
+}
 </script>
