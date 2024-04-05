@@ -4,7 +4,7 @@
             <div class="product_list_card no-margin display-flex">
                 <div class="card_header add-combo-header">
                     <div data-v-06ca3cce="" class="row align-items-center add-combo-banner">
-                        <div data-v-06ca3cce="" class="col-100 large-60 medium-35">
+                        <div data-v-06ca3cce="" class="col-100 large-60 medium-60">
                             <h3 data-v-06ca3cce="" class="combo-banner-heading no-margin"><svg width="16" height="13"
                                     viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -14,7 +14,7 @@
                                 <span data-v-06ca3cce="" class="page_heading">Add Combo</span>
                             </h3>
                         </div>
-                        <div data-v-06ca3cce="" class="col-100 large-40 medium-65">
+                        <div data-v-06ca3cce="" class="col-100 large-40 medium-40">
                             <form class="searchbar combo-search-bar">
                                 <input type="search" placeholder="Search">
                                 <i class="searchbar-icon"></i>
@@ -27,77 +27,104 @@
                     <div class="card-content add-combo">
                         <div
                             class="grid grid-cols-3 medium-grid-cols-4 grid-gap-25 grid-gap-20 align-items-center add-combo-list">
-                            <div class="card-type1 bg-color-white selected-product add-combo-product-card">
+                            <div class="bg-color-white selected-product add-combo-product-card">
                                 <div class="combo-image"><img src="/assets/images/seederImages/combo/Burger.png">
                                 </div>
                                 <div class="text-align-center add-combo-product-name">
                                     <h4 class="no-margin no-padding">Burger</h4>
                                     <p class="add-combo-product-price no-margin no-padding">$8.00</p>
                                 </div>
+                                <img class="card-type" src="/assets/images/seederImages/combo/type1.png">
                             </div>
-                            <div class="card-type2 bg-color-white add-combo-product-card">
+                            <div class="bg-color-white add-combo-product-card">
                                 <div class="combo-image"><img src="/assets/images/seederImages/combo/Sandwich.png">
                                 </div>
                                 <div class="text-align-center add-combo-product-name">
                                     <h4 class="no-margin no-padding">Sandwich</h4>
                                     <p class="add-combo-product-price no-margin no-padding">$10.00</p>
                                 </div>
+                                <img class="card-type" src="/assets/images/seederImages/combo/type2.png">
                             </div>
-                            <div class="card-type1 bg-color-white add-combo-product-card">
+                            <div class="bg-color-white add-combo-product-card">
                                 <div class="combo-image"><img src="/assets/images/seederImages/combo/Noodles.png">
                                 </div>
                                 <div class="text-align-center add-combo-product-name">
                                     <h4 class="no-margin no-padding">Noodles</h4>
                                     <p class="add-combo-product-price no-margin no-padding">$19.00</p>
                                 </div>
+                                <img class="card-type" src="/assets/images/seederImages/combo/type1.png">
                             </div>
-                            <div class="card-type3 bg-color-white add-combo-product-card">
+                            <div class="bg-color-white add-combo-product-card">
                                 <div class="combo-image"><img src="/assets/images/seederImages/combo/Papad.png">
                                 </div>
                                 <div class="text-align-center add-combo-product-name">
                                     <h4 class="no-margin no-padding">Papad</h4>
                                     <p class="add-combo-product-price no-margin no-padding">$10.00</p>
                                 </div>
+                                <img class="card-type" src="/assets/images/seederImages/combo/type3.png">
                             </div>
-                            <div class="card-type1 bg-color-white selected-product add-combo-product-card">
+                            <div class="bg-color-white selected-product add-combo-product-card">
                                 <div class="combo-image"><img src="/assets/images/seederImages/combo/French_Fries.png">
                                 </div>
                                 <div class="text-align-center add-combo-product-name">
                                     <h4 class="no-margin no-padding">French Fries</h4>
                                     <p class="add-combo-product-price no-margin no-padding">$19.00</p>
                                 </div>
+                                <img class="card-type" src="/assets/images/seederImages/combo/type1.png">
                             </div>
-                            <div class="card-type3 bg-color-white selected-product add-combo-product-card">
+                            <div class="bg-color-white selected-product add-combo-product-card">
                                 <div class="combo-image"><img src="/assets/images/seederImages/combo/Coca_Cola.png">
                                 </div>
                                 <div class="text-align-center add-combo-product-name">
                                     <h4 class="no-margin no-padding">Coca Cola</h4>
                                     <p class="add-combo-product-price no-margin no-padding">$19.00</p>
                                 </div>
+                                <img class="card-type" src="/assets/images/seederImages/combo/type3.png">
                             </div>
-                            <div class="card-type3 bg-color-white add-combo-product-card">
+                            <div class="bg-color-white add-combo-product-card">
                                 <div class="combo-image"><img src="/assets/images/seederImages/combo/Momos.png">
                                 </div>
                                 <div class="text-align-center add-combo-product-name">
                                     <h4 class="no-margin no-padding">Momos</h4>
                                     <p class="add-combo-product-price no-margin no-padding">$10.00</p>
                                 </div>
+                                <img class="card-type" src="/assets/images/seederImages/combo/type3.png">
                             </div>
-                            <div class="card-type1 bg-color-white add-combo-product-card">
+                            <div class="bg-color-white add-combo-product-card">
                                 <div class="combo-image"><img src="/assets/images/seederImages/combo/Pasta.png">
                                 </div>
                                 <div class="text-align-center add-combo-product-name">
                                     <h4 class="no-margin no-padding">Pasta</h4>
                                     <p class="add-combo-product-price no-margin no-padding">$10.00</p>
                                 </div>
+                                <img class="card-type" src="/assets/images/seederImages/combo/type1.png">
                             </div>
-                            <div class="card-type3 bg-color-white add-combo-product-card">
+                            <div class="bg-color-white add-combo-product-card">
                                 <div class="combo-image"><img src="/assets/images/seederImages/combo/Manchurian.png">
                                 </div>
                                 <div class="text-align-center add-combo-product-name">
                                     <h4 class="no-margin no-padding">Manchurian</h4>
                                     <p class="add-combo-product-price no-margin no-padding">$19.00</p>
                                 </div>
+                                <img class="card-type" src="/assets/images/seederImages/combo/type3.png">
+                            </div>
+                            <div class="bg-color-white add-combo-product-card">
+                                <div class="combo-image"><img src="/assets\images\seederImages\combo\Pizza.png">
+                                </div>
+                                <div class="text-align-center add-combo-product-name">
+                                    <h4 class="no-margin no-padding">Pizza</h4>
+                                    <p class="add-combo-product-price no-margin no-padding">$19.00</p>
+                                </div>
+                                <img class="card-type" src="/assets/images/seederImages/combo/type1.png">
+                            </div>
+                            <div class="bg-color-white add-combo-product-card">
+                                <div class="combo-image"><img src="/assets/images/seederImages/combo/Buttermilk.png">
+                                </div>
+                                <div class="text-align-center add-combo-product-name">
+                                    <h4 class="no-margin no-padding">Buttermilk</h4>
+                                    <p class="add-combo-product-price no-margin no-padding">$10.00</p>
+                                </div>
+                                <img class="card-type" src="/assets/images/seederImages/combo/type3.png">
                             </div>
                         </div>
                     </div>
