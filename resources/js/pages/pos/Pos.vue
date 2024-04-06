@@ -10,7 +10,7 @@
                         :productsCount="productsCount"
                     />
                 </div>
-                <Product :categories="categories"/>
+                <Product :products="products"/>
             </div>
             <div class="add-to-cart">
                 <AddToCart />

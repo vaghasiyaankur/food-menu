@@ -179,9 +179,10 @@ class ProductController extends Controller
             $name = $product->productLanguage->isEmpty() ? null : $product->productLanguage->first()->name;
             return [
                 'id' => $product->id,
-                'price' => $product->price,
+                'price' => number_format($product->price, 2),
                 'food_type' => $product->food_type,
                 'name' => $name,
+                'image' => $product->image,
             ];
         });
         $productCount = $products->count();
