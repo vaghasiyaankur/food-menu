@@ -3,8 +3,15 @@
 .setting-tabs{
     margin-top: 70px;
 }
+.setting-tabs .tabs{
+    width: 70%;
+}
 .setting-tabs .toolbar{
     width: 30%;
+    background: white;
+    border-right: 1px solid #E0E0E0;
+    position: unset;
+    height: auto;
 }
 .setting-tabs .toolbar-inner .tab-link p{
     display: flex;
@@ -22,6 +29,10 @@
 }
 .setting-tabs .toolbar-inner .tab-link.tab-link-active{
     background: #FFF0F0;
+    color: #F33E3E;
+}
+
+.setting-tabs .toolbar-inner .tab-link.tab-link-active p{
     color: #F33E3E;
 }
 
@@ -47,30 +58,26 @@
 .tabbar-labels .tab-link, .tabbar .link, .tabbar-labels .link{
     padding: 10px;
 }
-.setting-tabs .general_info_form{
+.setting-tabs .general_info_form, .setting-tabs .currency_form, .setting-tabs .taxsetting_form{
     margin-top: 34px;
 }
-.setting-tabs .general_info_form .block-title{
+.setting-tabs .block-title{
     font-weight: 600;
     font-size: 16px;
     color: #555555;
     margin-left: 0px !important;
+    overflow: unset;
 }
 
-.setting-tabs .general_info_form .list input[type='text'], .list input[type='password'], .list input[type='search'], .list input[type='email'], .list input[type='tel'], .list input[type='url'], .list input[type='date'], .list input[type='month'], .list input[type='datetime-local'], .list input[type='time'], .list input[type='number'], .list select{
+.setting-tabs .list input[type='text'], .list input[type='password'], .list input[type='search'], .list input[type='email'], .list input[type='tel'], .list input[type='url'], .list input[type='date'], .list input[type='month'], .list input[type='datetime-local'], .list input[type='time'], .list input[type='number'], .list select{
     background-color: #FAFAFA;
     border: 1px solid #000;
     border-radius: 10px;
 }
 .setting-tabs .general_info_form .list input[type='file']{
     opacity: 0;
-    position: absolute;
-    width: 100%;
-    height: auto;
 }
 .setting-tabs .general_info_form .list .image-field label{
-    position: relative;
-    border: 1px dashed #e0e0e0;
     border-radius: 6px;
     height: 100%;
     max-height: 40px;
@@ -99,10 +106,10 @@
     border-radius: 0 5px 5px 0;
     background-color: #FFF0F0;
 }
-.setting-tabs .general_info_form .form-submit{
+.setting-tabs .form-submit{
     margin-top: 60px;
 }
-.setting-tabs .general_info_form .form-submit button{
+.setting-tabs .form-submit button{
     font-size: 18px;
     width: 170px;
     height: 45px;
@@ -111,4 +118,61 @@
 .setting-tabs .tabbar .tab-link, .tabbar-labels .tab-link, .tabbar .link, .tabbar-labels .link{
     justify-content: flex-start;
     align-items: flex-start;
+}
+.setting-tabs .general_info_form .image-logo{
+    background-color: #F5F5F5;
+    border-radius: 10px;
+    width: 100%;
+    height: 120px;
+    text-align: center;
+}
+.setting-tabs .general_info_form .image-logo img{
+    height: 100%;
+    text-align: center;
+    object-fit: contain;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.setting-tabs .currency_form{
+    height: 75dvh;
+    position: relative;
+}
+
+.setting-tabs .currency_form form{
+    height: 100%;
+}
+
+.setting-tabs .currency_form .form-submit{
+    position: absolute;
+    bottom: 20px;
+    right: 0px;
+}
+.setting-tabs .taxsetting_form .type_charge, .setting-tabs .taxsetting_form .active_status{
+    accent-color: #555555;
+    color: #555555;
+}
+.setting-tabs .item-input .item-inner{
+    padding-right: 0;
+}
+
+.setting-tabs .item-input .item-inner:nth-child(2){
+    margin-left: 20px;
+}
+
+.setting-tabs .taxsetting_form .tax-divider{
+    border : 1px dashed #DADADA;
+    margin: 30px 0;
+}
+
+.setting-tabs .taxsetting_form .note_details{
+    background-color: #FAFAFA;
+    color: #555555;
+    padding: 12px 18px;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.edit_tax_button{
+    border-right: 1px solid #E0E0E0;
 }

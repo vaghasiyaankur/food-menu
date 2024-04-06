@@ -54,7 +54,7 @@ const navbarItems = [
       { label: 'Digital Menu', href: '/digital-menu/', routesName: 'DigitalMenu'}
     ]
   },
-  { label: 'Settings', routesName: ['Setting'], href: '/settings/', icon: 'settings' }
+  { label: 'Settings', routesName: ['NewSetting'], href: '/new-settings/', icon: 'settings' }
 ];
 
 
