@@ -1,16 +1,129 @@
 <template>
-<f7-page>
+    <f7-page>
 
-    <div class="category-list-section">
-        <div class="card elevation-2 border_radius_10">
-            <MenuManagementHeader 
-                title="Category"
-                @blank:action="blankForm" 
-                @add:popup="showCategoryPopup" 
-                @update:search="updateSearch"
-                @update:PopupTitle="updatePopupTitle"
-            />
-            <div class="card-content card-content-padding categorey_card">
+        <div class="category-list-section">
+            <!-- <div class="card elevation-2 border_radius_10"> -->
+            <MenuManagementHeader title="Category" @blank:action="blankForm" @add:popup="showCategoryPopup"
+                @update:search="updateSearch" @update:PopupTitle="updatePopupTitle" />
+
+            <div class="card-content add-combo">
+                <div
+                    class="grid grid-cols-5 medium-grid-cols-4 grid-gap-25 grid-gap-20 align-items-center add-combo-list">
+                    <div class="bg-color-white add-combo-product-card">
+                        <div class="combo-image"><img src="/assets/images/seederImages/Category/Indian.png">
+                        </div>
+                        <div class="text-align-center add-combo-product-name">
+                            <h4 class="no-margin no-padding">Indian</h4>
+                        </div>
+                        <div class="grid grid-cols-2 grid-gap-5 combo-change">
+                            <a class="edit-combo col-100 large-45 medium-50">
+                                <Icon name="editIcon" />Edit
+                            </a>
+                            <a class="delete-combo col-100 large-50 medium-50">
+                                <Icon name="deleteIcon" />Delete
+                            </a>
+                        </div>
+                        <img class="food-category" src="/assets/images/seederImages/combo/type1.png">
+                    </div>
+                    <div class="bg-color-white add-combo-product-card">
+                        <div class="combo-image"><img src="/assets/images/seederImages/Category/Chinese.png">
+                        </div>
+                        <div class="text-align-center add-combo-product-name">
+                            <h4 class="no-margin no-padding">Chinese</h4>
+                        </div>
+                        <div class="grid grid-cols-2 grid-gap-5 combo-change">
+                            <a class="edit-combo col-100 large-45 medium-50">
+                                <Icon name="editIcon" />Edit
+                            </a>
+                            <a class="delete-combo col-100 large-50 medium-50">
+                                <Icon name="deleteIcon" />Delete
+                            </a>
+                        </div>
+                        <img class="food-category" src="/assets/images/seederImages/combo/type2.png">
+                    </div>
+                    <div class="bg-color-white add-combo-product-card">
+                        <div class="combo-image"><img src="/assets/images/seederImages/Category/Panjabi.png">
+                        </div>
+                        <div class="text-align-center add-combo-product-name">
+                            <h4 class="no-margin no-padding">Panjabi</h4>
+                        </div>
+                        <div class="grid grid-cols-2 grid-gap-5 combo-change">
+                            <a class="edit-combo col-100 large-45 medium-50">
+                                <Icon name="editIcon" />Edit
+                            </a>
+                            <a class="delete-combo col-100 large-50 medium-50">
+                                <Icon name="deleteIcon" />Delete
+                            </a>
+                        </div>
+                        <img class="food-category" src="/assets/images/seederImages/combo/type1.png">
+                    </div>
+                    <div class="bg-color-white add-combo-product-card">
+                        <div class="combo-image"><img src="/assets/images/seederImages/Category/Dessert.png">
+                        </div>
+                        <div class="text-align-center add-combo-product-name">
+                            <h4 class="no-margin no-padding">Dessert</h4>
+                        </div>
+                        <div class="grid grid-cols-2 grid-gap-5 combo-change">
+                            <a class="edit-combo col-100 large-45 medium-50">
+                                <Icon name="editIcon" />Edit
+                            </a>
+                            <a class="delete-combo col-100 large-50 medium-50">
+                                <Icon name="deleteIcon" />Delete
+                            </a>
+                        </div>
+                        <img class="food-category" src="/assets/images/seederImages/combo/type3.png">
+                    </div>
+                    <div class="bg-color-white add-combo-product-card">
+                        <div class="combo-image"><img src="/assets/images/seederImages/Category/Fast_Food.png">
+                        </div>
+                        <div class="text-align-center add-combo-product-name">
+                            <h4 class="no-margin no-padding">Fast Food</h4>
+                        </div>
+                        <div class="grid grid-cols-2 grid-gap-5 combo-change">
+                            <a class="edit-combo col-100 large-45 medium-50">
+                                <Icon name="editIcon" />Edit
+                            </a>
+                            <a class="delete-combo col-100 large-50 medium-50">
+                                <Icon name="deleteIcon" />Delete
+                            </a>
+                        </div>
+                        <img class="food-category" src="/assets/images/seederImages/combo/type1.png">
+                    </div>
+                    <div class="bg-color-white add-combo-product-card">
+                        <div class="combo-image"><img src="/assets/images/seederImages/Category/South_Indian.png">
+                        </div>
+                        <div class="text-align-center add-combo-product-name">
+                            <h4 class="no-margin no-padding">South Indian</h4>
+                        </div>
+                        <div class="grid grid-cols-2 grid-gap-5 combo-change">
+                            <a class="edit-combo col-100 large-45 medium-50">
+                                <Icon name="editIcon" />Edit
+                            </a>
+                            <a class="delete-combo col-100 large-50 medium-50">
+                                <Icon name="deleteIcon" />Delete
+                            </a>
+                        </div>
+                        <img class="food-category" src="/assets/images/seederImages/combo/type1.png">
+                    </div>
+                    <div class="bg-color-white add-combo-product-card">
+                        <div class="combo-image"><img src="/assets\images\seederImages\Category\Drink.png">
+                        </div>
+                        <div class="text-align-center add-combo-product-name">
+                            <h4 class="no-margin no-padding">Drink</h4>
+                        </div>
+                        <div class="grid grid-cols-2 grid-gap-5 combo-change">
+                            <a class="edit-combo col-100 large-45 medium-50">
+                                <Icon name="editIcon" />Edit
+                            </a>
+                            <a class="delete-combo col-100 large-50 medium-50">
+                                <Icon name="deleteIcon" />Delete
+                            </a>
+                        </div>
+                        <img class="food-category" src="/assets/images/seederImages/combo/type1.png">
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="card-content card-content-padding categorey_card">
                 <div v-if="categories.length">
                     <div class="category-list padding-top padding-bottom" v-for="(category,index) in categories" :key="category">
                         <f7-card class="no-margin">
@@ -29,8 +142,8 @@
                                     <button class="button button-raised btn-add-product padding text-transform-capitalize" data-popup="#watter_popup" @click="f7.popup.open(`.watterPopup`);"><f7-icon f7="plus" class="font-16 margin-right-half"></f7-icon>Add</button>
                                 </div>
                             </f7-card-content>
-                        </f7-card>
-                        <!-- <div class="row align-items-center">
+                        </f7-card> -->
+            <!-- <div class="row align-items-center">
                             <div class="col-100 medium-40 large-60 ">
                                 <div class="display-flex align-items-center">
                                     <div class="category-count padding-right">
@@ -62,7 +175,7 @@
                                 </div>
                             </div>
                         </div> -->
-                    </div>
+            <!-- </div>
                 </div>
                 <div v-else>
                     <div class="no_order">
@@ -73,65 +186,82 @@
                     </div>
                 </div>
             </div>
+        </div> -->
         </div>
-    </div>
-    <!-- ========= CATEGORY POPUP ========= -->
-    <div id="category_popup" class="popup categoryPopup" style="position: fixed; display: block; border-radius: 15px;">
-        <div class="category-form">
-            <div class="text-align-center padding popup_title">{{ category_title }}</div>
-            <div class="category-add padding">
-                <label class="add_category_name">Category name</label>
-                <div class="categoryForm text-align-left" v-for="lang in $root.langs" :key="lang.id">
-                    <input type="text" v-model="category.name[lang.id]" name="name" class="category-name margin-top-half padding-left-half padding-right-half" :placeholder="'Add '+lang.name+' Category name'">
-                </div>
-                <div class="category-image-selection margin-top">
-                    <input type="file" class="add-category-image" @change="addimageChange" id="categoryImage" />
-                    <label class="category-image text-align-center" for="categoryImage">
-                        <div v-if="image_url" class="popup_img">
-                            <img :src="image_url" alt="" />
+        <!-- ========= ADD CATEGORY POPUP ========= -->
+        <div class="popup categoryPopup">
+            <div class="category-form">
+                <div class="text-align-center popup_title">
+                    Add Category</div>
+                <div class="category-add">
+                    <label class="add_category_name">Add category name</label>
+                    <div class="categoryName text-align-left">
+                        <input type="text" class="category-name" placeholder="Add category name">
+                    </div>
+                    <div class="category-image-selection">
+                        <div class="category-add-image">
+                            <img src="/images/add-image.png" />
                         </div>
-                        <div v-else>
-                            <div class="margin-bottom">
-                                <img src="/images/add-image.png" />
-                            </div>
-                            <div>
-                                <span class="add-image-text">Select Image</span>
-                            </div>
+                        <div class="category-add-image-text">
+                            <span class="add-image-text">Select Image</span>
                         </div>
-                    </label>
-                </div>
-                <div class="margin-top no-margin-bottom display-flex justify-content-center padding-top popup_button">
-                    <button type="button" class="button button-raised text-color-black button-large popup-close margin-right popup-button">Cancel</button>
-                    <button type="button" class="button button-raised button-large popup-button" style="background-color: rgb(243, 62, 62); color: rgb(255, 255, 255);" @click="addCategory">Ok</button>
+                    </div>
+                    <div class="display-flex justify-content-center popup_button">
+                        <button type="button"
+                            class="button button-raised button-large popup-close popup-cancel-button">Cancel</button>
+                        <button type="button" class="button button-raised button-large popup-ok-button">Ok</button>
+                    </div>
                 </div>
             </div>
             <div class="wave-image-content"><img src="/images/flow.png" style="width:100%"></div>
         </div>
-    </div>
-    <!-- ========= SUBCATEGORY POPUP ========= -->
-    <div id="subCategory_popup" class="popup subCategoryPopup" style="position: fixed; display: block; border-radius: 15px;">
-        <div class="text-align-center padding popup_title">Add Sub category</div>
-        <div class="category-add padding">
-            <div class="categoryForm text-align-left no-padding margin-bottom">
-                <label class="add_category_name">Sub category name</label>
-                <input type="text" name="name" v-model="subCategory.name[lang.id]" v-for="lang in $root.langs" :key="lang.id" class="category-name margin-top-half padding-left-half padding-right-half" :placeholder="'Add ' + lang.name + ' sub category name'">
-            </div>
-            <div class="categoryForm text-align-left margin-bottom">
-                <label for="" class="add_category_name">Parent category</label>
-                <div class="item-input-wrap input-dropdown-wrap category-name margin-top-half no-padding">
-                    <select placeholder="Please choose..." v-model="subCategory.category" class="selectCategory padding-left-half">
-                        <option v-for="(category,key) in categoryOption" :key="category" :value="key">{{ category }}</option>
-                    </select>
+        <!-- ========= EDIT CATEGORY POPUP ========= -->
+        <div class="popup EditCategoryPopup">
+            <div class="category-form">
+                <div class="text-align-center popup_title">
+                    edit Category</div>
+                <div class="category-add">
+                    <label class="add_category_name">Category name</label>
+                    <div class="categoryName text-align-left">
+                        <input type="text" class="category-name" placeholder="Add category name">
+                    </div>
+                    <div class="category-image-selection">
+                        <div class="category-add-image">
+                            <img src="/images/add-image.png" />
+                        </div>
+                        <div class="category-add-image-text">
+                            <span class="add-image-text">Select Image</span>
+                        </div>
+                    </div>
+                    <div class="display-flex justify-content-center popup_button">
+                        <button type="button"
+                            class="button button-raised button-large popup-close popup-cancel-button">Cancel</button>
+                        <button type="button" class="button button-raised button-large popup-ok-button">Ok</button>
+                    </div>
                 </div>
             </div>
-            <div class="margin-top no-margin-bottom display-flex justify-content-center padding-top popup_button">
-                <button type="button" class="button button-raised text-color-black button-large popup-close margin-right popup-button">Cancel</button>
-                <button type="button" class="button button-raised button-large text-color-white popup-button" style="background-color: #f33e3e" @click="addSubCategory">Ok</button>
-            </div>
+            <div class="wave-image-content"><img src="/images/flow.png" style="width:100%"></div>
         </div>
-        <div class="wave-image-content"><img src="/images/flow.png" style="width:100%"></div>
-    </div>
-</f7-page>
+        <!-- ========= DELETE CATEGORY POPUP ========= -->
+        <div class="popup DeleteCategoryPopup">
+            <div class="delete-category-form">
+                <div class="delete-category-WarningSign">
+                    <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M13.5 0C6.05663 0 0 6.05663 0 13.5C0 20.9434 6.05663 27 13.5 27C20.9434 27 27 20.9434 27 13.5C27 6.05663 20.9434 0 13.5 0ZM18.4715 16.8816C18.9102 17.3204 18.9102 18.0327 18.4715 18.4731C18.2519 18.6923 17.9635 18.8023 17.6767 18.8023C17.3896 18.8023 17.1012 18.6923 16.8816 18.4731L13.5 15.0915L10.1184 18.4731C9.89882 18.6923 9.61043 18.8023 9.32327 18.8023C9.03488 18.8023 8.74814 18.6923 8.52855 18.4731C8.08978 18.0343 8.08978 17.322 8.52855 16.8816L11.9085 13.5L8.5269 10.1184C8.08813 9.67964 8.08813 8.96732 8.5269 8.5269C8.96567 8.08649 9.67799 8.08813 10.1184 8.5269L13.5 11.9085L16.8816 8.5269C17.3204 8.08813 18.0327 8.08813 18.4731 8.5269C18.9135 8.96567 18.9119 9.67799 18.4731 10.1184L15.0915 13.5L18.4715 16.8816Z"
+                            fill="#F33E3E" />
+                    </svg>
+                </div>
+                <h4 class=" no-margin delete-category-warning-text">Are you sure delete the category?</h4>
+                <div class="display-flex justify-content-center popup_button">
+                    <button type="button"
+                        class="button button-raised button-large popup-close popup-cancel-button">Cancel</button>
+                    <button type="button" class="button button-raised button-large popup-ok-button">Ok</button>
+                </div>
+            </div>
+            <div class="wave-image-content"><img src="/images/flow.png"></div>
+        </div>
+    </f7-page>
 </template>
 
 <script>
@@ -147,6 +277,7 @@ import $ from 'jquery';
 import axios from "axios";
 import NoValueFound from '../../../components/NoValueFound.vue'
 import MenuManagementHeader from './MenuManagementHeader.vue'
+import Icon from "../../../components/Icon.vue"
 
 export default {
     name: 'Favourite',
@@ -178,7 +309,8 @@ export default {
         f7,
         f7Input,
         NoValueFound,
-        MenuManagementHeader
+        MenuManagementHeader,
+        Icon
     },
     beforeCreate() {
         this.$root.addLoader();
@@ -190,7 +322,7 @@ export default {
         this.$root.removeLoader();
     },
     methods: {
-        updateSearch(searchValue){
+        updateSearch(searchValue) {
             this.search = searchValue;
             this.getCategories();
         },
@@ -201,8 +333,8 @@ export default {
         getCategories() {
             console.log(this.search);
             axios.post('/api/get-categories', {
-                    search: this.search
-                })
+                search: this.search
+            })
                 .then((res) => {
                     this.categories = res.data.category.data;
                     this.paginationData = res.data.category;
@@ -211,8 +343,8 @@ export default {
         removeCategory(id) {
             f7.dialog.confirm('Are you sure delete the category?', () => {
                 axios.post('/api/delete-category', {
-                        id: id
-                    })
+                    id: id
+                })
                     .then((res) => {
                         this.getCategories();
                         this.$root.successnotification(res.data.success);
@@ -317,245 +449,3 @@ export default {
     },
 };
 </script>
-
-<style scoped>
-.height-40 {
-    height: 40px;
-}
-
-.bg-dark {
-    background: #38373D;
-}
-
-.icon-only {
-    width: 100% !important;
-    height: 100% !important;
-}
-
-.border-bottom {
-    border-bottom: 1px solid #EAEAEA;
-}
-
-.padding-icon {
-    padding: 3px;
-}
-
-.border-right {
-    border-right: 1px solid #F3F3F3 !important;
-}
-
-.header-links {
-    width: 75%;
-}
-
-.bg-pink {
-    background: #F33E3E;
-}
-
-.bg-karaka-orange {
-    background: #EE4925;
-}
-
-.text-color-pink {
-    color: #F33E3E;
-}
-
-.font-22 {
-    font-size: 22px;
-}
-
-.height-36 {
-    height: 36px;
-}
-
-.category_image {
-    background: #FFE3E3;
-    filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.2));
-    border-radius: 5px;
-    width: 50px;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.category_name {
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 18px;
-}
-
-.category-list-section .category-list .button {
-    box-shadow: none;
-}
-
-.border__right {
-    border-right: 1px solid #D8D8D8;
-    border-radius: 0;
-}
-
-.popup_title {
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 22px;
-    color: #38373D;
-}
-
-.popup_button .button {
-    width: 130px;
-    border-radius: 10px;
-}
-
-.category-image-selection .popup_img {
-    width: 100%;
-    height: 100%;
-}
-
-.category-image-selection .popup_img img {
-    width: 100%;
-    height: 100%;
-    object-fit: none;
-}
-
-.category-list-section .card {
-    height: calc(100vh - 132px);
-    overflow: scroll;
-}
-
-.category-list-section {
-    margin-top: 77px;
-}
-
-.category-list-section .category-list .menu-dropdown-link {
-    border-bottom: none !important;
-}
-
-@media screen and (max-width:820px) {
-    .header-links {
-        width: 100%;
-    }
-
-}
-</style>
-
-<style>
-.border_radius_10 {
-    border-radius: 10px;
-}
-
-.page_heading {
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 24px;
-    color: #38373D;
-}
-
-.dialog-title {
-    padding-bottom: 10px;
-}
-
-.cart-list {
-    box-shadow: 1px 2px 5px 2px rgb(0 0 0 / 20%);
-}
-
-.padding-top-page-content {
-    padding-top: 50px !important;
-}
-
-.navbar-large .title {
-    opacity: 1 !important;
-    left: 0 !important;
-}
-
-.title-large {
-    display: none !important;
-}
-
-.fav-list-remove-icon {
-    border-radius: 50%;
-}
-
-.category-add {
-    border-top: 1px solid #D8D8D8;
-}
-
-.add_category_name {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 19px;
-}
-
-.category-name {
-    background: #F7F7F7 !important;
-    border-radius: 10px !important;
-    width: 100%;
-    height: 40px;
-}
-
-.category-image {
-    background: #F7F7F7;
-    border: 1px dashed #999999;
-    border-radius: 2px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 90px;
-}
-
-#categoryImage {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.add-image-text {
-    border: 1px solid transparent;
-    border-radius: 7px;
-    padding: 8px 15px;
-}
-
-.dialog-buttons {
-    width: 70%;
-    margin: 0 auto 15px;
-}
-
-.selectCategory {
-    width: 100%;
-    height: 40px;
-}
-
-.popup {
-    width: 378px !important;
-    height: auto !important;
-    top: 20% !important;
-    left: 35% !important;
-    margin: 0 !important;
-}
-
-.popup-button {
-    text-transform: capitalize !important;
-}
-
-.pagination_count .pagination_list {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-}
-
-.pagination_count .pagination_list a {
-    color: black;
-    float: left;
-    padding: 8px 16px;
-    text-decoration: none;
-    border-radius: 5px;
-}
-
-@media screen and (max-width:991px) {
-    .popup {
-        left: 28% !important;
-        top: 28% !important;
-    }
-}
-</style>
