@@ -7,7 +7,7 @@
 
                 <div class="card-content add-combo">
                 <div
-                    class="grid grid-cols-5 medium-grid-cols-4 grid-gap-25 grid-gap-20 align-items-center add-list food-ingradient-list">
+                    class="grid grid-cols-5 medium-grid-cols-4 grid-gap-25 grid-gap-20 align-items-center add-combo-list food-ingradient-list">
                     <div class="bg-color-white add-combo-product-card">
                         <div class="combo-image"><img
                                 src="\assets\images\seederImages\Ingradients\Onion.png">
@@ -34,7 +34,7 @@
             </div>
         </div>
         <!-- ========= ADD INGRADIENT POPUP ========= -->
-        <div class="IngradientPopup display-none">
+        <div class="ingradientPopup display-none">
             <div class="category-form">
                 <div class="text-align-center popup_title">
                     Add Ingradient Category</div>
@@ -64,7 +64,7 @@
             <div class="wave-image-content"><img src="/images/flow.png" style="width:100%"></div>
         </div>
         <!-- ========= EDIT INGRADIENT POPUP ========= -->
-        <div class="EditIngradientPopup display-none">
+        <div class="EditCategoryPopup">
             <div class="category-form">
                 <div class="text-align-center popup_title">
                     edit Category</div>

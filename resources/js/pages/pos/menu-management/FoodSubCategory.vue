@@ -32,7 +32,7 @@
             <MenuManagementHeader title="Sub Category" @blank:action="blankForm" @add:popup="showSubCategoryPopup"
                 @update:search="updateSearch" @update:PopupTitle="updatePopupTitle" />
             <div class="card-content add-combo">
-                <div class="grid grid-cols-5 medium-grid-cols-4 grid-gap-25 grid-gap-20 align-items-center add-combo-list food-sub-category-list">
+                <div class="grid grid-cols-5 medium-grid-cols-4 grid-gap-25 grid-gap-20 align-items-center add-list food-sub-category-list">
                     <div class="bg-color-white add-combo-product-card">
                         <div class="combo-image"><img
                                 src="\assets\images\seederImages\Food-SubCategory\Kathiyavadi_Thali.png">

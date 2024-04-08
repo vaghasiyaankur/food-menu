@@ -7,7 +7,7 @@
                 @update:search="updateSearch" @update:PopupTitle="updatePopupTitle" />
 
             <div class="card-content add-combo">
-                <div class="grid grid-cols-5 medium-grid-cols-4 grid-gap-25 grid-gap-20 align-items-center add-combo-list">
+                <div class="grid grid-cols-5 medium-grid-cols-4 grid-gap-25 grid-gap-20 align-items-center add-list">
                     <div class="bg-color-white add-combo-product-card" v-for="category in categories" :key="category">
                         <div class="combo-image"><img :src="'/storage'+category?.image">
                         </div>

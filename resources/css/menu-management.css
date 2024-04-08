@@ -185,7 +185,7 @@
     position: sticky;
     top: 60px;
     z-index: 2;
-    background-color: #f7f7f7;
+    background-color: #f7f7f7 !important;
     /* box-shadow: 0px 1.5px 3px 0px #00000026; */
 }
 
@@ -534,10 +534,19 @@
 }
 
 /* FOOD CATEGORY */
+.add-list{
+    padding: 0 30px;
+    max-width: 100%;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
 .categoryPopup,
 .EditCategoryPopup,
 .DeleteCategoryPopup,
-.ingradientPopup {
+.IngradientPopup,
+.EditIngradientPopup,
+.DeleteIngradientPopup,
+.DeleteProductPopup {
     max-width: 378px;
     position: fixed;
     display: block;
@@ -635,9 +644,14 @@
 .wave-image-content img {
     width: 100%;
 }
-.delete-category-form {
-    padding: 30px 43px 0;
+.delete-category-form,
+.delete-subcategory-form,
+.delete-ingradient-form,
+.delete-product-form{
+    padding: 30px 0px 0;
+    text-align: center;
 }
+
 .delete-category-WarningSign {
     margin: 0 auto;
     width: 51px;
@@ -690,9 +704,6 @@
 .choose_sub-category option label{
     text-align: left;
 }
-.delete-subcategory-form{
-    padding: 30px 25px 0;
-}
 
 /* INGRADIENTS */
 
@@ -716,9 +727,9 @@
     margin-top: 7px;
 }
 .ingradientPopup .popup_button,
-.DeleteIngradientPopup .popup_button{
+.DeleteIngradientPopup .popup_button,
+.DeleteProductPopup .popup_button{
     margin-top: 30px;
 }
-.delete-ingradient-form{
-    padding: 30px 48px 0;
-}
+
+/* PRODUCTS PAGE */
