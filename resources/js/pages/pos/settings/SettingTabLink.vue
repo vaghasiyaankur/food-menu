@@ -18,7 +18,6 @@
 <script setup>
 // import SettingTab from './settings/SettingTab.vue';
 import Icon from '../../../components/Icon.vue';
-import { defineProps , defineEmits} from 'vue';
 
 const props = defineProps({
     tabs: Object,

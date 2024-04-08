@@ -116,7 +116,6 @@
 <script setup>
 import { f7Card, f7CardContent,f7, f7Icon } from 'framework7-vue';
 import Icon from '../components/Icon.vue'
-import { defineProps } from 'vue'
 
 const props = defineProps({
     products: Object,

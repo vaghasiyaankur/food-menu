@@ -7,109 +7,12 @@
                 @update:search="updateSearch" @update:PopupTitle="updatePopupTitle" />
 
             <div class="card-content add-combo">
-                <div
-                    class="grid grid-cols-5 medium-grid-cols-4 grid-gap-25 grid-gap-20 align-items-center add-combo-list">
-                    <div class="bg-color-white add-combo-product-card">
-                        <div class="combo-image"><img src="/assets/images/seederImages/Category/Indian.png">
+                <div class="grid grid-cols-5 medium-grid-cols-4 grid-gap-25 grid-gap-20 align-items-center add-combo-list">
+                    <div class="bg-color-white add-combo-product-card" v-for="category in categories" :key="category">
+                        <div class="combo-image"><img :src="'/storage'+category?.image">
                         </div>
                         <div class="text-align-center add-combo-product-name">
-                            <h4 class="no-margin no-padding">Indian</h4>
-                        </div>
-                        <div class="grid grid-cols-2 grid-gap-5 combo-change">
-                            <a class="edit-combo col-100 large-45 medium-50">
-                                <Icon name="editIcon" />Edit
-                            </a>
-                            <a class="delete-combo col-100 large-50 medium-50">
-                                <Icon name="deleteIcon" />Delete
-                            </a>
-                        </div>
-                        <img class="food-category" src="/assets/images/seederImages/combo/type1.png">
-                    </div>
-                    <div class="bg-color-white add-combo-product-card">
-                        <div class="combo-image"><img src="/assets/images/seederImages/Category/Chinese.png">
-                        </div>
-                        <div class="text-align-center add-combo-product-name">
-                            <h4 class="no-margin no-padding">Chinese</h4>
-                        </div>
-                        <div class="grid grid-cols-2 grid-gap-5 combo-change">
-                            <a class="edit-combo col-100 large-45 medium-50">
-                                <Icon name="editIcon" />Edit
-                            </a>
-                            <a class="delete-combo col-100 large-50 medium-50">
-                                <Icon name="deleteIcon" />Delete
-                            </a>
-                        </div>
-                        <img class="food-category" src="/assets/images/seederImages/combo/type2.png">
-                    </div>
-                    <div class="bg-color-white add-combo-product-card">
-                        <div class="combo-image"><img src="/assets/images/seederImages/Category/Panjabi.png">
-                        </div>
-                        <div class="text-align-center add-combo-product-name">
-                            <h4 class="no-margin no-padding">Panjabi</h4>
-                        </div>
-                        <div class="grid grid-cols-2 grid-gap-5 combo-change">
-                            <a class="edit-combo col-100 large-45 medium-50">
-                                <Icon name="editIcon" />Edit
-                            </a>
-                            <a class="delete-combo col-100 large-50 medium-50">
-                                <Icon name="deleteIcon" />Delete
-                            </a>
-                        </div>
-                        <img class="food-category" src="/assets/images/seederImages/combo/type1.png">
-                    </div>
-                    <div class="bg-color-white add-combo-product-card">
-                        <div class="combo-image"><img src="/assets/images/seederImages/Category/Dessert.png">
-                        </div>
-                        <div class="text-align-center add-combo-product-name">
-                            <h4 class="no-margin no-padding">Dessert</h4>
-                        </div>
-                        <div class="grid grid-cols-2 grid-gap-5 combo-change">
-                            <a class="edit-combo col-100 large-45 medium-50">
-                                <Icon name="editIcon" />Edit
-                            </a>
-                            <a class="delete-combo col-100 large-50 medium-50">
-                                <Icon name="deleteIcon" />Delete
-                            </a>
-                        </div>
-                        <img class="food-category" src="/assets/images/seederImages/combo/type3.png">
-                    </div>
-                    <div class="bg-color-white add-combo-product-card">
-                        <div class="combo-image"><img src="/assets/images/seederImages/Category/Fast_Food.png">
-                        </div>
-                        <div class="text-align-center add-combo-product-name">
-                            <h4 class="no-margin no-padding">Fast Food</h4>
-                        </div>
-                        <div class="grid grid-cols-2 grid-gap-5 combo-change">
-                            <a class="edit-combo col-100 large-45 medium-50">
-                                <Icon name="editIcon" />Edit
-                            </a>
-                            <a class="delete-combo col-100 large-50 medium-50">
-                                <Icon name="deleteIcon" />Delete
-                            </a>
-                        </div>
-                        <img class="food-category" src="/assets/images/seederImages/combo/type1.png">
-                    </div>
-                    <div class="bg-color-white add-combo-product-card">
-                        <div class="combo-image"><img src="/assets/images/seederImages/Category/South_Indian.png">
-                        </div>
-                        <div class="text-align-center add-combo-product-name">
-                            <h4 class="no-margin no-padding">South Indian</h4>
-                        </div>
-                        <div class="grid grid-cols-2 grid-gap-5 combo-change">
-                            <a class="edit-combo col-100 large-45 medium-50">
-                                <Icon name="editIcon" />Edit
-                            </a>
-                            <a class="delete-combo col-100 large-50 medium-50">
-                                <Icon name="deleteIcon" />Delete
-                            </a>
-                        </div>
-                        <img class="food-category" src="/assets/images/seederImages/combo/type1.png">
-                    </div>
-                    <div class="bg-color-white add-combo-product-card">
-                        <div class="combo-image"><img src="/assets\images\seederImages\Category\Drink.png">
-                        </div>
-                        <div class="text-align-center add-combo-product-name">
-                            <h4 class="no-margin no-padding">Drink</h4>
+                            <h4 class="no-margin no-padding">{{category?.category_languages[0]?.name}}</h4>
                         </div>
                         <div class="grid grid-cols-2 grid-gap-5 combo-change">
                             <a class="edit-combo col-100 large-45 medium-50">
@@ -123,70 +26,6 @@
                     </div>
                 </div>
             </div>
-            <!-- <div class="card-content card-content-padding categorey_card">
-                <div v-if="categories.length">
-                    <div class="category-list padding-top padding-bottom" v-for="(category,index) in categories" :key="category">
-                        <f7-card class="no-margin">
-                            <f7-card-content>
-                                <div class="food-category">
-                                    <img src="/images/vegan-icon.png" alt="">
-                                </div>
-                                <div class="product-image">
-                                    <img src="/storage/product/1-3.webp" alt="" width="100" height="100">
-                                </div>
-                                <div class="product-summary">
-                                    <p class="product_name margin-bottom-half">Water Bottle</p>
-                                    <p class="product_price text-red margin-top-half">$0.00</p>
-                                </div>
-                                <div class="product-add-button">
-                                    <button class="button button-raised btn-add-product padding text-transform-capitalize" data-popup="#watter_popup" @click="f7.popup.open(`.watterPopup`);"><f7-icon f7="plus" class="font-16 margin-right-half"></f7-icon>Add</button>
-                                </div>
-                            </f7-card-content>
-                        </f7-card> -->
-            <!-- <div class="row align-items-center">
-                            <div class="col-100 medium-40 large-60 ">
-                                <div class="display-flex align-items-center">
-                                    <div class="category-count padding-right">
-                                        <span>{{ index + 1 }}.</span>
-                                    </div>
-                                    <a class="display-flex align-items-center" :href="'/single-category-products/'+category.id">
-                                        <div class="category_image">
-                                            <img :src="'/storage'+category.image" alt="">
-                                        </div>
-
-                                        <span class="padding-left-half category_name text-color-black">{{ category.category_languages[0].name }}</span>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-100 medium-60 large-40 action-buttons">
-                                <div class="row align-items-center">
-                                    <div class="col-50">
-                                        <button class="button text-color-black padding height-36 border__right" data-popup="#subCategory_popup" @click="getAllCategories(category.id)">
-                                            <i class="f7-icons font-22 margin-right-half">plus_square</i>Add sub category
-                                        </button>
-                                    </div>
-                                    <div class="col-25">
-                                        <button class="button text-color-black padding height-36 popup-open" data-popup=".categoryPopup" @click="editCategory(category.id);showCategoryPopup()"><i class="f7-icons font-22 margin-right-half">square_pencil</i> Edit</button>
-                                    </div>
-                                    <div class="col-25">
-                                        <button class="button text-color-red padding height-36" @click="removeCategory(category.id)"><i class="f7-icons font-22 margin-right-half">trash</i>
-                                            Delete</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
-            <!-- </div>
-                </div>
-                <div v-else>
-                    <div class="no_order">
-                        <NoValueFound />
-                        <div class="no_order_text text-align-center">
-                            <p class="no-margin">Empty Food Category List</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
         </div>
         <!-- ========= ADD CATEGORY POPUP ========= -->
         <div class="popup categoryPopup">

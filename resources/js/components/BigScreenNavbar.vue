@@ -57,7 +57,6 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue';
 import Icon from './Icon.vue';
 
 const props = defineProps({
@@ -74,6 +73,6 @@ const props = defineProps({
 
 <style scoped>
 .active_submenu {
-  color: #f33e3e !important;
+    color: #f33e3e !important;
 }
 </style>
