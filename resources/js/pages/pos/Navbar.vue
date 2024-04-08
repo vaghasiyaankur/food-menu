@@ -49,6 +49,7 @@ const navbarItems = [
     submenu: [
       { label: 'Food Category', href: '/food-category/', routesName: 'FoodCategory'},
       { label: 'Food Subcategory', href: '/food-subcategory/', routesName: 'FoodSubCategory'},
+      { label: 'Food Ingradient', href: '/food-ingradient/', routesName: 'FoodSubCategory'},
       { label: 'Food Combo', href: '/food-combo/', routesName: 'FoodCombo'},
       { label: 'Food Menu', href: '/food-product/', routesName: 'FoodProduct'},
       { label: 'Digital Menu', href: '/digital-menu/', routesName: 'DigitalMenu'}
