@@ -95,7 +95,7 @@
                 </div>
             </div>
         </div>
-        <!-- ========= DELETE INGRADIENT POPUP ========= -->
+        <!-- ========= DELETE PRODUCT POPUP ========= -->
         <div class="DeleteProductPopup">
             <div class="delete-product-form">
                 <div class="delete-category-WarningSign">

@@ -2,110 +2,34 @@
     <f7-page>
 
         <div class="category-list-section">
-            <MenuManagementHeader title="Ingradient" @blank:action="blankForm" @add:popup="showCategoryPopup"
-                @update:search="updateSearch" @update:PopupTitle="updatePopupTitle" />
-
-                <div class="card-content add-combo">
-                <div
-                    class="grid grid-cols-5 medium-grid-cols-4 grid-gap-25 grid-gap-20 align-items-center add-combo-list food-ingradient-list">
-                    <div class="bg-color-white add-combo-product-card">
-                        <div class="combo-image"><img
-                                src="\assets\images\seederImages\Ingradients\Onion.png">
-                        </div>
-                        <div class="text-align-center add-combo-product-name">
-                            <h4 class="no-margin no-padding">Kathiyavadi Thali</h4>
-                        </div>
-                        <div class="text-align-center combo-name">
-                                <h4 class="no-margin no-padding">Combo 1</h4>
-                                <p class="combo-price no-margin no-padding">$8.00</p>
+            <div class="add-product-page display-flex">
+                <div class="add-product_details">
+                    <div class="add-product_heading">
+                        <h4 class="no-margin no-padding"><svg width="16" height="13" viewBox="0 0 16 13" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M15.0415 5.55139H2.70258L6.89287 1.3611C6.96848 1.28807 7.0288 1.20072 7.07029 1.10413C7.11178 1.00755 7.13362 0.903663 7.13453 0.798546C7.13544 0.693429 7.11541 0.589182 7.07561 0.49189C7.0358 0.394597 6.97702 0.306205 6.90269 0.231874C6.82835 0.157542 6.73996 0.0987582 6.64267 0.0589525C6.54538 0.0191468 6.44113 -0.000883547 6.33601 2.9891e-05C6.2309 0.000943329 6.12701 0.0227825 6.03043 0.0642729C5.93384 0.105763 5.84649 0.166074 5.77346 0.241687L0.231789 5.78335C0.0833746 5.93181 0 6.13314 0 6.34306C0 6.55298 0.0833746 6.75431 0.231789 6.90277L5.77346 12.4444C5.92277 12.5886 6.12274 12.6684 6.33032 12.6666C6.53789 12.6648 6.73645 12.5816 6.88323 12.4348C7.03001 12.288 7.11327 12.0895 7.11507 11.8819C7.11688 11.6743 7.03708 11.4743 6.89287 11.325L2.70258 7.13473H15.0415C15.2515 7.13473 15.4528 7.05132 15.6013 6.90285C15.7498 6.75439 15.8332 6.55302 15.8332 6.34306C15.8332 6.1331 15.7498 5.93174 15.6013 5.78327C15.4528 5.6348 15.2515 5.55139 15.0415 5.55139Z"
+                                    fill="#38373D" />
+                            </svg>
+                            Add Products</h4>
+                    </div>
+                    <div class="add-product_form">
+                        <div class="add-product_name-price display-flex">
+                            <div class="add-product_name">
+                                <label>Product Name</label>
+                                <input type="text" placeholder="Enter Product Name">
                             </div>
-                        <div class="grid grid-cols-2 grid-gap-5 combo-change">
-                            <a class="edit-combo col-100 large-45 medium-50">
-                                <Icon name="editIcon" />Edit
-                            </a>
-                            <a class="delete-combo col-100 large-50 medium-50">
-                                <Icon name="deleteIcon" />Delete
-                            </a>
-                        </div>
-                        <img class="food-category" src="/assets/images/seederImages/combo/type1.png">
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-        <!-- ========= ADD INGRADIENT POPUP ========= -->
-        <div class="ingradientPopup display-none">
-            <div class="category-form">
-                <div class="text-align-center popup_title">
-                    Add Ingradient Category</div>
-                <div class="category-add">
-                    <label class="add_ingradient_name">Ingradient name</label>
-                    <div class="ingradientName text-align-left">
-                        <input type="text" class="ingradient-name" placeholder="Enter Ingradient name">
-                    </div>
-                    <div class="add_ingradient_image">
-                        <label>Profile Image</label>
-                    </div>
-                    <div class="ingradient-image-selection">
-                        <div class="category-add-image">
-                            <img src="/images/add-image.png" />
-                        </div>
-                        <div class="category-add-image-text">
-                            <span class="add-image-text">Select Image</span>
+                            <div class="add-product_price">
+                                <label>Price</label>
+                                <input type="number" placeholder="Enter Product Price">
+                            </div>
                         </div>
                     </div>
-                    <div class="display-flex justify-content-center popup_button">
-                        <button type="button"
-                            class="button button-raised button-large popup-close popup-cancel-button">Cancel</button>
-                        <button type="button" class="button button-raised button-large popup-ok-button">Ok</button>
-                    </div>
+                </div>
+                <div class="add-product_search-wrapper">
+                    <div class="add-product_search"></div>
                 </div>
             </div>
-            <div class="wave-image-content"><img src="/images/flow.png" style="width:100%"></div>
-        </div>
-        <!-- ========= EDIT INGRADIENT POPUP ========= -->
-        <div class="EditCategoryPopup">
-            <div class="category-form">
-                <div class="text-align-center popup_title">
-                    edit Category</div>
-                <div class="category-add">
-                    <label class="add_category_name">Ingradient name</label>
-                    <div class="categoryName text-align-left">
-                        <input type="text" class="category-name" placeholder="Kathiyavadi thali">
-                    </div>
-                    <div class="ingradient_price">
-                        <label>Price</label>
-                        <div class="ingradientPrice text-align-left">
-                        <input type="text" class="ingradient-price" placeholder="₹ 70.00">
-                    </div>
-                    </div>
-                    <div class="display-flex justify-content-center popup_button">
-                        <button type="button"
-                            class="button button-raised button-large popup-close popup-cancel-button">Cancel</button>
-                        <button type="button" class="button button-raised button-large popup-ok-button">Ok</button>
-                    </div>
-                </div>
-            </div>
-            <div class="wave-image-content"><img src="/images/flow.png" style="width:100%"></div>
-        </div>
-        <!-- ========= DELETE INGRADIENT POPUP ========= -->
-        <div class="DeleteIngradientPopup display-none">
-            <div class="delete-ingradient-form">
-                <div class="delete-category-WarningSign">
-                    <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M13.5 0C6.05663 0 0 6.05663 0 13.5C0 20.9434 6.05663 27 13.5 27C20.9434 27 27 20.9434 27 13.5C27 6.05663 20.9434 0 13.5 0ZM18.4715 16.8816C18.9102 17.3204 18.9102 18.0327 18.4715 18.4731C18.2519 18.6923 17.9635 18.8023 17.6767 18.8023C17.3896 18.8023 17.1012 18.6923 16.8816 18.4731L13.5 15.0915L10.1184 18.4731C9.89882 18.6923 9.61043 18.8023 9.32327 18.8023C9.03488 18.8023 8.74814 18.6923 8.52855 18.4731C8.08978 18.0343 8.08978 17.322 8.52855 16.8816L11.9085 13.5L8.5269 10.1184C8.08813 9.67964 8.08813 8.96732 8.5269 8.5269C8.96567 8.08649 9.67799 8.08813 10.1184 8.5269L13.5 11.9085L16.8816 8.5269C17.3204 8.08813 18.0327 8.08813 18.4731 8.5269C18.9135 8.96567 18.9119 9.67799 18.4731 10.1184L15.0915 13.5L18.4715 16.8816Z"
-                            fill="#F33E3E" />
-                    </svg>
-                </div>
-                <h4 class=" no-margin delete-category-warning-text">Are you sure delete the Ingradient?</h4>
-                <div class="display-flex justify-content-center popup_button">
-                    <button type="button"
-                        class="button button-raised button-large popup-close popup-cancel-button">Cancel</button>
-                    <button type="button" class="button button-raised button-large popup-ok-button">Ok</button>
-                </div>
-            </div>
-            <div class="wave-image-content"><img src="/images/flow.png"></div>
         </div>
     </f7-page>
 </template>

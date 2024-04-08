@@ -732,4 +732,51 @@
     margin-top: 30px;
 }
 
-/* PRODUCTS PAGE */
+/* ADD PRODUCT PAGE */
+
+.add-product-page{
+    width: 100%;
+}
+
+.add-product_details{
+    width: calc(100% - 463px);
+    padding: 30px 27px 0 30px;
+}
+
+.add-product_heading h4{
+    font-size: 20px !important;
+    line-height: 24px;
+    font-weight: 600 !important;
+    color: #38373D !important;
+}
+
+.add-product_heading h4 svg{
+    margin-right: 7px;
+}
+
+.add-product_form{
+    margin-top: 30px;
+}
+
+.add-product_form label{
+    font-size: 14px;
+    line-height: 17px;
+    font-weight: 600px;
+    color: #555555;
+}
+
+.add-product_name-price{
+    width: 100%;
+    gap: 25px;
+}
+
+.add-product_name,
+.add-product_price{
+    width: 50%;
+}
+
+
+
+.add-product_search-wrapper{
+    width: 463px;
+}
