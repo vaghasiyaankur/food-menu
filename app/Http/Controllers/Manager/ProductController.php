@@ -59,7 +59,7 @@ class ProductController extends Controller
         return response()->json($products);
     }
 
-    public function getProducts(Request $req)
+    public function getProductss(Request $req)
     {
         $lang_id = SettingHelper::managerLanguage();
         $restaurantId = CustomerHelper::getRestaurantId();
@@ -105,6 +105,42 @@ class ProductController extends Controller
         $sub_product = $sub_product->whereRestaurantId($restaurantId)->paginate(6);
 
         return response()->json(['sub_category_product' => $sub_product,'sub_category' => $subCategory,'category_name' =>  $category_name]);
+    }
+
+    public function getProducts(Request $request){
+        $restaurant_id = CustomerHelper::getRestaurantId();
+        
+        $lang_id = SettingHelper::managerLanguage();
+
+        $products = Product::with(['productLanguage' => function ($query) use ($lang_id) {
+            $query->where('language_id', $lang_id);
+        }]);
+        
+        if ($request->has('search')) {
+            $searchTerm = $request->search;
+            $products->whereHas('productLanguage', function ($query) use ($searchTerm) {
+                $query->where('name', 'like', '%' . $searchTerm . '%');
+            });
+        }
+
+        if ($request->subCatId) {
+            $subCatId = $request->subCatId;
+            $products = $products->where('sub_category_id', $subCatId);
+        }
+
+        $products = $products->where('restaurant_id', $restaurant_id)->get();
+        $products->transform(function ($product) {
+            $name = $product->productLanguage->isEmpty() ? null : $product->productLanguage->first()->name;
+            return [
+                'id' => $product->id,
+                'price' => number_format($product->price, 2),
+                'food_type' => $product->food_type,
+                'name' => $name,
+                'image' => $product->image,
+            ];
+        });
+        $productCount = $products->count();
+        return response()->json(['products' => $products, 'count'=>$productCount]);
     }
 
     public function editProduct($id){

@@ -3,7 +3,7 @@
         <div class="display-flex justify-content-space-between align-items-center">
             <Slider 
                 :categories="categories"
-                :productFetch="productFetch"
+                :fetchProductsBySubcategory="fetchProductsBySubcategory"
                 :activeCategory="activeCategory"
                 :productsCount="productsCount"
             />
@@ -23,13 +23,13 @@
                     <div class="item-content item-input no-padding-left" style="width:90%">
                         <div class="item-inner">
                             <div class="item-input-wrap w-100">
-                                <input type="search" class="padding w-100" placeholder="Search Food...">
+                                <input type="text" class="bg-color-transparent padding w-100" placeholder="Search Food..." @input="searchProduct">
                             </div>
                         </div>
                     </div>
                 </div>
                 <div>
-                    <i class="f7-icons text-gray" @click="showSearchBar = false">xmark</i>
+                    <i class="f7-icons text-gray" @click="clearSearch">xmark</i>
                 </div>
             </div>
         </div>
@@ -40,9 +40,12 @@
 import Slider from "./Slider.vue"
 import { ref } from 'vue'
 
+const search = ref(null);
+
 const props = defineProps({
     categories: Object,
-    productFetch: Function,
+    fetchProductsBySubcategory: Function,
+    fetchProductsBySearch: Function,
     activeCategory: Number,
     productsCount: Number
 });
@@ -50,4 +53,27 @@ const showSearchBar = ref(true);
 setTimeout(() => {  
     showSearchBar.value = false;    
 }, 10);
+
+const debounce = (func, delay) => {
+    let timeoutId;
+    return function (...args) {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+            func.apply(this, args);
+        }, delay);
+    };
+}
+
+const searchProduct = debounce((event) => {
+    if (search.value !== event.target.value) {
+        search.value = event.target.value;
+        props.fetchProductsBySearch(search.value);
+    }
+}, 300);
+
+const clearSearch = () => {
+    search.value = null;
+    props.fetchProductsBySearch(search.value);
+    showSearchBar.value = false;
+}
 </script>
