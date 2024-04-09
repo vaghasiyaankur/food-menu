@@ -32,8 +32,7 @@
             <MenuManagementHeader title="Sub Category" @blank:action="blankForm" @add:popup="showSubCategoryPopup"
                 @update:search="updateSearch" @update:PopupTitle="updatePopupTitle" />
             <div class="card-content add-combo">
-                <div
-                    class="grid grid-cols-5 medium-grid-cols-4 grid-gap-25 grid-gap-20 align-items-center add-combo-list food-sub-category-list">
+                <div class="grid grid-cols-5 medium-grid-cols-4 grid-gap-25 grid-gap-20 align-items-center add-list food-sub-category-list">
                     <div class="bg-color-white add-combo-product-card">
                         <div class="combo-image"><img
                                 src="\assets\images\seederImages\Food-SubCategory\Kathiyavadi_Thali.png">
@@ -123,7 +122,7 @@
         </div>
 
         <!-- ========= ADD SUB-CATEGORY POPUP ========= -->
-        <div class="popup categoryPopup" id="sub_category_popup">
+        <div class="popup SubCategoryPopup" id="sub_category_popup">
             <div class="category-form">
                 <div class="text-align-center popup_title">
                     Add sub Category</div>
@@ -143,13 +142,7 @@
                     <label class="choose_sub-category_title">Category</label>
                     <div class="choose_sub-category">
                         <select name="choose_sub-category" id="choose_sub-category">
-                            <option value="pizza" selected><label>Pizza</label><svg width="8" height="5"
-                                    viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M3.78383 4.77535C3.90185 4.898 4.09815 4.898 4.21617 4.77535L7.84129 1.00801C8.02469 0.817422 7.88962 0.5 7.62512 0.5H0.374881C0.110383 0.5 -0.0246882 0.817421 0.158708 1.00801L3.78383 4.77535Z"
-                                        fill="#555555" />
-                                </svg>
-                            </option>
+                            <option value="pizza" selected><label>Pizza</label></option>
                         </select>
                     </div>
                     <div class="display-flex justify-content-center popup_button">

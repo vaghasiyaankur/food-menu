@@ -25,7 +25,7 @@
                             </div>
                         </div>
 
-                        <div class="card-content add-combo">
+                        <div class="card-content add-combo display-flex">
                             <div
                                 class="grid grid-cols-3 medium-grid-cols-4 grid-gap-25 grid-gap-20 align-items-center add-combo-list">
                                 <div class="bg-color-white selected-product add-combo-product-card">

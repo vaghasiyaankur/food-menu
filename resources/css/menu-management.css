@@ -1,5 +1,6 @@
 .grid {
     display: grid;
+    /* width: 100%; */
 }
 
 .grid-gap-25 {
@@ -142,13 +143,19 @@
 
 @media screen and (min-width: 991px) {
     .grid-cols-5 {
-        grid-template-columns: auto auto auto auto auto;
+        grid-template-columns: calc((100% - 100px) / 5) calc((100% - 100px) / 5) calc((100% - 100px) / 5) calc((100% - 100px) / 5) calc((100% - 100px) / 5);
+    }
+    .grid-cols-4 {
+        grid-template-columns: calc((100% - 75px) / 4) calc((100% - 75px) / 4) calc((100% - 75px) / 4) calc((100% - 75px) / 4);
     }
 }
 
 @media screen and (max-width: 991px) {
     .medium-grid-cols-4 {
-        grid-template-columns: auto auto auto auto;
+        grid-template-columns: calc((100% - 60px) / 4) calc((100% - 60px) / 4) calc((100% - 60px) / 4) calc((100% - 60px) / 4);
+    }
+    .medium-grid-cols-3 {
+        grid-template-columns: calc((100% - 40px) / 3) calc((100% - 40px) / 3) calc((100% - 40px) / 3);
     }
 
     .combo-card {
@@ -180,14 +187,13 @@
     position: sticky;
     top: 60px;
     z-index: 2;
-    background-color: #f7f7f7;
+    background-color: #f7f7f7 !important;
     /* box-shadow: 0px 1.5px 3px 0px #00000026; */
 }
 
 .add-combo {
     margin-top: 15px;
     margin-bottom: 25px;
-    display: flex;
 }
 
 .selected-product {
@@ -399,10 +405,8 @@
 @media screen and (min-width: 991px) {
     .add-combo-header {
         max-width: 100%;
-        flex-grow: 1;
     }
     .add-combo-list {
-        flex-grow: 1;
         padding: 0 25px 0 30px;
         max-width: 100%;
         overflow-y: auto;
@@ -444,14 +448,12 @@
     .add-combo-header {
         max-width: calc(100%);
         z-index: -1;
-        flex-grow: 1;
     }
 
     .add-combo-list {
         padding: 0 25px 0 30px;
         max-width: 100%;
         z-index: -1;
-        flex-grow: 1;
     }
 
     .add-combo-product-card {
@@ -534,9 +536,19 @@
 }
 
 /* FOOD CATEGORY */
+.add-list{
+    padding: 0 30px;
+    max-width: 100%;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
 .categoryPopup,
 .EditCategoryPopup,
-.DeleteCategoryPopup {
+.DeleteCategoryPopup,
+.IngradientPopup,
+.EditIngradientPopup,
+.DeleteIngradientPopup,
+.DeleteProductPopup {
     max-width: 378px;
     position: fixed;
     display: block;
@@ -553,28 +565,33 @@
     line-height: 21px;
     font-weight: 500;
     color: #38373d;
+    text-transform: capitalize;
 }
 .category-add {
     padding: 15px 13px 0;
     border-top: 1px solid #d8d8d8;
 }
 .add_category_name,
-.add_sub-category_name {
+.add_sub-category_name,
+.add_ingradient_name {
     font-size: 14px;
-    line-height: 16px;
+    line-height: 17px;
     font-weight: 600;
     color: #555555;
 }
 .categoryName,
-.sub-categoryName {
+.sub-categoryName,
+.ingradientName {
     width: 100%;
     margin-top: 7px;
 }
 .category-name,
-.sub-category-name {
+.sub-category-name,
+.ingradient-name,
+.ingradient-price {
     width: 100%;
     font-size: 14px;
-    line-height: 16px;
+    line-height: 17px;
     font-weight: 400;
     color: #999999;
     background-color: #fafafa !important;
@@ -629,9 +646,14 @@
 .wave-image-content img {
     width: 100%;
 }
-.delete-category-form {
-    padding: 30px 43px 0;
+.delete-category-form,
+.delete-subcategory-form,
+.delete-ingradient-form,
+.delete-product-form{
+    padding: 30px 0px 0;
+    text-align: center;
 }
+
 .delete-category-WarningSign {
     margin: 0 auto;
     width: 51px;
@@ -663,7 +685,7 @@
 .choose_sub-category_title{
     margin-top: 20px !important;
     font-size: 14px !important;
-    line-height: 16px;
+    line-height: 17px;
     font-weight: 600 !important;
     color: #555555 !important;
 }
@@ -684,14 +706,79 @@
 .choose_sub-category option label{
     text-align: left;
 }
-.choose_sub-category option svg{
-    text-align: right;
+
+/* INGRADIENTS */
+
+.add_ingradient_image{
+    margin-top: 20px !important;
 }
-.delete-subcategory-form{
-    padding: 30px 25px 0;
+.add_ingradient_image label,
+.ingradient_price label{
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: 600;
+    color: #555555;
 }
-@media screen and (min-width: 991px) {
-    .food-sub-category-list {
-        flex-grow: 0.5;
-    }
+.ingradient-image-selection{
+    margin-top: 8px;
+}
+.ingradient_price{
+    margin-top: 20px;
+}
+.ingradientPrice{
+    margin-top: 7px;
+}
+.ingradientPopup .popup_button,
+.DeleteIngradientPopup .popup_button,
+.DeleteProductPopup .popup_button{
+    margin-top: 30px;
+}
+
+/* ADD PRODUCT PAGE */
+
+.add-product-page{
+    width: 100%;
+}
+
+.add-product_details{
+    width: calc(100% - 463px);
+    padding: 30px 27px 0 30px;
+}
+
+.add-product_heading h4{
+    font-size: 20px !important;
+    line-height: 24px;
+    font-weight: 600 !important;
+    color: #38373D !important;
+}
+
+.add-product_heading h4 svg{
+    margin-right: 7px;
+}
+
+.add-product_form{
+    margin-top: 30px;
+}
+
+.add-product_form label{
+    font-size: 14px;
+    line-height: 17px;
+    font-weight: 600px;
+    color: #555555;
+}
+
+.add-product_name-price{
+    width: 100%;
+    gap: 25px;
+}
+
+.add-product_name,
+.add-product_price{
+    width: 50%;
+}
+
+
+
+.add-product_search-wrapper{
+    width: 463px;
 }

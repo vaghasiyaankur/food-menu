@@ -5,7 +5,9 @@ import FoodSubCategory from "./pages/pos/menu-management/FoodSubCategory.vue";
 import FoodProduct from "./pages/pos/menu-management/FoodProduct.vue";
 import FoodCombo from "./pages/pos/menu-management/FoodCombo.vue";
 import AddCombo from "./pages/pos/menu-management/AddCombo.vue";
+import AddProduct from "./pages/pos/menu-management/AddProduct.vue";
 import DigitalMenu from "./pages/pos/menu-management/DigitalMenu.vue";
+import FoodIngradient from "./pages/pos/menu-management/FoodIngradient.vue";
 import Setting from "./pages/pos/SettingsTab.vue";
 import NewSetting from "./pages/pos/NewSettingsTab.vue";
 
@@ -50,9 +52,19 @@ export default [
     component: AddCombo,
   },
   {
+    name : 'AddProduct',
+    path: '/add-product/',
+    component: AddProduct,
+  },
+  {
     name : 'DigitalMenu',
     path: '/digital-menu/',
     component: DigitalMenu,
+  },
+  {
+    name : 'FoodIngradient',
+    path: '/food-ingradient/',
+    component: FoodIngradient,
   },
   {
     name : 'Setting',
