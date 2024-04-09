@@ -3,10 +3,10 @@
         <div class="setting-tabs">
             <div class="col-100 large-50 medium-40 margin-left">
                 <h3>
-                    <span class="page_heading"> Setting</span>
+                    <span class="page_heading settings-banner">Settings</span>
                 </h3>
             </div>
-            <div class="card elevation-2 border_radius_10">
+            <div class="card elevation-2 settings_tabs">
                 <div class="card-content setting_tab_card">
                     <SettingTab />
                 </div>

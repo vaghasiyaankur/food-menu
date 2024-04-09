@@ -936,7 +936,7 @@
     max-width: 463px;
     width: 100%;
     position: relative;
-    box-shadow: -1px 1px 15px 0px #3333330D;
+    box-shadow: -1px 1px 15px 0px #3333330d;
     height: 100dvh;
 }
 .add-product_search {
@@ -956,9 +956,9 @@
 }
 .added-product-list-bar-inner {
     gap: 20px;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
 }
-.added-product-list-bar-inner a{
+.added-product-list-bar-inner a {
     font-size: 13px;
     line-height: 16px;
     font-weight: 500 !important;
@@ -969,15 +969,15 @@
     border-radius: 5px;
 }
 
-.added-product-list-bar .tab-link-active{
+.added-product-list-bar .tab-link-active {
     background-color: #f33e3e !important;
     color: #ffffff !important;
 }
 .dine-in-btn,
-.takeaway-btn{
+.takeaway-btn {
     --f7-touch-ripple-color: none !important;
 }
-.added-product-list-bar .tab-link-highlight{
+.added-product-list-bar .tab-link-highlight {
     background: none !important;
 }
 
@@ -987,8 +987,8 @@
     overflow-y: auto;
     scrollbar-width: none;
 }
-.added-product-list hr{
-    border: 0.5px solid #E0E0E0;
+.added-product-list hr {
+    border: 0.5px solid #e0e0e0;
     border-bottom: 0;
 }
 .added-product_list-item {
@@ -1033,11 +1033,11 @@
     border-radius: 10px;
     box-shadow: 1px 1px 4px 0px #8f716459;
 }
-.added-product_list-size-select{
+.added-product_list-size-select {
     margin-top: 25px;
     align-items: center;
 }
-.takeaway-icons{
+.takeaway-icons {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1047,11 +1047,61 @@
     border-radius: 7px;
     margin-right: 15px;
 }
-.added-product_list-size-select p{
+.added-product_list-size-select p {
     margin: 0;
     padding: 0;
     font-size: 15px;
     line-height: 18px;
     font-weight: 500;
-    color: #38373D;
+    color: #38373d;
+}
+
+/* NEW SETTINGS */
+.setting-tabs{
+    margin-top: 60px;
+}
+.settings-banner {
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 600;
+    color: #38373d;
+}
+.settings_tabs {
+    border-radius: 10px;
+}
+
+/* GENERAL SETTINGS */
+.general_settings-banner,
+.general_info_form {
+    margin: 30px 25px 0 !important;
+}
+.general_settings {
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 600;
+    color: #38373d;
+}
+.general_info_form-input {
+    margin-top: 7px;
+}
+.general_info_form-input input {
+    padding: 13px 15px !important;
+}
+.general_info_form-image-input,
+.general_info_form-address,
+.general_info_form-phone,
+.general_info_form-print{
+    margin-top: 25px;
+}
+.general_info_form-image-input .image-logo {
+    margin-top: 7px;
+}
+.general_info_form-image-input .image-field input {
+    display: none;
+}
+.general_info_form-image-input .item-input-wrap {
+    margin-top: 10px;
+}
+.general_info_form .form-submit{
+    margin: 50px 0 25px !important;
 }

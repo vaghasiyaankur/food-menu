@@ -7,7 +7,7 @@
         />
       </div>
       <f7-view
-        url="/"
+        url="/new-settings/"
         :main="true"
         class="safe-areas"
         :master-detail-breakpoint="768"
