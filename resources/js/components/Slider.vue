@@ -36,13 +36,13 @@
 
     const props = defineProps({
         categories: Object,
-        productFetch: Function,
+        fetchProductsBySubcategory: Function,
         activeCategory: Number,
         productsCount: Number
     });
 
     const selectCategory = (id) => {
-        props.productFetch(id);
+        props.fetchProductsBySubcategory(id);
     }
 
 

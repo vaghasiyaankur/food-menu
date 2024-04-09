@@ -100,7 +100,7 @@ Route::get('/get-category-wise-products/{id}',[ProductController::class, 'getCat
 
 Route::get('/toggle-wishlist',[ProductController::class, 'toggleWishlist']);
 
-Route::post('get-products',[ProductController::class, 'getProducts']);
+// Route::post('get-products',[ProductController::class, 'getProducts']);
 
 Route::get('product/{id}',[ProductController::class, 'editProduct']);
 
@@ -108,7 +108,10 @@ Route::post('update-product',[ProductController::class, 'updateProduct']);
 
 Route::post('/delete-product',[ProductController::class, 'deleteProduct']);
 
+// Update Routes
 Route::get('get-subcategory-wise-products/{id}',[ProductController::class, 'getSubcategoryWiseProduct']);
+
+Route::post('get-products',[ProductController::class, 'getProducts']);
 
 // ------------------------ Manager Table Page Routes ------------------------ //
 

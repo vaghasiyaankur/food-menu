@@ -5,7 +5,8 @@
                 <div class="flex-shrink-0 category-search padding-horizontal padding-vertical-half">
                     <CategorySearch 
                         :categories="categories"
-                        :productFetch="productFetch"
+                        :fetchProductsBySubcategory="fetchProductsBySubcategory"
+                        :fetchProductsBySearch="fetchProductsBySearch"
                         :activeCategory="activeCategory"
                         :productsCount="productsCount"
                     />
@@ -45,16 +46,37 @@ const currentRoute = ref('');
 
 const categoryFetch = axios.get('/api/get-sub-categories-list').then(response => {
     const subCategories = response.data.sub_category;
-    subCategories.length > 0 && productFetch(subCategories[0].id); // Fetch First category product data
+    subCategories.length > 0 && fetchProductsBySubcategory(subCategories[0].id); // Fetch First category product data
     categories.value = subCategories;
 })
 
-const productFetch = (id) => {
+const fetchProductsBySubcategory = (id) => {
+
     activeCategory.value = id;
-    axios.get('/api/get-subcategory-wise-products/'+id).then(response => {
+
+    // axios.get('/api/get-subcategory-wise-products/'+id)
+    // .then(response => {
+    //     products.value = response.data.products;
+    //     productsCount.value = response.data.count;
+    // })
+    axios.post('/api/get-products', { subCatId: id })
+    .then((response) => {
         products.value = response.data.products;
         productsCount.value = response.data.count;
     })
+}
+
+const fetchProductsBySearch = (search) => {
+    console.log(search);
+    if(search){
+        console.log(search);
+        axios.post('/api/get-products', { search: search })
+        .then((response) => {
+            products.value = response.data.products;
+        })
+    }else{
+        fetchProductsBySubcategory(activeCategory.value);
+    }
 }
 
 </script>
