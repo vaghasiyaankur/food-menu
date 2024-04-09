@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
             $table->string('image')->nullable();
             $table->enum('added_by', ['admin', 'manager'])->default('manager');
+            $table->enum('category_type', ['1', '2', '3'])->default('1');
             $table->unsignedBigInteger('added_by_id')->unsigned();
             $table->boolean('status')->default(1);
             $table->timestamps();
@@ -27,12 +28,12 @@ return new class extends Migration
         // Add foreign key for admins
         Schema::table('categories', function (Blueprint $table) {
             $table->foreign('added_by_id')
-                  ->references('id')
-                  ->on('admins')
-                  ->onDelete('cascade')
-                  ->onUpdate('cascade')
-                  ->where('added_by', '=', 'admin')
-                  ->name('categories_added_by_admin_foreign');
+                ->references('id')
+                ->on('admins')
+                ->onDelete('cascade')
+                ->onUpdate('cascade')
+                ->where('added_by', '=', 'admin')
+                ->name('categories_added_by_admin_foreign');
         });
 
         // Add foreign key for users

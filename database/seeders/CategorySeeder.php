@@ -29,7 +29,9 @@ class CategorySeeder extends Seeder
                     ['Gujarati Dish', 'ગુજરાતી વાનગી', 'गुजराती डिश']
                 ],
                 'restaurant_id' => 1,
-                'added_by_id' => 1
+                'added_by_id' => 1,
+                'category_type' => 1,
+                'status' =>1
             ],
             [
                 'name' => ['Panjabi', 'પંજાબી','पंजाबी'],
@@ -39,7 +41,9 @@ class CategorySeeder extends Seeder
                     ['Sabji', 'સબજી', 'सब्जी']
                 ],
                 'restaurant_id' => 1,
-                'added_by_id' => 1
+                'added_by_id' => 1,
+                'category_type' => 1,
+                'status' =>1
             ],
             [
                 'name' => ['Indian','ભારતીય','भारतीय'],
@@ -49,7 +53,9 @@ class CategorySeeder extends Seeder
                     ['Gujarati Dish', 'ગુજરાતી વાનગી', 'गुजराती डिश']
                 ],
                 'restaurant_id' => 2,
-                'added_by_id' => 4
+                'added_by_id' => 4,
+                'category_type' => 1,
+                'status' =>1
             ],
             [
                 'name' => ['Panjabi', 'પંજાબી','पंजाबी'],
@@ -59,17 +65,31 @@ class CategorySeeder extends Seeder
                     ['Sabji', 'સબજી', 'सब्जी']
                 ],
                 'restaurant_id' => 2,
-                'added_by_id' => 4
+                'added_by_id' => 4,
+                'category_type' => 1,
+                'status' =>1
             ]
         ];
+
+        $check_folder= is_dir(storage_path('app/public/category'));
+        if(!$check_folder) mkdir(storage_path('app/public/category'));
 
         $check_folder= is_dir(storage_path('app/public/sub_category'));
         if(!$check_folder) mkdir(storage_path('app/public/sub_category'));
 
         $languages = Language::all();
 
-
+        
         foreach ($categories as $k => $cate) {
+            
+            $catSourcePath = public_path('assets/images/seederImages'.$cate['image']);
+            $catDestinationPath = storage_path('app/public'.$cate['image']);
+            if (File::exists($catSourcePath)) {
+                if(!File::exists($catDestinationPath)){
+                    File::copy($catSourcePath, $catDestinationPath);
+                }
+            }
+
             $cat = new Category();
             $cat->image = $cate['image'];
             $cat->added_by_id = $cate['added_by_id'];
@@ -93,7 +113,7 @@ class CategorySeeder extends Seeder
                 else if($subCat[0] == 'Naan Or Roti') $imageName = 'naan_roti';
 
                 $sourcePath = public_path('assets/images/seederImages/sub_category/'.$imageName.'.webp');
-                $destinationPath = public_path('storage/sub_category/'.$cat->restaurant_id.'-'.$k.'-'.$key.'.webp');
+                $destinationPath = storage_path('app/public/sub_category/'.$cat->restaurant_id.'-'.$k.'-'.$key.'.webp');
                 if (File::exists($sourcePath)) {
                     if(!File::exists($destinationPath)){
                         File::copy($sourcePath, $destinationPath);
