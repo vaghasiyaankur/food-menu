@@ -1353,9 +1353,6 @@ tbody .numeric-cell:last-child {
     color: #f33e3e !important;
     padding-left: 6px;
 }
-.AllUsers{
-    position: relative;
-}
 .AllUsers::-webkit-scrollbar,
 .SuperAdmin::-webkit-scrollbar {
     height: 13px !important;
