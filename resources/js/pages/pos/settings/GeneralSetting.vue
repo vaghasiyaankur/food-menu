@@ -6,7 +6,7 @@
     </div>
     <div class="general_info_form">
         <form class="list" id="my-form">
-            <div class="item-content item-input no-padding">
+            <div class="item-content item-input general_info_form-restaurent-name no-padding">
                 <div class="item-inner no-padding">
                     <div class="block-title no-margin">Restaurant Name</div>
                     <div class="item-input-wrap general_info_form-input">

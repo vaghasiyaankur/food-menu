@@ -1,5 +1,5 @@
 <template>
-    <div class="toolbar tabbar">
+    <div class="toolbar tabbar vertical-setting-tabs">
     <div class="toolbar-inner">
         <SettingTabLink :tabs="allTabs" :active-tab="currentTab" @update:activeTab="setCurrentTab"/>
     </div>
