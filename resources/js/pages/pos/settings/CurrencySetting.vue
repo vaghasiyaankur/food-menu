@@ -1,32 +1,32 @@
 <template>
-    <div class="form-title">
-        <h3>                                    
-            <span class="page_heading"> Add New Currency </span> 
+    <div class="form-title currency_settings-banner">
+        <h3 class="no-margin">                                    
+            <span class="page_heading no-margin currency_settings"> Add New Currency </span> 
         </h3>
     </div>
     <div class="currency_form">
-        <form class="list margin-vertical" id="my-form">
-            <div class="item-content item-input margin-bottom no-padding-left">
-                <div class="item-inner">
-                    <div class="block-title no-margin-top">Name</div>
-                    <div class="item-input-wrap">
-                        <input type="text" name="name" class="padding margin-top-half" placeholder="Enter currency name">
+        <form class="list" id="my-form">
+            <div class="item-content item-input currency_form-currency-name no-margin no-padding">
+                <div class="item-inner no-padding">
+                    <div class="block-title no-margin">Name</div>
+                    <div class="item-input-wrap currency_form-input">
+                        <input type="text" name="name" class="" placeholder="Enter currency name">
                     </div>
                 </div>
             </div>
-            <div class="item-content item-input margin-bottom no-padding-left">
-                <div class="item-inner">
-                    <div class="block-title no-margin-top">Code</div>
-                    <div class="item-input-wrap">
-                        <input type="text" name="name" class="padding margin-top-half" placeholder="Enter code">
+            <div class="item-content item-input currency_form-currency-code no-margin no-padding">
+                <div class="item-inner no-padding">
+                    <div class="block-title no-margin">Code</div>
+                    <div class="item-input-wrap currency_form-input">
+                        <input type="text" name="name" class="" placeholder="INR">
                     </div>
                 </div>
             </div>
-            <div class="item-content item-input margin-bottom no-padding-left">
-                <div class="item-inner">
-                    <div class="block-title no-margin-top">Symbol</div>
-                    <div class="item-input-wrap">
-                        <input type="text" name="name" class="padding margin-top-half" placeholder="Enter symbol">
+            <div class="item-content item-input currency_form-currency-symbol no-margin no-padding">
+                <div class="item-inner no-padding">
+                    <div class="block-title no-margin">Symbol</div>
+                    <div class="item-input-wrap currency_form-input">
+                        <input type="text" name="name" class="" placeholder="₹">
                     </div>
                 </div>
             </div>

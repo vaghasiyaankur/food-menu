@@ -1,10 +1,10 @@
 <template>
-    <div class="toolbar tabbar">
+    <div class="toolbar tabbar vertical-setting-tabs">
     <div class="toolbar-inner">
         <SettingTabLink :tabs="allTabs" :active-tab="currentTab" @update:activeTab="setCurrentTab"/>
     </div>
 </div>
-<div class="tabs margin-horizontal" style="flex-grow: 1;">
+<div class="tabs">
     <div id="tab-general-setting" class="tab tab-active">
         <GeneralSetting />
     </div>

@@ -1,7 +1,7 @@
 
 /* setting */
 .setting-tabs{
-    margin-top: 70px;
+    margin-top: 56px;
 }
 .setting-tabs .tabs{
     width: 70%;
@@ -27,7 +27,7 @@
     height: auto;
     padding: 0;
 }
-.setting-tabs .toolbar-inner .tab-link.tab-link-active{
+.setting-tabs .vertical-setting-tabs .toolbar-inner .tab-link.tab-link-active{
     background: #FFF0F0;
     color: #F33E3E;
 }
@@ -39,7 +39,7 @@
 .setting-tabs .toolbar-inner .tab-link-highlight{
     display: none;
 }
-.setting-tabs .toolbar-inner .tab-link.tab-link-active:after{
+.setting-tabs .vertical-setting-tabs .toolbar-inner .tab-link.tab-link-active:after{
     content: '';
     position: absolute;
     background-color: #F33E3E;
