@@ -167,9 +167,9 @@ export default {
         $(".dialog-buttons").addClass("margin-top no-margin-bottom");
       }, 50);
     },
-    successnotification(notice) {
+    successNotification(notice) {
       var notificationFull = f7.notification.create({
-        title: '<img src="/images/checkicon.png">' + notice,
+        title: '<img src="/images/check-icon.png">' + notice,
         closeTimeout: 3000,
         closeOnClick: true,
         cssClass: "success--notification",
@@ -178,9 +178,9 @@ export default {
       $(".notification-header").append('<div><i class="f7-icons">xmark</i></div>');
       $(".notification-content").remove();
     },
-    errornotification(notice) {
+    errorNotification(notice) {
       var notificationFull = f7.notification.create({
-        title: '<img src="/images/crossicon.png">' + notice,
+        title: '<img src="/images/cross-icon.png">' + notice,
         closeTimeout: 3000,
         closeOnClick: true,
         cssClass: "error--notification",

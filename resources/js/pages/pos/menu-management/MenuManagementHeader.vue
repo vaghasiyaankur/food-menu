@@ -13,7 +13,7 @@
                         <div class="item-inner">
                             <div class="col-100 large-60 medium-65">
                                 <form class="searchbar combo-search-bar">
-                                    <input type="search" placeholder="Search" class="height_40">
+                                    <input type="search" placeholder="Search" class="height_40" @input="handleSearch">
                                     <i class="searchbar-icon"></i>
                                     <span class="input-clear-button"></span>
                                     <span class="searchbar-disable-button">Cancel</span>
@@ -38,15 +38,23 @@ const props = defineProps({
     title               :  String,
 });
 
-const emit = defineEmits(['update:search', 'blank:action', 'add:popup', 'update:PopupTitle']);
+const emit = defineEmits(['update:search', 'add:popup']);
 
-const handleSearch = (event) => {
+const debounce = (func, delay) => {
+    let timeoutId;
+    return function (...args) {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+            func.apply(this, args);
+        }, delay);
+    };
+}
+
+const handleSearch = debounce((event) => {
     emit('update:search', event.target.value);
-};
+}, 300);
 
 const handleButtonClick = () => {
-    emit('update:PopupTitle', 'Add '+props.title)
-    emit('blank:action');
     emit('add:popup');
 };
 </script>
@@ -67,14 +75,9 @@ const handleButtonClick = () => {
     .nav-botton {
         height: 100%;
     }
-
-
-
     .bg-dark {
         background: #38373D;
     }
-
-
     .menu-dropdown-link{
         border-bottom: 1px solid #EFEFEF;
     }
@@ -89,9 +92,6 @@ const handleButtonClick = () => {
     .font-22 {
         font-size: 22px;
     }
-
-
-
     /*<!-- =======MENU CSS ========== -->*/
     .demo-swiper .swiper-slide {
         font-size: 25px;

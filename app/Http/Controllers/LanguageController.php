@@ -18,7 +18,7 @@ class LanguageController extends Controller
     {
         $langs = Language::whereHas('RestaurantLanguages', function ($query) {
             $query->where('status', 1);
-        })->get();
+        })->select('id', 'name')->get();
         return response()->json(['langs' => $langs]);
     }
 

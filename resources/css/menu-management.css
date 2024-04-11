@@ -72,13 +72,13 @@
     position: relative;
     padding: 24px !important;
 }
-.add-combo-product-card {
+.data-card {
     position: relative;
     border-radius: 10px;
 }
 
 .combo-name h4,
-.add-combo-product-name h4 {
+.data-card-name h4 {
     font-size: 15px;
     line-height: 18.15px;
     font-weight: 500 !important;
@@ -174,7 +174,7 @@
         max-height: 94px;
     }
 
-    .add-combo-product-card {
+    .data-card {
         position: relative;
         border-radius: 10px;
     }
@@ -248,6 +248,7 @@
 
 .type-radio-btn {
     margin-right: 110px;
+    width: 100%;
 }
 
 .type-radio-btn:first-child,
@@ -413,7 +414,7 @@
         scrollbar-width: none;
     }
 
-    .add-combo-product-card {
+    .data-card {
         padding: 24px !important;
     }
 
@@ -456,7 +457,7 @@
         z-index: -1;
     }
 
-    .add-combo-product-card {
+    .data-card {
         padding: 14px !important;
     }
 
@@ -556,7 +557,7 @@
     box-shadow: 0px 1px 15px 0px #0000001c;
     background-color: #ffffff;
 }
-.category-form {
+.data-form {
     padding: 16px 12px 0;
 }
 .popup_title {
@@ -567,26 +568,30 @@
     color: #38373d;
     text-transform: capitalize;
 }
-.category-add {
+.data-add {
     padding: 15px 13px 0;
     border-top: 1px solid #d8d8d8;
 }
-.add_category_name,
+.add-data-main-div{
+    margin-top: 10px;
+}
+.add-data-name,
 .add_sub-category_name,
 .add_ingradient_name {
     font-size: 14px;
     line-height: 17px;
     font-weight: 600;
     color: #555555;
+    margin-top: 10px;
 }
-.categoryName,
-.sub-categoryName,
+.data-name,
+.sub-data-name,
 .ingradientName {
     width: 100%;
     margin-top: 7px;
 }
-.category-name,
-.sub-category-name,
+.add-update-data-name,
+.sub-add-update-data-name,
 .ingradient-name,
 .ingradient-price {
     width: 100%;
@@ -596,23 +601,29 @@
     color: #999999;
     background-color: #fafafa !important;
 }
-.category-image-selection,
-.sub-category-image-selection {
+.data-image-selection,
+.sub-data-image-selection {
     margin-top: 15px;
-    padding: 20px 0;
+    /* padding: 20px 0; */
     background-color: #fafafa;
     outline: 1px dashed #999999;
     border-radius: 10px;
 }
-.category-add-image,
-.sub-category-add-image {
+.data-add-image,
+.sub-data-add-image {
     color: #999999;
     text-align: center;
 }
-.category-add-image-text,
-.sub-category-add-image-text {
+.data-add-image-file{
+    opacity: 0;
+    display: none;
+}
+.data-add-image-text,
+.sub-data-add-image-text {
     margin-top: 15px;
     text-align: center;
+    display: flex;
+    justify-content: center;
 }
 .add-image-text {
     font-size: 11px;
@@ -646,8 +657,8 @@
 .wave-image-content img {
     width: 100%;
 }
-.delete-category-form,
-.delete-subcategory-form,
+.delete-data-form,
+.delete-subdata-form,
 .delete-ingradient-form,
 .delete-product-form{
     padding: 30px 0px 0;
@@ -679,7 +690,7 @@
 
 /* FOOD SUB-CATEGORY */
 
-.sub-category-image-selection {
+.sub-data-image-selection {
     margin-bottom: 20px;
 }
 .choose_sub-category_title{

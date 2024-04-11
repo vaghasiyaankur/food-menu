@@ -29,6 +29,7 @@ class CategoryController extends Controller
 
     public function addCategory(Request $req)
     {
+
         $validator = Validator::make($req->all(),[
             'name' => 'required',
             'image' => 'required',
@@ -79,6 +80,8 @@ class CategoryController extends Controller
 
     public function updateCategory(Request $req)
     {
+        dump('updateCategory');
+        dd($req->all());
         $validator = Validator::make($req->all(),[
             'name' => 'required',
             'image' => 'required',

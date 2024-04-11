@@ -289,7 +289,7 @@ export default {
             .then((res) => {
                 this.close_reservation = res.data.close_reservation;
                 if(res.data.close_reservation == 1){
-                    this.errornotification("Currently, the restaurant is closed");return false;
+                    this.errorNotification("Currently, the restaurant is closed");return false;
                 }
             });
         },
@@ -327,14 +327,14 @@ export default {
             this.checkreservation()
             if(this.close_reservation == 0){
                 if(!this.reservation.name || !this.reservation.number || !this.reservation.member){
-                    this.errornotification(this.$root.trans.reservation_error); return false;
+                    this.errorNotification(this.$root.trans.reservation_error); return false;
                 } else if (parseInt(this.reservation.member) > parseInt(this.member_limit)) {
-                    this.errornotification(this.$root.trans.capacity_error); return false;
-                    // this.errornotification(this.$root.trans.capacity_error.replace(/@person/g, this.member_limit)); return false;
+                    this.errorNotification(this.$root.trans.capacity_error); return false;
+                    // this.errorNotification(this.$root.trans.capacity_error.replace(/@person/g, this.member_limit)); return false;
                 } else if (this.reservation.number.toString().length != 10) {
-                    this.errornotification(this.$root.trans.number_error);
+                    this.errorNotification(this.$root.trans.number_error);
                 }else if(!this.reservation.agree_condition){
-                    this.errornotification(this.$root.trans.accept_term_cond); return false;
+                    this.errorNotification(this.$root.trans.accept_term_cond); return false;
                 }else{
                     var formData = new FormData();
                     formData.append('person', this.reservation.member);
@@ -350,16 +350,16 @@ export default {
                             this.checkWaitingTime = true;
                         }
                         else{
-                            this.errornotification(res.data.message); return false;
+                            this.errorNotification(res.data.message); return false;
                         }
                     });
                 }
             }
 
         },
-        successnotification(notice) {
+        successNotification(notice) {
             var notificationFull = f7.notification.create({
-                title: '<img src="/images/checkicon.png">' + notice ,
+                title: '<img src="/images/check-icon.png">' + notice ,
                 closeTimeout: 3000,
                 closeOnClick: true,
                 cssClass: 'success--notification'
@@ -369,9 +369,9 @@ export default {
             $('.notification-header').append('<div><i class="f7-icons">xmark</i></div>');
             $('.notification-content').remove();
         },
-        errornotification(notice) {
+        errorNotification(notice) {
             var notificationFull = f7.notification.create({
-                title: '<img src="/images/crossicon.png">' + notice,
+                title: '<img src="/images/cross-icon.png">' + notice,
                 closeTimeout: 3000,
                 closeOnClick: true,
                 cssClass: 'error--notification'
@@ -391,14 +391,14 @@ export default {
             this.checkreservation();
             if(this.close_reservation == 0){
                 if(!this.reservation.name || !this.reservation.number || !this.reservation.member){
-                    this.errornotification(this.$root.trans.reservation_error); return false;
+                    this.errorNotification(this.$root.trans.reservation_error); return false;
                 }else if(parseInt(this.reservation.member) > parseInt(this.member_limit)){
-                    this.errornotification(this.$root.trans.capacity_error); return false;
-                    // this.errornotification(this.$root.trans.capacity_error.replace(/@person/g, this.member_limit)); return false;
+                    this.errorNotification(this.$root.trans.capacity_error); return false;
+                    // this.errorNotification(this.$root.trans.capacity_error.replace(/@person/g, this.member_limit)); return false;
                 } else if (this.reservation.number.toString().length != 10) {
-                    this.errornotification(this.$root.trans.number_error); return false;
+                    this.errorNotification(this.$root.trans.number_error); return false;
                 }else if(!this.reservation.agree_condition){
-                    this.errornotification(this.$root.trans.accept_term_cond); return false;
+                    this.errorNotification(this.$root.trans.accept_term_cond); return false;
                 }
 
                 var formData = new FormData();
@@ -414,7 +414,7 @@ export default {
                         this.register();
                     }
                     else{
-                        this.errornotification(res.data.message); return false;
+                        this.errorNotification(res.data.message); return false;
                     }
                 });
             }
@@ -461,7 +461,7 @@ export default {
                     }, 10);
                 })
                 .catch((err) => {
-                    this.errornotification(err.response.data.error); return false;
+                    this.errorNotification(err.response.data.error); return false;
                 });
             });
 

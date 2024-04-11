@@ -223,11 +223,11 @@ export default {
         },
         checkTimeForRegister() {
             if(!this.reservation.name || !this.reservation.number || !this.reservation.member){
-                this.$root.errornotification(this.$root.trans.reservation_error); return false;
+                this.$root.errorNotification(this.$root.trans.reservation_error); return false;
             }else if(parseInt(this.reservation.member) > parseInt(this.member_limit)){
-                this.$root.errornotification(this.$root.trans.capacity_error.replace(/@person/g, this.member_limit)); return false;
+                this.$root.errorNotification(this.$root.trans.capacity_error.replace(/@person/g, this.member_limit)); return false;
             } else if (this.reservation.number.toString().length != 10) {
-                this.$root.errornotification(this.$root.trans.number_error); return false;
+                this.$root.errorNotification(this.$root.trans.number_error); return false;
             }
 
             var formData = new FormData();
@@ -243,7 +243,7 @@ export default {
                     this.register();
                 }
                 else{
-                    this.errornotification(res.data.message); return false;
+                    this.errorNotification(res.data.message); return false;
                 }
             });
 
@@ -303,9 +303,9 @@ export default {
         },
         checkTime() {
             if(!this.reservation.name || !this.reservation.number || !this.reservation.member){
-                this.$root.errornotification('Please enter all the required details.'); return false;
+                this.$root.errorNotification('Please enter all the required details.'); return false;
             }else if(parseInt(this.reservation.member) > parseInt(this.member_limit)){
-                this.$root.errornotification('order create must be '+this.member_limit+' or less than member.'); return false;
+                this.$root.errorNotification('order create must be '+this.member_limit+' or less than member.'); return false;
             }else{
                 var formData = new FormData();
                 formData.append('person', this.reservation.member);
@@ -319,7 +319,7 @@ export default {
                         this.checkWaitingTime = true;
                     }
                     else{
-                        this.$root.errornotification(res.data.message); return false;
+                        this.$root.errorNotification(res.data.message); return false;
                     }
                 });
             }

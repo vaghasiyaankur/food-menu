@@ -71,10 +71,10 @@
                 <div class="card-content add-combo">
                     <div
                         class="grid grid-cols-5 medium-grid-cols-4 grid-gap-25 grid-gap-20 align-items-center add-list food-ingradient-list">
-                        <div class="bg-color-white add-combo-product-card">
+                        <div class="bg-color-white data-card">
                             <div class="combo-image"><img src="\assets\images\seederImages\Ingradients\Onion.png">
                             </div>
-                            <div class="text-align-center add-combo-product-name">
+                            <div class="text-align-center data-card-name">
                                 <h4 class="no-margin no-padding">Kathiyavadi Thali</h4>
                             </div>
                             <div class="text-align-center combo-name">
@@ -116,16 +116,16 @@
         </div>
         <div id="product_popup" class="popup" style="position: fixed; display: block; border-radius: 15px;">
             <div class="text-align-center padding popup_title">Add Product</div>
-            <div class="category-add padding">
+            <div class="data-add padding">
                 <div class="categoryForm text-align-left no-padding">
-                    <label for="" class="add_category_name">Add product</label>
+                    <label for="" class="add-data-name">Add product</label>
                     <input type="text" name="name" v-model="product.name[lang.id]" v-for="lang in $root.langs"
-                        :key="lang.id" class="category-name margin-top-half padding-left-half padding-right-half"
+                        :key="lang.id" class="add-update-data-name margin-top-half padding-left-half padding-right-half"
                         :placeholder="'Add ' + lang.name + ' Product name'">
                 </div>
                 <div class="categoryForm text-align-left margin-top">
-                    <label for="" class="add_category_name">Choose Sub category</label>
-                    <div class="item-input-wrap input-dropdown-wrap category-name margin-top-half no-padding">
+                    <label for="" class="add-data-name">Choose Sub category</label>
+                    <div class="item-input-wrap input-dropdown-wrap add-update-data-name margin-top-half no-padding">
                         <select placeholder="Please choose..." v-model="product.sub_category"
                             class="selectCategory padding-left-half">
                             <option v-for="(subCat, key) in subCategoryOption" :key="subCat" :value="key">{{ subCat }}
@@ -134,9 +134,9 @@
                     </div>
                 </div>
                 <div class="categoryForm margin-top text-align-left no-padding">
-                    <label for="" class="add_category_name">Price</label>
+                    <label for="" class="add-data-name">Price</label>
                     <input type="text" name="price" v-model="product.price"
-                        class="category-name margin-top-half padding-left-half padding-right-half"
+                        class="add-update-data-name margin-top-half padding-left-half padding-right-half"
                         placeholder="Add product price">
                 </div>
                 <div class="margin-top no-margin-bottom display-flex justify-content-center padding-top popup_button">
@@ -218,7 +218,7 @@ export default {
             formData.append('sub_category_id', this.product.sub_category);
 
             if (!this.product.name || !this.product.price || !this.product.sub_category) {
-                this.$root.errornotification('Please fill the form details.');
+                this.$root.errorNotification('Please fill the form details.');
                 return false;
             }
 
@@ -226,7 +226,7 @@ export default {
                 formData.append('id', this.product.id);
                 axios.post('/api/update-product', formData)
                     .then((res) => {
-                        this.$root.successnotification(res.data.success);
+                        this.$root.successNotification(res.data.success);
                         this.getProducts();
                         f7.popup.close(`#product_popup`);
                         this.blankform();
@@ -234,7 +234,7 @@ export default {
             } else {
                 axios.post('/api/add-product', formData)
                     .then((res) => {
-                        this.$root.successnotification(res.data.success);
+                        this.$root.successNotification(res.data.success);
                         this.getProducts();
                         f7.popup.close(`#product_popup`);
                         this.blankform();
@@ -245,7 +245,7 @@ export default {
             f7.dialog.confirm('Are you sure delete the product?', () => {
                 axios.post('/api/delete-product', { id: id })
                     .then((res) => {
-                        this.$root.successnotification(res.data.success);
+                        this.$root.successNotification(res.data.success);
                         this.getProducts();
                     })
             });

@@ -28,149 +28,149 @@
                         <div class="card-content add-combo display-flex">
                             <div
                                 class="grid grid-cols-3 medium-grid-cols-4 grid-gap-25 grid-gap-20 align-items-center add-combo-list">
-                                <div class="bg-color-white selected-product add-combo-product-card">
+                                <div class="bg-color-white selected-product data-card">
                                     <div class="combo-image"><img src="/assets/images/seederImages/combo/Burger.png">
                                     </div>
-                                    <div class="text-align-center add-combo-product-name">
+                                    <div class="text-align-center data-card-name">
                                         <h4 class="no-margin no-padding">Burger</h4>
                                         <p class="add-combo-product-price no-margin no-padding">$8.00</p>
                                     </div>
                                     <img class="food-category" src="/assets/images/seederImages/combo/type1.png">
                                 </div>
-                                <div class="bg-color-white add-combo-product-card">
+                                <div class="bg-color-white data-card">
                                     <div class="combo-image"><img src="/assets/images/seederImages/combo/Sandwich.png">
                                     </div>
-                                    <div class="text-align-center add-combo-product-name">
+                                    <div class="text-align-center data-card-name">
                                         <h4 class="no-margin no-padding">Sandwich</h4>
                                         <p class="add-combo-product-price no-margin no-padding">$10.00</p>
                                     </div>
                                     <img class="food-category" src="/assets/images/seederImages/combo/type2.png">
                                 </div>
-                                <div class="bg-color-white add-combo-product-card">
+                                <div class="bg-color-white data-card">
                                     <div class="combo-image"><img src="/assets/images/seederImages/combo/Noodles.png">
                                     </div>
-                                    <div class="text-align-center add-combo-product-name">
+                                    <div class="text-align-center data-card-name">
                                         <h4 class="no-margin no-padding">Noodles</h4>
                                         <p class="add-combo-product-price no-margin no-padding">$19.00</p>
                                     </div>
                                     <img class="food-category" src="/assets/images/seederImages/combo/type1.png">
                                 </div>
-                                <div class="bg-color-white add-combo-product-card">
+                                <div class="bg-color-white data-card">
                                     <div class="combo-image"><img src="/assets/images/seederImages/combo/Papad.png">
                                     </div>
-                                    <div class="text-align-center add-combo-product-name">
+                                    <div class="text-align-center data-card-name">
                                         <h4 class="no-margin no-padding">Papad</h4>
                                         <p class="add-combo-product-price no-margin no-padding">$10.00</p>
                                     </div>
                                     <img class="food-category" src="/assets/images/seederImages/combo/type3.png">
                                 </div>
-                                <div class="bg-color-white selected-product add-combo-product-card">
+                                <div class="bg-color-white selected-product data-card">
                                     <div class="combo-image"><img
                                             src="/assets/images/seederImages/combo/French_Fries.png">
                                     </div>
-                                    <div class="text-align-center add-combo-product-name">
+                                    <div class="text-align-center data-card-name">
                                         <h4 class="no-margin no-padding">French Fries</h4>
                                         <p class="add-combo-product-price no-margin no-padding">$19.00</p>
                                     </div>
                                     <img class="food-category" src="/assets/images/seederImages/combo/type1.png">
                                 </div>
-                                <div class="bg-color-white selected-product add-combo-product-card">
+                                <div class="bg-color-white selected-product data-card">
                                     <div class="combo-image"><img src="/assets/images/seederImages/combo/Coca_Cola.png">
                                     </div>
-                                    <div class="text-align-center add-combo-product-name">
+                                    <div class="text-align-center data-card-name">
                                         <h4 class="no-margin no-padding">Coca Cola</h4>
                                         <p class="add-combo-product-price no-margin no-padding">$19.00</p>
                                     </div>
                                     <img class="food-category" src="/assets/images/seederImages/combo/type3.png">
                                 </div>
-                                <div class="bg-color-white add-combo-product-card">
+                                <div class="bg-color-white data-card">
                                     <div class="combo-image"><img src="/assets/images/seederImages/combo/Momos.png">
                                     </div>
-                                    <div class="text-align-center add-combo-product-name">
+                                    <div class="text-align-center data-card-name">
                                         <h4 class="no-margin no-padding">Momos</h4>
                                         <p class="add-combo-product-price no-margin no-padding">$10.00</p>
                                     </div>
                                     <img class="food-category" src="/assets/images/seederImages/combo/type3.png">
                                 </div>
-                                <div class="bg-color-white add-combo-product-card">
+                                <div class="bg-color-white data-card">
                                     <div class="combo-image"><img src="/assets/images/seederImages/combo/Pasta.png">
                                     </div>
-                                    <div class="text-align-center add-combo-product-name">
+                                    <div class="text-align-center data-card-name">
                                         <h4 class="no-margin no-padding">Pasta</h4>
                                         <p class="add-combo-product-price no-margin no-padding">$10.00</p>
                                     </div>
                                     <img class="food-category" src="/assets/images/seederImages/combo/type1.png">
                                 </div>
-                                <div class="bg-color-white add-combo-product-card">
+                                <div class="bg-color-white data-card">
                                     <div class="combo-image"><img
                                             src="/assets/images/seederImages/combo/Manchurian.png">
                                     </div>
-                                    <div class="text-align-center add-combo-product-name">
+                                    <div class="text-align-center data-card-name">
                                         <h4 class="no-margin no-padding">Manchurian</h4>
                                         <p class="add-combo-product-price no-margin no-padding">$19.00</p>
                                     </div>
                                     <img class="food-category" src="/assets/images/seederImages/combo/type3.png">
                                 </div>
-                                <div class="bg-color-white add-combo-product-card">
+                                <div class="bg-color-white data-card">
                                     <div class="combo-image"><img src="/assets\images\seederImages\combo\Pizza.png">
                                     </div>
-                                    <div class="text-align-center add-combo-product-name">
+                                    <div class="text-align-center data-card-name">
                                         <h4 class="no-margin no-padding">Pizza</h4>
                                         <p class="add-combo-product-price no-margin no-padding">$19.00</p>
                                     </div>
                                     <img class="food-category" src="/assets/images/seederImages/combo/type1.png">
                                 </div>
-                                <div class="bg-color-white add-combo-product-card">
+                                <div class="bg-color-white data-card">
                                     <div class="combo-image"><img
                                             src="/assets/images/seederImages/combo/Buttermilk.png">
                                     </div>
-                                    <div class="text-align-center add-combo-product-name">
+                                    <div class="text-align-center data-card-name">
                                         <h4 class="no-margin no-padding">Buttermilk</h4>
                                         <p class="add-combo-product-price no-margin no-padding">$10.00</p>
                                     </div>
                                     <img class="food-category" src="/assets/images/seederImages/combo/type3.png">
                                 </div>
-                                <div class="bg-color-white add-combo-product-card">
+                                <div class="bg-color-white data-card">
                                     <div class="combo-image"><img src="/assets/images/seederImages/combo/Sprite.png">
                                     </div>
-                                    <div class="text-align-center add-combo-product-name">
+                                    <div class="text-align-center data-card-name">
                                         <h4 class="no-margin no-padding">Sprite</h4>
                                         <p class="add-combo-product-price no-margin no-padding">$10.00</p>
                                     </div>
                                     <img class="food-category" src="/assets/images/seederImages/combo/type2.png">
                                 </div>
-                                <div class="bg-color-white add-combo-product-card">
+                                <div class="bg-color-white data-card">
                                     <div class="combo-image"><img
                                             src="/assets/images/seederImages/combo/Veg_Crispy.png">
                                     </div>
-                                    <div class="text-align-center add-combo-product-name">
+                                    <div class="text-align-center data-card-name">
                                         <h4 class="no-margin no-padding">Veg Crispy</h4>
                                         <p class="add-combo-product-price no-margin no-padding">$8.00</p>
                                     </div>
                                     <img class="food-category" src="/assets/images/seederImages/combo/type1.png">
                                 </div>
-                                <div class="bg-color-white add-combo-product-card">
+                                <div class="bg-color-white data-card">
                                     <div class="combo-image"><img src="/assets/images/seederImages/combo/Fanta.png">
                                     </div>
-                                    <div class="text-align-center add-combo-product-name">
+                                    <div class="text-align-center data-card-name">
                                         <h4 class="no-margin no-padding">Fanta</h4>
                                         <p class="add-combo-product-price no-margin no-padding">$10.00</p>
                                     </div>
                                     <img class="food-category" src="/assets/images/seederImages/combo/type3.png">
                                 </div>
-                                <div class="bg-color-white add-combo-product-card">
+                                <div class="bg-color-white data-card">
                                     <div class="combo-image"><img src="/assets/images/seederImages/combo/Soup.png">
                                     </div>
-                                    <div class="text-align-center add-combo-product-name">
+                                    <div class="text-align-center data-card-name">
                                         <h4 class="no-margin no-padding">Soup</h4>
                                         <p class="add-combo-product-price no-margin no-padding">$19.00</p>
                                     </div>
                                     <img class="food-category" src="/assets/images/seederImages/combo/type1.png">
                                 </div>
-                                <div class="bg-color-white add-combo-product-card">
+                                <div class="bg-color-white data-card">
                                     <div class="combo-image"><img src="/assets/images/seederImages/combo/Samosa.png">
                                     </div>
-                                    <div class="text-align-center add-combo-product-name">
+                                    <div class="text-align-center data-card-name">
                                         <h4 class="no-margin no-padding">Samosa</h4>
                                         <p class="add-combo-product-price no-margin no-padding">$19.00</p>
                                     </div>
@@ -420,7 +420,7 @@ export default {
             formData.append('sub_category_id', this.product.sub_category);
 
             if (!this.product.name || !this.product.price || !this.product.sub_category) {
-                this.$root.errornotification('Please fill the form details.');
+                this.$root.errorNotification('Please fill the form details.');
                 return false;
             }
 
@@ -428,7 +428,7 @@ export default {
                 formData.append('id', this.product.id);
                 axios.post('/api/update-product', formData)
                     .then((res) => {
-                        this.$root.successnotification(res.data.success);
+                        this.$root.successNotification(res.data.success);
                         this.getProducts();
                         f7.popup.close(`#product_popup`);
                         this.blankform();
@@ -436,7 +436,7 @@ export default {
             } else {
                 axios.post('/api/add-product', formData)
                     .then((res) => {
-                        this.$root.successnotification(res.data.success);
+                        this.$root.successNotification(res.data.success);
                         this.getProducts();
                         f7.popup.close(`#product_popup`);
                         this.blankform();
@@ -447,7 +447,7 @@ export default {
             f7.dialog.confirm('Are you sure delete the product?', () => {
                 axios.post('/api/delete-product', { id: id })
                     .then((res) => {
-                        this.$root.successnotification(res.data.success);
+                        this.$root.successNotification(res.data.success);
                         this.getProducts();
                     })
             });

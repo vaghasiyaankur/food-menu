@@ -195,7 +195,7 @@ export default {
             f7.dialog.confirm('Are you sure delete the QR Code?', () => {
                 axios.post('/api/delete-qrcode',{id:id})
                 .then((res) => {
-                    this.$root.successnotification(res.data.success);
+                    this.$root.successNotification(res.data.success);
                     this.listQrCodes(this.pagenumber)
                 })
             });
@@ -235,16 +235,16 @@ export default {
         },
         generateQrCode() {
             if (!this.start_qrcode) {
-                this.$root.errornotification("Please enter start month."); return;
+                this.$root.errorNotification("Please enter start month."); return;
             } else if (!this.end_qrcode) {
-                this.$root.errornotification("Please enter end month."); return;
+                this.$root.errorNotification("Please enter end month."); return;
             }
             axios.post('/api/generate-qrcode', { start_qrcode: this.start_qrcode, end_qrcode: this.end_qrcode })
                 .then((res) => {
                 if (res.data.success) {
-                    this.$root.successnotification(res.data.success);
+                    this.$root.successNotification(res.data.success);
                 } else {
-                    this.$root.errornotification(res.data.error);
+                    this.$root.errorNotification(res.data.error);
                 }
                 f7.popup.close(`#qrcode_popup`);
                 this.listQrCodes();
@@ -253,7 +253,7 @@ export default {
         regenerateQrCode(id) {
             axios.post('/api/regenerate-qrcode', { id: id })
             .then((res) => {
-                this.$root.successnotification(res.data.success);
+                this.$root.successNotification(res.data.success);
                 this.listQrCodes(this.pagenumber);
             })
         },

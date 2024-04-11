@@ -126,7 +126,7 @@
                 var formData = new FormData();
 
                 if(!this.table_number || !this.capacity_of_person || !this.floor_number || !this.color){
-                    this.$root.errornotification('Please Fill All Data in Form')
+                    this.$root.errorNotification('Please Fill All Data in Form')
                     return false;
                 }
 
@@ -140,10 +140,10 @@
                 axios
                 .post("/api/add-update-table", formData, config)
                 .then((res) => {
-                    this.$root.successnotification(res.data.success);
+                    this.$root.successNotification(res.data.success);
                     this.$emit('tableshow')
                 }).catch((error) => {
-                    this.$root.errornotification('Something Went Wrong !!!');
+                    this.$root.errorNotification('Something Went Wrong !!!');
                     return false;
                 });
             },

@@ -187,7 +187,6 @@ Route::post('/get-wishlist',[FavoriteController::class, 'getWishlist']);
 
 // ------------------------ Lauguage Routes ------------------------ //
 
-Route::get('/get-languages',[LanguageController::class, 'getlangs']);
 
 Route::get('/get-all-languages',[LanguageController::class, 'getAllLangs']);
 
@@ -198,6 +197,10 @@ Route::get('/get-lang-translation/{id}',[LanguageController::class, 'getLangTran
 Route::post('update-lang-translation',[LanguageController::class, 'updateLangTrans']);
 
 Route::post('update-languages-status',[LanguageController::class, 'updateLangStatus']);
+
+// New 
+
+Route::get('/get-languages',[LanguageController::class, 'getlangs']);
 
 // ------------------------ Qrcode Routes ------------------------ //
 
