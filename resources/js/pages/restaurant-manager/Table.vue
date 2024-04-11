@@ -822,7 +822,7 @@ export default {
                     if(res.data.success) {
                         this.tableListFloorWise(floor_id);
                     }else{
-                        this.$root.errornotification(res.data.message); return false;
+                        this.$root.errorNotification(res.data.message); return false;
                     }
                 })
             });
@@ -883,7 +883,7 @@ export default {
         },
         addMinutes(){
             if(this.minutes == ''){
-                this.$root.errornotification("Please add minutes in order"); return false;
+                this.$root.errorNotification("Please add minutes in order"); return false;
             }
             axios.post('/api/add-minutes-order', { minutes : this.minutes, orderId : this.orderId})
             .then((res) => {

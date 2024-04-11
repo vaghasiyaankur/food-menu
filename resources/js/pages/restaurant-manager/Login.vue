@@ -75,19 +75,19 @@ export default {
     methods: {
         loginAuthUser() {
             if (!this.email) {
-                this.$root.errornotification("Please enter your email"); return;
+                this.$root.errorNotification("Please enter your email"); return;
             } else if (!this.password) {
-                this.$root.errornotification("Please enter your password"); return;
+                this.$root.errorNotification("Please enter your password"); return;
             }
             axios.post('/api/login-user', { email: this.email, password: this.password })
             .then((res) => {
                 if (res.data.success) {
-                    this.$root.successnotification(res.data.success);
+                    this.$root.successNotification(res.data.success);
                     this.$root.user.id = res.data.id;
                     // f7.view.main.router.navigate({ url: '/pos' });
                     location.reload();
                 } else {
-                    this.$root.errornotification(res.data.error);
+                    this.$root.errorNotification(res.data.error);
                 }
             })
         }

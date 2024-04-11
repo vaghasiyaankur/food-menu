@@ -33,11 +33,11 @@
                 @update:search="updateSearch" @update:PopupTitle="updatePopupTitle" />
             <div class="card-content add-combo">
                 <div class="grid grid-cols-5 medium-grid-cols-4 grid-gap-25 grid-gap-20 align-items-center add-list food-sub-category-list">
-                    <div class="bg-color-white add-combo-product-card">
+                    <div class="bg-color-white data-card">
                         <div class="combo-image"><img
                                 src="\assets\images\seederImages\Food-SubCategory\Kathiyavadi_Thali.png">
                         </div>
-                        <div class="text-align-center add-combo-product-name">
+                        <div class="text-align-center data-card-name">
                             <h4 class="no-margin no-padding">Kathiyavadi Thali</h4>
                         </div>
                         <div class="grid grid-cols-2 grid-gap-5 combo-change">
@@ -50,10 +50,10 @@
                         </div>
                         <img class="food-category" src="/assets/images/seederImages/combo/type1.png">
                     </div>
-                    <div class="bg-color-white add-combo-product-card">
+                    <div class="bg-color-white data-card">
                         <div class="combo-image"><img src="\assets\images\seederImages\Food-SubCategory\Pizza.png">
                         </div>
-                        <div class="text-align-center add-combo-product-name">
+                        <div class="text-align-center data-card-name">
                             <h4 class="no-margin no-padding">Pizza</h4>
                         </div>
                         <div class="grid grid-cols-2 grid-gap-5 combo-change">
@@ -66,10 +66,10 @@
                         </div>
                         <img class="food-category" src="/assets/images/seederImages/combo/type3.png">
                     </div>
-                    <div class="bg-color-white add-combo-product-card">
+                    <div class="bg-color-white data-card">
                         <div class="combo-image"><img src="\assets\images\seederImages\Food-SubCategory\Paratha.png">
                         </div>
-                        <div class="text-align-center add-combo-product-name">
+                        <div class="text-align-center data-card-name">
                             <h4 class="no-margin no-padding">Paratha</h4>
                         </div>
                         <div class="grid grid-cols-2 grid-gap-5 combo-change">
@@ -83,10 +83,10 @@
                         <img class="food-category" src="/assets/images/seederImages/combo/type1.png">
                     </div>
 
-                    <div class="bg-color-white add-combo-product-card">
+                    <div class="bg-color-white data-card">
                         <div class="combo-image"><img src="\assets\images\seederImages\Food-SubCategory\Sandwich.png">
                         </div>
-                        <div class="text-align-center add-combo-product-name">
+                        <div class="text-align-center data-card-name">
                             <h4 class="no-margin no-padding">Sandwich</h4>
                         </div>
                         <div class="grid grid-cols-2 grid-gap-5 combo-change">
@@ -123,19 +123,19 @@
 
         <!-- ========= ADD SUB-CATEGORY POPUP ========= -->
         <div class="popup SubCategoryPopup" id="sub_category_popup">
-            <div class="category-form">
+            <div class="data-form">
                 <div class="text-align-center popup_title">
                     Add sub Category</div>
-                <div class="category-add">
+                <div class="data-add">
                     <label class="add_sub-category_name">Add sub category name</label>
-                    <div class="sub-categoryName text-align-left">
-                        <input type="text" class="sub-category-name" placeholder="Add sub category name">
+                    <div class="sub-data-name text-align-left">
+                        <input type="text" class="sub-add-update-data-name" placeholder="Add sub category name">
                     </div>
-                    <div class="sub-category-image-selection">
-                        <div class="sub-category-add-image">
+                    <div class="sub-data-image-selection">
+                        <div class="sub-data-add-image">
                             <img src="/images/add-image.png" />
                         </div>
-                        <div class="sub-category-add-image-text">
+                        <div class="sub-data-add-image-text">
                             <span class="add-image-text">Select Image</span>
                         </div>
                     </div>
@@ -156,13 +156,13 @@
         </div>
         <!-- ========= EDIT SUB-CATEGORY POPUP ========= -->
         <div class="popup EditSubCategoryPopup">
-            <div class="category-form">
+            <div class="data-form">
                 <div class="text-align-center popup_title">
                     edit sub Category</div>
-                <div class="category-add">
+                <div class="data-add">
                     <label class="add_sub-category_name">Add sub category name</label>
-                    <div class="sub-categoryName text-align-left">
-                        <input type="text" class="sub-category-name" placeholder="Add sub category name">
+                    <div class="sub-data-name text-align-left">
+                        <input type="text" class="sub-add-update-data-name" placeholder="Add sub category name">
                     </div>
                     <div class="display-flex justify-content-center popup_button">
                         <button type="button"
@@ -175,7 +175,7 @@
         </div>
         <!-- ========= DELETE SUB-CATEGORY POPUP ========= -->
         <div class="popup DeleteSubCategoryPopup">
-            <div class="delete-sub-category-form">
+            <div class="delete-sub-data-form">
                 <div class="delete-category-WarningSign">
                     <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -196,16 +196,16 @@
 
         <!-- <div id="sub_category_popup" class="popup" style="position: fixed; display: block; border-radius: 15px;">
             <div class="text-align-center padding popup_title">{{ subCategory_title }}</div>
-            <div class="category-add padding">
+            <div class="data-add padding">
                 <div class="categoryForm text-align-left no-padding">
-                    <label for="" class="add_category_name">Sub category name</label>
+                    <label for="" class="add-data-name">Sub category name</label>
                     <input type="text" name="name" v-model="subCategory.name[lang.id]" v-for="lang in $root.langs"
-                        :key="lang.id" class="category-name margin-top-half padding-left-half padding-right-half"
+                        :key="lang.id" class="add-update-data-name margin-top-half padding-left-half padding-right-half"
                         :placeholder="'Add ' + lang.name + ' sub category name'">
                 </div>
                 <div class="categoryForm text-align-left margin-top">
-                    <label for="" class="add_category_name">Parent category</label>
-                    <div class="item-input-wrap input-dropdown-wrap category-name margin-top-half no-padding">
+                    <label for="" class="add-data-name">Parent category</label>
+                    <div class="item-input-wrap input-dropdown-wrap add-update-data-name margin-top-half no-padding">
                         <select placeholder="Please choose..." v-model="subCategory.category"
                             class="selectCategory padding-left-half">
                             <option v-for="(category, key) in categoryOption" :key="category" :value="key">{{ category }}
@@ -226,16 +226,16 @@
 
         <div id="product_popup" class="popup" style="position: fixed; display: block; border-radius: 15px;">
             <div class="text-align-center padding popup_title">Add Product</div>
-            <div class="category-add padding">
+            <div class="data-add padding">
                 <div class="categoryForm text-align-left no-padding">
-                    <label for="" class="add_category_name">Product Name</label>
+                    <label for="" class="add-data-name">Product Name</label>
                     <input type="text" v-model="product.name[lang.id]" name="name" v-for="lang in $root.langs"
-                        :key="lang.id" class="category-name margin-top-half padding-left-half padding-right-half"
+                        :key="lang.id" class="add-update-data-name margin-top-half padding-left-half padding-right-half"
                         :placeholder="'Add ' + lang.name + ' Product name'">
                 </div>
                 <div class="categoryForm text-align-left margin-top">
-                    <label for="" class="add_category_name">Choose Sub category</label>
-                    <div class="item-input-wrap input-dropdown-wrap category-name margin-top-half no-padding">
+                    <label for="" class="add-data-name">Choose Sub category</label>
+                    <div class="item-input-wrap input-dropdown-wrap add-update-data-name margin-top-half no-padding">
                         <select placeholder="Please choose..." v-model="product.sub_category"
                             class="selectCategory padding-left-half">
                             <option v-for="(subCat, key) in subCategoryOption" :key="subCat" :value="key">{{ subCat }}
@@ -244,9 +244,9 @@
                     </div>
                 </div>
                 <div class="categoryForm margin-top text-align-left no-padding">
-                    <label for="" class="add_category_name">Price</label>
+                    <label for="" class="add-data-name">Price</label>
                     <input type="number" name="name" v-model="product.price"
-                        class="category-name margin-top-half padding-left-half padding-right-half"
+                        class="add-update-data-name margin-top-half padding-left-half padding-right-half"
                         placeholder="Add product price">
                 </div>
                 <div class="margin-top no-margin-bottom display-flex justify-content-center padding-top popup_button">
@@ -333,7 +333,7 @@ export default {
             formData.append('category_id', this.subCategory.category);
 
             if (!this.subCategory.name || !this.subCategory.category) {
-                this.$root.errornotification('Please fill the form details.');
+                this.$root.errorNotification('Please fill the form details.');
                 return false;
             }
 
@@ -342,7 +342,7 @@ export default {
 
                 axios.post('/api/update-sub-category', formData)
                     .then((res) => {
-                        this.$root.successnotification(res.data.success);
+                        this.$root.successNotification(res.data.success);
                         this.getSubCategories();
                         f7.popup.close(`#sub_category_popup`);
                     })
@@ -350,7 +350,7 @@ export default {
                 axios.post('/api/add-sub-category', formData)
                     .then((res) => {
                         this.getSubCategories();
-                        this.$root.successnotification(res.data.success);
+                        this.$root.successNotification(res.data.success);
                         f7.popup.close(`#sub_category_popup`);
                     })
             }
@@ -391,13 +391,13 @@ export default {
             formData.append('sub_category_id', this.product.sub_category);
 
             if (!this.product.name || !this.product.price || !this.product.sub_category) {
-                this.$root.errornotification('Please fill the form details.');
+                this.$root.errorNotification('Please fill the form details.');
                 return false;
             }
 
             axios.post('/api/add-product', formData)
                 .then((res) => {
-                    this.$root.successnotification(res.data.success);
+                    this.$root.successNotification(res.data.success);
                     f7.popup.close(`#product_popup`);
                     this.product.name = '';
                     this.product.price = '';

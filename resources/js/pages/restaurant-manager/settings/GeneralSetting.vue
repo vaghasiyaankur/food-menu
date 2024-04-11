@@ -378,7 +378,7 @@
                 var formData = new FormData();
 
                 if(!this.restaurant_name || !this.phone_number || !this.manager_name){
-                    this.$root.errornotification('Please Fill All Data in Form')
+                    this.$root.errorNotification('Please Fill All Data in Form')
                     return false;
                 }
 
@@ -396,9 +396,9 @@
                 axios
                 .post("/api/update-setting", formData, config)
                 .then((res) => {
-                    this.$root.successnotification(res.data.success);
+                    this.$root.successNotification(res.data.success);
                 }).catch((error) => {
-                    this.$root.errornotification('Something Went Wrong !!!');
+                    this.$root.errorNotification('Something Went Wrong !!!');
                     return false;
                 });
             },

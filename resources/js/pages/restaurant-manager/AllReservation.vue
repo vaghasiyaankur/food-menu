@@ -220,7 +220,7 @@ export default {
                         id: id
                     })
                     .then((res) => {
-                        this.$root.successnotification(res.data.success);
+                        this.$root.successNotification(res.data.success);
                         this.reservationData();
                     })
             });

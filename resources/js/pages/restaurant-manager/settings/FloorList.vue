@@ -100,7 +100,7 @@
                 f7.dialog.confirm('Are you sure delete the Floor?', () => {
                     axios.post('/api/delete-floor', { id: id })
                         .then((res) => {
-                            this.$root.successnotification(res.data.success);
+                            this.$root.successNotification(res.data.success);
                             this.getFloors();
                         })
                 });

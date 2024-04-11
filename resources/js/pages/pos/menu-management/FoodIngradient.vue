@@ -8,11 +8,11 @@
                 <div class="card-content add-combo">
                 <div
                     class="grid grid-cols-5 medium-grid-cols-4 grid-gap-25 grid-gap-20 align-items-center add-list food-ingradient-list">
-                    <div class="bg-color-white add-combo-product-card">
+                    <div class="bg-color-white data-card">
                         <div class="combo-image"><img
                                 src="\assets\images\seederImages\Ingradients\Onion.png">
                         </div>
-                        <div class="text-align-center add-combo-product-name">
+                        <div class="text-align-center data-card-name">
                             <h4 class="no-margin no-padding">Kathiyavadi Thali</h4>
                         </div>
                         <div class="text-align-center combo-name">
@@ -35,10 +35,10 @@
         </div>
         <!-- ========= ADD INGRADIENT POPUP ========= -->
         <div class="IngradientPopup display-none">
-            <div class="category-form">
+            <div class="data-form">
                 <div class="text-align-center popup_title">
                     Add Ingradient Category</div>
-                <div class="category-add">
+                <div class="data-add">
                     <label class="add_ingradient_name">Ingradient name</label>
                     <div class="ingradientName text-align-left">
                         <input type="text" class="ingradient-name" placeholder="Enter Ingradient name">
@@ -47,10 +47,10 @@
                         <label>Profile Image</label>
                     </div>
                     <div class="ingradient-image-selection">
-                        <div class="category-add-image">
+                        <div class="data-add-image">
                             <img src="/images/add-image.png" />
                         </div>
-                        <div class="category-add-image-text">
+                        <div class="data-add-image-text">
                             <span class="add-image-text">Select Image</span>
                         </div>
                     </div>
@@ -65,13 +65,13 @@
         </div>
         <!-- ========= EDIT INGRADIENT POPUP ========= -->
         <div class="EditIngradientPopup display-none">
-            <div class="category-form">
+            <div class="data-form">
                 <div class="text-align-center popup_title">
                     edit Category</div>
-                <div class="category-add">
-                    <label class="add_category_name">Ingradient name</label>
-                    <div class="categoryName text-align-left">
-                        <input type="text" class="category-name" placeholder="Kathiyavadi thali">
+                <div class="data-add">
+                    <label class="add-data-name">Ingradient name</label>
+                    <div class="data-name text-align-left">
+                        <input type="text" class="add-update-data-name" placeholder="Kathiyavadi thali">
                     </div>
                     <div class="ingradient_price">
                         <label>Price</label>
