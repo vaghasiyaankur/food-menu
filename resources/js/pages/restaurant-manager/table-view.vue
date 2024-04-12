@@ -2,16 +2,16 @@
     <f7-page>
         <div class="card_header table_view-header">
             <div class="row align-items-center table_view-header_inner">
-                <div class="col-100 large-20 medium-15">
+                <div class="col-100 large-20 medium-100">
                     <h3 class="no-margin no-padding table_view-banner">Table View
                     </h3>
                 </div>
-                <div class="col-100 large-80 medium-85">
-                    <div class="display-flex align-items-center justify-content-right">
+                <div class="col-100 large-80 medium-100">
+                    <div class="table_view-features">
                         <div class="table_view-btn table_view-move_btn">
                             <button class="button button-raised height_40">Move KOT / Items</button>
                         </div>
-                        <div class="display-flex table_view-representer">
+                        <div class="table_view-representer">
                             <div class="display-flex align-items-center">
                                 <div class="table_status-represent-ordering"></div>
                                 <p class="table_status-represent-type no-margin no-padding">Ordering</p>
@@ -39,7 +39,7 @@
         </div>
         <div class="card-content table_view_list">
             <h4 class="table_view_list-floor-heading no-margin no-padding">Ground Floor</h4>
-            <div class="grid grid-cols-5 medium-grid-cols-4 grid-gap-25 align-items-center floor-divider">
+            <div class="grid grid-cols-5 medium-grid-cols-3 grid-gap-25 grid-gap-20 align-items-center floor-divider">
                 <div class="card-type table_view-ground_floor-card ordering_card">
                     <div class="card-margin-padding">
                         <div class="table_view-table_number">
@@ -368,7 +368,7 @@
                 </div>
             </div>
             <h4 class="table_view_list-floor-heading no-margin no-padding">First Floor</h4>
-            <div class="grid grid-cols-5 medium-grid-cols-4 grid-gap-25 align-items-center floor-divider">
+            <div class="grid grid-cols-5 medium-grid-cols-3 grid-gap-25 grid-gap-20 align-items-center floor-divider">
                 <div class="card-type table_view-first_floor-card empty_card">
                     <div class="card-margin-padding">
                         <div class="table_view-table_number">
@@ -697,7 +697,7 @@
                 </div>
             </div>
             <h4 class="table_view_list-floor-heading no-margin no-padding">Second Floor</h4>
-            <div class="grid grid-cols-5 medium-grid-cols-4 grid-gap-25 align-items-center floor-divider">
+            <div class="grid grid-cols-5 medium-grid-cols-3 grid-gap-25 grid-gap-20 align-items-center floor-divider">
                 <div class="card-type table_view-second_floor-card blank_card">
                     <div class="card-margin-padding">
                         <div class="table_view-table_number">
@@ -1025,6 +1025,46 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <!-- ========= TABLE-VIEW POPUP ========= -->
+        <div class="popup add_table_Popup" id="add_table_Popup">
+            <div class="data-form add_table-data-form">
+                <div class="text-align-center add_table-popup_title">
+                    Add Table</div>
+                <div class="data-add add_table-data">
+                    <label class="add_table_name">Table Number</label>
+                    <div class="add_table-name text-align-left">
+                        <input type="text" class="add_table-update-data-name" placeholder="Enter table number">
+                    </div>
+                    <label class="add_table_cap">Capacity of Person</label>
+                    <div class="add_table-cap text-align-left">
+                        <input type="text" class="add_table_cap-data-name" placeholder="Enter capacity of person">
+                    </div>
+                    <label class="choose_add_table_floor">Select Floor</label>
+                    <div class="choose_table_floor">
+                        <select name="choose_table_floor" id="choose_table_floor">
+                            <option value="FirstFloor" selected><label>First Floor</label></option>
+                        </select>
+                    </div>
+                    <label class="choose_add_table_status">Status</label>
+                    <div class="display-flex align-items-center table_status-outer">
+                        <div class="table_status-inner">
+                            <input type="radio" id="table_status" name="table_status" value="active" checked>
+                            <label for="table_status">Active</label>
+                        </div>
+                        <div class="table_status-inner">
+                            <input type="radio" id="table_status" name="table_status" value="deactive">
+                            <label for="table_status">Deactive</label>
+                        </div>
+                    </div>
+                    <div class="display-flex justify-content-center popup_button">
+                        <button type="button"
+                            class="button button-raised button-large popup-close popup-cancel-button">Cancel</button>
+                        <button type="button" class="button button-raised button-large popup-ok-button">Ok</button>
+                    </div>
+                </div>
+            </div>
+            <div class="wave-image-content"><img src="/images/flow.png" style="width:100%"></div>
         </div>
     </f7-page>
 </template>
