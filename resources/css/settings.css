@@ -1,4 +1,21 @@
+.AllUsers::-webkit-scrollbar,
+.SuperAdmin::-webkit-scrollbar {
+    height: 5px !important;
+    width: 65px !important;
+}
 
+.AllUsers::-webkit-scrollbar-track,
+.SuperAdmin::-webkit-scrollbar {
+    background: #e8e8e8;
+    border-top: 0 solid #fafafa !important;
+    border-bottom: 0px solid #fafafa !important;
+}
+.AllUsers::-webkit-scrollbar-thumb,
+.SuperAdmin::-webkit-scrollbar-thumb {
+    background: #555555;
+    border-radius: 5px;
+    max-width: 65px !important;
+}
 /* setting */
 .setting-tabs{
     margin-top: 56px;
@@ -80,6 +97,7 @@
 .setting-tabs .general_info_form .list .image-field label{
     border-radius: 6px;
     height: 100%;
+    min-height: 40px;
     max-height: 40px;
     display: flex;
     align-items: center;
@@ -97,10 +115,10 @@
     color: #F33E3E;
 }
 .setting-tabs .general_info_form .list .image-field label div.image-label div.image-label-text{
-    width: 90%;
+    width: 88%;
 }
 .setting-tabs .general_info_form .list .image-field label div.image-label button.image-label-remove{
-    width: 10%;
+    width: 12%;
     height: 100%;
     border-left: 1px solid #F33E3E;
     border-radius: 0 5px 5px 0;
@@ -175,4 +193,399 @@
 
 .edit_tax_button{
     border-right: 1px solid #E0E0E0;
+}
+
+
+
+/* NEW SETTINGS */
+.tab-link {
+    --f7-touch-ripple-color: none;
+}
+.setting-tabs {
+    margin: 56px 30px !important;
+}
+.setting-tabs-banner {
+    display: flex;
+    align-items: center;
+}
+.setting-tabs-banner h3 {
+    margin: 25px 0 !important;
+    max-width: calc(100% / 3);
+    flex: calc(100% / 3);
+}
+.settings-banner {
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 600;
+    color: #38373d;
+}
+.settings_tabs {
+    border-radius: 10px;
+    margin: 0;
+}
+.settings_page-tab_listing {
+    max-width: calc(100% / 1.5);
+    flex: calc(100% / 1.5);
+    width: 100%;
+}
+.settings_page-tab_listing .toolbar {
+    width: 100% !important;
+    background: #f7f7f7 !important;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    border-right: none !important;
+}
+.settings_page-tab_listing .tabbar::before,
+.settings_page-tab_listing .tabbar::after {
+    display: none;
+}
+.settings_page-tab_listing .toolbar-inner {
+    width: fit-content;
+    position: relative;
+    left: 100%;
+    transform: translate(-100%);
+    display: flex !important;
+    background: #f7f7f7 !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-end;
+    border-bottom: 1px solid #e0e0e0;
+}
+.settings_page-tab_listing .tab-link {
+    padding: 0 !important;
+    padding-bottom: 6px !important;
+    width: fit-content;
+    color: black !important;
+    font-size: 15px !important;
+    line-height: 18px;
+    font-weight: 500 !important;
+    color: #555555 !important;
+    text-transform: capitalize;
+    justify-content: flex-end !important;
+    align-items: flex-end !important;
+}
+.settings_page-tab_listing .tab-link:not(:first-child) {
+    margin-left: 30px !important;
+}
+.settings_page-tab_listing .tab-link.tab-link:active {
+    background: #f7f7f7 !important;
+}
+.setting-tabs
+    .settings_page-tab_listing
+    .toolbar-inner
+    .tab-link.tab-link-active:after {
+    content: "";
+    position: absolute;
+    background-color: #f33e3e;
+    display: block;
+    z-index: 15;
+    bottom: 0 !important;
+    right: 0;
+    bottom: auto;
+    left: auto;
+    width: 100%;
+    height: 1px;
+}
+
+/* GENERAL SETTINGS */
+.general_settings-banner,
+.general_info_form,
+.currency_settings-banner,
+.currency_form,
+.tax_settings-banner,
+.taxsetting_form {
+    margin: 30px 25px 0 !important;
+}
+.general_settings,
+.currency_settings,
+.tax_settings {
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 600;
+    color: #38373d;
+}
+.general_info_form-input,
+.currency_form-input,
+.taxsetting_form-input,
+.gst-details {
+    margin-top: 7px !important;
+}
+.general_info_form-input input,
+.currency_form-input input,
+.taxsetting_form-input input,
+.note_details {
+    padding: 13px 15px !important;
+}
+.general_info_form-restaurent-name input,
+.currency_form-currency-name input,
+.taxsetting_form-name input {
+    border: 1px solid #555555 !important;
+}
+.general_info_form-address input,
+.general_info_form-phone input,
+.general_info_form-print input,
+.currency_form-currency-code input,
+.currency_form-currency-symbol input,
+.taxsetting_form-type-charge input {
+    border: none !important;
+}
+.currency_form-currency-name input {
+    border: 1px solid #999999;
+}
+.general_info_form-input input::placeholder,
+.currency_form-input input::placeholder,
+.taxsetting_form-input input::placeholder {
+    font-size: 15px !important;
+    line-height: 18px;
+    font-weight: 500 !important;
+    color: #555555 !important;
+}
+.general_info_form-image-input,
+.general_info_form-address,
+.general_info_form-phone,
+.general_info_form-print,
+.currency_form-currency-code,
+.currency_form-currency-symbol,
+.taxsetting_form-type-charge,
+.taxsetting_form-cgst,
+.taxsetting_form-sgst {
+    margin-top: 25px !important;
+}
+.general_info_form-image-input .image-logo {
+    margin-top: 7px;
+}
+.general_info_form-image-input .image-field input {
+    display: none;
+}
+.general_info_form-image-input .item-input-wrap {
+    margin-top: 10px;
+}
+.general_info_form .form-submit {
+    margin: 50px 0 25px !important;
+}
+.tax-setting-form hr {
+    margin: 35px 0 !important;
+}
+.edit_tax_button {
+    margin-right: 30px;
+}
+.tax-btns {
+    position: relative;
+}
+.tax-btns:before {
+    content: "";
+    border-right: 1px solid #e0e0e0;
+    position: absolute;
+    height: 24px;
+    width: 1px;
+    left: 50%;
+    top: 25%;
+    transform: translate(-50%, -33%);
+}
+.taxsetting_form-gst {
+    margin-top: 30px;
+}
+.taxsetting_form .popup_button {
+    margin: 68px 0 30px !important;
+}
+
+/* USER MANAGEMENT SETTINGS */
+.data-table {
+    margin: 0 !important;
+}
+.all_users thead th {
+    text-align: left !important;
+    font-size: 15px !important;
+    line-height: 18px;
+    font-weight: 600 !important;
+    padding: 17px 0 !important;
+}
+.all_users thead th:first-child {
+    padding-left: 20px !important;
+}
+.all_users tbody tr td:first-child {
+    padding-left: 20px !important;
+}
+thead .label-cell {
+    padding: 17px 0 17px 20px !important;
+}
+thead .numeric-cell:nth-child(2) {
+    padding: 17px 0 17px 26px !important;
+}
+thead .numeric-cell:nth-child(3) {
+    padding: 17px 0 17px 82px !important;
+}
+thead .numeric-cell:nth-child(4) {
+    padding: 17px 0 17px 79px !important;
+}
+thead .numeric-cell:last-child {
+    padding: 17px 43px 17px 71px !important;
+}
+
+tbody .numeric-cell:nth-child(1) {
+    padding: 26px 0 26px 20px !important;
+}
+tbody .numeric-cell:nth-child(2) {
+    padding: 9px 0 9px 18px !important;
+}
+.settings_user-name {
+    margin-left: 14px;
+    text-wrap: nowrap;
+}
+tbody .numeric-cell:nth-child(3) {
+    padding: 26px 0 26px 82px !important;
+    text-wrap: nowrap;
+    text-align: left;
+}
+tbody .numeric-cell:nth-child(4) {
+    padding: 26px 0 26px 79px !important;
+    text-wrap: nowrap;
+    text-align: left;
+}
+tbody .numeric-cell:last-child {
+    padding: 26px 43px 26px 71px !important;
+    text-wrap: nowrap;
+    text-align: center;
+}
+.settings_user-name,
+.settings_user-email {
+    font-size: 15px !important;
+    line-height: 18px;
+    font-weight: 400 !important;
+    color: #38373d;
+}
+.site-role {
+    max-width: calc(130px - 32px);
+    width: 100%;
+    padding: 8px 16px !important;
+    background-color: #f4f4f4;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.site-role label {
+    font-size: 12px !important;
+    line-height: 15px;
+    font-weight: 500 !important;
+    color: #555555 !important;
+}
+.user-btns {
+    gap: 25px;
+}
+.edit_user_button p {
+    font-size: 15px !important;
+    line-height: 18px;
+    font-weight: 500 !important;
+    color: #999999 !important;
+    padding-left: 6px;
+}
+.edit_user_button,
+.delete_user_button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.delete_user_button p {
+    font-size: 15px !important;
+    line-height: 18px;
+    font-weight: 500 !important;
+    color: #f33e3e !important;
+    padding-left: 6px;
+}
+
+
+/*========= SWITCH ON OFF CSS ===========*/
+.time_onoff .switch {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    width: 80px;
+    height: 31px;
+    padding: 3px;
+    background-color: white;
+    border-radius: 7px;
+    /*box-shadow: inset 0 -1px white, inset 0 1px 1px rgba(0, 0, 0, 0.05);*/
+    cursor: pointer;
+   /* background-image: -webkit-linear-gradient(top, #eeeeee, white 25px);
+    background-image: -moz-linear-gradient(top, #eeeeee, white 25px);
+    background-image: -o-linear-gradient(top, #eeeeee, white 25px);
+    background-image: linear-gradient(to bottom, #eeeeee, white 25px);*/
+}
+.time_onoff .switch-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+.time_onoff .switch-input:checked ~ .switch-label {
+    background: #f33e3e;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+.time_onoff .switch-label {
+    position: relative;
+    display: block;
+    height: inherit;
+    font-size: 14px;
+    text-transform: uppercase;
+    background: #f5f5f5;
+    border-radius: inherit;
+    -webkit-transition: 0.15s ease-out;
+    -moz-transition: 0.15s ease-out;
+    -o-transition: 0.15s ease-out;
+    transition: 0.15s ease-out;
+    -webkit-transition-property: opacity background;
+    -moz-transition-property: opacity background;
+    -o-transition-property: opacity background;
+    transition-property: opacity background;
+}
+.time_onoff .switch-label:before,.time_onoff .switch-label:after {
+    position: absolute;
+    top: 50%;
+    margin-top: -.5em;
+    line-height: 1;
+    -webkit-transition: inherit;
+    -moz-transition: inherit;
+    -o-transition: inherit;
+    transition: inherit;
+}
+.time_onoff .switch-label:before {
+    content: attr(data-off);
+    right: 11px;
+    color: #999999;
+    text-shadow: 0 1px rgba(255, 255, 255, 0.5);
+}
+.time_onoff .switch-input:checked ~.switch-label:before {
+    opacity: 0;
+}
+.time_onoff .switch-label:after {
+    content: attr(data-on);
+    left: 11px;
+    color: white;
+    text-shadow: 0 1px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+}
+.time_onoff .switch-input:checked ~.switch-label:after {
+    opacity: 1;
+}
+.time_onoff .switch-handle {
+    position: absolute;
+    top: 7px;
+    left: 4px;
+    width: 22px;
+    height: 22px;
+    background: #999999;
+    border-radius: 7px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+    -webkit-transition: left 0.15s ease-out;
+    -moz-transition: left 0.15s ease-out;
+    -o-transition: left 0.15s ease-out;
+    transition: left 0.15s ease-out;
+}
+.time_onoff .switch-input:checked ~.switch-handle {
+    left: 53px;
+    box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
 }

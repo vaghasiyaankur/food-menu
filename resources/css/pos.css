@@ -242,6 +242,11 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox{
 }
 .pos-product-section .product-summary .product_name{
     color: #38373D;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 1;
+    line-height: 1.5;
 }
 .pos-product-section .card-content-padding{
     padding : 20px 25px;
