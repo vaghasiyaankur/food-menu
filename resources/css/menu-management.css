@@ -140,7 +140,7 @@
     max-height: 100px;
 }
 
-@media screen and (min-width: 991px) {
+@media screen and (min-width: 992px) {
     .grid-cols-5 {
         grid-template-columns:
             calc((100% - 100px) / 5) calc((100% - 100px) / 5) calc((100% - 100px) / 5) calc((100% - 100px) / 5) calc((100% - 100px) / 5);
@@ -410,7 +410,7 @@
     left: auto;
 }
 
-@media screen and (min-width: 991px) {
+@media screen and (min-width: 992px) {
     .add-combo-header {
         max-width: 100%;
     }
@@ -522,7 +522,7 @@
     }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
     .medium-grid-cols-4 {
         grid-template-columns: auto auto;
     }
@@ -537,7 +537,7 @@
         left: -25%;
     }
 }
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 575px) {
     .medium-grid-cols-4 {
         grid-template-columns: auto;
     }
@@ -1058,230 +1058,4 @@
     line-height: 18px;
     font-weight: 500;
     color: #38373d;
-}
-
-/* TABLE VIEW PAGE */
-.page-content{
-    background-color: #FBFBFB !important;
-    color: #38373D !important;
-}
-.table_view-header {
-    margin-top: 60px !important;
-}
-.table_view-header_inner {
-    padding: 24px 30px !important;
-}
-.table_view-banner {
-    font-size: 20px !important;
-    line-height: 24px;
-    font-weight: 600 !important;
-    color: #38373d !important;
-}
-.table_view-btn button {
-    padding: 10px 20px !important;
-    text-transform: capitalize;
-    font-size: 16px !important;
-    line-height: 20px;
-    font-weight: 500 !important;
-    border-radius: 5px;
-}
-.table_view-move_btn button {
-    color: #f33e3e;
-    background-color: #fbfbfb;
-    border: 1px solid #f33e3e;
-    box-shadow: none;
-}
-.table_view-reserve_btn {
-    box-shadow: 0px -1px 4px 0px #a6a6a60d;
-    margin-right: 15px;
-}
-.table_view-reserve_btn button {
-    color: #f33e3e;
-    background-color: #fbfbfb;
-    box-shadow: 0px 1.5px 5px 0px #a6a6a666;
-}
-.table_view-add_table_btn{
-    box-shadow: 2.5px -2.5px 2px 0px #863e2026 inset;
-}
-.table_view-add_table_btn button {
-    box-shadow: 1px 1px 4px 0px #8f716459;
-}
-.table_view-representer {
-    margin: 0 20px;
-}
-.table_status-represent-ordering,
-.table_status-represent-empty,
-.table_status-represent-blank {
-    height: 15px;
-    width: 15px;
-    border-radius: 100%;
-}
-.table_status-represent-ordering {
-    background-color: #009049;
-}
-.table_status-represent-empty {
-    background-color: #009bfe;
-    margin-left: 20px;
-}
-.table_status-represent-blank {
-    background-color: #999999;
-    margin-left: 20px;
-}
-.table_status-represent-type {
-    text-wrap: nowrap;
-    margin-left: 8px !important;
-}
-
-.table_view_list{
-    margin: 30px 30px 0 !important;
-}
-.table_view_list-floor-heading{
-    font-size: 17px !important;
-    line-height: 21px;
-    font-weight: 600 !important;
-    color: #38373D !important;
-    margin-bottom: 10px !important;
-}
-.floor-divider{
-    margin-bottom: 35px !important;
-}
-.table_view-ground_floor-card,
-.table_view-first_floor-card,
-.table_view-second_floor-card{
-    width: 100%;
-    padding: 20px 10px 20px 20px !important;
-    border-radius: 10px;
-    box-shadow: 0px 1px 15px 0px #3333330D;
-    box-sizing: border-box;
-}
-.ordering_card{
-    background-color: #F6FFFB;
-    position: relative;
-    overflow: hidden;
-}
-.empty_card{
-    background-color: #F6FBFF;
-    position: relative;
-    overflow: hidden;
-}
-.blank_card{
-    background-color: #FCFCFC;
-    position: relative;
-    overflow: hidden;
-}
-.ordering_card::before{
-    content: "";
-    position: absolute;
-    height: 200px;
-    width: 7px;
-    background-color: #009049;
-    top: 0;
-    left: 0;
-}
-.empty_card::before{
-    content: "";
-    position: absolute;
-    height: 200px;
-    width: 7px;
-    background-color: #009BFE;
-    top: 0;
-    left: 0;
-}
-.blank_card::before{
-    content: "";
-    position: absolute;
-    height: 200px;
-    width: 7px;
-    background-color: #878A99;
-    top: 0;
-    left: 0;
-}
-.blank_card .table_view-table_number{
-    margin-bottom: 130px;
-}
-.table_view-table_number h5{
-    font-size: 16px !important;
-    line-height: 19px;
-    font-weight: 500 !important;
-    color: #555555 !important;
-}
-.ordering_card .ordering_card-waiting-time{
-    display: block !important;
-}
-.empty_card .ordering_card-waiting_time{
-    display: none !important;
-}
-.blank_card .ordering_card-waiting_time{
-    display: none !important;
-}
-.ordering_card-waiting_time{
-    margin-top: 10px !important;
-}
-.ordering_card-waiting_time .waiting-time{
-    margin-left: 5px !important;
-    font-size: 14px !important;
-    line-height: 17px;
-    font-weight: 500 !important;
-    color: #555555 !important;
-}
-.ordering_card .table_view-table_cost{
-    color: #009049;
-    margin-top: 20px;
-}
-.empty_card .table_view-table_cost{
-    color: #009BFE;
-    margin-top: 48px;
-}
-.blank_card .table_view-table_cost{
-    display: none !important;
-}
-.table_view-table_cost{
-    font-size: 18px !important;
-    line-height: 22px;
-    font-weight: 500 !important;
-}
-.blank_card .table_view-table_details{
-    display: none !important;
-}
-.ordering_card .table_view-table_details,
-.empty_card .table_view-table_details{
-    margin: 20px 0px 0 0 !important;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.ordering_card .table_view-people_count_btn button{
-    background: #0090491F !important;
-    color: #009049 !important;
-    border-radius: 5px;
-}
-.ordering_card .table_view-people_count_btn svg{
-    fill: #009049;
-    stroke: #009049;
-}
-
-.empty_card .table_view-people_count_btn button{
-    background: #009BFE1F !important;
-    color: #009BFE !important;
-    border-radius: 5px;
-}
-.empty_card .table_view-people_count_btn svg{
-    fill: #009BFE;
-    stroke: #009BFE;
-}
-.table_view-people_count_btn button span{
-    font-size: 14px !important;
-    line-height: 17px;
-    font-weight: 500 !important;
-    margin-left: 6px;
-}
-.table_view-inspect_btn button{
-    padding: 8px 9px !important;
-    background: #999999;
-    border-radius: 5px;
-}
-.table_view-print_btn button{
-    padding: 8px 9px !important;
-    background: #999999;
-    border-radius: 5px;
 }
