@@ -4,7 +4,7 @@
             <f7-card class="no-margin" v-for="(product,index) in products" :key="index">
                 <f7-card-content>
                     <div class="food-category">
-                        <img :src="getFoodIcon(product.food_type)" alt="">
+                        <img :src="foodTypeIcon(product.food_type)" alt="">
                     </div>
                     <div class="product-image">
                         <img :src="'/storage/'+product.image" alt="" width="100" height="100">
@@ -116,22 +116,13 @@
 <script setup>
 import { f7Card, f7CardContent,f7, f7Icon } from 'framework7-vue';
 import Icon from '../components/Icon.vue'
+import { getFoodTypeIcon } from '../commonFunction.js';
 
 const props = defineProps({
     products: Object,
 });
-console.log(props.products);
 
-const getFoodIcon = (foodType) => {
-    switch (foodType) {
-        case 1:
-            return '/images/veg-icon.png';
-        case 2:
-            return '/images/non-veg-icon.png';
-        case 3:
-            return '/images/vegan-icon.png';
-        default:
-            return '/images/veg-icon.png'; // Default to veg-icon.png if foodType is not recognized
-    }
+const foodTypeIcon = (typeId) => {
+    return getFoodTypeIcon(typeId);
 }
 </script>

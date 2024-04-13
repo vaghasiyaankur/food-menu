@@ -31,4 +31,9 @@ class Product extends Model
     {
         return $this->hasMany(ProductLanguage::class);
     }
+
+    public function productRestaurantLanguages()
+    {
+        return $this->hasMany(RestaurantLanguage::class, 'product_id');
+    }
 }

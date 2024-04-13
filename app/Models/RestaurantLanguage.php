@@ -20,4 +20,19 @@ class RestaurantLanguage extends Model
     {
         return $this->belongsTo(Restaurant::class, 'restaurant_id');
     }
+
+    public function categoryRestaurantLanguages()
+    {
+        return $this->hasMany(CategoryRestaurantLanguage::class, 'restaurant_language_id');
+    }
+
+    public function subcategoryRestaurantLanguages()
+    {
+        return $this->hasMany(SubcategoryRestaurantLanguage::class, 'restaurant_language_id');
+    }
+
+    public function productRestaurantLanguages()
+    {
+        return $this->hasMany(ProductRestaurantLanguage::class, 'restaurant_language_id');
+    }
 }

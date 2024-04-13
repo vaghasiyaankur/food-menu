@@ -7,32 +7,41 @@
 
             <div class="card-content add-combo">
                 <div class="grid grid-cols-5 medium-grid-cols-4 grid-gap-25 grid-gap-20 align-items-center add-list">
-                    <div class="bg-color-white data-card" v-for="category in categories" :key="category">
-                        <div class="combo-image"><img :src="'/storage'+category?.image">
+                    <div class="bg-color-white data-card" v-for="category in categories" :key="category.id">
+                        <div class="combo-image"><img :src="'/storage'+category.image">
                         </div>
                         <div class="text-align-center data-card-name">
-                            <h4 class="no-margin no-padding">{{category?.category_languages[0]?.name}}</h4>
+                            <h4 class="no-margin no-padding">{{category.name}}</h4>
                         </div>
                         <div class="grid grid-cols-2 grid-gap-5 combo-change">
                             <a class="edit-combo col-100 large-45 medium-50" @click="showCategoryPopup(category.id)">
                                 <Icon name="editIcon" />Edit
                             </a>
-                            <a class="delete-combo col-100 large-50 medium-50">
+                            <a class="delete-combo col-100 large-50 medium-50" @click="showRemoveCategoryPopup(category.id)">
                                 <Icon name="deleteIcon" />Delete
                             </a>
                         </div>
-                        <img class="food-category" src="/assets/images/seederImages/combo/type1.png">
+                        <img class="food-category" :src="foodTypeIcon(category.type)">
                     </div>
                 </div>
             </div>
         </div>
 
-        <AddUpdatePopup 
-            :title="addUpdateTitle" 
-            :form-data-format="addUpdateFormDataFormat" 
-            :type="addUpdateType" :data-type="'category'"
-            @store:update="storeUpdateData"
-        />
+        <div class="popup addUpdatePopup">
+            <AddUpdatePopup
+                :title="addUpdateTitle"
+                :form-data-format="addUpdateFormDataFormat" 
+                :type="addUpdateType" :data-type="'category'"
+                @store:update="storeUpdateData"
+            />
+        </div>
+
+        <div class="popup removePopup">
+            <RemovePopup 
+                :title="'Are you sure delete the category?'"
+                @remove="removeData"
+            />
+        </div>
 
 </f7-page>
 </template>
@@ -52,18 +61,14 @@ import $ from 'jquery';
 import NoValueFound from '../../../components/NoValueFound.vue'
 import MenuManagementHeader from './MenuManagementHeader.vue'
 import Icon from "../../../components/Icon.vue"
-import AddUpdatePopup from './PopUp/AddUpdatePopup.vue';
-
-
-// const emit = defineEmits(['error:notification', 'success:notification']);
-const props = defineProps({
-    errorNotification     : Function,
-    successNotification   : Function
-});
+import AddUpdatePopup from './PopUp/AddUpdatePopup.vue'
+import RemovePopup from './PopUp/RemovePopup.vue'
+import { successNotification, errorNotification, getErrorMessage, getFoodTypeIcon } from '../../../commonFunction.js';
 
 const categories = ref([]);
 const addUpdateTitle = ref('Add Category');
 const addUpdateType = ref('add');
+const removeCategoryId = ref(0);
 
 const addUpdateFormDataFormat = ref([
     { label: 'Id', multipleLang: false, type: 'hidden', placeHolder: 'Category Id', value: ''},
@@ -108,7 +113,8 @@ const getCategories = () => {
         search: search.value
     })
     .then((response) => {
-        categories.value = response.data.category.data;
+        console.log(response.data.categories);
+        categories.value = response.data.categories;
     });
 };
 
@@ -166,7 +172,6 @@ const manipulateField = (formData, label, value = null) => {
 };
 
 const updateFormData = (categoryData) => {
-
     const formData = addUpdateFormDataFormat.value;
     manipulateField(formData, 'Id', categoryData.id);
     manipulateField(formData, 'Image', `/storage/${categoryData.image}`);
@@ -175,10 +180,10 @@ const updateFormData = (categoryData) => {
 
     const nameIndex = formData.findIndex(item => item.label === 'Name');
     if (nameIndex !== -1) {
-        categoryData.category_languages.forEach((categoryLang) => {
-            const langOptionIndex = formData[nameIndex].options.findIndex(option => option.language_id === categoryLang.language_id);
+        categoryData.catRestLang.forEach((categoryRestLang) => {
+            const langOptionIndex = formData[nameIndex].options.findIndex(option => option.language_id === categoryRestLang.language_id);
             if (langOptionIndex !== -1) {
-                formData[nameIndex].options[langOptionIndex].value = categoryLang.name;
+                formData[nameIndex].options[langOptionIndex].value = categoryRestLang.name;
             }
         });
     }
@@ -205,19 +210,21 @@ const updateSearch = (searchValue) => {
 const storeUpdateData = () => {
     const formData = addUpdateFormDataFormat.value;
     const id = formData.find(item => item.label === 'Id').value;
-    const imageFile = formData.find(item => item.label === 'Image').value; // Assuming value is the file object
+    const categoryType = formData.find(item => item.label === 'Type').value;
+    const status = formData.find(item => item.label === 'Status').value;
+    const imageName = formData.find(item => item.label === 'Image').value.name; // Get the name of the image file
 
     // Create FormData object to send file data along with other form data
     const categoryData = new FormData();
     categoryData.append('id', id);
-    categoryData.append('image', imageFile); // Append the file object to FormData
-    categoryData.append('category_type', formData.find(item => item.label === 'Type').value);
-    categoryData.append('status', formData.find(item => item.label === 'Status').value);
+    categoryData.append('category_type', categoryType);
+    categoryData.append('status', status);
+    categoryData.append('image', formData.find(item => item.label === 'Image').value); // Append the image file to FormData
 
-    // Map language data to FormData if needed
+    // Map language data to FormData
     formData.find(item => item.label === 'Name').options.forEach(option => {
-        categoryData.append('language_id[]', option.language_id);
-        categoryData.append('name[]', option.value);
+        categoryData.append('names['+option.language+']', option.value);
+        categoryData.append('language[]', option.language);
     });
 
     const endpoint = id ? '/api/update-category' : '/api/add-category';
@@ -225,16 +232,47 @@ const storeUpdateData = () => {
     // Send POST request with FormData
     axios.post(endpoint, categoryData, {
         headers: {
-            'Content-Type': 'multipart/form-data' // Set content type to multipart/form-data for file upload
+            'Content-Type': 'multipart/form-data'
         }
     })
     .then((response) => {
-        // Handle response if needed
+        successNotification(response.data.success);
+        f7.popup.close(`.addUpdatePopup`);
+        getCategories();
     })
     .catch((error) => {
-        this.$root.errorNotification("Currently, the restaurant is closed");
-        // props.errorNotification('Failed to fetch categories. Please try again later.');
-        // emit('error:notification', 'test');
+        const errorMessage = getErrorMessage(error);
+        errorNotification(errorMessage);
     });
 };
+
+const foodTypeIcon = (typeId) => {
+    return getFoodTypeIcon(typeId);
+}
+
+const showRemoveCategoryPopup = (id) => {
+    removeCategoryId.value = id;
+    f7.popup.open(`.removePopup`);
+}
+
+const removeData = () => {
+    const categoryData = new FormData();
+    categoryData.append('id', removeCategoryId.value);
+    
+    axios.post(`/api/delete-category`, categoryData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    })
+    .then((response) => {
+        successNotification(response.data.success);
+        f7.popup.close(`.removePopup`);
+        getCategories();
+    })
+    .catch((error) => {
+        const errorMessage = getErrorMessage(error);
+        errorNotification(errorMessage);
+    });
+}
+
 </script>

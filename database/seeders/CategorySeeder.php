@@ -4,9 +4,12 @@ namespace Database\Seeders;
 
 use App\Models\Category;
 use App\Models\CategoryLanguage;
+use App\Models\CategoryRestaurantLanguage;
 use App\Models\SubCategory;
 use App\Models\Language;
+use App\Models\RestaurantLanguage;
 use App\Models\SubCategoryLanguage;
+use App\Models\SubcategoryRestaurantLanguage;
 use Illuminate\Support\Facades\File;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -102,6 +105,15 @@ class CategorySeeder extends Seeder
                 $catlan->category_id = $cat->id;
                 $catlan->name = $cate['name'][$lan_key];
                 $catlan->save();
+
+
+                $restaurantLanguage = RestaurantLanguage::where('restaurant_id', $cate['restaurant_id'])->where('language_id', $lan->id)->first();
+
+                $subCatRestLang = new CategoryRestaurantLanguage();
+                $subCatRestLang->name = $cate['name'][$lan_key];
+                $subCatRestLang->restaurant_language_id = $restaurantLanguage->id;
+                $subCatRestLang->category_id = $cat->id;
+                $subCatRestLang->save();
             }
 
 
@@ -130,6 +142,13 @@ class CategorySeeder extends Seeder
                     $subcatlang->language_id = $lang->id;
                     $subcatlang->sub_category_id = $subCate->id;
                     $subcatlang->save();
+
+                    $restaurantLanguage = RestaurantLanguage::where('restaurant_id', $cate['restaurant_id'])->where('language_id', $lang->id)->first();
+                    $subCatRestLang = new SubcategoryRestaurantLanguage();
+                    $subCatRestLang->name = $subCat[$ke];
+                    $subCatRestLang->restaurant_language_id = $restaurantLanguage->id;
+                    $subCatRestLang->sub_category_id = $subCate->id;
+                    $subCatRestLang->save();
                 }
             }
 

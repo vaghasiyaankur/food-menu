@@ -2,105 +2,155 @@
 
 namespace App\Http\Controllers\Manager;
 
+use App\Helper\CustomerHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use File;
 use App\Helper\SettingHelper;
 use App\Models\CategoryLanguage;
+use App\Models\CategoryRestaurantLanguage;
 use App\Models\Language;
+use App\Models\Restaurant;
+use App\Models\RestaurantLanguage;
 use Illuminate\Support\Facades\Auth;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
     public function getCategories(Request $req)
     {
-        $lang_id = SettingHelper::managerLanguage();
-        $categories = Category::with(['categoryLanguages' => function($q) use ($req,$lang_id){
-            $q->where('language_id',$lang_id);
+        $langId = SettingHelper::managerLanguage();
+        $restaurantId = CustomerHelper::getRestaurantId();
+        $restaurantLanguageId = RestaurantLanguage::where('language_id', $langId)
+                                ->where('restaurant_id', $restaurantId)
+                                ->value('id');
+
+        $categories = Category::with(['categoryRestaurantLanguages' => function ($query) use ($restaurantLanguageId, $req) {
+            $query->where('restaurant_language_id', $restaurantLanguageId);
+            $query->where('name', 'LIKE', '%' . $req->search . '%');
+        }])->whereHas('categoryRestaurantLanguages',function($q) use ($req,$restaurantLanguageId){
+            $q->where('restaurant_language_id',$restaurantLanguageId);
             $q->where('name','LIKE','%'.$req->search.'%');
-        }])->whereHas('categoryLanguages',function($q) use ($req,$lang_id){
-            $q->where('language_id',$lang_id);
-            $q->where('name','LIKE','%'.$req->search.'%');
-        })->whereRestaurantId(Auth::user()->restaurant_id)->paginate(10);
-        return response()->json(['category' => $categories]);
+        })->where('restaurant_id', $restaurantId)->get();
+
+        $categories->transform(function ($category) use ($req) {
+            $name = $category->categoryRestaurantLanguages->isEmpty() ? null : $category->categoryRestaurantLanguages->first()->name;
+            return [
+                'id' => $category->id,
+                'image' => $category->image,
+                'status' => $category->status,
+                'type' => $category->type,
+                'name' => $name,
+            ];
+        });
+
+        return response()->json(['categories' => $categories]);
     }
 
     public function addCategory(Request $req)
     {
+        $rules = [];
+        $languages = $req->language; 
+        foreach ($languages as $language) {
+            $rules["names.$language"] = 'required';
+        }
+        $rules['category_type'] = 'required';
+        $rules['status'] = 'required';
+        $rules['image'] = 'required|image|mimes:jpg,png,jpeg,gif,svg';
 
-        $validator = Validator::make($req->all(),[
-            'name' => 'required',
-            'image' => 'required',
-        ]);
-         if ($validator->fails()) {
-            return response()->json(['error' => $validator->messages()], 401);
+        $customMessages = [];
+        foreach ($languages as $language) {
+            $customMessages["names.$language.required"] = ucfirst($language) . " name is required.";
+        }
+
+        $validator = Validator::make($req->all(), $rules, $customMessages);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
         }
 
         $image_name = '';
         if($req->file('image')){
-            $validatorimage = Validator::make($req->all(), [
-                'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg',
-                ]
-            );
-
-            if ($validatorimage->fails()) {
-                return response()->json(['error' => $validatorimage->messages()], 401);
-            }
-
             $imageFile = $req->file('image');
             $image_name = '/category/'.rand(10000000,99999999).".".$imageFile->GetClientOriginalExtension();
             $imageFile->move(storage_path('app/public/category/'),$image_name);
         }
-        $name = explode(',',$req->name);
-        $langs = Language::whereStatus(1)->get();
+
+        $restaurantId = CustomerHelper::getRestaurantId();
+        $resLangs = RestaurantLanguage::where('restaurant_id', $restaurantId)
+        ->get();
+
         $cat = new Category();
         $cat->image = $image_name;
-        $cat->restaurant_id = Auth::user()->restaurant_id;
+        $cat->restaurant_id = $restaurantId;
+        $cat->added_by = Auth::user()->role;
+        $cat->category_type = $req->category_type;
+        $cat->added_by_id = Auth::user()->id;
+        $cat->status = $req->status;
         if($cat->save()){
-            foreach ($langs as $key => $lang) {
-                $cat_lang = new CategoryLanguage();
-                $cat_lang->category_id = $cat->id;
-                $cat_lang->language_id = $lang->id;
-                $cat_lang->name = $name[$lang->id];
-                $cat_lang->save();
+            $names = $req->names;
+            foreach($resLangs as $resLang){
+                $language = Language::where('id', $resLang->language_id)->first();
+                $catResLang = new CategoryRestaurantLanguage();
+                $catResLang->restaurant_language_id = $resLang->id;
+                $catResLang->category_id = $cat->id;
+                $catResLang->name = $names[$language->name];
+                $catResLang->save();
             }
         }
-
-        return response()->json(['success'=>'category Added Successfully.']);
-
+        return response()->json(['success'=>'Category Added Successfully.']);
     }
 
     public function getCategory($id)
     {
-        $category = Category::with('categoryLanguages')->find($id);
-        return response()->json($category);
+        $category = Category::with('categoryRestaurantLanguages.restaurantLanguage')->select('id', 'image', 'category_type', 'status')->find($id);
+
+        if ($category) {
+            $transformedCategory = [
+                'id' => $category->id,
+                'image' => $category->image,
+                'category_type' => $category->category_type,
+                'status' => $category->status,
+                'catRestLang' => $category->categoryRestaurantLanguages->map(function ($catRestLang) {
+                    return [
+                        'name' => $catRestLang->name,
+                        'language_id' => $catRestLang->restaurantLanguage->language_id
+                    ];
+                }),
+            ];
+
+            return response()->json($transformedCategory);
+        }
     }
 
     public function updateCategory(Request $req)
     {
-        dump('updateCategory');
-        dd($req->all());
-        $validator = Validator::make($req->all(),[
-            'name' => 'required',
-            'image' => 'required',
-        ]);
-         if ($validator->fails()) {
-            return response()->json(['error' => $validator->messages()], 401);
+        $rules = [];
+        $languages = $req->language; 
+        foreach ($languages as $language) {
+            $rules["names.$language"] = 'required';
         }
-        $category = Category::find($req->id);
-        $image_name = '';
+        $rules['category_type'] = 'required';
+        $rules['status'] = 'required';
         if($req->file('image')){
-            $validatorimage = Validator::make($req->all(), [
-                'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg',
-                ]
-            );
+            $rules['image'] = 'required|image|mimes:jpg,png,jpeg,gif,svg';
+        }
 
-            if ($validatorimage->fails()) {
-                return response()->json(['error' => $validatorimage->messages()], 401);
-            }
+        $customMessages = [];
+        foreach ($languages as $language) {
+            $customMessages["names.$language.required"] = ucfirst($language) . " name is required.";
+        }
 
+        $validator = Validator::make($req->all(), $rules, $customMessages);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $category = Category::find($req->id);
+        $imageName = '';
+        if($req->file('image')){
             $path = storage_path()."/app/public/" .@$category->image;
             $result = File::exists($path);
 
@@ -110,19 +160,30 @@ class CategoryController extends Controller
             }
 
             $imageFile = $req->file('image');
-            $image_name = '/category/'.rand(10000000,99999999).".".$imageFile->GetClientOriginalExtension();
-            $imageFile->move(storage_path('app/public/category/'),$image_name);
-        }else if($req->image){
-            $image_name = $req->image;
+            $imageName = '/category/'.rand(10000000,99999999).".".$imageFile->GetClientOriginalExtension();
+            $imageFile->move(storage_path('app/public/category/'),$imageName);
+        }else{
+            $imageName = $category->image;
         }
 
-        $name = explode(',',$req->name);
-        $category->image = $image_name;
-        $langs = Language::whereStatus(1)->get();
-        if($category->save()){
-            foreach ($langs as $key => $lang) {
-                CategoryLanguage::where('category_id',$req->id)->where('language_id',$lang->id)->update(['name'=>$name[$lang->id]]);
-            }
+        $restaurantId = CustomerHelper::getRestaurantId();
+        $resLangs = RestaurantLanguage::where('restaurant_id', $restaurantId)
+        ->get();
+
+        Category::where('id', $req->id)->update([
+            'image' => $imageName,
+            'category_type' => $req->category_type,
+            'status' => $req->status
+        ]);
+
+        $names = $req->names;
+        foreach($resLangs as $resLang){
+            $language = Language::where('id', $resLang->language_id)->first();
+            CategoryRestaurantLanguage::where('category_id', $category->id)
+                                        ->where('restaurant_language_id', $resLang->id)
+                                        ->update([
+                                            'name' => $names[$language->name]
+                                        ]);
         }
 
         return response()->json(['success'=>'category Updated Successfully.']);

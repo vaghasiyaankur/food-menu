@@ -33,4 +33,9 @@ class Category extends Model
     {
         return $this->hasMany(CategoryLanguage::class);
     }
+
+    public function categoryRestaurantLanguages()
+    {
+        return $this->hasMany(CategoryRestaurantLanguage::class, 'category_id');
+    }
 }

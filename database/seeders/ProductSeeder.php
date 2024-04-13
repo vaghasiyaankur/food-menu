@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use App\Models\Language;
 use App\Models\Product;
 use App\Models\ProductLanguage;
+use App\Models\ProductRestaurantLanguage;
+use App\Models\RestaurantLanguage;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
@@ -231,6 +233,15 @@ class ProductSeeder extends Seeder
                     $pro_lang->name = $product['name'][$k];
                     $pro_lang->slug = $name_slug.'-'.$restaurant_id.'-'.$k;
                     $pro_lang->save();
+
+                    $restaurantLanguage = RestaurantLanguage::where('restaurant_id', $restaurant_id)->where('language_id', $lang->id)->first();
+
+                    $pro_lang = new ProductRestaurantLanguage();
+                    $pro_lang->restaurant_language_id = $restaurantLanguage->id;
+                    $pro_lang->product_id = $pro->id;
+                    $pro_lang->name = $product['name'][$k];
+                    $pro_lang->slug = $name_slug.'-'.$restaurant_id.'-'.$k;
+                    $pro_lang->save();
                 }
             }
         }
@@ -260,6 +271,16 @@ class ProductSeeder extends Seeder
                     $name_slug = Str::slug($product['name'][0]);
                     $pro_lang = new ProductLanguage();
                     $pro_lang->language_id = $lang->id;
+                    $pro_lang->product_id = $pro->id;
+                    $pro_lang->name = $product['name'][$k];
+                    $pro_lang->slug = $name_slug.'-'.$restaurant_id.'-'.$k;
+                    $pro_lang->save();
+
+
+                    $restaurantLanguage = RestaurantLanguage::where('restaurant_id', $restaurant_id)->where('language_id', $lang->id)->first();
+
+                    $pro_lang = new ProductRestaurantLanguage();
+                    $pro_lang->restaurant_language_id = $restaurantLanguage->id;
                     $pro_lang->product_id = $pro->id;
                     $pro_lang->name = $product['name'][$k];
                     $pro_lang->slug = $name_slug.'-'.$restaurant_id.'-'.$k;

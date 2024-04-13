@@ -34,7 +34,6 @@ Route::post('/register', [ReservationController::class, 'register']);
 
 // ------------------------ Category Routes ------------------------ //
 
-Route::post('/get-categories',[CategoryController::class, 'getCategories']);
 
 Route::post('/get-categories-list',[CategoryController::class, 'getCategoriesList']);
 
@@ -49,6 +48,9 @@ Route::post('update-category',[CategoryController::class, 'updateCategory']);
 Route::post('/delete-category',[CategoryController::class, 'deleteCategory']);
 
 Route::get('/categories',[CategoryController::class, 'get_categories']);
+
+// new 
+Route::post('/get-categories',[CategoryController::class, 'getCategories']);
 
 // ------------------------ Sub Category Routes ------------------------ //
 
