@@ -1,177 +1,269 @@
 <template>
-    <div class="cart-products padding-half">
-        <div class="product_detail padding display-flex justify-content-space-between align-items-center">
-            <div class="delete-product">
-                <span data-popup="#deleteCartItem_popup" @click="f7.popup.open(`.deleteCartItemPopup`);"><f7-icon f7="minus" class="font-16 delete-product-button"></f7-icon></span>
-            </div>
-            <div class="product-summary margin-horizontal-half">
-                <p class="no-margin margin-bottom-half">Margherita Pizza</p>
-                <p class="no-margin"><span>Size: S</span> <span class="text-red">$10.00</span></p>
-            </div>
-            <div class="quantity-section text-align-center padding">
-                <div class="quantity-content display-flex justify-content-center align-items-center">
-                    <span class="quantity-minus padding-vertical-half"><f7-icon f7="minus" class="font-16"></f7-icon></span>
-                    <span class="quantity-count padding-vertical-half">1</span>
-                    <span class="quantity-plus padding-vertical-half"><f7-icon f7="plus" class="font-16"></f7-icon></span>
+    <div class="cart-products">
+        <div class="kot-time-wrapper">
+            <div class="kot-time">
+                <div class="kot-time-heading">
+                    <h5 class="no-margin">KOT - 1 Time - 01:10</h5>
+                </div>
+                <div class="product_detail">
+                    <div class="product-detail-inner">
+                        <div class="delete-product">
+                            <span data-popup="#deleteCartItem_popup"
+                                @click="f7.popup.open(`.deleteCartItemPopup`);"><f7-icon f7="minus"
+                                    class="font-16 delete-product-button"></f7-icon></span>
+                        </div>
+                        <div class="product-summary">
+                            <p class="no-margin">Margherita Pizza</p>
+                            <span class="no-margin display-flex align-items-center">Size: S<p
+                                    class="text-red no-margin">
+                                    $10.00</p></span>
+                        </div>
+                    </div>
+                    <div class="product-detail-inner">
+                        <div class="quantity-section">
+                            <div class="quantity-content">
+                                <span class="quantity-minus"><f7-icon f7="minus"
+                                        class="font-16 quantity-icon"></f7-icon></span>
+                                <span class="quantity-count">1</span>
+                                <span class="quantity-plus"><f7-icon f7="plus"
+                                        class="font-16 quantity-icon"></f7-icon></span>
+                            </div>
+                        </div>
+                        <div class="product-note-content">
+                            <div class="product-note" data-popup="#note_popup" @click="f7.popup.open(`.notePopup`);">
+                                <Icon name="note" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="product_detail">
+                    <div class="product-detail-inner">
+                        <div class="delete-product">
+                            <span data-popup="#deleteCartItem_popup"
+                                @click="f7.popup.open(`.deleteCartItemPopup`);"><f7-icon f7="minus"
+                                    class="font-16 delete-product-button"></f7-icon></span>
+                        </div>
+                        <div class="product-summary">
+                            <p class="no-margin">Romana Pizza</p>
+                            <span class="no-margin display-flex align-items-center">Size: M<p
+                                    class="text-red no-margin">
+                                    $15.00</p></span>
+                        </div>
+                    </div>
+                    <div class="product-detail-inner">
+                        <div class="quantity-section">
+                            <div class="quantity-content">
+                                <span class="quantity-minus"><f7-icon f7="minus"
+                                        class="font-16 quantity-icon"></f7-icon></span>
+                                <span class="quantity-count">1</span>
+                                <span class="quantity-plus"><f7-icon f7="plus"
+                                        class="font-16 quantity-icon"></f7-icon></span>
+                            </div>
+                        </div>
+                        <div class="product-note-content">
+                            <div class="product-note" data-popup="#note_popup" @click="f7.popup.open(`.notePopup`);">
+                                <Icon name="note" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="product_detail">
+                    <div class="product-detail-inner">
+                        <div class="delete-product">
+                            <span data-popup="#deleteCartItem_popup"
+                                @click="f7.popup.open(`.deleteCartItemPopup`);"><f7-icon f7="minus"
+                                    class="font-16 delete-product-button"></f7-icon></span>
+                        </div>
+                        <div class="product-summary">
+                            <p class="no-margin">California Style Pizza</p>
+                            <span class="no-margin display-flex align-items-center">Size: L<p
+                                    class="text-red no-margin">
+                                    $15.00</p></span>
+                        </div>
+                    </div>
+                    <div class="product-detail-inner">
+                        <div class="quantity-section">
+                            <div class="quantity-content">
+                                <span class="quantity-minus"><f7-icon f7="minus"
+                                        class="font-16 quantity-icon"></f7-icon></span>
+                                <span class="quantity-count">1</span>
+                                <span class="quantity-plus"><f7-icon f7="plus"
+                                        class="font-16 quantity-icon"></f7-icon></span>
+                            </div>
+                        </div>
+                        <div class="product-note-content">
+                            <div class="product-note" data-popup="#note_popup" @click="f7.popup.open(`.notePopup`);">
+                                <Icon name="note" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="product_detail">
+                    <div class="product-detail-inner">
+                        <div class="delete-product">
+                            <span data-popup="#deleteCartItem_popup"
+                                @click="f7.popup.open(`.deleteCartItemPopup`);"><f7-icon f7="minus"
+                                    class="font-16 delete-product-button"></f7-icon></span>
+                        </div>
+                        <div class="product-summary">
+                            <p class="no-margin">New York-Style Pizza
+                                Vegetarian</p>
+                            <span class="no-margin display-flex align-items-center">Size: S<p
+                                    class="text-red no-margin">
+                                    $10.00</p></span>
+                        </div>
+                    </div>
+                    <div class="product-detail-inner">
+                        <div class="quantity-section">
+                            <div class="quantity-content">
+                                <span class="quantity-minus"><f7-icon f7="minus"
+                                        class="font-16 quantity-icon"></f7-icon></span>
+                                <span class="quantity-count">1</span>
+                                <span class="quantity-plus"><f7-icon f7="plus"
+                                        class="font-16 quantity-icon"></f7-icon></span>
+                            </div>
+                        </div>
+                        <div class="product-note-content">
+                            <div class="product-note" data-popup="#note_popup" @click="f7.popup.open(`.notePopup`);">
+                                <Icon name="note" />
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="product-note-content text-align-center">
-                <div class="product-note" data-popup="#note_popup" @click="f7.popup.open(`.notePopup`);"><Icon name="note" /></div>
-            </div>
-        </div>
-        <div class="product_detail padding display-flex justify-content-space-between align-items-center">
-            <div class="delete-product">
-                <span data-popup="#deleteCartItem_popup" @click="f7.popup.open(`.deleteCartItemPopup`);"><f7-icon f7="minus" class="font-16 delete-product-button"></f7-icon></span>
-            </div>
-            <div class="product-summary margin-horizontal-half">
-                <p class="no-margin margin-bottom-half">Margherita Pizza</p>
-                <p class="no-margin"><span>Size: S</span> <span class="text-red">$10.00</span></p>
-            </div>
-            <div class="quantity-section text-align-center padding">
-                <div class="quantity-content display-flex justify-content-center align-items-center">
-                    <span class="quantity-minus padding-vertical-half"><f7-icon f7="minus" class="font-16"></f7-icon></span>
-                    <span class="quantity-count padding-vertical-half">1</span>
-                    <span class="quantity-plus padding-vertical-half"><f7-icon f7="plus" class="font-16"></f7-icon></span>
+            <div class="kot-time">
+                <div class="kot-time-heading">
+                    <h5 class="no-margin">KOT - 2 Time - 01:20</h5>
                 </div>
-            </div>
-            <div class="product-note-content text-align-center">
-                <div class="product-note" data-popup="#note_popup" @click="f7.popup.open(`.notePopup`);"><Icon name="note" /></div>
-            </div>
-        </div>
-        <div class="product_detail padding display-flex justify-content-space-between align-items-center">
-            <div class="delete-product">
-                <span  data-popup="#deleteCartItem_popup" @click="f7.popup.open(`.deleteCartItemPopup`);"><f7-icon f7="minus" class="font-16 delete-product-button"></f7-icon></span>
-            </div>
-            <div class="product-summary margin-horizontal-half">
-                <p class="no-margin margin-bottom-half">Margherita Pizza</p>
-                <p class="no-margin"><span>Size: S</span> <span class="text-red">$10.00</span></p>
-            </div>
-            <div class="quantity-section text-align-center padding">
-                <div class="quantity-content display-flex justify-content-center align-items-center">
-                    <span class="quantity-minus padding-vertical-half"><f7-icon f7="minus" class="font-16"></f7-icon></span>
-                    <span class="quantity-count padding-vertical-half">1</span>
-                    <span class="quantity-plus padding-vertical-half"><f7-icon f7="plus" class="font-16"></f7-icon></span>
+                <div class="product_detail">
+                    <div class="product-detail-inner">
+                        <div class="delete-product">
+                            <span data-popup="#deleteCartItem_popup"
+                                @click="f7.popup.open(`.deleteCartItemPopup`);"><f7-icon f7="minus"
+                                    class="font-16 delete-product-button"></f7-icon></span>
+                        </div>
+                        <div class="product-summary">
+                            <p class="no-margin">New York-Style Pizza
+                                Vegetarian</p>
+                            <span class="no-margin display-flex align-items-center">Size: S<p
+                                    class="text-red no-margin">
+                                    $10.00</p></span>
+                        </div>
+                    </div>
+                    <div class="product-detail-inner">
+                        <div class="quantity-section">
+                            <div class="quantity-content">
+                                <span class="quantity-minus"><f7-icon f7="minus"
+                                        class="font-16 quantity-icon"></f7-icon></span>
+                                <span class="quantity-count">1</span>
+                                <span class="quantity-plus"><f7-icon f7="plus"
+                                        class="font-16 quantity-icon"></f7-icon></span>
+                            </div>
+                        </div>
+                        <div class="product-note-content">
+                            <div class="product-note" data-popup="#note_popup" @click="f7.popup.open(`.notePopup`);">
+                                <Icon name="note" />
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="product-note-content text-align-center">
-                <div class="product-note" data-popup="#note_popup" @click="f7.popup.open(`.notePopup`);"><Icon name="note" /></div>
-            </div>
-        </div>
-        <div class="product_detail padding display-flex justify-content-space-between align-items-center">
-            <div class="delete-product">
-                <span  data-popup="#deleteCartItem_popup" @click="f7.popup.open(`.deleteCartItemPopup`);"><f7-icon f7="minus" class="font-16 delete-product-button"></f7-icon></span>
-            </div>
-            <div class="product-summary margin-horizontal-half">
-                <p class="no-margin margin-bottom-half">Margherita Pizza</p>
-                <p class="no-margin"><span>Size: S</span> <span class="text-red">$10.00</span></p>
-            </div>
-            <div class="quantity-section text-align-center padding">
-                <div class="quantity-content display-flex justify-content-center align-items-center">
-                    <span class="quantity-minus padding-vertical-half"><f7-icon f7="minus" class="font-16"></f7-icon></span>
-                    <span class="quantity-count padding-vertical-half">1</span>
-                    <span class="quantity-plus padding-vertical-half"><f7-icon f7="plus" class="font-16"></f7-icon></span>
+                <div class="product_detail">
+                    <div class="product-detail-inner">
+                        <div class="delete-product">
+                            <span data-popup="#deleteCartItem_popup"
+                                @click="f7.popup.open(`.deleteCartItemPopup`);"><f7-icon f7="minus"
+                                    class="font-16 delete-product-button"></f7-icon></span>
+                        </div>
+                        <div class="product-summary">
+                            <p class="no-margin">California Style Pizza</p>
+                            <span class="no-margin display-flex align-items-center">Size: L<p
+                                    class="text-red no-margin">
+                                    $15.00</p></span>
+                        </div>
+                    </div>
+                    <div class="product-detail-inner">
+                        <div class="quantity-section">
+                            <div class="quantity-content">
+                                <span class="quantity-minus"><f7-icon f7="minus"
+                                        class="font-16 quantity-icon"></f7-icon></span>
+                                <span class="quantity-count">1</span>
+                                <span class="quantity-plus"><f7-icon f7="plus"
+                                        class="font-16 quantity-icon"></f7-icon></span>
+                            </div>
+                        </div>
+                        <div class="product-note-content">
+                            <div class="product-note" data-popup="#note_popup" @click="f7.popup.open(`.notePopup`);">
+                                <Icon name="note" />
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="product-note-content text-align-center">
-                <div class="product-note" data-popup="#note_popup" @click="f7.popup.open(`.notePopup`);"><Icon name="note" /></div>
-            </div>
-        </div>
-        <div class="product_detail padding display-flex justify-content-space-between align-items-center">
-            <div class="delete-product">
-                <span  data-popup="#deleteCartItem_popup" @click="f7.popup.open(`.deleteCartItemPopup`);"><f7-icon f7="minus" class="font-16 delete-product-button"></f7-icon></span>
-            </div>
-            <div class="product-summary margin-horizontal-half">
-                <p class="no-margin margin-bottom-half">Margherita Pizza</p>
-                <p class="no-margin"><span>Size: S</span> <span class="text-red">$10.00</span></p>
-            </div>
-            <div class="quantity-section text-align-center padding">
-                <div class="quantity-content display-flex justify-content-center align-items-center">
-                    <span class="quantity-minus padding-vertical-half"><f7-icon f7="minus" class="font-16"></f7-icon></span>
-                    <span class="quantity-count padding-vertical-half">1</span>
-                    <span class="quantity-plus padding-vertical-half"><f7-icon f7="plus" class="font-16"></f7-icon></span>
+                <div class="product_detail">
+                    <div class="product-detail-inner">
+                        <div class="delete-product">
+                            <span data-popup="#deleteCartItem_popup"
+                                @click="f7.popup.open(`.deleteCartItemPopup`);"><f7-icon f7="minus"
+                                    class="font-16 delete-product-button"></f7-icon></span>
+                        </div>
+                        <div class="product-summary">
+                            <p class="no-margin">Romana Pizza</p>
+                            <span class="no-margin display-flex align-items-center">Size: M<p
+                                    class="text-red no-margin">
+                                    $15.00</p></span>
+                        </div>
+                    </div>
+                    <div class="product-detail-inner">
+                        <div class="quantity-section">
+                            <div class="quantity-content">
+                                <span class="quantity-minus"><f7-icon f7="minus"
+                                        class="font-16 quantity-icon"></f7-icon></span>
+                                <span class="quantity-count">1</span>
+                                <span class="quantity-plus"><f7-icon f7="plus"
+                                        class="font-16 quantity-icon"></f7-icon></span>
+                            </div>
+                        </div>
+                        <div class="product-note-content">
+                            <div class="product-note" data-popup="#note_popup" @click="f7.popup.open(`.notePopup`);">
+                                <Icon name="note" />
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="product-note-content text-align-center">
-                <div class="product-note" data-popup="#note_popup" @click="f7.popup.open(`.notePopup`);"><Icon name="note" /></div>
-            </div>
-        </div>
-        <div class="product_detail padding display-flex justify-content-space-between align-items-center">
-            <div class="delete-product">
-                <span  data-popup="#deleteCartItem_popup" @click="f7.popup.open(`.deleteCartItemPopup`);"><f7-icon f7="minus" class="font-16 delete-product-button"></f7-icon></span>
-            </div>
-            <div class="product-summary margin-horizontal-half">
-                <p class="no-margin margin-bottom-half">Margherita Pizza</p>
-                <p class="no-margin"><span>Size: S</span> <span class="text-red">$10.00</span></p>
-            </div>
-            <div class="quantity-section text-align-center padding">
-                <div class="quantity-content display-flex justify-content-center align-items-center">
-                    <span class="quantity-minus padding-vertical-half"><f7-icon f7="minus" class="font-16"></f7-icon></span>
-                    <span class="quantity-count padding-vertical-half">1</span>
-                    <span class="quantity-plus padding-vertical-half"><f7-icon f7="plus" class="font-16"></f7-icon></span>
+                <div class="product_detail">
+                    <div class="product-detail-inner">
+                        <div class="delete-product">
+                            <span data-popup="#deleteCartItem_popup"
+                                @click="f7.popup.open(`.deleteCartItemPopup`);"><f7-icon f7="minus"
+                                    class="font-16 delete-product-button"></f7-icon></span>
+                        </div>
+                        <div class="product-summary">
+                            <p class="no-margin">California Style Pizza</p>
+                            <span class="no-margin display-flex align-items-center">Size: L<p
+                                    class="text-red no-margin">
+                                    $15.00</p></span>
+                        </div>
+                    </div>
+                    <div class="product-detail-inner">
+                        <div class="quantity-section">
+                            <div class="quantity-content">
+                                <span class="quantity-minus"><f7-icon f7="minus"
+                                        class="font-16 quantity-icon"></f7-icon></span>
+                                <span class="quantity-count">1</span>
+                                <span class="quantity-plus"><f7-icon f7="plus"
+                                        class="font-16 quantity-icon"></f7-icon></span>
+                            </div>
+                        </div>
+                        <div class="product-note-content">
+                            <div class="product-note" data-popup="#note_popup" @click="f7.popup.open(`.notePopup`);">
+                                <Icon name="note" />
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="product-note-content text-align-center">
-                <div class="product-note" data-popup="#note_popup" @click="f7.popup.open(`.notePopup`);"><Icon name="note" /></div>
-            </div>
-        </div>
-        <div class="product_detail padding display-flex justify-content-space-between align-items-center">
-            <div class="delete-product">
-                <span  data-popup="#deleteCartItem_popup" @click="f7.popup.open(`.deleteCartItemPopup`);"><f7-icon f7="minus" class="font-16 delete-product-button"></f7-icon></span>
-            </div>
-            <div class="product-summary margin-horizontal-half">
-                <p class="no-margin margin-bottom-half">Margherita Pizza</p>
-                <p class="no-margin"><span>Size: S</span> <span class="text-red">$10.00</span></p>
-            </div>
-            <div class="quantity-section text-align-center padding">
-                <div class="quantity-content display-flex justify-content-center align-items-center">
-                    <span class="quantity-minus padding-vertical-half"><f7-icon f7="minus" class="font-16"></f7-icon></span>
-                    <span class="quantity-count padding-vertical-half">1</span>
-                    <span class="quantity-plus padding-vertical-half"><f7-icon f7="plus" class="font-16"></f7-icon></span>
-                </div>
-            </div>
-            <div class="product-note-content text-align-center">
-                <div class="product-note" data-popup="#note_popup" @click="f7.popup.open(`.notePopup`);"><Icon name="note" /></div>
-            </div>
-        </div>
-        <div class="product_detail padding display-flex justify-content-space-between align-items-center">
-            <div class="delete-product">
-                <span  data-popup="#deleteCartItem_popup" @click="f7.popup.open(`.deleteCartItemPopup`);"><f7-icon f7="minus" class="font-16 delete-product-button"></f7-icon></span>
-            </div>
-            <div class="product-summary margin-horizontal-half">
-                <p class="no-margin margin-bottom-half">Margherita Pizza</p>
-                <p class="no-margin"><span>Size: S</span> <span class="text-red">$10.00</span></p>
-            </div>
-            <div class="quantity-section text-align-center padding">
-                <div class="quantity-content display-flex justify-content-center align-items-center">
-                    <span class="quantity-minus padding-vertical-half"><f7-icon f7="minus" class="font-16"></f7-icon></span>
-                    <span class="quantity-count padding-vertical-half">1</span>
-                    <span class="quantity-plus padding-vertical-half"><f7-icon f7="plus" class="font-16"></f7-icon></span>
-                </div>
-            </div>
-            <div class="product-note-content text-align-center">
-                <div class="product-note" data-popup="#note_popup" @click="f7.popup.open(`.notePopup`);"><Icon name="note" /></div>
-            </div>
-        </div>
-        <div class="product_detail padding display-flex justify-content-space-between align-items-center">
-            <div class="delete-product">
-                <span  data-popup="#deleteCartItem_popup" @click="f7.popup.open(`.deleteCartItemPopup`);"><f7-icon f7="minus" class="font-16 delete-product-button"></f7-icon></span>
-            </div>
-            <div class="product-summary margin-horizontal-half">
-                <p class="no-margin margin-bottom-half">Margherita Pizza</p>
-                <p class="no-margin"><span>Size: S</span> <span class="text-red">$10.00</span></p>
-            </div>
-            <div class="quantity-section text-align-center padding">
-                <div class="quantity-content display-flex justify-content-center align-items-center">
-                    <span class="quantity-minus padding-vertical-half"><f7-icon f7="minus" class="font-16"></f7-icon></span>
-                    <span class="quantity-count padding-vertical-half">1</span>
-                    <span class="quantity-plus padding-vertical-half"><f7-icon f7="plus" class="font-16"></f7-icon></span>
-                </div>
-            </div>
-            <div class="product-note-content text-align-center">
-                <div class="product-note" data-popup="#note_popup" @click="f7.popup.open(`.notePopup`);"><Icon name="note" /></div>
             </div>
         </div>
     </div>
+    
 </template>
 <script setup>
 import { f7, f7Icon } from 'framework7-vue';

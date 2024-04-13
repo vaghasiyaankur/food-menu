@@ -10,6 +10,7 @@ import DigitalMenu from "./pages/pos/menu-management/DigitalMenu.vue";
 import FoodIngradient from "./pages/pos/menu-management/FoodIngradient.vue";
 import Setting from "./pages/pos/SettingsTab.vue";
 import NewSetting from "./pages/pos/NewSettingsTab.vue";
+import TableView from "./pages/restaurant-manager/table-view.vue"
 
 // Pages
 export default [
@@ -75,6 +76,11 @@ export default [
     name : 'NewSetting',
     path: '/new-settings/',
     component: NewSetting,
-  }
+  },  
+  {
+    name : 'TableView',
+    path: '/table-view/',
+    component: TableView,
+  },
 
 ]
