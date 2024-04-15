@@ -1,6 +1,6 @@
 <template>
     <div 
-        class="submit__button margin-top padding-top"
+        class="submit__button"
     >
         <button
             class="col button button-large button-fill" 
@@ -20,10 +20,14 @@
 </script>
 
 <style scoped>
+.submit__button{
+    padding: 12px 23px;
+    margin: 100px 0 300px;
+}
 .submit__button button {
 	width: 100%;
-	max-width: 160px;
-	margin: 0 auto 10px;
+	max-width: 170px;
+	margin: 0 auto;
 	border-radius: 10px;
 	background-color: #F33E3E;
 }
