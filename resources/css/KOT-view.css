@@ -142,3 +142,23 @@
     font-weight: 500;
     color: #ffffff;
 }
+.kot_view_list{
+    margin: 0 30px;
+}
+.kot_view_list .grid{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto;
+    column-gap: 35px;
+    row-gap: 30px;
+}
+.kot_view_table_card .kot_view_table_no{
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 600;
+    color: #38373D;
+    margin-bottom: 7px !important;
+}
+.kot_view_table_card .table_card{
+    border-radius: 5px;
+}
