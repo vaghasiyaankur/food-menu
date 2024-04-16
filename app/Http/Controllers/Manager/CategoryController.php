@@ -6,12 +6,10 @@ use App\Helper\CustomerHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use File;
+use Illuminate\Support\Facades\File;
 use App\Helper\SettingHelper;
-use App\Models\CategoryLanguage;
 use App\Models\CategoryRestaurantLanguage;
 use App\Models\Language;
-use App\Models\Restaurant;
 use App\Models\RestaurantLanguage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -72,6 +70,12 @@ class CategoryController extends Controller
 
         $image_name = '';
         if($req->file('image')){
+            $directory = storage_path('app/public/category/');
+
+            if (!file_exists($directory)) {
+                mkdir($directory, 0777, true);
+            }
+
             $imageFile = $req->file('image');
             $image_name = '/category/'.rand(10000000,99999999).".".$imageFile->GetClientOriginalExtension();
             $imageFile->move(storage_path('app/public/category/'),$image_name);
@@ -186,7 +190,7 @@ class CategoryController extends Controller
                                         ]);
         }
 
-        return response()->json(['success'=>'category Updated Successfully.']);
+        return response()->json(['success'=>'Category Updated Successfully.']);
     }
 
     public function deleteCategory(Request $req)
@@ -202,7 +206,7 @@ class CategoryController extends Controller
         }
 
         $category->delete();
-        return response()->json(['success'=>'category Deleted Successfully.']);
+        return response()->json(['success'=>'SubCategory Deleted Successfully.']);
     }
 
     public function get_categories()

@@ -140,7 +140,7 @@
                 axios
                 .post("/api/add-update-table", formData, config)
                 .then((res) => {
-                    this.$root.successNotification(res.data.success);
+                    // this.$root.successNotification(res.data.success);
                     this.$emit('tableshow')
                 }).catch((error) => {
                     this.$root.errorNotification('Something Went Wrong !!!');

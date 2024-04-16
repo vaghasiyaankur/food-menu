@@ -14,7 +14,7 @@
     grid-template-columns: calc(100% / 2) calc(100% / 2);
 }
 
-.category-list-section {
+.data-list-section {
     margin-top: 60px;
 }
 
@@ -258,7 +258,7 @@
     width: 100%;
 }
 
-.type-radio-btn:first-child,
+/* .type-radio-btn:first-child,
 .status-radio-btn:first-child {
     margin-top: 15px;
 }
@@ -266,7 +266,7 @@
 .type-radio-btn:last-child,
 .status-radio-btn:last-child {
     margin-top: 7px;
-}
+} */
 
 .added-combo-type span {
     font-size: 15px !important;
@@ -402,7 +402,7 @@
     margin-top: 60px !important;
 }
 
-.food-category {
+.food-type-icon {
     position: absolute;
     top: 15px;
     right: 15px;
@@ -668,7 +668,7 @@
 .delete-subdata-form,
 .delete-ingradient-form,
 .delete-product-form {
-    padding: 30px 0px 0;
+    padding: 30px 30px 0;
     text-align: center;
 }
 
@@ -700,20 +700,20 @@
 .sub-data-image-selection {
     margin-bottom: 20px;
 }
-.choose_sub-category_title {
+.data-drop-down_title {
     margin-top: 20px !important;
     font-size: 14px !important;
     line-height: 17px;
     font-weight: 600 !important;
     color: #555555 !important;
 }
-.choose_sub-category {
+.data-drop-down {
     margin-top: 7px;
 }
-.choose_sub-category select {
+.data-drop-down select {
     width: 100%;
 }
-.choose_sub-category option {
+.data-drop-down option {
     font-size: 14px !important;
     line-height: 16px;
     font-weight: 600 !important;
@@ -721,7 +721,7 @@
     justify-content: space-between;
     align-items: center;
 }
-.choose_sub-category option label {
+.data-drop-down option label {
     text-align: left;
 }
 
@@ -753,7 +753,7 @@
 }
 
 /* ADD PRODUCT PAGE */
-.category-list-section {
+.data-list-section {
     /* background-color: #ffffff; */
     height: 100%;
 }
@@ -1058,4 +1058,9 @@
     line-height: 18px;
     font-weight: 500;
     color: #38373d;
+}
+
+.active_status{
+    accent-color: #555555;
+    color: #555555;
 }

@@ -105,7 +105,7 @@
                 f7.dialog.confirm('Are you sure delete the table?', () => {
                 axios.post('/api/delete-table', { id: id })
                     .then((res) => {
-                        this.$root.successNotification(res.data.success);
+                        // this.$root.successNotification(res.data.success);
                         this.tableList();
                     })
                 });
@@ -122,7 +122,7 @@
                 f7.dialog.confirm('Are you sure Change status of the table?', () => {
                     axios.post('/api/change-table-status', { id : id , status: status })
                     .then((res) => {
-                        this.$root.successNotification(res.data.success);
+                        // this.$root.successNotification(res.data.success);
                         this.tableList();
                     })
                 });

@@ -396,7 +396,7 @@
                 axios
                 .post("/api/update-setting", formData, config)
                 .then((res) => {
-                    this.$root.successNotification(res.data.success);
+                    // this.$root.successNotification(res.data.success);
                 }).catch((error) => {
                     this.$root.errorNotification('Something Went Wrong !!!');
                     return false;

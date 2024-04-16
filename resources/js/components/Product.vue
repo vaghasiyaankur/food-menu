@@ -3,7 +3,7 @@
         <div class="grid grid-cols-3 grid-gap-25 text-align-center padding">
             <f7-card class="no-margin" v-for="(product,index) in products" :key="index">
                 <f7-card-content>
-                    <div class="food-category">
+                    <div class="food-type-icon">
                         <img :src="foodTypeIcon(product.food_type)" alt="">
                     </div>
                     <div class="product-image">
@@ -26,7 +26,7 @@
             </f7-card>
             <!-- <f7-card class="no-margin">
                 <f7-card-content>
-                    <div class="food-category">
+                    <div class="food-type-icon">
                         <img src="/images/non-veg-icon.png" alt="">
                     </div>
                     <div class="product-image">
@@ -43,7 +43,7 @@
             </f7-card>
             <f7-card class="no-margin">
                 <f7-card-content>
-                    <div class="food-category">
+                    <div class="food-type-icon">
                         <img src="/images/vegan-icon.png" alt="">
                     </div>
                     <div class="product-image">
@@ -60,7 +60,7 @@
             </f7-card>
             <f7-card class="no-margin">
                 <f7-card-content>
-                    <div class="food-category">
+                    <div class="food-type-icon">
                         <img src="/images/non-veg-icon.png" alt="">
                     </div>
                     <div class="product-image">
@@ -77,7 +77,7 @@
             </f7-card>
             <f7-card class="no-margin">
                 <f7-card-content>
-                    <div class="food-category">
+                    <div class="food-type-icon">
                         <img src="/images/vegan-icon.png" alt="">
                     </div>
                     <div class="product-image">
@@ -94,7 +94,7 @@
             </f7-card>
             <f7-card class="no-margin">
                 <f7-card-content>
-                    <div class="food-category">
+                    <div class="food-type-icon">
                         <img src="/images/vegan-icon.png" alt="">
                     </div>
                     <div class="product-image">

@@ -35,7 +35,7 @@
                                         <h4 class="no-margin no-padding">Burger</h4>
                                         <p class="add-combo-product-price no-margin no-padding">$8.00</p>
                                     </div>
-                                    <img class="food-category" src="/assets/images/seederImages/combo/type1.png">
+                                    <img class="food-type-icon" src="/assets/images/seederImages/combo/type1.png">
                                 </div>
                                 <div class="bg-color-white data-card">
                                     <div class="combo-image"><img src="/assets/images/seederImages/combo/Sandwich.png">
@@ -44,7 +44,7 @@
                                         <h4 class="no-margin no-padding">Sandwich</h4>
                                         <p class="add-combo-product-price no-margin no-padding">$10.00</p>
                                     </div>
-                                    <img class="food-category" src="/assets/images/seederImages/combo/type2.png">
+                                    <img class="food-type-icon" src="/assets/images/seederImages/combo/type2.png">
                                 </div>
                                 <div class="bg-color-white data-card">
                                     <div class="combo-image"><img src="/assets/images/seederImages/combo/Noodles.png">
@@ -53,7 +53,7 @@
                                         <h4 class="no-margin no-padding">Noodles</h4>
                                         <p class="add-combo-product-price no-margin no-padding">$19.00</p>
                                     </div>
-                                    <img class="food-category" src="/assets/images/seederImages/combo/type1.png">
+                                    <img class="food-type-icon" src="/assets/images/seederImages/combo/type1.png">
                                 </div>
                                 <div class="bg-color-white data-card">
                                     <div class="combo-image"><img src="/assets/images/seederImages/combo/Papad.png">
@@ -62,7 +62,7 @@
                                         <h4 class="no-margin no-padding">Papad</h4>
                                         <p class="add-combo-product-price no-margin no-padding">$10.00</p>
                                     </div>
-                                    <img class="food-category" src="/assets/images/seederImages/combo/type3.png">
+                                    <img class="food-type-icon" src="/assets/images/seederImages/combo/type3.png">
                                 </div>
                                 <div class="bg-color-white selected-product data-card">
                                     <div class="combo-image"><img
@@ -72,7 +72,7 @@
                                         <h4 class="no-margin no-padding">French Fries</h4>
                                         <p class="add-combo-product-price no-margin no-padding">$19.00</p>
                                     </div>
-                                    <img class="food-category" src="/assets/images/seederImages/combo/type1.png">
+                                    <img class="food-type-icon" src="/assets/images/seederImages/combo/type1.png">
                                 </div>
                                 <div class="bg-color-white selected-product data-card">
                                     <div class="combo-image"><img src="/assets/images/seederImages/combo/Coca_Cola.png">
@@ -81,7 +81,7 @@
                                         <h4 class="no-margin no-padding">Coca Cola</h4>
                                         <p class="add-combo-product-price no-margin no-padding">$19.00</p>
                                     </div>
-                                    <img class="food-category" src="/assets/images/seederImages/combo/type3.png">
+                                    <img class="food-type-icon" src="/assets/images/seederImages/combo/type3.png">
                                 </div>
                                 <div class="bg-color-white data-card">
                                     <div class="combo-image"><img src="/assets/images/seederImages/combo/Momos.png">
@@ -90,7 +90,7 @@
                                         <h4 class="no-margin no-padding">Momos</h4>
                                         <p class="add-combo-product-price no-margin no-padding">$10.00</p>
                                     </div>
-                                    <img class="food-category" src="/assets/images/seederImages/combo/type3.png">
+                                    <img class="food-type-icon" src="/assets/images/seederImages/combo/type3.png">
                                 </div>
                                 <div class="bg-color-white data-card">
                                     <div class="combo-image"><img src="/assets/images/seederImages/combo/Pasta.png">
@@ -99,7 +99,7 @@
                                         <h4 class="no-margin no-padding">Pasta</h4>
                                         <p class="add-combo-product-price no-margin no-padding">$10.00</p>
                                     </div>
-                                    <img class="food-category" src="/assets/images/seederImages/combo/type1.png">
+                                    <img class="food-type-icon" src="/assets/images/seederImages/combo/type1.png">
                                 </div>
                                 <div class="bg-color-white data-card">
                                     <div class="combo-image"><img
@@ -109,7 +109,7 @@
                                         <h4 class="no-margin no-padding">Manchurian</h4>
                                         <p class="add-combo-product-price no-margin no-padding">$19.00</p>
                                     </div>
-                                    <img class="food-category" src="/assets/images/seederImages/combo/type3.png">
+                                    <img class="food-type-icon" src="/assets/images/seederImages/combo/type3.png">
                                 </div>
                                 <div class="bg-color-white data-card">
                                     <div class="combo-image"><img src="/assets\images\seederImages\combo\Pizza.png">
@@ -118,7 +118,7 @@
                                         <h4 class="no-margin no-padding">Pizza</h4>
                                         <p class="add-combo-product-price no-margin no-padding">$19.00</p>
                                     </div>
-                                    <img class="food-category" src="/assets/images/seederImages/combo/type1.png">
+                                    <img class="food-type-icon" src="/assets/images/seederImages/combo/type1.png">
                                 </div>
                                 <div class="bg-color-white data-card">
                                     <div class="combo-image"><img
@@ -128,7 +128,7 @@
                                         <h4 class="no-margin no-padding">Buttermilk</h4>
                                         <p class="add-combo-product-price no-margin no-padding">$10.00</p>
                                     </div>
-                                    <img class="food-category" src="/assets/images/seederImages/combo/type3.png">
+                                    <img class="food-type-icon" src="/assets/images/seederImages/combo/type3.png">
                                 </div>
                                 <div class="bg-color-white data-card">
                                     <div class="combo-image"><img src="/assets/images/seederImages/combo/Sprite.png">
@@ -137,7 +137,7 @@
                                         <h4 class="no-margin no-padding">Sprite</h4>
                                         <p class="add-combo-product-price no-margin no-padding">$10.00</p>
                                     </div>
-                                    <img class="food-category" src="/assets/images/seederImages/combo/type2.png">
+                                    <img class="food-type-icon" src="/assets/images/seederImages/combo/type2.png">
                                 </div>
                                 <div class="bg-color-white data-card">
                                     <div class="combo-image"><img
@@ -147,7 +147,7 @@
                                         <h4 class="no-margin no-padding">Veg Crispy</h4>
                                         <p class="add-combo-product-price no-margin no-padding">$8.00</p>
                                     </div>
-                                    <img class="food-category" src="/assets/images/seederImages/combo/type1.png">
+                                    <img class="food-type-icon" src="/assets/images/seederImages/combo/type1.png">
                                 </div>
                                 <div class="bg-color-white data-card">
                                     <div class="combo-image"><img src="/assets/images/seederImages/combo/Fanta.png">
@@ -156,7 +156,7 @@
                                         <h4 class="no-margin no-padding">Fanta</h4>
                                         <p class="add-combo-product-price no-margin no-padding">$10.00</p>
                                     </div>
-                                    <img class="food-category" src="/assets/images/seederImages/combo/type3.png">
+                                    <img class="food-type-icon" src="/assets/images/seederImages/combo/type3.png">
                                 </div>
                                 <div class="bg-color-white data-card">
                                     <div class="combo-image"><img src="/assets/images/seederImages/combo/Soup.png">
@@ -165,7 +165,7 @@
                                         <h4 class="no-margin no-padding">Soup</h4>
                                         <p class="add-combo-product-price no-margin no-padding">$19.00</p>
                                     </div>
-                                    <img class="food-category" src="/assets/images/seederImages/combo/type1.png">
+                                    <img class="food-type-icon" src="/assets/images/seederImages/combo/type1.png">
                                 </div>
                                 <div class="bg-color-white data-card">
                                     <div class="combo-image"><img src="/assets/images/seederImages/combo/Samosa.png">
@@ -174,7 +174,7 @@
                                         <h4 class="no-margin no-padding">Samosa</h4>
                                         <p class="add-combo-product-price no-margin no-padding">$19.00</p>
                                     </div>
-                                    <img class="food-category" src="/assets/images/seederImages/combo/type1.png">
+                                    <img class="food-type-icon" src="/assets/images/seederImages/combo/type1.png">
                                 </div>
                             </div>
                         </div>
@@ -428,7 +428,7 @@ export default {
                 formData.append('id', this.product.id);
                 axios.post('/api/update-product', formData)
                     .then((res) => {
-                        this.$root.successNotification(res.data.success);
+                        // this.$root.successNotification(res.data.success);
                         this.getProducts();
                         f7.popup.close(`#product_popup`);
                         this.blankform();
@@ -436,7 +436,7 @@ export default {
             } else {
                 axios.post('/api/add-product', formData)
                     .then((res) => {
-                        this.$root.successNotification(res.data.success);
+                        // this.$root.successNotification(res.data.success);
                         this.getProducts();
                         f7.popup.close(`#product_popup`);
                         this.blankform();
@@ -447,7 +447,7 @@ export default {
             f7.dialog.confirm('Are you sure delete the product?', () => {
                 axios.post('/api/delete-product', { id: id })
                     .then((res) => {
-                        this.$root.successNotification(res.data.success);
+                        // this.$root.successNotification(res.data.success);
                         this.getProducts();
                     })
             });

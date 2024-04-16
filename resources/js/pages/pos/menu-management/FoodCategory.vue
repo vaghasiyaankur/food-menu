@@ -1,69 +1,53 @@
 <template>
     <f7-page>
-        <div class="category-list-section">
-            <!-- <div class="card elevation-2 border_radius_10"> -->
+        
+        <div class="data-list-section">
             <MenuManagementHeader title="Category" @add:popup="showCategoryPopup"
                 @update:search="updateSearch" />
 
-            <div class="card-content add-combo">
-                <div class="grid grid-cols-5 medium-grid-cols-4 grid-gap-25 grid-gap-20 align-items-center add-list">
-                    <div class="bg-color-white data-card" v-for="category in categories" :key="category.id">
-                        <div class="combo-image"><img :src="'/storage'+category.image">
-                        </div>
-                        <div class="text-align-center data-card-name">
-                            <h4 class="no-margin no-padding">{{category.name}}</h4>
-                        </div>
-                        <div class="grid grid-cols-2 grid-gap-5 combo-change">
-                            <a class="edit-combo col-100 large-45 medium-50" @click="showCategoryPopup(category.id)">
-                                <Icon name="editIcon" />Edit
-                            </a>
-                            <a class="delete-combo col-100 large-50 medium-50" @click="showRemoveCategoryPopup(category.id)">
-                                <Icon name="deleteIcon" />Delete
-                            </a>
-                        </div>
-                        <img class="food-category" :src="foodTypeIcon(category.type)">
-                    </div>
-                </div>
+            <div class="category-card">
+                <Card 
+                    :dataSet="categories" 
+                    @open:edit-popup="showCategoryPopup"
+                    @open:remove-popup="showRemoveCategoryPopup"
+                />
             </div>
         </div>
 
+        <!-- ========= ADD - EDIT CATEGORY POPUP ========= -->
         <div class="popup addUpdatePopup">
             <AddUpdatePopup
                 :title="addUpdateTitle"
                 :form-data-format="addUpdateFormDataFormat" 
                 :type="addUpdateType" :data-type="'category'"
                 @store:update="storeUpdateData"
+                @set:data-value="setDataValue"
+                @set:image-value="setImageValue"
             />
         </div>
 
+        <!-- ========= DELETE CATEGORY POPUP ========= -->
         <div class="popup removePopup">
             <RemovePopup 
-                :title="'Are you sure delete the category?'"
+                :title="'Are you sure delete this category?'"
                 @remove="removeData"
             />
         </div>
 
-</f7-page>
+    </f7-page>
 </template>
 
 <script setup>
-import {
-    f7Page,
-    f7Navbar,
-    f7BlockTitle,
-    f7Block,
-    f7,
-    f7Input
-} from 'framework7-vue';
+import { f7Page, f7 } from 'framework7-vue';
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import $ from 'jquery';
 import NoValueFound from '../../../components/NoValueFound.vue'
 import MenuManagementHeader from './MenuManagementHeader.vue'
-import Icon from "../../../components/Icon.vue"
-import AddUpdatePopup from './PopUp/AddUpdatePopup.vue'
-import RemovePopup from './PopUp/RemovePopup.vue'
-import { successNotification, errorNotification, getErrorMessage, getFoodTypeIcon } from '../../../commonFunction.js';
+import AddUpdatePopup from './common/AddUpdatePopup.vue'
+import RemovePopup from './common/RemovePopup.vue'
+import Card from './common/Card.vue'
+import { successNotification, errorNotification, getErrorMessage } from '../../../commonFunction.js';
 
 const categories = ref([]);
 const addUpdateTitle = ref('Add Category');
@@ -72,7 +56,7 @@ const removeCategoryId = ref(0);
 
 const addUpdateFormDataFormat = ref([
     { label: 'Id', multipleLang: false, type: 'hidden', placeHolder: 'Category Id', value: ''},
-    { label: 'Image', multipleLang: false, type: 'image', placeHolder: 'Category Image', value: '', preview: ''},
+    { label: 'Image', multipleLang: false, type: 'image', placeHolder: 'Category Image', value: {}, preview: ''},
     {
         label: 'Type',
         multipleLang: false,
@@ -113,7 +97,6 @@ const getCategories = () => {
         search: search.value
     })
     .then((response) => {
-        console.log(response.data.categories);
         categories.value = response.data.categories;
     });
 };
@@ -157,14 +140,12 @@ const showCategoryPopup = (id = null) => {
     f7.popup.open(`.addUpdatePopup`);
 };
 
-const findIndexByLabel = (formData, label) => formData.findIndex(item => item.label === label);
-
 const manipulateField = (formData, label, value = null) => {
     const index = formData.findIndex(item => item.label === label);
     if (index !== -1) {
         if(label == 'Image'){
             formData[index].preview = value !== null ? value : formData[index].default;
-            formData[index].value = '';
+            formData[index].value = {};
         }else{
             formData[index].value = value !== null ? value : formData[index].default;
         }
@@ -212,7 +193,6 @@ const storeUpdateData = () => {
     const id = formData.find(item => item.label === 'Id').value;
     const categoryType = formData.find(item => item.label === 'Type').value;
     const status = formData.find(item => item.label === 'Status').value;
-    const imageName = formData.find(item => item.label === 'Image').value.name; // Get the name of the image file
 
     // Create FormData object to send file data along with other form data
     const categoryData = new FormData();
@@ -246,10 +226,6 @@ const storeUpdateData = () => {
     });
 };
 
-const foodTypeIcon = (typeId) => {
-    return getFoodTypeIcon(typeId);
-}
-
 const showRemoveCategoryPopup = (id) => {
     removeCategoryId.value = id;
     f7.popup.open(`.removePopup`);
@@ -273,6 +249,19 @@ const removeData = () => {
         const errorMessage = getErrorMessage(error);
         errorNotification(errorMessage);
     });
+}
+
+const setDataValue = (index, optionInd, value) => {
+    if(optionInd){
+        addUpdateFormDataFormat.value[index].options[ind].value = value;
+    }else{
+        addUpdateFormDataFormat.value[index].value = value;
+    }
+}
+const setImageValue = (index, value, preview) => {
+    console.log(addUpdateFormDataFormat.value[index]);
+    addUpdateFormDataFormat.value[index].value = value;
+    addUpdateFormDataFormat.value[index].preview = preview;
 }
 
 </script>

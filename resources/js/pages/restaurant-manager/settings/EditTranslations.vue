@@ -132,7 +132,7 @@
             updateTraslation() {
                 axios.post('/api/update-lang-translation', { lang_trans: this.lang_trans })
                 .then((res) => {
-                    this.$root.successNotification(res.data.success);
+                    // this.$root.successNotification(res.data.success);
                     this.getLangTraslation(this.pagenumber)
                 });
             }

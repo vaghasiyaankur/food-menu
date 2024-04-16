@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Setting;
-use File;
+use Illuminate\Support\Facades\File;
 
 class SettingSeeder extends Seeder
 {
@@ -36,6 +36,9 @@ class SettingSeeder extends Seeder
         $setting->highlight_time = 1;
         $setting->language_id = 1;
         $setting->restaurant_id = 1;
+        $setting->currency_name = "Indian";
+        $setting->currency_code = "INR";
+        $setting->currency_symbol = "₹";
         $setting->save();
 
         $image_name_2 = rand(00000,11111) .'_logo.png';
@@ -54,6 +57,9 @@ class SettingSeeder extends Seeder
         $setting->highlight_time = 1;
         $setting->language_id = 1;
         $setting->restaurant_id = 2;
+        $setting->currency_name = "Indian";
+        $setting->currency_code = "INR";
+        $setting->currency_symbol = "₹";
         $setting->save();
     }
 }

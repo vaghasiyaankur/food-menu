@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Ingredient extends Model
 {
     use HasFactory;
+
+    protected $table = 'ingredients';
+
+    protected $guarded = ['id']; 
+
+    public function ingredientRestaurantLanguages()
+    {
+        return $this->hasMany(IngredientRestaurantLanguage::class, 'ingredient_id');
+    }
 }

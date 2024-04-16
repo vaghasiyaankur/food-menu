@@ -9,7 +9,7 @@
                 <div class="card-content combo-list">
                     <div class="grid grid-cols-5 medium-grid-cols-4 grid-gap-25 align-items-center">
                         <div class="card-type bg-color-white combo-card">
-                            <div class="food-category">
+                            <div class="food-type-icon">
                                 <img src="/images/veg-icon.png" alt="">
                             </div>
                             <div class="combo-image"><img src="/assets/images/seederImages/combo/1.png"></div>
@@ -23,7 +23,7 @@
                             </div>
                         </div>
                         <div class="card-type bg-color-white combo-card">
-                            <div class="food-category">
+                            <div class="food-type-icon">
                                 <img src="/images/veg-icon.png" alt="">
                             </div>
                             <div class="combo-image">
@@ -39,7 +39,7 @@
                             </div>
                         </div>
                         <div class="card-type bg-color-white combo-card">
-                            <div class="food-category">
+                            <div class="food-type-icon">
                                 <img src="/images/vegan-icon.png" alt="">
                             </div>
                             <div class="combo-image">
@@ -55,7 +55,7 @@
                             </div>
                         </div>
                         <div class="card-type bg-color-white combo-card">
-                            <div class="food-category">
+                            <div class="food-type-icon">
                                 <img src="/images/non-veg-icon.png" alt="">
                             </div>
                             <div class="combo-image"><img src="/assets/images/seederImages/combo/4.png"></div>
@@ -69,7 +69,7 @@
                             </div>
                         </div>
                         <div class="card-type bg-color-white combo-card">
-                            <div class="food-category">
+                            <div class="food-type-icon">
                                 <img src="/images/veg-icon.png" alt="">
                             </div>
                             <div class="combo-image"><img src="/assets/images/seederImages/combo/5.png"></div>
@@ -83,7 +83,7 @@
                             </div>
                         </div>
                         <div class="card-type bg-color-white combo-card">
-                            <div class="food-category">
+                            <div class="food-type-icon">
                                 <img src="/images/veg-icon.png" alt="">
                             </div>
                             <div class="combo-image"><img src="/assets/images/seederImages/combo/6.png"></div>
@@ -97,7 +97,7 @@
                             </div>
                         </div>
                         <div class="card-type bg-color-white combo-card">
-                            <div class="food-category">
+                            <div class="food-type-icon">
                                 <img src="/images/non-veg-icon.png" alt="">
                             </div>
                             <div class="combo-image">
@@ -113,7 +113,7 @@
                             </div>
                         </div>
                         <div class="card-type bg-color-white combo-card">
-                            <div class="food-category">
+                            <div class="food-type-icon">
                                 <img src="/images/vegan-icon.png" alt="">
                             </div>
                             <div class="combo-image"><img src="/assets/images/seederImages/combo/8.png"></div>

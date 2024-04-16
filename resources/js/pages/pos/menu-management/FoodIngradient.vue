@@ -1,127 +1,267 @@
 <template>
     <f7-page>
+        
+        <div class="data-list-section">
+            <MenuManagementHeader title="Ingredient" @add:popup="showIngredientPopup"
+                @update:search="updateSearch" />
 
-        <div class="category-list-section">
-            <MenuManagementHeader title="Ingradient" @blank:action="blankForm" @add:popup="showCategoryPopup"
-                @update:search="updateSearch" @update:PopupTitle="updatePopupTitle" />
+            <div class="ingredient-card">
+                <Card 
+                    :dataSet="ingredients" 
+                    @open:edit-popup="showIngredientPopup"
+                    @open:remove-popup="showRemoveIngredientPopup"
+                />
+            </div>
+        </div>
 
-                <div class="card-content add-combo">
-                <div
-                    class="grid grid-cols-5 medium-grid-cols-4 grid-gap-25 grid-gap-20 align-items-center add-list food-ingradient-list">
-                    <div class="bg-color-white data-card">
-                        <div class="combo-image"><img
-                                src="\assets\images\seederImages\Ingradients\Onion.png">
-                        </div>
-                        <div class="text-align-center data-card-name">
-                            <h4 class="no-margin no-padding">Kathiyavadi Thali</h4>
-                        </div>
-                        <div class="text-align-center combo-name">
-                                <h4 class="no-margin no-padding">Combo 1</h4>
-                                <p class="combo-price no-margin no-padding">$8.00</p>
-                            </div>
-                        <div class="grid grid-cols-2 grid-gap-5 combo-change">
-                            <a class="edit-combo col-100 large-45 medium-50">
-                                <Icon name="editIcon" />Edit
-                            </a>
-                            <a class="delete-combo col-100 large-50 medium-50">
-                                <Icon name="deleteIcon" />Delete
-                            </a>
-                        </div>
-                        <img class="food-category" src="/assets/images/seederImages/combo/type1.png">
-                    </div>
-                    
-                </div>
-            </div>
+        <!-- ========= ADD - EDIT INGREDIENT POPUP ========= -->
+        <div class="popup addUpdatePopup">
+            <AddUpdatePopup
+                :title="addUpdateTitle"
+                :form-data-format="addUpdateFormDataFormat" 
+                :type="addUpdateType" :data-type="'ingredient'"
+                @store:update="storeUpdateData"
+                @set:data-value="setDataValue"
+                @set:image-value="setImageValue"
+            />
         </div>
-        <!-- ========= ADD INGRADIENT POPUP ========= -->
-        <div class="IngradientPopup display-none">
-            <div class="data-form">
-                <div class="text-align-center popup_title">
-                    Add Ingradient Category</div>
-                <div class="data-add">
-                    <label class="add_ingradient_name">Ingradient name</label>
-                    <div class="ingradientName text-align-left">
-                        <input type="text" class="ingradient-name" placeholder="Enter Ingradient name">
-                    </div>
-                    <div class="add_ingradient_image">
-                        <label>Profile Image</label>
-                    </div>
-                    <div class="ingradient-image-selection">
-                        <div class="data-add-image">
-                            <img src="/images/add-image.png" />
-                        </div>
-                        <div class="data-add-image-text">
-                            <span class="add-image-text">Select Image</span>
-                        </div>
-                    </div>
-                    <div class="display-flex justify-content-center popup_button">
-                        <button type="button"
-                            class="button button-raised button-large popup-close popup-cancel-button">Cancel</button>
-                        <button type="button" class="button button-raised button-large popup-ok-button">Ok</button>
-                    </div>
-                </div>
-            </div>
-            <div class="wave-image-content"><img src="/images/flow.png" style="width:100%"></div>
+
+        <!-- ========= DELETE INGREDIENT POPUP ========= -->
+        <div class="popup removePopup">
+            <RemovePopup 
+                :title="'Are you sure delete this ingredient ?'"
+                @remove="removeData"
+            />
         </div>
-        <!-- ========= EDIT INGRADIENT POPUP ========= -->
-        <div class="EditIngradientPopup display-none">
-            <div class="data-form">
-                <div class="text-align-center popup_title">
-                    edit Category</div>
-                <div class="data-add">
-                    <label class="add-data-name">Ingradient name</label>
-                    <div class="data-name text-align-left">
-                        <input type="text" class="add-update-data-name" placeholder="Kathiyavadi thali">
-                    </div>
-                    <div class="ingradient_price">
-                        <label>Price</label>
-                        <div class="ingradientPrice text-align-left">
-                        <input type="text" class="ingradient-price" placeholder="₹ 70.00">
-                    </div>
-                    </div>
-                    <div class="display-flex justify-content-center popup_button">
-                        <button type="button"
-                            class="button button-raised button-large popup-close popup-cancel-button">Cancel</button>
-                        <button type="button" class="button button-raised button-large popup-ok-button">Ok</button>
-                    </div>
-                </div>
-            </div>
-            <div class="wave-image-content"><img src="/images/flow.png" style="width:100%"></div>
-        </div>
-        <!-- ========= DELETE INGRADIENT POPUP ========= -->
-        <div class="DeleteIngradientPopup display-none">
-            <div class="delete-ingradient-form">
-                <div class="delete-data-warning-sign">
-                    <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M13.5 0C6.05663 0 0 6.05663 0 13.5C0 20.9434 6.05663 27 13.5 27C20.9434 27 27 20.9434 27 13.5C27 6.05663 20.9434 0 13.5 0ZM18.4715 16.8816C18.9102 17.3204 18.9102 18.0327 18.4715 18.4731C18.2519 18.6923 17.9635 18.8023 17.6767 18.8023C17.3896 18.8023 17.1012 18.6923 16.8816 18.4731L13.5 15.0915L10.1184 18.4731C9.89882 18.6923 9.61043 18.8023 9.32327 18.8023C9.03488 18.8023 8.74814 18.6923 8.52855 18.4731C8.08978 18.0343 8.08978 17.322 8.52855 16.8816L11.9085 13.5L8.5269 10.1184C8.08813 9.67964 8.08813 8.96732 8.5269 8.5269C8.96567 8.08649 9.67799 8.08813 10.1184 8.5269L13.5 11.9085L16.8816 8.5269C17.3204 8.08813 18.0327 8.08813 18.4731 8.5269C18.9135 8.96567 18.9119 9.67799 18.4731 10.1184L15.0915 13.5L18.4715 16.8816Z"
-                            fill="#F33E3E" />
-                    </svg>
-                </div>
-                <h4 class=" no-margin delete-data-warning-text">Are you sure delete the Ingradient?</h4>
-                <div class="display-flex justify-content-center popup_button">
-                    <button type="button"
-                        class="button button-raised button-large popup-close popup-cancel-button">Cancel</button>
-                    <button type="button" class="button button-raised button-large popup-ok-button">Ok</button>
-                </div>
-            </div>
-            <div class="wave-image-content"><img src="/images/flow.png"></div>
-        </div>
+
     </f7-page>
 </template>
 
 <script setup>
-import {
-    f7Page,
-    f7Navbar,
-    f7BlockTitle,
-    f7Block,
-    f7,
-    f7Input
-} from 'framework7-vue';
+import { f7Page, f7 } from 'framework7-vue';
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
 import $ from 'jquery';
-import axios from "axios";
 import NoValueFound from '../../../components/NoValueFound.vue'
 import MenuManagementHeader from './MenuManagementHeader.vue'
-import Icon from "../../../components/Icon.vue"
+import AddUpdatePopup from './common/AddUpdatePopup.vue'
+import RemovePopup from './common/RemovePopup.vue'
+import Card from './common/Card.vue'
+import { successNotification, errorNotification, getErrorMessage } from '../../../commonFunction.js';
+
+const ingredients = ref([]);
+const addUpdateTitle = ref('Add Ingredient');
+const addUpdateType = ref('add');
+const removeIngredientId = ref(0);
+
+const addUpdateFormDataFormat = ref([
+    { label: 'Id', multipleLang: false, type: 'hidden', placeHolder: 'Ingredient Id', value: ''},
+    { label: 'Image', multipleLang: false, type: 'image', placeHolder: 'Ingredient Image', value: {}, preview: ''},
+    {
+        label: 'Type',
+        multipleLang: false,
+        type: 'radio',
+        name: 'food-type',
+        options: [
+            { label: 'Veg', value: 1},
+            { label: 'Non-veg', value: 2},
+            { label: 'Egg Type', value: 3}
+        ],
+        placeHolder: 'Add Ingredient Type',
+        value: 1
+    },
+    {
+        label: 'Status',
+        multipleLang: false,
+        type: 'radio',
+        name: 'status',
+        options: [
+            { label: 'Active', value: 1},
+            { label: 'Deactive', value: 2}
+        ],
+        placeHolder: 'Ingredient Status',
+        value: 1
+    }
+]);
+
+const search = ref('');
+
+onMounted(() => {
+    $('.page-content').css('background', '#F7F7F7');
+    getIngredients();
+    getLanguages();
+});
+
+const getIngredients = () => {
+    axios.post('/api/get-ingredients', {
+        search: search.value
+    })
+    .then((response) => {
+        ingredients.value = response.data.ingredients;
+    });
+};
+
+const getLanguages = () => {
+    axios.get('/api/get-languages')
+    .then((response) => {
+        let optionsData = [];
+        
+        Object.keys(response.data.langs).forEach(langKey => {
+            const lang = response.data.langs[langKey];
+            optionsData.push({
+                language_id: lang.id,
+                language: lang.name,
+                value: ''
+            });
+        });
+
+        addUpdateFormDataFormat.value.unshift({
+            label: 'Name',
+            multipleLang: true,
+            type: 'text',
+            placeHolder: 'Add Ingredient Name',
+            value: '',
+            options: optionsData
+        });
+    });
+};
+
+const showIngredientPopup = (id = null) => {
+    if(id){
+        axios.get('/api/get-ingredient/'+id)
+        .then((response) => {
+            updateFormData(response.data);
+        });
+    }else{
+        resetFormData();
+    }
+    addUpdateTitle.value = id ? 'Edit Ingredient' : 'Add Ingredient';
+    addUpdateType.value = id ? 'edit' : 'add';
+    f7.popup.open(`.addUpdatePopup`);
+};
+
+const manipulateField = (formData, label, value = null) => {
+    const index = formData.findIndex(item => item.label === label);
+    if (index !== -1) {
+        if(label == 'Image'){
+            formData[index].preview = value !== null ? value : formData[index].default;
+            formData[index].value = {};
+        }else{
+            formData[index].value = value !== null ? value : formData[index].default;
+        }
+    }
+};
+
+const updateFormData = (ingredientData) => {
+    const formData = addUpdateFormDataFormat.value;
+    manipulateField(formData, 'Id', ingredientData.id);
+    manipulateField(formData, 'Image', `/storage/${ingredientData.image}`);
+    manipulateField(formData, 'Type', parseInt(ingredientData.type));
+    manipulateField(formData, 'Status', parseInt(ingredientData.status));
+
+    const nameIndex = formData.findIndex(item => item.label === 'Name');
+    if (nameIndex !== -1) {
+        ingredientData.ingRestLang.forEach((ingredientRestLang) => {
+            const langOptionIndex = formData[nameIndex].options.findIndex(option => option.language_id === ingredientRestLang.language_id);
+            if (langOptionIndex !== -1) {
+                formData[nameIndex].options[langOptionIndex].value = ingredientRestLang.name;
+            }
+        });
+    }
+};
+
+const resetFormData = () => {
+    const formData = addUpdateFormDataFormat.value;
+    manipulateField(formData, 'Id', '');
+    manipulateField(formData, 'Image', '');
+    manipulateField(formData, 'Type', 1);
+    manipulateField(formData, 'Status', 1);
+
+    const nameIndex = formData.findIndex(item => item.label === 'Name');
+    if (nameIndex !== -1) {
+        formData[nameIndex].options.forEach(option => option.value = '');
+    }
+};
+
+const updateSearch = (searchValue) => {
+    search.value = searchValue;
+    getIngredients();
+}
+
+const storeUpdateData = () => {
+    const formData = addUpdateFormDataFormat.value;
+    const id = formData.find(item => item.label === 'Id').value;
+    const type = formData.find(item => item.label === 'Type').value;
+    const status = formData.find(item => item.label === 'Status').value;
+
+    // Create FormData object to send file data along with other form data
+    const ingredientData = new FormData();
+    ingredientData.append('id', id);
+    ingredientData.append('type', type);
+    ingredientData.append('status', status);
+    ingredientData.append('image', formData.find(item => item.label === 'Image').value); // Append the image file to FormData
+
+    // Map language data to FormData
+    formData.find(item => item.label === 'Name').options.forEach(option => {
+        ingredientData.append('names['+option.language+']', option.value);
+        ingredientData.append('language[]', option.language);
+    });
+
+    const endpoint = id ? '/api/update-ingredient' : '/api/add-ingredient';
+
+    // Send POST request with FormData
+    axios.post(endpoint, ingredientData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    })
+    .then((response) => {
+        successNotification(response.data.success);
+        f7.popup.close(`.addUpdatePopup`);
+        getIngredients();
+    })
+    .catch((error) => {
+        const errorMessage = getErrorMessage(error);
+        errorNotification(errorMessage);
+    });
+};
+
+const showRemoveIngredientPopup = (id) => {
+    removeIngredientId.value = id;
+    f7.popup.open(`.removePopup`);
+}
+
+const removeData = () => {
+    const ingredientData = new FormData();
+    ingredientData.append('id', removeIngredientId.value);
+    
+    axios.post(`/api/delete-ingredient`, ingredientData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    })
+    .then((response) => {
+        successNotification(response.data.success);
+        f7.popup.close(`.removePopup`);
+        getIngredients();
+    })
+    .catch((error) => {
+        const errorMessage = getErrorMessage(error);
+        errorNotification(errorMessage);
+    });
+}
+
+const setDataValue = (index, optionInd, value) => {
+    if(optionInd){
+        addUpdateFormDataFormat.value[index].options[ind].value = value;
+    }else{
+        addUpdateFormDataFormat.value[index].value = value;
+    }
+}
+
+const setImageValue = (index, value, preview) => {
+    console.log(addUpdateFormDataFormat.value[index]);
+    addUpdateFormDataFormat.value[index].value = value;
+    addUpdateFormDataFormat.value[index].preview = preview;
+}
 </script>

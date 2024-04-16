@@ -451,7 +451,7 @@ $("body").click(function (e) {
   top: 0px !important;
 }
 
-/*.category-list-section {
+/*.data-list-section {
     margin-top: 70px
 }*/
 

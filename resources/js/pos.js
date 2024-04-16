@@ -9,7 +9,6 @@ import 'framework7/css/bundle';
 import '.././css/pos.css';
 import '.././css/menu-management.css';
 import '.././css/settings.css';
-import '.././css/NewSettingsTab.css';
 import '.././css/table-view.css';
 
 /* import font awesome icon component */

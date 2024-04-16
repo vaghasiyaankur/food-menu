@@ -89,7 +89,7 @@
                                     <Icon name="deleteIcon" />Delete
                                 </a>
                             </div>
-                            <img class="food-category" src="/assets/images/seederImages/combo/type1.png">
+                            <img class="food-type-icon" src="/assets/images/seederImages/combo/type1.png">
                         </div>
                     </div>
                 </div>
@@ -226,7 +226,7 @@ export default {
                 formData.append('id', this.product.id);
                 axios.post('/api/update-product', formData)
                     .then((res) => {
-                        this.$root.successNotification(res.data.success);
+                        // this.$root.successNotification(res.data.success);
                         this.getProducts();
                         f7.popup.close(`#product_popup`);
                         this.blankform();
@@ -234,7 +234,7 @@ export default {
             } else {
                 axios.post('/api/add-product', formData)
                     .then((res) => {
-                        this.$root.successNotification(res.data.success);
+                        // this.$root.successNotification(res.data.success);
                         this.getProducts();
                         f7.popup.close(`#product_popup`);
                         this.blankform();
@@ -245,7 +245,7 @@ export default {
             f7.dialog.confirm('Are you sure delete the product?', () => {
                 axios.post('/api/delete-product', { id: id })
                     .then((res) => {
-                        this.$root.successNotification(res.data.success);
+                        // this.$root.successNotification(res.data.success);
                         this.getProducts();
                     })
             });

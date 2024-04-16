@@ -70,7 +70,7 @@ import TabHeader from '../../../components/TabHeader.vue';
 
                 axios.post('/api/add-floor', formData)
                 .then((res) => {
-                    this.$root.successNotification(res.data.success);
+                    // this.$root.successNotification(res.data.success);
                     this.$emit('floorlistshow');
                 });
             },

@@ -134,14 +134,15 @@ class CategorySeeder extends Seeder
                 $subCate = new SubCategory();
                 $subCate->image = 'sub_category/'.$cat->restaurant_id.'-'.$k.'-'.$key.'.webp';
                 $subCate->category_id = $cat->id;
+                $subCate->added_by_id = $cate['added_by_id'];
                 $subCate->restaurant_id = $cate['restaurant_id'];
                 $subCate->save();
                 foreach($languages as $ke=>$lang){
-                    $subcatlang = new SubCategoryLanguage();
-                    $subcatlang->name = $subCat[$ke];
-                    $subcatlang->language_id = $lang->id;
-                    $subcatlang->sub_category_id = $subCate->id;
-                    $subcatlang->save();
+                    $subCatLang = new SubCategoryLanguage();
+                    $subCatLang->name = $subCat[$ke];
+                    $subCatLang->language_id = $lang->id;
+                    $subCatLang->sub_category_id = $subCate->id;
+                    $subCatLang->save();
 
                     $restaurantLanguage = RestaurantLanguage::where('restaurant_id', $cate['restaurant_id'])->where('language_id', $lang->id)->first();
                     $subCatRestLang = new SubcategoryRestaurantLanguage();
