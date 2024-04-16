@@ -50,6 +50,7 @@
                                 :name="data.name" 
                                 :value="data.value"
                                 @update:radio="saveValue(index, null, $event)" 
+                                class="type-radio-btn"
                             />
                         </div>
                     </template>

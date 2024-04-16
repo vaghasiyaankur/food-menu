@@ -13,6 +13,7 @@ use App\Http\Controllers\Manager\SubCategoryController;
 use App\Http\Controllers\Manager\SettingController;
 use App\Http\Controllers\Manager\TableController;
 use App\Http\Controllers\QrCodeController;
+use App\Http\Controllers\TaxSettingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -83,6 +84,16 @@ Route::post('/delete-ingredient',[IngredientController::class, 'deleteIngredient
 // ------------------------ Setting Page Routes ------------------------ //
 
 Route::get('setting-data',[SettingController::class, 'settingData']);
+
+Route::get('get-currency', [SettingController::class, 'getCurrency']);
+
+Route::post('save-currency', [SettingController::class, 'saveCurrency']);
+
+Route::get('get-tax-detail', [TaxSettingController::class, 'getTaxList']);
+
+Route::post('save-tax-detail', [TaxSettingController::class, 'saveTaxDetail']);
+
+Route::delete('delete-tax-detail/{tax}', [TaxSettingController::class, 'deleteTaxDetail']);
 
 Route::post('update-setting',[SettingController::class, 'updateSetting']);
 
