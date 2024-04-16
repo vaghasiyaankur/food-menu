@@ -1,8 +1,9 @@
 <template>
-   <div class="type-radio-btn">
+    <div class="">
         <span 
             v-for="(opt, index) in options" :key="index" 
-            :class="index == 0 ? '' : 'margin-left'"
+            class="active_status"
+            :class="{'margin-left': index !== 0 }"
         >
             <input type="radio" 
                 :id="name+'-'+opt.value" 

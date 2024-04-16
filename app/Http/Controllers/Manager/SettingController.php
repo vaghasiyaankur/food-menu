@@ -66,7 +66,7 @@ class SettingController extends Controller
             'highlight_time' => $request->highlight_on_off ? $request->highlight_time : 0
         ];
 
-       Setting::where('id', $setting->id)->update($settingData);
+        Setting::where('id', $setting->id)->update($settingData);
 
         return response()->json([ 'success' => 'Setting Data Updated successfully' ] , 200);
     }
@@ -186,6 +186,20 @@ class SettingController extends Controller
         $member_capacity = Setting::whereRestaurantId($restaurant_id)->first()->member_capacity;
 
         return response()->json(['member_capacity'=>$member_capacity]);
+    }
+
+    public function getCurrency() {
+        $setting = Setting::select('currency_name', 'currency_code', 'currency_symbol')->whereRestaurantId(Auth::user()->restaurant_id)->first();
+
+        return response()->json(['setting'=>$setting]);
+    }
+
+    public function saveCurrency(Request $request) {
+        $data = $request->all();
+
+        Setting::whereRestaurantId(Auth::user()->restaurant_id)->update($data);
+
+        return response()->json(['success'=>'Currency Updated Successfully.']);
     }
 
 }

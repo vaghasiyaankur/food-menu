@@ -258,7 +258,7 @@
     width: 100%;
 }
 
-.type-radio-btn:first-child,
+/* .type-radio-btn:first-child,
 .status-radio-btn:first-child {
     margin-top: 15px;
 }
@@ -266,7 +266,7 @@
 .type-radio-btn:last-child,
 .status-radio-btn:last-child {
     margin-top: 7px;
-}
+} */
 
 .added-combo-type span {
     font-size: 15px !important;
@@ -1058,4 +1058,9 @@
     line-height: 18px;
     font-weight: 500;
     color: #38373d;
+}
+
+.active_status{
+    accent-color: #555555;
+    color: #555555;
 }

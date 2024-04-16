@@ -1,22 +1,8 @@
-.AllUsers::-webkit-scrollbar,
-.SuperAdmin::-webkit-scrollbar {
-    height: 5px !important;
-    width: 65px !important;
-}
-
-.AllUsers::-webkit-scrollbar-track,
-.SuperAdmin::-webkit-scrollbar {
-    background: #e8e8e8;
-    border-top: 0 solid #fafafa !important;
-    border-bottom: 0px solid #fafafa !important;
-}
-.AllUsers::-webkit-scrollbar-thumb,
-.SuperAdmin::-webkit-scrollbar-thumb {
-    background: #555555;
-    border-radius: 5px;
-    max-width: 65px !important;
-}
 /* setting */
+.active {
+    background-color: #F33E3E;
+    color: #fff;
+}
 .setting-tabs{
     margin-top: 56px;
 }
@@ -191,12 +177,6 @@
     box-sizing: border-box;
 }
 
-.edit_tax_button{
-    border-right: 1px solid #E0E0E0;
-}
-
-
-
 /* NEW SETTINGS */
 .tab-link {
     --f7-touch-ripple-color: none;
@@ -365,7 +345,7 @@
     margin: 50px 0 25px !important;
 }
 .tax-setting-form hr {
-    margin: 35px 0 !important;
+    margin: 30px 0 !important;
 }
 .edit_tax_button {
     margin-right: 30px;
@@ -387,7 +367,7 @@
     margin-top: 30px;
 }
 .taxsetting_form .popup_button {
-    margin: 68px 0 30px !important;
+    margin: 30px 0 !important;
 }
 
 /* USER MANAGEMENT SETTINGS */
@@ -458,7 +438,7 @@ tbody .numeric-cell:last-child {
 .site-role {
     max-width: calc(130px - 32px);
     width: 100%;
-    padding: 8px 16px !important;
+    padding: 5px 16px !important;
     background-color: #f4f4f4;
     border-radius: 5px;
     display: flex;
@@ -588,4 +568,79 @@ tbody .numeric-cell:last-child {
     left: 53px;
     box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2);
     background-color: #fff;
+}
+
+#drop-down,#drop-down-1{
+    display: inline-block;
+    position: relative;
+    width: 100%;
+}
+
+.drop-down__button{
+    background:#FAFAFA;
+    display: inline-block;
+    text-align: left;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px 0px rgba(0,0,0,0.2);
+    width:100%
+}
+
+.drop-down__name input{
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: 2px;
+    width: 100%;
+}
+
+.drop-down__menu-box {
+    position: absolute;
+    width: 100%;
+    left: 14.5%;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.11);
+    transition: all 0.3s;
+    visibility: hidden;
+    opacity: 0;
+    margin-top: 5px;
+    z-index: 10;
+    width: 100%;
+    max-width: 378px;
+    border-radius: 10px;
+}
+
+.drop-down__menu {
+    margin: 0;
+    padding: 0 13px;
+    list-style: none;
+
+}
+.drop-down__menu-box:before{
+    content: '';
+    background-color: transparent;
+    border-right: 15px solid transparent;
+    position: absolute;
+    border-left: 15px solid transparent;
+    border-bottom: 15px solid #fff;
+    border-top: 15px solid transparent;
+    top: -30px;
+    right: 50%;
+
+}
+.drop-down__item {
+    font-size: 13px;
+    padding: 13px 0;
+    text-align: left;
+    font-weight: 500;
+    color: #909dc2;
+    cursor: pointer;
+    position: relative;
+    border-bottom: 1px solid #e0e2e9;
+}
+
+.drop-down--active .drop-down__menu-box, .drop-down--active-1 .drop-down__menu-box{
+    visibility: visible;
+    opacity: 1;
+    margin-top: 15px;
 }
