@@ -668,7 +668,7 @@
 .delete-subdata-form,
 .delete-ingradient-form,
 .delete-product-form {
-    padding: 30px 0px 0;
+    padding: 30px 30px 0;
     text-align: center;
 }
 
