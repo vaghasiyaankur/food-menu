@@ -7,7 +7,8 @@ import FoodCombo from "./pages/pos/menu-management/FoodCombo.vue";
 import AddCombo from "./pages/pos/menu-management/AddCombo.vue";
 import AddProduct from "./pages/pos/menu-management/AddProduct.vue";
 import DigitalMenu from "./pages/pos/menu-management/DigitalMenu.vue";
-import FoodIngradient from "./pages/pos/menu-management/FoodIngradient.vue";
+import FoodIngredient from "./pages/pos/menu-management/FoodIngredient.vue";
+import FoodVariation from "./pages/pos/menu-management/FoodVariation.vue";
 import Setting from "./pages/pos/SettingsTab.vue";
 import NewSetting from "./pages/pos/NewSettingsTab.vue";
 import TableView from "./pages/restaurant-manager/table-view.vue"
@@ -37,7 +38,6 @@ export default [
     path: '/food-subcategory/',
     component: FoodSubCategory,
   },
-
   {
     name : 'FoodProduct',
     path: '/food-product/',
@@ -64,9 +64,14 @@ export default [
     component: DigitalMenu,
   },
   {
-    name : 'FoodIngradient',
-    path: '/food-ingradient/',
-    component: FoodIngradient,
+    name : 'FoodIngredient',
+    path: '/food-ingredient/',
+    component: FoodIngredient,
+  },
+  {
+    name : 'FoodVariation',
+    path: '/food-variation/',
+    component: FoodVariation,
   },
   {
     name : 'Setting',

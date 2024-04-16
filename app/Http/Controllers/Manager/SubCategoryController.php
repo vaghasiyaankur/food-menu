@@ -34,7 +34,14 @@ class SubCategoryController extends Controller
         }, 'category'])->whereHas('subCategoryRestaurantLanguages',function($q) use ($req,$restaurantLanguageId){
             $q->where('restaurant_language_id',$restaurantLanguageId);
             $q->where('name','LIKE','%'.$req->search.'%');
-        })->where('restaurant_id', $restaurantId)->get();
+        });
+
+        if($req->category){
+            $subCategories = $subCategories->where('category_id', $req->category);
+        }
+        
+        
+        $subCategories = $subCategories->where('restaurant_id', $restaurantId)->get();
         $subCategories->transform(function ($subCategory) use ($req) {
 
             $name = $subCategory->subCategoryRestaurantLanguages->isEmpty() ? null : $subCategory->subCategoryRestaurantLanguages->first()->name;

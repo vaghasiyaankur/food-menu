@@ -553,9 +553,9 @@
 .categoryPopup,
 .EditCategoryPopup,
 .DeleteCategoryPopup,
-.IngradientPopup,
-.EditIngradientPopup,
-.DeleteIngradientPopup,
+.IngredientPopup,
+.EditIngredientPopup,
+.DeleteIngredientPopup,
 .DeleteProductPopup {
     max-width: 378px;
     position: fixed;
@@ -584,7 +584,7 @@
 }
 .add-data-name,
 .add_sub-category_name,
-.add_ingradient_name {
+.add_ingredient_name {
     font-size: 14px;
     line-height: 17px;
     font-weight: 600;
@@ -593,14 +593,14 @@
 }
 .data-name,
 .sub-data-name,
-.ingradientName {
+.ingredientName {
     width: 100%;
     margin-top: 7px;
 }
 .add-update-data-name,
 .sub-add-update-data-name,
-.ingradient-name,
-.ingradient-price {
+.ingredient-name,
+.ingredient-price {
     width: 100%;
     font-size: 14px;
     line-height: 17px;
@@ -666,7 +666,7 @@
 }
 .delete-data-form,
 .delete-subdata-form,
-.delete-ingradient-form,
+.delete-ingredient-form,
 .delete-product-form {
     padding: 30px 30px 0;
     text-align: center;
@@ -727,27 +727,27 @@
 
 /* INGRADIENTS */
 
-.add_ingradient_image {
+.add_ingredient_image {
     margin-top: 20px !important;
 }
-.add_ingradient_image label,
-.ingradient_price label {
+.add_ingredient_image label,
+.ingredient_price label {
     font-size: 16px;
     line-height: 19px;
     font-weight: 600;
     color: #555555;
 }
-.ingradient-image-selection {
+.ingredient-image-selection {
     margin-top: 8px;
 }
-.ingradient_price {
+.ingredient_price {
     margin-top: 20px;
 }
-.ingradientPrice {
+.ingredientPrice {
     margin-top: 7px;
 }
-.ingradientPopup .popup_button,
-.DeleteIngradientPopup .popup_button,
+.ingredientPopup .popup_button,
+.DeleteIngredientPopup .popup_button,
 .DeleteProductPopup .popup_button {
     margin-top: 30px;
 }

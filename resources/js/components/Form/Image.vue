@@ -1,8 +1,6 @@
 <template>
-    <input type="file" class="data-add-image-file" name="image" accept="image/*"  id="image" @change="addimageChange">
-    <label class="category-image text-align-center" for="image">
-        {{ preview }}
-        {{ value }}
+    <input type="file" class="data-add-image-file" :name="'image-' + dataType" accept="image/*"  :id="'image-' + dataType" @change="addimageChange">
+    <label class="category-image text-align-center" :for="'image-' + dataType">
         <div class="data-add-image" v-if="preview">
             <div class="data-add-image padding-top padding-bottom">
                 <img :src="preview" :alt="alt" width="100" height="100"/>          
@@ -21,19 +19,17 @@
 
 <script setup>
     const props = defineProps({
+        dataType: String,
         alt     : String,
         value   : Object,
         preview   : String,
     });
-
+    
     const emit = defineEmits(['update:image']);
 
     const addimageChange = (event) => {
         const ImageInput = event.target.files[0];
         const ImageData = URL.createObjectURL(ImageInput);
-        console.log(props.value);
-        props.value.value = ImageInput;
-        props.preview.value = ImageData;
         emit('update:image', {ImageData, ImageInput});
     }
 </script>

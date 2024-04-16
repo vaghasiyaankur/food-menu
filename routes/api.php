@@ -12,8 +12,10 @@ use App\Http\Controllers\Manager\ProductController;
 use App\Http\Controllers\Manager\SubCategoryController;
 use App\Http\Controllers\Manager\SettingController;
 use App\Http\Controllers\Manager\TableController;
+use App\Http\Controllers\Manager\VariationController;
 use App\Http\Controllers\QrCodeController;
 use App\Http\Controllers\TaxSettingController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -80,41 +82,26 @@ Route::post('update-ingredient',[IngredientController::class, 'updateIngredient'
 
 Route::post('/delete-ingredient',[IngredientController::class, 'deleteIngredient']);
 
+// ------------------------ Variation Routes ------------------------ //
 
-// ------------------------ Setting Page Routes ------------------------ //
+Route::post('/get-variations',[VariationController::class, 'getVariations']);
 
-Route::get('setting-data',[SettingController::class, 'settingData']);
+Route::post('add-variation',[VariationController::class, 'addVariation']);
 
-Route::get('get-currency', [SettingController::class, 'getCurrency']);
+Route::get('/get-variation/{id}', [VariationController::class, 'getVariation']);
 
-Route::post('save-currency', [SettingController::class, 'saveCurrency']);
+Route::post('update-variation',[VariationController::class, 'updateVariation']);
 
-Route::get('get-tax-detail', [TaxSettingController::class, 'getTaxList']);
-
-Route::post('save-tax-detail', [TaxSettingController::class, 'saveTaxDetail']);
-
-Route::delete('delete-tax-detail/{tax}', [TaxSettingController::class, 'deleteTaxDetail']);
-
-Route::post('update-setting',[SettingController::class, 'updateSetting']);
-
-Route::get('table-list',[SettingController::class, 'tableList']);
-
-Route::get('color-list',[SettingController::class, 'colorList']);
-
-Route::get('check-color/{capacity}',[SettingController::class, 'checkColor']);
-
-Route::get('table-data/{id}',[SettingController::class, 'tableData']);
-
-Route::post('add-update-table',[SettingController::class, 'addUpdateTable']);
-
-Route::post('/delete-table',[SettingController::class, 'deleteTable']);
-
-Route::post('/change-table-status',[SettingController::class, 'changeTableStatus']);
-
-Route::get('/member-limitation',[SettingController::class, 'memberLimitation']);
+Route::post('/delete-variation',[VariationController::class, 'deleteVariation']);
 
 
 // ------------------------ Product Routes ------------------------ //
+
+Route::post('get-products',[ProductController::class, 'getProducts']);
+
+Route::get('get-subcategory-wise-products/{id}',[ProductController::class, 'getSubcategoryWiseProduct']);
+
+Route::get('/get-category-products/{id}',[ProductController::class, 'getCategoryProduct']);
 
 Route::post('/add-product',[ProductController::class, 'addProduct']);
 
@@ -132,10 +119,43 @@ Route::post('update-product',[ProductController::class, 'updateProduct']);
 
 Route::post('/delete-product',[ProductController::class, 'deleteProduct']);
 
-// Update Routes
-Route::get('get-subcategory-wise-products/{id}',[ProductController::class, 'getSubcategoryWiseProduct']);
 
-Route::post('get-products',[ProductController::class, 'getProducts']);
+// ------------------------ Setting Page Routes ------------------------ //
+
+Route::get('setting-data',[SettingController::class, 'settingData']);
+
+Route::get('get-currency', [SettingController::class, 'getCurrency']);
+
+Route::post('save-currency', [SettingController::class, 'saveCurrency']);
+
+Route::get('get-tax-detail', [TaxSettingController::class, 'getTaxList']);
+
+Route::post('save-tax-detail', [TaxSettingController::class, 'saveTaxDetail']);
+
+Route::post('save-taxes-status', [TaxSettingController::class, 'saveTaxStatus']);
+
+Route::delete('delete-tax-detail/{tax}', [TaxSettingController::class, 'deleteTaxDetail']);
+
+Route::post('update-setting',[SettingController::class, 'updateSetting']);
+
+Route::get('table-list',[SettingController::class, 'tableList']);
+
+Route::get('color-list',[SettingController::class, 'colorList']);
+
+Route::get('get-users',[UserController::class, 'getUsers']);
+
+Route::get('check-color/{capacity}',[SettingController::class, 'checkColor']);
+
+Route::get('table-data/{id}',[SettingController::class, 'tableData']);
+
+Route::post('add-update-table',[SettingController::class, 'addUpdateTable']);
+
+Route::post('/delete-table',[SettingController::class, 'deleteTable']);
+
+Route::post('/change-table-status',[SettingController::class, 'changeTableStatus']);
+
+Route::get('/member-limitation',[SettingController::class, 'memberLimitation']);
+
 
 // ------------------------ Manager Table Page Routes ------------------------ //
 

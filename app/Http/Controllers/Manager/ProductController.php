@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Language;
 use App\Models\Product;
 use App\Models\ProductLanguage;
+use App\Models\RestaurantLanguage;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -107,7 +108,48 @@ class ProductController extends Controller
         return response()->json(['sub_category_product' => $sub_product,'sub_category' => $subCategory,'category_name' =>  $category_name]);
     }
 
-    public function getProducts(Request $request){
+    public function getProducts(Request $req){
+
+        $langId = SettingHelper::managerLanguage();
+        $restaurantId = CustomerHelper::getRestaurantId();
+        $restaurantLanguageId = RestaurantLanguage::where('language_id', $langId)
+                                ->where('restaurant_id', $restaurantId)
+                                ->value('id');
+
+        $products = Product::with(['productRestaurantLanguages' => function ($query) use ($restaurantLanguageId, $req) {
+            $query->where('restaurant_language_id', $restaurantLanguageId);
+            $query->where('name', 'LIKE', '%' . $req->search . '%');
+        }, 'subCategory'])->whereHas('productRestaurantLanguages',function($q) use ($req,$restaurantLanguageId){
+            $q->where('restaurant_language_id',$restaurantLanguageId);
+            $q->where('name','LIKE','%'.$req->search.'%');
+        });
+
+        if($req->subCategory){
+            $products = $products->where('sub_category_id', $req->subCategory);
+        }
+        
+        if($req->category){
+            $products = $products->whereHas('subCategory',function($q) use ($req){
+                $q->where('category_id', $req->category);
+            });
+        }
+        
+        $products = $products->where('restaurant_id', $restaurantId)->get();
+
+        $products->transform(function ($category) use ($req) {
+            $name = $category->productRestaurantLanguages->isEmpty() ? null : $category->productRestaurantLanguages->first()->name;
+            return [
+                'id' => $category->id,
+                'image' => $category->image,
+                'status' => $category->status,
+                'type' => $category->type,
+                'name' => $name,
+            ];
+        });
+
+        return response()->json(['products' => $products]);
+
+
         $restaurant_id = CustomerHelper::getRestaurantId();
         
         $lang_id = SettingHelper::managerLanguage();

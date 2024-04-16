@@ -12,6 +12,7 @@
                                 v-for="(option, ind) in data.options" :key="option"
                             >
                                 <Input 
+                                    :data-type="dataType"
                                     :type="data.type" 
                                     :class="'add-update-data-name'" 
                                     :placeholder="data.placeHolder+ ' (' + option.language +')'"
@@ -23,6 +24,7 @@
                         <template v-else>
                             <div class="data-name text-align-left padding-bottom-half">
                                 <Input 
+                                    :data-type="dataType"
                                     :type="data.type" 
                                     :class="'add-update-data-name'" 
                                     :placeholder="data.placeHolder"
@@ -34,8 +36,8 @@
                     </template>
                     <template v-if="data.type == 'image'">
                         <div class="data-image-selection margin-top">
-                            {{ typeof data.value }}
                             <Image 
+                                :data-type="dataType"
                                 :alt="data.placeHolder"
                                 :value="data.value"
                                 :preview="data.preview"
@@ -46,6 +48,7 @@
                     <template v-if="data.type == 'radio'">
                         <div class="data-name text-align-left">
                             <Radio 
+                                :data-type="dataType"
                                 :options="data.options" 
                                 :name="data.name" 
                                 :value="data.value"
@@ -57,6 +60,7 @@
                     <template v-if="data.type == 'drop-down'">
                         <div class="data-name text-align-left">
                             <DropDown 
+                                :data-type="dataType"
                                 :options="data.options" 
                                 :value="data.value"
                                 :placeholder="data.placeHolder"
@@ -73,7 +77,9 @@
             </div>
         </div>
     </div>
-    <div class="wave-image-content"><img src="/images/flow.png" style="width:100%"></div>
+    <div class="wave-image-content">
+        <img src="/images/flow.png" style="width:100%" />
+    </div>
 </template>
 
 <script setup>
@@ -94,34 +100,20 @@ const props = defineProps({
     dataType: String
 });
 
-console.log(props.formDataFormat);
-
-const emit = defineEmits(['store:update', 'set:data-value', 'set:image-value']);
+const emit = defineEmits(['store:update']);
 
 const saveValue = (index, ind = null, value) => {
-    emit('set:data-value', index, ind, value);
-    // console.log(props.formDataFormat);
-    // if(ind == null){
-    //     props.formDataFormat[index].value = value;
-    // }else{
-    //     props.formDataFormat[index].options[ind].value = value;
-    // }
+    if(ind == null){
+        props.formDataFormat[index].value = value;
+    }else{
+        props.formDataFormat[index].options[ind].value = value;
+    }
 };
 
 const saveImage = (index, imageData, imageInput) => {
-    // console.log(props.formDataFormat);
-    // console.log(typeof imageInput);
-    // console.log(typeof imageData);
-    // console.log(imageInput);
-    // console.log(imageData);
-    // console.log(props.formDataFormat);   
-    // console.log(props.formDataFormat[index]);
-    // console.log(index);
 
-    // props.formDataFormat[index].value = imageInput;
-    // props.formDataFormat[index].preview = imageData;
-
-    emit('set:image-value', index, imageInput, imageData)
+    props.formDataFormat[index].value = imageInput;
+    props.formDataFormat[index].preview = imageData;
 };
 
 const storeData = () => {
