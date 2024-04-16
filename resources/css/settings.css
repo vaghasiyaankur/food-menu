@@ -178,20 +178,8 @@
 }
 
 /* NEW SETTINGS */
-.tab-link {
-    --f7-touch-ripple-color: none;
-}
 .setting-tabs {
     margin: 56px 30px !important;
-}
-.setting-tabs-banner {
-    display: flex;
-    align-items: center;
-}
-.setting-tabs-banner h3 {
-    margin: 25px 0 !important;
-    max-width: calc(100% / 3);
-    flex: calc(100% / 3);
 }
 .settings-banner {
     font-size: 20px;
@@ -199,74 +187,14 @@
     font-weight: 600;
     color: #38373d;
 }
+.setting-tabs-banner h3{
+    padding: 25px 0 !important;
+}
 .settings_tabs {
     border-radius: 10px;
     margin: 0;
 }
-.settings_page-tab_listing {
-    max-width: calc(100% / 1.5);
-    flex: calc(100% / 1.5);
-    width: 100%;
-}
-.settings_page-tab_listing .toolbar {
-    width: 100% !important;
-    background: #f7f7f7 !important;
-    display: flex;
-    justify-content: flex-end;
-    flex-direction: column;
-    border-right: none !important;
-}
-.settings_page-tab_listing .tabbar::before,
-.settings_page-tab_listing .tabbar::after {
-    display: none;
-}
-.settings_page-tab_listing .toolbar-inner {
-    width: fit-content;
-    position: relative;
-    left: 100%;
-    transform: translate(-100%);
-    display: flex !important;
-    background: #f7f7f7 !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    justify-content: flex-end;
-    border-bottom: 1px solid #e0e0e0;
-}
-.settings_page-tab_listing .tab-link {
-    padding: 0 !important;
-    padding-bottom: 6px !important;
-    width: fit-content;
-    color: black !important;
-    font-size: 15px !important;
-    line-height: 18px;
-    font-weight: 500 !important;
-    color: #555555 !important;
-    text-transform: capitalize;
-    justify-content: flex-end !important;
-    align-items: flex-end !important;
-}
-.settings_page-tab_listing .tab-link:not(:first-child) {
-    margin-left: 30px !important;
-}
-.settings_page-tab_listing .tab-link.tab-link:active {
-    background: #f7f7f7 !important;
-}
-.setting-tabs
-    .settings_page-tab_listing
-    .toolbar-inner
-    .tab-link.tab-link-active:after {
-    content: "";
-    position: absolute;
-    background-color: #f33e3e;
-    display: block;
-    z-index: 15;
-    bottom: 0 !important;
-    right: 0;
-    bottom: auto;
-    left: auto;
-    width: 100%;
-    height: 1px;
-}
+
 
 /* GENERAL SETTINGS */
 .general_settings-banner,
@@ -371,20 +299,97 @@
 }
 
 /* USER MANAGEMENT SETTINGS */
+.tab-link {
+    --f7-touch-ripple-color: none;
+}
+.user_setting-tab .settings_page-tab_listing {
+    max-width: 100%;
+    width: 100%;
+}
+.user_setting-tab .settings_page-tab_listing .toolbar {
+    width: 100% !important;
+    background: #FFFFFF !important;
+    border-right: none !important;
+}
+.user_setting-tab .settings_page-tab_listing .tabbar::before,
+.user_setting-tab .settings_page-tab_listing .tabbar::after {
+    display: none;
+}
+.user_setting-tab .settings_page-tab_listing .toolbar-inner {
+    padding: 20px;
+    width: 100%;
+    position: relative;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between;
+    background: #FFFFFF!important;
+    border-bottom: 1px solid #E0E0E0;
+}
+.user_setting-tab .settings_page-tab_listing .tab-link {
+    width: fit-content;
+    padding: 0 !important;
+    display: flex;
+    flex-direction: row;
+    align-items: center !important;
+    justify-content: space-between !important;
+    font-size: 15px !important;
+    line-height: 18px;
+    font-weight: 500 !important;
+    color: #555555;
+    text-transform: capitalize;
+}
+.user_setting-tab .settings_page-tab_listing .tab-link svg{
+    fill: #38373D;
+    margin-right: 7px;
+    max-width: 20px;
+    max-height: 20px;
+}
+.user_setting-tab .settings_page-tab_listing .tab-link:first-child svg,
+.user_setting-tab .settings_page-tab_listing .tab-link:nth-child(3) svg,
+.user_setting-tab .settings_page-tab_listing .tab-link:nth-child(5) svg{
+    stroke: #38373D;
+}
+.user_setting-tab .settings_page-tab_listing .toolbar-inner .tab-link-active {
+    color: #F33E3E !important;    
+}
+.user_setting-tab .settings_page-tab_listing .toolbar-inner .tab-link-active svg{
+    fill: #F33E3E !important;
+}
+.user_setting-tab .settings_page-tab_listing .tab-link-active:first-child svg,
+.user_setting-tab .settings_page-tab_listing .tab-link-active:nth-child(3) svg,
+.user_setting-tab .settings_page-tab_listing .tab-link-active:nth-child(5) svg{
+    stroke: #F33E3E !important;
+}
+
+
+.user_setting-tab .tabs{
+    width: 100%;
+    max-height: 752px;
+    overflow: scroll;
+    scrollbar-width: none;
+}
 .data-table {
     margin: 0 !important;
 }
-.all_users thead th {
+.all_users thead,
+.super_admin thead {
+    border-bottom: 1px solid #E0E0E0;
+}
+.all_users thead th,
+.super_admin thead th {
     text-align: left !important;
     font-size: 15px !important;
     line-height: 18px;
     font-weight: 600 !important;
     padding: 17px 0 !important;
 }
-.all_users thead th:first-child {
+.all_users thead th:first-child,
+.super_admin thead th:first-child {
     padding-left: 20px !important;
 }
-.all_users tbody tr td:first-child {
+.all_users tbody tr td:first-child,
+.super_admin tbody tr td:first-child {
     padding-left: 20px !important;
 }
 thead .label-cell {
@@ -474,6 +479,9 @@ tbody .numeric-cell:last-child {
     color: #f33e3e !important;
     padding-left: 6px;
 }
+
+/* LANGUAGE SETTINGS */
+.language_setting
 
 
 /*========= SWITCH ON OFF CSS ===========*/

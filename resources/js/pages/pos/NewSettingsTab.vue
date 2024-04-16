@@ -5,6 +5,9 @@
                 <h3 class="no-padding no-margin">
                     <span class="page_heading settings-banner">Settings</span>
                 </h3>
+                <h3 class="no-padding no-margin display-none">
+                    <span class="page_heading settings-banner">User Management</span>
+                </h3>
             </div>
             <div class="card elevation-2 settings_tabs">
                 <div class="card-content setting_tab_card">

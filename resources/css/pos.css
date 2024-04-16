@@ -595,10 +595,10 @@ textarea {
     color: #555555;
     margin-left: 10px;
 }
-.payment-option input:checked {
+.payment-method input:checked {
     accent-color: #f33e3e;
 }
-.payment-option .checked {
+.payment-method input:checked + label{
     color: #f33e3e;
 }
 .billing-btns {

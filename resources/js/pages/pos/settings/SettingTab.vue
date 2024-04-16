@@ -17,6 +17,9 @@
     <div id="tab-user-management" class="tab">
         <UserManagement />
     </div>
+    <div id="tab-language" class="tab">
+        <Language />
+    </div>
 </div>
 </template>
 
@@ -26,6 +29,7 @@ import GeneralSetting from './GeneralSetting.vue';
 import CurrencySetting from './CurrencySetting.vue';
 import TaxSetting from './TaxSetting.vue';
 import UserManagement from './UserManagement.vue';
+import Language from './Language.vue';
 import { ref } from 'vue';
 
 const allTabs = [
@@ -33,6 +37,7 @@ const allTabs = [
     { label: 'Currency', slug: 'currency', icon: 'currency'},
     { label: 'Taxes', slug: 'taxes', icon: 'taxes'},
     { label: 'User Management', slug: 'user-management', icon: 'userManagement'},
+    { label: 'Language', slug: 'language', icon: 'language'},
 ];
 
 const props = defineProps({

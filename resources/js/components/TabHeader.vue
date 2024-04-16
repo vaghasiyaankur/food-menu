@@ -1,5 +1,5 @@
 <template>
-    <div class="card-header margin-vertical-half">
+    <!-- <div class="card-header">
         <div class="table_mangment_heading">
             <h3 class="no-margin">
                 <span class="page_heading">
@@ -7,7 +7,7 @@
                 </span>
             </h3>
         </div>
-    </div>
+    </div> -->
 </template>
 
 <script setup>
