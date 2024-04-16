@@ -22,9 +22,9 @@ class Product extends Model
         });
     }
 
-    public function sub_category()
+    public function subCategory()
     {
-        return $this->belongsTo(SubCategory::class);
+        return $this->belongsTo(SubCategory::class, 'sub_category_id');
     }
 
     public function productLanguage()
@@ -34,6 +34,6 @@ class Product extends Model
 
     public function productRestaurantLanguages()
     {
-        return $this->hasMany(RestaurantLanguage::class, 'product_id');
+        return $this->hasMany(ProductRestaurantLanguage::class, 'product_id');
     }
 }

@@ -7,7 +7,7 @@
         />
       </div>
       <f7-view
-        url="/food-subcategory/"
+        url="/food-product/"
         :main="true"
         class="safe-areas"
         :master-detail-breakpoint="768"

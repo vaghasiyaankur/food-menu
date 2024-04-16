@@ -12,6 +12,7 @@ use App\Http\Controllers\Manager\ProductController;
 use App\Http\Controllers\Manager\SubCategoryController;
 use App\Http\Controllers\Manager\SettingController;
 use App\Http\Controllers\Manager\TableController;
+use App\Http\Controllers\Manager\VariationController;
 use App\Http\Controllers\QrCodeController;
 use App\Http\Controllers\TaxSettingController;
 use Illuminate\Http\Request;
@@ -80,6 +81,43 @@ Route::post('update-ingredient',[IngredientController::class, 'updateIngredient'
 
 Route::post('/delete-ingredient',[IngredientController::class, 'deleteIngredient']);
 
+// ------------------------ Variation Routes ------------------------ //
+
+Route::post('/get-variations',[VariationController::class, 'getVariations']);
+
+Route::post('add-variation',[VariationController::class, 'addVariation']);
+
+Route::get('/get-variation/{id}', [VariationController::class, 'getVariation']);
+
+Route::post('update-variation',[VariationController::class, 'updateVariation']);
+
+Route::post('/delete-variation',[VariationController::class, 'deleteVariation']);
+
+
+// ------------------------ Product Routes ------------------------ //
+
+Route::post('get-products',[ProductController::class, 'getProducts']);
+
+Route::get('get-subcategory-wise-products/{id}',[ProductController::class, 'getSubcategoryWiseProduct']);
+
+Route::get('/get-category-products/{id}',[ProductController::class, 'getCategoryProduct']);
+
+Route::post('/add-product',[ProductController::class, 'addProduct']);
+
+Route::get('/get-category-products/{id}',[ProductController::class, 'getCategoryProduct']);
+
+Route::get('/get-category-wise-products/{id}',[ProductController::class, 'getCategoryWiseProduct']);
+
+Route::get('/toggle-wishlist',[ProductController::class, 'toggleWishlist']);
+
+// Route::post('get-products',[ProductController::class, 'getProducts']);
+
+Route::get('product/{id}',[ProductController::class, 'editProduct']);
+
+Route::post('update-product',[ProductController::class, 'updateProduct']);
+
+Route::post('/delete-product',[ProductController::class, 'deleteProduct']);
+
 
 // ------------------------ Setting Page Routes ------------------------ //
 
@@ -113,29 +151,6 @@ Route::post('/change-table-status',[SettingController::class, 'changeTableStatus
 
 Route::get('/member-limitation',[SettingController::class, 'memberLimitation']);
 
-
-// ------------------------ Product Routes ------------------------ //
-
-Route::post('/add-product',[ProductController::class, 'addProduct']);
-
-Route::get('/get-category-products/{id}',[ProductController::class, 'getCategoryProduct']);
-
-Route::get('/get-category-wise-products/{id}',[ProductController::class, 'getCategoryWiseProduct']);
-
-Route::get('/toggle-wishlist',[ProductController::class, 'toggleWishlist']);
-
-// Route::post('get-products',[ProductController::class, 'getProducts']);
-
-Route::get('product/{id}',[ProductController::class, 'editProduct']);
-
-Route::post('update-product',[ProductController::class, 'updateProduct']);
-
-Route::post('/delete-product',[ProductController::class, 'deleteProduct']);
-
-// Update Routes
-Route::get('get-subcategory-wise-products/{id}',[ProductController::class, 'getSubcategoryWiseProduct']);
-
-Route::post('get-products',[ProductController::class, 'getProducts']);
 
 // ------------------------ Manager Table Page Routes ------------------------ //
 

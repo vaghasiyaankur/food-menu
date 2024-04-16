@@ -9,10 +9,11 @@
 
 <script setup>
 const props = defineProps({
+    dataType    : String,
     type        : String,
     placeholder : String,
     class       : String,
-    value       : String,
+    value       : [String, Number],
     label       : String,
     name        : String,
 });

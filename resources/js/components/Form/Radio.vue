@@ -6,22 +6,23 @@
             :class="{'margin-left': index !== 0 }"
         >
             <input type="radio" 
-                :id="name+'-'+opt.value" 
-                :name="name" 
+                :id="name+'-'+dataType+'-'+opt.value" 
+                :name="name + '-' + dataType" 
                 :value="opt.value" 
                 :checked="value == opt.value"
                 @change="updateRadioValue"
             >
-            <label :for="name+'-'+opt.value">{{opt.label}}</label>
+            <label :for="name+'-'+dataType+'-'+opt.value">{{opt.label}}</label>
         </span>
     </div>
 </template>
 
 <script setup>
 const props = defineProps({
+    dataType    : String,
     options         : Object,
     name            : String,
-    value           : Number
+    value           : [String, Number]
 });
 
 const emit = defineEmits(['update:radio']);

@@ -16,9 +16,10 @@
 
 <script setup>
 const props = defineProps({
+    dataType        : String,
     options         : Object,
     placeholder     : String,
-    value           : Number
+    value           : [String, Number]
 });
 
 const emit = defineEmits(['update:drop-down']);

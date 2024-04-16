@@ -20,8 +20,6 @@
                 :form-data-format="addUpdateFormDataFormat" 
                 :type="addUpdateType" :data-type="'sub-category'"
                 @store:update="storeUpdateData"
-                @set:data-value="setDataValue"
-                @set:image-value="setImageValue"
             />
         </div>
 
@@ -55,7 +53,7 @@ const defaultSelectCatId = ref(0);
 
 const addUpdateFormDataFormat = ref([
     { label: 'Id', multipleLang: false, type: 'hidden', placeHolder: 'Category Id', value: ''},
-    { label: 'Image', multipleLang: false, type: 'image', placeHolder: 'Sub Caegory Image', value: {}, preview: ''},
+    { label: 'Image', multipleLang: false, type: 'image', placeHolder: 'Sub Category Image', value: {}, preview: ''},
     {
         label: 'Status',
         multipleLang: false,
@@ -259,20 +257,5 @@ const removeData = () => {
         const errorMessage = getErrorMessage(error);
         errorNotification(errorMessage);
     });
-}
-
-const setDataValue = (index, optionInd, value) => {
-    if(optionInd){
-        addUpdateFormDataFormat.value[index].options[ind].value = value;
-    }else{
-        addUpdateFormDataFormat.value[index].value = value;
-    }
-}
-
-const setImageValue = (index, value, preview) => {
-    console.log('addUpdateFormDataFormat.value[index]');
-    console.log(addUpdateFormDataFormat.value[index]);
-    addUpdateFormDataFormat.value[index].value = value;
-    addUpdateFormDataFormat.value[index].preview = preview;
 }
 </script>
