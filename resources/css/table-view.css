@@ -335,7 +335,8 @@
 .settle_save_Popup,
 .dine_in_order_Popup,
 .delivery_order_Popup,
-.part_payment_Popup {
+.part_payment_Popup,
+.split_bill_Popup {
     border-radius: 20px !important;
 }
 .add_table_view-data-form {
@@ -495,7 +496,8 @@
     max-width: 394px !important;
     width: 100% !important;
 }
-.part_payment_Popup {
+.part_payment_Popup,
+.split_bill_Popup {
     max-width: 650px;
     width: 100% !important;
     background-color: #ffffff;
@@ -518,50 +520,69 @@
 .bill-header {
     margin-bottom: 25px;
 }
-.part_payment_Popup .toolbar {
+.part_payment_Popup .toolbar,
+.split_bill_Popup .toolbar {
     background-color: #ffffff;
     height: auto;
     margin-bottom: 30px;
 }
-.part_payment_Popup .toolbar-inner {
+.part_payment_Popup .toolbar-inner,
+.split_bill_Popup .toolbar-inner {
     display: flex;
     position: relative;
     gap: 20px;
     justify-content: center;
     align-items: center;
 }
-.part_payment_Popup .toolbar-inner a {
+.part_payment_Popup .toolbar-inner a,
+.split_bill_Popup .toolbar-inner a {
     padding: 10px 20px !important;
     text-align: center;
     border-radius: 10px;
     background-color: #f5f5f5;
     border: 1px solid transparent;
 }
-.part_payment_Popup .toolbar-inner a svg {
+.part_payment_Popup .toolbar-inner p,
+.split_bill_Popup .toolbar-inner p {
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 500 !important;
+    color: #555555;
+    letter-spacing: 0px;
+    text-transform: capitalize;
+}
+.part_payment_Popup .toolbar-inner a svg,
+.split_bill_Popup .toolbar-inner a svg {
     margin-bottom: 6px;
     width: 40px;
     height: 40px !important;
     z-index: 10;
     flex-shrink: 0;
 }
-.part_payment_Popup .toolbar-inner .tab-link-active {
+.part_payment_Popup .toolbar-inner .tab-link-active,
+.split_bill_Popup .toolbar-inner .tab-link-active {
     border: 1px solid #f33e3e;
     color: #f33e3e;
     background-color: #ffffff;
     box-shadow: 0px -1px 4px 0px #a6a6a60d;
     box-shadow: 0px 1.5px 5px 0px #a6a6a666;
 }
-.part_payment_Popup .toolbar-inner .tab-link-active svg {
+.part_payment_Popup .toolbar-inner .tab-link-active svg + p,
+.split_bill_Popup .toolbar-inner .tab-link-active svg + p {
     color: #f33e3e;
 }
-.part_payment_Popup .toolbar-inner .tab-link-highlight {
+.part_payment_Popup .toolbar-inner .tab-link-highlight,
+.split_bill_Popup .toolbar-inner .tab-link-highlight {
     display: none;
 }
 .popup_button button {
     font-size: 16px !important;
 }
-.part_payment_Popup .tabs .tab {
+.part_payment_Popup .tabs .tab{
     background-color: #ffffff !important;
+}
+.split_bill_Popup .tabs .tab {
+    background-color: transparent !important;
 }
 .captured_amount-text {
     font-size: 18px;
@@ -572,7 +593,9 @@
 .user-amount-input {
     margin: 15px 0 30px;
 }
-.enter_amount-text {
+.enter_amount-text,
+.other-method-text,
+.comment-text {
     font-size: 16px;
     line-height: 19px;
     font-weight: 600;
@@ -604,19 +627,327 @@
     box-shadow: 1px 1px 4px 0px #8f716459;
     border: none;
 }
-.dashed-line-devider{
+.dashed-line-devider {
     border: 1px dashed rgba(153, 153, 153, 0.5);
     border-bottom: none;
     border-left: none;
     border-right: none;
 }
-.payment-details{
+.payment-details {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 15px 0;
     padding-left: 29px;
 }
-.payment-details .enter_amount-text{
+.payment-details .enter_amount-text {
+    color: #38373d;
+}
+.payment-details svg {
+    position: absolute;
+    left: 0;
+    color: #38373d;
+}
+.payment-details .delete-indicator {
+    color: #f33e3e;
+}
+.part_payment_Popup .popup_button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.back-to-order-btn {
+    max-width: 30%;
+    padding: 12px 22px;
+    border-radius: 10px;
+    border: 1px solid #f33e3e;
+    box-shadow: 1px 1px 4px 0px #9999994d;
+    background-color: #ffffff;
+    z-index: 1;
+}
+.part_payment_Popup .popup_button button {
+    font-size: 18px !important;
+    padding: 0;
+    margin: 0;
+}
+.popup-back-button,
+.popup-new-order-button {
+    line-height: 22px;
+    font-weight: 500;
+    color: #f33e3e;
+    background-color: #ffffff;
+    border: none;
+}
+.bill-btns {
+    max-width: 65%;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    justify-content: space-between;
+}
+.new-order-btn {
+    padding: 12px 19px;
+    background-color: #ffffff;
+    box-shadow: 0px 1.5px 5px 0px #a6a6a666;
+    border-radius: 10px;
+    z-index: 1;
+}
+.popup-new-order-button {
+    box-shadow: 0px -1px 4px 0px #a6a6a60d;
+    background-color: #ffffff;
+}
+.print-btn {
+    padding: 12px 25px;
+    background-color: #f33e3e;
+    box-shadow: 2.5px -2.5px 2px 0px #863e2026 inset;
+    box-shadow: 1px 1px 4px 0px #8f716459;
+    border-radius: 10px;
+    z-index: 1;
+}
+.popup-print-button {
+    background-color: #f33e3e;
+}
+.popup-print-button,
+.popup-ebill-button {
+    line-height: 22px;
+    font-weight: 500 !important;
+    color: #ffffff;
+    border: none;
+}
+.ebill-btn {
+    padding: 12px 27px;
+    background-color: #f33e3e;
+    box-shadow: 2.5px -2.5px 2px 0px #863e2026 inset;
+    box-shadow: 1px 1px 4px 0px #8f716459;
+    border-radius: 10px;
+    z-index: 1;
+}
+.popup-ebill-button {
+    background-color: #f33e3e;
+}
+.other-pay-method,
+.add-comments {
+    margin-bottom: 20px;
+}
+.other-pay-method .other-method-selector select,
+.add-comments .comment-text-area textarea {
+    width: 100%;
+}
+.other-method-selector,
+.comment-text-area {
+    margin-top: 7px;
+}
+.split_bill_Popup .toolbar-inner {
+    padding: 0 55px;
+}
+.split_bill_Popup .popup-btns-for-portion-split{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.add-more-btn{
+    padding: 12px 33px;
+    background-color: #FFFFFF;
+    border: 1px solid #F33E3E;
+    border-radius: 10px;
+    box-shadow: 1px 1px 4px 0px #9999994D;
+    z-index: 1;
+}
+.popup-add-more-button{
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 500;
+    color: #F33E3E;
+    background-color: #FFFFFF;
+    border: none;
+}
+.split_bill_Popup .popup_button{
+    margin: 50px auto 25px;
+}
+.split_bill_Popup .popup-btns-for-portion-split .cancel_save-btns {
+    margin: 0 !important;
+}
+.split_bill_Popup .popup_button .cancel_save-btns {
+    max-width: 327px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+.cancel-split-btn {
+    padding: 12px 45px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0px 1.5px 5px 0px #a6a6a666;
+    z-index: 1;
+}
+.popup-cancel-split-button{
+    box-shadow: 0px -1px 4px 0px #a6a6a60d;
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 500;
+    color: #F33E3E;
+    background-color: #ffffff;
+    border: none;
+}
+.save-split-btn {
+    padding: 12px 54px;
+    border-radius: 10px;
+    background-color: #f33e3e;
+    box-shadow: 2.5px -2.5px 2px 0px #863e2026 inset;
+    box-shadow: 1px 1px 4px 0px #8f716459;
+    z-index: 1;
+}
+.popup-save-split-button{
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 500;
+    color: #FFFFFF;
+    background-color: #f33e3e;
+    border: none;
+}
+.split_bill_Popup .portion_calc .portion_split-text{
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: 600;
+    color: #555555;
+}
+.split_bill_Popup .portion_calc .portion_split-input{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 7px;
+}
+.split_bill_Popup .portion_calc .main-portin{
+    font: 15px;
+    line-height: 18px;
+    font-weight: 500;
     color: #38373D;
+}
+.split_bill_Popup .portion_calc .portion_split-input input{
+    width: 100%;
+}
+.percentage-split-heading{
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 600;
+    color: #555555;
+}
+.percentage_split_calc{
+    margin-top: 15px;
+}
+.percentage_split-text{
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: 600;
+    color: #555555;
+}
+.percentage-input-1{
+    margin-bottom: 20px;
+}
+.percentage_split-input-1,
+.percentage_split-input-2{
+    margin-top: 7px;
+}
+.percentage_split-input-1 input,
+.percentage_split-input-2 input{
+    width: 100%;
+}
+.split_bill_Popup .item_wise{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+.split_bill_Popup .add-items-part-1{
+    margin-bottom: 20px;
+}
+.split_bill_Popup .all-items,
+.split_bill_Popup .add-items-part-1,
+.split_bill_Popup .add-items-part-2{
+    max-width: 290px;
+    width: 100% !important;
+}
+.split_bill_Popup .all-items input{
+    margin: 0;
+    margin-right: 10px;
+}
+.split_bill_Popup .all-items label{
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: 400;
+}
+.split_bill_Popup .all-items{
+    padding: 0;
+    margin: 0 !important;
+}
+.split_bill_Popup .all-items .all-items-selector{
+    background-color: #F33E3E;
+    color: #FFFFFF !important;
+    font-weight: 600;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+.split_bill_Popup .all-items .all-items-selector-input{
+    accent-color: #FFFFFF;
+}
+.split_bill_Popup .all-items .all-items-list{
+    list-style: none;
+    border: 1px solid rgba(153, 153, 153, 0.4);
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top: none;
+    padding: 15px 15px 0 !important;
+}
+.split_bill_Popup .all-items .all-items-list .all_items-item{
+    margin-bottom: 15px;
+}
+.split_bill_Popup .add-in-items{
+    max-width: 290px;
+    width: 100%;
+}
+.split_bill_Popup .add-in-items .add-items-part-banner{
+    padding: 5px;
+    background-color: #F33E3E;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border-radius: 5px;
+}
+.split_bill_Popup .add-in-items .add-items-to-list-btn{
+    padding: 5px 10px;
+    background-color: #FFFFFF;
+    border: none;
+    max-width: 52px;
+    border-radius: 3px;
+}
+.split_bill_Popup .add-in-items .add-items-to-list-btn p{
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: 500;
+    text-align: center;
+    color: #F33E3E;
+}
+.split_bill_Popup .add-in-items h4{
+    margin-left: 10px !important;
+    color: #FFFFFF;
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: 600;
+}
+.split_bill_Popup .add-in-items .list-item-show{
+    box-sizing: border-box;
+    width: 100%;
+    height: 123px;
+    border: 1px solid rgba(153, 153, 153, 0.4);
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top: none;
+}
+
+.split_bill_Popup .wave-image-content{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
 }
