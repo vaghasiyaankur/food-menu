@@ -1,7 +1,7 @@
 <template>
     <f7-page>
 
-        <div class="category-list-section">
+        <div class="data-list-section">
             <div class="add-product-page display-flex">
                 <div class="add-product_details">
                     <div class="add-product_heading">
@@ -101,7 +101,7 @@
                                         <h4 class="no-margin no-padding">French fries</h4>
                                         <p class="selected-product-price no-margin no-padding">$19.00</p>
                                     </div>
-                                    <img class="food-category" src="/assets/images/seederImages/combo/type1.png">
+                                    <img class="food-type-icon" src="/assets/images/seederImages/combo/type1.png">
                                 </div>
                                 <div class="bg-color-white select-product-card selected-card">
                                     <div class="combo-image"><img src="\assets\images\seederImages\combo\Coca_Cola.png">
@@ -110,7 +110,7 @@
                                         <h4 class="no-margin no-padding">Coca-Cola</h4>
                                         <p class="selected-product-price no-margin no-padding">$19.00</p>
                                     </div>
-                                    <img class="food-category" src="/assets/images/seederImages/combo/type1.png">
+                                    <img class="food-type-icon" src="/assets/images/seederImages/combo/type1.png">
                                 </div>
                                 <div class="add-product-card display-flex">
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"

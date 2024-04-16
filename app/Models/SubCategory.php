@@ -42,8 +42,8 @@ class SubCategory extends Model
         return $this->hasMany(Product::class);
     }
 
-    public function subcategoryRestaurantLanguages()
+    public function subCategoryRestaurantLanguages()
     {
-        return $this->hasMany(RestaurantLanguage::class, 'sub_category_id');
+        return $this->hasMany(SubcategoryRestaurantLanguage::class, 'sub_category_id');
     }
 }

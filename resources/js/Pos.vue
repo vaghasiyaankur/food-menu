@@ -7,7 +7,7 @@
         />
       </div>
       <f7-view
-        url="/"
+        url="/food-subcategory/"
         :main="true"
         class="safe-areas"
         :master-detail-breakpoint="768"
@@ -453,7 +453,7 @@ export default {
   top: 0px !important;
 }
 
-/*.category-list-section {
+/*.data-list-section {
     margin-top: 70px
 }*/
 

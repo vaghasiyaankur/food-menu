@@ -6,6 +6,7 @@ use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\Manager\AuthController;
 use App\Http\Controllers\Manager\CategoryController;
 use App\Http\Controllers\Manager\FloorController;
+use App\Http\Controllers\Manager\IngredientController;
 use App\Http\Controllers\Manager\ReportController;
 use App\Http\Controllers\Manager\ProductController;
 use App\Http\Controllers\Manager\SubCategoryController;
@@ -34,6 +35,7 @@ Route::post('/register', [ReservationController::class, 'register']);
 
 // ------------------------ Category Routes ------------------------ //
 
+Route::post('/get-categories',[CategoryController::class, 'getCategories']);
 
 Route::post('/get-categories-list',[CategoryController::class, 'getCategoriesList']);
 
@@ -48,9 +50,6 @@ Route::post('update-category',[CategoryController::class, 'updateCategory']);
 Route::post('/delete-category',[CategoryController::class, 'deleteCategory']);
 
 Route::get('/categories',[CategoryController::class, 'get_categories']);
-
-// new 
-Route::post('/get-categories',[CategoryController::class, 'getCategories']);
 
 // ------------------------ Sub Category Routes ------------------------ //
 
@@ -68,8 +67,20 @@ Route::post('/delete-sub-category',[SubCategoryController::class, 'deleteSubCate
 
 Route::get('/sub-categories',[SubCategoryController::class, 'get_Subcategories']);
 
+// ------------------------ Ingredient Routes ------------------------ //
 
-// ------------------------Setting Page Routes ------------------------ //
+Route::post('/get-ingredients',[IngredientController::class, 'getIngredients']);
+
+Route::post('add-ingredient',[IngredientController::class, 'addIngredient']);
+
+Route::get('/get-ingredient/{id}', [IngredientController::class, 'getIngredient']);
+
+Route::post('update-ingredient',[IngredientController::class, 'updateIngredient']);
+
+Route::post('/delete-ingredient',[IngredientController::class, 'deleteIngredient']);
+
+
+// ------------------------ Setting Page Routes ------------------------ //
 
 Route::get('setting-data',[SettingController::class, 'settingData']);
 

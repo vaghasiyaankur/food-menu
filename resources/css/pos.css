@@ -236,7 +236,7 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox {
 .pos-product-section .card {
     border-radius: 6px;
 }
-.pos-product-section .food-category {
+.pos-product-section .food-type-icon {
     position: absolute;
     right: 13px;
 }

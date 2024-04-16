@@ -82,7 +82,7 @@ export default {
           axios.post('/api/login-user', { email: this.email, password: this.password })
           .then((res) => {
               if (res.data.success) {
-                  this.$root.successNotification(res.data.success);
+                  // this.$root.successNotification(res.data.success);
                   this.$root.user.id = res.data.id;
                   // f7.view.main.router.navigate({ url: '/pos' });
                   location.reload();

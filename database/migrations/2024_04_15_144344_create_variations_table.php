@@ -13,38 +13,37 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('variations', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('restaurant_id')->nullable();
             $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
             $table->string('image')->nullable();
             $table->enum('added_by', ['admin', 'manager'])->default('manager');
-            $table->enum('category_type', ['1', '2', '3'])->default('1');
             $table->unsignedBigInteger('added_by_id')->unsigned();
             $table->boolean('status')->default(1);
             $table->timestamps();
-        });
-
+        }); 
+        
         // Add foreign key for admins
-        Schema::table('categories', function (Blueprint $table) {
+        Schema::table('variations', function (Blueprint $table) {
             $table->foreign('added_by_id')
                 ->references('id')
                 ->on('admins')
                 ->onDelete('cascade')
                 ->onUpdate('cascade')
                 ->where('added_by', '=', 'admin')
-                ->name('categories_added_by_admin_foreign');
+                ->name('ingredient_categorie_added_by_admin_foreign');
         });
 
         // Add foreign key for users
-        Schema::table('categories', function (Blueprint $table) {
+        Schema::table('variations', function (Blueprint $table) {
             $table->foreign('added_by_id')
                     ->references('id')
                     ->on('users')
                     ->onDelete('cascade')
                     ->onUpdate('cascade')
                     ->where('added_by', '=', 'manager')
-                    ->name('categories_added_by_manager_foreign');
+                    ->name('ingredient_categorie_added_by_manager_foreign');
         });
     }
 
@@ -55,6 +54,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('variations');
     }
 };

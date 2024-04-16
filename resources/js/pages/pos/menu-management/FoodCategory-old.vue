@@ -1,6 +1,6 @@
 <template>
     <f7-page>
-        <div class="category-list-section">
+        <div class="data-list-section">
             <!-- <div class="card elevation-2 border_radius_10"> -->
             <MenuManagementHeader title="Category" @blank:action="blankForm" @add:popup="showCategoryPopup"
                 @update:search="updateSearch" @update:PopupTitle="updatePopupTitle" />
@@ -21,7 +21,7 @@
                                 <Icon name="deleteIcon" />Delete
                             </a>
                         </div>
-                        <img class="food-category" src="/assets/images/seederImages/combo/type1.png">
+                        <img class="food-type-icon" src="/assets/images/seederImages/combo/type1.png">
                     </div>
                 </div>
             </div>
@@ -185,7 +185,7 @@ export default {
                 })
                     .then((res) => {
                         this.getCategories();
-                        this.$root.successNotification(res.data.success);
+                        // this.$root.successNotification(res.data.success);
                     })
             });
             setTimeout(() => {
@@ -217,7 +217,7 @@ export default {
                 formData.append('id', this.category.id);
                 axios.post('/api/update-category', formData, config)
                     .then((res) => {
-                        this.$root.successNotification(res.data.success);
+                        // this.$root.successNotification(res.data.success);
                         this.getCategories();
                         this.blankForm();
                         f7.popup.close(`#category_popup`);
@@ -225,7 +225,7 @@ export default {
             } else {
                 axios.post('/api/add-category', formData, config)
                     .then((res) => {
-                        this.$root.successNotification(res.data.success);
+                        // this.$root.successNotification(res.data.success);
                         this.getCategories();
                         this.blankForm();
                         f7.popup.close(`#category_popup`);
@@ -258,7 +258,7 @@ export default {
 
             axios.post('/api/add-sub-category', formData)
                 .then((res) => {
-                    this.$root.successNotification(res.data.success);
+                    // this.$root.successNotification(res.data.success);
                     this.subCategory.name = [];
                     this.subCategory.category = null;
                     f7.popup.close(`#subCategory_popup`);

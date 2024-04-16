@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Setting;
-use File;
+use Illuminate\Support\Facades\File;
 
 class SettingSeeder extends Seeder
 {

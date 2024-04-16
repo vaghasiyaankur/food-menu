@@ -26,7 +26,7 @@ class RestaurantLanguage extends Model
         return $this->hasMany(CategoryRestaurantLanguage::class, 'restaurant_language_id');
     }
 
-    public function subcategoryRestaurantLanguages()
+    public function subCategoryRestaurantLanguages()
     {
         return $this->hasMany(SubcategoryRestaurantLanguage::class, 'restaurant_language_id');
     }

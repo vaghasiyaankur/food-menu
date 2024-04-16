@@ -9,48 +9,211 @@ use App\Models\Category;
 use App\Models\SubCategory;
 use App\Models\SubCategoryLanguage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use App\Models\Language;
 use App\Models\Restaurant;
+use App\Models\RestaurantLanguage;
+use App\Models\SubcategoryRestaurantLanguage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class SubCategoryController extends Controller
 {
-    public function addSubCategory(Request $req)
-    {
-        $subCat = new SubCategory();
-        $subCat->category_id = $req->category_id;
-        $subCat->user_id = Auth::id();
-        $langs = Language::whereStatus(1)->get();
-        if($subCat->save()){
-            $name = explode(',',$req->name);
-            foreach ($langs as $key => $lang) {
-                $cat_lang = new SubCategoryLanguage();
-                $cat_lang->sub_category_id = $subCat->id;
-                $cat_lang->language_id = $lang->id;
-                $cat_lang->name = $name[$lang->id];
-                $cat_lang->save();
-            }
-        }
-
-        return response()->json(['success'=>'Sub Category Added Successfully.']);
-    }
 
     public function getSubCategories(Request $req)
     {
-        $restaurant_id = CustomerHelper::getRestaurantId();
+        $langId = SettingHelper::managerLanguage();
+        $restaurantId = CustomerHelper::getRestaurantId();
+        $restaurantLanguageId = RestaurantLanguage::where('language_id', $langId)
+                                ->where('restaurant_id', $restaurantId)
+                                ->value('id');
 
-        $lang_id = SettingHelper::managerLanguage();
-        $subCategories = Category::with(['categoryLanguages' => function($q) use ($lang_id){
-            $q->where('language_id',$lang_id);
-        },'subCategory' => function($q){
-            $q->whereHas('subCategoryLanguage');
-        },'subCategory.subCategoryLanguage' => function($q) use ($req,$lang_id){
-            $q->where('name','LIKE','%'.$req->search.'%')->where('language_id',$lang_id);
-        }])
-        ->whereHas('subCategory.subCategoryLanguage',function($q) use ($req,$lang_id){
-            $q->where('name','LIKE','%'.$req->search.'%')->where('language_id',$lang_id);
-        })->whereRestaurantId($restaurant_id)->paginate(5);
-        return response()->json(['sub_category' => $subCategories]);
+        $subCategories = SubCategory::with(['subCategoryRestaurantLanguages' => function ($query) use ($restaurantLanguageId, $req) {
+            $query->where('restaurant_language_id', $restaurantLanguageId);
+            $query->where('name', 'LIKE', '%' . $req->search . '%');
+        }, 'category'])->whereHas('subCategoryRestaurantLanguages',function($q) use ($req,$restaurantLanguageId){
+            $q->where('restaurant_language_id',$restaurantLanguageId);
+            $q->where('name','LIKE','%'.$req->search.'%');
+        })->where('restaurant_id', $restaurantId)->get();
+        $subCategories->transform(function ($subCategory) use ($req) {
+
+            $name = $subCategory->subCategoryRestaurantLanguages->isEmpty() ? null : $subCategory->subCategoryRestaurantLanguages->first()->name;
+            $type = $subCategory->category ? $subCategory->category->category_type : 1;
+
+            return [
+                'id' => $subCategory->id,
+                'image' => $subCategory->image,
+                'status' => $subCategory->status,
+                'type' => $type,
+                'name' => $name,
+            ];
+        });
+
+        return response()->json(['subCategories' => $subCategories]);
+    }
+
+    public function addSubCategory(Request $req)
+    {
+        $rules = [];
+        $languages = $req->language; 
+        foreach ($languages as $language) {
+            $rules["names.$language"] = 'required';
+        }
+        $rules['status'] = 'required';
+        $rules['image'] = 'required|image|mimes:jpg,png,jpeg,gif,svg';
+
+        $customMessages = [];
+        foreach ($languages as $language) {
+            $customMessages["names.$language.required"] = ucfirst($language) . " name is required.";
+        }
+
+        $validator = Validator::make($req->all(), $rules, $customMessages);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $image_name = '';
+        if($req->file('image')){
+            $directory = storage_path('app/public/sub_category/');
+
+            if (!file_exists($directory)) {
+                mkdir($directory, 0777, true);
+            }
+            
+            $imageFile = $req->file('image');
+            $image_name = '/sub_category/'.rand(10000000,99999999).".".$imageFile->GetClientOriginalExtension();
+            $imageFile->move(storage_path('app/public/sub_category/'),$image_name);
+        }
+
+        $restaurantId = CustomerHelper::getRestaurantId();
+        $resLangs = RestaurantLanguage::where('restaurant_id', $restaurantId)
+        ->get();
+
+        $subCat = new SubCategory();
+        $subCat->image = $image_name;
+        $subCat->restaurant_id = $restaurantId;
+        $subCat->added_by = Auth::user()->role;
+        $subCat->added_by_id = Auth::user()->id;
+        $subCat->status = $req->status;
+        $subCat->category_id = $req->category_id;
+        if($subCat->save()){
+            $names = $req->names;
+            foreach($resLangs as $resLang){
+                $language = Language::where('id', $resLang->language_id)->first();
+                $subCatResLang = new SubcategoryRestaurantLanguage();
+                $subCatResLang->restaurant_language_id = $resLang->id;
+                $subCatResLang->sub_category_id = $subCat->id;
+                $subCatResLang->name = $names[$language->name];
+                $subCatResLang->save();
+            }
+        }
+        return response()->json(['success'=>'Sub Category Added Successfully.']);
+    }
+
+    public function getSubCategory($id)
+    {
+        // $subCategories = SubCategory::with('subCategoryLanguage')->find($id);
+        // return response()->json($subCategories);
+
+        $subCategory = SubCategory::with('subCategoryRestaurantLanguages.restaurantLanguage')->select('id', 'image', 'status', 'category_id')->find($id);
+
+        if ($subCategory) {
+            $transformedSubCategory = [
+                'id' => $subCategory->id,
+                'image' => $subCategory->image,
+                'status' => $subCategory->status,
+                'categoryId' => $subCategory->category_id,
+                'subCatRestLang' => $subCategory->subCategoryRestaurantLanguages->map(function ($subCatRestLang) {
+                    return [
+                        'name' => $subCatRestLang->name,
+                        'language_id' => $subCatRestLang->restaurantLanguage->language_id
+                    ];
+                }),
+            ];
+
+            return response()->json($transformedSubCategory);
+        }
+    }
+
+    public function updateSubCategory(Request $req)
+    {
+        $rules = [];
+        $languages = $req->language; 
+        foreach ($languages as $language) {
+            $rules["names.$language"] = 'required';
+        }
+        $rules['status'] = 'required';
+        if($req->file('image')){
+            $rules['image'] = 'required|image|mimes:jpg,png,jpeg,gif,svg';
+        }
+
+        $customMessages = [];
+        foreach ($languages as $language) {
+            $customMessages["names.$language.required"] = ucfirst($language) . " name is required.";
+        }
+
+        $validator = Validator::make($req->all(), $rules, $customMessages);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $subCategory = SubCategory::find($req->id);
+        $imageName = '';
+        if($req->file('image')){
+            $path = storage_path()."/app/public/" .@$subCategory->image;
+            $result = File::exists($path);
+
+            if($result)
+            {
+                File::delete($path);
+            }
+
+            $imageFile = $req->file('image');
+            $imageName = '/sub_category/'.rand(10000000,99999999).".".$imageFile->GetClientOriginalExtension();
+            $imageFile->move(storage_path('app/public/sub_category/'),$imageName);
+        }else{
+            $imageName = $subCategory->image;
+        }
+
+        $restaurantId = CustomerHelper::getRestaurantId();
+        $resLangs = RestaurantLanguage::where('restaurant_id', $restaurantId)
+        ->get();
+
+        SubCategory::where('id', $req->id)->update([
+            'image' => $imageName,
+            'status' => $req->status,
+            'category_id' => $req->category_id
+        ]);
+
+        $names = $req->names;
+        foreach($resLangs as $resLang){
+            $language = Language::where('id', $resLang->language_id)->first();
+            SubCategoryRestaurantLanguage::where('sub_category_id', $subCategory->id)
+                                        ->where('restaurant_language_id', $resLang->id)
+                                        ->update([
+                                            'name' => $names[$language->name]
+                                        ]);
+        }
+
+        return response()->json(['success'=>'Sub Category Updated Successfully.']);
+    }
+
+    public function deleteSubCategory(Request $req)
+    {
+        $subCategory = SubCategory::find($req->id);
+
+        $path = storage_path()."/app/public/" .@$subCategory->image;
+        $result = File::exists($path);
+
+        if($result)
+        {
+            File::delete($path);
+        }
+
+        $subCategory->delete();
+        return response()->json(['success'=>'SubCategory Deleted Successfully.']);
     }
 
     public function getSubCategoriesList()
@@ -74,36 +237,6 @@ class SubCategoryController extends Controller
             ];
         });
         return response()->json(['sub_category' => $subCategories]);
-    }
-
-    public function getSubCategory($id)
-    {
-        $subCategories = SubCategory::with('subCategoryLanguage')->find($id);
-        return response()->json($subCategories);
-    }
-
-    public function updateSubCategory(Request $req)
-    {
-        $subCat = SubCategory::find($req->id);
-        $subCat->category_id = $req->category_id;
-         if($subCat->save()){
-            $langs = Language::whereStatus(1)->get();
-            $name = explode(',',$req->name);
-            foreach ($langs as $key => $lang) {
-                SubCategoryLanguage::where('sub_category_id',$req->id)->where('language_id',$lang->id)->update(['name'=>$name[$lang->id]]);
-            }
-        }
-
-        return response()->json(['success'=>'Sub Category Updated Successfully.']);
-    }
-
-    public function deleteSubCategory(Request $req)
-    {
-        $subCat = SubCategory::find($req->id);
-
-        $subCat->delete();
-
-        return response()->json(['success'=>'Sub Category Deleted Successfully.']);
     }
 
     public function get_Subcategories()

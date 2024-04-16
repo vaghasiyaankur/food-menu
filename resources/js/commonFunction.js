@@ -20,10 +20,12 @@ export const errorNotification = (notice) => {
 
 export const getErrorMessage = (error) => {
     let errorMessage = 'An error occurred';
-    const errorFields = Object.keys(error.response.data.errors);
-    if (errorFields.length > 0) {
-        const firstErrorField = errorFields[0];
-        errorMessage = error.response.data.errors[firstErrorField][0];
+    if(error.response.data.errors){
+        const errorFields = Object.keys(error.response.data.errors);
+        if (errorFields.length > 0) {
+            const firstErrorField = errorFields[0];
+            errorMessage = error.response.data.errors[firstErrorField][0];
+        }
     }
     return errorMessage;
 };

@@ -73,7 +73,7 @@
             changeLangStatus() {
                 axios.post('/api/update-languages-status', { language: this.selected_lang })
                 .then((res) => {
-                    this.$root.successNotification(res.data.success);
+                    // this.$root.successNotification(res.data.success);
                     this.getLanguage();
                 })
             },

@@ -195,7 +195,7 @@ export default {
             f7.dialog.confirm('Are you sure delete the QR Code?', () => {
                 axios.post('/api/delete-qrcode',{id:id})
                 .then((res) => {
-                    this.$root.successNotification(res.data.success);
+                    // this.$root.successNotification(res.data.success);
                     this.listQrCodes(this.pagenumber)
                 })
             });
@@ -242,7 +242,7 @@ export default {
             axios.post('/api/generate-qrcode', { start_qrcode: this.start_qrcode, end_qrcode: this.end_qrcode })
                 .then((res) => {
                 if (res.data.success) {
-                    this.$root.successNotification(res.data.success);
+                    // this.$root.successNotification(res.data.success);
                 } else {
                     this.$root.errorNotification(res.data.error);
                 }
@@ -253,7 +253,7 @@ export default {
         regenerateQrCode(id) {
             axios.post('/api/regenerate-qrcode', { id: id })
             .then((res) => {
-                this.$root.successNotification(res.data.success);
+                // this.$root.successNotification(res.data.success);
                 this.listQrCodes(this.pagenumber);
             })
         },

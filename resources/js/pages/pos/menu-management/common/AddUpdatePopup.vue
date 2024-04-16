@@ -2,6 +2,7 @@
     <div class="data-form">
         <div class="text-align-center popup_title">{{title}}</div>
         <div class="data-add">
+            <!-- {{ formDataFormat }} -->
             <template v-for="(data,index) in formDataFormat" :key="index">
                 <div class="add-data-main-div">
                     <label class="add-data-name" v-if="data.type != 'hidden'">{{ data.label }}</label>
@@ -33,6 +34,7 @@
                     </template>
                     <template v-if="data.type == 'image'">
                         <div class="data-image-selection margin-top">
+                            {{ typeof data.value }}
                             <Image 
                                 :alt="data.placeHolder"
                                 :value="data.value"
@@ -51,6 +53,16 @@
                             />
                         </div>
                     </template>
+                    <template v-if="data.type == 'drop-down'">
+                        <div class="data-name text-align-left">
+                            <DropDown 
+                                :options="data.options" 
+                                :value="data.value"
+                                :placeholder="data.placeHolder"
+                                @update:drop-down="saveValue(index, null, $event)" 
+                            />
+                        </div>
+                    </template>
                 </div>
             </template>
             <div class="display-flex justify-content-center popup_button">
@@ -64,10 +76,12 @@
 </template>
 
 <script setup>
-
 import Input from '../../../../components/Form/Input.vue';
 import Image from '../../../../components/Form/Image.vue';
 import Radio from '../../../../components/Form/Radio.vue';
+import DropDown from '../../../../components/Form/DropDown.vue';
+import { onBeforeUnmount } from 'vue';
+
 
 const props = defineProps({
     title   :   String,
@@ -76,26 +90,45 @@ const props = defineProps({
         default: () => []
     },
     type    : String,
-    DataType: String
+    dataType: String
 });
 
-const emit = defineEmits(['store:update']);
+console.log(props.formDataFormat);
+
+const emit = defineEmits(['store:update', 'set:data-value', 'set:image-value']);
 
 const saveValue = (index, ind = null, value) => {
-    if(ind == null){
-        props.formDataFormat[index].value = value;
-    }else{
-        props.formDataFormat[index].options[ind].value = value;
-    }
+    emit('set:data-value', index, ind, value);
+    // console.log(props.formDataFormat);
+    // if(ind == null){
+    //     props.formDataFormat[index].value = value;
+    // }else{
+    //     props.formDataFormat[index].options[ind].value = value;
+    // }
 };
 
 const saveImage = (index, imageData, imageInput) => {
-    props.formDataFormat[index].value = imageInput;
-    props.formDataFormat[index].preview = imageData;
+    // console.log(props.formDataFormat);
+    // console.log(typeof imageInput);
+    // console.log(typeof imageData);
+    // console.log(imageInput);
+    // console.log(imageData);
+    // console.log(props.formDataFormat);   
+    // console.log(props.formDataFormat[index]);
+    // console.log(index);
+
+    // props.formDataFormat[index].value = imageInput;
+    // props.formDataFormat[index].preview = imageData;
+
+    emit('set:image-value', index, imageInput, imageData)
 };
 
 const storeData = () => {
     emit('store:update');
 }
+
+onBeforeUnmount(() => {
+    props.formDataFormat = [];  
+});
 
 </script>
