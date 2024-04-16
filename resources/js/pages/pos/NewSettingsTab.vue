@@ -1,17 +1,14 @@
 <template>
     <f7-page>
         <div class="setting-tabs">
-            <div class="setting-tabs-banner">
+            <div class="setting-tabs-banner display-flex justify-content-space-between align-items-center">
                 <h3 class="no-padding no-margin">
                     <span class="page_heading settings-banner">Settings</span>
-                </h3>
-                <h3 class="no-padding no-margin display-none">
-                    <span class="page_heading settings-banner">User Management</span>
                 </h3>
             </div>
             <div class="card elevation-2 settings_tabs">
                 <div class="card-content setting_tab_card">
-                    <SettingTab />
+                    <SettingTab ref="settingtab" />
                 </div>
             </div>
         </div>
@@ -29,6 +26,6 @@ import {
 } from 'framework7-vue';
 import Icon from '../../components/Icon.vue';
 import SettingTab from './settings/SettingTab.vue';
-
+import { ref, onMounted } from 'vue'
 
 </script>

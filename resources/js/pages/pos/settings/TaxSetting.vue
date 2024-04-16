@@ -26,25 +26,32 @@
             </div>
         </form>
         <hr class="tax-divider no-padding">
-        <form class="list no-margin tax-setting-form" id="tax-setting-form">
+        <form class="list no-margin tax-setting-form" id="tax-setting-form" @submit.prevent="statusTaxChange">
             <h3 class="no-margin no-padding"> <span class="page_heading tax_settings"> Taxes </span></h3>
-            <div v-for="(tax,index) in taxes" :key="tax" class="item-content item-input taxsetting_form-gst no-padding-left">
-                <div class="item-inner no-padding">
-                    <div class="w-100 display-flex justify-content-space-between">
-                        <div class="block-title no-margin"> {{ tax.tax_name }}</div>
-                        <Radio :options="statusOption" :name="'status_'+tax.id" :value="tax.status" />
-                    </div>
-                    <div class="w-100 display-flex justify-content-space-between align-tems-center note_details gst-details">
-                        <div class="block-title no-margin">{{ tax.tax_charge_amount }} {{ tax.tax_charge_type == 'percentage' ? '%' : currency.currency_code }}</div>
-                        <div class="tax-btns">
-                            <span class="edit_tax_button"><Icon name="editIcon" @click="editTax(index)" /></span>
-                            <span class="delete_tax_button"><Icon name="deleteIcon" @click="deleteTax(tax.id)" /></span>
+            <div v-if="taxes.length > 0" >
+                <div v-for="(tax,index) in taxes" :key="tax" class="item-content item-input taxsetting_form-gst no-padding-left">
+                    <div class="item-inner no-padding">
+                        <div class="w-100 display-flex justify-content-space-between">
+                            <div class="block-title no-margin"> {{ tax.tax_name }}</div>
+                            <Radio :options="statusOption" :name="'status_'+tax.id" :value="tax.status" />
+                        </div>
+                        <div class="w-100 display-flex justify-content-space-between align-tems-center note_details gst-details">
+                            <div class="block-title no-margin">{{ tax.tax_charge_amount }} {{ tax.tax_charge_type == 'percentage' ? '%' : currency.currency_code }}</div>
+                            <div class="tax-btns">
+                                <span class="edit_tax_button"><Icon name="editIcon" @click="editTax(index)" /></span>
+                                <span class="delete_tax_button"><Icon name="deleteIcon" @click="deleteTax(tax.id)" /></span>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="form-submit no-margin no-padding display-flex justify-content-right popup_button">
+                    <button type="submit" class="button button-raised text-color-white bg-color-red button-large popup-button">Save Changes</button>
+                </div>
             </div>
-            <div class="form-submit no-margin no-padding display-flex justify-content-right popup_button">
-                <button type="button" class="button button-raised text-color-white bg-color-red button-large popup-button">Save Changes</button>
+            <div v-else>
+                <div class="text-align-center margin">
+                    <span>No Tax Found !!</span>
+                </div>
             </div>
         </form>
     </div>
@@ -111,6 +118,14 @@ const deleteTax = (id) => {
     .catch(error => {
         console.error('Error deleting tax detail:', error);
     });
+}
+
+const statusTaxChange = () => {
+    var formData = new FormData(event.target);
+    axios.post('/api/save-taxes-status', formData)
+    .then((res) => {
+        successNotification(res.data.success);
+    })
 }
 
 getCurrency();

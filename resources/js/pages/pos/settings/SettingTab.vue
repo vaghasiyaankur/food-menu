@@ -30,7 +30,7 @@ import CurrencySetting from './CurrencySetting.vue';
 import TaxSetting from './TaxSetting.vue';
 import UserManagement from './UserManagement.vue';
 import Language from './Language.vue';
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 
 const allTabs = [
     { label: 'General Setting', slug: 'general-setting', icon: 'generalSetting'},
@@ -39,6 +39,8 @@ const allTabs = [
     { label: 'User Management', slug: 'user-management', icon: 'userManagement'},
     { label: 'Language', slug: 'language', icon: 'language'},
 ];
+
+const componentInstance = ref(null);
 
 const props = defineProps({
     tabs: Object,
@@ -49,4 +51,8 @@ const currentTab = ref('general-setting');
 const setCurrentTab = (tab) => {
     currentTab.value = tab;
 };
+
+onMounted(() => {
+    componentInstance.value = this;
+});
 </script>

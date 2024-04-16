@@ -1,9 +1,9 @@
 <template>
-   <thead>
+    <thead>
         <tr>
             <th 
                 v-for="(item, index) in items" :key="index"
-                :style="item.width ? { width: item.width } : ''"
+                :style="item.width ? { width: item.width } : ''" :class="item.class"
             >
                 {{ item.field }}
             </th>

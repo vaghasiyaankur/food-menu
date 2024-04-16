@@ -28,6 +28,16 @@ class TaxSettingController extends Controller
 
     public function deleteTaxDetail(TaxSetting $tax) {
         $tax->delete();
-        return response()->json(['success' => 'Tax Save Successfully.']);
+        return response()->json(['success' => 'Tax Deleted Successfully.']);
+    }
+
+    public function saveTaxStatus(Request $request) {
+        $data = $request->toArray();
+
+        foreach ($data as $key => $value) {
+            $newKey = preg_replace('/^status_/', '', $key); // Remove 'status_' prefix
+            TaxSetting::where('id',$newKey)->update(['status' => $value]);
+        }
+        return response()->json(['success' => 'Tax Status Changed Successfully.']);
     }
 }

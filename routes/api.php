@@ -14,6 +14,7 @@ use App\Http\Controllers\Manager\SettingController;
 use App\Http\Controllers\Manager\TableController;
 use App\Http\Controllers\QrCodeController;
 use App\Http\Controllers\TaxSettingController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -93,6 +94,8 @@ Route::get('get-tax-detail', [TaxSettingController::class, 'getTaxList']);
 
 Route::post('save-tax-detail', [TaxSettingController::class, 'saveTaxDetail']);
 
+Route::post('save-taxes-status', [TaxSettingController::class, 'saveTaxStatus']);
+
 Route::delete('delete-tax-detail/{tax}', [TaxSettingController::class, 'deleteTaxDetail']);
 
 Route::post('update-setting',[SettingController::class, 'updateSetting']);
@@ -100,6 +103,8 @@ Route::post('update-setting',[SettingController::class, 'updateSetting']);
 Route::get('table-list',[SettingController::class, 'tableList']);
 
 Route::get('color-list',[SettingController::class, 'colorList']);
+
+Route::get('get-users',[UserController::class, 'getUsers']);
 
 Route::get('check-color/{capacity}',[SettingController::class, 'checkColor']);
 
