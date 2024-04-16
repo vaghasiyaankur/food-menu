@@ -40,8 +40,8 @@
                 </svg>
                 <span class="tooltiptext">Note</span>
             </button>
-            <button class="button button-small order-option tooltip" data-popup="#part_payment_Popup"
-                @click="f7.popup.open(`.part_payment_Popup`)">
+            <button class="button button-small order-option tooltip" data-popup="#split_bill_Popup"
+                @click="f7.popup.open(`.split_bill_Popup`)">
                 <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M23.7906 17.2084L19.5549 19.2963C19.5909 18.7392 19.3198 18.1897 18.8149 17.889L17.2081 16.9312C16.6277 16.5855 15.9648 16.403 15.2892 16.4029H13.1164C12.1151 16.4029 11.1739 16.7927 10.4661 17.5007L9.27511 18.6918V18.4936C9.27511 17.6204 8.56465 16.9101 7.69156 16.9101H4.58354C3.71045 16.9101 3 17.6204 3 18.4936V24.5377C3 25.411 3.71045 26.1212 4.58354 26.1212H7.69151C8.5646 26.1212 9.27506 25.411 9.27506 24.5377V23.9233L9.81171 24.385C10.4931 24.9712 11.3621 25.2936 12.2609 25.2939H17.3942C18.1819 25.2939 18.9372 25.0516 19.5785 24.5932L25.6233 20.2702C26.5212 19.6283 26.631 18.3317 25.8478 17.5481C25.3052 17.0057 24.4784 16.8687 23.7906 17.2084ZM8.51625 24.5377C8.51625 24.9923 8.14628 25.3624 7.69151 25.3624H4.58354C4.12877 25.3624 3.75881 24.9923 3.75881 24.5377V18.4937C3.75881 18.0391 4.12877 17.669 4.58354 17.669H7.69151C8.14628 17.669 8.51625 18.0391 8.51625 18.4937V24.5377ZM25.182 19.653L19.1372 23.976C18.6255 24.3417 18.0227 24.5351 17.3942 24.5351H12.2609C11.5437 24.5349 10.8503 24.2776 10.3065 23.81L9.27501 22.9224V19.7649L11.0025 18.0372C11.5671 17.4725 12.3177 17.1617 13.1163 17.1617H15.2891C15.8279 17.1617 16.3567 17.3074 16.8195 17.5833L18.4266 18.5411C18.8365 18.7849 18.9246 19.3424 18.6083 19.7011C18.3964 19.9413 18.0393 20.0391 17.7159 19.8893L15.9335 19.0665C15.7432 18.9794 15.5178 19.0613 15.4301 19.2521C15.3421 19.4421 15.4253 19.6678 15.6156 19.7556L17.3981 20.5784C17.8158 20.7711 18.2889 20.7757 18.7351 20.5423C18.7403 20.54 18.7458 20.5406 18.751 20.5381L24.1258 17.889C24.523 17.6926 24.9987 17.7726 25.3113 18.0846C25.7612 18.5349 25.7007 19.2817 25.182 19.653ZM26.9019 13.6998H25.7609C25.5634 9.13517 21.8244 5.47548 17.2288 5.40328V4.3794C17.2288 4.1697 17.0589 4 16.8494 4C16.6399 4 16.47 4.1697 16.47 4.3794V5.42446C12.1002 5.73546 8.61528 9.29637 8.42488 13.6998H7.28416C7.07465 13.6998 6.90475 13.8695 6.90475 14.0792C6.90475 14.2889 7.07465 14.4586 7.28416 14.4586H26.9019C27.1114 14.4586 27.2813 14.2889 27.2813 14.0792C27.2813 13.8695 27.1114 13.6998 26.9019 13.6998ZM9.18295 13.6998C9.38154 9.50791 12.8526 6.15857 17.0909 6.15857C21.3313 6.15857 24.804 9.50791 25.0028 13.6998H9.18295Z"
@@ -414,7 +414,7 @@
             </div>
             <div class="toolbar tabbar">
                 <div class="toolbar-inner">
-                    <a href="#pay_opt_1" class="tab-link tab-link-active">
+                    <a href="#pay_opt_1" class="tab-link">
                         <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_2679_2121)">
                                 <path
@@ -505,7 +505,7 @@
                 </div>
             </div>
             <div class="tabs">
-                <div id="pay_opt_1" class="page-content tab tab-active">
+                <div id="pay_opt_1" class="page-content tab">
                     <label class="captured_amount-text">Captured Amount:</label>
                     <div class="user-amount-input">
                         <label class="enter_amount-text">Enter Amount<span>*</span></label>
@@ -516,6 +516,14 @@
                     </div>
                     <hr class="dashed-line-devider">
                     <div class="payment-details">
+                        <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M14.4667 7.39793H9.82716C9.46484 7.39793 9.16437 7.09746 9.16437 6.73514C9.16437 6.37281 9.46484 6.07235 9.82716 6.07235H14.4667C14.6425 6.07235 14.8111 6.14218 14.9354 6.26647C15.0597 6.39077 15.1295 6.55936 15.1295 6.73514C15.1295 6.91092 15.0597 7.0795 14.9354 7.2038C14.8111 7.3281 14.6425 7.39793 14.4667 7.39793ZM5.18763 8.06956C5.01972 8.06956 4.85182 8.0077 4.71926 7.87514L4.05647 7.21235C3.80019 6.95607 3.80019 6.53188 4.05647 6.2756C4.31275 6.01932 4.73693 6.01932 4.99321 6.2756L5.18763 6.47002L6.70763 4.95002C6.96391 4.69374 7.38809 4.69374 7.64437 4.95002C7.90065 5.2063 7.90065 5.63049 7.64437 5.88677L5.656 7.87514C5.53182 7.99947 5.36335 8.0694 5.18763 8.06956ZM14.4667 13.584H9.82716C9.46484 13.584 9.16437 13.2835 9.16437 12.9212C9.16437 12.5589 9.46484 12.2584 9.82716 12.2584H14.4667C14.6425 12.2584 14.8111 12.3282 14.9354 12.4525C15.0597 12.5768 15.1295 12.7454 15.1295 12.9212C15.1295 13.097 15.0597 13.2656 14.9354 13.3898C14.8111 13.5141 14.6425 13.584 14.4667 13.584ZM5.18763 14.2556C5.01972 14.2556 4.85182 14.1937 4.71926 14.0612L4.05647 13.3984C3.80019 13.1421 3.80019 12.7179 4.05647 12.4617C4.31275 12.2054 4.73693 12.2054 4.99321 12.4617L5.18763 12.6561L6.70763 11.1361C6.96391 10.8798 7.38809 10.8798 7.64437 11.1361C7.90065 11.3923 7.90065 11.8165 7.64437 12.0728L5.656 14.0612C5.53182 14.1855 5.36335 14.2554 5.18763 14.2556Z"
+                                fill="currentColor" />
+                            <path
+                                d="M12.1512 19H6.84884C2.05023 19 0 16.9498 0 12.1512V6.84884C0 2.05023 2.05023 0 6.84884 0H12.1512C16.9498 0 19 2.05023 19 6.84884V12.1512C19 16.9498 16.9498 19 12.1512 19ZM6.84884 1.32558C2.77488 1.32558 1.32558 2.77488 1.32558 6.84884V12.1512C1.32558 16.2251 2.77488 17.6744 6.84884 17.6744H12.1512C16.2251 17.6744 17.6744 16.2251 17.6744 12.1512V6.84884C17.6744 2.77488 16.2251 1.32558 12.1512 1.32558H6.84884Z"
+                                fill="currentColor" />
+                        </svg>
                         <label class="enter_amount-text">Payment Summary</label>
                         <label class="enter_amount-text">$38.00</label>
                     </div>
@@ -527,19 +535,260 @@
                     <hr class="dashed-line-devider">
                 </div>
                 <div id="pay_opt_2" class="page-content tab"></div>
-                <div id="pay_opt_3" class="page-content tab"></div>
+                <div id="pay_opt_3" class="page-content tab">
+                    <div class="other-pay-method">
+                        <label class="other-method-text">Other</label>
+                        <div class="other-method-selector">
+                            <select name="other-method" id="other-method" class="other-method">
+                                <option value="paytm">Paytm</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="add-comments">
+                        <label class="comment-text">Comments</label>
+                        <div class="comment-text-area">
+                            <textarea name="add-comment-text" id="add-comment-text" rows="1"></textarea>
+                        </div>
+                    </div>
+                    <label class="captured_amount-text">Captured Amount:</label>
+                    <div class="user-amount-input">
+                        <label class="enter_amount-text">Enter Amount<span>*</span></label>
+                        <div class="enter_amount-inputs">
+                            <input type="text" name="enter_amount" id="enter_amount" class="enter_amount">
+                            <button class="save-amount-btn">Save</button>
+                        </div>
+                    </div>
+                    <hr class="dashed-line-devider">
+                    <div class="payment-details">
+                        <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M14.4667 7.39793H9.82716C9.46484 7.39793 9.16437 7.09746 9.16437 6.73514C9.16437 6.37281 9.46484 6.07235 9.82716 6.07235H14.4667C14.6425 6.07235 14.8111 6.14218 14.9354 6.26647C15.0597 6.39077 15.1295 6.55936 15.1295 6.73514C15.1295 6.91092 15.0597 7.0795 14.9354 7.2038C14.8111 7.3281 14.6425 7.39793 14.4667 7.39793ZM5.18763 8.06956C5.01972 8.06956 4.85182 8.0077 4.71926 7.87514L4.05647 7.21235C3.80019 6.95607 3.80019 6.53188 4.05647 6.2756C4.31275 6.01932 4.73693 6.01932 4.99321 6.2756L5.18763 6.47002L6.70763 4.95002C6.96391 4.69374 7.38809 4.69374 7.64437 4.95002C7.90065 5.2063 7.90065 5.63049 7.64437 5.88677L5.656 7.87514C5.53182 7.99947 5.36335 8.0694 5.18763 8.06956ZM14.4667 13.584H9.82716C9.46484 13.584 9.16437 13.2835 9.16437 12.9212C9.16437 12.5589 9.46484 12.2584 9.82716 12.2584H14.4667C14.6425 12.2584 14.8111 12.3282 14.9354 12.4525C15.0597 12.5768 15.1295 12.7454 15.1295 12.9212C15.1295 13.097 15.0597 13.2656 14.9354 13.3898C14.8111 13.5141 14.6425 13.584 14.4667 13.584ZM5.18763 14.2556C5.01972 14.2556 4.85182 14.1937 4.71926 14.0612L4.05647 13.3984C3.80019 13.1421 3.80019 12.7179 4.05647 12.4617C4.31275 12.2054 4.73693 12.2054 4.99321 12.4617L5.18763 12.6561L6.70763 11.1361C6.96391 10.8798 7.38809 10.8798 7.64437 11.1361C7.90065 11.3923 7.90065 11.8165 7.64437 12.0728L5.656 14.0612C5.53182 14.1855 5.36335 14.2554 5.18763 14.2556Z"
+                                fill="currentColor" />
+                            <path
+                                d="M12.1512 19H6.84884C2.05023 19 0 16.9498 0 12.1512V6.84884C0 2.05023 2.05023 0 6.84884 0H12.1512C16.9498 0 19 2.05023 19 6.84884V12.1512C19 16.9498 16.9498 19 12.1512 19ZM6.84884 1.32558C2.77488 1.32558 1.32558 2.77488 1.32558 6.84884V12.1512C1.32558 16.2251 2.77488 17.6744 6.84884 17.6744H12.1512C16.2251 17.6744 17.6744 16.2251 17.6744 12.1512V6.84884C17.6744 2.77488 16.2251 1.32558 12.1512 1.32558H6.84884Z"
+                                fill="currentColor" />
+                        </svg>
+                        <label class="enter_amount-text">Payment Summary</label>
+                        <label class="enter_amount-text">$38.00</label>
+                    </div>
+                    <hr class="dashed-line-devider">
+                    <div class="payment-details">
+                        <svg class="delete-indicator" width="19" height="19" viewBox="0 0 19 19" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M14.8023 19H4.19767C3.08481 18.9986 2.01793 18.5559 1.23102 17.769C0.444107 16.9821 0.00140306 15.9152 0 14.8023V4.19767C0.00140306 3.08481 0.444107 2.01793 1.23102 1.23102C2.01793 0.444107 3.08481 0.00140306 4.19767 0H14.8023C15.9152 0.00140306 16.9821 0.444107 17.769 1.23102C18.5559 2.01793 18.9986 3.08481 19 4.19767V14.8023C18.9986 15.9152 18.5559 16.9821 17.769 17.769C16.9821 18.5559 15.9152 18.9986 14.8023 19ZM4.19767 1.32558C3.43624 1.32652 2.70625 1.62941 2.16783 2.16783C1.62941 2.70625 1.32652 3.43624 1.32558 4.19767V14.8023C1.32652 15.5638 1.62941 16.2938 2.16783 16.8322C2.70625 17.3706 3.43624 17.6735 4.19767 17.6744H14.8023C15.5638 17.6735 16.2938 17.3706 16.8322 16.8322C17.3706 16.2938 17.6735 15.5638 17.6744 14.8023V4.19767C17.6735 3.43624 17.3706 2.70625 16.8322 2.16783C16.2938 1.62941 15.5638 1.32652 14.8023 1.32558H4.19767Z"
+                                fill="currentColor" />
+                            <path
+                                d="M5.89928 14C5.72138 13.9998 5.54751 13.9468 5.39964 13.8477C5.25177 13.7485 5.13653 13.6077 5.06847 13.4429C5.00041 13.2781 4.98259 13.0969 5.01725 12.9219C5.05192 12.747 5.13751 12.5863 5.26323 12.4602L12.4638 5.24215C12.6344 5.08278 12.8601 4.99602 13.0933 5.00014C13.3264 5.00426 13.5489 5.09896 13.7138 5.26426C13.8787 5.42957 13.9732 5.65259 13.9773 5.88633C13.9814 6.12008 13.8949 6.3463 13.7359 6.51733L6.53533 13.7353C6.45207 13.8195 6.35297 13.8862 6.24378 13.9316C6.1346 13.977 6.0175 14.0003 5.89928 14Z"
+                                fill="currentColor" />
+                            <path
+                                d="M13.1006 14C12.9824 14.0003 12.8653 13.977 12.7561 13.9316C12.6469 13.8862 12.5478 13.8195 12.4646 13.7353L5.26403 6.51733C5.10504 6.3463 5.01849 6.12008 5.0226 5.88633C5.02672 5.65259 5.12118 5.42957 5.28609 5.26426C5.45099 5.09896 5.67347 5.00426 5.90665 5.00014C6.13983 4.99602 6.36551 5.08278 6.53613 5.24215L13.7367 12.4602C13.8624 12.5863 13.948 12.747 13.9827 12.9219C14.0173 13.0969 13.9995 13.2781 13.9314 13.4429C13.8634 13.6077 13.7481 13.7485 13.6003 13.8477C13.4524 13.9468 13.2785 13.9998 13.1006 14Z"
+                                fill="#F33E3E" />
+                        </svg>
+                        <label class="enter_amount-text">Pay via Other (Paytm)</label>
+                        <label class="enter_amount-text">$38.00</label>
+                    </div>
+                    <hr class="dashed-line-devider">
+                    <div class="payment-details">
+                        <label class="enter_amount-text">Pay via cash</label>
+                        <label class="enter_amount-text">$38.00</label>
+                    </div>
+                    <hr class="dashed-line-devider">
+                </div>
                 <div id="pay_opt_4" class="page-content tab"></div>
             </div>
 
-            <div class="display-flex justify-content-center popup_button">
-                <button type="button"
-                    class="button button-raised button-small popup-close popup-cancel-button">Cancel</button>
-                <button type="button"
-                    class="button button-raised button-small popup-ok-button popup-place-order-button">Place
-                    Order</button>
-                <button type="button"
-                    class="button button-raised button-small popup-ok-button popup-place-order-button">Place
-                    Order</button>
+            <div class="popup_button">
+                <div class="back-to-order-btn">
+                    <button class="popup-back-button">Back To Order</button>
+                </div>
+                <div class="bill-btns">
+                    <div class="new-order-btn">
+                        <button type="button" class="popup-new-order-button">New Order</button>
+                    </div>
+                    <div class="print-btn">
+                        <button type="button" class="popup-print-button">Print</button>
+                    </div>
+                    <div class="ebill-btn">
+                        <button type="button" class="popup-ebill-button">EBill</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wave-image-content"><img src="/images/flow.png" style="width:100%"></div>
+    </div>
+
+    <!-- ========= SPLIT BILL POPUP ========= -->
+    <div class="popup split_bill_Popup" id="split_bill_Popup">
+        <div class="data-form add_table_view-data-form">
+            <div class="text-align-center table_view-popup_title">
+                Split Bill</div>
+            <hr class="popup_title_divider">
+            <div class="toolbar tabbar">
+                <div class="toolbar-inner">
+                    <a href="#split_bill_opt_1" class="tab-link tab-link-active">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M34.8602 9.88302C24.903 -4.68058 2.13243 2.24475 2 19.9541C1.99862 22.3225 2.46595 24.6678 3.37502 26.8545C4.2841 29.0411 5.6169 31.0259 7.2965 32.6942C23.076 47.5963 46.5242 28.2526 34.8602 9.88302ZM35.9602 15.1605L25.6121 24.6886L22.7617 21.8355L34.2283 11.2735C34.9696 12.4895 35.5516 13.7959 35.9602 15.1605ZM33.5064 10.1932L21.8533 20.9264L20.6165 19.6884V16.5909L30.7813 7.23913C31.8043 8.11135 32.7191 9.10309 33.5064 10.1932ZM29.7598 6.43354L20.6171 14.8459V9.36827L26.0229 4.38934C27.3507 4.90805 28.6066 5.59506 29.7598 6.43354ZM19.9736 3.24852C21.5523 3.24888 23.1229 3.4742 24.6382 3.9177L20.6165 7.62069V5.17691C20.6112 5.01003 20.5413 4.85176 20.4215 4.73558C20.3017 4.61941 20.1414 4.55445 19.9746 4.55445C19.8078 4.55445 19.6475 4.61941 19.5277 4.73558C19.4079 4.85176 19.338 5.01003 19.3327 5.17691V19.6884L7.73557 31.2967C-2.10206 20.8221 5.46757 3.20348 19.9736 3.24852ZM19.9736 36.6591C15.7701 36.6616 11.7216 35.0702 8.64328 32.2052L19.9743 20.8633L29.9578 30.8559C30.0795 30.9698 30.2406 31.0319 30.4072 31.0291C30.5738 31.0263 30.7327 30.9588 30.8505 30.8409C30.9683 30.723 31.0357 30.5639 31.0385 30.3972C31.0413 30.2305 30.9793 30.0692 30.8655 29.9474L30.2825 29.3638L36.1832 23.9248C35.2908 27.5546 33.2096 30.7808 30.2717 33.0887C27.3338 35.3966 23.7083 36.654 19.9736 36.6591ZM29.3748 28.4546L26.5205 25.5977L36.3208 16.5754C36.6763 18.3054 36.7555 20.0808 36.5555 21.8355L29.3748 28.4546Z"
+                                fill="currentColor" />
+                        </svg>
+                        <p class="no-margin">Portion Wise</p>
+                    </a>
+                    <a href="#split_bill_opt_2" class="tab-link">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M20.0023 2C15.2286 2.00249 10.6511 3.89996 7.27551 7.27551C3.89996 10.6511 2.00249 15.2286 2 20.0023C2.00311 24.7755 3.90093 29.3522 7.27648 32.7268C10.652 36.1015 15.2292 37.9981 20.0023 38C24.775 37.9981 29.3517 36.1014 32.7265 32.7265C36.1014 29.3517 37.9981 24.775 38 20.0023C37.9981 15.2292 36.1015 10.652 32.7268 7.27648C29.3522 3.90093 24.7755 2.00311 20.0023 2ZM20.0023 3.24332C22.2034 3.2424 24.3831 3.67525 26.4168 4.51714C28.4506 5.35903 30.2984 6.59346 31.8548 8.14986C33.4112 9.70627 34.6457 11.5541 35.4875 13.5878C36.3294 15.6216 36.7623 17.8013 36.7614 20.0023C36.7623 22.2034 36.3294 24.3831 35.4875 26.4168C34.6457 28.4506 33.4112 30.2984 31.8548 31.8548C30.2984 33.4112 28.4506 34.6457 26.4168 35.4875C24.3831 36.3294 22.2034 36.7623 20.0023 36.7614C17.8011 36.7626 15.6211 36.33 13.5871 35.4882C11.5531 34.6465 9.705 33.4121 8.14835 31.8557C6.59169 30.2992 5.35706 28.4513 4.51502 26.4174C3.67298 24.3835 3.24005 22.2036 3.24097 20.0023C3.23974 17.8009 3.67245 15.6207 4.51435 13.5866C5.35625 11.5524 6.59083 9.7042 8.14752 8.14752C9.7042 6.59083 11.5524 5.35625 13.5866 4.51435C15.6207 3.67245 17.8009 3.24209 20.0023 3.24332Z"
+                                fill="currentColor" />
+                            <path
+                                d="M20.0021 5.72266C16.2151 5.72452 12.5838 7.22988 9.90623 9.90789C7.22866 12.5859 5.7239 16.2175 5.72266 20.0044C5.72514 23.7902 7.23013 27.4202 9.90706 30.0971C12.584 32.774 16.214 34.279 19.9997 34.2815C23.7855 34.279 27.4155 32.774 30.0924 30.0971C32.7693 27.4202 34.2743 23.7902 34.2768 20.0044C34.2756 16.2183 32.7714 12.5874 30.0949 9.90955C27.4183 7.23167 23.7882 5.72576 20.0021 5.72266ZM20.0021 6.96598C21.7142 6.96505 23.4096 7.30163 24.9915 7.95645C26.5734 8.61128 28.0107 9.57151 29.2212 10.7822C30.4317 11.993 31.3917 13.4304 32.0463 15.0125C32.7008 16.5945 33.0371 18.29 33.0358 20.0021C33.0368 21.714 32.7003 23.4092 32.0456 24.991C31.3909 26.5727 30.4309 28.0099 29.2204 29.2204C28.0099 30.4309 26.5727 31.3909 24.991 32.0456C23.4092 32.7003 21.714 33.0368 20.0021 33.0358C18.29 33.0371 16.5945 32.7008 15.0125 32.0463C13.4304 31.3917 11.993 30.4317 10.7822 29.2212C9.57151 28.0107 8.61128 26.5734 7.95645 24.9915C7.30163 23.4096 6.96505 21.7142 6.96598 20.0021C6.96474 18.2898 7.30109 16.5941 7.95578 15.0119C8.61047 13.4297 9.57065 11.9922 10.7814 10.7814C11.9922 9.57065 13.4297 8.61047 15.0119 7.95578C16.5941 7.30109 18.2898 6.96474 20.0021 6.96598Z"
+                                fill="currentColor" />
+                            <path
+                                d="M19.3784 2.625V6.34792H20.6217V2.62735L19.3784 2.625ZM19.3784 33.6564V37.3817H20.6217V33.6564H19.3784ZM33.6554 19.384V20.6273H37.3807V19.384H33.6554ZM2.62402 19.3793V20.6227H6.34695V19.377L2.62402 19.3793ZM32.3464 7.75546L29.6111 10.2796L30.4533 11.1922L33.1886 8.66801L32.3464 7.75546ZM9.55143 28.8145L6.81612 31.3387L7.66065 32.2512L10.3913 29.7224L9.55143 28.8145ZM30.2844 29.0115L29.4211 29.903L32.1118 32.4835L32.9681 31.592L30.2844 29.0115ZM7.89289 7.52087L7.03429 8.41465L9.72033 10.9951L10.5813 10.0967L7.89289 7.52087Z"
+                                fill="currentColor" />
+                            <path
+                                d="M13.4164 13.4184C13.3586 13.4761 13.3127 13.5447 13.2815 13.6201C13.2502 13.6956 13.2341 13.7765 13.2341 13.8582C13.2341 13.9399 13.2502 14.0208 13.2815 14.0963C13.3127 14.1718 13.3586 14.2403 13.4164 14.2981L25.7042 26.5858C25.7619 26.6436 25.8305 26.6895 25.906 26.7208C25.9814 26.7521 26.0623 26.7682 26.144 26.7682C26.2257 26.7682 26.3066 26.7521 26.3821 26.7208C26.4576 26.6895 26.5261 26.6436 26.5839 26.5858C26.6417 26.5281 26.6876 26.4595 26.7188 26.3841C26.7501 26.3086 26.7662 26.2277 26.7662 26.146C26.7662 26.0643 26.7501 25.9834 26.7188 25.9079C26.6876 25.8324 26.6417 25.7639 26.5839 25.7061L14.2961 13.4184C14.2384 13.3606 14.1698 13.3147 14.0943 13.2834C14.0189 13.2521 13.938 13.236 13.8563 13.236C13.7746 13.236 13.6937 13.2521 13.6182 13.2834C13.5427 13.3147 13.4742 13.3606 13.4164 13.4184ZM24.3436 12.5527C22.6381 12.5527 21.2423 13.9532 21.2423 15.6587C21.2423 17.3665 22.6381 18.7623 24.3436 18.76C26.0514 18.76 27.4519 17.3665 27.4519 15.6587C27.4519 13.9509 26.0514 12.5527 24.3436 12.5527ZM24.3436 13.7961C25.3804 13.7961 26.2085 14.6242 26.2085 15.6587C26.2085 16.6932 25.3804 17.519 24.3436 17.519C24.0988 17.5205 23.8562 17.4735 23.6298 17.3805C23.4034 17.2876 23.1977 17.1506 23.0247 16.9776C22.8516 16.8045 22.7146 16.5988 22.6217 16.3724C22.5288 16.146 22.4817 15.9034 22.4833 15.6587C22.4817 15.4137 22.5287 15.1709 22.6216 14.9442C22.7145 14.7176 22.8514 14.5116 23.0244 14.3382C23.1974 14.1647 23.403 14.0273 23.6295 13.9339C23.8559 13.8404 24.0986 13.7951 24.3436 13.7961ZM15.6567 21.2443C13.9513 21.2443 12.5508 22.6401 12.5508 24.3455C12.5539 25.1685 12.882 25.957 13.4638 26.5392C14.0455 27.1214 14.8337 27.4501 15.6567 27.4538C17.3645 27.4538 18.758 26.0533 18.7603 24.3455C18.7603 22.6401 17.3645 21.2443 15.6567 21.2443ZM15.6567 22.4876C16.6936 22.4876 17.517 23.3086 17.517 24.3455C17.5186 24.5905 17.4716 24.8333 17.3787 25.06C17.2858 25.2866 17.1489 25.4926 16.9759 25.6661C16.8029 25.8395 16.5973 25.9769 16.3708 26.0703C16.1444 26.1638 15.9017 26.2114 15.6567 26.2105C15.4116 26.2114 15.1686 26.1638 14.9419 26.0704C14.7153 25.977 14.5093 25.8397 14.3359 25.6663C14.1626 25.493 14.0252 25.287 13.9318 25.0603C13.8384 24.8336 13.7908 24.5907 13.7918 24.3455C13.7908 24.1006 13.8385 23.8579 13.9319 23.6314C14.0254 23.405 14.1628 23.1993 14.3362 23.0263C14.5096 22.8534 14.7156 22.7165 14.9423 22.6236C15.169 22.5307 15.4118 22.4837 15.6567 22.4852V22.4876Z"
+                                fill="currentColor" />
+                        </svg>
+                        <p class="no-margin">Percentage Wise</p>
+                    </a>
+                    <a href="#split_bill_opt_3" class="tab-link">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M6.09756 3.5C3.81463 3.5 2 5.379 2 7.61032C2 9.90036 3.87317 11.7206 6.09756 11.7206C8.38049 11.7206 10.1951 9.84164 10.1951 7.61032C10.1951 5.32028 8.32195 3.5 6.09756 3.5ZM6.09756 9.66548C4.98537 9.66548 4.04878 8.72598 4.04878 7.61032C4.04878 6.49466 4.98537 5.55516 6.09756 5.55516C7.20976 5.55516 8.14634 6.49466 8.14634 7.61032C8.14634 8.72598 7.20976 9.66548 6.09756 9.66548ZM6.09756 15.8897C3.81463 15.8897 2 17.7687 2 20C2 22.29 3.87317 24.1103 6.09756 24.1103C8.38049 24.1103 10.1951 22.2313 10.1951 20C10.1951 17.71 8.32195 15.8897 6.09756 15.8897ZM6.09756 22.0552C4.98537 22.0552 4.04878 21.1157 4.04878 20C4.04878 18.8843 4.98537 17.9448 6.09756 17.9448C7.20976 17.9448 8.14634 18.8843 8.14634 20C8.14634 21.1157 7.20976 22.0552 6.09756 22.0552ZM6.09756 28.2794C3.81463 28.2794 2 30.1584 2 32.3897C2 34.621 3.87317 36.5 6.09756 36.5C8.38049 36.5 10.1951 34.621 10.1951 32.3897C10.1951 30.1584 8.32195 28.2794 6.09756 28.2794ZM6.09756 34.4448C4.98537 34.4448 4.04878 33.5053 4.04878 32.3897C4.04878 31.274 4.98537 30.3345 6.09756 30.3345C7.20976 30.3345 8.14634 31.274 8.14634 32.3897C8.14634 33.5053 7.20976 34.4448 6.09756 34.4448ZM15.3463 8.66726H36.9463C37.5317 8.66726 38 8.19751 38 7.61032C38 7.02313 37.5317 6.6121 36.9463 6.6121H15.3463C14.761 6.6121 14.2927 7.08185 14.2927 7.66904C14.2927 8.25623 14.761 8.66726 15.3463 8.66726ZM36.9463 19.0018H15.3463C14.761 19.0018 14.2927 19.4715 14.2927 20.0587C14.2927 20.6459 14.761 21.1157 15.3463 21.1157H36.9463C37.5317 21.1157 38 20.6459 38 20.0587C38 19.4715 37.5317 19.0018 36.9463 19.0018ZM36.9463 31.3327H15.3463C14.761 31.3327 14.2927 31.8025 14.2927 32.3897C14.2927 32.9769 14.761 33.4466 15.3463 33.4466H36.9463C37.5317 33.4466 38 32.9769 38 32.3897C38 31.8025 37.5317 31.3327 36.9463 31.3327Z"
+                                fill="currentColor" />
+                        </svg>
+                        <p class="no-margin">Item Wise</p>
+                    </a>
+                </div>
+            </div>
+            <div class="tabs">
+                <div id="split_bill_opt_1" class="page-content tab tab-active">
+                    <div class="portion_calc">
+                        <label class="portion_split-text">Please enter number in which bill can be splited:</label>
+                        <div class="portion_split-input">
+                            <p class="main-portion no-margin">1/</p>
+                            <input type="text" name="enter_portions" id="enter_portions" class="enter_portions"
+                                placeholder="Enter portion here.">
+                        </div>
+                    </div>
+                    <div class="popup_button">
+                        <div class="cancel_save-btns">
+                            <div class="cancel-split-btn">
+                                <button class="popup-cancel-split-button">Cancel</button>
+                            </div>
+                            <div class="save-split-btn">
+                                <button type="button" class="popup-save-split-button">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="split_bill_opt_2" class="page-content tab">
+                    <h3 class="percentage-split-heading no-margin">Please provide only number</h3>
+                    <div class="percentage_split_calc">
+                        <div class="percentage-input-1">
+                            <label class="percentage_split-text">Percentage Number</label>
+                            <div class="percentage_split-input-1">
+                                <input type="text" name="enter_percentages" id="enter_percentages"
+                                    class="enter_percentages" placeholder="Enter percentage here like 80">
+                            </div>
+                        </div>
+                        <div class="percentage-input-2">
+                            <label class="percentage_split-text">Percentage Number</label>
+                            <div class="percentage_split-input-2">
+                                <input type="text" name="enter_percentages" id="enter_percentages"
+                                    class="enter_percentages" placeholder="Enter percentage here like 20">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="popup_button popup-btns-for-portion-split">
+                        <div class="add-more-btn">
+                            <button class="popup-add-more-button">Add More</button>
+                        </div>
+                        <div class="cancel_save-btns">
+                            <div class="cancel-split-btn">
+                                <button class="popup-cancel-split-button">Cancel</button>
+                            </div>
+                            <div class="save-split-btn">
+                                <button type="button" class="popup-save-split-button">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="split_bill_opt_3" class="page-content tab">
+                    <div class="item_wise">
+                        <ul class="all-items">
+                            <li class="all-items-selector"><input class="all-items-selector-input" type="checkbox" name="All_Items" id="All_Items"
+                                    value="All Items" /> <label for="All_Items">All Items</label></li>
+                            <ul class="all-items-list">
+                                <li class="all_items-item">
+                                    <input type="checkbox" name="All_Items-list" id="All_Items-list"
+                                        value="Masala Dosa" /> <label for="All_Items-list">Masala Dosa</label>
+                                </li>
+                                <li class="all_items-item">
+                                    <input type="checkbox" name="All_Items-list" id="All_Items-list"
+                                        value="Paneer Wrap" /> <label for="All_Items-list">Paneer Wrap</label>
+                                </li>
+                                <li class="all_items-item">
+                                    <input type="checkbox" name="All_Items-list" id="All_Items-list"
+                                        value="Spl. Shahi Paneer (Half)" /> <label for="All_Items-list">Spl. Shahi
+                                        Paneer (Half)</label>
+                                </li>
+                                <li class="all_items-item">
+                                    <input type="checkbox" name="All_Items-list" id="All_Items-list"
+                                        value="Mix Veg Soup" /> <label for="All_Items-list">Mix Veg Soup</label>
+                                </li>
+                                <li class="all_items-item">
+                                    <input type="checkbox" name="All_Items-list" id="All_Items-list"
+                                        value="Hot And Sour Soup" /> <label for="All_Items-list">Hot And Sour
+                                        Soup</label>
+                                </li>
+                                <li class="all_items-item">
+                                    <input type="checkbox" name="All_Items-list" id="All_Items-list"
+                                        value="Manchow Soup" /> <label for="All_Items-list">Manchow Soup</label>
+                                </li>
+                                <li class="all_items-item">
+                                    <input type="checkbox" name="All_Items-list" id="All_Items-list"
+                                        value="Veg Clear Soup" /> <label for="All_Items-list">Veg Clear Soup</label>
+                                </li>
+                                <li class="all_items-item">
+                                    <input type="checkbox" name="All_Items-list" id="All_Items-list"
+                                        value="Paneer Garlic Bread" /> <label for="All_Items-list">Paneer Garlic
+                                        Bread</label>
+                                </li>
+                            </ul>
+                        </ul>
+                        <div class="add-in-items">
+                            <div class="add-items-part-1">
+                                <div class="add-items-part-banner">
+                                    <button class="add-items-to-list-btn">
+                                        <p class="no-margin">Add</p>
+                                    </button>
+                                    <h4 class="no-margin">Part 1</h4>
+                                </div>
+                                <div class="list-item-show"></div>
+                            </div>
+                            <div class="add-items-part-2">
+                                <div class="add-items-part-banner">
+                                    <button class="add-items-to-list-btn">
+                                        <p class="no-margin">Add</p>
+                                    </button>
+                                    <h4 class="no-margin">Part 2</h4>
+                                </div>
+                                <div class="list-item-show"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="popup_button">
+                        <div class="cancel_save-btns">
+                            <div class="cancel-split-btn">
+                                <button class="popup-cancel-split-button">Cancel</button>
+                            </div>
+                            <div class="save-split-btn">
+                                <button type="button" class="popup-save-split-button">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="wave-image-content"><img src="/images/flow.png" style="width:100%"></div>
