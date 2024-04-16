@@ -11,6 +11,7 @@ import FoodIngradient from "./pages/pos/menu-management/FoodIngradient.vue";
 import Setting from "./pages/pos/SettingsTab.vue";
 import NewSetting from "./pages/pos/NewSettingsTab.vue";
 import TableView from "./pages/restaurant-manager/table-view.vue"
+import KotView from "./pages/restaurant-manager/KOT-view.vue"
 
 // Pages
 export default [
@@ -81,6 +82,11 @@ export default [
     name : 'TableView',
     path: '/table-view/',
     component: TableView,
+  },
+  {
+    name : 'KotView',
+    path: '/KOT-view/',
+    component: KotView,
   },
 
 ]
