@@ -1,5 +1,5 @@
 <template>
-    <input type="file" class="data-add-image-file" :name="'image-' + dataType" accept="image/*"  :id="'image-' + dataType" @change="addimageChange">
+    <input type="file" class="data-add-image-file" :name="name" accept="image/*"  :id="'image-' + dataType" @change="addimageChange">
     <label class="category-image text-align-center" :for="'image-' + dataType">
         <div class="data-add-image" v-if="preview">
             <div class="data-add-image padding-top padding-bottom">
@@ -23,6 +23,7 @@
         alt     : String,
         value   : Object,
         preview   : String,
+        name : String
     });
     
     const emit = defineEmits(['update:image']);
