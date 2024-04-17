@@ -7,7 +7,7 @@
         >
             <input type="radio" 
                 :id="name+'-'+dataType+'-'+opt.value" 
-                :name="name + '-' + dataType" 
+                :name="name" 
                 :value="opt.value" 
                 :checked="value == opt.value"
                 @change="updateRadioValue"

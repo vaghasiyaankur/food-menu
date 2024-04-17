@@ -42,9 +42,9 @@ import axios from 'axios';
 import $ from 'jquery';
 import NoValueFound from '../../../components/NoValueFound.vue'
 import MenuManagementHeader from './MenuManagementHeader.vue'
-import AddUpdatePopup from './common/AddUpdatePopup.vue'
-import RemovePopup from './common/RemovePopup.vue'
-import Card from './common/Card.vue'
+import AddUpdatePopup from '../../../components/common/AddUpdatePopup.vue'
+import RemovePopup from '../../../components/common/RemovePopup.vue'
+import Card from '../../../components/common/Card.vue'
 import { successNotification, errorNotification, getErrorMessage } from '../../../commonFunction.js';
 
 const categories = ref([]);
@@ -53,13 +53,13 @@ const addUpdateType = ref('add');
 const removeCategoryId = ref(0);
 
 const addUpdateFormDataFormat = ref([
-    { label: 'Id', multipleLang: false, type: 'hidden', placeHolder: 'Category Id', value: ''},
-    { label: 'Image', multipleLang: false, type: 'image', placeHolder: 'Category Image', value: {}, preview: ''},
+    { label: 'Id', multipleLang: false, type: 'hidden', name: 'id', placeHolder: 'Category Id', value: ''},
+    { label: 'Image', multipleLang: false, type: 'image', name: 'image', placeHolder: 'Category Image', value: {}, preview: ''},
     {
         label: 'Type',
         multipleLang: false,
         type: 'radio',
-        name: 'food-type',
+        name: 'category_type',
         options: [
             { label: 'Veg', value: 1},
             { label: 'Non-veg', value: 2},
@@ -189,19 +189,12 @@ const updateSearch = (searchValue) => {
 const storeUpdateData = () => {
     const formData = addUpdateFormDataFormat.value;
     const id = formData.find(item => item.label === 'Id').value;
-    const categoryType = formData.find(item => item.label === 'Type').value;
-    const status = formData.find(item => item.label === 'Status').value;
 
     // Create FormData object to send file data along with other form data
-    const categoryData = new FormData();
-    categoryData.append('id', id);
-    categoryData.append('category_type', categoryType);
-    categoryData.append('status', status);
-    categoryData.append('image', formData.find(item => item.label === 'Image').value); // Append the image file to FormData
+    const categoryData = new FormData(event.target);
 
     // Map language data to FormData
     formData.find(item => item.label === 'Name').options.forEach(option => {
-        categoryData.append('names['+option.language+']', option.value);
         categoryData.append('language[]', option.language);
     });
 
