@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
             $table->enum('added_by', ['admin', 'manager'])->default('manager');
             $table->enum('type', ['1', '2', '3'])->default('1');
+            $table->float('price')->default(0);
             $table->unsignedBigInteger('added_by_id')->unsigned();
             $table->boolean('status')->default(1);
             $table->timestamps();

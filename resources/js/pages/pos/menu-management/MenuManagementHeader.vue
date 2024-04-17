@@ -1,12 +1,12 @@
 <template>
 <div class="card_header">
     <div class="row padding-left padding-right padding-top-half align-items-center">
-        <div class="col-100 large-50 medium-40">
+        <div class="col-100 large-30 medium-20">
             <h3>
                 <span class="page_heading"> {{ title }}</span>
             </h3>
         </div>
-        <div class="col-100 large-50 medium-60">
+        <div class="col-100 large-70 medium-80">
             <div class="row align-items-center">
                 <div class="col">
                     <div class="item-content item-input">
@@ -22,7 +22,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- {{dropDown}} -->
                 <div class="col" 
                     v-for="(dd,index) in dropDown" :key="index"
                 >
@@ -34,7 +33,6 @@
                             @update:drop-down="saveValue(index, $event)" 
                         />
                 </div>
-                    <!-- @update:drop-down="saveValue(index, null, $event)"  -->
                 <div class="col padding-left-half padding-right-half">
                     <button class="button button-raised bg-dark text-color-white padding height_40 active" @click="handleButtonClick">
                         <i class="f7-icons font-22 margin-right-half">plus_square</i>

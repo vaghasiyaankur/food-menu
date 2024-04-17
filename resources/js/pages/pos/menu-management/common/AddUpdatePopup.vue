@@ -6,7 +6,7 @@
             <template v-for="(data,index) in formDataFormat" :key="index">
                 <div class="add-data-main-div">
                     <label class="add-data-name" v-if="data.type != 'hidden'">{{ data.label }}</label>
-                    <template v-if="data.type == 'text' || data.type == 'hidden'">
+                    <template v-if="data.type == 'text' || data.type == 'hidden' || data.type == 'number'">
                         <template v-if="data.multipleLang">
                             <div class="data-name text-align-left padding-bottom-half" 
                                 v-for="(option, ind) in data.options" :key="option"

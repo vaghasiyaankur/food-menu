@@ -6,7 +6,7 @@
                 @update:search="updateSearch" />
 
             <div class="category-card">
-                <Card 
+                <Card
                     :dataSet="categories" 
                     @open:edit-popup="showCategoryPopup"
                     @open:remove-popup="showRemoveCategoryPopup"

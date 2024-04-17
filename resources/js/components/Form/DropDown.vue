@@ -6,7 +6,7 @@
         >
             <option 
             v-for="(opt, index) in options" :key="index"
-            :value="opt.id" 
+            :value="opt.id" :selected="value == opt.id"
             >
                 <label>{{opt.label}}</label>
             </option>
@@ -27,5 +27,6 @@ const emit = defineEmits(['update:drop-down']);
 const updateDropDownValue = (event) => {
     emit('update:drop-down', event.target.value);
 };
+
 
 </script>
