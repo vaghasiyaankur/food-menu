@@ -22,8 +22,8 @@
 </template>
 
 <script setup>
-import Icon from "../../../../components/Icon.vue"
-import { getFoodTypeIcon } from '../../../../commonFunction.js';
+import Icon from "../Icon.vue"
+import { getFoodTypeIcon } from '../../commonFunction.js';
 
 
 const emit = defineEmits(['open:edit-popup', 'open:remove-popup']);

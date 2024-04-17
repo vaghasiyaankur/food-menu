@@ -4,14 +4,14 @@
             class="tab-link" :class="{ 'tab-link-active': activeTab === tab.slug }" 
             @click="setActiveTab(tab.slug)"
         >
-        <p>
-            <Icon
-                :name="tab.icon"
-                :color="activeTab === tab.slug ? '#F33E3E' : '#555555'"
-                class="margin-right-half"
-            />
-            {{ tab.label }}
-        </p>
+            <p>
+                <Icon
+                    :name="tab.icon"
+                    :color="activeTab === tab.slug ? '#F33E3E' : '#555555'"
+                    class="margin-right-half"
+                />
+                {{ tab.label }}
+            </p>
         </a>
 </template>
 
@@ -27,7 +27,7 @@ const props = defineProps({
 const emit = defineEmits(['update:activeTab']);
 
 const setActiveTab = (slug) => {
-  emit('update:activeTab', slug); // Emit the update:activeTab event
+  emit('update:activeTab', slug);
 };
 
 </script>

@@ -38,6 +38,7 @@ class IngredientController extends Controller
                 'id' => $ingredient->id,
                 'image' => $ingredient->image,
                 'status' => $ingredient->status,
+                'price' => $ingredient->price,
                 'type' => $ingredient->type,
                 'name' => $name,
             ];
@@ -54,6 +55,7 @@ class IngredientController extends Controller
             $rules["names.$language"] = 'required';
         }
         $rules['type'] = 'required';
+        $rules['price'] = 'required';
         $rules['status'] = 'required';
         $rules['image'] = 'required|image|mimes:jpg,png,jpeg,gif,svg';
 
@@ -90,6 +92,7 @@ class IngredientController extends Controller
         $ing->restaurant_id = $restaurantId;
         $ing->added_by = Auth::user()->role;
         $ing->type = $req->type;
+        $ing->price = $req->price;
         $ing->added_by_id = Auth::user()->id;
         $ing->status = $req->status;
         if($ing->save()){
@@ -108,13 +111,14 @@ class IngredientController extends Controller
 
     public function getIngredient($id)
     {
-        $ingredient = Ingredient::with('ingredientRestaurantLanguages.restaurantLanguage')->select('id', 'image', 'type', 'status')->find($id);
+        $ingredient = Ingredient::with('ingredientRestaurantLanguages.restaurantLanguage')->select('id', 'image', 'type', 'price', 'status')->find($id);
 
         if ($ingredient) {
             $transformedIngredient = [
                 'id' => $ingredient->id,
                 'image' => $ingredient->image,
                 'type' => $ingredient->type,
+                'price' => $ingredient->price,
                 'status' => $ingredient->status,
                 'ingRestLang' => $ingredient->ingredientRestaurantLanguages->map(function ($ingRestLang) {
                     return [
@@ -136,6 +140,7 @@ class IngredientController extends Controller
             $rules["names.$language"] = 'required';
         }
         $rules['type'] = 'required';
+        $rules['price'] = 'required';
         $rules['status'] = 'required';
         if($req->file('image')){
             $rules['image'] = 'required|image|mimes:jpg,png,jpeg,gif,svg';
@@ -177,6 +182,7 @@ class IngredientController extends Controller
         Ingredient::where('id', $req->id)->update([
             'image' => $imageName,
             'type' => $req->type,
+            'price' => $req->price,
             'status' => $req->status
         ]);
 

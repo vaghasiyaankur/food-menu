@@ -42,9 +42,9 @@ import axios from 'axios';
 import $ from 'jquery';
 import NoValueFound from '../../../components/NoValueFound.vue'
 import MenuManagementHeader from './MenuManagementHeader.vue'
-import AddUpdatePopup from './common/AddUpdatePopup.vue'
-import RemovePopup from './common/RemovePopup.vue'
-import Card from './common/Card.vue'
+import AddUpdatePopup from '../../../components/common/AddUpdatePopup.vue'
+import RemovePopup from '../../../components/common/RemovePopup.vue'
+import Card from '../../../components/common/Card.vue'
 import { successNotification, errorNotification, getErrorMessage } from '../../../commonFunction.js';
 
 const ingredients = ref([]);
@@ -55,6 +55,7 @@ const removeIngredientId = ref(0);
 const addUpdateFormDataFormat = ref([
     { label: 'Id', multipleLang: false, type: 'hidden', placeHolder: 'Ingredient Id', value: ''},
     { label: 'Image', multipleLang: false, type: 'image', placeHolder: 'Ingredient Image', value: {}, preview: ''},
+    { label: 'Price', multipleLang: false, type: 'number', placeHolder: 'Ingredient Price', value: ''},
     {
         label: 'Type',
         multipleLang: false,
@@ -153,6 +154,7 @@ const manipulateField = (formData, label, value = null) => {
 const updateFormData = (ingredientData) => {
     const formData = addUpdateFormDataFormat.value;
     manipulateField(formData, 'Id', ingredientData.id);
+    manipulateField(formData, 'Price', ingredientData.price);
     manipulateField(formData, 'Image', `/storage/${ingredientData.image}`);
     manipulateField(formData, 'Type', parseInt(ingredientData.type));
     manipulateField(formData, 'Status', parseInt(ingredientData.status));
@@ -171,6 +173,7 @@ const updateFormData = (ingredientData) => {
 const resetFormData = () => {
     const formData = addUpdateFormDataFormat.value;
     manipulateField(formData, 'Id', '');
+    manipulateField(formData, 'Price', '');
     manipulateField(formData, 'Image', '');
     manipulateField(formData, 'Type', 1);
     manipulateField(formData, 'Status', 1);
@@ -189,12 +192,14 @@ const updateSearch = (searchValue) => {
 const storeUpdateData = () => {
     const formData = addUpdateFormDataFormat.value;
     const id = formData.find(item => item.label === 'Id').value;
+    const price = formData.find(item => item.label === 'Price').value;
     const type = formData.find(item => item.label === 'Type').value;
     const status = formData.find(item => item.label === 'Status').value;
 
     // Create FormData object to send file data along with other form data
     const ingredientData = new FormData();
     ingredientData.append('id', id);
+    ingredientData.append('price', price);
     ingredientData.append('type', type);
     ingredientData.append('status', status);
     ingredientData.append('image', formData.find(item => item.label === 'Image').value); // Append the image file to FormData

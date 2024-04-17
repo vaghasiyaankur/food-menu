@@ -58,14 +58,9 @@
             </div>
             <hr class="margin-vertical">
             <div class="time_onoff margin-top">
-                <div class="row align-items-center">
+                <div class="row align-items-center margin-bottom">
                     <div class="col-50 height_46">
-                        <div class="block-title no-margin">Highlight Time ON /OFF</div>
-                        <label class="switch general_info_form-input">
-                            <input type="checkbox" class="switch-input" @change="highlight_on_off = !highlight_on_off" :checked="highlight_on_off">
-                            <span class="switch-label" data-on="On" data-off="Off"></span>
-                            <span class="switch-handle"></span>
-                        </label>
+                        <Switch :highlight_on_off="highlight_on_off" :label="'Highlight Time ON /OFF'" @update:changeData="changeData" />
                     </div>
                     <div class="col-50 list" :class="{ 'display-none' : !highlight_on_off }">
                         <div class="item-content item-input no-padding">
@@ -165,6 +160,7 @@ import Icon from '../../../components/Icon.vue';
 import axios from 'axios';
 import { f7 } from 'framework7-vue';
 import Input from "../../../components/Form/Input.vue"
+import Switch from "../../../components/Form/Switch.vue"
 
 const logo_preview = ref("/images/logo.png");
 const fav_preview = ref("/images/logo.png");
@@ -200,8 +196,8 @@ const getGeneralsetting = () => {
 }
 getGeneralsetting();
 
-const submitGeneralsetting = () => {
-
+const changeData = (status) => {
+    highlight_on_off.value = status;
 }
 
 const openTimePopupToggle = (e) => {

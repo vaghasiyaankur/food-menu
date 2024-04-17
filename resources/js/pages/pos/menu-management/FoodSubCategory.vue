@@ -40,9 +40,9 @@ import axios from 'axios';
 import $ from 'jquery';
 import NoValueFound from '../../../components/NoValueFound.vue'
 import MenuManagementHeader from './MenuManagementHeader.vue'
-import AddUpdatePopup from './common/AddUpdatePopup.vue'
-import RemovePopup from './common/RemovePopup.vue'
-import Card from './common/Card.vue'
+import AddUpdatePopup from '../../../components/common/AddUpdatePopup.vue'
+import RemovePopup from '../../../components/common/RemovePopup.vue'
+import Card from '../../../components/common/Card.vue'
 import { successNotification, errorNotification, getErrorMessage } from '../../../commonFunction.js';
 
 const subCategories = ref([]);

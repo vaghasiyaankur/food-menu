@@ -737,13 +737,19 @@ code {
 .position-relative{
   position: relative;
 }
-.popup {
+
+.popup{
   width: 378px !important;
   height: auto !important;
   top: 20% !important;
   left: 35% !important;
   margin: 0 !important;
 }
+
+.popup:not(.popup-tablet-fullscreen).modal-in{
+  transform: translate(0%, -15%) !important;
+}
+
 .popup_button .button {
   border-radius: 10px;
 }

@@ -1,6 +1,5 @@
 <template>
     <f7-page>
-        
         <div class="data-list-section">
             <MenuManagementHeader title="Product" @add:popup="showProductPopup"
                 @update:search="updateSearch" :drop-down="headerDropDown" @filter:data="filterData" />
@@ -32,8 +31,8 @@ import axios from 'axios';
 import $ from 'jquery';
 import NoValueFound from '../../../components/NoValueFound.vue'
 import MenuManagementHeader from './MenuManagementHeader.vue'
-import RemovePopup from './common/RemovePopup.vue'
-import Card from './common/Card.vue'
+import RemovePopup from '../../../components/common/RemovePopup.vue'
+import Card from '../../../components/common/Card.vue'
 import { successNotification, errorNotification, getErrorMessage } from '../../../commonFunction.js';
 
 const products = ref([]);
@@ -152,17 +151,19 @@ const getProductList = () => {
 };
 
 const showProductPopup = (id = null) => {
-    if(id){
-        axios.get('/api/get-product/'+id)
-        .then((response) => {
-            updateFormData(response.data);
-        });
-    }else{
-        resetFormData();
-    }
-    addUpdateTitle.value = id ? 'Edit Product' : 'Add Product';
-    addUpdateType.value = id ? 'edit' : 'add';
-    f7.popup.open(`.addUpdatePopup`);
+
+    f7.view.main.router.navigate({ url: "/add-product/" });
+    // if(id){
+    //     axios.get('/api/get-product/'+id)
+    //     .then((response) => {
+    //         updateFormData(response.data);
+    //     });
+    // }else{
+    //     resetFormData();
+    // }
+    // addUpdateTitle.value = id ? 'Edit Product' : 'Add Product';
+    // addUpdateType.value = id ? 'edit' : 'add';
+    // f7.popup.open(`.addUpdatePopup`);
 };
 
 const updateSearch = (searchValue) => {

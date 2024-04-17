@@ -452,7 +452,7 @@ thead .label-cell {
 
 
 /*========= SWITCH ON OFF CSS ===========*/
-.time_onoff .switch {
+.switch {
     position: relative;
     display: inline-block;
     vertical-align: top;
@@ -463,18 +463,18 @@ thead .label-cell {
     border-radius: 7px;
     cursor: pointer;
 }
-.time_onoff .switch-input {
+.switch-input {
     position: absolute;
     top: 0;
     left: 0;
     opacity: 0;
 }
-.time_onoff .switch-input:checked ~ .switch-label {
+.switch-input:checked ~ .switch-label {
     background: #f33e3e;
     box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.25);
 }
 
-.time_onoff .switch-label {
+.switch-label {
     position: relative;
     display: block;
     height: inherit;
@@ -491,7 +491,7 @@ thead .label-cell {
     -o-transition-property: opacity background;
     transition-property: opacity background;
 }
-.time_onoff .switch-label:before,.time_onoff .switch-label:after {
+.switch-label:before,.switch-label:after {
     position: absolute;
     top: 50%;
     margin-top: -.5em;
@@ -501,29 +501,29 @@ thead .label-cell {
     -o-transition: inherit;
     transition: inherit;
 }
-.time_onoff .switch-label:before {
+.switch-label:before {
     content: attr(data-off);
     right: 11px;
     color: #999999;
     text-shadow: 0 1px rgba(255, 255, 255, 0.5);
 }
-.time_onoff .switch-input:checked ~.switch-label:before {
+.switch-input:checked ~.switch-label:before {
     opacity: 0;
 }
-.time_onoff .switch-label:after {
+.switch-label:after {
     content: attr(data-on);
     left: 11px;
     color: white;
     text-shadow: 0 1px rgba(0, 0, 0, 0.2);
     opacity: 0;
 }
-.time_onoff .switch-input:checked ~.switch-label:after {
+.switch-input:checked ~.switch-label:after {
     opacity: 1;
 }
-.time_onoff .switch-handle {
+.switch-handle {
     position: absolute;
     top: 7px;
-    left: 4px;
+    left: 10px;
     width: 22px;
     height: 22px;
     background: #999999;
@@ -534,7 +534,7 @@ thead .label-cell {
     -o-transition: left 0.15s ease-out;
     transition: left 0.15s ease-out;
 }
-.time_onoff .switch-input:checked ~.switch-handle {
+.switch-input:checked ~.switch-handle {
     left: 53px;
     box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2);
     background-color: #fff;
