@@ -6,7 +6,7 @@
             <template v-for="(data,index) in formDataFormat" :key="index">
                 <div class="add-data-main-div">
                     <label class="add-data-name" v-if="data.type != 'hidden'">{{ data.label }}</label>
-                    <template v-if="data.type == 'text' || data.type == 'hidden'">
+                    <template v-if="data.type == 'text' || data.type == 'hidden' || data.type == 'email' || data.type == 'password'">
                         <template v-if="data.multipleLang">
                             <div class="data-name text-align-left padding-bottom-half" 
                                 v-for="(option, ind) in data.options" :key="option"
@@ -68,6 +68,11 @@
                             />
                         </div>
                     </template>
+                    <template v-if="data.type == 'switch'">
+                        <div class="data-name text-align-left">
+                            <Switch :highlight_on_off="highlight_on_off" :name="'lock_enable'" @update:changeData="changeData" />
+                        </div>
+                    </template>
                 </div>
             </template>
             <div class="display-flex justify-content-center popup_button">
@@ -83,10 +88,11 @@
 </template>
 
 <script setup>
-import Input from '../../../../components/Form/Input.vue';
-import Image from '../../../../components/Form/Image.vue';
-import Radio from '../../../../components/Form/Radio.vue';
-import DropDown from '../../../../components/Form/DropDown.vue';
+import Input from '../Form/Input.vue';
+import Image from '../Form/Image.vue';
+import Radio from '../Form/Radio.vue';
+import DropDown from '../Form/DropDown.vue';
+import Switch from '../Form/Switch.vue';
 import { onBeforeUnmount } from 'vue';
 
 

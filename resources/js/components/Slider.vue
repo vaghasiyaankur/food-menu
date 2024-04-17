@@ -1,5 +1,5 @@
 <template>
-     <div class="position-relative category-slider-content">
+    <div class="position-relative category-slider-content">
         <div data-navigation='{"prevEl":".swiper-button-prev", "nextEl":".swiper-button-next"}' data-space-between="15" data-slides-per-view="4" class="swiper demo-swiper-multiple swiper-init demo-swiper margin-top-half margin-bottom-half">
             <div class="swiper-wrapper">
                 <div class="swiper-slide" 
