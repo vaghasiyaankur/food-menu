@@ -1,6 +1,6 @@
 <template>
     <div class="data-drop-down">
-        <select name="data-drop-down" 
+        <select :name="name" 
             id="data-drop-down"
             @change="updateDropDownValue"
         >
@@ -19,6 +19,7 @@ const props = defineProps({
     dataType        : String,
     options         : Object,
     placeholder     : String,
+    name            : String,
     value           : [String, Number]
 });
 

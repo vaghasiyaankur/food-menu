@@ -63,7 +63,7 @@ import axios from 'axios';
 import Icon from './../../../components/Icon.vue'
 import AddEditProductForm from './../../../components/Product/AddEditProductForm.vue'
 import RightSideProductForm from './../../../components/Product/RightSideProductForm.vue'
-import AddUpdatePopup from './common/AddUpdatePopup.vue';
+import AddUpdatePopup from './../../../components/common/AddUpdatePopup.vue';
 
 const ingredients = ref([]);
 const variations = ref([]);
