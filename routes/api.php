@@ -146,6 +146,8 @@ Route::get('get-users',[UserController::class, 'getUsers']);
 
 Route::post('save-user-data', [UserController::class, 'saveUserData']);
 
+Route::delete('delete-user-data/{user}', [UserController::class, 'deleteUserData']);
+
 Route::get('check-color/{capacity}',[SettingController::class, 'checkColor']);
 
 Route::get('table-data/{id}',[SettingController::class, 'tableData']);

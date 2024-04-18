@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Cookie;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -60,6 +61,7 @@ class UserController extends Controller
         $roleWiseUsers = [];
         if($restaurant_id = Auth::user()->restaurant_id){
             $users = User::whereRestaurantId($restaurant_id)->get();
+            $roleWiseUsers['all'] = $users;
 
             foreach ($users as $user) {
                 // Assuming 'role' is a column in your users table
@@ -75,6 +77,23 @@ class UserController extends Controller
 
     public function saveUserData(UserRequest $request) {
         $data = $request->toArray();
-        dd($data);
+        $data['lock_enable'] = $data['lock_enable'] ?? 0;
+        $data['restaurant_id'] = Auth::user()->restaurant_id;
+        $data['password'] = Hash::make($data['password']);
+
+        if (isset($data['id']) && $data['id'] != '') {
+            unset($data['password']);
+        }
+        unset($data['confirm_password']);
+
+        User::updateOrCreate(['id' => $data['id']], $data);
+
+        return response()->json(['success' => "User changes added successfully."]);
     }
+
+    public function deleteUserData(User $user) {
+        $user->delete();
+        return response()->json(['success' => "User deleted successfully."]);
+    }
+
 }

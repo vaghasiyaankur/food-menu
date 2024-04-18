@@ -21,6 +21,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'restaurant_id',
+        'role',
+        'lock_pin',
+        'lock_enable'
     ];
 
     /**

@@ -447,7 +447,7 @@ thead .label-cell {
 
 /* LANGUAGE SETTINGS */
 #tab-user-management{
-    height: calc(100vh - 180px);
+    min-height: calc(100vh - 180px);
 }
 
 

@@ -24,11 +24,12 @@ class UserRequest extends FormRequest
     public function rules()
     {
         $pageId = $this->input('id', null);
+        $passwordRule = ($pageId === null) ? 'required|min:8' : 'nullable|min:8';
         return [
             'name' => 'required',
-            'email' => 'required|unique:users,email,email,'.$pageId,
-            'password' => 'required|min:8',
-            'confirm_password' => 'required|min:8|same:password',
+            'email' => 'required|unique:users,email,'.$pageId,
+            'password' => $passwordRule,
+            'confirm_password' => 'required_with:password|same:password',
             'role' => 'required',
             'lock_pin' => 'required|max:4'
         ];

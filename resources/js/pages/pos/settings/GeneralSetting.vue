@@ -60,7 +60,7 @@
             <div class="time_onoff margin-top">
                 <div class="row align-items-center margin-bottom">
                     <div class="col-50 height_46">
-                        <Switch :highlight_on_off="highlight_on_off" :label="'Highlight Time ON /OFF'" @update:changeData="changeData" />
+                        <Switch :changeStatus="highlight_on_off" :label="'Highlight Time ON /OFF'" @update:changeData="changeData" />
                     </div>
                     <div class="col-50 list" :class="{ 'display-none' : !highlight_on_off }">
                         <div class="item-content item-input no-padding">
