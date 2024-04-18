@@ -53,8 +53,8 @@ const addUpdateType = ref('add');
 const removeVariationId = ref(0);
 
 const addUpdateFormDataFormat = ref([
-    { label: 'Id', multipleLang: false, type: 'hidden', placeHolder: 'Variation Id', value: ''},
-    { label: 'Image', multipleLang: false, type: 'image', placeHolder: 'Variation Image', value: {}, preview: ''},
+    { label: 'Id', multipleLang: false, type: 'hidden', name: 'id', placeHolder: 'Variation Id', value: ''},
+    { label: 'Image', multipleLang: false, type: 'image', name: 'image', placeHolder: 'Variation Image', value: {}, preview: ''},
     {
         label: 'Status',
         multipleLang: false,

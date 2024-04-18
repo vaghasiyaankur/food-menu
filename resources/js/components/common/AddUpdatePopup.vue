@@ -2,11 +2,12 @@
     <div class="data-form">
         <div class="text-align-center popup_title">{{title}}</div>
         <div class="data-add">
-            <form @submit.prevent="storeData" method="post">
+            <!-- {{ formDataFormat }} -->
+            <form @submit.prevent="storeData" class="no-margin" method="post">
                 <template v-for="(data,index) in formDataFormat" :key="index">
                     <div class="add-data-main-div">
                         <label class="add-data-name" v-if="data.type != 'hidden'">{{ data.label }}</label>
-                        <template v-if="data.type == 'text' || data.type == 'hidden' || data.type == 'email' || data.type == 'password'">
+                        <template v-if="data.type == 'text' || data.type == 'hidden'  || data.type == 'number' || data.type == 'email' || data.type == 'password'">
                             <template v-if="data.multipleLang">
                                 <div class="data-name text-align-left padding-bottom-half" 
                                     v-for="(option, ind) in data.options" :key="option"

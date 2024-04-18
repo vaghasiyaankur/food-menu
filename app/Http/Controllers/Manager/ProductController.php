@@ -144,6 +144,7 @@ class ProductController extends Controller
                 'status' => $category->status,
                 'type' => $category->type,
                 'name' => $name,
+                'price' => $category->price,
             ];
         });
 

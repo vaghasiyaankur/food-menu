@@ -53,14 +53,14 @@ const addUpdateType = ref('add');
 const removeIngredientId = ref(0);
 
 const addUpdateFormDataFormat = ref([
-    { label: 'Id', multipleLang: false, type: 'hidden', placeHolder: 'Ingredient Id', value: ''},
-    { label: 'Image', multipleLang: false, type: 'image', placeHolder: 'Ingredient Image', value: {}, preview: ''},
-    { label: 'Price', multipleLang: false, type: 'number', placeHolder: 'Ingredient Price', value: ''},
+    { label: 'Id', multipleLang: false, type: 'hidden', name: 'id', placeHolder: 'Ingredient Id', value: ''},
+    { label: 'Image', multipleLang: false, type: 'image', name: 'image', placeHolder: 'Ingredient Image', value: {}, preview: ''},
+    { label: 'Price', multipleLang: false, type: 'number', name: 'price', placeHolder: 'Ingredient Price', value: ''},
     {
         label: 'Type',
         multipleLang: false,
         type: 'radio',
-        name: 'food-type',
+        name: 'type',
         options: [
             { label: 'Veg', value: 1},
             { label: 'Non-veg', value: 2},
@@ -192,21 +192,12 @@ const updateSearch = (searchValue) => {
 const storeUpdateData = () => {
     const formData = addUpdateFormDataFormat.value;
     const id = formData.find(item => item.label === 'Id').value;
-    const price = formData.find(item => item.label === 'Price').value;
-    const type = formData.find(item => item.label === 'Type').value;
-    const status = formData.find(item => item.label === 'Status').value;
 
     // Create FormData object to send file data along with other form data
-    const ingredientData = new FormData();
-    ingredientData.append('id', id);
-    ingredientData.append('price', price);
-    ingredientData.append('type', type);
-    ingredientData.append('status', status);
-    ingredientData.append('image', formData.find(item => item.label === 'Image').value); // Append the image file to FormData
+    const ingredientData = new FormData(event.target);
 
     // Map language data to FormData
     formData.find(item => item.label === 'Name').options.forEach(option => {
-        ingredientData.append('names['+option.language+']', option.value);
         ingredientData.append('language[]', option.language);
     });
 

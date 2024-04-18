@@ -52,8 +52,8 @@ const removeSubCategoryId = ref(0);
 const defaultSelectCatId = ref(0);
 
 const addUpdateFormDataFormat = ref([
-    { label: 'Id', multipleLang: false, type: 'hidden', placeHolder: 'Category Id', value: ''},
-    { label: 'Image', multipleLang: false, type: 'image', placeHolder: 'Sub Category Image', value: {}, preview: ''},
+    { label: 'Id', multipleLang: false, type: 'hidden', name: 'id', placeHolder: 'Category Id', value: ''},
+    { label: 'Image', multipleLang: false, type: 'image', name: 'image', placeHolder: 'Sub Category Image', value: {}, preview: ''},
     {
         label: 'Status',
         multipleLang: false,
@@ -105,6 +105,7 @@ const getCategories = () => {
             label: 'Category',
             multipleLang: false,
             type: 'drop-down',
+            name: 'category_id',
             placeHolder: 'Select Category Name',
             value: response.data.categories[0]?.id ?? '',
             options: optionsData
@@ -202,17 +203,10 @@ const updateSearch = (searchValue) => {
 const storeUpdateData = () => {
     const formData = addUpdateFormDataFormat.value;
     const id = formData.find(item => item.label === 'Id').value;
-    const status = formData.find(item => item.label === 'Status').value;
-    const categoryId = formData.find(item => item.label === 'Category').value;
 
-    const subCategoryData = new FormData();
-    subCategoryData.append('id', id);
-    subCategoryData.append('status', status);
-    subCategoryData.append('category_id', categoryId);
-    subCategoryData.append('image', formData.find(item => item.label === 'Image').value); // Append the image file to FormData
+    const subCategoryData = new FormData(event.target);
 
     formData.find(item => item.label === 'Name').options.forEach(option => {
-        subCategoryData.append('names['+option.language+']', option.value);
         subCategoryData.append('language[]', option.language);
     });
 
