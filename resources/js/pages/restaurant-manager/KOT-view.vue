@@ -79,11 +79,120 @@
                     <h4 class="kot_view_table_no no-margin">Table : 1</h4>
                     <div class="card-type table_card">
                         <div class="table_card-margin-padding">
-                            <div class="table_card_header">
-                                <div></div>
-                                <div></div>
-                                <div></div>
+                            <div class="kot_table_details">
+                                <div class="table_detail text-align-center">
+                                    <h4 class="dine-in-number no-margin">6</h4>
+                                    <h4 class="dine-in-number-text no-margin">Dine in</h4>
+                                </div>
+                                <div class="table_detail text-align-center">
+                                    <h4 class="kot-number no-margin">1</h4>
+                                    <h4 class="kot-number-text no-margin">KOT No. </h4>
+                                </div>
+                                <div class="table_detail text-align-center">
+                                    <h4 class="kot-time-number no-margin">1:35:02</h4>
+                                    <h4 class="kot-time-text no-margin">Time</h4>
+                                </div>
                             </div>
+                            <div class="kot_table-bill-details">
+                                <div class="customer-detail">
+                                    <h5 class="no-margin">John Doe</h5>
+                                    <h5 class="no-margin">25 min ago</h5>
+                                </div>
+                                <div class="ordered-items-details">
+                                    <ol class="ordered-item-details-list no-margin">
+                                        <li>
+                                            <div class="ordered-item">
+                                                <h6 class="no-margin">Margherita Pizza</h6>
+                                                <h6 class="no-margin">₹ 146.00</h6>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="ordered-item">
+                                                <h6 class="no-margin">Vegetarian Hakka Noodles</h6>
+                                                <h6 class="no-margin">₹ 256.00</h6>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="ordered-item">
+                                                <h6 class="no-margin">Supreme Veggie Burger <span>[Note : Strong]</span>
+                                                </h6>
+                                                <h6 class="no-margin">₹ 100.00</h6>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="ordered-item">
+                                                <h6 class="no-margin">Biryani Rice</h6>
+                                                <h6 class="no-margin">₹ 100.00</h6>
+                                            </div>
+                                        </li>
+                                    </ol>
+                                </div>
+                                <div>
+                                    <div>
+                                        <hr class="horizontal-divider">
+                                        <div class="ordered_items-total">
+                                            <h4 class="ordered_items-total-text no-margin">Total Amount</h4>
+                                            <h4 class="ordered_items-total-number no-margin">$38.00</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="kot_view_table_card">
+                    <h4 class="kot_view_table_no no-margin">Table : 2</h4>
+                    <div class="card-type table_card">
+                        <div class="table_card-margin-padding">
+                            <div class="kot_table_details">
+                                <div class="table_detail text-align-center">
+                                    <h4 class="dine-in-number no-margin">4</h4>
+                                    <h4 class="dine-in-number-text no-margin">Dine in</h4>
+                                </div>
+                                <div class="table_detail text-align-center">
+                                    <h4 class="kot-number no-margin">2</h4>
+                                    <h4 class="kot-number-text no-margin">KOT No. </h4>
+                                </div>
+                                <div class="table_detail text-align-center">
+                                    <h4 class="kot-time-number no-margin">1:35:02</h4>
+                                    <h4 class="kot-time-text no-margin">Time</h4>
+                                </div>
+                            </div>
+                            <div class="kot_table-bill-details">
+                                <div class="customer-detail">
+                                    <h5 class="no-margin">John Doe</h5>
+                                    <h5 class="no-margin">25 min ago</h5>
+                                </div>
+                            </div>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="kot_view_table_card">
+                    <h4 class="kot_view_table_no no-margin">Table : 3</h4>
+                    <div class="card-type table_card">
+                        <div class="table_card-margin-padding">
+                            <div class="kot_table_details">
+                                <div class="table_detail text-align-center">
+                                    <h4 class="dine-in-number no-margin">5</h4>
+                                    <h4 class="dine-in-number-text no-margin">Dine in</h4>
+                                </div>
+                                <div class="table_detail text-align-center">
+                                    <h4 class="kot-number no-margin">3</h4>
+                                    <h4 class="kot-number-text no-margin">KOT No. </h4>
+                                </div>
+                                <div class="table_detail text-align-center">
+                                    <h4 class="kot-time-number no-margin">1:35:02</h4>
+                                    <h4 class="kot-time-text no-margin">Time</h4>
+                                </div>
+                            </div>
+                            <div class="kot_table-bill-details">
+                                <div class="customer-detail">
+                                    <h5 class="no-margin">John Doe</h5>
+                                    <h5 class="no-margin">25 min ago</h5>
+                                </div>
+                            </div>
+                            <div></div>
                         </div>
                     </div>
                 </div>

@@ -162,3 +162,60 @@
 .kot_view_table_card .table_card{
     border-radius: 5px;
 }
+.kot_view_table_card .table_card .kot_table_details{
+    background-color: #555555;
+    padding: 10px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    /* border: 1px solid #555555; */
+}
+.kot_table_details .table_detail h4:first-child{
+    margin-bottom: 5px !important;
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: 500;
+    color: #FFFFFF;
+}
+.kot_table_details .table_detail h4:last-child{
+    font-size: 15px;
+    line-height: 18px;
+    font-weight: 500;
+    color: #FFFFFF;
+}
+.kot_table-bill-details .customer-detail{
+    margin-top: 8px;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #EDEDED;
+}
+.kot_table-bill-details .customer-detail h5{
+    font-size: 14px;
+    line-height: 17px;
+    font-weight: 500;
+    color: #38373D;
+}
+.kot_table-bill-details .ordered-items-details .ordered-item-details-list{
+    padding: 10px 15px;
+    list-style-type: decimal;
+}
+.kot_table-bill-details .ordered-items-details .ordered-item-details-list li{
+    font-size: 13px !important;
+    line-height: 16px;
+    font-weight: 400 !important;
+    color: #38373D !important;
+}
+.kot_table-bill-details .ordered-items-details .ordered-item-details-list .ordered-item{
+    display: flex;
+    font-size: 13px !important;
+    line-height: 16px;
+    font-weight: 400 !important;
+    color: #38373D !important;
+}
+.kot_table-bill-details .ordered-items-details .ordered-item-details-list h6{
+    
+}
