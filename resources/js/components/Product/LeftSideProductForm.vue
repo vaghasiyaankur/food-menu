@@ -7,7 +7,7 @@
             <h5 class="no-padding no-margin">Variation</h5>
             <div class="add-product_size-selector-btns display-flex">
                 <div class="position-relative" v-for="(variation,index) in selectVariations" :key="index">
-                    <div class="pencil-icon">
+                    <div class="pencil-icon" @click="openVariationPrice(variation.id)">
                         <Icon name="pencil" />
                     </div>
                     <label for="small" checked>
@@ -39,18 +39,8 @@
 </template>
 
 <script setup>
-import { f7 } from 'framework7-vue';
 import AddEditForm from './AddEditForm.vue';
-import DropDown from '../Form/DropDown.vue';
-import Input from '../Form/Input.vue';
-import { ref, onMounted } from 'vue';
-import axios from 'axios';
 import Icon from '../Icon.vue';
-
-onMounted(() => {
-    // getLanguages();
-})
-
 
 const props = defineProps({
     selectIngredients: {
@@ -66,4 +56,12 @@ const props = defineProps({
         default: () => []
     }
 });
+
+const emit = defineEmits([
+    'open:variation-popup'
+]);
+
+const openVariationPrice = (id) => {
+    emit('open:variation-popup', id);
+}
 </script>

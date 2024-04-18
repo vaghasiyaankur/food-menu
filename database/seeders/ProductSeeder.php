@@ -216,11 +216,12 @@ class ProductSeeder extends Seeder
                 }
             }
             $pro = new Product();
+            $pro->image = 'product/'.$restaurant_id.'-'.$newKey.'.webp';
             $pro->price = $product['price'];
             $pro->sub_category_id = $product['sub_category_id'];
             $pro->restaurant_id = $restaurant_id;
-            $pro->slug = 'product-'.$restaurant_id.'-'.$newKey;
-            $pro->image = 'product/'.$restaurant_id.'-'.$newKey.'.webp';
+            $pro->added_by_id = 1;
+            // $pro->slug = 'product-'.$restaurant_id.'-'.$newKey;
             if($pro->save()){
                 $langs = Language::whereHas('RestaurantLanguages', function ($query) use($restaurant_id) {
                     $query->where('restaurant_id', $restaurant_id)->where('status', 1);
@@ -258,11 +259,12 @@ class ProductSeeder extends Seeder
                 }
             }
             $pro = new Product();
+            $pro->image = 'product/'.$restaurant_id.'-'.$newKey.'.webp';
             $pro->price = $product['price'];
             $pro->sub_category_id = 4 + $product['sub_category_id'];
             $pro->restaurant_id = $restaurant_id;
-            $pro->slug = 'product-'.$restaurant_id.'-'.$newKey;
-            $pro->image = 'product/'.$restaurant_id.'-'.$newKey.'.webp';
+            $pro->added_by_id = 4;
+            // $pro->slug = 'product-'.$restaurant_id.'-'.$newKey;
             if($pro->save()){
                 $langs = Language::whereHas('RestaurantLanguages', function ($query) use($restaurant_id) {
                     $query->where('restaurant_id', $restaurant_id)->where('status', 1);

@@ -16,12 +16,13 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->text('image')->nullable();
-            $table->bigInteger('price')->nullable();
+            $table->float('price')->nullable();
             $table->unsignedBigInteger('sub_category_id');
             $table->foreign('sub_category_id')->references('id')->on('sub_categories');
             $table->unsignedBigInteger('restaurant_id');
             $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
-            $table->string('slug')->nullable();
+            $table->enum('added_by', ['admin', 'manager'])->default('manager');
+            $table->unsignedBigInteger('added_by_id')->unsigned();
             $table->text('description')->nullable();
             $table->boolean('featured')->default(0);
             $table->boolean('status')->default(1);
