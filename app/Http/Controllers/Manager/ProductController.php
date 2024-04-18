@@ -13,11 +13,32 @@ use App\Models\RestaurantLanguage;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
     public function addProduct(Request $req)
     {
+        $rules = [];
+        $languages = $req->language; 
+
+        foreach ($languages as $language) {
+            $rules["names.$language"] = 'required';
+        }
+        $rules['status'] = 'required';
+        $rules['image'] = 'required|image|mimes:jpg,png,jpeg,gif,svg';
+
+        $customMessages = [];
+        foreach ($languages as $language) {
+            $customMessages["names.$language.required"] = ucfirst($language) . " name is required.";
+        }
+        $validator = Validator::make($req->all(), $rules, $customMessages);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        
         $pro = new Product();
         $pro->price = $req->price;
         $pro->sub_category_id = $req->sub_category_id;

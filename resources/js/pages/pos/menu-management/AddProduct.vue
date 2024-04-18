@@ -33,7 +33,7 @@
                                     <a href="#" class="bg-color-white" @click="clearAllData">Clear All</a>
                                 </div>
                                 <div class="submit-products-btn">
-                                    <a href="#" class="text-color-white">Submit Products</a>
+                                    <a href="#" class="text-color-white" @click="submitProduct">Submit Products</a>
                                 </div>
                             </div>
                         </div>
@@ -48,7 +48,7 @@
                 :title="'Select Variation'"
                 :form-data-format="variationDataFormat" 
                 :data-type="'category'"
-                @store:update="storeUpdateData"
+                @store:update="variationAddUpdateData"
                 />
         </div>
     </f7-page>
@@ -64,6 +64,7 @@ import Icon from './../../../components/Icon.vue'
 import LeftSideProductForm from './../../../components/Product/LeftSideProductForm.vue'
 import RightSideProductForm from './../../../components/Product/RightSideProductForm.vue'
 import AddUpdatePopup from './../../../components/common/AddUpdatePopup.vue';
+import { successNotification, errorNotification, getErrorMessage } from '../../../commonFunction.js';
 
 const ingredients = ref([]);
 const variations = ref([]);
@@ -80,8 +81,8 @@ const productData = ref([
     {
         label: 'Food Type',
         multipleLang: false,
-        type: 'radio',
-        name: 'category_type',
+        type: 'radio',  
+        name: 'type',
         options: [
             { label: 'Veg', value: 1},
             { label: 'Non-veg', value: 2},
@@ -189,7 +190,7 @@ const getSubCategories = () => {
             label: 'Category',
             multipleLang: false,
             type: 'drop-down',
-            name: 'category_id',
+            name: 'sub_category_id',
             placeHolder: 'Select Category Name',
             value: response.data.subCategories[0]?.id ?? '',
             options: optionsData
@@ -219,7 +220,6 @@ const openVariationPopup = (id) => {
 }
 
 const removeVariation = (id) => {
-    console.log(id);
     const allVariations = selectVariations.value;
     const index = allVariations.findIndex(item => item.id === id);
     if (index !== -1) {
@@ -227,7 +227,7 @@ const removeVariation = (id) => {
     }
 }
 
-const storeUpdateData = () => {
+const variationAddUpdateData = () => {
     const formData = variationDataFormat.value;
     const id = formData.find(item => item.label === 'Id').value;
     const price = formData.find(item => item.label === 'Price').value;
@@ -275,6 +275,49 @@ const clearAllData = () => {
 
     selectIngredients.value = [];
     selectVariations.value = [];
+}
+
+const submitProduct = () => {
+    const formData = new FormData();
+    const id = productData.value.find(item => item.label === 'Id').value;
+
+    productData.value.forEach(item => {
+        if(item.label == 'Name'){
+            item.options.forEach(option => {
+                formData.append('names['+ option.language +']', option.value);
+                formData.append('language[]', option.language);
+            });
+        }else{
+            formData.append(item.name, item.value);
+        }
+    });
+    selectIngredients.value.forEach(ingredient => {
+        formData.append('ingredient[]', ingredient.id);
+    });
+    selectVariations.value.forEach(variation => {
+        formData.append('variation[]', variation.id);
+        formData.append('variationPrice[]', variation.price);
+    });
+
+
+    const endpoint = id ? '/api/update-product' : '/api/add-product';
+
+    axios.post(endpoint, formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    })
+    .then((response) => {
+        successNotification(response.data.success);
+        f7.view.main.router.navigate({ url: "/food-product/" });
+    })
+    .catch((error) => {
+        const errorMessage = getErrorMessage(error);
+        errorNotification(errorMessage);
+    });
+
+
+    console.log(formData);
 }
 
 </script>
