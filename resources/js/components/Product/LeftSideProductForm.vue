@@ -1,7 +1,7 @@
 <template>
     <div class="add-product_form">
 
-        <AddEditForm :form-data-format="productData"/>
+        <AddEditForm :form-data-format="formDataFormat"/>
 
         <div class="add-product_size-select" v-if="selectVariations.length">
             <h5 class="no-padding no-margin">Variation</h5>
@@ -62,62 +62,9 @@ import { ref, onMounted } from 'vue';
 import axios from 'axios';
 
 onMounted(() => {
-    getLanguages();
+    // getLanguages();
 })
 
-const productData = ref([
-    {  label: 'Id', multipleLang: false, type: 'hidden', name: 'id', placeHolder: 'Category Id', value: ''},
-    {
-        label: 'Food Type',
-        multipleLang: false,
-        type: 'radio',
-        name: 'category_type',
-        options: [
-            { label: 'Veg', value: 1},
-            { label: 'Non-veg', value: 2},
-            { label: 'Egg Type', value: 3}
-        ],
-        placeHolder: 'Add Category Type',
-        value: 1
-    },
-    {
-        label: 'Status',
-        multipleLang: false,
-        type: 'radio',
-        name: 'status',
-        options: [
-            { label: 'Active', value: 1},
-            { label: 'Deactive', value: 2}
-        ],
-        placeHolder: 'Category Status',
-        value: 1
-    }
-]);
-
-const getLanguages = () => {
-    axios.get('/api/get-languages')
-    .then((response) => {
-        let optionsData = [];
-        
-        Object.keys(response.data.langs).forEach(langKey => {
-            const lang = response.data.langs[langKey];
-            optionsData.push({
-                language_id: lang.id,
-                language: lang.name,
-                value: ''
-            });
-        });
-        
-        productData.value.unshift({
-            label: 'Name',
-            multipleLang: true,
-            type: 'text',
-            placeHolder: 'Add Product Name',
-            value: '',
-            options: optionsData
-        });
-    });
-};
 
 const props = defineProps({
     selectIngredients: {
@@ -128,5 +75,9 @@ const props = defineProps({
         type: Array,
         default: () => []
     },
+    formDataFormat: {
+        type: Array,
+        default: () => []
+    }
 });
 </script>

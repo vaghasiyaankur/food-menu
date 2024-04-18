@@ -11,6 +11,7 @@
                     <LeftSideProductForm 
                         :select-ingredients="selectIngredients" 
                         :select-variations="selectVariations" 
+                        :form-data-format="productData"
                     />
                 </div>
 
@@ -29,7 +30,7 @@
                                 />
                             <div class="added-product-combo-btns display-flex">
                                 <div class="clear-all-products-btn">
-                                    <a href="#" class="bg-color-white">Clear All</a>
+                                    <a href="#" class="bg-color-white" @click="clearAllData">Clear All</a>
                                 </div>
                                 <div class="submit-products-btn">
                                     <a href="#" class="text-color-white">Submit Products</a>
@@ -70,14 +71,75 @@ const selectIngredients = ref([]);
 const selectVariations = ref([]);
 
 const variationDataFormat = ref([
-    { label: 'Id', multipleLang: false, type: 'hidden', placeHolder: 'Category Id', value: ''},
-    { label: 'Price', multipleLang: false, type: 'number', placeHolder: 'Category Price', value: ''}
+    { label: 'Id', multipleLang: false, type: 'hidden', placeHolder: 'Variation Id', value: ''},
+    { label: 'Price', multipleLang: false, type: 'number', placeHolder: 'Variation Price', value: ''}
+]);
+
+const productData = ref([
+    {  label: 'Price', multipleLang: false, type: 'number', name: 'price', placeHolder: 'Product Price', value: ''},
+    {
+        label: 'Food Type',
+        multipleLang: false,
+        type: 'radio',
+        name: 'category_type',
+        options: [
+            { label: 'Veg', value: 1},
+            { label: 'Non-veg', value: 2},
+            { label: 'Egg Type', value: 3}
+        ],
+        placeHolder: 'Add Category Type',
+        value: 1
+    },
+    {
+        label: 'Status',
+        multipleLang: false,
+        type: 'radio',
+        name: 'status',
+        options: [
+            { label: 'Active', value: 1},
+            { label: 'Deactive', value: 2}
+        ],
+        placeHolder: 'Category Status',
+        value: 1
+    },
+    { label: 'Image', multipleLang: false, type: 'image', name: 'image', placeHolder: 'Product Image', value: {}, preview: ''},
+    { label: 'Description', multipleLang: false, type: 'text-area', name: 'description', placeHolder: 'Product Description', value: ''},
+    {  label: 'Id', multipleLang: false, type: 'hidden', name: 'id', placeHolder: 'Product Id', value: ''},
 ]);
 
 onMounted(() => {
     getIngredientList();
     getVariationList();
+    getLanguages();
+    getSubCategories();
 });
+
+
+
+const getLanguages = () => {
+    axios.get('/api/get-languages')
+    .then((response) => {
+        let optionsData = [];
+        
+        Object.keys(response.data.langs).forEach(langKey => {
+            const lang = response.data.langs[langKey];
+            optionsData.push({
+                language_id: lang.id,
+                language: lang.name,
+                value: ''
+            });
+        });
+        
+        productData.value.unshift({
+            label: 'Name',
+            multipleLang: true,
+            type: 'text',
+            placeHolder: 'Add Product Name',
+            value: '',
+            options: optionsData
+        });
+    });
+};
 
 const getIngredientList = () => {
     axios.post('/api/get-ingredients')
@@ -107,6 +169,34 @@ const addIngredient = (id) => {
     }
 }
 
+const getSubCategories = () => {
+    axios.post('/api/get-sub-categories')
+    .then((response) => {
+        let optionsData = [];
+        
+        Object.keys(response.data.subCategories).forEach(catKey => {
+            const cat = response.data.subCategories[catKey];
+            optionsData.push({
+                id: cat.id,
+                label: cat.name,
+            });
+        });
+
+        // defaultSelectCatId.value = response.data.categories[0]?.id ?? ''
+        const priceIndex = productData.value.findIndex(item => item.name === 'price');
+
+        productData.value.splice(priceIndex + 1, 0, {
+            label: 'Category',
+            multipleLang: false,
+            type: 'drop-down',
+            name: 'category_id',
+            placeHolder: 'Select Category Name',
+            value: response.data.subCategories[0]?.id ?? '',
+            options: optionsData
+        });
+    });
+};
+
 const removeIngredient = (id) => {
     const allIngredients = selectIngredients.value;
     const index = allIngredients.findIndex(item => item.id === id);
@@ -114,13 +204,6 @@ const removeIngredient = (id) => {
         selectIngredients.value.splice(index, 1);
     }
 }
-
-const manipulateField = (formData, label, value = null) => {
-    const index = formData.findIndex(item => item.label === label);
-    if (index !== -1) {        
-        formData[index].value = value !== null ? value : formData[index].default;
-    }
-};
 
 const openVariationPopup = (id) => {
     const allSelectVariations = selectVariations.value;
@@ -162,6 +245,36 @@ const storeUpdateData = () => {
         });
     }
     f7.popup.close(`.variationPricePopup`);
+}
+
+const manipulateField = (formData, label, value = null) => {
+    const index = formData.findIndex(item => item.label === label);
+    if (index !== -1) {
+        if(label == 'Image'){
+            formData[index].preview = value !== null ? value : formData[index].default;
+            formData[index].value = {};
+        }else{
+            formData[index].value = value !== null ? value : formData[index].default;
+        }
+    }
+};
+
+const clearAllData = () => {
+    const formData = productData.value;
+    manipulateField(formData, 'Id', '');
+    manipulateField(formData, 'Image', '');
+    manipulateField(formData, 'Price', '');
+    manipulateField(formData, 'Description', '');
+    manipulateField(formData, 'Food Type', 1);
+    manipulateField(formData, 'Status', 1);
+
+    const nameIndex = formData.findIndex(item => item.label === 'Name');
+    if (nameIndex !== -1) {
+        formData[nameIndex].options.forEach(option => option.value = '');
+    }
+
+    selectIngredients.value = [];
+    selectVariations.value = [];
 }
 
 </script>

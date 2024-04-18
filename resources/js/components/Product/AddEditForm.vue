@@ -1,7 +1,87 @@
 <template>
     <div class="data-add">
-        <form class="add-edit-form">
-            
+        <form class="row add-edit-form">
+            <div 
+                class="row item-content item-input general_info_form-address no-padding col-100"
+                :class="{ 'medium-100 large-100' : data.multipleLang, 'medium-100 large-50' : !data.multipleLang }" v-for="(data,index) in formDataFormat" :key="index"   
+            >
+
+            <template v-if="data.type == 'text' || data.type == 'hidden'  || data.type == 'number' || data.type == 'email' || data.type == 'password'">
+                <template v-if="data.multipleLang">
+                    <div class="block-title no-margin col-100" v-if="data.type != 'hidden'">{{ data.label }}</div>
+                        <div class="col-100 medium-100 large-33" v-for="(option, ind) in data.options" :key="option">
+                            <Input 
+                                :type="data.type" 
+                                :value="option.value"
+                                :name="'names['+option.language+']'"
+                                :placeholder="'Name ('+ option.language +')'"
+                                @update:input="saveValue(index, ind, $event)" 
+                            />
+                        </div>
+                    </template>
+                    <template v-else>
+                        <div class="block-title no-margin col-100" v-if="data.type != 'hidden'">{{ data.label }}</div>
+                        <div class="col-100 medium-100 large-100">
+                            <Input 
+                                :type="data.type" 
+                                :placeholder="data.placeHolder"
+                                :value="data.value"
+                                :name="data.name"
+                                @update:input="saveValue(index, null, $event)" 
+                            />
+                        </div>
+                    </template>
+                </template>
+                <template v-if="data.type == 'radio'">
+                    <div class="col-100">
+                        <div class="block-title no-margin col-100">{{ data.label }}</div>
+                        <Radio 
+                            :options="data.options" 
+                            :name="data.name" 
+                            :value="data.value"
+                            @update:radio="saveValue(index, null, $event)" 
+                            class="type-radio-btn"
+                        />
+                    </div>
+                </template>
+                <template v-if="data.type == 'drop-down'">
+                    <div class="col-100 medium-100 large-100">
+
+                        <div class="block-title no-margin col-100">{{ data.label }}</div>
+                            <DropDown 
+                                :options="data.options" 
+                                :value="data.value"
+                                :name="data.name"
+                                :placeholder="data.placeHolder"
+                                @update:drop-down="saveValue(index, null, $event)" 
+                            />
+                    </div>
+                </template>
+                <template v-if="data.type == 'image'">
+                    <div class="col-100">
+                        <div class="block-title no-margin col-100">{{ data.label }}</div>
+                            <Image 
+                                :alt="data.placeHolder"
+                                :value="data.value"
+                                :preview="data.preview"
+                                :name="data.name"
+                                @update:image="saveImage(index, $event.ImageData, $event.ImageInput)"
+                            />
+                    </div>  
+                </template>
+                <template v-if="data.type == 'text-area'">
+                    <div class="col-100">
+                        <div class="block-title no-margin col-100">{{ data.label }}</div>
+                            <TextArea 
+                                :type="data.type" 
+                                :placeholder="data.placeHolder"
+                                :value="data.value"
+                                :name="data.name"
+                                @update:input="saveValue(index, null, $event)" 
+                            />
+                    </div>  
+                </template>
+            </div>
         </form>
     </div>
     <!-- <div class="add-product">
@@ -81,10 +161,30 @@
 </template>
 
 <script setup>
+
+import Input from '../Form/Input.vue';
+import TextArea from '../Form/TextArea.vue';
+import Radio from '../Form/Radio.vue';
+import DropDown from '../Form/DropDown.vue';
+import Image from '../Form/Image.vue';
+
 const props = defineProps({
     formDataFormat: {
         type: Array,
         default: () => []
     }
 });
+
+const saveValue = (index, ind = null, value) => {
+    if(ind == null){
+        props.formDataFormat[index].value = value;
+    }else{
+        props.formDataFormat[index].options[ind].value = value;
+    }
+};
+
+const saveImage = (index, imageData, imageInput) => {
+    props.formDataFormat[index].value = imageInput;
+    props.formDataFormat[index].preview = imageData;
+};
 </script>
