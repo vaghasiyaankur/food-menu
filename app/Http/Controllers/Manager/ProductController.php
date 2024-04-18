@@ -9,11 +9,13 @@ use App\Models\Category;
 use App\Models\Language;
 use App\Models\Product;
 use App\Models\ProductLanguage;
+use App\Models\ProductRestaurantLanguage;
 use App\Models\RestaurantLanguage;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -38,22 +40,45 @@ class ProductController extends Controller
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        
-        $pro = new Product();
-        $pro->price = $req->price;
-        $pro->sub_category_id = $req->sub_category_id;
-        $langs = Language::whereStatus(1)->get();
-        if($pro->save()){
-            $name = explode(',',$req->name);
-            foreach ($langs as $key => $lang) {
-                $pro_lang = new ProductLanguage();
-                $pro_lang->product_id = $pro->id;
-                $pro_lang->language_id = $lang->id;
-                $pro_lang->name = $name[$lang->id];
-                $pro_lang->save();
+        $image_name = '';
+        if($req->file('image')){
+            $directory = storage_path('app/public/product/');
+
+            if (!file_exists($directory)) {
+                mkdir($directory, 0777, true);
             }
+
+            $imageFile = $req->file('image');
+            $image_name = '/product/'.rand(10000000,99999999).".".$imageFile->GetClientOriginalExtension();
+            $imageFile->move(storage_path('app/public/product/'),$image_name);
         }
 
+        $restaurantId = CustomerHelper::getRestaurantId();
+        $resLangs = RestaurantLanguage::where('restaurant_id', $restaurantId)
+        ->get();
+
+        $pro = new Product();
+        $pro->image = $image_name;
+        $pro->price = $req->price;
+        $pro->sub_category_id = $req->sub_category_id;
+        $pro->restaurant_id = $restaurantId;
+        $pro->added_by = Auth::user()->role;
+        $pro->added_by_id = Auth::user()->id;
+        $pro->description = $req->description;
+        $pro->status = $req->status;
+        $pro->food_type = $req->food_type;
+        if($pro->save()){
+            $names = $req->names;
+            foreach($resLangs as $key=>$resLang){
+                $language = Language::where('id', $resLang->language_id)->first();
+                $proResLang = new ProductRestaurantLanguage();
+                $proResLang->slug = Str::slug($names[$language->name]).'-'.$pro.'-'.$key+1;
+                $proResLang->name = $names[$language->name];
+                $proResLang->product_id = $pro->id;
+                $proResLang->restaurant_language_id = $resLang->id;
+                $proResLang->save();
+            }
+        }
         return response()->json(['success'=>'Product Added Successfully.']);
     }
 

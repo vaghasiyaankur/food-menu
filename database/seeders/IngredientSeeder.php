@@ -2,19 +2,14 @@
 
 namespace Database\Seeders;
 
-use App\Models\Category;
-use App\Models\CategoryLanguage;
-use App\Models\CategoryRestaurantLanguage;
-use App\Models\SubCategory;
+use App\Models\Ingredient;
+use App\Models\IngredientRestaurantLanguage;
 use App\Models\Language;
 use App\Models\RestaurantLanguage;
-use App\Models\SubCategoryLanguage;
-use App\Models\SubcategoryRestaurantLanguage;
 use Illuminate\Support\Facades\File;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class CategorySeeder extends Seeder
+class IngredientSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -23,146 +18,72 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        // $ingredients = [
-        //     [
-        //         'name' => ['Size','માપ','माप'],
-        //         'image' => '/category/size.png',
-        //         'ingredients' => [
-        //             ['S', 'S', 'S'],
-        //             ['M', 'M', 'M'],
-        //             ['L', 'L', 'L'],
-        //             ['XL', 'XL', 'XL']
-        //         ],
-        //         'restaurant_id' => 1,
-        //         'added_by_id' => 1,
-        //         'category_type' => 1,
-        //         'status' =>1
-        //     ],
-        //     [
-        //         'name' => ['Fleisch', 'ફ્લેશ','फ्लेश'],
-        //         'image' => '/category/fleisch.png',
-        //         'ingredients' => [
-        //             ['Naan Or Roti', 'નાન કે રોટી', 'नान या रोटी'],
-        //             ['Sabji', 'સબજી', 'सब्जी']
-        //         ],
-        //         'restaurant_id' => 1,
-        //         'added_by_id' => 1,
-        //         'category_type' => 1,
-        //         'status' =>1
-        //     ],
-        //     [
-        //         'name' => ['Indian','ભારતીય','भारतीय'],
-        //         'image' => '/category/indian_dish.png',
-        //         'ingredients' => [
-        //             ['Dosa', 'ઢોસા', 'ढोसा'],
-        //             ['Gujarati Dish', 'ગુજરાતી વાનગી', 'गुजराती डिश']
-        //         ],
-        //         'restaurant_id' => 2,
-        //         'added_by_id' => 4,
-        //         'category_type' => 1,
-        //         'status' =>1
-        //     ],
-        //     [
-        //         'name' => ['Panjabi', 'પંજાબી','पंजाबी'],
-        //         'image' => '/category/panjabi_dish.png',
-        //         'ingredients' => [
-        //             ['Naan Or Roti', 'નાન કે રોટી', 'नान या रोटी'],
-        //             ['Sabji', 'સબજી', 'सब्जी']
-        //         ],
-        //         'restaurant_id' => 2,
-        //         'added_by_id' => 4,
-        //         'category_type' => 1,
-        //         'status' =>1
-        //     ]
-        // ];
+        $ingredients = [
+            ['name' => ['Butter Milk', 'છાછ', 'छाछ'], 'price' => 2.50],
+            ['name' => ['Milk', 'દૂધ', 'दूध'], 'price' => 3.00],
+            ['name' => ['Salad', 'સલાડ', 'सलाद'], 'price' => 4.50],
+            ['name' => ['Sweet', 'મીઠાઈ', 'मिठाई'], 'price' => 3.50],
+            ['name' => ['Noodles', 'નૂડલ્સ', 'नूडल्स'], 'price' => 5.00],
+            ['name' => ['Pasta', 'પાસ્તા', 'पास्ता'], 'price' => 4.50],
+            ['name' => ['Mushrooms', 'મશરૂમ', 'मशरूम'], 'price' => 6.00],
+            ['name' => ['Tofu', 'ટોફુ', 'टोफू'], 'price' => 4.00],
+            ['name' => ['Almond', 'બાદામ', 'बादाम'], 'price' => 8.00],
+            ['name' => ['Cashew', 'કાજૂ', 'काजू'], 'price' => 7.00],
+            ['name' => ['Raisins', 'કિશમિશ', 'किशमिश'], 'price' => 6.50],
+            ['name' => ['Pistachio', 'પિસ્તા', 'पिस्ता'], 'price' => 9.00],
+            ['name' => ['Chocolates', 'ચોકલેટ્સ', 'चॉकलेट्स'], 'price' => 3.50],
+            ['name' => ['Papad', 'પાપડ', 'पापड़'], 'price' => 2.00],
+            ['name' => ['Cheese', 'ચીઝ', 'चीज़'], 'price' => 5.00],
+            ['name' => ['Paneer', 'પનીર', 'पनीर'], 'price' => 6.50],
+            ['name' => ['Butter', 'મક્ખણ', 'मक्खन'], 'price' => 4.00],
+            ['name' => ['Punjabi Pickle', 'પંજાબી આચાર', 'पंजाबी अचार'], 'price' => 5.50],
+            ['name' => ['Curd', 'દહી', 'दही'], 'price' => 3.00],
+            ['name' => ['Rice', 'ચોખા', 'चावल'], 'price' => 10.00],
+            ['name' => ['Coconut Chutney', 'નારીયેલ ચટણી', 'नारियल चटनी'], 'price' => 4.50],
+            ['name' => ['Sambar', 'સાંભર', 'सांभर'], 'price' => 5.00],
+            ['name' => ['Mayonnaise', 'મેયોનીઝ', 'मेयोनेज'], 'price' => 3.50],
+            ['name' => ['Corn', 'મક્કા', 'मक्का'], 'price' => 2.50],
+            ['name' => ['Olive', 'ઓલિવ', 'ऑलिव'], 'price' => 8.00]
+        ];
 
-        // $check_folder= is_dir(storage_path('app/public/category'));
-        // if(!$check_folder) mkdir(storage_path('app/public/category'));
-
-        // $check_folder= is_dir(storage_path('app/public/sub_category'));
-        // if(!$check_folder) mkdir(storage_path('app/public/sub_category'));
-
-        // $languages = Language::all();
-
+        $check_folder= is_dir(storage_path('app/public/ingredient'));
+        if(!$check_folder) mkdir(storage_path('app/public/ingredient'));
         
-        // foreach ($ingredients as $k => $cate) {
-            
-        //     $catSourcePath = public_path('assets/images/seederImages'.$cate['image']);
-        //     $catDestinationPath = storage_path('app/public'.$cate['image']);
-        //     if (File::exists($catSourcePath)) {
-        //         if(!File::exists($catDestinationPath)){
-        //             File::copy($catSourcePath, $catDestinationPath);
-        //         }
-        //     }
+        $languages = Language::all();
+        
+        $restaurantData = [
+            ['id' => 1, 'added_by' => 1],
+            ['id' => 2, 'added_by' => 4]
+        ];
 
-        //     $cat = new Category();
-        //     $cat->image = $cate['image'];
-        //     $cat->added_by_id = $cate['added_by_id'];
-        //     $cat->restaurant_id = $cate['restaurant_id'];
-        //     $cat->save();
-
-        //     foreach($languages as $lan_key=>$lan){
-        //         $catlan = new CategoryLanguage();
-        //         $catlan->language_id = $lan->id;
-        //         $catlan->category_id = $cat->id;
-        //         $catlan->name = $cate['name'][$lan_key];
-        //         $catlan->save();
-
-
-        //         $restaurantLanguage = RestaurantLanguage::where('restaurant_id', $cate['restaurant_id'])->where('language_id', $lan->id)->first();
-
-        //         $subCatRestLang = new CategoryRestaurantLanguage();
-        //         $subCatRestLang->name = $cate['name'][$lan_key];
-        //         $subCatRestLang->restaurant_language_id = $restaurantLanguage->id;
-        //         $subCatRestLang->category_id = $cat->id;
-        //         $subCatRestLang->save();
-        //     }
-
-
-        //     foreach ($cate['ingredients'] as $key => $subCat) {
-        //         $imageName = '';
-        //         if($subCat[0] == 'Dosa') $imageName = 'dosa';
-        //         else if($subCat[0] == 'Gujarati Dish') $imageName = 'gujarati_dish';
-        //         else if($subCat[0] == 'Sabji') $imageName = 'sabji';
-        //         else if($subCat[0] == 'Naan Or Roti') $imageName = 'naan_roti';
-
-        //         $sourcePath = public_path('assets/images/seederImages/sub_category/'.$imageName.'.webp');
-        //         $destinationPath = storage_path('app/public/sub_category/'.$cat->restaurant_id.'-'.$k.'-'.$key.'.webp');
-        //         if (File::exists($sourcePath)) {
-        //             if(!File::exists($destinationPath)){
-        //                 File::copy($sourcePath, $destinationPath);
-        //             }
-        //         }
-        //         $subCate = new SubCategory();
-        //         $subCate->image = 'sub_category/'.$cat->restaurant_id.'-'.$k.'-'.$key.'.webp';
-        //         $subCate->category_id = $cat->id;
-        //         $subCate->added_by_id = $cate['added_by_id'];
-        //         $subCate->restaurant_id = $cate['restaurant_id'];
-        //         $subCate->save();
-        //         foreach($languages as $ke=>$lang){
-        //             $subCatLang = new SubCategoryLanguage();
-        //             $subCatLang->name = $subCat[$ke];
-        //             $subCatLang->language_id = $lang->id;
-        //             $subCatLang->sub_category_id = $subCate->id;
-        //             $subCatLang->save();
-
-        //             $restaurantLanguage = RestaurantLanguage::where('restaurant_id', $cate['restaurant_id'])->where('language_id', $lang->id)->first();
-        //             $subCatRestLang = new SubcategoryRestaurantLanguage();
-        //             $subCatRestLang->name = $subCat[$ke];
-        //             $subCatRestLang->restaurant_language_id = $restaurantLanguage->id;
-        //             $subCatRestLang->sub_category_id = $subCate->id;
-        //             $subCatRestLang->save();
-        //         }
-        //     }
-
-        // }
-    }
-
-    /**
-     * Get the value of key
-     */
-    public function getKey()
-    {
-        return $this->key;
+        foreach($restaurantData as $restData){
+            foreach ($ingredients as $k => $ingredient) {
+                $newKey = $k + 1;
+                $sourcePath = public_path('assets/images/seederImages/ingredient/'.$newKey.'.webp');
+                $destinationPath = public_path('storage/ingredient/'.$restData['id'].'-'.$newKey.'.webp');
+                if (File::exists($sourcePath)) {
+                    if(!File::exists($destinationPath)){
+                        File::copy($sourcePath, $destinationPath);
+                    }
+                }
+                $ing = new Ingredient();
+                $ing->image = 'ingredient/'.$restData['id'].'-'.$newKey.'.webp';
+                $ing->restaurant_id = $restData['id'];
+                $ing->price = $ingredient['price'];
+                $ing->added_by_id = $restData['added_by'];
+                if($ing->save()){
+                    foreach($languages as $key=>$lan){
+                        $restaurantLanguage = RestaurantLanguage::where('restaurant_id', $restData['id'])
+                                                ->where('language_id', $lan->id)
+                                                ->first();
+                        $ingCatRestLang = new IngredientRestaurantLanguage();
+                        $ingCatRestLang->name = $ingredient['name'][$key];
+                        $ingCatRestLang->restaurant_language_id = $restaurantLanguage->id;
+                        $ingCatRestLang->ingredient_id = $ing->id;
+                        $ingCatRestLang->save();
+                    }
+                }
+            }
+        }
     }
 }

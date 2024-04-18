@@ -29,7 +29,9 @@ class DatabaseSeeder extends Seeder
             // OrderSeeder::class,
             SettingSeeder::class,
             ContentSeeder::class,
-            QrCodeTokenSeeder::class
+            QrCodeTokenSeeder::class,
+            IngredientSeeder::class,
+            VariationSeeder::class
         ]);
     }
 }

@@ -12,6 +12,7 @@
                         :select-ingredients="selectIngredients" 
                         :select-variations="selectVariations" 
                         :form-data-format="productData"
+                        @open:variation-popup="openVariationPopup"
                     />
                 </div>
 
@@ -82,7 +83,7 @@ const productData = ref([
         label: 'Food Type',
         multipleLang: false,
         type: 'radio',  
-        name: 'type',
+        name: 'food_type',
         options: [
             { label: 'Veg', value: 1},
             { label: 'Non-veg', value: 2},
@@ -232,17 +233,26 @@ const variationAddUpdateData = () => {
     const id = formData.find(item => item.label === 'Id').value;
     const price = formData.find(item => item.label === 'Price').value;
 
-
     const allVariations = variations.value;
-    const index = allVariations.findIndex(item => item.id === id);
-    if (index !== -1) {
-        selectVariations.value.push({
-            id: id,
-            image: allVariations[index].image,
-            name: allVariations[index].name,
-            price: price,
-            status: allVariations[index].status
+
+    const existingIndex = selectVariations.value.findIndex(item => item.id === id);
+    if (existingIndex !== -1) {
+        selectVariations.value.forEach((item, index) => {
+            if (item.id === id) {
+                selectVariations.value[index].price = price;
+            }
         });
+    } else {
+        const index = allVariations.findIndex(item => item.id === id);
+        if (index !== -1) {
+            selectVariations.value.push({
+                id: id,
+                image: allVariations[index].image,
+                name: allVariations[index].name,
+                price: price,
+                status: allVariations[index].status
+            });
+        }
     }
     f7.popup.close(`.variationPricePopup`);
 }
