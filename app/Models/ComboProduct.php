@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class ComboProduct extends Model
 {
     use HasFactory;
+
+    protected $table = 'combo_products';
+
+    protected $guarded = ['id'];
 }

@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('combos', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
             $table->float('price');
             $table->text('image');
             $table->boolean('food_type')->default(1);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helper\SettingHelper;
+use App\Http\Requests\UserRequest;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -70,5 +71,10 @@ class UserController extends Controller
             }
         }
         return response()->json(['users'=>$roleWiseUsers]);
+    }
+
+    public function saveUserData(UserRequest $request) {
+        $data = $request->toArray();
+        dd($data);
     }
 }

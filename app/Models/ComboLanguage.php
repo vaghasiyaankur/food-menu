@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class ComboLanguage extends Model
 {
     use HasFactory;
+
+    protected $table = 'combo_languages';
+
+    protected $guarded = ['id'];
 }
