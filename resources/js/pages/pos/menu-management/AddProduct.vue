@@ -8,7 +8,7 @@
                             <Icon name="back" />
                             Add Products</h4>
                     </div>
-                    <AddEditProductForm 
+                    <LeftSideProductForm 
                         :select-ingredients="selectIngredients" 
                         :select-variations="selectVariations" 
                     />
@@ -49,7 +49,6 @@
                 :data-type="'category'"
                 @store:update="storeUpdateData"
                 />
-                <!-- @store:update="storeUpdateData" -->
         </div>
     </f7-page>
 </template>
@@ -61,7 +60,7 @@ import {
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import Icon from './../../../components/Icon.vue'
-import AddEditProductForm from './../../../components/Product/AddEditProductForm.vue'
+import LeftSideProductForm from './../../../components/Product/LeftSideProductForm.vue'
 import RightSideProductForm from './../../../components/Product/RightSideProductForm.vue'
 import AddUpdatePopup from './common/AddUpdatePopup.vue';
 
@@ -123,36 +122,21 @@ const manipulateField = (formData, label, value = null) => {
     }
 };
 
-
 const openVariationPopup = (id) => {
     const allSelectVariations = selectVariations.value;
     const index = allSelectVariations.findIndex(item => item.id === id);
     const formData = variationDataFormat.value;
+    manipulateField(formData, 'Id', id);
     if (index !== -1) {
-        manipulateField(formData, 'Id', id);
         manipulateField(formData, 'Price', allSelectVariations[index].price);
     }else{
-        manipulateField(formData, 'Id', '');
         manipulateField(formData, 'Price', '');
     }
     f7.popup.open(`.variationPricePopup`);
 }
 
-const addVariation = (id) => {
-    const allVariations = variations.value;
-    const index = allVariations.findIndex(item => item.id === id);
-    if (index !== -1) {
-        selectVariations.value.push({
-            id: allVariations[index].id,
-            image: allVariations[index].image,
-            name: allVariations[index].name,
-            price: allVariations[index].price,
-            type: allVariations[index].type
-        });
-    }
-}
-
 const removeVariation = (id) => {
+    console.log(id);
     const allVariations = selectVariations.value;
     const index = allVariations.findIndex(item => item.id === id);
     if (index !== -1) {
@@ -162,7 +146,22 @@ const removeVariation = (id) => {
 
 const storeUpdateData = () => {
     const formData = variationDataFormat.value;
-    console.log(formData);
+    const id = formData.find(item => item.label === 'Id').value;
+    const price = formData.find(item => item.label === 'Price').value;
+
+
+    const allVariations = variations.value;
+    const index = allVariations.findIndex(item => item.id === id);
+    if (index !== -1) {
+        selectVariations.value.push({
+            id: id,
+            image: allVariations[index].image,
+            name: allVariations[index].name,
+            price: price,
+            status: allVariations[index].status
+        });
+    }
+    f7.popup.close(`.variationPricePopup`);
 }
 
 </script>

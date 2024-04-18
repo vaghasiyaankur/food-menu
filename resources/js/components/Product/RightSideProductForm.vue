@@ -47,9 +47,9 @@
                     <!-- <div class="add-remove-icon" @click="selectVariation(variation.id)">
                         <Icon name="minusCircleFillUp" />
                     </div> -->
-                    <div class="add-remove-icon" 
+                <div class="add-remove-icon" 
                     v-if="isVariationSelected(variation.id)"
-                    @click="removeSelectVariation(ingredient.id)"
+                    @click="removeSelectVariation(variation.id)"
                 >
                     <Icon name="minusCircleFillUp"/>
                 </div>

@@ -2,7 +2,6 @@
     <div class="data-form">
         <div class="text-align-center popup_title">{{title}}</div>
         <div class="data-add">
-            <!-- {{ formDataFormat }} -->
             <form @submit.prevent="storeData" method="post">
                 <template v-for="(data,index) in formDataFormat" :key="index">
                     <div class="add-data-main-div">
