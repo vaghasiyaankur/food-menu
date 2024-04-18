@@ -22,7 +22,7 @@
         </div>
     </div>
     <div class="popup addEditUserPopup" id="addEditUserPopup">
-        <AddUpdatePopup :title="'Add User'" :form-data-format="addUpdateFormDataFormat" />
+        <AddUpdatePopup :title="'Add User'" :form-data-format="addUpdateFormDataFormat" @store:update="saveUserData" />
     </div>
 </template>
 <script setup>
@@ -32,14 +32,14 @@ import { ref } from 'vue';
 import axios from 'axios';
 import { f7 } from 'framework7-vue';
 import AddUpdatePopup from '../../../components/common/AddUpdatePopup.vue';
-
+import { successNotification, errorNotification } from '../../../commonFunction.js';
 
 const addUpdateFormDataFormat = ref([
-    { label: 'Id', type: 'hidden', placeHolder: 'User Id', value: ''},
-    { label: 'Name', type: 'text', placeHolder: 'Enter Name', value: ''},
-    { label: 'Email', type: 'email', placeHolder: 'Enter Email', value: ''},
-    { label: 'Password', type: 'password', placeHolder: 'Enter Password', value: ''},
-    { label: 'Confirm Password', type: 'password', placeHolder: 'Enter Confirm Password', value: ''},
+    { label: 'Id', name: 'id', type: 'hidden', placeHolder: 'User Id', value: ''},
+    { label: 'Name', name: 'name', type: 'text', placeHolder: 'Enter Name', value: ''},
+    { label: 'Email', name: 'email', type: 'email', placeHolder: 'Enter Email', value: ''},
+    { label: 'Password', name: 'password', type: 'password', placeHolder: 'Enter Password', value: ''},
+    { label: 'Confirm Password', name: 'confirm_password', type: 'password', placeHolder: 'Enter Confirm Password', value: ''},
     {
         label: 'Role',
         multipleLang: false,
@@ -52,8 +52,8 @@ const addUpdateFormDataFormat = ref([
         placeHolder: 'Select Role',
         value: 1
     },
-    { label: 'Lock pin', type: 'password', placeHolder: 'Enter Lock pin', value: ''},
-    { label: 'Lock Status', type: 'switch' },
+    { label: 'Lock pin', name: 'lock_pin', type: 'password', placeHolder: 'Enter Lock pin', value: ''},
+    { label: 'Lock Status', name: 'lock_enable', type: 'switch', value: 1 },
 ]);
 
 const userData = ref([]);
@@ -66,4 +66,13 @@ const getUser = () => {
 }
 
 getUser();
+
+const saveUserData = () => {
+    var formData = new FormData(event.target);
+    axios.post('/api/save-user-data', formData)
+    .then((res) => {
+        successNotification(res.data.success);
+        event.target.reset();
+    })
+}
 </script>

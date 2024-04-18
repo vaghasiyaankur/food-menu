@@ -75,7 +75,7 @@
                         </template>
                         <template v-if="data.type == 'switch'">
                             <div class="data-name text-align-left">
-                                <Switch :highlight_on_off="highlight_on_off" :name="'lock_enable'" @update:changeData="changeData" />
+                                <Switch :highlight_on_off="highlight_on_off" :name="'lock_enable'" @update:changeData="changeData" :value="data.value" />
                             </div>
                         </template>
                     </div>

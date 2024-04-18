@@ -144,6 +144,8 @@ Route::get('color-list',[SettingController::class, 'colorList']);
 
 Route::get('get-users',[UserController::class, 'getUsers']);
 
+Route::post('save-user-data', [UserController::class, 'saveUserData']);
+
 Route::get('check-color/{capacity}',[SettingController::class, 'checkColor']);
 
 Route::get('table-data/{id}',[SettingController::class, 'tableData']);
