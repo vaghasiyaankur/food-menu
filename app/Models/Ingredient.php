@@ -17,4 +17,9 @@ class Ingredient extends Model
     {
         return $this->hasMany(IngredientRestaurantLanguage::class, 'ingredient_id');
     }
+
+    public function productIngredients()
+    {
+        return $this->hasMany(ProductIngredient::class, 'ingredient_id');
+    }
 }

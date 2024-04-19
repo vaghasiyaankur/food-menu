@@ -2,19 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Category;
-use App\Models\CategoryLanguage;
-use App\Models\CategoryRestaurantLanguage;
 use App\Models\Variation;
 use App\Models\VariationRestaurantLanguage;
-use App\Models\SubCategory;
 use App\Models\Language;
-use App\Models\ProductRestaurantLanguage;
 use App\Models\RestaurantLanguage;
-use App\Models\SubCategoryLanguage;
-use App\Models\SubcategoryRestaurantLanguage;
 use Illuminate\Support\Facades\File;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class VariationSeeder extends Seeder

@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Validator;
 class CategoryController extends Controller
 {
     public function getCategories(Request $req)
-    {
+    {        
         $langId = SettingHelper::managerLanguage();
         $restaurantId = CustomerHelper::getRestaurantId();
         $restaurantLanguageId = RestaurantLanguage::where('language_id', $langId)

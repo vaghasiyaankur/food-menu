@@ -5,7 +5,7 @@ import FoodSubCategory from "./pages/pos/menu-management/FoodSubCategory.vue";
 import FoodProduct from "./pages/pos/menu-management/FoodProduct.vue";
 import FoodCombo from "./pages/pos/menu-management/FoodCombo.vue";
 import AddCombo from "./pages/pos/menu-management/AddCombo.vue";
-import AddProduct from "./pages/pos/menu-management/AddProduct.vue";
+import AddEditProduct from "./pages/pos/menu-management/AddEditProduct.vue";
 import DigitalMenu from "./pages/pos/menu-management/DigitalMenu.vue";
 import FoodIngredient from "./pages/pos/menu-management/FoodIngredient.vue";
 import FoodVariation from "./pages/pos/menu-management/FoodVariation.vue";
@@ -56,7 +56,12 @@ export default [
   {
     name : 'AddProduct',
     path: '/add-product/',
-    component: AddProduct,
+    component: AddEditProduct,
+  },
+  {
+    name : 'EditProduct',
+    path: '/edit-product/:id',
+    component: AddEditProduct,
   },
   {
     name : 'DigitalMenu',

@@ -105,6 +105,8 @@ Route::get('/get-category-products/{id}',[ProductController::class, 'getCategory
 
 Route::post('/add-product',[ProductController::class, 'addProduct']);
 
+Route::get('/get-product/{id}', [ProductController::class, 'getProduct']);
+
 Route::get('/get-category-products/{id}',[ProductController::class, 'getCategoryProduct']);
 
 Route::get('/get-category-wise-products/{id}',[ProductController::class, 'getCategoryWiseProduct']);

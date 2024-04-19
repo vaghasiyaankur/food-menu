@@ -3,10 +3,10 @@
         <div class="data-list-section">
             <div class="add-product-page display-flex">
                 <div class="add-product_details">
-                    <div class="add-product_heading">
+                    <div class="add-product_heading" >
                         <h4 class="no-margin no-padding">
-                            <Icon name="back" />
-                            Add Products</h4>
+                            <Icon name="back" @click="moveBack" />
+                            {{ pageType }} Products</h4>
                     </div>
                     <LeftSideProductForm 
                         :select-ingredients="selectIngredients" 
@@ -71,6 +71,7 @@ const ingredients = ref([]);
 const variations = ref([]);
 const selectIngredients = ref([]);
 const selectVariations = ref([]);
+const pageType = ref('');
 
 const variationDataFormat = ref([
     { label: 'Id', multipleLang: false, type: 'hidden', placeHolder: 'Variation Id', value: ''},
@@ -114,9 +115,16 @@ onMounted(() => {
     getVariationList();
     getLanguages();
     getSubCategories();
+    setTimeout(() => {
+        if(f7.view.main.router.currentRoute.params.id){
+            const id = f7.view.main.router.currentRoute.params.id;
+            getProduct(id);
+            pageType.value = 'Edit';
+        }else{
+            pageType.value = 'Add';
+        }
+    }, 400)
 });
-
-
 
 const getLanguages = () => {
     axios.get('/api/get-languages')
@@ -156,6 +164,56 @@ const getVariationList = () => {
         variations.value = response.data.variations;
     });
 };
+
+const getProduct = (id = null) => {
+    if(id){
+        axios.get('/api/get-product/'+id)
+        .then((response) => {
+            updateFormData(response.data);
+        });
+    }
+}
+
+const updateFormData = (productResponseData) => {
+
+    const formData = productData.value;
+    manipulateField(formData, 'Id', productResponseData.id);
+    manipulateField(formData, 'Image', `/storage/${productResponseData.image}`);
+    manipulateField(formData, 'Food Type', parseInt(productResponseData.food_type));
+    manipulateField(formData, 'Status', parseInt(productResponseData.status));
+    manipulateField(formData, 'Price', productResponseData.price);
+    manipulateField(formData, 'Description', productResponseData.description);
+    manipulateField(formData, 'Category', productResponseData.sub_category_id);
+
+    const nameIndex = formData.findIndex(item => item.label === 'Name');
+    if (nameIndex !== -1) {
+        productResponseData.proRestLang.forEach((productRestLang) => {
+            const langOptionIndex = formData[nameIndex].options.findIndex(option => option.language_id === productRestLang.language_id);
+            if (langOptionIndex !== -1) {
+                formData[nameIndex].options[langOptionIndex].value = productRestLang.name;
+            }
+        });
+    }
+    productResponseData.ingredients.forEach((ingredient) => {
+        selectIngredients.value.push({
+            id: ingredient.id,
+            image: ingredient.image,
+            name: ingredient.name,
+            price: ingredient.price,
+            type: ingredient.type
+        });
+    });
+    productResponseData.variations.forEach((variation) => {
+        selectVariations.value.push({
+            id: variation.id,
+            image: variation.image,
+            name: variation.name,
+            price: variation.price,
+            type: variation.type
+        });
+    });
+    console.log(productResponseData.ingredient);
+}
 
 const addIngredient = (id) => {
     const allIngredients = ingredients.value;
@@ -271,7 +329,6 @@ const manipulateField = (formData, label, value = null) => {
 
 const clearAllData = () => {
     const formData = productData.value;
-    manipulateField(formData, 'Id', '');
     manipulateField(formData, 'Image', '');
     manipulateField(formData, 'Price', '');
     manipulateField(formData, 'Description', '');
@@ -302,11 +359,11 @@ const submitProduct = () => {
         }
     });
     selectIngredients.value.forEach(ingredient => {
-        formData.append('ingredient[]', ingredient.id);
+        formData.append('ingredients[]', ingredient.id);
     });
     selectVariations.value.forEach(variation => {
-        formData.append('variation[]', variation.id);
-        formData.append('variationPrice[]', variation.price);
+        formData.append('variations[]', variation.id);
+        formData.append('variationPrices[]', variation.price);
     });
 
 
@@ -318,6 +375,7 @@ const submitProduct = () => {
         }
     })
     .then((response) => {
+        console.log(response.data.success);
         successNotification(response.data.success);
         f7.view.main.router.navigate({ url: "/food-product/" });
     })
@@ -328,6 +386,10 @@ const submitProduct = () => {
 
 
     console.log(formData);
+}
+
+const moveBack = () => {
+    f7.view.main.router.navigate({ url: "/food-product/" });
 }
 
 </script>

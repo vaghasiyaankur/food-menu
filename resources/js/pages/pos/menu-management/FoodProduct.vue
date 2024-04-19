@@ -7,7 +7,7 @@
             <div class="product-card">
                 <Card 
                     :dataSet="products" 
-                    @open:edit-popup="showProductPopup"
+                    @open:edit-popup="openEditPage"
                     @open:remove-popup="showRemoveProductPopup"
                 />
             </div>
@@ -210,4 +210,7 @@ const filterData = (filterLabel) => {
     getProductList();
 }
 
+const openEditPage = (id) => {
+    f7.view.main.router.navigate({ url: "/edit-product/"+id });
+}
 </script>

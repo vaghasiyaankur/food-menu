@@ -17,4 +17,9 @@ class Variation extends Model
     {
         return $this->hasMany(VariationRestaurantLanguage::class, 'variation_id');
     }
+
+    public function productVariations()
+    {
+        return $this->hasMany(ProductVariation::class, 'variation_id');
+    }
 }
