@@ -1,5 +1,5 @@
 <template>
-    <div class="toolbar tabbar vertical-setting-tabs">
+<div class="toolbar tabbar vertical-setting-tabs">
     <div class="toolbar-inner">
         <SettingTabLink :tabs="allTabs" :active-tab="currentTab" @update:activeTab="setCurrentTab"/>
     </div>
@@ -18,7 +18,8 @@
         <UserManagement />
     </div>
     <div id="tab-language" class="tab">
-        <Language />
+        <Language @change:langTrans="langTrans" :showLangs="showLangs" v-if="showLangs" />
+        <LanguageTranslate :langId="langId" v-else />
     </div>
 </div>
 </template>
@@ -30,6 +31,7 @@ import CurrencySetting from './CurrencySetting.vue';
 import TaxSetting from './TaxSetting.vue';
 import UserManagement from './UserManagement.vue';
 import Language from './Language.vue';
+import LanguageTranslate from './LanguageTranslate.vue';
 import { ref, onMounted } from 'vue';
 
 const allTabs = [
@@ -46,11 +48,19 @@ const props = defineProps({
     tabs: Object,
 });
 
+const showLangs = ref(true);
+const langId = ref(0);
+
 const currentTab = ref('general-setting');
 
 const setCurrentTab = (tab) => {
     currentTab.value = tab;
 };
+
+const langTrans = (isLang, newLangId) => {
+    showLangs.value = isLang; // Assuming showLangs is defined elsewhere as a reactive variable
+    langId.value = newLangId; // Assigning the newLangId to the reactive ref
+}
 
 onMounted(() => {
     componentInstance.value = this;

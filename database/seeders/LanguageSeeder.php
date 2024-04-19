@@ -38,11 +38,11 @@ class LanguageSeeder extends Seeder
 
         foreach($restaurants as $res_id=>$restaurant){
             foreach($restaurant as $restaurantLang)
-            RestaurantLanguage::create([
-                'restaurant_id' => $res_id,
-                'language_id' => $restaurantLang,
-                'status' => 1,
-            ]);
+                RestaurantLanguage::create([
+                    'restaurant_id' => $res_id,
+                    'language_id' => $restaurantLang,
+                    'status' => 1,
+                ]);
+            }
         }
     }
-}

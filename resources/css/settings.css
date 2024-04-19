@@ -7,10 +7,10 @@
     margin-top: 56px;
 }
 .setting-tabs .tabs{
-    width: 70%;
+    width: 75%;
 }
 .setting-tabs .toolbar{
-    width: 30%;
+    width: 25%;
     background: white;
     border-right: 1px solid #E0E0E0;
     position: unset;
