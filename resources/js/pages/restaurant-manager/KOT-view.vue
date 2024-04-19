@@ -160,7 +160,8 @@
                                         <button class="server_btn">Serve</button>
                                     </div>
                                     <div class="pay_btn-outer">
-                                        <button class="pay_btn">Pay</button>
+                                        <button class="pay_btn" data-popup="#kot_paybill_popup"
+                                            @click="f7.popup.open(`.kot_paybill_popup`);">Pay</button>
                                     </div>
                                 </div>
                             </div>
@@ -238,7 +239,8 @@
                                         <button class="server_btn">Serve</button>
                                     </div>
                                     <div class="pay_btn-outer">
-                                        <button class="pay_btn">Pay</button>
+                                        <button class="pay_btn" data-popup="#kot_paybill_popup"
+                                            @click="f7.popup.open(`.kot_paybill_popup`);">Pay</button>
                                     </div>
                                 </div>
                             </div>
@@ -316,7 +318,8 @@
                                         <button class="server_btn">Serve</button>
                                     </div>
                                     <div class="pay_btn-outer">
-                                        <button class="pay_btn">Pay</button>
+                                        <button class="pay_btn" data-popup="#kot_paybill_popup"
+                                            @click="f7.popup.open(`.kot_paybill_popup`);">Pay</button>
                                     </div>
                                 </div>
                             </div>
@@ -394,7 +397,8 @@
                                         <button class="server_btn">Serve</button>
                                     </div>
                                     <div class="pay_btn-outer">
-                                        <button class="pay_btn">Pay</button>
+                                        <button class="pay_btn" data-popup="#kot_paybill_popup"
+                                            @click="f7.popup.open(`.kot_paybill_popup`);">Pay</button>
                                     </div>
                                 </div>
                             </div>
@@ -472,7 +476,8 @@
                                         <button class="server_btn">Serve</button>
                                     </div>
                                     <div class="pay_btn-outer">
-                                        <button class="pay_btn">Pay</button>
+                                        <button class="pay_btn" data-popup="#kot_paybill_popup"
+                                            @click="f7.popup.open(`.kot_paybill_popup`);">Pay</button>
                                     </div>
                                 </div>
                             </div>
@@ -550,7 +555,8 @@
                                         <button class="server_btn">Serve</button>
                                     </div>
                                     <div class="pay_btn-outer">
-                                        <button class="pay_btn">Pay</button>
+                                        <button class="pay_btn" data-popup="#kot_paybill_popup"
+                                            @click="f7.popup.open(`.kot_paybill_popup`);">Pay</button>
                                     </div>
                                 </div>
                             </div>
@@ -558,6 +564,73 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <!-- ========= KOT-VIEW POPUP ========= -->
+        <div class="popup kot_paybill_popup" id="kot_paybill_popup">
+            <div class="data-form add_table-data-form">
+                <div class="kot_paybill-popup_header">
+                    <div class="text-align-center kot_paybill-popup_title">
+                        Table No. 4</div>
+                    <div class="kot_paybill-popup_edit_btn">
+                        <button class="kot_paybill_edit_btn">Edit</button>
+                    </div>
+                </div>
+                <div class="kot_paybill_data">
+                    <div class="customer_order_datails">
+                        <div class="order_heading">
+                            <h5 class="no-margin">Order #1321</h5>
+                            <h5 class="no-margin">John Doe</h5>
+                        </div>
+                    </div>
+                    <div class="billed_items">
+                        <ol class="billed-order-items">
+                            <li>
+                                <div class="display-flex align-items-center justify-content-space-between">
+                                    <h6 class="no-margin">Margherita Pizza</h6>
+                                    <h6 class="no-margin">₹ 146.00</h6>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="display-flex align-items-center justify-content-space-between">
+                                    <h6 class="no-margin">Vegetarian Hakka Noodles</h6>
+                                    <h6 class="no-margin">₹ 256.00</h6>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="display-flex align-items-center justify-content-space-between">
+                                    <h6 class="no-margin">Supreme Veggie Burger</h6>
+                                    <h6 class="no-margin">₹ 100.00</h6>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="display-flex align-items-center justify-content-space-between">
+                                    <h6 class="no-margin">Biryani Rice</h6>
+                                    <h6 class="no-margin">₹ 100.00</h6>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+                    <hr class="horizontal-divider">
+                    <div class="pay_bill_total_outer">
+                        <div class="pay_bill_subtotal">
+                            <h5 class="no-margin">Sub Total</h5>
+                            <h5 class="no-margin">$38.00</h5>
+                        </div>
+                        <hr class="horizontal-divider">
+                        <div class="pay_bill_total">
+                            <h5 class="no-margin">Total Amount</h5>
+                            <h5 class="no-margin">$38.00</h5>
+                        </div>
+                    </div>
+                    <div class="display-flex justify-content-center popup_button">
+                        <button type="button"
+                            class="button button-raised button-large popup-close popup-cancel-button">Cancel</button>
+                        <button type="button" class="button button-raised button-large popup-ok-button">Ok</button>
+                    </div>
+                </div>
+            </div>
+            <div class="wave-image-content"><img src="/images/flow.png" style="width:100%"></div>
         </div>
     </f7-page>
 </template>
