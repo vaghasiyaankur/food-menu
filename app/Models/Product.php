@@ -47,4 +47,9 @@ class Product extends Model
     {
         return $this->hasMany(ProductIngredient::class, 'product_id');
     }
+
+    public function comboProducts()
+    {
+        return $this->hasMany(ComboProduct::class, 'product_id');
+    }
 }

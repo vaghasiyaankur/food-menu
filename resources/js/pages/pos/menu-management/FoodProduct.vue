@@ -36,8 +36,6 @@ import Card from '../../../components/common/Card.vue'
 import { successNotification, errorNotification, getErrorMessage } from '../../../commonFunction.js';
 
 const products = ref([]);
-const addUpdateTitle = ref('Add Product');
-const addUpdateType = ref('add');
 const removeProductId = ref(0);
 
 const headerDropDown = ref([
