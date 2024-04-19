@@ -3,8 +3,8 @@
         <div class="card-header padding">
             <div class="heading translate_left">
                 <h3 class="no-margin">
-                    <a href="/Language/" class=" text-color-black" @click="$emit('languagelistshow')"><i class="f7-icons font-22 margin-right-half">arrow_left</i></a> 
-                    <span class="page_heading">Edit Translations -</span>
+                    <a href="/Language/" class=" text-color-black" @click="emit('change:langTrans', true,0)"><i class="f7-icons font-22 margin-right-half">arrow_left</i></a> 
+                    <span class="page_heading">Edit Translations</span>
                 </h3>
             </div>
             <div class="translate_right display-flex align-items-center">
@@ -34,18 +34,18 @@
                         </thead>
                         <tbody>
                             <tr v-for="(trans,index) in translations" :key="trans.id">
-                                <td>{{ index + 1 }}.</td>
+                                <td>{{ (paginationData.per_page * (pageCount - 1)) + (index + 1) }}.</td>
                                 <td>
                                     <div class="translate__id display-flex align-items-center">
-                                        <div class="item-input-wrap margin-bottom-half margin-top-half width_100">
-                                            <input type="text" name="name" class="padding" :value="trans.title" readonly>
+                                        <div class="item-input-wrap margin-bottom-half margin-top-half w-100">
+                                            <input type="text" name="name" :value="trans.title" readonly>
                                         </div>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="translate__label">
-                                        <div class="item-input-wrap margin-bottom-half margin-top-half width_100 margin-right">
-                                            <input type="text" name="translation" v-model="lang_trans[trans.id]" class="padding">
+                                        <div class="item-input-wrap margin-bottom-half margin-top-half w-100 margin-right">
+                                            <input type="text" name="translation" v-model="lang_trans[trans.id]">
                                         </div>
                                     </div>
                                 </td>
@@ -57,18 +57,7 @@
         </div>
         <div class="bottom__bar">           
             <div class="pagination_count padding display-flex justify-content-end align-items-center">
-                <div class="pagination_list display-flex">
-                    <div v-for="(link,index) in paginationData.links" :key="link">
-                        <a href="javascript:;" v-if="index == 0" @click="link.url != null ? getLangTraslation(link.url) : 'javascript:;'"
-                            class="link" :class="{ 'disabled': link.url == null}"><i class="icon-prev"></i></a>
-                        <a href="javascript:;" v-if="paginationData.links.length - 1 != index && index != 0"
-                            @click="link.url != null ? getLangTraslation(link.url) : 'javascript:;'"
-                            :class="{ 'disabled': link.url == null, 'active': paginationData.current_page == index}">{{ index }}</a>
-                        <a href="javascript:;" v-if="paginationData.links.length - 1 == index"
-                            @click="link.url != null ? getLangTraslation(link.url) : 'javascript:;'" class="link"
-                            :class="{ 'disabled': link.url == null}"><i class="icon-next"></i></a>
-                    </div>
-                </div>
+                <Pagination :function-name="getLangTraslation" :data="paginationData" />
             </div>
         </div>
     </div>
@@ -78,24 +67,31 @@
 import { f7 } from 'framework7-vue';
 import axios from 'axios';
 import { ref } from "vue";
+import { successNotification, errorNotification } from '../../../commonFunction.js';
+import Pagination from '../../../components/Pagination.vue';
 
 const props = defineProps({
     langId : Number
 });
 
-const pageNumber = ref(1);
+const emit = defineEmits(['change:langTrans']);
+
 const searchData = ref('');
 const translations = ref([]);
 const paginationData = ref([]);
 const lang_trans = ref([]);
+const pageNumber = ref(1);
+const pageCount = ref(1);
 
-const getLangTraslation = (pageNumber) => {
-    if (pageNumber == undefined || pageNumber == 1) {
-        pageNumber = 1
+const getLangTraslation = (pageNum) => {
+    if (pageNum == undefined || pageNum == 1) {
+        pageNum = 1
     } else {
-        pageNumber = pageNumber.split('page=')[1];
+        pageNum = pageNum.split('page=')[1];
     }
-    var page = '/api/get-lang-translation/' + props.langId + '?page=' + pageNumber + '&q=' + searchData.value;
+    pageNumber.value = pageNum;
+    pageCount.value = pageNum;
+    var page = '/api/get-lang-translation/' + props.langId + '?page=' + pageNum + '&q=' + searchData.value;
     axios.get(page)
     .then((res) => {
         translations.value = res.data.translations.data;
@@ -110,7 +106,7 @@ const updateTraslation = () => {
     axios.post('/api/update-lang-translation', { lang_trans: lang_trans.value })
     .then((res) => {
         successNotification(res.data.success);
-        getLangTraslation(this.pageNumber)
+        getLangTraslation(pageNumber.value)
     });
 }
 

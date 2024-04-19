@@ -150,7 +150,7 @@
                         <div class="drop-down__menu-box">
                             <div class="drop-down__menu">
                                 <div class="block-title margin-top">Set Close Time</div>
-                                    <!-- <div class="list no-margin">
+                                    <div class="list no-margin">
                                         <ul>
                                             <li>
                                                 <div class="item-content item-input">
@@ -162,7 +162,7 @@
                                                 </div>
                                             </li>
                                         </ul>
-                                    </div> -->
+                                    </div>
                                 <div class="block block-strong no-padding no-margin margin-bottom time_piker_inner">
                                     <div id="end-picker-date-container"></div>
                                 </div>
@@ -238,8 +238,8 @@
                 $('.drop-down').toggleClass('drop-down--active');
 
                 var otime = this.open_time;
-                var ohours = Number(otime.match(/^(\d+)/)[1]);
-                var ominutes = Number(otime.match(/:(\d+)/)[1]);
+                var ohours = otime != '' ? Number(otime.match(/^(\d+)/)[1]) : '';
+                var ominutes = otime != '' ? Number(otime.match(/:(\d+)/)[1]) : ''                        ;
                 var OAMPM = otime.match(/\s(.*)$/)[1];
                 if(OAMPM == "PM" && ohours<12) ohours = ohours+12;
                 if(OAMPM == "AM" && ohours==12) ohours = ohours-12;
