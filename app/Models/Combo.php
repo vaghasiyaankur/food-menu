@@ -12,4 +12,14 @@ class Combo extends Model
     protected $table = 'combos';
 
     protected $guarded = ['id'];
+
+    public function comboProducts()
+    {
+        return $this->hasMany(ComboProduct::class, 'combo_id');
+    } 
+
+    public function comboRestaurantLanguages()
+    {
+        return $this->hasMany(ComboRestaurantLanguage::class, 'combo_id');
+    }
 }

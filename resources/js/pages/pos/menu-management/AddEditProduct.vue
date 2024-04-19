@@ -212,7 +212,6 @@ const updateFormData = (productResponseData) => {
             type: variation.type
         });
     });
-    console.log(productResponseData.ingredient);
 }
 
 const addIngredient = (id) => {
@@ -383,9 +382,6 @@ const submitProduct = () => {
         const errorMessage = getErrorMessage(error);
         errorNotification(errorMessage);
     });
-
-
-    console.log(formData);
 }
 
 const moveBack = () => {

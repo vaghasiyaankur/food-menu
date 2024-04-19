@@ -4,7 +4,7 @@ import FoodCategory from "./pages/pos/menu-management/FoodCategory.vue";
 import FoodSubCategory from "./pages/pos/menu-management/FoodSubCategory.vue";
 import FoodProduct from "./pages/pos/menu-management/FoodProduct.vue";
 import FoodCombo from "./pages/pos/menu-management/FoodCombo.vue";
-import AddCombo from "./pages/pos/menu-management/AddCombo.vue";
+import AddEditCombo from "./pages/pos/menu-management/AddEditCombo.vue";
 import AddEditProduct from "./pages/pos/menu-management/AddEditProduct.vue";
 import DigitalMenu from "./pages/pos/menu-management/DigitalMenu.vue";
 import FoodIngredient from "./pages/pos/menu-management/FoodIngredient.vue";
@@ -14,10 +14,8 @@ import NewSetting from "./pages/pos/NewSettingsTab.vue";
 import TableView from "./pages/restaurant-manager/table-view.vue"
 import KotView from "./pages/restaurant-manager/KOT-view.vue"
 
-// Pages
-export default [
-  // Index page
 
+export default [
   {
     name : 'POS',
     path: '/',
@@ -51,7 +49,12 @@ export default [
   {
     name : 'AddCombo',
     path: '/add-combo/',
-    component: AddCombo,
+    component: AddEditCombo,
+  },
+  {
+    name : 'EditCombo',
+    path: '/edit-combo/:id',
+    component: AddEditCombo,
   },
   {
     name : 'AddProduct',

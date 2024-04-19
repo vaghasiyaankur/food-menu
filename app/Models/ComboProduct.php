@@ -12,4 +12,14 @@ class ComboProduct extends Model
     protected $table = 'combo_products';
 
     protected $guarded = ['id'];
+
+    public function combo()
+    {
+        return $this->belongsTo(Combo::class, 'combo_id');
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'product_id');
+    }
 }

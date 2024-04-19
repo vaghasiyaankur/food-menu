@@ -48,7 +48,7 @@
                                                     :key="submenuIndex" 
                                                     :href="submenuItem.href" 
                                                     class="menu-dropdown-link menu-close text-color-black margin-horizontal no-padding panel-close" 
-                                                    :class="[submenuItem.routeName == currentRouteName ? 'active_submenu' : 'text-color-black']"
+                                                    :class="[submenuItem.routesName.includes(currentRouteName) ? 'active_submenu' : 'text-color-black']"
                                                     >
                                                     {{ submenuItem.label }}
                                                 </a>
