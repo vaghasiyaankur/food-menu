@@ -147,10 +147,11 @@
 }
 .kot_view_list .grid{
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: calc((100% / 3) - 25px) calc((100% / 3) - 25px) calc((100% / 3) - 25px);
     grid-template-rows: auto auto;
     column-gap: 35px;
     row-gap: 30px;
+    box-sizing: border-box;
 }
 .kot_view_table_card .kot_view_table_no{
     font-size: 16px;
@@ -161,6 +162,10 @@
 }
 .kot_view_table_card .table_card{
     border-radius: 5px;
+    height: 420px;
+    box-sizing: border-box;
+    border: 1px solid rgba(85, 85, 85, 1);
+    position: relative;
 }
 .kot_view_table_card .table_card .kot_table_details{
     background-color: #555555;
@@ -200,22 +205,112 @@
     color: #38373D;
 }
 .kot_table-bill-details .ordered-items-details .ordered-item-details-list{
-    padding: 10px 15px;
+    padding: 10px 10px 10px 30px;
     list-style-type: decimal;
+    height: 120px;
+    overflow-y: scroll;
+}
+.kot_table-bill-details .ordered-items-details .ordered-item-details-list::-webkit-scrollbar{
+    width: 5px;
+}
+.kot_table-bill-details .ordered-items-details .ordered-item-details-list::-webkit-scrollbar-thumb{
+    background-color: #555555;
+    border-radius: 5px;
 }
 .kot_table-bill-details .ordered-items-details .ordered-item-details-list li{
-    font-size: 13px !important;
+    font-size: 13px;
     line-height: 16px;
-    font-weight: 400 !important;
-    color: #38373D !important;
+    font-weight: 400;
+    color: #38373D;
+}
+.kot_table-bill-details .ordered-items-details .ordered-item-details-list li:not(:last-child){
+    margin-bottom: 10px;
 }
 .kot_table-bill-details .ordered-items-details .ordered-item-details-list .ordered-item{
     display: flex;
-    font-size: 13px !important;
-    line-height: 16px;
-    font-weight: 400 !important;
-    color: #38373D !important;
+    align-items: flex-start;
+    justify-content: space-between;
 }
 .kot_table-bill-details .ordered-items-details .ordered-item-details-list h6{
-    
+    font-size: 13px;
+    line-height: 16px;
+    font-weight: 400;
+    color: #38373D;
+}
+.kot_table-bill-details .ordered-items-details .ordered-item-details-list h6:last-child{
+    text-wrap: nowrap;
+}
+.kot_table-bill-details .ordered-items-details .ordered-item-details-list .ordered-item h6:first-child{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.kot_table-bill-details .ordered-items-details .ordered-item-details-list .ordered-item h6 span{
+    color: #F33E3E;
+    margin-top: 4px;
+}
+.kot_view_table_card .bill-pay-details{
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+    background-color: #FAFAFA;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+.kot_view_table_card .bill-pay-details .total-bill{
+    padding: 0 15px;
+    margin-bottom: 15px;
+}
+.kot_view_table_card .bill-pay-details .horizontal-divider{
+    border-top: 1px dashed rgba(153, 153, 153, 0.7);
+    border-right: none;
+    border-left: none;
+    border-bottom: none;
+    margin: 10px 0;
+}
+.kot_view_table_card .bill-pay-details .total-bill .ordered_items-total{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.kot_view_table_card .bill-pay-details .total-bill .ordered_items-total h4{
+    font-size: 14px;
+    line-height: 17px;
+    font-weight: 600;
+    color: #38373D;
+}
+.kot_view_table_card .bill-pay-details .order-user-comment{
+    background-color: rgba(56, 55, 61, 0.05);
+    padding: 15px;
+}
+.kot_view_table_card .bill-pay-details .order-user-comment p{
+    font-size: 14px;
+    line-height: 17px;
+    font-weight: 400;
+    color: #555555;
+}
+.kot_view_table_card .bill-pay-details .bill_buttons{
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.kot_view_table_card .bill-pay-details .bill_buttons .server_btn-outer{
+    padding: 7px 50px;
+    border-radius: 5px;
+    border: 0.7px solid rgba(56, 55, 61, 1);
+}
+.kot_view_table_card .bill-pay-details .bill_buttons .pay_btn-outer{
+    padding: 7px 57px;
+    border-radius: 5px;
+    border: 0.7px solid rgba(56, 55, 61, 1);
+}
+.kot_view_table_card .bill-pay-details .bill_buttons .server_btn,
+.kot_view_table_card .bill-pay-details .bill_buttons .pay_btn{
+    font-size: 14px;
+    line-height: 17px;
+    font-weight: 500;
+    color: #38373D;
+    border: none;
+    background-color: #FFFFFF;
 }
