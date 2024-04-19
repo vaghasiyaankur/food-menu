@@ -5,6 +5,7 @@ use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\Manager\AuthController;
 use App\Http\Controllers\Manager\CategoryController;
+use App\Http\Controllers\Manager\ComboController;
 use App\Http\Controllers\Manager\FloorController;
 use App\Http\Controllers\Manager\IngredientController;
 use App\Http\Controllers\Manager\ReportController;
@@ -81,6 +82,18 @@ Route::get('/get-ingredient/{id}', [IngredientController::class, 'getIngredient'
 Route::post('update-ingredient',[IngredientController::class, 'updateIngredient']);
 
 Route::post('/delete-ingredient',[IngredientController::class, 'deleteIngredient']);
+
+// ------------------------ Combo Routes ------------------------ //
+
+Route::post('/get-combos',[ComboController::class, 'getCombos']);
+
+Route::post('add-combo',[ComboController::class, 'addCombo']);
+
+Route::get('/get-combo/{id}', [ComboController::class, 'getCombo']);
+
+Route::post('update-combo',[ComboController::class, 'updateCombo']);
+
+Route::post('/delete-combo',[ComboController::class, 'deleteCombo']);
 
 // ------------------------ Variation Routes ------------------------ //
 

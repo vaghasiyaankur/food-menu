@@ -5,10 +5,9 @@
                 class="row item-content item-input general_info_form-address no-padding col-100"
                 :class="{ 'medium-100 large-100' : data.multipleLang, 'medium-100 large-50' : !data.multipleLang }" v-for="(data,index) in formDataFormat" :key="index"   
             >
-
-            <template v-if="data.type == 'text' || data.type == 'hidden'  || data.type == 'number' || data.type == 'email' || data.type == 'password'">
-                <template v-if="data.multipleLang">
-                    <div class="block-title no-margin col-100" v-if="data.type != 'hidden'">{{ data.label }}</div>
+                <template v-if="data.type == 'text' || data.type == 'hidden'  || data.type == 'number' || data.type == 'email' || data.type == 'password'">
+                    <template v-if="data.multipleLang">
+                        <div class="block-title no-margin col-100" v-if="data.type != 'hidden'">{{ data.label }}</div>
                         <div class="col-100 medium-100 large-33" v-for="(option, ind) in data.options" :key="option">
                             <Input 
                                 :type="data.type" 

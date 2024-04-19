@@ -1,16 +1,12 @@
 /* setting */
-.active {
-    background-color: #F33E3E;
-    color: #fff;
-}
 .setting-tabs{
     margin-top: 56px;
 }
 .setting-tabs .tabs{
-    width: 75%;
+    width: 70%;
 }
 .setting-tabs .toolbar{
-    width: 25%;
+    width: 30%;
     background: white;
     border-right: 1px solid #E0E0E0;
     position: unset;
@@ -70,6 +66,14 @@
     color: #555555;
     margin-left: 0px !important;
     overflow: unset;
+}
+
+.pagination_count .pagination_list a {
+	color: black;
+	float: left;
+	padding: 8px 16px;
+	text-decoration: none;
+	border-radius: 5px;
 }
 
 .setting-tabs .list input[type='text'], .list input[type='password'], .list input[type='search'], .list input[type='email'], .list input[type='tel'], .list input[type='url'], .list input[type='date'], .list input[type='month'], .list input[type='datetime-local'], .list input[type='time'], .list input[type='number'], .list select{
@@ -446,7 +450,7 @@ thead .label-cell {
 }
 
 /* LANGUAGE SETTINGS */
-#tab-user-management{
+#tab-user-management, #tab-language, #tab-floor-plan{
     min-height: calc(100vh - 180px);
 }
 
@@ -613,4 +617,27 @@ thead .label-cell {
     visibility: visible;
     opacity: 1;
     margin-top: 15px;
+}
+
+.active {
+    background-color: #F33E3E;
+    color: #fff !important;
+}
+.edit_translate_table .translate__id .item-input-wrap input{
+    background: #F0F0F0;
+}
+.edit_translate_table .translate__label .item-input-wrap input{
+    background: #FFFFFF ;
+}
+.edit_translate_table .item-input-wrap input{
+	width: 100%;
+	border: 0.5px solid #DCDCDC;
+	border-radius: 5px;
+    height: 36px;
+}
+.search_data_wrap{
+    align-items: center;
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 0 8px !important;
 }

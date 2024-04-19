@@ -45,15 +45,15 @@ const navbarItems = [
   {
     label: 'Menu Management',
     icon: 'bars',
-    routesName: ['FoodCategory', 'FoodSubCategory', 'FoodIngredient', 'FoodVariation', 'FoodCombo', 'FoodProduct', 'DigitalMenu'],
+    routesName: ['FoodCategory', 'FoodSubCategory', 'FoodIngredient', 'FoodVariation', 'FoodCombo', 'AddCombo', 'EditCombo', 'FoodProduct', 'AddProduct', 'EditProduct', 'DigitalMenu'],
     submenu: [
-      { label: 'Food Category', href: '/food-category/', routesName: 'FoodCategory'},
-      { label: 'Food Subcategory', href: '/food-subcategory/', routesName: 'FoodSubCategory'},
-      { label: 'Food Ingredient', href: '/food-ingredient/', routesName: 'FoodIngredient'},
-      { label: 'Food Variation', href: '/food-variation/', routesName: 'FoodVariation'},
-      { label: 'Food Combo', href: '/food-combo/', routesName: 'FoodCombo'},
-      { label: 'Food Menu', href: '/food-product/', routesName: 'FoodProduct'},
-      { label: 'Digital Menu', href: '/digital-menu/', routesName: 'DigitalMenu'}
+      { label: 'Food Category', href: '/food-category/', routesName: ['FoodCategory']},
+      { label: 'Food Subcategory', href: '/food-subcategory/', routesName: ['FoodSubCategory']},
+      { label: 'Food Ingredient', href: '/food-ingredient/', routesName: ['FoodIngredient']},
+      { label: 'Food Variation', href: '/food-variation/', routesName: ['FoodVariation']},
+      { label: 'Food Combo', href: '/food-combo/', routesName: ['FoodCombo', 'AddCombo', 'EditCombo']},
+      { label: 'Food Menu', href: '/food-product/', routesName: ['FoodProduct', 'AddProduct', 'EditProduct']},
+      { label: 'Digital Menu', href: '/digital-menu/', routesName: ['DigitalMenu']}
     ]
   },
   { label: 'Settings', routesName: ['NewSetting'], href: '/new-settings/', icon: 'settings' }

@@ -1,51 +1,97 @@
 <template>
     <f7-page>
-        <div class="product-list-section" @click="clickout">
-            <div class="product_list_card no-margin">
-                <MenuManagementHeader 
-                    title="Combo" @add:popup="showaddCombo"
-                />
+        <div class="data-list-section">
+            <MenuManagementHeader title="Combo" @add:popup="showComboPopup"
+                @update:search="updateSearch" />
 
-                <div class="card-content combo-list">
-                    <div class="grid grid-cols-5 medium-grid-cols-4 grid-gap-25 align-items-center">
-                        <div class="card-type bg-color-white combo-card">
-                            <div class="food-type-icon">
-                                <img src="/images/veg-icon.png" alt="">
-                            </div>
-                            <div class="combo-image"><img src="/assets/images/seederImages/combo/1.png"></div>
-                            <div class="text-align-center combo-name">
-                                <h4 class="no-margin no-padding">Combo 1</h4>
-                                <p class="combo-price no-margin no-padding">$8.00</p>
-                            </div>
-                            <div class="grid grid-cols-2 grid-gap-5 combo-change">
-                                <a class="edit-combo col-100 large-45 medium-50"><Icon name="editIcon" />Edit</a>
-                                <a class="delete-combo col-100 large-50 medium-50"><Icon name="deleteIcon" />Delete</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="combo-card">
+                <Card 
+                    :dataSet="combos" 
+                    @open:edit-popup="openEditPage"
+                    @open:remove-popup="showRemoveComboPopup"
+                />
             </div>
         </div>
+
+        <!-- ========= DELETE PRODUCT POPUP ========= -->
+        <div class="popup removePopup">
+            <RemovePopup 
+                :title="'Are you sure delete this combo?'"
+                @remove="removeData"
+            />
+        </div>
+
     </f7-page>
 </template>
+
 <script setup>
-import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Input, f7ListItem, f7AccordionContent, f7List, f7AccordionToggle, f7AccordionItem } from 'framework7-vue';
+import { f7Page, f7 } from 'framework7-vue';
+import { ref, onMounted } from 'vue';
 import axios from 'axios';
+import $ from 'jquery';
 import NoValueFound from '../../../components/NoValueFound.vue'
-import Icon from '../../../components/Icon.vue'
 import MenuManagementHeader from './MenuManagementHeader.vue'
-import { ref } from 'vue';
+import RemovePopup from '../../../components/common/RemovePopup.vue'
+import Card from '../../../components/common/Card.vue'
+import { successNotification, errorNotification, getErrorMessage } from '../../../commonFunction.js';
 
-const showaddCombo = () => {
-    f7.views.main.router.navigate('/add-combo/');
+const combos = ref([]);
+const removeComboId = ref(0);
+
+const search = ref('');
+
+onMounted(() => {
+    $('.page-content').css('background', '#F7F7F7');
+    getComboList();
+});
+
+const getComboList = () => {
+
+    const formData = new FormData();
+
+    formData.append('search', search.value);
+
+    axios.post('/api/get-combos', formData)
+    .then((response) => {
+        combos.value = response.data.combos;
+    });
+};
+
+const showComboPopup = (id = null) => {
+    f7.view.main.router.navigate({ url: "/add-combo/" });
+};
+
+const updateSearch = (searchValue) => {
+    search.value = searchValue;
+    getComboList();
 }
 
-const getCombo = () => {
-    // axios.get('/api/get-sub-category/'+id)
-    // .then((response) => {
-    //     updateFormData(response.data);
-    // });
+const showRemoveComboPopup = (id) => {
+    removeComboId.value = id;
+    f7.popup.open(`.removePopup`);
 }
 
-getCombo()
+const removeData = () => {
+    const comboData = new FormData();
+    comboData.append('id', removeComboId.value);
+    
+    axios.post(`/api/delete-combo`, comboData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    })
+    .then((response) => {
+        successNotification(response.data.success);
+        f7.popup.close(`.removePopup`);
+        getComboList();
+    })
+    .catch((error) => {
+        const errorMessage = getErrorMessage(error);
+        errorNotification(errorMessage);
+    });
+}
+
+const openEditPage = (id) => {
+    f7.view.main.router.navigate({ url: "/edit-combo/"+id });
+}
 </script>
