@@ -126,18 +126,6 @@
                                                 <h6 class="no-margin">₹ 100.00</h6>
                                             </div>
                                         </li>
-                                        <li>
-                                            <div class="ordered-item">
-                                                <h6 class="no-margin">Biryani Rice</h6>
-                                                <h6 class="no-margin">₹ 100.00</h6>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="ordered-item">
-                                                <h6 class="no-margin">Biryani Rice</h6>
-                                                <h6 class="no-margin">₹ 100.00</h6>
-                                            </div>
-                                        </li>
                                     </ol>
                                 </div>
                             </div>
@@ -623,10 +611,21 @@
                             <h5 class="no-margin">$38.00</h5>
                         </div>
                     </div>
-                    <div class="display-flex justify-content-center popup_button">
-                        <button type="button"
-                            class="button button-raised button-large popup-close popup-cancel-button">Cancel</button>
-                        <button type="button" class="button button-raised button-large popup-ok-button">Ok</button>
+                    <div class="popup_button">
+                        <div class="new_order_button">
+                            <button class="new_order_btn">New Order</button>
+                        </div>
+                        <div class="kot_pay_bill_btns">
+                            <div class="cancel_pay_button">
+                                <button type="button" class="cancel_pay_btn">Cancel</button>
+                            </div>
+                            <div class="online_pay_button">
+                                <button type="button" class="online_pay_btn">Online Pay</button>
+                            </div>
+                            <div class="cash_pay_button">
+                                <button type="button" class="cash_pay_btn">Cash</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
