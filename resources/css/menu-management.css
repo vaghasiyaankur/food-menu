@@ -142,12 +142,14 @@
 
 @media screen and (min-width: 992px) {
     .grid-cols-5 {
-        grid-template-columns:
-            calc((100% - 100px) / 5) calc((100% - 100px) / 5) calc((100% - 100px) / 5) calc((100% - 100px) / 5) calc((100% - 100px) / 5);
+        grid-template-columns: calc((100% - 100px) / 5) calc((100% - 100px) / 5) calc(
+                (100% - 100px) / 5
+            ) calc((100% - 100px) / 5) calc((100% - 100px) / 5);
     }
     .grid-cols-4 {
-        grid-template-columns:
-            calc((100% - 75px) / 4) calc((100% - 75px) / 4) calc((100% - 75px) / 4) calc((100% - 75px) / 4);
+        grid-template-columns: calc((100% - 75px) / 4) calc((100% - 75px) / 4) calc(
+                (100% - 75px) / 4
+            ) calc((100% - 75px) / 4);
     }
 }
 
@@ -590,7 +592,7 @@
     padding: 15px 13px 0;
     border-top: 1px solid #d8d8d8;
 }
-.add-data-main-div{
+.add-data-main-div {
     margin-top: 10px;
 }
 .add-data-name,
@@ -632,7 +634,7 @@
     color: #999999;
     text-align: center;
 }
-.data-add-image-file{
+.data-add-image-file {
     opacity: 0;
     display: none;
 }
@@ -1025,7 +1027,7 @@
     padding: 0;
     border-radius: 4px;
 } */
-.added-product_list-item .add-remove-icon{
+.added-product_list-item .add-remove-icon {
     position: absolute;
     right: 0;
 }
@@ -1077,12 +1079,12 @@
     color: #38373d;
 }
 
-.active_status{
+.active_status {
     accent-color: #555555;
     color: #555555;
 }
 
-.pencil-icon{
+.pencil-icon {
     position: absolute;
     background-color: #ffffff;
     border-radius: 50%;
@@ -1090,4 +1092,161 @@
     top: -10px;
     right: -10px;
     box-shadow: 0px 1px 12px 0px #66666640;
+}
+
+/* DIGITAL MENU NEW CSS */
+.digital_menu_page {
+    margin: 80px 20px 20px !important;
+    border-radius: 10px !important;
+    padding: 20px 25px;
+    height: auto !important;
+}
+.digital_menu_page .digital_menu_banner {
+    margin-bottom: 25px;
+}
+.digital_menu_page .digital_menu_banner h3 {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px !important;
+}
+.digital_menu_page .digital_menu_banner h3 a {
+    color: #38373d;
+}
+.digital_menu_page .digital_menu_banner h3 span {
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 600;
+    color: #38373d;
+    margin-left: 10px;
+}
+.digital_menu_page .digital_menu_banner p {
+    font-size: 14px;
+    line-height: 17px;
+    font-weight: 500;
+    color: #555555;
+}
+.digital_menu_page .digital_menu_swiper .swiper .swiper-wrapper {
+    display: flex;
+    align-items: flex-start;
+}
+.digital_menu_page
+    .digital_menu_swiper
+    .swiper
+    .swiper-wrapper
+    .swiper-slide:not(:last-child) {
+    margin-right: 30px;
+}
+.digital_menu_page
+    .digital_menu_swiper
+    .swiper
+    .swiper-wrapper
+    .swiper-slide
+    p {
+    padding-top: 8px;
+    text-align: center;
+}
+.digital_menu_page .horizontal_menu_devider {
+    display: flex;
+    align-items: center;
+    margin: 40px 0;
+}
+.digital_menu_page .horizontal_menu_devider .hmd-line {
+    border: none;
+    border-top: 1px dashed rgba(85, 85, 85, 0.4);
+    width: 100%;
+}
+.digital_menu_page .horizontal_menu_devider .hmd_category_name_empty {
+    text-wrap: nowrap;
+    padding: 0 20px;
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 500;
+    color: #38373d;
+}
+.digital_menu_page .horizontal_menu_devider .hmd_category_name {
+    text-wrap: nowrap;
+    padding: 0 20px;
+    font-size: 26px;
+    line-height: 31px;
+    font-weight: 600;
+    color: #38373d;
+}
+.digital_menu_page .empty_category_list {
+    text-align: center;
+    padding-bottom: 45px;
+}
+.digital_menu_page .empty_category_list p {
+    font-size: 20px;
+    line-height: 40px;
+    font-weight: 600;
+    color: #38373d;
+    padding-top: 15px;
+}
+
+.digital_menu_page .gujarati_dish_category .faq-heading {
+    font-size: 22px;
+    text-indent: 27px;
+    font-weight: 600;
+    color: #38373D;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid rgba(85, 85, 85, 0.4);
+}
+
+.digital_menu_page .gujarati_dish_category .faq-text {
+    font-weight: 400;
+    color: #919191;
+    width: 100%;
+    padding-left: 20px;
+    margin: 25px 0 0;
+    padding: 0;
+}
+
+.digital_menu_page .gujarati_dish_category .faq {
+    width: 100%;
+    background: white;
+}
+.digital_menu_page .gujarati_dish_category .faq input{
+    margin: 0;
+}
+.digital_menu_page .gujarati_dish_category .faq label {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.digital_menu_page .faq input[type="checkbox"] {
+    display: none;
+}
+
+.digital_menu_page .gujarati_dish_category .faq .faq-arrow {
+    width: 10px;
+    height: 10px;
+    border-top: 0.5px solid rgba(56, 55, 61, 1);
+    border-right: 0.5px solid rgba(56, 55, 61, 1);
+    float: right;
+    position: absolute;
+    top: 13px;
+    right: 3px;
+    transform: rotate(-45deg);
+}
+
+.digital_menu_page
+    .gujarati_dish_category
+    .faq
+    input[type="checkbox"]:checked
+    + label {
+    display: block;
+    height: 200px;
+}
+
+.digital_menu_page
+    .gujarati_dish_category
+    .faq
+    input[type="checkbox"]:not(:checked)
+    + label {
+    display: block;
+    height: 37px;
 }
