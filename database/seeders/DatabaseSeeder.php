@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
             LanguageSeeder::class,
             CategorySeeder::class,
             ColorSeeder::class,
-            // ProductSeeder::class,
+            ProductSeeder::class,
             CustomerSeeder::class,
             FloorSeeder::class,
             TableSeeder::class,
