@@ -2,7 +2,7 @@
     <div class="item-inner no-padding">
         <div class="block-title no-margin" v-if="label">{{label}}</div>
         <div class="item-input-wrap general_info_form-input w-100">
-            <input :type="type" :name="name" :placeholder="placeholder" :class="class" :value="value" @input="updateInputValue"/>
+            <input :type="type" :name="name" :placeholder="placeholder" :class="class" :min="min" :max="max" :value="value" @change="emit('set:change', $event.target.value)" @input="updateInputValue"/>
         </div>
     </div>
 </template>
@@ -15,10 +15,12 @@ const props = defineProps({
     class       : String,
     value       : [String, Number],
     label       : String,
-    name        : String,
+    min         : String,
+    max         : String,
+    name        : String    
 });
 
-const emit = defineEmits(['update:input']);
+const emit = defineEmits(['update:input', 'set:change']);
 
 const updateInputValue = (event) => {
     emit('update:input', event.target.value);

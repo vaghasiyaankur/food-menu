@@ -7,7 +7,7 @@
                 <template v-for="(data,index) in formDataFormat" :key="index">
                     <div class="add-data-main-div">
                         <label class="add-data-name" v-if="data.type != 'hidden'">{{ data.label }}</label>
-                        <template v-if="data.type == 'text' || data.type == 'hidden'  || data.type == 'number' || data.type == 'email' || data.type == 'password'">
+                        <template v-if="data.type == 'text' || data.type == 'hidden'  || data.type == 'number' || data.type == 'email' || data.type == 'password' || data.type == 'month'">
                             <template v-if="data.multipleLang">
                                 <div class="data-name text-align-left padding-bottom-half" 
                                     v-for="(option, ind) in data.options" :key="option"
@@ -32,7 +32,10 @@
                                         :placeholder="data.placeHolder"
                                         :value="data.value"
                                         :name="data.name"
+                                        :min="data.min"
+                                        :max="data.max"
                                         @update:input="saveValue(index, null, $event)" 
+                                        @set:change="changeValue(data.method)"
                                     />
                                 </div>
                             </template>
@@ -112,7 +115,7 @@ const props = defineProps({
     dataType: String
 });
 
-const emit = defineEmits(['store:update']);
+const emit = defineEmits(['store:update', 'set:startDate', 'set:endDate']);
 
 const saveValue = (index, ind = null, value) => {
     if(ind == null){
@@ -130,6 +133,12 @@ const saveImage = (index, imageData, imageInput) => {
 
 const storeData = () => {
     emit('store:update');
+}
+
+const changeValue = (method) => {
+    if (method && typeof method.startsWith === 'function') {
+        emit(method);
+    }
 }
 
 onBeforeUnmount(() => {

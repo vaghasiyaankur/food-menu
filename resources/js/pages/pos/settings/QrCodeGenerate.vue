@@ -9,25 +9,11 @@
             <div class="col-60">
                 <div class="row">
                     <div class="col-60">
-                        <div class="list no-hairlines reporting_calander no-margin">
-                            <ul>
-                                <li>
-                                    <div class="item-content item-input">
-                                        <div class="item-inner no-padding-right">
-                                            <div class="item-input-wrap input-dropdown-wrap">
-                                                <input type="text" placeholder="Select date range" readonly="" id="demo-calendar-range">
-                                                <input type="hidden" name="from-date" id="from-date">
-                                                <input type="hidden" name="to-date" id="to-date">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
+                        <Calender />
                     </div>
                     <div class="col-40">
                         <div class="qrcode_generate_popup">
-                            <button class="button button-raised padding height_40 popup-open" @click="blankform" data-popup=".qrcode_popup">Generate QR Code</button>
+                            <button class="button button-raised padding height_40 popup-open" @click="blankForm" data-popup=".qrcode_popup">Generate QR Code</button>
                         </div>
                     </div>
                     <button @click="calender" style="opacity: 0" id="date-set"></button>
@@ -51,7 +37,7 @@
                         <tr v-for="(qrCode,index) in qrCodes" :key="qrCode">
                             <td class="label-cell">{{ (paginationData.per_page * (pageNumber - 1)) + (index + 1) }}.</td>
                             <td>{{ qrCode.start_date }} - {{ qrCode.end_date }}</td>
-                            <td>{{ date_format(qrCode.updated_at) }}</td>
+                            <td>{{ dateFormat(qrCode.updated_at) }}</td>
                             <td><div v-html="qrCodeXml[qrCode.id]"></div></td>
                             <td><span class="status_info" :class="[{ 'status_expired': qrCode.status == 'Expired' }, { 'status_ongoing': qrCode.status == 'Ongoing' }, { 'status_upcoming': qrCode.status == 'Upcoming' }]">{{ qrCode.status }}</span></td>
                             <td>
@@ -74,38 +60,18 @@
                 </table>
                 <div class="bottom__bar">           
                     <div class="pagination_count padding display-flex justify-content-end align-items-center">
-                        <Pagination :function-name="getLangTraslation" :data="paginationData" />
+                        <Pagination :function-name="listQrCodes" :data="paginationData" />
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <div id="qrcode_popup" class="popup qrcode_popup" style="position:fixed; border-radius: 15px; top:37% !important; left:34% !important;">
-        <div class="qrcode-form">
-            <div class="padding margin-top">
-                <div class="list no-hairlines no-margin">
-                    <form action="">
-                        <ul>
-                            <li class="item-input margin-bottom no-padding">
-                                <div class="item-input-wrap">
-                                    <input type="month" v-model="start_qrcode" placeholder="Please choose..." :min="startMinDate" :max="startMaxDate" class="no-padding-vertical" @change="startChangeDate" />
-                                </div>
-                            </li>
-                            <li class="item-input margin-bottom no-padding">
-                                <div class="item-input-wrap">
-                                    <input type="month" v-model="end_qrcode" class="no-padding-vertical" :min="endMinDate" :max="endMaxDate" placeholder="Please choose..." @change="endChangeDate" />
-                                </div>
-                            </li>
-                            <li class="item-input no-padding">
-                                <div class="item-input-wrap" style="border-radius:10px">
-                                    <button type="button" class="button button-raised button-large popup-button" @click="generateQrCode()" style="background-color: rgb(243, 62, 62); color: rgb(255, 255, 255); border-radius:10px">Apply</button>
-                                </div>
-                            </li>
-                        </ul>
-                    </form>
-                </div>
-            </div>
-        </div>
+        <AddUpdatePopup title="Generate Qr Code" :form-data-format="addUpdateFormDataFormat" :type="addUpdateType" :data-type="'category'" @set:startDate="startChangeDate" @set:endDate="endChangeDate" @store:update="storeUpdateData" />
+    </div>
+    <!-- ========= DELETE CATEGORY POPUP ========= -->
+    <div class="popup removePopup">
+        <RemovePopup :title="'Are you sure delete this QR Code?'" @remove="removeData" />
     </div>
 </template>
 
@@ -115,6 +81,10 @@ import axios from 'axios';
 import moment from 'moment';
 import { ref } from 'vue';
 import Pagination from '../../../components/Pagination.vue';
+import AddUpdatePopup from "../../../components/common/AddUpdatePopup.vue"
+import { successNotification, errorNotification } from '../../../commonFunction.js';
+import RemovePopup from '../../../components/common/RemovePopup.vue'
+import Calender from "../../../components/Form/Calendar.vue"
 
 const qrCodeXml = ref([]);
 const qrCodes = ref([]);
@@ -122,30 +92,125 @@ const pageNumber = ref(1);
 const paginationData = ref([]);
 const fromDate = ref('');
 const toDate = ref('');
-const startQrCode = ref('');
-const endQrCode = ref('');
-const startMinDate = ref('');
-const endMinDate = ref('');
-const startMaxDate = ref('');
-const endMaxDate = ref('');
+const deleteId = ref(0);
+
+const addUpdateFormDataFormat = ref([
+    { label: 'Start Month', multipleLang: false, type: 'month', name: 'start_qrcode', value: '', min: '', max: '', method: 'set:startDate'},
+    { label: 'End Month', multipleLang: false, type: 'month', name: 'end_qrcode', value: '', min: '', max: '', method: 'set:endDate'},
+]);
+
+const startChangeDate = () => {
+    addUpdateFormDataFormat.value[1].min = event.target.value;
+}
+const endChangeDate = () => {
+    addUpdateFormDataFormat.value[0].max = event.target.value;
+}
 
 const generateQrCode = () => {
-    if (!start_qrcode.value) {
+    if (!startQrCode.value) {
         errorNotification("Please enter start month."); return;
     } else if (!end_qrcode.value) {
         errorNotification("Please enter end month."); return;
     }
-    axios.post('/api/generate-qrcode', { start_qrcode: start_qrcode.value, end_qrcode: end_qrcode.value })
+    axios.post('/api/generate-qrcode', { start_qrcode: startQrCode.value, end_qrcode: startQrCode.value })
     .then((res) => {
         if (res.data.success) {
             successNotification(res.data.success);
+            f7.popup.close(`#qrcode_popup`);
+            listQrCodes();
         } else {
             errorNotification(res.data.error);
         }
-        f7.popup.close(`#qrcode_popup`);
-        listQrCodes();
     })
 }
+
+const listQrCodes = (pageNum) => {
+    if (pageNum == undefined || pageNum == 1) {
+        pageNumber.value = 1;
+    } else if (Number(pageNum)) {
+        pageNumber.value = Number(pageNumber.value);
+    } else {
+        pageNumber.value = pageNum.split('page=')[1];
+    }
+    var page = '/api/qrcode?page=' + pageNumber.value + '&from_date=' + fromDate.value + '&to_date=' + toDate.value;
+    axios.get(page)
+    .then((res) => {
+        qrCodes.value = res.data.qrcodes.data;
+        qrCodeXml.value = res.data.qrcodexml;
+        paginationData.value = res.data.qrcodes;
+    })
+}
+
+listQrCodes();
+
+const dateFormat = (date) => {
+    return moment(String(date)).format('DD, MMM YYYY');
+}
+
+const blankForm = () => {
+    const current = new Date();
+
+    addUpdateFormDataFormat.value.forEach((formData,index) => {
+        formData.value = '';
+        formData.min = `${current.getFullYear()}-${String(current.getMonth() + 1).padStart(2, '0')}`;
+        formData.max = '';
+    });
+}
+
+const downloadQrCode = (id) => {
+    axios({ url: '/api/download-qrcode/' + id, method: 'GET', responseType: 'arraybuffer', })
+    .then((response) => {
+        let blob = new Blob([response.data], {
+            type: 'application/pdf'
+        })
+        let link = document.createElement('a')
+        link.href = window.URL.createObjectURL(blob)
+        link.download = 'qrcode.pdf'
+        link.click()
+    })
+}
+
+const regenerateQrCode = (id) => {
+    axios.post('/api/regenerate-qrcode', { id: id })
+    .then((res) => {
+        successNotification(res.data.success);
+        listQrCodes(pageNumber.value);
+    })
+}
+
+const removeqr = (id) => {
+    deleteId.value = id;
+    f7.popup.open(`.removePopup`);
+}
+
+const removeData = () => {
+    axios.post('/api/delete-qrcode',{id:deleteId.value})
+    .then((res) => {
+        successNotification(res.data.success);
+        f7.popup.close(`.removePopup`);
+        listQrCodes(pageNumber.value)
+    })
+}
+
+const storeUpdateData = () => {
+    var formData = new FormData(event.target);
+    if (!formData.get('start_qrcode')) {
+        errorNotification("Please enter start month."); return;
+    } else if (!formData.get('end_qrcode')) {
+        errorNotification("Please enter end month."); return;
+    }
+    axios.post('/api/generate-qrcode', formData)
+        .then((res) => {
+        if (res.data.success) {
+            successNotification(res.data.success);
+            f7.popup.close(`#qrcode_popup`);
+            listQrCodes(pageNumber.value);
+        } else {
+            errorNotification(res.data.error);
+        }
+    })
+}
+
 
 // export default {
 //     name : 'QrCodeGenerate',

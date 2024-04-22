@@ -70,6 +70,7 @@ import Icon from "../../../components/Icon.vue";
 import AddUpdatePopup from '../../../components/common/AddUpdatePopup.vue'
 import RemovePopup from '../../../components/common/RemovePopup.vue'
 import Pagination from '../../../components/Pagination.vue';
+import { successNotification, errorNotification } from '../../../commonFunction.js';
 
 const floors = ref([]);
 const paginationData = ref([]);
@@ -106,6 +107,7 @@ const storeUpdateData = () => {
 
     axios.post('/api/add-floor', formData)
     .then((res) => {
+        successNotification(res.data.success);
         getFloors();
     });
 }
@@ -120,6 +122,13 @@ const showFloorPopup = (id = null) => {
         resetFormData();
     }
 };
+
+const resetFormData = () => {
+    const formData = addUpdateFormDataFormat.value;
+    manipulateField(formData, 'Id', '');
+    manipulateField(formData, 'Name', '');
+    manipulateField(formData, 'Shortcut Floor Name', '');
+}
 
 const updateFormData = (floor) => {
     const formData = addUpdateFormDataFormat.value;
@@ -141,11 +150,11 @@ const deleteUserData = (id) => {
 }
 
 const removeData = () => {
-    axios.delete('/api/delete-floor-data/'+deleteId.value)
+    axios.post('/api/delete-floor',{'id': deleteId.value})
     .then((res) => {
         successNotification(res.data.success);
         f7.popup.close(`.removePopup`);
-        getUser();
+        getFloors();
     })
 }
 
