@@ -191,12 +191,4 @@ class CategorySeeder extends Seeder
             }
         }
     }
-
-            /**
-             * Get the value of key
-             */
-            public function getKey()
-            {
-                return $this->key;
-            }
 }
