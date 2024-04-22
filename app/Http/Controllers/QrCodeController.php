@@ -94,22 +94,22 @@ class QrCodeController extends Controller
         else if(Carbon::parse($date)->daysInMonth == '29') $duration = [8,7,7,7];
         else $duration = [7,7,7,7];
 
-        foreach($duration as $key=>$dur){
-
-            $cal_of_start = 0;
-            if($key != 0) $cal_of_start = $key * $duration[$key - 1];
-            $startDate = Carbon::parse($date)->startOfMonth()->addDays($cal_of_start);
-            $startDuration = Carbon::parse($date)->startOfMonth()->addDays($cal_of_start);
-            $cal_of_end = ($key + 1) * $dur - 1;
-            $endDuration = $startDate->addDays($dur - 1);
+        $startDate = Carbon::parse($date)->startOfMonth(); // Reset start date for each user
+        foreach ($duration as $dur) {
+            $endDuration = $startDate->copy()->addDays($dur - 1); // Calculate end date based on duration
+    
             $data = random_bytes(32);
             $encode = Encoding::base64Encode($data);
+    
             $qr = new QrCodeToken();
-            $qr->start_date = date('Y-m-d', strtotime($startDuration));
-            $qr->end_date = date('Y-m-d', strtotime($endDuration));
-            $qr->restaurant_id = Auth::user()->restaurant_id;
+            $qr->start_date = $startDate->toDateString(); // Convert Carbon instance to date string
+            $qr->end_date = $endDuration->toDateString(); // Convert Carbon instance to date string
             $qr->token = str_replace("+", "0", $encode);
+            $qr->restaurant_id = Auth::user()->restaurant_id;
             $qr->save();
+    
+            // Move start date to next duration
+            $startDate->addDays($dur);
         }
     }
     public function deleteQrCode(Request $req)

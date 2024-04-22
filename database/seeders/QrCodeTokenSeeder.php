@@ -24,25 +24,23 @@ class QrCodeTokenSeeder extends Seeder
 
         $user_ids = [1,2];
 
-        foreach ($user_ids as $key => $user_id) {
-            foreach($duration as $key=>$dur){
-
-                $cal_of_start = 0;
-                if($key != 0) $cal_of_start = $key * $duration[$key - 1];
-                $startDate = Carbon::now()->startOfMonth()->addDays($cal_of_start);
-                $startDuration = Carbon::now()->startOfMonth()->addDays($cal_of_start);
-
-                $endDuration = $startDate->addDays($dur - 1);
-
+        foreach ($user_ids as $user_id) {
+            $startDate = Carbon::now()->startOfMonth(); // Reset start date for each user
+            foreach ($duration as $dur) {
+                $endDuration = $startDate->copy()->addDays($dur - 1); // Calculate end date based on duration
+        
                 $data = random_bytes(32);
                 $encode = Encoding::base64Encode($data);
-
+        
                 $qr = new QrCodeToken();
-                $qr->start_date = date('Y-m-d', strtotime($startDuration));
-                $qr->end_date = date('Y-m-d', strtotime($endDuration));
+                $qr->start_date = $startDate->toDateString(); // Convert Carbon instance to date string
+                $qr->end_date = $endDuration->toDateString(); // Convert Carbon instance to date string
                 $qr->token = str_replace("+", "0", $encode);
                 $qr->restaurant_id = $user_id;
                 $qr->save();
+        
+                // Move start date to next duration
+                $startDate->addDays($dur);
             }
         }
     }
