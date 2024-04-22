@@ -19,7 +19,10 @@
     </div>
     <div id="tab-language" class="tab">
         <Language @change:langTrans="langTrans" :showLangs="showLangs" v-if="showLangs" />
-        <LanguageTranslate :langId="langId" v-else />
+        <LanguageTranslate @change:langTrans="langTrans" :langId="langId" v-else />
+    </div>
+    <div id="tab-floor-plan" class="tab">
+        <FloorList />
     </div>
 </div>
 </template>
@@ -32,7 +35,9 @@ import TaxSetting from './TaxSetting.vue';
 import UserManagement from './UserManagement.vue';
 import Language from './Language.vue';
 import LanguageTranslate from './LanguageTranslate.vue';
+import FloorList from './FloorList.vue'
 import { ref, onMounted } from 'vue';
+import FloorListVue from './FloorList.vue';
 
 const allTabs = [
     { label: 'General Setting', slug: 'general-setting', icon: 'generalSetting'},
@@ -40,6 +45,8 @@ const allTabs = [
     { label: 'Taxes', slug: 'taxes', icon: 'taxes'},
     { label: 'User Management', slug: 'user-management', icon: 'userManagement'},
     { label: 'Language', slug: 'language', icon: 'language'},
+    { label: 'Floor Plan', slug: 'floor-plan', icon: 'floorPlan'},
+    { label: 'QR Code Generator', slug: 'qr-code-generator', icon: 'qrCodeScanner'}
 ];
 
 const componentInstance = ref(null);
@@ -55,6 +62,9 @@ const currentTab = ref('general-setting');
 
 const setCurrentTab = (tab) => {
     currentTab.value = tab;
+    if (tab == "language") {
+        showLangs.value = true;
+    }
 };
 
 const langTrans = (isLang, newLangId) => {

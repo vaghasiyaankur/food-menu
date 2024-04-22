@@ -80,39 +80,43 @@
     width: 100%;
     max-height: 36px;
 }
-.search-bar-wrapper .searchbar{
+.search-bar-wrapper .searchbar {
     max-height: 36px;
     width: 100% !important;
     margin: 0 !important;
     border-radius: 7px !important;
-    border: 0.5px solid #DCDCDC !important;
-    background-color: #F0F0F0 !important;
+    border: 0.5px solid #dcdcdc !important;
+    background-color: #f0f0f0 !important;
     box-shadow: none !important;
 }
-.search-bar-wrapper .searchbar .searchbar-inner{
+.search-bar-wrapper .searchbar .searchbar-inner {
     padding: 0;
     max-height: 36px;
 }
-.search-bar-wrapper .searchbar .searchbar-inner .searchbar-input-wrap{
+.search-bar-wrapper .searchbar .searchbar-inner .searchbar-input-wrap {
     padding: 0;
     flex-shrink: 0;
     max-height: 36px;
     position: relative;
 }
-.search-bar-wrapper .searchbar .searchbar-inner .searchbar-input-wrap input{
+.search-bar-wrapper .searchbar .searchbar-inner .searchbar-input-wrap input {
     padding: 8px 32px 11px;
     font-size: 14px;
     line-height: 17px;
     font-weight: 400;
     color: #555555;
 }
-.search-bar-wrapper .searchbar .searchbar-inner .searchbar-input-wrap input::placeholder{
+.search-bar-wrapper
+    .searchbar
+    .searchbar-inner
+    .searchbar-input-wrap
+    input::placeholder {
     font-size: 14px;
     line-height: 17px;
     font-weight: 400;
     color: #999999;
 }
-.search-bar-wrapper .searchbar .searchbar-inner .searchbar-input-wrap svg{
+.search-bar-wrapper .searchbar .searchbar-inner .searchbar-input-wrap svg {
     position: absolute;
     color: #999999;
     top: 50%;
@@ -133,7 +137,7 @@
     box-shadow: 1px 1px 4px 0px #8f716459;
 }
 .kot_view_btn .kot_view-add_table_btn svg {
-    color: #FFFFFF;
+    color: #ffffff;
     margin-right: 9px;
 }
 .kot_view_btn .kot_view-add_table_btn p {
@@ -142,32 +146,34 @@
     font-weight: 500;
     color: #ffffff;
 }
-.kot_view_list{
+.kot_view_list {
     margin: 0 30px;
 }
-.kot_view_list .grid{
+.kot_view_list .grid {
     display: grid;
-    grid-template-columns: calc((100% / 3) - 25px) calc((100% / 3) - 25px) calc((100% / 3) - 25px);
-    grid-template-rows: auto auto;
+    grid-template-columns: calc((100% / 3) - 25px) calc((100% / 3) - 25px) calc(
+            (100% / 3) - 25px
+        );
+    grid-template-rows: auto auto auto;
     column-gap: 35px;
     row-gap: 30px;
     box-sizing: border-box;
 }
-.kot_view_table_card .kot_view_table_no{
+.kot_view_table_card .kot_view_table_no {
     font-size: 16px;
     line-height: 20px;
     font-weight: 600;
-    color: #38373D;
+    color: #38373d;
     margin-bottom: 7px !important;
 }
-.kot_view_table_card .table_card{
+.kot_view_table_card .table_card {
     border-radius: 5px;
     height: 420px;
     box-sizing: border-box;
     border: 1px solid rgba(85, 85, 85, 1);
     position: relative;
 }
-.kot_view_table_card .table_card .kot_table_details{
+.kot_view_table_card .table_card .kot_table_details {
     background-color: #555555;
     padding: 10px 30px;
     display: flex;
@@ -177,140 +183,354 @@
     border-top-left-radius: 5px;
     /* border: 1px solid #555555; */
 }
-.kot_table_details .table_detail h4:first-child{
+.kot_table_details .table_detail h4:first-child {
     margin-bottom: 5px !important;
     font-size: 16px;
     line-height: 19px;
     font-weight: 500;
-    color: #FFFFFF;
+    color: #ffffff;
 }
-.kot_table_details .table_detail h4:last-child{
+.kot_table_details .table_detail h4:last-child {
     font-size: 15px;
     line-height: 18px;
     font-weight: 500;
-    color: #FFFFFF;
+    color: #ffffff;
 }
-.kot_table-bill-details .customer-detail{
+.kot_table-bill-details .customer-detail {
     margin-top: 8px;
     padding: 10px 15px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #EDEDED;
+    background-color: #ededed;
 }
-.kot_table-bill-details .customer-detail h5{
+.kot_table-bill-details .customer-detail h5 {
     font-size: 14px;
     line-height: 17px;
     font-weight: 500;
-    color: #38373D;
+    color: #38373d;
 }
-.kot_table-bill-details .ordered-items-details .ordered-item-details-list{
+.kot_table-bill-details .ordered-items-details .ordered-item-details-list {
     padding: 10px 10px 10px 30px;
     list-style-type: decimal;
     height: 120px;
     overflow-y: scroll;
 }
-.kot_table-bill-details .ordered-items-details .ordered-item-details-list::-webkit-scrollbar{
+.kot_table-bill-details
+    .ordered-items-details
+    .ordered-item-details-list::-webkit-scrollbar {
     width: 5px;
 }
-.kot_table-bill-details .ordered-items-details .ordered-item-details-list::-webkit-scrollbar-thumb{
+.kot_table-bill-details
+    .ordered-items-details
+    .ordered-item-details-list::-webkit-scrollbar-thumb {
     background-color: #555555;
     border-radius: 5px;
 }
-.kot_table-bill-details .ordered-items-details .ordered-item-details-list li{
+.kot_table-bill-details .ordered-items-details .ordered-item-details-list li {
     font-size: 13px;
     line-height: 16px;
     font-weight: 400;
-    color: #38373D;
+    color: #38373d;
 }
-.kot_table-bill-details .ordered-items-details .ordered-item-details-list li:not(:last-child){
+.kot_table-bill-details
+    .ordered-items-details
+    .ordered-item-details-list
+    li:not(:last-child) {
     margin-bottom: 10px;
 }
-.kot_table-bill-details .ordered-items-details .ordered-item-details-list .ordered-item{
+.kot_table-bill-details
+    .ordered-items-details
+    .ordered-item-details-list
+    .ordered-item {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
 }
-.kot_table-bill-details .ordered-items-details .ordered-item-details-list h6{
+.kot_table-bill-details .ordered-items-details .ordered-item-details-list h6 {
     font-size: 13px;
     line-height: 16px;
     font-weight: 400;
-    color: #38373D;
+    color: #38373d;
 }
-.kot_table-bill-details .ordered-items-details .ordered-item-details-list h6:last-child{
+.kot_table-bill-details
+    .ordered-items-details
+    .ordered-item-details-list
+    h6:last-child {
     text-wrap: nowrap;
 }
-.kot_table-bill-details .ordered-items-details .ordered-item-details-list .ordered-item h6:first-child{
+.kot_table-bill-details
+    .ordered-items-details
+    .ordered-item-details-list
+    .ordered-item
+    h6:first-child {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
-.kot_table-bill-details .ordered-items-details .ordered-item-details-list .ordered-item h6 span{
-    color: #F33E3E;
+.kot_table-bill-details
+    .ordered-items-details
+    .ordered-item-details-list
+    .ordered-item
+    h6
+    span {
+    color: #f33e3e;
     margin-top: 4px;
 }
-.kot_view_table_card .bill-pay-details{
+.kot_view_table_card .bill-pay-details {
     position: absolute;
+    width: 100%;
     bottom: 0;
     z-index: 1;
-    background-color: #FAFAFA;
+    background-color: #fafafa;
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
 }
-.kot_view_table_card .bill-pay-details .total-bill{
+.kot_view_table_card .bill-pay-details .total-bill {
     padding: 0 15px;
     margin-bottom: 15px;
 }
-.kot_view_table_card .bill-pay-details .horizontal-divider{
+.kot_view_table_card .bill-pay-details .horizontal-divider {
     border-top: 1px dashed rgba(153, 153, 153, 0.7);
     border-right: none;
     border-left: none;
     border-bottom: none;
     margin: 10px 0;
 }
-.kot_view_table_card .bill-pay-details .total-bill .ordered_items-total{
+.kot_view_table_card .bill-pay-details .total-bill .ordered_items-total {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-.kot_view_table_card .bill-pay-details .total-bill .ordered_items-total h4{
+.kot_view_table_card .bill-pay-details .total-bill .ordered_items-total h4 {
     font-size: 14px;
     line-height: 17px;
     font-weight: 600;
-    color: #38373D;
+    color: #38373d;
 }
-.kot_view_table_card .bill-pay-details .order-user-comment{
+.kot_view_table_card .bill-pay-details .order-user-comment {
     background-color: rgba(56, 55, 61, 0.05);
     padding: 15px;
 }
-.kot_view_table_card .bill-pay-details .order-user-comment p{
+.kot_view_table_card .bill-pay-details .order-user-comment p {
     font-size: 14px;
     line-height: 17px;
     font-weight: 400;
     color: #555555;
 }
-.kot_view_table_card .bill-pay-details .bill_buttons{
+.kot_view_table_card .bill-pay-details .bill_buttons {
     padding: 15px;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-.kot_view_table_card .bill-pay-details .bill_buttons .server_btn-outer{
+.kot_view_table_card .bill-pay-details .bill_buttons .server_btn-outer {
     padding: 7px 50px;
     border-radius: 5px;
     border: 0.7px solid rgba(56, 55, 61, 1);
 }
-.kot_view_table_card .bill-pay-details .bill_buttons .pay_btn-outer{
+.kot_view_table_card .bill-pay-details .bill_buttons .pay_btn-outer {
     padding: 7px 57px;
     border-radius: 5px;
     border: 0.7px solid rgba(56, 55, 61, 1);
 }
 .kot_view_table_card .bill-pay-details .bill_buttons .server_btn,
-.kot_view_table_card .bill-pay-details .bill_buttons .pay_btn{
+.kot_view_table_card .bill-pay-details .bill_buttons .pay_btn {
     font-size: 14px;
     line-height: 17px;
     font-weight: 500;
-    color: #38373D;
+    color: #38373d;
+    border: none;
+    background-color: #ffffff;
+}
+/* ========= KOT-VIEW POPUP ========= */
+.kot_paybill_popup{
+    max-width: 680px;
+    width: 100% !important;
+    border-radius: 20px !important;
+    background-color: #FFFFFF;
+}
+.kot_paybill_popup .kot_paybill-popup_header{
+    padding: 25px;
+    position: relative;
+}
+.kot_paybill_popup .kot_paybill-popup_header .kot_paybill-popup_title{
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 500;
+    color: #222222
+}
+.kot_paybill_popup .kot_paybill-popup_header .kot_paybill-popup_edit_btn{
+    padding: 7px 26px;
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    max-width: 26px;
+    border-radius: 5px;
+    border: 1px solid #F33E3E;
+    box-shadow: 1px 1px 4px 0px rgba(153, 153, 153, 0.3);
+    background: #FFFFFF;
+}
+.kot_paybill_popup .kot_paybill-popup_header .kot_paybill-popup_edit_btn .kot_paybill_edit_btn{
+    font-size: 14px;
+    padding: 0;
+    line-height: 16px;
+    font-weight: 500;
+    color: #F33E3E;
     border: none;
     background-color: #FFFFFF;
+}
+.kot_paybill_popup .kot_paybill_data .customer_order_datails{
+    background-color: #EDEDED;
+}
+.kot_paybill_popup .kot_paybill_data .customer_order_datails .order_heading{
+    padding: 15px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.kot_paybill_popup .kot_paybill_data .customer_order_datails .order_heading h5{
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 500;
+    color: #555555;
+}
+.kot_paybill_popup .kot_paybill_data .billed_items{
+    padding: 22px 25px 0;
+}
+.kot_paybill_popup .kot_paybill_data .billed_items .billed-order-items{
+    margin: 0;
+    padding: 0 0 0 15px;
+    list-style-type: decimal;
+}
+.kot_paybill_popup .kot_paybill_data .billed_items .billed-order-items li{
+    font-size: 15px;
+    line-height: 18px;
+    font-weight: 400;
+    color: #38373D;
+}
+.kot_paybill_popup .kot_paybill_data .billed_items .billed-order-items li:not(:last-child){
+    margin-bottom: 24px;
+}
+.kot_paybill_popup .kot_paybill_data .billed_items .billed-order-items li h6{
+    font-size: 15px;
+    line-height: 18px;
+    font-weight: 400;
+    color: #38373D;
+}
+.kot_paybill_popup .kot_paybill_data .billed_items .billed-order-items li h6:last-child{
+    text-wrap: nowrap;
+}
+.kot_paybill_popup .kot_paybill_data .horizontal-divider{
+    border: none;
+    border-top: 1px dashed #999999;
+    margin: 27px 0 0;
+}
+.kot_paybill_popup .kot_paybill_data .pay_bill_total_outer{
+    padding: 25px 25px 0;
+}
+.kot_paybill_popup .kot_paybill_data .pay_bill_total_outer .pay_bill_subtotal{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.kot_paybill_popup .kot_paybill_data .pay_bill_total_outer .pay_bill_subtotal h5{
+    font-size: 15px;
+    line-height: 18px;
+    font-weight: 500;
+    color: #38373D;
+}
+.kot_paybill_popup .kot_paybill_data .pay_bill_total_outer .horizontal-divider{
+    margin: 15px 0;
+}
+.kot_paybill_popup .kot_paybill_data .pay_bill_total_outer .pay_bill_total{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.kot_paybill_popup .kot_paybill_data .pay_bill_total_outer .pay_bill_total h5{
+    font-size: 15px;
+    line-height: 18px;
+    font-weight: 600;
+    color: #38373D;
+}
+.kot_paybill_popup .popup_button{
+    margin: 30px 0 0;
+    padding: 0 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.kot_paybill_popup .wave-image-content{
+    width: 100%;
+    height: 50px;
+}
+.new_order_button {
+    max-width: 30%;
+    padding: 12px 22px;
+    border-radius: 10px;
+    border: 1px solid #f33e3e;
+    box-shadow: 1px 1px 4px 0px #9999994d;
+    background-color: #ffffff;
+    z-index: 1;
+}
+.part_payment_Popup .popup_button button {
+    font-size: 18px !important;
+    padding: 0;
+    margin: 0;
+}
+.new_order_btn,
+.cancel_pay_btn {
+    line-height: 22px;
+    font-weight: 500;
+    color: #f33e3e;
+    background-color: #ffffff;
+    border: none;
+}
+.kot_pay_bill_btns {
+    max-width: 65%;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    justify-content: space-between;
+}
+.cancel_pay_button {
+    padding: 12px 19px;
+    background-color: #ffffff;
+    box-shadow: 0px 1.5px 5px 0px #a6a6a666;
+    border-radius: 10px;
+    z-index: 1;
+}
+.cancel_pay_btn {
+    box-shadow: 0px -1px 4px 0px #a6a6a60d;
+    background-color: #ffffff;
+}
+.online_pay_button {
+    padding: 12px 25px;
+    background-color: #f33e3e;
+    box-shadow: 2.5px -2.5px 2px 0px #863e2026 inset;
+    box-shadow: 1px 1px 4px 0px #8f716459;
+    border-radius: 10px;
+    z-index: 1;
+}
+.online_pay_btn {
+    background-color: #f33e3e;
+}
+.online_pay_btn,
+.cash_pay_btn {
+    line-height: 22px;
+    font-weight: 500 !important;
+    color: #ffffff;
+    border: none;
+}
+.cash_pay_button {
+    padding: 12px 27px;
+    background-color: #f33e3e;
+    box-shadow: 2.5px -2.5px 2px 0px #863e2026 inset;
+    box-shadow: 1px 1px 4px 0px #8f716459;
+    border-radius: 10px;
+    z-index: 1;
+}
+.cash_pay_btn {
+    background-color: #f33e3e;
 }
