@@ -1,69 +1,69 @@
 <template>
-<f7-page>
-    <div class="card digital_menu_card elevation-2">
-        <div class="row padding-horizontal no-padding-vertical">
-            <div class="col">
-                <h3 class="margin-bottom-half">
-                    <!-- <a href="javscript:;" class="text-color-black padding-right-half"><i class="f7-icons font-22" style="vertical-align: bottom;">arrow_left</i></a> -->
-                    <span class="page_heading"> Food Menu </span>
-                </h3>
-                <p class="no-margin">Select your favourite food and enjoy with family</p>
+    <f7-page>
+        <div class="card digital_menu_card elevation-2">
+            <div class="row padding-horizontal no-padding-vertical">
+                <div class="col">
+                    <h3 class="margin-bottom-half">
+                        <!-- <a href="javscript:;" class="text-color-black padding-right-half"><i class="f7-icons font-22" style="vertical-align: bottom;">arrow_left</i></a> -->
+                        <span class="page_heading"> Food Menu </span>
+                    </h3>
+                    <p class="no-margin">Select your favourite food and enjoy with family</p>
+                </div>
             </div>
-        </div>
-        <div v-if="product_subcategory.length != 0">
-            <div class="digital_menu_swiper padding">
-                <div data-pagination='{"el":".swiper-pagination"}' data-space-between="20" data-slides-per-view="11"
-                class="swiper swiper-init demo-swiper margin-top margin-bottom" style="height : 135px">
-                    <div class="swiper-pagination"></div>
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide margin-right" :class="{ 'slide-active': category.id == sliderActive}" v-for="category in product_category" :key="category" @click="getProducts(category.id)">
-                            <div class="menu-image">
-                                <img :src="'/storage'+category.image" alt="">
+            <div v-if="product_subcategory.length != 0">
+                <div class="digital_menu_swiper padding">
+                    <div data-pagination='{"el":".swiper-pagination"}' data-space-between="20" data-slides-per-view="11"
+                    class="swiper swiper-init demo-swiper margin-top margin-bottom" style="height : 135px">
+                        <div class="swiper-pagination"></div>
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide margin-right" :class="{ 'slide-active': category.id == sliderActive}" v-for="category in product_category" :key="category" @click="getProducts(category.id)">
+                                <div class="menu-image">
+                                    <img :src="'/storage'+category.image" alt="">
+                                </div>
+                                <p class="font-13 no-margin text-align-center margin-top-half">{{ category.category_languages[0].name }}</p>
                             </div>
-                            <p class="font-13 no-margin text-align-center margin-top-half">{{ category.category_languages[0].name }}</p>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="menu_list">
-                <div class="position-relative">
-                    <div class="menu-title"><span>{{ categoryName }} Menu</span></div>
-                </div>
-                <div class="menu-details margin-top">
-                    <div class="menu-lists">
-                        <div class="row" v-if="product_subcategory.length">
-                            <div class="col-50" v-for="subcate in product_subcategory" :key="subcate">
-                                <div class="menu-list">
-                                    <div class="font-18 text-align-center menu-list-title text-color-black"><u>{{ subcate.sub_category_language[0].name }}</u></div>
-                                    <div class="list row margin-half align-items-center" v-for="product in subcate.products" :key="product">
-                                        <div class="col-85 display-flex">{{ product.product_language[0].name }}&nbsp;<span class="dots"></span></div>
-                                        <div class="col-15">{{ product.price.toFixed(2) }}</div>
+                <div class="menu_list">
+                    <div class="position-relative">
+                        <div class="menu-title"><span>{{ categoryName }} Menu</span></div>
+                    </div>
+                    <div class="menu-details margin-top">
+                        <div class="menu-lists">
+                            <div class="row" v-if="product_subcategory.length">
+                                <div class="col-50" v-for="subcate in product_subcategory" :key="subcate">
+                                    <div class="menu-list">
+                                        <div class="font-18 text-align-center menu-list-title text-color-black"><u>{{ subcate.sub_category_language[0].name }}</u></div>
+                                        <div class="list row margin-half align-items-center" v-for="product in subcate.products" :key="product">
+                                            <div class="col-85 display-flex">{{ product.product_language[0].name }}&nbsp;<span class="dots"></span></div>
+                                            <div class="col-15">{{ product.price.toFixed(2) }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div v-else>
+                                <div class="no_order">
+                                    <NoValueFound />
+                                    <div class="no_order_text text-align-center">
+                                        <p class="no-margin">Empty Food Menu List</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div v-else>
-                            <div class="no_order">
-                                <NoValueFound />
-                                <div class="no_order_text text-align-center">
-                                    <p class="no-margin">Empty Food Menu List</p>
-                                </div>
-                            </div>
-                        </div>
+                    </div>
+                </div>
+            </div>
+            <div v-else>
+                <div class="no_order">
+                    <NoValueFound />
+                    <div class="no_order_text text-align-center">
+                        <p class="no-margin">Empty Food Menu List</p>
                     </div>
                 </div>
             </div>
         </div>
-        <div v-else>
-            <div class="no_order">
-                <NoValueFound />
-                <div class="no_order_text text-align-center">
-                    <p class="no-margin">Empty Food Menu List</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</f7-page>
+    </f7-page>
 </template>
 
 <script>

@@ -33,6 +33,7 @@
                             :combo-data="comboData"
                             @clear:data="clearAllData"
                             @submit:combo="submitCombo"
+                            :page-type-button="pageTypeButton"
                             />
                     </div>
                 </div>
@@ -57,6 +58,7 @@ const selectProducts = ref([]);
 const products = ref([]);
 const search = ref('');
 const pageType = ref('');
+const pageTypeButton = ref('');
 
 const comboData = ref([
     {  label: 'Price', multipleLang: false, type: 'number', name: 'price', placeHolder: 'Product Price', value: ''},
@@ -97,8 +99,10 @@ onMounted(() => {
             const id = f7.view.main.router.currentRoute.params.id;
             getCombo(id);
             pageType.value = 'Edit';
+            pageTypeButton.value = 'Update';
         }else{
             pageType.value = 'Add';
+            pageTypeButton.value = 'Add';
         }
     }, 400)
 });
@@ -284,4 +288,7 @@ const submitCombo = () => {
     });
 }
 
+const moveBack = () => {
+    f7.view.main.router.navigate({ url: "/food-combo/" });
+}
 </script>

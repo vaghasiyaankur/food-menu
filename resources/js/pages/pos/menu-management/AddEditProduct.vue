@@ -56,9 +56,7 @@
 </template>
 
 <script setup>
-import {
-    f7Page, f7
-} from 'framework7-vue';
+import { f7Page, f7 } from 'framework7-vue';
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import Icon from './../../../components/Icon.vue'

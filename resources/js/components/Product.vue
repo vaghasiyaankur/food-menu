@@ -17,7 +17,10 @@
                         <button class="button active button-raised padding text-transform-capitalize"><Icon name="tick" class="margin-right-half" />Added</button>
                     </div> -->
                     <div class="product-add-button">
-                        <button class="button button-raised btn-add-product padding text-transform-capitalize">
+                        <button 
+                            class="button button-raised btn-add-product padding text-transform-capitalize"
+                            @click="addProductIntoCart(product.id)"
+                        >
                             <f7-icon f7="plus" class="font-16 margin-right-half"></f7-icon>
                                 Add
                         </button>
@@ -32,12 +35,19 @@
 import { f7Card, f7CardContent,f7, f7Icon } from 'framework7-vue';
 import Icon from '../components/Icon.vue'
 import { getFoodTypeIcon } from '../commonFunction.js';
+import { ref } from 'vue';
 
 const props = defineProps({
     products: Object,
 });
 
+const cartProduct = ref([]);
+
 const foodTypeIcon = (typeId) => {
     return getFoodTypeIcon(typeId);
+}
+
+const addProductIntoCart = (id) => {
+    console.log(id);
 }
 </script>

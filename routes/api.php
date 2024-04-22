@@ -134,6 +134,9 @@ Route::post('update-product',[ProductController::class, 'updateProduct']);
 
 Route::post('/delete-product',[ProductController::class, 'deleteProduct']);
 
+// ------------------------ Digital Product Routes ------------------------ //
+
+Route::get('get-digital-product-list/{categoryId}',[ProductController::class, 'getDigitalProductList']);
 
 // ------------------------ Setting Page Routes ------------------------ //
 

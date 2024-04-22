@@ -13,7 +13,7 @@
             </div>
         </div>
 
-        <!-- ========= DELETE PRODUCT POPUP ========= -->
+        <!-- ========= DELETE COMBO POPUP ========= -->
         <div class="popup removePopup">
             <RemovePopup 
                 :title="'Are you sure delete this combo?'"
