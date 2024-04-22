@@ -62,7 +62,6 @@
                     </div>
                 </div>
             </div>
-        </div> -->
 
             <div class="horizontal_menu_devider">
                 <hr class="hmd-line hmd-line-1">
