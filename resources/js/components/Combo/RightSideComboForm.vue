@@ -25,11 +25,12 @@
 
         <div class="added-product-combo-btns display-flex">
             <a href="#" class="clear-all-btn bg-color-white" @click="clearAllData">Clear All</a>
-            <a href="#" class="add-combo-btn text-color-white" @click="submitCombo">Add Combo</a>
+            <a href="#" class="add-combo-btn text-color-white" @click="submitCombo">{{ pageTypeButton }} Combo</a>
         </div>
 
         <div class="horizontal-added-combo-slider">
-            <a href="#"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"
+            <a href="#">
+                <svg width="8" height="12" viewBox="0 0 8 12" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M1.8578 11.0639L7.06917 6.53649C7.15405 6.46279 7.22168 6.37383 7.26791 6.27509C7.31414 6.17635 7.33799 6.06993 7.33799 5.96236C7.33799 5.8548 7.31414 5.74837 7.26791 5.64964C7.22168 5.5509 7.15405 5.46194 7.06917 5.38824L1.8578 0.860863C1.46617 0.520738 0.823486 0.776863 0.823486 1.27336L0.823487 10.6514C0.823487 11.1479 1.46617 11.404 1.8578 11.0639Z"
@@ -41,11 +42,10 @@
 </template>
 
 <script setup>
-
 import Icon from '../Icon.vue';
 import AddEditForm from './AddEditForm.vue';
-const emit = defineEmits(['select:remove-product', 'clear:data', 'submit:combo']);
 
+const emit = defineEmits(['select:remove-product', 'clear:data', 'submit:combo']);
 
 const props = defineProps({
     selectProducts: {
@@ -55,7 +55,8 @@ const props = defineProps({
     comboData : {
         type: Array,
         default: () => []
-    }
+    },
+    pageTypeButton : String
 });
 
 const removeSelectProduct = (id) => {

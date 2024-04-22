@@ -15,6 +15,7 @@ use App\Models\ProductRestaurantLanguage;
 use App\Models\ProductVariation;
 use App\Models\RestaurantLanguage;
 use App\Models\SubCategory;
+use App\Models\SubcategoryRestaurantLanguage;
 use App\Models\VariationRestaurantLanguage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -66,7 +67,7 @@ class ProductController extends Controller
             ];
         });
 
-        return response()->json(['products' => $products]);
+        return response()->json(['products' => $products, 'count' => $products->count()]);
     }
 
     public function addProduct(Request $req)
@@ -466,5 +467,46 @@ class ProductController extends Controller
         });
         $productCount = $products->count();
         return response()->json(['products' => $products, 'count'=>$productCount]);
+    }
+
+    public function getDigitalProductList($categoryId)
+    {
+        $langId = SettingHelper::managerLanguage();
+        $restaurantId = CustomerHelper::getRestaurantId();
+
+        $subCategories = SubCategory::with(
+                            [
+                                'subCategoryRestaurantLanguages',
+                                'products.productRestaurantLanguages'
+                            ]
+                        )->where('category_id', $categoryId)->get();
+
+        $transformedSubCategories = $subCategories->map(function ($subCategory) use($restaurantId, $langId){
+
+            $name = SubcategoryRestaurantLanguage::whereHas('restaurantLanguage', function ($query) use($restaurantId, $langId) {
+                $query->where('restaurant_id', $restaurantId)->where('language_id', $langId);
+            })->where('sub_category_id', $subCategory->id)
+            ->value('name');
+
+            return [
+                'id' => $subCategory->id,
+                'name' => $name,
+                'products' => $subCategory->products->map(function ($product) use($restaurantId, $langId){
+                    $productId = $product->id;
+                    $productName = ProductRestaurantLanguage::whereHas('restaurantLanguage', function ($query) use($restaurantId, $langId, $productId) {
+                        $query->where('restaurant_id', $restaurantId)->where('language_id', $langId);
+                    })->where('product_id', $productId)
+                    ->value('name');
+                    return [
+                        'id' => $product->id,
+                        'name' => $productName,
+                        'image' => $product->image,
+                        'price' => $product->price
+                    ];
+                }),
+            ];
+        });
+
+        return response()->json($transformedSubCategories);
     }
 }

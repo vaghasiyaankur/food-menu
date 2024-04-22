@@ -52,7 +52,7 @@ const categoryFetch = axios.get('/api/get-sub-categories-list').then(response =>
 
 const fetchProductsBySubcategory = (id) => {
     activeCategory.value = id;
-    axios.post('/api/get-products', { subCatId: id })
+    axios.post('/api/get-products', { subCategory: id })
     .then((response) => {
         products.value = response.data.products;
         productsCount.value = response.data.count;
