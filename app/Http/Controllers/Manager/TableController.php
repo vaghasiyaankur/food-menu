@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Manager;
 
+use App\Helper\CustomerHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Table;
 use App\Models\Customer;
@@ -499,6 +500,33 @@ class TableController extends Controller
         $finish_time = $order->finish_time + $req->minutes;
         $order->update(['finish_time' => $finish_time]);
         return true;
+    }
+
+    public function getTableListFloorWise(){
+        $restaurantId = CustomerHelper::getRestaurantId();
+
+        $floors = Floor::with(['tables.color'])->where('restaurant_id', $restaurantId)->get();
+
+        $transformedFloors = $floors->map(function ($floor){
+            return [
+                'id' => $floor->id,
+                'name' => $floor->name,
+                'short_cut' => $floor->short_cut,
+                'tables' => $floor->tables->map(function ($table) {
+                    return [
+                        'id' => $table->id,
+                        'table_number' => $table->table_number,
+                        'capacity_of_person' => $table->capacity_of_person,
+                        'status' => $table->status,
+                        'color' => $table->color->color,
+                        'rgb' => $table->color->rgb,
+                    ];
+                }),
+            ];
+        });
+
+        return response()->json($transformedFloors);
+
     }
 
 }

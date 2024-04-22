@@ -55,15 +55,15 @@ class ProductController extends Controller
         
         $products = $products->where('restaurant_id', $restaurantId)->get();
 
-        $products->transform(function ($category) use ($req) {
-            $name = $category->productRestaurantLanguages->isEmpty() ? null : $category->productRestaurantLanguages->first()->name;
+        $products->transform(function ($product) use ($req) {
+            $name = $product->productRestaurantLanguages->isEmpty() ? null : $product->productRestaurantLanguages->first()->name;
             return [
-                'id' => $category->id,
-                'image' => $category->image,
-                'status' => $category->status,
-                'type' => $category->type,
+                'id' => $product->id,
+                'image' => $product->image,
+                'status' => $product->status,
+                'food_type' => $product->food_type,
                 'name' => $name,
-                'price' => $category->price,
+                'price' => $product->price
             ];
         });
 

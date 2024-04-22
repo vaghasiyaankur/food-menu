@@ -181,9 +181,11 @@ Route::get('/member-limitation',[SettingController::class, 'memberLimitation']);
 
 // ------------------------ Manager Table Page Routes ------------------------ //
 
-Route::get('table-list-with-order',[TableController::class, 'tableList']);
+Route::post('/get-table-list-floor-wise', [TableController::class, 'getTableListFloorWise']);
 
 Route::get('table-list-floor-wise/{id}',[TableController::class, 'tableListFloorWise']);
+
+Route::get('table-list-with-order',[TableController::class, 'tableList']);
 
 Route::post('change-order-table',[TableController::class, 'changeOrderTable']);
 

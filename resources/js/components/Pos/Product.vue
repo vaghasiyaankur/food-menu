@@ -19,7 +19,16 @@
                     <div class="product-add-button">
                         <button 
                             class="button button-raised btn-add-product padding text-transform-capitalize"
+                            @click="removeProductIntoCart(product.id)"
+                            v-if="isProductSelected(product.id)"
+                        >
+                            <f7-icon f7="minus" class="font-16 margin-right-half"></f7-icon>
+                                Remove
+                        </button>
+                        <button 
+                            class="button button-raised btn-add-product padding text-transform-capitalize"
                             @click="addProductIntoCart(product.id)"
+                            v-else
                         >
                             <f7-icon f7="plus" class="font-16 margin-right-half"></f7-icon>
                                 Add
@@ -33,13 +42,19 @@
 
 <script setup>
 import { f7Card, f7CardContent,f7, f7Icon } from 'framework7-vue';
-import Icon from '../components/Icon.vue'
-import { getFoodTypeIcon } from '../commonFunction.js';
+import { getFoodTypeIcon } from '../../commonFunction.js';
 import { ref } from 'vue';
+import Icon from '../Icon.vue';
 
 const props = defineProps({
     products: Object,
+    cartProducts: {
+        type: Array,
+        default: () => []
+    },
 });
+
+const emit = defineEmits(['add:cart-product', 'remove:cart-product']);
 
 const cartProduct = ref([]);
 
@@ -48,6 +63,14 @@ const foodTypeIcon = (typeId) => {
 }
 
 const addProductIntoCart = (id) => {
-    console.log(id);
+    emit('add:cart-product', id);
+}
+
+const removeProductIntoCart = (id) => {
+    emit('remove:cart-product', id);
+}
+
+const isProductSelected = (id) => {
+    return props.cartProducts.some(item => item.id === id);
 }
 </script>

@@ -662,16 +662,35 @@ textarea {
     border-top: 7px solid #ffffff;
 }
 @media screen and (min-width: 991px) {
-    .order-details,
+    /* .order-details, */
     .bill-divider,
     .payment-method{
         display: none;
     }
 }
 @media screen and (max-width: 991px) {
-    .order-details,
+    /* .order-details, */
     .bill-divider,
     .payment-method{
         display: block;
     }
+}
+.quantity-minus.disabled{
+    background-color: grey;
+}
+
+.order-details {
+    display: none;
+}
+.order-details.open {
+    display: block;
+}
+
+.kot-time{
+    height: calc(50dvh);
+    overflow: auto;
+}
+
+.kot-time.open{
+    height: calc(44dvh);
 }
