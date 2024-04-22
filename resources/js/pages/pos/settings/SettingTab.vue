@@ -24,6 +24,9 @@
     <div id="tab-floor-plan" class="tab">
         <FloorList />
     </div>
+    <div id="tab-qr-code-generator" class="tab">
+        <QrCodeGenerate />
+    </div>
 </div>
 </template>
 
@@ -37,7 +40,7 @@ import Language from './Language.vue';
 import LanguageTranslate from './LanguageTranslate.vue';
 import FloorList from './FloorList.vue'
 import { ref, onMounted } from 'vue';
-import FloorListVue from './FloorList.vue';
+import QrCodeGenerate from './QrCodeGenerate.vue';
 
 const allTabs = [
     { label: 'General Setting', slug: 'general-setting', icon: 'generalSetting'},

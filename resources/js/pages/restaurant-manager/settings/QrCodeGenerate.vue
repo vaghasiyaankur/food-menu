@@ -289,7 +289,7 @@ export default {
 }
 </script>
 <style scoped>
-.font-13{
+/* .font-13{
     font-size: 13px;
 }
 .height-40 {
@@ -384,7 +384,7 @@ export default {
 	border-radius: 7px;
 	height: auto;
 }
- ul .item-input-wrap input{
+ul .item-input-wrap input{
 	background-color: #fff;
 	border-radius: 8px;
 	padding: 12px;
@@ -424,14 +424,14 @@ export default {
     padding: 8px 16px;
     text-decoration: none;
     border-radius: 5px;
-}
+} */
 </style>
 <style>
-#qrcode_generate_popup .popup{
+/* #qrcode_generate_popup .popup{
     top: 50% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
-}
+} */
 
 </style>
 

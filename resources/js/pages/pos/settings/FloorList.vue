@@ -7,7 +7,7 @@
                         <span class="page_heading">Floor List</span>
                     </h3>
                 </div>
-                <div class="add_table_button"><button class="button button-raised button-raise text-color-white bg-pink height-40 padding-horizontal padding-vertical-half text-transform-capitalize" data-popup="#addEditFloorPopup" @click="f7.popup.open(`.addEditFloorPopup`);"><i class="f7-icons margin-right-half">plus_square</i> Add Floor</button></div>
+                <div class="add_table_button"><button class="button button-raised button-raise text-color-white bg-pink height-40 padding-horizontal padding-vertical-half text-transform-capitalize" data-popup="#addEditFloorPopup" @click="showFloorPopup();f7.popup.open(`.addEditFloorPopup`);"><i class="f7-icons margin-right-half">plus_square</i> Add Floor</button></div>
             </div>
             <div class="card-content">
                 <div class="data-table">
@@ -27,10 +27,10 @@
                                 <td class="label-cell settings_user-name">{{ floor.short_cut }}</td>
                                 <td class="label-cell settings_user-name">
                                     <div class="user-btns display-flex">
-                                        <span class="edit_user_button display-flex">
+                                        <span class="edit_user_button display-flex" @click="showFloorPopup(floor.id)">
                                             <Icon name="editIcon" /> <p>Edit</p>
                                         </span>
-                                        <span class="delete_user_button display-flex">
+                                        <span class="delete_user_button display-flex" @click="deleteUserData(floor.id)">
                                             <Icon name="deleteIcon" /> <p>Delete</p>
                                         </span>
                                     </div>
@@ -80,6 +80,7 @@ const addUpdateFormDataFormat = ref([
     { label: 'Name', multipleLang: false, type: 'text', name: 'name', placeHolder: 'Floor Name', value: ''},
     { label: 'Shortcut Floor Name', multipleLang: false, type: 'text', name: 'short_cut', placeHolder: 'Floor Short Cut', value: ''},
 ]);
+const deleteId = ref(0);
 const addUpdateTitle = ref('Add Floor');
 
 const getFloors = (pageNum) => {
@@ -91,6 +92,7 @@ const getFloors = (pageNum) => {
     .then((res) => {
         floors.value = res.data.data;
         paginationData.value = res.data;
+        f7.popup.close(`#addEditFloorPopup`);
     })
     .catch((error) => {
         console.error("Error fetching floors:", error);
@@ -106,6 +108,45 @@ const storeUpdateData = () => {
     .then((res) => {
         getFloors();
     });
+}
+
+const showFloorPopup = (id = null) => {
+    if(id){
+        addUpdateTitle.value = id ? 'Edit Floor' : 'Add Floor';
+        const floor = floors.value.find(item => item.id === id);
+        updateFormData(floor);
+        f7.popup.open(`#addEditFloorPopup`);
+    }else{
+        resetFormData();
+    }
+};
+
+const updateFormData = (floor) => {
+    const formData = addUpdateFormDataFormat.value;
+    manipulateField(formData, 'Id', floor.id);
+    manipulateField(formData, 'Name', floor.name);
+    manipulateField(formData, 'Shortcut Floor Name', floor.short_cut);
+};
+
+const manipulateField = (formData, label, value = null) => {
+    const index = formData.findIndex(item => item.label === label);
+    if (index !== -1) {
+        formData[index].value = value !== null ? value : formData[index].default;
+    }
+};
+
+const deleteUserData = (id) => {
+    deleteId.value = id;
+    f7.popup.open(`.removePopup`);
+}
+
+const removeData = () => {
+    axios.delete('/api/delete-floor-data/'+deleteId.value)
+    .then((res) => {
+        successNotification(res.data.success);
+        f7.popup.close(`.removePopup`);
+        getUser();
+    })
 }
 
 </script>

@@ -450,7 +450,7 @@ thead .label-cell {
 }
 
 /* LANGUAGE SETTINGS */
-#tab-user-management, #tab-language, #tab-floor-plan{
+#tab-user-management, #tab-language, #tab-floor-plan, #tab-qr-code-generator{
     min-height: calc(100vh - 180px);
 }
 
@@ -627,7 +627,7 @@ thead .label-cell {
     background: #F0F0F0;
 }
 .edit_translate_table .translate__label .item-input-wrap input{
-    background: #FFFFFF ;
+    background: #FFFFFF;
 }
 .edit_translate_table .item-input-wrap input{
 	width: 100%;
@@ -640,4 +640,150 @@ thead .label-cell {
     border: 1px solid;
     border-radius: 5px;
     padding: 0 8px !important;
+}
+
+/*========= QR Code Generate CSS ===========*/
+
+.font-13{
+    font-size: 13px;
+}
+.height-40 {
+    height: 40px;
+}
+.height-45{
+    height: 45px;
+}
+.qrcode_generate.card{
+    box-shadow: none !important;
+}
+.menu-dropdown-link{
+    padding-left:25px
+}
+.height_100{
+    height: 100%;
+}
+.qrcode_generate .data-table{
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+.qrcode_generate_popup .button{
+    box-shadow: none;
+    border: 0.5px solid #999999;
+    color:  #999999;
+    font-weight: 500;
+    border-radius: 7px;
+}
+
+.qrcode_generate .menu-dropdown-content a{
+	font-weight: 500;
+	font-size: 15px;
+	line-height: 18px;
+	color: #999999;
+}
+.qrcode_generate .menu-dropdown-link{
+	justify-content: flex-start !important;
+    margin-top: 5px;
+}
+.qrcode_generate .menu-dropdown{
+	background-color: transparent !important;
+}
+.qrcode_generate .menu-dropdown-right::before{
+    background-image: none !important;
+}
+.qrcode_generate .menu-dropdown-link:first-child{
+    border-bottom: 0.5px solid #999999;
+    border-radius: 0;
+}
+.qrcode_generate .menu-dropdown-content{
+	background: #FFFFFF;
+	box-shadow: 0px 0px 14px rgba(34, 34, 34, 0.1);
+	z-index: 99;
+    top: -7px !important;
+}
+.qrcode_generate .menu-item-dropdown-right .menu-dropdown-content, .qrcode_generate .menu-dropdown-right .menu-dropdown-content {
+	right: 72px;
+	border-top-right-radius: 5px;
+	width: 180px;
+}
+.qrcode_popup .qrcode-form .button.active-state{
+    background-color: rgb(243, 62, 62) !important;
+    color: rgb(255, 255, 255) !important;
+}
+.status_info{
+    display: flex;
+    justify-content: center;
+    border-radius: 5px;
+    height: 26px;
+    line-height: 1px;
+    font-weight: 400;
+    font-size: 12px;
+    width: 60%;
+    padding: 0px 25px;
+    align-items: center;
+}
+.status_info.status_expired{
+    background: #FFE7DD;
+	color: #E31A1A;
+}
+.status_info.status_upcoming{
+    background: #E9FBE7;
+    color: #3D833C;
+}
+.status_info.status_ongoing{
+    background: #FFF9E3;
+    color: #D39255;
+}
+.item-input-wrap{
+	width: 100%;
+	background: #ffffff;
+	border-radius: 7px;
+	height: auto;
+}
+ul .item-input-wrap input{
+	background-color: #fff;
+	border-radius: 8px;
+	padding: 12px;
+    height: 40px;
+	border: 0.5px solid #999999;
+}
+.active_text{
+    color: rgba(243, 62, 62, 1) !important;
+}
+.qrcode_popup .simple-list li:after, .qrcode_popup .links-list a:after, .qrcode_popup .list .item-inner:after{
+    background-color: transparent !important;
+}
+.menu-dropdown-link::before{
+    content: none !important;
+}
+.active-state{
+    background-color: none !important;
+    opacity: 1 !important;
+}
+
+#qrcode_generate_popup .popup{
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+}
+
+@media screen and (max-width:991px) {
+    .qrcode_generate .menu-item-dropdown-right .menu-dropdown-content, .qrcode_generate .menu-dropdown-right .menu-dropdown-content{
+        right: 31px;
+    }
+    #qrcode_popup{
+        transform: translate(-18%);
+    }
+}
+.pagination_count .pagination_list {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.pagination_count .pagination_list a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 5px;
 }

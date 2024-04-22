@@ -3,7 +3,7 @@
         <div class="product-list-section">
             <div class="product_list_card no-margin position-relative">
                 <div class="display-flex">
-                    <div class="card_header add-combo-header">
+                    <div class="add-combo-header">
                         <div class="row align-items-center add-combo-banner">
                             <div class="col-100 large-60 medium-60">
                                 <h3 class="combo-banner-heading no-margin">

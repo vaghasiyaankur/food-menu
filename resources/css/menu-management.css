@@ -83,6 +83,11 @@
     font-weight: 500 !important;
     color: #38373d;
     margin-top: 15px !important;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 1;
+    line-height: 1.5;
 }
 
 .combo-price,
@@ -198,9 +203,19 @@
     /* box-shadow: 0px 1.5px 3px 0px #00000026; */
 }
 
+.add-combo-header .add-combo{
+    overflow: auto;
+    height: calc(79dvh);
+}
+
 .add-combo {
     margin-top: 15px;
     margin-bottom: 25px;
+}
+
+.add-combo-form-list{
+    height: 78%;
+    overflow: auto;
 }
 
 .selected-product {
@@ -377,17 +392,17 @@
 }
 
 .added-product-combo-btns {
-    max-width: 100%;
+    width: 30%;
     position: fixed;
     gap: 20px;
-    bottom: 25px;
+    bottom: 5px;
     margin: 13px auto;
     text-align: center;
+    background-color: #ffffff;
 }
 
-.clear-all-btn a,
-.add-combo-btn a {
-    max-width: 50%;
+.clear-all-btn, .add-combo-btn {
+    width: 50%;
     font-size: 18px !important;
     line-height: 21px;
     font-weight: 500 !important;
@@ -395,17 +410,15 @@
     border-radius: 10px;
 }
 
-.clear-all-btn a {
-    padding: 12px 59px;
+.clear-all-btn {
+    padding: 12px 0;
     color: #f33e3e;
-    box-shadow: 0px -1px 4px 0px #a6a6a60d;
     box-shadow: 0px 1.5px 5px 0px #a6a6a666;
 }
 
-.add-combo-btn a {
-    padding: 12px 44px;
+.add-combo-btn{
+    padding: 12px 0;
     background-color: #f33e3e;
-    box-shadow: 2.5px -2.5px 2px 0px #863e2026 inset;
     box-shadow: 1px 1px 4px 0px #8f716459;
 }
 
@@ -419,6 +432,13 @@
     right: 15px;
     bottom: auto;
     left: auto;
+}
+
+.category-image>div{
+    margin-top: 7px;
+    border: 1px dashed #999999;
+    border-radius: 5px;
+    background: #F5F5F5;
 }
 
 @media screen and (min-width: 992px) {
@@ -437,13 +457,13 @@
     }
 
     .add-combo-slider-wrapper {
-        max-width: 463px !important;
-        min-width: 463px !important;
+        max-width: 410px !important;
+        min-width: 410px !important;
     }
 
     .add-combo-slider {
         padding: 30px 30px 0;
-        max-width: calc(463px - 60px);
+        max-width: calc(410px - 60px);
         height: 100%;
         position: fixed;
         right: 0;
@@ -494,7 +514,7 @@
 
     .add-combo-slider {
         padding: 30px 30px 0px;
-        max-width: 463px;
+        max-width: 410px;
         height: 100%;
         position: fixed;
         top: 60px;
