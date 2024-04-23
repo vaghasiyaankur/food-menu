@@ -242,12 +242,15 @@
                             </div>
                         </div>
                     </div> -->
-                    <div class="card-type table_view-ground_floor-card blank_card">
+                    <div class="card-type table_view-ground_floor-card blank_card"
+                        v-for="(table,ind) in floor.tables" :key="ind"
+                        @click="openPos(table.id)"
+                    >
                         <div class="card-margin-padding">
                             <div class="table_view-table_number">
-                                <h5 class="no-margin no-padding">Table No. 4</h5>
+                                <h5 class="no-margin no-padding">Table No. {{ table.table_number }}</h5>
                             </div>
-                            <div class="ordering_card-waiting_time">
+                            <!-- <div class="ordering_card-waiting_time">
                                 <div class="display-flex align-items-center">
                                     <svg width="12" height="18" viewBox="0 0 12 18" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -273,8 +276,8 @@
                                     </svg>
                                     <span class="waiting-time">40 Minutes</span>
                                 </div>
-                            </div>
-                            <div class="table_view-table_cost">
+                            </div> -->
+                            <!-- <div class="table_view-table_cost">
                                 <p class="no-margin no-padding">₹ 170.00</p>
                             </div>
                             <div class="table_view-table_details">
@@ -302,7 +305,7 @@
                                         </svg>
                                     </button>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <!-- <div class="card-type table_view-ground_floor-card ordering_card">
@@ -1072,7 +1075,7 @@
     </f7-page>
 </template>
 <script setup>
-import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Input, f7ListItem, f7AccordionContent, f7List, f7AccordionToggle, f7AccordionItem } from 'framework7-vue';
+import { f7Page, f7 } from 'framework7-vue';
 import axios from 'axios';
 import { ref, onMounted } from 'vue';
 
@@ -1087,6 +1090,11 @@ const getTableListFloorWise = () => {
     .then((response) => {
         floorList.value = response.data;
     });
+}
+
+const openPos = (id) => {
+    console.log(id);
+    f7.view.main.router.navigate({ url: "/pos/"+id });
 }
 
 </script>

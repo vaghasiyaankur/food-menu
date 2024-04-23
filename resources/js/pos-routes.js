@@ -1,4 +1,5 @@
 import Pos from "./pages/pos/Pos.vue";
+import PosNew from "./pages/pos/PosNew.vue";
 import Login from "./pages/restaurant-manager/Login.vue";
 import FoodCategory from "./pages/pos/menu-management/FoodCategory.vue";
 import FoodSubCategory from "./pages/pos/menu-management/FoodSubCategory.vue";
@@ -20,6 +21,11 @@ export default [
     name : 'POS',
     path: '/',
     component: Pos,
+  },
+  {
+    name : 'PosNew',
+    path: '/pos/:id',
+    component: PosNew,
   },
   {
     name : 'Login',

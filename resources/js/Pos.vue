@@ -7,7 +7,7 @@
         />
       </div>
       <f7-view
-        url="/table-view/"
+        url="/pos/6/"
         :main="true"
         class="safe-areas"
         :master-detail-breakpoint="768"

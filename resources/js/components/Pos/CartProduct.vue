@@ -140,10 +140,9 @@
                     v-for="(product,index) in cartProducts" :key="index"
                 >
                     <div class="product-detail-inner">
-                        <div class="delete-product">
-                            <span data-popup="#deleteCartItem_popup"
-                                @click="f7.popup.open(`.deleteCartItemPopup`);"
-                            >
+                        <div class="delete-product"  @click="removeProduct(product.id)">
+                            <span>
+                            <!-- @click="f7.popup.open(`.deleteCartItemPopup`);" -->
                                 <f7-icon f7="minus" class="font-16 delete-product-button">
                                 </f7-icon>
                             </span>
@@ -152,12 +151,14 @@
                             <p class="no-margin">
                                 {{ product.name }}
                             </p>
-                            <p class="text-red no-margin">
-                                    ${{ product.price.toFixed(2)}}
-                            </p>
-                            <!-- <span class="no-margin display-flex align-items-center">Size: S<p
+                            <span class="no-margin display-flex align-items-center">Size: S<p
                                     class="text-red no-margin">
-                                    ${{ product.price.toFixed(2)}}</p></span> -->
+                                    ${{ product.price.toFixed(2)}}</p></span>
+                                    <span>
+                                        Ingredient : 
+                                        <span>dhs</span><br>
+                                        <span>dhs</span><br>
+                                    </span>
                         </div>
                     </div>
                     <div class="product-detail-inner">
@@ -289,7 +290,7 @@
 import { f7, f7Icon } from 'framework7-vue';
 import Icon from '../Icon.vue';
 
-const emit = defineEmits(['increase:quantity', 'decrease:quantity', 'open:note-popup']);
+const emit = defineEmits(['increase:quantity', 'decrease:quantity', 'open:note-popup', 'remove:cart-product']);
 
 const props = defineProps({
     cartProducts: {
@@ -308,5 +309,9 @@ const decreaseQuantity = (id) => {
 
 const openNotePopup = (id) => {
     emit('open:note-popup', id);
+}
+
+const removeProduct = (id) => {
+    emit('remove:cart-product', id)
 }
 </script>

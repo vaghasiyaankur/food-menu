@@ -17,14 +17,20 @@
                         <button class="button active button-raised padding text-transform-capitalize"><Icon name="tick" class="margin-right-half" />Added</button>
                     </div> -->
                     <div class="product-add-button">
-                        <button 
-                            class="button button-raised btn-add-product padding text-transform-capitalize"
-                            @click="removeProductIntoCart(product.id)"
-                            v-if="isProductSelected(product.id)"
-                        >
-                            <f7-icon f7="minus" class="font-16 margin-right-half"></f7-icon>
-                                Remove
-                        </button>
+                        <template  v-if="isProductSelected(product.id)">
+                            <button 
+                                class="button button-raised btn-add-product padding text-transform-capitalize active"
+                            >
+                                <f7-icon f7="checkmark" class="font-16 margin-right-half"></f7-icon>
+                                    Added
+                                </button>
+                                <button 
+                                    class="button button-raised btn-add-product padding text-transform-capitalize "
+                                    @click="addProductIntoCart(product.id)"
+                                >
+                                    <f7-icon f7="plus" class="font-16 margin-right-half"></f7-icon>
+                                Add</button>
+                        </template>
                         <button 
                             class="button button-raised btn-add-product padding text-transform-capitalize"
                             @click="addProductIntoCart(product.id)"
@@ -63,12 +69,13 @@ const foodTypeIcon = (typeId) => {
 }
 
 const addProductIntoCart = (id) => {
+    console.log(id);
     emit('add:cart-product', id);
 }
 
-const removeProductIntoCart = (id) => {
-    emit('remove:cart-product', id);
-}
+// const removeProductIntoCart = (id) => {
+//     emit('remove:cart-product', id);
+// }
 
 const isProductSelected = (id) => {
     return props.cartProducts.some(item => item.id === id);

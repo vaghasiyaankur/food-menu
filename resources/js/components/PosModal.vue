@@ -760,13 +760,28 @@ import $ from 'jquery';
 
 const props = defineProps({
     noteProductId: Number,
-    noteProductDescription: String
+    noteProductDescription: String,
+    addIngredientList: {
+        type: Array,
+        default: () => []
+    },
+    addVariationList: {
+        type: Array,
+        default: () => []
+    },
 });
 
-const emit = defineEmits(['submit:product-note']);
+const emit = defineEmits([
+                'submit:product-note', 
+                'add-remove:ingredient-variation'
+            ]);
 
 const submitNote = () => {
     const note = $("#product-note").val();
     emit('submit:product-note', note);
+}
+
+const addRemoveIngVar = (id, type, add) => {    
+    emit('add-remove:ingredient-variation', id, type, add);
 }
 </script>

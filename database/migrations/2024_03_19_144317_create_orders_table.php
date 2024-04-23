@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('role')->default('Guest');
             $table->string('cancelled_by')->nullable();
             $table->timestamp('start_time')->nullable();
-            $table->integer('finish_time')->default(0);
+            $table->timestamp('finish_time')->nullable();
             $table->boolean('finished')->default(0);
             $table->timestamp('finish_at')->nullable();
             $table->softDeletes();
