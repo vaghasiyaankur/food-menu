@@ -1,6 +1,6 @@
 <template>
     <f7-page>
-        <div class="card digital_menu_card elevation-2">
+        <div class="card digital_menu_card digital_menu_page elevation-2">
             <div class="row padding-horizontal no-padding-vertical">
                 <div class="col">
                     <h3 class="margin-bottom-half">
@@ -13,14 +13,17 @@
             <div v-if="product_subcategory.length != 0">
                 <div class="digital_menu_swiper padding">
                     <div data-pagination='{"el":".swiper-pagination"}' data-space-between="20" data-slides-per-view="11"
-                    class="swiper swiper-init demo-swiper margin-top margin-bottom" style="height : 135px">
+                        class="swiper swiper-init demo-swiper margin-top margin-bottom" style="height : 135px">
                         <div class="swiper-pagination"></div>
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide margin-right" :class="{ 'slide-active': category.id == sliderActive}" v-for="category in product_category" :key="category" @click="getProducts(category.id)">
+                            <div class="swiper-slide margin-right"
+                                :class="{ 'slide-active': category.id == sliderActive }"
+                                v-for="category in product_category" :key="category" @click="getProducts(category.id)">
                                 <div class="menu-image">
-                                    <img :src="'/storage'+category.image" alt="">
+                                    <img :src="'/storage' + category.image" alt="">
                                 </div>
-                                <p class="font-13 no-margin text-align-center margin-top-half">{{ category.category_languages[0].name }}</p>
+                                <p class="font-13 no-margin text-align-center margin-top-half">{{
+                                    category.category_languages[0].name }}</p>
                             </div>
                         </div>
                     </div>
@@ -34,9 +37,12 @@
                             <div class="row" v-if="product_subcategory.length">
                                 <div class="col-50" v-for="subcate in product_subcategory" :key="subcate">
                                     <div class="menu-list">
-                                        <div class="font-18 text-align-center menu-list-title text-color-black"><u>{{ subcate.sub_category_language[0].name }}</u></div>
-                                        <div class="list row margin-half align-items-center" v-for="product in subcate.products" :key="product">
-                                            <div class="col-85 display-flex">{{ product.product_language[0].name }}&nbsp;<span class="dots"></span></div>
+                                        <div class="font-18 text-align-center menu-list-title text-color-black"><u>{{
+                                            subcate.sub_category_language[0].name }}</u></div>
+                                        <div class="list row margin-half align-items-center"
+                                            v-for="product in subcate.products" :key="product">
+                                            <div class="col-85 display-flex">{{ product.product_language[0].name
+                                                }}&nbsp;<span class="dots"></span></div>
                                             <div class="col-15">{{ product.price.toFixed(2) }}</div>
                                         </div>
                                     </div>
@@ -55,7 +61,7 @@
                 </div>
             </div>
             <div v-else>
-                <div class="no_order">
+                <div class="no_order display-none">
                     <NoValueFound />
                     <div class="no_order_text text-align-center">
                         <p class="no-margin">Empty Food Menu List</p>
@@ -511,39 +517,348 @@
                 </svg>
                 <p class="no-margin">Empty Food Menu List</p>
             </div>
-            <div class="gujarati_dish_category">
+
+            <div class="gujarati_dish_category scroll-category">
                 <div class='faq'>
                     <input id='faq-a' type='checkbox'>
                     <label for='faq-a'>
-                        <p class="faq-heading">Sabji</p>
+                        <h4 class="no-margin faq-heading">Sabji</h4>
                         <div class='faq-arrow'></div>
-                        <p class="faq-text">It is completely safe and totally legal! There will is no record of this
-                            process to your shared Dropbox users.</p>
+                        <div class="faq-menu-items">
+                            <div class="sub-menu-items sabji_menu">
+                                <div class="sub_items">
+                                    <div class="item_display">
+                                        <img src="\assets\images\seederImages\gujarati_menu\sabji\undhiyu.png">
+                                    </div>
+                                    <div class="item_disc">
+                                        <div class="item_name">Undhiyu</div>
+                                        <div class="item_price">110.00</div>
+                                    </div>
+                                </div>
+                                <div class="sub_items">
+                                    <div class="item_display">
+                                        <img src="\assets\images\seederImages\gujarati_menu\sabji\sev_tamatar.png">
+                                    </div>
+                                    <div class="item_disc">
+                                        <div class="item_name">Sev Tamatar</div>
+                                        <div class="item_price">110.00</div>
+                                    </div>
+                                </div>
+                                <div class="sub_items">
+                                    <div class="item_display">
+                                        <img src="\assets\images\seederImages\gujarati_menu\sabji\dhokli_sabji.png">
+                                    </div>
+                                    <div class="item_disc">
+                                        <div class="item_name">Dhokli Sabji</div>
+                                        <div class="item_price">110.00</div>
+                                    </div>
+                                </div>
+                                <div class="sub_items">
+                                    <div class="item_display">
+                                        <img src="\assets\images\seederImages\gujarati_menu\sabji\urad_dal.png">
+                                    </div>
+                                    <div class="item_disc">
+                                        <div class="item_name">Urad Dal</div>
+                                        <div class="item_price">110.00</div>
+                                    </div>
+                                </div>
+                                <div class="sub_items">
+                                    <div class="item_display">
+                                        <img src="\assets\images\seederImages\gujarati_menu\sabji\chana_masala.png">
+                                    </div>
+                                    <div class="item_disc">
+                                        <div class="item_name">Chana Masala</div>
+                                        <div class="item_price">110.00</div>
+                                    </div>
+                                </div>
+                                <div class="sub_items">
+                                    <div class="item_display">
+                                        <img src="\assets\images\seederImages\gujarati_menu\sabji\onion.png">
+                                    </div>
+                                    <div class="item_disc">
+                                        <div class="item_name">Onion</div>
+                                        <div class="item_price">110.00</div>
+                                    </div>
+                                </div>
+                                <div class="sub_items">
+                                    <div class="item_display">
+                                        <img src="\assets\images\seederImages\gujarati_menu\sabji\aloo_matar.png">
+                                    </div>
+                                    <div class="item_disc">
+                                        <div class="item_name">Aloo Matar</div>
+                                        <div class="item_price">110.00</div>
+                                    </div>
+                                </div>
+                                <div class="sub_items">
+                                    <div class="item_display">
+                                        <img src="\assets\images\seederImages\gujarati_menu\sabji\bhindi_masala.png">
+                                    </div>
+                                    <div class="item_disc">
+                                        <div class="item_name">Bhindi Masala</div>
+                                        <div class="item_price">110.00</div>
+                                    </div>
+                                </div>
+                                <div class="sub_items">
+                                    <div class="item_display">
+                                        <img src="\assets\images\seederImages\gujarati_menu\sabji\baingan_bhartha.png">
+                                    </div>
+                                    <div class="item_disc">
+                                        <div class="item_name">Baingan Bhartha</div>
+                                        <div class="item_price">110.00</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </label>
                     <input id='faq-b' type='checkbox'>
                     <label for='faq-b'>
-                        <p class="faq-heading">Roti</p>
+                        <h4 class="no-margin faq-heading">Roti</h4>
                         <div class='faq-arrow'></div>
-                        <p class="faq-text">Upgrading is a slow process and will take around 3-10 days. <strong>In order
-                                to control the risk and secure the space you earned, we will gradually process
-                                it.</strong> during this time you can still use your account as normal as usual.</p>
+                        <div class="faq-menu-items">
+                            <div class="sub-menu-items roti_menu">
+                                <div class="sub_items">
+                                    <div class="item_display">
+                                        <img src="\assets\images\seederImages\gujarati_menu\roti\plain_roti.png">
+                                    </div>
+                                    <div class="item_disc">
+                                        <div class="item_name">Plain Roti</div>
+                                        <div class="item_price">110.00</div>
+                                    </div>
+                                </div>
+                                <div class="sub_items">
+                                    <div class="item_display">
+                                        <img src="\assets\images\seederImages\gujarati_menu\roti\bajri_rotlo.png">
+                                    </div>
+                                    <div class="item_disc">
+                                        <div class="item_name">Bajri Rotlo</div>
+                                        <div class="item_price">110.00</div>
+                                    </div>
+                                </div>
+                                <div class="sub_items">
+                                    <div class="item_display">
+                                        <img src="\assets\images\seederImages\gujarati_menu\roti\juvar_rotlo.png">
+                                    </div>
+                                    <div class="item_disc">
+                                        <div class="item_name">Juvar Rotlo</div>
+                                        <div class="item_price">110.00</div>
+                                    </div>
+                                </div>
+                                <div class="sub_items">
+                                    <div class="item_display">
+                                        <img src="\assets\images\seederImages\gujarati_menu\roti\makai_rotlo.png">
+                                    </div>
+                                    <div class="item_disc">
+                                        <div class="item_name">Makai Rotlo</div>
+                                        <div class="item_price">110.00</div>
+                                    </div>
+                                </div>
+                                <div class="sub_items">
+                                    <div class="item_display">
+                                        <img src="\assets\images\seederImages\gujarati_menu\roti\thepla.png">
+                                    </div>
+                                    <div class="item_disc">
+                                        <div class="item_name">Thepla</div>
+                                        <div class="item_price">110.00</div>
+                                    </div>
+                                </div>
+                                <div class="sub_items">
+                                    <div class="item_display">
+                                        <img src="\assets\images\seederImages\gujarati_menu\roti\rice_roti.png">
+                                    </div>
+                                    <div class="item_disc">
+                                        <div class="item_name">Rice Roti</div>
+                                        <div class="item_price">110.00</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </label>
                     <input id='faq-c' type='checkbox'>
                     <label for='faq-c'>
-                        <p class="faq-heading">Papad</p>
+                        <h4 class="no-margin faq-heading">Papad</h4>
                         <div class='faq-arrow'></div>
-                        <p class="faq-text">NO ACCESS TO YOUR PERSONAL ACCOUNT OR INFO IS REQUIRED! All I need from you
-                            is your Dropbox referral link.</p>
+                        <div class="faq-menu-items">
+                            <div class="sub-menu-items papad_menu">
+                                <div class="sub_items">
+                                    <div class="item_display">
+                                        <img src="\assets\images\seederImages\gujarati_menu\papad\moong_dal_papad.png">
+                                    </div>
+                                    <div class="item_disc">
+                                        <div class="item_name">Moong Dal Papad</div>
+                                        <div class="item_price">110.00</div>
+                                    </div>
+                                </div>
+                                <div class="sub_items">
+                                    <div class="item_display">
+                                        <img src="\assets\images\seederImages\gujarati_menu\papad\urad_dal_papad.png">
+                                    </div>
+                                    <div class="item_disc">
+                                        <div class="item_name">Urad Dal Papad</div>
+                                        <div class="item_price">110.00</div>
+                                    </div>
+                                </div>
+                                <div class="sub_items">
+                                    <div class="item_display">
+                                        <img src="\assets\images\seederImages\gujarati_menu\papad\jeera_rice_papad.png">
+                                    </div>
+                                    <div class="item_disc">
+                                        <div class="item_name">Jeera Rice Papad</div>
+                                        <div class="item_price">110.00</div>
+                                    </div>
+                                </div>
+                                <div class="sub_items">
+                                    <div class="item_display">
+                                        <img src="\assets\images\seederImages\gujarati_menu\papad\masala_papad.png">
+                                    </div>
+                                    <div class="item_disc">
+                                        <div class="item_name">Masala Papad</div>
+                                        <div class="item_price">110.00</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </label>
                     <input id='faq-d' type='checkbox'>
                     <label for='faq-d'>
-                        <p class="faq-heading">Other</p>
+                        <h4 class="no-margin faq-heading">Other</h4>
                         <div class='faq-arrow'></div>
-                        <p class="faq-text">Log in to the Dropbox website and get your referral link:
-                            www.dropbox.com/referral. Copy the link (example link:
-                            <strong>https://db.tt/xYxYzyXy</strong>) and send it via eBay message. </p>
+                        <div class="faq-menu-items">
+                            <div class="sub-menu-items other_gujarati_menu">
+                                <div class="sub_items">
+                                    <div class="item_display">
+                                        <img
+                                            src="\assets\images\seederImages\gujarati_menu\other_items\kadhi_khichdi.png">
+                                    </div>
+                                    <div class="item_disc">
+                                        <div class="item_name">Kadhi Khichdi</div>
+                                        <div class="item_price">110.00</div>
+                                    </div>
+                                </div>
+                                <div class="sub_items">
+                                    <div class="item_display">
+                                        <img src="\assets\images\seederImages\gujarati_menu\other_items\dal_dhokli.png">
+                                    </div>
+                                    <div class="item_disc">
+                                        <div class="item_name">Dal Dhokli</div>
+                                        <div class="item_price">110.00</div>
+                                    </div>
+                                </div>
+                                <div class="sub_items">
+                                    <div class="item_display">
+                                        <img src="\assets\images\seederImages\gujarati_menu\other_items\khandvi.png">
+                                    </div>
+                                    <div class="item_disc">
+                                        <div class="item_name">Khandvi</div>
+                                        <div class="item_price">110.00</div>
+                                    </div>
+                                </div>
+                                <div class="sub_items">
+                                    <div class="item_display">
+                                        <img src="\assets\images\seederImages\gujarati_menu\other_items\handvo.png">
+                                    </div>
+                                    <div class="item_disc">
+                                        <div class="item_name">Handvo</div>
+                                        <div class="item_price">110.00</div>
+                                    </div>
+                                </div>
+                                <div class="sub_items">
+                                    <div class="item_display">
+                                        <img src="\assets\images\seederImages\gujarati_menu\other_items\patra.png">
+                                    </div>
+                                    <div class="item_disc">
+                                        <div class="item_name">Patra</div>
+                                        <div class="item_price">110.00</div>
+                                    </div>
+                                </div>
+                                <div class="sub_items">
+                                    <div class="item_display">
+                                        <img
+                                            src="\assets\images\seederImages\gujarati_menu\other_items\muthiya_dhokla.png">
+                                    </div>
+                                    <div class="item_disc">
+                                        <div class="item_name">Muthiya Dhokla</div>
+                                        <div class="item_price">110.00</div>
+                                    </div>
+                                </div>
+                                <div class="sub_items">
+                                    <div class="item_display">
+                                        <img
+                                            src="\assets\images\seederImages\gujarati_menu\other_items\lilva kachori.png">
+                                    </div>
+                                    <div class="item_disc">
+                                        <div class="item_name">Lilva Kachori</div>
+                                        <div class="item_price">110.00</div>
+                                    </div>
+                                </div>
+                                <div class="sub_items">
+                                    <div class="item_display">
+                                        <img src="\assets\images\seederImages\gujarati_menu\other_items\khichu.png">
+                                    </div>
+                                    <div class="item_disc">
+                                        <div class="item_name">Khichu</div>
+                                        <div class="item_price">110.00</div>
+                                    </div>
+                                </div>
+                                <div class="sub_items">
+                                    <div class="item_display">
+                                        <img
+                                            src="\assets\images\seederImages\gujarati_menu\other_items\khaman_dhokla.png">
+                                    </div>
+                                    <div class="item_disc">
+                                        <div class="item_name">Khaman/Dhokla</div>
+                                        <div class="item_price">110.00</div>
+                                    </div>
+                                </div>
+                                <div class="sub_items">
+                                    <div class="item_display">
+                                        <img src="\assets\images\seederImages\gujarati_menu\other_items\locho.png">
+                                    </div>
+                                    <div class="item_disc">
+                                        <div class="item_name">Locho</div>
+                                        <div class="item_price">110.00</div>
+                                    </div>
+                                </div>
+                                <div class="sub_items">
+                                    <div class="item_display">
+                                        <img
+                                            src="\assets\images\seederImages\gujarati_menu\other_items\bateta_bhungla.png">
+                                    </div>
+                                    <div class="item_disc">
+                                        <div class="item_name">Bateta Bhungla</div>
+                                        <div class="item_price">110.00</div>
+                                    </div>
+                                </div>
+                                <div class="sub_items">
+                                    <div class="item_display">
+                                        <img src="\assets\images\seederImages\gujarati_menu\other_items\bhajiya.png">
+                                    </div>
+                                    <div class="item_disc">
+                                        <div class="item_name">Bhajiya</div>
+                                        <div class="item_price">110.00</div>
+                                    </div>
+                                </div>
+                                <div class="sub_items">
+                                    <div class="item_display">
+                                        <img src="\assets\images\seederImages\gujarati_menu\other_items\ghughra.png">
+                                    </div>
+                                    <div class="item_disc">
+                                        <div class="item_name">Ghughra</div>
+                                        <div class="item_price">110.00</div>
+                                    </div>
+                                </div>
+                                <div class="sub_items">
+                                    <div class="item_display">
+                                        <img
+                                            src="\assets\images\seederImages\gujarati_menu\other_items\bread pakora.png">
+                                    </div>
+                                    <div class="item_disc">
+                                        <div class="item_name">Bread Pakora</div>
+                                        <div class="item_price">110.00</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </label>
-
                 </div>
             </div>
 
