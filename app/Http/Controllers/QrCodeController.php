@@ -15,22 +15,8 @@ class QrCodeController extends Controller
 {
     public function index(Request $req)
     {
-        // $start = Carbon::create(2019, 2, 25);
-
-        // $end = Carbon::create(2022, 8, 25);
-
-        // $diff = $start->diffInMonths($end);
-
-        // for($i=0; $i<$diff; $i++){
-        //     if($i == 0){
-        //         $this->setQrCodeMonthly(date('Y-m-d', strtotime($start)));
-        //     }
-        //     $date = date('Y-m-d', strtotime($start->addMonth(1)));
-        //     $this->setQrCodeMonthly($date);
-        // }
-
         $fromDate = $req->from_date ? Carbon::parse($req->from_date)->format('Y-m-d') : '';
-        $toDate = $req->to_date ? Carbon::parse($req->to_date)->format('Y-m-d') : $fromDate;
+        $toDate = $req->to_date && $req->to_date != 'undefined' ? Carbon::parse($req->to_date)->format('Y-m-d') : $fromDate;
         $qrcodes = QrCodeToken::whereRestaurantId(Auth::user()->restaurant_id);
         if ($req->from_date && $req->to_date) {
             $qrcodes = $qrcodes->whereDate('start_date','>=',$fromDate)->whereDate('end_date','<=',$toDate);
@@ -42,7 +28,7 @@ class QrCodeController extends Controller
         foreach($qrcodes as $key=>$qr){
             $qr->status = '';
             if (Carbon::parse($qr['start_date'])->format('Y-m-d') <= Carbon::now()->format('Y-m-d') && Carbon::parse($qr['end_date'])->format('Y-m-d') >= Carbon::now()->format('Y-m-d')) {
-               $qr->status = 'Ongoing';
+                $qr->status = 'Ongoing';
             }else if(Carbon::parse($qr['start_date'])->format('Y-m-d') >= Carbon::now()->format('Y-m-d')){
                 $qr->status = 'Upcoming';
             }else if(Carbon::parse($qr['end_date'])->format('Y-m-d') <= Carbon::now()->format('Y-m-d')){

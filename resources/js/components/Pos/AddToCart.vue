@@ -61,6 +61,7 @@
     />
 
     <div class="order-bill-wrapper">
+        <button class="btn-order-detail-expand"></button>
         <div class="order-bill">
             <div class="order-details" :class="{'open' : !openAmountSlider}">
                 <div class="order-discount">

@@ -60,6 +60,12 @@
 .setting-tabs .general_info_form, .setting-tabs .currency_form, .setting-tabs .taxsetting_form{
     margin-top: 34px;
 }
+
+.setting-tabs .general_info_form select{
+    border: none;
+    padding: 13px 15px;
+}
+
 .setting-tabs .block-title{
     font-weight: 600;
     font-size: 16px;
@@ -565,6 +571,7 @@ thead .label-cell {
     line-height: 17px;
     letter-spacing: 2px;
     width: 100%;
+    border: 0 !important;
 }
 
 .drop-down__menu-box {
@@ -668,8 +675,8 @@ thead .label-cell {
 }
 .qrcode_generate_popup .button{
     box-shadow: none;
-    border: 0.5px solid #999999;
-    color:  #999999;
+    background: #F33E3E;
+    color:  #ffffff;
     font-weight: 500;
     border-radius: 7px;
 }
@@ -786,4 +793,23 @@ ul .item-input-wrap input{
     padding: 8px 16px;
     text-decoration: none;
     border-radius: 5px;
+}
+.picker-items{
+    padding:43px 0 !important;
+}
+.picker-center-highlight{
+    background-color:transparent !important;
+}
+.picker-columns{
+    width: 90%;
+    height: 60% !important;
+    background:  linear-gradient(180deg, #F3F4F5 0%, #FFFFFF 34.65%, #FFFFFF 63.19%, rgba(243, 244, 245, 0.857255) 100%);
+    border-radius: 10px;
+    margin:0 auto;
+    top: 20px;
+    justify-content: space-between !important;
+    -webkit-mask-box-image: none !important;
+}
+.picker.picker-inline{
+    height: 150px;
 }
