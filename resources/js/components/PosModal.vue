@@ -6,11 +6,14 @@
             <div class="popup-content padding-horizontal padding-top">
                 <label class="add_minutes_text">Special Notes</label>
                 <div class="display-flex align-items-center margin-top-half">
-                    <input type="text" class="w-100" id="product-note" :value="noteProductDescription" placeholder="Add Note...">
+                    <input type="text" class="w-100" id="product-note" :value="noteProductDescription"
+                        placeholder="Add Note...">
                 </div>
                 <div class="margin-top no-margin-bottom display-flex justify-content-center padding-top popup_button">
-                    <button type="button" class="button button-raised text-color-black bg-color-white button-large popup-close margin-right popup-button">Cancel</button>
-                    <button type="button" class="button button-raised button-large popup-button active" @click="submitNote">Save</button>
+                    <button type="button"
+                        class="button button-raised text-color-black bg-color-white button-large popup-close margin-right popup-button">Cancel</button>
+                    <button type="button" class="button button-raised button-large popup-button active"
+                        @click="submitNote">Save</button>
                 </div>
             </div>
         </div>
@@ -35,7 +38,8 @@
                     </div>
                 </div>
                 <div class="margin-top no-margin-bottom display-flex justify-content-center padding-top popup_button">
-                    <button type="button" class="button button-raised text-color-black bg-color-white button-large popup-close margin-right popup-button">Cancel</button>
+                    <button type="button"
+                        class="button button-raised text-color-black bg-color-white button-large popup-close margin-right popup-button">Cancel</button>
                     <button type="button" class="button button-raised button-large popup-button active">Save</button>
                 </div>
             </div>
@@ -52,7 +56,8 @@
                     <input type="number" class="w-100" placeholder="Add Price...">
                 </div>
                 <div class="margin-top no-margin-bottom display-flex justify-content-center padding-top popup_button">
-                    <button type="button" class="button button-raised text-color-black bg-color-white button-large popup-close margin-right popup-button">Cancel</button>
+                    <button type="button"
+                        class="button button-raised text-color-black bg-color-white button-large popup-close margin-right popup-button">Cancel</button>
                     <button type="button" class="button button-raised button-large popup-button active">Save</button>
                 </div>
             </div>
@@ -60,7 +65,8 @@
         <div class="wave-image-content"><img src="/images/flow.png" style="width:100%"></div>
     </div>
     <!-- ========= Delete Cart Item POPUP ========= -->
-    <div id="deleteCartItem_popup" class="popup deleteCartItemPopup" style="position: fixed; display: block; border-radius: 15px;">
+    <div id="deleteCartItem_popup" class="popup deleteCartItemPopup"
+        style="position: fixed; display: block; border-radius: 15px;">
         <div class="text-align-center padding popup_title">Delete New York-Style Pizza Vegetarian</div>
         <div class="padding-horizontal">
             <div class="popup-content padding-horizontal padding-top">
@@ -69,7 +75,8 @@
                     <textarea rows="" cols="" class="w-100" placeholder="Reason"></textarea>
                 </div>
                 <div class="margin-top no-margin-bottom display-flex justify-content-center padding-top popup_button">
-                    <button type="button" class="button button-raised text-color-black bg-color-white button-large popup-close margin-right popup-button">Cancel</button>
+                    <button type="button"
+                        class="button button-raised text-color-black bg-color-white button-large popup-close margin-right popup-button">Cancel</button>
                     <button type="button" class="button button-raised button-large popup-button active">Save</button>
                 </div>
             </div>
@@ -283,6 +290,103 @@
                 <button type="button"
                     class="button button-raised button-large popup-ok-button popup-save-settle-button">Save &
                     Settle</button>
+            </div>
+        </div>
+        <div class="wave-image-content"><img src="/images/flow.png" style="width:100%"></div>
+    </div>
+
+    <!-- ========= ITEM EDIT POPUP ========= -->
+    <div class="popup item_edit_btn_Popup" id="item_edit_btn_Popup">
+        <div class="data-form item_edit-data-form">
+            <div class="text-align-center item_edit-popup_title">
+                <h2 class="no-margin">New York-Style Pizza Vegetarian</h2>
+            </div>
+            
+            <div class="item_edit-popup_heading">
+                <h4 class="no-margin">Variation</h4>
+            </div>
+            <div class="diff_var_btns">
+                <div class="variable_button selected">
+                    <i class="icon f7-icons font-16 delete-product-button">minus </i>
+                    <button class="small_variable_button">
+                        <h5 class="no-margin variable_name">Small</h5>
+                        <p class="no-margin variable_price">$10.00</p>
+                    </button>
+                </div>
+                <div class="variable_button">
+                    <i class="icon f7-icons font-16 delete-product-button">minus </i>
+                    <button class="medium_variable_button">
+                        <h5 class="no-margin variable_name">Medium</h5>
+                        <p class="no-margin variable_price">$10.00</p>
+                    </button>
+                </div>
+                <div class="variable_button">
+                    <i class="icon f7-icons font-16 delete-product-button">minus </i>
+                    <button class="large_variable_button">
+                        <h5 class="no-margin variable_name">Large</h5>
+                        <p class="no-margin variable_price">$10.00</p>
+                    </button>
+                </div>
+                <div class="variable_button">
+                    <i class="icon f7-icons font-16 delete-product-button">minus </i>
+                    <button class="extra_large_variable_button">
+                        <h5 class="no-margin variable_name">Extra Large</h5>
+                        <p class="no-margin variable_price">$10.00</p>
+                    </button>
+                </div>
+            </div>
+            <div class="item_edit-popup_addon_heading">
+                <h4 class="no-margin">Pizza Addons Small</h4>
+            </div>
+            <div class="diff_addon_btns">
+                <div class="addon_button selected">
+                    <i class="icon f7-icons font-16 delete-product-button">minus </i>
+                    <button class="cheese_addon_button">
+                        <h5 class="no-margin addon_name">Extra Cheese</h5>
+                        <p class="no-margin addon_price">$10.00</p>
+                    </button>
+                    <img src="http://127.0.0.1:8000/images/veg-icon.png">
+                </div>
+                <div class="addon_button">
+                    <i class="icon f7-icons font-16 delete-product-button">minus </i>
+                    <button class="crust_addon_button">
+                        <h5 class="no-margin addon_name">Thin Crust</h5>
+                        <p class="no-margin addon_price">$10.00</p>
+                    </button>
+                    <img src="http://127.0.0.1:8000/images/veg-icon.png">
+                </div>
+                <div class="addon_button">
+                    <i class="icon f7-icons font-16 delete-product-button">minus </i>
+                    <button class="topping_addon_button">
+                        <h5 class="no-margin addon_name">Extra Toppings</h5>
+                        <p class="no-margin addon_price">$10.00</p>
+                    </button>
+                    <img src="http://127.0.0.1:8000/images/veg-icon.png">
+                </div>
+                <div class="addon_button">
+                    <i class="icon f7-icons font-16 delete-product-button">minus </i>
+                    <button class="base_addon_button">
+                        <h5 class="no-margin addon_name">Pan Base</h5>
+                        <p class="no-margin addon_price">$10.00</p>
+                    </button>
+                    <img src="http://127.0.0.1:8000/images/veg-icon.png">
+                </div>
+            </div>
+            <hr class="horizontal-divider no-margin">
+            <div class="probable_amount">
+                <h5 class="no-margin">Extra Amount</h5>
+                <h5 class="no-margin">$20.00</h5>
+            </div>
+            <hr class="horizontal-divider no-margin">
+            <div class="popup_button">
+                <div class="item_edit-bill-btns">
+                    <div class="popup_cancel_item_edit-btn">
+                        <button type="button" class="cancle-item_edit-button">Cancel</button>
+                    </div>
+                    <div class="popup_save-item_edit-btn">
+                        <button type="button" class="save-item_edit-btn">Save</button>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="wave-image-content"><img src="/images/flow.png" style="width:100%"></div>
@@ -676,8 +780,9 @@
                 <div id="split_bill_opt_3" class="page-content tab">
                     <div class="item_wise">
                         <ul class="all-items">
-                            <li class="all-items-selector"><input class="all-items-selector-input" type="checkbox" name="All_Items" id="All_Items"
-                                    value="All Items" /> <label for="All_Items">All Items</label></li>
+                            <li class="all-items-selector"><input class="all-items-selector-input" type="checkbox"
+                                    name="All_Items" id="All_Items" value="All Items" /> <label for="All_Items">All
+                                    Items</label></li>
                             <ul class="all-items-list">
                                 <li class="all_items-item">
                                     <input type="checkbox" name="All_Items-list" id="All_Items-list"
