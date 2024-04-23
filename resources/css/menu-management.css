@@ -147,14 +147,18 @@
 
 @media screen and (min-width: 992px) {
     .grid-cols-5 {
-        grid-template-columns: calc((100% - 100px) / 5) calc((100% - 100px) / 5) calc(
+        grid-template-columns:
+            calc((100% - 100px) / 5) calc((100% - 100px) / 5) calc(
                 (100% - 100px) / 5
-            ) calc((100% - 100px) / 5) calc((100% - 100px) / 5);
+            )
+            calc((100% - 100px) / 5) calc((100% - 100px) / 5);
     }
     .grid-cols-4 {
-        grid-template-columns: calc((100% - 75px) / 4) calc((100% - 75px) / 4) calc(
+        grid-template-columns:
+            calc((100% - 75px) / 4) calc((100% - 75px) / 4) calc(
                 (100% - 75px) / 4
-            ) calc((100% - 75px) / 4);
+            )
+            calc((100% - 75px) / 4);
     }
 }
 
@@ -205,7 +209,7 @@
     /* box-shadow: 0px 1.5px 3px 0px #00000026; */
 }
 
-.add-combo-header .add-combo{
+.add-combo-header .add-combo {
     overflow: auto;
     height: calc(79dvh);
 }
@@ -215,7 +219,7 @@
     margin-bottom: 25px;
 }
 
-.add-combo-form-list{
+.add-combo-form-list {
     height: 78%;
     overflow: auto;
 }
@@ -403,7 +407,8 @@
     background-color: #ffffff;
 }
 
-.clear-all-btn, .add-combo-btn {
+.clear-all-btn,
+.add-combo-btn {
     width: 50%;
     font-size: 18px !important;
     line-height: 21px;
@@ -418,7 +423,7 @@
     box-shadow: 0px 1.5px 5px 0px #a6a6a666;
 }
 
-.add-combo-btn{
+.add-combo-btn {
     padding: 12px 0;
     background-color: #f33e3e;
     box-shadow: 1px 1px 4px 0px #8f716459;
@@ -436,11 +441,11 @@
     left: auto;
 }
 
-.category-image>div{
+.category-image > div {
     margin-top: 7px;
     border: 1px dashed #999999;
     border-radius: 5px;
-    background: #F5F5F5;
+    background: #f5f5f5;
 }
 
 @media screen and (min-width: 992px) {
@@ -1203,31 +1208,46 @@
     padding-top: 15px;
 }
 
+.digital_menu_page .scroll-category {
+    overflow-y: scroll;
+    max-height: 260px;
+}
+.digital_menu_page .scroll-category::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 10px;
+    box-shadow: -1px -1px 4px 0px rgba(255, 255, 255, 0.3) inset;
+    border-right: 5px solid #e0e0e0;
+    border-left: 5px solid #e0e0e0;
+}
+.digital_menu_page .scroll-category::-webkit-scrollbar-thumb {
+    background-color: #999999;
+    box-shadow: -1px -1px 4px 0px #ffffff4d inset;
+    border-radius: 10px;
+}
 .digital_menu_page .gujarati_dish_category .faq-heading {
     font-size: 22px;
     text-indent: 27px;
     font-weight: 600;
-    color: #38373D;
+    color: #38373d;
     width: 100%;
-    margin: 0;
+    margin: 0 !important;
     padding: 0;
-    border-bottom: 1px solid rgba(85, 85, 85, 0.4);
+    border-bottom: 1px dashed rgba(85, 85, 85, 0.4);
 }
 
-.digital_menu_page .gujarati_dish_category .faq-text {
+.digital_menu_page .gujarati_dish_category .faq-menu-items {
     font-weight: 400;
     color: #919191;
     width: 100%;
-    padding-left: 20px;
-    margin: 25px 0 0;
     padding: 0;
+    margin: 25px 0 40px;
 }
 
 .digital_menu_page .gujarati_dish_category .faq {
     width: 100%;
     background: white;
 }
-.digital_menu_page .gujarati_dish_category .faq input{
+.digital_menu_page .gujarati_dish_category .faq input {
     margin: 0;
 }
 .digital_menu_page .gujarati_dish_category .faq label {
@@ -1235,6 +1255,7 @@
     position: relative;
     overflow: hidden;
     cursor: pointer;
+    margin: 0;
 }
 
 .digital_menu_page .faq input[type="checkbox"] {
@@ -1248,7 +1269,7 @@
     border-right: 0.5px solid rgba(56, 55, 61, 1);
     float: right;
     position: absolute;
-    top: 13px;
+    top: 10px;
     right: 3px;
     transform: rotate(-45deg);
 }
@@ -1259,7 +1280,6 @@
     input[type="checkbox"]:checked
     + label {
     display: block;
-    height: 200px;
 }
 
 .digital_menu_page
@@ -1268,5 +1288,59 @@
     input[type="checkbox"]:not(:checked)
     + label {
     display: block;
-    height: 37px;
+    height: 34px;
+    margin-bottom: 40px;
+}
+.digital_menu_page .gujarati_dish_category .faq-menu-items .sub-menu-items {
+    display: grid;
+    row-gap: 20px;
+}
+.digital_menu_page .gujarati_dish_category .faq-menu-items .sabji_menu,
+.digital_menu_page .gujarati_dish_category .faq-menu-items .roti_menu,
+.digital_menu_page
+    .gujarati_dish_category
+    .faq-menu-items
+    .other_gujarati_menu {
+    grid-template-columns: auto auto auto auto auto;
+}
+.digital_menu_page .gujarati_dish_category .faq-menu-items .papad_menu {
+    grid-template-columns: auto auto auto auto;
+}
+.digital_menu_page .gujarati_dish_category .faq-menu-items .sub_items {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.digital_menu_page
+    .gujarati_dish_category
+    .faq-menu-items
+    .sub_items
+    .item_display
+    img {
+    width: 70px;
+}
+.digital_menu_page
+    .gujarati_dish_category
+    .faq-menu-items
+    .sub_items
+    .item_disc
+    .item_name {
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 600;
+    color: #38373d;
+    text-wrap: nowrap;
+    text-transform: capitalize;
+}
+.digital_menu_page
+    .gujarati_dish_category
+    .faq-menu-items
+    .sub_items
+    .item_disc
+    .item_price {
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: 500;
+    color: #f33e3e;
+    margin-top: 7px !important;
 }
