@@ -6,6 +6,7 @@ use App\Helper\CustomerHelper;
 use App\Helper\SettingHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Ingredient;
 use App\Models\IngredientRestaurantLanguage;
 use App\Models\Language;
 use App\Models\Product;
@@ -28,7 +29,6 @@ class ProductController extends Controller
 
     public function getProducts(Request $req)
     {
-
         $langId = SettingHelper::managerLanguage();
         $restaurantId = CustomerHelper::getRestaurantId();
         $restaurantLanguageId = RestaurantLanguage::where('language_id', $langId)
@@ -508,5 +508,53 @@ class ProductController extends Controller
         });
 
         return response()->json($transformedSubCategories);
+    }
+    
+    public function getVariationsAndIngredients(Request $req){
+        $langId = SettingHelper::managerLanguage();
+        $restaurantId = CustomerHelper::getRestaurantId();
+
+        $productIngredients = ProductIngredient::with('ingredient.ingredientRestaurantLanguages')
+                        ->where('product_id', $req->id)
+                        ->get();
+
+        $restaurantLanguageId = RestaurantLanguage::where('language_id', $langId)
+        ->where('restaurant_id', $restaurantId)
+        ->value('id');
+
+        $productVariations = ProductVariation::with('variation.variationRestaurantLanguages')
+        ->where('product_id', $req->id)
+        ->get();
+
+
+        $transformedIngredients = $productIngredients->map(function ($productIngredient) use ($restaurantLanguageId) {
+            $ingredient = $productIngredient->ingredient;
+            $translatedName = $ingredient->ingredientRestaurantLanguages->where('restaurant_language_id', $restaurantLanguageId)->first()->name ?? $ingredient->name;
+            return [
+                'id' => $ingredient->id,
+                'type' => $ingredient->type,
+                'image' => $ingredient->image,
+                'name' => $translatedName,
+                'price' => $ingredient->price,
+            ];
+        });
+
+        $transformedVariations = $productVariations->map(function ($productVariation) use ($restaurantLanguageId) {
+            $variation = $productVariation->variation;
+            $translatedName = $variation->variationRestaurantLanguages->where('restaurant_language_id', $restaurantLanguageId)->first()->name ?? $variation->name;
+            return [
+                'id' => $variation->id,
+                'image' => $variation->image,
+                'name' => $translatedName,
+                'price' => $productVariation->price,
+            ];
+        });
+
+        $transformedData = [
+            'ingredients' => $transformedIngredients,
+            'variations' => $transformedVariations,
+        ];
+
+        return response()->json($transformedData);
     }
 }

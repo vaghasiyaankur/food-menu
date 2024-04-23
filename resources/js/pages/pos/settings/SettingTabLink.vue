@@ -27,7 +27,7 @@ const props = defineProps({
 const emit = defineEmits(['update:activeTab']);
 
 const setActiveTab = (slug) => {
-  emit('update:activeTab', slug);
+    emit('update:activeTab', slug);
 };
 
 </script>

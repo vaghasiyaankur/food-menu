@@ -52,4 +52,9 @@ class Product extends Model
     {
         return $this->hasMany(ComboProduct::class, 'product_id');
     }
+
+    public function kotProduct()
+    {
+        return $this->hasMany(KotProduct::class, 'product_id');
+    }
 }

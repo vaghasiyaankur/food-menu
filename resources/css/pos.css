@@ -387,8 +387,11 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox {
 }
 .add-to-cart .cart-products {
     overflow: auto;
-    height: 77dvh;
+    height: 48dvh;
     scrollbar-width: none;
+}
+.add-to-cart .cart-products.open{
+    height: calc(44dvh);
 }
 .add-to-cart .cart-products .kot-time-wrapper {
     margin-top: 15px;
@@ -637,9 +640,9 @@ textarea {
     box-shadow: 2.5px -2.5px 2px 0px #863e2026 inset;
     box-shadow: 1px 1px 4px 0px #8f716459;
 }
-.order-bill-wrapper::before {
+.btn-order-detail-expand {
     content: "";
-    position: absolute;
+    position: relative;
     width: 37px;
     height: 37px;
     top: 0;
@@ -647,18 +650,18 @@ textarea {
     transform: translate(-50%, -50%);
     border-radius: 100%;
     background-color: #f33e3e;
+    border: 0;
 }
-.order-bill-wrapper::after {
+.btn-order-detail-expand::after {
     content: "";
     position: absolute;
     width: 0;
     height: 0;
-    top: 0;
-    left: 50%;
+    top: 49%;
+    left: 52%;
     transform: translate(-50%, -30%);
     border-left: 7px solid transparent;
     border-right: 7px solid transparent;
-
     border-top: 7px solid #ffffff;
 }
 @media screen and (min-width: 991px) {
@@ -673,6 +676,9 @@ textarea {
     .bill-divider,
     .payment-method {
         display: block;
+    }
+    .add-to-cart .cart-products{
+        height: 54dvh;
     }
 }
 .quantity-minus.disabled {

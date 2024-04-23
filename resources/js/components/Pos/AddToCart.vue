@@ -1,8 +1,8 @@
 <template>
     <div class="order-summary add-to-cart-section">
         <div class="order_table_details">
-            <div class="order_number">Order #10663</div>
-            <div class="table_number">Table No. 10</div>
+            <div class="order_number">Order {{ table.order ? '#'+table.order.number : '' }}</div>
+            <div class="table_number">Table No. {{ table ?.table_number }}</div>
         </div>
         <div class="dine-options grid grid-cols-3">
             <button class="button button-small food-received-type button-raised active">Dine In</button>
@@ -49,7 +49,7 @@
                 </svg>
                 <span class="tooltiptext">Waiter</span>
             </button>
-            <button class="button button-small deactive">Ground Floor</button>
+            <button class="button button-small deactive">{{ floorName }}</button>
         </div>
     </div>
 
@@ -58,18 +58,20 @@
         @increase:quantity="increaseQuantity"
         @decrease:quantity="decreaseQuantity"
         @open:note-popup="openNotePopup"
+        @remove:cart-product="removeProduct" 
     />
 
     <div class="order-bill-wrapper">
+        <button class="btn-order-detail-expand"></button>
         <div class="order-bill">
             <div class="order-details" :class="{'open' : !openAmountSlider}">
                 <div class="order-discount">
                     <p class="no-margin">Discount</p>
-                    <p class="no-margin">$0.00</p>
+                    <p class="no-margin">${{ discount }}</p>
                 </div>
                 <div class="order-sub_total">
                     <p class="no-margin">Sub Total</p>
-                    <p class="no-margin">$38.00</p>
+                    <p class="no-margin">${{ subTotal }}</p>
                 </div>
             </div>
             <hr class="bill-divider">
@@ -78,7 +80,7 @@
                     <p class="no-margin">Total Amount</p>
                 </div>
                 <div class="total_bill-amount">
-                    <p class="no-margin">${{ totalAmount.toFixed(2) }}</p>
+                    <p class="no-margin">${{ totalAmount }}</p>
                 </div>
             </div>
             <hr class="bill-divider">
@@ -130,16 +132,24 @@ import { f7 } from "framework7-vue"
 import CartProduct from './CartProduct.vue'
 import { ref } from 'vue'
 
-const emit = defineEmits(['increase:quantity', 'decrease:quantity','open:note-popup']);
+const emit = defineEmits(['increase:quantity', 'decrease:quantity','open:note-popup', 'remove:cart-product']);
 
-const openAmountSlider = ref(false);
+const openAmountSlider = ref(true);
 
 const props = defineProps({
     cartProducts: {
         type: Array,
         default: () => []
     },
-    totalAmount: Number
+    table: {
+        type: Array,
+        default: () => []
+    },
+    floorName: String,
+    totalAmount: Number,
+    subTotal: Number,
+    discount: Number
+
 });
 
 const increaseQuantity = (id) => {
@@ -158,5 +168,9 @@ const openNotePopup = (id) => {
 //     const zero = 0;
 //     return zero.toFixed(2);
 // }
+
+const removeProduct = (id) => {
+    emit('remove:cart-product', id)
+}
 
 </script>

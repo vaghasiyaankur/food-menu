@@ -44,4 +44,9 @@ class Order extends Model
     {
         return $this->hasMany(TableShiftHistory::class);
     }
+
+    public function kots()
+    {
+        return $this->hasMany(Kot::class, 'order_id');
+    }
 }

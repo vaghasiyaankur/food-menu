@@ -8,6 +8,7 @@ use App\Http\Controllers\Manager\CategoryController;
 use App\Http\Controllers\Manager\ComboController;
 use App\Http\Controllers\Manager\FloorController;
 use App\Http\Controllers\Manager\IngredientController;
+use App\Http\Controllers\Manager\PosController;
 use App\Http\Controllers\Manager\ReportController;
 use App\Http\Controllers\Manager\ProductController;
 use App\Http\Controllers\Manager\SubCategoryController;
@@ -107,6 +108,9 @@ Route::post('update-variation',[VariationController::class, 'updateVariation']);
 
 Route::post('/delete-variation',[VariationController::class, 'deleteVariation']);
 
+// ------------------------ POS Routes ------------------------ //
+
+Route::post('get-current-table-details',[PosController::class, 'getCurrentTableDetails']);
 
 // ------------------------ Product Routes ------------------------ //
 
@@ -133,6 +137,8 @@ Route::get('product/{id}',[ProductController::class, 'editProduct']);
 Route::post('update-product',[ProductController::class, 'updateProduct']);
 
 Route::post('/delete-product',[ProductController::class, 'deleteProduct']);
+
+Route::post('/get-variations-and-ingredients',[ProductController::class, 'getVariationsAndIngredients']);
 
 // ------------------------ Digital Product Routes ------------------------ //
 

@@ -1,5 +1,5 @@
 <template>
-    <div class="data-drop-down col-100">
+    <div class="data-drop-down w-100 col-100">
         <select :name="name" 
             id="data-drop-down" class="col-100"
             @change="updateDropDownValue"
