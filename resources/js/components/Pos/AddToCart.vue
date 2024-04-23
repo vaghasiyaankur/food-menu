@@ -67,11 +67,11 @@
             <div class="order-details" :class="{'open' : !openAmountSlider}">
                 <div class="order-discount">
                     <p class="no-margin">Discount</p>
-                    <p class="no-margin">${{ discount.toFixed(2) }}</p>
+                    <p class="no-margin">${{ discount }}</p>
                 </div>
                 <div class="order-sub_total">
                     <p class="no-margin">Sub Total</p>
-                    <p class="no-margin">${{ subTotal.toFixed(2) }}</p>
+                    <p class="no-margin">${{ subTotal }}</p>
                 </div>
             </div>
             <hr class="bill-divider">
@@ -80,7 +80,7 @@
                     <p class="no-margin">Total Amount</p>
                 </div>
                 <div class="total_bill-amount">
-                    <p class="no-margin">${{ totalAmount.toFixed(2) }}</p>
+                    <p class="no-margin">${{ totalAmount }}</p>
                 </div>
             </div>
             <hr class="bill-divider">
@@ -148,7 +148,7 @@ const props = defineProps({
     floorName: String,
     totalAmount: Number,
     subTotal: Number,
-    discount: Number,
+    discount: Number
 
 });
 
