@@ -1,28 +1,26 @@
 <template>
     <f7-page>
         <div class="card digital_menu_card digital_menu_page elevation-2">
-            <div class="row padding-horizontal no-padding-vertical">
-                <div class="col">
-                    <h3 class="margin-bottom-half">
-                        <!-- <a href="javscript:;" class="text-color-black padding-right-half"><i class="f7-icons font-22" style="vertical-align: bottom;">arrow_left</i></a> -->
-                        <span class="page_heading"> Food Menu </span>
-                    </h3>
-                    <p class="no-margin">Select your favourite food and enjoy with family</p>
+            <div class="no-padding digital_menu_banner-outer">
+                <div class="digital_menu_banner">
+                    <a href="javscript:;" class="text-color-black padding-right-half"><i class="f7-icons font-22"
+                            style="vertical-align: bottom;">arrow_left</i></a>
+                    <h3 class="no-margin"> Food Menu </h3>
                 </div>
+                <p class="no-margin">Select your favourite food and enjoy with family</p>
             </div>
             <div v-if="product_subcategory.length != 0">
-                <div class="digital_menu_swiper padding">
+                <div class="digital_menu_swiper">
                     <div data-pagination='{"el":".swiper-pagination"}' data-space-between="20" data-slides-per-view="11"
-                        class="swiper swiper-init demo-swiper margin-top margin-bottom" style="height : 135px">
+                        class="swiper swiper-init demo-swiper" style="height : 135px">
                         <div class="swiper-pagination"></div>
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide margin-right"
-                                :class="{ 'slide-active': category.id == sliderActive }"
+                            <div class="swiper-slide" :class="{ 'slide-active': category.id == sliderActive }"
                                 v-for="category in product_category" :key="category" @click="getProducts(category.id)">
                                 <div class="menu-image">
                                     <img :src="'/storage' + category.image" alt="">
                                 </div>
-                                <p class="font-13 no-margin text-align-center margin-top-half">{{
+                                <p class="font-13 no-margin">{{
                                     category.category_languages[0].name }}</p>
                             </div>
                         </div>
@@ -518,14 +516,14 @@
                 <p class="no-margin">Empty Food Menu List</p>
             </div>
 
-            <div class="gujarati_dish_category scroll-category">
+            <div class="digital_gujarati_dish_category scroll-category">
                 <div class='faq'>
                     <input id='faq-a' type='checkbox'>
                     <label for='faq-a'>
                         <h4 class="no-margin faq-heading">Sabji</h4>
                         <div class='faq-arrow'></div>
                         <div class="faq-menu-items">
-                            <div class="sub-menu-items sabji_menu">
+                            <div class="sub-menu-items sabji_digital_menu">
                                 <div class="sub_items">
                                     <div class="item_display">
                                         <img src="\assets\images\seederImages\gujarati_menu\sabji\undhiyu.png">
@@ -615,7 +613,7 @@
                         <h4 class="no-margin faq-heading">Roti</h4>
                         <div class='faq-arrow'></div>
                         <div class="faq-menu-items">
-                            <div class="sub-menu-items roti_menu">
+                            <div class="sub-menu-items roti_digital_menu">
                                 <div class="sub_items">
                                     <div class="item_display">
                                         <img src="\assets\images\seederImages\gujarati_menu\roti\plain_roti.png">
@@ -678,7 +676,7 @@
                         <h4 class="no-margin faq-heading">Papad</h4>
                         <div class='faq-arrow'></div>
                         <div class="faq-menu-items">
-                            <div class="sub-menu-items papad_menu">
+                            <div class="sub-menu-items papad_digital_menu">
                                 <div class="sub_items">
                                     <div class="item_display">
                                         <img src="\assets\images\seederImages\gujarati_menu\papad\moong_dal_papad.png">
@@ -723,7 +721,7 @@
                         <h4 class="no-margin faq-heading">Other</h4>
                         <div class='faq-arrow'></div>
                         <div class="faq-menu-items">
-                            <div class="sub-menu-items other_gujarati_menu">
+                            <div class="sub-menu-items other_gujarati_digital_menu">
                                 <div class="sub_items">
                                     <div class="item_display">
                                         <img

@@ -1129,22 +1129,22 @@
 .digital_menu_page .digital_menu_banner {
     margin-bottom: 25px;
 }
-.digital_menu_page .digital_menu_banner h3 {
+.digital_menu_page .digital_menu_banner {
     display: flex;
     align-items: center;
     margin-bottom: 10px !important;
 }
-.digital_menu_page .digital_menu_banner h3 a {
+.digital_menu_page .digital_menu_banner a {
     color: #38373d;
 }
-.digital_menu_page .digital_menu_banner h3 span {
+.digital_menu_page .digital_menu_banner h3 {
     font-size: 20px;
     line-height: 24px;
     font-weight: 600;
     color: #38373d;
     margin-left: 10px;
 }
-.digital_menu_page .digital_menu_banner p {
+.digital_menu_page .digital_menu_banner-outer p {
     font-size: 14px;
     line-height: 17px;
     font-weight: 500;
@@ -1173,7 +1173,7 @@
 .digital_menu_page .horizontal_menu_devider {
     display: flex;
     align-items: center;
-    margin: 40px 0;
+    margin: 40px 0 0;
 }
 .digital_menu_page .horizontal_menu_devider .hmd-line {
     border: none;
@@ -1210,19 +1210,23 @@
 
 .digital_menu_page .scroll-category {
     overflow-y: scroll;
-    max-height: 260px;
+    max-height: 300px;
 }
 .digital_menu_page .scroll-category::-webkit-scrollbar {
     width: 10px;
     border-radius: 10px;
     box-shadow: -1px -1px 4px 0px rgba(255, 255, 255, 0.3) inset;
-    border-right: 5px solid #e0e0e0;
-    border-left: 5px solid #e0e0e0;
+    background-color: #e0e0e0;
 }
 .digital_menu_page .scroll-category::-webkit-scrollbar-thumb {
     background-color: #999999;
     box-shadow: -1px -1px 4px 0px #ffffff4d inset;
     border-radius: 10px;
+}
+.digital_menu_page .gujarati_dish_category{
+    padding-top: 40px;
+    padding-right: 15px;
+    margin-right: -25px;
 }
 .digital_menu_page .gujarati_dish_category .faq-heading {
     font-size: 22px;
