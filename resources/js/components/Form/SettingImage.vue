@@ -4,13 +4,10 @@
         <img :src="preview" width="100" height="100" alt="" class="restaurant_logo">
     </div>
     <div class="image-field item-input-wrap">
-        <input type="file" :name="name" accept="image/*" :id="name" @change="onImageChange">
+        <input type="file" :name="name" accept="image/*" :id="name" @change="emit('set:update',name)">
         <label :for="name">
             <div class="image-label">
                 <div class="image-label-text">Choose File</div>
-                <button type="button" class="button image-label-remove" @click="onImageDelete">
-                    <Icon name="remove" color="#F33E3E" />
-                </button>
             </div>
         </label>
     </div>
@@ -21,18 +18,14 @@ import { ref } from 'vue';
 
 const props = defineProps({
     label : String,
-    name  : String
+    name  : String,
+    preview : String
 });
 
-const preview = ref("/images/logo.png");
+const emit = defineEmits(['set:update']);
 
 const onImageChange = (e) => {
     preview.value = URL.createObjectURL(e.target.files[0]);
-}
-
-const onImageDelete = () => {
-    document.getElementById(props.name).value = '';
-    preview.value = "/images/logo.png";
 }
 
 </script>

@@ -27,7 +27,7 @@ class SettingController extends Controller
      */
     public function settingData()
     {
-        $setting = Setting::select('restaurant_name', 'phone_number', 'manager_name', 'restaurant_logo', 'open_time', 'close_time', 'member_capacity', 'highlight_on_off', 'highlight_time')->whereRestaurantId(Auth::user()->restaurant_id)->first();
+        $setting = Setting::whereRestaurantId(Auth::user()->restaurant_id)->first();
         $select_highlight_time = '';
         if(intval($setting->highlight_time * 60) < 60 && intval($setting->highlight_time * 60) > 0) $select_highlight_time = intval($setting->highlight_time * 60).' seconds';
         if(intval($setting->highlight_time * 60) >= 60) $select_highlight_time = intval($setting->highlight_time).' minute';
@@ -48,25 +48,27 @@ class SettingController extends Controller
     {
         $setting = Setting::whereRestaurantId(Auth::user()->restaurant_id)->first();
 
-        $restaurant_logo_name = $setting->restaurant_logo;
-        if($request->file('restaurant_logo')){
-            $restaurant_logo_name = ImageHelper::storeImage($request->file('restaurant_logo'), 'setting');
-            ImageHelper::removeImage($setting->restaurant_logo);
+        $logo_name = $setting->logo;
+        if($request->file('logo')){
+            $logo_name = ImageHelper::storeImage($request->file('logo'), 'setting');
+            ImageHelper::removeImage($setting->logo);
         }
 
-        $settingData = [
-            'restaurant_name' => $request->restaurant_name,
-            'phone_number' => $request->phone_number,
-            'manager_name' => $request->manager_name,
-            'restaurant_logo' => $restaurant_logo_name,
-            'open_time' => date("H:i", strtotime($request->open_time)),
-            'close_time' => date("H:i", strtotime($request->close_time)),
-            'member_capacity' => $request->member_capacity,
-            'highlight_on_off' => $request->highlight_on_off,
-            'highlight_time' => $request->highlight_on_off ? $request->highlight_time : 0
-        ];
+        $fav_icon_name = $setting->fav_icon;
+        if($request->file('logo')){
+            $fav_icon_name = ImageHelper::storeImage($request->file('fav_icon'), 'setting');
+            ImageHelper::removeImage($setting->fav_icon);
+        }
 
-        Setting::where('id', $setting->id)->update($settingData);
+
+
+        $settingData = $request->toArray();
+        $settingData['logo'] = $logo_name;
+        $settingData['fav_icon'] = $fav_icon_name;
+        $settingData['highlight_on_off'] = $settingData['highlight_on_off'] ?? 0;
+        $settingData['highlight_time'] = $request->highlight_on_off ? $request->highlight_time : 0;
+
+        Setting::updateOrCreate(['id' => $settingData['id']],$settingData);
 
         return response()->json([ 'success' => 'Setting Data Updated successfully' ] , 200);
     }

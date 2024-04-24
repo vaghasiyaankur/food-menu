@@ -550,7 +550,7 @@ thead .label-cell {
     background-color: #fff;
 }
 
-#drop-down,#drop-down-1{
+.drop-down{
     display: inline-block;
     position: relative;
     width: 100%;
@@ -561,7 +561,7 @@ thead .label-cell {
     display: inline-block;
     text-align: left;
     border-radius: 10px;
-    box-shadow: 0px 4px 6px 0px rgba(0,0,0,0.2);
+    /* box-shadow: 0px 4px 6px 0px rgba(0,0,0,0.2); */
     width:100%
 }
 
@@ -577,7 +577,7 @@ thead .label-cell {
 .drop-down__menu-box {
     position: absolute;
     width: 100%;
-    left: 14.5%;
+    left: 0;
     background-color: #fff;
     border-radius: 4px;
     box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.11);
@@ -800,13 +800,16 @@ ul .item-input-wrap input{
 .picker-center-highlight{
     background-color:transparent !important;
 }
+.block-strong .picker-columns{
+    --f7-picker-mask-bg-color: #F3F4F5;
+}
 .picker-columns{
     width: 90%;
-    height: 60% !important;
-    background:  linear-gradient(180deg, #F3F4F5 0%, #FFFFFF 34.65%, #FFFFFF 63.19%, rgba(243, 244, 245, 0.857255) 100%);
+    height: 80% !important;
+    background-image:  linear-gradient(180deg, #F3F4F5 0%, #FFFFFF 34.65%, #FFFFFF 63.19%, rgba(243, 244, 245, 0.857255) 100%) !important;
     border-radius: 10px;
     margin:0 auto;
-    top: 20px;
+    top: 15px;
     justify-content: space-between !important;
     -webkit-mask-box-image: none !important;
 }
