@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('customer_id')->unsigned();
+            $table->unsignedBigInteger('customer_id')->unsigned()->nullable();
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
-            $table->unsignedBigInteger('table_id')->unsigned();
+            $table->unsignedBigInteger('table_id')->unsigned()->nullable();
             $table->foreign('table_id')->references('id')->on('tables')->onDelete('cascade');
-            $table->unsignedBigInteger('restaurant_id');
+            $table->unsignedBigInteger('restaurant_id')->unsigned()->nullable();
             $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
             $table->integer('person')->default(0);
             $table->string('role')->default('Guest');

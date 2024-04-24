@@ -20,7 +20,7 @@ export default [
   {
     name : 'POS',
     path: '/',
-    component: Pos,
+    component: TableView,
   },
   {
     name : 'PosNew',

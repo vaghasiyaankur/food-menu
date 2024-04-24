@@ -22,4 +22,9 @@ class Variation extends Model
     {
         return $this->hasMany(ProductVariation::class, 'variation_id');
     }
+
+    public function kotProductVariations()
+    {
+        return $this->hasMany(KotProductVariation::class, 'ingredient_id');
+    }
 }

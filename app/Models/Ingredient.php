@@ -22,4 +22,9 @@ class Ingredient extends Model
     {
         return $this->hasMany(ProductIngredient::class, 'ingredient_id');
     }
+
+    public function kotProductIngredients()
+    {
+        return $this->hasMany(KotProductIngredient::class, 'ingredient_id');
+    }
 }

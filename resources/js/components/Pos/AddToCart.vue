@@ -117,7 +117,7 @@
                 </div>
             </div>
             <div class="billing-btns grid grid-cols-3">
-                <button class="button kot-btn active">KOT</button>
+                <button class="button kot-btn active" @click="createKot(table ?.table_number)">KOT</button>
                 <button class="button hold-btn">Hold</button>
                 <button class="button ebill-btn">eBill</button>
             </div>
@@ -169,8 +169,12 @@ const openNotePopup = (id) => {
 //     return zero.toFixed(2);
 // }
 
-const removeProduct = (id) => {
-    emit('remove:cart-product', id)
+const removeProduct = (index) => {
+    emit('remove:cart-product', index)
+}
+
+const createKot = (tableId) => {
+    emit('create:kot', tableId)
 }
 
 </script>
