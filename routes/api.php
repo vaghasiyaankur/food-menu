@@ -112,6 +112,8 @@ Route::post('/delete-variation',[VariationController::class, 'deleteVariation'])
 
 Route::post('get-current-table-details',[PosController::class, 'getCurrentTableDetails']);
 
+Route::post('/add-kot',[PosController::class, 'addKOT']);
+
 // ------------------------ Product Routes ------------------------ //
 
 Route::post('get-products',[ProductController::class, 'getProducts']);

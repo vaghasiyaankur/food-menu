@@ -140,25 +140,33 @@
                     v-for="(product,index) in cartProducts" :key="index"
                 >
                     <div class="product-detail-inner">
-                        <div class="delete-product"  @click="removeProduct(product.id)">
-                            <span>
-                            <!-- @click="f7.popup.open(`.deleteCartItemPopup`);" -->
-                                <f7-icon f7="minus" class="font-16 delete-product-button">
-                                </f7-icon>
-                            </span>
-                        </div>
-                        <div class="product-summary">
-                            <p class="no-margin">
-                                {{ product.name }}
-                            </p>
-                            <span class="no-margin display-flex align-items-center">Size: S<p
-                                    class="text-red no-margin">
-                                    ${{ product.price.toFixed(2)}}</p></span>
-                                    <span>
-                                        Ingredient : 
-                                        <span>dhs</span><br>
-                                        <span>dhs</span><br>
+                        <div class="display-flex align-items-center w-100">
+                            <div class="delete-product"  @click="removeProduct(index)">
+                                <span>
+                                    <f7-icon f7="minus" class="font-16 delete-product-button">
+                                    </f7-icon>
+                                </span>
+                            </div>
+                            <div class="product-summary">
+                                <p class="no-margin">
+                                    {{ product.name }}
+                                </p>
+                                <p class="text-red no-margin">${{ (product.price + product.extraAmount).toFixed(2) }}</p>
+                                    <span 
+                                        v-if="product.variation.name"
+                                        class="no-margin display-flex align-items-center"
+                                    >
+                                        Size: {{ product.variation.name }}
                                     </span>
+                                    <span 
+                                        v-if="product.ingredient.length > 0"
+                                        >
+                                        Ingredient : 
+                                        <span v-for="(ing, index) in product.ingredient" :key="index">
+                                            {{ ing.name }} <span v-if="(product.ingredient.length - 1) !== index">, </span>
+                                        </span>
+                                    </span>
+                            </div>
                         </div>
                     </div>
                     <div class="product-detail-inner">
@@ -284,7 +292,6 @@
             </div>
         </div>
     </div>
-    
 </template>
 <script setup>
 import { f7, f7Icon } from 'framework7-vue';
@@ -311,7 +318,7 @@ const openNotePopup = (id) => {
     emit('open:note-popup', id);
 }
 
-const removeProduct = (id) => {
-    emit('remove:cart-product', id)
+const removeProduct = (index) => {
+    emit('remove:cart-product', index)
 }
 </script>

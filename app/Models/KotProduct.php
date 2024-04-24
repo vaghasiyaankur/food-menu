@@ -9,7 +9,7 @@ class KotProduct extends Model
 {
     use HasFactory;
 
-    protected $table = 'kots';
+    protected $table = 'kot_products';
 
     protected $guarded = ['id']; 
 
@@ -21,5 +21,15 @@ class KotProduct extends Model
     public function product()
     {
         return $this->belongsTo(Product::class, 'product_id');
+    }
+
+    public function kotProductIngredients()
+    {
+        return $this->hasMany(KotProductIngredient::class, 'kot_product_id');
+    }
+
+    public function kotProductVariation()
+    {
+        return $this->hasOne(KotProductVariation::class, 'kot_product_id');
     }
 }

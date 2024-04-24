@@ -28,7 +28,8 @@
                     :discount="discount"
                     :floor-name="floorName"
                     :table="table"
-                    @remove:cart-product="removeProductIntoCart" 
+                    @remove:cart-product="removeProductIntoCart"
+                    @create:kot="createKOT"
                 />
             </div>
         </div>
@@ -36,9 +37,10 @@
             :note-product-id="noteProductId"
             :note-product-description="noteProductDescription"
             @submit:product-note="submitProductNote"
+
             :add-ingredient-list="addIngredientList"
             :add-variation-list="addVariationList"
-            @add-remove:ingredient-variation="addRemoveIngredient"
+            @submit:ingredient-variation="submitIngVar"
         />
     </f7-page>
 </template>
@@ -46,12 +48,13 @@
 <script setup>
 import { f7Page, f7 } from 'framework7-vue';
 import CategorySearch from "../../components/CategorySearch.vue"
-import { ref, watchEffect, onMounted } from 'vue'
+import { ref, watchEffect, onMounted, provide } from 'vue'
 import Product from '../../components/Pos/Product.vue'
 import AddToCart from '../../components/Pos/AddToCart.vue'
 import axios from 'axios'
 import $ from 'jquery';
 import Modal from '../../components/PosModal.vue';
+import { successNotification, errorNotification, getErrorMessage } from '../../commonFunction.js';
 
 const categories =  ref({});
 const activeCategory =  ref(0);
@@ -65,9 +68,14 @@ const subTotal = ref(0);
 const discount = ref(0);
 const currentRoute = ref('');
 const floorName = ref('');
-const table = ref([]);
+const table = ref({});
+
+const addIngVarId = ref([]);
 const addIngredientList = ref([]);
 const addVariationList = ref([]);
+const selectIngredient = ref([]);
+const selectVariation = ref([]);
+const extraAmount = ref(0);
 
 onMounted(() => {
     setTimeout(() => {
@@ -81,7 +89,6 @@ onMounted(() => {
 const getTableCurrentDetail = (tableId) => {
     axios.post('/api/get-current-table-details', { tableId: tableId })
     .then((response) => {
-        console.log(response.data);
         floorName.value = response.data.floor ? response.data.floor.name : '';
         table.value = response.data;
     })
@@ -120,31 +127,45 @@ const addProductIntoCart = (id) => {
         addVariationList.value = response.data.variations;
 
         if (addIngredientList.value.length > 0 || addVariationList.value.length > 0) { 
-            f7.popup.open(`.notePopup`);
+            addIngVarId.value = id;
+            selectVariation.value = [];
+            selectIngredient.value = [];
+            if(addVariationList.value.length > 0){
+                const firstVariation = addVariationList.value[0];
+                selectVariation.value.push({
+                    id: firstVariation.id,
+                    image: firstVariation.image,
+                    name: firstVariation.name,
+                    price: firstVariation.price,
+                });
+                extraAmount.value = firstVariation.price;
+            }
+            f7.popup.open(`.add_ingredient_variation_popup`);
         } else {
             const allProduct = products.value;
             const index = allProduct.findIndex(item => item.id === id);
 
             if (index !== -1) {
                 const existingProductIndex = cartProducts.value.findIndex(item => item.id === allProduct[index].id);
-                console.log(existingProductIndex);
                 if (existingProductIndex !== -1) {
                     cartProducts.value[existingProductIndex].quantity++;
                 } else {
                     cartProducts.value.push({
                         id: allProduct[index].id,
                         image: allProduct[index].image,
-                        name: allProduct[index].name,
+                        name: allProduct[index].name,   
                         price: allProduct[index].price,
                         food_type: allProduct[index].food_type,
                         quantity: 1,
-                        note: ''
+                        note: '',
+                        ingredient: [],
+                        variation: {},
+                        extraAmount: 0,
                     });
                 }
                 getTotalAmount();
             }
-        }
-        
+        }   
     })
         // const allProduct = products.value;
         // const index = allProduct.findIndex(item => item.id === id);
@@ -162,11 +183,11 @@ const addProductIntoCart = (id) => {
     
 }
 
-const removeProductIntoCart = (id) => {
-    const index = cartProducts.value.findIndex(item => item.id === id);
-    if(index !== -1){
+const removeProductIntoCart = (index) => {
+    // const index = cartProducts.value.findIndex(item => item.id === id);
+    // if(index !== -1){
         cartProducts.value.splice(index, 1);
-    }
+    // }
     getTotalAmount();
 }
 
@@ -209,14 +230,67 @@ const submitProductNote = (note) => {
 const getTotalAmount = () => {
     let total = 0;
     for (const product of cartProducts.value) {
-        total += product.price * product.quantity;
+        const tempPrice = product.extraAmount > 0 ? product.extraAmount : product.price;
+        total += tempPrice * product.quantity;
     }
     totalAmount.value = total;
     subTotal.value = total - discount.value;
 }
 
-const addRemoveIngredient = (id, type, add) => {
-    console.log(id, type, add);
+const submitIngVar = () => {
+    const allProduct = products.value;
+
+    const index = allProduct.findIndex(item => item.id === addIngVarId.value);
+
+    const selectedProduct = allProduct[index];
+
+    const selectedVariation = selectVariation.value[0];;
+
+    let extraAmt = extraAmount.value;
+
+    if (selectedVariation && selectedVariation.price) {
+        var price = selectedVariation.price;
+        extraAmt = extraAmt - selectedVariation.price;
+    }else{
+        var price = selectedProduct.price;
+    }
+
+    const productToAdd = {
+        id: selectedProduct.id,
+        image: selectedProduct.image,
+        name: selectedProduct.name,   
+        price: price,
+        food_type: selectedProduct.food_type,
+        quantity: 1,
+        note: '',
+        ingredient: selectIngredient.value,
+        variation: selectedVariation,
+        extraAmount: extraAmt,
+    };
+
+    cartProducts.value.push(productToAdd);
+    selectVariation.value = [];
+    selectIngredient.value = [];
+    extraAmount.value = 0;
+    f7.popup.close(`.add_ingredient_variation_popup`);
 }
+
+const createKOT = (tableId) => {
+    if(cartProducts.value.length){
+        axios.post('/api/add-kot', { cart: cartProducts.value, tableId: tableId })
+        .then((response) => {
+            successNotification(response.data.success);
+            f7.view.main.router.navigate({ url: "/" });
+        })
+        .catch((error) => {
+            const errorMessage = getErrorMessage(error);
+            errorNotification(errorMessage);
+        });
+    }
+}
+
+provide('selectIngredient',selectIngredient);
+provide('selectVariation',selectVariation);
+provide('extraAmount',extraAmount);
 
 </script>

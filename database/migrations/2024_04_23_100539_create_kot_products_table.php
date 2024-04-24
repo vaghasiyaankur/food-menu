@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->float('quantity')->default(0);
             $table->text('note')->nullable();
+            $table->float('price')->default(0);
             $table->timestamps();
         });
     }
