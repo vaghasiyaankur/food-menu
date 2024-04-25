@@ -8,6 +8,7 @@ use App\Http\Controllers\Manager\CategoryController;
 use App\Http\Controllers\Manager\ComboController;
 use App\Http\Controllers\Manager\FloorController;
 use App\Http\Controllers\Manager\IngredientController;
+use App\Http\Controllers\Manager\OrderController;
 use App\Http\Controllers\Manager\PosController;
 use App\Http\Controllers\Manager\ReportController;
 use App\Http\Controllers\Manager\ProductController;
@@ -291,6 +292,10 @@ Route::post('/regenerate-qrcode', [QrCodeController::class, 'qrCodereGenerate'])
 Route::get('/download-qrcode/{id}', [QrCodeController::class, 'qrCodereDownload']);
 
 Route::post('/check-qrcode-exists', [QrCodeController::class, 'checkQrcodeExists']);
+
+// ------------------------ KOT Route ------------------------ //
+
+Route::get('/kot-list', [OrderController::class, 'kotList']);
 
 // ------------------------ Auth Routes ------------------------ //
 

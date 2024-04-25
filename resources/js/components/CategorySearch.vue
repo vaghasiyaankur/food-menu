@@ -22,7 +22,7 @@
                     </div>
                     <div class="item-content item-input no-padding-left" style="width:90%">
                         <div class="item-inner">
-                            <div class="item-input-wrap w-100">
+                            <div class="item-input-wrap w-100 bg-color-transparent">
                                 <input type="text" class="bg-color-transparent padding w-100" placeholder="Search Food..." @input="searchProduct">
                             </div>
                         </div>
