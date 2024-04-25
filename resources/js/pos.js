@@ -12,6 +12,7 @@ import '.././css/settings.css';
 import '.././css/table-view.css';
 import '.././css/KOT-view.css';
 import '.././css/completedOrders.css';
+import '.././css/currentOrders.css';
 
 /* import font awesome icon component */
 import { library } from '@fortawesome/fontawesome-svg-core'

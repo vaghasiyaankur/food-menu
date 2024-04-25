@@ -7,7 +7,7 @@
         />
       </div>
       <f7-view
-        url="/completedOrders/"
+        url="/currentOrders/"
         :main="true"
         class="safe-areas"
         :master-detail-breakpoint="768"

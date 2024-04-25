@@ -1,0 +1,123 @@
+.current_orders_page{
+    margin: 85px 30px 5px;
+    background-color: #FBFBFB;
+}
+.current_orders_page .current_orders-banner{
+    margin-bottom: 5px;
+}
+.current_orders-banner h2{
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 600;
+    color: #38373D;
+}
+.current_orders_page .current_order_table_list{
+    padding-top: 20px;
+}
+.current_orders_page .current_order_table_list .grid{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto auto;
+    column-gap: 35px;
+    row-gap: 30px;
+}
+.current_orders_page .current_order_table_card{
+    border-radius: 10px;
+    border: 1px solid #555555;
+    background-color: #FAFAFA;
+}
+.current_orders_page h4{
+    font-size: 15px;
+    line-height: 18px;
+    font-weight: 500;
+}
+.current_orders_page .current_order_table_details{
+    padding: 11px 15px 12px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #555555;
+    color: #FFFFFF;
+    border-top-right-radius: 9px;
+    border-top-left-radius: 9px;
+}
+.current_orders_page .current_table-bill-details{
+    padding-top: 8px;
+}
+.current_orders_page h5{
+    font-size: 14px;
+    line-height: 17px;
+    font-weight: 500;
+}
+.current_orders_page .customer-detail{
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #EDEDED;
+    color: #38373D;
+}
+.current_orders_page .ordered-items-details{
+    padding: 10px 15px;
+}
+.current_orders_page .ordered-item-list{
+    padding-left: 20px;
+    font-size: 13px;
+    line-height: 16px;
+    font-weight: 400;
+    color: #38373D;
+}
+.current_orders_page .ordered-item{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;    
+}
+.current_orders_page li:not(:last-child){
+    margin-bottom: 10px;
+}
+.current_orders_page .ordered-item h6{
+    font-size: 13px;
+    line-height: 16px;
+    font-weight: 400;
+    color: #38373D;
+}
+.current_orders_page .bill-pay-details{
+    padding: 55px 15px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+.current_orders_page .server_btn{
+    color: #38373D;
+    background-color: #FAFAFA;
+    border-radius: 5px;
+    border: 0.7px solid #38373D;
+    padding: 7px 0px;
+}
+.current_orders_page .pay_btn{
+    color: #FFFFFF;
+    background-color: #F33E3E;
+    border-radius: 5px;
+    border: none;
+    padding: 8px 0px;
+}
+.current_orders_page .additional_orders{
+    position: relative;
+}
+.current_orders_page .additional_orders:before{
+    content: '';
+    max-width: 350px;
+    width: 100%;
+    max-height: 290px;
+    height: 100%;
+    position: absolute;
+    top: -10px;
+    left: 0;
+    background-color: #555555;
+    border: 0.5px solid #555555;
+    border-radius: 5px;
+    box-shadow: 0px -2px 5px 0px #000000E5;
+    z-index: -1;
+}
+.current_orders_page{}
