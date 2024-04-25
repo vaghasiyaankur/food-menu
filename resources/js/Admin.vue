@@ -7,7 +7,7 @@
         />
       </div>
       <f7-view
-        url="/completedOrders/"
+        url="/"
         :main="true"
         class="safe-areas"
         :master-detail-breakpoint="768"
@@ -29,12 +29,12 @@
 <script>
 import { ref, reactive, onMounted, onBeforeUnmount, computed } from 'vue';
 import { f7App, f7Panel, f7View, f7, f7Page, f7Navbar } from "framework7-vue";
-import routes from "./pos-routes";
+import routes from "./admin-routes";
 import store from "./store";
 import $ from "jquery";
 import axios from "axios";
 import Icon from "./components/Icon.vue";
-import Navbar from "./pages/pos/Navbar.vue";
+// import Navbar from "./pages/admin/Navbar.vue";
 
 export default {
   components: {
@@ -45,7 +45,7 @@ export default {
     f7Page,
     f7Navbar,
     Icon,
-    Navbar
+    // Navbar
   },
   setup() {
     const f7Params = reactive({
