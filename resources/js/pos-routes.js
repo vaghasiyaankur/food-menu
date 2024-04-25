@@ -14,6 +14,10 @@ import Setting from "./pages/pos/SettingsTab.vue";
 import NewSetting from "./pages/pos/NewSettingsTab.vue";
 import TableView from "./pages/restaurant-manager/tableView.vue"
 import KotView from "./pages/restaurant-manager/KOT-view.vue"
+import Order from "./pages/pos/Order.vue";
+import TableView from "./pages/restaurant-manager/table-view.vue"
+import KotView from "./pages/pos/KOT-view.vue"
+import completedOrders from "./pages/restaurant-manager/completedOrders.vue"
 
 
 export default [
@@ -106,6 +110,11 @@ export default [
     name : 'KotView',
     path: '/KOT-view/',
     component: KotView,
+  },
+  {
+    name : 'completedOrders',
+    path: '/completedOrders/',
+    component: completedOrders,
   },
 
 ]

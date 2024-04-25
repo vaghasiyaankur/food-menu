@@ -20,6 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('restaurant_id')->nullable();
             $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
             $table->time('time')->nullable();
+            $table->string('note')->nullable();
             $table->integer('number')->nullable();
             $table->timestamps();
         });

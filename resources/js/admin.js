@@ -1,17 +1,12 @@
 import { createApp } from 'vue';
 import Framework7 from 'framework7/lite/bundle';
 import Framework7Vue from 'framework7-vue';
-import Pos from './Pos.vue';
+import Admin from './Admin.vue';
 import Pusher from 'pusher-js';
 import Echo from 'laravel-echo';
 
 import 'framework7/css/bundle';
-import '.././css/pos.css';
-import '.././css/menu-management.css';
-import '.././css/settings.css';
-import '.././css/table-view.css';
-import '.././css/KOT-view.css';
-import '.././css/completedOrders.css';
+import '.././css/admin.css';
 
 /* import font awesome icon component */
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -60,7 +55,7 @@ window.Echo = new Echo({
 
 
 // Init Vue App
-const app = createApp(Pos);
+const app = createApp(Admin);
 // app.use(VueApexCharts);
 app.component('font-awesome-icon', FontAwesomeIcon)
 app.mount('#app');

@@ -41,7 +41,7 @@ const props = defineProps({
 
 const navbarItems = [
   { label: 'POS', routesName: ['POS'], href: '/', icon: 'pos' },
-  { label: 'Floorplan', routesName: ['TABLE'], href: '/table/', icon: 'dining_table' },
+  { label: 'Order', routesName: ['Order'], href: '/KOT-view/', icon: 'orderIcon' },
   {
     label: 'Menu Management',
     icon: 'bars',

@@ -93,6 +93,10 @@
                                             {{ ing.name }} <span v-if="(product.ingredient.length - 1) !== index">, </span>
                                         </span>
                                     </span>
+
+
+
+                                    <!-- <p><span>$67</span></p> -->
                             </div>
                         </div>
                     </div>

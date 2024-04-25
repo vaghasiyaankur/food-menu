@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QrCodeController;
 use Illuminate\Support\Facades\Auth;
 use App\Events\NewReservation;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Models\Order;
 
@@ -39,6 +40,9 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/manager', [UserController::class, 'manager'])->name('manager');
 Route::get('/manager/{any}', [UserController::class, 'manager'])->name('manager.any');
+
+Route::get('/admin', [AdminController::class, 'admin'])->name('admin');
+Route::get('/admin', [AdminController::class, 'admin'])->name('admin');
 
 Route::get('/pos', [UserController::class, 'pos'])->name('pos');
 Route::get('/pos/{any}', [UserController::class, 'pos'])->name('pos.any');
