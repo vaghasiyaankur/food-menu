@@ -1,136 +1,63 @@
 <template>
     <div class="cart-products">
         <div class="kot-time-wrapper">
-            <!-- <div class="kot-time">
-                <div class="kot-time-heading">
-                    <h5 class="no-margin">KOT - 1 Time - 01:10</h5>
-                </div>
-                <div class="product_detail">
-                    <div class="product-detail-inner">
-                        <div class="delete-product">
-                            <span data-popup="#deleteCartItem_popup"
-                                @click="f7.popup.open(`.deleteCartItemPopup`);"><f7-icon f7="minus"
-                                    class="font-16 delete-product-button"></f7-icon></span>
-                        </div>
-                        <div class="product-summary">
-                            <p class="no-margin">Margherita Pizza</p>
-                            <span class="no-margin display-flex align-items-center">Size: S<p
-                                    class="text-red no-margin">
-                                    $10.00</p></span>
-                        </div>
+            <div class="kot-time" v-if="oldOrder">
+                <template v-for="(kot,index) in oldOrder.kots" :key="index">
+                    <div class="kot-time-heading">
+                        <h5 class="no-margin">KOT - {{ kot.number }} Time - {{ kot.time }}</h5>
                     </div>
-                    <div class="product-detail-inner">
-                        <div class="quantity-section">
-                            <div class="quantity-content">
-                                <span class="quantity-minus"><f7-icon f7="minus"
-                                        class="font-16 quantity-icon"></f7-icon></span>
-                                <span class="quantity-count">1</span>
-                                <span class="quantity-plus"><f7-icon f7="plus"
-                                        class="font-16 quantity-icon"></f7-icon></span>
+                    <div class="product_detail" v-for="(kp, ind) in kot.kot_products" :key="ind">
+                        <div class="product-detail-inner">
+                            <div class="delete-product" @click="removeProduct(index, 'old', index, ind)">
+                                <span data-popup="#deleteCartItem_popup">
+                                    <f7-icon f7="minus" class="font-16 delete-product-button"></f7-icon>
+                                </span>
+                            </div>
+                            <div class="product-summary">
+                                <p class="no-margin">{{ kp.name }}</p>
+                                <!-- <span class="no-margin display-flex align-items-center">Size: S<p
+                                        class="text-red no-margin">
+                                        ${{ kp.price.toFixed(2) }}</p></span> -->
+                                <p class="text-red no-margin">${{ kp.price.toFixed(2) }}</p>
+                                <span 
+                                    v-if="kp.variation"
+                                    class="no-margin display-flex align-items-center"
+                                >
+                                    Size: {{ kp.variation }}
+                                </span>
+                                <span 
+                                    v-if="kp.ingredients.length > 0"
+                                    >
+                                    Ingredient : 
+                                    <span v-for="(ing, index) in kp.ingredients" :key="index">
+                                        {{ ing }} <span v-if="(kp.ingredients.length - 1) !== index">, </span>
+                                    </span>
+                                </span>
                             </div>
                         </div>
-                        <div class="product-note-content">
-                            <div class="product-note" data-popup="#note_popup" @click="f7.popup.open(`.notePopup`);">
-                                <Icon name="note" />
+                        <div class="product-detail-inner">
+                            <div class="quantity-section">
+                                <div class="quantity-content">
+                                    <span class="quantity-minus" :class="{'disabled' : kp.quantity < 2}" @click="decreaseQuantity(kot.id, 'old', index, ind)">
+                                        <f7-icon f7="minus" class="font-16 quantity-icon"></f7-icon>
+                                    </span>
+                                    <span class="quantity-count">{{ kp.quantity }}</span>
+                                    <span class="quantity-plus" @click="increaseQuantity(kot.id, 'old', index, ind)">
+                                        <f7-icon f7="plus" class="font-16 quantity-icon"></f7-icon>
+                                    </span>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="product_detail">
-                    <div class="product-detail-inner">
-                        <div class="delete-product">
-                            <span data-popup="#deleteCartItem_popup"
-                                @click="f7.popup.open(`.deleteCartItemPopup`);"><f7-icon f7="minus"
-                                    class="font-16 delete-product-button"></f7-icon></span>
-                        </div>
-                        <div class="product-summary">
-                            <p class="no-margin">Romana Pizza</p>
-                            <span class="no-margin display-flex align-items-center">Size: M<p
-                                    class="text-red no-margin">
-                                    $15.00</p></span>
-                        </div>
-                    </div>
-                    <div class="product-detail-inner">
-                        <div class="quantity-section">
-                            <div class="quantity-content">
-                                <span class="quantity-minus"><f7-icon f7="minus"
-                                        class="font-16 quantity-icon"></f7-icon></span>
-                                <span class="quantity-count">1</span>
-                                <span class="quantity-plus"><f7-icon f7="plus"
-                                        class="font-16 quantity-icon"></f7-icon></span>
-                            </div>
-                        </div>
-                        <div class="product-note-content">
-                            <div class="product-note" data-popup="#note_popup" @click="f7.popup.open(`.notePopup`);">
-                                <Icon name="note" />
+                            <div class="product-note-content">
+                                <div class="product-note" data-popup="#note_popup" 
+                                    @click="openNotePopup(kot.id, 'old', index, ind)"
+                                >
+                                    <Icon name="note" />
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="product_detail">
-                    <div class="product-detail-inner">
-                        <div class="delete-product">
-                            <span data-popup="#deleteCartItem_popup"
-                                @click="f7.popup.open(`.deleteCartItemPopup`);"><f7-icon f7="minus"
-                                    class="font-16 delete-product-button"></f7-icon></span>
-                        </div>
-                        <div class="product-summary">
-                            <p class="no-margin">California Style Pizza</p>
-                            <span class="no-margin display-flex align-items-center">Size: L<p
-                                    class="text-red no-margin">
-                                    $15.00</p></span>
-                        </div>
-                    </div>
-                    <div class="product-detail-inner">
-                        <div class="quantity-section">
-                            <div class="quantity-content">
-                                <span class="quantity-minus"><f7-icon f7="minus"
-                                        class="font-16 quantity-icon"></f7-icon></span>
-                                <span class="quantity-count">1</span>
-                                <span class="quantity-plus"><f7-icon f7="plus"
-                                        class="font-16 quantity-icon"></f7-icon></span>
-                            </div>
-                        </div>
-                        <div class="product-note-content">
-                            <div class="product-note" data-popup="#note_popup" @click="f7.popup.open(`.notePopup`);">
-                                <Icon name="note" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="product_detail">
-                    <div class="product-detail-inner">
-                        <div class="delete-product">
-                            <span data-popup="#deleteCartItem_popup"
-                                @click="f7.popup.open(`.deleteCartItemPopup`);"><f7-icon f7="minus"
-                                    class="font-16 delete-product-button"></f7-icon></span>
-                        </div>
-                        <div class="product-summary">
-                            <p class="no-margin">New York-Style Pizza
-                                Vegetarian</p>
-                            <span class="no-margin display-flex align-items-center">Size: S<p
-                                    class="text-red no-margin">
-                                    $10.00</p></span>
-                        </div>
-                    </div>
-                    <div class="product-detail-inner">
-                        <div class="quantity-section">
-                            <div class="quantity-content">
-                                <span class="quantity-minus"><f7-icon f7="minus"
-                                        class="font-16 quantity-icon"></f7-icon></span>
-                                <span class="quantity-count">1</span>
-                                <span class="quantity-plus"><f7-icon f7="plus"
-                                        class="font-16 quantity-icon"></f7-icon></span>
-                            </div>
-                        </div>
-                        <div class="product-note-content">
-                            <div class="product-note" data-popup="#note_popup" @click="f7.popup.open(`.notePopup`);">
-                                <Icon name="note" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
+                </template>
+            </div>
             <div class="kot-time">
                 <div class="kot-time-heading">
                     <h5 class="no-margin">New KOT</h5>
@@ -141,7 +68,7 @@
                 >
                     <div class="product-detail-inner">
                         <div class="display-flex align-items-center w-100">
-                            <div class="delete-product"  @click="removeProduct(index)">
+                            <div class="delete-product"  @click="removeProduct(index, 'new', null, null)">
                                 <span>
                                     <f7-icon f7="minus" class="font-16 delete-product-button">
                                     </f7-icon>
@@ -172,13 +99,13 @@
                     <div class="product-detail-inner">
                         <div class="quantity-section">
                             <div class="quantity-content">
-                                <span class="quantity-minus" :class="{'disabled' : product.quantity < 2}" @click="decreaseQuantity(product.id)">
+                                <span class="quantity-minus" :class="{'disabled' : product.quantity < 2}" @click="decreaseQuantity(index, 'new', null, null)">
                                     <f7-icon f7="minus"
                                         class="font-16 quantity-icon">
                                     </f7-icon>
                                 </span>
                                 <span class="quantity-count">{{ product.quantity }}</span>
-                                <span class="quantity-plus" @click="increaseQuantity(product.id)">
+                                <span class="quantity-plus" @click="increaseQuantity(index, 'new', null, null)">
                                     <f7-icon f7="plus"
                                         class="font-16 quantity-icon">
                                     </f7-icon>
@@ -188,7 +115,7 @@
                         <div class="product-note-content">
                             <div 
                                 class="product-note"
-                                @click="openNotePopup(product.id)"
+                                @click="openNotePopup(index, 'new', null, null)"
                                 >
                                 <!-- @click="f7.popup.open(`.notePopup`);" -->
                                 <Icon name="note" />
@@ -303,22 +230,30 @@ const props = defineProps({
     cartProducts: {
         type: Array,
         default: () => []
+    },
+    table: {
+        type: Array,
+        default: () => []
+    },
+    oldOrder: {
+        type: Array,
+        default: () => []
     }
 });
 
-const increaseQuantity = (id) => {
-    emit('increase:quantity', id);
+const increaseQuantity = (id, kot, kotIndex, kotProductIndex) => {
+    emit('increase:quantity', id, kot, kotIndex, kotProductIndex);
 }
 
-const decreaseQuantity = (id) => {
-    emit('decrease:quantity', id);
+const decreaseQuantity = (id, kot, kotIndex, kotProductIndex) => {
+    emit('decrease:quantity', id, kot, kotIndex, kotProductIndex);
 }
 
-const openNotePopup = (id) => {
-    emit('open:note-popup', id);
+const openNotePopup = (id, kot, kotIndex, kotProductIndex) => {
+    emit('open:note-popup', id, kot, kotIndex, kotProductIndex);
 }
 
-const removeProduct = (index) => {
-    emit('remove:cart-product', index)
+const removeProduct = (index, kot, kotIndex, kotProductIndex) => {
+    emit('remove:cart-product', index, kot, kotIndex, kotProductIndex)
 }
 </script>

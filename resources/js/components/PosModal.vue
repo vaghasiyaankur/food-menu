@@ -4,6 +4,7 @@
             :note-product-id="noteProductId"
             :note-product-description="noteProductDescription"
             @submit:product-note="submitNote"
+            :note-product-status="noteProductStatus"
     />
 
     <!-- ========= ADD INGREDIENT/VARIATION POPUP ========= -->
@@ -31,7 +32,8 @@ const props = defineProps({
     addVariationList: {
         type: Array,
         default: () => []
-    }
+    },
+    noteProductStatus: String
     
 });
 
@@ -40,8 +42,8 @@ const emit = defineEmits([
                 'submit:ingredient-variation'
             ]);
 
-const submitNote = (note) => {
-    emit('submit:product-note', note);
+const submitNote = (note, npStatus) => {
+    emit('submit:product-note', note, npStatus);
 }
 
 const submitIngVar = () => {    

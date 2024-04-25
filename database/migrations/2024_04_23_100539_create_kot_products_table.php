@@ -22,6 +22,8 @@ return new class extends Migration
             $table->float('quantity')->default(0);
             $table->text('note')->nullable();
             $table->float('price')->default(0);
+            $table->float('extra_amount')->default(0);
+            $table->float('total_price')->default(0);
             $table->timestamps();
         });
     }

@@ -26,6 +26,7 @@ const props = defineProps({
     // Note Modal
     noteProductId: Number,
     noteProductDescription: String,
+    noteProductStatus: String
     
 });
 
@@ -35,6 +36,6 @@ const emit = defineEmits([
 
 const submitNote = () => {
     const note = $("#product-note").val();
-    emit('submit:product-note', note);
+    emit('submit:product-note', note, props.noteProductStatus);
 }
 </script>

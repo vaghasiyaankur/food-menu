@@ -1,7 +1,7 @@
 <template>
     <div class="order-summary add-to-cart-section">
         <div class="order_table_details">
-            <div class="order_number">Order {{ table.order ? '#'+table.order.number : '' }}</div>
+            <div class="order_number">Order {{ table.order ? '#'+table.order.id : '' }}</div>
             <div class="table_number">Table No. {{ table ?.table_number }}</div>
         </div>
         <div class="dine-options grid grid-cols-3">
@@ -59,6 +59,8 @@
         @decrease:quantity="decreaseQuantity"
         @open:note-popup="openNotePopup"
         @remove:cart-product="removeProduct" 
+        :table="table"
+        :oldOrder="oldOrder"
     />
 
     <div class="order-bill-wrapper">
@@ -145,6 +147,10 @@ const props = defineProps({
         type: Array,
         default: () => []
     },
+    oldOrder: {
+        type: Array,
+        default: () => []
+    },
     floorName: String,
     totalAmount: Number,
     subTotal: Number,
@@ -152,16 +158,16 @@ const props = defineProps({
 
 });
 
-const increaseQuantity = (id) => {
-    emit('increase:quantity', id);
+const increaseQuantity = (index, kot, kotIndex, kotProductIndex) => {
+    emit('increase:quantity', index, kot, kotIndex, kotProductIndex);
 }
 
-const decreaseQuantity = (id) => {
-    emit('decrease:quantity', id);
+const decreaseQuantity = (index, kot, kotIndex, kotProductIndex) => {
+    emit('decrease:quantity', index, kot, kotIndex, kotProductIndex);
 }
 
-const openNotePopup = (id) => {
-    emit('open:note-popup', id);
+const openNotePopup = (index, kot, kotIndex, kotProductIndex) => {
+    emit('open:note-popup', index, kot, kotIndex, kotProductIndex);
 }
 
 // const getTotalAmount = () => {
@@ -169,8 +175,8 @@ const openNotePopup = (id) => {
 //     return zero.toFixed(2);
 // }
 
-const removeProduct = (index) => {
-    emit('remove:cart-product', index)
+const removeProduct = (index, kot, kotIndex, kotProductIndex) => {
+    emit('remove:cart-product', index, kot, kotIndex, kotProductIndex)
 }
 
 const createKot = (tableId) => {

@@ -12,7 +12,7 @@ import FoodIngredient from "./pages/pos/menu-management/FoodIngredient.vue";
 import FoodVariation from "./pages/pos/menu-management/FoodVariation.vue";
 import Setting from "./pages/pos/SettingsTab.vue";
 import NewSetting from "./pages/pos/NewSettingsTab.vue";
-import TableView from "./pages/restaurant-manager/table-view.vue"
+import TableView from "./pages/restaurant-manager/tableView.vue"
 import KotView from "./pages/restaurant-manager/KOT-view.vue"
 
 

@@ -5,13 +5,19 @@ namespace App\Http\Controllers\Manager;
 use App\Helper\CustomerHelper;
 use App\Helper\SettingHelper;
 use App\Http\Controllers\Controller;
+use App\Models\IngredientRestaurantLanguage;
 use App\Models\Kot;
 use App\Models\KotProduct;
 use App\Models\KotProductIngredient;
 use App\Models\KotProductVariation;
 use App\Models\Order;
+use App\Models\ProductLanguage;
+use App\Models\ProductRestaurantLanguage;
+use App\Models\RestaurantLanguage;
 use App\Models\Table;
+use App\Models\VariationRestaurantLanguage;
 use Illuminate\Http\Request;
+use PHPUnit\TextUI\XmlConfiguration\Variable;
 
 class PosController extends Controller
 {
@@ -19,6 +25,10 @@ class PosController extends Controller
     {
         $langId = SettingHelper::managerLanguage();
         $restaurantId = CustomerHelper::getRestaurantId();
+        $restaurantLanguageId = RestaurantLanguage::where('language_id', $langId)
+        ->where('restaurant_id', $restaurantId)
+        ->value('id');
+
         $tableId = $req->tableId;
 
         $table = Table::with(['orders' => function ($query) {
@@ -32,12 +42,40 @@ class PosController extends Controller
             $orderData = null;
             if ($table->orders->isNotEmpty()) {
                 $order = $table->orders->first();
-                $kotsData = $order->kots->map(function ($kot) {
-                    $kotProductsData = $kot->kotProducts->map(function ($kotProduct) {
+                $kotsData = $order->kots->map(function ($kot) use($restaurantLanguageId) {
+                    $kotProductsData = $kot->kotProducts->map(function ($kotProduct) use($restaurantLanguageId) {
+                        $name = ProductRestaurantLanguage::where('restaurant_language_id', $restaurantLanguageId)
+                                ->where('product_id', $kotProduct->product_id)
+                                ->value('name');
+
+                        $variation = null;
+                        $ingredients = [];
+                        if($kotProduct->kotProductVariation){
+                            $varName = VariationRestaurantLanguage::where('restaurant_language_id', $restaurantLanguageId)
+                                        ->where('variation_id', $kotProduct->kotProductVariation->variation_id)
+                                        ->value('name');
+                            $variation = $varName;
+                        }
+
+                        if($kotProduct->kotProductIngredients){
+                            $ingredients = $kotProduct->kotProductIngredients->map(function ($kotProductIngredient) use($restaurantLanguageId) {
+                                $ingName = IngredientRestaurantLanguage::where('restaurant_language_id', $restaurantLanguageId)
+                                        ->where('ingredient_id', $kotProductIngredient->ingredient_id)
+                                        ->value('name');
+                                return $ingName;
+                            });
+                        }
+
                         return [
                             'id' => $kotProduct->id,
                             'quantity' => $kotProduct->quantity,
                             'note' => $kotProduct->note,
+                            'name' => $name,
+                            'price' => $kotProduct->price,
+                            'total_price' => $kotProduct->total_price,
+                            'extra_amount' => $kotProduct->extra_amount,
+                            'variation' => $variation,
+                            'ingredients' => $ingredients,
                         ];
                     });
                     return [
@@ -103,7 +141,7 @@ class PosController extends Controller
             $orderId = $order->id;
             $kotNumber = 1;
         }
-
+        $priceCount = 0;
         $kot = new Kot();
         $kot->order_id = $orderId;
         $kot->restaurant_id = $restaurantId;
@@ -111,12 +149,15 @@ class PosController extends Controller
         $kot->number = $kotNumber;
         if($kot->save()){
             foreach($request->cart as $product){
+                $priceCount += $product['quantity'] * $product['price'] + $product['extraAmount'];
                 $kotProduct = new KotProduct();
                 $kotProduct->kot_id = $kot->id;
                 $kotProduct->product_id = $product['id'];
                 $kotProduct->quantity = $product['quantity']; 
                 $kotProduct->note = $product['note']; 
                 $kotProduct->price = $product['price']; 
+                $kotProduct->extra_amount = $product['extraAmount'];
+                $kotProduct->total_price = ($product['quantity'] * $product['price']) + $product['extraAmount'];
                 if($kotProduct->save()){
                     foreach($product['ingredient'] as $ingredient){
                         $kotProductIngredient = new KotProductIngredient();
@@ -136,6 +177,8 @@ class PosController extends Controller
                 }
             }
         }
+
+        Order::where('id', $order->id)->update(['total_price' => $order->total_price + $priceCount]);
         
         return response()->json(['success'=>'KOT Added Successfully.']);
     }
