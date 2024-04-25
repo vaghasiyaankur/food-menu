@@ -28,15 +28,17 @@
                     :discount="discount"
                     :floor-name="floorName"
                     :table="table"
+                    :old-order="oldOrder"
                     @remove:cart-product="removeProductIntoCart"
                     @create:kot="createKOT"
                 />
             </div>
         </div>
         <Modal 
-            :note-product-id="noteProductId"
+            :note-product-id="noteProductIndex"
             :note-product-description="noteProductDescription"
             @submit:product-note="submitProductNote"
+            :note-product-status="noteProductStatus"
 
             :add-ingredient-list="addIngredientList"
             :add-variation-list="addVariationList"
@@ -61,14 +63,18 @@ const activeCategory =  ref(0);
 const products =  ref({});
 const productsCount =  ref(0);
 const cartProducts = ref([]);
-const noteProductId = ref(0);
+const noteProductIndex = ref(0);
+const noteOldKotIndex = ref(0);
+const noteOldKotProductIndex = ref(0);
 const noteProductDescription = ref('');
+const noteProductStatus = ref('new');
 const totalAmount = ref(0);
 const subTotal = ref(0);
 const discount = ref(0);
 const currentRoute = ref('');
 const floorName = ref('');
 const table = ref({});
+const oldOrder = ref([]);
 
 const addIngVarId = ref([]);
 const addIngredientList = ref([]);
@@ -91,6 +97,8 @@ const getTableCurrentDetail = (tableId) => {
     .then((response) => {
         floorName.value = response.data.floor ? response.data.floor.name : '';
         table.value = response.data;
+        oldOrder.value = response.data.order;
+        getTotalAmount();
     })
 }
 
@@ -183,58 +191,92 @@ const addProductIntoCart = (id) => {
     
 }
 
-const removeProductIntoCart = (index) => {
-    // const index = cartProducts.value.findIndex(item => item.id === id);
-    // if(index !== -1){
+const removeProductIntoCart = (index, kot, kotIndex, kotProductIndex) => {
+    if(kot == 'old'){
+        oldOrder.value['kots'][kotIndex]['kot_products'].splice(kotProductIndex, 1);
+    }else{
         cartProducts.value.splice(index, 1);
-    // }
-    getTotalAmount();
-}
-
-const increaseQuantity = (id) => {
-    const productIndex = cartProducts.value.findIndex(product => product.id === id);
-    if (productIndex !== -1) {
-        cartProducts.value[productIndex].quantity++;
     }
     getTotalAmount();
 }
 
-const decreaseQuantity = (id) => {
-    const productIndex = cartProducts.value.findIndex(product => product.id === id);
-    if (productIndex !== -1 && cartProducts.value[productIndex].quantity > 1) {
-        cartProducts.value[productIndex].quantity--;
+const increaseQuantity = (index, kot, kotIndex, kotProductIndex) => {
+    if(kot == 'old'){
+        oldOrder.value['kots'][kotIndex]['kot_products'][kotProductIndex].quantity++;
+    }else{
+        // const productIndex = cartProducts.value.findIndex(product => product.id === id);
+        // if (productIndex !== -1) {
+            cartProducts.value[index].quantity++;
+        // }
     }
     getTotalAmount();
 }
 
-const openNotePopup = (id) => {
-    noteProductId.value = id;
-    const productIndex = cartProducts.value.findIndex(product => product.id === id);
-    console.log(cartProducts.value[productIndex]);
-    if (productIndex !== -1) {
-        $("#product-note").val(cartProducts.value[productIndex].note);
-        noteProductDescription.value = cartProducts.value[productIndex].note;
+const decreaseQuantity = (index, kot, kotIndex, kotProductIndex) => {
+    if(kot == 'old'){
+        oldOrder.value['kots'][kotIndex]['kot_products'][kotProductIndex].quantity--;
+    }else{
+        // const productIndex = cartProducts.value.findIndex(product => product.id === id);
+        // if (productIndex !== -1 && cartProducts.value[productIndex].quantity > 1) {
+            cartProducts.value[index].quantity--;
+        // }
     }
+    getTotalAmount();
+}
+
+const openNotePopup = (index, kot, kotIndex, kotProductIndex) => {
+    if(kot == 'old'){
+        let noteDescribe = oldOrder.value['kots'][kotIndex]['kot_products'][kotProductIndex].note;
+        $("#product-note").val(noteDescribe);
+        noteProductDescription.value = noteDescribe;
+        noteOldKotIndex.value = kotIndex;
+        noteOldKotProductIndex.value = kotProductIndex;
+
+    }else{
+        noteProductIndex.value = index;
+        // const productIndex = cartProducts.value.findIndex(product => product.id === id);
+        // if (productIndex !== -1) {
+            $("#product-note").val(cartProducts.value[index].note);
+            noteProductDescription.value = cartProducts.value[index].note;
+        // }
+    }
+    noteProductStatus.value = kot;
     f7.popup.open(`.notePopup`);
 }
 
-const submitProductNote = (note) => {
+const submitProductNote = (note, npStatus) => {
     noteProductDescription.value = note;
-    const productIndex = cartProducts.value.findIndex(product => product.id === noteProductId.value);
-    if (productIndex !== -1) {
-        cartProducts.value[productIndex].note = noteProductDescription.value;
+    if(npStatus == 'old'){
+        let kI = noteOldKotIndex.value;
+        let kPI = noteOldKotProductIndex.value;
+        oldOrder.value['kots'][kI]['kot_products'][kPI].note = note;
+    }else{
+        cartProducts.value[noteProductIndex.value].note = noteProductDescription.value;
+        // const productIndex = cartProducts.value.findIndex(product => product.id === noteProductIndex.value);
+        // if (productIndex !== -1) {
+        //     cartProducts.value[productIndex].note = noteProductDescription.value;
+        // }
     }
     f7.popup.close(`.notePopup`);
 }
 
 const getTotalAmount = () => {
     let total = 0;
+    if(oldOrder.value){
+        oldOrder.value.kots.forEach(kot => {
+            kot.kot_products.forEach(kotProduct => {
+                const subtotal = kotProduct.quantity * kotProduct.price + kotProduct.extra_amount;
+                total += subtotal;
+            })
+        });
+    }   
+console.log(total);
     for (const product of cartProducts.value) {
         const tempPrice = product.extraAmount > 0 ? product.extraAmount : product.price;
         total += tempPrice * product.quantity;
     }
-    totalAmount.value = total;
-    subTotal.value = total - discount.value;
+    totalAmount.value = total.toFixed(2);
+    subTotal.value = (total - discount.value).toFixed(2);
 }
 
 const submitIngVar = () => {

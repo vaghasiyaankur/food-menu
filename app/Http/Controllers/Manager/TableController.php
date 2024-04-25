@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use App\Helper\ReservationHelper;
 use Kutia\Larafirebase\Facades\Larafirebase;
 use \Carbon\Carbon;
+use DateTime;
 use Illuminate\Support\Facades\Auth;
 
 class TableController extends Controller
@@ -505,14 +506,43 @@ class TableController extends Controller
     public function getTableListFloorWise(){
         $restaurantId = CustomerHelper::getRestaurantId();
 
-        $floors = Floor::with(['tables.color'])->where('restaurant_id', $restaurantId)->get();
+        $floors = Floor::with(['tables.orders' => function ($query) {
+            $query->where('finish_time', '=', null)->where('finished', '=', 0)->latest()->with('kots.kotProducts');
+        }, 'tables.color'])
+        ->where('restaurant_id', $restaurantId)
+        ->get();
 
-        $transformedFloors = $floors->map(function ($floor){
+        $currentDateTime = now();
+
+        $transformedFloors = $floors->map(function ($floor) use ($currentDateTime) {
             return [
                 'id' => $floor->id,
                 'name' => $floor->name,
                 'short_cut' => $floor->short_cut,
-                'tables' => $floor->tables->map(function ($table) {
+                'tables' => $floor->tables->map(function ($table) use ($currentDateTime) {
+                    $orderData = null;
+                    if ($table->orders->isNotEmpty()) {
+                        $order = $table->orders->first();
+                        $orderStartTime = new DateTime($order->start_time); // Convert string to DateTime
+                        $orderDuration = $currentDateTime->diff($orderStartTime);
+                        
+                        if ($orderDuration->h >= 1) {
+                            $formattedDuration = $orderDuration->format('%h hrs %i minutes');
+                        } elseif ($orderDuration->i >= 1) {
+                            $formattedDuration = $orderDuration->format('%i minutes');
+                        } else {
+                            $formattedDuration = 'just now';
+                        }
+
+                        $orderData = [
+                            'id' => $order->id,
+                            'person' => $order->person,
+                            'total_price' => $order->total_price,
+                            'start_time' => $orderStartTime->format('H:i'), // Format the start time
+                            'duration' => $formattedDuration,
+                        ];
+                    }
+
                     return [
                         'id' => $table->id,
                         'table_number' => $table->table_number,
@@ -520,11 +550,11 @@ class TableController extends Controller
                         'status' => $table->status,
                         'color' => $table->color->color,
                         'rgb' => $table->color->rgb,
+                        'order' => $orderData,
                     ];
                 }),
             ];
         });
-
         return response()->json($transformedFloors);
 
     }

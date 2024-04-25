@@ -176,7 +176,7 @@ const getExtraAmount = () => {
     extraAmount.value = total;
 }
 
-const formattedExtraAmount = computed(() => extraAmount.value ? extraAmount.value.toFixed(2) : '0.00');
+const formattedExtraAmount = computed(() => extraAmount.value ? extraAmount.value.toFixed(2) : 0.00);
 
 const submitIngredientVariation = () => {
     emit('submit:ingredient-variation');

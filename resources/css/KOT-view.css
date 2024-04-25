@@ -100,7 +100,7 @@
     position: relative;
 }
 .search-bar-wrapper .searchbar .searchbar-inner .searchbar-input-wrap input {
-    padding: 8px 32px 11px;
+    padding: 8px;
     font-size: 14px;
     line-height: 17px;
     font-weight: 400;
@@ -324,23 +324,26 @@
     align-items: center;
     justify-content: space-between;
 }
-.kot_view_table_card .bill-pay-details .bill_buttons .server_btn-outer {
-    padding: 7px 50px;
+.kot_view_table_card .bill-pay-details .bill_buttons .server_btn-outer, .kot_view_table_card .bill-pay-details .bill_buttons .pay_btn-outer {
+    width: 46%;
     border-radius: 5px;
+}
+.kot_view_table_card .bill-pay-details .bill_buttons .server_btn-outer{
     border: 0.7px solid rgba(56, 55, 61, 1);
 }
-.kot_view_table_card .bill-pay-details .bill_buttons .pay_btn-outer {
-    padding: 7px 57px;
-    border-radius: 5px;
-    border: 0.7px solid rgba(56, 55, 61, 1);
+.kot_view_table_card .bill-pay-details .bill_buttons .pay_btn-outer .pay_btn {
+    border: 0.7px solid #f33e3e;
 }
 .kot_view_table_card .bill-pay-details .bill_buttons .server_btn,
 .kot_view_table_card .bill-pay-details .bill_buttons .pay_btn {
     font-size: 14px;
+    width : 100%;
     line-height: 17px;
+    padding: 7px;
     font-weight: 500;
     color: #38373d;
     border: none;
+    border-radius: 5px;
     background-color: #ffffff;
 }
 /* ========= KOT-VIEW POPUP ========= */
@@ -461,10 +464,10 @@
     align-items: center;
     justify-content: space-between;
 }
-.kot_paybill_popup .wave-image-content{
+/* .kot_paybill_popup .wave-image-content{
     width: 100%;
-    height: 50px;
-}
+    height: 43px;
+} */
 .new_order_button {
     max-width: 30%;
     padding: 12px 22px;
