@@ -40,6 +40,7 @@ class PosController extends Controller
 
         if ($table) {
             $orderData = null;
+            $receivedType = 'dine_in';
             if ($table->orders->isNotEmpty()) {
                 $order = $table->orders->first();
                 $kotsData = $order->kots->map(function ($kot) use($restaurantLanguageId) {
@@ -87,11 +88,22 @@ class PosController extends Controller
                 });
                 $orderData = [
                     'id' => $order->id,
+                    'person' => $order->person,
+                    'phone' => $order->phone,
+                    'name' => $order->name,
+                    'address' => $order->address,
+                    'locality' => $order->locality,
                     'start_time' => $order->start_time,
                     'finish_time' => $order->finish_time,
                     'finish_at' => $order->finish_at,
+                    'note' => $order->note,
+                    'waiter' => $order->waiter_id,
                     'kots' => $kotsData,
                 ];
+                $latestKot = Kot::where('order_id', $order->id)->latest()->take(1)->first();
+                if($latestKot){
+                    $receivedType = $latestKot->food_received_type ? : 'dine_in';
+                }
             }
 
             $floorData = null;
@@ -109,6 +121,7 @@ class PosController extends Controller
                 'capacity_of_person' => $table->capacity_of_person,
                 'order' => $orderData,
                 'floor' => $floorData,
+                'received_type' => $receivedType
             ];
         } else {
             $transformedTable = null;
@@ -146,10 +159,13 @@ class PosController extends Controller
         $kot->order_id = $orderId;
         $kot->restaurant_id = $restaurantId;
         $kot->time = date('H:i:s');
+        $kot->food_received_type = $request->foodReceivedType;
         $kot->number = $kotNumber;
         if($kot->save()){
+            $kotPrice = 0;
             foreach($request->cart as $product){
-                $priceCount += $product['quantity'] * $product['price'] + $product['extraAmount'];
+                $priceCount += $product['quantity'] * ($product['price'] + $product['extraAmount']);
+                $kotPrice += $product['quantity'] * ($product['price'] + $product['extraAmount']);
                 $kotProduct = new KotProduct();
                 $kotProduct->kot_id = $kot->id;
                 $kotProduct->product_id = $product['id'];
@@ -157,7 +173,7 @@ class PosController extends Controller
                 $kotProduct->note = $product['note']; 
                 $kotProduct->price = $product['price']; 
                 $kotProduct->extra_amount = $product['extraAmount'];
-                $kotProduct->total_price = ($product['quantity'] * $product['price']) + $product['extraAmount'];
+                $kotProduct->total_price = ($product['extraAmount'] + $product['price']) * $product['quantity'];
                 if($kotProduct->save()){
                     foreach($product['ingredient'] as $ingredient){
                         $kotProductIngredient = new KotProductIngredient();
@@ -176,9 +192,19 @@ class PosController extends Controller
                     }
                 }
             }
+            Kot::where('id',$kot->id)->update(['price' => $kotPrice]);
         }
 
-        Order::where('id', $order->id)->update(['total_price' => $order->total_price + $priceCount]);
+        Order::where('id', $order->id)->update([
+            'total_price' => $order->total_price + $priceCount,
+            'person' => $request->numberOfPerson,
+            'phone' => $request->personNumber,
+            'name' => $request->personName,
+            'address' => $request->personAddress,
+            'locality' => $request->personLocality,
+            'note' => $request->orderNote,
+            'waiter_id' => $request->selectWaiter
+        ]);
         
         return response()->json(['success'=>'KOT Added Successfully.']);
     }

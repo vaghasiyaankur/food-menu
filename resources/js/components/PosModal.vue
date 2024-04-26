@@ -13,11 +13,28 @@
         :add-variation-list="addVariationList"
         @submit:ingredient-variation="submitIngVar"
     />
+
+    <!-- ========= ADD Number Of Person Add  POPUP ========= -->
+    <PersonDetailPopup />
+    
+    <!-- ========= NUMBER OF PERSON POPUP ========= -->
+    <NoOfPersonPopup />
+
+    <!-- ========= ORDER NOTE POPUP ========= -->
+    <OrderNotePopup />
+
+    <!-- ========= WAITER POPUP ========= -->
+    <WaiterAssignPopup />
+
 </template>
 <script setup>
 
 import NotePopup from './Popup/NotePopup.vue'
 import AddIngredientVariationPopUp from './Popup/AddIngredientVariationPopUp.vue'
+import PersonDetailPopup from './Popup/PersonDetailPopup.vue'
+import NoOfPersonPopup from './Popup/NoOfPersonPopup.vue'
+import OrderNotePopup from './Popup/OrderNotePopup.vue'
+import WaiterAssignPopup from './Popup/WaiterAssignPopup.vue'
 
 const props = defineProps({
     // Note Modal

@@ -8,17 +8,17 @@
                     </div>
                     <div class="product_detail" v-for="(kp, ind) in kot.kot_products" :key="ind">
                         <div class="product-detail-inner">
-                            <div class="delete-product" @click="removeProduct(index, 'old', index, ind)">
+                            <!-- <div class="delete-product" @click="removeProduct(index, 'old', index, ind)">
                                 <span data-popup="#deleteCartItem_popup">
                                     <f7-icon f7="minus" class="font-16 delete-product-button"></f7-icon>
                                 </span>
-                            </div>
+                            </div> -->
                             <div class="product-summary">
                                 <p class="no-margin">{{ kp.name }}</p>
                                 <!-- <span class="no-margin display-flex align-items-center">Size: S<p
                                         class="text-red no-margin">
                                         ${{ kp.price.toFixed(2) }}</p></span> -->
-                                <p class="text-red no-margin">${{ ((kp.price * kp.quantity) + kp.extra_amount).toFixed(2) }}</p>
+                                <p class="text-red no-margin">${{ ((kp.price + kp.extra_amount) * kp.quantity).toFixed(2) }}</p>
                                 <span 
                                     v-if="kp.variation"
                                     class="no-margin display-flex align-items-center"
@@ -36,7 +36,7 @@
                             </div>
                         </div>
                         <div class="product-detail-inner">
-                            <div class="quantity-section">
+                            <!-- <div class="quantity-section">
                                 <div class="quantity-content">
                                     <span class="quantity-minus" :class="{'disabled' : kp.quantity < 2}" @click="decreaseQuantity(kot.id, 'old', index, ind)">
                                         <f7-icon f7="minus" class="font-16 quantity-icon"></f7-icon>
@@ -46,7 +46,7 @@
                                         <f7-icon f7="plus" class="font-16 quantity-icon"></f7-icon>
                                     </span>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="product-note-content">
                                 <div class="product-note" data-popup="#note_popup" 
                                     @click="openNotePopup(kot.id, 'old', index, ind)"
@@ -78,7 +78,7 @@
                                 <p class="no-margin">
                                     {{ product.name }}
                                 </p>
-                                <p class="text-red no-margin">${{ (product.price + product.extraAmount).toFixed(2) }}</p>
+                                <p class="text-red no-margin">${{ ((product.price + product.extraAmount) * product.quantity).toFixed(2) }}</p>
                                     <span 
                                         v-if="product.variation.name"
                                         class="no-margin display-flex align-items-center"
