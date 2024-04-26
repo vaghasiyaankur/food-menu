@@ -310,6 +310,7 @@
 }
 .dashboard_page .tabs .dashboard_tab .orders-category_tables{
     display: grid;
+    grid-template-columns: auto auto;
     gap: 40px;  
 }
 .dashboard_page .tabs .dashboard_tab .orders-category_tables .latest_orders_table{
@@ -348,19 +349,35 @@
     border-right: 0.4px solid #F33E3E;
     translate: 0 -50%;
 }
-.dashboard_page .tabs .dashboard_tab .orders-category_tables .latest_orders_table .table_card table{
+.dashboard_page .tabs .dashboard_tab .latest_orders_table table{
     padding: 0 20px;
     width: 100%;
     border-collapse: collapse;
 }
-.dashboard_page .tabs .dashboard_tab .orders-category_tables .latest_orders_table .table_card thead{
-    
-}
-.dashboard_page .tabs .dashboard_tab .orders-category_tables .latest_orders_table .table_card thead tr th{
+.dashboard_page .tabs .dashboard_tab .latest_orders_table thead{
+    border-bottom: 1px solid rgba(153, 153, 153, 0.25);
     background-color: #F4F4F4;
-    padding: 0 17px !important;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+.dashboard_page .tabs .dashboard_tab .latest_orders_table table th,
+.dashboard_page .tabs .dashboard_tab .latest_orders_table table tr{
+    width: auto;
+    font-size: 15px;
+    line-height: 18px;
+}
+.dashboard_page .tabs .dashboard_tab .latest_orders_table table th{
+    font-weight: 600;
+    color: #555555;
+}
+.dashboard_page .tabs .dashboard_tab .latest_orders_table table tr{
+    font-weight: 400;
+    color: #38373D;
+}
+.dashboard_page .tabs .dashboard_tab .latest_orders_table thead th{
+    padding: 17px 0;
 }
 
-.dashboard_page .tabs .dashboard_tab .orders-category_tables .latest_category_table{
+.dashboard_page .tabs .dashboard_tab .latest_category_table{
     max-width: 500px;
 }
