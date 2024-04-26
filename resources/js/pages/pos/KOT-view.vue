@@ -83,19 +83,18 @@
                                     <hr class="horizontal-divider">
                                     <div class="ordered_items-total">
                                         <h4 class="ordered_items-total-text no-margin">Total Amount</h4>
-                                        <h4 class="ordered_items-total-number no-margin">$38.00</h4>
+                                        <h4 class="ordered_items-total-number no-margin">${{item?.total_price?.toFixed(2)}}</h4>
                                     </div>
                                 </div>
-                                <div class="order-user-comment">
-                                    <p class="no-margin">Momos me shezwan souce kam dalna or mayonnaise mat dalna</p>
+                                <div class="order-user-comment" v-if="item?.kots[0]?.note">
+                                    <p class="no-margin">{{item?.kots[0]?.note}}</p>
                                 </div>
                                 <div class="bill_buttons">
                                     <div class="server_btn-outer">
                                         <button class="server_btn">Serve</button>
                                     </div>
                                     <div class="pay_btn-outer">
-                                        <button class="pay_btn bg-pink text-color-white" data-popup="#kot_paybill_popup"
-                                            @click="f7.popup.open(`.kot_paybill_popup`);">Pay</button>
+                                        <button class="pay_btn bg-pink text-color-white" data-popup="#kot_paybill_popup" @click="f7.popup.open(`.kot_paybill_popup`);">Pay</button>
                                     </div>
                                 </div>
                             </div>
@@ -202,9 +201,7 @@ const getKotList = async () => {
 }
 
 const timeFormat = (time) => {
-    if (time) {
-        return dayjs().to(dayjs(time));
-    }
+    if (time) return dayjs().to(dayjs(time));
 }
 
 getKotList();

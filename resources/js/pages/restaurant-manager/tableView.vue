@@ -181,7 +181,7 @@
                                     </div>
                                 </div>
                                 <div class="table_view-table_cost">
-                                    <p class="no-margin no-padding">₹ {{ table.order.total_price.toFixed(2)}}</p>
+                                    <p class="no-margin no-padding">₹ {{ table?.order?.total_price?.toFixed(2)}}</p>
                                 </div>
                                 <div class="display-flex align-items-center table_view-table_details">
                                     <div class="table_view-people_count_btn">

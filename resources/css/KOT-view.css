@@ -213,7 +213,7 @@
 .kot_table-bill-details .ordered-items-details .ordered-item-details-list {
     padding: 10px 10px 10px 30px;
     list-style-type: decimal;
-    height: 120px;
+    height: 180px;
     overflow-y: scroll;
 }
 .kot_table-bill-details
