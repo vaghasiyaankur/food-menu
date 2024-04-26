@@ -2,9 +2,7 @@
   <f7-app ref="app" v-bind="f7Params">
     <f7-page>
       <div class="nav-bar" v-if="currentRoute.value != 'login'">
-        <Navbar 
-          :moveToMethod="MoveToWaitingArea"
-        />
+        
       </div>
       <f7-view
         url="/"
