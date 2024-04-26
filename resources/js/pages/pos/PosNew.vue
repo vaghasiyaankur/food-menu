@@ -75,6 +75,7 @@ const currentRoute = ref('');
 const floorName = ref('');
 const table = ref({});
 const oldOrder = ref([]);
+const foodReceivedType = ref('dine_in')
 
 const addIngVarId = ref([]);
 const addIngredientList = ref([]);
@@ -82,6 +83,21 @@ const addVariationList = ref([]);
 const selectIngredient = ref([]);
 const selectVariation = ref([]);
 const extraAmount = ref(0);
+
+// Person Detail Popup
+const personNumber = ref('');
+const personName = ref('');
+const personAddress = ref('');
+const personLocality = ref('');
+
+// No Of Person Popup
+const numberOfPerson = ref(0);
+
+// Order Note Popup
+const orderNote = ref('');
+
+// Select Waiter Popup
+const selectWaiter = ref(1);
 
 onMounted(() => {
     setTimeout(() => {
@@ -98,6 +114,14 @@ const getTableCurrentDetail = (tableId) => {
         floorName.value = response.data.floor ? response.data.floor.name : '';
         table.value = response.data;
         oldOrder.value = response.data.order;
+        foodReceivedType.value = response.data.received_type;
+        numberOfPerson.value = response.data.order ? response.data.order.person : 0;
+        personNumber.value = response.data.order ? response.data.order.phone : '';
+        personName.value = response.data.order ? response.data.order.name : '';
+        personAddress.value = response.data.order ? response.data.order.address : '';
+        personLocality.value = response.data.order ? response.data.order.locality : '';
+        orderNote.value = response.data.order ? response.data.order.note : '';
+        selectWaiter.value = response.data.order ? response.data.order.waiter : 1;
         getTotalAmount();
     })
 }
@@ -265,15 +289,14 @@ const getTotalAmount = () => {
     if(oldOrder.value){
         oldOrder.value.kots.forEach(kot => {
             kot.kot_products.forEach(kotProduct => {
-                const subtotal = kotProduct.quantity * kotProduct.price + kotProduct.extra_amount;
-                total += subtotal;
+                const totalValue = kotProduct.quantity * (kotProduct.price + kotProduct.extra_amount);
+                total += totalValue;
             })
         });
     }   
-console.log(total);
     for (const product of cartProducts.value) {
-        const tempPrice = product.extraAmount > 0 ? product.extraAmount : product.price;
-        total += tempPrice * product.quantity;
+        const totalValue = product.quantity * (product.price + product.extraAmount);
+        total += totalValue;
     }
     totalAmount.value = total.toFixed(2);
     subTotal.value = (total - discount.value).toFixed(2);
@@ -314,12 +337,27 @@ const submitIngVar = () => {
     selectVariation.value = [];
     selectIngredient.value = [];
     extraAmount.value = 0;
+    getTotalAmount();
     f7.popup.close(`.add_ingredient_variation_popup`);
 }
 
 const createKOT = (tableId) => {
+
     if(cartProducts.value.length){
-        axios.post('/api/add-kot', { cart: cartProducts.value, tableId: tableId })
+
+        axios.post('/api/add-kot', 
+            { 
+                cart: cartProducts.value,
+                tableId: tableId, 
+                foodReceivedType : foodReceivedType.value, 
+                numberOfPerson : numberOfPerson.value,
+                personNumber : personNumber.value,
+                personName : personName.value,
+                personAddress : personAddress.value,
+                personLocality : personLocality.value,
+                orderNote : orderNote.value,
+                selectWaiter : selectWaiter.value,
+            })
         .then((response) => {
             successNotification(response.data.success);
             f7.view.main.router.navigate({ url: "/" });
@@ -334,5 +372,22 @@ const createKOT = (tableId) => {
 provide('selectIngredient',selectIngredient);
 provide('selectVariation',selectVariation);
 provide('extraAmount',extraAmount);
+provide('foodReceivedType', foodReceivedType)
+
+// Person Detail Popup
+provide('personNumber', personNumber);
+provide('personName', personName);
+provide('personAddress', personAddress);
+provide('personLocality', personLocality);
+
+// No Of Person Popup
+provide('numberOfPerson', numberOfPerson);
+
+// Order Note Popup
+provide('orderNote', orderNote);
+
+// Select Waiter Popup
+provide('selectWaiter', selectWaiter);
+
 
 </script>

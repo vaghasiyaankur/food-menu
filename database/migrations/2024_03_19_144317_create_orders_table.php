@@ -22,6 +22,12 @@ return new class extends Migration
             $table->unsignedBigInteger('restaurant_id')->unsigned()->nullable();
             $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
             $table->integer('person')->default(0);
+            $table->string('phone')->nullable();
+            $table->string('name')->nullable();
+            $table->string('address')->nullable();
+            $table->string('locality')->nullable();
+            $table->text('note')->nullable();
+            $table->integer('waiter_id')->nullable();
             $table->string('role')->default('Guest');
             $table->string('cancelled_by')->nullable();
             $table->timestamp('start_time')->nullable();

@@ -22,6 +22,8 @@ return new class extends Migration
             $table->time('time')->nullable();
             $table->string('note')->nullable();
             $table->integer('number')->nullable();
+            $table->float('price')->nullable();
+            $table->string('food_received_type')->nullable();
             $table->timestamps();
         });
     }
