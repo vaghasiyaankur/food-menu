@@ -1050,7 +1050,6 @@ const getTableListFloorWise = () => {
 }
 
 const openPos = (id) => {
-    console.log(id);
     f7.view.main.router.navigate({ url: "/pos/"+id });
 }
 

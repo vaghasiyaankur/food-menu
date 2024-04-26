@@ -75,6 +75,7 @@ const currentRoute = ref('');
 const floorName = ref('');
 const table = ref({});
 const oldOrder = ref([]);
+const foodDeliveryType = ref('dine_in')
 
 const addIngVarId = ref([]);
 const addIngredientList = ref([]);
@@ -265,15 +266,14 @@ const getTotalAmount = () => {
     if(oldOrder.value){
         oldOrder.value.kots.forEach(kot => {
             kot.kot_products.forEach(kotProduct => {
-                const subtotal = kotProduct.quantity * kotProduct.price + kotProduct.extra_amount;
-                total += subtotal;
+                const totalValue = kotProduct.quantity * kotProduct.price + kotProduct.extra_amount;
+                total += totalValue;
             })
         });
     }   
-console.log(total);
     for (const product of cartProducts.value) {
-        const tempPrice = product.extraAmount > 0 ? product.extraAmount : product.price;
-        total += tempPrice * product.quantity;
+        const totalValue = product.quantity * product.price + product.extraAmount;
+        total += totalValue;
     }
     totalAmount.value = total.toFixed(2);
     subTotal.value = (total - discount.value).toFixed(2);
@@ -314,6 +314,7 @@ const submitIngVar = () => {
     selectVariation.value = [];
     selectIngredient.value = [];
     extraAmount.value = 0;
+    getTotalAmount();
     f7.popup.close(`.add_ingredient_variation_popup`);
 }
 
@@ -334,5 +335,6 @@ const createKOT = (tableId) => {
 provide('selectIngredient',selectIngredient);
 provide('selectVariation',selectVariation);
 provide('extraAmount',extraAmount);
+provide('foodDeliveryType', foodDeliveryType)
 
 </script>

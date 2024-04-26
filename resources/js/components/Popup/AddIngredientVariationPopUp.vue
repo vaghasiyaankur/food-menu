@@ -65,8 +65,8 @@
                     <div class="popup_cancel_item_edit-btn">
                         <button type="button" class="cancel-item_edit-button popup-close">Cancel</button>
                     </div>
-                    <div class="popup_save-item_edit-btn">
-                        <button type="button" class="save-item_edit-btn" @click="submitIngredientVariation">Save</button>
+                    <div class="popup_save-item_edit-btn" @click="submitIngredientVariation">
+                        <button type="button" class="save-item_edit-btn" >Save</button>
                     </div>
                 </div>
             </div>

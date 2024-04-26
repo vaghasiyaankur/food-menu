@@ -69,7 +69,6 @@ const foodTypeIcon = (typeId) => {
 }
 
 const addProductIntoCart = (id) => {
-    console.log(id);
     emit('add:cart-product', id);
 }
 

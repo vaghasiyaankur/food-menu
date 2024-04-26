@@ -18,7 +18,7 @@
                                 <!-- <span class="no-margin display-flex align-items-center">Size: S<p
                                         class="text-red no-margin">
                                         ${{ kp.price.toFixed(2) }}</p></span> -->
-                                <p class="text-red no-margin">${{ kp.price.toFixed(2) }}</p>
+                                <p class="text-red no-margin">${{ ((kp.price * kp.quantity) + kp.extra_amount).toFixed(2) }}</p>
                                 <span 
                                     v-if="kp.variation"
                                     class="no-margin display-flex align-items-center"

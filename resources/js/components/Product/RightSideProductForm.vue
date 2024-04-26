@@ -101,7 +101,6 @@ const popupSelectVariationId = ref(0);
 
 const selectVariation = (id) => {
     popupSelectVariationId.value = id;
-    console.log(id);
 }
 
 const addSelectIngredient = (id) => {

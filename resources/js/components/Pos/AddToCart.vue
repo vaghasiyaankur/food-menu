@@ -5,9 +5,24 @@
             <div class="table_number">Table No. {{ table ?.table_number }}</div>
         </div>
         <div class="dine-options grid grid-cols-3">
-            <button class="button button-small food-received-type button-raised active">Dine In</button>
-            <button class="button button-small food-received-type">Takeaway</button>
-            <button class="button button-small food-received-type">Delivery</button>
+            <button class="button button-small food-received-type" 
+                    :class="{'button-raised active' : foodDeliveryType == 'dine_in'}"
+                    @click="changeFoodReceiveType('dine_in')"
+            >
+                Dine In
+            </button>
+            <button class="button button-small food-received-type" 
+                    :class="{'button-raised active' : foodDeliveryType == 'takeaway'}"
+                    @click="changeFoodReceiveType('takeaway')"
+            >
+                Takeaway
+            </button>
+            <button class="button button-small food-received-type" 
+                    :class="{'button-raised active' : foodDeliveryType == 'delivery'}"
+                    @click="changeFoodReceiveType('delivery')"
+            >
+                Delivery
+            </button>
         </div>
         <div class="order-specific-options grid">
             <button class="button button-small order-option tooltip button-raised active" data-popup="#due_btn_Popup"
@@ -132,7 +147,7 @@
 <script setup>
 import { f7 } from "framework7-vue"
 import CartProduct from './CartProduct.vue'
-import { ref } from 'vue'
+import { ref, inject } from 'vue'
 
 const emit = defineEmits(['increase:quantity', 'decrease:quantity','open:note-popup', 'remove:cart-product']);
 
@@ -154,9 +169,11 @@ const props = defineProps({
     floorName: String,
     totalAmount: Number,
     subTotal: Number,
-    discount: Number
-
+    discount: Number,
 });
+
+
+const foodDeliveryType = inject('foodDeliveryType');
 
 const increaseQuantity = (index, kot, kotIndex, kotProductIndex) => {
     emit('increase:quantity', index, kot, kotIndex, kotProductIndex);
@@ -184,6 +201,10 @@ const createKot = (tableId) => {
 }
 const toggleAmountSlider = () => {
     openAmountSlider.value = !openAmountSlider.value
+}
+
+const changeFoodReceiveType = (type) => {
+    foodDeliveryType.value = type;
 }
 
 </script>
