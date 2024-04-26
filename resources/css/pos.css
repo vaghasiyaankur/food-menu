@@ -672,6 +672,30 @@ textarea {
     border-right: 7px solid transparent;
     border-top: 7px solid #ffffff;
 }
+.btn-order-detail-collapse {
+    content: "";
+    position: relative;
+    width: 37px;
+    height: 37px;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 100%;
+    background-color: #f33e3e;
+    border: 0;
+}
+.btn-order-detail-collapse::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: 40%;
+    left: 52%;
+    transform: translate(-50%, -30%);
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 7px solid #ffffff;
+}
 @media screen and (min-width: 991px) {
     /* .order-details, */
     .bill-divider,

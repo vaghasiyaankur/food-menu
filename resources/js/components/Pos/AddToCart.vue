@@ -64,7 +64,7 @@
     />
 
     <div class="order-bill-wrapper">
-        <button class="btn-order-detail-expand"></button>
+        <button :class="openAmountSlider ? 'btn-order-detail-expand' : 'btn-order-detail-collapse'" @click="toggleAmountSlider"></button>
         <div class="order-bill">
             <div class="order-details" :class="{'open' : !openAmountSlider}">
                 <div class="order-discount">
@@ -181,6 +181,9 @@ const removeProduct = (index, kot, kotIndex, kotProductIndex) => {
 
 const createKot = (tableId) => {
     emit('create:kot', tableId)
+}
+const toggleAmountSlider = () => {
+    openAmountSlider.value = !openAmountSlider.value
 }
 
 </script>
