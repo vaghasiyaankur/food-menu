@@ -115,6 +115,10 @@ Route::post('get-current-table-details',[PosController::class, 'getCurrentTableD
 
 Route::post('/add-kot',[PosController::class, 'addKOT']);
 
+Route::post('/hold-kot',[PosController::class, 'holdKOT']);
+
+Route::get('/remove-hold-kot/{tableId}',[PosController::class, 'removeHoldKOT']);
+
 // ------------------------ Product Routes ------------------------ //
 
 Route::post('get-products',[ProductController::class, 'getProducts']);

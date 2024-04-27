@@ -542,6 +542,10 @@ class TableController extends Controller
                             'duration' => $formattedDuration,
                         ];
                     }
+                    $holdKOTDataAvailable = false;
+                    if($table->kotHold){
+                        $holdKOTDataAvailable = true;
+                    }
 
                     return [
                         'id' => $table->id,
@@ -551,6 +555,7 @@ class TableController extends Controller
                         'color' => $table->color->color,
                         'rgb' => $table->color->rgb,
                         'order' => $orderData,
+                        'holdKotAvailable' => $holdKOTDataAvailable
                     ];
                 }),
             ];

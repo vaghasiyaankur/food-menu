@@ -31,4 +31,9 @@ class Table extends Model
         return $this->belongsTo(Floor::class);
     }
 
+    public function kotHold()
+    {
+        return $this->hasOne(KotHold::class, 'table_id');
+    }
+
 }
