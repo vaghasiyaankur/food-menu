@@ -718,7 +718,7 @@
                         </div>
                         <div class="orders-category_tables">
                             <div class="latest_orders_table">
-                                <div class="latest_orders_table_header">
+                                <div class="table_header">
                                     <h3 class="no-margin">Latest Orders</h3>
                                     <a href="" class="no-margin">
                                         <h5 class="no-margin">View All</h5>
@@ -738,9 +738,20 @@
                                     <tbody>
                                         <tr>
                                             <td>#10663</td>
-                                            <td>159</td>
+                                            <td>
+                                                <div class="customer_img">
+                                                    <img src="\assets\images\seederImages\dashboard\user_1.png">
+                                                </div>
+                                                <div class="customer_name">Jannson Wasley</div>
+                                            </td>
                                             <td>$109.00</td>
-                                            <td>24</td>
+                                            <td>
+                                                <div class="status_indicator">
+                                                    <div class="cancelled_order">
+                                                        <p class="no-margin">Cancelled</p>
+                                                    </div>
+                                                </div>
+                                            </td>
                                             <td>24, Sep 2022 / 10:00 am</td>
                                             <td><svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
@@ -765,9 +776,20 @@
                                         </tr>
                                         <tr>
                                             <td>#10662</td>
-                                            <td>237</td>
+                                            <td>
+                                                <div class="customer_img">
+                                                    <img src="\assets\images\seederImages\dashboard\user_2.png">
+                                                </div>
+                                                <div class="customer_name">Robert Fox</div>
+                                            </td>
                                             <td>$159.00</td>
-                                            <td>37</td>
+                                            <td>
+                                                <div class="status_indicator">
+                                                    <div class="processing_order">
+                                                        <p class="no-margin">Processing</p>
+                                                    </div>
+                                                </div>
+                                            </td>
                                             <td>24, Sep 2022 / 10:00 am</td>
                                             <td><svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
@@ -792,9 +814,20 @@
                                         </tr>
                                         <tr>
                                             <td>#10661</td>
-                                            <td>262</td>
+                                            <td>
+                                                <div class="customer_img">
+                                                    <img src="\assets\images\seederImages\dashboard\user_3.png">
+                                                </div>
+                                                <div class="customer_name">Marvin Kinney</div>
+                                            </td>
                                             <td>$89.00</td>
-                                            <td>24</td>
+                                            <td>
+                                                <div class="status_indicator">
+                                                    <div class="processing_order">
+                                                        <p class="no-margin">Processing</p>
+                                                    </div>
+                                                </div>
+                                            </td>
                                             <td>24, Sep 2022 / 10:00 am</td>
                                             <td><svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
@@ -819,9 +852,20 @@
                                         </tr>
                                         <tr>
                                             <td>#10660</td>
-                                            <td>305</td>
+                                            <td>
+                                                <div class="customer_img">
+                                                    <img src="\assets\images\seederImages\dashboard\user_4.png">
+                                                </div>
+                                                <div class="customer_name">Jessica Williams</div>
+                                            </td>
                                             <td>$96.00</td>
-                                            <td>67</td>
+                                            <td>
+                                                <div class="status_indicator">
+                                                    <div class="cancelled_order">
+                                                        <p class="no-margin">Cancelled</p>
+                                                    </div>
+                                                </div>
+                                            </td>
                                             <td>24, Sep 2022 / 10:00 am</td>
                                             <td><svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
@@ -846,9 +890,20 @@
                                         </tr>
                                         <tr>
                                             <td>#10659</td>
-                                            <td>305</td>
+                                            <td>
+                                                <div class="customer_img">
+                                                    <img src="\assets\images\seederImages\dashboard\user_5.png">
+                                                </div>
+                                                <div class="customer_name">Floyd Miles</div>
+                                            </td>
                                             <td>$330.00</td>
-                                            <td>67</td>
+                                            <td>
+                                                <div class="status_indicator">
+                                                    <div class="processing_order">
+                                                        <p class="no-margin">Processing</p>
+                                                    </div>
+                                                </div>
+                                            </td>
                                             <td>24, Sep 2022 / 10:00 am</td>
                                             <td><svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
@@ -873,9 +928,20 @@
                                         </tr>
                                         <tr>
                                             <td>#10658</td>
-                                            <td>305</td>
+                                            <td>
+                                                <div class="customer_img">
+                                                    <img src="\assets\images\seederImages\dashboard\user_6.png">
+                                                </div>
+                                                <div class="customer_name">Kathryn Murphy</div>
+                                            </td>
                                             <td>$234.00</td>
-                                            <td>67</td>
+                                            <td>
+                                                <div class="status_indicator">
+                                                    <div class="processing_order">
+                                                        <p class="no-margin">Processing</p>
+                                                    </div>
+                                                </div>
+                                            </td>
                                             <td>24, Sep 2022 / 10:00 am</td>
                                             <td><svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
@@ -902,8 +968,100 @@
                                 </table>
                             </div>
                             <div class="latest_category_table">
-                                <div class="latest_orders_table_header">
-                                    <h3 class="no-margin">Latest Orders</h3>
+                                <div class="table_header">
+                                    <h3 class="no-margin">Latest Category</h3>
+                                    <a href="" class="no-margin">
+                                        <h5 class="no-margin">View All</h5>
+                                    </a>
+                                </div>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Category Name</th>
+                                            <th>Item</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>01</td>
+                                            <td>
+                                                <div class="category_image">
+                                                    <img src="\assets\images\seederImages\dashboard\Burger.png">
+                                                </div>
+                                                <div class="category_name">Burger</div>
+                                            </td>
+                                            <td>16 Item</td>
+                                        </tr>
+                                        <tr>
+                                            <td>02</td>
+                                            <td>
+                                                <div class="category_image">
+                                                    <img src="\assets\images\seederImages\dashboard\Noodles.png">
+                                                </div>
+                                                <div class="category_name">Noodles</div>
+                                            </td>
+                                            <td>6 Item</td>
+                                        </tr>
+                                        <tr>
+                                            <td>03</td>
+                                            <td>
+                                                <div class="category_image">
+                                                    <img src="\assets\images\seederImages\dashboard\Indian_Food.png">
+                                                </div>
+                                                <div class="category_name">Indian Food</div>
+                                            </td>
+                                            <td>10 Item</td>
+                                        </tr>
+                                        <tr>
+                                            <td>04</td>
+                                            <td>
+                                                <div class="category_image">
+                                                    <img src="\assets\images\seederImages\dashboard\Sandwich.png">
+                                                </div>
+                                                <div class="category_name">Sandwich</div>
+                                            </td>
+                                            <td>8 Item</td>
+                                        </tr>
+                                        <tr>
+                                            <td>05</td>
+                                            <td>
+                                                <div class="category_image">
+                                                    <img src="\assets\images\seederImages\dashboard\Pizza.png">
+                                                </div>
+                                                <div class="category_name">Pizza</div>
+                                            </td>
+                                            <td>17 Item</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="customer-info_pending-order_table">
+                            <div class="latest_customer_info">
+                                <div class="table_header">
+                                    <h3 class="no-margin">Latest Customer</h3>
+                                    <a href="" class="no-margin">
+                                        <h5 class="no-margin">View All</h5>
+                                    </a>
+                                </div>
+                                <div class="customer_card_holder">
+                                    <div class="customer_card">
+                                        <div class="customer_image">
+                                            <img src="">
+                                        </div>
+                                        <div class="customer_name">
+                                            <h5 class="no-margin"></h5>
+                                        </div>
+                                        <div class="customer_online_status">
+                                            <p class="no-margin"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pending_order_table">
+                                <div class="table_header">
+                                    <h3 class="no-margin">Latest Customer</h3>
                                     <a href="" class="no-margin">
                                         <h5 class="no-margin">View All</h5>
                                     </a>
