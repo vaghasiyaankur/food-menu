@@ -309,58 +309,179 @@
     right: 0;
 }
 .dashboard_page .tabs .dashboard_tab .orders-category_tables{
-    display: grid;
-    gap: 40px;  
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 40px;
 }
 .dashboard_page .tabs .dashboard_tab .orders-category_tables .latest_orders_table{
     max-width: 840px;
+    width: 100%;
 }
-.dashboard_page .tabs .dashboard_tab .orders-category_tables .latest_orders_table_header{
+.dashboard_page .tabs .dashboard_tab .table_header{
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 20px;
 }
-.dashboard_page .tabs .dashboard_tab .orders-category_tables .latest_orders_table_header h3{
+.dashboard_page .tabs .dashboard_tab .table_header h3{
     font-size: 18px;
     line-height: 22px;
     font-weight: 500;
     color: #38373D;
+    text-transform: capitalize;
 }
-.dashboard_page .tabs .dashboard_tab .orders-category_tables .latest_orders_table_header h5{
+.dashboard_page .tabs .dashboard_tab .table_header h5{
     padding-right: 27px;
     position: relative;
     font-size: 15px;
     line-height: 18px;
     font-weight: 500;
     color: #F33E3E;
+    text-transform: capitalize;
 }
-.dashboard_page .tabs .dashboard_tab .orders-category_tables .latest_orders_table_header h5:before{
+.dashboard_page .tabs .dashboard_tab .table_header h5:before{
     content: '';
-    width: 5px;
-    height: 5px;
+    width: 6px;
+    height: 6px;
     transform: rotate(45deg);
     position: absolute;
     top: 50%;
-    right: 0;
+    right: 12px;
     border: none;
     border-top: 0.4px solid #F33E3E;
     border-right: 0.4px solid #F33E3E;
     translate: 0 -50%;
 }
-.dashboard_page .tabs .dashboard_tab .orders-category_tables .latest_orders_table .table_card table{
-    padding: 0 20px;
+.dashboard_page .tabs .dashboard_tab table{
     width: 100%;
     border-collapse: collapse;
+    box-shadow: 0px 1px 15px 0px #3333330D;
+    border-radius: 10px;
 }
-.dashboard_page .tabs .dashboard_tab .orders-category_tables .latest_orders_table .table_card thead{
-    
-}
-.dashboard_page .tabs .dashboard_tab .orders-category_tables .latest_orders_table .table_card thead tr th{
+.dashboard_page .tabs .dashboard_tab table thead{
+    border-bottom: 1px solid rgba(153, 153, 153, 0.25);
     background-color: #F4F4F4;
-    padding: 0 17px !important;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+.dashboard_page .tabs .dashboard_tab table tr{
+    font-size: 15px;
+    line-height: 18px;
+}
+.dashboard_page .tabs .dashboard_tab table tbody tr:not(:last-child){
+    border-bottom: 1px solid rgba(153, 153, 153, 0.15);
+}
+.dashboard_page .tabs .dashboard_tab table thead th{
+    font-weight: 600 !important;
+    color: #555555 !important;
+    padding: 17px 10px;
+}
+.dashboard_page .tabs .dashboard_tab table tbody td{
+    font-weight: 400 !important;
+    color: #38373D !important;
+}
+.dashboard_page .tabs .dashboard_tab .latest_orders_table table thead th{
+    text-align: left;
+}
+.dashboard_page .tabs .dashboard_tab .latest_orders_table table tbody td{
+    padding: 15px 10px;
+    text-align: left;
+}
+.dashboard_page .tabs .dashboard_tab .latest_orders_table table tbody .customer_img{
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+}
+.dashboard_page .tabs .dashboard_tab .latest_orders_table tbody tr td:nth-child(2){
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.dashboard_page .tabs .dashboard_tab table thead tr th:first-child,
+.dashboard_page .tabs .dashboard_tab table tbody tr td:first-child{
+    padding-left: 20px;
+}
+.dashboard_page .tabs .dashboard_tab table thead tr th:last-child,
+.dashboard_page .tabs .dashboard_tab table tbody tr td:last-child{
+    padding-right: 20px;
+}
+.dashboard_page .tabs .dashboard_tab .latest_orders_table thead tr th:last-child,
+.dashboard_page .tabs .dashboard_tab .latest_orders_table tbody tr td:last-child{
+    text-align: center;
+}
+.dashboard_page .tabs .dashboard_tab .latest_orders_table .status_indicator{
+    max-width: 100px;
+    max-height: 26px;
+    border-radius: 5px;
+}
+.dashboard_page .tabs .dashboard_tab .latest_orders_table .status_indicator p{
+    font-size: 12px;
+    line-height: 15px;
+    font-weight: 400;
+}
+.dashboard_page .tabs .dashboard_tab .latest_orders_table .status_indicator .cancelled_order{
+    padding: 5px 21px;
+    color: #AE4444;
+    border-radius: 5px;
+    background-color: #FFE9E9;
+}
+.dashboard_page .tabs .dashboard_tab .latest_orders_table .status_indicator .processing_order{
+    padding: 5px 18px;
+    color: #9B804B;
+    border-radius: 5px;
+    background-color: #FFF9E3;
 }
 
-.dashboard_page .tabs .dashboard_tab .orders-category_tables .latest_category_table{
+.dashboard_page .tabs .dashboard_tab .latest_category_table{
     max-width: 500px;
+    width: 100%;;
+}
+.dashboard_page .tabs .dashboard_tab .latest_category_table table thead th{
+    text-align: left;
+}
+.dashboard_page .tabs .dashboard_tab .latest_category_table table tbody td{
+    padding: 12px 10px;
+    text-align: left;
+}
+.dashboard_page .tabs .dashboard_tab .latest_category_table table tbody .category_image{
+    width: 60px;
+    height: 60px;
+    border-radius: 5px;
+}
+.dashboard_page .tabs .dashboard_tab .latest_category_table tbody tr td:nth-child(2){
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.dashboard_page .tabs .dashboard_tab .latest_category_table thead tr th:last-child,
+.dashboard_page .tabs .dashboard_tab .latest_category_table tbody tr td:last-child{
+    text-align: right;
+}
+.dashboard_page .tabs .dashboard_tab .customer-info_pending-order_table{
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+.dashboard_page .tabs .dashboard_tab .customer-info_pending-order_table .latest_customer_info{
+    max-width: 577px;
+    width: 100% !important;
+}
+.dashboard_page .tabs .dashboard_tab .latest_customer_info .customer_card_holder{
+    padding: 43px 20px;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    column-gap: 39px;
+    row-gap: 60px;
+    box-shadow: 0px 1px 15px 0px #3333330D;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+}
+.dashboard_page .tabs .dashboard_tab .customer_card_holder .customer_card{
+
+}
+.dashboard_page .tabs .dashboard_tab .customer-info_pending-order_table .pending_order_table{
+    max-width: 577px;
+    width: 100% !important;
 }
