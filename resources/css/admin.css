@@ -398,6 +398,9 @@
     align-items: center;
     gap: 10px;
 }
+.dashboard_page .tabs .dashboard_tab .latest_orders_table tbody tr td:nth-child(3){
+    color: #F33E3E !important;
+}
 .dashboard_page .tabs .dashboard_tab table thead tr th:first-child,
 .dashboard_page .tabs .dashboard_tab table tbody tr td:first-child{
     padding-left: 20px;
@@ -469,19 +472,60 @@
     width: 100% !important;
 }
 .dashboard_page .tabs .dashboard_tab .latest_customer_info .customer_card_holder{
-    padding: 43px 20px;
+    padding: 50px 20px;
     display: grid;
     grid-template-columns: auto auto auto auto;
     column-gap: 39px;
-    row-gap: 60px;
+    row-gap: 62px;
     box-shadow: 0px 1px 15px 0px #3333330D;
     border-radius: 10px;
     background-color: #FFFFFF;
 }
 .dashboard_page .tabs .dashboard_tab .customer_card_holder .customer_card{
-
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.dashboard_page .tabs .dashboard_tab .customer_card .customer_image{
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+}
+.dashboard_page .tabs .dashboard_tab .customer_card .customer_name{
+    margin: 20px 0 7px;
+}
+.dashboard_page .tabs .dashboard_tab .customer_card_holder .customer_card h5{
+    font-size: 15px;
+    line-height: 18px;
+    font-weight: 500;
+    color: #38373D;
+}
+.dashboard_page .tabs .dashboard_tab .customer_card_holder .customer_card{
+    font-size: 11px;
+    line-height: 13px;
+    font-weight: 400;
+    color: #999999;
 }
 .dashboard_page .tabs .dashboard_tab .customer-info_pending-order_table .pending_order_table{
-    max-width: 577px;
+    max-width: 763px;
     width: 100% !important;
+}
+.dashboard_page .tabs .dashboard_tab .pending_order_table table thead th{
+    text-align: left;
+}
+.dashboard_page .tabs .dashboard_tab .pending_order_table table tbody td{
+    padding: 15px 10px;
+    text-align: left;
+}
+.dashboard_page .tabs .dashboard_tab .pending_order_table tbody tr td:nth-child(2){
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.dashboard_page .tabs .dashboard_tab .pending_order_table tbody tr td:nth-child(3){
+    color: #F33E3E !important;
+}
+.dashboard_page .tabs .dashboard_tab .pending_order_table thead tr th:last-child,
+.dashboard_page .tabs .dashboard_tab .pending_order_table tbody tr td:last-child{
+    text-align: center;
 }
