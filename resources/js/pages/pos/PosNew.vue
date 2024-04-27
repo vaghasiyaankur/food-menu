@@ -31,6 +31,7 @@
                     :old-order="oldOrder"
                     @remove:cart-product="removeProductIntoCart"
                     @create:kot="createKOT"
+                    @hold:kot="holdKOT"
                 />
             </div>
         </div>
@@ -114,14 +115,38 @@ const getTableCurrentDetail = (tableId) => {
         floorName.value = response.data.floor ? response.data.floor.name : '';
         table.value = response.data;
         oldOrder.value = response.data.order;
-        foodReceivedType.value = response.data.received_type;
-        numberOfPerson.value = response.data.order ? response.data.order.person : 0;
-        personNumber.value = response.data.order ? response.data.order.phone : '';
-        personName.value = response.data.order ? response.data.order.name : '';
-        personAddress.value = response.data.order ? response.data.order.address : '';
-        personLocality.value = response.data.order ? response.data.order.locality : '';
-        orderNote.value = response.data.order ? response.data.order.note : '';
-        selectWaiter.value = response.data.order ? response.data.order.waiter : 1;
+        if(response.data.hold_kot_data){
+            const productsArray = JSON.parse(response.data.hold_kot_data.products);
+
+            productsArray.forEach(product => {
+                if (Array.isArray(product.variation) && product.variation.length === 0) {
+                    product.variation = {};
+                }
+            });
+
+            cartProducts.value = productsArray;
+            let holdKotOtherData = response.data.hold_kot_data;
+            let personDetails = JSON.parse(holdKotOtherData.person_details);
+
+            foodReceivedType.value = holdKotOtherData.food_received_type;
+            numberOfPerson.value = personDetails.person ? personDetails.person : 0;
+            personNumber.value = personDetails.number ? personDetails.number : '';
+            personName.value = personDetails.name ? personDetails.name : '';
+            personAddress.value = personDetails.address ? personDetails.address : '';
+            personLocality.value = personDetails.locality ? personDetails.locality : '';
+            orderNote.value = holdKotOtherData.order_note ? holdKotOtherData.order_note : '';
+            selectWaiter.value = holdKotOtherData.waiter_id ? holdKotOtherData.waiter_id : 1;
+
+        }else{
+            foodReceivedType.value = response.data.received_type;
+            numberOfPerson.value = response.data.order ? response.data.order.person : 0;
+            personNumber.value = response.data.order ? response.data.order.phone : '';
+            personName.value = response.data.order ? response.data.order.name : '';
+            personAddress.value = response.data.order ? response.data.order.address : '';
+            personLocality.value = response.data.order ? response.data.order.locality : '';
+            orderNote.value = response.data.order ? response.data.order.note : '';
+            selectWaiter.value = response.data.order ? response.data.order.waiter : 1;
+        }
         getTotalAmount();
     })
 }
@@ -199,19 +224,6 @@ const addProductIntoCart = (id) => {
             }
         }   
     })
-        // const allProduct = products.value;
-        // const index = allProduct.findIndex(item => item.id === id);
-        // if (index !== -1) {
-        //     cartProducts.value.push({
-        //         id: allProduct[index].id,
-        //         image: allProduct[index].image,
-        //         name: allProduct[index].name,
-        //         price: allProduct[index].price,
-        //         food_type: allProduct[index].food_type,
-        //         quantity: 1,
-        //         note: ''
-        //     });
-        // }
     
 }
 
@@ -228,10 +240,7 @@ const increaseQuantity = (index, kot, kotIndex, kotProductIndex) => {
     if(kot == 'old'){
         oldOrder.value['kots'][kotIndex]['kot_products'][kotProductIndex].quantity++;
     }else{
-        // const productIndex = cartProducts.value.findIndex(product => product.id === id);
-        // if (productIndex !== -1) {
-            cartProducts.value[index].quantity++;
-        // }
+        cartProducts.value[index].quantity++;
     }
     getTotalAmount();
 }
@@ -240,10 +249,7 @@ const decreaseQuantity = (index, kot, kotIndex, kotProductIndex) => {
     if(kot == 'old'){
         oldOrder.value['kots'][kotIndex]['kot_products'][kotProductIndex].quantity--;
     }else{
-        // const productIndex = cartProducts.value.findIndex(product => product.id === id);
-        // if (productIndex !== -1 && cartProducts.value[productIndex].quantity > 1) {
-            cartProducts.value[index].quantity--;
-        // }
+        cartProducts.value[index].quantity--;
     }
     getTotalAmount();
 }
@@ -346,6 +352,32 @@ const createKOT = (tableId) => {
     if(cartProducts.value.length){
 
         axios.post('/api/add-kot', 
+            { 
+                cart: cartProducts.value,
+                tableId: tableId, 
+                foodReceivedType : foodReceivedType.value, 
+                numberOfPerson : numberOfPerson.value,
+                personNumber : personNumber.value,
+                personName : personName.value,
+                personAddress : personAddress.value,
+                personLocality : personLocality.value,
+                orderNote : orderNote.value,
+                selectWaiter : selectWaiter.value,
+            })
+        .then((response) => {
+            successNotification(response.data.success);
+            f7.view.main.router.navigate({ url: "/" });
+        })
+        .catch((error) => {
+            const errorMessage = getErrorMessage(error);
+            errorNotification(errorMessage);
+        });
+    }
+}
+
+const holdKOT = (tableId) => {
+    if(cartProducts.value.length){
+        axios.post('/api/hold-kot', 
             { 
                 cart: cartProducts.value,
                 tableId: tableId, 

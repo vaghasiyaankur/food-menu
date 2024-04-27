@@ -131,7 +131,7 @@
             </div>
             <div class="billing-btns grid grid-cols-3">
                 <button class="button kot-btn active" @click="createKot(table ?.table_number)">KOT</button>
-                <button class="button hold-btn">Hold</button>
+                <button class="button hold-btn" @click="holdKot(table ?.table_number)">Hold</button>
                 <button class="button ebill-btn">eBill</button>
             </div>
             <div class="bill-details-extend">
@@ -145,7 +145,7 @@ import { f7 } from "framework7-vue"
 import CartProduct from './CartProduct.vue'
 import { ref, inject } from 'vue'
 
-const emit = defineEmits(['increase:quantity', 'decrease:quantity','open:note-popup', 'remove:cart-product']);
+const emit = defineEmits(['increase:quantity', 'decrease:quantity','open:note-popup', 'remove:cart-product', 'create:kot', 'hold:kot']);
 
 const openAmountSlider = ref(true);
 
@@ -195,6 +195,10 @@ const removeProduct = (index, kot, kotIndex, kotProductIndex) => {
 const createKot = (tableId) => {
     emit('create:kot', tableId)
 }
+const holdKot = (tableId) => {
+    emit('hold:kot', tableId)
+}
+
 const toggleAmountSlider = () => {
     openAmountSlider.value = !openAmountSlider.value
 }

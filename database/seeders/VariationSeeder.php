@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Variation;
 use App\Models\VariationRestaurantLanguage;
 use App\Models\Language;
+use App\Models\ProductVariation;
 use App\Models\RestaurantLanguage;
 use Illuminate\Support\Facades\File;
 use Illuminate\Database\Seeder;
@@ -65,6 +66,18 @@ class VariationSeeder extends Seeder
                     }
                 }
             }
+        }
+
+
+        //Add For Testing 
+        $datas = [
+            ['variation_id' => 1, 'product_id' => 1, 'price' => 12],
+            ['variation_id' => 2, 'product_id' => 1, 'price' => 21],
+            ['variation_id' => 1, 'product_id' => 2, 'price' => 12],
+            ['variation_id' => 2, 'product_id' => 2, 'price' => 21]
+        ];
+        foreach($datas as $data){
+            ProductVariation::create($data);
         }
     }
 }

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Ingredient;
 use App\Models\IngredientRestaurantLanguage;
 use App\Models\Language;
+use App\Models\ProductIngredient;
 use App\Models\RestaurantLanguage;
 use Illuminate\Support\Facades\File;
 use Illuminate\Database\Seeder;
@@ -85,5 +86,17 @@ class IngredientSeeder extends Seeder
                 }
             }
         }
+
+        //Add For Testing 
+        $datas = [
+            ['ingredient_id' => 1, 'product_id' => 1],
+            ['ingredient_id' => 2, 'product_id' => 1],
+            ['ingredient_id' => 1, 'product_id' => 2],
+            ['ingredient_id' => 2, 'product_id' => 2]
+        ];
+        foreach($datas as $data){
+            ProductIngredient::create($data);
+        }
+
     }
 }
