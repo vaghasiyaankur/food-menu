@@ -12,7 +12,7 @@
         class="safe-areas"
         :master-detail-breakpoint="768"
       ></f7-view>
-      <div class="overlay">
+      <div class="overlay loaded">
         <div class="overlayDoor"></div>
         <div class="overlayContent">
           <div class="inner text-align-center">
