@@ -1,0 +1,64 @@
+.orders_admin_page{
+    background-color: #F4F4F4;
+    padding: 25px 30px;
+}
+.orders_admin_page .orders_header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.orders_admin_page .orders_header h2{
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 600;
+    color: #38373D;
+    margin-bottom: 25px;
+}
+.orders_admin_page .order_info{}
+.orders_admin_page .dashboard_topbar_left .search_bar {
+    max-width: 650px;
+}
+.orders_admin_page .dashboard_topbar_left .search_bar .searchbar {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    background-color: #f4f4f4 !important;
+    width: 100%;
+    max-height: 45px;
+    border-radius: 5px !important;
+    border: none !important;
+    box-shadow: none;
+}
+.orders_admin_page .dashboard_topbar_left .search_bar .searchbar input {
+    padding: 12px 45px 12px 40px;
+    width: 650px;
+    color: #999999;
+    background-color: #f4f4f4;
+    border-radius: 5px;
+}
+.orders_admin_page
+    .dashboard_topbar_left
+    .search_bar
+    .searchbar
+    input::placeholder {
+    font-size: 15px;
+    line-height: 18px;
+    font-weight: 500;
+    color: #999999;
+}
+.orders_admin_page
+    .dashboard_topbar_left
+    .search_bar
+    .searchbar
+    .searchbar-icon::after {
+    color: #999999 !important;
+}
+.orders_admin_page
+    .dashboard_topbar_left
+    .search_bar
+    .searchbar
+    .input-clear-button {
+    width: 45px;
+    height: 45px;
+    color: #999999;
+}
