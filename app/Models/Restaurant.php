@@ -36,4 +36,9 @@ class Restaurant extends Model
         return $this->hasMany(RestaurantLanguage::class, 'language_id');
     }
 
+    public function kotHolds()
+    {
+        return $this->hasMany(Restaurant::class, 'restaurant_id');
+    }
+
 }

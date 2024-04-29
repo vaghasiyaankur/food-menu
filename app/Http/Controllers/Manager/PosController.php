@@ -7,6 +7,7 @@ use App\Helper\SettingHelper;
 use App\Http\Controllers\Controller;
 use App\Models\IngredientRestaurantLanguage;
 use App\Models\Kot;
+use App\Models\KotHold;
 use App\Models\KotProduct;
 use App\Models\KotProductIngredient;
 use App\Models\KotProductVariation;
@@ -33,7 +34,7 @@ class PosController extends Controller
 
         $table = Table::with(['orders' => function ($query) {
                         $query->where('finish_time', '=', null)->where('finished', '=', 0)->latest()->take(1)->with('kots.kotProducts');
-                    }, 'floor'])
+                    }, 'floor', 'kotHold'])
                     ->where('id', $tableId)
                     ->where('restaurant_id', $restaurantId)
                     ->first();
@@ -115,11 +116,19 @@ class PosController extends Controller
                 ];
             }
 
+            $holdKOTData = null;
+            if($table->kotHold){
+                $holdKOTData = $table->kotHold;
+            }
+
+
+
             $transformedTable = [
                 'id' => $table->id,
                 'table_number' => $table->table_number,
                 'capacity_of_person' => $table->capacity_of_person,
                 'order' => $orderData,
+                'hold_kot_data' => $holdKOTData,
                 'floor' => $floorData,
                 'received_type' => $receivedType
             ];
@@ -154,6 +163,7 @@ class PosController extends Controller
             $orderId = $order->id;
             $kotNumber = 1;
         }
+
         $priceCount = 0;
         $kot = new Kot();
         $kot->order_id = $orderId;
@@ -205,7 +215,44 @@ class PosController extends Controller
             'note' => $request->orderNote,
             'waiter_id' => $request->selectWaiter
         ]);
+
+        $this->removeHoldKOT($request->tableId);
         
         return response()->json(['success'=>'KOT Added Successfully.']);
+    }
+
+    public function holdKOT(Request $request){
+        $restaurantId = CustomerHelper::getRestaurantId();
+
+        $personDetails = [
+            'number' => $request->personNumber,
+            'name' => $request->personName,
+            'address' => $request->personAddress,
+            'locality' => $request->personLocality,
+            'person' => $request->numberOfPerson
+        ];
+
+        $data = [
+            'products' => json_encode($request->cart),
+            'person_details' => json_encode($personDetails),
+            'waiter_id' => $request->selectWaiter,
+            'food_received_type' => $request->foodReceivedType,
+            'order_note' => $request->orderNote
+        ];
+
+        KotHold::updateOrCreate(
+            [
+                'table_id' => $request->tableId,
+                'restaurant_id' => $restaurantId
+            ],$data);
+
+        return response()->json(['success'=>'Hold KOT Added Successfully.']);
+
+    }
+
+    public function removeHoldKOT($tableId){
+        $restaurantId = CustomerHelper::getRestaurantId();
+        KotHold::where('table_id', $tableId)->where('restaurant_id', $restaurantId)->delete();
+        return response()->json(['success'=>'Hold KOT Removed Successfully.']);
     }
 }
