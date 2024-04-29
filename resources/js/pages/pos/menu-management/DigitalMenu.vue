@@ -517,7 +517,7 @@
             </div>
 
             <div class="digital_gujarati_dish_category scroll-category">
-                <div class='faq'>
+                <div class='faq faq-dropdown'>
                     <input id='faq-a' type='checkbox'>
                     <label for='faq-a'>
                         <h4 class="no-margin faq-heading">Sabji</h4>
@@ -893,15 +893,15 @@ export default {
         }
     },
     beforeCreate() {
-        this.$root.addLoader();
+        // this.$root.addLoader();
     },
     created() {
         $('.page-content').css('background', '#F7F7F7');
         this.getCategories();
     },
     mounted() {
-        this.$root.activationMenu('menu_management', 'digitalmenu');
-        this.$root.removeLoader();
+        // this.$root.activationMenu('menu_management', 'digitalmenu');
+        // this.$root.removeLoader();
     },
     methods: {
         getCategories() {

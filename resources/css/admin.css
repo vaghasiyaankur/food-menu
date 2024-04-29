@@ -311,12 +311,12 @@
 .dashboard_page .tabs .dashboard_tab .orders-category_tables{
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 40px;
     margin-bottom: 40px;
 }
 .dashboard_page .tabs .dashboard_tab .orders-category_tables .latest_orders_table{
-    max-width: 840px;
-    width: 100%;
+    width: 60.87%;
 }
 .dashboard_page .tabs .dashboard_tab .table_header{
     display: flex;
@@ -437,8 +437,7 @@
 }
 
 .dashboard_page .tabs .dashboard_tab .latest_category_table{
-    max-width: 500px;
-    width: 100%;;
+    width: 36.23%;
 }
 .dashboard_page .tabs .dashboard_tab .latest_category_table table thead th{
     text-align: left;
@@ -464,12 +463,12 @@
 .dashboard_page .tabs .dashboard_tab .customer-info_pending-order_table{
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 40px;
     margin-bottom: 40px;
 }
 .dashboard_page .tabs .dashboard_tab .customer-info_pending-order_table .latest_customer_info{
-    max-width: 577px;
-    width: 100% !important;
+    width: 41.81% !important;
 }
 .dashboard_page .tabs .dashboard_tab .latest_customer_info .customer_card_holder{
     padding: 50px 20px;
@@ -507,8 +506,7 @@
     color: #999999;
 }
 .dashboard_page .tabs .dashboard_tab .customer-info_pending-order_table .pending_order_table{
-    max-width: 763px;
-    width: 100% !important;
+    width: 55.29% !important;
 }
 .dashboard_page .tabs .dashboard_tab .pending_order_table table thead th{
     text-align: left;
@@ -528,4 +526,41 @@
 .dashboard_page .tabs .dashboard_tab .pending_order_table thead tr th:last-child,
 .dashboard_page .tabs .dashboard_tab .pending_order_table tbody tr td:last-child{
     text-align: center;
+}
+.dashboard_page .tabs .dashboard_tab .complete_order-product_tables{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+.dashboard_page .tabs .dashboard_tab .complete_order-product_tables .latest_completed_orders_table{
+    width: 55.62%;
+}
+.dashboard_page .tabs .dashboard_tab .latest_completed_orders_table table thead th{
+    text-align: left;
+}
+.dashboard_page .tabs .dashboard_tab .latest_completed_orders_table table tbody td{
+    padding: 15px 10px;
+    text-align: left;
+}
+.dashboard_page .tabs .dashboard_tab .latest_completed_orders_table table tbody .customer_img{
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+}
+.dashboard_page .tabs .dashboard_tab .latest_completed_orders_table tbody tr td:nth-child(2){
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.dashboard_page .tabs .dashboard_tab .latest_completed_orders_table tbody tr td:nth-child(3){
+    color: #F33E3E !important;
+}
+.dashboard_page .tabs .dashboard_tab .latest_completed_orders_table thead tr th:last-child,
+.dashboard_page .tabs .dashboard_tab .latest_completed_orders_table tbody tr td:last-child{
+    text-align: center;
+}
+.dashboard_page .tabs .dashboard_tab .complete_order-product_tables .latest_product_table{
+    width: 41.45%;
 }
