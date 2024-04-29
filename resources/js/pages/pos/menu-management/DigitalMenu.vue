@@ -517,7 +517,7 @@
             </div>
 
             <div class="digital_gujarati_dish_category scroll-category">
-                <div class='faq'>
+                <div class='faq faq-dropdown'>
                     <input id='faq-a' type='checkbox'>
                     <label for='faq-a'>
                         <h4 class="no-margin faq-heading">Sabji</h4>
