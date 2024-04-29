@@ -206,7 +206,6 @@
     top: 60px;
     z-index: 2;
     background-color: #f7f7f7 !important;
-    /* box-shadow: 0px 1.5px 3px 0px #00000026; */
 }
 
 .add-combo-header .add-combo {
@@ -1126,7 +1125,7 @@
     padding: 20px 25px;
     height: auto !important;
 }
-.digital_menu_page .digital_menu_banner {
+.digital_menu_page .digital_menu_banner-outer {
     margin-bottom: 25px;
 }
 .digital_menu_page .digital_menu_banner {
@@ -1150,6 +1149,41 @@
     font-weight: 500;
     color: #555555;
 }
+.digital_menu_card {
+    margin-top: 70px;
+    height: calc(100vh - 132px);
+}
+.font-13 {
+    font-size: 13px;
+    line-height: 18px;
+    font-weight: 500;
+}
+.height-40 {
+    height: 40px;
+}
+.nav-botton {
+    height: 100%;
+}
+.bg-dark {
+    background: #38373d;
+}
+.menu-dropdown-link {
+    border-bottom: 1px solid #efefef;
+}
+.bg-pink {
+    background: #f33e3e;
+}
+
+.text-color-pink {
+    color: #f33e3e;
+}
+
+.font-22 {
+    font-size: 22px;
+}
+.digital_menu_page .digital_menu_swiper .swiper{
+    max-height: 75px;
+}
 .digital_menu_page .digital_menu_swiper .swiper .swiper-wrapper {
     display: flex;
     align-items: flex-start;
@@ -1159,7 +1193,83 @@
     .swiper
     .swiper-wrapper
     .swiper-slide:not(:last-child) {
-    margin-right: 30px;
+    margin-right: 35px;
+}
+.digital_menu_page .digital_menu_swiper .swiper .swiper-wrapper .swiper-slide{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.demo-swiper .swiper-slide {
+    font-size: 25px;
+    font-weight: 300;
+    display: block;
+    background: #fff;
+    color: #000;
+}
+.menu-image {
+    box-sizing: border-box;
+    background: #faf5f2;
+    border-radius: 7px;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.position-relative {
+    position: relative;
+}
+.menu-title,
+.menu-list-title {
+    text-align: center;
+    font-size: 18px;
+    padding: 0 10px;
+}
+.menu-title::before {
+    position: absolute;
+    content: "";
+    border: 1px dashed #000;
+    left: 10%;
+    width: 80%;
+    height: 0px;
+    top: 11px;
+    z-index: 1;
+}
+.menu-title span {
+    background: white;
+    padding: 0 10px;
+    position: relative;
+    z-index: 2;
+}
+.dots {
+    flex: 1;
+    border-bottom: 2px dotted #000;
+    height: 1em;
+}
+.swiper-slide {
+    width: 67px;
+    height: 67px;
+}
+.menu-lists {
+    height: 100%;
+    max-height: 390px;
+    overflow: auto;
+}
+.swiper-horizontal > .swiper-pagination-bullets,
+.swiper-pagination-bullets.swiper-pagination-horizontal,
+.swiper-pagination-custom,
+.swiper-pagination-fraction {
+    bottom: 0;
+}
+.digital_menu_card .menu-details {
+    width: 82%;
+    margin: 0 auto;
+}
+@media screen and (max-width: 820px) {
+    .header-links {
+        width: 100%;
+    }
 }
 .digital_menu_page
     .digital_menu_swiper
@@ -1168,7 +1278,16 @@
     .swiper-slide
     p {
     padding-top: 8px;
+    text-wrap: nowrap;
     text-align: center;
+}
+.slide-active .menu-image {
+    background: #f33e3e59 !important;
+    box-shadow: 0px 1px 3px #f33e3e59;
+    border-radius: 7px;
+}
+.swiper-pagination-bullet-active {
+    background: #f33e3e !important;
 }
 .digital_menu_page .category_title_show {
     display: flex;
@@ -1223,7 +1342,7 @@
     box-shadow: -1px -1px 4px 0px #ffffff4d inset;
     border-radius: 10px;
 }
-.digital_menu_page .digital_gujarati_dish_category{
+.digital_menu_page .digital_gujarati_dish_category {
     padding-top: 40px;
     padding-right: 15px;
     margin-right: -25px;
@@ -1238,18 +1357,16 @@
     padding: 0;
     border-bottom: 1px dashed rgba(85, 85, 85, 0.4);
 }
-
 .digital_menu_page .digital_gujarati_dish_category .faq-menu-items {
     font-weight: 400;
     color: #919191;
     width: 100%;
     padding: 0;
-    margin: 25px 0 40px;
+    margin: 25px 0 35px;
 }
-
 .digital_menu_page .digital_gujarati_dish_category .faq {
     width: 100%;
-    background: #FFFFFF;
+    background: #ffffff;
 }
 .digital_menu_page .digital_gujarati_dish_category .faq input {
     margin: 0;
@@ -1266,7 +1383,8 @@
     display: none;
 }
 
-.digital_menu_page .digital_gujarati_dish_category .faq .faq-arrow {
+.digital_menu_page .digital_gujarati_dish_category .faq input[type="checkbox"]:not(:checked)
++ label .faq-arrow {
     width: 10px;
     height: 10px;
     border-top: 0.5px solid rgba(56, 55, 61, 1);
@@ -1277,6 +1395,18 @@
     right: 3px;
     transform: rotate(-45deg);
 }
+.digital_menu_page .digital_gujarati_dish_category .faq input[type="checkbox"]:checked
++ label .faq-arrow {
+    width: 10px;
+    height: 10px;
+    border-top: 0.5px solid rgba(56, 55, 61, 1);
+    border-right: 0.5px solid rgba(56, 55, 61, 1);
+    float: right;
+    position: absolute;
+    top: 10px;
+    right: 3px;
+    transform: rotate(135deg);
+}
 
 .digital_menu_page
     .digital_gujarati_dish_category
@@ -1285,7 +1415,6 @@
     + label {
     display: block;
 }
-
 .digital_menu_page
     .digital_gujarati_dish_category
     .faq
@@ -1293,16 +1422,24 @@
     + label {
     display: block;
     height: 34px;
-    margin-bottom: 40px;
 }
-.digital_menu_page .digital_gujarati_dish_category .faq-menu-items .sub-menu-items {
+.digital_menu_page
+    .digital_gujarati_dish_category
+    .faq-menu-items
+    .sub-menu-items {
     display: grid;
     row-gap: 20px;
 }
-.digital_menu_page .digital_gujarati_dish_category .faq-menu-items .item_digital_menu {
+.digital_menu_page
+    .digital_gujarati_dish_category
+    .faq-menu-items
+    .item_digital_menu {
     grid-template-columns: auto auto auto auto auto;
 }
-.digital_menu_page .digital_gujarati_dish_category .faq-menu-items .papad_digital_menu {
+.digital_menu_page
+    .digital_gujarati_dish_category
+    .faq-menu-items
+    .papad_digital_menu {
     grid-template-columns: auto auto auto auto;
 }
 .digital_menu_page .digital_gujarati_dish_category .faq-menu-items .sub_items {

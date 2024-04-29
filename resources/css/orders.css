@@ -6,59 +6,63 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 25px;
 }
 .orders_admin_page .orders_header h2{
     font-size: 20px;
     line-height: 24px;
     font-weight: 600;
     color: #38373D;
-    margin-bottom: 25px;
 }
-.orders_admin_page .order_info{}
-.orders_admin_page .dashboard_topbar_left .search_bar {
-    max-width: 650px;
+.orders_admin_page .order_info .table_search_filter{
+    padding: 30px 20px;
 }
-.orders_admin_page .dashboard_topbar_left .search_bar .searchbar {
+.orders_admin_page .order_info .table_search_filter .search_bar {
+    max-width: 350px;
+    border-radius: 5px;
+}
+.orders_admin_page .order_info .table_search_filter .search_bar .searchbar {
     margin: 0;
     display: flex;
     align-items: center;
-    background-color: #f4f4f4 !important;
+    background-color: #FFFFFF !important;
     width: 100%;
     max-height: 45px;
     border-radius: 5px !important;
     border: none !important;
     box-shadow: none;
+    border: 1px solid #555555;
 }
-.orders_admin_page .dashboard_topbar_left .search_bar .searchbar input {
+.orders_admin_page .order_info .table_search_filter .search_bar .searchbar input {
     padding: 12px 45px 12px 40px;
     width: 650px;
-    color: #999999;
-    background-color: #f4f4f4;
+    color: #555555;
+    background-color: #FFFFFF;
     border-radius: 5px;
 }
 .orders_admin_page
-    .dashboard_topbar_left
+    .order_info .table_search_filter
     .search_bar
     .searchbar
     input::placeholder {
     font-size: 15px;
     line-height: 18px;
     font-weight: 500;
-    color: #999999;
+    color: #555555;
 }
 .orders_admin_page
-    .dashboard_topbar_left
+    .order_info .table_search_filter
     .search_bar
     .searchbar
     .searchbar-icon::after {
-    color: #999999 !important;
+    color: #555555 !important;
 }
 .orders_admin_page
-    .dashboard_topbar_left
+    .order_info .table_search_filter
     .search_bar
     .searchbar
     .input-clear-button {
     width: 45px;
     height: 45px;
-    color: #999999;
+    color: #555555;
 }
