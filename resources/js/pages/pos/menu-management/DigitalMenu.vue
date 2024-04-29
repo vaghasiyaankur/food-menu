@@ -893,15 +893,15 @@ export default {
         }
     },
     beforeCreate() {
-        this.$root.addLoader();
+        // this.$root.addLoader();
     },
     created() {
         $('.page-content').css('background', '#F7F7F7');
         this.getCategories();
     },
     mounted() {
-        this.$root.activationMenu('menu_management', 'digitalmenu');
-        this.$root.removeLoader();
+        // this.$root.activationMenu('menu_management', 'digitalmenu');
+        // this.$root.removeLoader();
     },
     methods: {
         getCategories() {
