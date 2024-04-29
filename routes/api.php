@@ -295,7 +295,7 @@ Route::post('/check-qrcode-exists', [QrCodeController::class, 'checkQrcodeExists
 
 // ------------------------ KOT Route ------------------------ //
 
-Route::get('/kot-list', [OrderController::class, 'kotList']);
+Route::post('/kot-list', [OrderController::class, 'kotList']);
 
 // ------------------------ Auth Routes ------------------------ //
 

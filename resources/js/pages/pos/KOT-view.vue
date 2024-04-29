@@ -21,17 +21,16 @@
                         </div>
                     </div>
                     <div class="kot_view-floor_select">
-                        <select class="floor_selector" name="floor_selector" id="floor_selector">
-                            <option value="First Floor" selected>First Floor (15)</option>
-                            <option value="First Floor">First Floor (15)</option>
-                            <option value="First Floor">First Floor (15)</option>
+                        <select class="floor_selector" name="floor_selector" v-model="floor" id="floor_selector" @change="getKotList">
+                            <option value="">Select Floor</option>
+                            <option :value="key" v-for="(floor,key) in floorList" :key="floor">{{ floor }}</option>
                         </select>
                     </div>
                     <div class="search-bar-wrapper">
                         <form class="searchbar">
                             <div class="searchbar-inner">
                                 <div class="searchbar-input-wrap">
-                                    <input type="search" placeholder="Enter KOT / Order No." />
+                                    <input type="search" v-model="kotSearch" placeholder="Enter KOT / Order No." @input="getKotList" />
                                     <Icon name="searchCloseIcon" />
                                     <span class="input-clear-button"></span>
                                 </div>
@@ -71,7 +70,7 @@
                                     <ol class="ordered-item-details-list no-margin">
                                         <li v-for="kot_product in item?.kots[0]?.kot_products" :key="kot_product">
                                             <div class="ordered-item">
-                                                <h6 class="no-margin">{{kot_product?.product?.product_restaurant_languages[0].name}} <span v-if="kot_product.note">[Note : {{kot_product.note}}]</span></h6>
+                                                <h6 class="no-margin">{{kot_product?.product?.product_restaurant_languages[0]?.name}} <span v-if="kot_product.note">[Note : {{kot_product.note}}]</span></h6>
                                                 <h6 class="no-margin">₹ {{kot_product?.product?.price.toFixed(2)}}</h6>
                                             </div>
                                         </li>
@@ -194,10 +193,21 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 dayjs.extend(relativeTime);
 
 const paginateData = ref({});
+const floorList = ref({});
+const floor = ref('');
+const kotSearch = ref('');
 
 const getKotList = async () => {
-    const res = await axios.get("/api/kot-list");
+    const formData = {};
+    formData.floor = floor.value;
+    formData.kotSearch = kotSearch.value;
+    const res = await axios.post("/api/kot-list",formData);
     paginateData.value = res.data
+}
+
+const getFloor = async () => {
+    const res = await axios.get("/api/get-floors-data");
+    floorList.value = res.data;
 }
 
 const timeFormat = (time) => {
@@ -205,4 +215,5 @@ const timeFormat = (time) => {
 }
 
 getKotList();
+getFloor();
 </script>
