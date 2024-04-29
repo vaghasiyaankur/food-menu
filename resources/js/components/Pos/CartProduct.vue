@@ -235,10 +235,7 @@ const props = defineProps({
         type: Array,
         default: () => []
     },
-    table: {
-        type: Array,
-        default: () => []
-    },
+    table: [Array, Object],
     oldOrder: {
         type: Array,
         default: () => []
