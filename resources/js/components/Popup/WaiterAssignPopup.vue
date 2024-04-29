@@ -8,15 +8,15 @@
             <div class="add_waiter-selector text-align-left">
                 <div class="waiter-data display-flex align-items-center">
                     <input type="radio" id="waiter-list-1" name="waiter-list" value="1"  v-model="selectWaiter">
-                    <label for="waiter-list-1">Krishna</label>
+                    <label for="waiter-list-1">John</label>
                 </div>
                 <div class="waiter-data display-flex align-items-center">
                     <input type="radio" id="waiter-list-2" name="waiter-list" value="2" v-model="selectWaiter">
-                    <label for="waiter-list-2">Jemisha</label>
+                    <label for="waiter-list-2">Lincon</label>
                 </div>
                 <div class="waiter-data display-flex align-items-center">
                     <input type="radio" id="waiter-list-3" name="waiter-list" value="3" v-model="selectWaiter">
-                    <label for="waiter-list-3">Khushi</label>
+                    <label for="waiter-list-3">William</label>
                 </div>
             </div>
             <div class="display-flex justify-content-center popup_button">

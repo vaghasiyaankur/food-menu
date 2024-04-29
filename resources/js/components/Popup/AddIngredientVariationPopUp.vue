@@ -49,7 +49,7 @@
                         >
                             <h5 class="no-margin addon_name">{{ ingredient.name }}</h5>
                             <p class="no-margin addon_price">${{ ingredient.price ? ingredient.price.toFixed(2) : '0.00'}}</p>
-                            <img src="http://127.0.0.1:8000/images/veg-icon.png">
+                            <img src="/images/veg-icon.png">
                         </button>
                     </div>
                 </div>
