@@ -9,13 +9,16 @@ use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
-    public function kotList() {
+    public function kotList(Request $request) {
+        $floorId = $request->floor;
         $kot_orders = Order::with([
             'table' => function ($query) {
                 $query->select('id', 'table_number');
             },
             'kots.kotProducts.product.productRestaurantLanguages'
-        ])->whereRestaurantId(Auth::user()->restaurant_id)->paginate(12);
+        ])->whereHas('table', function ($query) use ($floorId) {
+            if ($floorId != '') $query->where('floor_id', $floorId);
+        })->whereRestaurantId(Auth::user()->restaurant_id)->paginate(12);
         
         return response()->json($kot_orders);
     }

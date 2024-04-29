@@ -69,7 +69,7 @@ export default {
       f7,f7Page, f7Navbar, f7BlockTitle, f7Block
   },
   mounted() {
-      this.$root.activationMenu('login', '');
+      // this.$root.activationMenu('login', '');
       this.$root.removeLoader();
   },
   methods: {
