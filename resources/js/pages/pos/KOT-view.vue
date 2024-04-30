@@ -42,65 +42,79 @@
             </div>
         </div>
         <div class="card-content kot_view_list">
-            <div class="grid">
-                <div class="kot_view_table_card" v-for="item in paginateData.data" :key="item">
-                    <h4 class="kot_view_table_no no-margin">Table : {{ item?.table?.table_number }}</h4>
-                    <div class="card-type table_card">
-                        <div class="table_card-margin-padding">
-                            <div class="kot_table_details">
-                                <div class="table_detail text-align-center">
-                                    <h4 class="dine-in-number no-margin">6</h4>
-                                    <h4 class="dine-in-number-text no-margin">Dine in</h4>
-                                </div>
-                                <div class="table_detail text-align-center">
-                                    <h4 class="kot-number no-margin">{{ item?.kots[0]?.number }}</h4>
-                                    <h4 class="kot-number-text no-margin">KOT No. </h4>
-                                </div>
-                                <div class="table_detail text-align-center">
-                                    <h4 class="kot-time-number no-margin">{{ item?.kots[0]?.time }}</h4>
-                                    <h4 class="kot-time-text no-margin">Time</h4>
-                                </div>
-                            </div>
-                            <div class="kot_table-bill-details">
-                                <div class="customer-detail">
-                                    <h5 class="no-margin">John Doe</h5>
-                                    <h5 class="no-margin">{{ timeFormat(item?.kots[0]?.created_at) }}</h5>
-                                </div>
-                                <div class="ordered-items-details">
-                                    <ol class="ordered-item-details-list no-margin">
-                                        <li v-for="kot_product in item?.kots[0]?.kot_products" :key="kot_product">
-                                            <div class="ordered-item">
-                                                <h6 class="no-margin">{{kot_product?.product?.product_restaurant_languages[0]?.name}} <span v-if="kot_product.note">[Note : {{kot_product.note}}]</span></h6>
-                                                <h6 class="no-margin">₹ {{kot_product?.product?.price.toFixed(2)}}</h6>
-                                            </div>
-                                        </li>
-                                    </ol>
-                                </div>
-                            </div>
-                            <div class="bill-pay-details">
-                                <div class="total-bill">
-                                    <hr class="horizontal-divider">
-                                    <div class="ordered_items-total">
-                                        <h4 class="ordered_items-total-text no-margin">Total Amount</h4>
-                                        <h4 class="ordered_items-total-number no-margin">${{item?.total_price?.toFixed(2)}}</h4>
+            <template v-if="paginateData?.data?.length > 0">
+                <div class="grid">
+                    <div class="kot_view_table_card" v-for="item in paginateData.data" :key="item">
+                        <h4 class="kot_view_table_no no-margin">Table : {{ item?.table?.table_number }}</h4>
+                        <div class="card-type table_card">
+                            <div class="table_card-margin-padding">
+                                <div class="kot_table_details">
+                                    <div class="table_detail text-align-center">
+                                        <h4 class="dine-in-number no-margin">6</h4>
+                                        <h4 class="dine-in-number-text no-margin">Dine in</h4>
+                                    </div>
+                                    <div class="table_detail text-align-center">
+                                        <h4 class="kot-number no-margin">{{ item?.kots[0]?.number }}</h4>
+                                        <h4 class="kot-number-text no-margin">KOT No. </h4>
+                                    </div>
+                                    <div class="table_detail text-align-center">
+                                        <h4 class="kot-time-number no-margin">{{ item?.kots[0]?.time }}</h4>
+                                        <h4 class="kot-time-text no-margin">Time</h4>
                                     </div>
                                 </div>
-                                <div class="order-user-comment" v-if="item?.kots[0]?.note">
-                                    <p class="no-margin">{{item?.kots[0]?.note}}</p>
-                                </div>
-                                <div class="bill_buttons">
-                                    <div class="server_btn-outer">
-                                        <button class="server_btn">Serve</button>
+                                <div class="kot_table-bill-details">
+                                    <div class="customer-detail">
+                                        <h5 class="no-margin">John Doe</h5>
+                                        <h5 class="no-margin">{{ timeFormat(item?.kots[0]?.created_at) }}</h5>
                                     </div>
-                                    <div class="pay_btn-outer">
-                                        <button class="pay_btn bg-pink text-color-white" data-popup="#kot_paybill_popup" @click="f7.popup.open(`.kot_paybill_popup`);">Pay</button>
+                                    <div class="ordered-items-details">
+                                        <ol class="ordered-item-details-list no-margin">
+                                            <li v-for="kot_product in item?.kots[0]?.kot_products" :key="kot_product">
+                                                <div class="ordered-item">
+                                                    <h6 class="no-margin">{{kot_product?.product?.product_restaurant_languages[0]?.name}} <span v-if="kot_product.note">[Note : {{kot_product.note}}]</span></h6>
+                                                    <h6 class="no-margin">₹ {{kot_product?.total_price?.toFixed(2)}}</h6>
+                                                </div>
+                                            </li>
+                                        </ol>
+                                    </div>
+                                </div>
+                                <div class="bill-pay-details">
+                                    <div class="total-bill">
+                                        <hr class="horizontal-divider">
+                                        <div class="ordered_items-total">
+                                            <h4 class="ordered_items-total-text no-margin">Total Amount</h4>
+                                            <h4 class="ordered_items-total-number no-margin">${{item?.total_price?.toFixed(2)}}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="order-user-comment" v-if="item?.kots[0]?.note">
+                                        <p class="no-margin">{{item?.kots[0]?.note}}</p>
+                                    </div>
+                                    <div class="bill_buttons">
+                                        <div class="server_btn-outer">
+                                            <button class="server_btn">Serve</button>
+                                        </div>
+                                        <div class="pay_btn-outer">
+                                            <button class="pay_btn bg-pink text-color-white" data-popup="#kot_paybill_popup" @click="f7.popup.open(`.kot_paybill_popup`);">Pay</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </template>
+            <template v-else>
+                <div>
+                    <div class="no_order">
+                        <div class="search__img text-align-center">
+                            <img src="/images/Empty-pana 1.png" alt="serach">
+                        </div>
+                        <div class="no_order_text text-align-center">
+                            <p class="no-margin">Empty KOT List</p>
+                        </div>
+                    </div>
+                </div>
+            </template>
         </div>
 
         <!-- ========= KOT-VIEW POPUP ========= -->

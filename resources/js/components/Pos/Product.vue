@@ -13,31 +13,23 @@
                         <p class="product_name margin-bottom-half">{{ product.name }}</p>
                         <p class="product_price text-red margin-top-half">${{ product.price }}</p>
                     </div>
-                    <!-- <div class="product-add-button">
-                        <button class="button active button-raised padding text-transform-capitalize"><Icon name="tick" class="margin-right-half" />Added</button>
-                    </div> -->
                     <div class="product-add-button">
-                        <template  v-if="isProductSelected(product.id)">
-                            <button 
-                                class="button button-raised btn-add-product padding text-transform-capitalize active"
-                            >
-                                <f7-icon f7="checkmark" class="font-16 margin-right-half"></f7-icon>
-                                    Added
+                        <template v-if="isProductSelected(product.id)">
+                            <div class="display-flex">
+                                <button class="button button-raised btn-add-product btn-added-product padding text-transform-capitalize active">
+                                    <f7-icon f7="checkmark" class="font-16 margin-right-half"></f7-icon> Added
                                 </button>
-                                <button 
-                                    class="button button-raised btn-add-product padding text-transform-capitalize "
-                                    @click="addProductIntoCart(product.id)"
-                                >
-                                    <f7-icon f7="plus" class="font-16 margin-right-half"></f7-icon>
-                                Add</button>
+                                <button class="button button-raised btn-add-product btn-added-more-product padding text-transform-capitalize" @click="addProductIntoCart(product.id)" >
+                                    <f7-icon f7="plus" class="font-16"></f7-icon>
+                                </button>
+                            </div>
                         </template>
                         <button 
                             class="button button-raised btn-add-product padding text-transform-capitalize"
                             @click="addProductIntoCart(product.id)"
                             v-else
                         >
-                            <f7-icon f7="plus" class="font-16 margin-right-half"></f7-icon>
-                                Add
+                            <f7-icon f7="plus" class="font-16 margin-right-half"></f7-icon> Add
                         </button>
                     </div>
                 </f7-card-content>

@@ -52,7 +52,7 @@ const props = defineProps({
 const showSearchBar = ref(true);
 setTimeout(() => {  
     showSearchBar.value = false;    
-}, 10);
+}, 200);
 
 const debounce = (func, delay) => {
     let timeoutId;
