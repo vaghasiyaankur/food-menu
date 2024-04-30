@@ -17,6 +17,7 @@ use Kutia\Larafirebase\Facades\Larafirebase;
 use \Carbon\Carbon;
 use DateTime;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class TableController extends Controller
 {
@@ -562,6 +563,36 @@ class TableController extends Controller
         });
         return response()->json($transformedFloors);
 
+    }
+
+    public function addUpdateTable(Request $req){
+        $rules = [];
+        $rules['table_number'] = 'required|numeric';
+        $rules['capacity_of_person'] = 'required|numeric';
+        $rules['status'] = 'required';
+        $rules['floor_id'] = 'required';
+        $rules['color_id'] = 'required';
+        $rules['finish_order_time'] = 'required';
+
+        $validator = Validator::make($req->all(), $rules);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $requestData = $req->all();
+        
+        $restaurantId = CustomerHelper::getRestaurantId();
+        $requestData['restaurant_id'] = $restaurantId;
+
+        if(isset($requestData['id'])) {
+            $table = Table::findOrFail($requestData['id']);
+            $table->update($requestData);
+        } else {
+            Table::create($requestData);
+        }
+        
+        return response()->json(['message' => 'Table added/updated successfully'], 200);
     }
 
 }

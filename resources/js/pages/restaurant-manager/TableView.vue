@@ -30,7 +30,7 @@
                         </div>
                         <div class="table_view-btn table_view-add_table_btn">
                             <button class="button button-raised bg-dark text-color-white height_40 active"
-                                data-popup=".add_table_Popup" @click="handleButtonClick"><i
+                                @click="openAddNewTablePopup"><i
                                     class="f7-icons font-22 margin-right-half">plus_square</i>Add Table</button>
                         </div>
                     </div>
@@ -98,64 +98,110 @@
                 </div>
             </template>
         </div>
-        <!-- ========= TABLE-VIEW POPUP ========= -->
-            <!-- <div class="popup add_table_Popup" id="add_table_Popup">
-                <div class="data-form add_table-data-form">
-                    <div class="text-align-center add_table-popup_title">
-                        Add Table</div>
-                    <div class="data-add add_table-data">
-                        <label class="add_table_name">Table Number</label>
-                        <div class="add_table-name text-align-left">
-                            <input type="text" class="add_table-update-data-name" placeholder="Enter table number">
-                        </div>
-                        <label class="add_table_cap">Capacity of Person</label>
-                        <div class="add_table-cap text-align-left">
-                            <input type="text" class="add_table_cap-data-name" placeholder="Enter capacity of person">
-                        </div>
-                        <label class="choose_add_table_floor">Select Floor</label>
-                        <div class="choose_table_floor">
-                            <select name="choose_table_floor" id="choose_table_floor">
-                                <option value="FirstFloor" selected><label>First Floor</label></option>
-                            </select>
-                        </div>
-                        <label class="choose_add_table_status">Status</label>
-                        <div class="display-flex align-items-center table_status-outer">
-                            <div class="table_status-inner">
-                                <input type="radio" id="table_status" name="table_status" value="active" checked>
-                                <label for="table_status">Active</label>
-                            </div>
-                            <div class="table_status-inner">
-                                <input type="radio" id="table_status" name="table_status" value="deactive">
-                                <label for="table_status">Deactive</label>
-                            </div>
-                        </div>
-                        <div class="display-flex justify-content-center popup_button">
-                            <button type="button"
-                                class="button button-raised button-large popup-close popup-cancel-button">Cancel</button>
-                            <button type="button" class="button button-raised button-large popup-ok-button">Ok</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="wave-image-content"><img src="/images/flow.png" style="width:100%"></div>
-            </div> -->
-    </f7-page>
+        <!-- ========= ADD TABLE-VIEW POPUP ========= -->
+        <div class="popup addUpdatePopup">
+            <AddUpdatePopup 
+                :title="addUpdateTitle"
+                :form-data-format="addUpdateFormDataFormat"
+                :type="addUpdateType" :data-type="'table-view'"
+                @store:update="storeUpdateData"
+            />
+        </div>
+    </f7-page>  
 </template>
 <script setup>
 import { f7Page, f7 } from 'framework7-vue';
 import axios from 'axios';
 import { ref, onMounted } from 'vue';
 import Icon from '../../components/Icon.vue';
-
+import AddUpdatePopup from '../../components/common/AddUpdatePopup.vue'
+import { successNotification, errorNotification, getErrorMessage } from '../../commonFunction.js'
 const floorList = ref([]);
+
+const addUpdateTitle = ref('Add Table');
+const addUpdateType = ref('add');
+const addUpdateFormDataFormat = ref([
+    { label: 'Table Number', multipleLang: false, type: 'number', name: 'table_number', placeHolder: 'Table Number', value: ''},
+    { label: 'Capacity Of Person', multipleLang: false, type: 'number', name: 'capacity_of_person', placeHolder: 'Capacity Of Person', value: ''},
+    {
+        label: 'Status',
+        multipleLang: false,
+        type: 'radio',
+        name: 'status',
+        options: [
+            { label: 'Active', value: 1},
+            { label: 'Deactive', value: 0}
+        ],
+        placeHolder: 'Status',
+        value: 1
+    },
+    { label: 'Finish Order Time', multipleLang: false, type: 'number', name: 'finish_order_time', placeHolder: 'Finish Order Time (In Minutes)', value: ''},
+    { label: 'Id', multipleLang: false, type: 'hidden', name: 'id', placeHolder: 'Category Id', value: ''},
+]);
 
 onMounted(() => {
     getTableListFloorWise();
+    getColorList();
 });
+
+const getColorList = () => {
+    axios.get('/api/color-list')
+    .then((response) => {
+        let optionsData = [];
+        
+        Object.keys(response.data.colors).forEach(floorKey => {
+            const floor = response.data.colors[floorKey];
+            optionsData.push({
+                id: floor.id,
+                label: floor.color,
+            });
+        });
+
+        const statusIndex = addUpdateFormDataFormat.value.findIndex(item => item.label === 'Status');
+
+        if (statusIndex !== -1) {
+            addUpdateFormDataFormat.value.splice(statusIndex + 1, 0, {
+                label: 'Color',
+                multipleLang: false,
+                type: 'drop-down',
+                name: 'color_id',
+                placeHolder: 'Select Color Name',
+                value: response.data.colors[0]?.id ?? '',
+                options: optionsData
+            });
+        }
+    });
+}
 
 const getTableListFloorWise = () => {
     axios.post('/api/get-table-list-floor-wise')
     .then((response) => {
         floorList.value = response.data;
+
+        let optionsData = [];
+        
+        Object.keys(response.data).forEach(floorKey => {
+            const floor = response.data[floorKey];
+            optionsData.push({
+                id: floor.id,
+                label: floor.name,
+            });
+        });
+
+        const capacityIndex = addUpdateFormDataFormat.value.findIndex(item => item.label === 'Capacity Of Person');
+
+        if (capacityIndex !== -1) {
+            addUpdateFormDataFormat.value.splice(capacityIndex + 1, 0, {
+                label: 'Floor',
+                multipleLang: false,
+                type: 'drop-down',
+                name: 'floor_id',
+                placeHolder: 'Select Floor Name',
+                value: response.data[0]?.id ?? '',
+                options: optionsData
+            });
+        }
+
     });
 }
 
@@ -170,4 +216,29 @@ const removeHoldKot = (id) => {
     });
 }
 
+const openAddNewTablePopup = () => {
+    f7.popup.open(`.addUpdatePopup`);
+}
+
+const storeUpdateData = () => {
+    const formData = addUpdateFormDataFormat.value;
+    const id = formData.find(item => item.label === 'Id').value;
+
+    const tableData = new FormData(event.target);
+
+    axios.post('/api/add-update-table', tableData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    })
+    .then((response) => {
+        successNotification(response.data.success);
+        f7.popup.close(`.addUpdatePopup`);
+        getTableListFloorWise();
+    })
+    .catch((error) => {
+        const errorMessage = getErrorMessage(error);
+        errorNotification(errorMessage);
+    });
+}
 </script>

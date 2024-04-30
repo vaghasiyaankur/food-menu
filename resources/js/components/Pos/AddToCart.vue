@@ -111,8 +111,8 @@
                 </div>
             </div>
             <div class="billing-btns grid grid-cols-3">
-                <button class="button kot-btn active" @click="createKot(table ?.table_number)">KOT</button>
-                <button class="button hold-btn" @click="holdKot(table ?.table_number)">Hold</button>
+                <button class="button kot-btn active" @click="createKot(table ?.id)">KOT</button>
+                <button class="button hold-btn" @click="holdKot(table ?.id)">Hold</button>
                 <button class="button ebill-btn">eBill</button>
             </div>
             <div class="bill-details-extend">
