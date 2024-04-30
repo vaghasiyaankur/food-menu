@@ -135,6 +135,8 @@
 }
 .orders_admin_page .order_info .order_table_wrapper {
     overflow-x: scroll;
+    border-bottom: 3px solid #999999;
+    scrollbar-width: 3px;
 }
 .orders_admin_page .order_info .order_table {
     width: 100%;
