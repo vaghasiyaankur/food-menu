@@ -64,20 +64,20 @@
                             </div>
                         </div>
                         <div class="seeking_detail">
-                            <h4 class="no-margin"></h4>
-                            <h4 class="no-margin"></h4>
+                            <h4 class="no-margin">Order ID :</h4>
+                            <h4 class="no-margin">663</h4>
                         </div>
                         <div class="seeking_detail">
-                            <h4 class="no-margin"></h4>
-                            <h4 class="no-margin"></h4>
+                            <h4 class="no-margin">Order Number :</h4>
+                            <h4 class="no-margin">10663</h4>
                         </div>
                         <div class="seeking_detail">
-                            <h4 class="no-margin"></h4>
-                            <h4 class="no-margin"></h4>
+                            <h4 class="no-margin">Payment Method :</h4>
+                            <h4 class="no-margin">Bank Transfer</h4>
                         </div>
                         <div class="seeking_detail">
-                            <h4 class="no-margin"></h4>
-                            <h4 class="no-margin"></h4>
+                            <h4 class="no-margin">Payment Status :</h4>
+                            <h4 class="no-margin">Awaiting Payment</h4>
                         </div>
                         <div class="seeking_detail">
                             <h4 class="no-margin">Updated :</h4>
@@ -87,6 +87,154 @@
                             <h4 class="no-margin">Date :</h4>
                             <h4 class="no-margin">24, Sep 2022 / 10:00 am (6 minutes ago)</h4>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="customer_order_history">
+                <div class="order-header">
+                    <h3 class="no-margin">Order</h3>
+                </div>
+                <div class="order-table_wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Product ID</th>
+                                <th>Product</th>
+                                <th>Item Price</th>
+                                <th>Quantity</th>
+                                <th>Size</th>
+                                <th>VAT</th>
+                                <th>Total Amount</th>
+                                <th>Status</th>
+                                <th>Updated</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>115</td>
+                                <td>
+                                    <div class="product-detail">
+                                        <div class="product-img">
+                                            <img src="\assets\images\seederImages\dashboard\product-1.png">
+                                        </div>
+                                        <div class="product-name">Margherita Pizza</div>
+                                    </div>
+                                </td>
+                                <td>$159.00</td>
+                                <td>2</td>
+                                <td>L</td>
+                                <td>$20.36(10%)</td>
+                                <td>$179.36</td>
+                                <td>
+                                    <div class="payment_status">
+                                        <div class="status_heading">Awaiting Payment</div>
+                                        <button class="pay_approve_btn">
+                                            <p class="no-margin">Approve</p>
+                                        </button>
+                                    </div>
+                                </td>
+                                <td>6 minutes ago</td>
+                                <td class="order_action">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_386_1152)">
+                                            <path
+                                                d="M2.00001 12C3.10459 12 4.00003 11.1046 4.00003 9.99998C4.00003 8.89541 3.10459 7.99997 2.00001 7.99997C0.895437 7.99997 0 8.89541 0 9.99998C0 11.1046 0.895437 12 2.00001 12Z"
+                                                fill="#555555" />
+                                            <path
+                                                d="M10 12C11.1046 12 12 11.1046 12 9.99998C12 8.89541 11.1046 7.99997 10 7.99997C8.89544 7.99997 8 8.89541 8 9.99998C8 11.1046 8.89544 12 10 12Z"
+                                                fill="#555555" />
+                                            <path
+                                                d="M18 12C19.1046 12 20 11.1046 20 9.99998C20 8.89541 19.1046 7.99997 18 7.99997C16.8954 7.99997 16 8.89541 16 9.99998C16 11.1046 16.8954 12 18 12Z"
+                                                fill="#555555" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_386_1152">
+                                                <rect width="20" height="20" fill="white" />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="10">
+                                    <div class="order_shipment_detail">
+                                        <div class="order_detail_heading">Order</div>
+                                        <div class="shipment_status">The order has not yet been shipped.</div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>114</td>
+                                <td>
+                                    <div class="product-detail">
+                                        <div class="product-img">
+                                            <img src="\assets\images\seederImages\dashboard\product-2.png">
+                                        </div>
+                                        <div class="product-name">Burger</div>
+                                    </div>
+                                </td>
+                                <td>$102.00</td>
+                                <td>4</td>
+                                <td>M</td>
+                                <td>$13.00(10%)</td>
+                                <td>$115.00</td>
+                                <td>
+                                    <div class="payment_status">
+                                        <div class="status_heading">Awaiting Payment</div>
+                                        <button class="pay_approve_btn">
+                                            <p class="no-margin">Approve</p>
+                                        </button>
+                                    </div>
+                                </td>
+                                <td>6 minutes ago</td>
+                                <td class="order_action">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_386_1152)">
+                                            <path
+                                                d="M2.00001 12C3.10459 12 4.00003 11.1046 4.00003 9.99998C4.00003 8.89541 3.10459 7.99997 2.00001 7.99997C0.895437 7.99997 0 8.89541 0 9.99998C0 11.1046 0.895437 12 2.00001 12Z"
+                                                fill="#555555" />
+                                            <path
+                                                d="M10 12C11.1046 12 12 11.1046 12 9.99998C12 8.89541 11.1046 7.99997 10 7.99997C8.89544 7.99997 8 8.89541 8 9.99998C8 11.1046 8.89544 12 10 12Z"
+                                                fill="#555555" />
+                                            <path
+                                                d="M18 12C19.1046 12 20 11.1046 20 9.99998C20 8.89541 19.1046 7.99997 18 7.99997C16.8954 7.99997 16 8.89541 16 9.99998C16 11.1046 16.8954 12 18 12Z"
+                                                fill="#555555" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_386_1152">
+                                                <rect width="20" height="20" fill="white" />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="10">
+                                    <div class="order_shipment_detail">
+                                        <div class="order_detail_heading">Order</div>
+                                        <div class="shipment_status">The order has not yet been shipped.</div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="total_payable">
+                    <div class="subtotal">
+                        <h4 class="no-margin">Subtotal :</h4>
+                        <h4 class="no-margin">$334.80</h4>
+                    </div>
+                    <div class="vat">
+                        <h4 class="no-margin">VAT :</h4>
+                        <h4 class="no-margin">$26.55</h4>
+                    </div>
+                    <hr class="divider">
+                    <div class="total">
+                        <h4 class="no-margin">Total (USD) :</h4>
+                        <h4 class="no-margin">$361.35</h4>
                     </div>
                 </div>
             </div>

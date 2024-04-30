@@ -244,7 +244,7 @@
 }
 /* ORDERS DETAIL PAGE */
 .orders_datail_admin_page{
-    padding: 25px 30px;
+    padding: 25px 30px 70px;
     background-color: #FBFBFB;
 }
 .orders_datail_admin_page .orders_datail_header{
@@ -339,6 +339,9 @@
 }
 .orders_datail_admin_page .order_detail_card .specific_order_detail{
     padding: 20px 20px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
 }
 .orders_datail_admin_page .order_detail_card .specific_order_detail .seeking_detail{
     display: flex;
@@ -350,6 +353,9 @@
     line-height: 18px;
     font-weight: 500;
     color: #38373D;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
 .orders_datail_admin_page .order_detail_card .specific_order_detail .seeking_detail h4:last-child{
     font-size: 15px;
@@ -367,4 +373,138 @@
     line-height: 15px;
     font-weight: 400;
     color: #9B804B;
+}
+.orders_datail_admin_page .customer_order_history{
+    margin-top: 40px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0px 1px 15px 0px #3333330D;
+    padding-bottom: 145px;
+    position: relative;
+}
+.orders_datail_admin_page .customer_order_history .order-header{
+    border-bottom: 1px dashed rgba(153, 153, 153, 0.3);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+.orders_datail_admin_page .customer_order_history .order-header h3{
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 500;
+    color: #38373D;
+}
+.orders_datail_admin_page .customer_order_history table{
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 35px;
+}
+.orders_datail_admin_page .customer_order_history table thead th{
+    background-color: #F4F4F4;
+    padding: 17px 20px;
+    text-wrap: nowrap;
+    text-align: left;
+    font-size: 15px;
+    line-height: 18px;
+    font-weight: 600 !important;
+    color: #555555;
+}
+.orders_datail_admin_page .customer_order_history table thead tr{
+    border-top: 1px solid rgba(153, 153, 153, 0.25);
+    border-bottom: 1px solid rgba(153, 153, 153, 0.25);
+}
+.orders_datail_admin_page .customer_order_history table tbody td{
+    padding: 15px 20px;
+    text-wrap: nowrap;
+    text-align: left;
+    font-size: 15px;
+    line-height: 18px;
+    font-weight: 400 !important;
+    color: #38373D;
+}
+.orders_datail_admin_page .customer_order_history table tbody tr{
+    border-bottom: 1px solid rgba(153, 153, 153, 0.15);
+}
+.orders_datail_admin_page .customer_order_history table tr .product-detail{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.orders_datail_admin_page .customer_order_history table .product-detail .product-img{
+    width: 60px;
+    height: 60px;
+    border-radius: 5px;
+}
+.orders_datail_admin_page .customer_order_history table .payment_status .status_heading{
+    margin-bottom: 10px;
+}
+.orders_datail_admin_page .customer_order_history table .payment_status .pay_approve_btn{
+    padding: 6px 26px;
+    background-color: #F33E3E;
+    border: none;
+    border-radius: 5px;
+    max-width: 100px;
+}
+.orders_datail_admin_page .customer_order_history table .payment_status p{
+    font-size: 12px;
+    line-height: 15px;
+    font-weight: 400 !important;
+    color: #FFFFFF;
+}
+.orders_datail_admin_page .customer_order_history table thead tr th:last-child{
+    text-align: center;
+}
+.orders_datail_admin_page .customer_order_history table tbody tr td:last-child.order_action{
+    text-align: center;
+}
+.orders_datail_admin_page .customer_order_history table .order_shipment_detail .order_detail_heading{
+    font-size: 15px;
+    line-height: 18px;
+    font-weight: 500;
+    color: #38373D;
+    margin-bottom: 10px;
+}
+.orders_datail_admin_page .customer_order_history table .order_shipment_detail .shipment_status{
+    font-size: 14px;
+    line-height: 17px;
+    font-weight: 400;
+    color: #38373D;
+}
+.orders_datail_admin_page .customer_order_history .total_payable{
+    max-width: 417px;
+    width: 100%;
+    position: absolute;
+    right: 30px;
+    bottom: 20px;
+}
+.orders_datail_admin_page .customer_order_history .total_payable .subtotal{
+    margin-bottom: 18px;
+}
+.orders_datail_admin_page .customer_order_history .total_payable .subtotal,
+.orders_datail_admin_page .customer_order_history .total_payable .vat,
+.orders_datail_admin_page .customer_order_history .total_payable .total{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 16px;
+    color: #38373D;
+}
+.orders_datail_admin_page .customer_order_history .total_payable .subtotal h4:first-child,
+.orders_datail_admin_page .customer_order_history .total_payable .vat h4:first-child{
+    line-height: 19px;
+    font-weight: 500;
+}
+.orders_datail_admin_page .customer_order_history .total_payable .subtotal h4:last-child,
+.orders_datail_admin_page .customer_order_history .total_payable .vat h4:last-child{
+    line-height: 19px;
+    font-weight: 400;
+}
+.orders_datail_admin_page .customer_order_history .total_payable .total h4{
+    line-height: 22px;
+    font-weight: 600;
+}
+.orders_datail_admin_page .customer_order_history .total_payable hr.divider{
+    border: none;
+    border-bottom: 1px dashed rgba(153, 153, 153, 0.3);
+    margin: 20px 0 !important;
 }
