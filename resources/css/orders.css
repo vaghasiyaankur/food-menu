@@ -168,10 +168,10 @@
     align-items: center;
     gap: 10px;
 }
-.orders_admin_page .order_info .order_table tbody tr:nth-child(even) {
-    background-color: #fafafa;
+.orders_admin_page .order_info table tbody tr:nth-child(odd) td {
+    background-color: #FFFFFF;
 }
-.orders_admin_page .order_info .order_table tbody tr:nth-child(even) {
+.orders_admin_page .order_info table tbody tr:nth-child(even) td {
     background-color: #fafafa;
 }
 .orders_admin_page .order_info .order_table tbody td:nth-child(3) {
