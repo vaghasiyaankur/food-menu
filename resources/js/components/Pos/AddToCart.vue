@@ -136,18 +136,15 @@ const props = defineProps({
         type: Array,
         default: () => []
     },
-    table: {
-        type: Array,
-        default: () => []
-    },
+    table: [Array, Object],
     oldOrder: {
         type: Array,
         default: () => []
     },
     floorName: String,
-    totalAmount: Number,
-    subTotal: Number,
-    discount: Number,
+    totalAmount: [String, Number],
+    subTotal: [String, Number],
+    discount: [String, Number],
 });
 
 

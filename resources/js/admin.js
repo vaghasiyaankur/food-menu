@@ -7,6 +7,7 @@ import Echo from 'laravel-echo';
 
 import 'framework7/css/bundle';
 import '.././css/admin.css';
+import '.././css/orders.css';
 
 /* import font awesome icon component */
 import { library } from '@fortawesome/fontawesome-svg-core'
