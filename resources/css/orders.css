@@ -242,3 +242,129 @@
     color: #ffffff;
     border-radius: 5px;
 }
+/* ORDERS DETAIL PAGE */
+.orders_datail_admin_page{
+    padding: 25px 30px;
+    background-color: #FBFBFB;
+}
+.orders_datail_admin_page .orders_datail_header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+.orders_datail_admin_page .orders_datail_header h2{
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 600;
+    color: #38373D;
+}
+.orders_datail_admin_page .orders_datail_header .f7-link{
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: 400;
+    color: #555555;
+}
+.orders_datail_admin_page .orders_datail_header .breadcrumbs-item-active {
+    font-weight: 500;
+    color: #38373D;
+}
+.orders_datail_admin_page .customer_order_detail_cards{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.orders_datail_admin_page .customer_order_detail_cards .card_header{
+    padding: 20px;
+    border-bottom: 1px solid rgba(153, 153, 153, 0.15);
+}
+.orders_datail_admin_page .customer_order_detail_cards h3{
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 500;
+    color: #38373D;
+}
+.orders_datail_admin_page .customer_detail_card{
+    max-width: 42.86%;
+    width: 100%;
+    box-shadow: 0px 1px 15px 0px #3333330D;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+}
+.orders_datail_admin_page .order_detail_card{
+    max-width: 53.57%;
+    width: 100%;
+    box-shadow: 0px 1px 15px 0px #3333330D;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+}
+.orders_datail_admin_page .customer_detail_card .customer_info{
+    padding: 20px 20px 35px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.orders_datail_admin_page .customer_detail_card .customer_info .customer_name{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 7px;
+}
+.orders_datail_admin_page .customer_detail_card .customer_info .customer_name p{
+    font-size: 14px;
+    line-height: 17px;
+    font-weight: 400;
+    color: #999999;
+}
+.orders_datail_admin_page .customer_detail_card .customer_contact_info{
+    padding: 0 20px 65px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+}
+.orders_datail_admin_page .customer_detail_card .customer_phone,
+.orders_datail_admin_page .customer_detail_card .customer_email{
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+}
+.orders_datail_admin_page .customer_detail_card .customer_phone a,
+.orders_datail_admin_page .customer_detail_card .customer_email a{
+    font-size: 15px;
+    line-height: 18px;
+    font-weight: 400;
+    color: #38373D;
+}
+.orders_datail_admin_page .order_detail_card .specific_order_detail{
+    padding: 20px 20px 30px;
+}
+.orders_datail_admin_page .order_detail_card .specific_order_detail .seeking_detail{
+    display: flex;
+}
+.orders_datail_admin_page .order_detail_card .specific_order_detail .seeking_detail h4:first-child{
+    max-width: 46.43%;
+    width: 100%;
+    font-size: 15px;
+    line-height: 18px;
+    font-weight: 500;
+    color: #38373D;
+}
+.orders_datail_admin_page .order_detail_card .specific_order_detail .seeking_detail h4:last-child{
+    font-size: 15px;
+    line-height: 18px;
+    font-weight: 400;
+    color: #38373D;
+}
+.orders_datail_admin_page .order_detail_card .specific_order_detail .seeking_detail .status_indicator{
+    padding: 5px 19px;
+    border-radius: 5px;
+    background-color: #FFF9E3;
+}
+.orders_datail_admin_page .order_detail_card .specific_order_detail .seeking_detail .status_indicator p{
+    font-size: 12px;
+    line-height: 15px;
+    font-weight: 400;
+    color: #9B804B;
+}
