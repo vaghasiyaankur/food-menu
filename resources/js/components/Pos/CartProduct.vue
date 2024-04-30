@@ -8,16 +8,8 @@
                     </div>
                     <div class="product_detail" v-for="(kp, ind) in kot.kot_products" :key="ind">
                         <div class="product-detail-inner">
-                            <!-- <div class="delete-product" @click="removeProduct(index, 'old', index, ind)">
-                                <span data-popup="#deleteCartItem_popup">
-                                    <f7-icon f7="minus" class="font-16 delete-product-button"></f7-icon>
-                                </span>
-                            </div> -->
                             <div class="product-summary">
                                 <p class="no-margin">{{ kp.name }}</p>
-                                <!-- <span class="no-margin display-flex align-items-center">Size: S<p
-                                        class="text-red no-margin">
-                                        ${{ kp.price.toFixed(2) }}</p></span> -->
                                 <p class="text-red no-margin">${{ ((kp.price + kp.extra_amount) * kp.quantity).toFixed(2) }}</p>
                                 <span 
                                     v-if="kp.variation"
@@ -25,9 +17,7 @@
                                 >
                                     Size: {{ kp.variation }}
                                 </span>
-                                <span 
-                                    v-if="kp.ingredients.length > 0"
-                                    >
+                                <span v-if="kp.ingredients.length > 0" >
                                     Ingredient : 
                                     <span v-for="(ing, index) in kp.ingredients" :key="index">
                                         {{ ing }} <span v-if="(kp.ingredients.length - 1) !== index">, </span>
@@ -36,21 +26,8 @@
                             </div>
                         </div>
                         <div class="product-detail-inner">
-                            <!-- <div class="quantity-section">
-                                <div class="quantity-content">
-                                    <span class="quantity-minus" :class="{'disabled' : kp.quantity < 2}" @click="decreaseQuantity(kot.id, 'old', index, ind)">
-                                        <f7-icon f7="minus" class="font-16 quantity-icon"></f7-icon>
-                                    </span>
-                                    <span class="quantity-count">{{ kp.quantity }}</span>
-                                    <span class="quantity-plus" @click="increaseQuantity(kot.id, 'old', index, ind)">
-                                        <f7-icon f7="plus" class="font-16 quantity-icon"></f7-icon>
-                                    </span>
-                                </div>
-                            </div> -->
                             <div class="product-note-content">
-                                <div class="product-note" data-popup="#note_popup" 
-                                    @click="openNotePopup(kot.id, 'old', index, ind)"
-                                >
+                                <div class="product-note" data-popup="#note_popup" @click="openNotePopup(kot.id, 'old', index, ind)">
                                     <Icon name="note" />
                                 </div>
                             </div>
@@ -62,16 +39,12 @@
                 <div class="kot-time-heading">
                     <h5 class="no-margin">New KOT</h5>
                 </div>
-                <div 
-                    class="product_detail" 
-                    v-for="(product,index) in cartProducts" :key="index"
-                >
+                <div class="product_detail" v-for="(product,index) in cartProducts" :key="index" >
                     <div class="product-detail-inner">
                         <div class="display-flex align-items-center w-100">
                             <div class="delete-product"  @click="removeProduct(index, 'new', null, null)">
                                 <span>
-                                    <f7-icon f7="minus" class="font-16 delete-product-button">
-                                    </f7-icon>
+                                    <f7-icon f7="minus" class="font-16 delete-product-button"></f7-icon>
                                 </span>
                             </div>
                             <div class="product-summary">
@@ -79,24 +52,15 @@
                                     {{ product.name }}
                                 </p>
                                 <p class="text-red no-margin">${{ ((product.price + product.extraAmount) * product.quantity).toFixed(2) }}</p>
-                                    <span 
-                                        v-if="product.variation.name"
-                                        class="no-margin display-flex align-items-center"
-                                    >
-                                        Size: {{ product.variation.name }}
+                                <span v-if="product.variation.name" class="no-margin display-flex align-items-center" >
+                                    Size: {{ product.variation.name }}
+                                </span>
+                                <span v-if="product.ingredient.length > 0" >
+                                    Ingredient : 
+                                    <span v-for="(ing, index) in product.ingredient" :key="index">
+                                        {{ ing.name }} <span v-if="(product.ingredient.length - 1) !== index">, </span>
                                     </span>
-                                    <span 
-                                        v-if="product.ingredient.length > 0"
-                                        >
-                                        Ingredient : 
-                                        <span v-for="(ing, index) in product.ingredient" :key="index">
-                                            {{ ing.name }} <span v-if="(product.ingredient.length - 1) !== index">, </span>
-                                        </span>
-                                    </span>
-
-
-
-                                    <!-- <p><span>$67</span></p> -->
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -110,116 +74,17 @@
                                 </span>
                                 <span class="quantity-count">{{ product.quantity }}</span>
                                 <span class="quantity-plus" @click="increaseQuantity(index, 'new', null, null)">
-                                    <f7-icon f7="plus"
-                                        class="font-16 quantity-icon">
-                                    </f7-icon>
+                                    <f7-icon f7="plus" class="font-16 quantity-icon"></f7-icon>
                                 </span>
                             </div>
                         </div>
                         <div class="product-note-content">
-                            <div 
-                                class="product-note"
-                                @click="openNotePopup(index, 'new', null, null)"
-                                >
-                                <!-- @click="f7.popup.open(`.notePopup`);" -->
+                            <div class="product-note" @click="openNotePopup(index, 'new', null, null)">
                                 <Icon name="note" />
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- <div class="product_detail">
-                    <div class="product-detail-inner">
-                        <div class="delete-product">
-                            <span data-popup="#deleteCartItem_popup"
-                                @click="f7.popup.open(`.deleteCartItemPopup`);"><f7-icon f7="minus"
-                                    class="font-16 delete-product-button"></f7-icon></span>
-                        </div>
-                        <div class="product-summary">
-                            <p class="no-margin">California Style Pizza</p>
-                            <span class="no-margin display-flex align-items-center">Size: L<p
-                                    class="text-red no-margin">
-                                    $15.00</p></span>
-                        </div>
-                    </div>
-                    <div class="product-detail-inner">
-                        <div class="quantity-section">
-                            <div class="quantity-content">
-                                <span class="quantity-minus"><f7-icon f7="minus"
-                                        class="font-16 quantity-icon"></f7-icon></span>
-                                <span class="quantity-count">1</span>
-                                <span class="quantity-plus"><f7-icon f7="plus"
-                                        class="font-16 quantity-icon"></f7-icon></span>
-                            </div>
-                        </div>
-                        <div class="product-note-content">
-                            <div class="product-note" data-popup="#note_popup" @click="f7.popup.open(`.notePopup`);">
-                                <Icon name="note" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="product_detail">
-                    <div class="product-detail-inner">
-                        <div class="delete-product">
-                            <span data-popup="#deleteCartItem_popup"
-                                @click="f7.popup.open(`.deleteCartItemPopup`);"><f7-icon f7="minus"
-                                    class="font-16 delete-product-button"></f7-icon></span>
-                        </div>
-                        <div class="product-summary">
-                            <p class="no-margin">Romana Pizza</p>
-                            <span class="no-margin display-flex align-items-center">Size: M<p
-                                    class="text-red no-margin">
-                                    $15.00</p></span>
-                        </div>
-                    </div>
-                    <div class="product-detail-inner">
-                        <div class="quantity-section">
-                            <div class="quantity-content">
-                                <span class="quantity-minus"><f7-icon f7="minus"
-                                        class="font-16 quantity-icon"></f7-icon></span>
-                                <span class="quantity-count">1</span>
-                                <span class="quantity-plus"><f7-icon f7="plus"
-                                        class="font-16 quantity-icon"></f7-icon></span>
-                            </div>
-                        </div>
-                        <div class="product-note-content">
-                            <div class="product-note" data-popup="#note_popup" @click="f7.popup.open(`.notePopup`);">
-                                <Icon name="note" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="product_detail">
-                    <div class="product-detail-inner">
-                        <div class="delete-product">
-                            <span data-popup="#deleteCartItem_popup"
-                                @click="f7.popup.open(`.deleteCartItemPopup`);"><f7-icon f7="minus"
-                                    class="font-16 delete-product-button"></f7-icon></span>
-                        </div>
-                        <div class="product-summary">
-                            <p class="no-margin">California Style Pizza</p>
-                            <span class="no-margin display-flex align-items-center">Size: L<p
-                                    class="text-red no-margin">
-                                    $15.00</p></span>
-                        </div>
-                    </div>
-                    <div class="product-detail-inner">
-                        <div class="quantity-section">
-                            <div class="quantity-content">
-                                <span class="quantity-minus"><f7-icon f7="minus"
-                                        class="font-16 quantity-icon"></f7-icon></span>
-                                <span class="quantity-count">1</span>
-                                <span class="quantity-plus"><f7-icon f7="plus"
-                                        class="font-16 quantity-icon"></f7-icon></span>
-                            </div>
-                        </div>
-                        <div class="product-note-content">
-                            <div class="product-note" data-popup="#note_popup" @click="f7.popup.open(`.notePopup`);">
-                                <Icon name="note" />
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
             </div>
         </div>
     </div>

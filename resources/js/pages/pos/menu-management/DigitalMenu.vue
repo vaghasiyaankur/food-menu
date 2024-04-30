@@ -40,7 +40,7 @@
                         <input :id="'sub-category-'+ind" type='checkbox'>
                         <label :for="'sub-category-'+ind">
                             <h4 class="no-margin faq-heading">{{ subCat.name }}</h4>
-                            <div class='faq-arrow'></div>
+                            <div class='faq-arrow open'></div>
                             <div class="faq-menu-items">
                                 <div class="sub-menu-items item_digital_menu">
                                     <div class="sub_items" v-for="(product, index) in subCat.products" :key="index">
