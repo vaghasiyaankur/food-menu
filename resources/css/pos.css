@@ -387,7 +387,7 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox {
 }
 .add-to-cart .cart-products {
     overflow: auto;
-    height: 48dvh;
+    height: 52dvh;
     scrollbar-width: none;
 }
 .add-to-cart .cart-products.open{
@@ -725,12 +725,12 @@ textarea {
 }
 
 .kot-time {
-    height: calc(50dvh);
+    /* height: calc(50dvh); */
     overflow: auto;
 }
 
 .kot-time.open {
-    height: calc(44dvh);
+    /* height: calc(44dvh); */
 }
 
 .add_ingredient_variation_popup {
@@ -982,4 +982,17 @@ textarea {
     width: 100%;
     flex : 0 0 20%;
     max-width: 20%;
+}
+.btn-add-product.btn-added-product{
+    width: 77%;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.btn-add-product.btn-added-more-product{
+    width: 23%;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.no_order{
+    height: calc(100% - 200px);
 }
