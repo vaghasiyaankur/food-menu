@@ -39,382 +39,717 @@
                         <h4 class="no-margin">Filter</h4>
                     </button>
                 </div>
-                <table class="order_table">
-                    <thead>
-                        <tr>
-                            <th>Order ID</th>
-                            <th>Customer</th>
-                            <th>Total Amount</th>
-                            <th>Status</th>
-                            <th>Payment Status</th>
-                            <th>Updated</th>
-                            <th>Date</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>#10663</td>
-                            <td>
-                                <div class="customer-detail">
-                                    <div class="customer-img">
-                                        <img src="\assets\images\seederImages\dashboard\user_1.png">
+                <div class="order_table_wrapper">
+                    <table class="order_table">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Customer</th>
+                                <th>Total Amount</th>
+                                <th>Status</th>
+                                <th>Payment Status</th>
+                                <th>Updated</th>
+                                <th>Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#10663</td>
+                                <td>
+                                    <div class="customer-detail">
+                                        <div class="customer-img">
+                                            <img src="\assets\images\seederImages\dashboard\user_1.png">
+                                        </div>
+                                        <div class="customer-name">Jannson Wasley</div>
                                     </div>
-                                    <div class="customer-name">Jannson Wasley</div>
-                                </div>
-                            </td>
-                            <td>$109.00</td>
-                            <td>
-                                <div class="order_status cancelled_status">
-                                    <p class="no-margin">Cancelled</p>
-                                </div>
-                            </td>
-                            <td>Payment Received</td>
-                            <td>17 hours ago</td>
-                            <td>24, Sep 2022 / 10:00 am</td>
-                            <td><svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <g clip-path="url(#clip0_386_1152)">
-                                        <path
-                                            d="M2.00001 12C3.10459 12 4.00003 11.1046 4.00003 9.99998C4.00003 8.89541 3.10459 7.99997 2.00001 7.99997C0.895437 7.99997 0 8.89541 0 9.99998C0 11.1046 0.895437 12 2.00001 12Z"
-                                            fill="#555555" />
-                                        <path
-                                            d="M10 12C11.1046 12 12 11.1046 12 9.99998C12 8.89541 11.1046 7.99997 10 7.99997C8.89544 7.99997 8 8.89541 8 9.99998C8 11.1046 8.89544 12 10 12Z"
-                                            fill="#555555" />
-                                        <path
-                                            d="M18 12C19.1046 12 20 11.1046 20 9.99998C20 8.89541 19.1046 7.99997 18 7.99997C16.8954 7.99997 16 8.89541 16 9.99998C16 11.1046 16.8954 12 18 12Z"
-                                            fill="#555555" />
-                                    </g>
-                                    <defs>
-                                        <clipPath id="clip0_386_1152">
-                                            <rect width="20" height="20" fill="white" />
-                                        </clipPath>
-                                    </defs>
-                                </svg>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#10662</td>
-                            <td>
-                                <div class="customer-detail">
-                                    <div class="customer-img">
-                                        <img src="\assets\images\seederImages\dashboard\user_2.png">
+                                </td>
+                                <td>$109.00</td>
+                                <td>
+                                    <div class="order_status cancelled_status">
+                                        <p class="no-margin">Cancelled</p>
                                     </div>
-                                    <div class="customer-name">Robert Fox</div>
-                                </div>
-                            </td>
-                            <td>$159.00</td>
-                            <td>
-                                <div class="order_status processing_status">
-                                    <p class="no-margin">Processing</p>
-                                </div>
-                            </td>
-                            <td>Payment Received</td>
-                            <td>17 hours ago</td>
-                            <td>24, Sep 2022 / 10:00 am</td>
-                            <td><svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <g clip-path="url(#clip0_386_1152)">
-                                        <path
-                                            d="M2.00001 12C3.10459 12 4.00003 11.1046 4.00003 9.99998C4.00003 8.89541 3.10459 7.99997 2.00001 7.99997C0.895437 7.99997 0 8.89541 0 9.99998C0 11.1046 0.895437 12 2.00001 12Z"
-                                            fill="#555555" />
-                                        <path
-                                            d="M10 12C11.1046 12 12 11.1046 12 9.99998C12 8.89541 11.1046 7.99997 10 7.99997C8.89544 7.99997 8 8.89541 8 9.99998C8 11.1046 8.89544 12 10 12Z"
-                                            fill="#555555" />
-                                        <path
-                                            d="M18 12C19.1046 12 20 11.1046 20 9.99998C20 8.89541 19.1046 7.99997 18 7.99997C16.8954 7.99997 16 8.89541 16 9.99998C16 11.1046 16.8954 12 18 12Z"
-                                            fill="#555555" />
-                                    </g>
-                                    <defs>
-                                        <clipPath id="clip0_386_1152">
-                                            <rect width="20" height="20" fill="white" />
-                                        </clipPath>
-                                    </defs>
-                                </svg>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#10661</td>
-                            <td>
-                                <div class="customer-detail">
-                                    <div class="customer-img">
-                                        <img src="\assets\images\seederImages\dashboard\user_3.png">
+                                </td>
+                                <td>Payment Received</td>
+                                <td>17 hours ago</td>
+                                <td>24, Sep 2022 / 10:00 am</td>
+                                <td><svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_386_1152)">
+                                            <path
+                                                d="M2.00001 12C3.10459 12 4.00003 11.1046 4.00003 9.99998C4.00003 8.89541 3.10459 7.99997 2.00001 7.99997C0.895437 7.99997 0 8.89541 0 9.99998C0 11.1046 0.895437 12 2.00001 12Z"
+                                                fill="#555555" />
+                                            <path
+                                                d="M10 12C11.1046 12 12 11.1046 12 9.99998C12 8.89541 11.1046 7.99997 10 7.99997C8.89544 7.99997 8 8.89541 8 9.99998C8 11.1046 8.89544 12 10 12Z"
+                                                fill="#555555" />
+                                            <path
+                                                d="M18 12C19.1046 12 20 11.1046 20 9.99998C20 8.89541 19.1046 7.99997 18 7.99997C16.8954 7.99997 16 8.89541 16 9.99998C16 11.1046 16.8954 12 18 12Z"
+                                                fill="#555555" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_386_1152">
+                                                <rect width="20" height="20" fill="white" />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#10662</td>
+                                <td>
+                                    <div class="customer-detail">
+                                        <div class="customer-img">
+                                            <img src="\assets\images\seederImages\dashboard\user_2.png">
+                                        </div>
+                                        <div class="customer-name">Robert Fox</div>
                                     </div>
-                                    <div class="customer-name">Marvin Kinney</div>
-                                </div>
-                            </td>
-                            <td>$89.00</td>
-                            <td>
-                                <div class="order_status completed_status">
-                                    <p class="no-margin">Completed</p>
-                                </div>
-                            </td>
-                            <td>Payment Received</td>
-                            <td>1 day ago</td>
-                            <td>24, Sep 2022 / 10:00 am</td>
-                            <td><svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <g clip-path="url(#clip0_386_1152)">
-                                        <path
-                                            d="M2.00001 12C3.10459 12 4.00003 11.1046 4.00003 9.99998C4.00003 8.89541 3.10459 7.99997 2.00001 7.99997C0.895437 7.99997 0 8.89541 0 9.99998C0 11.1046 0.895437 12 2.00001 12Z"
-                                            fill="#555555" />
-                                        <path
-                                            d="M10 12C11.1046 12 12 11.1046 12 9.99998C12 8.89541 11.1046 7.99997 10 7.99997C8.89544 7.99997 8 8.89541 8 9.99998C8 11.1046 8.89544 12 10 12Z"
-                                            fill="#555555" />
-                                        <path
-                                            d="M18 12C19.1046 12 20 11.1046 20 9.99998C20 8.89541 19.1046 7.99997 18 7.99997C16.8954 7.99997 16 8.89541 16 9.99998C16 11.1046 16.8954 12 18 12Z"
-                                            fill="#555555" />
-                                    </g>
-                                    <defs>
-                                        <clipPath id="clip0_386_1152">
-                                            <rect width="20" height="20" fill="white" />
-                                        </clipPath>
-                                    </defs>
-                                </svg>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#10660</td>
-                            <td>
-                                <div class="customer-detail">
-                                    <div class="customer-img">
-                                        <img src="\assets\images\seederImages\dashboard\user_4.png">
+                                </td>
+                                <td>$159.00</td>
+                                <td>
+                                    <div class="order_status processing_status">
+                                        <p class="no-margin">Processing</p>
                                     </div>
-                                    <div class="customer-name">Jessica Williams</div>
-                                </div>
-                            </td>
-                            <td>$96.00</td>
-                            <td>
-                                <div class="order_status cancelled_status">
-                                    <p class="no-margin">Cancelled</p>
-                                </div>
-                            </td>
-                            <td>Payment Received</td>
-                            <td>2 days ago</td>
-                            <td>24, Sep 2022 / 10:00 am</td>
-                            <td><svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <g clip-path="url(#clip0_386_1152)">
-                                        <path
-                                            d="M2.00001 12C3.10459 12 4.00003 11.1046 4.00003 9.99998C4.00003 8.89541 3.10459 7.99997 2.00001 7.99997C0.895437 7.99997 0 8.89541 0 9.99998C0 11.1046 0.895437 12 2.00001 12Z"
-                                            fill="#555555" />
-                                        <path
-                                            d="M10 12C11.1046 12 12 11.1046 12 9.99998C12 8.89541 11.1046 7.99997 10 7.99997C8.89544 7.99997 8 8.89541 8 9.99998C8 11.1046 8.89544 12 10 12Z"
-                                            fill="#555555" />
-                                        <path
-                                            d="M18 12C19.1046 12 20 11.1046 20 9.99998C20 8.89541 19.1046 7.99997 18 7.99997C16.8954 7.99997 16 8.89541 16 9.99998C16 11.1046 16.8954 12 18 12Z"
-                                            fill="#555555" />
-                                    </g>
-                                    <defs>
-                                        <clipPath id="clip0_386_1152">
-                                            <rect width="20" height="20" fill="white" />
-                                        </clipPath>
-                                    </defs>
-                                </svg>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#10659</td>
-                            <td>
-                                <div class="customer-detail">
-                                    <div class="customer-img">
-                                        <img src="\assets\images\seederImages\dashboard\user_5.png">
+                                </td>
+                                <td>Payment Received</td>
+                                <td>17 hours ago</td>
+                                <td>24, Sep 2022 / 10:00 am</td>
+                                <td><svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_386_1152)">
+                                            <path
+                                                d="M2.00001 12C3.10459 12 4.00003 11.1046 4.00003 9.99998C4.00003 8.89541 3.10459 7.99997 2.00001 7.99997C0.895437 7.99997 0 8.89541 0 9.99998C0 11.1046 0.895437 12 2.00001 12Z"
+                                                fill="#555555" />
+                                            <path
+                                                d="M10 12C11.1046 12 12 11.1046 12 9.99998C12 8.89541 11.1046 7.99997 10 7.99997C8.89544 7.99997 8 8.89541 8 9.99998C8 11.1046 8.89544 12 10 12Z"
+                                                fill="#555555" />
+                                            <path
+                                                d="M18 12C19.1046 12 20 11.1046 20 9.99998C20 8.89541 19.1046 7.99997 18 7.99997C16.8954 7.99997 16 8.89541 16 9.99998C16 11.1046 16.8954 12 18 12Z"
+                                                fill="#555555" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_386_1152">
+                                                <rect width="20" height="20" fill="white" />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#10661</td>
+                                <td>
+                                    <div class="customer-detail">
+                                        <div class="customer-img">
+                                            <img src="\assets\images\seederImages\dashboard\user_3.png">
+                                        </div>
+                                        <div class="customer-name">Marvin Kinney</div>
                                     </div>
-                                    <div class="customer-name">Floyd Miles</div>
-                                </div>
-                            </td>
-                            <td>$330.00</td>
-                            <td>
-                                <div class="order_status completed_status">
-                                    <p class="no-margin">Completed</p>
-                                </div>
-                            </td>
-                            <td>Payment Received</td>
-                            <td>2 days ago</td>
-                            <td>24, Sep 2022 / 10:00 am</td>
-                            <td><svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <g clip-path="url(#clip0_386_1152)">
-                                        <path
-                                            d="M2.00001 12C3.10459 12 4.00003 11.1046 4.00003 9.99998C4.00003 8.89541 3.10459 7.99997 2.00001 7.99997C0.895437 7.99997 0 8.89541 0 9.99998C0 11.1046 0.895437 12 2.00001 12Z"
-                                            fill="#555555" />
-                                        <path
-                                            d="M10 12C11.1046 12 12 11.1046 12 9.99998C12 8.89541 11.1046 7.99997 10 7.99997C8.89544 7.99997 8 8.89541 8 9.99998C8 11.1046 8.89544 12 10 12Z"
-                                            fill="#555555" />
-                                        <path
-                                            d="M18 12C19.1046 12 20 11.1046 20 9.99998C20 8.89541 19.1046 7.99997 18 7.99997C16.8954 7.99997 16 8.89541 16 9.99998C16 11.1046 16.8954 12 18 12Z"
-                                            fill="#555555" />
-                                    </g>
-                                    <defs>
-                                        <clipPath id="clip0_386_1152">
-                                            <rect width="20" height="20" fill="white" />
-                                        </clipPath>
-                                    </defs>
-                                </svg>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#10658</td>
-                            <td>
-                                <div class="customer-detail">
-                                    <div class="customer-img">
-                                        <img src="\assets\images\seederImages\dashboard\user_6.png">
+                                </td>
+                                <td>$89.00</td>
+                                <td>
+                                    <div class="order_status completed_status">
+                                        <p class="no-margin">Completed</p>
                                     </div>
-                                    <div class="customer-name">Kathryn Murphy</div>
-                                </div>
-                            </td>
-                            <td>$234.00</td>
-                            <td>
-                                <div class="order_status cancelled_status">
-                                    <p class="no-margin">Completed</p>
-                                </div>
-                            </td>
-                            <td>Payment Received</td>
-                            <td>2 days ago</td>
-                            <td>24, Sep 2022 / 10:00 am</td>
-                            <td><svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <g clip-path="url(#clip0_386_1152)">
-                                        <path
-                                            d="M2.00001 12C3.10459 12 4.00003 11.1046 4.00003 9.99998C4.00003 8.89541 3.10459 7.99997 2.00001 7.99997C0.895437 7.99997 0 8.89541 0 9.99998C0 11.1046 0.895437 12 2.00001 12Z"
-                                            fill="#555555" />
-                                        <path
-                                            d="M10 12C11.1046 12 12 11.1046 12 9.99998C12 8.89541 11.1046 7.99997 10 7.99997C8.89544 7.99997 8 8.89541 8 9.99998C8 11.1046 8.89544 12 10 12Z"
-                                            fill="#555555" />
-                                        <path
-                                            d="M18 12C19.1046 12 20 11.1046 20 9.99998C20 8.89541 19.1046 7.99997 18 7.99997C16.8954 7.99997 16 8.89541 16 9.99998C16 11.1046 16.8954 12 18 12Z"
-                                            fill="#555555" />
-                                    </g>
-                                    <defs>
-                                        <clipPath id="clip0_386_1152">
-                                            <rect width="20" height="20" fill="white" />
-                                        </clipPath>
-                                    </defs>
-                                </svg>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#10657</td>
-                            <td>
-                                <div class="customer-detail">
-                                    <div class="customer-img">
-                                        <img src="\assets\images\seederImages\dashboard\user_2.png">
+                                </td>
+                                <td>Payment Received</td>
+                                <td>1 day ago</td>
+                                <td>24, Sep 2022 / 10:00 am</td>
+                                <td><svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_386_1152)">
+                                            <path
+                                                d="M2.00001 12C3.10459 12 4.00003 11.1046 4.00003 9.99998C4.00003 8.89541 3.10459 7.99997 2.00001 7.99997C0.895437 7.99997 0 8.89541 0 9.99998C0 11.1046 0.895437 12 2.00001 12Z"
+                                                fill="#555555" />
+                                            <path
+                                                d="M10 12C11.1046 12 12 11.1046 12 9.99998C12 8.89541 11.1046 7.99997 10 7.99997C8.89544 7.99997 8 8.89541 8 9.99998C8 11.1046 8.89544 12 10 12Z"
+                                                fill="#555555" />
+                                            <path
+                                                d="M18 12C19.1046 12 20 11.1046 20 9.99998C20 8.89541 19.1046 7.99997 18 7.99997C16.8954 7.99997 16 8.89541 16 9.99998C16 11.1046 16.8954 12 18 12Z"
+                                                fill="#555555" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_386_1152">
+                                                <rect width="20" height="20" fill="white" />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#10660</td>
+                                <td>
+                                    <div class="customer-detail">
+                                        <div class="customer-img">
+                                            <img src="\assets\images\seederImages\dashboard\user_4.png">
+                                        </div>
+                                        <div class="customer-name">Jessica Williams</div>
                                     </div>
-                                    <div class="customer-name">Robert Fox</div>
-                                </div>
-                            </td>
-                            <td>$159.00</td>
-                            <td>
-                                <div class="order_status completed_status">
-                                    <p class="no-margin">Completed</p>
-                                </div>
-                            </td>
-                            <td>Payment Received</td>
-                            <td>17 hours ago</td>
-                            <td>24, Sep 2022 / 10:00 am</td>
-                            <td><svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <g clip-path="url(#clip0_386_1152)">
-                                        <path
-                                            d="M2.00001 12C3.10459 12 4.00003 11.1046 4.00003 9.99998C4.00003 8.89541 3.10459 7.99997 2.00001 7.99997C0.895437 7.99997 0 8.89541 0 9.99998C0 11.1046 0.895437 12 2.00001 12Z"
-                                            fill="#555555" />
-                                        <path
-                                            d="M10 12C11.1046 12 12 11.1046 12 9.99998C12 8.89541 11.1046 7.99997 10 7.99997C8.89544 7.99997 8 8.89541 8 9.99998C8 11.1046 8.89544 12 10 12Z"
-                                            fill="#555555" />
-                                        <path
-                                            d="M18 12C19.1046 12 20 11.1046 20 9.99998C20 8.89541 19.1046 7.99997 18 7.99997C16.8954 7.99997 16 8.89541 16 9.99998C16 11.1046 16.8954 12 18 12Z"
-                                            fill="#555555" />
-                                    </g>
-                                    <defs>
-                                        <clipPath id="clip0_386_1152">
-                                            <rect width="20" height="20" fill="white" />
-                                        </clipPath>
-                                    </defs>
-                                </svg>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#10656</td>
-                            <td>
-                                <div class="customer-detail">
-                                    <div class="customer-img">
-                                        <img src="\assets\images\seederImages\dashboard\user_3.png">
+                                </td>
+                                <td>$96.00</td>
+                                <td>
+                                    <div class="order_status cancelled_status">
+                                        <p class="no-margin">Cancelled</p>
                                     </div>
-                                    <div class="customer-name">Marvin Kinney</div>
-                                </div>
-                            </td>
-                            <td>$89.00</td>
-                            <td>
-                                <div class="order_status processing_status">
-                                    <p class="no-margin">Processing</p>
-                                </div>
-                            </td>
-                            <td>Payment Received</td>
-                            <td>17 hours ago</td>
-                            <td>24, Sep 2022 / 10:00 am</td>
-                            <td><svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <g clip-path="url(#clip0_386_1152)">
-                                        <path
-                                            d="M2.00001 12C3.10459 12 4.00003 11.1046 4.00003 9.99998C4.00003 8.89541 3.10459 7.99997 2.00001 7.99997C0.895437 7.99997 0 8.89541 0 9.99998C0 11.1046 0.895437 12 2.00001 12Z"
-                                            fill="#555555" />
-                                        <path
-                                            d="M10 12C11.1046 12 12 11.1046 12 9.99998C12 8.89541 11.1046 7.99997 10 7.99997C8.89544 7.99997 8 8.89541 8 9.99998C8 11.1046 8.89544 12 10 12Z"
-                                            fill="#555555" />
-                                        <path
-                                            d="M18 12C19.1046 12 20 11.1046 20 9.99998C20 8.89541 19.1046 7.99997 18 7.99997C16.8954 7.99997 16 8.89541 16 9.99998C16 11.1046 16.8954 12 18 12Z"
-                                            fill="#555555" />
-                                    </g>
-                                    <defs>
-                                        <clipPath id="clip0_386_1152">
-                                            <rect width="20" height="20" fill="white" />
-                                        </clipPath>
-                                    </defs>
-                                </svg>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#10655</td>
-                            <td>
-                                <div class="customer-detail">
-                                    <div class="customer-img">
-                                        <img src="\assets\images\seederImages\dashboard\user_4.png">
+                                </td>
+                                <td>Payment Received</td>
+                                <td>2 days ago</td>
+                                <td>24, Sep 2022 / 10:00 am</td>
+                                <td><svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_386_1152)">
+                                            <path
+                                                d="M2.00001 12C3.10459 12 4.00003 11.1046 4.00003 9.99998C4.00003 8.89541 3.10459 7.99997 2.00001 7.99997C0.895437 7.99997 0 8.89541 0 9.99998C0 11.1046 0.895437 12 2.00001 12Z"
+                                                fill="#555555" />
+                                            <path
+                                                d="M10 12C11.1046 12 12 11.1046 12 9.99998C12 8.89541 11.1046 7.99997 10 7.99997C8.89544 7.99997 8 8.89541 8 9.99998C8 11.1046 8.89544 12 10 12Z"
+                                                fill="#555555" />
+                                            <path
+                                                d="M18 12C19.1046 12 20 11.1046 20 9.99998C20 8.89541 19.1046 7.99997 18 7.99997C16.8954 7.99997 16 8.89541 16 9.99998C16 11.1046 16.8954 12 18 12Z"
+                                                fill="#555555" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_386_1152">
+                                                <rect width="20" height="20" fill="white" />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#10659</td>
+                                <td>
+                                    <div class="customer-detail">
+                                        <div class="customer-img">
+                                            <img src="\assets\images\seederImages\dashboard\user_5.png">
+                                        </div>
+                                        <div class="customer-name">Floyd Miles</div>
                                     </div>
-                                    <div class="customer-name">Jessica Williams</div>
-                                </div>
-                            </td>
-                            <td>$96.00</td>
-                            <td>
-                                <div class="order_status cancelled_status">
-                                    <p class="no-margin">Cancelled</p>
-                                </div>
-                            </td>
-                            <td>Payment Received</td>
-                            <td>17 hours ago</td>
-                            <td>24, Sep 2022 / 10:00 am</td>
-                            <td><svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <g clip-path="url(#clip0_386_1152)">
-                                        <path
-                                            d="M2.00001 12C3.10459 12 4.00003 11.1046 4.00003 9.99998C4.00003 8.89541 3.10459 7.99997 2.00001 7.99997C0.895437 7.99997 0 8.89541 0 9.99998C0 11.1046 0.895437 12 2.00001 12Z"
-                                            fill="#555555" />
-                                        <path
-                                            d="M10 12C11.1046 12 12 11.1046 12 9.99998C12 8.89541 11.1046 7.99997 10 7.99997C8.89544 7.99997 8 8.89541 8 9.99998C8 11.1046 8.89544 12 10 12Z"
-                                            fill="#555555" />
-                                        <path
-                                            d="M18 12C19.1046 12 20 11.1046 20 9.99998C20 8.89541 19.1046 7.99997 18 7.99997C16.8954 7.99997 16 8.89541 16 9.99998C16 11.1046 16.8954 12 18 12Z"
-                                            fill="#555555" />
-                                    </g>
-                                    <defs>
-                                        <clipPath id="clip0_386_1152">
-                                            <rect width="20" height="20" fill="white" />
-                                        </clipPath>
-                                    </defs>
-                                </svg>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                                </td>
+                                <td>$330.00</td>
+                                <td>
+                                    <div class="order_status completed_status">
+                                        <p class="no-margin">Completed</p>
+                                    </div>
+                                </td>
+                                <td>Payment Received</td>
+                                <td>2 days ago</td>
+                                <td>24, Sep 2022 / 10:00 am</td>
+                                <td><svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_386_1152)">
+                                            <path
+                                                d="M2.00001 12C3.10459 12 4.00003 11.1046 4.00003 9.99998C4.00003 8.89541 3.10459 7.99997 2.00001 7.99997C0.895437 7.99997 0 8.89541 0 9.99998C0 11.1046 0.895437 12 2.00001 12Z"
+                                                fill="#555555" />
+                                            <path
+                                                d="M10 12C11.1046 12 12 11.1046 12 9.99998C12 8.89541 11.1046 7.99997 10 7.99997C8.89544 7.99997 8 8.89541 8 9.99998C8 11.1046 8.89544 12 10 12Z"
+                                                fill="#555555" />
+                                            <path
+                                                d="M18 12C19.1046 12 20 11.1046 20 9.99998C20 8.89541 19.1046 7.99997 18 7.99997C16.8954 7.99997 16 8.89541 16 9.99998C16 11.1046 16.8954 12 18 12Z"
+                                                fill="#555555" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_386_1152">
+                                                <rect width="20" height="20" fill="white" />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#10658</td>
+                                <td>
+                                    <div class="customer-detail">
+                                        <div class="customer-img">
+                                            <img src="\assets\images\seederImages\dashboard\user_6.png">
+                                        </div>
+                                        <div class="customer-name">Kathryn Murphy</div>
+                                    </div>
+                                </td>
+                                <td>$234.00</td>
+                                <td>
+                                    <div class="order_status cancelled_status">
+                                        <p class="no-margin">Completed</p>
+                                    </div>
+                                </td>
+                                <td>Payment Received</td>
+                                <td>2 days ago</td>
+                                <td>24, Sep 2022 / 10:00 am</td>
+                                <td><svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_386_1152)">
+                                            <path
+                                                d="M2.00001 12C3.10459 12 4.00003 11.1046 4.00003 9.99998C4.00003 8.89541 3.10459 7.99997 2.00001 7.99997C0.895437 7.99997 0 8.89541 0 9.99998C0 11.1046 0.895437 12 2.00001 12Z"
+                                                fill="#555555" />
+                                            <path
+                                                d="M10 12C11.1046 12 12 11.1046 12 9.99998C12 8.89541 11.1046 7.99997 10 7.99997C8.89544 7.99997 8 8.89541 8 9.99998C8 11.1046 8.89544 12 10 12Z"
+                                                fill="#555555" />
+                                            <path
+                                                d="M18 12C19.1046 12 20 11.1046 20 9.99998C20 8.89541 19.1046 7.99997 18 7.99997C16.8954 7.99997 16 8.89541 16 9.99998C16 11.1046 16.8954 12 18 12Z"
+                                                fill="#555555" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_386_1152">
+                                                <rect width="20" height="20" fill="white" />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#10657</td>
+                                <td>
+                                    <div class="customer-detail">
+                                        <div class="customer-img">
+                                            <img src="\assets\images\seederImages\dashboard\user_2.png">
+                                        </div>
+                                        <div class="customer-name">Robert Fox</div>
+                                    </div>
+                                </td>
+                                <td>$159.00</td>
+                                <td>
+                                    <div class="order_status completed_status">
+                                        <p class="no-margin">Completed</p>
+                                    </div>
+                                </td>
+                                <td>Payment Received</td>
+                                <td>17 hours ago</td>
+                                <td>24, Sep 2022 / 10:00 am</td>
+                                <td><svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_386_1152)">
+                                            <path
+                                                d="M2.00001 12C3.10459 12 4.00003 11.1046 4.00003 9.99998C4.00003 8.89541 3.10459 7.99997 2.00001 7.99997C0.895437 7.99997 0 8.89541 0 9.99998C0 11.1046 0.895437 12 2.00001 12Z"
+                                                fill="#555555" />
+                                            <path
+                                                d="M10 12C11.1046 12 12 11.1046 12 9.99998C12 8.89541 11.1046 7.99997 10 7.99997C8.89544 7.99997 8 8.89541 8 9.99998C8 11.1046 8.89544 12 10 12Z"
+                                                fill="#555555" />
+                                            <path
+                                                d="M18 12C19.1046 12 20 11.1046 20 9.99998C20 8.89541 19.1046 7.99997 18 7.99997C16.8954 7.99997 16 8.89541 16 9.99998C16 11.1046 16.8954 12 18 12Z"
+                                                fill="#555555" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_386_1152">
+                                                <rect width="20" height="20" fill="white" />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#10656</td>
+                                <td>
+                                    <div class="customer-detail">
+                                        <div class="customer-img">
+                                            <img src="\assets\images\seederImages\dashboard\user_3.png">
+                                        </div>
+                                        <div class="customer-name">Marvin Kinney</div>
+                                    </div>
+                                </td>
+                                <td>$89.00</td>
+                                <td>
+                                    <div class="order_status processing_status">
+                                        <p class="no-margin">Processing</p>
+                                    </div>
+                                </td>
+                                <td>Payment Received</td>
+                                <td>1 day ago</td>
+                                <td>24, Sep 2022 / 10:00 am</td>
+                                <td><svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_386_1152)">
+                                            <path
+                                                d="M2.00001 12C3.10459 12 4.00003 11.1046 4.00003 9.99998C4.00003 8.89541 3.10459 7.99997 2.00001 7.99997C0.895437 7.99997 0 8.89541 0 9.99998C0 11.1046 0.895437 12 2.00001 12Z"
+                                                fill="#555555" />
+                                            <path
+                                                d="M10 12C11.1046 12 12 11.1046 12 9.99998C12 8.89541 11.1046 7.99997 10 7.99997C8.89544 7.99997 8 8.89541 8 9.99998C8 11.1046 8.89544 12 10 12Z"
+                                                fill="#555555" />
+                                            <path
+                                                d="M18 12C19.1046 12 20 11.1046 20 9.99998C20 8.89541 19.1046 7.99997 18 7.99997C16.8954 7.99997 16 8.89541 16 9.99998C16 11.1046 16.8954 12 18 12Z"
+                                                fill="#555555" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_386_1152">
+                                                <rect width="20" height="20" fill="white" />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#10655</td>
+                                <td>
+                                    <div class="customer-detail">
+                                        <div class="customer-img">
+                                            <img src="\assets\images\seederImages\dashboard\user_4.png">
+                                        </div>
+                                        <div class="customer-name">Jessica Williams</div>
+                                    </div>
+                                </td>
+                                <td>$96.00</td>
+                                <td>
+                                    <div class="order_status cancelled_status">
+                                        <p class="no-margin">Cancelled</p>
+                                    </div>
+                                </td>
+                                <td>Payment Received</td>
+                                <td>2 days ago</td>
+                                <td>24, Sep 2022 / 10:00 am</td>
+                                <td><svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_386_1152)">
+                                            <path
+                                                d="M2.00001 12C3.10459 12 4.00003 11.1046 4.00003 9.99998C4.00003 8.89541 3.10459 7.99997 2.00001 7.99997C0.895437 7.99997 0 8.89541 0 9.99998C0 11.1046 0.895437 12 2.00001 12Z"
+                                                fill="#555555" />
+                                            <path
+                                                d="M10 12C11.1046 12 12 11.1046 12 9.99998C12 8.89541 11.1046 7.99997 10 7.99997C8.89544 7.99997 8 8.89541 8 9.99998C8 11.1046 8.89544 12 10 12Z"
+                                                fill="#555555" />
+                                            <path
+                                                d="M18 12C19.1046 12 20 11.1046 20 9.99998C20 8.89541 19.1046 7.99997 18 7.99997C16.8954 7.99997 16 8.89541 16 9.99998C16 11.1046 16.8954 12 18 12Z"
+                                                fill="#555555" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_386_1152">
+                                                <rect width="20" height="20" fill="white" />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#10654</td>
+                                <td>
+                                    <div class="customer-detail">
+                                        <div class="customer-img">
+                                            <img src="\assets\images\seederImages\dashboard\user_5.png">
+                                        </div>
+                                        <div class="customer-name">Floyd Miles</div>
+                                    </div>
+                                </td>
+                                <td>$330.00</td>
+                                <td>
+                                    <div class="order_status completed_status">
+                                        <p class="no-margin">Completed</p>
+                                    </div>
+                                </td>
+                                <td>Payment Received</td>
+                                <td>2 days ago</td>
+                                <td>24, Sep 2022 / 10:00 am</td>
+                                <td><svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_386_1152)">
+                                            <path
+                                                d="M2.00001 12C3.10459 12 4.00003 11.1046 4.00003 9.99998C4.00003 8.89541 3.10459 7.99997 2.00001 7.99997C0.895437 7.99997 0 8.89541 0 9.99998C0 11.1046 0.895437 12 2.00001 12Z"
+                                                fill="#555555" />
+                                            <path
+                                                d="M10 12C11.1046 12 12 11.1046 12 9.99998C12 8.89541 11.1046 7.99997 10 7.99997C8.89544 7.99997 8 8.89541 8 9.99998C8 11.1046 8.89544 12 10 12Z"
+                                                fill="#555555" />
+                                            <path
+                                                d="M18 12C19.1046 12 20 11.1046 20 9.99998C20 8.89541 19.1046 7.99997 18 7.99997C16.8954 7.99997 16 8.89541 16 9.99998C16 11.1046 16.8954 12 18 12Z"
+                                                fill="#555555" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_386_1152">
+                                                <rect width="20" height="20" fill="white" />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#10653</td>
+                                <td>
+                                    <div class="customer-detail">
+                                        <div class="customer-img">
+                                            <img src="\assets\images\seederImages\dashboard\user_6.png">
+                                        </div>
+                                        <div class="customer-name">Kathryn Murphy</div>
+                                    </div>
+                                </td>
+                                <td>$234.00</td>
+                                <td>
+                                    <div class="order_status processing_status">
+                                        <p class="no-margin">Processing</p>
+                                    </div>
+                                </td>
+                                <td>Payment Received</td>
+                                <td>2 days ago</td>
+                                <td>24, Sep 2022 / 10:00 am</td>
+                                <td><svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_386_1152)">
+                                            <path
+                                                d="M2.00001 12C3.10459 12 4.00003 11.1046 4.00003 9.99998C4.00003 8.89541 3.10459 7.99997 2.00001 7.99997C0.895437 7.99997 0 8.89541 0 9.99998C0 11.1046 0.895437 12 2.00001 12Z"
+                                                fill="#555555" />
+                                            <path
+                                                d="M10 12C11.1046 12 12 11.1046 12 9.99998C12 8.89541 11.1046 7.99997 10 7.99997C8.89544 7.99997 8 8.89541 8 9.99998C8 11.1046 8.89544 12 10 12Z"
+                                                fill="#555555" />
+                                            <path
+                                                d="M18 12C19.1046 12 20 11.1046 20 9.99998C20 8.89541 19.1046 7.99997 18 7.99997C16.8954 7.99997 16 8.89541 16 9.99998C16 11.1046 16.8954 12 18 12Z"
+                                                fill="#555555" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_386_1152">
+                                                <rect width="20" height="20" fill="white" />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#10652</td>
+                                <td>
+                                    <div class="customer-detail">
+                                        <div class="customer-img">
+                                            <img src="\assets\images\seederImages\dashboard\user_6.png">
+                                        </div>
+                                        <div class="customer-name">Kathryn Murphy</div>
+                                    </div>
+                                </td>
+                                <td>$234.00</td>
+                                <td>
+                                    <div class="order_status completed_status">
+                                        <p class="no-margin">Completed</p>
+                                    </div>
+                                </td>
+                                <td>Payment Received</td>
+                                <td>2 days ago</td>
+                                <td>24, Sep 2022 / 10:00 am</td>
+                                <td><svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_386_1152)">
+                                            <path
+                                                d="M2.00001 12C3.10459 12 4.00003 11.1046 4.00003 9.99998C4.00003 8.89541 3.10459 7.99997 2.00001 7.99997C0.895437 7.99997 0 8.89541 0 9.99998C0 11.1046 0.895437 12 2.00001 12Z"
+                                                fill="#555555" />
+                                            <path
+                                                d="M10 12C11.1046 12 12 11.1046 12 9.99998C12 8.89541 11.1046 7.99997 10 7.99997C8.89544 7.99997 8 8.89541 8 9.99998C8 11.1046 8.89544 12 10 12Z"
+                                                fill="#555555" />
+                                            <path
+                                                d="M18 12C19.1046 12 20 11.1046 20 9.99998C20 8.89541 19.1046 7.99997 18 7.99997C16.8954 7.99997 16 8.89541 16 9.99998C16 11.1046 16.8954 12 18 12Z"
+                                                fill="#555555" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_386_1152">
+                                                <rect width="20" height="20" fill="white" />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#10651</td>
+                                <td>
+                                    <div class="customer-detail">
+                                        <div class="customer-img">
+                                            <img src="\assets\images\seederImages\dashboard\user_2.png">
+                                        </div>
+                                        <div class="customer-name">Robert Fox</div>
+                                    </div>
+                                </td>
+                                <td>$159.00</td>
+                                <td>
+                                    <div class="order_status processing_status">
+                                        <p class="no-margin">Processing</p>
+                                    </div>
+                                </td>
+                                <td>Payment Received</td>
+                                <td>17 hours ago</td>
+                                <td>24, Sep 2022 / 10:00 am</td>
+                                <td><svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_386_1152)">
+                                            <path
+                                                d="M2.00001 12C3.10459 12 4.00003 11.1046 4.00003 9.99998C4.00003 8.89541 3.10459 7.99997 2.00001 7.99997C0.895437 7.99997 0 8.89541 0 9.99998C0 11.1046 0.895437 12 2.00001 12Z"
+                                                fill="#555555" />
+                                            <path
+                                                d="M10 12C11.1046 12 12 11.1046 12 9.99998C12 8.89541 11.1046 7.99997 10 7.99997C8.89544 7.99997 8 8.89541 8 9.99998C8 11.1046 8.89544 12 10 12Z"
+                                                fill="#555555" />
+                                            <path
+                                                d="M18 12C19.1046 12 20 11.1046 20 9.99998C20 8.89541 19.1046 7.99997 18 7.99997C16.8954 7.99997 16 8.89541 16 9.99998C16 11.1046 16.8954 12 18 12Z"
+                                                fill="#555555" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_386_1152">
+                                                <rect width="20" height="20" fill="white" />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#10650</td>
+                                <td>
+                                    <div class="customer-detail">
+                                        <div class="customer-img">
+                                            <img src="\assets\images\seederImages\dashboard\user_3.png">
+                                        </div>
+                                        <div class="customer-name">Marvin Kinney</div>
+                                    </div>
+                                </td>
+                                <td>$89.00</td>
+                                <td>
+                                    <div class="order_status completed_status">
+                                        <p class="no-margin">Completed</p>
+                                    </div>
+                                </td>
+                                <td>Payment Received</td>
+                                <td>1 day ago</td>
+                                <td>24, Sep 2022 / 10:00 am</td>
+                                <td><svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_386_1152)">
+                                            <path
+                                                d="M2.00001 12C3.10459 12 4.00003 11.1046 4.00003 9.99998C4.00003 8.89541 3.10459 7.99997 2.00001 7.99997C0.895437 7.99997 0 8.89541 0 9.99998C0 11.1046 0.895437 12 2.00001 12Z"
+                                                fill="#555555" />
+                                            <path
+                                                d="M10 12C11.1046 12 12 11.1046 12 9.99998C12 8.89541 11.1046 7.99997 10 7.99997C8.89544 7.99997 8 8.89541 8 9.99998C8 11.1046 8.89544 12 10 12Z"
+                                                fill="#555555" />
+                                            <path
+                                                d="M18 12C19.1046 12 20 11.1046 20 9.99998C20 8.89541 19.1046 7.99997 18 7.99997C16.8954 7.99997 16 8.89541 16 9.99998C16 11.1046 16.8954 12 18 12Z"
+                                                fill="#555555" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_386_1152">
+                                                <rect width="20" height="20" fill="white" />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#10649</td>
+                                <td>
+                                    <div class="customer-detail">
+                                        <div class="customer-img">
+                                            <img src="\assets\images\seederImages\dashboard\user_4.png">
+                                        </div>
+                                        <div class="customer-name">Jessica Williams</div>
+                                    </div>
+                                </td>
+                                <td>$96.00</td>
+                                <td>
+                                    <div class="order_status cancelled_status">
+                                        <p class="no-margin">Cancelled</p>
+                                    </div>
+                                </td>
+                                <td>Payment Received</td>
+                                <td>2 days ago</td>
+                                <td>24, Sep 2022 / 10:00 am</td>
+                                <td><svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_386_1152)">
+                                            <path
+                                                d="M2.00001 12C3.10459 12 4.00003 11.1046 4.00003 9.99998C4.00003 8.89541 3.10459 7.99997 2.00001 7.99997C0.895437 7.99997 0 8.89541 0 9.99998C0 11.1046 0.895437 12 2.00001 12Z"
+                                                fill="#555555" />
+                                            <path
+                                                d="M10 12C11.1046 12 12 11.1046 12 9.99998C12 8.89541 11.1046 7.99997 10 7.99997C8.89544 7.99997 8 8.89541 8 9.99998C8 11.1046 8.89544 12 10 12Z"
+                                                fill="#555555" />
+                                            <path
+                                                d="M18 12C19.1046 12 20 11.1046 20 9.99998C20 8.89541 19.1046 7.99997 18 7.99997C16.8954 7.99997 16 8.89541 16 9.99998C16 11.1046 16.8954 12 18 12Z"
+                                                fill="#555555" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_386_1152">
+                                                <rect width="20" height="20" fill="white" />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#10648</td>
+                                <td>
+                                    <div class="customer-detail">
+                                        <div class="customer-img">
+                                            <img src="\assets\images\seederImages\dashboard\user_5.png">
+                                        </div>
+                                        <div class="customer-name">Floyd Miles</div>
+                                    </div>
+                                </td>
+                                <td>$330.00</td>
+                                <td>
+                                    <div class="order_status completed_status">
+                                        <p class="no-margin">Completed</p>
+                                    </div>
+                                </td>
+                                <td>Payment Received</td>
+                                <td>2 days ago</td>
+                                <td>24, Sep 2022 / 10:00 am</td>
+                                <td><svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_386_1152)">
+                                            <path
+                                                d="M2.00001 12C3.10459 12 4.00003 11.1046 4.00003 9.99998C4.00003 8.89541 3.10459 7.99997 2.00001 7.99997C0.895437 7.99997 0 8.89541 0 9.99998C0 11.1046 0.895437 12 2.00001 12Z"
+                                                fill="#555555" />
+                                            <path
+                                                d="M10 12C11.1046 12 12 11.1046 12 9.99998C12 8.89541 11.1046 7.99997 10 7.99997C8.89544 7.99997 8 8.89541 8 9.99998C8 11.1046 8.89544 12 10 12Z"
+                                                fill="#555555" />
+                                            <path
+                                                d="M18 12C19.1046 12 20 11.1046 20 9.99998C20 8.89541 19.1046 7.99997 18 7.99997C16.8954 7.99997 16 8.89541 16 9.99998C16 11.1046 16.8954 12 18 12Z"
+                                                fill="#555555" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_386_1152">
+                                                <rect width="20" height="20" fill="white" />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#10647</td>
+                                <td>
+                                    <div class="customer-detail">
+                                        <div class="customer-img">
+                                            <img src="\assets\images\seederImages\dashboard\user_6.png">
+                                        </div>
+                                        <div class="customer-name">Kathryn Murphy</div>
+                                    </div>
+                                </td>
+                                <td>$234.00</td>
+                                <td>
+                                    <div class="order_status completed_status">
+                                        <p class="no-margin">Completed</p>
+                                    </div>
+                                </td>
+                                <td>Payment Received</td>
+                                <td>2 days ago</td>
+                                <td>24, Sep 2022 / 10:00 am</td>
+                                <td><svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_386_1152)">
+                                            <path
+                                                d="M2.00001 12C3.10459 12 4.00003 11.1046 4.00003 9.99998C4.00003 8.89541 3.10459 7.99997 2.00001 7.99997C0.895437 7.99997 0 8.89541 0 9.99998C0 11.1046 0.895437 12 2.00001 12Z"
+                                                fill="#555555" />
+                                            <path
+                                                d="M10 12C11.1046 12 12 11.1046 12 9.99998C12 8.89541 11.1046 7.99997 10 7.99997C8.89544 7.99997 8 8.89541 8 9.99998C8 11.1046 8.89544 12 10 12Z"
+                                                fill="#555555" />
+                                            <path
+                                                d="M18 12C19.1046 12 20 11.1046 20 9.99998C20 8.89541 19.1046 7.99997 18 7.99997C16.8954 7.99997 16 8.89541 16 9.99998C16 11.1046 16.8954 12 18 12Z"
+                                                fill="#555555" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_386_1152">
+                                                <rect width="20" height="20" fill="white" />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="pagination_wrapper">
+                    <p class="no-margin">Showing 15 of 220 Results</p>
+                    <div class="pagination">
+                        <a href="#">&laquo;</a>
+                        <a href="#" class="active">1</a>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#">4</a>
+                        <a href="#">5</a>
+                        <a href="#">6</a>
+                        <a href="#">&raquo;</a>
+                    </div>
+                </div>
             </div>
         </div>
     </f7-page>
