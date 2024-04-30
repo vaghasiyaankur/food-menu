@@ -45,14 +45,11 @@ export const getFoodTypeIcon = (typeNumber) => {
 };
 
 export const addLoader = () => {
-    console.log('addLoader');
     $(".overlay, body").removeClass("loaded");
     $(".overlay").css({ display: "" });
 }
 
 export const removeLoader = () => {
-    console.log('removeLoader');
-
     setTimeout(function () {
         $(".overlay, body").addClass("loaded");
         setTimeout(function () {
