@@ -33,6 +33,7 @@
 }
 .demo-swiper .swiper-slide,
 .demo-swiper-multiple .swiper-slide {
+    display: flex !important;
     justify-content: flex-start;
 }
 .swiper-button-prev,
@@ -995,4 +996,15 @@ textarea {
 }
 .no_order{
     height: calc(100% - 200px);
+}
+.table_hold-inspect_btn{
+    position: absolute;
+    top: 7px;
+    right: 7px;
+}
+.table_hold-inspect_btn .button{
+    padding: 5px 7px !important;
+    background: #999999;
+    border-radius: 5px;
+
 }

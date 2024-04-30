@@ -44,6 +44,14 @@
                     <!-- empty_card -->
                     <template v-for="(table,ind) in floor.tables" :key="ind">
                         <div v-if="table.order" class="card-type table_view-ground_floor-card ordering_card">
+                            <div class="table_hold-inspect_btn">
+                                <f7-button popover-open=".popover-menu"><Icon name="hold"/></f7-button> 
+                                <f7-popover class="popover-menu">
+                                    <f7-list>
+                                        <f7-list-item popover-close title="Delete" />
+                                    </f7-list>
+                                </f7-popover>
+                            </div>
                             <div class="card-margin-padding">
                                 <div class="table_view-table_number">
                                     <h5 class="no-margin no-padding">Table No. {{ table.table_number }}</h5>
@@ -79,69 +87,24 @@
                                 </div>
                             </div>
                         </div>
-                        <div v-else class="card-type table_view-ground_floor-card blank_card"
-                            @click="openPos(table.id)"
-                        >
-                            <div class="card-margin-padding">
+                        <div v-else class="card-type table_view-ground_floor-card blank_card">
+                            <div class="table_hold-inspect_btn">
+                                <f7-button popover-open=".popover-menu"><Icon name="hold"/></f7-button> 
+                            </div>
+                            <div class="card-margin-padding" @click="openPos(table.id)">
                                 <div class="table_view-table_number">
                                     <h5 class="no-margin no-padding">Table No. {{ table.table_number }}</h5>
                                 </div>
-                                <!-- <div class="table_view-inspect_btn" v-if="table.holdKotAvailable">
-                                    <button class="button height_40">
-                                        <Icon name="deleteIcon" @click="removeHoldKot(table.id)"/>
-                                        Hold
-                                    </button>
-                                </div> -->
                             </div>
                         </div>
                     </template>
                 </div>
             </template>
         </div>
-        <!-- ========= TABLE-VIEW POPUP ========= -->
-            <!-- <div class="popup add_table_Popup" id="add_table_Popup">
-                <div class="data-form add_table-data-form">
-                    <div class="text-align-center add_table-popup_title">
-                        Add Table</div>
-                    <div class="data-add add_table-data">
-                        <label class="add_table_name">Table Number</label>
-                        <div class="add_table-name text-align-left">
-                            <input type="text" class="add_table-update-data-name" placeholder="Enter table number">
-                        </div>
-                        <label class="add_table_cap">Capacity of Person</label>
-                        <div class="add_table-cap text-align-left">
-                            <input type="text" class="add_table_cap-data-name" placeholder="Enter capacity of person">
-                        </div>
-                        <label class="choose_add_table_floor">Select Floor</label>
-                        <div class="choose_table_floor">
-                            <select name="choose_table_floor" id="choose_table_floor">
-                                <option value="FirstFloor" selected><label>First Floor</label></option>
-                            </select>
-                        </div>
-                        <label class="choose_add_table_status">Status</label>
-                        <div class="display-flex align-items-center table_status-outer">
-                            <div class="table_status-inner">
-                                <input type="radio" id="table_status" name="table_status" value="active" checked>
-                                <label for="table_status">Active</label>
-                            </div>
-                            <div class="table_status-inner">
-                                <input type="radio" id="table_status" name="table_status" value="deactive">
-                                <label for="table_status">Deactive</label>
-                            </div>
-                        </div>
-                        <div class="display-flex justify-content-center popup_button">
-                            <button type="button"
-                                class="button button-raised button-large popup-close popup-cancel-button">Cancel</button>
-                            <button type="button" class="button button-raised button-large popup-ok-button">Ok</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="wave-image-content"><img src="/images/flow.png" style="width:100%"></div>
-            </div> -->
     </f7-page>
 </template>
 <script setup>
-import { f7Page, f7 } from 'framework7-vue';
+import { f7Page, f7, f7Button, f7Popover, f7Link, f7List, f7ListItem } from 'framework7-vue';
 import axios from 'axios';
 import { ref, onMounted } from 'vue';
 import Icon from '../../components/Icon.vue';
