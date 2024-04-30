@@ -1,6 +1,7 @@
 import DashBoard from "./pages/admin/DashBoard.vue";
 import Orders from "./pages/admin/orders.vue";
 import OrdersDetail from "./pages/admin/orders_detail.vue";
+import FeedBack from "./pages/admin/feedback.vue";
 
 export default [
   {
@@ -17,5 +18,10 @@ export default [
     name : 'OrdersDetail',
     path: '/OrdersDetail/',
     component: OrdersDetail,
+  },
+  {
+    name : 'FeedBack',
+    path: '/FeedBack/',
+    component: FeedBack,
   },
 ]
