@@ -1,4 +1,5 @@
 import { f7 } from 'framework7-vue';
+import $ from 'jquery';
 
 export const successNotification = (notice) => {
     f7.notification.create({
@@ -42,3 +43,20 @@ export const getFoodTypeIcon = (typeNumber) => {
             return '/images/veg-icon.png'; // Default to veg-icon.png if foodType is not recognized
     }
 };
+
+export const addLoader = () => {
+    console.log('addLoader');
+    $(".overlay, body").removeClass("loaded");
+    $(".overlay").css({ display: "" });
+}
+
+export const removeLoader = () => {
+    console.log('removeLoader');
+
+    setTimeout(function () {
+        $(".overlay, body").addClass("loaded");
+        setTimeout(function () {
+            $(".overlay").css({ display: "none" });
+        }, 1000);
+    }, 2000);
+}

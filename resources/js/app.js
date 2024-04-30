@@ -7,7 +7,7 @@ import App from './app.vue';
 
 import 'framework7/css/bundle';
 
-// import '.././css/app.css';
+import '.././css/mobile.css';
 
 // Demo
 /* eslint-disable */

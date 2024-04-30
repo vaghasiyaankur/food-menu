@@ -7,7 +7,7 @@
         />
       </div>
       <f7-view
-        url="/digital-menu/"
+        url="/"
         :main="true"
         class="safe-areas"
         :master-detail-breakpoint="768"

@@ -21,12 +21,12 @@ import currentOrders from "./pages/restaurant-manager/currentOrders.vue"
 
 export default [
   {
-    name : 'POS',
+    name : 'TableView',
     path: '/',
     component: TableView,
   },
   {
-    name : 'PosNew',
+    name : 'POS',
     path: '/pos/:id',
     component: PosNew,
   },
