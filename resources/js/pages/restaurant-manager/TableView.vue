@@ -25,9 +25,9 @@
                                 <p class="table_status-represent-type no-margin no-padding">Blank Table</p>
                             </div>
                         </div>
-                        <div class="table_view-btn table_view-reserve_btn">
+                        <!-- <div class="table_view-btn table_view-reserve_btn">
                             <button class="button button-raised height_40">Table Reservation</button>
-                        </div>
+                        </div> -->
                         <div class="table_view-btn table_view-add_table_btn">
                             <button class="button button-raised bg-dark text-color-white height_40 active"
                                 @click="openAddNewTablePopup"><i

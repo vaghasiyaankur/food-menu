@@ -479,7 +479,7 @@ label.item-checkbox.active-state {
     top: 11px;
     z-index: -1;
 }
-.add-favlist i {
+.add-fav-list i {
     box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.15);
     border-radius: 32px;
 }
@@ -629,6 +629,7 @@ label.item-checkbox.active-state {
     overflow: hidden;
     cursor: pointer;
     background-color: #FFFFFF;
+    margin-bottom: 25px;
 }
 .faq input[type="checkbox"] {
     display: none;
@@ -651,13 +652,11 @@ label.item-checkbox.active-state {
     transform: rotate(135deg);
     top: 8px;
 }
-.faq input[type="checkbox"]:checked + label {
+.faq input[type="checkbox"]:checked + label + .faq-banner {
     display: block;
 }
-.faq input[type="checkbox"]:not(:checked) + label {
-    display: block;
-    height: 19px;
-    margin-bottom: 15px;
+.faq input[type="checkbox"]:not(:checked) + label + .faq-banner {
+    display: none;
 }
 .faq-list .product{
     width: calc(100% - 5px);

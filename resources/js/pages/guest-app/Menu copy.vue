@@ -32,7 +32,7 @@
                             <div class="font-18 text-align-center menu-list-title text-color-black"><u>{{ subcate.sub_category_language[0].name }}</u></div>
                             <div class="list row margin-half align-items-center" v-for="product in subcate.products" :key="product">
                                 <div class="col-10">
-                                    <span class="add-favlist" @click="toggleWishlist(product.id)">
+                                    <span class="add-fav-list" @click="toggleWishlist(product.id)">
                                         <i class="f7-icons size-22 bg-color-white text-color-red padding-half font-13">{{ this.wishlist && this.wishlist.includes(product.id) ? 'heart_fill' : 'heart' }}</i>
                                     </span>
                                     </div>

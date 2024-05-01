@@ -31,56 +31,34 @@
                 </div>
                 <div class="menu-details">
                     <div class="menu-lists" v-if="productSubcategory.length">
-                        <div class='faq'>
-                            <input id='faq-a' type='checkbox'>
-                            <label for='faq-a'>
-                                <p class="no-margin faq-heading">Sabji</p>
+                        <div class='faq' v-for="subCat in productSubcategory" :key="subCat">
+                            <input :id='"faq-"+subCat.id' type='checkbox'>
+                            <label :for='"faq-"+subCat.id'>
+                                <p class="no-margin faq-heading">{{ subCat.name }}</p>
                                 <div class='faq-arrow'></div>
+                            </label>
+                            <div class="faq-banner">
                                 <div class="faq-list">
-                                    <div class="product">
+                                    <div class="product"  v-for="product in subCat.products" :key="product">
                                         <div class="product-detail-left">
                                             <div class="product-img">
-                                                <img src="#">
+                                                <img :src="'/storage/'+product.image">
                                             </div>
                                             <div class="product-detail">
-                                                <div class="product-name">Undhiyu</div>
-                                                <div class="product-price">110.00</div>
+                                                <div class="product-name">{{ product.name }}</div>
+                                                <div class="product-price">{{ product.price.toFixed(2) }}</div>
                                             </div>
                                         </div>
-                                        <span class="add-favlist" @click="toggleWishlist(product.id)">
+                                        <span class="add-fav-list" @click="toggleWishlist(product.id)">
                                             <i
                                                 class="f7-icons size-22 bg-color-white text-color-red padding-half font-13">{{
-                                                    this.wishlist && this.wishlist.includes(product.id) ? 'heart_fill' :
-                                                'heart' }}</i>
+                                                    wishlist && wishlist.includes(product.id) ? 'heart_fill' :
+                                                        'heart' }}</i>
                                         </span>
                                     </div>
                                 </div>
-                            </label>
-                            <input id='faq-b' type='checkbox'>
-                            <label for='faq-b'>
-                                <p class="no-margin faq-heading">Roti</p>
-                                <div class='faq-arrow'></div>
-                                <div class="faq-list"></div>
-                            </label>
-                            <input id='faq-c' type='checkbox'>
-                            <label for='faq-c'>
-                                <p class="no-margin faq-heading">nothing</p>
-                                <div class='faq-arrow'></div>
-                                <div class="faq-list"></div>
-                            </label>
-                        </div>
-                        <!-- <div class="menu-list" v-for="subcate in productSubcategory" :key="subcate">
-                            <div class="font-18 menu-list-title">{{ subcate.sub_category_language[0].name }}</div>
-                            <div class="list row margin-half align-items-center" v-for="product in subcate.products" :key="product">
-                                <div class="col-10">
-                                    <span class="add-favlist" @click="toggleWishlist(product.id)">
-                                        <i class="f7-icons size-22 bg-color-white text-color-red padding-half font-13">{{ this.wishlist && this.wishlist.includes(product.id) ? 'heart_fill' : 'heart' }}</i>
-                                    </span>
-                                    </div>
-                                <div class="col-70 display-flex">{{ product.product_language[0].name }}&nbsp; <span class="dots"></span></div>
-                                <div class="col-20">{{ product.price.toFixed(2) }}</div>
                             </div>
-                        </div> -->
+                        </div>
                     </div>
                     <div class="menu-lists" v-else>
                         <div class="no_order">
@@ -162,10 +140,14 @@ const getCategories = () => {
 
 const getProducts = (id) => {
     sliderActive.value = id;
-    axios.get('/api/get-category-products/' + id)
+    const indexCategory = productCategory.value.findIndex(item => item.id == id);
+    if(indexCategory){
+        categoryName.value = productCategory.value[indexCategory].category_languages[0].name;
+    }
+    axios.get('/api/get-digital-product-list/' + id)
         .then((res) => {
-            categoryName.value = res.data.category_languages[0].name;
-            productSubcategory.value = res.data.sub_category;
+            productSubcategory.value = res.data;
+            console.log(productSubcategory.value);
         })
 }
 

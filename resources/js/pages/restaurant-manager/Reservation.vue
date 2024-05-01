@@ -433,7 +433,7 @@ export default {
     background: white;
     padding: 0 10px;
 }
-.add-favlist i {
+.add-fav-list i {
     box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.15);
     border-radius: 50%;
     width: 25px;
