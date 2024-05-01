@@ -27,6 +27,9 @@
     <div id="tab-qr-code-generator" class="tab">
         <QrCodeGenerate />
     </div>
+    <div id="tab-Coupon-Code" class="tab">
+        <CouponCode />
+    </div>
 </div>
 </template>
 
@@ -41,6 +44,7 @@ import LanguageTranslate from './LanguageTranslate.vue';
 import FloorList from './FloorList.vue'
 import { ref, onMounted } from 'vue';
 import QrCodeGenerate from './QrCodeGenerate.vue';
+import CouponCode from './CouponCode.vue';
 
 const allTabs = [
     { label: 'General Setting', slug: 'general-setting', icon: 'generalSetting'},
@@ -49,7 +53,8 @@ const allTabs = [
     { label: 'User Management', slug: 'user-management', icon: 'userManagement'},
     { label: 'Language', slug: 'language', icon: 'language'},
     { label: 'Floor Plan', slug: 'floor-plan', icon: 'floorPlan'},
-    { label: 'QR Code Generator', slug: 'qr-code-generator', icon: 'qrCodeScanner'}
+    { label: 'QR Code Generator', slug: 'qr-code-generator', icon: 'qrCodeScanner'},
+    { label: 'Coupon Code', slug: 'Coupon-Code', icon: 'CouponCode'}
 ];
 
 const componentInstance = ref(null);

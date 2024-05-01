@@ -10,6 +10,7 @@
                             <a href="#tab-3" class="tab-link" @click="floorlistShow = true">Floor Plan</a>
                             <a href="#tab-4" class="tab-link" @click="language = true">Language</a>
                             <a href="#tab-5" class="tab-link">QR Code</a>
+                            <a href="#tab-6" class="tab-link">Coupon Code</a>
                         </div>
                     </div>
                     <div class="tabs">
@@ -30,6 +31,9 @@
                         </div>
                         <div id="tab-5" class="tab">
                             <QrCodeGenerate />
+                        </div>
+                        <div id="tab-6" class="tab">
+                            <CouponCode />
                         </div>
                     </div>
                 </div>
