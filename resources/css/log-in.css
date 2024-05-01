@@ -1,0 +1,32 @@
+.sign_in_page {
+    position: relative;
+    width: 100dvw;
+    height: 100dvh;
+}
+.sign_in_page .top_left_img {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.sign_in_page .left_img {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(0, -75%);
+}
+.sign_in_page .bottom_right_img {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+.sign_in_page .sign_in_outer_wrapper{
+    position: relative;
+    padding: 0 15px 0 85px;
+}
+.sign_in_page .sign_in_outer_wrapper .sign_in_wrapper {
+    position: absolute;
+    height: 664px;
+    max-width: 1053px;
+    width: 100%;
+    top: 50%;
+}
