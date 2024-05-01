@@ -443,7 +443,7 @@ label.item-checkbox.active-state {
     display: block;
     background: #fff;
     color: #000;
-    padding-right: 15px;
+    /* padding-right: 15px; */
 }
 .slide-active .menu-image {
     background: #f33e3e59;
@@ -543,6 +543,7 @@ label.item-checkbox.active-state {
     flex-direction: column;
     align-items: center;
     gap: 4px;
+    height: 100%;
 }
 .swiper-wrapper .swiper-slide:first-child .menu-image {
     margin: 0 5px;
@@ -555,18 +556,21 @@ label.item-checkbox.active-state {
     height: 35px;
 }
 .swiper-wrapper .swiper-slide p {
-    text-wrap: nowrap !important;
+    /* text-wrap: nowrap !important; */
     text-align: center;
     font-size: 12px;
     line-height: 18px;
     font-weight: 400;
     color: #555555;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
 }
-.slide-active {
+/* .slide-active {
     max-width: 78px;
     width: 100%;
     max-height: 89px;
-}
+} */
 .slide-active p {
     font-weight: 500 !important;
 }
