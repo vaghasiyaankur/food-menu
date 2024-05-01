@@ -1,19 +1,10 @@
 <template>
     <f7-page>
-        <div class="user_admin_page">
-            <div class="user_header">
-                <h2 class="no-margin">User</h2>
-                <f7-breadcrumbs>
-                    <f7-breadcrumbs-item class="f7-link" active>
-                        <f7-link>Dashboard</f7-link>
-                    </f7-breadcrumbs-item>
-                    <f7-breadcrumbs-separator />
-                    <f7-breadcrumbs-item class="f7-link">
-                        <f7-link>Customers</f7-link>
-                    </f7-breadcrumbs-item>
-                </f7-breadcrumbs>
+        <div class="branch_list_admin_page">
+            <div class="branch_list_header">
+                <h2 class="no-margin">Branch List</h2>
             </div>
-            <div class="user_info">
+            <div class="branch_list_info">
                 <div class="table_search_filter">
                     <div class="search_bar_left">
                         <div class="search_bar">
@@ -32,8 +23,8 @@
                         <h4 class="no-margin">Add</h4>
                     </button>
                 </div>
-                <div class="user_table_wrapper">
-                    <table class="user_table">
+                <div class="branch_list_table_wrapper">
+                    <table class="branch_list_table">
                         <thead>
                             <tr>
                                 <th>ID</th>

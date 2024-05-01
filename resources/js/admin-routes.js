@@ -5,6 +5,7 @@ import FeedBack from "./pages/admin/feedback.vue";
 import Transaction from "./pages/admin/transaction.vue";
 import User from "./pages/admin/user.vue";
 import BranchList from "./pages/admin/branch-list.vue";
+import Branch from "./pages/admin/branch.vue";
 
 export default [
   {
@@ -41,5 +42,10 @@ export default [
     name : 'BranchList',
     path: '/BranchList/',
     component: BranchList,
+  },
+  {
+    name : 'Branch',
+    path: '/Branch/',
+    component: Branch,
   },
 ]
