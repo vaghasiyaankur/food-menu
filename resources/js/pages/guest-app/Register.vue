@@ -320,15 +320,15 @@ const checkTime = () => {
     checkReservation()
     if(closeReservation.value == 0){
         if(!reservation.value.name || !reservation.value.number || !reservation.value.member){
-            errorNotification('trans.reservation_error');
+            errorNotification(trans.value.reservation_error);
             return false;
         } else if (parseInt(reservation.value.member) > parseInt(memberLimit.value)) {
-            errorNotification('trans.capacity_error');
+            errorNotification(trans.value.capacity_error);
             return false;
         } else if (reservation.value.number.toString().length != 10) {
-            errorNotification('trans.number_error');
+            errorNotification(trans.value.number_error);
         }else if(!reservation.value.agree_condition){
-            errorNotification('trans.accept_term_cond'); 
+            errorNotification(trans.value.accept_term_cond); 
             return false;
         }else{
             var formData = new FormData();
@@ -360,17 +360,18 @@ const getFloors = () => {
     })
 }
 
-const checkTimeForRegister = () => {
-    checkReservation();
-    if(closeReservation == 0){
+const checkTimeForRegister = async () => {
+    await checkReservation();
+
+    if(closeReservation.value == 0){
         if(!reservation.value.name || !reservation.value.number || !reservation.value.member){
-            errorNotification('trans.reservation_error'); return false;
+            errorNotification(trans.value.reservation_error); return false;
         }else if(parseInt(reservation.value.member) > parseInt(memberLimit.value)){
-            errorNotification('trans.capacity_error'); return false;
+            errorNotification(trans.value.capacity_error); return false;
         } else if (reservation.value.number.toString().length != 10) {
-            errorNotification('trans.number_error'); return false;
+            errorNotification(trans.value.number_error); return false;
         }else if(!reservation.value.agree_condition){
-            errorNotification('trans.accept_term_cond'); return false;
+            errorNotification(trans.value.accept_term_cond); return false;
         }
 
         var formData = new FormData();
@@ -396,14 +397,14 @@ const checkTimeForRegister = () => {
 const register = () => {
     if(reservation.value.agree_condition) var agreeCondition = 1;
     else var agreeCondition = 0;
-
+console.log(trans);
     if(waitingTime.value == '00:00'){
-        var conformation_message = trans.no_waiting_message;
+        var conformation_message = trans.value.no_waiting_message;
     }else{
-        var conformation_message = trans.conformation_message.replace('@waiting', waitingTime.value);
+        var conformation_message = trans.value.conformation_message.replace('@waiting', waitingTime.value);
     }
 
-    f7.dialog.confirm(conformation_message, () => {
+    f7.dialog.confirm('conformation_message', () => {
 
         var formData = new FormData();
         formData.append('customer_name', reservation.value.name);
@@ -422,14 +423,14 @@ const register = () => {
             cookieArray.push(orderId);
             cookies.set("orderId", JSON.stringify(cookieArray), 60 * 60 * 24);
 
-            f7.dialog.alert(trans.success, () => {
+            f7.dialog.alert(trans.value.success, () => {
                 document.getElementById('book_table').classList.remove('active');
                 f7.view.main.router.navigate({ url: '/waiting/' });
             });
 
             setTimeout(() => {
                 $('.dialog-title').html("<img src='/images/success.png'>");
-                $('.dialog-button').addClass('col button button-raised button-large text-transform-capitalize active').text(trans.ok);
+                $('.dialog-button').addClass('col button button-raised button-large text-transform-capitalize active').text(trans.value.ok);
                 $('.dialog-button').css('width', '50%');
                 $('.dialog-text').css({'text-align': 'center'});
             }, 10);
@@ -445,8 +446,8 @@ const register = () => {
         $('.dialog-text').css({'font-size': '18px', 'line-height': '22px', 'text-align':'center'});
         $('.dialog-title').html("<img src='/images/usericon.png'>");
         $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
-        $('.dialog-button').eq(0).text(trans.cancel);
-        $('.dialog-button').eq(1).removeClass('text-color-black').addClass('active').text(trans.ok);
+        $('.dialog-button').eq(0).text(trans.value.cancel);
+        $('.dialog-button').eq(1).removeClass('text-color-black').addClass('active').text(trans.value.ok);
         $('.dialog-buttons').addClass('margin-vertical padding-bottom');
     },10);
 }

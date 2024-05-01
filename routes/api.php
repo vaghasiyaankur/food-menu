@@ -194,6 +194,9 @@ Route::get('/member-limitation',[SettingController::class, 'memberLimitation']);
 
 // ------------------------ Manager Table Page Routes ------------------------ //
 
+
+Route::post('/add-update-table', [TableController::class, 'addUpdateTable']);
+
 Route::post('/get-table-list-floor-wise', [TableController::class, 'getTableListFloorWise']);
 
 Route::get('table-list-floor-wise/{id}',[TableController::class, 'tableListFloorWise']);

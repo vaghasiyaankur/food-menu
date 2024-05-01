@@ -1,7 +1,11 @@
 <template>
     <div class="order-summary add-to-cart-section">
         <div class="order_table_details">
-            <div class="order_number">Order {{ table.order ? '#'+table.order.id : '' }}</div>
+            <div class="order_number">
+                <Icon name="back" @click="moveToTableView"/>
+                Order
+                {{ table.order ? '#'+table.order.id : '' }}
+            </div>
             <div class="table_number">Table No. {{ table ?.table_number }}</div>
         </div>
         <div class="dine-options grid grid-cols-3">
@@ -111,8 +115,8 @@
                 </div>
             </div>
             <div class="billing-btns grid grid-cols-3">
-                <button class="button kot-btn active" @click="createKot(table ?.table_number)">KOT</button>
-                <button class="button hold-btn" @click="holdKot(table ?.table_number)">Hold</button>
+                <button class="button kot-btn active" @click="createKot(table ?.id)">KOT</button>
+                <button class="button hold-btn" @click="holdKot(table ?.id)">Hold</button>
                 <button class="button ebill-btn">eBill</button>
             </div>
             <div class="bill-details-extend">
@@ -200,6 +204,10 @@ const orderNote = () => {
 
 const waiterAssign = () => {
     f7.popup.open(`.waiter_popup`);
+}
+
+const moveToTableView = () => {
+
 }
 
 </script>

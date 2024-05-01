@@ -9,26 +9,68 @@
             <div @click="closePopup" class="close-menu">
                 <i class="f7-icons font-30">xmark</i>
             </div>
-            <f7-block-title class="text-align-center font-18 text-color-black margin-top-half padding-vertical-half">{{ trans.food_menu }}</f7-block-title>
+            <f7-block-title class="font-18">{{ trans.food_menu }}</f7-block-title>
+            <p class="no-margin title-text">Select your favourite food
+                and enjoy with family</p>
             <div class="margin" v-if="productCategory.length != 0">
-                <div data-pagination='{"el":".swiper-pagination"}' data-space-between="10" data-slides-per-view="5" class="swiper swiper-init demo-swiper margin-top margin-bottom" style="height : 100px">
+                <div data-pagination='{"el":".swiper-pagination"}' data-space-between="10" data-slides-per-view="5"
+                    class="swiper swiper-init demo-swiper" style="height : 75px">
                     <div class="swiper-pagination"></div>
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide" :class="{ 'slide-active': category.id == sliderActive}" v-for="category in productCategory" :key="category" @click="getProducts(category.id)">
-                            <div class="menu-image col">
-                                <img :src="'/storage'+category.image" alt="">
+                    <div class="swiper-wrapper" id="dynamic-img">
+                        <div class="swiper-slide" :class="{ 'slide-active': category.id == sliderActive }"
+                            v-for="category in productCategory" :key="category" @click="getProducts(category.id)">
+                            <div class="menu-image">
+                                <img :src="'/storage' + category.image" alt="">
                             </div>
-                            <p class="font-13 no-margin text-align-center margin-top-half">{{ category.category_languages[0].name }}</p>
+                            <p class="font-13 no-margin">{{ category.category_languages[0].name }}</p>
                         </div>
                     </div>
                 </div>
                 <div class="position-relative">
                     <div class="menu-title"><span>{{ categoryName }} {{ trans.menu }}</span></div>
                 </div>
-                <div class="menu-details margin-top">
+                <div class="menu-details">
                     <div class="menu-lists" v-if="productSubcategory.length">
-                        <div class="menu-list" v-for="subcate in productSubcategory" :key="subcate">
-                            <div class="font-18 text-align-center menu-list-title text-color-black"><u>{{ subcate.sub_category_language[0].name }}</u></div>
+                        <div class='faq'>
+                            <input id='faq-a' type='checkbox'>
+                            <label for='faq-a'>
+                                <p class="no-margin faq-heading">Sabji</p>
+                                <div class='faq-arrow'></div>
+                                <div class="faq-list">
+                                    <div class="product">
+                                        <div class="product-detail-left">
+                                            <div class="product-img">
+                                                <img src="#">
+                                            </div>
+                                            <div class="product-detail">
+                                                <div class="product-name">Undhiyu</div>
+                                                <div class="product-price">110.00</div>
+                                            </div>
+                                        </div>
+                                        <span class="add-favlist" @click="toggleWishlist(product.id)">
+                                            <i
+                                                class="f7-icons size-22 bg-color-white text-color-red padding-half font-13">{{
+                                                    this.wishlist && this.wishlist.includes(product.id) ? 'heart_fill' :
+                                                'heart' }}</i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </label>
+                            <input id='faq-b' type='checkbox'>
+                            <label for='faq-b'>
+                                <p class="no-margin faq-heading">Roti</p>
+                                <div class='faq-arrow'></div>
+                                <div class="faq-list"></div>
+                            </label>
+                            <input id='faq-c' type='checkbox'>
+                            <label for='faq-c'>
+                                <p class="no-margin faq-heading">nothing</p>
+                                <div class='faq-arrow'></div>
+                                <div class="faq-list"></div>
+                            </label>
+                        </div>
+                        <!-- <div class="menu-list" v-for="subcate in productSubcategory" :key="subcate">
+                            <div class="font-18 menu-list-title">{{ subcate.sub_category_language[0].name }}</div>
                             <div class="list row margin-half align-items-center" v-for="product in subcate.products" :key="product">
                                 <div class="col-10">
                                     <span class="add-favlist" @click="toggleWishlist(product.id)">
@@ -38,7 +80,7 @@
                                 <div class="col-70 display-flex">{{ product.product_language[0].name }}&nbsp; <span class="dots"></span></div>
                                 <div class="col-20">{{ product.price.toFixed(2) }}</div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="menu-lists" v-else>
                         <div class="no_order">
@@ -67,11 +109,11 @@
 </template>
 <script setup>
 import {
-  f7BlockTitle,
-  f7PageContent,
-  f7,
-  f7Block,
-  f7Sheet
+    f7BlockTitle,
+    f7PageContent,
+    f7,
+    f7Block,
+    f7Sheet
 } from 'framework7-vue';
 import VueCountdown from '@chenfengyuan/vue-countdown';
 import $ from 'jquery';
@@ -112,19 +154,19 @@ const closePopup = () => {
 
 const getCategories = () => {
     axios.post('/api/get-categories-list')
-    .then((res) => {
-        productCategory.value = res.data.category;
-        getProducts(productCategory.value[0].id);
-    })
+        .then((res) => {
+            productCategory.value = res.data.category;
+            getProducts(productCategory.value[0].id);
+        })
 }
 
 const getProducts = (id) => {
     sliderActive.value = id;
     axios.get('/api/get-category-products/' + id)
-    .then((res) => {
-        categoryName.value = res.data.category_languages[0].name;
-        productSubcategory.value = res.data.sub_category;
-    })
+        .then((res) => {
+            categoryName.value = res.data.category_languages[0].name;
+            productSubcategory.value = res.data.sub_category;
+        })
 }
 
 const toggleWishlist = (id) => {

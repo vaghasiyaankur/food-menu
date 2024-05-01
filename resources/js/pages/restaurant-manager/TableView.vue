@@ -30,7 +30,7 @@
                         </div>
                         <div class="table_view-btn table_view-add_table_btn">
                             <button class="button button-raised bg-dark text-color-white height_40 active"
-                                data-popup=".add_table_Popup" @click="handleButtonClick"><i
+                                @click="openAddNewTablePopup"><i
                                     class="f7-icons font-22 margin-right-half">plus_square</i>Add Table</button>
                         </div>
                     </div>
@@ -44,14 +44,6 @@
                     <!-- empty_card -->
                     <template v-for="(table,ind) in floor.tables" :key="ind">
                         <div v-if="table.order" class="card-type table_view-ground_floor-card ordering_card">
-                            <div class="table_hold-inspect_btn">
-                                <f7-button popover-open=".popover-menu"><Icon name="hold"/></f7-button> 
-                                <f7-popover class="popover-menu">
-                                    <f7-list>
-                                        <f7-list-item popover-close title="Delete" />
-                                    </f7-list>
-                                </f7-popover>
-                            </div>
                             <div class="card-margin-padding">
                                 <div class="table_view-table_number">
                                     <h5 class="no-margin no-padding">Table No. {{ table.table_number }}</h5>
@@ -87,38 +79,129 @@
                                 </div>
                             </div>
                         </div>
-                        <div v-else class="card-type table_view-ground_floor-card blank_card">
-                            <div class="table_hold-inspect_btn">
-                                <f7-button popover-open=".popover-menu"><Icon name="hold"/></f7-button> 
-                            </div>
-                            <div class="card-margin-padding" @click="openPos(table.id)">
+                        <div v-else class="card-type table_view-ground_floor-card blank_card"
+                            @click="openPos(table.id)"
+                        >
+                            <div class="card-margin-padding">
                                 <div class="table_view-table_number">
                                     <h5 class="no-margin no-padding">Table No. {{ table.table_number }}</h5>
                                 </div>
+                                <!-- <div class="table_view-inspect_btn" v-if="table.holdKotAvailable">
+                                    <button class="button height_40">
+                                        <Icon name="deleteIcon" @click="removeHoldKot(table.id)"/>
+                                        Hold
+                                    </button>
+                                </div> -->
                             </div>
                         </div>
                     </template>
                 </div>
             </template>
         </div>
-    </f7-page>
+        <!-- ========= ADD TABLE-VIEW POPUP ========= -->
+        <div class="popup addUpdatePopup">
+            <AddUpdatePopup 
+                :title="addUpdateTitle"
+                :form-data-format="addUpdateFormDataFormat"
+                :type="addUpdateType" :data-type="'table-view'"
+                @store:update="storeUpdateData"
+            />
+        </div>
+    </f7-page>  
 </template>
 <script setup>
-import { f7Page, f7, f7Button, f7Popover, f7Link, f7List, f7ListItem } from 'framework7-vue';
+import { f7Page, f7 } from 'framework7-vue';
 import axios from 'axios';
 import { ref, onMounted } from 'vue';
 import Icon from '../../components/Icon.vue';
-
+import AddUpdatePopup from '../../components/common/AddUpdatePopup.vue'
+import { successNotification, errorNotification, getErrorMessage } from '../../commonFunction.js'
 const floorList = ref([]);
+
+const addUpdateTitle = ref('Add Table');
+const addUpdateType = ref('add');
+const addUpdateFormDataFormat = ref([
+    { label: 'Table Number', multipleLang: false, type: 'number', name: 'table_number', placeHolder: 'Table Number', value: ''},
+    { label: 'Capacity Of Person', multipleLang: false, type: 'number', name: 'capacity_of_person', placeHolder: 'Capacity Of Person', value: ''},
+    {
+        label: 'Status',
+        multipleLang: false,
+        type: 'radio',
+        name: 'status',
+        options: [
+            { label: 'Active', value: 1},
+            { label: 'Deactive', value: 0}
+        ],
+        placeHolder: 'Status',
+        value: 1
+    },
+    { label: 'Finish Order Time', multipleLang: false, type: 'number', name: 'finish_order_time', placeHolder: 'Finish Order Time (In Minutes)', value: ''},
+    { label: 'Id', multipleLang: false, type: 'hidden', name: 'id', placeHolder: 'Category Id', value: ''},
+]);
 
 onMounted(() => {
     getTableListFloorWise();
+    getColorList();
 });
+
+const getColorList = () => {
+    axios.get('/api/color-list')
+    .then((response) => {
+        let optionsData = [];
+        
+        Object.keys(response.data.colors).forEach(floorKey => {
+            const floor = response.data.colors[floorKey];
+            optionsData.push({
+                id: floor.id,
+                label: floor.color,
+            });
+        });
+
+        const statusIndex = addUpdateFormDataFormat.value.findIndex(item => item.label === 'Status');
+
+        if (statusIndex !== -1) {
+            addUpdateFormDataFormat.value.splice(statusIndex + 1, 0, {
+                label: 'Color',
+                multipleLang: false,
+                type: 'drop-down',
+                name: 'color_id',
+                placeHolder: 'Select Color Name',
+                value: response.data.colors[0]?.id ?? '',
+                options: optionsData
+            });
+        }
+    });
+}
 
 const getTableListFloorWise = () => {
     axios.post('/api/get-table-list-floor-wise')
     .then((response) => {
         floorList.value = response.data;
+
+        let optionsData = [];
+        
+        Object.keys(response.data).forEach(floorKey => {
+            const floor = response.data[floorKey];
+            optionsData.push({
+                id: floor.id,
+                label: floor.name,
+            });
+        });
+
+        const capacityIndex = addUpdateFormDataFormat.value.findIndex(item => item.label === 'Capacity Of Person');
+
+        if (capacityIndex !== -1) {
+            addUpdateFormDataFormat.value.splice(capacityIndex + 1, 0, {
+                label: 'Floor',
+                multipleLang: false,
+                type: 'drop-down',
+                name: 'floor_id',
+                placeHolder: 'Select Floor Name',
+                value: response.data[0]?.id ?? '',
+                options: optionsData
+            });
+        }
+
     });
 }
 
@@ -133,4 +216,29 @@ const removeHoldKot = (id) => {
     });
 }
 
+const openAddNewTablePopup = () => {
+    f7.popup.open(`.addUpdatePopup`);
+}
+
+const storeUpdateData = () => {
+    const formData = addUpdateFormDataFormat.value;
+    const id = formData.find(item => item.label === 'Id').value;
+
+    const tableData = new FormData(event.target);
+
+    axios.post('/api/add-update-table', tableData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    })
+    .then((response) => {
+        successNotification(response.data.success);
+        f7.popup.close(`.addUpdatePopup`);
+        getTableListFloorWise();
+    })
+    .catch((error) => {
+        const errorMessage = getErrorMessage(error);
+        errorNotification(errorMessage);
+    });
+}
 </script>
