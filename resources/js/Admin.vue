@@ -5,7 +5,7 @@
         
       </div>
       <f7-view
-        url="/FeedBack/"
+        url="/User/"
         :main="true"
         class="safe-areas"
         :master-detail-breakpoint="768"
