@@ -64,52 +64,6 @@
     </div>
     
 
-    <!-- ========= APPLIED DISCOUNT POPUP ========= -->
-    <div class="popup applied_disc_Popup" id="applied_disc_Popup">
-        <div class="data-form add_table_view-data-form">
-            <div class="text-align-center table_view-popup_title">
-                Applied Discount</div>
-            <hr class="popup_title_divider">
-            <label class="custom-disc-text">Custom Discount</label>
-            <div class="apply-custom-disc-selector text-align-left">
-                <select name="apply-custom-disc" class="add-custom-disc" id="add-custom-disc">
-                    <option value="all" class="custom-disc-value" checked>All</option>
-                </select>
-                <div class="reason-for-adding-custom-disc-outer">
-                    <input type="text" class="reason-for-adding-custom-disc" placeholder="Reason">
-                </div>
-            </div>
-            <div class="discount-type-selector text-align-left">
-                <div class="display-flex">
-                    <div class="disc-data display-flex align-items-center">
-                        <input type="checkbox" id="discount_percentage-select" name="discount_percentage-select"
-                            value="Percentage" checked>
-                        <label for="discount_percentage-select">Percentage</label>
-                    </div>
-                    <div class="disc-data display-flex align-items-center">
-                        <input type="checkbox" id="discount_fixed" name="discount_fixed" value="Fixed">
-                        <label for="discount_fixed">Fixed</label>
-                    </div>
-                </div>
-                <input type="number" class="selected-disc-data-input" placeholder="10">
-            </div>
-            <label class="apply_disc-coupon-code-text">Coupon Code</label>
-            <div class="apply_disc-coupon-code text-align-left">
-                <input type="text" class="apply_disc-coupon-code-data" placeholder="Enter coupon code">
-                <div class="apply-btn-outer">
-                    <button class="button apply-btn">Apply</button>
-                </div>
-            </div>
-            <div class="display-flex justify-content-center popup_button">
-                <button type="button"
-                    class="button button-raised button-large popup-close popup-cancel-button">Cancel</button>
-                <button type="button"
-                    class="button button-raised button-large popup-ok-button popup-save-button">Save</button>
-            </div>
-        </div>
-        <div class="wave-image-content"><img src="/images/flow.png" style="width:100%"></div>
-    </div>
-
     <!-- ========= SETTLE & SAVE POPUP ========= -->
     <div class="popup settle_save_Popup" id="settle_save_Popup">
         <div class="data-form add_table_view-data-form">

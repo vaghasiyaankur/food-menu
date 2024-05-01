@@ -26,18 +26,6 @@
                             <option :value="key" v-for="(floor,key) in floorList" :key="floor">{{ floor }}</option>
                         </select>
                     </div>
-                    <div class="search-bar-wrapper">
-                        <form class="searchbar">
-                            <div class="searchbar-inner">
-                                <div class="searchbar-input-wrap">
-                                    <input type="search" v-model="kotSearch" placeholder="Enter KOT / Order No." @input="getKotList" />
-                                    <Icon name="searchCloseIcon" />
-                                    <span class="input-clear-button"></span>
-                                </div>
-                                <span class="searchbar-disable-button">Cancel</span>
-                            </div>
-                        </form>
-                    </div>
                 </div>
             </div>
         </div>
@@ -45,31 +33,24 @@
             <template v-if="paginateData?.data?.length > 0">
                 <div class="grid">
                     <div class="kot_view_table_card" v-for="item in paginateData.data" :key="item">
-                        <h4 class="kot_view_table_no no-margin">Table : {{ item?.table?.table_number }}</h4>
                         <div class="card-type table_card">
                             <div class="table_card-margin-padding">
                                 <div class="kot_table_details">
                                     <div class="table_detail text-align-center">
-                                        <h4 class="dine-in-number no-margin">6</h4>
-                                        <h4 class="dine-in-number-text no-margin">Dine in</h4>
+                                        <h4 class="dine-in-number-text no-margin">Table</h4>
+                                        <h4 class="dine-in-number no-margin">{{ item?.table?.table_number }}</h4>
                                     </div>
                                     <div class="table_detail text-align-center">
-                                        <h4 class="kot-number no-margin">{{ item?.kots[0]?.number }}</h4>
-                                        <h4 class="kot-number-text no-margin">KOT No. </h4>
-                                    </div>
-                                    <div class="table_detail text-align-center">
-                                        <h4 class="kot-time-number no-margin">{{ item?.kots[0]?.time }}</h4>
                                         <h4 class="kot-time-text no-margin">Time</h4>
+                                        <h4 class="kot-time-number no-margin">{{ item?.kots[0]?.time }}</h4>
                                     </div>
                                 </div>
                                 <div class="kot_table-bill-details">
                                     <div class="ordered-items-details">
                                         <template v-for="kot in item?.kots" :key="kot">
                                             <div class="customer-detail">
-                                                <h5 class="no-margin">John Doe</h5>
-                                                <h5 class="no-margin">{{ timeFormat(item?.kots[0]?.created_at) }}</h5>
+                                                <h5 class="no-margin">KOT - {{kot.number}} Time - {{kot.time}}</h5>
                                             </div>
-                                            <div class="kot-time-heading"><h5 class="no-margin">KOT - {{kot.number}} Time - 11:55:29</h5></div>
                                             <ol class="ordered-item-details-list no-margin">
                                                 <li v-for="kot_product in kot?.kot_products" :key="kot_product">
                                                     <div class="ordered-item">
@@ -89,8 +70,8 @@
                                             <h4 class="ordered_items-total-number no-margin">${{item?.total_price?.toFixed(2)}}</h4>
                                         </div>
                                     </div>
-                                    <div class="order-user-comment" v-if="item?.kots[0]?.note">
-                                        <p class="no-margin">{{item?.kots[0]?.note}}</p>
+                                    <div class="order-user-comment" v-if="item?.note">
+                                        <p class="no-margin">{{item?.note}}</p>
                                     </div>
                                     <div class="bill_buttons">
                                         <div class="server_btn-outer">

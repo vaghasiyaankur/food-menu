@@ -55,8 +55,8 @@
     font-size: 18px;
     font-weight: 600;
 }
-.demo-swiper .swiper-slide,
-.demo-swiper-multiple .swiper-slide {
+.pos-page .demo-swiper .swiper-slide,
+.pos-page .demo-swiper-multiple .swiper-slide {
     background: #ffffff;
     border-radius: 40px;
     height: 53px;
@@ -357,7 +357,7 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox {
     opacity: 1;
     overflow: visible;
 }
-.tooltip .tooltiptext {
+.tooltip .tool-tip-text {
     display: none;
     position: absolute;
     top: -26px;
@@ -373,7 +373,7 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox {
     background-color: black;
     z-index: 1;
 }
-.tooltip .tooltiptext::before {
+.tooltip .tool-tip-text::before {
     content: " ";
     position: absolute;
     top: 100%;
@@ -383,7 +383,7 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox {
     border-style: solid;
     border-color: black transparent transparent transparent;
 }
-.tooltip:hover .tooltiptext {
+.tooltip:hover .tool-tip-text {
     display: block;
 }
 .add-to-cart .cart-products {
@@ -740,6 +740,7 @@ textarea {
     max-width: 580px;
     width: 100% !important;
     --f7-touch-ripple-color: none;
+    left: 25% !important;
 }
 
 .add_ingredient_variation_popup .item_edit-data-form {
