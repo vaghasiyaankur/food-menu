@@ -11,19 +11,14 @@
             </div>
             <div v-if="categories.length != 0">
                 <div class="digital_menu_swiper">
-                    <div data-pagination='{"el":".swiper-pagination"}' data-space-between="20" data-slides-per-view="11"
-                        class="swiper swiper-init demo-swiper" style="height : 135px">
-                        <div class="swiper-pagination"></div>
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide" :class="{ 'slide-active': category.id == selectCategory}" v-for="(category, index) in categories" :key="index" @click="getProducts(category.id)">
-                                <div class="menu-image">
-                                    <img :src="'/storage' + category.image"  width="50" height="50">
-                                </div>
-                                <p class="font-13 no-margin">{{
-                                    category.name }}</p>
-                            </div>
+                    <f7-swiper ref="swiperRef" class="demo-swiper" :pagination="true" :space-between="20" :slides-per-view="11" style="height: 135px">
+                        <f7-swiper-slide :class="{'slide-active': category.id === selectCategory}" v-for="category in categories" :key="category.id" @click="getProducts(category.id)">
+                        <div class="menu-image">
+                            <img :src="'/storage' + category.image" alt="" width="50" height="50">
                         </div>
-                    </div>
+                        <p class="font-13 no-margin">{{ category.name }}</p>
+                        </f7-swiper-slide>
+                    </f7-swiper>
                 </div>
             </div>
             <div class="category_title_show">
@@ -67,7 +62,7 @@
 </template>
 
 <script setup>
-import { f7Page, f7 } from 'framework7-vue';
+import { f7Page, f7, f7Swiper, f7SwiperSlide } from 'framework7-vue';
 import axios from 'axios';
 import { ref, onMounted } from 'vue';
 import EmptyCardIcon from '../../../components/common/EmptyCardIcon.vue'

@@ -1182,7 +1182,7 @@
     font-size: 22px;
 }
 .digital_menu_page .digital_menu_swiper .swiper{
-    max-height: 75px;
+    max-height: 135px;
 }
 .digital_menu_page .digital_menu_swiper .swiper .swiper-wrapper {
     display: flex;
@@ -1216,6 +1216,7 @@
     height: 100%;
     justify-content: center;
     align-items: center;
+    padding: 12px;
 }
 .position-relative {
     position: relative;
@@ -1429,12 +1430,13 @@
     .sub-menu-items {
     display: grid;
     row-gap: 20px;
+    column-gap: 10px;
 }
 .digital_menu_page
     .digital_gujarati_dish_category
     .faq-menu-items
     .item_digital_menu {
-    grid-template-columns: auto auto auto auto auto;
+    grid-template-columns: auto auto auto auto;
 }
 .digital_menu_page
     .digital_gujarati_dish_category

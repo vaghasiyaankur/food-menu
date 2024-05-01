@@ -352,6 +352,7 @@
     width: 100% !important;
     border-radius: 20px !important;
     background-color: #FFFFFF;
+    left: 25% !important;
 }
 .kot_paybill_popup .kot_paybill-popup_header{
     padding: 25px;
