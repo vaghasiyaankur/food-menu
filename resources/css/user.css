@@ -1,0 +1,233 @@
+.user_admin_page {
+    background-color: #f4f4f4;
+    padding: 25px 30px;
+}
+.user_admin_page .user_header {
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+.user_admin_page .user_header h2 {
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 600;
+    color: #38373d;
+}
+.user_admin_page .user_info {
+    box-shadow: 0px 1px 15px 0px #3333330d;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.user_admin_page .user_info .table_search_filter {
+    padding: 30px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    background-color: #ffffff;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+.user_admin_page .user_info .table_search_filter .search_bar_left {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px;
+}
+.user_admin_page .user_info .table_search_filter .search_bar {
+    max-width: 540px;
+    border-radius: 5px;
+}
+.user_admin_page
+    .user_info
+    .table_search_filter
+    .search_bar
+    .searchbar {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    background-color: #ffffff !important;
+    width: 100%;
+    max-height: 45px;
+    border-radius: 5px !important;
+    box-shadow: none;
+}
+.user_admin_page
+    .user_info
+    .table_search_filter
+    .search_bar
+    .searchbar
+    input {
+    padding: 12px 45px 12px 40px;
+    width: 650px;
+    color: #555555;
+    background-color: #ffffff;
+    border: 1px solid #555555;
+    border-radius: 5px;
+}
+.user_admin_page
+    .user_info
+    .table_search_filter
+    .search_bar
+    .searchbar
+    input::placeholder {
+    font-size: 15px;
+    line-height: 18px;
+    font-weight: 500;
+    color: #555555;
+}
+.user_admin_page
+    .user_info
+    .table_search_filter
+    .search_bar
+    .searchbar
+    .searchbar-icon::after {
+    color: #555555 !important;
+}
+.user_admin_page
+    .user_info
+    .table_search_filter
+    .search_bar
+    .searchbar
+    .input-clear-button {
+    width: 45px;
+    height: 45px;
+    color: #555555;
+}
+.user_admin_page
+    .user_info
+    .table_search_filter
+    .search_bar_left
+    select {
+    padding: 13px 15px;
+    border: 1px solid #555555;
+    border-radius: 5px;
+    max-width: 220px;
+    width: 100%;
+}
+.user_admin_page .user_info .table_search_filter select {
+    position: relative;
+}
+.user_admin_page .user_info .table_search_filter select::before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: none;
+    border-top: 4px solid #555555;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    top: 0;
+    right: 0;
+}
+.user_admin_page .user_info .table_search_filter .add_btn {
+    padding: 10px 44px;
+    max-width: 120px;
+    border-radius: 5px;
+    border: none;
+    background-color: #F33E3E;
+}
+.user_admin_page .user_info .table_search_filter .add_btn h4 {
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: 500;
+    color: #FFFFFF;
+}
+.user_admin_page .user_info .user_table_wrapper {
+    overflow-x: scroll;
+    scrollbar-width: none;
+}
+.user_admin_page .user_info .user_table {
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+    min-width: 1100px;
+}
+.user_admin_page .user_info .user_table thead th {
+    padding: 17px 20px;
+    font-size: 15px;
+    line-height: 18px;
+    font-weight: 600;
+    color: #555555;
+}
+.user_admin_page .user_info .user_table tbody td {
+    padding: 15px 20px;
+    background-color: #ffffff;
+    font-size: 15px;
+    line-height: 18px;
+    font-weight: 400;
+    color: #38373d;
+}
+.user_admin_page .user_info .user_table thead {
+    border: none;
+    border-top: 0.5px solid rgba(153, 153, 153, 0.25);
+    border-bottom: 0.5px solid rgba(153, 153, 153, 0.25);
+    background-color: #f4f4f4;
+}
+.user_admin_page .user_info .user_table .customer-detail {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.user_admin_page .user_info table tbody tr:nth-child(odd) td {
+    background-color: #ffffff;
+}
+.user_admin_page .user_info table tbody tr:nth-child(even) td {
+    background-color: #fafafa;
+}
+.user_admin_page .user_info table tbody tr td:nth-child(4) {
+    max-width: 470px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+.user_admin_page .user_info table thead tr th:last-child,
+.user_admin_page .user_info table tbody tr td:last-child{
+    text-align: center;
+}
+.user_admin_page .user_info .user_table thead th,
+.user_admin_page .user_info .user_table tbody td {
+    text-wrap: nowrap;
+}
+.user_admin_page .user_info .pagination_wrapper {
+    padding: 40px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    background-color: #ffffff;
+}
+.user_admin_page .user_info .pagination_wrapper p {
+    font-size: 15px;
+    line-height: 18px;
+    font-weight: 500;
+    color: #878a99;
+}
+.user_admin_page .user_info .pagination_wrapper .pagination a {
+    float: left;
+    padding: 8px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: 500;
+    color: #878a99;
+}
+.user_admin_page .user_info .pagination_wrapper .pagination a.active {
+    background-color: #f33e3e;
+    color: #ffffff;
+    border-radius: 5px;
+}
+.user_admin_page
+    .user_info
+    .pagination_wrapper
+    .pagination
+    a:hover:not(.active) {
+    background-color: #f33e3e;
+    color: #ffffff;
+    border-radius: 5px;
+}

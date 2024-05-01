@@ -9,6 +9,10 @@ import 'framework7/css/bundle';
 import '.././css/admin.css';
 import '.././css/orders.css';
 import '.././css/feedback.css';
+import '.././css/transaction.css';
+import '.././css/user.css';
+import '.././css/branch.css';
+import '.././css/log-in.css';
 
 /* import font awesome icon component */
 import { library } from '@fortawesome/fontawesome-svg-core'
