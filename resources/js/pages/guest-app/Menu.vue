@@ -13,19 +13,14 @@
             <p class="no-margin title-text">Select your favourite food
                 and enjoy with family</p>
             <div class="margin" v-if="productCategory.length != 0">
-                <div data-pagination='{"el":".swiper-pagination"}' data-space-between="10" data-slides-per-view="5"
-                    class="swiper swiper-init demo-swiper" style="height : 75px">
-                    <div class="swiper-pagination"></div>
-                    <div class="swiper-wrapper" id="dynamic-img">
-                        <div class="swiper-slide" :class="{ 'slide-active': category.id == sliderActive }"
-                            v-for="category in productCategory" :key="category" @click="getProducts(category.id)">
-                            <div class="menu-image">
-                                <img :src="'/storage' + category.image" alt="">
-                            </div>
-                            <p class="font-13 no-margin">{{ category.category_languages[0].name }}</p>
-                        </div>
+                <f7-swiper ref="swiperRef" class="demo-swiper" :pagination="true" :space-between="10" :slides-per-view="5" style="height: 79px">
+                    <f7-swiper-slide :class="{'slide-active': category.id === sliderActive}" v-for="category in productCategory" :key="category.id" @click="getProducts(category.id)">
+                    <div class="menu-image">
+                        <img :src="'/storage' + category.image" alt="">
                     </div>
-                </div>
+                    <p class="font-13 no-margin">{{ category.category_languages[0].name }}</p>
+                    </f7-swiper-slide>
+                </f7-swiper>
                 <div class="position-relative">
                     <div class="menu-title"><span>{{ categoryName }} {{ trans.menu }}</span></div>
                 </div>
@@ -39,7 +34,7 @@
                             </label>
                             <div class="faq-banner">
                                 <div class="faq-list">
-                                    <div class="product"  v-for="product in subCat.products" :key="product">
+                                    <div class="product" v-for="product in subCat.products" :key="product">
                                         <div class="product-detail-left">
                                             <div class="product-img">
                                                 <img :src="'/storage/'+product.image">
@@ -91,14 +86,16 @@ import {
     f7PageContent,
     f7,
     f7Block,
-    f7Sheet
+    f7Sheet,
+    f7Swiper,
+    f7SwiperSlide
 } from 'framework7-vue';
 import VueCountdown from '@chenfengyuan/vue-countdown';
 import $ from 'jquery';
 import axios from "axios";
 import NoValueFound from '../../components/NoValueFound.vue'
 import { useCookies } from "vue3-cookies";
-import { ref, onMounted, inject, defineExpose } from 'vue';
+import { ref, onMounted, inject, defineExpose, computed } from 'vue';
 
 const productCategory = ref([]);
 const productSubcategory = ref([]);
@@ -107,14 +104,22 @@ const wishlist = ref([]);
 const { cookies } = useCookies();
 const sliderActive = ref(0);
 const categoryName = ref('');
-
 const trans = inject('trans');
+const swiperRef = ref(null);
 
 onMounted(() => {
     getCategories();
     if (cookies.get('wishlist')) {
         wishlist.value = JSON.parse(cookies.get('wishlist'));
     }
+    f7.swiper.create(swiperRef.value, {
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        spaceBetween: 10,
+        slidesPerView: 5,
+    });
 });
 
 const wishlistData = () => {
