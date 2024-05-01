@@ -1006,5 +1006,8 @@ textarea {
     padding: 5px 7px !important;
     background: #999999;
     border-radius: 5px;
-
+}
+.ordered-items-details{
+    height: 190px;
+    overflow: auto;
 }

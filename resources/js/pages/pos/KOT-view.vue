@@ -63,19 +63,22 @@
                                     </div>
                                 </div>
                                 <div class="kot_table-bill-details">
-                                    <div class="customer-detail">
-                                        <h5 class="no-margin">John Doe</h5>
-                                        <h5 class="no-margin">{{ timeFormat(item?.kots[0]?.created_at) }}</h5>
-                                    </div>
                                     <div class="ordered-items-details">
-                                        <ol class="ordered-item-details-list no-margin">
-                                            <li v-for="kot_product in item?.kots[0]?.kot_products" :key="kot_product">
-                                                <div class="ordered-item">
-                                                    <h6 class="no-margin">{{kot_product?.product?.product_restaurant_languages[0]?.name}} <span v-if="kot_product.note">[Note : {{kot_product.note}}]</span></h6>
-                                                    <h6 class="no-margin">₹ {{kot_product?.total_price?.toFixed(2)}}</h6>
-                                                </div>
-                                            </li>
-                                        </ol>
+                                        <template v-for="kot in item?.kots" :key="kot">
+                                            <div class="customer-detail">
+                                                <h5 class="no-margin">John Doe</h5>
+                                                <h5 class="no-margin">{{ timeFormat(item?.kots[0]?.created_at) }}</h5>
+                                            </div>
+                                            <div class="kot-time-heading"><h5 class="no-margin">KOT - {{kot.number}} Time - 11:55:29</h5></div>
+                                            <ol class="ordered-item-details-list no-margin">
+                                                <li v-for="kot_product in kot?.kot_products" :key="kot_product">
+                                                    <div class="ordered-item">
+                                                        <h6 class="no-margin">{{kot_product?.product?.product_restaurant_languages[0]?.name}} <span v-if="kot_product.note">[Note : {{kot_product.note}}]</span></h6>
+                                                        <h6 class="no-margin">₹ {{kot_product?.total_price?.toFixed(2)}}</h6>
+                                                    </div>
+                                                </li>
+                                            </ol>
+                                        </template>
                                     </div>
                                 </div>
                                 <div class="bill-pay-details">
