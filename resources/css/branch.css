@@ -26,7 +26,10 @@
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
 }
-.branch_list_admin_page .branch_list_info .table_search_filter .search_bar_left {
+.branch_list_admin_page
+    .branch_list_info
+    .table_search_filter
+    .search_bar_left {
     width: 100%;
     display: flex;
     align-items: center;
@@ -124,13 +127,13 @@
     max-width: 120px;
     border-radius: 5px;
     border: none;
-    background-color: #F33E3E;
+    background-color: #f33e3e;
 }
 .branch_list_admin_page .branch_list_info .table_search_filter .add_btn h4 {
     font-size: 16px;
     line-height: 19px;
     font-weight: 500;
-    color: #FFFFFF;
+    color: #ffffff;
 }
 .branch_list_admin_page .branch_list_info .branch_list_table_wrapper {
     overflow-x: scroll;
@@ -182,7 +185,7 @@
     -webkit-box-orient: vertical;
 }
 .branch_list_admin_page .branch_list_info table thead tr th:last-child,
-.branch_list_admin_page .branch_list_info table tbody tr td:last-child{
+.branch_list_admin_page .branch_list_info table tbody tr td:last-child {
     text-align: center;
 }
 .branch_list_admin_page .branch_list_info .branch_list_table thead th,
@@ -225,7 +228,11 @@
     font-weight: 500;
     color: #878a99;
 }
-.branch_list_admin_page .branch_list_info .pagination_wrapper .pagination a.active {
+.branch_list_admin_page
+    .branch_list_info
+    .pagination_wrapper
+    .pagination
+    a.active {
     background-color: #f33e3e;
     color: #ffffff;
     border-radius: 5px;
@@ -239,4 +246,212 @@
     color: #ffffff;
     border-radius: 5px;
 }
+
 /* BRANCH PAGE */
+.branch_admin_page {
+    background-color: #f4f4f4;
+    padding: 25px 30px 30px;
+}
+.branch_admin_page .branch_header {
+    margin-bottom: 25px;
+}
+.branch_admin_page .branch_header h2 {
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 600;
+    color: #38373d;
+}
+.branch_admin_page .branch_info {
+    box-shadow: 0px 1px 15px 0px #3333330d;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #ffffff;
+    padding: 30px;
+}
+.branch_admin_page .branch_info .branch_form {
+    padding: 30px 0 0;
+}
+.branch_admin_page .branch_info h3:first-child {
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 600;
+    color: #38373d;
+}
+.branch_admin_page .branch_info .branch_form h3 {
+    margin: 0 0 15px;
+    padding: 0 0 7px;
+    border-bottom: 1px solid rgba(153, 153, 153, 0.5);
+    font-size: 17px;
+    line-height: 21px;
+    font-weight: 600;
+    color: #38373d;
+}
+.branch_admin_page .branch_info .branch_form h4 {
+    margin: 0 0 7px;
+    padding: 0;
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: 600;
+    color: #555555;
+}
+.branch_admin_page .branch_info .branch_form input {
+    width: 100%;
+    padding: 14px 15px;
+    border-radius: 10px;
+    background-color: #fafafa;
+}
+.branch_admin_page .branch_info .branch_form input::placeholder {
+    font-size: 15px;
+    line-height: 18px;
+    font-weight: 400;
+    column-rule: #555555;
+}
+.branch_admin_page .branch_info .branch_form .info_form_top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+.branch_admin_page .branch_info .branch_form .info_form_top .branch_name,
+.branch_admin_page .branch_info .branch_form .info_form_top .owner_name {
+    max-width: 48%;
+    width: 100%;
+}
+.branch_admin_page .branch_info .branch_form .info_form_top .branch_name input {
+    border: 1px solid #999999;
+}
+.branch_admin_page
+    .branch_info
+    .branch_form
+    .info_form_top
+    .branch_name
+    input::placeholder {
+    font-size: 14px;
+    line-height: 17px;
+    font-weight: 500;
+}
+.branch_admin_page .branch_info .branch_form .info_form_bottom {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+}
+.branch_admin_page .branch_info .branch_form .info_form_bottom .address_info,
+.branch_admin_page
+    .branch_info
+    .branch_form
+    .info_form_bottom
+    .contact_info-branch_img {
+    max-width: 48%;
+    width: 100%;
+}
+.branch_admin_page
+    .branch_info
+    .branch_form
+    .info_form_bottom
+    .address_form
+    > div:not(:last-child),
+.branch_admin_page
+    .branch_info
+    .branch_form
+    .info_form_bottom
+    .contact_info
+    > div:not(:last-child) {
+    margin-bottom: 25px;
+}
+.branch_admin_page .branch_info .branch_form .info_form_bottom .contact_info {
+    padding-bottom: 31px;
+    border-bottom: 1px solid rgba(153, 153, 153, 0.5);
+}
+.branch_admin_page .branch_info .branch_form .info_form_bottom .branch_img {
+    margin-top: 30px;
+}
+.branch_admin_page
+    .branch_info
+    .info_form_bottom
+    .branch_img
+    .image_select_preview-wrapper {
+    width: 100%;
+    max-height: 200px;
+    height: 100%;
+    border-radius: 10px;
+    background-color: #fafafa;
+    position: relative;
+}
+.branch_admin_page
+    .branch_info
+    .info_form_bottom
+    .branch_img
+    .image_select_preview-wrapper
+    .image_select_preview {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.branch_admin_page
+    .branch_info
+    .info_form_bottom
+    .branch_img
+    .image_select_preview {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+}
+.branch_admin_page
+    .branch_info
+    .info_form_bottom
+    .branch_img
+    .image_select_preview
+    .choose_img_btn {
+    padding: 7px 19px;
+    max-width: 135px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 4px 0px #99999959;
+    border: 1px solid #999999;
+}
+.branch_admin_page
+    .branch_info
+    .info_form_bottom
+    .branch_img
+    .image_select_preview
+    .choose_img_btn
+    span {
+    font-size: 14px;
+    line-height: 17px;
+    font-weight: 500;
+    color: #999999;
+    text-wrap: nowrap;
+}
+.branch_admin_page .branch_info .action-btns {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+.branch_admin_page .branch_info .action-btns button {
+    max-width: 170px;
+    border: none;
+    border-radius: 10px;
+}
+.branch_admin_page .branch_info .action-btns .cancel_btn {
+    padding: 12px 55px;
+    background-color: #ffffff;
+    color: #f33e3e;
+    box-shadow: 0px 1.5px 5px 0px #a6a6a666;
+}
+.branch_admin_page .branch_info .action-btns .save_btn {
+    padding: 12px 23px;
+    background-color: #f33e3e;
+    color: #ffffff;
+    box-shadow: 2.5px -2.5px 2px 0px #863e2026 inset;
+}
+.branch_admin_page .branch_info .action-btns .cancel_btn span,
+.branch_admin_page .branch_info .action-btns .save_btn span {
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 500;
+}
