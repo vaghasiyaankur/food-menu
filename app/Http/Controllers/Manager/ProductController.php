@@ -60,6 +60,7 @@ class ProductController extends Controller
             return [
                 'id' => $product->id,
                 'image' => $product->image,
+                'sub_category_id' => $product->sub_category_id,
                 'status' => $product->status,
                 'food_type' => $product->food_type,
                 'name' => $name,

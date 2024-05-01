@@ -6,7 +6,7 @@
                 Order
                 {{ table.order ? '#'+table.order.id : '' }}
             </div>
-            <div class="table_number">Table No. {{ table ?.table_number }}</div>
+            <div class="table_number">{{ floorName + ' Table No. ' +  table ?.table_number}}</div>
         </div>
         <div class="dine-options grid grid-cols-3">
             <button class="button button-small food-received-type" 
@@ -31,21 +31,25 @@
         <div class="order-specific-options grid">
             <button class="button button-small order-option tooltip button-raised active" @click="personDetails()">
                 <Icon name="singlePerson" />
-                <span class="tooltiptext">Details</span>
+                <span class="tool-tip-text">Details</span>
             </button>
             <button class="button button-small order-option tooltip" @click="noOfPerson()">
                 <Icon name="person" />
-                <span class="tooltiptext">No. of Person</span>
+                <span class="tool-tip-text">No. of Person</span>
             </button>
             <button class="button button-small order-option tooltip" @click="orderNote()">
                 <Icon name="note" />
-                <span class="tooltiptext">Note</span>
+                <span class="tool-tip-text">Note</span>
             </button>
             <button class="button button-small order-option tooltip"  @click="waiterAssign()">
                 <Icon name="waiterIcon" />
-                <span class="tooltiptext">Waiter</span>
+                <span class="tool-tip-text">Waiter</span>
             </button>
-            <button class="button button-small deactive">{{ floorName }}</button>
+            <button class="button button-small order-option tooltip"  @click="addDiscount()">
+                <Icon name="discountIcon" />
+                <span class="tool-tip-text">Discount</span>
+            </button>
+            <!-- <button class="button button-small deactive">{{ floorName }}</button> -->
         </div>
     </div>
 
@@ -114,6 +118,10 @@
                     </div>
                 </div>
             </div>
+            <!-- <div class="billing-btns grid grid-cols-2 margin-bottom">
+                <button class="button kot-btn active" @click="createKot(table ?.id)">Settle</button>
+                <button class="button hold-btn" @click="holdKot(table ?.id)">Discount</button>
+            </div> -->
             <div class="billing-btns grid grid-cols-3">
                 <button class="button kot-btn active" @click="createKot(table ?.id)">KOT</button>
                 <button class="button hold-btn" @click="holdKot(table ?.id)">Hold</button>
@@ -141,10 +149,7 @@ const props = defineProps({
         default: () => []
     },
     table: [Array, Object],
-    oldOrder: {
-        type: Array,
-        default: () => []
-    },
+    oldOrder: [Array, Object],
     floorName: String,
     totalAmount: [String, Number],
     subTotal: [String, Number],
@@ -204,6 +209,10 @@ const orderNote = () => {
 
 const waiterAssign = () => {
     f7.popup.open(`.waiter_popup`);
+}
+
+const addDiscount = () => {
+    f7.popup.open(`.applied-discount-popup`);
 }
 
 const moveToTableView = () => {

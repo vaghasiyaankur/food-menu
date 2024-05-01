@@ -357,7 +357,7 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox {
     opacity: 1;
     overflow: visible;
 }
-.tooltip .tooltiptext {
+.tooltip .tool-tip-text {
     display: none;
     position: absolute;
     top: -26px;
@@ -373,7 +373,7 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox {
     background-color: black;
     z-index: 1;
 }
-.tooltip .tooltiptext::before {
+.tooltip .tool-tip-text::before {
     content: " ";
     position: absolute;
     top: 100%;
@@ -383,7 +383,7 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox {
     border-style: solid;
     border-color: black transparent transparent transparent;
 }
-.tooltip:hover .tooltiptext {
+.tooltip:hover .tool-tip-text {
     display: block;
 }
 .add-to-cart .cart-products {

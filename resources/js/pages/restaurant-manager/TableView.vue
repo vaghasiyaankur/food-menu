@@ -212,7 +212,7 @@ const openPos = (id) => {
 const removeHoldKot = (id) => {
     axios.get('/api/remove-hold-kot/'+id)
     .then((response) => {
-        
+        getTableListFloorWise();
     });
 }
 
