@@ -4,6 +4,7 @@ import OrdersDetail from "./pages/admin/orders_detail.vue";
 import FeedBack from "./pages/admin/feedback.vue";
 import Transaction from "./pages/admin/transaction.vue";
 import User from "./pages/admin/user.vue";
+import BranchList from "./pages/admin/branch-list.vue";
 
 export default [
   {
@@ -35,5 +36,10 @@ export default [
     name : 'User',
     path: '/User/',
     component: User,
+  },
+  {
+    name : 'BranchList',
+    path: '/BranchList/',
+    component: BranchList,
   },
 ]

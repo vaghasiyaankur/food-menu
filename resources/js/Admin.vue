@@ -5,7 +5,7 @@
         
       </div>
       <f7-view
-        url="/User/"
+        url="/BranchList/"
         :main="true"
         class="safe-areas"
         :master-detail-breakpoint="768"

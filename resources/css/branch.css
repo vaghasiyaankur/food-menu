@@ -167,7 +167,7 @@
     border-bottom: 0.5px solid rgba(153, 153, 153, 0.25);
     background-color: #f4f4f4;
 }
-.user_admin_page .user_info .user_table .customer-detail {
+.user_admin_page .user_info .user_table .branch-detail {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -192,6 +192,18 @@
 .user_admin_page .user_info .user_table thead th,
 .user_admin_page .user_info .user_table tbody td {
     text-wrap: nowrap;
+}
+.user_admin_page .user_info table tbody tr .delete_btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+.user_admin_page .user_info table tbody tr .delete_btn p {
+    font-size: 15px;
+    line-height: 18px;
+    font-weight: 500;
+    color: #f33e3e;
 }
 .user_admin_page .user_info .pagination_wrapper {
     padding: 40px 20px;

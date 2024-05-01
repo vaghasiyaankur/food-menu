@@ -18,7 +18,7 @@
                     <div class="search_bar_left">
                         <div class="search_bar">
                             <form data-search-container=".search-list" data-search-in=".item-title" class="searchbar">
-                                <input type="search" placeholder="Search Order ID" />
+                                <input type="search" placeholder="Search User" />
                                 <i class="searchbar-icon"></i>
                                 <span class="input-clear-button"></span>
                             </form>
