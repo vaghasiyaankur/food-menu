@@ -5,7 +5,10 @@
                 <h2 class="no-margin">Add Branch</h2>
             </div>
             <div class="branch_info">
-                <h3>Add Branch</h3>
+                <div class="add_branch_header">
+                    <i class="f7-icons size-22">arrow_left</i>
+                    <h3>Add Branch</h3>
+                </div>
                 <div class="branch_form">
                     <div class="info_form_top">
                         <div class="branch_name">
