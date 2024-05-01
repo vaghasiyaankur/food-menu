@@ -101,10 +101,7 @@ const props = defineProps({
         default: () => []
     },
     table: [Array, Object],
-    oldOrder: {
-        type: Array,
-        default: () => []
-    }
+    oldOrder: [Array, Object]
 });
 
 const increaseQuantity = (id, kot, kotIndex, kotProductIndex) => {

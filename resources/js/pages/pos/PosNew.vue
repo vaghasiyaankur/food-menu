@@ -100,6 +100,13 @@ const orderNote = ref('');
 // Select Waiter Popup
 const selectWaiter = ref(1);
 
+// Applied Discount Popup
+const discountCategory = ref(0);
+const discountReason = ref('');
+const discountType = ref('fixed');
+const discountPrice = ref('');
+const discountCoupon = ref('');
+
 onMounted(() => {
     setTimeout(() => {
         if(f7.view.main.router.currentRoute.params.id){
@@ -147,7 +154,7 @@ const getTableCurrentDetail = (tableId) => {
             orderNote.value = response.data.order ? response.data.order.note : '';
             selectWaiter.value = response.data.order ? response.data.order.waiter : 1;
         }
-        getTotalAmount();
+        calculateDiscount();
     })
 }
 
@@ -213,6 +220,7 @@ const addProductIntoCart = (id) => {
                         name: allProduct[index].name,   
                         price: allProduct[index].price,
                         food_type: allProduct[index].food_type,
+                        subCategoryId: allProduct[index].sub_category_id,
                         quantity: 1,
                         note: '',
                         ingredient: [],
@@ -220,7 +228,7 @@ const addProductIntoCart = (id) => {
                         extraAmount: 0,
                     });
                 }
-                getTotalAmount();
+                calculateDiscount();
             }
         }   
     })
@@ -233,7 +241,7 @@ const removeProductIntoCart = (index, kot, kotIndex, kotProductIndex) => {
     }else{
         cartProducts.value.splice(index, 1);
     }
-    getTotalAmount();
+    calculateDiscount();
 }
 
 const increaseQuantity = (index, kot, kotIndex, kotProductIndex) => {
@@ -242,7 +250,7 @@ const increaseQuantity = (index, kot, kotIndex, kotProductIndex) => {
     }else{
         cartProducts.value[index].quantity++;
     }
-    getTotalAmount();
+    calculateDiscount();
 }
 
 const decreaseQuantity = (index, kot, kotIndex, kotProductIndex) => {
@@ -251,7 +259,7 @@ const decreaseQuantity = (index, kot, kotIndex, kotProductIndex) => {
     }else{
         cartProducts.value[index].quantity--;
     }
-    getTotalAmount();
+    calculateDiscount();
 }
 
 const openNotePopup = (index, kot, kotIndex, kotProductIndex) => {
@@ -304,8 +312,8 @@ const getTotalAmount = () => {
         const totalValue = product.quantity * (product.price + product.extraAmount);
         total += totalValue;
     }
-    totalAmount.value = total.toFixed(2);
-    subTotal.value = (total - discount.value).toFixed(2);
+    subTotal.value = total.toFixed(2); 
+    totalAmount.value = (total - discount.value).toFixed(2);
 }
 
 const submitIngVar = () => {
@@ -343,7 +351,7 @@ const submitIngVar = () => {
     selectVariation.value = [];
     selectIngredient.value = [];
     extraAmount.value = 0;
-    getTotalAmount();
+    calculateDiscount();
     f7.popup.close(`.add_ingredient_variation_popup`);
 }
 
@@ -401,6 +409,67 @@ const holdKOT = (tableId) => {
     }
 }
 
+const calculateDiscount = () => {
+    if(discountPrice.value){
+        if(discountPrice.value < 0 || (discountType.value == 'percentage' && discountPrice.value > 100)){
+            errorNotification('Please Enter Valid Percentage Value');
+            return;
+        }
+
+        let discountValue = discountPrice.value ? discountPrice.value : 0;
+        let priceTotal = 0;
+
+        if(discountCategory.value == 0){
+            priceTotal = totalAmount.value;
+        }else{
+            if(oldOrder.value){
+                oldOrder.value.kots.forEach(kot => {
+                    kot.kot_products.forEach(kotProduct => {
+                        if(discountCategory.value === 0){
+                            const totalValue = kotProduct.quantity * (kotProduct.price + kotProduct.extra_amount);
+                            priceTotal += totalValue;
+                        }else{
+                            if (kotProduct.subCategoryId === discountCategory.value) {
+                                const totalValue = kotProduct.quantity * (kotProduct.price + kotProduct.extra_amount);
+                                priceTotal += totalValue;
+                            }
+                        }
+                    })
+                });
+            }
+
+            for (const product of cartProducts.value) {
+                if(discountCategory.value === 0){
+                    const totalValue = product.quantity * (product.price + product.extraAmount);
+                    priceTotal += totalValue;
+                }else{
+                    if (product.subCategoryId === discountCategory.value) {
+                        const totalValue = product.quantity * (product.price + product.extraAmount);
+                        priceTotal += totalValue;
+                    }
+                }
+            }
+        }
+
+        
+        let discountCount  = 0;
+
+        if(discountType.value == 'percentage'){
+            discountCount = (parseFloat(discountValue) / 100) * parseFloat(priceTotal);
+        }else{
+            if(parseFloat(discountValue) > parseFloat(priceTotal) && parseFloat(priceTotal) > 0){
+                errorNotification('Add Maximum price of discount is : '+priceTotal);
+                return;
+            }
+            discountCount = parseFloat(priceTotal) > 0 ? discountValue : 0;
+        }
+    
+        discount.value = parseFloat(discountCount).toFixed(2);
+        f7.popup.close(`.applied-discount-popup`);
+    }
+    getTotalAmount();
+}
+
 provide('selectIngredient',selectIngredient);
 provide('selectVariation',selectVariation);
 provide('extraAmount',extraAmount);
@@ -421,5 +490,12 @@ provide('orderNote', orderNote);
 // Select Waiter Popup
 provide('selectWaiter', selectWaiter);
 
+// Applied Discount Popup
+provide('discountCategory', discountCategory);
+provide('discountReason', discountReason);
+provide('discountType', discountType);
+provide('discountCoupon', discountCoupon);
+provide('discountPrice', discountPrice);
+provide('calculateDiscount', calculateDiscount);
 
 </script>

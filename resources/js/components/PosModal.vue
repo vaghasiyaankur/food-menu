@@ -26,6 +26,9 @@
     <!-- ========= WAITER POPUP ========= -->
     <WaiterAssignPopup />
 
+    <!-- ========= APPLIED DISCOUNT POPUP ========= -->
+    <AppliedDiscountPopup />
+
 </template>
 <script setup>
 
@@ -35,6 +38,7 @@ import PersonDetailPopup from './Popup/PersonDetailPopup.vue'
 import NoOfPersonPopup from './Popup/NoOfPersonPopup.vue'
 import OrderNotePopup from './Popup/OrderNotePopup.vue'
 import WaiterAssignPopup from './Popup/WaiterAssignPopup.vue'
+import AppliedDiscountPopup from './Popup/AppliedDiscountPopup.vue'
 
 const props = defineProps({
     // Note Modal

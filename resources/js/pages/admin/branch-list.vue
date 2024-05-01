@@ -14,10 +14,6 @@
                                 <span class="input-clear-button"></span>
                             </form>
                         </div>
-                        <select name="" id="select_filter" placeholder="Date Range">
-                            <option value="1">All</option>
-                            <option value="2">Last 30 Days</option>
-                        </select>
                     </div>
                     <button class="add_btn">
                         <h4 class="no-margin">Add</h4>
@@ -516,19 +512,6 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>
-                <div class="pagination_wrapper">
-                    <p class="no-margin">Showing 15 of 220 Results</p>
-                    <div class="pagination">
-                        <a href="#">&laquo;</a>
-                        <a href="#" class="active">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#">4</a>
-                        <a href="#">5</a>
-                        <a href="#">6</a>
-                        <a href="#">&raquo;</a>
-                    </div>
                 </div>
             </div>
         </div>

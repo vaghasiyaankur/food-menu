@@ -12,6 +12,7 @@ use App\Models\KotProduct;
 use App\Models\KotProductIngredient;
 use App\Models\KotProductVariation;
 use App\Models\Order;
+use App\Models\Product;
 use App\Models\ProductLanguage;
 use App\Models\ProductRestaurantLanguage;
 use App\Models\RestaurantLanguage;
@@ -49,6 +50,9 @@ class PosController extends Controller
                         $name = ProductRestaurantLanguage::where('restaurant_language_id', $restaurantLanguageId)
                                 ->where('product_id', $kotProduct->product_id)
                                 ->value('name');
+                                
+                        $subCategoryId = Product::where('id', $kotProduct->product_id)
+                                                    ->value('sub_category_id');
 
                         $variation = null;
                         $ingredients = [];
@@ -73,6 +77,7 @@ class PosController extends Controller
                             'quantity' => $kotProduct->quantity,
                             'note' => $kotProduct->note,
                             'name' => $name,
+                            'subCategoryId' => $subCategoryId,
                             'price' => $kotProduct->price,
                             'total_price' => $kotProduct->total_price,
                             'extra_amount' => $kotProduct->extra_amount,
@@ -112,7 +117,7 @@ class PosController extends Controller
                 $floor = $table->floor;
                 $floorData = [
                     'id' => $floor->id,
-                    'name' => $floor->name,
+                    'name' => $floor->short_cut,
                 ];
             }
 

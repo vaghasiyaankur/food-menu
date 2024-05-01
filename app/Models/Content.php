@@ -12,7 +12,7 @@ class Content extends Model
 
     protected $guarded = ['id']; 
 
-    public function langauge()
+    public function language()
     {
         return $this->belongsTo(Language::class);
     }

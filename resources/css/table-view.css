@@ -331,7 +331,7 @@
 .no_of_person_Popup,
 .order_note,
 .waiter_popup,
-.applied_disc_Popup,
+.applied-discount-popup,
 .settle_save_Popup,
 .dine_in_order_Popup,
 .delivery_order_Popup,
@@ -435,7 +435,7 @@
 .discount-type-selector .disc-data input:checked + label {
     color: #f33e3e;
 }
-.applied_disc_Popup,
+.applied-discount-popup,
 .settle_save_Popup,
 .dine_in_order_Popup {
     max-width: 531px !important;
@@ -476,7 +476,7 @@
     font-weight: 600;
     padding: 0;
 }
-.applied_disc_Popup .popup_button,
+.applied-discount-popup .popup_button,
 .dine_in_order_Popup .popup_button,
 .delivery_order_Popup .popup_button {
     max-width: 315px !important;
