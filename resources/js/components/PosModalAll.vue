@@ -65,7 +65,7 @@
     
 
     <!-- ========= SETTLE & SAVE POPUP ========= -->
-    <div class="popup settle_save_Popup" id="settle_save_Popup">
+    <div class="popup settle-save-popup" id="settle-save-popup">
         <div class="data-form add_table_view-data-form">
             <div class="text-align-center table_view-popup_title">
                 Applied Discount</div>

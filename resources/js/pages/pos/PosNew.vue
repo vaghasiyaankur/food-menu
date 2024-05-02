@@ -107,6 +107,13 @@ const discountType = ref('fixed');
 const discountPrice = ref('');
 const discountCoupon = ref('');
 
+// Settle & Save Popup
+const paymentType = ref('cash');
+const customerPaid = ref('');
+const returnMoney = ref('');
+const tip = ref('');
+const settlementAmount = ref('');
+
 onMounted(() => {
     setTimeout(() => {
         if(f7.view.main.router.currentRoute.params.id){
@@ -298,23 +305,6 @@ const submitProductNote = (note, npStatus) => {
     f7.popup.close(`.notePopup`);
 }
 
-const getTotalAmount = () => {
-    let total = 0;
-    if(oldOrder.value){
-        oldOrder.value.kots.forEach(kot => {
-            kot.kot_products.forEach(kotProduct => {
-                const totalValue = kotProduct.quantity * (kotProduct.price + kotProduct.extra_amount);
-                total += totalValue;
-            })
-        });
-    }   
-    for (const product of cartProducts.value) {
-        const totalValue = product.quantity * (product.price + product.extraAmount);
-        total += totalValue;
-    }
-    subTotal.value = total.toFixed(2); 
-    totalAmount.value = (total - discount.value).toFixed(2);
-}
 
 const submitIngVar = () => {
     const allProduct = products.value;
@@ -419,17 +409,14 @@ const calculateDiscount = () => {
         let discountValue = discountPrice.value ? discountPrice.value : 0;
         let priceTotal = 0;
 
-        if(discountCategory.value == 0){
-            priceTotal = totalAmount.value;
-        }else{
             if(oldOrder.value){
                 oldOrder.value.kots.forEach(kot => {
                     kot.kot_products.forEach(kotProduct => {
-                        if(discountCategory.value === 0){
+                        if(parseInt(discountCategory.value) === 0){
                             const totalValue = kotProduct.quantity * (kotProduct.price + kotProduct.extra_amount);
                             priceTotal += totalValue;
                         }else{
-                            if (kotProduct.subCategoryId === discountCategory.value) {
+                            if (kotProduct.subCategoryId === parseInt(discountCategory.value)) {
                                 const totalValue = kotProduct.quantity * (kotProduct.price + kotProduct.extra_amount);
                                 priceTotal += totalValue;
                             }
@@ -449,13 +436,11 @@ const calculateDiscount = () => {
                     }
                 }
             }
-        }
 
         
         let discountCount  = 0;
-
         if(discountType.value == 'percentage'){
-            discountCount = (parseFloat(discountValue) / 100) * parseFloat(priceTotal);
+            discountCount = (Math.round(parseFloat(discountValue)) / 100) * Math.round(parseFloat(priceTotal));
         }else{
             if(parseFloat(discountValue) > parseFloat(priceTotal) && parseFloat(priceTotal) > 0){
                 errorNotification('Add Maximum price of discount is : '+priceTotal);
@@ -464,10 +449,33 @@ const calculateDiscount = () => {
             discountCount = parseFloat(priceTotal) > 0 ? discountValue : 0;
         }
     
-        discount.value = parseFloat(discountCount).toFixed(2);
+        discount.value = Math.round(parseFloat(discountCount) * 100) / 100; // Round discount to 2 decimal places
         f7.popup.close(`.applied-discount-popup`);
     }
     getTotalAmount();
+}
+
+
+const getTotalAmount = () => {
+    let total = 0;
+    if(oldOrder.value){
+        oldOrder.value.kots.forEach(kot => {
+            kot.kot_products.forEach(kotProduct => {
+                const totalValue = kotProduct.quantity * (kotProduct.price + kotProduct.extra_amount);
+                total += totalValue;
+            })
+        });
+    }   
+    for (const product of cartProducts.value) {
+        const totalValue = product.quantity * (product.price + product.extraAmount);
+        total += totalValue;
+    }
+    subTotal.value = total.toFixed(2); 
+    totalAmount.value = Math.round((total - discount.value) * 100) / 100;
+}
+
+const settleSavePayment = () => {
+    
 }
 
 provide('selectIngredient',selectIngredient);
@@ -497,5 +505,13 @@ provide('discountType', discountType);
 provide('discountCoupon', discountCoupon);
 provide('discountPrice', discountPrice);
 provide('calculateDiscount', calculateDiscount);
+
+// Settle & Save Popup
+provide('paymentType', paymentType);
+provide('customerPaid', customerPaid);
+provide('returnMoney', returnMoney);
+provide('tip', tip);
+provide('settlementAmount', settlementAmount);
+provide('settleSavePayment', settleSavePayment);
 
 </script>

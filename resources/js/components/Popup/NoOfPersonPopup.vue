@@ -1,5 +1,5 @@
 <template>
-    <div class="popup no_of_person_Popup" id="no_of_person_Popup">
+    <div class="popup no-of-person-popup" id="no-of-person-popup">
         <div class="data-form add_table_view-data-form">
             <div class="text-align-center table_view-popup_title">
                 Number of Person</div>
@@ -25,6 +25,6 @@ import { inject }  from 'vue';
 const numberOfPerson = inject('numberOfPerson');
 
 const setNumberOfPerson = () => {
-    f7.popup.close(`.no_of_person_Popup`);
+    f7.popup.close(`.no-of-person-popup`);
 }
 </script>

@@ -29,6 +29,9 @@
     <!-- ========= APPLIED DISCOUNT POPUP ========= -->
     <AppliedDiscountPopup />
 
+    <!-- ========= SETTLE & SAVE POPUP ========= -->
+    <SettleSavePopup />
+
 </template>
 <script setup>
 
@@ -39,6 +42,7 @@ import NoOfPersonPopup from './Popup/NoOfPersonPopup.vue'
 import OrderNotePopup from './Popup/OrderNotePopup.vue'
 import WaiterAssignPopup from './Popup/WaiterAssignPopup.vue'
 import AppliedDiscountPopup from './Popup/AppliedDiscountPopup.vue'
+import SettleSavePopup from './Popup/SettleSavePopup.vue'
 
 const props = defineProps({
     // Note Modal

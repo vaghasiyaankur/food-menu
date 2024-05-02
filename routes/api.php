@@ -6,6 +6,7 @@ use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\Manager\AuthController;
 use App\Http\Controllers\Manager\CategoryController;
 use App\Http\Controllers\Manager\ComboController;
+use App\Http\Controllers\Manager\CouponController;
 use App\Http\Controllers\Manager\FloorController;
 use App\Http\Controllers\Manager\IngredientController;
 use App\Http\Controllers\Manager\OrderController;
@@ -311,3 +312,17 @@ Route::post('/login-user', [AuthController::class, 'loginUser']);
 Route::post('lockenabledisable', [AuthController::class , 'lockEnableDisable']);
 
 Route::get('getuserpasscode', [AuthController::class , 'userPasscode']);
+
+// ------------------------ Coupon Routes ------------------------ //
+
+Route::get('/get-coupon-list', [CouponController::class, 'getCouponCodes']);
+
+Route::post('/add-coupon',[CouponController::class, 'addCoupon']);
+
+Route::get('/get-coupon/{id}', [CouponController::class, 'getCoupon']);
+
+Route::post('/update-coupon',[CouponController::class, 'updateCoupon']);
+
+Route::post('/delete-coupon',[CouponController::class, 'deleteCoupon']);
+
+Route::post('/apply-coupon',[CouponController::class, 'applyCoupon']);
