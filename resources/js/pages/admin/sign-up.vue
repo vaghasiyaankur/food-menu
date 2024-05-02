@@ -1,18 +1,22 @@
 <template>
     <f7-page>
-        <div class="sign-in-page">
+        <div class="sign-up-page">
             <img class="top-left-img" src="/assets/images/seederImages/log_in/top_left_img.png" alt="top-left-img">
             <img class="left-img" src="/assets/images/seederImages/log_in/left_img.png" alt="left-img">
             <img class="bottom-right-img" src="/assets/images/seederImages/log_in/bottom_right_img.png"
                 alt="bottom-right-img">
-            <div class="sign-in-outer-wrapper">
-                <div class="sign-in-wrapper">
-                    <div class="sign-in-form">
-                        <div class="sign-in-heading">
-                            <h2>Sign In</h2>
-                            <p>Please sign in to continue</p>
+            <div class="sign-up-outer-wrapper">
+                <div class="sign-up-wrapper">
+                    <div class="sign-up-form">
+                        <div class="sign-up-heading">
+                            <h2>Sign Up</h2>
+                            <p>Please fill the details and create account</p>
                         </div>
                         <div class="user-detail">
+                            <div class="name-input">
+                                <h4>Name</h4>
+                                <input type="text" placeholder="Enter name">
+                            </div>
                             <div class="email-input">
                                 <h4>Email</h4>
                                 <input type="email" placeholder="Enter email">
@@ -21,15 +25,10 @@
                                 <h4>Password</h4>
                                 <input type="password" placeholder="Enter password">
                             </div>
-                            <span><a href="#">Forgot Password?</a></span>
                         </div>
-                        <div class="terms-conditions">
-                            <input type="checkbox" name="terms" id="terms" checked>
-                            <label for="terms">I agree with the terms & conditions</label>
-                        </div>
-                        <div class="sign-in-buttons">
-                            <button class="sign-in-btn">
-                                <span>Sign In</span>
+                        <div class="sign-up-buttons">
+                            <button class="sign-up-btn">
+                                <span>Sign Up</span>
                             </button>
                             <p>OR</p>
                             <button class="guest-btn">
@@ -37,11 +36,11 @@
                             </button>
                         </div>
                         <div class="sign-up-link">
-                            <span>Don’t have an account? <a class="sign-up" href="#">Sign Up</a></span>
+                            <span>Already have a account? <a class="sign-in" href="#">Sign In</a></span>
                         </div>
                     </div>
-                    <div class="sign-in-img">
-                        <img src="/assets/images/seederImages/log_in/sign_in-img.png" alt="sign_in-img">
+                    <div class="sign-up-img">
+                        <img src="/assets/images/seederImages/log_in/sign_up-img.png" alt="sign_up-img">
                     </div>
                 </div>
             </div>
