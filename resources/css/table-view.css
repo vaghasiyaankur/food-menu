@@ -328,11 +328,11 @@
 
 /* POP-UP BUTTON */
 .person_details,
-.no_of_person_Popup,
+.no-of-person-popup,
 .order_note,
 .waiter_popup,
 .applied-discount-popup,
-.settle_save_Popup,
+.settle-save-popup,
 .dine_in_order_Popup,
 .delivery_order_Popup,
 .part_payment_Popup,
@@ -394,7 +394,7 @@
 .add-custom-disc,
 .reason-for-adding-custom-disc-outer input,
 .selected-disc-data-input,
-.apply_disc-coupon-code-data,
+.apply-discount-coupon-code-data,
 .settle_save-input,
 .table-selector,
 .dine_in_order-input,
@@ -436,7 +436,7 @@
     color: #f33e3e;
 }
 .applied-discount-popup,
-.settle_save_Popup,
+.settle-save-popup,
 .dine_in_order_Popup {
     max-width: 531px !important;
     width: 100% !important;
@@ -482,13 +482,13 @@
     max-width: 315px !important;
     margin: 30px auto 0;
 }
-.settle_save_Popup .payment-method {
+.settle-save-popup .payment-method {
     margin-top: 7px;
 }
-.settle_save_Popup .payment-method .grid {
+.settle-save-popup .payment-method .grid {
     margin-bottom: 25px;
 }
-.settle_save_Popup .popup_button {
+.settle-save-popup .popup_button {
     max-width: 360px;
     margin: 30px auto 0;
 }

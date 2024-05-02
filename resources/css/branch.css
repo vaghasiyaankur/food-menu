@@ -368,31 +368,31 @@
     color: #999999;
     text-wrap: nowrap;
 }
-.branch_admin_page .branch_info .action-btns {
+.branch_admin_page .branch_info .action-btn {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 20px;
 }
-.branch_admin_page .branch_info .action-btns button {
+.branch_admin_page .branch_info .action-btn button {
     max-width: 170px;
     border: none;
     border-radius: 10px;
 }
-.branch_admin_page .branch_info .action-btns .cancel_btn {
+.branch_admin_page .branch_info .action-btn .cancel_btn {
     padding: 12px 55px;
     background-color: #ffffff;
     color: #f33e3e;
     box-shadow: 0px 1.5px 5px 0px #a6a6a666;
 }
-.branch_admin_page .branch_info .action-btns .save_btn {
+.branch_admin_page .branch_info .action-btn .save_btn {
     padding: 12px 23px;
     background-color: #f33e3e;
     color: #ffffff;
     box-shadow: 2.5px -2.5px 2px 0px #863e2026 inset;
 }
-.branch_admin_page .branch_info .action-btns .cancel_btn span,
-.branch_admin_page .branch_info .action-btns .save_btn span {
+.branch_admin_page .branch_info .action-btn .cancel_btn span,
+.branch_admin_page .branch_info .action-btn .save_btn span {
     font-size: 18px;
     line-height: 22px;
     font-weight: 500;

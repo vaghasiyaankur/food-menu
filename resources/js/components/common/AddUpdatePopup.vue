@@ -81,6 +81,18 @@
                                 <Switch :name="'lock_enable'" @update:changeData="changeData" :value="data.value" :changeStatus="data.changeStatus" />
                             </div>
                         </template>
+                        <template v-if="data.type == 'date-time'">
+                            <div class="data-name text-align-left">
+                                <DateTime 
+                                    :data-type="dataType"
+                                    :options="data.options" 
+                                    :value="data.value"
+                                    :name="data.name"
+                                    :placeholder="data.placeHolder"
+                                    @update:date-time="saveValue(index, null, $event)" 
+                                />
+                            </div>
+                        </template>
                     </div>
                 </template>
                 <div class="display-flex justify-content-center popup_button">
@@ -102,6 +114,7 @@ import Image from '../Form/Image.vue';
 import Radio from '../Form/Radio.vue';
 import DropDown from '../Form/DropDown.vue';
 import Switch from '../Form/Switch.vue';
+import DateTime from '../Form/DateTime.vue';
 import { onBeforeUnmount } from 'vue';
 
 

@@ -42,9 +42,9 @@
             </div>
             <label class="apply_disc-coupon-code-text">Coupon Code</label>
             <div class="apply_disc-coupon-code text-align-left">
-                <input type="text" v-model="discountCoupon" class="apply_disc-coupon-code-data" placeholder="Enter coupon code">
+                <input type="text" v-model="discountCoupon" class="apply-discount-coupon-code-data" placeholder="Enter coupon code">
                 <div class="apply-btn-outer">
-                    <button class="button apply-btn">Apply</button>
+                    <button class="button apply-btn" @click="appliedCoupon">Apply</button>
                 </div>
             </div>
             <div class="display-flex justify-content-center popup_button">
@@ -63,6 +63,7 @@
 
 import { f7 } from 'framework7-vue';
 import { ref, inject, onMounted }  from 'vue';
+import { successNotification, errorNotification, getErrorMessage } from '../../commonFunction.js';
 import axios from 'axios'
 
 const discountSubCategoryList = ref([]);
@@ -85,6 +86,35 @@ const getSubCategoryList = () => {
 }
 const applyDiscount = () => {
     calculateDiscount();
-    // f7.popup.close(`.applied-discount-popup`);
+}
+
+const appliedCoupon = () => {
+    const formData = new FormData();
+    formData.append('discountCoupon', discountCoupon.value);
+
+    axios.post('/api/apply-coupon', formData)
+    .then((response) => {
+        if (response.status === 200) {
+            if(response.data.coupon){
+                const coupon = response.data.coupon;
+                discountType.value = coupon.discount_type;
+                discountPrice
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                .value = coupon.discount_value;
+            }
+            successNotification(response.data.message);
+        }
+    })
+    .catch((error) => {
+        errorNotification(error.response.data.message);
+    });
 }
 </script>

@@ -247,7 +247,7 @@
                 <h3 class="no-margin">Are you Sure ?</h3>
                 <p class="no-margin">Are you Sure want to Delete this
                     Order ?</p>
-                <div class="action_btns">
+                <div class="action-btn">
                     <button class="cancel_btn">
                         <span>Cancel</span>
                     </button>
@@ -274,7 +274,7 @@
                 <h3 class="no-margin">Remove Order ?</h3>
                 <p class="no-margin">Are you Sure want to Remove this
                     Order ?</p>
-                <div class="action_btns">
+                <div class="action-btn">
                     <button class="cancel_btn">
                         <span>Cancel</span>
                     </button>

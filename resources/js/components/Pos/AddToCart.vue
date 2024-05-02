@@ -60,7 +60,8 @@
         @open:note-popup="openNotePopup"
         @remove:cart-product="removeProduct" 
         :table="table"
-        :oldOrder="oldOrder"
+        :old-order="oldOrder"
+        :open-amount-slider="openAmountSlider"
     />
 
     <div class="order-bill-wrapper">
@@ -86,7 +87,7 @@
                 </div>
             </div>
             <hr class="bill-divider">
-            <div class="payment-method">
+            <!-- <div class="payment-method">
                 <div class="grid">
                     <div class="payment-option">
                         <input type="checkbox" id="Cash" name="Cash" value="Cash" checked>
@@ -117,7 +118,7 @@
                         <label for="Parts">Parts</label>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- <div class="billing-btns grid grid-cols-2 margin-bottom">
                 <button class="button kot-btn active" @click="createKot(table ?.id)">Settle</button>
                 <button class="button hold-btn" @click="holdKot(table ?.id)">Discount</button>
@@ -125,7 +126,7 @@
             <div class="billing-btns grid grid-cols-3">
                 <button class="button kot-btn active" @click="createKot(table ?.id)">KOT</button>
                 <button class="button hold-btn" @click="holdKot(table ?.id)">Hold</button>
-                <button class="button ebill-btn">eBill</button>
+                <button class="button ebill-btn" @click="settleBill(table ?.id)">Settle & eBill</button>
             </div>
             <div class="bill-details-extend">
                 <div class="bill-details-extend-inner"></div>
@@ -187,6 +188,10 @@ const holdKot = (tableId) => {
     emit('hold:kot', tableId)
 }
 
+const settleBill = () => {
+    f7.popup.open(`.settle-save-popup`);
+}
+
 const toggleAmountSlider = () => {
     openAmountSlider.value = !openAmountSlider.value
 }
@@ -200,7 +205,7 @@ const personDetails = () => {
 }
 
 const noOfPerson = () => {
-    f7.popup.open(`.no_of_person_Popup`);
+    f7.popup.open(`.no-of-person-popup`);
 }
 
 const orderNote = () => {
@@ -216,7 +221,7 @@ const addDiscount = () => {
 }
 
 const moveToTableView = () => {
-
+    f7.view.main.router.navigate({ url: "/" });
 }
 
 </script>

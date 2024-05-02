@@ -1,5 +1,5 @@
 <template>
-    <div class="cart-products">
+    <div class="cart-products" :class="openAmountSlider ? '' : 'open'" >
         <div class="kot-time-wrapper">
             <div class="kot-time" v-if="oldOrder">
                 <template v-for="(kot,index) in oldOrder.kots" :key="index">
@@ -101,7 +101,8 @@ const props = defineProps({
         default: () => []
     },
     table: [Array, Object],
-    oldOrder: [Array, Object]
+    oldOrder: [Array, Object],
+    openAmountSlider : Boolean
 });
 
 const increaseQuantity = (id, kot, kotIndex, kotProductIndex) => {
