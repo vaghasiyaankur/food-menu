@@ -20,7 +20,10 @@ return new class extends Migration
             $table->string('code')->nullable();
             $table->string('discount_type')->default('fixed');
             $table->float('discount_value')->nullable();
-            $table->timestamp('expiry_date')->nullable();
+            $table->timestamp('starting_date_time')->nullable();
+            $table->timestamp('expiry_date_time')->nullable();
+            $table->enum('added_by', ['admin', 'manager'])->default('manager');
+            $table->unsignedBigInteger('added_by_id')->unsigned();
             $table->timestamps();
         });
     }

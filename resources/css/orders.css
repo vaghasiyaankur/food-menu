@@ -605,15 +605,15 @@
     font-weight: 400;
     color: #999999;
 }
-.order_delete_popup .action_btns,
-.order_remove_popup .action_btns {
+.order_delete_popup .action-btn,
+.order_remove_popup .action-btn {
     margin-top: 35px;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-.order_delete_popup .action_btns .cancel_btn,
-.order_remove_popup .action_btns .cancel_btn {
+.order_delete_popup .action-btn .cancel_btn,
+.order_remove_popup .action-btn .cancel_btn {
     padding: 12px 55px;
     background-color: #ffffff;
     color: #f33e3e;
@@ -623,15 +623,15 @@
     box-shadow: 0px 1.5px 5px 0px #a6a6a666;
     max-width: 170px;
 }
-.order_delete_popup .action_btns span,
-.order_remove_popup .action_btns span {
+.order_delete_popup .action-btn span,
+.order_remove_popup .action-btn span {
     font-size: 18px;
     line-height: 22px;
     font-weight: 500;
     text-wrap: nowrap;
 }
-.order_delete_popup .action_btns .delete_btn,
-.order_remove_popup .action_btns .remove_btn {
+.order_delete_popup .action-btn .delete_btn,
+.order_remove_popup .action-btn .remove_btn {
     padding: 12px 25px;
     background-color: #f33e3e;
     color: #ffffff;

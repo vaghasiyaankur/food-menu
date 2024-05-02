@@ -85,7 +85,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="action-btns">
+                    <div class="action-btn">
                         <button class="cancel_btn">
                             <span>Cancel</span>
                         </button>
