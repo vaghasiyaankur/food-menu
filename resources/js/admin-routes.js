@@ -7,7 +7,10 @@ import user from "./pages/admin/user.vue";
 import branchList from "./pages/admin/branch-list.vue";
 import branch from "./pages/admin/branch.vue";
 import signin from "./pages/admin/sign-in.vue";
-// import login from "./pages/admin/log-in.vue";
+import signup from "./pages/admin/sign-up.vue";
+import forgotpassword from "./pages/admin/forgotPassword.vue";
+import resetpassword from "./pages/admin/resetPassword.vue";
+import verifyemail from "./pages/admin/verifyEmail.vue";
 
 export default [
   {
@@ -55,9 +58,24 @@ export default [
     path: '/signin/',
     component: signin,
   },
-  // {
-  //   name : 'login',
-  //   path: '/login/',
-  //   component: login,
-  // },
+  {
+    name : 'signup',
+    path: '/signup/',
+    component: signup,
+  },
+  {
+    name : 'forgotpassword',
+    path: '/forgotpassword/',
+    component: forgotpassword,
+  },
+  {
+    name : 'resetpassword',
+    path: '/resetpassword/',
+    component: resetpassword,
+  },
+  {
+    name : 'verifyemail',
+    path: '/verifyemail/',
+    component: verifyemail,
+  },
 ]
