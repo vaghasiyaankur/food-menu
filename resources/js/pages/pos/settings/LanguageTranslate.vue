@@ -16,7 +16,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="submit__button">
+                <div class="submit__button margin-left-half">
                     <button class="button button-large button-fill height_40 padding-horizontal bg-pink" @click="updateTraslation()">Save Change</button>
                 </div>
             </div>

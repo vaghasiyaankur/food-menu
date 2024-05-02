@@ -383,7 +383,7 @@
                     <option value="name">Customer name</option>
                 </select>
                 <select name="order_condition_select" id="order_condition_select" placeholder="Select Condition">
-                    <option value="contains"selected>Contains</option>
+                    <option value="contains" selected>Contains</option>
                     <option value="doesnt_contain">Does not contain</option>
                     <option value="equal">Is Equals to</option>
                     <option value="not_equal">Is Not equal to</option>

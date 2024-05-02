@@ -6,18 +6,18 @@
     </div>
     <div class="taxsetting_form">
         <form class="list no-margin tax-setting-form" id="tax-setting-form" @submit.prevent="saveTaxSetting">
-            <input name="id" type="hidden" :value="tax.id" />
+            <input name="id" type="hidden" :value="tax?.id" />
             <div class="item-content item-input taxsetting_form-name no-margin no-padding">
-                <Input name="tax_name" type="text" placeholder="Enter tax name" label="Tax Name" :value="tax.tax_name" />
+                <Input name="tax_name" type="text" placeholder="Enter tax name" label="Tax Name" :value="tax?.tax_name" />
             </div>
             <div class="item-content item-input taxsetting_form-type-charge no-margin no-padding">
                 <div class="item-inner no-padding">
                     <div class="block-title no-margin display-flex">
                         <span class="block-title no-margin"> Type Charge</span>
-                        <Radio :options="taxTypeOption" name="tax_charge_type" :value="tax.tax_charge_type ?? 'percentage'" />
+                        <Radio :options="taxTypeOption" name="tax_charge_type" :value="tax?.tax_charge_type ?? 'percentage'" />
                     </div>
                     <div class="item-input-wrap taxsetting_form-input">
-                        <Input name="tax_charge_amount" type="text" placeholder="Enter tax rate" :value="tax.tax_charge_amount" />
+                        <Input name="tax_charge_amount" type="text" placeholder="Enter tax rate" :value="tax?.tax_charge_amount" />
                     </div>
                 </div>
             </div>
@@ -32,14 +32,14 @@
                 <div v-for="(tax,index) in taxes" :key="tax" class="item-content item-input taxsetting_form-gst no-padding-left">
                     <div class="item-inner no-padding">
                         <div class="w-100 display-flex justify-content-space-between">
-                            <div class="block-title no-margin"> {{ tax.tax_name }}</div>
-                            <Radio :options="statusOption" :name="'status_'+tax.id" :value="tax.status" />
+                            <div class="block-title no-margin"> {{ tax?.tax_name }}</div>
+                            <Radio :options="statusOption" :name="'status_'+tax?.id" :value="tax?.status" />
                         </div>
                         <div class="w-100 display-flex justify-content-space-between align-tems-center note_details gst-details">
-                            <div class="block-title no-margin">{{ tax.tax_charge_amount }} {{ tax.tax_charge_type == 'percentage' ? '%' : currency.currency_code }}</div>
+                            <div class="block-title no-margin">{{ tax?.tax_charge_amount }} {{ tax?.tax_charge_type == 'percentage' ? '%' : currency.currency_code }}</div>
                             <div class="tax-btns">
                                 <span class="edit_tax_button"><Icon name="editIcon" @click="editTax(index)" /></span>
-                                <span class="delete_tax_button"><Icon name="deleteIcon" @click="deleteTax(tax.id)" /></span>
+                                <span class="delete_tax_button"><Icon name="deleteIcon" @click="deleteTax(tax?.id)" /></span>
                             </div>
                         </div>
                     </div>
@@ -86,6 +86,7 @@ const saveTaxSetting = (event) => {
     axios.post('/api/save-tax-detail', formData)
     .then((res) => {
         successNotification(res.data.success);
+        tax.value = {};
         getTaxSetting();
         event.target.reset();
     })
@@ -113,6 +114,7 @@ const deleteTax = (id) => {
     axios.delete(`/api/delete-tax-detail/${id}`)
     .then((res) => {
         successNotification(res.data.success);
+        tax.value = {};
         getTaxSetting();
     })
     .catch(error => {

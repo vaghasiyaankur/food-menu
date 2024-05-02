@@ -79,9 +79,9 @@ class UserController extends Controller
         $data = $request->toArray();
         $data['lock_enable'] = $data['lock_enable'] ?? 0;
         $data['restaurant_id'] = Auth::user()->restaurant_id;
-        $data['password'] = Hash::make($data['password']);
+        $data['password'] = $data['password'] ? Hash::make($data['password']) : '';
 
-        if (isset($data['id']) && $data['id'] != '') {
+        if (isset($data['id']) && $data['id'] != '' && $data['password'] == '') {
             unset($data['password']);
         }
         unset($data['confirm_password']);

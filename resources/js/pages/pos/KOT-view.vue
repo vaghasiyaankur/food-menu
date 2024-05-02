@@ -46,7 +46,7 @@
                                     </div>
                                 </div>
                                 <div class="kot_table-bill-details">
-                                    <div class="ordered-items-details">
+                                    <div class="ordered-items-details" :style="!item?.note ? 'height:240px' : ''">
                                         <template v-for="kot in item?.kots" :key="kot">
                                             <div class="customer-detail">
                                                 <h5 class="no-margin">KOT - {{kot.number}} Time - {{kot.time}}</h5>

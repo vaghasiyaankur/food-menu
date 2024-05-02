@@ -12,11 +12,10 @@ import FoodIngredient from "./pages/pos/menu-management/FoodIngredient.vue";
 import FoodVariation from "./pages/pos/menu-management/FoodVariation.vue";
 import Setting from "./pages/pos/SettingsTab.vue";
 import NewSetting from "./pages/pos/NewSettingsTab.vue";
-import Order from "./pages/pos/Order.vue";
 import TableView from "./pages/restaurant-manager/TableView.vue"
 import KotView from "./pages/pos/KOT-view.vue"
-import completedOrders from "./pages/restaurant-manager/completedOrders.vue"
-import currentOrders from "./pages/restaurant-manager/currentOrders.vue"
+import completedOrders from "./pages/pos/completedOrders.vue"
+import currentOrders from "./pages/pos/currentOrders.vue"
 
 
 export default [

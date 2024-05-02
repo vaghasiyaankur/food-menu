@@ -6,13 +6,13 @@
             :class="{'margin-left': index !== 0 }"
         >
             <input type="radio" 
-                :id="name+'-'+dataType+'-'+opt.value" 
+                :id="name+'-'+opt.value" 
                 :name="name" 
                 :value="opt.value" 
                 :checked="value == opt.value"
                 @change="updateRadioValue"
             >
-            <label :for="name+'-'+dataType+'-'+opt.value">{{opt.label}}</label>
+            <label :for="name+'-'+opt.value">{{opt.label}}</label>
         </span>
     </div>
 </template>

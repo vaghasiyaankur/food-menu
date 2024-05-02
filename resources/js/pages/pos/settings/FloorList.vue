@@ -55,7 +55,7 @@
     </div>
 
     <!-- ========= DELETE CATEGORY POPUP ========= -->
-    <div class="popup removePopup">
+    <div class="popup removeFloorPopup">
         <RemovePopup :title="'Are you sure delete this floor?'" @remove="removeData" />
     </div>
 
@@ -146,14 +146,14 @@ const manipulateField = (formData, label, value = null) => {
 
 const deleteUserData = (id) => {
     deleteId.value = id;
-    f7.popup.open(`.removePopup`);
+    f7.popup.open(`.removeFloorPopup`);
 }
 
 const removeData = () => {
     axios.post('/api/delete-floor',{'id': deleteId.value})
     .then((res) => {
         successNotification(res.data.success);
-        f7.popup.close(`.removePopup`);
+        f7.popup.close(`.removeFloorPopup`);
         getFloors();
     })
 }

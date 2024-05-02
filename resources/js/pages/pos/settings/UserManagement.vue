@@ -4,19 +4,17 @@
             <div class="toolbar toolbar-top tabbar">
                 <div class="toolbar-inner">
                     <div class="display-flex justify-content-space-between align-items-center w-70">
-                        <a href="#AllUsers" class="tab-link tab-link-active"><Icon name="multiUserIcon" /> All Users</a>
-                        <a href="#KitchenManager" class="tab-link"><Icon name="ManagerIcon" /> Kitchen Manager</a>
-                        <a href="#Waiter" class="tab-link"><Icon name="waiterIcon" /> Waiter</a>
+                        <a class="tab-link" :class="{ 'tab-link-active' : dataType == 'all'}" @click="dataType = 'all'"><Icon name="multiUserIcon" /> All Users</a>
+                        <a class="tab-link" :class="{ 'tab-link-active' : dataType == 'manager'}" @click="dataType = 'manager'"><Icon name="ManagerIcon" /> Kitchen Manager</a>
+                        <a class="tab-link" :class="{ 'tab-link-active' : dataType == 'waiter'}" @click="dataType = 'waiter'"><Icon name="waiterIcon" /> Waiter</a>
                     </div>
 
                     <div class="no-padding no-margin">
-                        <button class="button button-raised button-raise text-color-white bg-pink height-40 padding-horizontal padding-vertical-half text-transform-capitalize" data-popup="#addEditUserPopup" @click="f7.popup.open(`.addEditUserPopup`);"><Icon name="plusCircleIcon" class="margin-right-half" /> Add User</button>
+                        <button class="button button-raised button-raise text-color-white bg-pink height-40 padding-horizontal padding-vertical-half text-transform-capitalize" data-popup="#addEditUserPopup" @click="resetFormData();f7.popup.open(`.addEditUserPopup`);"><Icon name="plusCircleIcon" class="margin-right-half" /> Add User</button>
                     </div>
                 </div>
                 <div class="tabs margin-bottom">
-                    <div id="AllUsers" class="tab tab-active"><UserTable :items="userData?.all" :dataType="'all'" @open:edit-popup="showUserPopup" @delete:user="deleteUserData" /></div>
-                    <div id="KitchenManager" class="tab"><UserTable :items="userData?.manager" :dataType="'manager'" @open:edit-popup="showUserPopup" @delete:user="deleteUserData" /></div>
-                    <div id="Waiter" class="tab"><UserTable :items="userData?.waiter" :dataType="'waiter'" @open:edit-popup="showUserPopup" @delete:user="deleteUserData" /></div>
+                    <div id="AllUsers" class="tab tab-active"><UserTable :items="userData[dataType]" :dataType="dataType" @open:edit-popup="showUserPopup" @delete:user="deleteUserData" /></div>
                 </div>
             </div>
         </div>
@@ -25,7 +23,7 @@
         <AddUpdatePopup :title="addUpdateTitle" :form-data-format="addUpdateFormDataFormat" @store:update="saveUserData" />
     </div>
     <!-- ========= DELETE USER POPUP ========= -->
-    <div class="popup removePopup">
+    <div class="popup removeUserPopup">
         <RemovePopup :title="'Are you sure delete this user?'" @remove="removeData"
         />
     </div>
@@ -55,6 +53,7 @@ const addUpdateFormDataFormat = ref([
 
 const userData = ref([]);
 const deleteId = ref('');
+const dataType = ref('all');
 
 const getUser = () => {
     axios.get('/api/get-users')
@@ -85,12 +84,11 @@ const showUserPopup = (id = null) => {
     if(id){
         const user = userData.value.all.find(item => item.id === id);
         updateFormData(user);
-        f7.popup.open(`#addEditUserPopup`);
     }else{
         resetFormData();
     }
     addUpdateTitle.value = id ? 'Edit User' : 'Add User';
-    f7.popup.open(`.addUpdatePopup`);
+    f7.popup.open(`#addEditUserPopup`);
 };
 
 const updateFormData = (user) => {
@@ -113,14 +111,14 @@ const resetFormData = () => {
 
 const deleteUserData = (id) => {
     deleteId.value = id;
-    f7.popup.open(`.removePopup`);
+    f7.popup.open(`.removeUserPopup`);
 }
 
 const removeData = () => {
     axios.delete('/api/delete-user-data/'+deleteId.value)
     .then((res) => {
         successNotification(res.data.success);
-        f7.popup.close(`.removePopup`);
+        f7.popup.close(`.removeUserPopup`);
         getUser();
     })
 }
