@@ -11,6 +11,7 @@ import signup from "./pages/admin/sign-up.vue";
 import forgotpassword from "./pages/admin/forgotPassword.vue";
 import resetpassword from "./pages/admin/resetPassword.vue";
 import verifyemail from "./pages/admin/verifyEmail.vue";
+import branchlistnew from "./pages/admin/branchlistnew.vue";
 
 export default [
   {
@@ -47,6 +48,11 @@ export default [
     name : 'branchList',
     path: '/branchList/',
     component: branchList,
+  },
+  {
+    name : 'branchlistnew',
+    path: '/branchlistnew/',
+    component: branchlistnew,
   },
   {
     name : 'branch',
