@@ -77,6 +77,22 @@
 .table_view_list {
     margin: 30px 30px 0 !important;
 }
+@media screen and (min-width: 992px) {
+    .table_view_list .grid-cols-4 {
+        grid-template-columns: calc((100% / 4) - (75px / 3)) calc(
+                (100% / 4) - (75px / 3)
+            ) calc((100% / 4) - (75px / 3)) calc((100% / 4) - (75px / 3));
+        gap: 25px;
+    }
+}
+@media screen and (max-width: 992px) {
+    .table_view_list .grid-cols-4 {
+        grid-template-columns: calc((100% / 3) - (40px / 3)) calc(
+                (100% / 3) - (40px / 3)
+            ) calc((100% / 3) - (40px / 3));
+        gap: 20px;
+    }
+}
 .table_view_list-floor-heading {
     font-size: 17px !important;
     line-height: 21px;
@@ -94,22 +110,18 @@
     padding: 20px 10px 20px 20px !important;
     border-radius: 10px;
     box-shadow: 0px 1px 15px 0px #3333330d;
+    position: relative;
+    overflow: hidden;
     box-sizing: border-box;
 }
 .ordering_card {
     background-color: #f6fffb;
-    position: relative;
-    overflow: hidden;
 }
 .empty_card {
     background-color: #f6fbff;
-    position: relative;
-    overflow: hidden;
 }
 .blank_card {
     background-color: #fcfcfc;
-    position: relative;
-    overflow: hidden;
 }
 .ordering_card::before {
     content: "";
@@ -201,7 +213,74 @@
     fill: #009049;
     stroke: #009049;
 }
-
+.table_view-inspect_btn button {
+    padding: 8px 9px !important;
+    background: #999999;
+    border-radius: 5px;
+    --f7-touch-ripple-color: #f33e3e;
+}
+.table_view_list .card-type .action-btn {
+    position: absolute;
+    top: 16px;
+    right: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 5px;
+}
+.table_view_list .card-type .action-btn i {
+    font-size: 26px;
+    color: #555555;
+}
+.table_view_list .card-type .action-btn .action-dropdown {
+    max-width: 90px;
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0px 6.03px 17.87px 0px #66666615;
+}
+.table_view_list .card-type .action-btn .action-dropdown .bordershadow {
+    padding: 10px;
+    box-shadow: 0px 27px 80px 0px #66666624;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.table_view_list .card-type .action-btn .action-dropdown .edit-btn,
+.table_view_list .card-type .action-btn .action-dropdown .delete-btn {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 6px;
+}
+.table_view_list .card-type .hold-btn {
+    position: absolute;
+    top: 18px;
+    right: 50px;
+}
+.table_view_list .card-type .hold-btn i {
+    font-size: 24px;
+    color: #555555;
+    transform: scaleX(-1);
+}
+.table_view_list .card-type .hold-btn .delete-hold {
+    position: absolute;
+    top: -11px;
+    right: -7px;
+}
+.table_view_list .card-type .hold-btn .delete-hold button {
+    width: 14px;
+    height: 14px;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+.table_view_list .card-type .hold-btn .delete-hold button svg {
+    width: 14px;
+    height: 14px;
+}
 .empty_card .table_view-people_count_btn button {
     background: #009bfe1f !important;
     color: #009bfe !important;
@@ -217,10 +296,7 @@
     font-weight: 500 !important;
     margin-left: 6px;
 }
-.table_view-inspect_btn button {
-    padding: 8px 9px !important;
-    background: #999999;
-    border-radius: 5px;
+.delete-hold button {
     --f7-touch-ripple-color: #f33e3e;
 }
 .table_view-print_btn button {
@@ -243,17 +319,22 @@
     }
 }
 @media screen and (max-width: 991px) {
-    .table_view-move_btn {
-        margin: 10px 0;
+    .table_view-banner {
+        margin-bottom: 10px !important;
+    }
+    .table_view-features {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
     .table_view-representer {
         display: flex;
         justify-content: center;
-        margin-bottom: 10px;
     }
-    .table_view-reserve_btn,
+    .table_view-move_btn,
     .table_view-add_table_btn {
-        margin-bottom: 10px;
+        max-width: 190px;
+        width: 100%;
     }
 }
 
@@ -578,7 +659,7 @@
 .popup_button button {
     font-size: 16px !important;
 }
-.part_payment_Popup .tabs .tab{
+.part_payment_Popup .tabs .tab {
     background-color: #ffffff !important;
 }
 .split_bill_Popup .tabs .tab {
@@ -741,28 +822,28 @@
 .split_bill_Popup .toolbar-inner {
     padding: 0 55px;
 }
-.split_bill_Popup .popup-btns-for-portion-split{
+.split_bill_Popup .popup-btns-for-portion-split {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.add-more-btn{
+.add-more-btn {
     padding: 12px 33px;
-    background-color: #FFFFFF;
-    border: 1px solid #F33E3E;
+    background-color: #ffffff;
+    border: 1px solid #f33e3e;
     border-radius: 10px;
-    box-shadow: 1px 1px 4px 0px #9999994D;
+    box-shadow: 1px 1px 4px 0px #9999994d;
     z-index: 1;
 }
-.popup-add-more-button{
+.popup-add-more-button {
     font-size: 18px;
     line-height: 22px;
     font-weight: 500;
-    color: #F33E3E;
-    background-color: #FFFFFF;
+    color: #f33e3e;
+    background-color: #ffffff;
     border: none;
 }
-.split_bill_Popup .popup_button{
+.split_bill_Popup .popup_button {
     margin: 50px auto 25px;
 }
 .split_bill_Popup .popup-btns-for-portion-split .cancel_save-btns {
@@ -783,12 +864,12 @@
     box-shadow: 0px 1.5px 5px 0px #a6a6a666;
     z-index: 1;
 }
-.popup-cancel-split-button{
+.popup-cancel-split-button {
     box-shadow: 0px -1px 4px 0px #a6a6a60d;
     font-size: 18px;
     line-height: 22px;
     font-weight: 500;
-    color: #F33E3E;
+    color: #f33e3e;
     background-color: #ffffff;
     border: none;
 }
@@ -800,99 +881,99 @@
     box-shadow: 1px 1px 4px 0px #8f716459;
     z-index: 1;
 }
-.popup-save-split-button{
+.popup-save-split-button {
     font-size: 18px;
     line-height: 22px;
     font-weight: 500;
-    color: #FFFFFF;
+    color: #ffffff;
     background-color: #f33e3e;
     border: none;
 }
-.split_bill_Popup .portion_calc .portion_split-text{
+.split_bill_Popup .portion_calc .portion_split-text {
     font-size: 16px;
     line-height: 19px;
     font-weight: 600;
     color: #555555;
 }
-.split_bill_Popup .portion_calc .portion_split-input{
+.split_bill_Popup .portion_calc .portion_split-input {
     display: flex;
     align-items: center;
     gap: 10px;
     margin-top: 7px;
 }
-.split_bill_Popup .portion_calc .main-portin{
+.split_bill_Popup .portion_calc .main-portin {
     font: 15px;
     line-height: 18px;
     font-weight: 500;
-    color: #38373D;
+    color: #38373d;
 }
-.split_bill_Popup .portion_calc .portion_split-input input{
+.split_bill_Popup .portion_calc .portion_split-input input {
     width: 100%;
 }
-.percentage-split-heading{
+.percentage-split-heading {
     font-size: 18px;
     line-height: 22px;
     font-weight: 600;
     color: #555555;
 }
-.percentage_split_calc{
+.percentage_split_calc {
     margin-top: 15px;
 }
-.percentage_split-text{
+.percentage_split-text {
     font-size: 16px;
     line-height: 19px;
     font-weight: 600;
     color: #555555;
 }
-.percentage-input-1{
+.percentage-input-1 {
     margin-bottom: 20px;
 }
 .percentage_split-input-1,
-.percentage_split-input-2{
+.percentage_split-input-2 {
     margin-top: 7px;
 }
 .percentage_split-input-1 input,
-.percentage_split-input-2 input{
+.percentage_split-input-2 input {
     width: 100%;
 }
-.split_bill_Popup .item_wise{
+.split_bill_Popup .item_wise {
     display: flex;
     gap: 20px;
     align-items: center;
 }
-.split_bill_Popup .add-items-part-1{
+.split_bill_Popup .add-items-part-1 {
     margin-bottom: 20px;
 }
 .split_bill_Popup .all-items,
 .split_bill_Popup .add-items-part-1,
-.split_bill_Popup .add-items-part-2{
+.split_bill_Popup .add-items-part-2 {
     max-width: 290px;
     width: 100% !important;
 }
-.split_bill_Popup .all-items input{
+.split_bill_Popup .all-items input {
     margin: 0;
     margin-right: 10px;
 }
-.split_bill_Popup .all-items label{
+.split_bill_Popup .all-items label {
     font-size: 16px;
     line-height: 19px;
     font-weight: 400;
 }
-.split_bill_Popup .all-items{
+.split_bill_Popup .all-items {
     padding: 0;
     margin: 0 !important;
 }
-.split_bill_Popup .all-items .all-items-selector{
-    background-color: #F33E3E;
-    color: #FFFFFF !important;
+.split_bill_Popup .all-items .all-items-selector {
+    background-color: #f33e3e;
+    color: #ffffff !important;
     font-weight: 600;
     padding: 10px 15px;
     border-radius: 5px;
 }
-.split_bill_Popup .all-items .all-items-selector-input{
-    accent-color: #FFFFFF;
+.split_bill_Popup .all-items .all-items-selector-input {
+    accent-color: #ffffff;
 }
-.split_bill_Popup .all-items .all-items-list{
+.split_bill_Popup .all-items .all-items-list {
     list-style: none;
     border: 1px solid rgba(153, 153, 153, 0.4);
     border-bottom-right-radius: 10px;
@@ -900,43 +981,43 @@
     border-top: none;
     padding: 15px 15px 0 !important;
 }
-.split_bill_Popup .all-items .all-items-list .all_items-item{
+.split_bill_Popup .all-items .all-items-list .all_items-item {
     margin-bottom: 15px;
 }
-.split_bill_Popup .add-in-items{
+.split_bill_Popup .add-in-items {
     max-width: 290px;
     width: 100%;
 }
-.split_bill_Popup .add-in-items .add-items-part-banner{
+.split_bill_Popup .add-in-items .add-items-part-banner {
     padding: 5px;
-    background-color: #F33E3E;
+    background-color: #f33e3e;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     border-radius: 5px;
 }
-.split_bill_Popup .add-in-items .add-items-to-list-btn{
+.split_bill_Popup .add-in-items .add-items-to-list-btn {
     padding: 5px 10px;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     border: none;
     max-width: 52px;
     border-radius: 3px;
 }
-.split_bill_Popup .add-in-items .add-items-to-list-btn p{
+.split_bill_Popup .add-in-items .add-items-to-list-btn p {
     font-size: 16px;
     line-height: 19px;
     font-weight: 500;
     text-align: center;
-    color: #F33E3E;
+    color: #f33e3e;
 }
-.split_bill_Popup .add-in-items h4{
+.split_bill_Popup .add-in-items h4 {
     margin-left: 10px !important;
-    color: #FFFFFF;
+    color: #ffffff;
     font-size: 16px;
     line-height: 19px;
     font-weight: 600;
 }
-.split_bill_Popup .add-in-items .list-item-show{
+.split_bill_Popup .add-in-items .list-item-show {
     box-sizing: border-box;
     width: 100%;
     height: 123px;
@@ -946,7 +1027,7 @@
     border-top: none;
 }
 
-.split_bill_Popup .wave-image-content{
+.split_bill_Popup .wave-image-content {
     position: absolute;
     width: 100%;
     bottom: 0;

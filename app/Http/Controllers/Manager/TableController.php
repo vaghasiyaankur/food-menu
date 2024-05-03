@@ -595,4 +595,10 @@ class TableController extends Controller
         return response()->json(['message' => 'Table added/updated successfully'], 200);
     }
 
+    public function getTable($id)
+    {
+        $table = Table::find($id);
+        return response()->json($table);
+    }
+
 }
