@@ -71,9 +71,12 @@ const noOfPersonFillUp = inject('noOfPersonFillUp');
 const assignDeliveryFillUp = inject('assignDeliveryFillUp');
 const orderNoteFillUp = inject('orderNoteFillUp');
 const discountFillUp = inject('discountFillUp');
+const saveData = inject('saveData');
+const table = inject('table');
 
 const changeFoodReceiveType = (type) => {
     foodReceivedType.value = type;
+    saveData(table.value.id);
 }
 const personDetails = () => {
     f7.popup.open(`.person_details`);
