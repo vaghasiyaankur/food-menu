@@ -747,9 +747,9 @@ code {
   translate: -50% -50%;
 }
 
-.popup:not(.popup-tablet-fullscreen).modal-in{
+/* .popup:not(.popup-tablet-fullscreen).modal-in{
   transform: translate(0%, -15%) !important;
-}
+} */
 
 .popup_button .button {
   border-radius: 10px;
