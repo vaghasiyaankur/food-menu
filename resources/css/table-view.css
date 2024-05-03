@@ -94,22 +94,18 @@
     padding: 20px 10px 20px 20px !important;
     border-radius: 10px;
     box-shadow: 0px 1px 15px 0px #3333330d;
+    position: relative;
+    overflow: hidden;
     box-sizing: border-box;
 }
 .ordering_card {
     background-color: #f6fffb;
-    position: relative;
-    overflow: hidden;
 }
 .empty_card {
     background-color: #f6fbff;
-    position: relative;
-    overflow: hidden;
 }
 .blank_card {
     background-color: #fcfcfc;
-    position: relative;
-    overflow: hidden;
 }
 .ordering_card::before {
     content: "";
@@ -201,7 +197,41 @@
     fill: #009049;
     stroke: #009049;
 }
-
+.table_view_list .card-type .action-btn{
+    position: absolute;
+    top: 12px;
+    right: 2px;
+}
+.table_view_list .card-type .action-btn i{
+    font-size: 20px;
+    color: #555555;
+}
+.table_view_list .card-type .hold-btn{
+    position: absolute;
+    top: 14px;
+    right: 35px;
+}
+.table_view_list .card-type .hold-btn i{
+    font-size: 18px;
+    color: #555555;
+    transform: scaleX(-1);
+}
+.table_view_list .card-type .hold-btn .delete-hold{
+    position: absolute;
+    top: -7px;
+    right: -5px;
+}
+.table_view_list .card-type .hold-btn .delete-hold button{
+    width: 9px;
+    height: 9px;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+.table_view_list .card-type .hold-btn .delete-hold button svg{
+    width: 9px;
+    height: 9px;
+}
 .empty_card .table_view-people_count_btn button {
     background: #009bfe1f !important;
     color: #009bfe !important;
@@ -217,10 +247,7 @@
     font-weight: 500 !important;
     margin-left: 6px;
 }
-.table_view-inspect_btn button {
-    padding: 8px 9px !important;
-    background: #999999;
-    border-radius: 5px;
+.delete-hold button {
     --f7-touch-ripple-color: #f33e3e;
 }
 .table_view-print_btn button {
