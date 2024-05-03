@@ -41,7 +41,7 @@
             <template v-for="(floor, index) in floorList" :key="index">
                 <h4 class="table_view_list-floor-heading no-margin no-padding">{{ floor.name }}</h4>
                 <div
-                    class="grid grid-cols-5 medium-grid-cols-3 grid-gap-25 grid-gap-20 align-items-center floor-divider">
+                    class="grid grid-cols-4 medium-grid-cols-3 align-items-center floor-divider">
                     <!-- empty_card -->
                     <template v-for="(table, ind) in floor.tables" :key="ind">
                         <div v-if="table.order" class="card-type table_view-ground_floor-card ordering_card">
@@ -49,7 +49,7 @@
                                 <div class="action-btn">
                                     <i class="icon f7-icons">
                                         ellipsis_vertical</i>
-                                    <div class="action-dropdown">
+                                    <div class="action-dropdown display-none">
                                         <div class="bordershadow">
                                             <div class="edit-btn">
                                                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
