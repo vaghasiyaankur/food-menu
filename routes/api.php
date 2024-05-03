@@ -218,6 +218,8 @@ Route::post('change-floor-list',[TableController::class, 'changeFloorList']);
 
 Route::post('add-minutes-order',[TableController::class, 'addMinutesInOrder']);
 
+Route::get('/get-table/{id}', [TableController::class, 'getTable']);
+
 // ------------------------ Floor Routes ------------------------ //
 
 Route::get('get-floors',[FloorController::class , 'getFloors']);
