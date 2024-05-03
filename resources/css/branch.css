@@ -577,4 +577,22 @@
         max-width: 100%;
         flex: 100%;
     }
+    .branch-list-new-admin-page .branch-list-header .add-branch-btn {
+        padding: 10px 20px;
+        max-width: 150px;
+    }
+}
+@media only screen and (max-width: 380px){
+    .branch-list-new-admin-page .branch-list-header {
+        margin-bottom: 35px;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+    .branch-list-new-admin-page .branch-list-info {
+        row-gap: 30px;
+    }
+    .branch-list-new-admin-page .branch-list-header .add-branch-btn {
+        max-width: 100%;
+    }
 }

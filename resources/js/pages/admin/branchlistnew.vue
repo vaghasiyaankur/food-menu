@@ -15,7 +15,7 @@
                     <div class="display-flex">
                         <img src="/assets/images/seederImages/dashboard/branch_1.png" alt="branch_1-img">
                     </div>
-                    <input type="checkbox" id="dropdown" name="dropdown 1" value="dropdown" checked>
+                    <input type="checkbox" id="dropdown" name="dropdown 1" value="dropdown">
                     <label for="dropdown">
                         <i class="f7-icons dropdown-click">chevron_down</i>
                         <div class="banner">
@@ -94,7 +94,7 @@
                     <div class="display-flex">
                     <img src="/assets/images/seederImages/dashboard/branch_1.png" alt="branch_1-img">
                 </div>
-                    <input type="checkbox" id="dropdown 2" name="dropdown 2" value="dropdown 2" checked>
+                    <input type="checkbox" id="dropdown 2" name="dropdown 2" value="dropdown 2">
                     <label for="dropdown 2">
                         <i class="f7-icons dropdown-click">chevron_down</i>
                         <div class="banner">
@@ -173,7 +173,7 @@
                     <div class="display-flex">
                     <img src="/assets/images/seederImages/dashboard/branch_1.png" alt="branch_1-img">
                 </div>
-                    <input type="checkbox" id="dropdown 3" name="dropdown 3" value="dropdown 3" checked>
+                    <input type="checkbox" id="dropdown 3" name="dropdown 3" value="dropdown 3">
                     <label for="dropdown 3">
                         <i class="f7-icons dropdown-click">chevron_down</i>
                         <div class="banner">
@@ -252,7 +252,7 @@
                     <div class="display-flex">
                     <img src="/assets/images/seederImages/dashboard/branch_1.png" alt="branch_1-img">
                 </div>
-                    <input type="checkbox" id="dropdown 4" name="dropdown 4" value="dropdown 4" checked>
+                    <input type="checkbox" id="dropdown 4" name="dropdown 4" value="dropdown 4">
                     <label for="dropdown 4">
                         <i class="f7-icons dropdown-click">chevron_down</i>
                         <div class="banner">
