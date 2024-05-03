@@ -197,14 +197,44 @@
     fill: #009049;
     stroke: #009049;
 }
+.table_view-inspect_btn button {
+    padding: 8px 9px !important;
+    background: #999999;
+    border-radius: 5px;
+    --f7-touch-ripple-color: #f33e3e;
+}
 .table_view_list .card-type .action-btn{
     position: absolute;
     top: 12px;
-    right: 2px;
+    right: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 5px;
 }
 .table_view_list .card-type .action-btn i{
     font-size: 20px;
     color: #555555;
+}
+.table_view_list .card-type .action-btn .action-dropdown{
+    max-width: 90px;
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    box-shadow: 0px 6.03px 17.87px 0px #66666615;
+}
+.table_view_list .card-type .action-btn .action-dropdown .bordershadow{
+    padding: 10px;
+    box-shadow: 0px 27px 80px 0px #66666624;
+}
+.table_view_list .card-type .action-btn .action-dropdown .edit-btn,
+.table_view_list .card-type .action-btn .action-dropdown .delete-btn{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 6px;
 }
 .table_view_list .card-type .hold-btn{
     position: absolute;
