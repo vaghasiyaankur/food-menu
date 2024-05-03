@@ -6,7 +6,8 @@
                 Order
                 {{ table.order ? '#'+table.order.id : '' }}
             </div>
-            <div class="table_number">{{ floorName + ' Table No. ' +  table ?.table_number}}</div>
+            <div class="floor-name">{{floorName}}</div>
+            <div class="table_number">{{ ' Table No. ' +  table ?.table_number}}</div>
         </div>
         <CartHeader />
     </div>

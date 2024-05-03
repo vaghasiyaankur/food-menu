@@ -1,8 +1,8 @@
 <template>
     <f7-page color="bg-color-white pos-page">
         <div class="pos-page-content">
-            <div class="product-section flex-shrink-0">
-                <div class="flex-shrink-0 category-search padding-horizontal padding-vertical-half">
+            <div class="product-section">
+                <div class="category-search">
                     <CategorySearch
                         :categories="categories"
                         :fetchProductsBySubcategory="fetchProductsBySubcategory"

@@ -1,6 +1,6 @@
 <template>
     <div class="pos-product-section">
-        <div class="grid grid-cols-3 grid-gap-25 text-align-center padding">
+        <div class="grid grid-cols-3 medium-grid-cols-2 grid-gap-25 text-align-center">
             <f7-card class="no-margin" v-for="(product,index) in products" :key="index">
                 <f7-card-content>
                     <div class="food-type-icon">
