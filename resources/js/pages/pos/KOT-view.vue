@@ -90,12 +90,7 @@
             <template v-else>
                 <div>
                     <div class="no_order">
-                        <div class="search__img text-align-center">
-                            <img src="/images/Empty-pana 1.png" alt="serach">
-                        </div>
-                        <div class="no_order_text text-align-center">
-                            <p class="no-margin">Empty KOT List</p>
-                        </div>
+                        <NoValueFound title="Empty KOT List" />
                     </div>
                 </div>
             </template>
@@ -187,6 +182,7 @@ import { ref } from 'vue';
 import Icon from '../../components/Icon.vue';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import NoValueFound from '../../components/NoValueFound.vue';
 // Extend dayjs with the relativeTime plugin
 dayjs.extend(relativeTime);
 

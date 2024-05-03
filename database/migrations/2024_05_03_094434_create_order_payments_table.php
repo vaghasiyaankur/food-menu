@@ -13,18 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('kots', function (Blueprint $table) {
+        Schema::create('order_payments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('order_id')->nullable();
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
-            $table->unsignedBigInteger('restaurant_id')->nullable();
-            $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
-            $table->time('time')->nullable();
-            $table->string('note')->nullable();
-            $table->integer('number')->nullable();
-            $table->float('price')->nullable();
-            $table->boolean('is_serve')->default(0);
-            $table->string('food_received_type')->nullable();
+            $table->string('payment_type')->nullable();
+            $table->string('customer_paid')->default(0);
+            $table->string('return_to_customer')->default(0);
+            $table->string('tip')->default(0);
+            $table->string('settle_amount')->default(0);
             $table->timestamps();
         });
     }
@@ -36,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kots');
+        Schema::dropIfExists('order_payments');
     }
 };

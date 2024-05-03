@@ -98,17 +98,7 @@ const appliedCoupon = () => {
             if(response.data.coupon){
                 const coupon = response.data.coupon;
                 discountType.value = coupon.discount_type;
-                discountPrice
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                .value = coupon.discount_value;
+                discountPrice.value = coupon.discount_value;
             }
             successNotification(response.data.message);
         }

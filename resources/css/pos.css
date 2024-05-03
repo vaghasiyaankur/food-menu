@@ -1048,7 +1048,25 @@ textarea {
     background: #999999;
     border-radius: 5px;
 }
-.ordered-items-details{
+.ordered-items-full-details{
+    height: 250px;
+    overflow: auto;
+}
+
+.ordered-kot-items-details{
     height: 190px;
     overflow: auto;
+    padding: 15px;
+}
+.applied-discount-value{
+    display: flex;
+    justify-content: space-between;
+}
+.pos-fill-up-success{
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #f43d3d;
+    padding: 5px 3px;
+    border-radius: 50%;
 }

@@ -226,6 +226,40 @@ class PosController extends Controller
         return response()->json(['success'=>'KOT Added Successfully.']);
     }
 
+    public function saveData(Request $request){
+
+        $restaurantId = CustomerHelper::getRestaurantId();
+        $table = Table::with(['orders' => function ($query) {
+            $query->where('finish_time', '=', null)->where('finished', '=', 0)->latest()->take(1);
+        }, 'floor'])
+        ->where('id', $request->tableId)
+        ->where('restaurant_id', $restaurantId)
+        ->first();
+
+        if($table->orders->isNotEmpty()){
+            $order = $table->orders->first();
+        }else{
+            $order = new Order();
+            $order->table_id = $request->tableId;
+            $order->restaurant_id = $restaurantId;
+            $order->start_time = date('Y-m-d H:i:s');
+            $order->save();
+        }
+
+
+        Order::where('id', $order->id)->update([
+            'person' => $request->numberOfPerson,
+            'phone' => $request->personNumber,
+            'name' => $request->personName,
+            'address' => $request->personAddress,
+            'locality' => $request->personLocality,
+            'note' => $request->orderNote,
+            'waiter_id' => $request->selectWaiter
+        ]);
+
+        return response()->json(['success'=>'Data Added Successfully.']);
+    }
+
     public function holdKOT(Request $request){
         $restaurantId = CustomerHelper::getRestaurantId();
 

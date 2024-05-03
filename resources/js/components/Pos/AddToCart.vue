@@ -9,49 +9,7 @@
             <div class="floor-name">{{floorName}}</div>
             <div class="table_number">{{ ' Table No. ' +  table ?.table_number}}</div>
         </div>
-        <div class="dine-options grid grid-cols-3">
-            <button class="button button-small food-received-type" 
-                    :class="{'button-raised active' : foodReceivedType == 'dine_in'}"
-                    @click="changeFoodReceiveType('dine_in')"
-            >
-                Dine In
-            </button>
-            <button class="button button-small food-received-type" 
-                    :class="{'button-raised active' : foodReceivedType == 'takeaway'}"
-                    @click="changeFoodReceiveType('takeaway')"
-            >
-                Takeaway
-            </button>
-            <button class="button button-small food-received-type" 
-                    :class="{'button-raised active' : foodReceivedType == 'delivery'}"
-                    @click="changeFoodReceiveType('delivery')"
-            >
-                Delivery
-            </button>
-        </div>
-        <div class="order-specific-options grid">
-            <button class="button button-small order-option tooltip button-raised active" @click="personDetails()">
-                <Icon name="singlePerson" />
-                <span class="tool-tip-text">Details</span>
-            </button>
-            <button class="button button-small order-option tooltip" @click="noOfPerson()">
-                <Icon name="person" />
-                <span class="tool-tip-text">No. of Person</span>
-            </button>
-            <button class="button button-small order-option tooltip" @click="orderNote()">
-                <Icon name="note" />
-                <span class="tool-tip-text">Note</span>
-            </button>
-            <button class="button button-small order-option tooltip"  @click="waiterAssign()">
-                <Icon name="waiterIcon" />
-                <span class="tool-tip-text">Waiter</span>
-            </button>
-            <button class="button button-small order-option tooltip"  @click="addDiscount()">
-                <Icon name="discountIcon" />
-                <span class="tool-tip-text">Discount</span>
-            </button>
-            <!-- <button class="button button-small deactive">{{ floorName }}</button> -->
-        </div>
+        <CartHeader />
     </div>
 
     <CartProduct 
@@ -64,7 +22,6 @@
         :old-order="oldOrder"
         :open-amount-slider="openAmountSlider"
     />
-
     <div class="order-bill-wrapper">
         <button :class="openAmountSlider ? 'btn-order-detail-expand' : 'btn-order-detail-collapse'" @click="toggleAmountSlider"></button>
         <div class="order-bill">
@@ -88,46 +45,10 @@
                 </div>
             </div>
             <hr class="bill-divider">
-            <!-- <div class="payment-method">
-                <div class="grid">
-                    <div class="payment-option">
-                        <input type="checkbox" id="Cash" name="Cash" value="Cash" checked>
-                        <label for="Cash">Cash</label>
-                    </div>
-                    <div class="payment-option">
-                        <input type="checkbox" id="Card" name="Card" value="Card">
-                        <label for="Card">Card</label>
-                    </div>
-                    <div class="payment-option">
-                        <input type="checkbox" id="Split" name="Split" value="Split">
-                        <label for="Split">Split</label>
-                    </div>
-                    <div class="payment-option">
-                        <input type="checkbox" id="Other" name="Other" value="Other">
-                        <label for="Other">Other</label>
-                    </div>
-                    <div class="payment-option">
-                        <input type="checkbox" id="UPI" name="UPI" value="UPI">
-                        <label for="UPI">UPI</label>
-                    </div>
-                    <div class="payment-option">
-                        <input type="checkbox" id="Due" name="Due" value="Due">
-                        <label for="Due">Due</label>
-                    </div>
-                    <div class="payment-option">
-                        <input type="checkbox" id="Parts" name="Parts" value="Parts">
-                        <label for="Parts">Parts</label>
-                    </div>
-                </div>
-            </div> -->
-            <!-- <div class="billing-btns grid grid-cols-2 margin-bottom">
-                <button class="button kot-btn active" @click="createKot(table ?.id)">Settle</button>
-                <button class="button hold-btn" @click="holdKot(table ?.id)">Discount</button>
-            </div> -->
             <div class="billing-btns grid grid-cols-3">
-                <button class="button kot-btn active" @click="createKot(table ?.id)">KOT</button>
-                <button class="button hold-btn" @click="holdKot(table ?.id)">Hold</button>
-                <button class="button ebill-btn" @click="settleBill(table ?.id)">Settle & eBill</button>
+                <button class="button kot-btn active" @click="createKot(table?.id)">KOT</button>
+                <button class="button hold-btn" @click="holdKot(table?.id)">Hold</button>
+                <button class="button ebill-btn" @click="oldOrder || cartProducts?.length > 0 ? settleBill(table?.id): ''">Settle & eBill</button>
             </div>
             <div class="bill-details-extend">
                 <div class="bill-details-extend-inner"></div>
@@ -138,7 +59,8 @@
 <script setup>
 import { f7 } from "framework7-vue"
 import CartProduct from './CartProduct.vue'
-import { ref, inject } from 'vue'
+import CartHeader from './CartHeader.vue'
+import { ref } from 'vue'
 import Icon from '../../components/Icon.vue';
 
 const emit = defineEmits(['increase:quantity', 'decrease:quantity','open:note-popup', 'remove:cart-product', 'create:kot', 'hold:kot']);
@@ -159,8 +81,6 @@ const props = defineProps({
 });
 
 
-const foodReceivedType = inject('foodReceivedType');
-
 const increaseQuantity = (index, kot, kotIndex, kotProductIndex) => {
     emit('increase:quantity', index, kot, kotIndex, kotProductIndex);
 }
@@ -172,11 +92,6 @@ const decreaseQuantity = (index, kot, kotIndex, kotProductIndex) => {
 const openNotePopup = (index, kot, kotIndex, kotProductIndex) => {
     emit('open:note-popup', index, kot, kotIndex, kotProductIndex);
 }
-
-// const getTotalAmount = () => {
-//     const zero = 0;
-//     return zero.toFixed(2);
-// }
 
 const removeProduct = (index, kot, kotIndex, kotProductIndex) => {
     emit('remove:cart-product', index, kot, kotIndex, kotProductIndex)
@@ -195,30 +110,6 @@ const settleBill = () => {
 
 const toggleAmountSlider = () => {
     openAmountSlider.value = !openAmountSlider.value
-}
-
-const changeFoodReceiveType = (type) => {
-    foodReceivedType.value = type;
-}
-
-const personDetails = () => {
-    f7.popup.open(`.person_details`);
-}
-
-const noOfPerson = () => {
-    f7.popup.open(`.no-of-person-popup`);
-}
-
-const orderNote = () => {
-    f7.popup.open(`.order_note`);
-}
-
-const waiterAssign = () => {
-    f7.popup.open(`.waiter_popup`);
-}
-
-const addDiscount = () => {
-    f7.popup.open(`.applied-discount-popup`);
 }
 
 const moveToTableView = () => {

@@ -1,5 +1,5 @@
 <template>
-    <div class="popup waiter_popup" id="waiter_popup">
+    <div class="popup waiter-popup" id="waiter-popup">
         <div class="data-form add_table_view-data-form">
             <div class="text-align-center table_view-popup_title">
                 Assign Waiter</div>
@@ -34,8 +34,11 @@ import { f7 } from 'framework7-vue';
 import { inject }  from 'vue';
 
 const selectWaiter = inject('selectWaiter');
+const saveData = inject('saveData');
+const table = inject('table');
 
 const setOrderNote = () => {
-    f7.popup.close(`.waiter_popup`);
+    saveData(table.value.id);
+    // f7.popup.close(`.waiter-popup`);
 }
 </script>
