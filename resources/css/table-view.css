@@ -243,17 +243,22 @@
     }
 }
 @media screen and (max-width: 991px) {
-    .table_view-move_btn {
-        margin: 10px 0;
+    .table_view-banner {
+        margin-bottom: 10px !important;
+    }
+    .table_view-features{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
     .table_view-representer {
         display: flex;
         justify-content: center;
-        margin-bottom: 10px;
     }
-    .table_view-reserve_btn,
+    .table_view-move_btn,
     .table_view-add_table_btn {
-        margin-bottom: 10px;
+        max-width: 190px;
+        width: 100%;
     }
 }
 

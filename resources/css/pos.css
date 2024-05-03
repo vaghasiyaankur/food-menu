@@ -8,12 +8,13 @@
     align-items: flex-start;
 }
 .product-section {
-    width: calc(100% - 463px);
+    width: calc(100dvw - 463px);
     background-color: #f4f4f4;
 }
 
 .category-slider-content {
     width: 90%;
+    position: relative;
 }
 
 .register-button:hover,
@@ -30,6 +31,23 @@
 .demo-swiper-multiple {
     height: 75px;
     width: 85%;
+}
+.category-slider-content .swiper{
+    margin: 20px 0 20px;
+    max-height: 53px;
+    overflow: visible;
+}
+.category-slider-content .swiper .swiper-slide{
+    min-width: 126px;
+    margin: 0 !important;
+}
+.category-slider-content .swiper .slider-category-name{
+    text-align: center;
+    margin: 0 0 0 10px;
+}
+.category-slider-content .swiper-wrapper{
+    max-height: 53px;
+    gap: 15px;
 }
 .demo-swiper .swiper-slide,
 .demo-swiper-multiple .swiper-slide {
@@ -59,7 +77,7 @@
 .pos-page .demo-swiper-multiple .swiper-slide {
     background: #ffffff;
     border-radius: 40px;
-    height: 53px;
+    max-height: 53px;
     padding: 0 5px;
     box-shadow: 0px 1px 5px 0px #0000001a;
     position: relative;
@@ -231,8 +249,18 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox {
 .pos-product-section {
     background-color: #fbfbfb;
     overflow: auto;
-    height: 80dvh !important;
+    height: calc(100dvh - 193px) !important;
     scrollbar-width: none;
+    padding: 20px 16px;
+}
+@media screen and (max-width: 991px) {
+    .pos-product-section .medium-grid-cols-2{
+        grid-template-columns: auto auto;
+    }
+    .pos-product-section .food-type-icon{
+        top: 6px;
+        right: 8px !important;
+    }
 }
 .grid {
     display: grid;
@@ -242,7 +270,8 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox {
 }
 .pos-product-section .food-type-icon {
     position: absolute;
-    right: 13px;
+    top: 12px;
+    right: 12px;
 }
 .pos-product-section .product-summary .product_name,
 .pos-product-section .product-summary .product_price {
@@ -281,7 +310,11 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox {
 .add-to-cart-section.order-summary {
     box-shadow: 0px 2px 8px 0px #2222220f;
 }
+.add-to-cart-section .order_number svg{
+    margin-right: 5px;
+}
 .add-to-cart-section .order_number,
+.add-to-cart-section .floor-name,
 .add-to-cart-section .table_number {
     font-size: 16px;
     line-height: 19px;
@@ -289,6 +322,10 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox {
 .add-to-cart-section .order_number {
     font-weight: 600;
     color: #38373d;
+}
+.add-to-cart-section .floor-name{
+    font-weight: 600;
+    color: #555555;
 }
 .add-to-cart-section .table_number {
     font-weight: 500;

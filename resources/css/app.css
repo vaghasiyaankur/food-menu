@@ -741,9 +741,10 @@ code {
 .popup{
   width: 378px !important;
   height: auto !important;
-  top: 20% !important;
-  left: 35% !important;
+  top: 50% !important;
+  left: 50% !important;
   margin: 0 !important;
+  translate: -50% -50%;
 }
 
 .popup:not(.popup-tablet-fullscreen).modal-in{
