@@ -436,6 +436,7 @@
     align-items: flex-start;
     flex-wrap: wrap;
     gap: 25px;
+    row-gap: 30px;
 }
 .branch-list-new-admin-page .branch-list-info .branch-card {
     position: relative;
@@ -466,6 +467,8 @@
 .branch-list-new-admin-page .branch-list-info .branch-card img {
     border-radius: 10px;
     max-width: 100%;
+    flex-grow: 1;
+    flex-shrink: 1;
 }
 .branch-list-new-admin-page .branch-list-info .branch-card input {
     display: none;
@@ -558,8 +561,20 @@
     gap: 10px;
 }
 @media only screen and (max-width: 991px) {
+    .branch-list-new-admin-page .branch-list-info {
+        gap: 20px;
+    }
     .branch-list-new-admin-page .branch-list-info .branch-card {
-        max-width: calc((100% / 2) - (25px / 2));
+        max-width: calc((100% / 2) - (20px / 2));
         flex: calc(100% / 2);
+    }
+}
+@media only screen and (max-width: 577px) {
+    .branch-list-new-admin-page .branch-list-info {
+        row-gap: 40px;
+    }
+    .branch-list-new-admin-page .branch-list-info .branch-card {
+        max-width: 100%;
+        flex: 100%;
     }
 }
