@@ -63,7 +63,6 @@
         :old-order="oldOrder"
         :open-amount-slider="openAmountSlider"
     />
-
     <div class="order-bill-wrapper">
         <button :class="openAmountSlider ? 'btn-order-detail-expand' : 'btn-order-detail-collapse'" @click="toggleAmountSlider"></button>
         <div class="order-bill">
@@ -87,46 +86,10 @@
                 </div>
             </div>
             <hr class="bill-divider">
-            <!-- <div class="payment-method">
-                <div class="grid">
-                    <div class="payment-option">
-                        <input type="checkbox" id="Cash" name="Cash" value="Cash" checked>
-                        <label for="Cash">Cash</label>
-                    </div>
-                    <div class="payment-option">
-                        <input type="checkbox" id="Card" name="Card" value="Card">
-                        <label for="Card">Card</label>
-                    </div>
-                    <div class="payment-option">
-                        <input type="checkbox" id="Split" name="Split" value="Split">
-                        <label for="Split">Split</label>
-                    </div>
-                    <div class="payment-option">
-                        <input type="checkbox" id="Other" name="Other" value="Other">
-                        <label for="Other">Other</label>
-                    </div>
-                    <div class="payment-option">
-                        <input type="checkbox" id="UPI" name="UPI" value="UPI">
-                        <label for="UPI">UPI</label>
-                    </div>
-                    <div class="payment-option">
-                        <input type="checkbox" id="Due" name="Due" value="Due">
-                        <label for="Due">Due</label>
-                    </div>
-                    <div class="payment-option">
-                        <input type="checkbox" id="Parts" name="Parts" value="Parts">
-                        <label for="Parts">Parts</label>
-                    </div>
-                </div>
-            </div> -->
-            <!-- <div class="billing-btns grid grid-cols-2 margin-bottom">
-                <button class="button kot-btn active" @click="createKot(table ?.id)">Settle</button>
-                <button class="button hold-btn" @click="holdKot(table ?.id)">Discount</button>
-            </div> -->
             <div class="billing-btns grid grid-cols-3">
-                <button class="button kot-btn active" @click="createKot(table ?.id)">KOT</button>
-                <button class="button hold-btn" @click="holdKot(table ?.id)">Hold</button>
-                <button class="button ebill-btn" @click="settleBill(table ?.id)">Settle & eBill</button>
+                <button class="button kot-btn active" @click="createKot(table?.id)">KOT</button>
+                <button class="button hold-btn" @click="holdKot(table?.id)">Hold</button>
+                <button class="button ebill-btn" @click="oldOrder || cartProducts?.length > 0 ? settleBill(table?.id): ''">Settle & eBill</button>
             </div>
             <div class="bill-details-extend">
                 <div class="bill-details-extend-inner"></div>

@@ -120,11 +120,8 @@
                 <input type="number" class="settlement-amount-update-data settle_save-input" placeholder="0">
             </div>
             <div class="display-flex justify-content-center popup_button">
-                <button type="button"
-                    class="button button-raised button-large popup-close popup-cancel-button">Cancel</button>
-                <button type="button"
-                    class="button button-raised button-large popup-ok-button popup-save-settle-button">Save &
-                    Settle</button>
+                <button type="button" class="button button-raised button-large popup-close popup-cancel-button">Cancel</button>
+                <button type="button" class="button button-raised button-large popup-ok-button popup-save-settle-button">Save & Settle</button>
             </div>
         </div>
         <div class="wave-image-content"><img src="/images/flow.png" style="width:100%"></div>

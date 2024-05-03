@@ -1011,7 +1011,13 @@ textarea {
     background: #999999;
     border-radius: 5px;
 }
-.ordered-items-details{
+.ordered-items-full-details{
+    height: 250px;
+    overflow: auto;
+}
+
+.ordered-kot-items-details{
     height: 190px;
     overflow: auto;
+    padding: 15px;
 }

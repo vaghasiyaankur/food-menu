@@ -2,12 +2,14 @@
     <div class="search__img text-align-center">
         <img src="/images/Empty-pana 1.png" alt="serach">
     </div>
+    <div class="no_order_text text-align-center" v-if="title">
+        <p class="no-margin">{{title}}</p>
+    </div>
 </template>
-
-<script>
-export default {
-    name : 'NoValueFound'
-}
+<script setup>
+const props = defineProps({
+    title : String
+});
 </script>
 <style>
 .no_order{

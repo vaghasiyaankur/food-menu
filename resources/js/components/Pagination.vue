@@ -44,7 +44,7 @@
 
     const props = defineProps({
         functionName :  Function,
-        data         :  Array,
+        data         :  Object,
     });
 </script>
 

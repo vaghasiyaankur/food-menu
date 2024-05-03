@@ -303,6 +303,8 @@ Route::post('/check-qrcode-exists', [QrCodeController::class, 'checkQrcodeExists
 
 Route::post('/kot-list', [OrderController::class, 'kotList']);
 
+Route::post('order-serve',[OrderController::class, 'orderServe']);
+
 // ------------------------ Auth Routes ------------------------ //
 
 Route::get('/checkLogin', [AuthController::class, 'checklogin']);

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('note')->nullable();
             $table->integer('number')->nullable();
             $table->float('price')->nullable();
+            $table->boolean('is_serve')->default(0);
             $table->string('food_received_type')->nullable();
             $table->timestamps();
         });
