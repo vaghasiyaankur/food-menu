@@ -200,14 +200,14 @@
     background-color: #ffffff;
     padding: 30px;
 }
-.branch_admin_page .branch_info .add_branch_header{
+.branch_admin_page .branch_info .add_branch_header {
     display: flex;
     align-items: center;
     justify-content: flex-start;
     gap: 10px;
     max-height: 24px;
 }
-.branch_admin_page .branch_info .add_branch_header .f7-icons{
+.branch_admin_page .branch_info .add_branch_header .f7-icons {
     font-size: 22px;
 }
 .branch_admin_page .branch_info .branch_form {
@@ -400,11 +400,15 @@
 
 /* BRANCH LIST NEW */
 .branch-list-new-admin-page {
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     padding: 25px 30px;
 }
 .branch-list-new-admin-page .branch-list-header {
     margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
 }
 .branch-list-new-admin-page .branch-list-header h2 {
     font-size: 20px;
@@ -412,20 +416,37 @@
     font-weight: 600;
     color: #38373d;
 }
-.branch-list-new-admin-page .branch-list-info{
-    display: grid;
-    grid-template-columns: auto auto auto;
+.branch-list-new-admin-page .branch-list-header .add-branch-btn {
+    max-width: 170px;
+    padding: 12px 34px;
+    background-color: #ffffff;
+    border: 1px solid #f33e3e;
+    box-shadow: 1px 1px 4px 0px #9999994d;
+    border-radius: 10px;
+}
+.branch-list-new-admin-page .branch-list-header .add-branch-btn span {
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 500;
+    color: #f33e3e;
+    text-wrap: nowrap;
+}
+.branch-list-new-admin-page .branch-list-info {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
     gap: 25px;
 }
-.branch-list-new-admin-page .branch-list-info .branch-card{
-    border-radius: 10px;
+.branch-list-new-admin-page .branch-list-info .branch-card {
     position: relative;
-    max-width: 378px;
+    max-width: calc((100% / 3) - (50px / 3));
+    flex: calc(100% / 3);
+    border-radius: 10px;
     width: 100%;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     box-shadow: 0px 2px 15px 0px #44444440;
 }
-.branch-list-new-admin-page .branch-list-info .branch-card .branch_name{
+.branch-list-new-admin-page .branch-list-info .branch-card .branch_name {
     width: 100%;
     position: absolute;
     margin: 0 auto;
@@ -435,17 +456,18 @@
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
 }
-.branch-list-new-admin-page .branch-list-info .branch-card .branch_name h4{
+.branch-list-new-admin-page .branch-list-info .branch-card .branch_name h4 {
     margin: 0 auto;
     font-size: 17px;
     line-height: 21px;
     font-weight: 500;
-    color: #FFFFFF;
+    color: #ffffff;
 }
-.branch-list-new-admin-page .branch-list-info .branch-card img{
+.branch-list-new-admin-page .branch-list-info .branch-card img {
     border-radius: 10px;
+    max-width: 100%;
 }
-.branch-list-new-admin-page .branch-list-info .branch-card input{
+.branch-list-new-admin-page .branch-list-info .branch-card input {
     display: none;
     position: absolute;
     left: 50%;
@@ -453,11 +475,11 @@
     transform: translate(-75%, 75%);
     z-index: 5;
 }
-.branch-list-new-admin-page .branch-list-info .branch-card .dropdown-click{
+.branch-list-new-admin-page .branch-list-info .branch-card .dropdown-click {
     position: absolute;
     width: 26px;
     height: 26px;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     border-radius: 100%;
     left: 50%;
     bottom: 0;
@@ -468,36 +490,50 @@
     z-index: 2;
     font-size: 16px;
     color: #f33e3e;
-    box-shadow: 0px 1px 15px 0px #3333330D;
+    box-shadow: 0px 2px 15px 0px #44444440;
 }
-.branch-list-new-admin-page .branch-list-info .branch-card label{
+.branch-list-new-admin-page .branch-list-info .branch-card label {
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
 }
-.branch-list-new-admin-page .branch-list-info .branch-card input[type='checkbox']:not(:checked) + label div {
+.branch-list-new-admin-page
+    .branch-list-info
+    .branch-card
+    input[type="checkbox"]:not(:checked)
+    + label
+    div {
     display: none;
 }
-.branch-list-new-admin-page .branch-list-info .branch-card input[type="checkbox"]:checked + label {
+.branch-list-new-admin-page
+    .branch-list-info
+    .branch-card
+    input[type="checkbox"]:checked
+    + label {
     display: block;
 }
-.branch-list-new-admin-page .branch-list-info .branch-card input[type="checkbox"]:checked + label .dropdown-click{
+.branch-list-new-admin-page
+    .branch-list-info
+    .branch-card
+    input[type="checkbox"]:checked
+    + label
+    .dropdown-click {
     transform: rotate(180deg);
     translate: -50% 50%;
 }
-.branch-list-new-admin-page .branch-list-info .branch-card label{
+.branch-list-new-admin-page .branch-list-info .branch-card label {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 15px;
 }
-.branch-list-new-admin-page .branch-list-info .branch-card label p{
+.branch-list-new-admin-page .branch-list-info .branch-card label p {
     margin: 0;
     font-size: 16px;
     line-height: 19px;
     font-weight: 400;
-    color: #38373D;
+    color: #38373d;
 }
-.branch-list-new-admin-page .branch-list-info .branch-card label .banner{
+.branch-list-new-admin-page .branch-list-info .branch-card label .banner {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -505,19 +541,25 @@
 }
 .branch-list-new-admin-page .branch-card label .banner .mobile-no,
 .branch-list-new-admin-page .branch-card label .email-detail,
-.branch-list-new-admin-page .branch-card label .address-detail{
+.branch-list-new-admin-page .branch-card label .address-detail {
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
     gap: 17px;
 }
 .branch-list-new-admin-page .branch-card label .email-detail,
-.branch-list-new-admin-page .branch-card label .address-detail{
+.branch-list-new-admin-page .branch-card label .address-detail {
     margin: 15px;
 }
-.branch-list-new-admin-page .branch-card label .banner .edit-delete-btn{
+.branch-list-new-admin-page .branch-card label .banner .edit-delete-btn {
     display: flex;
     align-items: center;
     justify-content: flex-end;
     gap: 10px;
+}
+@media only screen and (max-width: 991px) {
+    .branch-list-new-admin-page .branch-list-info .branch-card {
+        max-width: calc((100% / 2) - (25px / 2));
+        flex: calc(100% / 2);
+    }
 }
