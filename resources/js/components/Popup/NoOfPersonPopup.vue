@@ -23,8 +23,11 @@ import { f7 } from 'framework7-vue';
 import { inject }  from 'vue';
 
 const numberOfPerson = inject('numberOfPerson');
+const saveData = inject('saveData');
+const table = inject('table');
 
 const setNumberOfPerson = () => {
-    f7.popup.close(`.no-of-person-popup`);
+    saveData(table.value.id);
+    // f7.popup.close(`.no-of-person-popup`);
 }
 </script>

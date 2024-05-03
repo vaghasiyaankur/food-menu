@@ -40,9 +40,12 @@ const personNumber = inject('personNumber');
 const personName = inject('personName');
 const personAddress = inject('personAddress');
 const personLocality = inject('personLocality');
+const saveData = inject('saveData');
+const table = inject('table');
 
 const setPersonDetails = () => {
-    f7.popup.close(`.person_details`);
+    saveData(table.value.id);
+    // f7.popup.close(`.person_details`);
 }
 
 </script>

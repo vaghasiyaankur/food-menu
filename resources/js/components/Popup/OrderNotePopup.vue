@@ -23,8 +23,11 @@ import { f7 } from 'framework7-vue';
 import { inject }  from 'vue';
 
 const orderNote = inject('orderNote');
+const saveData = inject('saveData');
+const table = inject('table');
 
 const setOrderNote = () => {
-    f7.popup.close(`.order_note`);
+    saveData(table.value.id);
+    // f7.popup.close(`.order_note`);
 }
 </script>

@@ -373,6 +373,27 @@ const createKOT = (tableId) => {
     }
 }
 
+const saveData = (tableId) => {
+    axios.post('/api/save-data', 
+            { 
+                tableId: tableId, 
+                numberOfPerson : numberOfPerson.value,
+                personNumber : personNumber.value,
+                personName : personName.value,
+                personAddress : personAddress.value,
+                personLocality : personLocality.value,
+                orderNote : orderNote.value,
+                selectWaiter : selectWaiter.value,
+            })
+        .then((response) => {
+            f7.popup.close(`.popup`);
+        })
+        .catch((error) => {
+            const errorMessage = getErrorMessage(error);
+            errorNotification(errorMessage);
+        });
+}
+
 const holdKOT = (tableId) => {
     if(cartProducts.value.length){
         axios.post('/api/hold-kot', 
@@ -478,6 +499,8 @@ const settleSavePayment = () => {
     
 }
 
+provide('table',table);
+
 provide('selectIngredient',selectIngredient);
 provide('selectVariation',selectVariation);
 provide('extraAmount',extraAmount);
@@ -505,6 +528,9 @@ provide('discountType', discountType);
 provide('discountCoupon', discountCoupon);
 provide('discountPrice', discountPrice);
 provide('calculateDiscount', calculateDiscount);
+
+
+provide('saveData', saveData);
 
 // Settle & Save Popup
 provide('paymentType', paymentType);

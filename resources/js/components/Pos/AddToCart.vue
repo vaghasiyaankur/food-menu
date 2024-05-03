@@ -8,49 +8,7 @@
             </div>
             <div class="table_number">{{ floorName + ' Table No. ' +  table ?.table_number}}</div>
         </div>
-        <div class="dine-options grid grid-cols-3">
-            <button class="button button-small food-received-type" 
-                    :class="{'button-raised active' : foodReceivedType == 'dine_in'}"
-                    @click="changeFoodReceiveType('dine_in')"
-            >
-                Dine In
-            </button>
-            <button class="button button-small food-received-type" 
-                    :class="{'button-raised active' : foodReceivedType == 'takeaway'}"
-                    @click="changeFoodReceiveType('takeaway')"
-            >
-                Takeaway
-            </button>
-            <button class="button button-small food-received-type" 
-                    :class="{'button-raised active' : foodReceivedType == 'delivery'}"
-                    @click="changeFoodReceiveType('delivery')"
-            >
-                Delivery
-            </button>
-        </div>
-        <div class="order-specific-options grid">
-            <button class="button button-small order-option tooltip button-raised active" @click="personDetails()">
-                <Icon name="singlePerson" />
-                <span class="tool-tip-text">Details</span>
-            </button>
-            <button class="button button-small order-option tooltip" @click="noOfPerson()">
-                <Icon name="person" />
-                <span class="tool-tip-text">No. of Person</span>
-            </button>
-            <button class="button button-small order-option tooltip" @click="orderNote()">
-                <Icon name="note" />
-                <span class="tool-tip-text">Note</span>
-            </button>
-            <button class="button button-small order-option tooltip"  @click="waiterAssign()">
-                <Icon name="waiterIcon" />
-                <span class="tool-tip-text">Waiter</span>
-            </button>
-            <button class="button button-small order-option tooltip"  @click="addDiscount()">
-                <Icon name="discountIcon" />
-                <span class="tool-tip-text">Discount</span>
-            </button>
-            <!-- <button class="button button-small deactive">{{ floorName }}</button> -->
-        </div>
+        <CartHeader />
     </div>
 
     <CartProduct 
@@ -137,7 +95,8 @@
 <script setup>
 import { f7 } from "framework7-vue"
 import CartProduct from './CartProduct.vue'
-import { ref, inject } from 'vue'
+import CartHeader from './CartHeader.vue'
+import { ref } from 'vue'
 import Icon from '../../components/Icon.vue';
 
 const emit = defineEmits(['increase:quantity', 'decrease:quantity','open:note-popup', 'remove:cart-product', 'create:kot', 'hold:kot']);
@@ -158,8 +117,6 @@ const props = defineProps({
 });
 
 
-const foodReceivedType = inject('foodReceivedType');
-
 const increaseQuantity = (index, kot, kotIndex, kotProductIndex) => {
     emit('increase:quantity', index, kot, kotIndex, kotProductIndex);
 }
@@ -171,11 +128,6 @@ const decreaseQuantity = (index, kot, kotIndex, kotProductIndex) => {
 const openNotePopup = (index, kot, kotIndex, kotProductIndex) => {
     emit('open:note-popup', index, kot, kotIndex, kotProductIndex);
 }
-
-// const getTotalAmount = () => {
-//     const zero = 0;
-//     return zero.toFixed(2);
-// }
 
 const removeProduct = (index, kot, kotIndex, kotProductIndex) => {
     emit('remove:cart-product', index, kot, kotIndex, kotProductIndex)
@@ -194,30 +146,6 @@ const settleBill = () => {
 
 const toggleAmountSlider = () => {
     openAmountSlider.value = !openAmountSlider.value
-}
-
-const changeFoodReceiveType = (type) => {
-    foodReceivedType.value = type;
-}
-
-const personDetails = () => {
-    f7.popup.open(`.person_details`);
-}
-
-const noOfPerson = () => {
-    f7.popup.open(`.no-of-person-popup`);
-}
-
-const orderNote = () => {
-    f7.popup.open(`.order_note`);
-}
-
-const waiterAssign = () => {
-    f7.popup.open(`.waiter_popup`);
-}
-
-const addDiscount = () => {
-    f7.popup.open(`.applied-discount-popup`);
 }
 
 const moveToTableView = () => {

@@ -34,8 +34,11 @@ import { f7 } from 'framework7-vue';
 import { inject }  from 'vue';
 
 const selectWaiter = inject('selectWaiter');
+const saveData = inject('saveData');
+const table = inject('table');
 
 const setOrderNote = () => {
-    f7.popup.close(`.waiter_popup`);
+    saveData(table.value.id);
+    // f7.popup.close(`.waiter_popup`);
 }
 </script>

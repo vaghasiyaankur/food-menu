@@ -13,30 +13,6 @@
                         <input type="radio" :id="'payment-type-'+index" name="payment_type" :value="payType.value" :checked="payType.value = paymentType">
                         <label :for="'payment-type-'+index">{{ payType.label }}</label>
                     </div>
-                    <!-- <div class="payment-option">
-                        <input type="radio" id="Card" name="payment_type" value="card">
-                        <label for="Card">Card</label>
-                    </div>
-                    <div class="payment-option">
-                        <input type="radio" id="Split" name="payment_type" value="split">
-                        <label for="Split">Split</label>
-                    </div>
-                    <div class="payment-option">
-                        <input type="radio" id="Other" name="payment_type" value="other">
-                        <label for="Other">Other</label>
-                    </div>
-                    <div class="payment-option">
-                        <input type="radio" id="UPI" name="payment_type" value="upi">
-                        <label for="UPI">UPI</label>
-                    </div>
-                    <div class="payment-option">
-                        <input type="radio" id="Due" name="payment_type" value="due">
-                        <label for="Due">Due</label>
-                    </div>
-                    <div class="payment-option">
-                        <input type="radio" id="Parts" name="payment_type" value="parts">
-                        <label for="Parts">Parts</label>
-                    </div> -->
                 </div>
             </div>
             <label class="settle_save-heading-text">Customer Paid</label>
@@ -66,18 +42,10 @@
             </div>
         </div>
         <div class="wave-image-content"><img src="/images/flow.png" style="width:100%"></div>
-        <!-- <AddUpdatePopup
-            :title="'Settle & Save'"
-            :form-data-format="addUpdateFormDataFormat" 
-            :type="'add'" :data-type="'settle-save'"
-            @store:update="storeUpdateData"
-        /> -->
     </div>
 </template>
 <script setup>
-import { f7 } from 'framework7-vue';
 import { inject, ref }  from 'vue';
-import AddUpdatePopup from '../../components/common/AddUpdatePopup.vue'
 
 const paymentType = inject('paymentType');
 const customerPaid = inject('customerPaid');
@@ -99,33 +67,5 @@ const paymentTypes = ref([
 const settleSave = () => {
     settleSavePayment();
 }
-// const addUpdateFormDataFormat = ref([
-//     {
-//         label: 'Payment Type',
-//         multipleLang: false,
-//         type: 'radio',
-//         name: 'payment_type',
-//         options: [
-//             { label: 'Cash', value: 'cash'},
-//             { label: 'Card', value: 'card'},
-//             { label: 'Split', value: 'split'},
-//             { label: 'Parts', value: 'parts'},
-//             { label: 'UPI', value: 'upi'},
-//             { label: 'Due', value: 'due'},
-//             { label: 'Other', value: 'other'}
-//         ],
-//         placeHolder: 'Payment Type',
-//         value: 'cash'
-//     },
-//     { label: 'Customer Paid', multipleLang: false, type: 'number', name: 'customer_paid', placeHolder: 'Customer Paid', value: ''},
-//     { label: 'Return Money', multipleLang: false, type: 'number', name: 'return_money', placeHolder: 'Return Money', value: ''},
-//     { label: 'Tip', multipleLang: false, type: 'number', name: 'tip', placeHolder: 'Tip', value: ''},
-//     { label: 'Settlement Amount', multipleLang: false, type: 'number', name: 'settlement_amount', placeHolder: 'Settlement Amount', value: ''}
-// ]);
-
-const storeUpdateData = () => {
-    // f7.popup.close(`.waiter_popup`);
-}
-
 
 </script>

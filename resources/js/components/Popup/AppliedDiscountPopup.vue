@@ -47,6 +47,17 @@
                     <button class="button apply-btn" @click="appliedCoupon">Apply</button>
                 </div>
             </div>
+            <div class="applied-discount-value margin-top">
+                <span>
+                    SubTotal : 12
+                </span>
+                <span>
+                    Discount : 12
+                </span>
+                <span>
+                    Total : 12
+                </span>
+            </div>
             <div class="display-flex justify-content-center popup_button">
                 <button type="button"
                     class="button button-raised button-large popup-close popup-cancel-button">Cancel</button>

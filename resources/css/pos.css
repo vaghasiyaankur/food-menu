@@ -1015,3 +1015,15 @@ textarea {
     height: 190px;
     overflow: auto;
 }
+.applied-discount-value{
+    display: flex;
+    justify-content: space-between;
+}
+.pos-fill-up-success{
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #f43d3d;
+    padding: 5px 3px;
+    border-radius: 50%;
+}
