@@ -1,5 +1,5 @@
 <template>
-    <div class="popup order_note" id="order_note">
+    <div class="popup order-note" id="order-note">
         <div class="data-form add_table_view-data-form">
             <div class="text-align-center table_view-popup_title">
                 Notes</div>
@@ -28,6 +28,6 @@ const table = inject('table');
 
 const setOrderNote = () => {
     saveData(table.value.id);
-    // f7.popup.close(`.order_note`);
+    // f7.popup.close(`.order-note`);
 }
 </script>

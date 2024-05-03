@@ -1,5 +1,5 @@
 <template>
-    <div class="popup waiter_popup" id="waiter_popup">
+    <div class="popup waiter-popup" id="waiter-popup">
         <div class="data-form add_table_view-data-form">
             <div class="text-align-center table_view-popup_title">
                 Assign Waiter</div>
@@ -39,6 +39,6 @@ const table = inject('table');
 
 const setOrderNote = () => {
     saveData(table.value.id);
-    // f7.popup.close(`.waiter_popup`);
+    // f7.popup.close(`.waiter-popup`);
 }
 </script>

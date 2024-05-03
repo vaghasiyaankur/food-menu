@@ -98,7 +98,7 @@ const numberOfPerson = ref(0);
 const orderNote = ref('');
 
 // Select Waiter Popup
-const selectWaiter = ref(1);
+const selectWaiter = ref('');
 
 // Applied Discount Popup
 const discountCategory = ref(0);
@@ -113,6 +113,13 @@ const customerPaid = ref('');
 const returnMoney = ref('');
 const tip = ref('');
 const settlementAmount = ref('');
+
+const personDetailFillUp = ref(false);
+const noOfPersonFillUp = ref(false);
+const assignDeliveryFillUp = ref(false);
+const orderNoteFillUp = ref(false);
+const discountFillUp = ref(false);
+
 
 onMounted(() => {
     setTimeout(() => {
@@ -149,7 +156,7 @@ const getTableCurrentDetail = (tableId) => {
             personAddress.value = personDetails.address ? personDetails.address : '';
             personLocality.value = personDetails.locality ? personDetails.locality : '';
             orderNote.value = holdKotOtherData.order_note ? holdKotOtherData.order_note : '';
-            selectWaiter.value = holdKotOtherData.waiter_id ? holdKotOtherData.waiter_id : 1;
+            selectWaiter.value = holdKotOtherData.waiter_id ? holdKotOtherData.waiter_id : '';
 
         }else{
             foodReceivedType.value = response.data.received_type;
@@ -159,9 +166,10 @@ const getTableCurrentDetail = (tableId) => {
             personAddress.value = response.data.order ? response.data.order.address : '';
             personLocality.value = response.data.order ? response.data.order.locality : '';
             orderNote.value = response.data.order ? response.data.order.note : '';
-            selectWaiter.value = response.data.order ? response.data.order.waiter : 1;
+            selectWaiter.value = response.data.order ? response.data.order.waiter : '';
         }
         calculateDiscount();
+        checkFillUpDate();
     })
 }
 
@@ -305,7 +313,6 @@ const submitProductNote = (note, npStatus) => {
     f7.popup.close(`.notePopup`);
 }
 
-
 const submitIngVar = () => {
     const allProduct = products.value;
 
@@ -374,16 +381,17 @@ const createKOT = (tableId) => {
 }
 
 const saveData = (tableId) => {
+    checkFillUpDate();
     axios.post('/api/save-data', 
             { 
-                tableId: tableId, 
+                tableId: tableId,
                 numberOfPerson : numberOfPerson.value,
                 personNumber : personNumber.value,
                 personName : personName.value,
                 personAddress : personAddress.value,
                 personLocality : personLocality.value,
                 orderNote : orderNote.value,
-                selectWaiter : selectWaiter.value,
+                selectWaiter : selectWaiter.value
             })
         .then((response) => {
             f7.popup.close(`.popup`);
@@ -392,6 +400,29 @@ const saveData = (tableId) => {
             const errorMessage = getErrorMessage(error);
             errorNotification(errorMessage);
         });
+}
+
+const checkFillUpDate = () => {
+    if(numberOfPerson.value)
+        noOfPersonFillUp.value = true;
+    else
+        noOfPersonFillUp.value = false;
+
+    if(personNumber.value && personName.value && personAddress.value && personLocality.value)
+        personDetailFillUp.value = true;
+    else
+        personDetailFillUp.value = false;
+
+    if(orderNote.value)
+        orderNoteFillUp.value = true;
+    else
+        orderNoteFillUp.value = false;
+
+    if(selectWaiter.value)
+        assignDeliveryFillUp.value = true;
+    else
+        assignDeliveryFillUp.value = false;
+    
 }
 
 const holdKOT = (tableId) => {
@@ -470,12 +501,12 @@ const calculateDiscount = () => {
             discountCount = parseFloat(priceTotal) > 0 ? discountValue : 0;
         }
     
-        discount.value = Math.round(parseFloat(discountCount) * 100) / 100; // Round discount to 2 decimal places
+        discount.value = Math.round(parseFloat(discountCount) * 100) / 100;
+        discountFillUp.value = true;
         f7.popup.close(`.applied-discount-popup`);
     }
     getTotalAmount();
 }
-
 
 const getTotalAmount = () => {
     let total = 0;
@@ -492,7 +523,8 @@ const getTotalAmount = () => {
         total += totalValue;
     }
     subTotal.value = total.toFixed(2); 
-    totalAmount.value = Math.round((total - discount.value) * 100) / 100;
+    totalAmount.value = (Math.round((total - discount.value) * 100) / 100).toFixed(2);
+
 }
 
 const settleSavePayment = () => {
@@ -505,6 +537,13 @@ provide('selectIngredient',selectIngredient);
 provide('selectVariation',selectVariation);
 provide('extraAmount',extraAmount);
 provide('foodReceivedType', foodReceivedType)
+
+// Cart Header Component Pass Data
+provide('personDetailFillUp', personDetailFillUp);
+provide('noOfPersonFillUp', noOfPersonFillUp);
+provide('assignDeliveryFillUp', assignDeliveryFillUp);
+provide('orderNoteFillUp', orderNoteFillUp);
+provide('discountFillUp', discountFillUp);
 
 // Person Detail Popup
 provide('personNumber', personNumber);
@@ -539,5 +578,8 @@ provide('returnMoney', returnMoney);
 provide('tip', tip);
 provide('settlementAmount', settlementAmount);
 provide('settleSavePayment', settleSavePayment);
+
+provide('cartProducts', cartProducts)
+provide('oldOrder', oldOrder)
 
 </script>
