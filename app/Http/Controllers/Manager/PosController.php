@@ -12,6 +12,7 @@ use App\Models\KotProduct;
 use App\Models\KotProductIngredient;
 use App\Models\KotProductVariation;
 use App\Models\Order;
+use App\Models\OrderPayment;
 use App\Models\Product;
 use App\Models\ProductLanguage;
 use App\Models\ProductRestaurantLanguage;
@@ -293,5 +294,10 @@ class PosController extends Controller
         $restaurantId = CustomerHelper::getRestaurantId();
         KotHold::where('table_id', $tableId)->where('restaurant_id', $restaurantId)->delete();
         return response()->json(['success'=>'Hold KOT Removed Successfully.']);
+    }
+
+    public function saveSettleBill(Request $request) {
+        OrderPayment::create($request->toArray());
+        return response()->json(['success'=>'Bill Settle Successfully.']);
     }
 }

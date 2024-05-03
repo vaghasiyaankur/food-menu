@@ -17,8 +17,7 @@
                     </div>
                 </div>
                 <div class="margin-top no-margin-bottom display-flex justify-content-center padding-top popup_button">
-                    <button type="button"
-                        class="button button-raised text-color-black bg-color-white button-large popup-close margin-right popup-button">Cancel</button>
+                    <button type="button" class="button button-raised text-color-black bg-color-white button-large popup-close margin-right popup-button">Cancel</button>
                     <button type="button" class="button button-raised button-large popup-button active">Save</button>
                 </div>
             </div>
@@ -62,71 +61,6 @@
         </div>
         <div class="wave-image-content"><img src="/images/flow.png" style="width:100%"></div>
     </div>
-    
-
-    <!-- ========= SETTLE & SAVE POPUP ========= -->
-    <div class="popup settle-save-popup" id="settle-save-popup">
-        <div class="data-form add_table_view-data-form">
-            <div class="text-align-center table_view-popup_title">
-                Applied Discount</div>
-            <hr class="popup_title_divider">
-            <label class="custom-disc-text">Custom Discount</label>
-            <div class="payment-method display-block">
-                <div class="grid">
-                    <div class="payment-option">
-                        <input type="checkbox" id="Cash" name="Cash" value="Cash" checked>
-                        <label for="Cash">Cash</label>
-                    </div>
-                    <div class="payment-option">
-                        <input type="checkbox" id="Card" name="Card" value="Card">
-                        <label for="Card">Card</label>
-                    </div>
-                    <div class="payment-option">
-                        <input type="checkbox" id="Split" name="Split" value="Split">
-                        <label for="Split">Split</label>
-                    </div>
-                    <div class="payment-option">
-                        <input type="checkbox" id="Other" name="Other" value="Other">
-                        <label for="Other">Other</label>
-                    </div>
-                    <div class="payment-option">
-                        <input type="checkbox" id="UPI" name="UPI" value="UPI">
-                        <label for="UPI">UPI</label>
-                    </div>
-                    <div class="payment-option">
-                        <input type="checkbox" id="Due" name="Due" value="Due">
-                        <label for="Due">Due</label>
-                    </div>
-                    <div class="payment-option">
-                        <input type="checkbox" id="Parts" name="Parts" value="Parts">
-                        <label for="Parts">Parts</label>
-                    </div>
-                </div>
-            </div>
-            <label class="settle_save-heading-text">Customer Paid</label>
-            <div class="settle_save-text text-align-left">
-                <input type="number" class="customer-paid-update-data settle_save-input" placeholder="2000">
-            </div>
-            <label class="settle_save-heading-text">Return to customer</label>
-            <div class="settle_save-text text-align-left">
-                <input type="number" class="return-customer-update-data settle_save-input" placeholder="0">
-            </div>
-            <label class="settle_save-heading-text">Tip</label>
-            <div class="settle_save-text text-align-left">
-                <input type="number" class="tip-update-data settle_save-input" placeholder="0">
-            </div>
-            <label class="settle_save-heading-text">Settlement Amount</label>
-            <div class="settle_save-text text-align-left">
-                <input type="number" class="settlement-amount-update-data settle_save-input" placeholder="0">
-            </div>
-            <div class="display-flex justify-content-center popup_button">
-                <button type="button" class="button button-raised button-large popup-close popup-cancel-button">Cancel</button>
-                <button type="button" class="button button-raised button-large popup-ok-button popup-save-settle-button">Save & Settle</button>
-            </div>
-        </div>
-        <div class="wave-image-content"><img src="/images/flow.png" style="width:100%"></div>
-    </div>
-
 
     <!-- ========= DINE IN PLACE ORDER POPUP ========= -->
     <div class="popup dine_in_order_Popup" id="dine_in_order_Popup">
