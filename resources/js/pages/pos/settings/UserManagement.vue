@@ -6,7 +6,7 @@
                     <div class="display-flex justify-content-space-between align-items-center w-70">
                         <a class="tab-link" :class="{ 'tab-link-active' : dataType == 'all'}" @click="dataType = 'all'"><Icon name="multiUserIcon" /> All Users</a>
                         <a class="tab-link" :class="{ 'tab-link-active' : dataType == 'manager'}" @click="dataType = 'manager'"><Icon name="ManagerIcon" /> Kitchen Manager</a>
-                        <a class="tab-link" :class="{ 'tab-link-active' : dataType == 'waiter'}" @click="dataType = 'waiter'"><Icon name="waiterIcon" /> Waiter</a>
+                        <a class="tab-link" :class="{ 'tab-link-active' : dataType == 'waiter'}" @click="dataType = 'waiter'"><Icon name="waiterIcon" :color=" dataType == 'waiter' ? '#f33e3e' : '#38373d'" /> Waiter</a>
                     </div>
 
                     <div class="no-padding no-margin">

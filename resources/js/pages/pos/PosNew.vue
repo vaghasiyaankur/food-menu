@@ -355,7 +355,6 @@ const submitIngVar = () => {
 const createKOT = (tableId) => {
 
     if(cartProducts.value.length){
-
         axios.post('/api/add-kot', 
             { 
                 cart: cartProducts.value,
@@ -383,20 +382,21 @@ const createKOT = (tableId) => {
 const saveData = (tableId) => {
     checkFillUpDate();
     axios.post('/api/save-data', 
-            { 
-                tableId: tableId,
-                numberOfPerson : numberOfPerson.value,
-                personNumber : personNumber.value,
-                personName : personName.value,
-                personAddress : personAddress.value,
-                personLocality : personLocality.value,
-                orderNote : orderNote.value,
-                selectWaiter : selectWaiter.value
-            })
-        .then((response) => {
-            f7.popup.close(`.popup`);
-        })
-        .catch((error) => {
+    { 
+        tableId: tableId,
+        foodReceivedType : foodReceivedType.value, 
+        numberOfPerson : numberOfPerson.value,
+        personNumber : personNumber.value,
+        personName : personName.value,
+        personAddress : personAddress.value,
+        personLocality : personLocality.value,
+        orderNote : orderNote.value,
+        selectWaiter : selectWaiter.value
+    })
+    .then((response) => {
+        f7.popup.close(`.popup`);
+    })
+    .catch((error) => {
             const errorMessage = getErrorMessage(error);
             errorNotification(errorMessage);
         });

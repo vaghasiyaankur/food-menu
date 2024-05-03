@@ -397,14 +397,14 @@ const checkTimeForRegister = async () => {
 const register = () => {
     if(reservation.value.agree_condition) var agreeCondition = 1;
     else var agreeCondition = 0;
-console.log(trans);
+
     if(waitingTime.value == '00:00'){
         var conformation_message = trans.value.no_waiting_message;
     }else{
         var conformation_message = trans.value.conformation_message.replace('@waiting', waitingTime.value);
     }
 
-    f7.dialog.confirm('conformation_message', () => {
+    f7.dialog.confirm(trans.value.conformation_message, () => {
 
         var formData = new FormData();
         formData.append('customer_name', reservation.value.name);
@@ -453,7 +453,6 @@ console.log(trans);
 }
 
 const showMenuData = () => {
-    console.log(menuComponentRef.value);
     if (menuComponentRef.value) {
         menuComponentRef.value.getCategories();
         menuComponentRef.value.wishlistData();

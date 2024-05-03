@@ -37,56 +37,53 @@ class ReservationController extends Controller
      */
     public function addReservation(Request $request)
     {
-        // Check permission for adding reservation
         $checkPermission = ReservationHelper::checkPermissionForAdd($request->role, $request->qrToken);
         if (!$checkPermission['status']) {
             return response()->json(['error' => $checkPermission['message']], 401);
         }
 
-        $restaurant_id = $checkPermission['restaurant_id'];
+        $restaurantId = $checkPermission['restaurant_id'];
 
-        $table_id = ReservationHelper::takeTable($request->floor, $request->person, $restaurant_id);
+        $tableId = ReservationHelper::takeTable($request->floor, $request->person, $restaurantId);
 
-        $orderExists = Order::where('table_id', $table_id)
-                        ->whereRestaurantId($restaurant_id)
+        $orderExists = Order::where('table_id', $tableId)
+                        ->whereRestaurantId($restaurantId)
                         ->whereNotNull('start_time')
                         ->where('finished', 0)
                         ->doesntExist();
-                        
-        if($table_id){
-            $table = Table::where('id', $table_id)->first();
+        if($tableId){
+            $table = Table::where('id', $tableId)->first();
 
             $customerData = [
                 'customer_name' => $request->customer_name,
                 'customer_number' => $request->customer_number,
                 'agree_condition' => $request->agree_condition,
-                'restaurant_id' => $restaurant_id,
+                'restaurant_id' => $restaurantId,
                 'device_token' => $request->session()->get('device_token', null),
             ];
             
             if($register = CustomerHelper::createCustomer($customerData)) {
-
                 $orderData = [
                     'customer_id' => $register->id,
-                    'table_id' => $table_id,
+                    'table_id' => $tableId,
                     'person' => $request->person,
                     'orderExists' => $orderExists, 
                     'role' => $request->role,
-                    'finish_time' => $table->finish_order_time,
+                    // 'finish_time' => $table->finish_order_time,
                     'finished' => 0,
-                    'restaurant_id' => $restaurant_id,
+                    'restaurant_id' => $restaurantId,
                 ];
 
                 $order = OrderHelper::createOrder($orderData);
 
                 if($order)
-                    broadcast(new NewReservation($order,$restaurant_id))->toOthers();
+                    broadcast(new NewReservation($order,$restaurantId))->toOthers();
 
             }
 
-            $orderExist = OrderHelper::CheckOrderExistParticularTable($order->table_id, $restaurant_id); 
+            $orderExist = OrderHelper::CheckOrderExistParticularTable($order->table_id, $restaurantId); 
             if(!$orderExist){
-                $nextOrder = OrderHelper::nextOrder($table_id, $restaurant_id);
+                $nextOrder = OrderHelper::nextOrder($tableId, $restaurantId);
 
                 $update_date = @$nextOrder->updated_at;
 
