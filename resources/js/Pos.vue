@@ -26,7 +26,7 @@
   </f7-app>
 </template>
 <script setup>
-import { ref, reactive, onMounted, onBeforeUnmount, computed } from 'vue';
+import { ref, reactive, onMounted, onBeforeUnmount, computed, provide } from 'vue';
 import { f7App, f7Panel, f7View, f7, f7Page, f7Navbar } from "framework7-vue";
 import routes from "./pos-routes";
 import store from "./store";
@@ -63,6 +63,7 @@ const checkLogin = ref(false);
 const trans = ref([]);
 const user = ref([]);
 const events = ["click", "mousemove", "mousedown", "scroll", "keypress", "load"];
+const currentCurrencyData = ref([]);
 
 // Function to move to waiting area
 const MoveToWaitingArea = () => {
@@ -169,6 +170,7 @@ const lockScreenEnable = async () => {
 // Lifecycle hooks
 onMounted(async () => {
   try {
+    getCurrencyData();
     const res = await axios.get("/api/checkLogin");
     if (res.data.check_auth) {
       checkLogin.value = true;
@@ -222,4 +224,16 @@ const manager = computed(() => {
   console.log(f7);
   // return this.$route.path === '/'
 });
+
+
+
+const getCurrencyData = () => {
+    axios.get('/api/get-currency')
+    .then((response) => {
+        currentCurrencyData.value = response.data.setting;
+    });
+}
+
+provide('currentCurrencyData', currentCurrencyData);
+
 </script>

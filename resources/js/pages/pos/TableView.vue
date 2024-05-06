@@ -55,7 +55,7 @@
                                     </div>
                                 </div>
                                 <div class="hold-btn" v-if="table.holdKotAvailable">
-                                    <i class="icon f7-icons" @click="removeHoldKot(table.id)">hand_raised_slash</i>
+                                    <i class="icon f7-icons" @click="showRemoveHoldPopUp(table.id)">hand_raised_slash</i>
                                     <!-- <div class="delete-hold">
                                         <button>
                                             <Icon name="deleteIcon" @click="removeHoldKot(table.id)" />
@@ -71,7 +71,7 @@
                                     </div>
                                 </div>
                                 <div class="table_view-table_cost">
-                                    <p class="no-margin no-padding">₹ {{ table?.order?.total_price?.toFixed(2) }}</p>
+                                    <p class="no-margin no-padding">{{ currentCurrencyData ? currentCurrencyData.currency_symbol :  '₹' }} {{ table?.order?.total_price?.toFixed(2) }}</p>
                                 </div>
                                 <div class="display-flex align-items-center table_view-table_details">
                                     <div class="table_view-people_count_btn">
@@ -140,7 +140,7 @@
 <script setup>
 import { f7Page, f7, f7Popover, f7List, f7ListItem, f7Link } from 'framework7-vue';
 import axios from 'axios';
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, inject } from 'vue';
 import Icon from '../../components/Icon.vue';
 import AddUpdatePopup from '../../components/common/AddUpdatePopup.vue'
 import RemovePopup from '../../components/common/RemovePopup.vue'
@@ -150,6 +150,7 @@ const defaultSelectColorId = ref('');
 const defaultSelectFloorId = ref('');
 const removeTableId = ref(0);
 const removeHoldId = ref(0);
+const currentCurrencyData = inject('currentCurrencyData');
 
 const addUpdateTitle = ref('Add Table');
 const addUpdateType = ref('add');
