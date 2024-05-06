@@ -120,7 +120,6 @@ const assignDeliveryFillUp = ref(false);
 const orderNoteFillUp = ref(false);
 const discountFillUp = ref(false);
 
-
 onMounted(() => {
     setTimeout(() => {
         if(f7.view.main.router.currentRoute.params.id){

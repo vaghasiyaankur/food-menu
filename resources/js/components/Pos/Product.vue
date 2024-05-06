@@ -11,7 +11,7 @@
                     </div>
                     <div class="product-summary">
                         <p class="product_name margin-bottom-half">{{ product.name }}</p>
-                        <p class="product_price text-red margin-top-half">${{ product.price }}</p>
+                        <p class="product_price text-red margin-top-half">{{  currentCurrencyData ? currentCurrencyData.currency_symbol :  '₹'  }} {{ product.price.toFixed(2) }}</p>
                     </div>
                     <div class="product-add-button">
                         <template v-if="isProductSelected(product.id)">
@@ -41,8 +41,11 @@
 <script setup>
 import { f7Card, f7CardContent,f7, f7Icon } from 'framework7-vue';
 import { getFoodTypeIcon } from '../../commonFunction.js';
-import { ref } from 'vue';
+import { ref, inject } from 'vue';
 import Icon from '../Icon.vue';
+
+const cartProduct = ref([]);
+const currentCurrencyData = inject('currentCurrencyData');
 
 const props = defineProps({
     products: Object,
@@ -54,7 +57,7 @@ const props = defineProps({
 
 const emit = defineEmits(['add:cart-product', 'remove:cart-product']);
 
-const cartProduct = ref([]);
+
 
 const foodTypeIcon = (typeId) => {
     return getFoodTypeIcon(typeId);

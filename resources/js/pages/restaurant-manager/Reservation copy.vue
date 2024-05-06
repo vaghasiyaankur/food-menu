@@ -1,6 +1,6 @@
 <template>
     <f7-page>
-        <div class="reservation_card" @click="clickOut">
+        <div class="reservation_card" @click="clickout">
             <div class="card">
                 <div class="row height_100 align-items-center">
                     <div class="col-100 medium-100 large-50 margin-bottom padding-bottom">
@@ -58,7 +58,7 @@
                                                 <img src="/images/clock.png" alt="">
                                                 <i class="f7-icons font-13 padding-half margin-bottom close-countdown" @click="(checkWaitingTime = false)">xmark</i>
                                                 <!-- <vue-countdown :time="60 * 50 * 1000" v-slot="{ hours, minutes, seconds }"> -->
-                                                    <p class="no-margin font-30">{{ waitingTime + " " + hourMin }}</p>
+                                                    <p class="no-margin font-30">{{ waiting_time + " " + hour_min }}</p>
                                                 <!-- </vue-countdown> -->
                                             </div>
                                         </div>
@@ -90,12 +90,12 @@
                 </div>
                 <i class="f7-icons font-30 close-menu" @click="closePopup">xmark</i>
                 <f7-block-title class="text-align-center font-18 text-color-black margin-top-half">Food Menu</f7-block-title>
-                <div class="margin" v-if="productCategory">
+                <div class="margin" v-if="product_category">
                     <!-- <div class="text-align-center text-color-gray">Select your favourite food <br> and enjoy with family</div> -->
                     <div data-pagination='{"el":".swiper-pagination"}' data-space-between="10" data-slides-per-view="8" class="swiper swiper-init demo-swiper margin-top margin-bottom" style="height : 120px">
                         <div class="swiper-pagination"></div>
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide" :class="{ 'slide-active': category.id == sliderActive}" v-for="category in productCategory" :key="category" @click="getProducts(category.id)">
+                            <div class="swiper-slide" :class="{ 'slide-active': category.id == sliderActive}" v-for="category in product_category" :key="category" @click="getProducts(category.id)">
                                 <div class="menu-image col">
                                     <img :src="'/storage'+category.image" alt="">
                                 </div>
@@ -107,8 +107,8 @@
                         <div class="menu-title"><span>{{ categoryName }} Menu</span></div>
                     </div>
                     <div class="menu-details margin-top">
-                        <div class="menu-lists" v-if="productSubcategory.length">
-                            <div class="menu-list" v-for="subcate in productSubcategory" :key="subcate">
+                        <div class="menu-lists" v-if="product_subcategory.length">
+                            <div class="menu-list" v-for="subcate in product_subcategory" :key="subcate">
                                 <div class="font-18 text-align-center menu-list-title text-color-black"><u>{{ subcate.sub_category_language[0].name }}</u></div>
                                 <div class="list row margin-half align-items-center" v-for="product in subcate.products" :key="product">
                                     <div class="col-90 display-flex">{{ product.product_language[0].name }}&nbsp; <span class="dots"></span></div>
@@ -138,213 +138,221 @@
         </f7-sheet>
     </f7-page>
 </template>
-<script setup>
-import { ref, onMounted, onBeforeMount } from 'vue';
-import $ from 'jquery';
-import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Input, f7Button, f7Sheet, f7PageContent } from 'framework7-vue';
+<script>
+import $ from "jquery";
+import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Input, f7Button, f7Sheet, f7PageContent} from 'framework7-vue';
 import VueCountdown from '@chenfengyuan/vue-countdown';
 import NoValueFound from '../../components/NoValueFound.vue';
-import axios from 'axios';
-import  { errorNotification, successNotification } from '../../commonFunction.js'
+import axios from "axios";
 
-const display = ref(true);
-const floors = ref([]);
-const reservation = ref({
-    name: '',
-    number: '',
-    member: '',
-    floor: null
-});
-const checkWaitingTime = ref(false);
-const productCategory = ref([]);
-const productSubcategory = ref([]);
-const categoryName = ref('');
-const sliderActive = ref(0);
-const memberLimit = ref(0);
-const waitingTime = ref('00:00');
-const showFloorList = ref(true);
-const showFloorName = ref('Select Floor');
-const showFloorId = ref(0);
-const hourMin = ref('Minutes');
-
-onBeforeMount(() => {
-    // addLoader();
-});
-
-onMounted(() => {
-  // getFloors();
-    getCategories();
-    memberLimitation();
-    // activationMenu('reservation', '');
-    // removeLoader();
-});
-
-const getCategories = () => {
-    axios.post('/api/get-category-list')
-        .then((res) => {
-        productCategory.value = res.data.category;
-        if (productCategory.length > 0) {
-            getProducts(productCategory.value[0].id);
+export default {
+    name : 'Reservation',
+    components: {
+        f7Page,
+        f7Navbar,
+        f7BlockTitle,
+        f7Block,
+        f7,
+        f7Input,
+        f7Button,
+        f7Sheet,
+        f7PageContent,
+        VueCountdown,
+        NoValueFound
+    },
+    data() {
+        return {
+            display: true,
+            floors: [],
+            reservation: {
+                name: '',
+                number: '',
+                member: '',
+                floor: null
+            },
+            checkWaitingTime: false,
+            product_category: [],
+            product_subcategory: [],
+            categoryName: '',
+            sliderActive : 0,
+            member_limit : 0,
+            waiting_time: '00:00',
+            showFloorList: true,
+            showFloorName: 'Select Floor',
+            showFloorId: 0,
+            hour_min : 'Minutes',
         }
-        });
-    };
+    },
+    beforeCreate() {
+        this.$root.addLoader();
+    },
+    created() {
+        // this.getFloors();
+        this.getCategories();
+        this.memberLimitation();
+    },
+    mounted() {
+        this.$root.activationMenu('reservation', '');
+        this.$root.removeLoader();
+    },
+    methods: {
+        getCategories() {
+            axios.post('/api/get-category-list')
+            .then((res) => {
+                this.product_category = res.data.category;
+                if(this.product_category) this.getProducts(this.product_category[0].id);
+            })
+        },
+        getProducts(id) {
+            this.sliderActive = id;
+            axios.get('/api/get-category-wise-products/' + id)
+            .then((res) => {
+                this.categoryName = res.data.category_languages[0].name;
+                this.product_subcategory = res.data.sub_category;
+            })
+        },
+        memberLimitation() {
+            axios.get('/api/member-limitation')
+            .then((res) => {
+                this.member_limit = res.data.member_capacity;
+            })
+        },
+        closePopup(){
+            document.querySelector('.sheet-backdrop').click();
+            this.$emit('textChange');
+        },
+        checkTimeForRegister() {
+            if(!this.reservation.name || !this.reservation.number || !this.reservation.member){
+                this.$root.errorNotification(this.$root.trans.reservation_error); return false;
+            }else if(parseInt(this.reservation.member) > parseInt(this.member_limit)){
+                this.$root.errorNotification(this.$root.trans.capacity_error.replace(/@person/g, this.member_limit)); return false;
+            } else if (this.reservation.number.toString().length != 10) {
+                this.$root.errorNotification(this.$root.trans.number_error); return false;
+            }
 
-const getProducts = (id) => {
-    sliderActive.value = id;
-    axios.get('/api/get-category-wise-products/' + id)
-        .then((res) => {
-        categoryName.value = res.data.category_languages[0].name;
-        productSubcategory.value = res.data.sub_category;
-    });
-};
+            var formData = new FormData();
+            formData.append('person', this.reservation.member);
+            formData.append('floor', this.reservation.floor);
+            formData.append('role', 'Manager');
 
-const memberLimitation = () => {
-    axios.get('/api/member-limitation')
-    .then((res) => {
-        memberLimit.value = res.data.member_capacity;
-    });
-};
+            axios.post('/api/check-time', formData)
+            .then((res) => {
+                if(res.data.success){
+                    this.hour_min = res.data.hour_min;
+                    this.waiting_time = res.data.waiting_time;
+                    this.register();
+                }
+                else{
+                    this.errorNotification(res.data.message); return false;
+                }
+            });
 
-const closePopup = () => {
-    document.querySelector('.sheet-backdrop').click();
-    // emit('textChange');
-};
+        },
+        register() {
+            if(this.waiting_time == '00:00'){
+                var conformation_message = this.$root.trans.no_waiting_message;
+            }else{
+                var conformation_message = this.$root.trans.conformation_message.replace('@waiting', this.waiting_time);
+            }
 
-const checkTimeForRegister = () => {
-    if (!reservation.value.name || !reservation.value.number || !reservation.value.member) {
-        errorNotification('Please enter all the required details.');
-        return false;
-    } else if (parseInt(reservation.value.member) > parseInt(memberLimit.value)) {
-        errorNotification(`Order create must be ${memberLimit.value} or less than member.`);
-        return false;
-    } else if (reservation.value.number.toString().length !== 10) {
-        errorNotification('Please enter a valid number.');
-        return false;
-    }
+            f7.dialog.confirm(conformation_message, () => {
 
-    const formData = new FormData();
-    formData.append('person', reservation.value.member);
-    formData.append('floor', reservation.value.floor);
-    formData.append('role', 'Manager');
+                var formData = new FormData();
+                formData.append('customer_name', this.reservation.name);
+                formData.append('customer_number', this.reservation.number);
+                formData.append('person', this.reservation.member);
+                formData.append('floor', this.reservation.floor);
+                formData.append('role', 'Manager');
+                formData.append('agree_condition', 1);
 
-    axios.post('/api/check-time', formData)
-        .then((res) => {
-        if (res.data.success) {
-            hourMin.value = res.data.hour_min;
-            waitingTime.value = res.data.waiting_time;
-            register();
-        } else {
-            errorNotification(res.data.message);
-            return false;
-        }
-        });
-};
+                axios.post('/api/add-reservation', formData)
+                .then((res) => {
+                    f7.dialog.alert('Success!', () => {
+                        document.getElementById('book_table').classList.remove('active');
+                        // f7.view.main.router.navigate({ url: '/waiting/' });
+                        this.reservation.name = '';
+                        this.reservation.number = '';
+                        this.reservation.member = '';
+                        this.floors = [];
+                        this.reservation.floor = 1;
+                    });
+                    setTimeout(() => {
+                        $('.dialog-title').html("<img src='/images/success.png'>");
+                        $('.dialog-button').addClass('col button button-raised button-large text-transform-capitalize');
+                        $('.dialog-button').addClass('active');
+                        $('.dialog-button').css('width', '50%');
+                    }, 50);
+                });
 
-const register = () => {
-    const conformationMessage = waitingTime.value === '00:00' ? 'No waiting message' : `Waiting time is ${waitingTime.value}`;
-
-    f7.dialog.confirm(conformationMessage, () => {
-        const formData = new FormData();
-        formData.append('customer_name', reservation.value.name);
-        formData.append('customer_number', reservation.value.number);
-        formData.append('person', reservation.value.member);
-        formData.append('floor', reservation.value.floor);
-        formData.append('role', 'Manager');
-        formData.append('agree_condition', 1);
-
-        axios.post('/api/add-reservation', formData)
-        .then((res) => {
-            f7.dialog.alert('Success!', () => {
-            document.getElementById('book_table').classList.remove('active');
-            reservation.value.name = '';
-            reservation.value.number = '';
-            reservation.value.member = '';
-            floors.value = [];
-            reservation.value.floor = 1;
             });
 
             setTimeout(() => {
-            $('.dialog-title').html("<img src='/images/success.png'>");
-            $('.dialog-button').addClass('col button button-raised button-large text-transform-capitalize');
-            $('.dialog-button').addClass('active');
-            $('.dialog-button').css('width', '50%');
-            }, 50);
-        });
-    });
+                $('.dialog-title').text("").css('font-size','20px').html("<img src='/images/usericon.png'>");
+                $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
+                $('.dialog-button').eq(1).removeClass('text-color-black');
+                $('.dialog-button').eq(1).addClass('active');
+                $('.dialog-inner').addClass('margin-top');
+                $('.dialog-buttons').css({ 'margin-top': '25px', 'margin-bottom': '35px' });
+            });
+        },
+        getFloors() {
+            axios.get('/api/get-floors-data')
+            .then((res) => {
+                this.floors = res.data;
+            })
+        },
+        checkTime() {
+            if(!this.reservation.name || !this.reservation.number || !this.reservation.member){
+                this.$root.errorNotification('Please enter all the required details.'); return false;
+            }else if(parseInt(this.reservation.member) > parseInt(this.member_limit)){
+                this.$root.errorNotification('order create must be '+this.member_limit+' or less than member.'); return false;
+            }else{
+                var formData = new FormData();
+                formData.append('person', this.reservation.member);
+                formData.append('floor', this.reservation.floor);
+                formData.append('role', 'Manager');
 
-    setTimeout(() => {
-        $('.dialog-title').text('').css('font-size', '20px').html("<img src='/images/usericon.png'>");
-        $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
-        $('.dialog-button').eq(1).removeClass('text-color-black');
-        $('.dialog-button').eq(1).addClass('active');
-        $('.dialog-inner').addClass('margin-top');
-        $('.dialog-buttons').css({ 'margin-top': '25px', 'margin-bottom': '35px' });
-    });
-    };
-
-const getFloors = () => {
-    axios.get('/api/get-floors-data')
-        .then((res) => {
-        floors.value = res.data;
-        });
-};
-
-const checkTime = () => {
-    if (!reservation.value.name || !reservation.value.number || !reservation.value.member) {
-        errorNotification('Please enter all the required details.');
-        return false;
-    } else if (parseInt(reservation.value.member) > parseInt(memberLimit.value)) {
-        errorNotification(`Order create must be ${memberLimit.value} or less than member.`);
-        return false;
-    } else {
-        const formData = new FormData();
-        formData.append('person', reservation.value.member);
-        formData.append('floor', reservation.value.floor);
-        formData.append('role', 'Manager');
-
-        axios.post('/api/check-time', formData)
-        .then((res) => {
-            if (res.data.success) {
-            waitingTime.value = res.data.waiting_time;
-            checkWaitingTime.value = true;
+                axios.post('/api/check-time', formData)
+                .then((res) => {
+                    if(res.data.success){
+                        this.waiting_time = res.data.waiting_time;
+                        this.checkWaitingTime = true;
+                    }
+                    else{
+                        this.$root.errorNotification(res.data.message); return false;
+                    }
+                });
+            }
+        },
+        checknumbervalidate(evt) {
+            evt = (evt) ? evt : window.event;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+                evt.preventDefault();
             } else {
-            errorNotification(res.data.message);
-            return false;
+                return true;
             }
-        });
-    }
-};
-
-const checkNumberValidate = (evt) => {
-    evt = evt ? evt : window.event;
-    const charCode = evt.which ? evt.which : evt.keyCode;
-    if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
-        evt.preventDefault();
-    } else {
-        return true;
-    }
-};
-
-const floorAvailable = () => {
-    console.log(reservation.value.member);
-    if (reservation.value.member) {
-        axios.post('/api/floor-available', { 'member': reservation.value.member })
-        .then((res) => {
-            if (res.data.success) {
-            reservation.value.floor = null;
-            floors.value = res.data.floors;
+        },
+        floorAvailable() {
+            if (this.reservation.member) {
+                axios.post('/api/floor-available', { 'member': this.reservation.member })
+                .then((res) => {
+                    if (res.data.success) {
+                        this.reservation.floor = null;
+                        this.floors = res.data.floors;
+                    }
+                });
             }
-        });
+        },
+        clickout(){
+            const floor_list = event.target.parentNode.classList.contains('floor--list');
+            if (!floor_list) {
+                this.showFloorList = true;
+            }
+        }
     }
-};
 
-const clickOut = () => {
-    const floorList = event.target.parentNode.classList.contains('floor--list');
-    if (!floorList) {
-        showFloorList.value = true;
-    }
-};
-
+}
 </script>
 <style scoped>
 

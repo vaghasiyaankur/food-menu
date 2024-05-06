@@ -114,7 +114,7 @@ class TableController extends Controller
         $max_table_cap = Table::whereRestaurantId(Auth::user()->restaurant_id)->where('floor_id', $groundFloorId)->where('status', 1)->max('capacity_of_person');
         $current_capacity = (100 - ($count / $total_table_number * 100));
 
-        return response()->json([ 'tables' => $tables , 'floorlist' => $floorlist, 'current_capacity' => $current_capacity,'max_table_cap'=>$max_table_cap, 'highlight_time' => $highlight_time, 'highlight_time_on_off' => $highlight_time_on_off] , 200);
+        return response()->json([ 'tables' => $tables , 'floorList' => $floorlist, 'current_capacity' => $current_capacity,'max_table_cap'=>$max_table_cap, 'highlight_time' => $highlight_time, 'highlight_time_on_off' => $highlight_time_on_off] , 200);
 
     }
 
@@ -233,7 +233,7 @@ class TableController extends Controller
 
         $current_capacity = (100 - ($count / $total_table_number * 100));
         $max_table_cap = Table::whereRestaurantId(Auth::user()->restaurant_id)->where('floor_id', $request->id)->where('status', 1)->max('capacity_of_person');
-        return response()->json([ 'tables' => $tables, 'current_capacity' => $current_capacity,'max_table_cap'=>$max_table_cap, 'floorlist' => $floorlist ] , 200);
+        return response()->json([ 'tables' => $tables, 'current_capacity' => $current_capacity,'max_table_cap'=>$max_table_cap, 'floorList' => $floorlist ] , 200);
     }
 
     /**
@@ -493,7 +493,7 @@ class TableController extends Controller
             }
         }
 
-        return response()->json(['floorlist' => $floorlist]);
+        return response()->json(['floorList' => $floorlist]);
     }
 
     public function addMinutesInOrder(Request $req)

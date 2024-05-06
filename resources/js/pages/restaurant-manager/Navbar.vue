@@ -6,8 +6,8 @@
   />
   <div
     class="header-links display-flex align-items-center"
-    v-if="CurrentsubmenuRoute != 'category'"
-  >
+    >
+    <!-- v-if="currentSubmenuRoute != 'category'" -->
 
     <!--========= MANAGER SMALL SCREEN NAVBAR =========== -->
     <SmallScreenNavbar
@@ -41,8 +41,9 @@ import BigScreenNavbar from "../../components/BigScreenNavbar.vue"
 
 const props = defineProps({
     moveToPos: Function,
-    closeReservation: Boolean,
+    closeReservation: [Boolean, Number],
     closeReservationEvent: Function,
+    currentSubmenuRoute: String
 });
 
 const navbarItems = [
