@@ -118,6 +118,7 @@
 .filtered_order_item .order_number_time {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     gap: 15px;
 }
 .filtered_order_item .order_number_time h3,
@@ -144,6 +145,7 @@
 .filtered_order_item .filtered_order_payment-info {
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
     gap: 15px;
 }
 .selected_order_details_wrapper {
