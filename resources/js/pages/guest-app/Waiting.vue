@@ -31,7 +31,7 @@
                                 <p class="no-margin margin-top-half font-20" v-if="String(hours).padStart(2, '0') != 0">{{ String(hours).padStart(2, '0') +' '+ trans.hour_and + ' ' +String(minutes).padStart(2, '0')+' '+trans.min_left}}</p>
                                 <p class="no-margin margin-top-half font-20" v-else-if="String(minutes).padStart(2, '0') != 0">{{ String(minutes).padStart(2, '0')+' '+trans.min_left}}</p>
                                 <p class="no-margin margin-top-half font-20" v-else-if="String(seconds).padStart(2, '0') != 0">{{ String(seconds).padStart(2, '0')+' '+trans.second_left}}</p>
-                                 <p class="no-margin margin-top-half font-20" v-else>{{ trans.your_turn }}</p>
+                                <p class="no-margin margin-top-half font-20" v-else>{{ trans.your_turn }}</p>
                             </vue-countdown> -->
                         </div>
                     </div>
@@ -92,7 +92,7 @@
                             <span class="table_info_text">{{ trans.date_time }} : </span>
                             <span>{{ order.orders ? dateFormat(order.orders[0].created_at) :  dateFormat(order.created_at)}}</span>
                         </div>
-                         <div class="margin-top-half margin-bottom">
+                        <div class="margin-top-half margin-bottom">
                             <span class="table_info_text">{{ trans.floor_no }} : </span>
                             <span>{{ order.floor ? order.floor.name : '' }}</span>
                         </div>
@@ -171,7 +171,7 @@ const onPageBeforeRemove = () => {
 
 const cancelReservation = () => {
     var ids = JSON.parse(cookies.get('orderId'));
-    f7.dialog.confirm(trans.cancel_conformation_message, () => {
+    f7.dialog.confirm(trans.value.cancel_conformation_message, () => {
 
         axios.post('/api/cancel-reservation', {ids : ids, cancelled_by : 'Guest'})
         .then((res) => {
@@ -187,8 +187,8 @@ const cancelReservation = () => {
         $('.dialog-text').css({'font-size': '18px', 'line-height': '22px', 'text-align':'center'});
         $('.dialog-title').html("<img src='/images/cross.png'>");
         $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
-        $('.dialog-button').eq(0).text(trans.cancel);
-        $('.dialog-button').eq(1).removeClass('text-color-black').addClass('active').text(trans.ok);
+        $('.dialog-button').eq(0).text(trans.value.cancel);
+        $('.dialog-button').eq(1).removeClass('text-color-black').addClass('active').text(trans.value.ok);
         $('.dialog-buttons').addClass('margin-vertical padding-bottom');
     });
 }
@@ -224,10 +224,10 @@ const getWaitingTime = () => {
         let hours = Math.floor(time.value / 3600000);
         let minutes = Math.floor((time.value % 3600000) / 60000);
         let seconds = Math.floor(((time.value % 3600000) % 60000) / 1000);
-
-        if(hours > 0)  remainingWaitingTime.value = String(hours).padStart(2, '0') +' '+ trans.hour_and + ' ' +String(minutes).padStart(2, '0')+' '+trans.min_left;
-        else if(minutes > 0) remainingWaitingTime.value = String(minutes).padStart(2, '0')+' '+trans.min_left;
-        else if(seconds > 0) remainingWaitingTime.value = String(seconds).padStart(2, '0')+' '+trans.second_left;
+        console.log(trans);
+        if(hours > 0)  remainingWaitingTime.value = String(hours).padStart(2, '0') +' '+ trans.value.hour_and + ' ' +String(minutes).padStart(2, '0')+' '+trans.value.min_left;
+        else if(minutes > 0) remainingWaitingTime.value = String(minutes).padStart(2, '0')+' '+trans.value.min_left;
+        else if(seconds > 0) remainingWaitingTime.value = String(seconds).padStart(2, '0')+' '+trans.value.second_left;
         else{
             remainingWaitingTime.value = '0 Second Left';
             time.value = 0;

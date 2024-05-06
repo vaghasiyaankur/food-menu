@@ -66,7 +66,7 @@ const props = defineProps({
         default: () => []
     },
     iconColor: String,
-    closeReservation: Boolean,
+    closeReservation: [Boolean, Number],
     closeReservationEvent: Function
 });
 </script>

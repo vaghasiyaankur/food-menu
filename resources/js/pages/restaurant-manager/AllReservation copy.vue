@@ -70,9 +70,9 @@
                                 </thead>
                                 <tbody>
                                     <tr v-for="(data,index) in reservation" :key="data.id">
-                                        <td>#{{ (paginationData.per_page * (pageNumber - 1)) + (index + 1) }}</td>
-                                        <td>{{ data.customer ? data.customer.name : '' }}</td>
-                                        <td>{{ data.customer ? data.customer.number : '' }}</td>
+                                        <td>#{{ (paginationData.per_page * (page_number - 1)) + (index + 1) }}</td>
+                                        <td>{{ data.customer.name }}</td>
+                                        <td>{{ data.customer.number }}</td>
                                         <td>{{ data.person }}</td>
                                         <td v-if="data.deleted_at"><span class="status_info status_cancel">Cancel</span></td>
                                         <td v-else-if="data.finished"><span class="status_info status_complete">Complete</span></td>
@@ -91,7 +91,7 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr v-if="reservation && reservation.length == 0">
+                                    <tr v-if="reservation.length == 0">
                                         <td colspan="7" class="text-align-center">No Data Found !!</td>
                                     </tr>
                                 </tbody>
@@ -115,118 +115,146 @@
 </f7-page>
 </template>
 
-<script setup>
-import { ref, onMounted } from 'vue';
-import $ from 'jquery';
-import { f7Page, f7 } from 'framework7-vue';
+<script>
+import $ from "jquery";
+import {
+    f7Page,
+    f7
+} from 'framework7-vue';
 import axios from 'axios';
 
-const id = ref('');
-const reservation = ref([]);
-const fromDate = ref('');
-const toDate = ref('');
-const search = ref('');
-const paginationData = ref([]);
-const showFilter = ref(false);
-const pageNumber = ref(1);
-
-onMounted(() => {
-    //   addLoader();
-    f7.calendar.create({
-        inputEl: '#calender-date-range',
-        rangePicker: true,
-        numbers: true,
-        footer: true,
-        on: {
-        open() {
-            setTimeout(() => {
-            $('.popover-angle').css({ 'left': '147px' });
-            if ($('body').width() > $('body').height()) $('.calendar-popover').css({ 'top': '152px', 'left': '293.312px' });
-            else $('.calendar-popover').css({ 'top': '152px', 'left': '143.312px' });
-            }, 1);
-        },
-        close(dateRange) {
-            var dates = dateRange.getValue();
-            if (dates) {
-            var from_date = new Date(dates[0]).toLocaleDateString('sv-SE');
-            var to_date = dates[1] ? new Date(dates[1]).toLocaleDateString('sv-SE') : '';
-            $("#from-date").val(from_date);
-            $("#to-date").val(to_date);
-            $("#date-set").trigger('click');
-            // axios.get('/api/report-data?from_date='+from_date+'&to_date='+to_date)
-            // .then((res) => {
-            //     $("#total_order").text(res.data.total_order);
-            //     $("#complete_order").text(res.data.complete_order);
-            //     $("#ongoing_order").text(res.data.ongoing_order);
-            //     $("#reservation_table").text(res.data.reservation_table);
-            // })
-            }
+export default {
+    name: 'AllReservation',
+    data() {
+        return {
+            id: '',
+            reservation: [],
+            from_date: '',
+            to_date: '',
+            search: '',
+            paginationData: [],
+            showFilter: false,
+            page_number: 1,
         }
+    },
+    components: {
+        f7Page,
+        f7,
+    },
+    beforeCreate() {
+        this.$root.addLoader();
+    },
+    created() {
+        this.reservationData(this.page_number);
+    },
+    mounted() {
+        f7.calendar.create({
+            inputEl: '#calender-date-range',
+            rangePicker: true,
+            numbers: true,
+            footer: true,
+            on: {
+                open() {
+                    setTimeout(() => {
+                        $('.popover-angle').css({
+                            'left': '147px'
+                        });
+                        if ($('body').width() > $('body').height()) $('.calendar-popover').css({
+                            'top': '152px',
+                            'left': '293.312px'
+                        });
+                        else $('.calendar-popover').css({
+                            'top': '152px',
+                            'left': '143.312px'
+                        });
+                    }, 1);
+                },
+                close(daterange) {
+                    var dates = daterange.getValue();
+                    if (dates) {
+                        var from_date = new Date(dates[0]).toLocaleDateString('sv-SE');
+                        if (dates[1]) var to_date = new Date(dates[1]).toLocaleDateString('sv-SE');
+                        else var to_date = '';
+                        $("#from-date").val(from_date);
+                        $("#to-date").val(to_date);
+                        $("#date-set").trigger('click');
+                        // axios.get('/api/report-data?from_date='+from_date+'&to_date='+to_date)
+                        // .then((res) => {
+                        //     $("#total_order").text(res.data.total_order);
+                        //     $("#complete_order").text(res.data.complete_order);
+                        //     $("#ongoing_order").text(res.data.ongoing_order);
+                        //     $("#reservation_table").text(res.data.reservation_table);
+                        // })
+
+                    }
+                }
+            },
+        });
+
+        this.$root.activationMenu('all-reservation', '');
+        this.$root.removeLoader();
+    },
+    methods: {
+        reservationData(pagenumber) {
+            if (pagenumber == undefined || pagenumber == 1) {
+                pagenumber = 1
+            } else {
+                pagenumber = pagenumber.split('page=')[1];
+            }
+
+            var search = this.search;
+            var from_date = this.from_date;
+            var to_date = this.to_date;
+
+            this.page_number = pagenumber;
+            var page = '/api/reservation-list?from_date=' + from_date + '&to_date=' + to_date + '&search=' + search + '&page=' + pagenumber;
+            axios.get(page)
+                .then((res) => {
+                    this.reservation = res.data.reservation.data;
+                    this.paginationData = res.data.reservation;
+                })
         },
-    });
+        removeReservation(id) {
+            f7.dialog.confirm('Are you sure delete this reservation?', () => {
+                axios.post('/api/remove-reservation', {
+                        id: id
+                    })
+                    .then((res) => {
+                        // this.$root.successNotification(res.data.success);
+                        this.reservationData();
+                    })
+            });
 
-    reservationData(pageNumber.value);
-    //   activationMenu('all-reservation', '');
-    //   removeLoader();
-});
-
-const reservationData = (pNumber) => {
-    if (pNumber == undefined || pNumber == 1) {
-        pNumber = 1
-    } else {
-        pNumber = pNumber.split('page=')[1];
+            setTimeout(() => {
+                $('.dialog-button').eq(1).css({
+                    'background-color': '#F33E3E',
+                    'color': '#fff'
+                });
+                $('.dialog-title').html("<img src='/images/cross.png'>");
+                $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
+                $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
+                $('.dialog-button').eq(1).removeClass('text-color-black');
+                $('.dialog-buttons').addClass('margin-top no-margin-bottom')
+            }, 50);
+        },
+        calender() {
+            var from = $("#from-date").val();
+            var to = $("#to-date").val();
+            if (from) this.from_date = new Date(from).toLocaleDateString('sv-SE');
+            else this.from_date = '';
+            if (to) this.to_date = new Date(to).toLocaleDateString('sv-SE');
+            else this.to_date = '';
+        },
+        resetFilter() {
+            this.from_date = '';
+            this.to_date = '';
+            this.search = '';
+            $(".date-range").val('');
+            this.reservationData();
+            this.showFilter = false;
+        }
     }
-
-    const searchValue = search.value;
-    const from_date = fromDate.value;
-    const to_date = toDate.value;
-
-    pageNumber.value = pNumber;
-    const page = '/api/reservation-list?from_date=' + from_date + '&to_date=' + to_date + '&search=' + searchValue + '&page=' + pNumber;
-    axios.get(page)
-    .then((res) => {
-        reservation.value = res.data.reservation.data;
-        paginationData.value = res.data.reservation;
-    })
 }
-
-const removeReservation = (id) => {
-    f7.dialog.confirm('Are you sure delete this reservation?', () => {
-        axios.post('/api/remove-reservation', { id: id })
-        .then((res) => {
-            // this.$root.successNotification(res.data.success);
-            reservationData();
-        })
-    });
-
-    setTimeout(() => {
-        $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });
-        $('.dialog-title').html("<img src='/images/cross.png'>");
-        $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
-        $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
-        $('.dialog-button').eq(1).removeClass('text-color-black');
-        $('.dialog-buttons').addClass('margin-top no-margin-bottom')
-    }, 50);
-}
-
-const calender = () => {
-    const from = $("#from-date").val();
-    const to = $("#to-date").val();
-    if (from) fromDate.value = new Date(from).toLocaleDateString('sv-SE');
-    else fromDate.value = '';
-    if (to) toDate.value = new Date(to).toLocaleDateString('sv-SE');
-    else toDate.value = '';
-    }
-
-    const resetFilter = () => {
-    fromDate.value = '';
-    toDate.value = '';
-    search.value = '';
-    $(".date-range").val('');
-    reservationData();
-    showFilter.value = false;
-}
-
 </script>
 
 <style scoped>

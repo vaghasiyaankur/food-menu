@@ -59,10 +59,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-100 large-50 medium-100" v-if="tableShiftHistory.length">
+                    <div class="col-100 large-50 medium-100" v-if="table_shift_history.length">
                         <div class="card border_radius_10">
                             <div class="card-header"><h3 class="no-margin"> Table Shift Details</h3></div>
-                            <div class="card-content card-content-padding" v-for="tsh in tableShiftHistory" :key="tsh.id">
+                            <div class="card-content card-content-padding" v-for="tsh in table_shift_history" :key="tsh.id">
                                 <div class="single_content row margin-bottom">
                                     <div class="content_left_text no-margin col-50"><p class="no-margin">Table shifted :</p> </div>
                                     <div class="content_right_text no-margin col-50"><span><span>Table {{tsh.from}}</span> <i class="f7-icons margin-horizontal-half">arrow_right</i> <span>Table {{tsh.to}}</span></span> </div>
@@ -74,10 +74,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-100 large-50 medium-100" v-if="floorShiftHistory.length">
+                    <div class="col-100 large-50 medium-100" v-if="floor_shift_history.length">
                         <div class="card border_radius_10">
                             <div class="card-header"><h3 class="no-margin"> Floor shift Details</h3></div>
-                            <div class="card-content card-content-padding" v-for="fsh in floorShiftHistory" :key="fsh.id">
+                            <div class="card-content card-content-padding" v-for="fsh in floor_shift_history" :key="fsh.id">
                                 <div class="single_content row margin-bottom">
                                     <div class="content_left_text no-margin col-50"><p class="no-margin">Floor shifted :</p> </div>
                                     <div class="content_right_text no-margin col-50"><span><span>{{ fsh.from }} </span> <i class="f7-icons margin-horizontal-half">arrow_right</i> <span>{{  fsh.to }}</span></span> </div>
@@ -91,49 +91,65 @@
                     </div>
                 </div>
             </div>
-    </div>
+       </div>
     </f7-page>
 </template>
-<script setup>
-import { onMounted, ref } from 'vue';
+<script>
+import $ from "jquery";
 import { f7Page, f7 } from 'framework7-vue';
 import axios from 'axios';
 
-const id = ref('');
-const reservation = ref([]);
-const floorShiftHistory = ref([]);
-const tableShiftHistory = ref([]);
-
-
-onMounted(() => {
-    // f7.addLoader();
-    setTimeout(() => {
-        reservationDetail();
-    }, 500);
-    equalHeight();
-    // f7.removeLoader();
-});
-
-const reservationDetail = () => {
-  id.value = f7.view.main.router.currentRoute.params.id;
-  axios.get('/api/reservation-detail/' + id.value)
-    .then((res) => {
-      reservation.value = res.data.reservation.order;
-      floorShiftHistory.value = res.data.reservation.floorHistory;
-      tableShiftHistory.value = res.data.reservation.tableHistory;
-    });
-};
-
-const equalHeight = () => {
-  let highestBox = 0;
-  const targetDiv = document.querySelectorAll('.reservation-table-height');
-  for (let i = 0; i < targetDiv.length; i++) {
-    if (targetDiv[i].clientHeight > highestBox) {
-      highestBox = targetDiv[i].clientHeight;
+export default {
+    name : 'ReservationView',
+    data() {
+        return {
+            id: '',
+            reservation : [],
+            floor_shift_history : [],
+            table_shift_history : [],
+        }
+    },
+    components: {
+        f7Page,
+        f7
+    },
+    beforeCreate() {
+        this.$root.addLoader();
+    },
+    created() {
+    },
+    mounted() {
+        setTimeout(() => {
+            this.reservationDetail();
+        }, 500);
+        this.equal_height();
+        this.$root.removeLoader();
+    },
+    methods : {
+        reservationDetail() {
+            this.id = f7.view.main.router.currentRoute.params.id;
+            axios.get('/api/reservation-detail/'+this.id)
+            .then((res) => {
+                this.reservation = res.data.reservation.order;
+                this.floor_shift_history = res.data.reservation.floorHistory;
+                this.table_shift_history = res.data.reservation.tableHistory;
+            })
+        },
+        equal_height(){
+            var highestBox = 0;
+            var targetDiv = document.querySelectorAll('.reservation-table-height');
+            console.log(targetDiv);
+            for(var i=0; i<targetDiv.length;i++){
+                console.log(targetDiv[i]);
+                if(targetDiv[i].clientHeight > highestBox){
+                        highestBox = targetDiv[i].clientHeight;
+                }
+            }
+            document.querySelectorAll(".reservation-table-height").forEach(node => node.style.height = highestBox + "px");
+        },
     }
-  }
-  document.querySelectorAll(".reservation-table-height").forEach(node => node.style.height = highestBox + "px");
-};
+
+}
 </script>
 <style scoped>
 .reservation_view{

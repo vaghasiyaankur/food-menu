@@ -4,18 +4,17 @@
       <div class="nav-bar" v-if="currentRoute != 'login'">
         <Navbar 
           :moveToPos="moveToPos"
-          :close-reservation="closeReservationValue"
+          :close-reservation="close_reservation"
           :close-reservation-event="closeReservation"
-          :current-submenu-route="currentSubmenuRoute"
         />
       </div>
       <f7-view
-        url="/all-reservation/"
-        :main="true"
+        url="/"
+        :main="true"  
         class="safe-areas"
         :master-detail-breakpoint="768"
-        ></f7-view>
-        <!-- @notification="notification" -->
+        @notification="notification"
+      ></f7-view>
       <div class="overlay">
         <div class="overlayDoor"></div>
         <div class="overlayContent">
@@ -30,186 +29,219 @@
   </f7-app>
 </template>
 
-<script setup>
-import { f7App, f7Panel, f7View, f7, f7Page, f7Navbar } from 'framework7-vue';
-import { ref, onMounted, onBeforeMount, provide } from 'vue';
+<script>
+import { f7App, f7Panel, f7View, f7, f7Page, f7Navbar } from "framework7-vue";
 import routes from "./restaurant-manager-routes";
 import store from "./store";
-import axios from "axios";
 import $ from "jquery";
+import axios from "axios";
+import SwitchButton from "./components/SwitchButton.vue";
 import Navbar from "./pages/restaurant-manager/Navbar.vue";
 
-const f7Params = {
-  id: "io.framework7.testapp",
-  theme: "auto",
-  routes,
-  store,
-  popup: {
-    closeOnEscape: true,
+export default {
+  components: {
+    f7App,
+    f7Panel,
+    f7View,
+    f7,
+    f7Page,
+    f7Navbar,
+    SwitchButton,
+    Navbar
   },
-  sheet: {
-    closeOnEscape: true,
-  },
-  popover: {
-    closeOnEscape: true,
-  },
-  actions: {
-    closeOnEscape: true,
-  },
-};
-
-const closeReservationValue = ref(0);
-const currentRoute = ref("");
-const currentSubmenuRoute = ref('');
-const langs = ref([]);
-const events = ["click", "mousemove", "mousedown", "scroll", "keypress", "load"];
-const warningTimer = ref(null);
-let checkLogin = false;
-const trans = ref([]);
-const user = ref([]);
-
-onMounted(() => {
-  setTimeout(() => {
-    if (checkLogin) {
-      getLanguage();
-      checkReservation();
+  data() {
+    // Demo Theme
+    let theme = "auto";
+    if (document.location.search.indexOf("theme=") >= 0) {
+      theme = document.location.search.split("theme=")[1].split("&")[0];
     }
-  }, 500);
-  $(window).bind("load", function () {
-    $(".overlay, body").addClass("loaded");
-    setTimeout(function () {
-      $(".overlay").css({ display: "none" });
-    }, 1000);
-  });
-});
 
-
-const getLanguage = () => {
-  axios.get("/api/get-all-languages").then((res) => {
-    langs.value = res.data.langs;
-    languageTranslation(langs.value[0].id);
-  });
-};
-
-const languageTranslation = (langId) => {
-  axios.post("/api/get-language-translation", { lang_id: langId }).then((res) => {
-    trans.value = res.data.translations;
-    selected_lang.value = res.data.lang_id;
-  });
-};
-
-const checkReservation = () => {
-  axios.get("/api/check-reservation").then((res) => {
-    closeReservationValue.value = res.data.close_reservation;
-  });
-};
-
-const closeReservation = (reservation) => {
-  $(".closeReservation").css("background-color", "#F33E3E");
-  var openOrClose = closeReservationValue.value == 0 ? "open" : "close";
-  f7.dialog.confirm("Are you sure " + openOrClose + " the reservation?", () => {
-    console.log(reservation);
-    var changeReservation = closeReservationValue.value == 0 ? 1 : 0;
-    axios
-      .post("/api/change-reservation", { reservation: changeReservation })
-      .then((res) => {
-        closeReservationValue.value = res.data.close_reservation;
+    return {
+      f7Params: {
+        id: "io.framework7.testapp",
+        theme,
+        routes,
+        store,
+        popup: {
+          closeOnEscape: true,
+        },
+        sheet: {
+          closeOnEscape: true,
+        },
+        popover: {
+          closeOnEscape: true,
+        },
+        actions: {
+          closeOnEscape: true,
+        },
+      },
+      close_reservation: 0,
+      currentRoute: "",
+      CurrentsubmenuRoute: "",
+      langs: [],
+      events: ["click", "mousemove", "mousedown", "scroll", "keypress", "load"],
+      warningTimer: null,
+      checklogin: false,
+      trans: [],
+      user: [],
+    };
+  },
+  beforeCreate() {
+    axios.get("/api/checkLogin").then((res) => {
+      if (res.data.check_auth) {
+        this.checklogin = true;
+        this.user = res.data.user;
+        f7.view.main.router.navigate({ url: "/table/" });
+      } else {
+        f7.view.main.router.navigate({ url: "/login/" });
+      }
+    });
+  },
+  created() {
+    setTimeout(() => {
+      if (this.checklogin) {
+        this.getLanguage();
+        this.checkreservation();
+      }
+    }, 500);
+    $(window).bind("load", function () {
+      $(".overlay, body").addClass("loaded");
+      setTimeout(function () {
+        $(".overlay").css({ display: "none" });
+      }, 1000);
+    });
+  },
+  mounted() {
+    this.events.forEach(function (event) {
+      window.addEventListener(event, this.resetTimer);
+    }, this);
+    if (this.checklogin) {
+      this.setTimer();
+    }
+  },
+  methods: {
+    getLanguage() {
+      axios.get("/api/get-all-languages").then((res) => {
+        this.langs = res.data.langs;
+        this.languageTranslation(this.langs[0].id);
       });
-    $(".closeReservation").css("background-color", "");
-  });
-  setTimeout(() => {
-    $(".dialog-button").eq(1).css({ "background-color": "#F33E3E", color: "#fff" });
-    if (closeReservationValue.value == 0)
-      $(".dialog-title").html("<img src='/images/open_reservation.png'>");
-    else $(".dialog-title").html("<img src='/images/close_reservation.png'>");
-    $(".dialog-buttons").after(
-      "<div><img src='/images/flow.png' style='width:100%'></div>"
-    );
-    $(".dialog-button").addClass(
-      "col button button-raised text-color-black button-large text-transform-capitalize"
-    );
-    $(".dialog-button").eq(1).removeClass("text-color-black");
-    $(".dialog-text").addClass("margin-top");
-    $(".dialog-buttons").addClass("margin-top no-margin-bottom");
-  }, 50);
+    },
+    languageTranslation(langId) {
+      axios.post("/api/get-language-translation", { lang_id: langId }).then((res) => {
+        this.trans = res.data.translations;
+        this.selected_lang = res.data.lang_id;
+      });
+    },
+    checkreservation() {
+      axios.get("/api/check-reservation").then((res) => {
+        this.close_reservation = res.data.close_reservation;
+      });
+    },
+    closeReservation(reservation) {
+      $(".closeReservation").css("background-color", "#F33E3E");
+      var openOrClose = this.close_reservation == 0 ? "open" : "close";
+      f7.dialog.confirm("Are you sure " + openOrClose + " the reservation?", () => {
+        console.log(reservation);
+        if (reservation == 0) var changereservation = 1;
+        else var changereservation = 0;
+        axios
+          .post("/api/change-reservation", { reservation: changereservation })
+          .then((res) => {
+            this.close_reservation = res.data.close_reservation;
+          });
+        $(".closeReservation").css("background-color", "");
+      });
+      setTimeout(() => {
+        $(".dialog-button").eq(1).css({ "background-color": "#F33E3E", color: "#fff" });
+        if (this.close_reservation == 0)
+          $(".dialog-title").html("<img src='/images/open_reservation.png'>");
+        else $(".dialog-title").html("<img src='/images/close_reservation.png'>");
+        $(".dialog-buttons").after(
+          "<div><img src='/images/flow.png' style='width:100%'></div>"
+        );
+        $(".dialog-button").addClass(
+          "col button button-raised text-color-black button-large text-transform-capitalize"
+        );
+        $(".dialog-button").eq(1).removeClass("text-color-black");
+        $(".dialog-text").addClass("margin-top");
+        $(".dialog-buttons").addClass("margin-top no-margin-bottom");
+      }, 50);
+    },
+    successNotification(notice) {
+      var notificationFull = f7.notification.create({
+        title: '<img src="/images/check-icon.png">' + notice,
+        closeTimeout: 3000,
+        closeOnClick: true,
+        cssClass: "success--notification",
+      });
+      notificationFull.open();
+      $(".notification-header").append('<div><i class="f7-icons">xmark</i></div>');
+      $(".notification-content").remove();
+    },
+    errorNotification(notice) {
+      var notificationFull = f7.notification.create({
+        title: '<img src="/images/cross-icon.png">' + notice,
+        closeTimeout: 3000,
+        closeOnClick: true,
+        cssClass: "error--notification",
+      });
+      notificationFull.open();
+      $(".notification-header").append('<div><i class="f7-icons">xmark</i></div>');
+      $(".notification-content").remove();
+    },
+    activationMenu(active, submenuactive) {
+      this.currentRoute = active;
+      this.CurrentsubmenuRoute = submenuactive;
+    },
+    addLoader() {
+      $(".overlay, body").removeClass("loaded");
+      $(".overlay").css({ display: "" });
+    },
+    removeLoader() {
+      setTimeout(function () {
+        $(".overlay, body").addClass("loaded");
+        setTimeout(function () {
+          $(".overlay").css({ display: "none" });
+        }, 1000);
+      }, 2000);
+    },
+    setTimer() {
+      this.warningTimer = setTimeout(this.warningMessage, 15 * 60 * 1000);
+    },
+    warningMessage() {
+      f7.dialog.close();
+      f7.popup.close();
+      f7.view.main.router.navigate({ url: "/lock-screen/" });
+      this.lockScreenEnable();
+    },
+    resetTimer() {
+      clearTimeout(this.warningTimer);
+      this.setTimer();
+    },
+    lockScreenEnable() {
+      const config = {
+        headers: { "content-type": "multipart/form-data" },
+      };
+      axios
+        .post("/api/lockenabledisable", { lock: 1 }, config)
+        .then((res) => {})
+        .catch((err) => {});
+    },
+    moveToPos() {
+      window.open('/pos', '_blank');
+    }
+  },
+  computed: {
+    manager() {
+      // return this.$route.path === '/'
+    },
+  },
 };
-
-const successNotification = (notice) => {
-  var notificationFull = f7.notification.create({
-    title: '<img src="/images/check-icon.png">' + notice,
-    closeTimeout: 3000,
-    closeOnClick: true,
-    cssClass: "success--notification",
-  });
-  notificationFull.open();
-  $(".notification-header").append('<div><i class="f7-icons">xmark</i></div>');
-  $(".notification-content").remove();
-};
-
-const errorNotification = (notice) => {
-  var notificationFull = f7.notification.create({
-    title: '<img src="/images/cross-icon.png">' + notice,
-    closeTimeout: 3000,
-    closeOnClick: true,
-    cssClass: "error--notification",
-  });
-  notificationFull.open();
-  $(".notification-header").append('<div><i class="f7-icons">xmark</i></div>');
-  $(".notification-content").remove();
-};
-
-const activationMenu = (active, submenuactive) => {
-  currentRoute.value = active;
-  currentSubmenuRoute.value = submenuactive;
-};
-
-const addLoader = () => {
-  $(".overlay, body").removeClass("loaded");
-  $(".overlay").css({ display: "" });
-};
-
-const removeLoader = () => {
-  setTimeout(function () {
-    $(".overlay, body").addClass("loaded");
-    setTimeout(function () {
-      $(".overlay").css({ display: "none" });
-    }, 1000);
-  }, 2000);
-};
-
-const setTimer = () => {
-  warningTimer.value = setTimeout(warningMessage.value, 15 * 60 * 1000);
-};
-
-const warningMessage = () => {
-  f7.dialog.close();
-  f7.popup.close();
-  f7.view.main.router.navigate({ url: "/lock-screen/" });
-  lockScreenEnable();
-};
-
-const resetTimer = () => {
-  clearTimeout(warningTimer.value);
-  setTimer();
-};
-
-const lockScreenEnable = () => {
-  const config = {
-    headers: { "content-type": "multipart/form-data" },
-  };
-  axios
-    .post("/api/lockenabledisable", { lock: 1 }, config)
-    .then((res) => {})
-    .catch((err) => {});
-};
-
-const moveToPos = () => {
-  window.open('/pos', '_blank');
-};
-
-
-provide('user', user)
-
+$("body").click(function (e) {
+  if ($(e.target).hasClass("backdrop-in")) {
+    f7.dialog.close();
+  }
+});
 </script>
 <style>
 .active_submenu {

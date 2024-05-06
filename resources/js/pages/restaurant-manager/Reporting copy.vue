@@ -6,7 +6,7 @@
                     <h3 class="no-margin">
                         <!-- <a href="javscript:;" class="text-color-black padding-right-half"><i class="f7-icons font-22" style="vertical-align: bottom;">arrow_left</i></a>                             -->
                         <span class="page_heading"> Reporting</span>
-                    </h3>
+                     </h3>
                 </div>
                 <div class="col-40">
                     <div class="list no-hairlines reporting_calander no-margin">
@@ -30,7 +30,7 @@
                         <div class="card border__radius_10 elevation-2">
                             <div class="card-content">
                                 <h3 class="card__heading no-margin-top">Total Orders</h3>
-                                <p class="total__number no-margin" id="total_order">{{ totalOrder }}</p>
+                                <p class="total__number no-margin" id="total_order">{{ total_order }}</p>
                                 <div class="card__icon">
                                     <img src="/images/report-1.png" alt="">
                                 </div>
@@ -41,7 +41,7 @@
                         <div class="card border__radius_10 elevation-2">
                             <div class="card-content">
                                 <h3 class="card__heading no-margin-top">Completed Orders</h3>
-                                <p class="total__number no-margin" id="complete_order">{{ completeOrder }}</p>
+                                <p class="total__number no-margin" id="complete_order">{{ complete_order }}</p>
                                 <div class="card__icon">
                                     <img src="/images/report-2.png" alt="">
                                 </div>
@@ -52,7 +52,7 @@
                         <div class="card border__radius_10 elevation-2">
                             <div class="card-content">
                                 <h3 class="card__heading no-margin-top">Ongoing Orders</h3>
-                                <p class="total__number no-margin" id="ongoing_order">{{ ongoingOrder }}</p>
+                                <p class="total__number no-margin" id="ongoing_order">{{ ongoing_order }}</p>
                                 <div class="card__icon">
                                     <img src="/images/report-3.png" alt="">
                                 </div>
@@ -63,7 +63,7 @@
                         <div class="card border__radius_10 elevation-2">
                             <div class="card-content">
                                 <h3 class="card__heading no-margin-top">Most Reservation Table</h3>
-                                <p class="total__number no-margin" id="reservation_table">{{ reservationTable }}</p>
+                                <p class="total__number no-margin" id="reservation_table">{{ reservation_table }}</p>
                                 <div class="card__icon card__icon_2">
                                     <img src="/images/report-4.png" alt="">
                                 </div>
@@ -106,96 +106,126 @@
     </f7-page>
 </template>
 
-<script setup>
-import { ref, onMounted, onBeforeMount } from 'vue';
-import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Input,f7AreaChart } from 'framework7-vue';
+<script>
+import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Input,f7AreaChart} from 'framework7-vue';
 import axios from 'axios';
 import $ from 'jquery';
 import moment from 'moment';
+// import {
+//     Chart,
+//     ChartSeries,
+//     ChartSeriesItem,
+//     ChartValueAxis,
+//     ChartValueAxisItem,
+//     ChartCategoryAxis,
+//     ChartCategoryAxisItem,
+//     ChartTooltip
+// } from '@progress/kendo-vue-charts';
 import 'hammerjs';
 
-const totalOrder = ref(0);
-const completeOrder = ref(0);
-const ongoingOrder = ref(0);
-const reservationTable = ref(0);
-const series = ref([]);
-const categoryAxisMax = new Date(2023, 1, 0);
-const categoryAxisMaxDivisions = 10;
+export default {
+    name : 'Reporting',
+    data() {
+        return {
+            total_order : 0,
+            complete_order : 0,
+            ongoing_order : 0,
+            reservation_table : 0,
+            series : [],
+            categoryAxisMax: new Date(2023, 1, 0),
+            categoryAxisMaxDivisions: 10,
+        }
+    },
+    components: {
+        f7Page,
+        f7Navbar,
+        f7BlockTitle,
+        f7Block,
+        f7,
+        f7Input,
+        f7AreaChart,
+        // Chart,
+        // ChartSeries,
+        // ChartTooltip,
+        // ChartSeriesItem,
+        // ChartValueAxis,
+        // ChartValueAxisItem,
+        // ChartCategoryAxis,
+        // ChartCategoryAxisItem,
+    },
+    beforeCreate() {
+        this.$root.addLoader();
+    },
+    mounted() {
+        f7.calendar.create({
+            inputEl: '#demo-calendar-range',
+            rangePicker: true,
+            numbers:true,
+            footer: true,
+            on: {
+                open() {
+                    setTimeout(() => {
+                        $('.popover-angle').css({ 'left': '147px' });
+                        if($('body').width() > $('body').height())  $('.calendar-popover').css({ 'top': '144px', 'left': '787.406px' });
+                        else $('.calendar-popover').css({ 'top': '144px', 'left': '493.406px' });
+                    }, 1);
+                },
+                close(daterange) {
+                    var dates = daterange.getValue();
+                    // var datefrom = dates[0] ? : '';
+                    // var dateto = dates[1];
+                    if(dates){
+                        var from_date = new Date(dates[0]).toLocaleDateString('sv-SE');
+                        if(dates[1]) var to_date = new Date(dates[1]).toLocaleDateString('sv-SE');
+                        else var to_date = '';
 
-onBeforeMount(() => {
-    // addLoader();
-});
+                        $('#fromDate').val(from_date);
+                        $('#toDate').val(to_date);
 
-onMounted(() => {
-    f7.calendar.create({
-        inputEl: '#demo-calendar-range',
-        rangePicker: true,
-        numbers:true,
-        footer: true,
-        on: {
-            open() {
-                setTimeout(() => {
-                    $('.popover-angle').css({ 'left': '147px' });
-                    if($('body').width() > $('body').height())  $('.calendar-popover').css({ 'top': '144px', 'left': '787.406px' });
-                    else $('.calendar-popover').css({ 'top': '144px', 'left': '493.406px' });
-                }, 1);
-            },
-            close(daterange) {
-                var dates = daterange.getValue();
-                if(dates){
-                    var from_date = new Date(dates[0]).toLocaleDateString('sv-SE');
-                    var to_date = dates[1] ? new Date(dates[1]).toLocaleDateString('sv-SE') : '';
-
-                    $('#fromDate').val(from_date);
-                    $('#toDate').val(to_date);
-
-                    $("#date-set").trigger('click');
+                        $("#date-set").trigger('click');
+                    }
                 }
             }
-        }
-    });
-
-    // activationMenu('reporting', '');
-    // removeLoader();
-    report();
-    // apexChartData();
-});
-
-const chartInstance = (chart) => {
-    chart.value = chart;
-}
-
-const report = () => {
-    const fromDate = $('#fromDate').val() || '';
-    const toDate = $('#toDate').val() || '';
-    axios.get('/api/report-data', { params: { from_date: fromDate, to_date: toDate } })
-        .then((res) => {
-            totalOrder.value = res.data.total_order;
-            completeOrder.value = res.data.complete_order;
-            ongoingOrder.value = res.data.ongoing_order;
-            reservationTable.value = res.data.reservation_table;
-        })
-        .catch((error) => {
-            console.error('Error fetching report data:', error);
         });
-};
 
-const apexChartData = () => {
-    axios.get('/api/report-chart-data')
-        .then((res) => {
-            res.data.all_orders.forEach((data) => {
-                const category = moment(data.created_at, moment.defaultFormat).toDate();
-                series.value.push({
-                    value: data.orders,
-                    category: category,
+        this.$root.activationMenu('reporting', '');
+        this.$root.removeLoader();
+    },
+    created() {
+        this.report();
+        // this.apexchartData();
+    },
+    methods : {
+        chartInstance(chart) {
+            this.chart = chart;
+        },
+        report() {
+
+            var from_date = $('#fromDate').val() ? $('#fromDate').val() : '';
+            var to_date = $('#toDate').val() ? $('#toDate').val() : '';
+
+            axios.get('/api/report-data?from_date='+from_date+'&to_date='+to_date)
+            .then((res) => {
+                this.total_order = res.data.total_order;
+                this.complete_order = res.data.complete_order;
+                this.ongoing_order = res.data.ongoing_order;
+                this.reservation_table = res.data.reservation_table;
+            })
+        },
+        apexchartData(){
+            axios.get('/api/report-chart-data')
+            .then((res) => {
+                res.data.all_orders.forEach((data,index) => {
+                    var category = moment(data.created_at,moment.defaultFormat).toDate();
+                    this.series.push({
+                        value: data.orders,
+                        category: category,
+                    });
                 });
-            });
-        })
-        .catch((error) => {
-            console.error('Error fetching chart data:', error);
-        });
-};
-
+            })
+        }
+    }
+}
 </script>
 
 <style scoped>
