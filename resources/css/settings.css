@@ -3,14 +3,20 @@
     margin-top: 56px;
 }
 .setting-tabs .tabs{
-    width: 70%;
+    width: calc(70dvw - 30px);
+}
+.setting-tabs .tabs .tab:first-child{
+    min-height: calc(100dvh - 186px);
+}
+.setting-tabs .tabs .tab:not(:first-child){
+    height: calc(100dvh - 186px);
 }
 .setting-tabs .toolbar{
-    width: 30%;
-    background: white;
+    width: calc(30dvw - 30px);
+    background: #FFFFFF;
     border-right: 1px solid #E0E0E0;
     position: unset;
-    height: auto;
+    min-height: calc(100dvh - 186px);
 }
 .setting-tabs .toolbar-inner .tab-link p{
     display: flex;
@@ -18,6 +24,7 @@
     font-size: 16px;
     color: #555555;
     font-weight: 500;
+    text-wrap: wrap;
     padding: 0 25px;
 }
 .setting-tabs .toolbar-inner{
@@ -63,7 +70,7 @@
 
 .setting-tabs .general_info_form select{
     border: none;
-    padding: 13px 15px;
+    padding: 10px 15px;
 }
 
 .setting-tabs .block-title{
@@ -233,7 +240,7 @@
 .currency_form-input input,
 .taxsetting_form-input input,
 .note_details {
-    padding: 13px 15px !important;
+    padding: 12px 15px !important;
 }
 .general_info_form-restaurent-name input,
 .currency_form-currency-name input,
@@ -459,7 +466,16 @@ thead .label-cell {
 #tab-user-management, #tab-language, #tab-floor-plan, #tab-qr-code-generator{
     min-height: calc(100vh - 180px);
 }
-
+.language_setting{
+    height: 100%;
+}
+.language_setting .submit__button{
+    padding: 0;
+    margin: 100px 0 0;
+}
+.language_setting table{
+    border-bottom: 1px solid #E1E1E1;
+}
 
 /*========= SWITCH ON OFF CSS ===========*/
 .switch {
@@ -670,7 +686,7 @@ thead .label-cell {
     height: 100%;
 }
 .qrcode_generate .data-table{
-    overflow-x: auto;
+    overflow-x: scroll;
     overflow-y: hidden;
 }
 .qrcode_generate_popup .button{
@@ -819,7 +835,7 @@ ul .item-input-wrap input{
 
 /* COUPON CODE CSS */
 .coupon_code_page{
-    min-height: 100vh;
+    min-height: calc(100dvh - 186px);
 }
 .coupon_code_page .coupon_code_heading {
     margin: 20px;
@@ -854,6 +870,11 @@ ul .item-input-wrap input{
     font-weight: 500;
     text-wrap: nowrap;
 }
+.coupon_code_page .coupon_table_wrapper{
+    width: 100%;
+    overflow-x: scroll;
+    scrollbar-width: none;
+}
 .coupon_code_page .coupon_table{
     width: 100%;
     text-align: left;
@@ -866,6 +887,7 @@ ul .item-input-wrap input{
     font-weight: 600;
     color: #555555;
     background-color: #F4F4F4;
+    text-wrap: nowrap;
 }
 .coupon_code_page .coupon_table tbody td{
     padding: 26px 20px;
