@@ -1,9 +1,9 @@
 <template>
-    <div class="card language_setting no-margin">
+    <div class="language_setting no-margin">
         <TabHeader title="Language" :toggle="false" /> 
         <div class="card-content">
             <div class="data-table">
-                <table style="border-bottom:1px solid #E1E1E1">
+                <table>
                     <TableHeader :items="headerItems" />
                     <tbody>
                         <tr v-for="lang in langs" :key="lang.id">

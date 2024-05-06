@@ -4,7 +4,7 @@
             <div class="text-align-center table_view-popup_title">
                 Settle & Save</div>
             <hr class="popup_title_divider">
-            <input type="hidden" name="order_id" :value="order.id">
+            <input type="hidden" name="order_id" :value="order?.id">
             <label class="custom-disc-text">Payment Type</label>
             <div class="payment-method display-block">
                 <div class="grid">

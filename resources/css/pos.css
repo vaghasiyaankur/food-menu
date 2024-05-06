@@ -33,9 +33,9 @@
     width: 85%;
 }
 .category-slider-content .swiper{
-    margin: 20px 0 20px;
+    margin: 20px auto 0;
+    padding-bottom: 20px;
     max-height: 53px;
-    overflow: visible;
 }
 .category-slider-content .swiper .swiper-slide{
     min-width: 126px;
@@ -780,7 +780,7 @@ textarea {
     max-width: 580px;
     width: 100% !important;
     --f7-touch-ripple-color: none;
-    left: 25% !important;
+    /* left: 25% !important; */
 }
 
 .add_ingredient_variation_popup .item_edit-data-form {
