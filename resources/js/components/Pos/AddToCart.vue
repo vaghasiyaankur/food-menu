@@ -26,13 +26,13 @@
         <button :class="openAmountSlider ? 'btn-order-detail-expand' : 'btn-order-detail-collapse'" @click="toggleAmountSlider"></button>
         <div class="order-bill">
             <div class="order-details" :class="{'open' : !openAmountSlider}">
-                <div class="order-discount">
-                    <p class="no-margin">Discount</p>
-                    <p class="no-margin">${{ discount }}</p>
-                </div>
                 <div class="order-sub_total">
                     <p class="no-margin">Sub Total</p>
                     <p class="no-margin">${{ subTotal }}</p>
+                </div>
+                <div class="order-discount">
+                    <p class="no-margin">Discount</p>
+                    <p class="no-margin">${{ discount }}</p>
                 </div>
             </div>
             <hr class="bill-divider">

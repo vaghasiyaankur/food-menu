@@ -21,7 +21,7 @@
                     <div class="category-image-slider">
                         <img :src="'/storage/' + category.image" :alt="category.name" width="33" height="33"/>
                     </div>
-                    <p class="slider-category-name">{{ `${category.name?.substr(0, 5)} ${category.name?.length > 5 ? '..' : ''}`}}</p>
+                    <p class="slider-category-name">{{ category?.name }}</p>
                     <span class="category-item" v-if="activeCategory === category.id">{{ category.product_count }}</span>
                 </div>
             </div>

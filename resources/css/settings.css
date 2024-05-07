@@ -4,6 +4,7 @@
 }
 .setting-tabs .tabs{
     width: calc(70dvw - 30px);
+    border-left: 1px solid #E0E0E0;
 }
 .setting-tabs .tabs .tab:first-child{
     min-height: calc(100dvh - 186px);
@@ -14,7 +15,7 @@
 .setting-tabs .toolbar{
     width: calc(30dvw - 30px);
     background: #FFFFFF;
-    border-right: 1px solid #E0E0E0;
+    /* border-right: 1px solid #E0E0E0; */
     position: unset;
     min-height: calc(100dvh - 186px);
 }
@@ -156,7 +157,7 @@
 }
 
 .setting-tabs .currency_form{
-    height: 75dvh;
+    height: calc(100dvh - 240px);
     position: relative;
 }
 
