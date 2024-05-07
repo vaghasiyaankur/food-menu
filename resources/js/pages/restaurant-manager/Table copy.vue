@@ -1124,7 +1124,6 @@ export default {
                     this.tableListFloorWise(this.active_floor_id);
                 }
                 if (duration.minutes() <= 0) {
-                    console.log(this.row_tables);
                     this.row_tables[rowIndex][tableIndex].orders[
                         orderIndex
                     ].time_left = "Time over";
@@ -1246,7 +1245,6 @@ export default {
                 } else {
                     // let index = this.intervalNewOrder.indexOf(orderIndex + 'and' +  tableIndex);
                     // if (index !== -1) {
-                    //     console.log('remove'+ orderIndex + 'ta' + tableIndex);
                     //     this.intervalNewOrder.splice(index, 1);
                     // }
 
@@ -1258,7 +1256,6 @@ export default {
             // }
             // var highlight_time = parseFloat(this.highlight_time) * 60 * 1000;
             // this.timeoutId = setTimeout(() => {
-            //     console.log('settimeout'+interval);
             //     // this.tableListFloorWise(this.active_floor_id);
             //     f7.popover.close('.popover-move');
             //     clearInterval(interval);

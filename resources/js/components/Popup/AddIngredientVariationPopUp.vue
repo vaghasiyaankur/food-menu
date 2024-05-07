@@ -23,7 +23,7 @@
                         <button class="small_variable_button"
                             @click="addRemoveIngVar(variation.id, 'variation', true)">
                             <h5 class="no-margin variable_name">{{ variation.name }}</h5>
-                            <p class="no-margin variable_price">${{ variation.price ? variation.price.toFixed(2) : '0.00' }}</p>
+                            <p class="no-margin variable_price">{{  currentCurrencyData ? currentCurrencyData.currency_symbol :  '₹'  }} {{ variation.price ? variation.price.toFixed(2) : '0.00' }}</p>
                         </button>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
                             @click="addRemoveIngVar(ingredient.id, 'ingredient', true)"
                         >
                             <h5 class="no-margin addon_name">{{ ingredient.name }}</h5>
-                            <p class="no-margin addon_price">${{ ingredient.price ? ingredient.price.toFixed(2) : '0.00'}}</p>
+                            <p class="no-margin addon_price">{{  currentCurrencyData ? currentCurrencyData.currency_symbol :  '₹'  }} {{ ingredient.price ? ingredient.price.toFixed(2) : '0.00'}}</p>
                             <img src="/images/veg-icon.png">
                         </button>
                     </div>
@@ -57,7 +57,7 @@
             <hr class="horizontal-divider no-margin">
             <div class="probable_amount">
                 <h5 class="no-margin">Extra Amount</h5>
-                <h5 class="no-margin">${{ formattedExtraAmount }}</h5>
+                <h5 class="no-margin">{{  currentCurrencyData ? currentCurrencyData.currency_symbol :  '₹'  }} {{ formattedExtraAmount }}</h5>
             </div>
             <hr class="horizontal-divider no-margin">
             <div class="popup_button">
@@ -93,6 +93,7 @@ const addVariationList = ref(props.addVariationList);
 const selectIngredient = inject('selectIngredient');
 const selectVariation = inject('selectVariation');
 const extraAmount = inject('extraAmount');
+const currentCurrencyData = inject('currentCurrencyData');
 
 // Watch for changes in each prop and update the corresponding ref accordingly
 watch(() => props.addIngredientList, (newVal) => {

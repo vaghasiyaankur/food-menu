@@ -14,7 +14,7 @@
                                 <h3 class="card-title text-align-center">Registration</h3>
                             </div>
                             <div>
-                                <form name="reservationForm" class="list margin-vertical" id="my-form">
+                                <form name="reservationForm" class="list margin-vertical" id="reservation-form">
                                     <div class="item-content item-input">
                                         <div class="item-inner">
                                             <!-- <div class="item-title item-label">Name</div> -->
@@ -90,12 +90,12 @@
                 </div>
                 <i class="f7-icons font-30 close-menu" @click="closePopup">xmark</i>
                 <f7-block-title class="text-align-center font-18 text-color-black margin-top-half">Food Menu</f7-block-title>
-                <div class="margin" v-if="productCategory">
+                <div class="margin" v-if="categories">
                     <!-- <div class="text-align-center text-color-gray">Select your favourite food <br> and enjoy with family</div> -->
                     <div data-pagination='{"el":".swiper-pagination"}' data-space-between="10" data-slides-per-view="8" class="swiper swiper-init demo-swiper margin-top margin-bottom" style="height : 120px">
                         <div class="swiper-pagination"></div>
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide" :class="{ 'slide-active': category.id == sliderActive}" v-for="category in productCategory" :key="category" @click="getProducts(category.id)">
+                            <div class="swiper-slide" :class="{ 'slide-active': category.id == sliderActive}" v-for="category in categories" :key="category" @click="digitalProductList(category.id)">
                                 <div class="menu-image col">
                                     <img :src="'/storage'+category.image" alt="">
                                 </div>
@@ -104,11 +104,11 @@
                         </div>
                     </div>
                     <div class="position-relative">
-                        <div class="menu-title"><span>{{ categoryName }} Menu</span></div>
+                        <div class="menu-title"><span>{{ selectedCategoryName }} Menu</span></div>
                     </div>
                     <div class="menu-details margin-top">
-                        <div class="menu-lists" v-if="productSubcategory.length">
-                            <div class="menu-list" v-for="subcate in productSubcategory" :key="subcate">
+                        <div class="menu-lists" v-if="digitalProducts.length">
+                            <div class="menu-list" v-for="subcate in digitalProducts" :key="subcate">
                                 <div class="font-18 text-align-center menu-list-title text-color-black"><u>{{ subcate.sub_category_language[0].name }}</u></div>
                                 <div class="list row margin-half align-items-center" v-for="product in subcate.products" :key="product">
                                     <div class="col-90 display-flex">{{ product.product_language[0].name }}&nbsp; <span class="dots"></span></div>
@@ -156,9 +156,12 @@ const reservation = ref({
     floor: null
 });
 const checkWaitingTime = ref(false);
-const productCategory = ref([]);
-const productSubcategory = ref([]);
-const categoryName = ref('');
+
+const categories = ref([]);
+const digitalProducts = ref([]);
+const selectedCategoryName = ref('');
+const selectCategory = ref('');
+
 const sliderActive = ref(0);
 const memberLimit = ref(0);
 const waitingTime = ref('00:00');
@@ -180,23 +183,40 @@ onMounted(() => {
 });
 
 const getCategories = () => {
-    axios.post('/api/get-category-list')
-        .then((res) => {
-        productCategory.value = res.data.category;
-        if (productCategory.length > 0) {
-            getProducts(productCategory.value[0].id);
-        }
-        });
-    };
-
-const getProducts = (id) => {
-    sliderActive.value = id;
-    axios.get('/api/get-category-wise-products/' + id)
-        .then((res) => {
-        categoryName.value = res.data.category_languages[0].name;
-        productSubcategory.value = res.data.sub_category;
+    // axios.post('/api/get-category-list')
+    //     .then((res) => {
+    //     productCategory.value = res.data;
+    //     if (productCategory.length > 0) {
+    //         getProducts(productCategory.value[0].id);
+    //     }
+    //     });
+    axios.post('/api/get-categories')
+    .then((response) => {
+        categories.value = response.data.categories;
+        selectCategory.value = response.data.categories[0]?.id ?? '';
+        selectedCategoryName.value = response.data.categories[0]?.name ?? '';
+        digitalProductList(selectCategory.value)
     });
 };
+
+const digitalProductList = (id) => {
+    if(id){
+        axios.get('/api/get-digital-product-list/'+id)
+        .then((response) => {
+            digitalProducts.value = response.data;
+        });
+    }
+}
+
+
+// const getProducts = (id) => {
+//     sliderActive.value = id;
+//     axios.get('/api/get-category-wise-products/' + id)
+//         .then((res) => {
+//         selectedCategoryName.value = res.data.category_languages[0].name;
+//         digitalProducts.value = res.data.sub_category;
+//     });
+// };
 
 const memberLimitation = () => {
     axios.get('/api/member-limitation')
@@ -326,7 +346,6 @@ const checkNumberValidate = (evt) => {
 };
 
 const floorAvailable = () => {
-    console.log(reservation.value.member);
     if (reservation.value.member) {
         axios.post('/api/floor-available', { 'member': reservation.value.member })
         .then((res) => {

@@ -10,7 +10,7 @@
         />
       </div>
       <f7-view
-        url="/all-reservation/"
+        url="/reservation/"
         :main="true"
         class="safe-areas"
         :master-detail-breakpoint="768"
@@ -108,7 +108,6 @@ const closeReservation = (reservation) => {
   $(".closeReservation").css("background-color", "#F33E3E");
   var openOrClose = closeReservationValue.value == 0 ? "open" : "close";
   f7.dialog.confirm("Are you sure " + openOrClose + " the reservation?", () => {
-    console.log(reservation);
     var changeReservation = closeReservationValue.value == 0 ? 1 : 0;
     axios
       .post("/api/change-reservation", { reservation: changeReservation })

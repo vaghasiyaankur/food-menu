@@ -9,7 +9,9 @@ use App\Models\Table;
 use Illuminate\Http\Request;
 use App\Helper\ImageHelper;
 use App\Helper\SettingHelper;
+use App\Models\KotHold;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class SettingController extends Controller
 {
@@ -46,6 +48,20 @@ class SettingController extends Controller
      */
     public function updateSetting(Request $request)
     {
+        $rules = [
+            'restaurant_name' => 'required',
+            'open_time' => 'required',
+            'close_time' => 'required',
+            'logo' => 'image|mimes:jpg,png,jpeg,gif,svg,webp',
+            'fav_icon' => 'image|mimes:jpg,png,jpeg,gif,svg,webp',
+        ];
+    
+        $validator = Validator::make($request->all(), $rules);
+    
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+        
         $setting = Setting::whereRestaurantId(Auth::user()->restaurant_id)->first();
 
         $logo_name = $setting->logo;
@@ -55,7 +71,7 @@ class SettingController extends Controller
         }
 
         $fav_icon_name = $setting->fav_icon;
-        if($request->file('logo')){
+        if($request->file('fav_icon')){
             $fav_icon_name = ImageHelper::storeImage($request->file('fav_icon'), 'setting');
             ImageHelper::removeImage($setting->fav_icon);
         }
@@ -157,7 +173,8 @@ class SettingController extends Controller
      */
     public function deleteTable(Request $request)
     {
-        $table = Table::find($request->id)->delete();
+        KotHold::where('table_id', $request->id)->delete();
+        Table::find($request->id)->delete();
 
         return response()->json(['success'=>'Table Deleted Successfully.']);
     }
@@ -170,7 +187,7 @@ class SettingController extends Controller
      */
     public function changeTableStatus(Request $request)
     {
-        $table = Table::find($request->id)->update(['status' => $request->status]);
+        Table::find($request->id)->update(['status' => $request->status]);
 
         return response()->json(['success'=>'Table Status Updated Successfully.']);
     }
@@ -196,7 +213,20 @@ class SettingController extends Controller
         return response()->json(['setting'=>$setting]);
     }
 
-    public function saveCurrency(Request $request) {
+    public function saveCurrency(Request $request) 
+    {
+        $rules = [
+            'currency_name' => 'required',
+            'currency_code' => 'required',
+            'currency_symbol' => 'required'
+        ];
+    
+        $validator = Validator::make($request->all(), $rules);
+    
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
         $data = $request->all();
 
         Setting::whereRestaurantId(Auth::user()->restaurant_id)->update($data);

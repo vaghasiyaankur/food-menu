@@ -12,7 +12,7 @@
                 </div>
                 <div class="text-align-center data-card-name">
                     <h4 class="no-margin no-padding">{{product.name}}</h4>
-                    <p class="add-combo-product-price no-margin no-padding">${{product.price}}</p>
+                    <p class="add-combo-product-price no-margin no-padding">{{  currentCurrencyData ? currentCurrencyData.currency_symbol :  '₹'  }} {{product.price}}</p>
                 </div>
                 <img class="food-type-icon" :src="foodTypeIcon(product.type)">
             </div>
@@ -21,9 +21,11 @@
 </template>
 <script setup>
 
-import { getFoodTypeIcon } from '../../commonFunction.js';
+import { getFoodTypeIcon } from '../../commonFunction.js'
+import { inject } from 'vue';
 
 const emit = defineEmits(['select:product']);
+const currentCurrencyData = inject('currentCurrencyData');
 
 const props = defineProps({
     products: {

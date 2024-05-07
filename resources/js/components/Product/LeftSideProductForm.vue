@@ -12,7 +12,7 @@
                     </div>
                     <label for="small" checked>
                         <div>{{ variation.name }}</div>
-                        <div>${{ variation.price }}</div>
+                        <div>{{  currentCurrencyData ? currentCurrencyData.currency_symbol :  '₹'  }} {{ variation.price }}</div>
                     </label>
                 </div>
             </div>
@@ -29,7 +29,7 @@
                     </div>
                     <div class="text-align-center add-combo-product-name">
                         <h4 class="no-margin no-padding">{{ingredient.name}}</h4>
-                        <p class="selected-product-price no-margin no-padding">${{ingredient.price}}</p>
+                        <p class="selected-product-price no-margin no-padding">{{  currentCurrencyData ? currentCurrencyData.currency_symbol :  '₹'  }} {{ingredient.price}}</p>
                     </div>
                     <img class="food-type-icon" src="/assets/images/seederImages/combo/type1.png">
                 </div>
@@ -41,6 +41,9 @@
 <script setup>
 import AddEditForm from './AddEditForm.vue';
 import Icon from '../Icon.vue';
+import { inject } from 'vue';
+
+const currentCurrencyData = inject('currentCurrencyData');
 
 const props = defineProps({
     selectIngredients: {

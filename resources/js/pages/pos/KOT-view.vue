@@ -55,7 +55,7 @@
                                                 <li v-for="kot_product in kot?.kot_products" :key="kot_product">
                                                     <div class="ordered-item">
                                                         <h6 class="no-margin">{{kot_product?.product?.product_restaurant_languages[0]?.name}} <span v-if="kot_product.note">[Note : {{kot_product.note}}]</span></h6>
-                                                        <h6 class="no-margin">₹ {{kot_product?.total_price?.toFixed(2)}}</h6>
+                                                        <h6 class="no-margin">{{  currentCurrencyData ? currentCurrencyData.currency_symbol :  '₹'  }}  {{kot_product?.total_price?.toFixed(2)}}</h6>
                                                     </div>
                                                 </li>
                                             </ol>
@@ -67,7 +67,7 @@
                                         <hr class="horizontal-divider">
                                         <div class="ordered_items-total">
                                             <h4 class="ordered_items-total-text no-margin">Total Amount</h4>
-                                            <h4 class="ordered_items-total-number no-margin">${{item?.total_price?.toFixed(2)}}</h4>
+                                            <h4 class="ordered_items-total-number no-margin">{{  currentCurrencyData ? currentCurrencyData.currency_symbol :  '₹'  }} {{item?.total_price?.toFixed(2)}}</h4>
                                         </div>
                                     </div>
                                     <div class="order-user-comment" v-if="item?.note">
@@ -118,25 +118,25 @@
                             <li>
                                 <div class="display-flex align-items-center justify-content-space-between">
                                     <h6 class="no-margin">Margherita Pizza</h6>
-                                    <h6 class="no-margin">₹ 146.00</h6>
+                                    <h6 class="no-margin">{{  currentCurrencyData ? currentCurrencyData.currency_symbol :  '₹'  }} 146.00</h6>
                                 </div>
                             </li>
                             <li>
                                 <div class="display-flex align-items-center justify-content-space-between">
                                     <h6 class="no-margin">Vegetarian Hakka Noodles</h6>
-                                    <h6 class="no-margin">₹ 256.00</h6>
+                                    <h6 class="no-margin">{{  currentCurrencyData ? currentCurrencyData.currency_symbol :  '₹'  }} 256.00</h6>
                                 </div>
                             </li>
                             <li>
                                 <div class="display-flex align-items-center justify-content-space-between">
                                     <h6 class="no-margin">Supreme Veggie Burger</h6>
-                                    <h6 class="no-margin">₹ 100.00</h6>
+                                    <h6 class="no-margin">{{  currentCurrencyData ? currentCurrencyData.currency_symbol :  '₹'  }} 100.00</h6>
                                 </div>
                             </li>
                             <li>
                                 <div class="display-flex align-items-center justify-content-space-between">
                                     <h6 class="no-margin">Biryani Rice</h6>
-                                    <h6 class="no-margin">₹ 100.00</h6>
+                                    <h6 class="no-margin">{{  currentCurrencyData ? currentCurrencyData.currency_symbol :  '₹'  }} 100.00</h6>
                                 </div>
                             </li>
                         </ol>
@@ -145,12 +145,12 @@
                     <div class="pay_bill_total_outer">
                         <div class="pay_bill_subtotal">
                             <h5 class="no-margin">Sub Total</h5>
-                            <h5 class="no-margin">$38.00</h5>
+                            <h5 class="no-margin">{{  currentCurrencyData ? currentCurrencyData.currency_symbol :  '₹'  }} 38.00</h5>
                         </div>
                         <hr class="horizontal-divider">
                         <div class="pay_bill_total">
                             <h5 class="no-margin">Total Amount</h5>
-                            <h5 class="no-margin">$38.00</h5>
+                            <h5 class="no-margin">{{  currentCurrencyData ? currentCurrencyData.currency_symbol :  '₹'  }} 38.00</h5>
                         </div>
                     </div>
                     <div class="popup_button">
@@ -178,7 +178,7 @@
 <script setup>
 import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7 } from 'framework7-vue';
 import axios from 'axios';
-import { ref } from 'vue';
+import { ref, inject } from 'vue';
 import Icon from '../../components/Icon.vue';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
@@ -190,6 +190,7 @@ const paginateData = ref({});
 const floorList = ref({});
 const floor = ref('');
 const kotSearch = ref('');
+const currentCurrencyData = inject('currentCurrencyData');
 
 const getKotList = async () => {
     const formData = {};

@@ -5,7 +5,7 @@
         </h3>
     </div>
     <div class="currency_form">
-        <form class="list" id="my-form" @submit.prevent="saveCurrency">
+        <form class="list" id="currency-setting-form" @submit.prevent="saveCurrency">
             <div class="item-content item-input currency_form-currency-name no-margin no-padding">
                 <Input type="text" name="currency_name" class="" :value="currency?.currency_name" placeholder="Enter currency name" label="Name" />
             </div>
@@ -26,7 +26,7 @@
 import axios from "axios"
 import Input from "../../../components/Form/Input.vue"
 import { ref } from "vue"
-import { successNotification, errorNotification } from '../../../commonFunction.js';
+import { successNotification, errorNotification, getErrorMessage } from '../../../commonFunction.js';
 
 const currency = ref([]);
 
@@ -42,7 +42,11 @@ const saveCurrency = () => {
     axios.post('/api/save-currency', formData)
     .then((res) => {
         successNotification(res.data.success);
-    })
+    }) 
+    .catch((error) => {
+        const errorMessage = getErrorMessage(error);
+        errorNotification(errorMessage);
+    });
 }
 
 getCurrency();

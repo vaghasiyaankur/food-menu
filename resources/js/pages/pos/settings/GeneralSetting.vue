@@ -5,7 +5,7 @@
         </h3>
     </div>
     <div class="general_info_form">
-        <form class="list" id="my-form" @submit.prevent="submitGeneralSetting">
+        <form class="list" id="general-setting-form" @submit.prevent="submitGeneralSetting">
             <input type="hidden" name="id" :value="data?.id">
             <div class="item-content item-input general_info_form-address no-padding">
                 <Input label="Restaurant Name" type="text" name="restaurant_name" :value="data?.restaurant_name" placeholder="Enter restaurant name" />
@@ -65,7 +65,7 @@ import Switch from "../../../components/Form/Switch.vue"
 import SettingImage from "../../../components/Form/SettingImage.vue";
 import Dropdown from "../../../components/Form/DropDown.vue";
 import Timer from "../../../components/Form/Timer.vue";
-import { successNotification, errorNotification } from '../../../commonFunction.js';
+import { successNotification, errorNotification, getErrorMessage } from '../../../commonFunction.js';
 
 const highlightOnOff = ref(true);
 const showTiming = ref('');
@@ -113,6 +113,10 @@ const submitGeneralSetting = () => {
     .then((res) => {
         successNotification(res.data.success);
     })
+    .catch((error) => {
+        const errorMessage = getErrorMessage(error);
+        errorNotification(errorMessage);
+    });
 }
 
 </script>

@@ -7,7 +7,7 @@
         />
       </div>
       <f7-view
-        url="/"
+        url="/new-settings/"
         :main="true"
         class="safe-areas"
         :master-detail-breakpoint="768"
@@ -221,7 +221,6 @@ onBeforeUnmount(() => {
 
 // Computed properties
 const manager = computed(() => {
-  console.log(f7);
   // return this.$route.path === '/'
 });
 

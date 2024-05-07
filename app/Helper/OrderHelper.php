@@ -2,6 +2,7 @@
 
 namespace App\Helper;
 
+use App\Models\Customer;
 use App\Models\Order;
 use Carbon\Carbon;
 
@@ -18,10 +19,13 @@ class OrderHelper
      */
     public static function createOrder(array $data)
     {
+        $customer = Customer::find($data['customer_id']);
         $order = new Order();
         $order->customer_id = $data['customer_id'] ?? null;
         $order->table_id = $data['table_id'] ?? null;
         $order->person = $data['person'] ?? null;
+        $order->name = $customer ? $customer->name : null;
+        $order->phone = $customer ? $customer->number : null;
         if (isset($data['orderExists']) && $data['orderExists']) {
             $order->start_time = Carbon::now();
         }

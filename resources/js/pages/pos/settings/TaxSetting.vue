@@ -4,19 +4,19 @@
             <span class="page_heading tax_settings"> Add Taxes </span> 
         </h3>
     </div>
-    <div class="taxsetting_form">
-        <form class="list no-margin tax-setting-form" id="tax-setting-form" @submit.prevent="saveTaxSetting">
+    <div class="tax-settings-form">
+        <form class="list no-margin tax-setting-form" id="add-tax-setting-form" @submit.prevent="saveTaxSetting">
             <input name="id" type="hidden" :value="tax?.id" />
-            <div class="item-content item-input taxsetting_form-name no-margin no-padding">
+            <div class="item-content item-input tax-settings-form-name no-margin no-padding">
                 <Input name="tax_name" type="text" placeholder="Enter tax name" label="Tax Name" :value="tax?.tax_name" />
             </div>
-            <div class="item-content item-input taxsetting_form-type-charge no-margin no-padding">
+            <div class="item-content item-input tax-settings-form-type-charge no-margin no-padding">
                 <div class="item-inner no-padding">
                     <div class="block-title no-margin display-flex">
                         <span class="block-title no-margin"> Type Charge</span>
                         <Radio :options="taxTypeOption" name="tax_charge_type" :value="tax?.tax_charge_type ?? 'percentage'" />
                     </div>
-                    <div class="item-input-wrap taxsetting_form-input">
+                    <div class="item-input-wrap tax-settings-form-input">
                         <Input name="tax_charge_amount" type="text" placeholder="Enter tax rate" :value="tax?.tax_charge_amount" />
                     </div>
                 </div>
@@ -26,10 +26,10 @@
             </div>
         </form>
         <hr class="tax-divider no-padding">
-        <form class="list no-margin tax-setting-form" id="tax-setting-form" @submit.prevent="statusTaxChange">
+        <form class="list no-margin tax-setting-form" id="tax-list-form" @submit.prevent="statusTaxChange">
             <h3 class="no-margin no-padding"> <span class="page_heading tax_settings"> Taxes </span></h3>
             <div v-if="taxes.length > 0" >
-                <div v-for="(tax,index) in taxes" :key="tax" class="item-content item-input taxsetting_form-gst no-padding-left">
+                <div v-for="(tax,index) in taxes" :key="tax" class="item-content item-input tax-setting-form-gst no-padding-left">
                     <div class="item-inner no-padding">
                         <div class="w-100 display-flex justify-content-space-between">
                             <div class="block-title no-margin"> {{ tax?.tax_name }}</div>
@@ -63,7 +63,7 @@ import Input from '../../../components/Form/Input.vue'
 import Radio from '../../../components/Form/Radio.vue'
 import { ref } from 'vue'
 import axios from 'axios'
-import { successNotification, errorNotification } from '../../../commonFunction.js';
+import { successNotification, errorNotification, getErrorMessage } from '../../../commonFunction.js';
 
 const taxes = ref([]);
 const tax = ref({});
@@ -90,6 +90,10 @@ const saveTaxSetting = (event) => {
         getTaxSetting();
         event.target.reset();
     })
+    .catch((error) => {
+        const errorMessage = getErrorMessage(error);
+        errorNotification(errorMessage);
+    });
 }
 
 const getCurrency = async () => {

@@ -70,7 +70,7 @@ import Icon from "../../../components/Icon.vue";
 import AddUpdatePopup from '../../../components/common/AddUpdatePopup.vue'
 import RemovePopup from '../../../components/common/RemovePopup.vue'
 import Pagination from '../../../components/Pagination.vue';
-import { successNotification, errorNotification } from '../../../commonFunction.js';
+import { successNotification, errorNotification, getErrorMessage } from '../../../commonFunction.js';
 
 const floors = ref([]);
 const paginationData = ref([]);
@@ -83,6 +83,7 @@ const addUpdateFormDataFormat = ref([
 ]);
 const deleteId = ref(0);
 const addUpdateTitle = ref('Add Floor');
+const addUpdateType = ref('floor');
 
 const getFloors = (pageNum) => {
     pageNum = pageNum || 1; // Default to 1 if not provided
@@ -109,6 +110,10 @@ const storeUpdateData = () => {
     .then((res) => {
         successNotification(res.data.success);
         getFloors();
+    })
+    .catch((error) => {
+        const errorMessage = getErrorMessage(error);
+        errorNotification(errorMessage);
     });
 }
 

@@ -138,9 +138,7 @@ export default {
         equal_height(){
             var highestBox = 0;
             var targetDiv = document.querySelectorAll('.reservation-table-height');
-            console.log(targetDiv);
             for(var i=0; i<targetDiv.length;i++){
-                console.log(targetDiv[i]);
                 if(targetDiv[i].clientHeight > highestBox){
                         highestBox = targetDiv[i].clientHeight;
                 }

@@ -67,7 +67,7 @@ class SubCategoryController extends Controller
             $rules["names.$language"] = 'required';
         }
         $rules['status'] = 'required';
-        $rules['image'] = 'required|image|mimes:jpg,png,jpeg,gif,svg';
+        $rules['image'] = 'required|image|mimes:jpg,png,jpeg,gif,svg,webp';
 
         $customMessages = [];
         foreach ($languages as $language) {
@@ -152,7 +152,7 @@ class SubCategoryController extends Controller
         }
         $rules['status'] = 'required';
         if($req->file('image')){
-            $rules['image'] = 'required|image|mimes:jpg,png,jpeg,gif,svg';
+            $rules['image'] = 'required|image|mimes:jpg,png,jpeg,gif,svg,webp';
         }
 
         $customMessages = [];

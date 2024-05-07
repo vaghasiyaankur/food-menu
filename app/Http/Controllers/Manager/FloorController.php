@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Floor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class FloorController extends Controller
 {
@@ -15,14 +16,25 @@ class FloorController extends Controller
         return response()->json($floors);
     }
 
-    public function addFloor(Request $req)
+    public function addFloor(Request $request)
     {
+            $rules = [
+                'name' => 'required',
+            'short_cut' => 'required'
+        ];
+    
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
         Floor::updateOrCreate(
-            ['id' => $req->id],
-            ['short_cut' => $req->short_cut,'name' => $req->name,'restaurant_id' => Auth::user()->restaurant_id]
+            ['id' => $request->uestid],
+            ['short_cut' => $request->uestshort_cut,'name' => $request->uestname,'restaurant_id' => Auth::user()->restaurant_id]
         );
 
-        if($req->id == 0) $message = 'Added';
+        if($request->id == 0) $message = 'Added';
         else $message = "Updated";
 
         return response()->json(['success'=>'Floor '.$message.' Successfully.']);

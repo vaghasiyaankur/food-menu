@@ -1,7 +1,7 @@
 <template>
     <div class="data-drop-down w-100 col-100">
         <select :name="name" 
-            id="data-drop-down" class="col-100"
+            :id="'data-drop-down-'+name" class="col-100"
             @change="updateDropDownValue"
         >
             <option 

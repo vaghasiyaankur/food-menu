@@ -8,7 +8,7 @@
                 <!-- <h2 @click="$emit('tableshow')">dcsfhczsdnvghasdf</h2> -->
             </div>
             <div class="add_table_field">
-                <form class="list margin-vertical" id="my-form">
+                <form class="list margin-vertical" id="add-table-form">
                     <div class="row padding-bottom margin-bottom">
                         <div class="col-50">
                             <div class="item-content item-input margin-bottom">

@@ -28,11 +28,11 @@
             <div class="order-details" :class="{'open' : !openAmountSlider}">
                 <div class="order-sub_total">
                     <p class="no-margin">Sub Total</p>
-                    <p class="no-margin">${{ subTotal }}</p>
+                    <p class="no-margin">{{  currentCurrencyData ? currentCurrencyData.currency_symbol :  '₹'  }} {{ subTotal }}</p>
                 </div>
                 <div class="order-discount">
                     <p class="no-margin">Discount</p>
-                    <p class="no-margin">${{ discount }}</p>
+                    <p class="no-margin">{{  currentCurrencyData ? currentCurrencyData.currency_symbol :  '₹'  }} {{ discount }}</p>
                 </div>
             </div>
             <hr class="bill-divider">
@@ -41,7 +41,7 @@
                     <p class="no-margin">Total Amount</p>
                 </div>
                 <div class="total_bill-amount">
-                    <p class="no-margin">${{ totalAmount }}</p>
+                    <p class="no-margin">{{  currentCurrencyData ? currentCurrencyData.currency_symbol :  '₹'  }} {{ totalAmount }}</p>
                 </div>
             </div>
             <hr class="bill-divider">
@@ -60,11 +60,12 @@
 import { f7 } from "framework7-vue"
 import CartProduct from './CartProduct.vue'
 import CartHeader from './CartHeader.vue'
-import { ref } from 'vue'
+import { ref, inject } from 'vue'
 import Icon from '../../components/Icon.vue';
 
 const emit = defineEmits(['increase:quantity', 'decrease:quantity','open:note-popup', 'remove:cart-product', 'create:kot', 'hold:kot']);
 
+const currentCurrencyData = inject('currentCurrencyData');
 const openAmountSlider = ref(true);
 
 const props = defineProps({

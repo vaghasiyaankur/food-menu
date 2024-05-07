@@ -141,7 +141,6 @@ export default {
       $(".closeReservation").css("background-color", "#F33E3E");
       var openOrClose = this.close_reservation == 0 ? "open" : "close";
       f7.dialog.confirm("Are you sure " + openOrClose + " the reservation?", () => {
-        console.log(reservation);
         if (reservation == 0) var changereservation = 1;
         else var changereservation = 0;
         axios

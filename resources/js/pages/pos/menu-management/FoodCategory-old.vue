@@ -169,7 +169,6 @@ export default {
             this.image_url = URL.createObjectURL(this.category.image);
         },
         getCategories() {
-            console.log(this.search);
             axios.post('/api/get-categories', {
                 search: this.search
             })
