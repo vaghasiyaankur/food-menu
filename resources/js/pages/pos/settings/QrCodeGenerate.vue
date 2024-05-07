@@ -8,10 +8,10 @@
             </div>
             <div class="col-60">
                 <div class="row">
-                    <div class="col-60">
+                    <div class="col-50">
                         <Calender />
                     </div>
-                    <div class="col-40">
+                    <div class="col-50">
                         <div class="qrcode_generate_popup">
                             <button class="button button-raised padding height_40 popup-open" @click="blankForm" data-popup=".qrcode_popup">Generate QR Code</button>
                         </div>
@@ -66,7 +66,7 @@
             </div>
         </div>
     </div>
-    <div id="qrcode_popup" class="popup qrcode_popup" style="position:fixed; border-radius: 15px; top:37% !important; left:34% !important;">
+    <div id="qrcode_popup" class="popup qrcode_popup" style="position:fixed; border-radius: 15px; top:37% !important;">
         <AddUpdatePopup title="Generate Qr Code" :form-data-format="addUpdateFormDataFormat" :type="addUpdateType" :data-type="'category'" @set:startDate="startChangeDate" @set:endDate="endChangeDate" @store:update="storeUpdateData" />
     </div>
     <!-- ========= DELETE CATEGORY POPUP ========= -->
@@ -95,8 +95,8 @@ const toDate = ref('');
 const deleteId = ref(0);
 
 const addUpdateFormDataFormat = ref([
-    { label: 'Start Month', multipleLang: false, type: 'month', name: 'start_qrcode', value: '', min: '', max: '', method: 'set:startDate'},
-    { label: 'End Month', multipleLang: false, type: 'month', name: 'end_qrcode', value: '', min: '', max: '', method: 'set:endDate'},
+    { label: 'Start Month', multipleLang: false, type: 'month', name: 'start_qrcode', value: '', min: '', class: 'height-40', max: '', method: 'set:startDate'},
+    { label: 'End Month', multipleLang: false, type: 'month', name: 'end_qrcode', value: '', min: '', max: '',class: 'height-40', method: 'set:endDate'},
 ]);
 
 const startChangeDate = () => {

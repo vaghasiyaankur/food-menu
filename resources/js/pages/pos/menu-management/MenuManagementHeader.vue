@@ -11,7 +11,7 @@
                 <div class="col">
                     <div class="item-content item-input">
                         <div class="item-inner">
-                            <div class="col-100 large-60 medium-65">
+                            <div class="col-100 large-60 medium-65 w-100">
                                 <form class="searchbar combo-search-bar">
                                     <input type="search" placeholder="Search" class="height_40" @input="handleSearch">
                                     <i class="searchbar-icon"></i>
@@ -33,7 +33,7 @@
                             @update:drop-down="saveValue(index, $event)" 
                         />
                 </div>
-                <div class="col padding-left-half padding-right-half">
+                <div class="col">
                     <button class="button button-raised bg-dark text-color-white padding height_40 active" @click="handleButtonClick">
                         <i class="f7-icons font-22 margin-right-half">plus_square</i>
                             Add {{ title }}

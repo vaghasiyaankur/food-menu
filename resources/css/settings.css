@@ -6,12 +6,12 @@
     width: calc(70dvw - 30px);
     border-left: 1px solid #E0E0E0;
 }
-.setting-tabs .tabs .tab:first-child{
+/* .setting-tabs .tabs .tab:first-child{
     min-height: calc(100dvh - 186px);
-}
-.setting-tabs .tabs .tab:not(:first-child){
-    height: calc(100dvh - 186px);
-}
+} */
+/* .setting-tabs .tabs .tab:not(:first-child){
+    min-height: calc(100dvh - 186px);
+} */
 .setting-tabs .toolbar{
     width: calc(30dvw - 30px);
     background: #FFFFFF;
@@ -328,6 +328,7 @@
     width: 100% !important;
     background: #FFFFFF !important;
     border-right: none !important;
+    height: 100%;
 }
 .user_setting-tab .settings_page-tab_listing .tabbar::before,
 .user_setting-tab .settings_page-tab_listing .tabbar::after {
@@ -464,9 +465,9 @@ thead .label-cell {
 }
 
 /* LANGUAGE SETTINGS */
-#tab-user-management, #tab-language, #tab-floor-plan, #tab-qr-code-generator{
+/* #tab-user-management, #tab-language, #tab-floor-plan, #tab-qr-code-generator{
     min-height: calc(100vh - 180px);
-}
+} */
 .language_setting{
     height: 100%;
 }
@@ -688,7 +689,7 @@ thead .label-cell {
 }
 .qrcode_generate .data-table{
     overflow-x: scroll;
-    overflow-y: hidden;
+    overflow-y: auto;
 }
 .qrcode_generate_popup .button{
     box-shadow: none;
@@ -696,6 +697,7 @@ thead .label-cell {
     color:  #ffffff;
     font-weight: 500;
     border-radius: 7px;
+    text-transform: capitalize;
 }
 
 .qrcode_generate .menu-dropdown-content a{

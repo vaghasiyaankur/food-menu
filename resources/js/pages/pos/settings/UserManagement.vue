@@ -10,7 +10,7 @@
                     </div>
 
                     <div class="no-padding no-margin">
-                        <button class="button button-raised button-raise text-color-white bg-pink height-40 padding-horizontal padding-vertical-half text-transform-capitalize" data-popup="#addEditUserPopup" @click="resetFormData();f7.popup.open(`.addEditUserPopup`);"><Icon name="plusCircleIcon" class="margin-right-half" /> Add User</button>
+                        <button class="button button-raised button-raise text-color-white bg-pink height-40 padding-horizontal padding-vertical-half text-transform-capitalize" data-popup="#addEditUserPopup" @click="showUserPopup();"><Icon name="plusCircleIcon" class="margin-right-half" /> Add User</button>
                     </div>
                 </div>
                 <div class="tabs margin-bottom">

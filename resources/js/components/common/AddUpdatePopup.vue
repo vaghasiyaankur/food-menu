@@ -15,7 +15,7 @@
                                     <Input 
                                         :data-type="dataType"
                                         :type="data.type" 
-                                        :class="'add-update-data-name'" 
+                                        :class="'add-update-data-name ' + data.class" 
                                         :placeholder="data.placeHolder+ ' (' + option.language +')'"
                                         :value="option.value"
                                         :name="'names['+option.language+']'"
@@ -28,7 +28,7 @@
                                     <Input 
                                         :data-type="dataType"
                                         :type="data.type" 
-                                        :class="'add-update-data-name'" 
+                                        :class="'add-update-data-name ' + data.class"  
                                         :placeholder="data.placeHolder"
                                         :value="data.value"
                                         :name="data.name"
@@ -88,6 +88,7 @@
                                     :options="data.options" 
                                     :value="data.value"
                                     :name="data.name"
+                                    :class="data.class"
                                     :placeholder="data.placeHolder"
                                     @update:date-time="saveValue(index, null, $event)" 
                                 />

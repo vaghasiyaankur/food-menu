@@ -11,7 +11,7 @@
             </div>
             <div v-if="categories.length != 0">
                 <div class="digital_menu_swiper">
-                    <f7-swiper ref="swiperRef" class="demo-swiper" :pagination="true" :space-between="20" :slides-per-view="11" style="height: 135px">
+                    <f7-swiper ref="swiperRef" class="demo-swiper" :pagination="true" :space-between="20" :slides-per-view="9" style="height: 135px">
                         <f7-swiper-slide :class="{'slide-active': category.id === selectCategory}" v-for="category in categories" :key="category.id" @click="getProducts(category.id)">
                         <div class="menu-image">
                             <img :src="'/storage' + category.image" alt="" width="50" height="50">
@@ -32,7 +32,7 @@
                 v-for="(subCat, ind) in digitalProducts" :key="ind"
                 >
                     <div class='faq faq-dropdown'>
-                        <input :id="'sub-category-'+ind" type='checkbox'>
+                        <input :id="'sub-category-'+ind" class="sub_categories" type='checkbox'>
                         <label :for="'sub-category-'+ind">
                             <h4 class="no-margin faq-heading">{{ subCat.name }}</h4>
                             <div class='faq-arrow open'></div>
@@ -71,6 +71,7 @@ const categories = ref([]);
 const digitalProducts = ref([]);
 const selectCategory = ref('');
 const selectedCategoryName = ref('');
+const sliderPerView = ref(11);
 
 onMounted(() => {
     getCategories();
@@ -91,6 +92,13 @@ const digitalProductList = (id) => {
         axios.get('/api/get-digital-product-list/'+id)
         .then((response) => {
             digitalProducts.value = response.data;
+            // Get all checkboxes with class 'sub_categories'
+            const checkboxes = document.querySelectorAll('.sub_categories');
+
+            // Loop through each checkbox and uncheck it
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = false;
+            });
         });
     }
 }

@@ -43,7 +43,7 @@
     border: 1px solid #555555;
 }
 .current_orders_page .current_order_table_list {
-    padding-top: 20px;
+    padding-top: 30px;
 }
 .current_orders_page .current_order_table_list .grid {
     display: grid;
@@ -192,9 +192,10 @@
     margin: 0 30px;
     width: 100% !important;
     background-color: transparent;
-    top: 15% !important;
+    top: 0% !important;
     left: 0px !important;
     box-shadow: none !important;
+    translate: 0% 0%;
 }
 .current_orders_popup .table_card_outer {
     width: 100%;

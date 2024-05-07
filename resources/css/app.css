@@ -739,6 +739,7 @@ code {
 }
 
 .popup{
+  position: fixed !important;
   width: 378px !important;
   height: auto !important;
   top: 50% !important;

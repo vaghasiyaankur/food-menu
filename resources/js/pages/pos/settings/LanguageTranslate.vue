@@ -1,23 +1,23 @@
 <template>
     <div class="card edit_tranaslation no-margin">
-        <div class="card-header padding">
-            <div class="heading translate_left">
+        <div class="card-header padding row">
+            <div class="heading translate_left col-40">
                 <h3 class="no-margin">
                     <a href="/Language/" class=" text-color-black" @click="emit('change:langTrans', true,0)"><i class="f7-icons font-22 margin-right-half">arrow_left</i></a> 
                     <span class="page_heading">Edit Translations</span>
                 </h3>
             </div>
-            <div class="translate_right display-flex align-items-center">
-                <div class="item-content item-input margin-right">
+            <div class="translate_right display-flex align-items-center row col-60">
+                <div class="item-content item-input col-50">
                     <div class="item-inner">
-                        <div class="item-input-wrap searchData row padding-half height_40 search_data_wrap">
+                        <div class="item-input-wrap searchData padding-half height_40 search_data_wrap display-flex">
                             <i class="f7-icons font-18 search-icon">search</i>
-                            <input type="search" name="search" class="search__data" v-model="searchData" @input="getLangTraslation()" placeholder="Search Translation...">
+                            <input type="search" name="search" class="search__data w-100" v-model="searchData" @input="getLangTraslation()" placeholder="Search...">
                         </div>
                     </div>
                 </div>
-                <div class="submit__button margin-left-half">
-                    <button class="button button-large button-fill height_40 padding-horizontal bg-pink" @click="updateTraslation()">Save Change</button>
+                <div class="submit__button col-50">
+                    <button class="button button-large button-fill height_40 padding-horizontal bg-pink margin-left-half" @click="updateTraslation()">Save Change</button>
                 </div>
             </div>
         </div>
@@ -33,23 +33,30 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="(trans,index) in translations" :key="trans.id">
-                                <td>{{ (paginationData.per_page * (pageCount - 1)) + (index + 1) }}.</td>
-                                <td>
-                                    <div class="translate__id display-flex align-items-center">
-                                        <div class="item-input-wrap margin-bottom-half margin-top-half w-100">
-                                            <input type="text" name="name" :value="trans.title" readonly>
+                            <template v-if="translations?.length > 0">
+                                <tr v-for="(trans,index) in translations" :key="trans.id">
+                                    <td>{{ (paginationData.per_page * (pageCount - 1)) + (index + 1) }}.</td>
+                                    <td>
+                                        <div class="translate__id display-flex align-items-center">
+                                            <div class="item-input-wrap margin-bottom-half margin-top-half w-100">
+                                                <input type="text" name="name" :value="trans.title" readonly>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="translate__label">
-                                        <div class="item-input-wrap margin-bottom-half margin-top-half w-100 margin-right">
-                                            <input type="text" name="translation" v-model="lang_trans[trans.id]">
+                                    </td>
+                                    <td>
+                                        <div class="translate__label">
+                                            <div class="item-input-wrap margin-bottom-half margin-top-half w-100 margin-right">
+                                                <input type="text" name="translation" v-model="lang_trans[trans.id]">
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
+                            </template>
+                            <template v-else>
+                                <tr>
+                                    <td class="text-align-center" colspan="3">No Translation Found !!</td>
+                                </tr>
+                            </template>
                         </tbody>
                     </table>
                 </div>
@@ -86,8 +93,8 @@ const pageCount = ref(1);
 const getLangTraslation = (pageNum) => {
     if (pageNum == undefined || pageNum == 1) {
         pageNum = 1
-    } else {
-        pageNum = pageNum.split('page=')[1];
+    } else if (pageNum.includes('page')) {        
+            pageNum = pageNum.split('page=')[1];
     }
     pageNumber.value = pageNum;
     pageCount.value = pageNum;

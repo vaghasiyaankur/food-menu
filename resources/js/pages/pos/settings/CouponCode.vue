@@ -22,25 +22,32 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(coupon, index) in coupons" :key="index">
-                        <td>{{ coupon.id }}.</td>
-                        <td>{{ coupon.code }}</td>
-                        <td>{{ coupon.discount_type == 'fixed' ? 'Fixed' : 'Percentage' }}</td>
-                        <td>{{ coupon.discount_value }}</td>
-                        <td>{{ formatDate(coupon.starting_date_time) }}</td>
-                        <td>{{ formatDate(coupon.expiry_date_time) }}</td>
-                        <td>
-                            <div class="action-btn">
-                                <a href="#" class="edit_btn" @click="showCouponPopup(coupon.id)">
-                                    <Icon name="editIcon" />
-                                    <span>Edit</span>
-                                </a>
-                                <a href="#" class="delete_btn" @click="showRemoveCouponPopup(coupon.id)">
-                                    <Icon name="deleteIcon" /> 
-                                    <span>Delete</span></a>
-                            </div>
-                        </td>
-                    </tr>
+                    <template v-if="coupons?.length > 0">
+                        <tr v-for="(coupon, index) in coupons" :key="index">
+                            <td>{{ coupon.id }}.</td>
+                            <td>{{ coupon.code }}</td>
+                            <td>{{ coupon.discount_type == 'fixed' ? 'Fixed' : 'Percentage' }}</td>
+                            <td>{{ coupon.discount_value }}</td>
+                            <td>{{ formatDate(coupon.starting_date_time) }}</td>
+                            <td>{{ formatDate(coupon.expiry_date_time) }}</td>
+                            <td>
+                                <div class="action-btn">
+                                    <a href="#" class="edit_btn" @click="showCouponPopup(coupon.id)">
+                                        <Icon name="editIcon" />
+                                        <span>Edit</span>
+                                    </a>
+                                    <a href="#" class="delete_btn" @click="showRemoveCouponPopup(coupon.id)">
+                                        <Icon name="deleteIcon" /> 
+                                        <span>Delete</span></a>
+                                </div>
+                            </td>
+                        </tr>
+                    </template>
+                    <template v-else>
+                        <tr>
+                            <td colspan="7"> No Coupon Found !!</td>
+                        </tr>
+                    </template>
                 </tbody>
             </table>
         </div>
@@ -93,8 +100,8 @@ const addUpdateFormDataFormat = ref([
         value: 'fixed'
     },
     {  label: 'Price / Percentage', multipleLang: false, type: 'number', name: 'discount_value', placeHolder: 'Discount Price / Percentage', value: ''},
-    {  label: 'Starting Date Time', multipleLang: false, type: 'date-time', name: 'starting_date_time', placeHolder: 'Starting Date Time', value: ''},
-    {  label: 'Expiry Date Time', multipleLang: false, type: 'date-time', name: 'expiry_date_time', placeHolder: 'Expiry Date Time', value: ''}
+    {  label: 'Starting Date Time', multipleLang: false, type: 'date-time', name: 'starting_date_time', class: "height_40", placeHolder: 'Starting Date Time', value: ''},
+    {  label: 'Expiry Date Time', multipleLang: false, type: 'date-time', name: 'expiry_date_time', class: "height_40", placeHolder: 'Expiry Date Time', value: ''}
 ]);
 
 onMounted(() => {

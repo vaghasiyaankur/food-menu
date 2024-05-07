@@ -7,7 +7,7 @@
                         <span class="page_heading">Floor List</span>
                     </h3>
                 </div>
-                <div class="add_table_button"><button class="button button-raised button-raise text-color-white bg-pink height-40 padding-horizontal padding-vertical-half text-transform-capitalize" data-popup="#addEditFloorPopup" @click="showFloorPopup();f7.popup.open(`.addEditFloorPopup`);"><i class="f7-icons margin-right-half">plus_square</i> Add Floor</button></div>
+                <div class="add_table_button"><button class="button button-raised button-raise text-color-white bg-pink height-40 padding-horizontal padding-vertical-half text-transform-capitalize" data-popup="#addEditFloorPopup" @click="showFloorPopup();"><i class="f7-icons margin-right-half">plus_square</i> Add Floor</button></div>
             </div>
             <div class="card-content">
                 <div class="data-table">
@@ -113,14 +113,14 @@ const storeUpdateData = () => {
 }
 
 const showFloorPopup = (id = null) => {
+    addUpdateTitle.value = id ? 'Edit Floor' : 'Add Floor';
     if(id){
-        addUpdateTitle.value = id ? 'Edit Floor' : 'Add Floor';
         const floor = floors.value.find(item => item.id === id);
         updateFormData(floor);
-        f7.popup.open(`#addEditFloorPopup`);
     }else{
         resetFormData();
     }
+    f7.popup.open(`#addEditFloorPopup`);
 };
 
 const resetFormData = () => {
