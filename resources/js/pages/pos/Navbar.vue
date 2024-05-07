@@ -46,7 +46,6 @@ const navbarItems = [
     icon: 'orderIcon',
     routesName: ['KotView', 'currentOrders', 'completedOrders'],
     submenu: [
-      { label: 'Kot View', href: '/KOT-view/', routesName: ['KotView']},
       { label: 'Current Orders', href: '/currentOrders/', routesName: ['currentOrders']},
       { label: 'Completed Orders', href: '/completedOrders/', routesName: ['completedOrders']}
     ]
