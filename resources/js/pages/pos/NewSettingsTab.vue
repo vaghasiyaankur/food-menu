@@ -8,7 +8,7 @@
             </div>
             <div class="card elevation-2 settings_tabs">
                 <div class="card-content setting_tab_card">
-                    <SettingTab ref="settingtab" />
+                    <SettingTab ref="settingTab" />
                 </div>
             </div>
         </div>

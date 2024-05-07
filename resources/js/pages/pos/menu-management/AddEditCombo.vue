@@ -278,7 +278,6 @@ const submitCombo = () => {
         }
     })
     .then((response) => {
-        console.log(response.data.success);
         successNotification(response.data.success);
         f7.view.main.router.navigate({ url: "/food-combo/" });
     })

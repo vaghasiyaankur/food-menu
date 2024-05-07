@@ -152,7 +152,6 @@ const getProducts = (id) => {
     axios.get('/api/get-digital-product-list/' + id)
         .then((res) => {
             productSubcategory.value = res.data;
-            console.log(productSubcategory.value);
         })
 }
 

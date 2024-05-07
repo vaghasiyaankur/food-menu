@@ -40,7 +40,7 @@
                         <div v-if="table.order" class="card-type table_view-ground_floor-card ordering_card">
                             <div class="card-margin-padding">
                                 <div class="action-btn">
-                                    <i class="icon f7-icons" @click="table.visible = true"> ellipsis_vertical</i>
+                                    <i class="icon f7-icons" @click="table.visible = !table.visible"> ellipsis_vertical</i>
                                     <div class="action-dropdown" v-if="table.visible">
                                         <div class="bordershadow">
                                             <div class="edit-btn" @click="openAddNewTablePopup(table.id)">
@@ -289,7 +289,6 @@ const openAddNewTablePopup = (id = null) => {
     if(id){
         axios.get('/api/get-table/'+id)
         .then((response) => {
-            console.log(response.data);
             updateFormData(response.data);
         });
     }else{
@@ -330,8 +329,18 @@ const resetFormData = () => {
 };
 
 const showRemoveTablePopUp = (id) => {
-    removeTableId.value = id;
-    f7.popup.open(`.removePopup`);
+    const table = floorList.value.flatMap(floor => floor.tables).find(table => table.id === id);
+
+    if (table) {
+        if (table.order) {
+            errorNotification("This Table Has a current order available. Please handle the order before removing the table.");
+        } else {
+            removeTableId.value = id;
+            f7.popup.open(`.removePopup`);
+        }
+    } else {
+        errorNotification("Table not found.");
+    }
 }
 
 const removeData = () => {

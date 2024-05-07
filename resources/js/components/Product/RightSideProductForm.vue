@@ -17,7 +17,7 @@
                 </div>
                 <div>
                     <p class="margin-bottom-half">{{ ingredient.name }}</p>
-                    <p class="margin-top-half">${{ ingredient.price }}</p>
+                    <p class="margin-top-half">{{  currentCurrencyData ? currentCurrencyData.currency_symbol :  '₹'  }} {{ ingredient.price }}</p>
                 </div>
                 <div class="add-remove-icon" 
                     v-if="isIngredientSelected(ingredient.id)"
@@ -69,7 +69,9 @@
 <script setup>
 
 import Icon from '../Icon.vue';
-import { ref } from 'vue';
+import { ref, inject } from 'vue';
+
+const currentCurrencyData = inject('currentCurrencyData');
 
 const emit = defineEmits([
     'add:select-ingredient', 

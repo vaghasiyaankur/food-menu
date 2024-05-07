@@ -58,7 +58,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <div v-else-if="item.openCloseReservation" class="padding-horizontal height-40 border-bottom" >
+                        <div v-else-if="item.openCloseReservation" class="height-40 border-bottom" >
                             <button
                                 class="col nav-link button close_reservation no-padding font-16 panel-close"
                                 @click="closeReservationEvent(closeReservation)"
@@ -68,7 +68,7 @@
                             </button>
                         </div>
                         <div v-else 
-                            class="padding-horizontal height-40 border-bottom pannel_menu_link panel-close"
+                            class="height-40 border-bottom pannel_menu_link panel-close"
                             :class="item.routesName.includes(currentRouteName) ? 'bg-pink' : 'bg-white'"
                         >
                             <a 

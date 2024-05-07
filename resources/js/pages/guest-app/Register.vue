@@ -30,7 +30,7 @@
                 <img src="/images/registerImage.png" alt="">
             </div>
             <div>
-                <form class="list margin-vertical" id="my-form">
+                <form class="list margin-vertical" id="register-form">
                     <div class="item-content item-input no-padding-left">
                         <div class="item-inner no-padding-right">
                             <div class="item-input-wrap margin-bottom-half margin-top-half">

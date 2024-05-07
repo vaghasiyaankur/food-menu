@@ -71,8 +71,8 @@
                                 <tbody>
                                     <tr v-for="(data,index) in reservation" :key="data.id">
                                         <td>#{{ (paginationData.per_page * (pageNumber - 1)) + (index + 1) }}</td>
-                                        <td>{{ data.customer ? data.customer.name : '' }}</td>
-                                        <td>{{ data.customer ? data.customer.number : '' }}</td>
+                                        <td>{{ data.name ? data.name : 'Anonymous' }}</td>
+                                        <td>{{ data.phone ? data.phone : '--' }}</td>
                                         <td>{{ data.person }}</td>
                                         <td v-if="data.deleted_at"><span class="status_info status_cancel">Cancel</span></td>
                                         <td v-else-if="data.finished"><span class="status_info status_complete">Complete</span></td>

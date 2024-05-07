@@ -93,6 +93,7 @@ const paginationData = ref([]);
 const fromDate = ref('');
 const toDate = ref('');
 const deleteId = ref(0);
+const addUpdateType = ref('Qr Code')
 
 const addUpdateFormDataFormat = ref([
     { label: 'Start Month', multipleLang: false, type: 'month', name: 'start_qrcode', value: '', min: '', class: 'height-40', max: '', method: 'set:startDate'},

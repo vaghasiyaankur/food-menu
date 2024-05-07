@@ -10,7 +10,7 @@
                         <div class="product-detail-inner">
                             <div class="product-summary">
                                 <p class="no-margin">{{ kp.name }}</p>
-                                <p class="text-red no-margin">${{ ((kp.price + kp.extra_amount) * kp.quantity).toFixed(2) }}</p>
+                                <p class="text-red no-margin">{{  currentCurrencyData ? currentCurrencyData.currency_symbol :  '₹'  }} {{ ((kp.price + kp.extra_amount) * kp.quantity).toFixed(2) }}</p>
                                 <span 
                                     v-if="kp.variation"
                                     class="no-margin display-flex align-items-center"
@@ -51,7 +51,7 @@
                                 <p class="no-margin">
                                     {{ product.name }}
                                 </p>
-                                <p class="text-red no-margin">${{ ((product.price + product.extraAmount) * product.quantity).toFixed(2) }}</p>
+                                <p class="text-red no-margin">{{  currentCurrencyData ? currentCurrencyData.currency_symbol :  '₹'  }} {{ ((product.price + product.extraAmount) * product.quantity).toFixed(2) }}</p>
                                 <span v-if="product.variation.name" class="no-margin display-flex align-items-center" >
                                     Size: {{ product.variation.name }}
                                 </span>
@@ -92,8 +92,10 @@
 <script setup>
 import { f7, f7Icon } from 'framework7-vue';
 import Icon from '../Icon.vue';
+import { inject } from 'vue';
 
 const emit = defineEmits(['increase:quantity', 'decrease:quantity', 'open:note-popup', 'remove:cart-product']);
+const currentCurrencyData = inject('currentCurrencyData');
 
 const props = defineProps({
     cartProducts: {

@@ -223,7 +223,6 @@ export default {
 
     // Computed properties
     const manager = computed(() => {
-      console.log(f7);
       // return this.$route.path === '/'
     });
 

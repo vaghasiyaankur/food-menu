@@ -78,16 +78,16 @@
                         </template>
                         <template v-if="data.type == 'switch'">
                             <div class="data-name text-align-left">
-                                <Switch :name="'lock_enable'" @update:changeData="changeData" :value="data.value" :changeStatus="data.changeStatus" />
+                                <Switch :name="'lock_enable'" @update:changeData="saveValue(index, null, $event)" :value="data.value" :changeStatus="data.changeStatus" />
                             </div>
                         </template>
                         <template v-if="data.type == 'date-time'">
                             <div class="data-name text-align-left">
                                 <DateTime 
                                     :data-type="dataType"
-                                    :options="data.options" 
                                     :value="data.value"
                                     :name="data.name"
+                                    :label="''"
                                     :class="data.class"
                                     :placeholder="data.placeHolder"
                                     @update:date-time="saveValue(index, null, $event)" 

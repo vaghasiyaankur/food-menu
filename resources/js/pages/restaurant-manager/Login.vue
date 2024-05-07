@@ -110,7 +110,7 @@ const loginAuthUser = () => {
     axios
         .post("/api/login-user", {
             email: email.value,
-            password: password.value,
+            password: password.value,alreadyLogin
         })
         .then((res) => {
             if (res.data.success) {

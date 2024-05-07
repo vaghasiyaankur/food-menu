@@ -11,12 +11,13 @@ use Cookie;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
     public function login()
     {
-        return $this->redirectIfAuthenticated('manager.any');
+        return view('login');
     }
 
     public function manager($slug = '')

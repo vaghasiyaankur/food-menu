@@ -29,7 +29,7 @@
                 </div>
                 </div>
             </template>
-            <div v-else-if="item.openCloseReservation" class="padding-horizontal height-40 border-bottom" >
+            <div v-else-if="item.openCloseReservation" class="height-40 border-bottom" >
                 <button
                     class="col link nav-link button button-raised text-color-white padding bg-dark"
                     @click="closeReservationEvent(closeReservation)"

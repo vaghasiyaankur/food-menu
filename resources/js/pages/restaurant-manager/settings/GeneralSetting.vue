@@ -4,7 +4,7 @@
             <div class="row border__bottom">
                 <div class="col">
                     <div class="general_info_form">
-                        <form class="list margin-vertical" id="my-form">
+                        <form class="list margin-vertical" id="general-setting-form">
                            <div class="item-content item-input margin-bottom no-padding-left">
                               <div class="item-inner">
                                  <div class=" block-title no-margin-top">Restaurant Name</div>

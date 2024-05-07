@@ -16,7 +16,7 @@
                     v-for="(category, index) of categories"
                     :key="index"
                     :class="activeCategory === category.id && 'active'"
-                    @click="selectCategory(category.id)"
+                    @click="selectCategory(category.id)"    
                 >
                     <div class="category-image-slider">
                         <img :src="'/storage/' + category.image" :alt="category.name" width="33" height="33"/>

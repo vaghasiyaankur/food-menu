@@ -55,7 +55,7 @@ class CategoryController extends Controller
         }
         $rules['category_type'] = 'required';
         $rules['status'] = 'required';
-        $rules['image'] = 'required|image|mimes:jpg,png,jpeg,gif,svg';
+        $rules['image'] = 'required|image|mimes:jpg,png,jpeg,gif,svg,webp';
 
         $customMessages = [];
         foreach ($languages as $language) {
@@ -138,7 +138,7 @@ class CategoryController extends Controller
         $rules['category_type'] = 'required';
         $rules['status'] = 'required';
         if($req->file('image')){
-            $rules['image'] = 'required|image|mimes:jpg,png,jpeg,gif,svg';
+            $rules['image'] = 'required|image|mimes:jpg,png,jpeg,gif,svg,webp';
         }
 
         $customMessages = [];

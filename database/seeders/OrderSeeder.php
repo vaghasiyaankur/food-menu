@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Customer;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Order;
@@ -91,11 +92,14 @@ class OrderSeeder extends Seeder
         ];
 
         foreach ($orders as $order) {
+            $customer = Customer::find($order['customer_id']);
             $ord = new Order();
             $ord->customer_id = $order['customer_id'];
             $ord->table_id = $order['table_id'];
             $ord->person = $order['person'];
             $ord->role = $order['role'];
+            $ord->name = $customer->name;
+            $ord->phone = $customer->number;
             $ord->start_time = @$order['start_time'];
             $ord->finished = 0;
             $ord->finish_time = $order['finish_time'];

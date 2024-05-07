@@ -121,7 +121,6 @@ export default {
     //   // Access $f7router after Framework7 is initialized
     //   if (this.$f7router) {
     //     this.$f7router.on('routeChanged', (to, from) => {
-    //       console.log('Route changed from', from, 'to', to)
     //       // You can call your method here or perform any action you want
     //     })
     //   } else {
@@ -243,7 +242,6 @@ export default {
   },
   computed: {
     manager() {
-      console.log(f7);
       // return this.$route.path === '/'
     },
   },

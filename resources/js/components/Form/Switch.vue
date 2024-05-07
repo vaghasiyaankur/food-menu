@@ -9,7 +9,7 @@
 
 <script setup>
 const props = defineProps({
-                changeStatus : Boolean,
+                changeStatus : [ Boolean, Number ],
                 label : String,
                 name : String,
                 value : [ String, Number ]

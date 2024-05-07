@@ -262,9 +262,8 @@
                                                                     class="text-color-black"
                                                                     >{{
                                                                         order
-                                                                            .customer ? order
-                                                                            .customer
-                                                                            .name : ''
+                                                                            .name ? order
+                                                                            .name : 'Anonymous'
                                                                     }}</span
                                                                 >
                                                             </div>
@@ -473,9 +472,8 @@
                                                                     class="text-color-black"
                                                                     >{{
                                                                         order
-                                                                            .customer ? order
-                                                                            .customer
-                                                                            .number : ''
+                                                                            .phone? order
+                                                                            .phone : '--'
                                                                     }}</span
                                                                 >
                                                             </div>
@@ -1326,8 +1324,6 @@ const tableList = () => {
             }
         });
 
-        console.log("row_tables_arr");
-        console.log(row_tables_arr);
     });
 };
 

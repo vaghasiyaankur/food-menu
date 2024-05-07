@@ -131,7 +131,6 @@ export default {
             }, 500);
 
             if(this.pin.length <= 4){
-                console.log("here");
                 var pos = this.pinposition + 1;
                 $("#position-"+pos).addClass('number_active');
                 this.position = this.pinposition++;
@@ -174,7 +173,6 @@ export default {
                 this.passcode = res.data.passcode;
             })
             .catch(err => {
-                console.log(err);
             });
         },
     }

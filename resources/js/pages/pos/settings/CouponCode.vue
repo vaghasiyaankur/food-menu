@@ -73,7 +73,6 @@ import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import { f7 } from 'framework7-vue';
 import { successNotification, errorNotification, getErrorMessage } from '../../../commonFunction.js';
-import UserTable from '../../../components/UserTable.vue';
 import AddUpdatePopup from '../../../components/common/AddUpdatePopup.vue'
 import RemovePopup from '../../../components/common/RemovePopup.vue'
 import Icon from '../../../components/Icon.vue';

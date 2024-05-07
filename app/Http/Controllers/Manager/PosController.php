@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Manager;
 use App\Helper\CustomerHelper;
 use App\Helper\SettingHelper;
 use App\Http\Controllers\Controller;
+use App\Models\Customer;
 use App\Models\IngredientRestaurantLanguage;
 use App\Models\Kot;
 use App\Models\KotHold;
@@ -222,6 +223,8 @@ class PosController extends Controller
             'waiter_id' => $request->selectWaiter
         ]);
 
+        $this->updateCustomerData($order->id, $request);
+
         $this->removeHoldKOT($request->tableId);
         
         return response()->json(['success'=>'KOT Added Successfully.']);
@@ -258,7 +261,27 @@ class PosController extends Controller
             'waiter_id' => $request->selectWaiter
         ]);
 
+        $this->updateCustomerData($order->id, $request);
         return response()->json(['success'=>'Data Added Successfully.']);
+    }
+    
+    public function updateCustomerData($orderId, $request){
+
+        $restaurantId = CustomerHelper::getRestaurantId();
+
+        $data = [
+            'restaurant_id' => $restaurantId,
+            'name' => $request->personName,
+            'number' => $request->personNumber,
+        ];
+        $getCustomerId = Order::where('id', $orderId)->value('customer_id');
+        if($getCustomerId){
+            Customer::where('id', $getCustomerId)
+                    ->update($data);
+        }else{
+            $customerId = Customer::insertGetId($data);
+            Order::where('id', $orderId)->update(['customer_id' => $customerId]);
+        }
     }
 
     public function holdKOT(Request $request){

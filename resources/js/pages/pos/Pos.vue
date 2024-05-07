@@ -138,7 +138,6 @@ const decreaseQuantity = (id) => {
 const openNotePopup = (id) => {
     noteProductId.value = id;
     const productIndex = cartProducts.value.findIndex(product => product.id === id);
-    console.log(cartProducts.value[productIndex]);
     if (productIndex !== -1) {
         $("#product-note").val(cartProducts.value[productIndex].note);
         noteProductDescription.value = cartProducts.value[productIndex].note;

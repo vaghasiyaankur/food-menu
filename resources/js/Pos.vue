@@ -7,7 +7,7 @@
         />
       </div>
       <f7-view
-        url="/"
+        url="/new-settings/"
         :main="true"
         class="safe-areas"
         :master-detail-breakpoint="768"
@@ -170,7 +170,6 @@ const lockScreenEnable = async () => {
 // Lifecycle hooks
 onMounted(async () => {
   try {
-    getCurrencyData();
     const res = await axios.get("/api/checkLogin");
     if (res.data.check_auth) {
       checkLogin.value = true;
@@ -184,6 +183,7 @@ onMounted(async () => {
       if (checkLogin.value) {
         getLanguage();
         checkReservation();
+        getCurrencyData();
       }
     }, 500);
 
@@ -221,7 +221,6 @@ onBeforeUnmount(() => {
 
 // Computed properties
 const manager = computed(() => {
-  console.log(f7);
   // return this.$route.path === '/'
 });
 

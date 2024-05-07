@@ -224,7 +224,6 @@ const getWaitingTime = () => {
         let hours = Math.floor(time.value / 3600000);
         let minutes = Math.floor((time.value % 3600000) / 60000);
         let seconds = Math.floor(((time.value % 3600000) % 60000) / 1000);
-        console.log(trans);
         if(hours > 0)  remainingWaitingTime.value = String(hours).padStart(2, '0') +' '+ trans.value.hour_and + ' ' +String(minutes).padStart(2, '0')+' '+trans.value.min_left;
         else if(minutes > 0) remainingWaitingTime.value = String(minutes).padStart(2, '0')+' '+trans.value.min_left;
         else if(seconds > 0) remainingWaitingTime.value = String(seconds).padStart(2, '0')+' '+trans.value.second_left;

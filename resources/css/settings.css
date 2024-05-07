@@ -65,7 +65,7 @@
 .tabbar-labels .tab-link, .tabbar .link, .tabbar-labels .link{
     padding: 10px;
 }
-.setting-tabs .general_info_form, .setting-tabs .currency_form, .setting-tabs .taxsetting_form{
+.setting-tabs .general_info_form, .setting-tabs .currency_form, .setting-tabs .tax-settings-form{
     margin-top: 34px;
 }
 
@@ -170,7 +170,7 @@
     bottom: 20px;
     right: 0px;
 }
-.setting-tabs .taxsetting_form .type_charge, .setting-tabs .taxsetting_form .active_status{
+.setting-tabs .tax-settings-form .type_charge, .setting-tabs .tax-settings-form .active_status{
     accent-color: #555555;
     color: #555555;
 }
@@ -182,12 +182,12 @@
     margin-left: 20px;
 }
 
-.setting-tabs .taxsetting_form .tax-divider{
+.setting-tabs .tax-settings-form .tax-divider{
     border : 1px dashed #DADADA;
     margin: 30px 0;
 }
 
-.setting-tabs .taxsetting_form .note_details{
+.setting-tabs .tax-settings-form .note_details{
     background-color: #FAFAFA;
     color: #555555;
     padding: 12px 18px;
@@ -220,7 +220,7 @@
 .currency_settings-banner,
 .currency_form,
 .tax_settings-banner,
-.taxsetting_form {
+.tax-settings-form {
     margin: 30px 25px 0 !important;
 }
 .general_settings,
@@ -233,19 +233,19 @@
 }
 .general_info_form-input,
 .currency_form-input,
-.taxsetting_form-input,
+.tax-settings-form-input,
 .gst-details {
     margin-top: 7px !important;
 }
 .general_info_form-input input,
 .currency_form-input input,
-.taxsetting_form-input input,
+.tax-settings-form-input input,
 .note_details {
     padding: 12px 15px !important;
 }
 .general_info_form-restaurent-name input,
 .currency_form-currency-name input,
-.taxsetting_form-name input {
+.tax-settings-form-name input {
     border: 1px solid #555555 !important;
 }
 .general_info_form-address input,
@@ -253,7 +253,7 @@
 .general_info_form-print input,
 .currency_form-currency-code input,
 .currency_form-currency-symbol input,
-.taxsetting_form-type-charge input {
+.tax-settings-form-type-charge input {
     border: none !important;
 }
 .currency_form-currency-name input {
@@ -261,7 +261,7 @@
 }
 .general_info_form-input input::placeholder,
 .currency_form-input input::placeholder,
-.taxsetting_form-input input::placeholder {
+.tax-settings-form-input input::placeholder {
     font-size: 15px !important;
     line-height: 18px;
     font-weight: 500 !important;
@@ -273,9 +273,9 @@
 .general_info_form-print,
 .currency_form-currency-code,
 .currency_form-currency-symbol,
-.taxsetting_form-type-charge,
-.taxsetting_form-cgst,
-.taxsetting_form-sgst {
+.tax-settings-form-type-charge,
+.tax-settings-form-cgst,
+.tax-settings-form-sgst {
     margin-top: 25px !important;
 }
 .general_info_form-image-input .image-logo {
@@ -309,10 +309,10 @@
     top: 25%;
     transform: translate(-50%, -33%);
 }
-.taxsetting_form-gst {
+.tax-setting-form-gst {
     margin-top: 30px;
 }
-.taxsetting_form .popup_button {
+.tax-settings-form .popup_button {
     margin: 30px 0 !important;
 }
 

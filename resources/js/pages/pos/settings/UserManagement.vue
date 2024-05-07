@@ -32,7 +32,7 @@
 import { ref } from 'vue';
 import axios from 'axios';
 import { f7 } from 'framework7-vue';
-import { successNotification, errorNotification } from '../../../commonFunction.js';
+import { successNotification, errorNotification, getErrorMessage } from '../../../commonFunction.js';
 import UserTable from '../../../components/UserTable.vue';
 import AddUpdatePopup from '../../../components/common/AddUpdatePopup.vue'
 import RemovePopup from '../../../components/common/RemovePopup.vue'
@@ -71,6 +71,10 @@ const saveUserData = () => {
         resetFormData();
         getUser();
     })
+    .catch((error) => {
+        const errorMessage = getErrorMessage(error);
+        errorNotification(errorMessage);
+    });
 }
 
 const manipulateField = (formData, label, value = null) => {
@@ -97,6 +101,7 @@ const updateFormData = (user) => {
     manipulateField(formData, 'Name', user.name);
     manipulateField(formData, 'Email', user.email);
     manipulateField(formData, 'Password', user.password);
+    
     manipulateField(formData, 'Confirm Password', user.password);
     manipulateField(formData, 'Role', user.role);
     manipulateField(formData, 'Lock pin', parseInt(user.lock_pin));
