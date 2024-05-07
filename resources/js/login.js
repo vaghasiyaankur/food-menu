@@ -1,7 +1,7 @@
 import { createApp } from 'vue';
 import Framework7 from 'framework7/lite/bundle';
 import Framework7Vue from 'framework7-vue';
-import Pos from './Pos.vue';
+import Login from './Login.vue';
 import Pusher from 'pusher-js';
 import Echo from 'laravel-echo';
 
@@ -43,6 +43,6 @@ window.Echo = new Echo({
 
 
 // Init Vue App
-const app = createApp(Pos);
+const app = createApp(Login);
 // app.use(VueApexCharts);
 app.mount('#app');

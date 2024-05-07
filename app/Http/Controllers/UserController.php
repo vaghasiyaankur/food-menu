@@ -16,7 +16,7 @@ class UserController extends Controller
 {
     public function login()
     {
-        return $this->redirectIfAuthenticated('manager.any');
+        return view('login');
     }
 
     public function manager($slug = '')

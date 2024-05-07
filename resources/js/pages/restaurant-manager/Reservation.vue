@@ -241,7 +241,7 @@ const checkTimeForRegister = () => {
 };
 
 const register = () => {
-    const conformationMessage = waitingTime.value === '00:00' ? 'No waiting message' : `Waiting time is ${waitingTime.value}`;
+    const conformationMessage = waitingTime.value === '00:00' ? 'No waiting time' : `Waiting time is ${waitingTime.value}`;
 
     f7.dialog.confirm(conformationMessage, () => {
         const formData = new FormData();
