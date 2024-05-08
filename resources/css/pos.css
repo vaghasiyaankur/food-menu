@@ -8,7 +8,7 @@
     align-items: flex-start;
 }
 .product-section {
-    width: calc(100dvw - 463px);
+    width: calc(100dvw - 40%);
     background-color: #f4f4f4;
 }
 
@@ -261,9 +261,9 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox {
     padding: 20px 16px;
 }
 @media screen and (max-width: 991px) {
-    .pos-product-section .medium-grid-cols-2{
+    /* .pos-product-section .medium-grid-cols-2{
         grid-template-columns: auto auto;
-    }
+    } */
     .pos-product-section .food-type-icon{
         top: 6px;
         right: 8px !important;
@@ -303,7 +303,7 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox {
 
 .add-to-cart {
     box-shadow: 0px 2px 8px 0px #2222220f;
-    width: 463px;
+    width: 40%;
     background: #ffffff;
     position: relative;
     z-index: 5;
@@ -366,7 +366,7 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox {
 .add-to-cart-section .order-option {
     background-color: rgba(243, 62, 62, 0.08);
     border-radius: 7px 7px 0px 0px;
-    padding: 6px 22px !important;
+    padding: 6px 0 !important;
     max-width: 75px;
     max-height: 42px;
     height: 100%;
@@ -586,8 +586,7 @@ textarea {
 }
 
 .order-bill-wrapper {
-    max-width: 463px;
-    width: 100%;
+    width: 40%;
     position: fixed;
     bottom: 0;
     right: 0;
@@ -759,6 +758,15 @@ textarea {
     }
     .add-to-cart .cart-products.open{
         height: 61dvh;
+    }
+    .product-section {
+        width: calc(100dvw - 45%);
+    }
+    .add-to-cart{
+        width: 45%;
+    }
+    .order-bill-wrapper{
+        width: 45%;
     }
 }
 .quantity-minus.disabled {

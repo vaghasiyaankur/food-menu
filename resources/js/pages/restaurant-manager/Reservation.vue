@@ -90,49 +90,8 @@
                 </div>
                 <i class="f7-icons font-30 close-menu" @click="closePopup">xmark</i>
                 <f7-block-title class="text-align-center font-18 text-color-black margin-top-half">Food Menu</f7-block-title>
-                <div class="margin" v-if="categories">
-                    <!-- <div class="text-align-center text-color-gray">Select your favourite food <br> and enjoy with family</div> -->
-                    <div data-pagination='{"el":".swiper-pagination"}' data-space-between="10" data-slides-per-view="8" class="swiper swiper-init demo-swiper margin-top margin-bottom" style="height : 120px">
-                        <div class="swiper-pagination"></div>
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide" :class="{ 'slide-active': category.id == sliderActive}" v-for="category in categories" :key="category" @click="digitalProductList(category.id)">
-                                <div class="menu-image col">
-                                    <img :src="'/storage'+category.image" alt="">
-                                </div>
-                                <p class="font-13 no-margin text-align-center margin-top-half">{{ category.category_languages[0].name }}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="position-relative">
-                        <div class="menu-title"><span>{{ selectedCategoryName }} Menu</span></div>
-                    </div>
-                    <div class="menu-details margin-top">
-                        <div class="menu-lists" v-if="digitalProducts.length">
-                            <div class="menu-list" v-for="subcate in digitalProducts" :key="subcate">
-                                <div class="font-18 text-align-center menu-list-title text-color-black"><u>{{ subcate.sub_category_language[0].name }}</u></div>
-                                <div class="list row margin-half align-items-center" v-for="product in subcate.products" :key="product">
-                                    <div class="col-90 display-flex">{{ product.product_language[0].name }}&nbsp; <span class="dots"></span></div>
-                                    <div class="col-10">{{ product.price.toFixed(2) }}</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="menu-lists" v-else>
-                            <div class="no_order">
-                                <NoValueFound />
-                                <div class="no_order_text text-align-center">
-                                    <p class="no-margin">Empty Food Menu List</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div v-else>
-                    <div class="no_order">
-                        <NoValueFound />
-                        <div class="no_order_text text-align-center">
-                            <p class="no-margin">Empty Food Menu List</p>
-                        </div>
-                    </div>
+                <div class="digital_menu_card digital_menu_page">
+                    <DigitalProduct />  
                 </div>
             </f7-page-content>
         </f7-sheet>
@@ -141,11 +100,12 @@
 <script setup>
 import { ref, onMounted, onBeforeMount } from 'vue';
 import $ from 'jquery';
-import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Input, f7Button, f7Sheet, f7PageContent } from 'framework7-vue';
+import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Input, f7Button, f7Sheet, f7PageContent, f7Swiper, f7SwiperSlide } from 'framework7-vue';
 import VueCountdown from '@chenfengyuan/vue-countdown';
 import NoValueFound from '../../components/NoValueFound.vue';
 import axios from 'axios';
 import  { errorNotification, successNotification } from '../../commonFunction.js'
+import DigitalProduct from "../../components/Product/DigitalProduct.vue";
 
 const display = ref(true);
 const floors = ref([]);
@@ -183,13 +143,6 @@ onMounted(() => {
 });
 
 const getCategories = () => {
-    // axios.post('/api/get-category-list')
-    //     .then((res) => {
-    //     productCategory.value = res.data;
-    //     if (productCategory.length > 0) {
-    //         getProducts(productCategory.value[0].id);
-    //     }
-    //     });
     axios.post('/api/get-categories')
     .then((response) => {
         categories.value = response.data.categories;
@@ -203,20 +156,11 @@ const digitalProductList = (id) => {
     if(id){
         axios.get('/api/get-digital-product-list/'+id)
         .then((response) => {
+            console.log(response.data);
             digitalProducts.value = response.data;
         });
     }
 }
-
-
-// const getProducts = (id) => {
-//     sliderActive.value = id;
-//     axios.get('/api/get-category-wise-products/' + id)
-//         .then((res) => {
-//         selectedCategoryName.value = res.data.category_languages[0].name;
-//         digitalProducts.value = res.data.sub_category;
-//     });
-// };
 
 const memberLimitation = () => {
     axios.get('/api/member-limitation')
@@ -365,290 +309,3 @@ const clickOut = () => {
 };
 
 </script>
-<style scoped>
-
-.border_radius_10{
-    border-radius: 10px !important;
-}
-.sheet-modal{
-    height: 92% !important;
-}
-
-.popover-inner{
-    background-color: #fff;
-    border-radius: 10px;
-}
-/*========== FOOD MENU MODAL CSS =============*/
-.close-menu{
-    position: absolute;
-    top: 10px;
-    right: 10px;
-}
-.border-popup{
-    width: 40px;
-    height: 5px;
-    background: #F3F3F3;
-    margin: 12px auto 0;
-    visibility: hidden !important;
-}
-.menu-image{
-    box-sizing: border-box;
-    background: #FAF5F2;
-    border-radius: 7px;
-    display: flex;
-    width: 100%;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
-}
-.swiper-slide{
-    width: 67px;
-    height: 67px;
-}
-.demo-swiper .swiper-slide{
-    font-size: 25px;
-    font-weight: 300;
-    display: block;
-    background: #fff;
-    color: #000;
-}
-.font-18 {
-    font-size: 18px !important;
-}
-.position-relative{
-    position: relative;
-}
-.menu-title, .menu-list-title {
-    text-align: center;
-    font-size: 18px;
-    padding: 0 10px;
-}
-.menu-title::before {
-    position: absolute;
-    content: '';
-    border: 1px dashed #000;
-    left: 0;
-    width: 100%;
-    height: 0px;
-    top: 11px;
-    z-index: -1;
-}
-.menu-lists{
-    height: 100%;
-    max-height: 500px;
-    overflow: auto;
-    width: 85%;
-    margin: 0 auto;
-}
-.menu-title span{
-    background: white;
-    padding: 0 10px;
-}
-.add-fav-list i {
-    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.15);
-    border-radius: 50%;
-    width: 25px;
-    height: 25px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.dots{
-    flex: 1;
-    border-bottom: 2px dotted #000;
-    height: 1em;
-}
-/*============ RESERVATION CARD ============*/
-
-.reservation_card .card{
-    height: calc(100vh - 142px);
-}
-
-.simple-list li:after, .links-list a:after, .list .item-inner:after{
-    background-color: transparent !important;
-}
-.list input[type='text'], .list input[type='password'], .list input[type='search'], .list input[type='email'], .list input[type='tel'], .list input[type='url'], .list input[type='date'], .list input[type='month'], .list input[type='datetime-local'], .list input[type='time'], .list input[type='number'], .list select{
-    background-color: #fafafa;
-    border-radius: 10px;
-}
-.reservation_card .item-title{
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 17px;
-    color: #555555;
-    margin-bottom: 10px;
-}
-.reservation_details{
-    padding-right: 30px;
-    padding-left: 30px;
-}
-.reservation_form{
-
-    height: calc(100vh - 250px);
-    overflow-y: auto;
-
-}
-.icon.icon-checkbox{
-    border-radius: 3px;
-}
-label.item-checkbox input[type='checkbox']:checked ~ .icon-checkbox:after, label.item-checkbox input[type='checkbox']:checked ~ * .icon-checkbox:after, .checkbox input[type='checkbox']:checked ~ i:after, label.item-checkbox input[type='checkbox']:indeterminate ~ .icon-checkbox:after, label.item-checkbox input[type='checkbox']:indeterminate ~ * .icon-checkbox:after, .checkbox input[type='checkbox']:indeterminate ~ i:after{
-    background-color: #F33E3E;
-    border-radius: 3px;
-}
-.countdown_section{
-    background: #f88f721a;
-    box-shadow: 0px 1px 9px #f88f721a;
-    border-radius: 7px;
-    padding: 18px;
-    position: relative;
-    height: 100%;
-    max-height: 125px;
-}
-.close-countdown{
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    background: white;
-    border-radius: 50%;
-    padding: 5px !important;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 20px;
-    height: 20px;
-}
-.font-13{
-    font-size: 13px !important;
-}
-.card-title{
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 24px;
-    color: #000;
-}
-.text-underline {
-    text-decoration: underline;
-}
-
-.height-40 {
-    height: 40px;
-}
-
-.height-36 {
-    height: 36px;
-}
-.nav-botton {
-    height: 100%;
-}
-
-.bg-dark {
-    background: #38373D;
-}
-
-/*.menu-dropdown-link:nth-child(2) {
-    border-bottom: 1px solid #EFEFEF;
-}*/
-.bg-pink {
-    background: #F33E3E;
-}
-
-.text-color-pink {
-    color: #F33E3E;
-}
-
-.font-22 {
-    font-size: 22px;
-}
-
-.reservation_card{
-    margin-top:80px;
-}
-
-.item-input-wrap {
-    width: 100%;
-    background: #F0F0F0;
-    border: 0.5px solid #DCDCDC;
-    border-radius: 7px;
-    height: auto;
-}
-
-
-.border-bottom {
-    border-bottom: 1px solid #EAEAEA;
-}
-
-#searchData {
-    width: 85%;
-}
-.disable-text, input::placeholder{
-    color: #464646;
-}
-
-@media screen and (max-width:820px) {
-    .header-links {
-        width: 100%;
-    }
-    .reservation_form{
-        height: calc(100vh - 730px);
-    }
-    /*.reservation_card .card .row{
-       height: auto !important;
-    }*/
-    .reservation_card .card .reservation_banner img{
-        width:100%;
-        max-width:350px;
-    }
-
-}
-</style>
-<style>
-.height_100{
-    height: 100%;
-}
-/* Chrome, Safari, Edge, Opera */
-
-/* Firefox */
-input[type=number] {
-  -moz-appearance: textfield !important;
-}
-#select-concise{
-    background-color: #fafafa;
-    border-radius: 10px;
-    width: 100%;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    padding: 16px;
-}
-#location-select-list{
-    position: absolute;
-    width: 100%;
-    z-index: 999;
-    background-color: #fff;
-    box-shadow: 0.7px 0.7px 5px rgba(0, 0, 0, 0.2);
-    border-radius: 3px;
-    max-height: 220px;
-    overflow: auto;
-}
-#location-select-list li.concise{
-    padding: 10px;
-}
-#location-select-list li.concise:first-child{
-    border-radius: 3px 3px 0px 0px;
-}
-.d-none{
-    display: none;
-}
-.register-button:hover, .register-button:active, .active {
-    background: #F33E3E !important;
-    color: #fff !important;
-}
-.sheet-modal-inner .page-content{
-    background: #fff !important;
-}
-@media screen and (max-width:820px){
-    .dialog{
-        top: 50% !important;
-    }
-}
-</style>
