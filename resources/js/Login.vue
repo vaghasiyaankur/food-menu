@@ -74,7 +74,7 @@
                                 <div class="item-inner no-padding-right">
                                     <div class="item-input-wrap">
                                         <button
-                                            class="button button-fill button border_radius_10 button-raised bg_red text-color-white button-large text-transform-capitalize"
+                                            class="button button-fill button border_radius_10 button-raised bg_red text-color-white button-large text-transform-capitalize height_40"
                                             @click="loginAuthUser"
                                         >
                                             Login

@@ -177,6 +177,10 @@
             );
     }
 
+    .medium-grid-cols-2 {
+        grid-template-columns: calc((100% - 20px) / 2) calc((100% - 20px) / 2);
+    }
+
     .combo-card {
         padding: 14px !important;
     }
@@ -494,14 +498,14 @@
 
 @media screen and (max-width: 991px) {
     .add-combo-header {
-        max-width: calc(100%);
-        z-index: -1;
+        max-width: calc(50%);
+        /* z-index: -1; */
     }
 
     .add-combo-list {
         padding: 0 25px 0 30px;
         max-width: 100%;
-        z-index: -1;
+        /* z-index: -1; */
     }
 
     .data-card {
@@ -950,7 +954,8 @@
     gap: 15px;
 }
 .select-product-card {
-    max-width: 149px;
+    position: relative;
+    max-width: 135px;
     width: 100%;
     border-radius: 10px;
 }

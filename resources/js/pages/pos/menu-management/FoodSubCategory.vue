@@ -4,12 +4,17 @@
             <MenuManagementHeader title="Sub Category" @add:popup="showSubCategoryPopup"
                 @update:search="updateSearch" />
 
-                <div class="sub-category-card">
+                <div class="sub-category-card" v-if="subCategories?.length > 0">
                     <Card 
                         :dataSet="subCategories" 
                         @open:edit-popup="showSubCategoryPopup"
                         @open:remove-popup="showRemoveSubCategoryPopup"
                     />
+                </div>
+                <div v-else>
+                    <div class="no_order">
+                        <NoValueFound title="Empty KOT List" />
+                    </div>
                 </div>
         </div>
 

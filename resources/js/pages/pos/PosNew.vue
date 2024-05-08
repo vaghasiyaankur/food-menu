@@ -14,6 +14,7 @@
                 <Product
                     :products="products"
                     :cart-products="cartProducts"
+                    :activeCategory="activeCategory"
                     @add:cart-product="addProductIntoCart"
                 />
             </div>

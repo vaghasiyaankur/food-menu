@@ -4,12 +4,17 @@
             <MenuManagementHeader title="Product" @add:popup="showProductPopup"
                 @update:search="updateSearch" :drop-down="headerDropDown" @filter:data="filterData" />
 
-            <div class="product-card">
+            <div class="product-card" v-if="products?.length > 0">
                 <Card 
                     :dataSet="products" 
                     @open:edit-popup="openEditPage"
                     @open:remove-popup="showRemoveProductPopup"
                 />
+            </div>
+            <div v-else>
+                <div class="no_order">
+                    <NoValueFound title="Empty KOT List" />
+                </div>
             </div>
         </div>
 

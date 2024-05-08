@@ -28,11 +28,11 @@
             <a href="#" class="add-combo-btn text-color-white" @click="submitCombo">{{ pageTypeButton }} Combo</a>
         </div>
 
-        <div class="horizontal-added-combo-slider">
+        <!-- <div class="horizontal-added-combo-slider">
             <a href="#">
                 <Icon name="rightArrowIcon" />
             </a>
-        </div>
+        </div> -->
     </div>
 </template>
 

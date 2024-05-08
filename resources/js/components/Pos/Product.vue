@@ -1,6 +1,25 @@
 <template>
     <div class="pos-product-section">
         <div class="grid grid-cols-3 medium-grid-cols-2 grid-gap-25 text-align-center">
+            <!-- <f7-card class="no-margin" v-if="activeCategory == 0">
+                <f7-card-content>
+                    <div class="food-type-icon">
+                        <img :src="foodTypeIcon(0)" alt="">
+                    </div>
+                    <div class="product-image">
+                        <img src="/storage/product/open_item.webp" alt="" width="100" height="100">
+                    </div>
+                    <div class="product-summary">
+                        <p class="product_name margin-bottom-half">Open Item</p>
+                        <p class="product_price text-red padding-top-half padding-bottom margin-top-half"></p>
+                    </div>
+                    <div class="product-add-button">
+                        <button class="button button-raised btn-add-product padding text-transform-capitalize" @click="addProductIntoCart(product.id)" >
+                            <f7-icon f7="plus" class="font-16 margin-right-half"></f7-icon> Add
+                        </button>
+                    </div>
+                </f7-card-content>
+            </f7-card> -->
             <f7-card class="no-margin" v-for="(product,index) in products" :key="index">
                 <f7-card-content>
                     <div class="food-type-icon">
@@ -49,6 +68,7 @@ const currentCurrencyData = inject('currentCurrencyData');
 
 const props = defineProps({
     products: Object,
+    activeCategory: Number,
     cartProducts: {
         type: Array,
         default: () => []
