@@ -5,12 +5,17 @@
             <MenuManagementHeader title="Variation" @add:popup="showVariationPopup"
                 @update:search="updateSearch" />
 
-            <div class="variation-card">
+            <div class="variation-card" v-if="variations?.length > 0">
                 <Card 
                     :dataSet="variations" 
                     @open:edit-popup="showVariationPopup"
                     @open:remove-popup="showRemoveVariationPopup"
                 />
+            </div>
+            <div v-else>
+                <div class="no_order">
+                    <NoValueFound title="Empty KOT List" />
+                </div>
             </div>
         </div>
 

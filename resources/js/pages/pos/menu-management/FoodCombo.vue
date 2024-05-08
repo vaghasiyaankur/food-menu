@@ -4,12 +4,17 @@
             <MenuManagementHeader title="Combo" @add:popup="showComboPopup"
                 @update:search="updateSearch" />
 
-            <div class="combo-card">
+            <div class="combo-card" v-if="combos?.length > 0">
                 <Card 
                     :dataSet="combos" 
                     @open:edit-popup="openEditPage"
                     @open:remove-popup="showRemoveComboPopup"
                 />
+            </div>
+            <div v-else>
+                <div class="no_order">
+                    <NoValueFound title="Empty KOT List" />
+                </div>
             </div>
         </div>
 

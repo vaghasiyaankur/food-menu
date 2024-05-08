@@ -1,7 +1,7 @@
 <template>
     <div class="card-content add-combo display-flex">
         <div
-            class="grid grid-cols-3 medium-grid-cols-4 grid-gap-25 grid-gap-20 align-items-center add-combo-list">
+            class="grid grid-cols-3 medium-grid-cols-2 grid-gap-25 grid-gap-20 align-items-center add-combo-list">
             <div class="bg-color-white data-card"  
                 :class="{ 'selected-product': isProductSelected(product.id)}"
                 v-for="(product, index) in products" :key="index"

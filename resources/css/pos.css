@@ -42,7 +42,7 @@
     margin: 0 !important;
 }
 .category-slider-content .swiper .slider-category-name{
-    text-align: center;
+    /* text-align: center; */
     margin: 0 0 0 10px;
 }
 .category-slider-content .swiper-wrapper{
