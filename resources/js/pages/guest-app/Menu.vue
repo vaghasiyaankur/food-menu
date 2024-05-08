@@ -13,12 +13,12 @@
             <p class="no-margin title-text">Select your favourite food
                 and enjoy with family</p>
             <div class="margin" v-if="productCategory.length != 0">
-                <f7-swiper ref="swiperRef" class="demo-swiper" :pagination="true" :space-between="10" :slides-per-view="5" style="height: 79px">
+                <f7-swiper ref="swiperRef" class="demo-swiper" :pagination="false" :space-between="10" :slides-per-view="5" style="height: 79px">
                     <f7-swiper-slide :class="{'slide-active': category.id === sliderActive}" v-for="category in productCategory" :key="category.id" @click="getProducts(category.id)">
                     <div class="menu-image">
                         <img :src="'/storage' + category.image" alt="">
                     </div>
-                    <p class="font-13 no-margin">{{ category.category_languages[0].name }}</p>
+                    <p class="font-13 no-margin">{{ category.name }}</p>
                     </f7-swiper-slide>
                 </f7-swiper>
                 <div class="position-relative">
@@ -138,7 +138,7 @@ const closePopup = () => {
 const getCategories = () => {
     axios.post('/api/get-categories-list')
         .then((res) => {
-            productCategory.value = res.data.category;
+            productCategory.value = res.data.categories;
             getProducts(productCategory.value[0].id);
         })
 }
@@ -147,7 +147,7 @@ const getProducts = (id) => {
     sliderActive.value = id;
     const indexCategory = productCategory.value.findIndex(item => item.id == id);
     if(indexCategory){
-        categoryName.value = productCategory.value[indexCategory].category_languages[0].name;
+        categoryName.value = productCategory.value[indexCategory].name;
     }
     axios.get('/api/get-digital-product-list/' + id)
         .then((res) => {

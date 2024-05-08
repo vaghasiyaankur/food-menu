@@ -3,8 +3,6 @@
         <div class="card digital_menu_card digital_menu_page elevation-2">
             <div class="no-padding digital_menu_banner-outer">
                 <div class="digital_menu_banner">
-                    <a href="javscript:;" class="text-color-black padding-right-half"><i class="f7-icons font-22"
-                            style="vertical-align: bottom;">arrow_left</i></a>
                     <h3 class="no-margin"> Food Menu </h3>
                 </div>
                 <p class="no-margin">Select your favourite food and enjoy with family</p>

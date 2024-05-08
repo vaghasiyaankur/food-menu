@@ -227,10 +227,32 @@ class CategoryController extends Controller
         $lang_id = SettingHelper::getlanguage();
         $restaurant_id = SettingHelper::getUserIdUsingQrcode();
         $restaurant_id = $restaurant_id ? $restaurant_id : Auth::user()->restaurant_id;
-        $category = Category::with(['categoryLanguages' => function($q) use ($lang_id){
-            $q->where('language_id',$lang_id);
-        }])->whereRestaurantId($restaurant_id)->get();
-        return response()->json(['category' => $category]);
+        // $category = Category::with(['categoryLanguages' => function($q) use ($lang_id){
+        //     $q->where('language_id',$lang_id);
+        // }])->whereRestaurantId($restaurant_id)->get();
+        // return response()->json(['category' => $category]);
+        $restaurantLanguageId = RestaurantLanguage::where('language_id', $lang_id)
+        ->where('restaurant_id', $restaurant_id)
+        ->value('id');
+
+        $categories = Category::with(['categoryRestaurantLanguages' => function ($query) use ($restaurantLanguageId) {
+            $query->where('restaurant_language_id', $restaurantLanguageId);
+        }])->whereHas('categoryRestaurantLanguages',function($q) use ($restaurantLanguageId){
+            $q->where('restaurant_language_id',$restaurantLanguageId);
+        })->where('restaurant_id', $restaurant_id)->get();
+
+        $categories->transform(function ($category){
+            $name = $category->categoryRestaurantLanguages->isEmpty() ? null : $category->categoryRestaurantLanguages->first()->name;
+            return [
+                'id' => $category->id,
+                'image' => $category->image,
+                'status' => $category->status,
+                'type' => $category->type,
+                'name' => $name,
+            ];
+        });
+
+        return response()->json(['categories' => $categories]);
     }
 
     public function getCategoryList()

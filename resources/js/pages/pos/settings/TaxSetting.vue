@@ -55,15 +55,21 @@
             </div>
         </form>
     </div>
+    <!-- ========= DELETE CATEGORY POPUP ========= -->
+    <div class="popup removeTaxPopup">
+        <RemovePopup :title="'Are you sure delete this tax?'" @remove="removeData" />
+    </div>
 </template>
 
 <script setup>
+import { f7 } from 'framework7-vue';
 import Icon from '../../../components/Icon.vue'
 import Input from '../../../components/Form/Input.vue'
 import Radio from '../../../components/Form/Radio.vue'
 import { ref } from 'vue'
 import axios from 'axios'
 import { successNotification, errorNotification, getErrorMessage } from '../../../commonFunction.js';
+import RemovePopup from '../../../components/common/RemovePopup.vue';
 
 const taxes = ref([]);
 const tax = ref({});
@@ -80,6 +86,7 @@ const statusOption = ref([{
                     }]);
 
 const currency = ref([]);
+const deleteId = ref(0);
 
 const saveTaxSetting = (event) => {
     var formData = new FormData(event.target);
@@ -115,11 +122,18 @@ const editTax = (id) => {
 }
 
 const deleteTax = (id) => {
-    axios.delete(`/api/delete-tax-detail/${id}`)
+    deleteId.value = id;
+    f7.popup.open(`.removeTaxPopup`);
+    
+}
+
+const removeData = () => {
+    axios.delete(`/api/delete-tax-detail/${deleteId.value}`)
     .then((res) => {
         successNotification(res.data.success);
         tax.value = {};
         getTaxSetting();
+        f7.popup.close(`.removeTaxPopup`);
     })
     .catch(error => {
         console.error('Error deleting tax detail:', error);

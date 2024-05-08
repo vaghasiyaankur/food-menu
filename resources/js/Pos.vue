@@ -7,12 +7,12 @@
         />
       </div>
       <f7-view
-        url="/new-settings/"
+        url="/"
         :main="true"
         class="safe-areas"
         :master-detail-breakpoint="768"
       ></f7-view>
-      <div class="overlay loaded">
+      <div class="overlay">
         <div class="overlayDoor"></div>
         <div class="overlayContent">
           <div class="inner text-align-center">
@@ -31,6 +31,7 @@ import { f7App, f7Panel, f7View, f7, f7Page, f7Navbar } from "framework7-vue";
 import routes from "./pos-routes";
 import store from "./store";
 import axios from "axios";
+import $ from "jquery";
 import Icon from "./components/Icon.vue";
 import Navbar from "./pages/pos/Navbar.vue";
 
@@ -187,18 +188,13 @@ onMounted(async () => {
       }
     }, 500);
 
-    window.addEventListener("load", () => {
-      const elements = document.querySelectorAll(".overlay, body");
-      elements.forEach(element => {
-        element.classList.add("loaded");
-      });
-
-      const overlayElements = document.querySelectorAll(".overlay");
-      overlayElements.forEach(element => {
-        element.style.display = "none";
-      });
+    $(window).bind("load", function () {
+      $(".overlay, body").addClass("loaded");
+      setTimeout(function () {
+        $(".overlay").css({ display: "none" });
+      }, 1000);
     });
-
+    
     events.forEach(event => {
       window.addEventListener(event, resetTimer);
     });

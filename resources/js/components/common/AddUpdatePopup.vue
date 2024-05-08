@@ -88,7 +88,7 @@
                                     :value="data.value"
                                     :name="data.name"
                                     :label="''"
-                                    :class="data.class"
+                                    :class-names="data.class"
                                     :placeholder="data.placeHolder"
                                     @update:date-time="saveValue(index, null, $event)" 
                                 />
