@@ -1,6 +1,6 @@
 <template>
     <div class="popup person_details" id="person_details">
-        <div class="data-form add_table_view-data-form">
+        <div class="data-form add-table-view-data-form">
             <div class="text-align-center table_view-popup_title">
                 Person Details</div>
             <hr class="popup_title_divider">

@@ -30,11 +30,18 @@
     <AppliedDiscountPopup />
 
     <!-- ========= SETTLE & SAVE POPUP ========= -->
-    <SettleSavePopup />
+    <SettleSavePopup @open:split-popup="openSplitPopup" @open:parts-popup="openPartsPopup" />
 
+    <!-- ========= SPLIT BILL POPUP ========= -->
+    <SplitPaymentPopup />
+
+    <!-- ========= PART PAYMENT POPUP ========= -->
+    <PartsPaymentPopup />
+    
 </template>
 <script setup>
 
+import { f7 } from 'framework7-vue';
 import NotePopup from './Popup/NotePopup.vue'
 import AddIngredientVariationPopUp from './Popup/AddIngredientVariationPopUp.vue'
 import PersonDetailPopup from './Popup/PersonDetailPopup.vue'
@@ -43,6 +50,8 @@ import OrderNotePopup from './Popup/OrderNotePopup.vue'
 import WaiterAssignPopup from './Popup/WaiterAssignPopup.vue'
 import AppliedDiscountPopup from './Popup/AppliedDiscountPopup.vue'
 import SettleSavePopup from './Popup/SettleSavePopup.vue'
+import SplitPaymentPopup from './Popup/SplitPaymentPopup.vue'
+import PartsPaymentPopup from './Popup/PartsPaymentPopup.vue'
 
 const props = defineProps({
     // Note Modal
@@ -73,5 +82,13 @@ const submitNote = (note, npStatus) => {
 
 const submitIngVar = () => {    
     emit('submit:ingredient-variation');
+}
+
+const openSplitPopup = () => {
+    f7.popup.open(".split-payment-popup");
+}
+
+const openPartsPopup = () => {
+    f7.popup.open(".parts-payment-popup");
 }
 </script>

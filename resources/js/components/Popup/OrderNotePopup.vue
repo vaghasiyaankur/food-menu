@@ -1,6 +1,6 @@
 <template>
     <div class="popup order-note" id="order-note">
-        <div class="data-form add_table_view-data-form">
+        <div class="data-form add-table-view-data-form">
             <div class="text-align-center table_view-popup_title">
                 Notes</div>
             <hr class="popup_title_divider">

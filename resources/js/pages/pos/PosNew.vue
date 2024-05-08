@@ -121,6 +121,22 @@ const assignDeliveryFillUp = ref(false);
 const orderNoteFillUp = ref(false);
 const discountFillUp = ref(false);
 
+// Split Payment Popup
+const splitType = ref('portion');
+const splitPortionData = ref({
+    portion : ''
+});
+const splitPercentageData = ref({
+    percentage1 : '',
+    percentage2 : '',
+});
+const splitItemWiseData = ref({
+    selectedItem : {},
+    part1 : {},
+    part2 : {}
+});
+// const percentageObj = ref({});
+
 onMounted(() => {
     setTimeout(() => {
         if(f7.view.main.router.currentRoute.params.id){
@@ -376,6 +392,8 @@ const createKOT = (tableId) => {
             const errorMessage = getErrorMessage(error);
             errorNotification(errorMessage);
         });
+    }else{
+        errorNotification("There are no items in the cart.")
     }
 }
 
@@ -448,6 +466,8 @@ const holdKOT = (tableId) => {
             const errorMessage = getErrorMessage(error);
             errorNotification(errorMessage);
         });
+    }else{
+        errorNotification("There are no items in the cart.")
     }
 }
 
@@ -532,6 +552,7 @@ const settleSavePayment = () => {
 }
 
 provide('table',table);
+provide('totalAmount', totalAmount)
 
 provide('selectIngredient',selectIngredient);
 provide('selectVariation',selectVariation);
@@ -581,5 +602,11 @@ provide('settleSavePayment', settleSavePayment);
 
 provide('cartProducts', cartProducts)
 provide('oldOrder', oldOrder)
+
+// Split Payment Popup
+provide('splitType', splitType)
+provide('splitPortionData', splitPortionData)
+provide('splitPercentageData', splitPercentageData)
+provide('splitItemWiseData', splitItemWiseData)
 
 </script>

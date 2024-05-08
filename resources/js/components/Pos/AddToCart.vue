@@ -48,7 +48,7 @@
             <div class="billing-btns grid grid-cols-3">
                 <button class="button kot-btn active" @click="createKot(table?.id)">KOT</button>
                 <button class="button hold-btn" @click="holdKot(table?.id)">Hold</button>
-                <button class="button ebill-btn" @click="oldOrder || cartProducts?.length > 0 ? settleBill(table?.id): ''">Settle & eBill</button>
+                <button class="button ebill-btn" @click="settleBill(table?.id)">Settle & eBill</button>
             </div>
             <div class="bill-details-extend">
                 <div class="bill-details-extend-inner"></div>
@@ -62,6 +62,7 @@ import CartProduct from './CartProduct.vue'
 import CartHeader from './CartHeader.vue'
 import { ref, inject } from 'vue'
 import Icon from '../../components/Icon.vue';
+import { errorNotification } from "../../commonFunction";
 
 const emit = defineEmits(['increase:quantity', 'decrease:quantity','open:note-popup', 'remove:cart-product', 'create:kot', 'hold:kot']);
 
@@ -106,7 +107,16 @@ const holdKot = (tableId) => {
 }
 
 const settleBill = () => {
-    f7.popup.open(`.settle-save-popup`);
+    if (props.oldOrder || props.cartProducts?.length > 0) {
+        const message = props.cartProducts?.length > 0 
+            ? "Please create KOT for items on hold or remove them from hold." 
+            : "Proceed to settle or save the order.";
+        props.cartProducts?.length > 0 
+            ? errorNotification(message) 
+            : f7.popup.open(`.settle-save-popup`);
+    } else {
+        errorNotification("There are no items in the order.");
+    }
 }
 
 const toggleAmountSlider = () => {

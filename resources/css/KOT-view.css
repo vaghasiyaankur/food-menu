@@ -502,7 +502,7 @@
     background-color: #ffffff;
     z-index: 1;
 }
-.part_payment_Popup .popup_button button {
+.parts-payment-popup .popup_button button {
     font-size: 18px !important;
     padding: 0;
     margin: 0;

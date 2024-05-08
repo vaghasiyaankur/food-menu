@@ -416,11 +416,11 @@
 .settle-save-popup,
 .dine_in_order_Popup,
 .delivery_order_Popup,
-.part_payment_Popup,
-.split_bill_Popup {
+.parts-payment-popup,
+.split-payment-popup {
     border-radius: 20px !important;
 }
-.add_table_view-data-form {
+.add-table-view-data-form {
     padding: 20px 25px 0;
 }
 .table_view-popup_title {
@@ -476,7 +476,7 @@
 .reason-for-adding-custom-disc-outer input,
 .selected-disc-data-input,
 .apply-discount-coupon-code-data,
-.settle_save-input,
+.settle-save-input,
 .table-selector,
 .dine_in_order-input,
 .delivery_order-input {
@@ -493,7 +493,7 @@
     font-weight: 400 !important;
     color: #555555 !important;
 }
-.add_table_view-data-form .popup_button {
+.add-table-view-data-form .popup_button {
     margin-top: 30px;
 }
 .add_waiter-selector .waiter-data {
@@ -577,8 +577,8 @@
     max-width: 394px !important;
     width: 100% !important;
 }
-.part_payment_Popup,
-.split_bill_Popup {
+.parts-payment-popup,
+.split-payment-popup {
     max-width: 650px;
     width: 100% !important;
     background-color: #ffffff;
@@ -601,30 +601,30 @@
 .bill-header {
     margin-bottom: 25px;
 }
-.part_payment_Popup .toolbar,
-.split_bill_Popup .toolbar {
+.parts-payment-popup .toolbar,
+.split-payment-popup .toolbar {
     background-color: #ffffff;
     height: auto;
     margin-bottom: 30px;
 }
-.part_payment_Popup .toolbar-inner,
-.split_bill_Popup .toolbar-inner {
+.parts-payment-popup .toolbar-inner,
+.split-payment-popup .toolbar-inner {
     display: flex;
     position: relative;
     gap: 20px;
     justify-content: center;
     align-items: center;
 }
-.part_payment_Popup .toolbar-inner a,
-.split_bill_Popup .toolbar-inner a {
+.parts-payment-popup .toolbar-inner a,
+.split-payment-popup .toolbar-inner a {
     padding: 10px 20px !important;
     text-align: center;
     border-radius: 10px;
     background-color: #f5f5f5;
     border: 1px solid transparent;
 }
-.part_payment_Popup .toolbar-inner p,
-.split_bill_Popup .toolbar-inner p {
+.parts-payment-popup .toolbar-inner p,
+.split-payment-popup .toolbar-inner p {
     font-size: 14px;
     line-height: 18px;
     font-weight: 500 !important;
@@ -632,37 +632,37 @@
     letter-spacing: 0px;
     text-transform: capitalize;
 }
-.part_payment_Popup .toolbar-inner a svg,
-.split_bill_Popup .toolbar-inner a svg {
+.parts-payment-popup .toolbar-inner a svg,
+.split-payment-popup .toolbar-inner a svg {
     margin-bottom: 6px;
     width: 40px;
     height: 40px !important;
     z-index: 10;
     flex-shrink: 0;
 }
-.part_payment_Popup .toolbar-inner .tab-link-active,
-.split_bill_Popup .toolbar-inner .tab-link-active {
+.parts-payment-popup .toolbar-inner .tab-link-active,
+.split-payment-popup .toolbar-inner .tab-link-active {
     border: 1px solid #f33e3e;
     color: #f33e3e;
     background-color: #ffffff;
     box-shadow: 0px -1px 4px 0px #a6a6a60d;
     box-shadow: 0px 1.5px 5px 0px #a6a6a666;
 }
-.part_payment_Popup .toolbar-inner .tab-link-active svg + p,
-.split_bill_Popup .toolbar-inner .tab-link-active svg + p {
+.parts-payment-popup .toolbar-inner .tab-link-active svg + p,
+.split-payment-popup .toolbar-inner .tab-link-active svg + p {
     color: #f33e3e;
 }
-.part_payment_Popup .toolbar-inner .tab-link-highlight,
-.split_bill_Popup .toolbar-inner .tab-link-highlight {
+.parts-payment-popup .toolbar-inner .tab-link-highlight,
+.split-payment-popup .toolbar-inner .tab-link-highlight {
     display: none;
 }
 .popup_button button {
     font-size: 16px !important;
 }
-.part_payment_Popup .tabs .tab {
+.parts-payment-popup .tabs .tab {
     background-color: #ffffff !important;
 }
-.split_bill_Popup .tabs .tab {
+.split-payment-popup .tabs .tab {
     background-color: transparent !important;
 }
 .captured_amount-text {
@@ -708,7 +708,7 @@
     box-shadow: 1px 1px 4px 0px #8f716459;
     border: none;
 }
-.dashed-line-devider {
+.dashed-line-division {
     border: 1px dashed rgba(153, 153, 153, 0.5);
     border-bottom: none;
     border-left: none;
@@ -733,7 +733,7 @@
 .payment-details .delete-indicator {
     color: #f33e3e;
 }
-.part_payment_Popup .popup_button {
+.parts-payment-popup .popup_button {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -747,7 +747,7 @@
     background-color: #ffffff;
     z-index: 1;
 }
-.part_payment_Popup .popup_button button {
+.parts-payment-popup .popup_button button {
     font-size: 18px !important;
     padding: 0;
     margin: 0;
@@ -819,10 +819,10 @@
 .comment-text-area {
     margin-top: 7px;
 }
-.split_bill_Popup .toolbar-inner {
+.split-payment-popup .toolbar-inner {
     padding: 0 55px;
 }
-.split_bill_Popup .popup-btns-for-portion-split {
+.split-payment-popup .popup-btns-for-portion-split {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -843,13 +843,13 @@
     background-color: #ffffff;
     border: none;
 }
-.split_bill_Popup .popup_button {
+.split-payment-popup .popup_button {
     margin: 50px auto 25px;
 }
-.split_bill_Popup .popup-btns-for-portion-split .cancel_save-btns {
+.split-payment-popup .popup-btns-for-portion-split .cancel-save-btn {
     margin: 0 !important;
 }
-.split_bill_Popup .popup_button .cancel_save-btns {
+.split-payment-popup .popup_button .cancel-save-btn {
     max-width: 327px;
     width: 100%;
     margin: 0 auto;
@@ -889,25 +889,25 @@
     background-color: #f33e3e;
     border: none;
 }
-.split_bill_Popup .portion_calc .portion_split-text {
+.split-payment-popup .portion_calc .portion_split-text {
     font-size: 16px;
     line-height: 19px;
     font-weight: 600;
     color: #555555;
 }
-.split_bill_Popup .portion_calc .portion_split-input {
+.split-payment-popup .portion_calc .portion_split-input {
     display: flex;
     align-items: center;
     gap: 10px;
     margin-top: 7px;
 }
-.split_bill_Popup .portion_calc .main-portin {
+.split-payment-popup .portion_calc .main-portin {
     font: 15px;
     line-height: 18px;
     font-weight: 500;
     color: #38373d;
 }
-.split_bill_Popup .portion_calc .portion_split-input input {
+.split-payment-popup .portion_calc .portion_split-input input {
     width: 100%;
 }
 .percentage-split-heading {
@@ -936,44 +936,44 @@
 .percentage_split-input-2 input {
     width: 100%;
 }
-.split_bill_Popup .item_wise {
+.split-payment-popup .item_wise {
     display: flex;
     gap: 20px;
     align-items: center;
 }
-.split_bill_Popup .add-items-part-1 {
+.split-payment-popup .add-items-part-1 {
     margin-bottom: 20px;
 }
-.split_bill_Popup .all-items,
-.split_bill_Popup .add-items-part-1,
-.split_bill_Popup .add-items-part-2 {
+.split-payment-popup .all-items,
+.split-payment-popup .add-items-part-1,
+.split-payment-popup .add-items-part-2 {
     max-width: 290px;
     width: 100% !important;
 }
-.split_bill_Popup .all-items input {
+.split-payment-popup .all-items input {
     margin: 0;
     margin-right: 10px;
 }
-.split_bill_Popup .all-items label {
+.split-payment-popup .all-items label {
     font-size: 16px;
     line-height: 19px;
     font-weight: 400;
 }
-.split_bill_Popup .all-items {
+.split-payment-popup .all-items {
     padding: 0;
     margin: 0 !important;
 }
-.split_bill_Popup .all-items .all-items-selector {
+.split-payment-popup .all-items .all-items-selector {
     background-color: #f33e3e;
     color: #ffffff !important;
     font-weight: 600;
     padding: 10px 15px;
     border-radius: 5px;
 }
-.split_bill_Popup .all-items .all-items-selector-input {
+.split-payment-popup .all-items .all-items-selector-input {
     accent-color: #ffffff;
 }
-.split_bill_Popup .all-items .all-items-list {
+.split-payment-popup .all-items .all-items-list {
     list-style: none;
     border: 1px solid rgba(153, 153, 153, 0.4);
     border-bottom-right-radius: 10px;
@@ -981,14 +981,14 @@
     border-top: none;
     padding: 15px 15px 0 !important;
 }
-.split_bill_Popup .all-items .all-items-list .all_items-item {
+.split-payment-popup .all-items .all-items-list .all_items-item {
     margin-bottom: 15px;
 }
-.split_bill_Popup .add-in-items {
+.split-payment-popup .add-in-items {
     max-width: 290px;
     width: 100%;
 }
-.split_bill_Popup .add-in-items .add-items-part-banner {
+.split-payment-popup .add-in-items .add-items-part-banner {
     padding: 5px;
     background-color: #f33e3e;
     display: flex;
@@ -996,28 +996,28 @@
     justify-content: flex-start;
     border-radius: 5px;
 }
-.split_bill_Popup .add-in-items .add-items-to-list-btn {
+.split-payment-popup .add-in-items .add-items-to-list-btn {
     padding: 5px 10px;
     background-color: #ffffff;
     border: none;
     max-width: 52px;
     border-radius: 3px;
 }
-.split_bill_Popup .add-in-items .add-items-to-list-btn p {
+.split-payment-popup .add-in-items .add-items-to-list-btn p {
     font-size: 16px;
     line-height: 19px;
     font-weight: 500;
     text-align: center;
     color: #f33e3e;
 }
-.split_bill_Popup .add-in-items h4 {
+.split-payment-popup .add-in-items h4 {
     margin-left: 10px !important;
     color: #ffffff;
     font-size: 16px;
     line-height: 19px;
     font-weight: 600;
 }
-.split_bill_Popup .add-in-items .list-item-show {
+.split-payment-popup .add-in-items .list-item-show {
     box-sizing: border-box;
     width: 100%;
     height: 123px;
@@ -1027,7 +1027,7 @@
     border-top: none;
 }
 
-.split_bill_Popup .wave-image-content {
+.split-payment-popup .wave-image-content {
     position: absolute;
     width: 100%;
     bottom: 0;
