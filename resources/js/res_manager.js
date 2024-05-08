@@ -6,7 +6,6 @@ import Pusher from 'pusher-js';
 import Echo from 'laravel-echo';
 
 import 'framework7/css/bundle';
-// import '.././css/app.css';
 
 // Demo
 /* eslint-disable */

@@ -13,6 +13,7 @@
 		}
 	</style>
 	@vite('resources/css/app.css')
+	@vite('resources/css/manager.css')
 </head>
 <body>
 	<div id="app">
