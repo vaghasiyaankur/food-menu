@@ -9,14 +9,15 @@
                     <div class="product_detail" v-for="(kp, ind) in kot.kot_products" :key="ind">
                         <div class="product-detail-inner">
                             <div class="product-summary">
-                                <p class="no-margin">{{ kp.name }}</p>
-                                <p class="text-red no-margin">{{  currentCurrencyData ? currentCurrencyData.currency_symbol :  '₹'  }} {{ ((kp.price + kp.extra_amount) * kp.quantity).toFixed(2) }}</p>
-                                <span 
-                                    v-if="kp.variation"
-                                    class="no-margin display-flex align-items-center"
-                                >
-                                    Size: {{ kp.variation }}
-                                </span>
+                                <div class="display-flex">
+                                    <p class="no-margin-vertical margin-right-half">{{ kp.name }}</p>
+                                    <span 
+                                        v-if="kp.variation"
+                                        class="no-margin display-flex align-items-center"
+                                    >
+                                        (Size: {{ kp.variation }})
+                                    </span>
+                                </div>
                                 <span v-if="kp.ingredients.length > 0" >
                                     Ingredient : 
                                     <span v-for="(ing, index) in kp.ingredients" :key="index">
@@ -25,7 +26,10 @@
                                 </span>
                             </div>
                         </div>
-                        <div class="product-detail-inner">
+                        <div class="product-detail-inner justify-content-end">
+                            <div class="product-summary text-align-right margin-right">
+                                <p class="text-red no-margin">{{  currentCurrencyData ? currentCurrencyData.currency_symbol :  '₹'  }} {{ ((kp.price + kp.extra_amount) * kp.quantity).toFixed(2) }}</p>
+                            </div>
                             <div class="product-note-content">
                                 <div class="product-note" data-popup="#note_popup" @click="openNotePopup(kot.id, 'old', index, ind)">
                                     <Icon name="note" />

@@ -30,7 +30,7 @@
                 </div>
             </div>
         </div>
-        <div class="card-content table_view_list">
+        <div class="card-content table_view_list"  v-if="floorList.length">
             <template v-for="(floor, index) in floorList" :key="index">
                 <h4 class="table_view_list-floor-heading no-margin no-padding">{{ floor.name }}</h4>
                 <div
@@ -122,6 +122,11 @@
                 </div>
             </template>
         </div>
+        <div v-else>
+            <div class="no_order">
+                <NoValueFound title="Empty KOT List" />
+            </div>
+        </div>
         <!-- ========= ADD TABLE-VIEW POPUP ========= -->
         <div class="popup addUpdatePopup">
             <AddUpdatePopup :title="addUpdateTitle" :form-data-format="addUpdateFormDataFormat" :type="addUpdateType" :data-type="'table-view'" @store:update="storeUpdateData" />
@@ -145,6 +150,7 @@ import Icon from '../../components/Icon.vue';
 import AddUpdatePopup from '../../components/common/AddUpdatePopup.vue'
 import RemovePopup from '../../components/common/RemovePopup.vue'
 import { successNotification, errorNotification, getErrorMessage } from '../../commonFunction.js'
+import NoValueFound from '../../components/NoValueFound.vue';
 const floorList = ref([]);
 const defaultSelectColorId = ref('');
 const defaultSelectFloorId = ref('');

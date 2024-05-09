@@ -360,7 +360,7 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox {
     grid-template-columns: auto auto auto auto auto;
     gap: 5px;
     margin: 0 30px;
-    padding-top: 26px;
+    padding-top: 10px;
     --f7-touch-ripple-color: none;
 }
 .add-to-cart-section .order-option {
@@ -432,11 +432,11 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox {
 }
 .add-to-cart .cart-products {
     overflow: auto;
-    height: 56dvh;
+    height: calc(100dvh - 340px);
     scrollbar-width: none;
 }
 .add-to-cart .cart-products.open{
-    height: calc(48dvh);
+    height: calc(100dvh - 410px);
 }
 .add-to-cart .cart-products .kot-time-wrapper {
     margin-top: 15px;
@@ -463,10 +463,11 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox {
     align-items: center;
 }
 .add-to-cart .cart-products .product-detail-inner:first-child{
-    width: 70%;
+    width: 60%;
 }
 .add-to-cart .cart-products .product-detail-inner:last-child{
-    width: 30%;
+    width: 40%;
+    justify-content: end;
 }
 .add-to-cart .cart-products .product_detail:last-child {
     border: 0;
@@ -754,10 +755,10 @@ textarea {
         display: block;
     }
     .add-to-cart .cart-products{
-        height: 66dvh;
+        height: calc(100dvh - 390px);
     }
     .add-to-cart .cart-products.open{
-        height: 61dvh;
+        height: calc(100dvh - 450px);
     }
     .product-section {
         width: calc(100dvw - 45%);
@@ -1066,6 +1067,7 @@ textarea {
 .ordered-items-full-details{
     height: 250px;
     overflow: auto;
+    background-color: #fafafa;
 }
 
 .ordered-kot-items-details{

@@ -30,8 +30,8 @@ class FloorController extends Controller
         }
 
         Floor::updateOrCreate(
-            ['id' => $request->uestid],
-            ['short_cut' => $request->uestshort_cut,'name' => $request->uestname,'restaurant_id' => Auth::user()->restaurant_id]
+            ['id' => $request->id],
+            ['short_cut' => $request->short_cut,'name' => $request->name,'restaurant_id' => Auth::user()->restaurant_id]
         );
 
         if($request->id == 0) $message = 'Added';

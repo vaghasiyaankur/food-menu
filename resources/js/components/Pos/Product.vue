@@ -1,6 +1,6 @@
 <template>
     <div class="pos-product-section">
-        <div class="grid grid-cols-3 medium-grid-cols-2 grid-gap-25 text-align-center">
+        <div class="grid grid-cols-3 medium-grid-cols-2 grid-gap-25 text-align-center" v-if="products?.length">
             <!-- <f7-card class="no-margin" v-if="activeCategory == 0">
                 <f7-card-content>
                     <div class="food-type-icon">
@@ -54,6 +54,11 @@
                 </f7-card-content>
             </f7-card>
         </div>
+        <div v-else>
+            <div class="no_order">
+                <NoValueFound title="Empty Product List" />
+            </div>
+        </div>
     </div>
 </template>
 
@@ -62,6 +67,7 @@ import { f7Card, f7CardContent,f7, f7Icon } from 'framework7-vue';
 import { getFoodTypeIcon } from '../../commonFunction.js';
 import { ref, inject } from 'vue';
 import Icon from '../Icon.vue';
+import NoValueFound from '../NoValueFound.vue'
 
 const cartProduct = ref([]);
 const currentCurrencyData = inject('currentCurrencyData');
