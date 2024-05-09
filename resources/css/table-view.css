@@ -577,7 +577,11 @@
     max-width: 394px !important;
     width: 100% !important;
 }
-.upi-payment-popup,
+.upi-payment-popup{
+    max-width: 500px;
+    width: 100% !important;
+    background-color: #ffffff;
+}
 .split-payment-popup {
     max-width: 650px;
     width: 100% !important;

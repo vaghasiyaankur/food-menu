@@ -74,7 +74,7 @@
     max-width: calc((100dvw - 425px) - 55px);
     width: 100%;
 }
-.completed_orders_list .filtered_list {
+.completed_orders_list .filtered_list, .upi-payment-methods .payment_list{
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -85,21 +85,25 @@
     max-height: calc(100dvh - 155px);
     scrollbar-width: none;
 }
-.completed_orders_list .filtered_list .filtered_order_item {
+.completed_orders_list .filtered_list .filtered_order_item, .upi-payment-methods .payment_list .upi-payment-method {
     padding: 10px 20px 10px 12px;
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0px 1px 15px 0px #3333330d;
 }
-.completed_orders_list .filtered_list .select {
+.completed_orders_list .filtered_list .select, .upi-payment-methods .payment_list .select {
     border: 1.2px solid #f33e3e;
     box-shadow: 0px 1px 10px 0px #f33e3e26;
 }
-.filtered_order_item .filtered_order_detail {
+.filtered_order_item .filtered_order_detail, .upi-payment-method .upi-payment-detail {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 10px;
+}
+
+.upi-payment-method{
+    border : 1.2px solid #d6d6d6;
 }
 
 .filtered_list .select .user_image {
@@ -108,7 +112,11 @@
 .filtered_list .select .selected_user_image {
     display: block !important;
 }
-.filtered_order_item .order_user-info {
+.upi-payment-info .upi_payment_radio{
+    accent-color : #f33e3e;
+    border: #F33E3E;
+}
+.filtered_order_item .order_user-info, .upi-payment-method .upi-payment-info {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -123,7 +131,7 @@
     gap: 15px;
 }
 .filtered_order_item .order_number_time h3,
-.filtered_order_item .filtered_order_payment-info h3 {
+.filtered_order_item .filtered_order_payment-info h3 ,.upi-payment-method .upi-payment-info h3 {
     font-size: 18px;
     line-height: 22px;
     font-weight: 500;
@@ -138,7 +146,7 @@
 }
 .filtered_order_item .order_timing span,
 .filtered_order_item .order_timing p,
-.filtered_order_item .filtered_order_payment-info p {
+.filtered_order_item .filtered_order_payment-info p , .upi-payment-method .upi-payment-info p {
     font-size: 15px;
     line-height: 18px;
     font-weight: 400;
