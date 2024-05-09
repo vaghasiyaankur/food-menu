@@ -67,6 +67,7 @@ import { errorNotification } from "../../commonFunction";
 const emit = defineEmits(['increase:quantity', 'decrease:quantity','open:note-popup', 'remove:cart-product', 'create:kot', 'hold:kot']);
 
 const currentCurrencyData = inject('currentCurrencyData');
+const defaultFillUpSettleMentData = inject('defaultFillUpSettleMentData')
 const openAmountSlider = ref(true);
 
 const props = defineProps({
@@ -114,7 +115,7 @@ const settleBill = () => {
             : "Proceed to settle or save the order.";
         props.cartProducts?.length > 0 
             ? errorNotification(message) 
-            : f7.popup.open(`.settle-save-popup`);
+            : openSettlementSavePopup();
     } else {
         errorNotification("There are no items in the order.");
     }
@@ -126,6 +127,11 @@ const toggleAmountSlider = () => {
 
 const moveToTableView = () => {
     f7.view.main.router.navigate({ url: "/" });
+}
+
+const openSettlementSavePopup = () => {
+    defaultFillUpSettleMentData();
+    f7.popup.open(`.settle-save-popup`);
 }
 
 </script>

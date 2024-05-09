@@ -135,6 +135,9 @@ const upiData = ref({
     selectedItem : ''
 });
 
+const orderId = ref(0);
+const tableIdNumber = ref(0);
+
 // const percentageObj = ref({});
 
 onMounted(() => {
@@ -152,6 +155,8 @@ const getTableCurrentDetail = (tableId) => {
         floorName.value = response.data.floor ? response.data.floor.name : '';
         table.value = response.data;
         oldOrder.value = response.data.order;
+        orderId.value = oldOrder.value?.id;
+        tableIdNumber.value = tableId;
         if(response.data.hold_kot_data){
             const productsArray = JSON.parse(response.data.hold_kot_data.products);
 
@@ -552,8 +557,37 @@ const blankSubPaymentForm = () => {
     upiData.value.selectedItem = '';
 }
 
+const defaultFillUpSettleMentData = () => {
+    customerPaid.value = totalAmount.value;
+    returnMoney.value = 0;
+    tip.value = 0;
+    settlementAmount.value = 0;
+}
+
 const settleSavePayment = () => {
-    
+    const formData = new FormData();
+    formData.append('orderId', orderId.value);
+    formData.append('tableId', tableIdNumber.value);
+    formData.append('paymentType', paymentType.value);
+    formData.append('customerPaid', customerPaid.value);
+    formData.append('returnMoney', returnMoney.value);
+    formData.append('tip', tip.value);
+    formData.append('settlementAmount', settlementAmount.value);
+    if(paymentType.value == 'split'){
+        if(splitType.value == 'portion'){
+            formData.append('subPaymentData', JSON.stringify(splitPortionData.value));
+        }else if(splitType.value == 'percentage'){
+            formData.append('subPaymentData', JSON.stringify(splitPercentageData.value));
+        }
+    }else if(paymentType.value == 'upi'){
+        formData.append('subPaymentData', JSON.stringify(upiData.value));
+    }
+    axios.post('/api/save-settle-bill', formData)
+    .then((response) => {
+        successNotification(response.data.success);
+        f7.popup.close(".settle-save-popup");
+        f7.view.main.router.navigate({ url: "/" });
+    })
 }
 
 provide('table',table);
@@ -610,6 +644,7 @@ provide('oldOrder', oldOrder)
 
 // Payment Form Function
 provide('blankSubPaymentForm', blankSubPaymentForm)
+provide('defaultFillUpSettleMentData', defaultFillUpSettleMentData)
 
 // Split Payment Popup
 provide('splitType', splitType)

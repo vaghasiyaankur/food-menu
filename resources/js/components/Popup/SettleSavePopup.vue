@@ -24,23 +24,23 @@
             </div>
             <label class="settle_save-heading-text">Customer Paid</label>
             <div class="settle_save-text text-align-left">
-                <input type="number" v-model="customerPaid" name="customer_paid" class="customer-paid-update-data settle-save-input" placeholder="0" required>
+                <input type="number" v-model="customerPaid" step="0.01" name="customer_paid" class="customer-paid-update-data settle-save-input" placeholder="0" required>
             </div>
             <label class="settle_save-heading-text">Return to customer</label>
             <div class="settle_save-text text-align-left">
-                <input type="number" v-model="returnMoney" name="return_to_customer" class="return-customer-update-data settle-save-input" placeholder="0" required>
+                <input type="number" v-model="returnMoney"  step="0.01" name="return_to_customer" class="return-customer-update-data settle-save-input" placeholder="0" required>
             </div>
             <label class="settle_save-heading-text">Tip</label>
             <div class="settle_save-text text-align-left">
-                <input type="number" v-model="tip" name="tip" class="tip-update-data settle-save-input" placeholder="0" required>
+                <input type="number" v-model="tip" step="0.01" name="tip" class="tip-update-data settle-save-input" placeholder="0" required>
             </div>
             <label class="settle_save-heading-text">Settlement Amount</label>
             <div class="settle_save-text text-align-left">
-                <input type="number" v-model="settlementAmount" name="settle_amount" class="settlement-amount-update-data settle-save-input" placeholder="0" required>
+                <input type="number" v-model="settlementAmount" step="0.01" name="settle_amount" class="settlement-amount-update-data settle-save-input" placeholder="0" required>
             </div>
             <label class="settle_save-heading-text">Total Amount</label>
             <div class="settle_save-text text-align-left">
-                <input type="number" v-model="totalAmount" name="total_amount" class="total-amount-data settle-save-input" placeholder="0" disabled>
+                <input type="number" v-model="totalAmount" step="0.01"  name="total_amount" class="total-amount-data settle-save-input" placeholder="0" disabled>
             </div>
             <div class="display-flex justify-content-center popup_button">
                 <button type="button"
@@ -86,16 +86,11 @@ const paymentTypes = ref([
 ]);
 
 const settleSave = () => {
-    var formData = new FormData(event.target);
-    axios.post('/api/save-settle-bill', formData)
-    .then((response) => {
-        successNotification(response.data.success);
-        f7.popup.close(".settle-save-popup");
-        f7.view.main.router.navigate({ url: "/" });
-    })
+    settleSavePayment();
 }
 
 const selectPaymentType = (paymentMethod) => {
+    paymentType.value = paymentMethod;
     blankSubPaymentForm();
     if(paymentMethod == 'split'){
         f7.popup.close(".settle-save-popup");

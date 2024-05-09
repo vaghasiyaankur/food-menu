@@ -20,6 +20,7 @@ use App\Models\ProductRestaurantLanguage;
 use App\Models\RestaurantLanguage;
 use App\Models\Table;
 use App\Models\VariationRestaurantLanguage;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use PHPUnit\TextUI\XmlConfiguration\Variable;
 
@@ -320,7 +321,26 @@ class PosController extends Controller
     }
 
     public function saveSettleBill(Request $request) {
-        OrderPayment::create($request->toArray());
+
+        $orderPayment = new OrderPayment();
+        $orderPayment->order_id = $request->orderId;
+        $orderPayment->table_id = $request->tableId;
+        $orderPayment->payment_type = $request->paymentType;
+        $orderPayment->customer_paid = $request->customerPaid;
+        $orderPayment->return_to_customer = $request->returnMoney;
+        $orderPayment->tip = $request->tip;
+        $orderPayment->settle_amount = $request->settlementAmount;
+        $orderPayment->payment_type_data = $request->subPaymentData ? $request->subPaymentData : null;
+        $orderPayment->save();
+
+        Order::where('id', $request->orderId)
+                ->update([
+                    'finish_time' => Carbon::now(),
+                    'finished' => 1,
+                    'is_serve' => 1,
+                    'finish_at' => Carbon::now(),
+                ]);
+
         return response()->json(['success'=>'Bill Settle Successfully.']);
     }
 }

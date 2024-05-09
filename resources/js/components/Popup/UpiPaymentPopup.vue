@@ -12,7 +12,7 @@
                     <th>Qr Code</th>
                 </tr>
                 <tr v-for="(upi, index) in upiList" :key="index">
-                    <td><input type="radio" name="upi" v-model="formattedUpiSelection"/></td>
+                    <td><input type="radio" name="upi" :value="upi.id" v-model="formattedUpiSelection"/></td>
                     <td>{{ upi.name }}</td>
                     <td>{{ upi.mode }}</td>
                     <td><img :src="'/storage/'+upi.image" width="50" height="50" /></td>
