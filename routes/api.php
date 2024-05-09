@@ -7,6 +7,7 @@ use App\Http\Controllers\Manager\AuthController;
 use App\Http\Controllers\Manager\CategoryController;
 use App\Http\Controllers\Manager\ComboController;
 use App\Http\Controllers\Manager\CouponController;
+use App\Http\Controllers\Manager\UpiController;
 use App\Http\Controllers\Manager\FloorController;
 use App\Http\Controllers\Manager\IngredientController;
 use App\Http\Controllers\Manager\OrderController;
@@ -334,3 +335,15 @@ Route::post('/update-coupon',[CouponController::class, 'updateCoupon']);
 Route::post('/delete-coupon',[CouponController::class, 'deleteCoupon']);
 
 Route::post('/apply-coupon',[CouponController::class, 'applyCoupon']);
+
+// ------------------------ UPI Payment Setting Routes ------------------------ //
+
+Route::get('/get-upi-list', [UpiController::class, 'getUpiCodes']);
+
+Route::post('/add-upi',[UpiController::class, 'addUpi']);
+
+Route::get('/get-upi/{id}', [UpiController::class, 'getUpi']);
+
+Route::post('/update-upi',[UpiController::class, 'updateUpi']);
+
+Route::post('/delete-upi',[UpiController::class, 'deleteUpi']);

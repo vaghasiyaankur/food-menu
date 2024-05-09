@@ -32,7 +32,6 @@ import routes from "./pos-routes";
 import store from "./store";
 import axios from "axios";
 import $ from "jquery";
-import Icon from "./components/Icon.vue";
 import Navbar from "./pages/pos/Navbar.vue";
 
 // Reactive data

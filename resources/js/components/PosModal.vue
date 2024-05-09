@@ -30,13 +30,13 @@
     <AppliedDiscountPopup />
 
     <!-- ========= SETTLE & SAVE POPUP ========= -->
-    <SettleSavePopup @open:split-popup="openSplitPopup" @open:parts-popup="openPartsPopup" />
+    <SettleSavePopup @open:split-popup="openSplitPopup" @open:upi-popup="openUPIPopup" />
 
     <!-- ========= SPLIT BILL POPUP ========= -->
     <SplitPaymentPopup />
 
     <!-- ========= PART PAYMENT POPUP ========= -->
-    <PartsPaymentPopup />
+    <UpiPaymentPopup />
     
 </template>
 <script setup>
@@ -51,7 +51,7 @@ import WaiterAssignPopup from './Popup/WaiterAssignPopup.vue'
 import AppliedDiscountPopup from './Popup/AppliedDiscountPopup.vue'
 import SettleSavePopup from './Popup/SettleSavePopup.vue'
 import SplitPaymentPopup from './Popup/SplitPaymentPopup.vue'
-import PartsPaymentPopup from './Popup/PartsPaymentPopup.vue'
+import UpiPaymentPopup from './Popup/UpiPaymentPopup.vue'
 
 const props = defineProps({
     // Note Modal
@@ -88,7 +88,7 @@ const openSplitPopup = () => {
     f7.popup.open(".split-payment-popup");
 }
 
-const openPartsPopup = () => {
-    f7.popup.open(".parts-payment-popup");
+const openUPIPopup = () => {
+    f7.popup.open(".upi-payment-popup");
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
     <div class="card no-margin-top qrcode_generate">
         <div class="row margin-vertical-half align-items-center padding">
-            <div class="table_mangment_heading col-40">
+            <div class="table-management-heading col-40">
                 <h3 class="no-margin">
                     <span class="page_heading">QR Code Generation</span>
                 </h3>
@@ -9,7 +9,7 @@
             <div class="col-60">
                 <div class="row">
                     <div class="col-60">
-                        <div class="list no-hairlines reporting_calander no-margin">
+                        <div class="list no-hairlines reporting-calendar no-margin">
                             <ul>
                                 <li>
                                     <div class="item-content item-input">

@@ -6,31 +6,30 @@
             <hr class="popup_title_divider">
             <div class="toolbar tabbar">
                 <div class="toolbar-inner">
-                    <a href="#split-bill-opt-1" class="tab-link tab-link-active" @click="splitType = 'portion'">
+                    <a href="#portion-form" class="tab-link tab-link-active" @click="splitType = 'portion'">
                         <Icon name="portion" :color="splitType == 'portion' ? '#f33e3e' : '#38373d'"/>
                         <p class="no-margin">Portion Wise</p>
                     </a>
-                    <a href="#split-bill-opt-2" class="tab-link" @click="splitType = 'percentage'">
+                    <a href="#percentage-wise-form" class="tab-link" @click="splitType = 'percentage'">
                         <Icon name="percentage" :color="splitType == 'percentage' ? '#f33e3e' : '#38373d'"/>
                         <p class="no-margin">Percentage Wise</p>
                     </a>
-                    <a href="#split-bill-opt-3" class="tab-link" @click="splitType = 'item'">
+                    <!-- <a href="#item-wise-form" class="tab-link" @click="splitType = 'item'">
                         <Icon name="list" :color="splitType == 'item' ? '#f33e3e' : '#38373d'"/>
                         <p class="no-margin">Item Wise</p>
-                    </a>
+                    </a> -->
                 </div>
             </div>
             <div class="tabs">
-                <div id="split-bill-opt-1" class="page-content tab tab-active">
+                <div id="portion-form" class="page-content tab tab-active">
                     <PortionForm />
                 </div>
-                <div id="split-bill-opt-2" class="page-content tab">
+                <div id="percentage-wise-form" class="page-content tab">
                     <PercentageWiseForm />
                 </div>
-                <div id="split-bill-opt-3" class="page-content tab">
+                <!-- <div id="item-wise-form" class="page-content tab">
                     <ItemWiseForm />
-
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="wave-image-content"><img src="/images/flow.png" style="width:100%"></div>

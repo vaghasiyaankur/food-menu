@@ -1,6 +1,6 @@
 <template>
     <!-- <div class="card-header">
-        <div class="table_mangment_heading">
+        <div class="table-management-heading">
             <h3 class="no-margin">
                 <span class="page_heading">
                     {{ title }}

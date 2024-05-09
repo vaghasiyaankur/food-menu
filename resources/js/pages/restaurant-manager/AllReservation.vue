@@ -18,7 +18,7 @@
                                     </div>
                                 </div>
                                 <div class="col-30">
-                                    <div class="list no-hairlines reporting_calander no-margin">
+                                    <div class="list no-hairlines reporting-calendar no-margin">
                                         <ul>
                                             <li>
                                                 <div class="item-input no-padding-left">

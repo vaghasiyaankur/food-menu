@@ -224,7 +224,7 @@ class CategoryController extends Controller
 
     public function getCategoriesList()
     {
-        $lang_id = SettingHelper::getlanguage();
+        $lang_id = SettingHelper::getLanguage();
         $restaurant_id = SettingHelper::getUserIdUsingQrcode();
         $restaurant_id = $restaurant_id ? $restaurant_id : Auth::user()->restaurant_id;
         // $category = Category::with(['categoryLanguages' => function($q) use ($lang_id){
