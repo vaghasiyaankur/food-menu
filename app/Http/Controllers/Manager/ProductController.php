@@ -333,7 +333,7 @@ class ProductController extends Controller
 
     public function getCategoryProduct($id)
     {
-        $lang_id = SettingHelper::getlanguage();
+        $lang_id = SettingHelper::getLanguage();
         $restaurant_id = SettingHelper::getUserIdUsingQrcode();
         $restaurant_id = $restaurant_id ? $restaurant_id : Auth::user()->restaurant_id;
         $products = Category::with(['subCategory' => function($q) use($restaurant_id){

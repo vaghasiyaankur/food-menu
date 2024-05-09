@@ -14,7 +14,7 @@ class FavoriteController extends Controller
     {
         $wishlist = $req->wishlist != null ? $req->wishlist : [];
 
-        $lang_id = SettingHelper::getlanguage();
+        $lang_id = SettingHelper::getLanguage();
 
         $wishlist = Product::with(['productLanguage' => function($q) use ($lang_id){
             $q->where('language_id',$lang_id);

@@ -9,7 +9,7 @@
                      </h3>
                 </div>
                 <div class="col-40">
-                    <div class="list no-hairlines reporting_calander no-margin">
+                    <div class="list no-hairlines reporting-calendar no-margin">
                         <ul>
                             <li>
                                 <div class="item-content item-input">
@@ -240,10 +240,10 @@ export default {
 .reporting_section{
     margin-top: 70px;
 }
-.reporting_calander ul{
+.reporting-calendar ul{
     background-color: transparent;
 }
-.reporting_calander ul .item-input-wrap input{
+.reporting-calendar ul .item-input-wrap input{
     background-color: #fff;
     border-radius: 8px;
     padding: 12px;

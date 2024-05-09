@@ -68,20 +68,21 @@ const settlementAmount = inject('settlementAmount');
 const settleSavePayment = inject('settleSavePayment');
 const order = inject('oldOrder');
 const totalAmount = inject('totalAmount');
+const blankSubPaymentForm = inject('blankSubPaymentForm');
 
 const emit = defineEmits([
     'open:split-popup', 
-    'open:parts-popup'
+    'open:upi-popup'
 ]);
 
 const paymentTypes = ref([
     { label: 'Cash', value: 'cash'},
     { label: 'Card', value: 'card'},
-    { label: 'Split', value: 'split'},
-    { label: 'Parts', value: 'parts'},
     { label: 'UPI', value: 'upi'},
-    { label: 'Due', value: 'due'},
-    { label: 'Other', value: 'other'}
+    { label: 'Split', value: 'split'},
+    // { label: 'Parts', value: 'parts'},
+    // { label: 'Due', value: 'due'},
+    // { label: 'Other', value: 'other'}
 ]);
 
 const settleSave = () => {
@@ -95,12 +96,13 @@ const settleSave = () => {
 }
 
 const selectPaymentType = (paymentMethod) => {
+    blankSubPaymentForm();
     if(paymentMethod == 'split'){
         f7.popup.close(".settle-save-popup");
         emit('open:split-popup');
-    }else if(paymentMethod == 'parts'){
+    }else if(paymentMethod == 'upi'){
         f7.popup.close(".settle-save-popup");
-        emit('open:parts-popup');
+        emit('open:upi-popup');
     }
 }
 

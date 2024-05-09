@@ -1,7 +1,7 @@
 <template>
     <div class="card no-margin qrcode_generate">
         <div class="row align-items-center padding">
-            <div class="table_mangment_heading col-40">
+            <div class="table-management-heading col-40">
                 <h3 class="no-margin">
                     <span class="page_heading">QR Code Generation</span>
                 </h3>

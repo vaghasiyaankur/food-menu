@@ -48,7 +48,7 @@
             <div class="billing-btns grid grid-cols-3">
                 <button class="button kot-btn active" @click="createKot(table?.id)">KOT</button>
                 <button class="button hold-btn" @click="holdKot(table?.id)">Hold</button>
-                <button class="button ebill-btn" @click="settleBill(table?.id)">Settle & eBill</button>
+                <button class="button e-bill-btn" @click="settleBill(table?.id)">Settle & eBill</button>
             </div>
             <div class="bill-details-extend">
                 <div class="bill-details-extend-inner"></div>
@@ -107,6 +107,7 @@ const holdKot = (tableId) => {
 }
 
 const settleBill = () => {
+    // f7.popup.open(`.split-payment-popup`);
     if (props.oldOrder || props.cartProducts?.length > 0) {
         const message = props.cartProducts?.length > 0 
             ? "Please create KOT for items on hold or remove them from hold." 

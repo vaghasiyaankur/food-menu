@@ -1,7 +1,7 @@
 <template>
     <div class="card no-margin-top">
         <div class="card-header margin-vertical-half">
-            <div class="table_mangment_heading">
+            <div class="table-management-heading">
                 <h3 class="no-margin">
                     <span class="page_heading">Table List</span>
                 </h3>

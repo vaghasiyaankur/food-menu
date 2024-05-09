@@ -669,12 +669,12 @@ textarea {
     box-shadow: 1px 1px 4px 0px #8f716459;
 }
 .billing-btns .hold-btn,
-.billing-btns .ebill-btn {
+.billing-btns .e-bill-btn {
     box-shadow: 0px 1.5px 5px 0px #a6a6a666;
 }
 .billing-btns .kot-btn,
 .billing-btns .hold-btn,
-.billing-btns .ebill-btn {
+.billing-btns .e-bill-btn {
     padding: 12px 42px;
     max-width: 124px;
     width: 100%;
@@ -972,7 +972,7 @@ textarea {
 .add_ingredient_variation_popup .item_edit-data-form .popup_button {
     margin-top: 20px;
 }
-.add_ingredient_variation_popup .item_edit-data-form .popup_button .item_edit-bill-btns {
+.add_ingredient_variation_popup .item_edit-data-form .popup_button .item_edit-bill-btn {
     max-width: 100%;
     display: flex;
     align-items: center;
@@ -982,7 +982,7 @@ textarea {
 .add_ingredient_variation_popup
     .item_edit-data-form
     .popup_button
-    .item_edit-bill-btns
+    .item_edit-bill-btn
     .popup_cancel_item_edit-btn {
     padding: 12px 45px;
     border-radius: 10px;
@@ -992,7 +992,7 @@ textarea {
 .add_ingredient_variation_popup
     .item_edit-data-form
     .popup_button
-    .item_edit-bill-btns
+    .item_edit-bill-btn
     .popup_save-item_edit-btn {
     padding: 12px 54px;
     border-radius: 10px;
@@ -1002,7 +1002,7 @@ textarea {
 .add_ingredient_variation_popup
     .item_edit-data-form
     .popup_button
-    .item_edit-bill-btns
+    .item_edit-bill-btn
     button {
     border: none;
     font-size: 18px !important;
@@ -1013,7 +1013,7 @@ textarea {
 .add_ingredient_variation_popup
     .item_edit-data-form
     .popup_button
-    .item_edit-bill-btns
+    .item_edit-bill-btn
     .popup_cancel_item_edit-btn
     .cancel-item_edit-button {
     background-color: #ffffff;
@@ -1023,7 +1023,7 @@ textarea {
 .add_ingredient_variation_popup
     .item_edit-data-form
     .popup_button
-    .item_edit-bill-btns
+    .item_edit-bill-btn
     .popup_save-item_edit-btn
     .save-item_edit-btn {
     background-color: #f33e3e;

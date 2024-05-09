@@ -61,7 +61,7 @@
             </div>
             <hr class="horizontal-divider no-margin">
             <div class="popup_button">
-                <div class="item_edit-bill-btns">
+                <div class="item_edit-bill-btn">
                     <div class="popup_cancel_item_edit-btn">
                         <button type="button" class="cancel-item_edit-button popup-close">Cancel</button>
                     </div>

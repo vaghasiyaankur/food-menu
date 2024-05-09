@@ -52,6 +52,7 @@ import Language from './Language.vue';
 import LanguageTraslation from './EditTranslations.vue';
 import QrCodeGenerate from './QrCodeGenerate.vue';
 import $ from 'jquery';
+import UpiPaymentSetting from '../../pos/settings/UpiPaymentSetting.vue';
 export default {
     name : 'SettingsTab',
     components: {

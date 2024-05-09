@@ -1,5 +1,5 @@
 <template>
-    <div class="list no-hairlines reporting_calander no-margin">
+    <div class="list no-hairlines reporting-calendar no-margin">
         <ul>
             <li>
                 <div class="item-content item-input">

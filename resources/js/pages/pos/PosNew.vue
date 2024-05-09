@@ -130,11 +130,11 @@ const splitPercentageData = ref({
     percentage1 : '',
     percentage2 : '',
 });
-const splitItemWiseData = ref({
-    selectedItem : {},
-    part1 : {},
-    part2 : {}
+// UPI Payment Popup
+const upiData = ref({
+    selectedItem : ''
 });
+
 // const percentageObj = ref({});
 
 onMounted(() => {
@@ -547,6 +547,11 @@ const getTotalAmount = () => {
 
 }
 
+const blankSubPaymentForm = () => {
+    splitPortionData.value.portion = '';
+    upiData.value.selectedItem = '';
+}
+
 const settleSavePayment = () => {
     
 }
@@ -603,10 +608,15 @@ provide('settleSavePayment', settleSavePayment);
 provide('cartProducts', cartProducts)
 provide('oldOrder', oldOrder)
 
+// Payment Form Function
+provide('blankSubPaymentForm', blankSubPaymentForm)
+
 // Split Payment Popup
 provide('splitType', splitType)
 provide('splitPortionData', splitPortionData)
 provide('splitPercentageData', splitPercentageData)
-provide('splitItemWiseData', splitItemWiseData)
+
+// UPI Payment Popup
+provide('upiData', upiData);
 
 </script>

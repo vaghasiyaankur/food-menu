@@ -31,7 +31,7 @@ class SettingHelper{
         return $setting->language_id;
     }
 
-    public static function getlanguage()
+    public static function getLanguage()
     {
         $langs = Language::whereHas('RestaurantLanguages', function ($query) {
             $query->where('status', 1);

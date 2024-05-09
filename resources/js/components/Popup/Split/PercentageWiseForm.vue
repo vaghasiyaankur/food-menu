@@ -1,23 +1,28 @@
 <template>
-    <h3 class="percentage-split-heading no-margin">Please provide only number</h3>
     <div class="percentage_split_calc">
-        {{ splitPercentageData }}
-        <div class="percentage-input-1" v-for="(splitPer, index) in splitPercentageData" :key="index"> 
-            <label class="percentage_split-text">Percentage Number</label>
-            <div class="percentage_split-input-1">
-                <input type="text" name="enter_percentages" id="enter_percentages"
-                    class="enter_percentages" placeholder="Enter percentage here like 80">
+        <div :class="'percentage-input-value percentage-input-'+(index+1)" v-for="(splitPer, key, index) in splitPercentageData" :key="index"> 
+            <label class="margin-top percentage_split-text">Percentage Number</label>
+            <div class="percentage-split-input-value display-flex">
+                <input type="number" 
+                    :name="'percentages-'+(index+1)" 
+                    :id="'percentages-'+(index+1)"
+                    :class="['percentages-'+(index+1), index >= 2 ? 'percentage-value-more' : '']"
+                    placeholder="Enter percentage"
+                    :value="splitPer"
+                    @input="updatePercentage($event, index)"
+                >
+                <template v-if="index >= 2">
+                    <button 
+                        class="remove-percentage-value display-flex justify-content-center align-items-center"
+                        @click="removePercentage(index)"
+                    >
+                        <Icon name="deleteIcon" />
+                    </button>
+                </template>
             </div>
         </div>
-        <!-- <div class="percentage-input-2">
-            <label class="percentage_split-text">Percentage Number</label>
-            <div class="percentage_split-input-2">
-                <input type="text" name="enter_percentages" id="enter_percentages"
-                    class="enter_percentages" placeholder="Enter percentage here like 20">
-            </div>
-        </div> -->
     </div>
-    <div class="popup_button popup-btns-for-portion-split">
+    <div class="popup_button popup-btn-for-portion-split">
         <div class="add-more-btn">
             <button class="popup-add-more-button" @click="addMorePercentage">Add More</button>
         </div>
@@ -26,7 +31,7 @@
                 <button class="popup-cancel-split-button popup-close">Cancel</button>
             </div>
             <div class="save-split-btn">
-                <button type="button" class="popup-save-split-button">Save</button>
+                <button type="button" class="popup-save-split-button" @click="portionFormSubmit">Save</button>
             </div>
         </div>
     </div>
@@ -36,28 +41,40 @@ import { f7 } from 'framework7-vue';
 import { inject, ref, computed }  from 'vue';
 import Input from '../../Form/Input.vue';
 import { successNotification, errorNotification } from '../../../commonFunction.js'
+import Icon from '../../Icon.vue';
 
 const splitPercentageData = inject('splitPercentageData')
 
-const formattedPortion = computed({
-    get: () => splitPercentageData.value.portion,
-    set: (newValue) => {
-        splitPercentageData.value.portion = newValue; 
-    }
-})
 const portionFormSubmit = () => {
-    // const portionValue = splitPercentageData.value.portion;
-    // if (!portionValue) {
-    //     errorNotification('Please enter a portion value.');
-    // } else if (portionValue < 1) {
-    //     errorNotification('Portion value must be greater than or equal to 1.');
-    // } else {
-    //     f7.popup.close(".split-payment-popup");
-    //     f7.popup.open(".settle-save-popup");
-    // }
+    console.log(splitPercentageData.value);
+    if (Object.values(splitPercentageData.value).some(val => !val)) return errorNotification('Please add a value for all percentages.');
+    const sum = Object.values(splitPercentageData.value).reduce((acc, val) => acc + parseFloat(val || 0), 0);
+    
+    if (Math.abs(sum - 100) > 0.50) return errorNotification('Please write proper percentages. The sum of all percentages must be 100.');
+    f7.popup.close(".split-payment-popup");
+    f7.popup.open(".settle-save-popup");
 }
 
 const addMorePercentage = () => {
+    let index = 1;
+    let newDataKey = `percentage${index}`;
+    while (splitPercentageData.value[newDataKey] !== undefined) {
+        index++;
+        newDataKey = `percentage${index}`;
+    }
+    splitPercentageData.value[newDataKey] = '';
+}
 
+const removePercentage = (index) => {
+    const keys = Object.keys(splitPercentageData.value);
+    const keyToRemove = keys[index];
+    delete splitPercentageData.value[keyToRemove];
+}
+
+const updatePercentage = (event, index) => {
+    const newValue = event.target.value;
+    const keys = Object.keys(splitPercentageData.value);
+    const keyToRemove = keys[index];
+    splitPercentageData.value[keyToRemove] = newValue;
 }
 </script>
