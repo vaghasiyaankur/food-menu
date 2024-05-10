@@ -215,7 +215,7 @@ Route::post('finish-next',[TableController::class, 'finishNext']);
 
 Route::post('cancel-next',[TableController::class, 'cancelNext']);
 
-Route::post('get-remainig-time',[TableController::class, 'getRemainigTime']);
+Route::post('get-remaining-time',[TableController::class, 'getRemainingTime']);
 
 Route::post('change-floor-list',[TableController::class, 'changeFloorList']);
 

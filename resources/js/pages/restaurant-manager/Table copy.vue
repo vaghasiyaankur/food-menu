@@ -1712,7 +1712,7 @@ export default {
         getRemainingTime(id) {
             // f7.popup.open('.popover-table-'+id);
             // '.popover-table-'+order.id
-            axios.post("/api/get-remainig-time", { id: id }).then((res) => {
+            axios.post("/api/get-remaining-time", { id: id }).then((res) => {
                 this.popup_remaining_time = res.data.time;
                 this.popup_remaining_time_over = res.data.time_over;
             });

@@ -24,8 +24,7 @@
     </div>
     <!-- ========= DELETE USER POPUP ========= -->
     <div class="popup removeUserPopup">
-        <RemovePopup :title="'Are you sure delete this user?'" @remove="removeData"
-        />
+        <RemovePopup :title="'Are you sure delete this user?'" @remove="removeData" />
     </div>
 </template>
 <script setup>

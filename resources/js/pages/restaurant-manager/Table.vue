@@ -2,676 +2,158 @@
     <f7-page color="bg-color-white">
         <div class="table_main">
             <!-- ============= TABLE FLOOR SWIPER ============= -->
-            <div class="table_floor_swiper">
-                <div class="row">
-                    <div class="col-100">
-                        <div
-                            data-pagination='{"el":".swiper-pagination"}'
-                            data-navigation="{'el':'.swiper-navigation'}"
-                            data-space-between="10"
-                            data-slides-per-view="4"
-                            class="swiper swiper-init demo-swiper margin-top margin-bottom floor_swiper_inner swiper-navigation"
-                        >
-                            <div class="swiper-wrapper padding-left-half">
-                                <div
-                                    class="swiper-slide"
-                                    :class="{
-                                        active: floor.id == activeFloorId,
-                                    }"
-                                    v-for="floor in floorList"
-                                    :key="floor.id"
-                                    @click="tableListFloorWise(floor.id)"
-                                >
-                                    <span v-if="floor.time_left">
-                                        <img
-                                            src="/images/floor_blinking.gif"
-                                            class="floor_blinking_img"
-                                        />
-                                    </span>
-
-                                    <p
-                                        class="no-margin text-align-center margin-vertical-half swiper_text display-flex"
-                                    >
-                                        {{ floor.name }}
-                                        <span
-                                            class="room_available color-blue"
-                                            >{{ floor.orders_count }}</span
-                                        >
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <Slider :floorList="floorList" :activeFloorId="activeFloorId" @get:floor-value="tableListFloorWise" />
             <div class="tables margin-horizontal" v-if="rowTables.length != 0">
-                <div
-                    class="table_row margin-horizontal padding-top margin-top"
-                    v-for="row in rowTables"
-                    :key="row"
-                >
+                <div class="table_row margin-horizontal padding-top margin-top" v-for="row in rowTables" :key="row" >
                     <!-- <div class="no-padding margin-bottom table-card" :class="[('col-'+table.col)]" v-for="table in row" :key="table.id"> -->
-                    <div
-                        class="no-padding margin-bottom table-card mr-72 -100"
-                        v-for="table in row"
-                        :key="table.id"
-                    >
+                    <div class="no-padding margin-bottom table-card mr-72 -100" v-for="table in row" :key="table.id" >
                         <!-- :style="'min-width: '+table.width+'px'" -->
                         <!--======= TABLE CHAIR ========= -->
                         <div class="row table_top_chair">
-                            <div
-                                class="col"
-                                v-for="index in table.up_table"
-                                :key="index"
-                            >
+                            <div class="col" v-for="index in table.up_table" :key="index">
                                 <div class="table_card_img text-align-center">
-                                    <img
-                                        :src="
-                                            '/images/table/' +
-                                            table.color.color +
-                                            '.png'
-                                        "
-                                        alt="table"
-                                    />
+                                    <img :src="'/images/table/' + table.color.color + '.png'" alt="table" />
                                 </div>
                             </div>
                         </div>
-                        <div
-                            class="card no-margin table_1 equal-height-table drop-target"
-                            :data-id="table.id"
-                            :data-name="table.floor.name"
-                            :data-tnumber="table.table_number"
-                            :style="
-                                'border-left : 10px solid rgb(' +
-                                table.color.rgb +
-                                '); min-width : ' +
-                                table.width +
-                                'px'
-                            "
-                        >
+                        <div class="card no-margin table_1 equal-height-table drop-target" :data-id="table.id" :data-name="table.floor.name" :data-tnumber="table.table_number" :style="'border-left : 10px solid rgb(' +table.color.rgb +'); min-width : ' +table.width +'px'">
                             <div class="card-header no-padding">
                                 <div class="row header_detail">
                                     <div class="table-number padding-half">
-                                        <p class="no-margin table__text">
-                                            Table No.
-                                        </p>
-                                        <p
-                                            class="text-align-center no-margin count__text"
-                                        >
-                                            {{ table.table_number }}
-                                        </p>
+                                        <p class="no-margin table__text">Table No.</p>
+                                        <p class="text-align-center no-margin count__text">{{ table.table_number }} </p>
                                     </div>
-                                    <div
-                                        class="table-capacity text-align-right padding-half"
-                                    >
-                                        <p class="no-margin table__text">
-                                            Capacity
-                                        </p>
-                                        <p
-                                            class="text-align-center no-margin count__text"
-                                        >
-                                            {{ table.capacity_of_person }}
-                                        </p>
+                                    <div class="table-capacity text-align-right padding-half">
+                                        <p class="no-margin table__text">Capacity</p>
+                                        <p class="text-align-center no-margin count__text">{{ table.capacity_of_person }}</p>
                                     </div>
                                 </div>
                             </div>
-                            <div
-                                class="card-content padding-top padding-horizontal-half table1__details"
-                            >
+                            <div class="card-content padding-top padding-horizontal-half table1__details" >
                                 <!-- :style="'max-width : '+(table.width - 20 )+'px'" -->
                                 <div class="table_reservation margin-bottom">
-                                    <!-- <h3 class="no-margin-top">Reserved</h3> -->
                                     <div class="display-flex h-100">
-                                        <!-- <draggable :scroll-sensitivity="250"  :force-fallback="true" class="dragArea list-group w-full" :class="'dragger'+table.id" :list="order[index]" @start="startDrag(order.id, table.id)" @touchend.prevent="onDrop" v-for="(order,index) in table.orders" :key="order.id"> -->
-                                        <div
-                                            class="table_reservation_info"
-                                            :class="'test' + order.id"
-                                            v-for="order in table.orders"
-                                            :key="order.id"
-                                        >
-                                            <div
-                                                :class="{
-                                                    ongoing_blinking:
-                                                        order.is_time_left,
-                                                }"
-                                            >
+                                        <div class="table_reservation_info" :class="'test' + order.id" v-for="order in table.orders" :key="order.id" >
+                                            <div :class="{ongoing_blinking: order.is_time_left,}">
                                                 <!-- :data-popover="'.popover-table-'+order.id" -->
                                                 <!-- popover-open -->
                                                 <!-- :data-popover="'.popover-table-'+order.id" -->
-                                                <div
-                                                    class="person-info popover-open"
-                                                    :class="[
-                                                        'popover-click-' +
-                                                            order.id,
-                                                        {
-                                                            'person-info_move':
-                                                                order.is_order_moved,
-                                                            'ongoing_popover ':
-                                                                order.is_ongoing_order &&
-                                                                !order.is_order_moved,
-                                                            neworder_add:
-                                                                order.is_new_order_timing,
-                                                        },
-                                                    ]"
-                                                    @click="
-                                                        getRemainingTime(
-                                                            order.id
-                                                        );
-                                                        orderPerson =
-                                                            order.person;
-                                                        removeBackdrop();
-                                                        orderId = order.id;
-                                                    "
-                                                    :data-popover="
-                                                        '.popover-table-' +
-                                                        order.id
-                                                    "
-                                                >
-                                                    <div
-                                                        class="neworder_tooltip order_tooltip"
-                                                        v-if="
-                                                            order.is_new_order_timing
-                                                        "
-                                                    >
-                                                        <div
-                                                            class="tooltip_text"
-                                                        >
-                                                            <p
-                                                                class="no-margin"
-                                                            >
-                                                                New Reservation
-                                                            </p>
-                                                            <p
-                                                                class="no-margin"
-                                                            >
-                                                                {{
-                                                                    order.new_order_timing_text
-                                                                }}
-                                                            </p>
+                                                <div class="person-info popover-open" :class="[ 'popover-click-' + order.id, { 'person-info_move': order.is_order_moved, 'ongoing_popover ': order.is_ongoing_order && !order.is_order_moved, neworder_add: order.is_new_order_timing, }, ]" @click=" getRemainingTime(order.id); orderPerson = order.person; removeBackdrop(); orderId = order.id; " :data-popover="'.popover-table-' + order.id" >
+                                                    <div class="neworder_tooltip order_tooltip" v-if="order.is_new_order_timing" >
+                                                        <div class="tooltip_text">
+                                                            <p class="no-margin">New Reservation</p>
+                                                            <p class="no-margin"> {{ order.new_order_timing_text }} </p>
                                                         </div>
                                                     </div>
-                                                    <div
-                                                        class="order_tooltip finish_order_tooltip"
-                                                        v-if="
-                                                            order.is_time_left
-                                                        "
-                                                    >
-                                                        <div
-                                                            class="tooltip_text"
-                                                        >
-                                                            <p
-                                                                class="no-margin"
-                                                            >
-                                                                {{
-                                                                    order.time_left
-                                                                }}
-                                                            </p>
+                                                    <div class="order_tooltip finish_order_tooltip" v-if="order.is_time_left">
+                                                        <div class="tooltip_text">
+                                                            <p class="no-margin">{{ order.time_left }}</p>
                                                         </div>
                                                     </div>
 
-                                                    <div
-                                                        class="person_info_name border__bottom padding-bottom-half margin-bottom-half"
-                                                    >
-                                                        <p
-                                                            class="no-margin text-align-center"
-                                                        >
-                                                            By {{ order.role }}
-                                                        </p>
+                                                    <div class="person_info_name border__bottom padding-bottom-half margin-bottom-half" >
+                                                        <p class="no-margin text-align-center">By {{ order.role }}</p>
                                                     </div>
-                                                    <div
-                                                        class="text-align-center person"
-                                                    >
-                                                        <i
-                                                            class="f7-icons size-22"
-                                                            >person</i
-                                                        >
-                                                        <span>
-                                                            &nbsp;
-                                                            {{ order.person }}
-                                                        </span>
-                                                        <span
-                                                            class="waiting-time margin-top-half text-align-center"
-                                                        >
+                                                    <div class="text-align-center person">
+                                                        <i class="f7-icons size-22">person</i>
+                                                        <span> &nbsp; {{ order.person }} </span>
+                                                        <span class="waiting-time margin-top-half text-align-center">
                                                             <!-- <i class="f7-icons size-22">clock_fill</i> -->
-                                                            <span>{{
-                                                                order.reservation_time
-                                                            }}</span>
+                                                            <span>{{ order.reservation_time }}</span>
                                                         </span>
                                                     </div>
-                                                    <div
-                                                        class="popover padding-half"
-                                                        v-if="
-                                                            !order.is_order_moved
-                                                        "
-                                                        :class="
-                                                            'popover-table-' +
-                                                            order.id
-                                                        "
-                                                    >
-                                                        <div
-                                                            class="user-info popover-inner"
-                                                        >
-                                                            <div
-                                                                class="display-flex padding-left-half padding-top-half align-items-center"
-                                                            >
-                                                                <i
-                                                                    class="f7-icons size-18 text-color-black padding-right-half margin-right-half"
-                                                                    >person</i
-                                                                >
-                                                                <span
-                                                                    class="text-color-black"
-                                                                    >{{
-                                                                        order
-                                                                            .name ? order
-                                                                            .name : 'Anonymous'
-                                                                    }}</span
-                                                                >
+                                                    <div class="popover padding-half" v-if="!order.is_order_moved" :class="'popover-table-' + order.id" >
+                                                        <div class="user-info popover-inner">
+                                                            <div class="display-flex padding-left-half padding-top-half align-items-center" >
+                                                                <i class="f7-icons size-18 text-color-black padding-right-half margin-right-half" >person</i >
+                                                                <span class="text-color-black">{{ order.name ? order.name : "Anonymous" }}</span>
                                                             </div>
-                                                            <div
-                                                                class="display-flex padding-left-half padding-top align-items-center"
-                                                            >
-                                                                <i
-                                                                    class="f7-icons size-18 text-color-black padding-right-half margin-right-half"
-                                                                    >clock</i
-                                                                >
-                                                                <span
-                                                                    class="text-color-black"
-                                                                    >{{
-                                                                        order.reservation_time_12_format
-                                                                    }}</span
-                                                                >
+                                                            <div class="display-flex padding-left-half padding-top align-items-center" >
+                                                                <i class="f7-icons size-18 text-color-black padding-right-half margin-right-half" >clock</i>
+                                                                <span class="text-color-black">{{ order.reservation_time_12_format }}</span>
                                                             </div>
-                                                            <div
-                                                                class="display-flex padding-left-half padding-top align-items-center"
-                                                            >
-                                                                <i
-                                                                    class="f7-icons size-18 text-color-black padding-right-half margin-right-half"
-                                                                    >timer</i
-                                                                >
-                                                                <span
-                                                                    class="text-color-black"
-                                                                    v-if="
-                                                                        popupRemainingTime ==
-                                                                        0
-                                                                    "
-                                                                    >Ongoing</span
-                                                                >
-                                                                <vue-countdown
-                                                                    v-else-if="
-                                                                        popupRemainingTimeOver
-                                                                    "
-                                                                    :time="
-                                                                        popupRemainingTime
-                                                                    "
-                                                                    v-slot="{
-                                                                        hours,
-                                                                        minutes,
-                                                                        seconds,
-                                                                    }"
-                                                                >
-                                                                    <p
-                                                                        class="no-margin font-30"
-                                                                        v-if="
-                                                                            String(
-                                                                                hours
-                                                                            ).padStart(
-                                                                                2,
-                                                                                '0'
-                                                                            ) !=
-                                                                            0
-                                                                        "
-                                                                    >
-                                                                        Time
-                                                                        Over
-                                                                        <span
-                                                                            class="time-over"
-                                                                            >{{
-                                                                                String(
-                                                                                    hours
-                                                                                ).padStart(
-                                                                                    2,
-                                                                                    "0"
-                                                                                ) +
-                                                                                " hour"
-                                                                            }}</span
-                                                                        >
+                                                            <div class="display-flex padding-left-half padding-top align-items-center" >
+                                                                <i class="f7-icons size-18 text-color-black padding-right-half margin-right-half" >timer</i>
+                                                                <span class="text-color-black" v-if="popupRemainingTime == 0" >Ongoing</span>
+                                                                <vue-countdown v-else-if="popupRemainingTimeOver" :time="popupRemainingTime" v-slot="{ hours, minutes, seconds }" >
+                                                                    <p class="no-margin font-30" v-if="String(hours).padStart(2, '0') != 0" >
+                                                                        Time Over
+                                                                        <span class="time-over">{{ String(hours).padStart(2, "0") + " hour" }}</span>
                                                                     </p>
-                                                                    <p
-                                                                        class="no-margin font-30"
-                                                                        v-else-if="
-                                                                            String(
-                                                                                minutes
-                                                                            ).padStart(
-                                                                                2,
-                                                                                '0'
-                                                                            ) !=
-                                                                            0
-                                                                        "
-                                                                    >
-                                                                        Time
-                                                                        Over
-                                                                        <span
-                                                                            class="time-over"
-                                                                            >{{
-                                                                                String(
-                                                                                    minutes
-                                                                                ).padStart(
-                                                                                    2,
-                                                                                    "0"
-                                                                                ) +
-                                                                                " mins"
-                                                                            }}</span
-                                                                        >
+                                                                    <p class="no-margin font-30" v-else-if="String(minutes).padStart(2, '0') != 0" >
+                                                                        Time Over
+                                                                        <span class="time-over">{{ String(minutes).padStart(2, "0") + " mins" }}</span>
                                                                     </p>
-                                                                    <p
-                                                                        class="no-margin font-30"
-                                                                        v-else
-                                                                    >
-                                                                        Time
-                                                                        Over
-                                                                        <span
-                                                                            class="time-over"
-                                                                            >{{
-                                                                                String(
-                                                                                    seconds
-                                                                                ).padStart(
-                                                                                    2,
-                                                                                    "0"
-                                                                                ) +
-                                                                                " second"
-                                                                            }}</span
-                                                                        >
+                                                                    <p class="no-margin font-30" v-else>
+                                                                        Time Over
+                                                                        <span class="time-over">{{ String(seconds).padStart(2, "0") + " second" }}</span>
                                                                     </p>
                                                                 </vue-countdown>
-                                                                <vue-countdown
-                                                                    v-else
-                                                                    :time="
-                                                                        popupRemainingTime
-                                                                    "
-                                                                    v-slot="{
-                                                                        hours,
-                                                                        minutes,
-                                                                        seconds,
-                                                                    }"
-                                                                >
-                                                                    <p
-                                                                        class="no-margin font-30"
-                                                                        v-if="
-                                                                            String(
-                                                                                hours
-                                                                            ).padStart(
-                                                                                2,
-                                                                                '0'
-                                                                            ) !=
-                                                                            0
-                                                                        "
-                                                                    >
-                                                                        {{
-                                                                            String(
-                                                                                hours
-                                                                            ).padStart(
-                                                                                2,
-                                                                                "0"
-                                                                            ) +
-                                                                            " hr & " +
-                                                                            String(
-                                                                                minutes
-                                                                            ).padStart(
-                                                                                2,
-                                                                                "0"
-                                                                            ) +
-                                                                            " M"
-                                                                        }}
+                                                                <vue-countdown v-else :time="popupRemainingTime" v-slot="{ hours, minutes, seconds }" >
+                                                                    <p class="no-margin font-30" v-if="String(hours).padStart(2, '0') != 0" >
+                                                                        {{ String(hours).padStart(2, "0") + " hr & " + String(minutes).padStart(2, "0") + " M" }}
                                                                     </p>
-                                                                    <p
-                                                                        class="no-margin font-30"
-                                                                        v-else-if="
-                                                                            String(
-                                                                                minutes
-                                                                            ).padStart(
-                                                                                2,
-                                                                                '0'
-                                                                            ) !=
-                                                                            0
-                                                                        "
-                                                                    >
-                                                                        {{
-                                                                            String(
-                                                                                minutes
-                                                                            ).padStart(
-                                                                                2,
-                                                                                "0"
-                                                                            ) +
-                                                                            " mins"
-                                                                        }}
+                                                                    <p class="no-margin font-30" v-else-if="String(minutes).padStart(2, '0') != 0" >
+                                                                        {{ String(minutes).padStart(2, "0") + " mins" }}
                                                                     </p>
-                                                                    <p
-                                                                        class="no-margin font-30"
-                                                                        v-else
-                                                                    >
-                                                                        {{
-                                                                            String(
-                                                                                seconds
-                                                                            ).padStart(
-                                                                                2,
-                                                                                "0"
-                                                                            ) +
-                                                                            " secs"
-                                                                        }}
+                                                                    <p class="no-margin font-30" v-else>
+                                                                        {{ String(seconds).padStart(2, "0") + " secs" }}
                                                                     </p>
                                                                 </vue-countdown>
                                                             </div>
-                                                            <div
-                                                                class="display-flex padding-left-half padding-top align-items-center"
-                                                            >
-                                                                <i
-                                                                    class="f7-icons size-18 text-color-black padding-right-half margin-right-half"
-                                                                    >phone</i
-                                                                >
-                                                                <span
-                                                                    class="text-color-black"
-                                                                    >{{
-                                                                        order
-                                                                            .phone? order
-                                                                            .phone : '--'
-                                                                    }}</span
-                                                                >
+                                                            <div class="display-flex padding-left-half padding-top align-items-center" >
+                                                                <i class="f7-icons size-18 text-color-black padding-right-half margin-right-half" >phone</i>
+                                                                <span class="text-color-black">{{ order.phone ? order.phone : "--" }}</span>
                                                             </div>
-                                                            <div
-                                                                class="display-flex padding-left-half padding-vertical align-items-center"
-                                                            >
-                                                                <i
-                                                                    class="f7-icons size-18 text-color-black padding-right-half margin-right-half"
-                                                                    >person_2</i
-                                                                >
-                                                                <span
-                                                                    class="text-color-black"
-                                                                    >{{
-                                                                        order.person
-                                                                    }}
-                                                                    family
-                                                                    member</span
-                                                                >
+                                                            <div class="display-flex padding-left-half padding-vertical align-items-center" >
+                                                                <i class="f7-icons size-18 text-color-black padding-right-half margin-right-half" >person_2</i>
+                                                                <span class="text-color-black">{{ order.person }} family member</span>
                                                             </div>
-                                                            <div
-                                                                class="add_minutes"
-                                                                v-if="
-                                                                    popupRemainingTime ==
-                                                                    0
-                                                                "
-                                                            >
-                                                                <div
-                                                                    class="card-footer no-margin no-padding justify-content-center"
-                                                                >
+                                                            <div class="add_minutes" v-if="popupRemainingTime == 0">
+                                                                <div class="card-footer no-margin no-padding justify-content-center" >
                                                                     <h3>
-                                                                        <a
-                                                                            class="text-color-red popup-open"
-                                                                            data-popup=".addMinutesPopup"
-                                                                            @click="
-                                                                                addMinutesToClosePopOver()
-                                                                            "
-                                                                        >
-                                                                            Add
-                                                                            Minutes
+                                                                        <a class="text-color-red popup-open" data-popup=".addMinutesPopup" @click="addMinutesToClosePopOver()" >
+                                                                        Add Minutes
                                                                         </a>
                                                                     </h3>
                                                                 </div>
                                                             </div>
 
-                                                            <div
-                                                                class="finish_popup"
-                                                                v-if="
-                                                                    order.start_time &&
-                                                                    order.finished ==
-                                                                        0
-                                                                "
-                                                            >
-                                                                <div
-                                                                    class="card-footer no-margin no-padding justify-content-center"
-                                                                >
+                                                            <div class="finish_popup" v-if="order.start_time && order.finished == 0" >
+                                                                <div class="card-footer no-margin no-padding justify-content-center" >
                                                                     <h3>
-                                                                        <a
-                                                                            href="javascript:;"
-                                                                            class="text-color-red"
-                                                                            @click="
-                                                                                cancelNext(
-                                                                                    order.id
-                                                                                )
-                                                                            "
-                                                                        >
-                                                                            Cancle
-                                                                            &
-                                                                            Next
-                                                                        </a>
+                                                                        <a href="javascript:;" class="text-color-red" @click="cancelNext(order.id)" > Cancle & Next </a>
                                                                     </h3>
                                                                 </div>
                                                             </div>
-                                                            <div
-                                                                class="finish_popup"
-                                                                v-if="
-                                                                    order.start_time &&
-                                                                    order.finished ==
-                                                                        0
-                                                                "
-                                                            >
-                                                                <div
-                                                                    class="card-footer no-margin no-padding justify-content-center"
-                                                                >
+                                                            <div class="finish_popup" v-if="order.start_time && order.finished == 0" >
+                                                                <div class="card-footer no-margin no-padding justify-content-center">
                                                                     <h3>
-                                                                        <a
-                                                                            href="javascript:;"
-                                                                            class="text-color-red"
-                                                                            @click="
-                                                                                finishNext(
-                                                                                    order.id
-                                                                                )
-                                                                            "
-                                                                        >
-                                                                            Finish
-                                                                            &
-                                                                            Next
-                                                                        </a>
+                                                                        <a href="javascript:;" class="text-color-red" @click="finishNext(order.id)" > Finish & Next </a>
                                                                     </h3>
                                                                 </div>
                                                             </div>
-                                                            <div
-                                                                class="floor__list"
-                                                                :class="
-                                                                    order.start_time &&
-                                                                    order.finished ==
-                                                                        0
-                                                                        ? 'display-none'
-                                                                        : ''
-                                                                "
-                                                            >
-                                                                <div
-                                                                    class="card-footer no-margin no-padding justify-content-center hassubs"
-                                                                    @click="
-                                                                        openFloorList(
-                                                                            order.id
-                                                                        )
-                                                                    "
-                                                                >
-                                                                    <h3
-                                                                        class="text-color-red"
-                                                                    >
-                                                                        Change
-                                                                        Floor
-                                                                    </h3>
+                                                            <div class="floor__list" :class=" order.start_time && order.finished == 0 ? 'display-none' : '' " >
+                                                                <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="openFloorList(order.id)" >
+                                                                    <h3 class="text-color-red">Change Floor</h3>
                                                                 </div>
                                                                 <!-- ============FLOOR DROP DOWN  ============= -->
-                                                                <div
-                                                                    class="list simple-list floor-drop-down"
-                                                                    :class="
-                                                                        'f_f' +
-                                                                        order.id
-                                                                    "
-                                                                >
+                                                                <div class="list simple-list floor-drop-down" :class="'f_f' + order.id" >
                                                                     <ul>
-                                                                        <li
-                                                                            v-for="floor in availableFloorList"
-                                                                            :key="
-                                                                                floor.id
-                                                                            "
-                                                                            @click="
-                                                                                changeFloor(
-                                                                                    order.id,
-                                                                                    floor.id,
-                                                                                    floor.name
-                                                                                )
-                                                                            "
-                                                                            :class="
-                                                                                table
-                                                                                    .floor
-                                                                                    .id ==
-                                                                                floor.id
-                                                                                    ? 'display-none'
-                                                                                    : ''
-                                                                            "
-                                                                        >
-                                                                            <div
-                                                                                class="floor_number display-flex align-items-center justify_content_between w-100"
-                                                                            >
-                                                                                <div
-                                                                                    class="floor_name"
-                                                                                >
-                                                                                    <span
-                                                                                        >{{
-                                                                                            floor.name
-                                                                                        }}
-                                                                                    </span>
+                                                                        <li v-for="floor in availableFloorList" :key="floor.id" @click="changeFloor(order.id, floor.id, floor.name)" :class=" table.floor.id == floor.id ? 'display-none' : '' " >
+                                                                            <div class="floor_number display-flex align-items-center justify_content_between w-100" >
+                                                                                <div class="floor_name">
+                                                                                    <span>{{ floor.name }} </span>
                                                                                 </div>
-                                                                                <div
-                                                                                    class="floor_room_available"
-                                                                                >
-                                                                                    <span
-                                                                                        class="room_available"
-                                                                                        >{{
-                                                                                            floor.orders_count
-                                                                                        }}</span
-                                                                                    >
+                                                                                <div class="floor_room_available">
+                                                                                    <span class="room_available">{{ floor.orders_count }}</span>
                                                                                 </div>
                                                                             </div>
                                                                         </li>
-                                                                        <li
-                                                                            class="no-available-list"
-                                                                            v-if="
-                                                                                availableFloorList.length ==
-                                                                                0
-                                                                            "
-                                                                        >
-                                                                            <div
-                                                                                class="floor_number display-flex align-items-center justify_content_between w-100 no-cap"
-                                                                            >
-                                                                                <div
-                                                                                    class="floor_name"
-                                                                                >
-                                                                                    <span
-                                                                                        >Not
-                                                                                        above
-                                                                                        capacity
-                                                                                        floor</span
-                                                                                    >
+                                                                        <li class="no-available-list" v-if="availableFloorList.length == 0" >
+                                                                            <div class="floor_number display-flex align-items-center justify_content_between w-100 no-cap" >
+                                                                                <div class="floor_name">
+                                                                                    <span>Not above capacity floor</span>
                                                                                 </div>
                                                                             </div>
                                                                         </li>
@@ -679,107 +161,25 @@
                                                                 </div>
                                                                 <!-- ============FLOOR DROP DOWN END ============= -->
                                                             </div>
-                                                            <div
-                                                                class="table__list"
-                                                                :class="
-                                                                    order.start_time &&
-                                                                    order.finished ==
-                                                                        0
-                                                                        ? 'display-none'
-                                                                        : ''
-                                                                "
-                                                            >
-                                                                <div
-                                                                    class="card-footer no-margin no-padding justify-content-center hassubs"
-                                                                    @click="
-                                                                        openTableList(
-                                                                            order
-                                                                        )
-                                                                    "
-                                                                >
-                                                                    <h3
-                                                                        class="text-color-red"
-                                                                    >
-                                                                        Change
-                                                                        Table
-                                                                    </h3>
+                                                            <div class="table__list" :class=" order.start_time && order.finished == 0 ? 'display-none' : '' ">
+                                                                <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="openTableList(order)" >
+                                                                    <h3 class="text-color-red">Change Table</h3>
                                                                 </div>
                                                                 <!-- ============FLOOR DROP DOWN  ============= -->
-                                                                <div
-                                                                    class="list simple-list table-drop-down"
-                                                                    :class="
-                                                                        't_f' +
-                                                                        order.id
-                                                                    "
-                                                                >
+                                                                <div class="list simple-list table-drop-down" :class="'t_f' + order.id" >
                                                                     <ul>
-                                                                        <li
-                                                                            v-for="changetable in changeTableList"
-                                                                            :key="
-                                                                                changetable.id
-                                                                            "
-                                                                            :class="
-                                                                                changetable.id ==
-                                                                                    table.id ||
-                                                                                changetable.capacity_of_person <
-                                                                                    orderPerson
-                                                                                    ? 'display-none'
-                                                                                    : ''
-                                                                            "
-                                                                            @click="
-                                                                                changeTable(
-                                                                                    order.id,
-                                                                                    changetable.id,
-                                                                                    table
-                                                                                        .floor
-                                                                                        .name
-                                                                                )
-                                                                            "
-                                                                        >
-                                                                            <div
-                                                                                class="floor_number display-flex align-items-center justify_content_between w-100"
-                                                                            >
-                                                                                <div
-                                                                                    class="floor_name"
-                                                                                >
-                                                                                    <span
-                                                                                        >Table
-                                                                                        No
-                                                                                        :
-                                                                                        {{
-                                                                                            changetable.table_number
-                                                                                        }}</span
-                                                                                    >
+                                                                        <li v-for="changetable in changeTableList" :key="changetable.id" :class="changetable.id == table.id || changetable.capacity_of_person < orderPerson ? 'display-none' : '' " @click="changeTable( order.id, changetable.id, table.floor.name ) " >
+                                                                            <div class="floor_number display-flex align-items-center justify_content_between w-100" >
+                                                                                <div class="floor_name">
+                                                                                    <span>Table No : {{ changetable.table_number }}</span>
                                                                                 </div>
-                                                                                <!-- <div class="floor_room_available">
-                                                                                    <span class="room_available">20</span>
-                                                                                </div> -->
                                                                             </div>
                                                                         </li>
-                                                                        <li
-                                                                            class="no-available-list"
-                                                                            v-if="
-                                                                                noTableListShow &&
-                                                                                maxNumberTableId ==
-                                                                                    table.id
-                                                                            "
-                                                                        >
-                                                                            <div
-                                                                                class="floor_number display-flex align-items-center justify_content_between w-100 no-cap"
-                                                                            >
-                                                                                <div
-                                                                                    class="floor_name"
-                                                                                >
-                                                                                    <span
-                                                                                        >Not
-                                                                                        above
-                                                                                        capacity
-                                                                                        table</span
-                                                                                    >
+                                                                        <li class="no-available-list" v-if="noTableListShow && maxNumberTableId == table.id " >
+                                                                            <div class="floor_number display-flex align-items-center justify_content_between w-100 no-cap" >
+                                                                                <div class="floor_name">
+                                                                                    <span>Not above capacity table</span>
                                                                                 </div>
-                                                                                <!-- <div class="floor_room_available">
-                                                                                    <span class="room_available">20</span>
-                                                                                </div> -->
                                                                             </div>
                                                                         </li>
                                                                     </ul>
@@ -788,29 +188,10 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div
-                                                        v-else
-                                                        class="popover popover-move padding"
-                                                        :class="
-                                                            'popover-table-' +
-                                                            order.id
-                                                        "
-                                                    >
-                                                        <div
-                                                            class="user-info popover-inner text-align-center"
-                                                        >
-                                                            <p
-                                                                class="text-color-white no-margin"
-                                                            >
-                                                                Moved
-                                                            </p>
-                                                            <p
-                                                                class="text-color-white no-margin"
-                                                            >
-                                                                {{
-                                                                    order.order_moved_text
-                                                                }}
-                                                            </p>
+                                                    <div v-else class="popover popover-move padding" :class="'popover-table-' + order.id">
+                                                        <div class="user-info popover-inner text-align-center">
+                                                            <p class="text-color-white no-margin">Moved</p>
+                                                            <p class="text-color-white no-margin">{{ order.order_moved_text }}</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -822,80 +203,35 @@
                         </div>
                         <!--======= TABLE CHAIR ========= -->
                         <div class="row table_bottom_chair">
-                            <div
-                                class="col"
-                                v-for="index in table.down_table"
-                                :key="index"
-                            >
+                            <div class="col" v-for="index in table.down_table" :key="index">
                                 <div class="table_card_img text-align-center">
-                                    <img
-                                        :src="
-                                            '/images/table/' +
-                                            table.color.color +
-                                            '.png'
-                                        "
-                                        alt="table"
-                                        style="transform: rotate(180deg)"
-                                    />
+                                    <img :src="'/images/table/' + table.color.color + '.png'" alt="table" style="transform: rotate(180deg)" />
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="extra-div"></div> -->
+                <!-- <div class="extra-div"></div> -->
                 </div>
             </div>
-            <!-- <div v-else>
+            <div v-else>
                 <div class="no_order">
-                    <NoValueFound />
-                    <div class="no_order_text text-align-center">
-                        <p class="no-margin">Empty Table List</p>
-                    </div>
+                    <NoValueFound title="Empty Table List" />
                 </div>
-            </div> -->
+            </div>
         </div>
         <!-- ======== ADD MINUTES POPUP ======= -->
-        <div
-            id="addMinutesPopup"
-            class="popup addMinutesPopup"
-            style="position: fixed; display: block; border-radius: 15px"
-        >
+        <div id="addMinutesPopup" class="popup addMinutesPopup" style="position: fixed; display: block; border-radius: 15px" >
             <div class="text-align-center padding popup_title">Change Time</div>
             <div class="padding-horizontal">
                 <div class="addminutes-form padding-horizontal padding-top">
                     <label class="add_minutes_text">Add Minutes</label>
-                    <div
-                        class="minutes_input display-flex align-items-center margin-top"
-                    >
-                        <input
-                            type="number"
-                            v-model="minutes"
-                            class="w-100 add-minutes-input padding-horizontal-half"
-                            name=""
-                            id=""
-                            @keypress="checkNumberValidate"
-                        />
+                    <div class="minutes_input display-flex align-items-center margin-top">
+                        <input type="number" v-model="minutes" class="w-100 add-minutes-input padding-horizontal-half" name="" id="" @keypress="checkNumberValidate" />
                         <div class="minutes_text">Min</div>
                     </div>
-                    <div
-                        class="margin-top no-margin-bottom display-flex justify-content-center padding-top popup_button"
-                    >
-                        <button
-                            type="button"
-                            class="button button-raised text-color-black bg-color-white button-large popup-close margin-right popup-button"
-                        >
-                            Cancel
-                        </button>
-                        <button
-                            type="button"
-                            class="button button-raised button-large popup-button"
-                            style="
-                                background-color: rgb(243, 62, 62);
-                                color: rgb(255, 255, 255);
-                            "
-                            @click="addMinutes()"
-                        >
-                            Add Minutes
-                        </button>
+                    <div class="margin-top no-margin-bottom display-flex justify-content-center padding-top popup_button" >
+                        <button type="button" class="button button-raised text-color-black bg-color-white button-large popup-close margin-right popup-button" > Cancel </button>
+                        <button type="button" class="button button-raised button-large popup-button" style="background-color: rgb(243, 62, 62); color: rgb(255, 255, 255)" @click="addMinutes()" > Add Minutes </button>
                     </div>
                 </div>
             </div>
@@ -913,16 +249,10 @@ import $ from "jquery";
 import axios from "axios";
 import VueCountdown from "@chenfengyuan/vue-countdown";
 import NoValueFound from "../../components/NoValueFound.vue";
+import Slider from "../../components/Table/Slider.vue";
 import Pusher from "pusher-js";
 import moment from "moment";
-import {
-    ref,
-    computed,
-    onMounted,
-    onUpdated,
-    onDeactivated,
-    inject,
-} from "vue";
+import { ref, computed, onMounted, onUpdated, onDeactivated, inject } from "vue";
 
 const rowTables = ref([]);
 const dragOrderId = ref("");
@@ -988,12 +318,9 @@ onMounted(() => {
         tableListFloorWise(activeFloorId.value);
     });
 
-    Echo.channel("reservation-" + userId.value).listen(
-        "NewReservation",
-        (e) => {
-            tableListFloorWise(activeFloorId.value);
-        }
-    );
+    Echo.channel("reservation-" + userId.value).listen("NewReservation", (e) => {
+        tableListFloorWise(activeFloorId.value);
+    });
 });
 
 onUpdated(() => {
@@ -1015,7 +342,7 @@ const equal_height = () => {
     const targetDiv = document.querySelectorAll(".equal-height-table");
     targetDiv.forEach((node) => {
         if (node.clientHeight > highestBox) {
-            highestBox = node.clientHeight;
+        highestBox = node.clientHeight;
         }
     });
     targetDiv.forEach((node) => {
@@ -1071,10 +398,7 @@ const openTableList = (order) => {
         noTableListShow.value = false;
     }
     let person = order.person;
-    if (
-        parseInt(person) % 2 != 0 &&
-        order.table_id == maxNumberTableData.value.id
-    ) {
+    if (parseInt(person) % 2 != 0 && order.table_id == maxNumberTableData.value.id) {
         person = parseInt(person) + 1;
     }
     if (
@@ -1112,19 +436,17 @@ const timingCountOrder = (
         duration = moment.duration(duration - interval, "milliseconds");
 
         if (duration.minutes() === 3) {
-            tableListFloorWise(activeFloorId.value);
+        tableListFloorWise(activeFloorId.value);
         }
 
         if (duration.minutes() <= 0) {
-            rowTables.value[rowIndex][tableIndex].orders[orderIndex].time_left =
-                "Time over";
+        rowTables.value[rowIndex][tableIndex].orders[orderIndex].time_left = "Time over";
         } else if (duration.minutes() <= 3) {
-            rowTables.value[rowIndex][tableIndex].orders[
-                orderIndex
-            ].time_left = `${duration.minutes()} Min Left`;
+        rowTables.value[rowIndex][tableIndex].orders[
+            orderIndex
+        ].time_left = `${duration.minutes()} Min Left`;
         } else {
-            rowTables.value[rowIndex][tableIndex].orders[orderIndex].time_left =
-                "Time over";
+        rowTables.value[rowIndex][tableIndex].orders[orderIndex].time_left = "Time over";
         }
     };
 
@@ -1137,28 +459,25 @@ const timingCountOrder = (
 const secondIncrement = (second, orderIndex, tableIndex, rowIndex) => {
     const intervalId = setInterval(() => {
         if (second < 60 * parseFloat(highlight_time.value)) {
-            second++;
-            const order =
-                rowTables.value[rowIndex]?.[tableIndex]?.orders?.[orderIndex];
-            if (order) {
-                order.order_moved = second;
+        second++;
+        const order = rowTables.value[rowIndex]?.[tableIndex]?.orders?.[orderIndex];
+        if (order) {
+            order.order_moved = second;
 
-                if (second > 60) {
-                    const minutes = parseInt(Math.floor(second / 60), 10);
-                    const extraSeconds = second % 60;
-                    order.order_moved_text = `${
-                        minutes < 10 ? "0" + minutes : minutes
-                    } minute ${
-                        extraSeconds < 10 ? "0" + extraSeconds : extraSeconds
-                    } second ago`;
-                } else {
-                    order.order_moved_text = second + " seconds ago";
-                }
+            if (second > 60) {
+            const minutes = parseInt(Math.floor(second / 60), 10);
+            const extraSeconds = second % 60;
+            order.order_moved_text = `${minutes < 10 ? "0" + minutes : minutes} minute ${
+                extraSeconds < 10 ? "0" + extraSeconds : extraSeconds
+            } second ago`;
+            } else {
+            order.order_moved_text = second + " seconds ago";
             }
+        }
         } else {
-            tableListFloorWise(activeFloorId.value);
-            f7.popover.close(".popover-move");
-            clearInterval(intervalId);
+        tableListFloorWise(activeFloorId.value);
+        f7.popover.close(".popover-move");
+        clearInterval(intervalId);
         }
     }, 1000);
 
@@ -1168,35 +487,30 @@ const secondIncrement = (second, orderIndex, tableIndex, rowIndex) => {
 const newOrderSecondIncrement = (second, orderIndex, tableIndex, rowIndex) => {
     const interval = setInterval(() => {
         if (second < 60 * parseFloat(highlight_time.value)) {
-            second++;
-            if (
-                rowTables.value[rowIndex] !== undefined &&
-                rowTables.value[rowIndex][tableIndex] !== undefined &&
-                rowTables.value[rowIndex][tableIndex].orders[orderIndex] !==
-                    undefined
-            ) {
-                rowTables.value[rowIndex][tableIndex].orders[
-                    orderIndex
-                ].new_order_timing = second;
-                if (second > 60) {
-                    var minutes = parseInt(Math.floor(second / 60), 10);
-                    var extraSeconds = second % 60;
-                    minutes = minutes < 10 ? "0" + minutes : minutes;
-                    extraSeconds =
-                        extraSeconds < 10 ? "0" + extraSeconds : extraSeconds;
-                    rowTables.value[rowIndex][tableIndex].orders[
-                        orderIndex
-                    ].new_order_timing_text =
-                        minutes + " minute " + extraSeconds + " second ago";
-                } else {
-                    rowTables.value[rowIndex][tableIndex].orders[
-                        orderIndex
-                    ].new_order_timing_text = second + " seconds ago";
-                }
+        second++;
+        if (
+            rowTables.value[rowIndex] !== undefined &&
+            rowTables.value[rowIndex][tableIndex] !== undefined &&
+            rowTables.value[rowIndex][tableIndex].orders[orderIndex] !== undefined
+        ) {
+            rowTables.value[rowIndex][tableIndex].orders[
+            orderIndex
+            ].new_order_timing = second;
+            if (second > 60) {
+            var minutes = parseInt(Math.floor(second / 60), 10);
+            var extraSeconds = second % 60;
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            extraSeconds = extraSeconds < 10 ? "0" + extraSeconds : extraSeconds;
+            rowTables.value[rowIndex][tableIndex].orders[orderIndex].new_order_timing_text =
+                minutes + " minute " + extraSeconds + " second ago";
+            } else {
+            rowTables.value[rowIndex][tableIndex].orders[orderIndex].new_order_timing_text =
+                second + " seconds ago";
             }
+        }
         } else {
-            tableListFloorWise(activeFloorId.value);
-            clearInterval(interval);
+        tableListFloorWise(activeFloorId.value);
+        clearInterval(interval);
         }
     }, 1000);
     intervalNewOrder.value.push(interval);
@@ -1208,66 +522,61 @@ const tableList = () => {
         highlight_time.value = res.data.highlight_time;
         currentCapacity.value = res.dataC;
         floorList.value = res.data.floorList;
-        activeFloorId.value = res.data.floorList[0]
-            ? res.data.floorList[0].id
-            : 0;
+        activeFloorId.value = res.data.floorList[0] ? res.data.floorList[0].id : 0;
         let row_tables_arr = [];
         let cal_of_capacity = 0;
         let single_row_data = [];
         let change_table_list_array = [];
         let max_number_table_id_val = 0;
         res.data.tables.forEach((table, index) => {
-            // calculation of row wise table list
-            if (parseInt(cal_of_capacity) > 6) {
-                row_tables_arr.push(single_row_data);
-                single_row_data = [];
-                cal_of_capacity = 0;
-            }
+        // calculation of row wise table list
+        if (parseInt(cal_of_capacity) > 6) {
+            row_tables_arr.push(single_row_data);
+            single_row_data = [];
+            cal_of_capacity = 0;
+        }
 
-            let cap, up_table, down_table;
-            if (parseInt(table.capacity_of_person) % 2 !== 0) {
-                cap = parseInt(table.capacity_of_person) - 1;
-                up_table = (parseInt(table.capacity_of_person) + 1) / 2;
-                down_table = (parseInt(table.capacity_of_person) - 1) / 2;
-            } else {
-                cap = parseInt(table.capacity_of_person) - 2;
-                up_table = parseInt(table.capacity_of_person) / 2;
-                down_table = parseInt(table.capacity_of_person) / 2;
-            }
+        let cap, up_table, down_table;
+        if (parseInt(table.capacity_of_person) % 2 !== 0) {
+            cap = parseInt(table.capacity_of_person) - 1;
+            up_table = (parseInt(table.capacity_of_person) + 1) / 2;
+            down_table = (parseInt(table.capacity_of_person) - 1) / 2;
+        } else {
+            cap = parseInt(table.capacity_of_person) - 2;
+            up_table = parseInt(table.capacity_of_person) / 2;
+            down_table = parseInt(table.capacity_of_person) / 2;
+        }
 
-            const col = (cap / 2) * 5 + 20;
+        const col = (cap / 2) * 5 + 20;
 
-            table.col = col > 100 ? 100 : col;
-            table.up_table = up_table;
-            table.down_table = down_table;
-            table.width = 182 + (up_table - 1) * 80;
+        table.col = col > 100 ? 100 : col;
+        table.up_table = up_table;
+        table.down_table = down_table;
+        table.width = 182 + (up_table - 1) * 80;
 
-            single_row_data.push(table);
+        single_row_data.push(table);
 
-            if (index === res.data.tables.length - 1) {
-                row_tables_arr.push(single_row_data);
-                single_row_data = [];
-                cal_of_capacity = 0;
-            }
-            cal_of_capacity += Object.keys(table.orders).length;
+        if (index === res.data.tables.length - 1) {
+            row_tables_arr.push(single_row_data);
+            single_row_data = [];
+            cal_of_capacity = 0;
+        }
+        cal_of_capacity += Object.keys(table.orders).length;
 
-            // set change table list upon capacity
-            const obj = {
-                id: table.id,
-                capacity_of_person: parseInt(table.capacity_of_person),
-                table_number: table.table_number,
-            };
-            change_table_list_array.push(obj);
+        // set change table list upon capacity
+        const obj = {
+            id: table.id,
+            capacity_of_person: parseInt(table.capacity_of_person),
+            table_number: table.table_number,
+        };
+        change_table_list_array.push(obj);
 
-            // Max Number Capacity Table Id
-            if (
-                parseInt(res.data.max_table_cap) ===
-                parseInt(table.capacity_of_person)
-            ) {
-                maxNumberTableId.value = parseInt(table.id);
-                maxNumberTableCap.value = parseInt(table.capacity_of_person);
-                maxNumberTableData.value = table;
-            }
+        // Max Number Capacity Table Id
+        if (parseInt(res.data.max_table_cap) === parseInt(table.capacity_of_person)) {
+            maxNumberTableId.value = parseInt(table.id);
+            maxNumberTableCap.value = parseInt(table.capacity_of_person);
+            maxNumberTableData.value = table;
+        }
         });
 
         // Setting values after processing
@@ -1275,55 +584,38 @@ const tableList = () => {
         rowTables.value = row_tables_arr;
 
         rowTables.value.forEach((tables, row_index) => {
-            tables.forEach((table, t_index) => {
-                table.orders.forEach((order, o_index) => {
-                    if (o_index === 0) {
-                        timingCountOrder(
-                            order.time_left,
-                            order.finish_time,
-                            o_index,
-                            t_index,
-                            row_index
-                        );
-                    }
-                    if (
-                        order.is_order_moved &&
-                        highlightTimeOnOff.value === 1
-                    ) {
-                        secondIncrement(
-                            order.order_moved,
-                            o_index,
-                            t_index,
-                            row_index
-                        );
-                    }
-                    if (
-                        order.is_new_order_timing &&
-                        highlightTimeOnOff.value === 1
-                    ) {
-                        newOrderSecondIncrement(
-                            order.new_order_timing,
-                            o_index,
-                            t_index,
-                            row_index
-                        );
-                    }
-                });
+        tables.forEach((table, t_index) => {
+            table.orders.forEach((order, o_index) => {
+            if (o_index === 0) {
+                timingCountOrder(
+                order.time_left,
+                order.finish_time,
+                o_index,
+                t_index,
+                row_index
+                );
+            }
+            if (order.is_order_moved && highlightTimeOnOff.value === 1) {
+                secondIncrement(order.order_moved, o_index, t_index, row_index);
+            }
+            if (order.is_new_order_timing && highlightTimeOnOff.value === 1) {
+                newOrderSecondIncrement(order.new_order_timing, o_index, t_index, row_index);
+            }
             });
+        });
         });
 
         changeTableList.value = change_table_list_array;
         noTableListShow.value = true;
 
         change_table_list_array.forEach((table, index) => {
-            if (
-                maxNumberTableCap.value === table.capacity_of_person &&
-                table.id !== maxNumberTableId.value
-            ) {
-                noTableListShow.value = false;
-            }
+        if (
+            maxNumberTableCap.value === table.capacity_of_person &&
+            table.id !== maxNumberTableId.value
+        ) {
+            noTableListShow.value = false;
+        }
         });
-
     });
 };
 
@@ -1336,132 +628,116 @@ const tableListFloorWise = (id) => {
     if (id !== undefined) activeFloorId.value = id;
 
     axios
-        .get("/api/table-list-floor-wise/" + activeFloorId.value)
-        .then((res) => {
-            currentCapacity.value = res.dataC;
-            floorList.value = res.data.floorList;
-            const rowTablesData = [];
-            let cal_of_capacity = 0;
-            let single_row_data = [];
-            const change_table_list_array = [];
-            let max_number_table_id_val = 0;
+    .get("/api/table-list-floor-wise/" + activeFloorId.value)
+    .then((res) => {
+        currentCapacity.value = res.dataC;
+        floorList.value = res.data.floorList;
+        const rowTablesData = [];
+        let cal_of_capacity = 0;
+        let single_row_data = [];
+        const change_table_list_array = [];
+        let max_number_table_id_val = 0;
 
-            res.data.tables.forEach((table, index) => {
-                if (parseInt(cal_of_capacity) > 6) {
-                    rowTablesData.push(single_row_data);
-                    single_row_data = [];
-                    cal_of_capacity = 0;
-                }
+        res.data.tables.forEach((table, index) => {
+            if (parseInt(cal_of_capacity) > 6) {
+            rowTablesData.push(single_row_data);
+            single_row_data = [];
+            cal_of_capacity = 0;
+            }
 
-                const cap =
-                    parseInt(table.capacity_of_person) % 2 !== 0
-                        ? parseInt(table.capacity_of_person) - 1
-                        : parseInt(table.capacity_of_person) - 2;
+            const cap =
+            parseInt(table.capacity_of_person) % 2 !== 0
+                ? parseInt(table.capacity_of_person) - 1
+                : parseInt(table.capacity_of_person) - 2;
 
-                const up_table =
-                    parseInt(table.capacity_of_person) % 2 !== 0
-                        ? (parseInt(table.capacity_of_person) + 1) / 2
-                        : parseInt(table.capacity_of_person) / 2;
+            const up_table =
+            parseInt(table.capacity_of_person) % 2 !== 0
+                ? (parseInt(table.capacity_of_person) + 1) / 2
+                : parseInt(table.capacity_of_person) / 2;
 
-                const down_table =
-                    parseInt(table.capacity_of_person) % 2 !== 0
-                        ? (parseInt(table.capacity_of_person) - 1) / 2
-                        : parseInt(table.capacity_of_person) / 2;
+            const down_table =
+            parseInt(table.capacity_of_person) % 2 !== 0
+                ? (parseInt(table.capacity_of_person) - 1) / 2
+                : parseInt(table.capacity_of_person) / 2;
 
-                const col = (cap / 2) * 5 + 20;
+            const col = (cap / 2) * 5 + 20;
 
-                table.col = col > 100 ? 100 : col;
-                table.up_table = up_table;
-                table.down_table = down_table;
-                table.width = 182 + (up_table - 1) * 80;
+            table.col = col > 100 ? 100 : col;
+            table.up_table = up_table;
+            table.down_table = down_table;
+            table.width = 182 + (up_table - 1) * 80;
 
-                single_row_data.push(table);
+            single_row_data.push(table);
 
-                if (index === res.data.tables.length - 1) {
-                    rowTablesData.push(single_row_data);
-                    single_row_data = [];
-                    cal_of_capacity = 0;
-                }
+            if (index === res.data.tables.length - 1) {
+            rowTablesData.push(single_row_data);
+            single_row_data = [];
+            cal_of_capacity = 0;
+            }
 
-                cal_of_capacity += parseInt(table.orders.length);
+            cal_of_capacity += parseInt(table.orders.length);
 
-                const obj = {
-                    id: table.id,
-                    capacity_of_person: parseInt(table.capacity_of_person),
-                    table_number: table.table_number,
-                };
+            const obj = {
+            id: table.id,
+            capacity_of_person: parseInt(table.capacity_of_person),
+            table_number: table.table_number,
+            };
 
-                change_table_list_array.push(obj);
+            change_table_list_array.push(obj);
 
-                if (
-                    parseInt(res.data.max_table_cap) ===
-                    parseInt(table.capacity_of_person)
-                ) {
-                    maxNumberTableId.value = parseInt(table.id);
-                    maxNumberTableCap.value = parseInt(
-                        table.capacity_of_person
-                    );
-                    maxNumberTableData.value = table;
-                }
-            });
-
-            // Assign values to reactive variables
-            maxNumberTableId.value = max_number_table_id_val;
-            rowTables.value = rowTablesData;
-
-            rowTables.value.forEach((tables, row_index) => {
-                tables.forEach((table, t_index) => {
-                    table.orders.forEach((order, o_index) => {
-                        if (o_index === 0) {
-                            timingCountOrder(
-                                order.time_left,
-                                order.finish_time,
-                                o_index,
-                                t_index,
-                                row_index
-                            );
-                        }
-                        if (
-                            order.is_order_moved &&
-                            highlightTimeOnOff.value === 1
-                        ) {
-                            secondIncrement(
-                                order.order_moved,
-                                o_index,
-                                t_index,
-                                row_index
-                            );
-                        }
-                        if (
-                            order.is_new_order_timing &&
-                            highlightTimeOnOff.value === 1
-                        ) {
-                            newOrderSecondIncrement(
-                                order.new_order_timing,
-                                o_index,
-                                t_index,
-                                row_index
-                            );
-                        }
-                    });
-                });
-            });
-
-            changeTableList.value = change_table_list_array;
-            noTableListShow.value = true;
-
-            change_table_list_array.forEach((table, index) => {
-                if (
-                    maxNumberTableCap.value === table.capacity_of_person &&
-                    table.id !== maxNumberTableId.value
-                ) {
-                    noTableListShow.value = false;
-                }
-            });
-        })
-        .catch((error) => {
-            console.error("Error fetching table list:", error);
+            if (parseInt(res.data.max_table_cap) === parseInt(table.capacity_of_person)) {
+            maxNumberTableId.value = parseInt(table.id);
+            maxNumberTableCap.value = parseInt(table.capacity_of_person);
+            maxNumberTableData.value = table;
+            }
         });
+
+        // Assign values to reactive variables
+        maxNumberTableId.value = max_number_table_id_val;
+        rowTables.value = rowTablesData;
+
+        rowTables.value.forEach((tables, row_index) => {
+            tables.forEach((table, t_index) => {
+            table.orders.forEach((order, o_index) => {
+                if (o_index === 0) {
+                timingCountOrder(
+                    order.time_left,
+                    order.finish_time,
+                    o_index,
+                    t_index,
+                    row_index
+                );
+                }
+                if (order.is_order_moved && highlightTimeOnOff.value === 1) {
+                secondIncrement(order.order_moved, o_index, t_index, row_index);
+                }
+                if (order.is_new_order_timing && highlightTimeOnOff.value === 1) {
+                newOrderSecondIncrement(
+                    order.new_order_timing,
+                    o_index,
+                    t_index,
+                    row_index
+                );
+                }
+            });
+            });
+        });
+
+        changeTableList.value = change_table_list_array;
+        noTableListShow.value = true;
+
+        change_table_list_array.forEach((table, index) => {
+            if (
+            maxNumberTableCap.value === table.capacity_of_person &&
+            table.id !== maxNumberTableId.value
+            ) {
+            noTableListShow.value = false;
+            }
+        });
+    })
+    .catch((error) => {
+        console.error("Error fetching table list:", error);
+    });
 };
 
 const startDrag = (id, tableId) => {
@@ -1477,43 +753,39 @@ const onDrop = (event) => {
     const table = endTarget.closest(".drop-target");
     if (table) {
         const tableId = $(table).data("id");
-        if (
-            !tableId ||
-            !dragOrderTableId.value ||
-            tableId == dragOrderTableId.value
-        ) {
-            return false;
+        if (!tableId || !dragOrderTableId.value || tableId == dragOrderTableId.value) {
+        return false;
         }
         const order_id = dragOrderId.value;
         const floor_name = $(table).data("name");
         const table_number = $(table).data("tnumber");
 
         f7.dialog.confirm(
-            "Are you sure to order transfer to " +
-                floor_name +
-                "(Table Number : " +
-                table_number +
-                ") ?",
-            () => {
-                axios
-                    .post("/api/change-order-table", {
-                        table_number: table_number,
-                        id: order_id,
-                    })
-                    .then((res) => {
-                        if (res.data.success) tableList();
-                    });
-            }
+        "Are you sure to order transfer to " +
+            floor_name +
+            "(Table Number : " +
+            table_number +
+            ") ?",
+        () => {
+            axios
+            .post("/api/change-order-table", {
+                table_number: table_number,
+                id: order_id,
+            })
+            .then((res) => {
+                if (res.data.success) tableList();
+            });
+        }
         );
 
         setTimeout(() => {
-            $(".dialog-title").html("<img src='/images/success.png'>");
-            $(".dialog-button").addClass(
-                "col button button-raised button-large text-transform-capitalize"
-            );
-            $(".dialog-button").eq(0).addClass("text-color-black");
-            $(".dialog-button").eq(1).addClass("active");
-            $(".dialog-button").css("width", "50%");
+        $(".dialog-title").html("<img src='/images/success.png'>");
+        $(".dialog-button").addClass(
+            "col button button-raised button-large text-transform-capitalize"
+        );
+        $(".dialog-button").eq(0).addClass("text-color-black");
+        $(".dialog-button").eq(1).addClass("active");
+        $(".dialog-button").css("width", "50%");
         }, 50);
     }
 };
@@ -1522,21 +794,21 @@ const changeTable = (order_id, table_number, floor_name) => {
     f7.popover.close();
     f7.dialog.confirm(
         "Are you sure to order transfer to " +
-            floor_name +
-            "(Table Number : " +
-            table_number +
-            ") ?",
+        floor_name +
+        "(Table Number : " +
+        table_number +
+        ") ?",
         () => {
-            axios
-                .post("/api/change-order-table", {
-                    table_number: table_number,
-                    id: order_id,
-                })
-                .then((res) => {
-                    if (res.data.success) {
-                        tableListFloorWise(activeFloorId.value);
-                    }
-                });
+        axios
+            .post("/api/change-order-table", {
+            table_number: table_number,
+            id: order_id,
+            })
+            .then((res) => {
+            if (res.data.success) {
+                tableListFloorWise(activeFloorId.value);
+            }
+            });
         }
     );
 
@@ -1551,29 +823,26 @@ const changeTable = (order_id, table_number, floor_name) => {
 
 const changeFloor = (order_id, floor_id, floor_name) => {
     f7.popover.close();
-    f7.dialog.confirm(
-        `Are you sure to order transfer to ${floor_name} ?`,
-        () => {
-            axios
-                .post("/api/change-floor-order", {
-                    floor_id: floor_id,
-                    id: order_id,
-                })
-                .then((res) => {
-                    if (res.data.success) {
-                        tableListFloorWise(floor_id);
-                    } else {
-                        root.errorNotification(res.data.message);
-                        return false;
-                    }
-                });
-        }
-    );
+    f7.dialog.confirm(`Are you sure to order transfer to ${floor_name} ?`, () => {
+        axios
+        .post("/api/change-floor-order", {
+            floor_id: floor_id,
+            id: order_id,
+        })
+        .then((res) => {
+            if (res.data.success) {
+            tableListFloorWise(floor_id);
+            } else {
+            root.errorNotification(res.data.message);
+            return false;
+            }
+        });
+    });
 
     setTimeout(() => {
         $(".dialog-title").html("<img src='/images/success.png'>");
         $(".dialog-button").addClass(
-            "col button button-raised button-large text-transform-capitalize"
+        "col button button-raised button-large text-transform-capitalize"
         );
         $(".dialog-button").eq(0).addClass("text-color-black");
         $(".dialog-button").eq(1).addClass("active");
@@ -1583,24 +852,19 @@ const changeFloor = (order_id, floor_id, floor_name) => {
 
 const finishNext = (id) => {
     f7.popover.close();
-    f7.dialog.confirm(
-        "Are you sure to finish this order and going to next?",
-        () => {
-            axios.post("/api/finish-next", { id: id }).then((res) => {
-                tableListFloorWise(activeFloorId.value);
-            });
-        }
-    );
+    f7.dialog.confirm("Are you sure to finish this order and going to next?", () => {
+        axios.post("/api/finish-next", { id: id }).then((res) => {
+        tableListFloorWise(activeFloorId.value);
+        });
+    });
     setTimeout(() => {
-        $(".dialog-button")
-            .eq(1)
-            .css({ "background-color": "#F33E3E", color: "#fff" });
+        $(".dialog-button").eq(1).css({ "background-color": "#F33E3E", color: "#fff" });
         $(".dialog-title").html("<img src='/images/cross.png'>");
         $(".dialog-buttons").after(
-            "<div><img src='/images/flow.png' style='width:100%'></div>"
+        "<div><img src='/images/flow.png' style='width:100%'></div>"
         );
         $(".dialog-button").addClass(
-            "col button button-raised text-color-black button-large text-transform-capitalize"
+        "col button button-raised text-color-black button-large text-transform-capitalize"
         );
         $(".dialog-button").eq(1).removeClass("text-color-black");
         $(".dialog-buttons").addClass("margin-top no-margin-bottom");
@@ -1609,29 +873,24 @@ const finishNext = (id) => {
 
 const cancelNext = (id) => {
     f7.popover.close();
-    f7.dialog.confirm(
-        "Are you sure to cancel this order and going to next?",
-        () => {
-            axios
-                .post("/api/cancel-next", {
-                    id: id,
-                    cancelled_by: "Manager",
-                })
-                .then((res) => {
-                    tableListFloorWise(activeFloorId.value);
-                });
-        }
-    );
+    f7.dialog.confirm("Are you sure to cancel this order and going to next?", () => {
+        axios
+        .post("/api/cancel-next", {
+            id: id,
+            cancelled_by: "Manager",
+        })
+        .then((res) => {
+            tableListFloorWise(activeFloorId.value);
+        });
+    });
     setTimeout(() => {
-        $(".dialog-button")
-            .eq(1)
-            .css({ "background-color": "#F33E3E", color: "#fff" });
+        $(".dialog-button").eq(1).css({ "background-color": "#F33E3E", color: "#fff" });
         $(".dialog-title").html("<img src='/images/cross.png'>");
         $(".dialog-buttons").after(
-            "<div><img src='/images/flow.png' style='width:100%'></div>"
+        "<div><img src='/images/flow.png' style='width:100%'></div>"
         );
         $(".dialog-button").addClass(
-            "col button button-raised text-color-black button-large text-transform-capitalize"
+        "col button button-raised text-color-black button-large text-transform-capitalize"
         );
         $(".dialog-button").eq(1).removeClass("text-color-black");
         $(".dialog-buttons").addClass("margin-top no-margin-bottom");
@@ -1639,7 +898,7 @@ const cancelNext = (id) => {
 };
 
 const getRemainingTime = (id) => {
-    axios.post("/api/get-remainig-time", { id: id }).then((res) => {
+    axios.post("/api/get-remaining-time", { id: id }).then((res) => {
         popupRemainingTime.value = res.data.time;
         popupRemainingTimeOver.value = res.data.time_over;
     });
@@ -1651,15 +910,15 @@ const addMinutes = () => {
         return false;
     }
     axios
-        .post("/api/add-minutes-order", {
-            minutes: minutes.value,
-            orderId: orderId.value,
-        })
-        .then((res) => {
-            f7.popup.close();
-            minutes.value = "";
-            tableListFloorWise(activeFloorId.value);
-        });
+    .post("/api/add-minutes-order", {
+        minutes: minutes.value,
+        orderId: orderId.value,
+    })
+    .then((res) => {
+        f7.popup.close();
+        minutes.value = "";
+        tableListFloorWise(activeFloorId.value);
+    });
 };
 
 const checkNumberValidate = (evt) => {
@@ -1672,668 +931,3 @@ const checkNumberValidate = (evt) => {
     }
 };
 </script>
-
-<style scoped>
-/* *{
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-} */
-.addMinutesPopup .addminutes-form .minutes_input .add-minutes-input {
-    border-radius: 10px 0 0 10px !important;
-    background: #fafafa;
-    height: 45px;
-}
-.addMinutesPopup.popup {
-    top: 35% !important;
-    left: 34% !important;
-}
-.popup_button .button {
-    border-radius: 10px;
-}
-.minutes_text {
-    height: 45px;
-    line-height: 45px;
-    border: 1px solid #e7e7e7;
-    border-radius: 0 10px 10px 0;
-    padding: 0 10px;
-    background-color: #fafafa;
-}
-
-.popup_title {
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 22px;
-    color: #38373d;
-}
-.addminutes-form {
-    border-top: 1px solid #d8d8d8;
-}
-.mr-72 {
-    margin-right: 72px;
-}
-C_card .card-content {
-    padding-right: 8px !important;
-    padding-left: 18px !important;
-}
-.menu-item-dropdown .menu-item-content .f7-icons {
-    font-size: 15px;
-    margin-left: 10px;
-}
-.border__bottom {
-    border-bottom: 0.5px solid #555555;
-}
-.w-100 {
-    width: 100%;
-}
-.justify_content_between {
-    justify-content: space-between;
-}
-.header-links {
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.15);
-    background-color: #fff;
-    height: 60px !important;
-    position: fixed;
-    width: 100%;
-    z-index: 99;
-}
-.height-40 {
-    height: 40px;
-}
-
-.nav-link,
-.menu-item-content {
-    height: 100%;
-    text-transform: capitalize;
-}
-.menu-item-content {
-    position: relative;
-    z-index: 9;
-}
-.menu-dropdown-content {
-    box-shadow: 0px 0.5px 12px rgba(0, 0, 0, 0.2);
-    min-width: 100% !important;
-    top: -30px;
-}
-.menu-dropdown-center:before,
-.menu-dropdown-center:after {
-    content: none;
-}
-.bg-dark {
-    background: #38373d;
-}
-.menu-item-dropdown-opened .menu-item-content {
-    background: #ff2d55;
-}
-.menu-dropdown-link {
-    border-bottom: 1px solid #efefef;
-}
-.col-25 {
-    padding: 5px;
-}
-.table_image {
-    height: 100%;
-    min-height: 44px;
-}
-.card {
-    border-radius: 10px;
-}
-.size-18 {
-    font-size: 18px;
-}
-p.table__text {
-    font-size: 14px;
-    line-height: 22px;
-    color: #555555;
-}
-p.count__text {
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 22px;
-    color: #555555;
-}
-.table_row {
-    display: flex;
-}
-.table_row .table_1 {
-    border-left: 10px solid #0fc963;
-    width: 100%;
-    height: 190px;
-}
-.table_row .table_2 {
-    border-left: 10px solid #ff6161;
-    width: 100%;
-    min-width: 332px;
-}
-.table_row .table_3 {
-    border-left: 10px solid #fc8e5e;
-    width: 100%;
-    min-width: 412px;
-}
-.table_row .table_4 {
-    border-left: 10px solid #ff619a;
-    width: 100%;
-    min-width: 500px;
-}
-.table_row .table_4 .card-content,
-.table_row .table_5 .card-content {
-    padding-top: 50px;
-}
-.table_row .table_10 .card-content {
-    padding-top: 50px;
-}
-.table_row .table_4_margin {
-    margin-right: 103px;
-}
-.table_row .table_5 {
-    border-left: 10px solid #9ecbff;
-    width: 100%;
-    min-width: 574px;
-}
-.table_row .table_9 {
-    width: 100%;
-    min-width: 182px;
-    /*max-width: 182px;*/
-    margin: 0 auto;
-    border-left: 10px solid #fcd95e;
-}
-.table_row .table_10 {
-    width: 100%;
-    min-width: 1120px;
-    margin: 0 auto;
-    border-left: 10px solid #c6c6c6;
-}
-.tables {
-    overflow-x: auto;
-}
-.table_main {
-    width: 100%;
-    height: calc(100vh - 70px);
-    overflow: auto;
-    margin-top: 70px;
-}
-.center_table_card {
-    margin-left: 83px;
-    margin-right: 83px;
-}
-.tables .row {
-    flex-wrap: nowrap !important;
-}
-/*.tables .table_row .row{
-    flex-wrap: wrap !important;
-}*/
-.table_card_right_margin {
-    margin-right: 72px;
-}
-.table1__details {
-    width: 100%;
-    /* overflow-x: auto; */
-    height: 100%;
-    max-height: 122px;
-    display: flex;
-    align-items: end;
-}
-
-.table2__details {
-    width: 100%;
-    max-width: 323px;
-    overflow-x: auto;
-}
-.table3__details {
-    width: 100%;
-    max-width: 426px;
-    overflow-x: auto;
-}
-.person {
-    white-space: nowrap;
-}
-/*=========  TABLE SWIPER ============*/
-.swiper-slide.active {
-    background: transparent !important;
-    border-bottom: 1px solid #f33e3e;
-}
-.swiper-slide.active p {
-    color: #f33e3e !important;
-}
-.table_main
-    .table_floor_swiper
-    .floor_swiper_inner
-    .swiper-slide
-    p.swiper_text {
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 21px;
-    color: #38373d;
-    white-space: nowrap;
-    justify-content: center;
-}
-.table_main .table_floor_swiper .floor_swiper_inner {
-    border-bottom: 1px solid #e0e0e0;
-    /*margin-left: 20px;*/
-}
-.table_main .table_floor_swiper .floor_swiper_inner .room_available {
-    width: 35px;
-    height: 21px;
-    background: #fdd5d5;
-    border-radius: 2px;
-    color: #f33e3e;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: 5px;
-}
-.h_100 {
-    height: 100%;
-}
-/*=============== POPOVER=================*/
-.popover.popover-move {
-    background-color: #f33e3e;
-    border: 0.5px solid transparent;
-}
-.popover {
-    width: 100%;
-    max-width: 180px;
-    box-shadow: 0px 0px 10px rgb(0 0 0 / 27%);
-    background: #fff;
-    border: 0.5px solid #999999;
-    border-radius: 7px;
-}
-.floor-drop-down {
-    min-width: 250px;
-    max-width: 250px;
-    position: absolute;
-    left: 100%;
-    background: white;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(2em);
-    border: 0.5px solid #999999;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    max-height: 360px;
-    overflow-y: auto;
-    border-radius: 7px;
-}
-/*.floor-drop-down::before{
-content: '';
-    background: var(--f7-popover-bg-color);
-    width: 26px;
-    height: 26px;
-    position: absolute;
-    left: 0;
-    top: 0;
-    border-radius: 3px;
-    transform: rotate(45deg);
-}*/
-.table-drop-down {
-    max-width: 240px;
-    min-width: 240px;
-    position: absolute;
-    background: white;
-    left: 100%;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(2em);
-    border: 0.5px solid #999999;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    max-height: 360px;
-    overflow-y: auto;
-    border-radius: 7px;
-}
-.floor__list.add_right_before::before {
-    position: absolute;
-    content: "";
-    width: 19px;
-    height: 19px;
-    border-radius: 3px;
-    background: #fff;
-    right: -9px;
-    bottom: 63px;
-    transform: rotate(45deg);
-    opacity: 1;
-}
-.floor__list.add_left_before::before {
-    position: absolute;
-    content: "";
-    width: 19px;
-    height: 19px;
-    border-radius: 3px;
-    background: #fff;
-    left: -9px;
-    bottom: 63px;
-    transform: rotate(45deg);
-    opacity: 1;
-}
-.table__list.add_right_before::before {
-    position: absolute;
-    content: "";
-    width: 19px;
-    height: 19px;
-    border-radius: 3px;
-    background: #fff;
-    right: -9px;
-    bottom: 21px;
-    transform: rotate(45deg);
-    opacity: 1;
-}
-.table__list.add_left_before::before {
-    position: absolute;
-    content: "";
-    width: 19px;
-    height: 19px;
-    border-radius: 3px;
-    background: #fff;
-    left: -9px;
-    bottom: 21px;
-    transform: rotate(45deg);
-    opacity: 1;
-}
-.floor_dropdown_visible {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(-1em);
-}
-.popover-angle:after {
-    border: 0.5px solid #999999 !important;
-}
-.popover-angle.on-bottom:after {
-    border: 0.5px solid #999999 !important;
-}
-.floor_room_available .room_available {
-    width: 35px;
-    height: 21px;
-    background: #fdd5d5;
-    border-radius: 2px;
-    color: #f33e3e;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: 5px;
-}
-.floor_name {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: 172px;
-}
-/*=========== ONGOING POPOVER =============*/
-.ongoing_popover {
-    background-color: #e2e2e2;
-    /* left : 5px; */
-    border: 1px solid #c4c4c4;
-    position: relative;
-}
-.table_reservation_info {
-    height: 70px;
-}
-.ongoing_blinking {
-    position: relative;
-    height: 100%;
-    left: 5px;
-}
-.ongoing_blinking::before {
-    position: absolute;
-    content: "";
-    top: -7px;
-    left: -11px;
-    background-image: url("/images/finish_blinking2.gif");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 180px 220px;
-    width: 100%;
-    height: 100%;
-    /* z-index: 9999; */
-}
-/*========= NEW ORDER ADD ========*/
-.neworder_add {
-    background-image: url("/images/blinking.gif");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    position: relative;
-}
-.order_tooltip {
-    background: #f33e3e;
-    color: #fff;
-    position: absolute;
-    padding: 5px;
-    border-radius: 5px;
-    width: 100%;
-    max-width: 96px;
-    left: 0;
-    text-align: center;
-    font-weight: 500;
-}
-.neworder_tooltip {
-    top: -44px;
-}
-.finish_order_tooltip {
-    top: -43px;
-    padding: 10px;
-    font-size: 12px;
-}
-.order_tooltip::before {
-    content: "";
-    position: absolute;
-    top: 99%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: #f33e3e transparent transparent transparent;
-}
-/*========= NEW ORDER ADD END ========*/
-
-.hamburger__button {
-    display: none;
-}
-@media screen and (max-width: 820px) {
-    .table_9_chair {
-        width: 100%;
-        min-width: 1120px;
-    }
-    .margin_right {
-        margin-right: 45px;
-    }
-    .margin_left {
-        margin-left: 45px;
-    }
-    .table-card {
-        width: 100% !important;
-    }
-    C_card .card-content {
-        padding-right: 8px !important;
-        padding-left: 8px !important;
-    }
-    C_card .card-content p {
-        font-size: 13px;
-    }
-    /*.closeReservation{
-        border: none;
-        background-color: transparent;
-        text-align:start;
-    }
-    .tablate_view_menu{
-        display:none;
-    }
-    .hamburger__button{
-        display: block;
-        text-align:end;
-        width:100%;
-    }
-    .menu-dropdown-content{
-        z-index:2;
-    }*/
-}
-.table_reservation {
-    height: 60px;
-}
-.extra-div {
-    min-width: 300px;
-    visibility: hidden;
-}
-.time-over {
-    border: 1px solid #000;
-}
-</style>
-
-<style>
-.demo-swiper .swiper-slide,
-.demo-swiper-multiple .swiper-slide {
-    background: transparent;
-}
-.popover-move .popover-angle:after {
-    background: #f33e3e !important;
-    border: 0.5px solid transparent !important;
-}
-.popover-angle:after {
-    border: 0.5px solid #999999 !important;
-}
-.ios .popover-angle.on-bottom:after {
-    left: 0;
-    top: -22px !important;
-}
-
-* {
-    box-sizing: border-box;
-}
-.header-link .button {
-    border-radius: 10px !important;
-}
-.header-link .menu-item {
-    border-radius: 10px !important;
-    background: #38373d !important;
-}
-.nav-button {
-    text-transform: capitalize;
-}
-.navbar a.link {
-    color: #000;
-}
-
-.right {
-    width: 40%;
-    margin-left: 0 !important;
-}
-.header-link {
-    width: 100%;
-}
-.header-link button {
-    text-transform: capitalize;
-}
-.card-header {
-    background: transparent;
-    min-height: 0 !important;
-    overflow: hidden;
-    color: #000;
-    border-radius: 10px 10px 0 0 !important;
-}
-.card-header:after {
-    background-color: transparent !important;
-}
-.header_detail {
-    width: 100%;
-}
-.person-info i {
-    font-size: 12px !important;
-    padding-right: 5px;
-    white-space: nowrap;
-}
-.person-info {
-    background: #f1f1f1;
-    border-radius: 5px;
-    padding: 7px 5px !important;
-    font-size: 10px !important;
-    width: 100%;
-    max-width: 96px;
-    margin-right: 30px;
-    position: relative;
-    height: 60px;
-}
-.person-info .person_info_name p {
-    font-weight: 500;
-    font-size: 10px;
-    line-height: 12px;
-    color: #38373d;
-}
-.person-info_move {
-    background: #fff;
-    border: 1px solid #f33e3e;
-    box-shadow: 0px 0px 10px rgb(241 2 2 / 29%);
-}
-.waiting-time {
-    border-left: 0.5px solid #555555;
-    padding-left: 8px;
-    margin-left: 8px;
-}
-.table_reservation_info .person-info span {
-    font-size: 12px;
-    line-height: 15px;
-    color: #38373d;
-}
-.bg-color-dark-pink {
-    background-color: #f33e3e !important;
-}
-
-.dialog-text {
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 24px;
-}
-
-.dialog-inner:after {
-    content: none !important;
-}
-
-.dialog {
-    background-color: #fff !important;
-    width: 378px !important;
-    /*transform: translate(-13%, -50%) !important;*/
-    transform: translateY(100%) !important;
-    left: 45% !important;
-}
-.dialog.modal-in {
-    transform: translateY(-50%) !important;
-}
-
-.dialog-button {
-    margin: 0 5px !important;
-    border-radius: var(--f7-dialog-border-radius) !important;
-}
-
-.dialog-buttons {
-    margin: 0 5px 15px;
-}
-.table_row .card {
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.11);
-}
-
-/*.framework7-root {
-    overflow: scroll !important;
-    box-sizing: border-box;
-    background: rgb(0 0 0 / 41%) !important;
-}*/
-.floor_blinking_img {
-    width: 100%;
-    height: 100%;
-    max-width: 20px;
-    max-height: 20px;
-    margin-right: 5px;
-}
-@media screen and (max-width: 820px) {
-    .dialog {
-        transform: translateY(100%) !important;
-        left: 43% !important;
-    }
-    .dialog.modal-in {
-        transform: translateY(-100%) !important;
-    }
-}
-</style>

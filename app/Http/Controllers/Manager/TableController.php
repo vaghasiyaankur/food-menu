@@ -417,7 +417,7 @@ class TableController extends Controller
      * @return @json ($time)
      *
      */
-    public function getRemainigTime(Request $request)
+    public function getRemainingTime(Request $request)
     {
         $orderId = $request->id;
 
