@@ -13,6 +13,7 @@ use App\Models\FloorShiftHistory;
 use App\Models\Floor;
 use Illuminate\Http\Request;
 use App\Helper\ReservationHelper;
+use App\Models\Kot;
 use Kutia\Larafirebase\Facades\Larafirebase;
 use \Carbon\Carbon;
 use DateTime;
@@ -599,6 +600,17 @@ class TableController extends Controller
     {
         $table = Table::find($id);
         return response()->json($table);
+    }
+
+    public function checkCurrentOrderProductsAvailable(Request $request){
+        $restaurantId = CustomerHelper::getRestaurantId();
+        $orderId = $request->orderId;
+
+        $count = Kot::where('restaurant_id', $restaurantId)
+                    ->where('order_id', $orderId)
+                    ->count();
+        
+        return $count;
     }
 
 }

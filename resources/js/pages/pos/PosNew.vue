@@ -45,6 +45,8 @@
             :add-ingredient-list="addIngredientList"
             :add-variation-list="addVariationList"
             @submit:ingredient-variation="submitIngVar"
+            ref="modalRef"
+            @success-payment="successPayment()"
         />
     </f7-page>
 </template>
@@ -71,6 +73,7 @@ const noteOldKotProductIndex = ref(0);
 const noteProductDescription = ref('');
 const noteProductStatus = ref('new');
 const totalAmount = ref(0);
+const payableAmount = ref(0);
 const subTotal = ref(0);
 const discount = ref(0);
 const currentRoute = ref('');
@@ -138,6 +141,7 @@ const upiData = ref({
 const orderId = ref(0);
 const tableIdNumber = ref(0);
 
+const modalRef = ref(null);
 // const percentageObj = ref({});
 
 onMounted(() => {
@@ -476,6 +480,13 @@ const holdKOT = (tableId) => {
     }
 }
 
+const removeDiscount = () => {
+    discountFillUp.value = false;
+    discount.value = 0;
+    discountPrice.value = 0;
+    getTotalAmount();
+}
+
 const calculateDiscount = () => {
     if(discountPrice.value){
         if(discountPrice.value < 0 || (discountType.value == 'percentage' && discountPrice.value > 100)){
@@ -549,19 +560,12 @@ const getTotalAmount = () => {
     }
     subTotal.value = total.toFixed(2); 
     totalAmount.value = (Math.round((total - discount.value) * 100) / 100).toFixed(2);
+    payableAmount.value = (Math.round((total - discount.value) * 100) / 100).toFixed(2);
 
-}
-
-const blankSubPaymentForm = () => {
-    splitPortionData.value.portion = '';
-    upiData.value.selectedItem = '';
 }
 
 const defaultFillUpSettleMentData = () => {
-    customerPaid.value = totalAmount.value;
-    returnMoney.value = 0;
-    tip.value = 0;
-    settlementAmount.value = 0;
+    modalRef.value.callPayAndEBillMethod();
 }
 
 const settleSavePayment = () => {
@@ -589,9 +593,13 @@ const settleSavePayment = () => {
         f7.view.main.router.navigate({ url: "/" });
     })
 }
+const successPayment = () => {
+    f7.view.main.router.navigate({ url: "/" });
+}
 
 provide('table',table);
 provide('totalAmount', totalAmount)
+provide('payableAmount', payableAmount)
 
 provide('selectIngredient',selectIngredient);
 provide('selectVariation',selectVariation);
@@ -627,6 +635,7 @@ provide('discountType', discountType);
 provide('discountCoupon', discountCoupon);
 provide('discountPrice', discountPrice);
 provide('calculateDiscount', calculateDiscount);
+provide('removeDiscount', removeDiscount);
 
 
 provide('saveData', saveData);
@@ -643,15 +652,8 @@ provide('cartProducts', cartProducts)
 provide('oldOrder', oldOrder)
 
 // Payment Form Function
-provide('blankSubPaymentForm', blankSubPaymentForm)
 provide('defaultFillUpSettleMentData', defaultFillUpSettleMentData)
 
-// Split Payment Popup
-provide('splitType', splitType)
-provide('splitPortionData', splitPortionData)
-provide('splitPercentageData', splitPercentageData)
-
-// UPI Payment Popup
-provide('upiData', upiData);
-
+provide('orderId', orderId)
+provide('tableIdNumber', tableIdNumber)
 </script>
