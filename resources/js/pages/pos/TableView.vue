@@ -82,7 +82,10 @@
                                     </div>
                                     <div class="table_view-inspect_btn" v-if="table.holdKotAvailable">
                                 </div>
-                                    <div class="table_view-inspect_btn">
+                                    <div class="table_view-inspect_btn display-flex">
+                                        <button class="button height_40 printer-active margin-right-half">
+                                            <Icon name="printer" @click="settleSavePayment(table.id)" />
+                                        </button>
                                         <button class="button height_40">
                                             <Icon name="eye" @click="openPos(table.id)" />
                                         </button>
@@ -138,19 +141,26 @@
         </div>
 
         <div class="popup removeHoldPopup">
-            <RemovePopup :title="'Are you sure release this table?'" @remove="removeHoldKot" />
+            <RemovePopup :title="'Are you sure to remove the hold KOT?'" @remove="removeHoldKot" />
         </div>
+
+
+        <!-- ========= SETTLE,SAVE & EBill POPUP ========= -->
+        <PayAndEBillPopup ref="payAndEBillRef" @success-payment="successPayment()" />
+        
     </f7-page>
 </template>
 <script setup>
 import { f7Page, f7, f7Popover, f7List, f7ListItem, f7Link } from 'framework7-vue';
 import axios from 'axios';
-import { ref, onMounted, inject } from 'vue';
+import { ref, onMounted, provide, inject } from 'vue';
 import Icon from '../../components/Icon.vue';
 import AddUpdatePopup from '../../components/common/AddUpdatePopup.vue'
 import RemovePopup from '../../components/common/RemovePopup.vue'
 import { successNotification, errorNotification, getErrorMessage } from '../../commonFunction.js'
 import NoValueFound from '../../components/NoValueFound.vue';
+import PayAndEBillPopup from '../../components/Popup/PayAndEBillPopup.vue';
+
 const floorList = ref([]);
 const defaultSelectColorId = ref('');
 const defaultSelectFloorId = ref('');
@@ -178,6 +188,11 @@ const addUpdateFormDataFormat = ref([
     { label: 'Finish Order Time', multipleLang: false, type: 'number', name: 'finish_order_time', placeHolder: 'Finish Order Time (In Minutes)', value: '' },
     { label: 'Id', multipleLang: false, type: 'hidden', name: 'id', placeHolder: 'Category Id', value: '' },
 ]);
+
+const payAndEBillRef = ref(null);
+const payableAmount = ref(0);
+const orderId = ref(0);
+const tableIdNumber = ref(0);
 
 onMounted(() => {
     getTableListFloorWise();
@@ -369,4 +384,48 @@ const removeData = () => {
     });
 }
 
+const settleSavePayment = (tableId) => {
+    const table = floorList.value.flatMap(floor => floor.tables).find(table => table.id === tableId);
+    if(table.holdKotAvailable){
+        errorNotification('Please create KOT for items on hold or remove them from hold.');
+    }else{
+        if(!table.order){
+            errorNotification('No Order Found in this Table.');
+        }else{
+            const order = table.order;
+            console.log(order);
+            axios.post('/api/check-current-order-kot-available', {tableId : tableId, orderId : order.id}, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+            .then((response) => {
+                if(response.data > 0){
+                    payableAmount.value = order.total_price;
+                    orderId.value = order.id;
+                    tableIdNumber.value = tableId;
+                    f7.popup.open(`.settle-save-popup`);
+                    payAndEBillRef.value.defaultFillUpSettleMentData();
+                }else{
+                    errorNotification('No Item available in this order. Add Item in Order or remove the order.');
+                }
+                // successNotification(response.data.success);
+                // f7.popup.close(`.addUpdatePopup`);
+                // getTableListFloorWise();
+            })
+            .catch((error) => {
+                // const errorMessage = getErrorMessage(error);
+                // errorNotification(errorMessage);
+            });
+        }
+    }
+}
+
+const successPayment = () => {
+    getTableListFloorWise();
+}
+
+provide('payableAmount', payableAmount);
+provide('orderId', orderId);
+provide('tableIdNumber', tableIdNumber);
 </script>

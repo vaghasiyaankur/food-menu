@@ -4,7 +4,6 @@
             <div class="text-align-center table_view-popup_title">
                 Settle & Save</div>
             <hr class="popup_title_divider">
-            <input type="hidden" name="order_id" :value="order?.id">
             <label class="custom-disc-text">Payment Type</label>
             <div class="payment-method display-block">
                 <div class="grid">
@@ -40,7 +39,7 @@
             </div>
             <label class="settle_save-heading-text">Total Amount</label>
             <div class="settle_save-text text-align-left">
-                <input type="number" v-model="totalAmount" step="0.01"  name="total_amount" class="total-amount-data settle-save-input" placeholder="0" disabled>
+                <input type="number" v-model="payableAmount" step="0.01"  name="total_amount" class="total-amount-data settle-save-input" placeholder="0" disabled>
             </div>
             <div class="display-flex justify-content-center popup_button">
                 <button type="button"
@@ -66,8 +65,7 @@ const returnMoney = inject('returnMoney');
 const tip = inject('tip');
 const settlementAmount = inject('settlementAmount');
 const settleSavePayment = inject('settleSavePayment');
-const order = inject('oldOrder');
-const totalAmount = inject('totalAmount');
+const payableAmount = inject('payableAmount');
 const blankSubPaymentForm = inject('blankSubPaymentForm');
 
 const emit = defineEmits([

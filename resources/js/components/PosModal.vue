@@ -29,14 +29,8 @@
     <!-- ========= APPLIED DISCOUNT POPUP ========= -->
     <AppliedDiscountPopup />
 
-    <!-- ========= SETTLE & SAVE POPUP ========= -->
-    <SettleSavePopup @open:split-popup="openSplitPopup" @open:upi-popup="openUPIPopup" />
-
-    <!-- ========= SPLIT BILL POPUP ========= -->
-    <SplitPaymentPopup />
-
-    <!-- ========= PART PAYMENT POPUP ========= -->
-    <UpiPaymentPopup />
+    <!-- ========= SETTLE,SAVE & EBill POPUP ========= -->
+    <PayAndEBillPopup ref="payAndEBillRef" @success-payment="successPayment()" />
     
 </template>
 <script setup>
@@ -49,9 +43,8 @@ import NoOfPersonPopup from './Popup/NoOfPersonPopup.vue'
 import OrderNotePopup from './Popup/OrderNotePopup.vue'
 import WaiterAssignPopup from './Popup/WaiterAssignPopup.vue'
 import AppliedDiscountPopup from './Popup/AppliedDiscountPopup.vue'
-import SettleSavePopup from './Popup/SettleSavePopup.vue'
-import SplitPaymentPopup from './Popup/SplitPaymentPopup.vue'
-import UpiPaymentPopup from './Popup/UpiPaymentPopup.vue'
+import PayAndEBillPopup from './Popup/PayAndEBillPopup.vue'
+import { ref } from 'vue'
 
 const props = defineProps({
     // Note Modal
@@ -70,10 +63,12 @@ const props = defineProps({
     noteProductStatus: String
     
 });
+const payAndEBillRef = ref(null);
 
 const emit = defineEmits([
                 'submit:product-note', 
-                'submit:ingredient-variation'
+                'submit:ingredient-variation',
+                'success-payment'
             ]);
 
 const submitNote = (note, npStatus) => {
@@ -83,12 +78,15 @@ const submitNote = (note, npStatus) => {
 const submitIngVar = () => {    
     emit('submit:ingredient-variation');
 }
-
-const openSplitPopup = () => {
-    f7.popup.open(".split-payment-popup");
+const callPayAndEBillMethod = () => {
+    payAndEBillRef.value.defaultFillUpSettleMentData();
 }
 
-const openUPIPopup = () => {
-    f7.popup.open(".upi-payment-popup");
+const successPayment = () => {
+    emit('success-payment');
 }
+
+defineExpose({
+    callPayAndEBillMethod
+})
 </script>

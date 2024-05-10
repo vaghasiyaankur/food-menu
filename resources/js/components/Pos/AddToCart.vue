@@ -31,7 +31,13 @@
                     <p class="no-margin">{{  currentCurrencyData ? currentCurrencyData.currency_symbol :  '₹'  }} {{ subTotal }}</p>
                 </div>
                 <div class="order-discount">
-                    <p class="no-margin">Discount</p>
+                    <p class="no-margin">
+                        Discount
+                        <i  
+                            v-if="parseFloat(discount) > 0"
+                            class="icon f7-icons font-16 remove-discount-icon" 
+                            @click="removeDiscountValue()">minus </i>
+                    </p>
                     <p class="no-margin">{{  currentCurrencyData ? currentCurrencyData.currency_symbol :  '₹'  }} {{ discount }}</p>
                 </div>
             </div>
@@ -69,6 +75,7 @@ const emit = defineEmits(['increase:quantity', 'decrease:quantity','open:note-po
 const currentCurrencyData = inject('currentCurrencyData');
 const defaultFillUpSettleMentData = inject('defaultFillUpSettleMentData')
 const openAmountSlider = ref(true);
+const removeDiscount = inject('removeDiscount');
 
 const props = defineProps({
     cartProducts: {
@@ -134,4 +141,7 @@ const openSettlementSavePopup = () => {
     f7.popup.open(`.settle-save-popup`);
 }
 
+const removeDiscountValue = () => {
+    removeDiscount();
+}
 </script>

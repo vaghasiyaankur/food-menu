@@ -219,6 +219,9 @@
     border-radius: 5px;
     --f7-touch-ripple-color: #f33e3e;
 }
+.printer-active {
+    background-color: #f33e3e !important;
+}
 .table_view_list .card-type .action-btn {
     position: absolute;
     top: 16px;

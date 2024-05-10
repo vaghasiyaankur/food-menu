@@ -619,6 +619,12 @@ textarea {
     font-weight: 500;
     color: #38373d;
 }
+.order-discount .remove-discount-icon{
+    background-color: #f33e3e;
+    color: #fff;
+    border-radius: 100%;
+    padding: 1px;
+}
 .bill-divider {
     margin-bottom: 20px;
     border-top: 1px dashed #e0e0e0;

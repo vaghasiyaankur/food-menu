@@ -223,6 +223,8 @@ Route::post('add-minutes-order',[TableController::class, 'addMinutesInOrder']);
 
 Route::get('/get-table/{id}', [TableController::class, 'getTable']);
 
+Route::post('/check-current-order-kot-available', [TableController::class, 'checkCurrentOrderProductsAvailable']);
+
 // ------------------------ Floor Routes ------------------------ //
 
 Route::get('get-floors',[FloorController::class , 'getFloors']);
