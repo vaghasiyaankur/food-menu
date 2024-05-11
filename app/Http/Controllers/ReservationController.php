@@ -69,7 +69,7 @@ class ReservationController extends Controller
                     'person' => $request->person,
                     'orderExists' => $orderExists, 
                     'role' => $request->role,
-                    // 'finish_time' => $table->finish_order_time,
+                    'finish_time' => $table->finish_order_time,
                     'finished' => 0,
                     'restaurant_id' => $restaurantId,
                 ];

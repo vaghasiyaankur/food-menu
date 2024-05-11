@@ -62,10 +62,10 @@
                                                             <span>{{ order.reservation_time }}</span>
                                                         </span>
                                                     </div>
-                                                    <div class="popover padding-half" v-if="!order.is_order_moved" :class="'popover-table-' + order.id" >
+                                                    <div class="popover popover-menu padding-half" v-if="!order.is_order_moved" :class="'popover-table-' + order.id" >
                                                         <div class="user-info popover-inner">
                                                             <div class="display-flex padding-left-half padding-top-half align-items-center" >
-                                                                <i class="f7-icons size-18 text-color-black padding-right-half margin-right-half" >person</i >
+                                                                <i class="f7-icons size-18 text-color-black padding-right-half margin-right-half" >person</i>
                                                                 <span class="text-color-black">{{ order.name ? order.name : "Anonymous" }}</span>
                                                             </div>
                                                             <div class="display-flex padding-left-half padding-top align-items-center" >
@@ -133,12 +133,12 @@
                                                                     </h3>
                                                                 </div>
                                                             </div>
-                                                            <div class="floor__list" :class=" order.start_time && order.finished == 0 ? 'display-none' : '' " >
-                                                                <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="openFloorList(order.id)" >
+                                                            <div class="floor__list popover-open popover-click-4 " :class=" order.start_time && order.finished == 0 ? 'display-none' : '' " data-popover=".popover-floor-4">
+                                                                <div class="card-footer no-margin no-padding justify-content-center hassubs" data-popover=".popover-floor-4" @click="openFloorList(order.id)" >
                                                                     <h3 class="text-color-red">Change Floor</h3>
                                                                 </div>
                                                                 <!-- ============FLOOR DROP DOWN  ============= -->
-                                                                <div class="list simple-list floor-drop-down" :class="'f_f' + order.id" >
+                                                                <div class="popover popover-menu list simple-list floor-drop-down" :class="'f_f' + order.id" >
                                                                     <ul>
                                                                         <li v-for="floor in availableFloorList" :key="floor.id" @click="changeFloor(order.id, floor.id, floor.name)" :class=" table.floor.id == floor.id ? 'display-none' : '' " >
                                                                             <div class="floor_number display-flex align-items-center justify_content_between w-100" >
@@ -293,15 +293,15 @@ const dragOptions = computed(() => ({
 onMounted(() => {
     tableList();
     equal_height();
-    $(document).on("click", ".popover-backdrop", function () {
-        $(".navbar-bg").css("background", "var(--f7-navbar-bg-color)");
-        $(".table-drop-down").removeClass("floor_dropdown_visible");
-        $(".floor-drop-down").removeClass("floor_dropdown_visible");
-        $(".floor__list").removeClass("add_left_before");
-        $(".floor__list").removeClass("add_right_before");
-        $(".table__list").removeClass("add_left_before");
-        $(".table__list").removeClass("add_right_before");
-    });
+    // $(document).on("click", ".popover-backdrop", function () {
+    //     $(".navbar-bg").css("background", "var(--f7-navbar-bg-color)");
+    //     $(".table-drop-down").removeClass("floor_dropdown_visible");
+    //     $(".floor-drop-down").removeClass("floor_dropdown_visible");
+    //     $(".floor__list").removeClass("add_left_before");
+    //     $(".floor__list").removeClass("add_right_before");
+    //     $(".table__list").removeClass("add_left_before");
+    //     $(".table__list").removeClass("add_right_before");
+    // });
     // activationMenu("table", "");
     // removeLoader();
     userId.value = user.value.id;
@@ -355,44 +355,44 @@ const openFloorList = (id) => {
         availableFloorList.value = res.data.floorList;
     });
 
-    $(".table-drop-down").removeClass("floor_dropdown_visible");
-    $(".table__list").removeClass("add_left_before");
-    $(".table__list").removeClass("add_right_before");
-    $(".floor-drop-down").toggleClass("floor_dropdown_visible");
+    // $(".table-drop-down").removeClass("floor_dropdown_visible");
+    // $(".table__list").removeClass("add_left_before");
+    // $(".table__list").removeClass("add_right_before");
+    // $(".floor-drop-down").toggleClass("floor_dropdown_visible");
     const ele = document.querySelector(".popover-click-" + id);
     const bounding = ele.getBoundingClientRect();
     const width = screen.width;
-    if (width > bounding.left + bounding.width + 285) {
-        $(".f_f" + id).css("left", "189px");
-        $(".floor__list").removeClass("add_left_before");
-        $(".floor__list").toggleClass("add_right_before");
-    } else {
-        $(".f_f" + id).css("left", "-260px");
-        $(".floor__list").removeClass("add_right_before");
-        $(".floor__list").toggleClass("add_left_before");
-    }
+    // if (width > bounding.left + bounding.width + 285) {
+    //     $(".f_f" + id).css("left", "189px");
+    //     $(".floor__list").removeClass("add_left_before");
+    //     $(".floor__list").toggleClass("add_right_before");
+    // } else {
+    //     $(".f_f" + id).css("left", "-260px");
+    //     $(".floor__list").removeClass("add_right_before");
+    //     $(".floor__list").toggleClass("add_left_before");
+    // }
     const height = parseInt($(".f_f" + id).height()) / 2 + 22;
     $(".f_f" + id).css("transform", "translateY(-" + height + "px");
 };
 
 const openTableList = (order) => {
-    $(".floor-drop-down").removeClass("floor_dropdown_visible");
-    $(".floor__list").removeClass("add_left_before");
-    $(".floor__list").removeClass("add_right_before");
-    $(".table-drop-down").toggleClass("floor_dropdown_visible");
+    // $(".floor-drop-down").removeClass("floor_dropdown_visible");
+    // $(".floor__list").removeClass("add_left_before");
+    // $(".floor__list").removeClass("add_right_before");
+    // $(".table-drop-down").toggleClass("floor_dropdown_visible");
     const ele = document.querySelector(".popover-click-" + order.id);
     const bounding = ele.getBoundingClientRect();
     const width = screen.width;
-    if (width > bounding.left + bounding.width + 285) {
-        $(".t_f" + order.id).css("left", "190px");
-        $(".table__list").removeClass("add_left_before");
-        $(".table__list").toggleClass("add_right_before");
-    } else {
-        $(".t_f" + order.id).css("left", "-249px");
-        $(".table__list").removeClass("add_right_before");
-        $(".table__list").toggleClass("add_left_before");
-    }
-    $(".table-drop-down").css("min-width", "240px");
+    // if (width > bounding.left + bounding.width + 285) {
+    //     $(".t_f" + order.id).css("left", "190px");
+    //     $(".table__list").removeClass("add_left_before");
+    //     $(".table__list").toggleClass("add_right_before");
+    // } else {
+    //     $(".t_f" + order.id).css("left", "-249px");
+    //     $(".table__list").removeClass("add_right_before");
+    //     $(".table__list").toggleClass("add_left_before");
+    // }
+    // $(".table-drop-down").css("min-width", "240px");
 
     if (order.person < parseInt(maxNumberTableData.value.capacity_of_person)) {
         noTableListShow.value = false;
@@ -413,12 +413,12 @@ const openTableList = (order) => {
 };
 
 const removeBackdrop = () => {
-    $(".floor-drop-down").removeClass("floor_dropdown_visible");
-    $(".table-drop-down").removeClass("floor_dropdown_visible");
-    $(".floor__list").removeClass("add_left_before");
-    $(".floor__list").removeClass("add_right_before");
-    $(".table__list").removeClass("add_left_before");
-    $(".table__list").removeClass("add_right_before");
+    // $(".floor-drop-down").removeClass("floor_dropdown_visible");
+    // $(".table-drop-down").removeClass("floor_dropdown_visible");
+    // $(".floor__list").removeClass("add_left_before");
+    // $(".floor__list").removeClass("add_right_before");
+    // $(".table__list").removeClass("add_left_before");
+    // $(".table__list").removeClass("add_right_before");
 };
 
 const timingCountOrder = (

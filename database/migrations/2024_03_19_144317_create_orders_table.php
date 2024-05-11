@@ -31,7 +31,7 @@ return new class extends Migration
             $table->string('role')->default('Guest');
             $table->string('cancelled_by')->nullable();
             $table->timestamp('start_time')->nullable();
-            $table->timestamp('finish_time')->nullable();
+            $table->integer('finish_time')->nullable();
             $table->boolean('finished')->default(0);
             $table->boolean('is_serve')->default(0);
             $table->float('total_price')->default(0);

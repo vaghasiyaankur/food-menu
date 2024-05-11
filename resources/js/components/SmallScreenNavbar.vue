@@ -11,8 +11,8 @@
                 <div
                     class="panel panel-right panel-right-1 panel-cover panel-resizable panel-init"
                 >
-                    <div class="pannel_header padding-horizontal text-align-right">
-                    <p>
+                    <div class="pannel_header padding padding-horizontal text-align-right">
+                    <p class="no-margin">
                         <a href="#" class="panel-close text-color-black"
                         ><i class="f7-icons">xmark</i></a
                         >
@@ -58,7 +58,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <div v-else-if="item.openCloseReservation" class="height-40 border-bottom" >
+                        <div v-else-if="item.openCloseReservation" class="height-40 border-bottom padding-left" >
                             <button
                                 class="col nav-link button close_reservation no-padding font-16 panel-close"
                                 @click="closeReservationEvent(closeReservation)"
@@ -68,13 +68,13 @@
                             </button>
                         </div>
                         <div v-else 
-                            class="height-40 border-bottom pannel_menu_link panel-close"
+                            class="height-40 border-bottom pannel_menu_link panel-close padding-left"
                             :class="item.routesName.includes(currentRouteName) ? 'bg-pink' : 'bg-white'"
                         >
                             <a 
                                 :href="item.href" 
                                 router 
-                                class="link nav-link  font-16"
+                                class="link nav-link font-16"
                                 :class="item.routesName.includes(currentRouteName) ? 'text-color-white' : 'text-color-black'"
                             >
                                 <Icon :name="item.icon" :color="item.routesName.includes(currentRouteName) ? '#fff' : iconColor" class="margin-right-half" />
