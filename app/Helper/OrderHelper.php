@@ -27,7 +27,7 @@ class OrderHelper
         $order->name = $customer ? $customer->name : null;
         $order->phone = $customer ? $customer->number : null;
         if (isset($data['orderExists']) && $data['orderExists']) {
-            $order->start_time = Carbon::now();
+            $order->start_at = Carbon::now();
         }
         $order->role = $data['role'] ?? null;
         $order->finish_time = $data['finish_time'] ?? null;
@@ -48,7 +48,7 @@ class OrderHelper
     public static function CheckOrderExistParticularTable($tableId, $restaurantId){
         return Order::where('table_id', $tableId)
                         ->whereRestaurantId($restaurantId)
-                        ->whereNotNull('start_time')
+                        ->whereNotNull('start_at')
                         ->where('finished', 0)
                         ->count();
     }
@@ -63,7 +63,7 @@ class OrderHelper
     public static function nextOrder($tableId, $restaurantId){
         return Order::where('table_id', $tableId)
                         ->whereRestaurantId($restaurantId)
-                        ->whereNull('start_time')
+                        ->whereNull('start_at')
                         ->where('finished', 0)
                         ->orderBy('updated_at', 'ASC')
                         ->first();

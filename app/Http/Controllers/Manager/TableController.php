@@ -67,9 +67,9 @@ class TableController extends Controller
             foreach ($floors->activetables as $t_key => $table) {
                 $floors['orders_count'] = $floors['orders_count'] + $table->orders_count;
                 if(count($table->orders) && $table->orders[0] && $floors['time_left'] == false){
-                    $start_time = $table->orders[0]->start_time;
+                    $start_at = $table->orders[0]->start_at;
                     $finish_time = $table->orders[0]->finish_time;
-                    $start = Carbon::parse($start_time)->addMinute($finish_time);
+                    $start = Carbon::parse($start_at)->addMinute($finish_time);
                     $end = Carbon::now();
                     $floors['time_left'] = $start->diffInMinutes($end) <= 3 || $start < $end;
                 }
@@ -89,9 +89,9 @@ class TableController extends Controller
 
                 $tables[$tkey]['orders'][$okey]['is_time_left'] = false;
                 if($okey == 0){
-                    $start_time = $order->start_time;
+                    $start_at = $order->start_at;
                     $finish_time = $order->finish_time;
-                    $start = Carbon::parse($start_time)->addMinute($finish_time);
+                    $start = Carbon::parse($start_at)->addMinute($finish_time);
                     $end = Carbon::now();
                     $tables[$tkey]['orders'][$okey]['is_time_left'] = $start->diffInMinutes($end) <= 3 || $start < $end;
                     $tables[$tkey]['orders'][$okey]['time_left'] = $start;
@@ -127,11 +127,11 @@ class TableController extends Controller
      */
     public function changeOrderTable(Request $request)
     {
-        $orderExists = Order::where('table_id', $request->table_number)->whereNotNull('start_time')->where('finished', 0)->doesntExist();
+        $orderExists = Order::where('table_id', $request->table_number)->whereNotNull('start_at')->where('finished', 0)->doesntExist();
         $data = [];
         $data['table_id'] = $request->table_number;
         if ($orderExists) {
-            $data['start_time'] = Carbon::now();
+            $data['start_at'] = Carbon::now();
         }
 
         $fromTableId = Order::where('id', $request->id)->first()->table_id;
@@ -183,9 +183,9 @@ class TableController extends Controller
 
                 $tables[$tkey]['orders'][$okey]['is_time_left'] = false;
                 if($okey == 0){
-                    $start_time = $order->start_time;
+                    $start_at = $order->start_at;
                     $finish_time = $order->finish_time;
-                    $start = Carbon::parse($start_time)->addMinute($finish_time);
+                    $start = Carbon::parse($start_at)->addMinute($finish_time);
                     $end = Carbon::now();
                     $tables[$tkey]['orders'][$okey]['is_time_left'] = $start->diffInMinutes($end) <= 4 || $start < $end;
                     $tables[$tkey]['orders'][$okey]['time_left'] = $start;
@@ -216,9 +216,9 @@ class TableController extends Controller
             foreach ($floors->activetables as $key => $table) {
                 $floors['orders_count'] = $floors['orders_count'] + $table->orders_count;
                 if($table->orders_count && $floors['time_left'] == false){
-                    $start_time = $table->orders[0]->start_time;
+                    $start_at = $table->orders[0]->start_at;
                     $finish_time = $table->orders[0]->finish_time;
-                    $start = Carbon::parse($start_time)->addMinute($finish_time);
+                    $start = Carbon::parse($start_at)->addMinute($finish_time);
                     $end = Carbon::now();
                     $floors['time_left'] = $start->diffInMinutes($end) <= 4 || $start < $end;
                 }
@@ -251,11 +251,11 @@ class TableController extends Controller
 
         if($table_id == 0) return response()->json([ 'success' => false, 'message' => 'not compatible capacity table in this floor' ] , 200);
 
-        $orderExists = Order::where('table_id', $request->table_number)->whereNotNull('start_time')->where('finished', 0)->doesntExist();
+        $orderExists = Order::where('table_id', $request->table_number)->whereNotNull('start_at')->where('finished', 0)->doesntExist();
         $data = [];
         $data['table_id'] = $table_id;
         if ($orderExists) {
-            $data['start_time'] = Carbon::now();
+            $data['start_at'] = Carbon::now();
         }
 
         $fromTableId = Order::where('id', $request->id)->first()->table_id;
@@ -290,9 +290,9 @@ class TableController extends Controller
         $table_id = Order::where('id', $request->id)->whereRestaurantId($restaurant_id)->first()->table_id;
 
 
-        $next = Order::where('table_id', $table_id)->whereNull('start_time')->whereRestaurantId($restaurant_id)->where('finished', 0)->orderBy('updated_at', 'ASC')->first();
+        $next = Order::where('table_id', $table_id)->whereNull('start_at')->whereRestaurantId($restaurant_id)->where('finished', 0)->orderBy('updated_at', 'ASC')->first();
         $update_date = @$next->updated_at;
-        if($next)  $next->update(['start_time' => Carbon::now()]);
+        if($next)  $next->update(['start_at' => Carbon::now()]);
         if($next)  $next->update(['updated_at' => $update_date]);
 
         // $token = $request->session()->get('device_token');
@@ -360,9 +360,9 @@ class TableController extends Controller
         $table_id = Order::where('id', $request->id)->whereRestaurantId($restaurant_id)->first()->table_id;
 
 
-        $next = Order::where('table_id', $table_id)->whereNull('start_time')->whereRestaurantId($restaurant_id)->where('finished', 0)->orderBy('updated_at', 'ASC')->first();
+        $next = Order::where('table_id', $table_id)->whereNull('start_at')->whereRestaurantId($restaurant_id)->where('finished', 0)->orderBy('updated_at', 'ASC')->first();
         $update_date = @$next->updated_at;
-        if($next)  $next->update(['start_time' => Carbon::now()]);
+        if($next)  $next->update(['start_at' => Carbon::now()]);
         if($next)  $next->update(['updated_at' => $update_date]);
 
         // $token = $request->session()->get('device_token');
@@ -428,7 +428,7 @@ class TableController extends Controller
         $restaurant_id = Auth::user()->restaurant_id;
 
         if($table_id){
-            $allOrder = Order::where('table_id', $table_id)->where('id', '!=', $orderId)->where('finished', 0)->where('created_at', '<=', $created_at)->select('id', 'table_id', 'start_time', 'finish_time', 'finished', 'updated_at')->whereRestaurantId($restaurant_id)->get();
+            $allOrder = Order::where('table_id', $table_id)->where('id', '!=', $orderId)->where('finished', 0)->where('created_at', '<=', $created_at)->select('id', 'table_id', 'start_at', 'finish_time', 'finished', 'updated_at')->whereRestaurantId($restaurant_id)->get();
 
             $calculateTime = 0;
 
@@ -436,9 +436,9 @@ class TableController extends Controller
                 $calculateTime += $order->finish_time;
             }
 
-            $firstOrderTime = Order::where('table_id', $table_id)->where('id', '!=', $orderId)->whereRestaurantId($restaurant_id)->where('finished', 0)->where('created_at', '<=', $created_at)->whereNotNull('start_time')->first();
+            $firstOrderTime = Order::where('table_id', $table_id)->where('id', '!=', $orderId)->whereRestaurantId($restaurant_id)->where('finished', 0)->where('created_at', '<=', $created_at)->whereNotNull('start_at')->first();
             if($firstOrderTime){
-                $started_time = $firstOrderTime->start_time;
+                $started_time = $firstOrderTime->start_at;
             }else{
                 $firstOrderTime = @$allOrder[0];
                 $started_time = @$firstOrderTime->created_at;
@@ -509,7 +509,7 @@ class TableController extends Controller
         $restaurantId = CustomerHelper::getRestaurantId();
 
         $floors = Floor::with(['tables.orders' => function ($query) {
-            $query->where('finish_time', '=', null)->where('finished', '=', 0)->latest()->with('kots.kotProducts');
+            $query->whereNull('finish_at')->where('finished', 0);
         }, 'tables.color'])
         ->where('restaurant_id', $restaurantId)
         ->get();
@@ -525,7 +525,7 @@ class TableController extends Controller
                     $orderData = null;
                     if ($table->orders->isNotEmpty()) {
                         $order = $table->orders->first();
-                        $orderStartTime = new DateTime($order->start_time); // Convert string to DateTime
+                        $orderStartTime = new DateTime($order->start_at); // Convert string to DateTime
                         $orderDuration = $currentDateTime->diff($orderStartTime);
                         
                         if ($orderDuration->h >= 1) {
@@ -540,7 +540,7 @@ class TableController extends Controller
                             'id' => $order->id,
                             'person' => $order->person,
                             'total_price' => $order->total_price,
-                            'start_time' => $orderStartTime->format('H:i'), // Format the start time
+                            'start_at' => $orderStartTime->format('H:i'), // Format the start time
                             'duration' => $formattedDuration,
                         ];
                     }

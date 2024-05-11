@@ -33,7 +33,7 @@ class ReportController extends Controller
 
         $total_order =  Order::whereRestaurantId(Auth::user()->restaurant_id)->whereDate('created_at', '>=', $from_date)->whereDate('created_at', '<=', $to_date)->count();
         $complete_order = Order::whereRestaurantId(Auth::user()->restaurant_id)->whereDate('created_at', '>=', $from_date)->whereDate('created_at', '<=', $to_date)->where('finished', 1)->count();
-        $ongoing_order = Order::whereRestaurantId(Auth::user()->restaurant_id)->whereDate('created_at', '>=', $from_date)->whereDate('created_at', '<=', $to_date)->where('finished', 0)->whereNotNull('start_time')->count();
+        $ongoing_order = Order::whereRestaurantId(Auth::user()->restaurant_id)->whereDate('created_at', '>=', $from_date)->whereDate('created_at', '<=', $to_date)->where('finished', 0)->whereNotNull('start_at')->count();
 
         if(!$total_order) $reservation_table = 0;
         else{

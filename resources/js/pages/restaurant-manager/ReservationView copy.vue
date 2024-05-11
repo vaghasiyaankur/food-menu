@@ -40,7 +40,7 @@
                                     <div class="content_right_text no-margin col-50">
                                         <span class="status_info status_cancel" v-if="reservation.deleted_at">Cancel</span>
                                         <span class="status_info status_complete" v-else-if="reservation.finished">Complete</span>
-                                        <span class="status_info status_ongoing" v-else-if="reservation.start_time">Ongoing</span>
+                                        <span class="status_info status_ongoing" v-else-if="reservation.start_at">Ongoing</span>
                                         <span class="status_info status_waiting" v-else>Wating</span>
                                     </div>
                                 </div>

@@ -102,7 +102,7 @@ class PosController extends Controller
                     'name' => $order->name,
                     'address' => $order->address,
                     'locality' => $order->locality,
-                    'start_time' => $order->start_time,
+                    'start_at' => $order->start_at,
                     'finish_time' => $order->finish_time,
                     'finish_at' => $order->finish_at,
                     'note' => $order->note,
@@ -165,7 +165,7 @@ class PosController extends Controller
             $order = new Order();
             $order->table_id = $request->tableId;
             $order->restaurant_id = $restaurantId;
-            $order->start_time = date('Y-m-d H:i:s');
+            $order->start_at = date('Y-m-d H:i:s');
             $order->save();
 
             $orderId = $order->id;
@@ -247,7 +247,7 @@ class PosController extends Controller
             $order = new Order();
             $order->table_id = $request->tableId;
             $order->restaurant_id = $restaurantId;
-            $order->start_time = date('Y-m-d H:i:s');
+            $order->start_at = date('Y-m-d H:i:s');
             $order->save();
         }
 

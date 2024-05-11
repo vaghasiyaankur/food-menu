@@ -38,7 +38,7 @@
                                                 <!-- :data-popover="'.popover-table-'+order.id" -->
                                                 <!-- popover-open -->
                                                 <!-- :data-popover="'.popover-table-'+order.id" -->
-                                                <div class="person-info popover-open" :class="[ 'popover-click-' + order.id, { 'person-info_move': order.is_order_moved, 'ongoing_popover ': order.is_ongoing_order && !order.is_order_moved, neworder_add: order.is_new_order_timing, }, ]" @click=" getRemainingTime(order.id); orderPerson = order.person; removeBackdrop(); orderId = order.id; " :data-popover="'.popover-table-' + order.id" >
+                                                <div class="person-info popover-open" :class="[ 'popover-click-' + order.id, { 'person-info_move': order.is_order_moved, 'ongoing_popover ': order.is_ongoing_order && !order.is_order_moved, neworder_add: order.is_new_order_timing, }, ]" @click=" getRemainingTime(order.id); orderPerson = order.person; orderId = order.id; " :data-popover="'.popover-table-' + order.id" >
                                                     <div class="neworder_tooltip order_tooltip" v-if="order.is_new_order_timing" >
                                                         <div class="tooltip_text">
                                                             <p class="no-margin">New Reservation</p>
@@ -119,26 +119,26 @@
                                                                 </div>
                                                             </div>
 
-                                                            <div class="finish_popup" v-if="order.start_time && order.finished == 0" >
+                                                            <div class="finish_popup" v-if="order.start_at && order.finished == 0" >
                                                                 <div class="card-footer no-margin no-padding justify-content-center" >
                                                                     <h3>
                                                                         <a href="javascript:;" class="text-color-red" @click="cancelNext(order.id)" > Cancle & Next </a>
                                                                     </h3>
                                                                 </div>
                                                             </div>
-                                                            <div class="finish_popup" v-if="order.start_time && order.finished == 0" >
+                                                            <div class="finish_popup" v-if="order.start_at && order.finished == 0" >
                                                                 <div class="card-footer no-margin no-padding justify-content-center">
                                                                     <h3>
                                                                         <a href="javascript:;" class="text-color-red" @click="finishNext(order.id)" > Finish & Next </a>
                                                                     </h3>
                                                                 </div>
                                                             </div>
-                                                            <div class="floor__list popover-open popover-click-4 " :class=" order.start_time && order.finished == 0 ? 'display-none' : '' " data-popover=".popover-floor-4">
-                                                                <div class="card-footer no-margin no-padding justify-content-center hassubs" data-popover=".popover-floor-4" @click="openFloorList(order.id)" >
+                                                            <div class="floor__list" :class=" order.start_time && order.finished == 0 ? 'display-none' : '' ">
+                                                                <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="openFloorList(order.id)" >
                                                                     <h3 class="text-color-red">Change Floor</h3>
                                                                 </div>
                                                                 <!-- ============FLOOR DROP DOWN  ============= -->
-                                                                <div class="popover popover-menu list simple-list floor-drop-down" :class="'f_f' + order.id" >
+                                                                <div class="list simple-list floor-drop-down" :class="'f_f' + order.id" >
                                                                     <ul>
                                                                         <li v-for="floor in availableFloorList" :key="floor.id" @click="changeFloor(order.id, floor.id, floor.name)" :class=" table.floor.id == floor.id ? 'display-none' : '' " >
                                                                             <div class="floor_number display-flex align-items-center justify_content_between w-100" >
@@ -161,7 +161,7 @@
                                                                 </div>
                                                                 <!-- ============FLOOR DROP DOWN END ============= -->
                                                             </div>
-                                                            <div class="table__list" :class=" order.start_time && order.finished == 0 ? 'display-none' : '' ">
+                                                            <div class="table__list" :class="order.start_at && order.finished == 0 ? 'display-none' : '' ">
                                                                 <div class="card-footer no-margin no-padding justify-content-center hassubs" @click="openTableList(order)" >
                                                                     <h3 class="text-color-red">Change Table</h3>
                                                                 </div>
@@ -293,17 +293,6 @@ const dragOptions = computed(() => ({
 onMounted(() => {
     tableList();
     equal_height();
-    // $(document).on("click", ".popover-backdrop", function () {
-    //     $(".navbar-bg").css("background", "var(--f7-navbar-bg-color)");
-    //     $(".table-drop-down").removeClass("floor_dropdown_visible");
-    //     $(".floor-drop-down").removeClass("floor_dropdown_visible");
-    //     $(".floor__list").removeClass("add_left_before");
-    //     $(".floor__list").removeClass("add_right_before");
-    //     $(".table__list").removeClass("add_left_before");
-    //     $(".table__list").removeClass("add_right_before");
-    // });
-    // activationMenu("table", "");
-    // removeLoader();
     userId.value = user.value.id;
     Pusher.logToConsole = true;
 
@@ -410,15 +399,6 @@ const openTableList = (order) => {
 
     const height = parseInt($(".t_f" + order.id).height()) / 2 + 22;
     $(".t_f" + order.id).css("transform", "translateY(-" + height + "px");
-};
-
-const removeBackdrop = () => {
-    // $(".floor-drop-down").removeClass("floor_dropdown_visible");
-    // $(".table-drop-down").removeClass("floor_dropdown_visible");
-    // $(".floor__list").removeClass("add_left_before");
-    // $(".floor__list").removeClass("add_right_before");
-    // $(".table__list").removeClass("add_left_before");
-    // $(".table__list").removeClass("add_right_before");
 };
 
 const timingCountOrder = (

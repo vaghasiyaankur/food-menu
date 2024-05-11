@@ -515,7 +515,7 @@
                                                             <div
                                                                 class="finish_popup"
                                                                 v-if="
-                                                                    order.start_time &&
+                                                                    order.start_at &&
                                                                     order.finished ==
                                                                         0
                                                                 "
@@ -543,7 +543,7 @@
                                                             <div
                                                                 class="finish_popup"
                                                                 v-if="
-                                                                    order.start_time &&
+                                                                    order.start_at &&
                                                                     order.finished ==
                                                                         0
                                                                 "
@@ -571,7 +571,7 @@
                                                             <div
                                                                 class="floor__list"
                                                                 :class="
-                                                                    order.start_time &&
+                                                                    order.start_at &&
                                                                     order.finished ==
                                                                         0
                                                                         ? 'display-none'
@@ -676,7 +676,7 @@
                                                             <div
                                                                 class="table__list"
                                                                 :class="
-                                                                    order.start_time &&
+                                                                    order.start_at &&
                                                                     order.finished ==
                                                                         0
                                                                         ? 'display-none'

@@ -28,9 +28,9 @@
     position: relative;
     z-index: 1;
 }
-.demo-swiper-multiple {
+.category-slider-content .demo-swiper-multiple {
     height: 75px;
-    width: 85%;
+    width: 90%;
 }
 .category-slider-content .swiper{
     margin: 20px auto 0;
@@ -432,11 +432,11 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox {
 }
 .add-to-cart .cart-products {
     overflow: auto;
-    height: calc(100dvh - 340px);
+    height: calc(100dvh - 354px);
     scrollbar-width: none;
 }
 .add-to-cart .cart-products.open{
-    height: calc(100dvh - 410px);
+    height: calc(100dvh - 420px);
 }
 .add-to-cart .cart-products .kot-time-wrapper {
     margin-top: 15px;
@@ -685,6 +685,7 @@ textarea {
     padding: 12px 42px;
     max-width: 124px;
     width: 100%;
+    height: 40px;
     font-size: 18px;
     line-height: 22px;
     font-weight: 500;
@@ -761,10 +762,10 @@ textarea {
         display: block;
     }
     .add-to-cart .cart-products{
-        height: calc(100dvh - 390px);
+        height: calc(100dvh - 400px);
     }
     .add-to-cart .cart-products.open{
-        height: calc(100dvh - 450px);
+        height: calc(100dvh - 460px);
     }
     .product-section {
         width: calc(100dvw - 45%);

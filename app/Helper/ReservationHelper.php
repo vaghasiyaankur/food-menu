@@ -40,7 +40,7 @@ class ReservationHelper{
         $orderExists = Order::with(['table' => function ($q) use ($from_cap, $restaurant_id) {
             $q->where('capacity_of_person', $from_cap)->where('restaurant_id', $restaurant_id);
         }])
-        ->whereNotNull('start_time')->where('finished', 0)->doesntExist();
+        ->whereNotNull('start_at')->where('finished', 0)->doesntExist();
 
         // Fetch ordered table IDs with matching capacity
         $order_tableId = Table::where('status', 1)->where('restaurant_id', $restaurant_id);
@@ -66,11 +66,11 @@ class ReservationHelper{
             $time = [];
             $tables_time_wise = [];
             foreach ($tableIds->pluck('id') as $tableId) {
-                $allOrder = Order::where('table_id', $tableId)->where('finished', 0)->select('id', 'table_id', 'start_time', 'finish_time', 'finished')->get();
+                $allOrder = Order::where('table_id', $tableId)->where('finished', 0)->select('id', 'table_id', 'start_at', 'finish_time', 'finished')->get();
                 $calculateTime = 0;
                 foreach ($allOrder as $order) {
-                    if ($order->start_time) {
-                        $start  = new Carbon($order->start_time);
+                    if ($order->start_at) {
+                        $start  = new Carbon($order->start_at);
                         $end    = new Carbon();
                         $calculateTime += $order->finish_time - $start->diffInMinutes($end);
                     } else {

@@ -48,7 +48,7 @@ class ReservationController extends Controller
 
         $orderExists = Order::where('table_id', $tableId)
                         ->whereRestaurantId($restaurantId)
-                        ->whereNotNull('start_time')
+                        ->whereNotNull('start_at')
                         ->where('finished', 0)
                         ->doesntExist();
         if($tableId){
@@ -88,7 +88,7 @@ class ReservationController extends Controller
                 $update_date = @$nextOrder->updated_at;
 
                 if($nextOrder)  
-                    $nextOrder->update(['start_time' => \Carbon\Carbon::now(), 'updated_at' => $update_date]);
+                    $nextOrder->update(['start_at' => \Carbon\Carbon::now(), 'updated_at' => $update_date]);
 
 
                 // $token = $request->session()->get('device_token');
@@ -217,11 +217,11 @@ class ReservationController extends Controller
         $table_id = ReservationHelper::takeTable($request->floor, $request->person, $restaurant_id);
 
         if($table_id){
-            $allOrder = Order::whereRestaurantId($restaurant_id)->where('table_id', $table_id)->where('finished', 0)->select('id', 'table_id', 'start_time', 'finish_time', 'finished')->get();
+            $allOrder = Order::whereRestaurantId($restaurant_id)->where('table_id', $table_id)->where('finished', 0)->select('id', 'table_id', 'start_at', 'finish_time', 'finished')->get();
             $calculateTime = 0;
             foreach($allOrder as $order){
-                if($order->start_time){
-                    $start  = new Carbon($order->start_time);
+                if($order->start_at){
+                    $start  = new Carbon($order->start_at);
                     $end    = new Carbon();
                     $calculateTime += $order->finish_time - $start->diffInMinutes($end);
                 }else{
@@ -310,20 +310,20 @@ class ReservationController extends Controller
         $table_id = @$order->table_id;
         $created_at = @$order->created_at;
         if($table_id){
-            $allOrder = Order::where('table_id', $table_id)->where('id', '!=', $orderId)->where('finished', 0)->where('created_at', '<=', $created_at)->select('id', 'table_id', 'start_time', 'finish_time', 'finished', 'updated_at')->get();
+            $allOrder = Order::where('table_id', $table_id)->where('id', '!=', $orderId)->where('finished', 0)->where('created_at', '<=', $created_at)->select('id', 'table_id', 'start_at', 'finish_time', 'finished', 'updated_at')->get();
             $calculateTime = 0;
             foreach($allOrder as $order){
-                // if($order->start_time){
-                //     $start  = new Carbon($order->start_time);
+                // if($order->start_at){
+                //     $start  = new Carbon($order->start_at);
                 //     $end    = new Carbon();
                 //     $calculateTime += $order->finish_time;
                 // }else{
                     $calculateTime += $order->finish_time;
                 // }
             }
-            $firstOrderTime = Order::where('table_id', $table_id)->where('id', '!=', $orderId)->where('finished', 0)->where('created_at', '<=', $created_at)->whereNotNull('start_time')->first();
+            $firstOrderTime = Order::where('table_id', $table_id)->where('id', '!=', $orderId)->where('finished', 0)->where('created_at', '<=', $created_at)->whereNotNull('start_at')->first();
             if($firstOrderTime){
-                $started_time = $firstOrderTime->start_time;
+                $started_time = $firstOrderTime->start_at;
             }else{
                 $firstOrderTime = @$allOrder[0];
                 $started_time = @$firstOrderTime->created_at;
@@ -450,7 +450,7 @@ class ReservationController extends Controller
             $reservation = $reservation->whereDate('created_at', '>=', $from_date)->whereDate('created_at', '<=', $to_date);
         }
 
-        $reservation = $reservation->select('id','customer_id','name', 'phone','person','start_time','finish_time','finished','deleted_at','restaurant_id')->selectRaw('DATE_FORMAT(created_at,"%d, %b %Y / %h:%i %p") as date');
+        $reservation = $reservation->select('id','customer_id','name', 'phone','person','start_at','finish_time','finished','deleted_at','restaurant_id')->selectRaw('DATE_FORMAT(created_at,"%d, %b %Y / %h:%i %p") as date');
 
         if($request->search)
         $reservation = $reservation->where('id', $request->search)->orWhere(function ($orWhere) use ($search) {
@@ -490,7 +490,7 @@ class ReservationController extends Controller
     {
             $order = Order::where('id', $request->id)->with(['customer' => function($q) {
                 $q->select('id','name', 'number');
-            } , 'floorShiftHistory', 'tableShiftHistory'])->select('id','customer_id','person','start_time','finish_time','finished','cancelled_by', 'role','deleted_at')->selectRaw('DATE_FORMAT(created_at,"%d, %b %Y / %h:%i %p") as date')->withTrashed()->findOrFail($request->id);
+            } , 'floorShiftHistory', 'tableShiftHistory'])->select('id','customer_id','person','start_at','finish_time','finished','cancelled_by', 'role','deleted_at')->selectRaw('DATE_FORMAT(created_at,"%d, %b %Y / %h:%i %p") as date')->withTrashed()->findOrFail($request->id);
 
             $floorHistory = FloorShiftHistory::where('order_id', $request->id)->select('id','order_id', 'from', 'to', 'updated_at')->selectRaw('DATE_FORMAT(updated_at,"%h:%i:%s %p") as time')->get();
 

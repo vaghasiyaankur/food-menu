@@ -27,7 +27,7 @@
                                     <div class="item-content item-input">
                                         <div class="item-inner">
                                             <!-- <div class="item-title item-label">Phone number</div> -->
-                                            <div class="item-input-wrap margin-bottom-half"><input type="text" v-model.number="reservation.number" name="number" class="padding" placeholder="Phone number" maxlength="10" @keypress="checknumbervalidate"></div>
+                                            <div class="item-input-wrap margin-bottom-half"><input type="text" v-model.number="reservation.number" name="number" class="padding" placeholder="Phone number" maxlength="10" @keypress="checkNumberValidate"></div>
                                         </div>
                                     </div>
                                     <div class="item-content item-input">
@@ -219,12 +219,12 @@ const register = () => {
         axios.post('/api/add-reservation', formData)
         .then((res) => {
             f7.dialog.alert('Success!', () => {
-            document.getElementById('book_table').classList.remove('active');
-            reservation.value.name = '';
-            reservation.value.number = '';
-            reservation.value.member = '';
-            floors.value = [];
-            reservation.value.floor = 1;
+                document.getElementById('book_table').classList.remove('active');
+                reservation.value.name = '';
+                reservation.value.number = '';
+                reservation.value.member = '';
+                floors.value = [];
+                reservation.value.floor = 1;
             });
 
             setTimeout(() => {
@@ -295,6 +295,7 @@ const floorAvailable = () => {
         .then((res) => {
             if (res.data.success) {
             reservation.value.floor = null;
+            showFloorName.value = 'Select Floor';
             floors.value = res.data.floors;
             }
         });

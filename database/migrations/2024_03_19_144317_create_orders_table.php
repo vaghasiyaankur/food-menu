@@ -30,11 +30,11 @@ return new class extends Migration
             $table->integer('waiter_id')->nullable();
             $table->string('role')->default('Guest');
             $table->string('cancelled_by')->nullable();
-            $table->timestamp('start_time')->nullable();
             $table->integer('finish_time')->nullable();
             $table->boolean('finished')->default(0);
             $table->boolean('is_serve')->default(0);
             $table->float('total_price')->default(0);
+            $table->timestamp('start_at')->nullable();
             $table->timestamp('finish_at')->nullable();
             $table->softDeletes();
             $table->timestamps();

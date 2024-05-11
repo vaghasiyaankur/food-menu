@@ -76,7 +76,7 @@
                                         <td>{{ data.person }}</td>
                                         <td v-if="data.deleted_at"><span class="status_info status_cancel">Cancel</span></td>
                                         <td v-else-if="data.finished"><span class="status_info status_complete">Complete</span></td>
-                                        <td v-else-if="data.start_time"><span class="status_info status_ongoing">Ongoing</span></td>
+                                        <td v-else-if="data.start_at"><span class="status_info status_ongoing">Ongoing</span></td>
                                         <td v-else><span class="status_info status_waiting">Wating</span></td>
                                         <td>{{ data.date }}</td>
                                         <td>
