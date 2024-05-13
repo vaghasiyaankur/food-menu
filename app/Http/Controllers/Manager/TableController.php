@@ -539,7 +539,7 @@ class TableController extends Controller
                         $orderData = [
                             'id' => $order->id,
                             'person' => $order->person,
-                            'total_price' => $order->total_price,
+                            'total_price' => $order->payable_amount,
                             'start_at' => $orderStartTime->format('H:i'), // Format the start time
                             'duration' => $formattedDuration,
                         ];

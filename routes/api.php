@@ -125,6 +125,8 @@ Route::get('/remove-hold-kot/{tableId}',[PosController::class, 'removeHoldKOT'])
 
 Route::post('/save-settle-bill',[PosController::class, 'saveSettleBill']);
 
+Route::post('/remove-discount', [PosController::class, 'removeDiscount']);
+
 // ------------------------ Product Routes ------------------------ //
 
 Route::post('get-products',[ProductController::class, 'getProducts']);

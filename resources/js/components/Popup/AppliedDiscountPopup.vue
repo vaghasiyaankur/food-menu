@@ -73,6 +73,8 @@ const discountType = inject('discountType');
 const discountCoupon = inject('discountCoupon');
 const discountPrice = inject('discountPrice');
 const calculateDiscount = inject('calculateDiscount');
+const saveData = inject('saveData');
+const table = inject('table');
 
 onMounted(() => {
     getSubCategoryList();
@@ -85,6 +87,7 @@ const getSubCategoryList = () => {
     });
 }
 const applyDiscount = () => {
+    saveData(table.value.id);
     calculateDiscount();
 }
 
