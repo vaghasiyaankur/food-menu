@@ -136,7 +136,7 @@ onBeforeMount(() => {
 
 onMounted(() => {
   // getFloors();
-    getCategories();
+    // getCategories();
     memberLimitation();
     // activationMenu('reservation', '');
     // removeLoader();

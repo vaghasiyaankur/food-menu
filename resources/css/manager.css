@@ -920,8 +920,11 @@ p.count__text {
 }
 /*=============== POPOVER=================*/
 .popover.popover-move {
-    background-color: #f33e3e;
+    background: #f33e3e;
     border: 0.5px solid transparent;
+}
+.popover.popover-move .popover-inner{
+    background: transparent;
 }
 .popover {
     width: 100%;
@@ -934,7 +937,7 @@ p.count__text {
 .floor-drop-down {
     min-width: 250px;
     max-width: 250px;
-    position: absolute;
+    position: absolute !important;
     left: 100%;
     background: white;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -949,7 +952,7 @@ p.count__text {
 .table-drop-down {
     max-width: 240px;
     min-width: 240px;
-    position: absolute;
+    position: absolute !important;
     background: white;
     left: 100%;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -970,7 +973,7 @@ p.count__text {
     border-radius: 3px;
     background: #fff;
     right: -9px;
-    bottom: 63px;
+    bottom: 80px;
     transform: rotate(45deg);
     opacity: 1;
 }
@@ -982,7 +985,7 @@ p.count__text {
     border-radius: 3px;
     background: #fff;
     left: -9px;
-    bottom: 63px;
+    bottom: 80px;
     transform: rotate(45deg);
     opacity: 1;
 }
@@ -1290,5 +1293,258 @@ p.count__text {
     }
     .dialog.modal-in {
         transform: translateY(-100%) !important;
+    }
+}
+.calendar-popover{
+    max-width: 320px;
+}
+
+
+button.data_set_btn {
+    outline: none;
+    border: none;
+}
+
+.overflow_x_inherit {
+    overflow-x: inherit;
+}
+
+.justify_content_between {
+    justify-content: space-between !important;
+}
+
+.all_reservation {
+    margin-top: 59px;
+    background-color: #ffffff;
+}
+
+.all_reservation_inner .card {
+    height: calc(100vh - 165px);
+    overflow: auto;
+}
+
+.all_reservation .card {
+    box-shadow: none;
+    background-color: transparent;
+}
+
+.all_reservation .item-input-wrap {
+    width: 100%;
+    background: #FFFFFF;
+    border: 0.5px solid #555555;
+    border-radius: 7px;
+    height: auto;
+}
+
+.all_reservation .filters_button .button {
+    border: 1px solid #555555;
+    border-radius: 5px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #555555;
+    border-radius: 7px;
+}
+
+/*======== TABLE ==========*/
+.reservation_table thead tr {
+    background: #F4F4F4;
+}
+
+.reservation_table .table_content table tr td {
+    padding: 20px 16px;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    color: #38373D;
+    white-space: nowrap;
+}
+
+.reservation_table .table_content table thead tr th {
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 18px;
+    color: #555555;
+}
+
+.reservation_table .table_content table tbody tr:nth-child(even) {
+    background-color: #FAFAFA;
+}
+
+.reservation_table .table_content .status_info {
+    display: flex;
+    justify-content: center;
+    border-radius: 5px;
+    height: 26px;
+    line-height: 26px;
+    font-weight: 400;
+    font-size: 12px;
+    width: 80%;
+    padding: 0 42px;
+}
+
+.reservation_table .table_content .status_info.status_complete {
+    background-color: #E9FBE7;
+    color: #3D833C;
+}
+
+.reservation_table .table_content .status_info.status_waiting {
+    background: #E7E7E7;
+    color: #555555;
+}
+
+.reservation_table .table_content .status_info.status_ongoing {
+    background: #FFF9E3;
+    color: #D39255;
+}
+
+.reservation_table .table_content .status_info.status_cancel {
+    background: #FFE7DD;
+    color: #E31A1A;
+}
+
+.pagination_count {
+    /* position: fixed;
+    bottom: 15; */
+    width: 100%;
+    z-index: 9999999;
+    height: 60px;
+    background-color: #fff;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+}
+
+.pagination_count .pagination_list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.pagination_count .pagination_list a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.pagination_count .pagination_list a:hover:not(.active) {
+    background-color: #ddd;
+    border-radius: 5px;
+}
+
+.menu-item-dropdown-right .menu-dropdown::before,
+.menu-item-dropdown-center .menu-dropdown::before,
+.menu-dropdown-right::before,
+.menu-dropdown-center::before {
+    content: none;
+}
+
+.reservation_table .table_content .menu-dropdown {
+    background-color: transparent;
+}
+
+.reservation_table .table_content .menu-dropdown-content {
+    top: -9px !important;
+}
+
+.reservation_table .table_content .menu-item-dropdown-right .menu-dropdown-content,
+.reservation_table .table_content .menu-dropdown-right .menu-dropdown-content {
+    right: 33px;
+    border-top-right-radius: 5px;
+    width: 180px;
+}
+
+.reservation_table .table_content .menu-dropdown-content {
+    background: #FFFFFF;
+    box-shadow: 0px 0px 14px rgba(34, 34, 34, 0.1);
+    z-index: 9999;
+}
+
+.reservation_table .table_content .menu-dropdown-content a {
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    color: #999999;
+}
+
+.reservation_table .table_content .menu-dropdown-link:last-child {
+    border-top: 0.5px solid #999999;
+    border-radius: 0;
+}
+
+.reservation_table .table_content .menu-dropdown-link {
+    justify-content: flex-start !important;
+}
+
+.pagination_count .pagination_list {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.pagination_count .pagination_list a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.menu-dropdown-link::before {
+    background-color: #F33E3E !important;
+    height: 100%;
+    top: -6px;
+}
+
+.active-state {
+    background-color: none !important;
+    opacity: 0 !important;
+}
+</style>
+<style>
+::placeholder {
+    font-weight: 500 !important;
+    font-size: 14px;
+    line-height: 17px;
+    color: #555555 !important;
+}
+
+.height_40 {
+    height: 40px !important;
+}
+
+.font-18 {
+    font-size: 18px !important;
+}
+
+.height_50 {
+    height: 50px !important;
+}
+
+/*===== SERACH BOX CSS =======*/
+.search__data {
+    width: 90%;
+    line-height: 20px;
+    font-size: var(--f7-input-font-size);
+}
+
+.search_data_wrap {
+    width: 100%;
+    background: #FFFFFF;
+    border: 0.5px solid #555555;
+    border-radius: 7px;
+    height: auto;
+}
+
+/*===== SERACH BOX CSS END=======*/
+.calendar.calendar-range {
+    background-color: #FFFFFF !important;
+    border-radius: 10px !important;
+}
+
+@media screen and (max-width:820px) {
+    .search__data {
+        width: 87%;
     }
 }
