@@ -34,6 +34,9 @@ return new class extends Migration
             $table->boolean('finished')->default(0);
             $table->boolean('is_serve')->default(0);
             $table->float('total_price')->default(0);
+            $table->float('discount_amount')->default(0);
+            $table->string('discount_type')->default('fixed');
+            $table->float('payable_amount')->default(0);
             $table->timestamp('start_at')->nullable();
             $table->timestamp('finish_at')->nullable();
             $table->softDeletes();

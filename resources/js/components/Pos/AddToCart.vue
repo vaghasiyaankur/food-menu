@@ -38,13 +38,13 @@
                             class="icon f7-icons font-16 remove-discount-icon" 
                             @click="removeDiscountValue()">minus </i>
                     </p>
-                    <p class="no-margin">{{  currentCurrencyData ? currentCurrencyData.currency_symbol :  '₹'  }} {{ discount }}</p>
+                    <p class="no-margin">{{  currentCurrencyData ? currentCurrencyData.currency_symbol :  '₹'  }} {{ discount ? discount : '0.00' }}</p>
                 </div>
             </div>
             <hr class="bill-divider">
             <div class="total_bill_amount">
                 <div class="total_bill-text">
-                    <p class="no-margin">Total Amount</p>
+                    <p class="no-margin">Payable Amount</p>
                 </div>
                 <div class="total_bill-amount">
                     <p class="no-margin">{{  currentCurrencyData ? currentCurrencyData.currency_symbol :  '₹'  }} {{ totalAmount }}</p>
@@ -76,6 +76,8 @@ const currentCurrencyData = inject('currentCurrencyData');
 const defaultFillUpSettleMentData = inject('defaultFillUpSettleMentData')
 const openAmountSlider = ref(true);
 const removeDiscount = inject('removeDiscount');
+const saveData = inject('saveData');
+const table = inject('table');
 
 const props = defineProps({
     cartProducts: {
@@ -142,6 +144,7 @@ const openSettlementSavePopup = () => {
 }
 
 const removeDiscountValue = () => {
+    saveData(table.value.id);
     removeDiscount();
 }
 </script>

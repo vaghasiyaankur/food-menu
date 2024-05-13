@@ -108,6 +108,10 @@ class PosController extends Controller
                     'note' => $order->note,
                     'waiter' => $order->waiter_id,
                     'kots' => $kotsData,
+                    'total_price' => $order->total_price,
+                    'discount_amount' => $order->discount_amount,
+                    'payable_amount' => $order->payable_amount,
+                    'discount_type' => $order->discount_type
                 ];
                 $latestKot = Kot::where('order_id', $order->id)->latest()->take(1)->first();
                 if($latestKot){
@@ -214,7 +218,10 @@ class PosController extends Controller
         }
 
         Order::where('id', $order->id)->update([
-            'total_price' => $order->total_price + $priceCount,
+            // 'total_price' => $order->total_price + $priceCount,
+            'total_price' => $request->subTotal,
+            'payable_amount' => $request->payableAmount,
+            'discount_amount' => $request->discountAmount,
             'person' => $request->numberOfPerson,
             'phone' => $request->personNumber,
             'name' => $request->personName,
@@ -229,6 +236,25 @@ class PosController extends Controller
         $this->removeHoldKOT($request->tableId);
         
         return response()->json(['success'=>'KOT Added Successfully.']);
+    }
+
+    public function removeDiscount(Request $request) {
+        
+        $order =  Order::findOrFail($request->tableId);
+
+        if($order) {
+
+            $order->update([
+                'discount_type'   =>  'fixed',
+                'discount_amount' =>  0.00,
+                'payable_amount'  =>  $order->total_price
+            ]);
+
+            return response()->json([
+                'success' => 'Discount Remove Successfully.'
+            ], 200);
+        }
+        
     }
 
     public function saveData(Request $request){
@@ -259,7 +285,11 @@ class PosController extends Controller
             'address' => $request->personAddress,
             'locality' => $request->personLocality,
             'note' => $request->orderNote,
-            'waiter_id' => $request->selectWaiter
+            'waiter_id' => $request->selectWaiter,
+            'discount_amount' => $request->discountAmount,
+            'discount_type' => $request->discountType
+            // 'total_price' => $request->subTotal,
+            // 'payable_amount' => $request->subTotal - $request->discountAmount
         ]);
 
         $this->updateCustomerData($order->id, $request);
@@ -309,6 +339,12 @@ class PosController extends Controller
                 'table_id' => $request->tableId,
                 'restaurant_id' => $restaurantId
             ],$data);
+
+        Order::where('table_id', $request->tableId)->update([
+            'total_price'     => $request->subTotal,
+            'payable_amount'  => $request->payableAmount,
+            'discount_amount' => $request->discountAmount
+        ]);
 
         return response()->json(['success'=>'Hold KOT Added Successfully.']);
 

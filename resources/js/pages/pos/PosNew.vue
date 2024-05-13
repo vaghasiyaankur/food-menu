@@ -182,6 +182,10 @@ const getTableCurrentDetail = (tableId) => {
             personLocality.value = personDetails.locality ? personDetails.locality : '';
             orderNote.value = holdKotOtherData.order_note ? holdKotOtherData.order_note : '';
             selectWaiter.value = holdKotOtherData.waiter_id ? holdKotOtherData.waiter_id : '';
+            discount.value = response.data.order ? response.data.order.discount_amount : '';
+            discountPrice.value = response.data.order ? response.data.order.discount_amount : '';
+            totalAmount.value = response.data.order ? response.data.order.payable_amount  : '';
+            discountType.value = response.data.order ? response.data.order.discount_type : '';
 
         }else{
             foodReceivedType.value = response.data.received_type;
@@ -192,6 +196,10 @@ const getTableCurrentDetail = (tableId) => {
             personLocality.value = response.data.order ? response.data.order.locality : '';
             orderNote.value = response.data.order ? response.data.order.note : '';
             selectWaiter.value = response.data.order ? response.data.order.waiter : '';
+            discount.value = response.data.order ? response.data.order.discount_amount : '';
+            discountPrice.value = response.data.order ? response.data.order.discount_amount : '';
+            totalAmount.value = response.data.order ? response.data.order.payable_amount  : '';
+            discountType.value = response.data.order ? response.data.order.discount_type : '';
         }
         calculateDiscount();
         checkFillUpDate();
@@ -392,6 +400,9 @@ const createKOT = (tableId) => {
                 personLocality : personLocality.value,
                 orderNote : orderNote.value,
                 selectWaiter : selectWaiter.value,
+                subTotal : subTotal.value,
+                payableAmount : payableAmount.value,
+                discountAmount : discountPrice.value ? discountPrice.value : 0.00,
             })
         .then((response) => {
             successNotification(response.data.success);
@@ -418,7 +429,9 @@ const saveData = (tableId) => {
         personAddress : personAddress.value,
         personLocality : personLocality.value,
         orderNote : orderNote.value,
-        selectWaiter : selectWaiter.value
+        selectWaiter : selectWaiter.value,
+        discountType : discountType.value,
+        discountAmount : discountPrice.value ? discountPrice.value : 0.00,
     })
     .then((response) => {
         f7.popup.close(`.popup`);
@@ -466,6 +479,9 @@ const holdKOT = (tableId) => {
                 personLocality : personLocality.value,
                 orderNote : orderNote.value,
                 selectWaiter : selectWaiter.value,
+                subTotal : subTotal.value,
+                payableAmount : payableAmount.value,
+                discountAmount : discountPrice.value ? discountPrice.value : 0.00,
             })
         .then((response) => {
             successNotification(response.data.success);
@@ -485,6 +501,13 @@ const removeDiscount = () => {
     discount.value = 0;
     discountPrice.value = 0;
     getTotalAmount();
+
+    axios.post('/api/remove-discount', { tableId : tableIdNumber.value })
+        .then(response => {
+            successNotification(response.data.success);
+        }).catch(error => {
+            console.error(error);
+        });
 }
 
 const calculateDiscount = () => {
