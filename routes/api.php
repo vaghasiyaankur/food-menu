@@ -316,6 +316,10 @@ Route::post('/kot-list', [OrderController::class, 'kotList']);
 
 Route::post('order-serve',[OrderController::class, 'orderServe']);
 
+Route::post('get-complete-orders',[OrderController::class, 'getCompleteOrders']);
+
+Route::get('orders/{id}',[OrderController::class, 'getOrder']);
+
 // ------------------------ Auth Routes ------------------------ //
 
 Route::get('/checkLogin', [AuthController::class, 'checklogin']);

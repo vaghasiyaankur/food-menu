@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             ColorSeeder::class,
             ProductSeeder::class,
+            ComboSeeder::class,
             CustomerSeeder::class,
             FloorSeeder::class,
             TableSeeder::class,

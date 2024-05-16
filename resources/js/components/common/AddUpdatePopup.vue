@@ -115,7 +115,7 @@ import Radio from '../Form/Radio.vue';
 import DropDown from '../Form/DropDown.vue';
 import Switch from '../Form/Switch.vue';
 import DateTime from '../Form/DateTime.vue';
-import { onBeforeUnmount } from 'vue';
+import { onBeforeUnmount, ref } from 'vue';
 
 
 const props = defineProps({
@@ -128,20 +128,22 @@ const props = defineProps({
     dataType: String
 });
 
+const localFormDataFormat = ref(props.formDataFormat);
+
 const emit = defineEmits(['store:update', 'set:startDate', 'set:endDate']);
 
 const saveValue = (index, ind = null, value) => {
     if(ind == null){
-        props.formDataFormat[index].value = value;
+        localFormDataFormat.value[index].value = value;
     }else{
-        props.formDataFormat[index].options[ind].value = value;
+        localFormDataFormat.value[index].options[ind].value = value;
     }
 };
 
 const saveImage = (index, imageData, imageInput) => {
 
-    props.formDataFormat[index].value = imageInput;
-    props.formDataFormat[index].preview = imageData;
+    localFormDataFormat.value[index].value = imageInput;
+    localFormDataFormat.value[index].preview = imageData;
 };
 
 const storeData = () => {
@@ -155,7 +157,7 @@ const changeValue = (method) => {
 }
 
 onBeforeUnmount(() => {
-    props.formDataFormat = [];  
+    localFormDataFormat.value = [];  
 });
 
 </script>

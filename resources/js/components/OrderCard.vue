@@ -29,10 +29,10 @@
                 </div>
             </div>
             <div class="bill-pay-details">
-                <button class="server_btn" :disabled="item.is_serve ? true : false" @click="emit('save:serve',item.id,'order')">
+                <button class="server_btn" :disabled="!!item.is_serve" @click="emit('save:serve',item.id,'order')">
                     <h5 class="no-margin">{{item.is_serve ? 'Served' : 'Serve'}}</h5>
                 </button>
-                <button class="pay_btn" data-popup="#current_order_paybill_popup" @click="f7.popup.open(`.current_order_paybill_popup`);">
+                <button class="pay_btn" @click="emit('save:settle-payment',item.table_id,item)" :disabled="!item.is_serve">
                     <h5 class="no-margin">Pay</h5>
                 </button>
             </div>
@@ -80,7 +80,7 @@ const props = defineProps({
     items : Object,
     item : Object,
 });
-const emit = defineEmits(['get:item', 'save:serve']);
+const emit = defineEmits(['get:item', 'save:serve', 'save:settle-payment']);
 
 const timeFormat = (time) => {
     if (time) return dayjs().to(dayjs(time));

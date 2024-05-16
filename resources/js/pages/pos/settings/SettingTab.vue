@@ -6,32 +6,34 @@
 </div>
 <div class="tabs">
     <div id="tab-general-setting" class="tab tab-active">
-        <GeneralSetting />
-    </div>
-    <div id="tab-currency" class="tab">
-        <CurrencySetting />
-    </div>
-    <div id="tab-taxes" class="tab">
-        <TaxSetting />
-    </div>
-    <div id="tab-user-management" class="tab">
-        <UserManagement />
-    </div>
-    <div id="tab-language" class="tab">
-        <Language @change:langTrans="langTrans" :showLangs="showLangs" v-if="showLangs" />
-        <LanguageTranslate @change:langTrans="langTrans" :langId="langId" v-else />
-    </div>
-    <div id="tab-floor-plan" class="tab">
-        <FloorList />
-    </div>
-    <div id="tab-qr-code-generator" class="tab">
-        <QrCodeGenerate />
-    </div>
-    <div id="tab-coupon-Code" class="tab">
-        <CouponCode />
-    </div>
-    <div id="tab-upi-qrcode-setting" class="tab">
-        <UpiPaymentSetting />
+        <div v-if="currentTab == 'general-setting'">
+            <GeneralSetting />
+        </div>
+        <div v-if="currentTab == 'currency'">
+            <CurrencySetting />
+        </div>
+        <div v-if="currentTab == 'taxes'">
+            <TaxSetting />
+        </div>
+        <div v-if="currentTab == 'user-management'">
+            <UserManagement />
+        </div>
+        <div v-if="currentTab == 'language'">
+            <Language @change:langTrans="langTrans" :showLangs="showLangs" v-if="showLangs" />
+            <LanguageTranslate @change:langTrans="langTrans" :langId="langId" v-else />
+        </div>
+        <div v-if="currentTab == 'floor-plan'">
+            <FloorList />
+        </div>
+        <div v-if="currentTab == 'qr-code-generator'">
+            <QrCodeGenerate />
+        </div>
+        <div v-if="currentTab == 'coupon-Code'">
+            <CouponCode />
+        </div>
+        <div v-if="currentTab == 'upi-qrcode-setting'">
+            <UpiPaymentSetting />
+        </div>
     </div>
 </div>
 </template>

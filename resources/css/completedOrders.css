@@ -82,7 +82,7 @@
     list-style-type: none;
     padding: 0;
     overflow-y: scroll;
-    max-height: calc(100dvh - 155px);
+    max-height: calc(100dvh - 175px);
     scrollbar-width: none;
 }
 .completed_orders_list .filtered_list .filtered_order_item, .upi-payment-methods .payment_list .upi-payment-method {
@@ -163,7 +163,7 @@
     width: 100%;
     position: relative;
 }
-.selected_order_details_wrapper .selected_order_details {
+.selected_order_details_wrapper.selected_order_details {
     position: fixed;
     top: 155px;
     right: 0;
@@ -250,7 +250,7 @@
     box-shadow: 0px -2px 8px 0px #2222220f;
     z-index: 2;
 }
-.selected_order_details .pullUp_total_menu-wrapper .pullUp_total_menu::before {
+/* .selected_order_details .pullUp_total_menu-wrapper .pullUp_total_menu::before {
     content: "";
     width: 37px;
     height: 37px;
@@ -276,7 +276,7 @@
     right: 50%;
     transform: translate(50%, -50%);
     z-index: 4;
-}
+} */
 .selected_order_details .pullUp_total_menu .discount_provided {
     display: flex;
     align-items: center;

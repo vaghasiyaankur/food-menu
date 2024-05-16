@@ -2,7 +2,7 @@
     <f7-page>
         <div class="data-list-section">
             <MenuManagementHeader title="Sub Category" @add:popup="showSubCategoryPopup"
-                @update:search="updateSearch" />
+                @update:search="updateSearch" :drop-down="headerDropDown" @filter:data="filterData" />
 
                 <div class="sub-category-card" v-if="subCategories?.length > 0">
                     <Card 
@@ -13,7 +13,7 @@
                 </div>
                 <div v-else>
                     <div class="no_order">
-                        <NoValueFound title="Empty KOT List" />
+                        <NoValueFound title="Empty Sub Category List" />
                     </div>
                 </div>
         </div>
@@ -56,6 +56,10 @@ const addUpdateType = ref('add');
 const removeSubCategoryId = ref(0);
 const defaultSelectCatId = ref(0);
 
+const headerDropDown = ref([
+    { label: 'Category',  data: {}, value: "0"}
+]);
+
 const addUpdateFormDataFormat = ref([
     { label: 'Id', multipleLang: false, type: 'hidden', name: 'id', placeHolder: 'Category Id', value: ''},
     { label: 'Image', multipleLang: false, type: 'image', name: 'image', placeHolder: 'Sub Category Image', value: {}, preview: ''},
@@ -83,8 +87,11 @@ onMounted(() => {
 });
 
 const getSubCategories = () => {
+
+    let category = headerDropDown.value[0].value;
     axios.post('/api/get-sub-categories', {
-        search: search.value
+        search: search.value,
+        category : category
     })
     .then((response) => {
         subCategories.value = response.data.subCategories;
@@ -95,6 +102,11 @@ const getCategories = () => {
     axios.post('/api/get-categories')
     .then((response) => {
         let optionsData = [];
+
+        optionsData.push({
+            id: 0,
+            label: 'Category',
+        });
         
         Object.keys(response.data.categories).forEach(catKey => {
             const cat = response.data.categories[catKey];
@@ -105,6 +117,8 @@ const getCategories = () => {
         });
 
         defaultSelectCatId.value = response.data.categories[0]?.id ?? ''
+
+        headerDropDown.value[0].data = optionsData;
 
         addUpdateFormDataFormat.value.push({
             label: 'Category',
@@ -202,6 +216,10 @@ const resetFormData = () => {
 
 const updateSearch = (searchValue) => {
     search.value = searchValue;
+    getSubCategories();
+}
+
+const filterData = (filterLabel) => {
     getSubCategories();
 }
 

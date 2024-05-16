@@ -73,8 +73,10 @@ class VariationSeeder extends Seeder
         $datas = [
             ['variation_id' => 1, 'product_id' => 1, 'price' => 12],
             ['variation_id' => 2, 'product_id' => 1, 'price' => 21],
-            ['variation_id' => 1, 'product_id' => 2, 'price' => 12],
-            ['variation_id' => 2, 'product_id' => 2, 'price' => 21]
+            ['variation_id' => 1, 'product_id' => 61, 'price' => 12],
+            ['variation_id' => 2, 'product_id' => 61, 'price' => 21],
+            ['variation_id' => 1, 'product_id' => 230, 'price' => 12],
+            ['variation_id' => 2, 'product_id' => 230, 'price' => 21]
         ];
         foreach($datas as $data){
             ProductVariation::create($data);

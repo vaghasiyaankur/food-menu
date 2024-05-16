@@ -56,13 +56,13 @@
                                     {{ product.name }}
                                 </p>
                                 <p class="text-red no-margin">{{  currentCurrencyData ? currentCurrencyData.currency_symbol :  '₹'  }} {{ ((product.price + product.extraAmount) * product.quantity).toFixed(2) }}</p>
-                                <span v-if="product.variation.name" class="no-margin display-flex align-items-center" >
-                                    Size: {{ product.variation.name }}
+                                <span v-if="product.variation?.name" class="no-margin display-flex align-items-center" >
+                                    Size: {{ product.variation?.name }}
                                 </span>
-                                <span v-if="product.ingredient.length > 0" >
+                                <span v-if="product.ingredient?.length > 0" >
                                     Ingredient : 
                                     <span v-for="(ing, index) in product.ingredient" :key="index">
-                                        {{ ing.name }} <span v-if="(product.ingredient.length - 1) !== index">, </span>
+                                        {{ ing.name }} <span v-if="(product.ingredient?.length - 1) !== index">, </span>
                                     </span>
                                 </span>
                             </div>

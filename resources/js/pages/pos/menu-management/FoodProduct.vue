@@ -13,7 +13,7 @@
             </div>
             <div v-else>
                 <div class="no_order">
-                    <NoValueFound title="Empty KOT List" />
+                    <NoValueFound title="Empty Product List" />
                 </div>
             </div>
         </div>

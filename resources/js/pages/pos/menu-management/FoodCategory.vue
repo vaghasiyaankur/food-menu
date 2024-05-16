@@ -14,7 +14,7 @@
             </div>
             <div v-else>
                 <div class="no_order">
-                    <NoValueFound title="Empty KOT List" />
+                    <NoValueFound title="Empty Category List" />
                 </div>
             </div>
         </div>

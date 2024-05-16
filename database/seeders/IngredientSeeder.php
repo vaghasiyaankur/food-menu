@@ -20,8 +20,8 @@ class IngredientSeeder extends Seeder
     public function run()
     {
         $ingredients = [
-            ['name' => ['Butter Milk', 'છાછ', 'छाछ'], 'price' => 2.50],
-            ['name' => ['Milk', 'દૂધ', 'दूध'], 'price' => 3.00],
+            ['name' => ['Kothmir', 'કોથમીર', 'कोथमीर'], 'price' => 2.50],
+            ['name' => ['Potato', 'બટાકા', 'आलू'], 'price' => 3.00],
             ['name' => ['Salad', 'સલાડ', 'सलाद'], 'price' => 4.50],
             ['name' => ['Sweet', 'મીઠાઈ', 'मिठाई'], 'price' => 3.50],
             ['name' => ['Noodles', 'નૂડલ્સ', 'नूडल्स'], 'price' => 5.00],
@@ -88,14 +88,16 @@ class IngredientSeeder extends Seeder
         }
 
         //Add For Testing 
-        $datas = [
+        $data = [
             ['ingredient_id' => 1, 'product_id' => 1],
             ['ingredient_id' => 2, 'product_id' => 1],
-            ['ingredient_id' => 1, 'product_id' => 2],
-            ['ingredient_id' => 2, 'product_id' => 2]
+            ['ingredient_id' => 5, 'product_id' => 34],
+            ['ingredient_id' => 13, 'product_id' => 123],
+            ['ingredient_id' => 30, 'product_id' => 302],
+            ['ingredient_id' => 38, 'product_id' => 391]
         ];
-        foreach($datas as $data){
-            ProductIngredient::create($data);
+        foreach($data as $d){
+            ProductIngredient::create($d);
         }
 
     }

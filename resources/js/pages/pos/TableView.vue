@@ -251,7 +251,12 @@ const getTableListFloorWise = () => {
             defaultSelectFloorId.value = response.data[0]?.id ?? '';
 
             if (capacityIndex !== -1) {
-                addUpdateFormDataFormat.value.splice(capacityIndex + 1, 0, {
+                const FloorIndex = addUpdateFormDataFormat.value.findIndex(item => item.label === 'Floor');
+                let floor = 0;
+                if (FloorIndex !== -1) {
+                    floor = 1;
+                }
+                addUpdateFormDataFormat.value.splice(capacityIndex + 1, floor, {
                     label: 'Floor',
                     multipleLang: false,
                     type: 'drop-down',
@@ -298,6 +303,7 @@ const storeUpdateData = () => {
         successNotification(response.data.success);
         f7.popup.close(`.addUpdatePopup`);
         getTableListFloorWise();
+        console.log(addUpdateFormDataFormat.value);
     })
     .catch((error) => {
         const errorMessage = getErrorMessage(error);

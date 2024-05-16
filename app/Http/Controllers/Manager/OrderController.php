@@ -24,7 +24,7 @@ class OrderController extends Controller
         ->whereHas('kots', function ($query) use ($dineType) {
             if ($dineType != '') $query->where('food_received_type', $dineType);
         })
-        ->whereRestaurantId(Auth::user()->restaurant_id)->paginate(12);
+        ->whereRestaurantId(Auth::user()->restaurant_id)->whereNull('finish_at')->where('finished', 0)->paginate(12);
         
         return response()->json($kot_orders);
     }
@@ -43,5 +43,29 @@ class OrderController extends Controller
             }
         }
         return response()->json(['success' => 'Order Serve Successfully.']);
+    }
+
+    public function getCompleteOrders(Request $request) {
+        $floorId = $request->floor;
+        $dineType = $request->dineType;
+        $kot_orders = Order::with([
+            'table' => function ($query) {
+                $query->select('id', 'table_number');
+            },
+            'kots.kotProducts.product.productRestaurantLanguages'
+        ])->whereRestaurantId(Auth::user()->restaurant_id)->whereNotNull('finish_at')->where('finished', 1)->paginate(12);
+        
+        return response()->json($kot_orders);
+    }
+
+    public function getOrder ($id) {
+        $kot_order = Order::with([
+            'table' => function ($query) {
+                $query->select('id', 'table_number');
+            },
+            'kots.kotProducts.product.productRestaurantLanguages'
+        ])->whereRestaurantId(Auth::user()->restaurant_id)->find($id);
+        
+        return response()->json($kot_order);
     }
 }

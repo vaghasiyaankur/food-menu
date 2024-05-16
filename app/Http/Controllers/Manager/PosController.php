@@ -170,6 +170,7 @@ class PosController extends Controller
             $order->table_id = $request->tableId;
             $order->restaurant_id = $restaurantId;
             $order->start_at = date('Y-m-d H:i:s');
+            $order->finish_time = $table->finish_order_time;
             $order->save();
 
             $orderId = $order->id;
@@ -371,7 +372,7 @@ class PosController extends Controller
 
         Order::where('id', $request->orderId)
                 ->update([
-                    'finish_time' => Carbon::now(),
+                    // 'finish_time' => Carbon::now(),
                     'finished' => 1,
                     'is_serve' => 1,
                     'finish_at' => Carbon::now(),
