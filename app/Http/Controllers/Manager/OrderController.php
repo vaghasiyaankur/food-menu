@@ -46,14 +46,23 @@ class OrderController extends Controller
     }
 
     public function getCompleteOrders(Request $request) {
-        $floorId = $request->floor;
-        $dineType = $request->dineType;
-        $kot_orders = Order::with([
-            'table' => function ($query) {
-                $query->select('id', 'table_number');
-            },
-            'kots.kotProducts.product.productRestaurantLanguages'
-        ])->whereRestaurantId(Auth::user()->restaurant_id)->whereNotNull('finish_at')->where('finished', 1)->paginate(12);
+        $kot_orders = Order::with(['kots' => function ($query) {
+            $query->withCount('kotProducts');
+        }])
+        ->select('id','created_at','total_price')
+        ->whereRestaurantId(Auth::user()->restaurant_id)
+        ->whereNotNull('finish_at')
+        ->where('finished', 1)
+        ->paginate(12);
+
+        // Iterate over each order in the paginated result
+        foreach ($kot_orders as $order) {
+            // Add the kot_products_count of the current order to the total sum
+            $order->total_products = 0;
+            foreach ($order->kots as $key => $kot) {
+                $order->total_products += $kot->kot_products_count;
+            }
+        }
         
         return response()->json($kot_orders);
     }

@@ -442,6 +442,7 @@
 }
 .due_mobile-text,
 .due_customer-name,
+.due_customer-email,
 .due_customer-address,
 .due_customer-locality,
 .no_of_person-text,
@@ -459,6 +460,7 @@
 }
 .add_due_mobile-text,
 .add_due_customer-name,
+.add_due_customer-email,
 .add_due_customer-address,
 .add_due_customer-locality,
 .add_no_of_person,

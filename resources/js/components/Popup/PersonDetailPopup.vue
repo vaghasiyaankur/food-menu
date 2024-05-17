@@ -12,6 +12,10 @@
             <div class="add_due_customer-name text-align-left">
                 <input type="text" class="due_customer-name-data" v-model="personName" placeholder="Enter your name">
             </div>
+            <label class="due_customer-email">Email</label>
+            <div class="add_due_customer-email text-align-left">
+                <input type="text" class="due_customer-email-data" v-model="personEmail" placeholder="Enter your email">
+            </div>
             <label class="due_customer-address">Address</label>
             <div class="add_due_customer-address text-align-left">
                 <input type="text" class="due_customer-address-data" v-model="personAddress" placeholder="Enter your address">
@@ -38,6 +42,7 @@ import { inject }  from 'vue';
 
 const personNumber = inject('personNumber');
 const personName = inject('personName');
+const personEmail = inject('personEmail');
 const personAddress = inject('personAddress');
 const personLocality = inject('personLocality');
 const saveData = inject('saveData');

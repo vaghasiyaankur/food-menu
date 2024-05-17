@@ -23,6 +23,10 @@ use App\Models\VariationRestaurantLanguage;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use PHPUnit\TextUI\XmlConfiguration\Variable;
+use PDF;
+use Dompdf\Dompdf;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendPdfMail;
 
 class PosController extends Controller
 {
@@ -283,12 +287,13 @@ class PosController extends Controller
             'person' => $request->numberOfPerson,
             'phone' => $request->personNumber,
             'name' => $request->personName,
+            'email' => $request->personEmail,
             'address' => $request->personAddress,
             'locality' => $request->personLocality,
             'note' => $request->orderNote,
             'waiter_id' => $request->selectWaiter,
             'discount_amount' => $request->discountAmount,
-            'discount_type' => $request->discountType
+            'discount_type' => $request->discountType ?? 'fixed'
             // 'total_price' => $request->subTotal,
             // 'payable_amount' => $request->subTotal - $request->discountAmount
         ]);
@@ -322,6 +327,7 @@ class PosController extends Controller
         $personDetails = [
             'number' => $request->personNumber,
             'name' => $request->personName,
+            'email' => $request->personEmail,
             'address' => $request->personAddress,
             'locality' => $request->personLocality,
             'person' => $request->numberOfPerson
@@ -379,5 +385,27 @@ class PosController extends Controller
                 ]);
 
         return response()->json(['success'=>'Bill Settle Successfully.']);
+    }
+
+    public function printOrder (Dompdf $dompdf,$id) {
+        // Generate PDF content (example HTML content)
+        $htmlContent = '<html><body><h1>Hello, this is a PDF!</h1></body></html>';
+
+        // Load HTML content into Dompdf instance
+        $dompdf->loadHtml($htmlContent);
+
+        // (Optional) Set paper size and orientation
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Get the generated PDF content
+        $pdfContent = $dompdf->output();
+
+        // Send email with PDF attachment
+        Mail::to('mekadi5100@mfyax.com')->send(new SendPdfMail($pdfContent));
+
+        return "PDF email has been sent.";
     }
 }

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('person')->default(0);
             $table->string('phone')->nullable();
             $table->string('name')->nullable();
+            $table->string('email')->nullable();
             $table->string('address')->nullable();
             $table->string('locality')->nullable();
             $table->text('note')->nullable();

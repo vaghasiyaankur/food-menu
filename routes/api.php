@@ -119,6 +119,8 @@ Route::post('/add-kot',[PosController::class, 'addKOT']);
 
 Route::post('/save-data',[PosController::class, 'saveData']);
 
+Route::get('/print-order/{id}', [PosController::class, 'printOrder']);
+
 Route::post('/hold-kot',[PosController::class, 'holdKOT']);
 
 Route::get('/remove-hold-kot/{tableId}',[PosController::class, 'removeHoldKOT']);

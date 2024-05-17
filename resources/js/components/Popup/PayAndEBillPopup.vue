@@ -54,7 +54,7 @@ const openUPIPopup = () => {
     f7.popup.open(".upi-payment-popup");
 }
 
-const settleSavePayment = () => {
+const settleSavePayment = async () => {
     const formData = new FormData();
     formData.append('orderId', orderId.value);
     formData.append('tableId', tableIdNumber.value);
@@ -72,7 +72,7 @@ const settleSavePayment = () => {
     }else if(paymentType.value == 'upi'){
         formData.append('subPaymentData', JSON.stringify(upiData.value));
     }
-    axios.post('/api/save-settle-bill', formData)
+    await axios.post('/api/save-settle-bill', formData)
     .then((response) => {
         successNotification(response.data.success);
         f7.popup.close(".settle-save-popup");
@@ -87,7 +87,6 @@ const blankSubPaymentForm = () => {
 
 const defaultFillUpSettleMentData = () => {
     customerPaid.value = payableAmount.value;
-    console.log(payableAmount.value);
     returnMoney.value = 0;
     tip.value = 0;
     settlementAmount.value = 0;

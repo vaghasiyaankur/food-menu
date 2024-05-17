@@ -17,22 +17,23 @@
                                 <form name="reservationForm" class="list margin-vertical" id="reservation-form">
                                     <div class="item-content item-input">
                                         <div class="item-inner">
-                                            <!-- <div class="item-title item-label">Name</div> -->
                                             <div class="item-input-wrap margin-bottom-half margin-top-half">
                                                 <input type="text" v-model="reservation.name" name="name" class="padding" placeholder="Enter Your name">
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="item-content item-input">
                                         <div class="item-inner">
-                                            <!-- <div class="item-title item-label">Phone number</div> -->
+                                            <div class="item-input-wrap margin-bottom-half"><input type="text" v-model="reservation.email" name="email" class="padding" placeholder="Email"></div>
+                                        </div>
+                                    </div>
+                                    <div class="item-content item-input">
+                                        <div class="item-inner">
                                             <div class="item-input-wrap margin-bottom-half"><input type="text" v-model.number="reservation.number" name="number" class="padding" placeholder="Phone number" maxlength="10" @keypress="checkNumberValidate"></div>
                                         </div>
                                     </div>
                                     <div class="item-content item-input">
                                         <div class="item-inner">
-                                            <!-- <div class="item-title item-label">Family member number</div> -->
                                             <div class="item-input-wrap margin-bottom-half"><input type="number" v-model="reservation.member" name="member" class="padding" placeholder="Family member" @keyup="floorAvailable"></div>
                                         </div>
                                     </div>
@@ -57,9 +58,7 @@
                                             <div style="background : url('/images/dots.png')" class="display-flex align-items-center justify-content-center flex-direction-column height_100">
                                                 <img src="/images/clock.png" alt="">
                                                 <i class="f7-icons font-13 padding-half margin-bottom close-countdown" @click="(checkWaitingTime = false)">xmark</i>
-                                                <!-- <vue-countdown :time="60 * 50 * 1000" v-slot="{ hours, minutes, seconds }"> -->
-                                                    <p class="no-margin font-30">{{ waitingTime + " " + hourMin }}</p>
-                                                <!-- </vue-countdown> -->
+                                                <p class="no-margin font-30">{{ waitingTime + " " + hourMin }}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -111,6 +110,7 @@ const display = ref(true);
 const floors = ref([]);
 const reservation = ref({
     name: '',
+    email: '',
     number: '',
     member: '',
     floor: null
@@ -175,7 +175,7 @@ const closePopup = () => {
 };
 
 const checkTimeForRegister = () => {
-    if (!reservation.value.name || !reservation.value.number || !reservation.value.member) {
+    if (!reservation.value.name || !reservation.value.email || !reservation.value.number || !reservation.value.member) {
         errorNotification('Please enter all the required details.');
         return false;
     } else if (parseInt(reservation.value.member) > parseInt(memberLimit.value)) {
@@ -188,6 +188,7 @@ const checkTimeForRegister = () => {
 
     const formData = new FormData();
     formData.append('person', reservation.value.member);
+    formData.append('email', reservation.value.email);
     formData.append('floor', reservation.value.floor);
     formData.append('role', 'Manager');
 
@@ -212,6 +213,7 @@ const register = () => {
         formData.append('customer_name', reservation.value.name);
         formData.append('customer_number', reservation.value.number);
         formData.append('person', reservation.value.member);
+        formData.append('email', reservation.value.email);
         formData.append('floor', reservation.value.floor);
         formData.append('role', 'Manager');
         formData.append('agree_condition', 1);
@@ -221,6 +223,7 @@ const register = () => {
             f7.dialog.alert('Success!', () => {
                 document.getElementById('book_table').classList.remove('active');
                 reservation.value.name = '';
+                reservation.value.email = '';
                 reservation.value.number = '';
                 reservation.value.member = '';
                 floors.value = [];

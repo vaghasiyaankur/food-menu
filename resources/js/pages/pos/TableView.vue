@@ -22,9 +22,7 @@
                             </div>
                         </div>
                         <div class="table_view-btn table_view-add_table_btn">
-                            <button class="button button-raised bg-dark text-color-white height_40 active"
-                                @click="openAddNewTablePopup(null)"><i
-                                    class="f7-icons font-22 margin-right-half">plus_square</i>Add Table</button>
+                            <button class="button button-raised bg-dark text-color-white height_40 active" @click="openAddNewTablePopup(null)"><i class="f7-icons font-22 margin-right-half">plus_square</i>Add Table</button>
                         </div>
                     </div>
                 </div>

@@ -9,7 +9,7 @@
                 <div class="item_edit-popup_heading">
                     <h4 class="no-margin">Variations</h4>
                 </div>
-                <div class="diff_var_btns">
+                <div class="diff_var_btns margin-bottom">
                     <div 
                         v-for="(variation,index) in addVariationList"
                         :key="index"

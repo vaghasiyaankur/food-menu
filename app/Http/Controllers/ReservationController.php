@@ -67,6 +67,7 @@ class ReservationController extends Controller
                     'customer_id' => $register->id,
                     'table_id' => $tableId,
                     'person' => $request->person,
+                    'email' => $request->email,
                     'orderExists' => $orderExists, 
                     'role' => $request->role,
                     'finish_time' => $table->finish_order_time,

@@ -23,22 +23,22 @@
                 <template v-if="orders.length">
                     <div class="completed_orders_list">
                         <ol class="filtered_list no-margin" id="filtered_list">
-                            <li class="filtered_order_item" :class="{ 'select' : activeOrder == order.id }" v-for="order in orders" :key="order.id">
+                            <li class="filtered_order_item" :class="{ 'select' : activeOrder == order?.id }" v-for="order in orders" :key="order?.id" @click="getOrder(order?.id)">
                                 <div class="filtered_order_detail">
                                     <div class="order_user-info">
                                         <img class="selected_user_image display-none" src="\assets\images\seederImages\completedOrders\selected_user.png">
                                         <img class="user_image" src="\assets\images\seederImages\completedOrders\user.png">
                                         <div class="order_number_time">
-                                            <h3 class="order_number no-margin">Order #{{order.id}}</h3>
+                                            <h3 class="order_number no-margin">Order #{{order?.id}}</h3>
                                             <div class="order_timing">
                                                 <Icon name="timeIcon" />
-                                                <span class="order_date">{{ formattedDateTime(order.created_at) }}</span>
+                                                <span class="order_date">{{ formattedDateTime(order?.created_at) }}</span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="filtered_order_payment-info">
-                                        <h3 class="total-amount no-margin">${{ order.total_price.toFixed(2) }}</h3>
-                                        <p class="total-items no-margin text-align-right">5 items</p>
+                                        <h3 class="total-amount no-margin">{{ currency.currency_symbol }}{{ order?.total_price.toFixed(2) }}</h3>
+                                        <p class="total-items no-margin text-align-right">{{order?.total_products}} items</p>
                                     </div>
                                 </div>
                             </li>
@@ -46,45 +46,49 @@
                     </div>
                     <div class="selected_order_details_wrapper selected_order_details">
                         <div class="selected_order_details_header">
-                            <h4 class="no-margin">Order #10663</h4>
-                            <a class="selected_order-customer_email" href="#">Customer@gmail.com</a>
+                            <h4 class="no-margin">Order #{{order?.id}}</h4>
+                            <a class="selected_order-customer_email" href="#">{{order?.email}}</a>
                         </div>
                         <ol class="order_items_full_list no-margin">
-                            <li class="ordered_list_item no-padding">
-                                <div class="order_list_item_detail">
-                                    <div class="item_name">
-                                        <h5 class="no-margin">Margherita Pizza</h5>
-                                    </div>
-                                    <div class="item_size-number">
-                                        <div class="item_size">
-                                            <p class="no-margin">Size: S</p>
+                            <template v-for="kot in order?.kots" :key="kot?.id">
+                                <li class="ordered_list_item no-padding" v-for="kot_pro in kot?.kot_products" :key="kot_pro?.id">
+                                    <div class="order_list_item_detail">
+                                        <div class="item_name">
+                                            <h5 class="no-margin">
+                                                {{kot_pro?.product?.product_restaurant_languages[0]?.name}}
+                                                <span class="number_of_items">
+                                                    <span class="no-margin">X {{kot_pro?.quantity}}</span>
+                                                </span>
+                                            </h5>
                                         </div>
-                                        <div class="number_of_items">
-                                            <p class="no-margin">X 2</p>
+                                        <div class="item_size-number">
+                                            <div class="item_size">
+                                                <p class="no-margin">Size: S</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="ordered_list_item_price">
-                                    <h5 class="no-margin">$10.00</h5>
-                                </div>
-                            </li>
+                                    <div class="ordered_list_item_price">
+                                        <h5 class="no-margin">{{ currency.currency_symbol }}{{kot_pro?.total_price?.toFixed(2)}}</h5>
+                                    </div>
+                                </li>
+                            </template>
                         </ol>
                         <div class="pullUp_total_menu-wrapper">
                             <div class="pullUp_total_menu">
-                                <div class="discount_provided">
-                                    <h5 class="no-margin">Discount</h5>
-                                    <h5 class="no-margin">$0.00</h5>
-                                </div>
                                 <div class="sub_total">
                                     <h5 class="no-margin">Sub Total</h5>
-                                    <h5 class="no-margin">$38.00</h5>
+                                    <h5 class="no-margin">{{ currency.currency_symbol }}{{order?.total_price?.toFixed(2)}}</h5>
+                                </div>
+                                <div class="discount_provided">
+                                    <h5 class="no-margin">Discount</h5>
+                                    <h5 class="no-margin">{{ currency.currency_symbol }}{{order?.discount_amount?.toFixed(2)}}</h5>
                                 </div>
                                 <hr class="divider">
                                 <div class="total_amount">
                                     <h5 class="no-margin">Total Amount</h5>
-                                    <h5 class="no-margin">$38.00</h5>
+                                    <h5 class="no-margin">{{ currency.currency_symbol }}{{order?.payable_amount?.toFixed(2)}}</h5>
                                 </div>
-                                <button class="print_invoice_btn">
+                                <button class="print_invoice_btn" @click="printOrder(order?.id)">
                                     <span class="no-margin">Print Invoice</span>
                                 </button>
                             </div>
@@ -130,16 +134,17 @@ import Icon from "../../components/Icon.vue";
 import NoValueFound from "../../components/NoValueFound.vue";
 
 const orders = ref([]);
-
-const order = ref(null);
-
+const currency = ref([]);
+const order = ref({});
 const activeOrder = ref(0);
 
 const getCompletedOrders = () => {
     axios.post('/api/get-complete-orders')
     .then(response => {
         orders.value = response.data.data;
-        getOrder(orders.value[0].id);
+        if (response.data.data.length) {
+            getOrder(orders.value[0]?.id);
+        }
     });
 }
 
@@ -168,7 +173,21 @@ const formattedDateTime = (dateTime) => {
     return originalDateTime.value.toLocaleString('en-US', options);
 };
 
+const getCurrency = async () => {
+    await axios.get('/api/get-currency')
+    .then((res) => {
+        currency.value = res.data.setting;
+    })
+}
+
+const printOrder = async (id) => {
+    await axios.get('/api/print-order/'+ id)
+    .then(response => {
+    });
+}
+
 onMounted(() => {
     getCompletedOrders();
+    getCurrency();
 })
 </script>
