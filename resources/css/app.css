@@ -1088,3 +1088,6 @@ code {
 :disabled{
   opacity: 0.7;
 }
+.md .navbar-inner {
+  overflow: unset !important;
+}
