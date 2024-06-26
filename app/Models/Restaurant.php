@@ -11,6 +11,8 @@ class Restaurant extends Model
 
     protected $table = 'restaurants';
 
+    protected $guarded = ['id'];
+    
     public static function boot() {
         parent::boot();
 

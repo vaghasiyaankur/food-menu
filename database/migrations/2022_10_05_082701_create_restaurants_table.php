@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('slug')->nullable();
             $table->string('location')->nullable();
+            $table->string('logo')->nullable();
+            $table->string('fav_icon')->nullable();
             $table->text('operating_start_hours')->nullable();
             $table->text('operating_end_hours')->nullable();
             $table->boolean('status')->default(1);

@@ -27,6 +27,9 @@ use PDF;
 use Dompdf\Dompdf;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendPdfMail;
+use App\Models\Restaurant;
+use App\Models\Setting;
+use Illuminate\Support\Facades\Auth;
 
 class PosController extends Controller
 {
@@ -387,24 +390,27 @@ class PosController extends Controller
         return response()->json(['success'=>'Bill Settle Successfully.']);
     }
 
-    public function printOrder (Dompdf $dompdf,$id) {
+    public function printOrder (Dompdf $domPdf,$id) {
+
+        $restaurant = Restaurant::find(Auth::user()->restaurant_id);
+
+        $setting = Setting::whereRestaurantId(Auth::user()->restaurant_id)->first();
+
+        $order = Order::with('kots.kotProducts')->find($id);
         // Generate PDF content (example HTML content)
-        $htmlContent = '<html><body><h1>Hello, this is a PDF!</h1></body></html>';
+        $htmlContent = view('emails.invoice', compact('setting', 'order', 'restaurant'))->render();
 
         // Load HTML content into Dompdf instance
-        $dompdf->loadHtml($htmlContent);
-
-        // (Optional) Set paper size and orientation
-        $dompdf->setPaper('A4', 'portrait');
+        $domPdf->loadHtml($htmlContent);
 
         // Render the HTML as PDF
-        $dompdf->render();
+        $domPdf->render();
 
         // Get the generated PDF content
-        $pdfContent = $dompdf->output();
+        $pdfContent = $domPdf->output();
 
         // Send email with PDF attachment
-        Mail::to('mekadi5100@mfyax.com')->send(new SendPdfMail($pdfContent));
+        Mail::to($order->email)->send(new SendPdfMail($pdfContent,$order,$setting, $restaurant));
 
         return "PDF email has been sent.";
     }

@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Helper\ImageHelper;
 use App\Helper\SettingHelper;
 use App\Models\KotHold;
+use App\Models\Restaurant;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -29,15 +30,16 @@ class SettingController extends Controller
      */
     public function settingData()
     {
+        $restaurant = Restaurant::find(Auth::user()->restaurant_id);
         $setting = Setting::whereRestaurantId(Auth::user()->restaurant_id)->first();
         $select_highlight_time = '';
         if(intval($setting->highlight_time * 60) < 60 && intval($setting->highlight_time * 60) > 0) $select_highlight_time = intval($setting->highlight_time * 60).' seconds';
         if(intval($setting->highlight_time * 60) >= 60) $select_highlight_time = intval($setting->highlight_time).' minute';
-        $setting['open_time_12_format'] = date("g:i A", strtotime($setting->open_time));
-        $setting['close_time_12_format'] = date("g:i A", strtotime($setting->close_time));
+        $setting['open_time_12_format'] = date("g:i A", strtotime($restaurant->operating_start_hours));
+        $setting['close_time_12_format'] = date("g:i A", strtotime($restaurant->operating_end_hours));
         $setting['select_highlight_time'] = $select_highlight_time;
 
-        return response()->json([ 'setting' => $setting ] , 200);
+        return response()->json([ 'setting' => $setting, 'restaurant' => $restaurant ] , 200);
     }
 
     /**
@@ -49,11 +51,11 @@ class SettingController extends Controller
     public function updateSetting(Request $request)
     {
         $rules = [
-            'restaurant_name' => 'required',
-            'open_time' => 'required',
-            'close_time' => 'required',
-            'logo' => 'image|mimes:jpg,png,jpeg,gif,svg,webp',
-            'fav_icon' => 'image|mimes:jpg,png,jpeg,gif,svg,webp',
+            'restaurant.name' => 'required',
+            'restaurant.operating_start_hours' => 'required',
+            'restaurant.operating_end_hours' => 'required',
+            'setting.logo' => 'image|mimes:jpg,png,jpeg,gif,svg,webp',
+            'setting.fav_icon' => 'image|mimes:jpg,png,jpeg,gif,svg,webp',
         ];
     
         $validator = Validator::make($request->all(), $rules);
@@ -62,29 +64,32 @@ class SettingController extends Controller
             return response()->json(['errors' => $validator->errors()], 422);
         }
         
-        $setting = Setting::whereRestaurantId(Auth::user()->restaurant_id)->first();
+        $res_setting = Restaurant::whereId(Auth::user()->restaurant_id)->first();
 
-        $logo_name = $setting->logo;
-        if($request->file('logo')){
-            $logo_name = ImageHelper::storeImage($request->file('logo'), 'setting');
-            ImageHelper::removeImage($setting->logo);
+        $logo_name = $res_setting->logo;
+        if($request->file('setting.logo')){
+            $logo_name = ImageHelper::storeImage($request->file('setting.logo'), 'setting');
+            ImageHelper::removeImage($res_setting->logo);
         }
 
-        $fav_icon_name = $setting->fav_icon;
-        if($request->file('fav_icon')){
-            $fav_icon_name = ImageHelper::storeImage($request->file('fav_icon'), 'setting');
-            ImageHelper::removeImage($setting->fav_icon);
+        $fav_icon_name = $res_setting->fav_icon;
+        if($request->file('setting.fav_icon')){
+            $fav_icon_name = ImageHelper::storeImage($request->file('setting.fav_icon'), 'setting');
+            ImageHelper::removeImage($res_setting->fav_icon);
         }
 
 
 
-        $settingData = $request->toArray();
-        $settingData['logo'] = $logo_name;
-        $settingData['fav_icon'] = $fav_icon_name;
+        $settingData = $request->setting;
         $settingData['highlight_on_off'] = $settingData['highlight_on_off'] ?? 0;
         $settingData['highlight_time'] = $request->highlight_on_off ? $request->highlight_time : 0;
+        
+        $restaurantData = $request->restaurant;
+        $restaurantData['logo'] = $logo_name;
+        $restaurantData['fav_icon'] = $fav_icon_name;
 
-        Setting::updateOrCreate(['id' => $settingData['id']],$settingData);
+        Setting::updateOrCreate(['id' => $request->id],$settingData);
+        Restaurant::updateOrCreate(['id' => Auth::user()->restaurant_id],$restaurantData);
 
         return response()->json([ 'success' => 'Setting Data Updated successfully' ] , 200);
     }

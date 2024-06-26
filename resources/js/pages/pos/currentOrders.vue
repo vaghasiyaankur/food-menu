@@ -83,7 +83,6 @@ const serveOrder = async (id, type) => {
 }
 
 const settleSavePayment = (tableId, order) => {
-    console.log(order);
     if(!order){
         errorNotification('No Order Found in this Table.');
     }else{

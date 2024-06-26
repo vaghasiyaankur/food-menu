@@ -15,12 +15,7 @@ return new class extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->string('restaurant_name')->nullable();
             $table->string('phone_number')->nullable();
-            $table->string('logo')->nullable();
-            $table->string('fav_icon')->nullable();
-            $table->string('open_time')->nullable();
-            $table->string('close_time')->nullable();
             $table->boolean('close_reservation')->default(0);
             $table->integer('member_capacity')->nullable();
             $table->boolean('highlight_on_off')->default(0);

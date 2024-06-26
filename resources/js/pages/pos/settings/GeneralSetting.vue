@@ -8,44 +8,44 @@
         <form class="list" id="general-setting-form" @submit.prevent="submitGeneralSetting">
             <input type="hidden" name="id" :value="data?.id">
             <div class="item-content item-input general_info_form-address no-padding">
-                <Input label="Restaurant Name" type="text" name="restaurant_name" :value="data?.restaurant_name" placeholder="Enter restaurant name" />
+                <Input label="Restaurant Name" type="text" name="restaurant[name]" :value="restaurant?.name" placeholder="Enter restaurant name" />
             </div>
             <div class="item-content item-input general_info_form-image-input no-padding">
                 <div class="item-inner no-padding">
-                    <SettingImage name="logo" label="Logo" :preview="logoPreview" @set:update="changeLogo" />
+                    <SettingImage name="restaurant[logo]" label="Logo" :preview="logoPreview" @set:update="changeLogo" />
                 </div>
                 <div class="item-inner no-padding">
-                    <SettingImage name="fav_icon" label="Fav Icon" :preview="favPreview" @set:update="changeLogo" />
+                    <SettingImage name="restaurant[fav_icon]" label="Fav Icon" :preview="favPreview" @set:update="changeLogo" />
                 </div>
             </div>
             <div class="item-content item-input general_info_form-address no-padding">
-                <Input label="Address" type="text" name="address" :value="data?.address" placeholder="Enter Address" />
+                <Input label="Address" type="text" name="setting[address]" :value="data?.address" placeholder="Enter Address" />
             </div>
             <div class="item-content item-input general_info_form-phone no-padding">
-                <Input label="Phone" type="number" name="phone_number" :value="data?.phone_number" placeholder="Enter Phone" />
-                <Input label="Member Capacity" type="number" name="member_capacity" :value="data?.member_capacity" placeholder="Enter Member capacity" />
+                <Input label="Phone" type="number" name="setting[phone_number]" :value="data?.phone_number" placeholder="Enter Phone" />
+                <Input label="Member Capacity" type="number" name="setting[member_capacity]" :value="data?.member_capacity" placeholder="Enter Member capacity" />
             </div>
             <div class="item-content item-input general_info_form-print no-padding">
-                <Input label="Print Bill Header" type="text" name="bill_header" :value="data?.bill_header" placeholder="Enter Print Bill Header" />
-                <Input label="Print Bill Footer" type="text" name="bill_footer" :value="data?.bill_footer" placeholder="Enter Print Bill Footer" />
+                <Input label="Print Bill Header" type="text" name="setting[bill_header]" :value="data?.bill_header" placeholder="Enter Print Bill Header" />
+                <Input label="Print Bill Footer" type="text" name="setting[bill_footer]" :value="data?.bill_footer" placeholder="Enter Print Bill Footer" />
             </div>
             <hr class="margin-vertical">
             <div class="time_onoff margin-top">
                 <div class="row align-items-center margin-bottom">
                     <div class="col-50 height_46">
-                        <Switch :changeStatus="data?.highlight_on_off" name="highlight_on_off" :value="1" :label="'Highlight Time ON /OFF'" @update:changeData="changeData" />
+                        <Switch :changeStatus="data?.highlight_on_off" name="setting[highlight_on_off]" :value="1" :label="'Highlight Time ON /OFF'" @update:changeData="changeData" />
                     </div>
                     <div class="col-50 list" :class="{ 'display-none' : !data?.highlight_on_off }">
                         <div class="item-content item-input no-padding">
                             <div class="item-inner no-padding-right general_info_form-print no-padding">
-                                <Dropdown :options="options" :value="data?.highlight_time" name="highlight_time" :placeholder="'select highlight time'" />
+                                <Dropdown :options="options" :value="data?.highlight_time" name="setting[highlight_time]" :placeholder="'select highlight time'" />
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="item-content item-input general_info_form-print no-padding">
-                    <Timer label="Open Time" name="open_time" :value="data?.open_time" />
-                    <Timer label="Close Time" name="close_time" :value="data?.close_time" />
+                    <Timer label="Open Time" name="restaurant[operating_start_hours]" :value="restaurant?.operating_start_hours" />
+                    <Timer label="Close Time" name="restaurant[operating_end_hours]" :value="restaurant?.operating_end_hours" />
                 </div>
             </div>
             <div class="form-submit no-margin display-flex justify-content-right popup_button">
@@ -86,13 +86,15 @@ const startPicker = ref(null);
 const data = ref(null);
 const logoPreview = ref("/images/logo.png");
 const favPreview = ref("/images/logo.png");
+const restaurant = ref(null);
 
 const getGeneralSetting = () => {
     axios.get('/api/setting-data')
     .then((res) => {
         data.value = res.data.setting;
-        logoPreview.value =  '/storage/' + data.value.logo;
-        favPreview.value = '/storage/' + data.value.fav_icon;
+        restaurant.value = res.data.restaurant;
+        logoPreview.value =  '/storage/' + restaurant.value.logo;
+        favPreview.value = '/storage/' + restaurant.value.fav_icon;
     })
 }
 
