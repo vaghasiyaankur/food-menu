@@ -31,10 +31,11 @@
             </div>
             <div>
                 <form class="list margin-vertical" id="register-form">
+                    <input type="hidden" name="qrToken" :value="qrToken">
                     <div class="item-content item-input no-padding-left">
                         <div class="item-inner no-padding-right">
                             <div class="item-input-wrap margin-bottom-half margin-top-half">
-                                <input type="text" v-model="reservation.name" name="name" class="padding" :placeholder="trans.enter_name" @keyup="removeTimer()">
+                                <input type="text" v-model="reservation.name" name="customer_name" class="padding" :placeholder="trans.enter_name" @keyup="removeTimer()">
                             </div>
                         </div>
                     </div>
@@ -42,14 +43,14 @@
                     <div class="item-content item-input no-padding-left">
                         <div class="item-inner no-padding-right">
                             <div class="item-input-wrap margin-bottom-half">
-                                <input type="number" v-model="reservation.number" name="number" class="padding" :placeholder="trans.phone_number" @keypress="checkNumberValidate" @keyup="removeTimer()">
+                                <input type="number" v-model="reservation.number" name="customer_number" class="padding" :placeholder="trans.phone_number" @keypress="checkNumberValidate" @keyup="removeTimer()">
                                 </div>
                         </div>
                     </div>
                     <div class="item-content item-input no-padding-left">
                         <div class="item-inner no-padding-right">
                             <div class="item-input-wrap margin-bottom-half">
-                                <input type="number" v-model="reservation.member" name="member" class="padding" :placeholder="trans.family_member" @keyup="floorAvailable(); removeTimer()"  @keypress="checkNumberValidate">
+                                <input type="number" v-model="reservation.member" name="person" class="padding" :placeholder="trans.family_member" @keyup="floorAvailable(); removeTimer()"  @keypress="checkNumberValidate">
                                 </div>
                         </div>
                     </div>
@@ -271,8 +272,8 @@ onMounted(() => {
 //     }, 2000);
 // });
 
-const checkReservation = () => {
-    axios.get('/api/check-reservation-enable?qrcode='+qrToken.value)
+const checkReservation = async () => {
+    await axios.get('/api/check-reservation-enable?qrcode='+qrToken.value)
     .then((res) => {
         closeReservation.value = res.data.close_reservation;
         if(res.data.close_reservation == 1){
@@ -316,8 +317,8 @@ const onPageBeforeRemove = () => {
     // if (self.sheet) self.sheet.destroy();
 }
 
-const checkTime = () => {
-    checkReservation()
+const checkTime = async () => {
+    await checkReservation()
     if(closeReservation.value == 0){
         if(!reservation.value.name || !reservation.value.number || !reservation.value.member){
             errorNotification(trans.value.reservation_error);
@@ -331,11 +332,16 @@ const checkTime = () => {
             errorNotification(trans.value.accept_term_cond); 
             return false;
         }else{
-            var formData = new FormData();
-            formData.append('person', reservation.value.member);
+            // var formData = new FormData();
+            // formData.append('person', reservation.value.member);
+            // formData.append('floor', reservation.value.floor);
+            // formData.append('role', 'Guest');
+            // formData.append('qrToken', qrToken.value);
+
+            var formData = new FormData(document.getElementById('register-form'));
+            ['customer_name', 'customer_number'].forEach(key => formData.delete(key));
             formData.append('floor', reservation.value.floor);
             formData.append('role', 'Guest');
-            formData.append('qrToken', qrToken.value);
 
             axios.post('/api/check-time', formData)
             .then((res) => {
@@ -373,16 +379,21 @@ const checkTimeForRegister = async () => {
         }else if(!reservation.value.agree_condition){
             errorNotification(trans.value.accept_term_cond); return false;
         }
+        // var formData = new FormData();
+        // formData.append('person', reservation.value.member);
+        // formData.append('floor', reservation.value.floor);
+        // formData.append('role', 'Guest');
+        // formData.append('qrToken', qrToken.value);
 
-        var formData = new FormData();
-        formData.append('person', reservation.value.member);
+        var formData = new FormData(document.getElementById('register-form'));
+        ['customer_name', 'customer_number'].forEach(key => formData.delete(key));
         formData.append('floor', reservation.value.floor);
         formData.append('role', 'Guest');
-        formData.append('qrToken', qrToken.value);
 
         axios.post('/api/check-time', formData)
         .then((res) => {
             if(res.data.success){
+                hourMin.value = res.data.hour_min;
                 waitingTime.value = res.data.waiting_time;
                 register();
             }
@@ -401,19 +412,24 @@ const register = () => {
     if(waitingTime.value == '00:00'){
         var conformation_message = trans.value.no_waiting_message;
     }else{
-        var conformation_message = trans.value.conformation_message.replace('@waiting', waitingTime.value);
+        var conformation_message = trans.value.conformation_message.replace('@waiting', waitingTime.value + " " + hourMin.value);
     }
 
-    f7.dialog.confirm(trans.value.conformation_message, () => {
+    f7.dialog.confirm(conformation_message, () => {
 
-        var formData = new FormData();
-        formData.append('customer_name', reservation.value.name);
-        formData.append('customer_number', reservation.value.number);
-        formData.append('person', reservation.value.member);
-        formData.append('floor', reservation.value.floor);
+        // var formData = new FormData();
+        // formData.append('customer_name', reservation.value.name);
+        // formData.append('customer_number', reservation.value.number);
+        // formData.append('person', reservation.value.member);
+        // formData.append('floor', reservation.value.floor);
+        // formData.append('role', 'Guest');
+        // formData.append('agree_condition', agreeCondition);
+        // formData.append('qrToken', qrToken.value);
+        
+        var form = document.getElementById('register-form');
+        var formData = new FormData(form);
         formData.append('role', 'Guest');
         formData.append('agree_condition', agreeCondition);
-        formData.append('qrToken', qrToken.value);
 
         axios.post('/api/add-reservation', formData)
         .then((res) => {
