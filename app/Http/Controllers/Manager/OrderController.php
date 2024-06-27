@@ -46,6 +46,9 @@ class OrderController extends Controller
     }
 
     public function getCompleteOrders(Request $request) {
+        $from_date = $request->input('start_date');
+        $to_date = $request->input('end_date');
+
         $kot_orders = Order::with(['kots' => function ($query) {
             $query->withCount('kotProducts');
         }])
@@ -53,6 +56,15 @@ class OrderController extends Controller
         ->whereRestaurantId(Auth::user()->restaurant_id)
         ->whereNotNull('finish_at')
         ->where('finished', 1)
+        ->when($from_date && $to_date, function ($query) use ($from_date, $to_date) {
+            return $query->whereDate('start_at', '>=', $from_date)->whereDate('finish_at', '<=', $to_date);
+        })
+        ->when($from_date && !$to_date, function ($query) use ($from_date) {
+            return $query->whereDate('start_at', '>=', $from_date);
+        })
+        ->when(!$from_date && $to_date, function ($query) use ($to_date) {
+            return $query->whereDate('finish_at', '<=', $to_date);
+        })
         ->paginate(12);
 
         // Iterate over each order in the paginated result

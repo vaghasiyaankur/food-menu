@@ -107,6 +107,11 @@ const settleSavePayment = (tableId, order) => {
     }
 }
 
+const successPayment = (event) => {
+    f7.popup.close(`.settle-save-popup`);
+    getKotList();
+}
+
 getFloor();
 getKotList();
 provide('orderId',orderId);

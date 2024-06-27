@@ -102,6 +102,10 @@
                     </div>
                 </div>
             </div> -->
+
+            <input type="hidden" id="fromDate">
+            <input type="hidden" id="toDate">
+            <button @click="report" style="opacity: 0" id="date-set"></button>
         </div>
     </f7-page>
 </template>

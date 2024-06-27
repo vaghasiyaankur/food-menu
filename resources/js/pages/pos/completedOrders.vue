@@ -7,16 +7,24 @@
                 </div>
                 <div class="order_by_dates_filter_box">
                     <div class="input_dates_for_filter">
-                        <input type="date" name="from_date" id="from_date">
+                        <input type="text" placeholder="Select date range" readonly="readonly" id="demo-calendar-range" />
+                        <!-- <input type="date" name="from_date" id="from_date" v-model="startDate" @change="getCompletedOrders()">
                         <p class="no-margin">To</p>
-                        <input type="date" name="to_date" id="to_date">
+                        <input type="date" name="to_date" id="to_date" v-model="endDate" @change="getCompletedOrders()"> -->
                     </div>
-                    <div class="filter_by_date_button">
+                    <!-- <div class="filter_by_date_button">
                         <button class="filter_btn" data-popup="#order_filter_popup" @click="f7.popup.open(`.order_filter_popup`);">
                             <Icon name="filterIcon" />
                             <span>Filter</span>
                         </button>
+                    </div> -->
+                    <div class="filter_by_date_button">
+                        <button @click="resetFilter()" class="filter_btn">
+                            <Icon name="filterIcon" />
+                            <span>Reset</span>
+                        </button>
                     </div>
+                    
                 </div>
             </div>
             <div class="card-content completed_order_content">
@@ -104,7 +112,7 @@
         </div>
 
         <!-- ========= ORDER FILTER POPUP ========= -->
-        <div class="popup order_filter_popup" id="order_filter_popup">
+        <!-- <div class="popup order_filter_popup" id="order_filter_popup">
             <div class="data-form order_filter-data-form">
                 <select name="order_detail_select" id="order_detail_select" placeholder="Select Column">
                     <option value="id" selected>Order ID</option>
@@ -122,7 +130,11 @@
                     <span>Apply</span>
                 </button>
             </div>
-        </div>
+        </div> -->
+
+        <input type="hidden" id="fromDate">
+        <input type="hidden" id="toDate">
+        <button @click="getCompletedOrders" style="opacity: 0" id="date-set"></button>
 
     </f7-page>
 </template>
@@ -132,20 +144,36 @@ import axios from 'axios';
 import { ref, onMounted } from 'vue';
 import Icon from "../../components/Icon.vue";
 import NoValueFound from "../../components/NoValueFound.vue";
+import $ from 'jquery';
 
 const orders = ref([]);
 const currency = ref([]);
 const order = ref({});
 const activeOrder = ref(0);
+const picker = ref(null);
 
 const getCompletedOrders = () => {
-    axios.post('/api/get-complete-orders')
+    const fromDate = $('#fromDate').val() || '';
+    const toDate = $('#toDate').val() || '';
+
+    const filterOption = {
+        start_date : fromDate,
+        end_date   : toDate
+    };
+    axios.post('/api/get-complete-orders', filterOption)
     .then(response => {
         orders.value = response.data.data;
         if (response.data.data.length) {
             getOrder(orders.value[0]?.id);
         }
     });
+}
+
+const resetFilter = () => {
+    $('#fromDate').val('');
+    $('#toDate').val('');
+    picker.value.setValue([]);
+    getCompletedOrders();
 }
 
 const getOrder = (id) => {
@@ -189,5 +217,32 @@ const printOrder = async (id) => {
 onMounted(() => {
     getCompletedOrders();
     getCurrency();
+    picker.value = f7.calendar.create({
+        inputEl: '#demo-calendar-range',
+        rangePicker: true,
+        numbers:true,
+        footer: true,
+        on: {
+            open() {
+                setTimeout(() => {
+                    $('.popover-angle').css({ 'left': '147px' });
+                    if($('body').width() > $('body').height())  $('.calendar-popover').css({ 'top': '144px', 'left': '787.406px' });
+                    else $('.calendar-popover').css({ 'top': '144px', 'left': '493.406px' });
+                }, 1);
+            },
+            close(daterange) {
+                var dates = daterange.getValue();
+                if(dates){
+                    var from_date = new Date(dates[0]).toLocaleDateString('sv-SE');
+                    var to_date = dates[1] ? new Date(dates[1]).toLocaleDateString('sv-SE') : '';
+
+                    $('#fromDate').val(from_date);
+                    $('#toDate').val(to_date);
+
+                    $("#date-set").trigger('click');
+                }
+            }
+        }
+    });
 })
 </script>
