@@ -1091,3 +1091,57 @@ code {
 .md .navbar-inner {
   overflow: unset !important;
 }
+
+.delete-data-form,
+.delete-subdata-form,
+.delete-ingredient-form,
+.delete-product-form {
+    padding: 30px 30px 0;
+    text-align: center;
+}
+
+.delete-data-warning-sign {
+    margin: 0 auto;
+    width: 51px;
+    height: 51px;
+    border-radius: 100%;
+    background-color: #fdd5d5;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.delete-data-warning-text {
+    margin-top: 20px !important;
+    text-align: center;
+    font-size: 18px !important;
+    line-height: 22px;
+    font-weight: 500 !important;
+    color: #38373d !important;
+}
+.DeleteCategoryPopup .popup_button {
+    margin-top: 30px !important;
+}
+.popup_button {
+  margin-top: 35px;
+  gap: 20px;
+}
+.popup-cancel-button {
+  padding: 12px 35px;
+  max-width: 50%;
+  background-color: #ffffff;
+  font-size: 18px !important;
+  line-height: 21px;
+  font-weight: 500 !important;
+  color: #38373d !important;
+  text-transform: capitalize;
+}
+.popup-ok-button {
+  padding: 12px 52px;
+  max-width: 50%;
+  background-color: #f33e3e !important;
+  font-size: 18px !important;
+  line-height: 21px;
+  font-weight: 500 !important;
+  color: #ffffff !important;
+}
