@@ -196,6 +196,10 @@ class ContentSeeder extends Seeder
             ['language_id' => 2, 'title' => 'booked', 'content' => 'બુક કરેલ'],
             ['language_id' => 3, 'title' => 'booked', 'content' => 'बुक'],
 
+            ['language_id' => 1, 'title' => 'select_floor', 'content' => "Please select floor."],
+            ['language_id' => 2, 'title' => 'select_floor', 'content' => 'કૃપા કરીને ફ્લોર પસંદ કરો.'],
+            ['language_id' => 3, 'title' => 'select_floor', 'content' => 'कृपया मंजिल का चयन करें.'],
+
         ];
 
         $restaurants = Restaurant::get();

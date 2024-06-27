@@ -378,6 +378,8 @@ const checkTimeForRegister = async () => {
             errorNotification(trans.value.number_error); return false;
         }else if(!reservation.value.agree_condition){
             errorNotification(trans.value.accept_term_cond); return false;
+        }else if (!reservation.value.floor) {
+            errorNotification(trans.value.select_floor); return false;
         }
         // var formData = new FormData();
         // formData.append('person', reservation.value.member);

@@ -184,6 +184,9 @@ const checkTimeForRegister = () => {
     } else if (reservation.value.number.toString().length !== 10) {
         errorNotification('Please enter a valid number.');
         return false;
+    } else if (!reservation.value.floor) {
+        errorNotification('Please select the floor.');
+        return false;
     }
     var formData = new FormData(document.getElementById('reservation-form'));
     ['customer_name', 'customer_number'].forEach(key => formData.delete(key));
