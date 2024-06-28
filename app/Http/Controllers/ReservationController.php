@@ -537,8 +537,8 @@ class ReservationController extends Controller
 
         $close_reservation = $setting->close_reservation;
         if ($close_reservation == 0) {
-            $open_time = isset($setting->restaurant) ? Carbon::create($setting->restaurant->operating_start_hours) : '';
-            $close_time = isset($setting->restaurant) ? Carbon::create($setting->restaurant->operating_end_hours) : '';
+            $open_time = Carbon::create($setting->restaurant->operating_start_hours);
+            $close_time = Carbon::create($setting->restaurant->operating_end_hours);
             $current_time = Carbon::now();
             if (!$current_time->isBetween($open_time, $close_time)) {
                 $close_reservation = 1;

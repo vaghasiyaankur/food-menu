@@ -6,7 +6,7 @@
                 <div class="drop-down__store display-flex justify-content-space-between padding-horizontal align-items-center toggle-event-check">
                     <span class="drop-down__name">
                         <input type="text" :name="name" class="toggle-event-check" placeholder="Date Time" readonly="readonly" :id="name+'-picker-date'" :value="value" />
-                        <input type="hidden" class="toggle-event-check" placeholder="Date Time" readonly="readonly" :id="name+'-picker-date-hidden'" :value="value" />
+                        <input type="hidden" class="toggle-event-check" placeholder="Date Time" readonly="readonly" :id="id+'-picker-date-hidden'" :value="value" />
                     </span>
                     <span class="down__icon">
                         <i class="f7-icons toggle-event-check">arrowtriangle_down_fill</i>
@@ -18,7 +18,7 @@
                 <div class="drop-down__menu">
                     <div class="block-title margin-top">Set {{label}}</div>
                     <div class="block block-strong no-padding no-margin margin-bottom time_piker_inner">
-                        <div :id="name+'-picker-date-container'"></div>
+                        <div :id="id+'-picker-date-container'"></div>
                     </div>
                     <div class="display-flex justify-content-end padding-bottom time__button">
                         <a class="padding-right text-color-black toggle-event-check" href="javascript:;">Cancel</a>
@@ -36,13 +36,14 @@ import { f7 } from "framework7-vue";
 const props = defineProps({
     label: String,
     name: String,
-    value: String
+    value: String,
+    id : String,
 });
 
 const createPicker = () => {
     if (!event.target.classList.contains('toggle-event-check')) return false;
     document.getElementById('drop-down-'+props.name).classList.toggle('drop-down--active');
-    document.getElementById(props.name+"-picker-date-container").innerHTML = '';
+    document.getElementById(props.id+"-picker-date-container").innerHTML = '';
 
     const today = new Date();
 
@@ -65,8 +66,8 @@ const createPicker = () => {
     if (cMinutes < 10) csMinutes = "0" + csMinutes;
 
     f7.picker.create({
-        containerEl: '#' + props.name + '-picker-date-container',
-        inputEl: '#' + props.name + '-picker-date-hidden',
+        containerEl: '#' + props.id + '-picker-date-container',
+        inputEl: '#' + props.id + '-picker-date-hidden',
         toolbar: false,
         rotateEffect: true,
         value: [
@@ -112,7 +113,7 @@ const createPicker = () => {
 }
 
 const closePicker = () => {
-    const pickerDate = document.getElementById(props.name + '-picker-date-hidden').value;
+    const pickerDate = document.getElementById(props.id + '-picker-date-hidden').value;
     document.getElementById(props.name + '-picker-date').value = pickerDate;
     document.getElementById('drop-down-' + props.name).classList.remove('drop-down--active');
 }

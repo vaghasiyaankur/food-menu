@@ -44,8 +44,8 @@
                     </div>
                 </div>
                 <div class="item-content item-input general_info_form-print no-padding">
-                    <Timer label="Open Time" name="restaurant[operating_start_hours]" :value="restaurant?.operating_start_hours" />
-                    <Timer label="Close Time" name="restaurant[operating_end_hours]" :value="restaurant?.operating_end_hours" />
+                    <Timer label="Open Time" name="restaurant[operating_start_hours]" :id="'restaurant_starting_hours'" :value="restaurant?.operating_start_hours" />
+                    <Timer label="Close Time" name="restaurant[operating_end_hours]" :id="'restaurant_ending_hours'" :value="restaurant?.operating_end_hours" />
                 </div>
             </div>
             <div class="form-submit no-margin display-flex justify-content-right popup_button">
