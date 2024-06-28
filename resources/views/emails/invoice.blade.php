@@ -13,7 +13,7 @@
         body {
             min-height: 100dvh;
             padding: 70px 30px 75px;
-            background-image: url("http://127.0.0.1:8000/images/main-bg.png");
+            background-image: url('file://{{ public_path("images/main-bg.png") }}');
             background-size: 100% 100%;
             background-repeat: no-repeat;
             /* background-position: center; */
@@ -72,17 +72,26 @@
         .invoice-content {
             width: 100%;
             margin: 10px 0;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-            gap: 10px;
             font-size: 18px;
             font-weight: 600;
             line-height: 22px;
             text-align: left;
             color: #38373D;
             text-transform: capitalize;
+        }
+        .invoice-content span{
+            display: inline-block;
+        }
+        .invoice-content span:first-child {
+            width: 220px;
+        }
+        .invoice-content span:nth-child(2) {
+            text-align: center;
+            width: 300px;
+        }
+        .invoice-content span:last-child {
+            text-align: right;
+            width: 220px;
         }
         .invoice-order {
             margin-top: 30px;
@@ -146,6 +155,10 @@
         .invoice-order table.table-items tbody tr:last-child td:last-child {
             border-bottom-right-radius: 5px;
         }
+        .invoice-order table.table-items thead tr th:not(:first-child),
+        .invoice-order table.table-items tbody tr td:not(:first-child) {
+            text-align: right;
+        }
         .invoice-data {
             margin-top: 20px;
             padding: 15px;
@@ -160,10 +173,22 @@
         .invoice-data .invoice-sub-total,
         .invoice-data .invoice-tax,
         .invoice-data .invoice-total-amount {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
+        }
+        .invoice-data .invoice-sub-total span,
+        .invoice-data .invoice-tax span,
+        .invoice-data .invoice-total-amount span{
+            display: inline-block;
+        }
+        .invoice-data .invoice-sub-total span:first-child,
+        .invoice-data .invoice-tax span:first-child,
+        .invoice-data .invoice-total-amount span:first-child{
+            width: 355px;
+        }
+        .invoice-data .invoice-sub-total span:last-child,
+        .invoice-data .invoice-tax span:last-child,
+        .invoice-data .invoice-total-amount span:last-child {
+            width: 355px;
+            text-align: right;
         }
         .invoice-data .invoice-tax {
             margin: 15px 0;
@@ -213,14 +238,14 @@
             </div>
         </div>
 
-            <hr>
+        <hr>
+        <div class="invoice">
             <div class="text-center invoice-content">
-                <p>Invoice: #{{ $order->id }} </p>
-                <p>Created Date: {{ $order->created_at->format('d-m-Y') }} </p>
-                <p>Total: {{ $setting->currency_symbol }}{{ number_format($order->payable_amount,2) }}
-                </p>
+                <span>Invoice: #{{ $order->id }} </span>
+                <span>Created Date: {{ $order->created_at->format('d-m-Y') }} </span>
+                <span>Total: {{ $setting->currency_symbol }}{{ number_format($order->payable_amount,2) }}</span>
             </div>
-            <hr>
+        <hr>
     </header>
     <main>
         <div class="invoice-order">
@@ -253,22 +278,29 @@
         </div>
         <div class="invoice-data">
             <div class="invoice-sub-total">
-                <p>Sub Total: ({{count($orderProduct)}} items)</p>
-                <p>{{ $setting->currency_symbol }}{{ number_format($order->total_price,2) }}</p>
+                <span>Sub Total: ({{count($orderProduct)}} items)</span>
+                <span>{{ $setting->currency_symbol }}{{ number_format($order->total_price,2) }}</span>
             </div>
             <div class="invoice-tax">
-                <p>Discount</p>
-                <p>{{ $setting->currency_symbol }}{{ number_format($order->discount_amount, 2) }}</p>
+                <span>Discount</span>
+                <span>{{ $setting->currency_symbol }}{{ number_format($order->discount_amount, 2) }}</span>
             </div>
             <hr>
             <div class="invoice-total-amount">
-                <p>Total</p>
-                <p>{{ $setting->currency_symbol }}{{ number_format($order->payable_amount, 2) }}</p>
+                <span>Total</span>
+                <span>{{ $setting->currency_symbol }}{{ number_format($order->payable_amount, 2) }}</span>
             </div>
         </div>
     </main>
     <footer class="text-center">
         <p>{{ $setting->bill_footer }}</p>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Set the background image dynamically
+            var imagePath = atob(atob('/images/main-bg.png'));
+            document.body.style.backgroundImage = 'url(' + imagePath + ')';
+        });
+    </script>
 </body>
 </html>

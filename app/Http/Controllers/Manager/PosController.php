@@ -410,6 +410,8 @@ class PosController extends Controller
         // Load HTML content into Dompdf instance
         $options = new Options();
         $options->set('defaultFont', 'DejaVu Sans');  // Set thte default font
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isRemoteEnabled', true); // Enable remote resources
 
         $domPdf = new Dompdf($options); 
 
