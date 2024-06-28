@@ -529,11 +529,16 @@ class ReservationController extends Controller
                 $restaurant_id = $qrcode->restaurant_id;
             }
         }
-        $setting = Setting::whereRestaurantId($restaurant_id)->first();
+        $setting = Setting::with(['restaurant' => function($query) {
+            $query->select('id', 'operating_start_hours', 'operating_end_hours');
+        }])
+        ->whereRestaurantId($restaurant_id)
+        ->first();
+
         $close_reservation = $setting->close_reservation;
         if ($close_reservation == 0) {
-            $open_time = Carbon::create($setting->open_time);
-            $close_time = Carbon::create($setting->close_time);
+            $open_time = isset($setting->restaurant) ? Carbon::create($setting->restaurant->operating_start_hours) : '';
+            $close_time = isset($setting->restaurant) ? Carbon::create($setting->restaurant->operating_end_hours) : '';
             $current_time = Carbon::now();
             if (!$current_time->isBetween($open_time, $close_time)) {
                 $close_reservation = 1;

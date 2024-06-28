@@ -85,7 +85,7 @@
                                                 <div class="menu-dropdown menu-dropdown-right">
                                                     <div class="menu-dropdown-content padding-vertical">
                                                         <a class="menu-dropdown-link menu-close button padding-bottom height_40" :href="'/reservation-view/'+data.id"><i class="f7-icons margin-right-half">eye</i>View </a>
-                                                        <a class="menu-dropdown-link menu-close padding-top button height_40" @click="removeReservation(data.id)"><i class="f7-icons margin-right-half">trash</i>Delete </a>
+                                                        <a class="menu-dropdown-link menu-close padding-top button height_40" @click="setRemoveReservationId(data.id)"><i class="f7-icons margin-right-half">trash</i>Delete </a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -112,6 +112,11 @@
             </div>
         </div>
     </div>
+
+    <!-- ========= DELETE COUPON CODE POPUP ========= -->
+    <div class="popup removePopup">
+        <RemovePopup :title="'Are you sure delete this reservation?'" @remove="removeReservation"/>
+    </div>
 </f7-page>
 </template>
 
@@ -120,6 +125,8 @@ import { ref, onMounted } from 'vue';
 import $ from 'jquery';
 import { f7Page, f7 } from 'framework7-vue';
 import axios from 'axios';
+import RemovePopup from '../../components/common/RemovePopup.vue';
+import { successNotification } from '../../commonFunction.js';
 
 const id = ref('');
 const reservation = ref([]);
@@ -190,23 +197,30 @@ const reservationData = (pNumber) => {
     })
 }
 
-const removeReservation = (id) => {
-    f7.dialog.confirm('Are you sure delete this reservation?', () => {
-        axios.post('/api/remove-reservation', { id: id })
+const setRemoveReservationId = (reservation_id) => {
+    id.value = reservation_id;
+    f7.popup.open(`.removePopup`);
+}
+
+const removeReservation = () => {
+    // f7.dialog.confirm('Are you sure delete this reservation?', () => {
+        axios.post('/api/remove-reservation', { id: id.value })
         .then((res) => {
             // this.$root.successNotification(res.data.success);
+            successNotification(res.data.success);
+            f7.popup.close(`.removePopup`);
             reservationData();
-        })
-    });
+        });
+    // });
 
-    setTimeout(() => {
-        $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });
-        $('.dialog-title').html("<img src='/images/cross.png'>");
-        $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
-        $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
-        $('.dialog-button').eq(1).removeClass('text-color-black');
-        $('.dialog-buttons').addClass('margin-top no-margin-bottom')
-    }, 50);
+    // setTimeout(() => {
+    //     $('.dialog-button').eq(1).css({ 'background-color': '#F33E3E', 'color': '#fff' });
+    //     $('.dialog-title').html("<img src='/images/cross.png'>");
+    //     $('.dialog-buttons').after("<div><img src='/images/flow.png' style='width:100%'></div>");
+    //     $('.dialog-button').addClass('col button button-raised text-color-black button-large text-transform-capitalize');
+    //     $('.dialog-button').eq(1).removeClass('text-color-black');
+    //     $('.dialog-buttons').addClass('margin-top no-margin-bottom')
+    // }, 50);
 }
 
 const calender = () => {

@@ -18,7 +18,7 @@
                                     <div class="item-content item-input">
                                         <div class="item-inner">
                                             <div class="item-input-wrap margin-bottom-half margin-top-half">
-                                                <input type="text" v-model="reservation.name" name="name" class="padding" placeholder="Enter Your name">
+                                                <input type="text" v-model="reservation.name" name="customer_name" class="padding" placeholder="Enter Your name">
                                             </div>
                                         </div>
                                     </div>
@@ -29,12 +29,12 @@
                                     </div>
                                     <div class="item-content item-input">
                                         <div class="item-inner">
-                                            <div class="item-input-wrap margin-bottom-half"><input type="text" v-model.number="reservation.number" name="number" class="padding" placeholder="Phone number" maxlength="10" @keypress="checkNumberValidate"></div>
+                                            <div class="item-input-wrap margin-bottom-half"><input type="text" v-model.number="reservation.number" name="customer_number" class="padding" placeholder="Phone number" maxlength="10" @keypress="checkNumberValidate"></div>
                                         </div>
                                     </div>
                                     <div class="item-content item-input">
                                         <div class="item-inner">
-                                            <div class="item-input-wrap margin-bottom-half"><input type="number" v-model="reservation.member" name="member" class="padding" placeholder="Family member" @keyup="floorAvailable"></div>
+                                            <div class="item-input-wrap margin-bottom-half"><input type="number" v-model="reservation.member" name="person" class="padding" placeholder="Family member" @keyup="floorAvailable"></div>
                                         </div>
                                     </div>
                                     <div class="item-content item-input margin-bottom">
@@ -184,13 +184,17 @@ const checkTimeForRegister = () => {
     } else if (reservation.value.number.toString().length !== 10) {
         errorNotification('Please enter a valid number.');
         return false;
+    } else if (!reservation.value.floor) {
+        errorNotification('Please select the floor.');
+        return false;
     }
-
-    const formData = new FormData();
-    formData.append('person', reservation.value.member);
-    formData.append('email', reservation.value.email);
+    var formData = new FormData(document.getElementById('reservation-form'));
+    ['customer_name', 'customer_number'].forEach(key => formData.delete(key));
     formData.append('floor', reservation.value.floor);
     formData.append('role', 'Manager');
+    
+    // formData.append('person', reservation.value.member);
+    // formData.append('email', reservation.value.email);
 
     axios.post('/api/check-time', formData)
         .then((res) => {
@@ -209,14 +213,15 @@ const register = () => {
     const conformationMessage = waitingTime.value === '00:00' ? 'No waiting time' : `Waiting time is ${waitingTime.value}`;
 
     f7.dialog.confirm(conformationMessage, () => {
-        const formData = new FormData();
-        formData.append('customer_name', reservation.value.name);
-        formData.append('customer_number', reservation.value.number);
-        formData.append('person', reservation.value.member);
-        formData.append('email', reservation.value.email);
-        formData.append('floor', reservation.value.floor);
+        var form = document.getElementById('reservation-form');
+        var formData = new FormData(form);
         formData.append('role', 'Manager');
         formData.append('agree_condition', 1);
+        // formData.append('customer_name', reservation.value.name);
+        // formData.append('customer_number', reservation.value.number);
+        // formData.append('person', reservation.value.member);
+        // formData.append('email', reservation.value.email);
+        // formData.append('floor', reservation.value.floor);
 
         axios.post('/api/add-reservation', formData)
         .then((res) => {

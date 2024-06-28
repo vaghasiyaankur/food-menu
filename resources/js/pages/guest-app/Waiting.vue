@@ -146,14 +146,12 @@ onBeforeUnmount(() => {
 
 onMounted(() => {
     windowWidth.value = window.innerWidth;
-    setTimeout(() => {
-        qrcode.value = window.location.href.split('/?qrcode=')[1];
-        if (qrcode.value) {
+    qrcode.value = window.location.href.split('/?qrcode=')[1];
+    if (qrcode.value) {
         cookies.set("qrcode", qrcode.value, 60 * 60 * 24);
         getOrderData();
         getWaitingTime();
-        }
-    }, 1000);
+    }
 
     intervalId.value = setInterval(() => {
         getWaitingTime();
