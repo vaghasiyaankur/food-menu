@@ -25,6 +25,7 @@ use Illuminate\Http\Request;
 use PHPUnit\TextUI\XmlConfiguration\Variable;
 use PDF;
 use Dompdf\Dompdf;
+use Dompdf\Options;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendPdfMail;
 use App\Models\Restaurant;
@@ -390,7 +391,7 @@ class PosController extends Controller
         return response()->json(['success'=>'Bill Settle Successfully.']);
     }
 
-    public function printOrder (Dompdf $domPdf,$id) {
+    public function printOrder ($id) {
 
         $restaurant = Restaurant::find(Auth::user()->restaurant_id);
 
@@ -398,12 +399,19 @@ class PosController extends Controller
 
         $order = Order::with('kots.kotProducts')->find($id);
 
-        $orderProduct = KotProduct::with('product.productRestaurantLanguages')->where('kot_id',$order->kots[0]->id)->get();
+        $kotId = (isset($order->kots) && isset($order->kots[0])) ? $order->kots[0]->id : "";
+        $orderProduct = KotProduct::with('product.productRestaurantLanguages')->where('kot_id',$kotId)->get();
 
         // Generate PDF content (example HTML content)
 
-        return view('emails.invoice', compact('setting', 'order', 'restaurant', 'orderProduct'));
+        // return view('emails.invoice', compact('setting', 'order', 'restaurant', 'orderProduct'));
         $htmlContent = view('emails.invoice', compact('setting', 'order', 'restaurant', 'orderProduct'))->render();
+
+        // Load HTML content into Dompdf instance
+        $options = new Options();
+        $options->set('defaultFont', 'DejaVu Sans');  // Set thte default font
+
+        $domPdf = new Dompdf($options); 
 
         // Load HTML content into Dompdf instance
         $domPdf->loadHtml($htmlContent);
