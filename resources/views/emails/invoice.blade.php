@@ -204,7 +204,7 @@
 <body>
     <header>
         <div class="text-center company-logo">
-            <img src="http://127.0.0.1:8000/storage/{{ $restaurant->logo }}" alt="Logo">
+            <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('storage/'.$restaurant->logo))) }}">
         </div>
         <div class="invoice-header">
             <div class="text-center biller-content">

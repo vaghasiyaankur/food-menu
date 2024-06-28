@@ -13,7 +13,8 @@
 </head>
 <body>
     <div style="text-align: center;">
-        <img src="https://ewaiting.widerthemes.in/storage/{{ $restaurant->logo }}" alt="Logo" style="width:100%; max-width:150px;">
+        <img src="http://127.0.0.1:8000/storage/{{ $restaurant->logo }}" alt="Logo" style="width:100%; max-width:150px;">
+        {{-- <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('storage/'.$restaurant->logo))) }}"> --}}
     </div>
     <h3>Dear {{ $order->name }},</h3>
     <p>I hope this email finds you well.</p>

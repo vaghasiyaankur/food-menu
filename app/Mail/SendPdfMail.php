@@ -34,7 +34,7 @@ class SendPdfMail extends Mailable
     public function build()
     {
         return $this->subject('Food Invoice - ['.$this->restaurant->name.']')
-        ->view('emails.mail',['order' => $this->order, 'setting' => $this->setting]) // Optional: Use a Blade template for email content
+        ->view('emails.mail',['order' => $this->order, 'setting' => $this->setting, 'restaurant'=> $this->restaurant]) // Optional: Use a Blade template for email content
         ->attachData($this->pdfContent, 'invoice.pdf', [
             'mime' => 'application/pdf',
         ]);
