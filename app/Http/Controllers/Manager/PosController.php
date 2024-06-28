@@ -213,7 +213,7 @@ class PosController extends Controller
                         $kotProductIngredient->price = $ingredient['price'];
                         $kotProductIngredient->save();
                     }
-                    if($product['variation']){
+                    if(isset($product['variation']) && !empty($product['variation'])){
                         $variation = $product['variation'];
                         $kotProductVariation = new KotProductVariation();
                         $kotProductVariation->kot_product_id = $kotProduct->id;

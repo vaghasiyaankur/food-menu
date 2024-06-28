@@ -8,9 +8,6 @@
                 </div>
                 <div class="col-100 large-80 medium-100">
                     <div class="table_view-features">
-                        <div class="table_view-btn table_view-move_btn">
-                            <button class="button button-raised height_40">Move KOT / Items</button>
-                        </div>
                         <div class="table_view-representer">
                             <div class="display-flex align-items-center">
                                 <div class="table_status-represent-ordering"></div>
