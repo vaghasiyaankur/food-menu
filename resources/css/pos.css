@@ -597,7 +597,7 @@ textarea {
 }
 .order-bill {
     margin: 0px 30px 25px;
-    max-width: 403px;
+    max-width: 100%;
     position: relative;
 }
 .order-details {
@@ -683,7 +683,7 @@ textarea {
 .billing-btns .hold-btn,
 .billing-btns .e-bill-btn {
     padding: 12px 42px;
-    max-width: 124px;
+    max-width: 100%;
     width: 100%;
     height: 40px;
     font-size: 18px;

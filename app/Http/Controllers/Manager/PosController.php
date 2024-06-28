@@ -44,7 +44,7 @@ class PosController extends Controller
         $tableId = $req->tableId;
 
         $table = Table::with(['orders' => function ($query) {
-                        $query->where('finish_time', '=', null)->where('finished', '=', 0)->latest()->take(1)->with('kots.kotProducts');
+                        $query->where('finished', '=', 0)->latest()->take(1)->with('kots.kotProducts');
                     }, 'floor', 'kotHold'])
                     ->where('id', $tableId)
                     ->where('restaurant_id', $restaurantId)
@@ -397,8 +397,13 @@ class PosController extends Controller
         $setting = Setting::whereRestaurantId(Auth::user()->restaurant_id)->first();
 
         $order = Order::with('kots.kotProducts')->find($id);
+
+        $orderProduct = KotProduct::with('product.productRestaurantLanguages')->where('kot_id',$order->kots[0]->id)->get();
+
         // Generate PDF content (example HTML content)
-        $htmlContent = view('emails.invoice', compact('setting', 'order', 'restaurant'))->render();
+
+        return view('emails.invoice', compact('setting', 'order', 'restaurant', 'orderProduct'));
+        $htmlContent = view('emails.invoice', compact('setting', 'order', 'restaurant', 'orderProduct'))->render();
 
         // Load HTML content into Dompdf instance
         $domPdf->loadHtml($htmlContent);
