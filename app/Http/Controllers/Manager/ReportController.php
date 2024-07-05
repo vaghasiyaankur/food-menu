@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Manager;
 
 use App\Http\Controllers\Controller;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Setting;
@@ -34,6 +35,7 @@ class ReportController extends Controller
         $total_order =  Order::whereRestaurantId(Auth::user()->restaurant_id)->whereDate('created_at', '>=', $from_date)->whereDate('created_at', '<=', $to_date)->count();
         $complete_order = Order::whereRestaurantId(Auth::user()->restaurant_id)->whereDate('created_at', '>=', $from_date)->whereDate('created_at', '<=', $to_date)->where('finished', 1)->count();
         $ongoing_order = Order::whereRestaurantId(Auth::user()->restaurant_id)->whereDate('created_at', '>=', $from_date)->whereDate('created_at', '<=', $to_date)->where('finished', 0)->whereNotNull('start_at')->count();
+        $customers = Customer::count();
 
         if(!$total_order) $reservation_table = 0;
         else{
@@ -42,7 +44,7 @@ class ReportController extends Controller
             $reservation_table = $most_table_order->table_id ? : 0;
         }
 
-        return response()->json([ 'total_order' => $total_order, 'complete_order' => $complete_order, 'ongoing_order' => $ongoing_order, 'reservation_table' => $reservation_table] , 200);
+        return response()->json([ 'total_order' => $total_order, 'complete_order' => $complete_order, 'ongoing_order' => $ongoing_order, 'reservation_table' => $reservation_table, 'customers' => $customers] , 200);
     }
 
     public function reportChartData(Request $request)
