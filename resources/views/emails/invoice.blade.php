@@ -10,16 +10,16 @@
             margin: 0;
             font-family: Inter;
         }
-        body {
+        /* body {
             min-height: 100dvh;
             padding: 70px 30px 75px;
-            background-image: url('file://{{ public_path("images/main-bg.png") }}');
+            background-image: url('{{ public_path("images/main-bg.png") }}');
             background-size: 100% 100%;
             background-repeat: no-repeat;
-            /* background-position: center; */
+            background-position: center;
             background-color: rgba(250, 250, 250, 1);
-            /* background-color: black; */
-        }
+            background-color: black;
+        } */
         .text-left {
             text-align: left;
         }

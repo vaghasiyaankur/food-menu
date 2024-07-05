@@ -249,7 +249,7 @@ export default {
     padding: 12px;
 }
 .reporting_card .card{
-    background-image: url(/images/reportingbg.png);
+    background-image: url(/images/reportingbg.gif);
     background-size: cover;
     border-left: 7px solid #F33E3E;
     justify-content: space-between;

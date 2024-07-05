@@ -34,6 +34,7 @@
                                 <div class="card__icon">
                                     <img src="/images/report-1.png" alt="">
                                 </div>
+                                <img src="/images/reportingbg.gif" class="dash_back-image" alt="">
                             </div>
                         </div>
                     </div>
@@ -45,6 +46,7 @@
                                 <div class="card__icon">
                                     <img src="/images/report-2.png" alt="">
                                 </div>
+                                <img src="/images/reportingbg.gif" class="dash_back-image" alt="">
                             </div>
                         </div>
                     </div>
@@ -56,6 +58,7 @@
                                 <div class="card__icon">
                                     <img src="/images/report-3.png" alt="">
                                 </div>
+                                <img src="/images/reportingbg.gif" class="dash_back-image" alt="">
                             </div>
                         </div>
                     </div>
@@ -67,12 +70,13 @@
                                 <div class="card__icon card__icon_2">
                                     <img src="/images/report-4.png" alt="">
                                 </div>
+                                <img src="/images/reportingbg.gif" class="dash_back-image" alt="">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- <div class="reporting__chart">
+            <div class="reporting__chart">
                 <div class="row">
                     <div class="col-100">
                         <div class="card elevation-2">
@@ -101,7 +105,7 @@
                         <button @click="report" style="opacity: 0" id="date-set"></button>
                     </div>
                 </div>
-            </div> -->
+            </div>
 
             <input type="hidden" id="fromDate">
             <input type="hidden" id="toDate">
@@ -223,12 +227,18 @@ const apexChartData = () => {
     padding: 12px;
 }
 .reporting_card .card{
-    background-image: url(/images/reportingbg.png);
-    background-size: cover;
     border-left: 7px solid #F33E3E;
     justify-content: space-between;
     align-items: end;
     overflow: hidden;
+    z-index: 0;
+}
+.reporting_card .card .dash_back-image {
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    right: 0;
+    width: 75%;
 }
 .reporting_card .card .card-content{
     padding: 20px;

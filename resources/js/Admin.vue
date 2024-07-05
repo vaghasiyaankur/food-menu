@@ -2,10 +2,12 @@
   <f7-app ref="app" v-bind="f7Params">
     <f7-page>
       <div class="nav-bar" v-if="currentRoute.value != 'login'">
-        
+        <Navbar 
+          :moveToMethod="MoveToWaitingArea"
+        />
       </div>
       <f7-view
-        url="/branchlistnew/"
+        url="/dashboard/"
         :main="true"
         class="safe-areas"
         :master-detail-breakpoint="768"
@@ -24,7 +26,7 @@
   </f7-app>
 </template>
 
-<script>
+<script setup>
 import { ref, reactive, onMounted, onBeforeUnmount, computed } from 'vue';
 import { f7App, f7Panel, f7View, f7, f7Page, f7Navbar } from "framework7-vue";
 import routes from "./admin-routes";
@@ -32,226 +34,187 @@ import store from "./store";
 import $ from "jquery";
 import axios from "axios";
 import Icon from "./components/Icon.vue";
-// import Navbar from "./pages/admin/Navbar.vue";
+import Navbar from "./pages/admin/Navbar.vue";
 
-export default {
-  components: {
-    f7App,
-    f7Panel,
-    f7View,
-    f7,
-    f7Page,
-    f7Navbar,
-    Icon,
-    // Navbar
+const f7Params = reactive({
+  id: "io.framework7.testapp",
+  theme: "auto",
+  routes,
+  store,
+  popup: {
+    closeOnEscape: true,
   },
-  setup() {
-    const f7Params = reactive({
-      id: "io.framework7.testapp",
-      theme: "auto",
-      routes,
-      store,
-      popup: {
-        closeOnEscape: true,
-      },
-      sheet: {
-        closeOnEscape: true,
-      },
-      popover: {
-        closeOnEscape: true,
-      },
-      actions: {
-        closeOnEscape: true,
-      },
-    });
+  sheet: {
+    closeOnEscape: true,
+  },
+  popover: {
+    closeOnEscape: true,
+  },
+  actions: {
+    closeOnEscape: true,
+  },
+});
 
-    const closeReservationData = ref(0);
-    const currentRoute = ref("");
-    const currentSubmenuRoute = ref("");
-    const langs = ref([]);
-    const events = ["click", "mousemove", "mousedown", "scroll", "keypress", "load"];
-    const warningTimer = ref(null);
-    const checkLogin = ref(false);
-    const trans = ref([]);
-    const user = ref([]);
+const closeReservationData = ref(0);
+const currentRoute = ref("");
+const currentSubmenuRoute = ref("");
+const langs = ref([]);
+const events = ["click", "mousemove", "mousedown", "scroll", "keypress", "load"];
+const warningTimer = ref(null);
+const checkLogin = ref(false);
+const trans = ref([]);
+const user = ref([]);
 
-    // Function to move to waiting area
-    const MoveToWaitingArea = () => {
-      window.open("/manager", "_blank");
-    };
+// Function to move to waiting area
+const MoveToWaitingArea = () => {
+  window.open("/manager", "_blank");
+};
 
-    // Methods
-    const getLanguage = () => {
-      axios.get("/api/get-all-languages").then((res) => {
-        langs.value = res.data.langs;
-        languageTranslation(langs.value[0].id);
-      });
-    };
+// Methods
+const getLanguage = () => {
+  axios.get("/api/get-all-languages").then((res) => {
+    langs.value = res.data.langs;
+    languageTranslation(langs.value[0].id);
+  });
+};
 
-    const languageTranslation = (langId) => {
-      // Here you can add your own code
-      axios.post("/api/get-language-translation", { lang_id: langId }).then((res) => {
-        trans.value = res.data.translations;
-        // Assuming you have a selected_lang ref or similar to store the selected language ID
-        // selected_lang.value = res.data.lang_id;
-      });
-    };
+const languageTranslation = (langId) => {
+  // Here you can add your own code
+  axios.post("/api/get-language-translation", { lang_id: langId }).then((res) => {
+    trans.value = res.data.translations;
+    // Assuming you have a selected_lang ref or similar to store the selected language ID
+    // selected_lang.value = res.data.lang_id;
+  });
+};
 
-    const checkReservation = () => {
-      axios.get("/api/check-reservation").then((res) => {
+const checkReservation = () => {
+  axios.get("/api/check-reservation").then((res) => {
+    closeReservationData.value = res.data.close_reservation;
+  });
+};
+
+const closeReservation = (reservation) => {
+  $(".closeReservation").css("background-color", "#F33E3E");
+  var openOrClose = closeReservationData.value == 0 ? "open" : "close";
+  f7.dialog.confirm("Are you sure " + openOrClose + " the reservation?", () => {
+    if (reservation == 0) var changeReservation = 1;
+    else var changeReservation = 0;
+    axios
+      .post("/api/change-reservation", { reservation: changeReservation })
+      .then((res) => {
         closeReservationData.value = res.data.close_reservation;
       });
-    };
-
-    const closeReservation = (reservation) => {
-      $(".closeReservation").css("background-color", "#F33E3E");
-      var openOrClose = closeReservationData.value == 0 ? "open" : "close";
-      f7.dialog.confirm("Are you sure " + openOrClose + " the reservation?", () => {
-        if (reservation == 0) var changeReservation = 1;
-        else var changeReservation = 0;
-        axios
-          .post("/api/change-reservation", { reservation: changeReservation })
-          .then((res) => {
-            closeReservationData.value = res.data.close_reservation;
-          });
-        $(".closeReservation").css("background-color", "");
-      });
-      setTimeout(() => {
-        $(".dialog-button").eq(1).css({ "background-color": "#F33E3E", color: "#fff" });
-        if (closeReservationData.value == 0)
-          $(".dialog-title").html("<img src='/images/open_reservation.png'>");
-        else $(".dialog-title").html("<img src='/images/close_reservation.png'>");
-        $(".dialog-buttons").after(
-          "<div><img src='/images/flow.png' style='width:100%'></div>"
-        );
-        $(".dialog-button").addClass(
-          "col button button-raised text-color-black button-large text-transform-capitalize"
-        );
-        $(".dialog-button").eq(1).removeClass("text-color-black");
-        $(".dialog-text").addClass("margin-top");
-        $(".dialog-buttons").addClass("margin-top no-margin-bottom");
-      }, 50);
-    };
-    const activationMenu = (active, submenuactive) => {
-      currentRoute.value = active;
-      currentSubmenuRoute.value = submenuactive;
-    };
-
-    const addLoader = () => {
-      $(".overlay, body").removeClass("loaded");
-      $(".overlay").css({ display: "" });
-    };
-
-    const removeLoader = () => {
-      setTimeout(function () {
-        $(".overlay, body").addClass("loaded");
-        setTimeout(function () {
-          $(".overlay").css({ display: "none" });
-        }, 1000);
-      }, 2000);
-    };
-
-    const setTimer = () => {
-      warningTimer.value = setTimeout(warningMessage.value, 15 * 60 * 1000);
-    };
-
-    const warningMessage = () => {
-      f7.dialog.close();
-      f7.popup.close();
-      f7.view.main.router.navigate({ url: "/lock-screen/" });
-      lockScreenEnable();
-    };
-
-    const resetTimer = () => {
-      clearTimeout(warningTimer.value);
-      setTimer();
-    };
-
-    const lockScreenEnable = () => {
-      const config = {
-        headers: { "content-type": "multipart/form-data" },
-      };
-      axios
-        .post("/api/lockenabledisable", { lock: 1 }, config)
-        .then((res) => {})
-        .catch((err) => {});
-    };
-
-    // Lifecycle hooks
-    onMounted(() => {
-      // Your mounted logic here
-      axios.get("/api/checkLogin").then((res) => {
-        if (res.data.check_auth) {
-          checkLogin.value = true;
-          user.value = res.data.user;
-          f7.view.main.router.navigate({ url: "/table/" });
-        } else {
-          f7.view.main.router.navigate({ url: "/login/" });
-        }
-      });
-
-      setTimeout(() => {
-        if (checkLogin.value) {
-          getLanguage();
-          checkReservation();
-        }
-      }, 500);
-      $(window).bind("load", function () {
-        $(".overlay, body").addClass("loaded");
-        setTimeout(function () {
-          $(".overlay").css({ display: "none" });
-        }, 1000);
-      });
-
-      events.forEach(event => {
-        window.addEventListener(event, resetTimer);
-      });
-
-      if (checkLogin.value) {
-        setTimer();
-      }
-    });
-
-    onBeforeUnmount(() => {
-      // Cleanup logic here
-      events.forEach(event => {
-        window.removeEventListener(event, resetTimer);
-      });
-
-      clearTimeout(warningTimer.value);
-    });
-
-    // Computed properties
-    const manager = computed(() => {
-      // return this.$route.path === '/'
-    });
-
-    return {
-      f7Params,
-      currentRoute,
-      currentSubmenuRoute,
-      langs,
-      events,
-      warningTimer,
-      checkLogin,
-      trans,
-      user,
-      MoveToWaitingArea,
-      getLanguage,
-      languageTranslation,
-      checkReservation,
-      closeReservation,
-      activationMenu,
-      addLoader,
-      removeLoader,
-      setTimer,
-      warningMessage,
-      resetTimer,
-      lockScreenEnable,
-      manager
-    };
-  },
+    $(".closeReservation").css("background-color", "");
+  });
+  setTimeout(() => {
+    $(".dialog-button").eq(1).css({ "background-color": "#F33E3E", color: "#fff" });
+    if (closeReservationData.value == 0)
+      $(".dialog-title").html("<img src='/images/open_reservation.png'>");
+    else $(".dialog-title").html("<img src='/images/close_reservation.png'>");
+    $(".dialog-buttons").after(
+      "<div><img src='/images/flow.png' style='width:100%'></div>"
+    );
+    $(".dialog-button").addClass(
+      "col button button-raised text-color-black button-large text-transform-capitalize"
+    );
+    $(".dialog-button").eq(1).removeClass("text-color-black");
+    $(".dialog-text").addClass("margin-top");
+    $(".dialog-buttons").addClass("margin-top no-margin-bottom");
+  }, 50);
 };
+const activationMenu = (active, submenuactive) => {
+  currentRoute.value = active;
+  currentSubmenuRoute.value = submenuactive;
+};
+
+const addLoader = () => {
+  $(".overlay, body").removeClass("loaded");
+  $(".overlay").css({ display: "" });
+};
+
+const removeLoader = () => {
+  setTimeout(function () {
+    $(".overlay, body").addClass("loaded");
+    setTimeout(function () {
+      $(".overlay").css({ display: "none" });
+    }, 1000);
+  }, 2000);
+};
+
+const setTimer = () => {
+  warningTimer.value = setTimeout(warningMessage.value, 15 * 60 * 1000);
+};
+
+const warningMessage = () => {
+  f7.dialog.close();
+  f7.popup.close();
+  f7.view.main.router.navigate({ url: "/lock-screen/" });
+  lockScreenEnable();
+};
+
+const resetTimer = () => {
+  clearTimeout(warningTimer.value);
+  setTimer();
+};
+
+const lockScreenEnable = () => {
+  const config = {
+    headers: { "content-type": "multipart/form-data" },
+  };
+  axios
+    .post("/api/lockenabledisable", { lock: 1 }, config)
+    .then((res) => {})
+    .catch((err) => {});
+};
+
+// Lifecycle hooks
+onMounted(() => {
+  // Your mounted logic here
+  axios.get("/api/checkLogin").then((res) => {
+    if (res.data.check_auth) {
+      checkLogin.value = true;
+      user.value = res.data.user;
+      f7.view.main.router.navigate({ url: "/table/" });
+    } else {
+      f7.view.main.router.navigate({ url: "/login/" });
+    }
+  });
+
+  setTimeout(() => {
+    if (checkLogin.value) {
+      getLanguage();
+      checkReservation();
+    }
+  }, 500);
+  $(window).bind("load", function () {
+    $(".overlay, body").addClass("loaded");
+    setTimeout(function () {
+      $(".overlay").css({ display: "none" });
+    }, 1000);
+  });
+
+  events.forEach(event => {
+    window.addEventListener(event, resetTimer);
+  });
+
+  if (checkLogin.value) {
+    setTimer();
+  }
+});
+
+onBeforeUnmount(() => {
+  // Cleanup logic here
+  events.forEach(event => {
+    window.removeEventListener(event, resetTimer);
+  });
+
+  clearTimeout(warningTimer.value);
+});
+
+// Computed properties
+const manager = computed(() => {
+  // return this.$route.path === '/'
+});
 </script>
 <style>
 .active_submenu {
