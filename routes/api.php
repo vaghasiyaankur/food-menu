@@ -23,6 +23,7 @@ use App\Http\Controllers\TaxSettingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -357,3 +358,7 @@ Route::get('/get-upi/{id}', [UpiController::class, 'getUpi']);
 Route::post('/update-upi',[UpiController::class, 'updateUpi']);
 
 Route::post('/delete-upi',[UpiController::class, 'deleteUpi']);
+
+// ------------------------ Dashboard List Routes ------------------------ //
+
+Route::get('/dashboard-list', [DashboardController::class, 'dashboardList']);
