@@ -18,7 +18,7 @@
             <Welcome />
 
             <!--  Dashoboard Counter Card Section Component -->
-            <DashboardCounter />
+            <DashboardCounter :overview-counter="overviewCounter" />
             
             <!-- Latest Order And Category Section Component -->
             <LatestOrderCategory />
@@ -47,6 +47,12 @@
     import LatestCustomerPendingOrder from './Dashboard/LatestCustomerAndPendingOrder.vue';
 
     const latestCustomers = ref([]);
+    const overviewCounter = ref({
+        total_order : 0,
+        completed_order : 0,
+        pending_order : 0,
+        customer : 0,
+    });
 
     onMounted(() => {
         dashboardList();
@@ -56,6 +62,10 @@
         await axios.get('/api/dashboard-list')
             .then(response => {
                 if(response.status) {
+                    overviewCounter.value.total_order = response.data.total_order;
+                    overviewCounter.value.completed_order = response.data.completed_order;
+                    overviewCounter.value.pending_order = response.data.pending_order;
+                    overviewCounter.value.customer = response.data.customer;
                     latestCustomers.value = response.data.latest_customer;
                 }
             }).catch(error => {

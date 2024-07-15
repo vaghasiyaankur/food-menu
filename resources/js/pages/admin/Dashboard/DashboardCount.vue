@@ -2,19 +2,19 @@
     <div class="dashboard_card">
         <div class="dashboard_card_item dashboard_total_orders">
             <h2 class="no-margin">Total Orders</h2>
-            <h1 class="no-margin">{{ dashboardCounter.total_order }}</h1>
+            <h1 class="no-margin">{{ overviewCounter.total_order }}</h1>
             <img src="/images/report-1.png" class="bottom-image" alt="" />
             <img src="/images/reportingbg.gif" class="dash_back-image" alt="">
         </div>
         <div class="dashboard_card_item dashboard_completed_orders">
             <h2 class="no-margin">Completed Orders</h2>
-            <h1 class="no-margin">{{ dashboardCounter.completed_order }}</h1>
+            <h1 class="no-margin">{{ overviewCounter.completed_order }}</h1>
             <img src="/images/report-2.png" class="bottom-image" alt="" />
             <img src="/images/reportingbg.gif" class="dash_back-image" alt="">
         </div>
         <div class="dashboard_card_item dashboard_pending_orders">
             <h2 class="no-margin">Pending Orders</h2>
-            <h1 class="no-margin">{{ dashboardCounter.pending_order }}</h1>
+            <h1 class="no-margin">{{ overviewCounter.pending_order }}</h1>
             <svg class="bottom-image" width="70" height="70" viewBox="0 0 85 83" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -64,7 +64,7 @@
         </div>
         <div class="dashboard_card_item dashboard_customer">
             <h2 class="no-margin">Customer</h2>
-            <h1 class="no-margin">{{ dashboardCounter.customer }}</h1>
+            <h1 class="no-margin">{{ overviewCounter.customer }}</h1>
             <svg class="bottom-image" width="80" height="70" viewBox="0 0 95 89" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -86,29 +86,12 @@
 </template>
 
 <script setup>
-    import axios from 'axios';
-    import { ref, onMounted } from 'vue';
+    import { defineProps } from 'vue';
 
-    const dashboardCounter = ref({
-        total_order : 0,
-        completed_order : 0,
-        pending_order : 0,
-        customer : 0,
+    defineProps({
+        overviewCounter: {
+            type: Array,
+            default: () => []
+        },
     });
-
-    onMounted(() => {
-        getDashboardCountDetails();
-    });
-
-    const getDashboardCountDetails = async () => {
-        await axios.get('/api/report-data')
-            .then(response => {
-                dashboardCounter.value.total_order = response.data.total_order ;
-                dashboardCounter.value.completed_order = response.data.complete_order ;
-                dashboardCounter.value.pending_order = response.data.ongoing_order ;
-                dashboardCounter.value.customer = response.data.customers ;
-            }).catch(error => {
-                console.log(error);
-            });
-    }
 </script>

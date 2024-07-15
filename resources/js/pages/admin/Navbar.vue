@@ -43,7 +43,7 @@ const props = defineProps({
 const navbarItems = [
   { label: 'Dashboard', routesName: ['dashboard'], href: '/dashboard/', icon: 'dashboard' },
   { label: 'Orders', routesName: ['orders'], href: '/orders/', icon: 'order' },
-  { label: 'Transaction', routesName: ['orders'], href: '/transaction/', icon: 'transaction' },
+  { label: 'Transaction', routesName: ['transaction'], href: '/transaction/', icon: 'transaction' },
   { label: 'Feedback', routesName: ['feedback'], href: '/feedback/', icon: 'feedback' },
   { label: 'User', routesName: ['user'], href: '/user/', icon: 'user' },
   { label: 'Branch', routesName: ['branch'], href: '/branch/', icon: 'branch' }

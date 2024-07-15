@@ -10,13 +10,13 @@
             <div class="customer_card_holder">
                 <div class="customer_card" v-for="latest_customer in latestCustomers" :key="latest_customer.id">
                     <div class="customer_image">
-                        <img src="\assets\images\seederImages\dashboard\customer_1.png">
+                        <img src="/images/user.png" width="100px">
                     </div>
                     <div class="card_customer_name">
                         <h5 class="no-margin">{{latest_customer.name}}</h5>
                     </div>
                     <div class="customer_online_status">
-                        <p class="no-margin">18 hours ago</p>
+                        <p class="no-margin">{{ timeFormat(latest_customer.created_at) }}</p>
                     </div>
                 </div>
             </div>
@@ -239,7 +239,10 @@
 </template>
 
 <script setup>
+    import dayjs from 'dayjs';
     import { defineProps } from 'vue';
+    import relativeTime from 'dayjs/plugin/relativeTime';
+    dayjs.extend(relativeTime);
 
     defineProps({
         latestCustomers: {
@@ -247,4 +250,8 @@
             default : () => []
         }
     });
+
+    const timeFormat = (time) => {
+        if (time) return dayjs().to(dayjs(time));
+    }
 </script>
