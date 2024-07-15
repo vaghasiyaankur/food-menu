@@ -58,22 +58,24 @@ class UserController extends Controller
         return redirect()->route('login');
     }
 
-    public function getUsers(){
-        $roleWiseUsers = [];
-        if($restaurant_id = Auth::user()->restaurant_id){
-            $users = User::whereRestaurantId($restaurant_id)->get();
-            $roleWiseUsers['all'] = $users;
+    public function getUsers(Request $request){
+        $restaurant_id = Auth::user()->restaurant_id;
+        $type = $request->query('type');
 
+        $usersQuery = User::whereRestaurantId($restaurant_id);
+
+        $users = $type === 'admin-user' ? $usersQuery->paginate(10) : $usersQuery->get();
+
+        $roleWiseUsers['all'] = $users;
+
+        if ($type !== 'admin-user') {
             foreach ($users as $user) {
-                // Assuming 'role' is a column in your users table
                 $role = $user->role;
-                if (!isset($roleWiseUsers[$role])) {
-                    $roleWiseUsers[$role] = [];
-                }
                 $roleWiseUsers[$role][] = $user;
             }
         }
-        return response()->json(['users'=>$roleWiseUsers]);
+
+        return response()->json(['users' => $roleWiseUsers]);
     }
 
     public function saveUserData(UserRequest $request) {
