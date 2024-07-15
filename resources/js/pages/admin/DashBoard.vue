@@ -17,7 +17,7 @@
             <!-- Dashboard Welcome Section Component -->
             <Welcome />
 
-            <!--  Dashoboard Counter Card Section Component -->
+            <!--  Dashboard Counter Card Section Component -->
             <DashboardCounter :overview-counter="overviewCounter" />
             
             <!-- Latest Order And Category Section Component -->
@@ -29,7 +29,7 @@
             <!-- Latest Order And Product Section Component -->
             <LatestOrderProduct />
             
-            <!-- Latest Menu Transction Section Component -->
+            <!-- Latest Menu Transaction Section Component -->
             <LatestMenuTransaction />
 
         </div>

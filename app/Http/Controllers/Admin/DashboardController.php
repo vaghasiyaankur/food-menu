@@ -19,7 +19,7 @@ class DashboardController extends Controller
         $total_order =  Order::whereRestaurantId(Auth::user()->restaurant_id)->whereDate('created_at', '>=', $from_date)->whereDate('created_at', '<=', $to_date)->count();
         $complete_order = Order::whereRestaurantId(Auth::user()->restaurant_id)->whereDate('created_at', '>=', $from_date)->whereDate('created_at', '<=', $to_date)->where('finished', 1)->count();
         $pending_order = Order::whereRestaurantId(Auth::user()->restaurant_id)->whereDate('created_at', '>=', $from_date)->whereDate('created_at', '<=', $to_date)->where('finished', 0)->whereNotNull('start_at')->count();
-        $customers = Customer::count();
+        $customers = Customer::whereRestaurantId(Auth::user()->restaurant_id)->count();
         $latestCustomer = Customer::whereRestaurantId(Auth::user()->restaurant_id)->orderByDesc('id')->take(8)->get();
 
         return response()->json([
