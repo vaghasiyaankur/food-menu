@@ -478,7 +478,7 @@
     text-align: center;
 }
 .dashboard_page .menu_transactions_tables .latest_transactions_table {
-    max-width: 54.78%;
+    max-width: 100%;
     width: 100%;
 }
 .dashboard_page .latest_transactions_table table thead th {

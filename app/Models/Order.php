@@ -49,4 +49,9 @@ class Order extends Model
     {
         return $this->hasMany(Kot::class, 'order_id');
     }
+
+    public function orderPayment()
+    {
+        return $this->hasOne(OrderPayment::class, 'order_id');
+    }
 }
