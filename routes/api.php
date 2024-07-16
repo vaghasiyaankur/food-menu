@@ -24,6 +24,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -364,3 +365,7 @@ Route::post('/delete-upi',[UpiController::class, 'deleteUpi']);
 Route::get('/dashboard-list', [DashboardController::class, 'dashboardList']);
 
 Route::get('/user-simulation/{id}', [UserController::class, 'changeSimulation']);
+
+Route::get('/orders', [AdminOrderController::class, 'getOrders']);
+
+Route::get('/order/{order}', [AdminOrderController::class, 'getOrder']);

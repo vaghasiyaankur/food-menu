@@ -27,6 +27,7 @@ class UserSeeder extends Seeder
                 'email_verified_at' => \Carbon\Carbon::now(),
                 'remember_token' => Str::random(10),
                 'lock_pin' => 1234,
+                'mobile_number' => 9632587413,
                 'role' => 'manager',
                 'restaurant_id' => 1
             ],
@@ -38,6 +39,7 @@ class UserSeeder extends Seeder
                 'remember_token' => Str::random(10),
                 'lock_pin' => 5678,
                 'role' => 'manager',
+                'mobile_number' => 9632587414,
                 'restaurant_id' => 1
                 ],
             [
@@ -46,6 +48,7 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('123456789'),
                 'email_verified_at' => \Carbon\Carbon::now(),
                 'remember_token' => Str::random(10),
+                'mobile_number' => 9632587415,
                 'lock_pin' => 9101,
                 'role' => 'manager',
                 'restaurant_id' => 1
@@ -56,6 +59,7 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('123456789'),
                 'email_verified_at' => \Carbon\Carbon::now(),
                 'remember_token' => Str::random(10),
+                'mobile_number' => 9632587416,
                 'lock_pin' => 1011,
                 'role' => 'manager',
                 'restaurant_id' => 2
@@ -66,6 +70,7 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('123456789'),
                 'email_verified_at' => \Carbon\Carbon::now(),
                 'remember_token' => Str::random(10),
+                'mobile_number' => 9632587417,
                 'lock_pin' => 1112,
                 'role' => 'manager',
                 'restaurant_id' => 2
@@ -77,6 +82,7 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('123456789'),
                 'email_verified_at' => \Carbon\Carbon::now(),
                 'remember_token' => Str::random(10),
+                'mobile_number' => 9632587418,
                 'lock_pin' => 1234,
                 'role' => 'waiter',
                 'restaurant_id' => 1
@@ -88,6 +94,7 @@ class UserSeeder extends Seeder
                 'email_verified_at' => \Carbon\Carbon::now(),
                 'remember_token' => Str::random(10),
                 'lock_pin' => 5678,
+                'mobile_number' => 9632587412,
                 'role' => 'waiter',
                 'restaurant_id' => 1
                 ],
@@ -98,6 +105,7 @@ class UserSeeder extends Seeder
                 'email_verified_at' => \Carbon\Carbon::now(),
                 'remember_token' => Str::random(10),
                 'lock_pin' => 9101,
+                'mobile_number' => 9874563321,
                 'role' => 'waiter',
                 'restaurant_id' => 1
             ],
@@ -108,6 +116,7 @@ class UserSeeder extends Seeder
                 'email_verified_at' => \Carbon\Carbon::now(),
                 'remember_token' => Str::random(10),
                 'lock_pin' => 1011,
+                'mobile_number' => 7412589632,
                 'role' => 'waiter',
                 'restaurant_id' => 2
             ],
@@ -118,6 +127,7 @@ class UserSeeder extends Seeder
                 'email_verified_at' => \Carbon\Carbon::now(),
                 'remember_token' => Str::random(10),
                 'lock_pin' => 1112,
+                'mobile_number' => 9514786325,
                 'role' => 'waiter',
                 'restaurant_id' => 2
             ]

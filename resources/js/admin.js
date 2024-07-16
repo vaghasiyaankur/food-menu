@@ -6,11 +6,11 @@ import Pusher from 'pusher-js';
 import Echo from 'laravel-echo';
 
 import 'framework7/css/bundle';
+import '.././css/user.css';
 import '.././css/admin.css';
 import '.././css/orders.css';
 import '.././css/feedback.css';
 import '.././css/transaction.css';
-import '.././css/user.css';
 import '.././css/branch.css';
 import '.././css/log-in.css';
 

@@ -60,10 +60,21 @@ class UserController extends Controller
 
     public function getUsers(Request $request){
         $restaurant_id = Auth::user()->restaurant_id;
-        $type = $request->query('type');
+        $restaurant_id = auth()->user()->restaurant_id;
+        $search = $request->input('search', '');
+        $filter = $request->input('filter', '');
+        $type = $request->input('type', ''); // Assuming you're passing 'type' in the request
 
         $usersQuery = User::whereRestaurantId($restaurant_id);
 
+        if (!empty($search)) {
+            $usersQuery->where('name', 'like', '%' . $search . '%');
+        }
+
+        if (!empty($filter)) {
+            $usersQuery->where('role', $filter);
+        }
+        
         $users = $type === 'admin-user' ? $usersQuery->paginate(10) : $usersQuery->get();
 
         $roleWiseUsers['all'] = $users;

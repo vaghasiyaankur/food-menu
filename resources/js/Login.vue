@@ -1,103 +1,123 @@
 <template>
-    <f7-page>
-        <div class="login_screen">
-            <div class="login_screen_inner">
-                <div class="login_image">
-                    <div class="login_main_img">
-                        <img src="/images/login_screen.png" />
+    <f7-app ref="app" v-bind="f7Params">
+        <f7-page>
+            <div class="login_screen">
+                <div class="login_screen_inner">
+                    <div class="login_image">
+                        <div class="login_main_img">
+                            <img src="/images/login_screen.png" />
+                        </div>
+                        <div class="login_tab_img display-none">
+                            <img src="/images/login_smallbg.png" alt="" />
+                        </div>
                     </div>
-                    <div class="login_tab_img display-none">
-                        <img src="/images/login_smallbg.png" alt="" />
-                    </div>
-                </div>
-                <div class="login_form">
-                    <div class="login_title text-align-center">
-                        <h3>Login</h3>
-                    </div>
-                    <div
-                        class="list no-hairlines login_inputs margin-top-half no-margin-bottom"
-                    >
-                        <ul>
-                            <li
-                                class="item-content item-input no-padding-left padding-bottom"
-                            >
-                                <div class="item-inner no-padding-right">
-                                    <div class="item-title item-label">
-                                        Email Address*
-                                    </div>
-                                    <div class="item-input-wrap">
-                                        <input
-                                            type="email"
-                                            placeholder="Email Address"
-                                            v-model="email"
-                                            class="padding-left-half"
-                                        />
-                                        <span class="input-clear-button"></span>
-                                        <!-- ====== ERROR SYMBOL ========= -->
-                                        <span
-                                            class="input_error_symbol display-none"
-                                            ><i class="f7-icons font-18"
-                                                >exclamationmark_triangle</i
-                                            ></span
+                    <div class="login_form">
+                        <div class="login_title text-align-center">
+                            <h3>Login</h3>
+                        </div>
+                        <div
+                            class="list no-hairlines login_inputs margin-top-half no-margin-bottom"
+                        >
+                            <ul>
+                                <li
+                                    class="item-content item-input no-padding-left padding-bottom"
+                                >
+                                    <div class="item-inner no-padding-right">
+                                        <div class="item-title item-label">
+                                            Email Address*
+                                        </div>
+                                        <div class="item-input-wrap">
+                                            <input
+                                                type="email"
+                                                placeholder="Email Address"
+                                                v-model="email"
+                                                class="padding-left-half"
+                                            />
+                                            <span class="input-clear-button"></span>
+                                            <!-- ====== ERROR SYMBOL ========= -->
+                                            <span
+                                                class="input_error_symbol display-none"
+                                                ><i class="f7-icons font-18"
+                                                    >exclamationmark_triangle</i
+                                                ></span
+                                            >
+                                        </div>
+                                        <!-- ======= ERROR MESSAGE =======-->
+                                        <p
+                                            class="error_message no-margin-bottom display-none"
                                         >
+                                            Please enter valid Email Address
+                                        </p>
                                     </div>
-                                    <!-- ======= ERROR MESSAGE =======-->
-                                    <p
-                                        class="error_message no-margin-bottom display-none"
-                                    >
-                                        Please enter valid Email Address
-                                    </p>
-                                </div>
-                            </li>
-                            <li
-                                class="item-content item-input no-padding-left padding-bottom"
-                            >
-                                <div class="item-inner no-padding-right">
-                                    <div class="item-title item-label">
-                                        Password*
+                                </li>
+                                <li
+                                    class="item-content item-input no-padding-left padding-bottom"
+                                >
+                                    <div class="item-inner no-padding-right">
+                                        <div class="item-title item-label">
+                                            Password*
+                                        </div>
+                                        <div class="item-input-wrap">
+                                            <input
+                                                type="password"
+                                                placeholder="Enter your password"
+                                                v-model="password"
+                                                class="padding-left-half"
+                                            /><span
+                                                class="input-clear-button"
+                                            ></span>
+                                        </div>
                                     </div>
-                                    <div class="item-input-wrap">
-                                        <input
-                                            type="password"
-                                            placeholder="Enter your password"
-                                            v-model="password"
-                                            class="padding-left-half"
-                                        /><span
-                                            class="input-clear-button"
-                                        ></span>
+                                </li>
+                                <li
+                                    class="item-content item-input no-padding-left padding-bottom"
+                                >
+                                    <div class="item-inner no-padding-right">
+                                        <div class="item-input-wrap">
+                                            <button
+                                                class="button button-fill button border_radius_10 button-raised bg_red text-color-white button-large text-transform-capitalize height_40"
+                                                @click="loginAuthUser"
+                                            >
+                                                Login
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
-                            <li
-                                class="item-content item-input no-padding-left padding-bottom"
-                            >
-                                <div class="item-inner no-padding-right">
-                                    <div class="item-input-wrap">
-                                        <button
-                                            class="button button-fill button border_radius_10 button-raised bg_red text-color-white button-large text-transform-capitalize height_40"
-                                            @click="loginAuthUser"
-                                        >
-                                            Login
-                                        </button>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </f7-page>
+        </f7-page>
+    </f7-app>
 </template>
 
 <script setup>
-import { f7Page } from "framework7-vue";
+import { f7App, f7Page, f7 } from "framework7-vue";
 import axios from "axios";
-import { ref } from 'vue';
+import { ref,reactive } from 'vue';
 import { errorNotification } from './commonFunction.js';
 
 const email = ref('');
 const password = ref('');
+
+// Reactive data
+const f7Params = reactive({
+    id: "io.framework7.testapp",
+    theme: "auto",
+    popup: {
+        closeOnEscape: true,
+    },
+    sheet: {
+        closeOnEscape: true,
+    },
+    popover: {
+        closeOnEscape: true,
+    },
+    actions: {
+        closeOnEscape: true,
+    },
+});
 
 const loginAuthUser = () => {
     if (!email.value) {
