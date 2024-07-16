@@ -18,14 +18,15 @@
                     <div class="search_bar_left">
                         <div class="search_bar">
                             <form data-search-container=".search-list" data-search-in=".item-title" class="searchbar">
-                                <input type="search" placeholder="Search User" />
+                                <input type="search" placeholder="Search User" @input="userSearch" v-model="searchQuery" />
                                 <i class="searchbar-icon"></i>
                                 <span class="input-clear-button"></span>
                             </form>
                         </div>
-                        <select name="" id="select_filter" placeholder="Date Range">
-                            <option value="1">All</option>
-                            <option value="2">Last 30 Days</option>
+                        <select name="" id="select_filter" placeholder="User Filter" @change="getUserList()" v-model="userType">
+                            <option value="">All</option>
+                            <option value="manager">Manager</option>
+                            <option value="waiter">Waiter</option>
                         </select>
                     </div>
                     <button class="add_btn">
@@ -83,23 +84,47 @@
 </template>
 
 <script setup>
-    import { ref, onMounted } from 'vue';
     import axios from 'axios';
+    import { ref, onMounted } from 'vue';
     import {
         f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Breadcrumbs,
         f7BreadcrumbsItem, f7BreadcrumbsSeparator, f7BreadcrumbsCollapsed,
     } from 'framework7-vue';
     import Pagination from '../../components/Pagination.vue';
+    import { successNotification } from '../../commonFunction';
 
     const users = ref([]);
     const paginateData = ref([]);
+
+    const userType = ref("");
+    const searchQuery = ref("");
 
     onMounted(() => {
         getUserList();
     });
 
-    const getUserList = async () => {
-        await axios.get('/api/get-users', { params: {type: 'admin-user'}})
+    const debounce = (func, delay) => {
+        let timeoutId;
+        return function (...args) {
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => {
+                func.apply(this, args);
+            }, delay);
+        };
+    }
+
+    const userSearch = debounce(() => {
+        getUserList(searchQuery.value);
+    }, 500);
+
+    const getUserList = async (query = '') => {
+        await axios.get('/api/get-users', { 
+                params: {
+                    type: 'admin-user', 
+                    search: query, 
+                    filter: userType.value
+                }
+            })
             .then(response => {
                 users.value = response.data.users.all.data;
                 paginateData.value = response.data.users.all;
@@ -117,5 +142,16 @@
             roleType = 'Waiter';
         }
         return roleType;
+    }
+
+    const handleSimulation = async (userID) => {
+        await axios.get(`/api/user-simulation/${userID}`)
+            .then(response => {
+                if(response.status) {
+                    successNotification(response.data.success);
+                }
+            }).catch((error) => {
+                console.error('An Error Ocurred When Change User Simulation : ', error)
+            });
     }
 </script>

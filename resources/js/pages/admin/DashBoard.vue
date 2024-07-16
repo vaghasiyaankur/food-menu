@@ -15,7 +15,7 @@
             </div>
             
             <!-- Dashboard Welcome Section Component -->
-            <Welcome />
+            <Welcome :user-name="user.name" />
 
             <!--  Dashboard Counter Card Section Component -->
             <DashboardCounter :overview-counter="overviewCounter" />
@@ -53,9 +53,11 @@
         pending_order : 0,
         customer : 0,
     });
+    const user = ref([]);
 
     onMounted(() => {
         dashboardList();
+        authUser();
     });
 
     const dashboardList = async () => {
@@ -70,6 +72,18 @@
                 }
             }).catch(error => {
                 console.log(error);
+            });
+    }
+
+    const authUser = async () => {
+        await axios.get('/api/checkLogin')
+            .then(response => {
+                if(response.data.user) {
+                    user.value = response.data.user;
+                }
+            })
+            .catch((error) => {
+                console.error('Auth User Error : ', error);
             });
     }
 </script>
