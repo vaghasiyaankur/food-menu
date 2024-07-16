@@ -13,62 +13,45 @@
                         <th>ID</th>
                         <th>Payment Method</th>
                         <th>Payment Amount</th>
-                        <th>Status</th>
                         <th>Date</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>121</td>
-                        <td>Master Card</td>
-                        <td>$56.00</td>
-                        <td>Payment Received</td>
-                        <td>24, Sep 2022 / 10:00 am</td>
+                    <tr v-for="(latestTransaction, index)   in latestTransactions" :key="index">
+                        <td>{{ index+1 }}</td>
+                        <td>{{ latestTransaction.payment_type }}</td>
+                        <td>{{ currencySymbol+""+latestTransaction.customer_paid }}</td>
+                        <td>{{ formateDateAndTime(latestTransaction.created_at) }}</td>
                     </tr>
-                    <tr>
-                        <td>120</td>
-                        <td>Visa Card</td>
-                        <td>$59.00</td>
-                        <td>Payment Received</td>
-                        <td>24, Sep 2022 / 10:00 am</td>
-                    </tr>
-                    <tr>
-                        <td>119</td>
-                        <td>PayPal Card</td>
-                        <td>$119.00</td>
-                        <td>Payment Received</td>
-                        <td>24, Sep 2022 / 10:00 am</td>
-                    </tr>
-                    <tr>
-                        <td>118</td>
-                        <td>Paytm Card</td>
-                        <td>$156.00</td>
-                        <td>Payment Received</td>
-                        <td>24, Sep 2022 / 10:00 am</td>
-                    </tr>
-                    <tr>
-                        <td>117</td>
-                        <td>Apple Pay</td>
-                        <td>$126.00</td>
-                        <td>Payment Received</td>
-                        <td>24, Sep 2022 / 10:00 am</td>
-                    </tr>
-                    <tr>
-                        <td>116</td>
-                        <td>Paytm Card</td>
-                        <td>$156.00</td>
-                        <td>Payment Received</td>
-                        <td>24, Sep 2022 / 10:00 am</td>
-                    </tr>
-                    <tr>
-                        <td>115</td>
-                        <td>RuPay Card</td>
-                        <td>$126.00</td>
-                        <td>Payment Received</td>
-                        <td>24, Sep 2022 / 10:00 am</td>
+                    <tr v-if="latestTransactions.length == 0">
+                        <td colspan="5">No Data Found !!</td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
 </template>
+
+<script setup>
+    import { defineProps } from 'vue';
+    import dayjs from 'dayjs';
+    import customParseFormat from 'dayjs/plugin/customParseFormat';
+    dayjs.extend(customParseFormat);
+
+    defineProps({
+        latestTransactions : {
+            type : Array,
+            default : () => []
+        },
+        currencySymbol : {
+            type : String,
+            default : ""
+        }
+    });
+
+    const formateDateAndTime = (dateAndTime) => {
+        if(dateAndTime) {
+            return dayjs(dateAndTime).format('DD, MMM YYYY / hh:mm a');
+        }
+    }
+</script>

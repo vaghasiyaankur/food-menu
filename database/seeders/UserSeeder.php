@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Faker\Factory as Faker;
 
 class UserSeeder extends Seeder
 {
@@ -17,6 +18,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        $faker = Faker::create();
 
         $users = [
 
@@ -24,6 +26,7 @@ class UserSeeder extends Seeder
                 'name' => 'Manager 1',
                 'email' => 'manager1@gmail.com',
                 'password' => Hash::make('123456789'),
+                'mobile_number' => $this->generateIndianMobileNumber($faker),
                 'email_verified_at' => \Carbon\Carbon::now(),
                 'remember_token' => Str::random(10),
                 'lock_pin' => 1234,
@@ -34,6 +37,7 @@ class UserSeeder extends Seeder
                 'name' => 'Manager 2',
                 'email' => 'manager2@gmail.com',
                 'password' => Hash::make('123456789'),
+                'mobile_number' => $this->generateIndianMobileNumber($faker),
                 'email_verified_at' => \Carbon\Carbon::now(),
                 'remember_token' => Str::random(10),
                 'lock_pin' => 5678,
@@ -44,6 +48,7 @@ class UserSeeder extends Seeder
                 'name' => 'Manager 3',
                 'email' => 'manager3@gmail.com',
                 'password' => Hash::make('123456789'),
+                'mobile_number' => $this->generateIndianMobileNumber($faker),
                 'email_verified_at' => \Carbon\Carbon::now(),
                 'remember_token' => Str::random(10),
                 'lock_pin' => 9101,
@@ -54,6 +59,7 @@ class UserSeeder extends Seeder
                 'name' => 'Manager 4',
                 'email' => 'manager4@gmail.com',
                 'password' => Hash::make('123456789'),
+                'mobile_number' => $this->generateIndianMobileNumber($faker),
                 'email_verified_at' => \Carbon\Carbon::now(),
                 'remember_token' => Str::random(10),
                 'lock_pin' => 1011,
@@ -64,6 +70,7 @@ class UserSeeder extends Seeder
                 'name' => 'Manager 5',
                 'email' => 'manager5@gmail.com',
                 'password' => Hash::make('123456789'),
+                'mobile_number' => $this->generateIndianMobileNumber($faker),
                 'email_verified_at' => \Carbon\Carbon::now(),
                 'remember_token' => Str::random(10),
                 'lock_pin' => 1112,
@@ -75,6 +82,7 @@ class UserSeeder extends Seeder
                 'name' => 'Waiter 1',
                 'email' => 'waiter1@gmail.com',
                 'password' => Hash::make('123456789'),
+                'mobile_number' => $this->generateIndianMobileNumber($faker),
                 'email_verified_at' => \Carbon\Carbon::now(),
                 'remember_token' => Str::random(10),
                 'lock_pin' => 1234,
@@ -85,6 +93,7 @@ class UserSeeder extends Seeder
                 'name' => 'Waiter 2',
                 'email' => 'waiter2@gmail.com',
                 'password' => Hash::make('123456789'),
+                'mobile_number' => $this->generateIndianMobileNumber($faker),
                 'email_verified_at' => \Carbon\Carbon::now(),
                 'remember_token' => Str::random(10),
                 'lock_pin' => 5678,
@@ -95,6 +104,7 @@ class UserSeeder extends Seeder
                 'name' => 'Waiter 3',
                 'email' => 'waiter3@gmail.com',
                 'password' => Hash::make('123456789'),
+                'mobile_number' => $this->generateIndianMobileNumber($faker),
                 'email_verified_at' => \Carbon\Carbon::now(),
                 'remember_token' => Str::random(10),
                 'lock_pin' => 9101,
@@ -105,6 +115,7 @@ class UserSeeder extends Seeder
                 'name' => 'Waiter 4',
                 'email' => 'waiter4@gmail.com',
                 'password' => Hash::make('123456789'),
+                'mobile_number' => $this->generateIndianMobileNumber($faker),
                 'email_verified_at' => \Carbon\Carbon::now(),
                 'remember_token' => Str::random(10),
                 'lock_pin' => 1011,
@@ -115,6 +126,7 @@ class UserSeeder extends Seeder
                 'name' => 'Waiter 5',
                 'email' => 'waiter5@gmail.com',
                 'password' => Hash::make('123456789'),
+                'mobile_number' => $this->generateIndianMobileNumber($faker),
                 'email_verified_at' => \Carbon\Carbon::now(),
                 'remember_token' => Str::random(10),
                 'lock_pin' => 1112,
@@ -184,5 +196,19 @@ class UserSeeder extends Seeder
         //     'role' => 'manager',
         //     'restaurant_id' => 2
         // ]);
+    }
+    
+    /**
+     * Generate a fake Indian mobile number.
+     *
+     * @param \Faker\Generator $faker
+     * @return string
+     */
+    private function generateIndianMobileNumber($faker)
+    {
+        // Indian mobile number format: 7XXXXXXXXX, 8XXXXXXXXX, or 9XXXXXXXXX
+        $prefix = $faker->randomElement(['7', '8', '9']);
+        $number = $faker->numerify('#########'); // 9 digits
+        return $prefix . $number;
     }
 }
