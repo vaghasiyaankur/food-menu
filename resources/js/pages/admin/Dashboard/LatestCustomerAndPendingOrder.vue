@@ -27,7 +27,7 @@
         <div class="pending_order_table">
             <div class="table_header">
                 <h3 class="no-margin">Latest Pending Orders</h3>
-                <a href="" class="no-margin">
+                <a href="/orders/" class="no-margin">
                     <h5 class="no-margin">View All</h5>
                 </a>
             </div>

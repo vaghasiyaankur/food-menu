@@ -288,5 +288,25 @@
 </template>
 
 <script setup>
-import { f7App, f7Panel, f7View, f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Breadcrumbs, f7BreadcrumbsItem, f7BreadcrumbsSeparator, f7BreadcrumbsCollapsed, } from 'framework7-vue';
+    import axios from 'axios';
+    import { ref, onMounted } from 'vue';
+    import { f7App, f7Panel, f7View, f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Breadcrumbs, f7BreadcrumbsItem, f7BreadcrumbsSeparator, f7BreadcrumbsCollapsed } from 'framework7-vue';
+
+    const orderID = ref("");
+    const orderDetails = ref([]);
+
+    onMounted(() => {
+        setTimeout(() => {
+            getOrderDetails();
+        }, 500);
+    });
+
+    const getOrderDetails = async () => {
+        orderID.value = f7.view.main.router.currentRoute.params.id;
+        await axios.get('/api/order/'+orderID.value)
+        .then(response => {
+        }).catch((error) => {
+            console.error('Error Ocurred When Fetch Order Details ',  error);
+        });
+    }
 </script>

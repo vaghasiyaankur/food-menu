@@ -26,7 +26,7 @@ export default [
   },
   {
     name : 'ordersdetail',
-    path: '/ordersdetail/',
+    path: '/ordersdetail/:id',
     component: ordersdetail,
   },
   {

@@ -77,28 +77,22 @@
             .then(response => {
                 if(response.status) {
 
-                    // Currency Symbol Api Response Set For currencySetting Ref
                     currencySetting.value = response.data.setting;
 
-                    // Latest Customer Api Response Set For overviewCounter Ref
                     overviewCounter.value.total_order = response.data.total_order;
                     overviewCounter.value.completed_order = response.data.completed_order;
                     overviewCounter.value.pending_order = response.data.pending_order;
                     overviewCounter.value.customer = response.data.customer;
 
-                    // Latest Customer And Pending Order Api Response Set For latestCustomers,latestCategory Ref
                     latestCustomers.value = response.data.latest_customer;
                     latestPendingOrders.value = response.data.latest_pending_order;
 
-                    // Latest Orders And Category Api Response Set For latestCustomers,latestCategory Ref
                     latestOrders.value = response.data.latest_orders;
                     latestCategory.value = response.data.category;
 
-                    // Latest Completed Orders And Products Api Response Set For latestCompletedOrders,latestProducts Ref
                     latestCompletedOrders.value = response.data.latest_complete_order;
                     latestProducts.value = response.data.latest_products;
 
-                    // Latest Transaction Api Response Set For latestTransactions Ref
                     latestTransactions.value = response.data.transactions;
                 }
             }).catch(error => {

@@ -18,7 +18,7 @@
                     <div class="search_bar_left">
                         <div class="search_bar">
                             <form data-search-container=".search-list" data-search-in=".item-title" class="searchbar">
-                                <input type="search" placeholder="Search User" @input="userSearch" v-model="searchQuery" />
+                                <input type="search" placeholder="Search User" @input="getUserList()" v-model="searchQuery" />
                                 <i class="searchbar-icon"></i>
                                 <span class="input-clear-button"></span>
                             </form>
@@ -45,8 +45,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="user in users" :key="user.id">
-                                <td>#{{ user.id }}</td>
+                            <tr v-for="(user, index) in users" :key="user.id">
+                                <td>{{ (paginateData.per_page * (pageCount - 1)) + (index + 1) }}</td>
                                 <td>
                                     <div class="customer-detail">
                                         <div class="customer-img">
@@ -99,32 +99,24 @@
     const userType = ref("");
     const searchQuery = ref("");
 
+    const pageNumber = ref(1);
+    const pageCount = ref(1);
+
     onMounted(() => {
         getUserList();
     });
 
-    const debounce = (func, delay) => {
-        let timeoutId;
-        return function (...args) {
-            clearTimeout(timeoutId);
-            timeoutId = setTimeout(() => {
-                func.apply(this, args);
-            }, delay);
-        };
-    }
+    const getUserList = async (pageNum) => {
+        if (pageNum == undefined || pageNum == 1) {
+            pageNum = 1
+        } else if (pageNum.includes('page')) {        
+                pageNum = pageNum.split('page=')[1];
+        }
+        pageNumber.value = pageNum;
+        pageCount.value = pageNum;
 
-    const userSearch = debounce(() => {
-        getUserList(searchQuery.value);
-    }, 500);
-
-    const getUserList = async (query = '') => {
-        await axios.get('/api/get-users', { 
-                params: {
-                    type: 'admin-user', 
-                    search: query, 
-                    filter: userType.value
-                }
-            })
+        var page = '/api/get-users' + '?page=' + pageNum + '&type=admin-user' + '&search=' + searchQuery.value + '&filter='+ userType.value;
+        await axios.get(page)
             .then(response => {
                 users.value = response.data.users.all.data;
                 paginateData.value = response.data.users.all;

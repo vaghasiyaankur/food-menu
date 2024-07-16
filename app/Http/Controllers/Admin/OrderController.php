@@ -14,16 +14,19 @@ class OrderController extends Controller
 
         $setting = Setting::whereRestaurantId(Auth::user()->restaurant_id)->value('currency_symbol');
 
-        $orders = Order::with('customer')->get();
+        $orders = Order::with(['customer' => function($query) {
+            $query->select('id', 'name');
+        }])
+        ->whereRestaurantId(Auth::user()->restaurant_id)->latest('id')->paginate(10);
 
-        return response()->json(['setting' => $setting,'orders' => $orders]);
+        return response()->json(['setting' => $setting, 'orders' => $orders]);
     }
 
     public function getOrder(Order $order) {
 
         $setting = Setting::whereRestaurantId(Auth::user()->restaurant_id)->value('currency_symbol');
 
-        $order->load('customer');
+        $order->load('customer','orderPayment','kots.kotProducts.product.productRestaurantLanguagesFirst','floorShiftHistory','tableShiftHistory');
 
         return response()->json(['setting' => $setting, 'order' => $order]);
     } 
