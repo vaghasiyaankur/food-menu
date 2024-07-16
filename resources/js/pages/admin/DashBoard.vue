@@ -21,16 +21,16 @@
             <DashboardCounter :overview-counter="overviewCounter" />
             
             <!-- Latest Order And Category Section Component -->
-            <LatestOrderCategory />
+            <LatestOrderCategory :latest-orders="latestOrders" :latest-category="latestCategory" :currency-symbol="currencySetting" />
 
             <!-- Latest Customer And Pending Order Section Component -->
-            <LatestCustomerPendingOrder :latest-customers="latestCustomers" />
+            <LatestCustomerPendingOrder :latest-customers="latestCustomers" :latest-pending-orders="latestPendingOrders" :currency-symbol="currencySetting" />
 
             <!-- Latest Order And Product Section Component -->
-            <LatestOrderProduct />
+            <LatestCompletedOrderProduct :latest-completed-orders="latestCompletedOrders" :latest-products="latestProducts" :currency-symbol="currencySetting" />
             
             <!-- Latest Menu Transaction Section Component -->
-            <LatestMenuTransaction />
+            <LatestMenuTransaction :latest-transactions="latestTransactions" :currency-symbol="currencySetting"/>
 
         </div>
     </f7-page>
@@ -41,19 +41,31 @@
     import {f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Breadcrumbs,f7BreadcrumbsItem, f7BreadcrumbsSeparator, f7BreadcrumbsCollapsed} from 'framework7-vue';
     import Welcome from './Dashboard/Welcome.vue';
     import DashboardCounter from './Dashboard/DashboardCount.vue';
-    import LatestOrderProduct from './Dashboard/LatestOrderProduct.vue';
+    import LatestCompletedOrderProduct from './Dashboard/LatestOrderProduct.vue';
     import LatestOrderCategory from './Dashboard/LatestOrderAndCategory.vue';
     import LatestMenuTransaction from './Dashboard/LatestMenuTransaction.vue';
     import LatestCustomerPendingOrder from './Dashboard/LatestCustomerAndPendingOrder.vue';
+    
+    const user = ref([]);
+    const currencySetting = ref("");
 
-    const latestCustomers = ref([]);
     const overviewCounter = ref({
         total_order : 0,
         completed_order : 0,
         pending_order : 0,
         customer : 0,
     });
-    const user = ref([]);
+    
+    const latestOrders = ref([]);
+    const latestCategory = ref([]);
+    
+    const latestCustomers = ref([]);
+    const latestPendingOrders = ref([]);
+
+    const latestCompletedOrders = ref([]);
+    const latestProducts = ref([]);
+
+    const latestTransactions = ref([]);
 
     onMounted(() => {
         dashboardList();
@@ -64,14 +76,33 @@
         await axios.get('/api/dashboard-list')
             .then(response => {
                 if(response.status) {
+
+                    // Currency Symbol Api Response Set For currencySetting Ref
+                    currencySetting.value = response.data.setting;
+
+                    // Latest Customer Api Response Set For overviewCounter Ref
                     overviewCounter.value.total_order = response.data.total_order;
                     overviewCounter.value.completed_order = response.data.completed_order;
                     overviewCounter.value.pending_order = response.data.pending_order;
                     overviewCounter.value.customer = response.data.customer;
+
+                    // Latest Customer And Pending Order Api Response Set For latestCustomers,latestCategory Ref
                     latestCustomers.value = response.data.latest_customer;
+                    latestPendingOrders.value = response.data.latest_pending_order;
+
+                    // Latest Orders And Category Api Response Set For latestCustomers,latestCategory Ref
+                    latestOrders.value = response.data.latest_orders;
+                    latestCategory.value = response.data.category;
+
+                    // Latest Completed Orders And Products Api Response Set For latestCompletedOrders,latestProducts Ref
+                    latestCompletedOrders.value = response.data.latest_complete_order;
+                    latestProducts.value = response.data.latest_products;
+
+                    // Latest Transaction Api Response Set For latestTransactions Ref
+                    latestTransactions.value = response.data.transactions;
                 }
             }).catch(error => {
-                console.log(error);
+                console.error('Error Fetching For Dashboard Details ' ,error);
             });
     }
 

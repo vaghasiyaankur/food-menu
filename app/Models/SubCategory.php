@@ -46,4 +46,9 @@ class SubCategory extends Model
     {
         return $this->hasMany(SubcategoryRestaurantLanguage::class, 'sub_category_id');
     }
+
+    public function subCategoryRestaurantLanguagesFirst()
+    {
+        return $this->hasOne(SubcategoryRestaurantLanguage::class, 'sub_category_id')->orderBy('id');
+    }
 }

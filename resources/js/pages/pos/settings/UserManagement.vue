@@ -43,6 +43,7 @@ const addUpdateFormDataFormat = ref([
     { label: 'Id', name: 'id', type: 'hidden', placeHolder: 'User Id', value: ''},
     { label: 'Name', name: 'name', type: 'text', placeHolder: 'Enter Name', value: ''},
     { label: 'Email', name: 'email', type: 'email', placeHolder: 'Enter Email', value: ''},
+    { label: 'Mobile Number', name: 'mobile_number', type: 'number', placeHolder: 'Enter Mobile Number', value: ''},
     { label: 'Password', name: 'password', type: 'password', placeHolder: 'Enter Password', value: ''},
     { label: 'Confirm Password', name: 'confirm_password', type: 'password', placeHolder: 'Enter Confirm Password', value: ''},
     { label: 'Role', multipleLang: false, type: 'drop-down', name: 'role', options: [{ label: 'Manager', id: 'manager'}, { label: 'Waiter', id: 'waiter'}], placeHolder: 'Select Role', value: 1 },
@@ -99,6 +100,7 @@ const updateFormData = (user) => {
     manipulateField(formData, 'Id', user.id);
     manipulateField(formData, 'Name', user.name);
     manipulateField(formData, 'Email', user.email);
+    manipulateField(formData, 'Mobile Number', user.mobile_number);
     manipulateField(formData, 'Password', user.password);
     
     manipulateField(formData, 'Confirm Password', user.password);
