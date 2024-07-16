@@ -10,7 +10,11 @@ use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
-    public function getOrders(){
+    public function getOrders(Request $request){
+
+        $search = $request->input('search', '');
+        $filter = $request->input('filter', '');
+        $type = $request->input('type', '');
 
         $setting = Setting::whereRestaurantId(Auth::user()->restaurant_id)->value('currency_symbol');
 
@@ -23,7 +27,7 @@ class OrderController extends Controller
 
         $setting = Setting::whereRestaurantId(Auth::user()->restaurant_id)->value('currency_symbol');
 
-        $order->load('customer');
+        $order->load('customer','orderPayment','kots.kotProducts.product.productRestaurantLanguagesFirst','floorShiftHistory','tableShiftHistory');
 
         return response()->json(['setting' => $setting, 'order' => $order]);
     } 

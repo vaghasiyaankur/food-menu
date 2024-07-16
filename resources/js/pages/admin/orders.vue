@@ -27,7 +27,7 @@
                             <option value="all" selected>All</option>
                         </select>
                         <select name="" id="select_filter">
-                            <option value="all" select>All</option>
+                            <option value="all" selected>All</option>
                         </select>
                     </div>
                     <button class="filter_table">
@@ -93,15 +93,12 @@
 </template>
 
 <script setup>
-import {
-    f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Breadcrumbs,
-    f7BreadcrumbsItem, f7BreadcrumbsSeparator, f7BreadcrumbsCollapsed,
-} from 'framework7-vue';
+import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Breadcrumbs, f7BreadcrumbsItem, f7BreadcrumbsSeparator, f7BreadcrumbsCollapsed } from 'framework7-vue';
 import Icon from '../../components/Icon.vue'
 import axios from 'axios'
 
 const getOrders = () => {
-    axios.get('/api/order/1')
+    axios.get('/api/order/6')
     .then((res) => {
         console.log(res.data);
     });

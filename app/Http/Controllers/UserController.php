@@ -59,30 +59,28 @@ class UserController extends Controller
     }
 
     public function getUsers(Request $request){
-        $restaurant_id = Auth::user()->restaurant_id;
-        $restaurant_id = auth()->user()->restaurant_id;
+        $restaurant_id = auth()->user()->restaurant_id; // Use a consistent method to retrieve restaurant_id
         $search = $request->input('search', '');
         $filter = $request->input('filter', '');
         $type = $request->input('type', ''); // Assuming you're passing 'type' in the request
 
         $usersQuery = User::whereRestaurantId($restaurant_id);
 
-        if (!empty($search)) {
-            $usersQuery->where('name', 'like', '%' . $search . '%');
-        }
+        $usersQuery->when($search, function ($query, $search) {
+            return $query->where('name', 'like', '%' . $search . '%');
+        });
 
-        if (!empty($filter)) {
-            $usersQuery->where('role', $filter);
-        }
-        
+        $usersQuery->when($filter, function ($query, $filter) {
+            return $query->where('role', $filter);
+        });
+
         $users = $type === 'admin-user' ? $usersQuery->paginate(10) : $usersQuery->get();
 
         $roleWiseUsers['all'] = $users;
 
         if ($type !== 'admin-user') {
             foreach ($users as $user) {
-                $role = $user->role;
-                $roleWiseUsers[$role][] = $user;
+                $roleWiseUsers[$user->role][] = $user;
             }
         }
 
