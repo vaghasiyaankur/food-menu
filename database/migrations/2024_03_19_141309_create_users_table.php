@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
             $table->string('name')->nullable();
             $table->string('email')->unique();
+            $table->string('mobile_number')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->string('role');

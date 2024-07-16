@@ -24,7 +24,8 @@ class User extends Authenticatable
         'restaurant_id',
         'role',
         'lock_pin',
-        'lock_enable'
+        'lock_enable',
+        'mobile_number'
     ];
 
     /**
