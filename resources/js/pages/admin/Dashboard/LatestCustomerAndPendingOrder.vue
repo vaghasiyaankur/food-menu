@@ -7,7 +7,7 @@
                     <h5 class="no-margin">View All</h5>
                 </a>
             </div>
-            <div class="customer_card_holder">
+            <div v-if="latestCustomers.length > 0" class="customer_card_holder">
                 <div class="customer_card" v-for="latest_customer in latestCustomers" :key="latest_customer.id">
                     <div class="customer_image">
                         <img src="/images/user.png" width="100px">
@@ -20,6 +20,7 @@
                     </div>
                 </div>
             </div>
+            <div v-else>No Data Found !!</div>
         </div>
         <div class="pending_order_table">
             <div class="table_header">

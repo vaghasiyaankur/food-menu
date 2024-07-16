@@ -362,3 +362,5 @@ Route::post('/delete-upi',[UpiController::class, 'deleteUpi']);
 // ------------------------ Dashboard List Routes ------------------------ //
 
 Route::get('/dashboard-list', [DashboardController::class, 'dashboardList']);
+
+Route::get('/user-simulation/{id}', [UserController::class, 'changeSimulation']);

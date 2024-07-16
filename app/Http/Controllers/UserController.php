@@ -99,4 +99,14 @@ class UserController extends Controller
         return response()->json(['success' => "User deleted successfully."]);
     }
 
+    public function changeSimulation($id) {
+        if($id) {
+            Auth::loginUsingId($id);
+            return response()->json([
+                'status' => true,
+                'success'   =>  'User Simulation Changes Successfully.'
+            ], 200);
+        }
+    }
+
 }
