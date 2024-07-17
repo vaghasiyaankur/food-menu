@@ -72,7 +72,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="pagination_wrapper">
+                <div class="pagination_wrapper" v-if="users.length != 0">
                     <p class="no-margin">Showing {{ paginateData.to }} of {{paginateData.total}} Results</p>
                     <div class="pagination">
                         <Pagination :function-name="getUserList" :data="paginateData" />

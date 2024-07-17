@@ -20,7 +20,7 @@
                     <tr v-for="(latestTransaction, index)   in latestTransactions" :key="index">
                         <td>{{ index+1 }}</td>
                         <td>{{ latestTransaction.payment_type }}</td>
-                        <td>{{ currencySymbol+""+latestTransaction.customer_paid }}</td>
+                        <td>{{ currencySymbol+""+formattedPrice(latestTransaction.customer_paid) }}</td>
                         <td>{{ formateDateAndTime(latestTransaction.created_at) }}</td>
                     </tr>
                     <tr v-if="latestTransactions.length == 0">
@@ -37,6 +37,7 @@
 <script setup>
     import { defineProps } from 'vue';
     import dayjs from 'dayjs';
+    import { formattedPrice } from '../../../commonFunction.js';
     import NoValueFound from '../../../components/NoValueFound.vue';
     import customParseFormat from 'dayjs/plugin/customParseFormat';
     dayjs.extend(customParseFormat);

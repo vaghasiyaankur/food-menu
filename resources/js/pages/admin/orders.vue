@@ -31,10 +31,7 @@
                             <option value="3">Processing</option>
                         </select>
                     </div>
-                    <button class="filter_table">
-                        <Icon name='filterIcon' />
-                        <h4 class="no-margin">Filter</h4>
-                    </button>
+                    
                 </div>
                 <div class="order_table_wrapper">
                     <table class="order_table">
@@ -60,7 +57,7 @@
                                         <div class="customer-name">{{ order.customer?.name }}</div>
                                     </div>
                                 </td>
-                                <td>{{ currency+""+order.total_price }}</td>
+                                <td>{{ currency+""+formattedPrice(order.total_price) }}</td>
                                 <td>
                                     <div v-if="order.cancelled_by" class="order_status cancelled_status">
                                         <p class="no-margin">Cancelled</p>
@@ -97,13 +94,17 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="pagination_wrapper">
+                <div class="pagination_wrapper" v-if="orders.length != 0">
                     <p class="no-margin">Showing {{ paginateData?.to }} of {{ paginateData?.total }} Results</p>
                     <div class="pagination">
                         <Pagination :function-name="getOrders" :data="paginateData" />
                     </div>
                 </div>
             </div>
+        </div>
+        <!-- ========= DELETE ORDER POPUP ========= -->
+        <div class="popup removePopup">
+            <RemovePopup :title="'Are you sure delete this Order?'" @remove="deleteOrder" />
         </div>
     </f7-page>
 </template>
@@ -114,8 +115,9 @@
     import { ref, onMounted } from 'vue';
     import Icon from '../../components/Icon.vue';
     import Pagination from '../../components/Pagination.vue';
+    import RemovePopup from '../../components/common/RemovePopup.vue';
     import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Breadcrumbs, f7BreadcrumbsItem, f7BreadcrumbsSeparator, f7BreadcrumbsCollapsed} from 'framework7-vue';
-    import { successNotification } from '../../commonFunction.js'
+    import { formattedPrice, successNotification } from '../../commonFunction.js'
 
     const orders = ref([]);
     const paginateData = ref([]);
@@ -127,6 +129,7 @@
     const pageCount = ref(1);
 
     const currency = ref(null);
+    const deleteId = ref(null);
 
     onMounted(() => {
         getOrders();
@@ -159,12 +162,19 @@
     }
 
     const setRemoveOrderId = async (id) => {
-        await axios.get('/api/delete-order/'+id)
-            .then(response => {
-                successNotification(response.data.message);
-                getOrders();
-            }).catch((error) => {
-                console.error('Error Ocurred While Fetch Order Data ', error);
-            });
+        deleteId.value = id;
+        f7.popup.open(`.removePopup`);
+    }
+
+    const deleteOrder = async () => {
+        await axios.get('/api/delete-order/'+deleteId.value)
+        .then(response => {
+            successNotification(response.data.message);
+            deleteId.value = null;
+            f7.popup.close(`.removePopup`);
+            getOrders(pageNumber.value);
+        }).catch((error) => {
+            console.error('Error Ocurred While Fetch Order Data ', error);
+        });
     }
 </script>

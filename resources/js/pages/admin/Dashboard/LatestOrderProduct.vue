@@ -25,7 +25,7 @@
                             </div>
                             <div class="customer_name">{{ latestCompletedOrder.customer?.name }}</div>
                         </td>
-                        <td>{{ currencySymbol+""+latestCompletedOrder.total_price }}</td>
+                        <td>{{ currencySymbol+""+formattedPrice(latestCompletedOrder.total_price) }}</td>
                         <td>{{ formateDateAndTime(latestCompletedOrder.created_at) }}</td>
                     </tr>
                     <tr v-if="latestCompletedOrders.length == 0">
@@ -99,6 +99,7 @@
     import { defineProps } from 'vue';
     import dayjs from 'dayjs';
     import relativeTime from 'dayjs/plugin/relativeTime';
+    import { formattedPrice } from '../../../commonFunction.js';
     import customParseFormat from 'dayjs/plugin/customParseFormat';
     import NoValueFound from '../../../components/NoValueFound.vue';
     dayjs.extend(relativeTime);

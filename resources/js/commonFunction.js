@@ -57,3 +57,7 @@ export const removeLoader = () => {
         }, 1000);
     }, 2000);
 }
+
+export const formattedPrice = (price) => {
+    return parseFloat(price).toFixed(2);
+}

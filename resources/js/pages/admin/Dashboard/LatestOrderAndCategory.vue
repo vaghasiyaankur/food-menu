@@ -26,7 +26,7 @@
                             </div>
                             <div class="customer_name">{{ latestOrder.customer?.name }}</div>
                         </td>
-                        <td>{{ currencySymbol+ "" +latestOrder.total_price }}</td>
+                        <td>{{ currencySymbol+ "" +formattedPrice(latestOrder.total_price) }}</td>
                         <td>
                             <div class="status_indicator" v-if="latestOrder.cancelled_by">
                                 <div class="cancelled_order">
@@ -99,6 +99,7 @@
 <script setup>
     import dayjs from 'dayjs';
     import { defineProps } from 'vue';
+    import { formattedPrice } from '../../../commonFunction.js';
     import customParseFormat from 'dayjs/plugin/customParseFormat';
     import NoValueFound from '../../../components/NoValueFound.vue';
     dayjs.extend(customParseFormat);

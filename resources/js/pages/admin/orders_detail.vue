@@ -124,10 +124,10 @@
                                             <div class="product-name">{{ kot?.product?.product_restaurant_languages_first?.name }}</div>
                                         </div>
                                     </td>
-                                    <td>{{ currencySetting.currency_symbol+""+kot?.price }}</td>
+                                    <td>{{ currencySetting.currency_symbol+""+formattedPrice(kot?.price) }}</td>
                                     <td>{{ kot?.quantity }}</td>
                                     <td>{{ kot.kot_product_variation?.variation?.variation_restaurant_languages_first?.name }}</td>
-                                    <td>{{ currencySetting.currency_symbol+""+kot?.total_price }}</td>
+                                    <td>{{ currencySetting.currency_symbol+""+formattedPrice(kot?.total_price) }}</td>
                                 </tr>
                             </template>
                         </tbody>
@@ -136,16 +136,16 @@
                 <div class="total_payable">
                     <div class="subtotal">
                         <h4 class="no-margin">Subtotal :</h4>
-                        <h4 class="no-margin">{{ currencySetting.currency_symbol+""+orderInfo.sub_total }}</h4>
+                        <h4 class="no-margin">{{ currencySetting.currency_symbol+""+formattedPrice(orderInfo.sub_total) }}</h4>
                     </div>
                     <div class="vat" v-if="orderInfo.discount_amount">
                         <h4 class="no-margin">Discount :</h4>
-                        <h4 class="no-margin">{{ currencySetting.currency_symbol+""+orderInfo.discount_amount }}</h4>
+                        <h4 class="no-margin">{{ currencySetting.currency_symbol+""+formattedPrice(orderInfo.discount_amount) }}</h4>
                     </div>
                     <hr class="divider">
                     <div class="total">
                         <h4 class="no-margin">Total ({{ currencySetting.currency_code }}) :</h4>
-                        <h4 class="no-margin">{{ currencySetting.currency_symbol+""+orderInfo.payable_amount }}</h4>
+                        <h4 class="no-margin">{{ currencySetting.currency_symbol+""+formattedPrice(orderInfo.payable_amount) }}</h4>
                     </div>
                 </div>
             </div>
@@ -203,6 +203,7 @@
     import axios from 'axios';
     import { ref, onMounted } from 'vue';
     import relativeTime from 'dayjs/plugin/relativeTime';
+    import { formattedPrice } from '../../commonFunction.js';
     import { f7App, f7Panel, f7View, f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Breadcrumbs, f7BreadcrumbsItem, f7BreadcrumbsSeparator, f7BreadcrumbsCollapsed } from 'framework7-vue';
     dayjs.extend(relativeTime);
 

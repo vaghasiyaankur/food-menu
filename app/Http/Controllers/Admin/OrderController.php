@@ -68,10 +68,23 @@ class OrderController extends Controller
 
     public function getTransactions (Request $request) {
         $search = $request->input('search', false);
+        $status = $request->input('status', false);
 
         $setting = Setting::whereRestaurantId(Auth::user()->restaurant_id)->value('currency_symbol');
         
-        $transaction = OrderPayment::paginate(10);
+        $transaction = OrderPayment::with('order.customer')
+            ->whereHas('order', function ($query) {
+                $query->whereRestaurantId(Auth::user()->restaurant_id);
+            })
+                ->when($search, function ($query, $search) {
+                    return $query->whereHas('order.customer', function ($query) use ($search) {
+                        $query->where('name', 'like', '%' . $search . '%');
+                    });
+                })
+                ->when($status, function ($query, $status) {
+                    return $query->where('payment_type', 'like', '%' . $status . '%');
+                })
+                    ->paginate(10);
 
         return response()->json(['setting' => $setting, 'transaction' => $transaction]);
     }
