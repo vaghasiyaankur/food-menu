@@ -1,9 +1,11 @@
 <template>
-    <div class="search__img text-align-center">
-        <img src="/images/Empty-pana 1.png" alt="serach">
-    </div>
-    <div class="no_order_text text-align-center" v-if="title">
-        <p class="no-margin">{{title}}</p>
+    <div class="text-align-center">
+        <div class="search__img text-align-center">
+            <img src="/images/Empty-pana 1.png" alt="serach">
+        </div>
+        <div class="no_order_text text-align-center" v-if="title">
+            <p class="no-margin">{{title}}</p>
+        </div>
     </div>
 </template>
 <script setup>

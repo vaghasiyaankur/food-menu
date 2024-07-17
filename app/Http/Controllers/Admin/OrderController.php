@@ -47,7 +47,14 @@ class OrderController extends Controller
 
         $setting = Setting::whereRestaurantId(Auth::user()->restaurant_id)->first(['currency_code', 'currency_symbol']);
 
-        $order->load('customer','orderPayment','kots.kotProducts.product.productRestaurantLanguagesFirst','kots.kotProducts.product.kotProductVariation','floorShiftHistory','tableShiftHistory');
+        $order->load([
+            'customer',
+            'orderPayment',
+            'kots.kotProducts.product.productRestaurantLanguagesFirst',
+            'kots.kotProducts.kotProductVariation.variation.variationRestaurantLanguagesFirst',
+            'floorShiftHistory',
+            'tableShiftHistory'
+        ]);
 
         return response()->json(['setting' => $setting, 'order' => $order]);
     }

@@ -53,7 +53,9 @@
                         <td>{{ formateDateAndTime(latestPendingOrder.created_at) }}</td>
                     </tr>
                     <tr v-if="latestPendingOrders.length == 0">
-                        <td colspan="4">No Data Found !!</td>
+                        <td colspan="5">
+                            <NoValueFound title="No Data Found !!"></NoValueFound>
+                        </td>
                     </tr>
                 </tbody>
             </table>

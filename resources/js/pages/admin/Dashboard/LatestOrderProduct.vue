@@ -29,7 +29,9 @@
                         <td>{{ formateDateAndTime(latestCompletedOrder.created_at) }}</td>
                     </tr>
                     <tr v-if="latestCompletedOrders.length == 0">
-                        <td colspan="4">No Data found !!</td>
+                        <td colspan="4">
+                            <NoValueFound title="No Data Found !!"></NoValueFound>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -83,7 +85,9 @@
                         </td>
                     </tr>
                     <tr v-if="latestProducts.length == 0">
-                        <td colspan="3">No Data found !!</td>
+                        <td colspan="3">
+                            <NoValueFound title="No Data Found !!"></NoValueFound>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -96,6 +100,7 @@
     import dayjs from 'dayjs';
     import relativeTime from 'dayjs/plugin/relativeTime';
     import customParseFormat from 'dayjs/plugin/customParseFormat';
+    import NoValueFound from '../../../components/NoValueFound.vue';
     dayjs.extend(relativeTime);
     dayjs.extend(customParseFormat);
 

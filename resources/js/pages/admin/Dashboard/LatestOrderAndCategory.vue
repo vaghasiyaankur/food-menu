@@ -33,12 +33,17 @@
                                     <p class="no-margin">Cancelled</p>
                                 </div>
                             </div>
-                            <div class="status_indicator" v-if="latestOrder.finished == 0">
+                            <div class="status_indicator" v-else-if="latestOrder.finished == 0 && latestOrder.start_at == null">
+                                <div class="pending_order">
+                                    <p class="no-margin">Pending</p>
+                                </div>
+                            </div>
+                            <div class="status_indicator" v-else-if="latestOrder.finished == 0 && latestOrder.start_at != null">
                                 <div class="processing_order">
                                     <p class="no-margin">Processing</p>
                                 </div>
                             </div>
-                            <div class="status_indicator" v-if="latestOrder.finished == 1">
+                            <div class="status_indicator" v-else-if="latestOrder.finished == 1 && latestOrder.start_at != null">
                                 <div class="completed_order">
                                     <p class="no-margin">Completed</p>
                                 </div>
@@ -47,7 +52,9 @@
                         <td>{{ formateDateAndTime(latestOrder.created_at) }}</td>
                     </tr>
                     <tr v-if="latestOrders.length == 0">
-                        <td colspan="5">No Data Found !!</td>
+                        <td colspan="5">
+                            <NoValueFound title="No Data Found !!"></NoValueFound>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -78,7 +85,11 @@
                         </td>
                         <td>{{ category.products_count }} Item</td>
                     </tr>
-                    
+                    <tr v-if="latestCategory.length == 0">
+                        <td colspan="3">
+                            <NoValueFound title="No Data Found !!"></NoValueFound>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -89,6 +100,7 @@
     import dayjs from 'dayjs';
     import { defineProps } from 'vue';
     import customParseFormat from 'dayjs/plugin/customParseFormat';
+    import NoValueFound from '../../../components/NoValueFound.vue';
     dayjs.extend(customParseFormat);
 
     const props = defineProps({

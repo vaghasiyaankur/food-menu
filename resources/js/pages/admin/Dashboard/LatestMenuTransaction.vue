@@ -24,7 +24,9 @@
                         <td>{{ formateDateAndTime(latestTransaction.created_at) }}</td>
                     </tr>
                     <tr v-if="latestTransactions.length == 0">
-                        <td colspan="5">No Data Found !!</td>
+                        <td colspan="5">
+                            <NoValueFound title="No Data Found !!"></NoValueFound>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -35,6 +37,7 @@
 <script setup>
     import { defineProps } from 'vue';
     import dayjs from 'dayjs';
+    import NoValueFound from '../../../components/NoValueFound.vue';
     import customParseFormat from 'dayjs/plugin/customParseFormat';
     dayjs.extend(customParseFormat);
 
