@@ -91,7 +91,7 @@
                             </tr>
                             <tr v-if="orders.length == 0">
                                 <td colspan="8">
-                                    <NoValueFound title="No Data Found !!"></NoValueFound>
+                                    No Data Found !!
                                 </td>
                             </tr>
                         </tbody>
@@ -114,7 +114,6 @@
     import { ref, onMounted } from 'vue';
     import Icon from '../../components/Icon.vue';
     import Pagination from '../../components/Pagination.vue';
-    import NoValueFound from '../../components/NoValueFound.vue';
     import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Breadcrumbs, f7BreadcrumbsItem, f7BreadcrumbsSeparator, f7BreadcrumbsCollapsed} from 'framework7-vue';
     import { successNotification } from '../../commonFunction.js'
 
