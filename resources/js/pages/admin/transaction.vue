@@ -160,7 +160,7 @@
     const deleteTransaction = async () => {
         await axios.get('/api/delete-transaction/'+deleteId.value)
         .then(response => {
-            if(response.data.status) {
+            if(response.data.success) {
                 successNotification(response.data.message);
                 deleteId.value = null;
                 f7.popup.close(`.removePopup`);
