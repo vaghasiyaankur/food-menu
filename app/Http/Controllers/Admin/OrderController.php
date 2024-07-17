@@ -66,7 +66,7 @@ class OrderController extends Controller
         return response()->json(['success' => true, 'message' => "order successfully delete."]);
     }
 
-    public function getTransactions (Request $request) {
+    public function getTransactions(Request $request) {
         $search = $request->input('search', false);
         $status = $request->input('status', false);
 
@@ -87,6 +87,13 @@ class OrderController extends Controller
                     ->paginate(10);
 
         return response()->json(['setting' => $setting, 'transaction' => $transaction]);
+    }
+
+    public function deleteTransaction(OrderPayment $transaction) {
+
+        $transaction->delete();
+
+        return response()->json(['success' => true, 'message' => "Transaction successfully delete."]);
     }
 
 }

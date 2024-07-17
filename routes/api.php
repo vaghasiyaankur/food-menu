@@ -373,3 +373,5 @@ Route::get('/order/{order}', [AdminOrderController::class, 'getOrder']);
 Route::get('/delete-order/{order}', [AdminOrderController::class, 'deleteOrder']);
 
 Route::get('/get-transactions', [AdminOrderController::class, 'getTransactions']);
+
+Route::get('/delete-transaction/{transaction}', [AdminOrderController::class, 'deleteTransaction']);
