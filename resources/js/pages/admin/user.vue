@@ -50,7 +50,7 @@
                                 <td>
                                     <div class="customer-detail">
                                         <div class="customer-img">
-                                            <img src="\assets\images\seederImages\dashboard\user_1.png">
+                                            <img src="/images/user.png" width="40px" height="40px">
                                         </div>
                                         <div class="customer-name">{{ user.name }}</div>
                                     </div>

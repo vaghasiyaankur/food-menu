@@ -509,6 +509,11 @@
     td:nth-child(3) {
     color: #f33e3e !important;
 }
+.orders_admin_page .order_info .order_table_wrapper {
+    overflow-x: auto !important;
+    border-bottom: 3px solid #999999;
+    scrollbar-width: 3px;
+}
 @media screen and (max-width: 1380px) {
     .dashboard_page .dashboard_card{
         gap: 25px;
@@ -539,6 +544,10 @@
     height: 60px;
     background-color: #fff;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+}
+
+.pagination_wrapper {
+    padding: 20px !important;
 }
 
 .pagination_wrapper .pagination_list {
