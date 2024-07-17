@@ -25,9 +25,10 @@
                         </div>
                         <select @change="getOrders()" v-model="orderStatus" name="" id="select_filter">
                             <option value="" selected>All</option>
-                            <option value="1">Completed</option>
                             <option value="0">Pending</option>
+                            <option value="1">Completed</option>
                             <option value="2">Cancelled</option>
+                            <option value="3">Processing</option>
                         </select>
                     </div>
                     <button class="filter_table">
@@ -64,14 +65,17 @@
                                     <div v-if="order.cancelled_by" class="order_status cancelled_status">
                                         <p class="no-margin">Cancelled</p>
                                     </div>
-                                    <div v-if="order.finished == 0" class="order_status processing_status">
+                                    <div v-else-if="order.finished == 0 && order.start_at != null" class="order_status processing_status">
                                         <p class="no-margin">Processing</p>
                                     </div>
-                                    <div v-if="order.finished == 1" class="order_status completed_status">
+                                    <div v-else-if="order.finished == 1 && order.start_at != null" class="order_status completed_status">
                                         <p class="no-margin">Completed</p>
                                     </div>
+                                    <div v-else-if="order.finished == 0 && order.start_at == null" class="order_status pending_status">
+                                        <p class="no-margin">Pending</p>
+                                    </div>
                                 </td>
-                                <td>{{ order.cancelled_by ? '-' : (order.finished == 1 ? 'Payment Received' : 'Payment Pending') }}</td>
+                                <td>{{ order.cancelled_by ? 'Payment Cancelled' : (order.finished == 1 ? 'Payment Received' : 'Payment Pending') }}</td>
                                 <td>{{ formateDateAndTime(order.created_at) }}</td>
                                 <td>
                                     <div class="menu-item-dropdown">
@@ -86,7 +90,9 @@
                                 </td>
                             </tr>
                             <tr v-if="orders.length == 0">
-                                <td colspan="8">No Data Found !!</td>
+                                <td colspan="8">
+                                    <NoValueFound title="No Data Found !!"></NoValueFound>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -108,6 +114,7 @@
     import { ref, onMounted } from 'vue';
     import Icon from '../../components/Icon.vue';
     import Pagination from '../../components/Pagination.vue';
+    import NoValueFound from '../../components/NoValueFound.vue';
     import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Breadcrumbs, f7BreadcrumbsItem, f7BreadcrumbsSeparator, f7BreadcrumbsCollapsed} from 'framework7-vue';
 
     const orders = ref([]);
