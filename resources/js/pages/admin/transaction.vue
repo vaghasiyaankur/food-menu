@@ -559,8 +559,5 @@
 </template>
 
 <script setup>
-import {
-    f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Breadcrumbs,
-    f7BreadcrumbsItem, f7BreadcrumbsSeparator, f7BreadcrumbsCollapsed,
-} from 'framework7-vue';
+import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Breadcrumbs, f7BreadcrumbsItem, f7BreadcrumbsSeparator, f7BreadcrumbsCollapsed, } from 'framework7-vue';
 </script>

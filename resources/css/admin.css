@@ -144,14 +144,13 @@
     right: 0;
 }
 .dashboard_page .orders-category_tables {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: calc((60%) - (40px / 2)) calc((40%) - (40px / 2));
     gap: 40px;
     margin-bottom: 40px;
 }
 .dashboard_page .orders-category_tables .latest_orders_table {
-    max-width: 60.87%;
+    max-width: 100%;
     width: 100%;
 }
 .dashboard_page .table_header {
@@ -191,6 +190,7 @@
 }
 .dashboard_page table {
     width: 100%;
+    height: calc(100% - 40px);
     border-collapse: collapse;
     box-shadow: 0px 1px 15px 0px #3333330d;
     border-radius: 10px;
@@ -287,7 +287,7 @@
 }
 
 .dashboard_page .latest_category_table {
-    max-width: 36.23%;
+    max-width: 100%;
     width: 100%;
 }
 .dashboard_page .latest_category_table table thead th {
@@ -323,14 +323,13 @@
     padding-left: 150px;
 }
 .dashboard_page .customer-info_pending-order_table {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: calc((40%) - (40px / 2)) calc((60%) - (40px / 2));
     gap: 40px;
     margin-bottom: 40px;
 }
 .dashboard_page .customer-info_pending-order_table .latest_customer_info {
-    max-width: 41.81%;
+    /* max-width: 41.81%; */
     width: 100%;
 }
 .dashboard_page .latest_customer_info .customer_card_holder {
@@ -371,7 +370,7 @@
     color: #999999;
 }
 .dashboard_page .customer-info_pending-order_table .pending_order_table {
-    max-width: 55.29%;
+    /* max-width: 55.29%; */
     width: 100%;
 }
 .dashboard_page .pending_order_table table thead th {
@@ -394,14 +393,13 @@
     text-align: center;
 }
 .dashboard_page .complete_order-product_tables {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: calc((60%) - (40px / 2)) calc((40%) - (40px / 2));
     gap: 40px;
     margin-bottom: 40px;
 }
 .dashboard_page .complete_order-product_tables .latest_completed_orders_table {
-    max-width: 55.62%;
+    /* max-width: 55.62%; */
     width: 100%;
 }
 .dashboard_page .latest_completed_orders_table table thead th {
@@ -424,7 +422,7 @@
     text-align: center;
 }
 .dashboard_page .complete_order-product_tables .latest_product_table {
-    max-width: 41.45%;
+    /* max-width: 41.45%; */
     width: 100%;
 }
 .dashboard_page .latest_product_table table thead th {

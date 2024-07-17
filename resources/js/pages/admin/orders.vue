@@ -109,6 +109,7 @@
     import Icon from '../../components/Icon.vue';
     import Pagination from '../../components/Pagination.vue';
     import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Breadcrumbs, f7BreadcrumbsItem, f7BreadcrumbsSeparator, f7BreadcrumbsCollapsed} from 'framework7-vue';
+    import { successNotification } from '../../commonFunction.js'
 
     const orders = ref([]);
     const paginateData = ref([]);
@@ -151,7 +152,13 @@
         }
     }
 
-    const setRemoveOrderId = (id) => {
-        console.log(id);
+    const setRemoveOrderId = async (id) => {
+        await axios.get('/api/delete-order/'+id)
+            .then(response => {
+                successNotification(response.data.message);
+                getOrders();
+            }).catch((error) => {
+                console.error('Error Ocurred While Fetch Order Data ', error);
+            });
     }
 </script>

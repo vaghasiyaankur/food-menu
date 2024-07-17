@@ -369,3 +369,7 @@ Route::get('/user-simulation/{id}', [UserController::class, 'changeSimulation'])
 Route::get('/orders', [AdminOrderController::class, 'getOrders']);
 
 Route::get('/order/{order}', [AdminOrderController::class, 'getOrder']);
+
+Route::get('/delete-order/{order}', [AdminOrderController::class, 'deleteOrder']);
+
+Route::get('/get-transactions', [AdminOrderController::class, 'getTransactions']);
