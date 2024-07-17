@@ -66,14 +66,29 @@ class OrderController extends Controller
         return response()->json(['success' => true, 'message' => "order successfully delete."]);
     }
 
-    public function getTransactions (Request $request) {
+    public function getTransactions(Request $request) {
         $search = $request->input('search', false);
 
         $setting = Setting::whereRestaurantId(Auth::user()->restaurant_id)->value('currency_symbol');
         
-        $transaction = OrderPayment::paginate(10);
+        $transaction = OrderPayment::with('order.customer')
+                    ->whereHas('order', function ($query) {
+                        $query->whereRestaurantId(Auth::user()->restaurant_id);
+                    })
+                    ->when($search, function ($query, $search) {
+                        return $query->whereHas('order.customer', function ($query) use ($search) {
+                            $query->where('name', 'like', '%' . $search . '%');
+                        });
+                    })->paginate(10);
 
         return response()->json(['setting' => $setting, 'transaction' => $transaction]);
+    }
+
+    public function deleteTransaction(OrderPayment $transaction) {
+
+        $transaction->delete();
+
+        return response()->json(['success' => true, 'message' => "Transaction successfully delete."]);
     }
 
 }

@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('tip')->default(0);
             $table->string('settle_amount')->default(0);
             $table->json('payment_type_data')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
