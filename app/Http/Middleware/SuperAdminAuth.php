@@ -20,7 +20,7 @@ class SuperAdminAuth
         if (Auth::check() && Auth::user()->role == 'super_admin') {
             return $next($request);
         } else if (Auth::check() && Auth::user()->role == 'manager') {
-            return redirect('manager');
+            return $next($request);
         } else {
             return redirect()->route('super-admin.auth');
         }

@@ -25,13 +25,13 @@ class AuthController extends Controller
         }
 
         // Attempt to log the user in
-        if (Auth::attempt($request->only(['email','password']))) {
+        if (Auth::login($request->only(['email','password']))) {
 
-            if (Auth::user()->role == 'super_admin') {
+            // if (Auth::user()->role == 'super_admin') {
                 return redirect()->route('super-admin.dashboard');
-            }else{
-                Auth::logout();
-            }
+            // }else{
+            //     Auth::logout();
+            // }
         }
 
         // Authentication failed...

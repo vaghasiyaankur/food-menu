@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\SuperAdmin\AuthController;
+use App\Http\Controllers\SuperAdmin\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +21,7 @@ Route::post('/super-admin/login', [AuthController::class, 'login'])->name('super
 
 Route::group(['middleware' => 'superAdmin'], function () {
     Route::view('/', 'admin.page.dashboard')->name('super-admin.dashboard');
+    Route::get('users/list', [UserController::class, 'getUsers'])->name('users.list');
     Route::view('/users', 'admin.page.user')->name('super-admin.user');
     Route::view('/restaurant', 'admin.page.restaurant')->name('super-admin.restaurant');
     Route::view('/branch', 'admin.page.branch')->name('super-admin.branch');
