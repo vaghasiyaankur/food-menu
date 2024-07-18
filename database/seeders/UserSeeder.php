@@ -142,7 +142,19 @@ class UserSeeder extends Seeder
                 'mobile_number' => 9514786325,
                 'role' => 'waiter',
                 'restaurant_id' => 2
-            ]
+            ],
+            [
+                'name' => 'Super Admin',
+                'email' => 'superadmin@gmail.com',
+                'password' => Hash::make('123456789'),
+                'mobile_number' => $this->generateIndianMobileNumber($faker),
+                'email_verified_at' => \Carbon\Carbon::now(),
+                'remember_token' => Str::random(10),
+                'lock_pin' => 1234,
+                'mobile_number' => 9632587413,
+                'role' => 'super_admin',
+                'restaurant_id' => 1
+            ],
         ];
 
 

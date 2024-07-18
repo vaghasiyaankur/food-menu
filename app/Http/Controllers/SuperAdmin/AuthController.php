@@ -11,22 +11,18 @@ class AuthController extends Controller
 {
     public function login(Request $request) {
 
-        // Validate the request data
         $validatedData = Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required|string',
         ]);
 
-        // Check if validation fails
         if ($validatedData->fails()) {
             return redirect()->back()
             ->withErrors($validatedData->errors())
             ->withInput($request->only('email'));
         }
 
-        // Attempt to log the user in
         if (Auth::attempt($request->only(['email','password']))) {
-
             if (Auth::user()->role == 'super_admin') {
                 return redirect()->route('super-admin.dashboard');
             }else{
@@ -34,9 +30,18 @@ class AuthController extends Controller
             }
         }
 
-        // Authentication failed...
         return redirect()->back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+            'email' => 'The provided credentials do not match our record.',
         ])->withInput($request->only('email'));
+    }
+
+    public function logout()
+    {
+        if(Auth::user()) {
+            if(Auth::user()->role == 'super_admin') {
+                Auth::logout();
+                return redirect()->route('super-admin.auth');
+            }
+        }
     }
 }
