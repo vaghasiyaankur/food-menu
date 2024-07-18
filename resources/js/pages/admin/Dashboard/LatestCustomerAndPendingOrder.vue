@@ -41,17 +41,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(latestPendingOrder, index) in latestPendingOrders" :key="index">
-                        <td>{{ index+1 }}</td>
-                        <td>
-                            <div class="customer_img">
-                                <img src="/images/user.png">
-                            </div>
-                            <div class="customer_name">{{ latestPendingOrder?.customer?.name }}</div>
-                        </td>
-                        <td>{{ currencySymbol+""+formattedPrice(latestPendingOrder?.total_price) }}</td>
-                        <td>{{ formateDateAndTime(latestPendingOrder.created_at) }}</td>
-                    </tr>
+                    <template v-if="latestPendingOrders.length > 0">
+                        <tr v-for="(latestPendingOrder, index) in latestPendingOrders" :key="index">
+                            <td>{{ index+1 }}</td>
+                            <td>
+                                <div class="customer_img">
+                                    <img src="/images/user.png">
+                                </div>
+                                <div class="customer_name">{{ latestPendingOrder?.customer?.name }}</div>
+                            </td>
+                            <td>{{ currencySymbol+""+formattedPrice(latestPendingOrder?.total_price) }}</td>
+                            <td>{{ formateDateAndTime(latestPendingOrder.created_at) }}</td>
+                        </tr>
+                        <tr v-if="latestPendingOrders.length < 8"><td colspan="4"></td></tr>
+                    </template>
                     <tr v-if="latestPendingOrders.length == 0">
                         <td colspan="5">
                             <NoValueFound title="No Data Found !!"></NoValueFound>
