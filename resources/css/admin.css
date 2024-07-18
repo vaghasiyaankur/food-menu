@@ -194,8 +194,10 @@
     border-collapse: collapse;
     box-shadow: 0px 1px 15px 0px #3333330d;
     border-radius: 10px;
+    overflow: auto;
 }
 .dashboard_page table thead {
+    /* width: 100%; */
     border-bottom: 1px solid rgba(153, 153, 153, 0.25);
     background-color: #f4f4f4;
     border-top-right-radius: 10px;
@@ -205,6 +207,9 @@
     font-size: 15px;
     line-height: 18px;
 }
+/* .dashboard_page table tbody {
+    width: 100%;
+} */
 .dashboard_page table tbody tr:not(:last-child) {
     border-bottom: 1px solid rgba(153, 153, 153, 0.15);
 }
@@ -220,6 +225,12 @@
 .dashboard_page table th,
 .dashboard_page table td {
     text-wrap: nowrap !important;
+}
+.dashboard_page .latest_orders_table tbody tr:not(:last-child),
+.dashboard_page .pending_order_table tbody tr:not(:last-child),
+.dashboard_page .latest_completed_orders_table tbody tr:not(:last-child),
+.dashboard_page .latest_transactions_table tbody tr:not(:last-child) {
+    height: 105px;
 }
 .dashboard_page .latest_orders_table table thead th {
     text-align: left;
@@ -239,10 +250,12 @@
 .dashboard_page table thead tr th:first-child,
 .dashboard_page table tbody tr td:first-child {
     padding-left: 20px;
+    max-width: 100px;
 }
 .dashboard_page table thead tr th:last-child,
 .dashboard_page table tbody tr td:last-child {
     padding-right: 20px;
+    max-width: auto;
 }
 .dashboard_page .latest_orders_table thead tr th:last-child,
 .dashboard_page .latest_orders_table tbody tr td:last-child {
