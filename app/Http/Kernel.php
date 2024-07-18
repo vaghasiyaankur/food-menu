@@ -62,6 +62,7 @@ class Kernel extends HttpKernel
      * @var array<string, class-string|string>
      */
     protected $routeMiddleware = [
+        'superAdmin' =>  \App\Http\Middleware\SuperAdminAuth::class,
         'alreadyLogin' => \App\Http\Middleware\AlreadyAuthenticate::class,
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,

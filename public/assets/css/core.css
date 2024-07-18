@@ -15316,12 +15316,12 @@ html:not(.layout-menu-fixed) .menu-inner-shadow {
 }
 @media (max-width: 1199.98px) {
   .layout-navbar.navbar-detached {
-    width: calc(100vw - (100vw - 100%) - (1.625rem * 2)) !important;
+    width: 100% !important;
   }
 }
 @media (max-width: 991.98px) {
   .layout-navbar.navbar-detached {
-    width: calc(100vw - (100vw - 100%) - (1rem * 2)) !important;
+    width: 100% !important;
   }
 }
 .layout-menu-collapsed .layout-navbar.navbar-detached, .layout-without-menu .layout-navbar.navbar-detached {
