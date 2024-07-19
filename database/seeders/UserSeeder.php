@@ -143,18 +143,6 @@ class UserSeeder extends Seeder
                 'role' => 'waiter',
                 'restaurant_id' => 2
             ],
-            [
-                'name' => 'Super Admin',
-                'email' => 'superadmin@gmail.com',
-                'password' => Hash::make('123456789'),
-                'mobile_number' => $this->generateIndianMobileNumber($faker),
-                'email_verified_at' => \Carbon\Carbon::now(),
-                'remember_token' => Str::random(10),
-                'lock_pin' => 1234,
-                'mobile_number' => 9632587413,
-                'role' => 'super_admin',
-                'restaurant_id' => 1
-            ],
         ];
 
 
@@ -164,16 +152,18 @@ class UserSeeder extends Seeder
 
 
 
-        // User::create([
-        //     'name' => 'Manager 1',
-        //     'email' => 'manager1@gmail.com',
-        //     'password' => Hash::make('123456789'),
-        //     'email_verified_at' => \Carbon\Carbon::now(),
-        //     'remember_token' => Str::random(10),
-        //     'lock_pin' => 1234,
-        //     'role' => 'manager',
-        //     'restaurant_id' => 1
-        // ]);
+        User::create([
+            'name' => 'Super Admin',
+            'email' => 'superadmin@gmail.com',
+            'password' => Hash::make('123456789'),
+            'mobile_number' => $this->generateIndianMobileNumber($faker),
+            'email_verified_at' => \Carbon\Carbon::now(),
+            'remember_token' => Str::random(10),
+            'lock_pin' => 1234,
+            'mobile_number' => 9632587424,
+            'role' => 'super_admin',
+            'restaurant_id' => 1
+        ]);
 
         // User::create([
         //     'name' => 'Manager 2',

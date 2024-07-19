@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('restaurant_id');
+            $table->unsignedBigInteger('restaurant_id')->nullable();
             $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
             $table->string('name')->nullable();
             $table->string('email')->unique();

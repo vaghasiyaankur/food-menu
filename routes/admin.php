@@ -19,8 +19,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/super-admin-login', 'admin.auth.login')->name('super-admin.auth');
 
-Route::post('/super-admin/login', [AuthController::class, 'login'])->name('super-admin.login');
-Route::get('/super-admin/logout', [AuthController::class, 'logout'])->name('super-admin.logout');
+Route::post('login', [AuthController::class, 'login'])->name('super-admin.login');
+Route::get('logout', [AuthController::class, 'logout'])->name('super-admin.logout');
 
 
 Route::group(['middleware' => 'superAdmin'], function () {
