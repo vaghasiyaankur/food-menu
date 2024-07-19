@@ -7,7 +7,7 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Login</title>
+    <title>Forgot Password</title>
 
     <meta name="description" content="" />
 
@@ -48,8 +48,8 @@
 
     <div class="container-xxl">
         <div class="authentication-wrapper authentication-basic container-p-y">
-            <div class="authentication-inner">
-                <!-- Register -->
+            <div class="authentication-inner py-4">
+                <!-- Forgot Password -->
                 <div class="card">
                     <div class="card-body">
                         <!-- Logo -->
@@ -58,53 +58,41 @@
                                 <img src="{{ asset('images/logo.png') }}" height="70px" width="100px" style="object-fit: contain">
                             </a>
                         </div>
+                        <h4 class="mb-2 text-center">Reset Password</h4>
                         <!-- /Logo -->
-                        <h4 class="mb-2">Welcome to Super Admin! 👋</h4>
-                        <p class="mb-4">Please sign-in to your account and start the adventure</p>
-                        @if (Session::has('status'))
-                            <span style="color: green;">{{ Session::get('status') }}</span>
-                        @endif
-                        <form id="formAuthentication" class="mb-3" action="{{ route('super-admin.login') }}" method="POST">
+                        <form class="mb-3" action="{{ route('password.update') }}" method="post">
+                            <input type="hidden" name="token" value="{{ $token }}" readonly>
                             @csrf
                             <div class="mb-3">
-                                <label for="email" class="form-label">Email or Username</label>
-                                <input type="text" class="form-control" id="email" name="email" placeholder="Enter your email or username" autofocus />
+                                <label for="email" class="form-label">Email</label>
+                                @if (request()->query('email'))
+                                    <input type="text" class="form-control" id="email" name="email" placeholder="Enter your Email" 
+                                        value="{{ request()->query('email') }}" readonly
+                                    />
+                                @endif
                                 @error('email')
                                     <span style="color: red;">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <div class="mb-3 form-password-toggle">
-                                <div class="d-flex justify-content-between">
-                                    <label class="form-label" for="password">Password</label>
-                                    <a href="{{ route('super-admin.forgot-password')  }}">
-                                        <small>Forgot Password?</small>
-                                    </a>
-                                </div>
-                                <div class="input-group input-group-merge">
-                                    <input type="password" id="password" class="form-control" name="password"
-                                        placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                        aria-describedby="password" />
-                                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                                </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="text" class="form-control" id="password" name="password" placeholder="Enter Your Password" autofocus />
                                 @error('password')
                                     <span style="color: red;">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="mb-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="remember-me" />
-                                    <label class="form-check-label" for="remember-me"> Remember Me </label>
-                                </div>
+                                <label for="password_confirmation" class="form-label">Confirmation Password</label>
+                                <input type="text" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Enter Confirmation Password" />
+                                @error('password_confirmation')
+                                    <span style="color: red;">{{ $message }}</span>
+                                @enderror
                             </div>
-                            <div class="mb-3">
-                                <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
-                            </div>
+                            <button class="btn btn-primary d-grid w-100">Reset Password</button>
                         </form>
-
-                        
                     </div>
                 </div>
-                <!-- /Register -->
+                <!-- /Forgot Password -->
             </div>
         </div>
     </div>
