@@ -77,6 +77,9 @@
                                 class="form-control"
                                 placeholder="Enter Branch Name"
                             />
+                            @error('branch_name')
+                                <span style="color: red;">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="col mb-3">
                             <label for="ownerBackdrop" class="form-label">Owner Name</label>
@@ -87,6 +90,9 @@
                                 class="form-control"
                                 placeholder="Enter Branch Owner"
                             />
+                            @error('owner_name')
+                                <span style="color: red;">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
                     <div class="row g-2">
@@ -99,6 +105,9 @@
                                 class="form-control"
                                 placeholder="xxxx@xxx.xx"
                             />
+                            @error('email')
+                                <span style="color: red;">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="col mb-3">
                             <label for="dobBackdrop" class="form-label">Mobile Number</label>
@@ -109,6 +118,9 @@
                                 class="form-control"
                                 placeholder="+91-9652310547"
                             />
+                            @error('mobile_number')
+                                <span style="color: red;">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
                     <div class="row">

@@ -7,6 +7,7 @@ use App\Models\Branch;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Validator;
 
 class RestaurantController extends Controller
 {
@@ -50,6 +51,16 @@ class RestaurantController extends Controller
 
     public function createBranch(Request $request)
     {
-        dd($request);
+        $validatedData = Validator::make($request->all(), [
+            'branch_name'   =>  'required',
+            'owner_name'    =>  'required|string',
+            'email'         =>  'required|email',
+            'mobile_number' =>  'required'
+        ]);
+
+        if ($validatedData->fails()) {
+            return redirect()->back()
+                ->withErrors($validatedData->errors());
+        }
     }
 }
