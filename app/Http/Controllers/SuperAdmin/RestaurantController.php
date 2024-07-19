@@ -38,10 +38,9 @@ class RestaurantController extends Controller
             return DataTables::of($branchList)
                 ->addIndexColumn()
                 ->addColumn('action', function($branchRow) {
-                    $userRoute = route('super-admin.user', ['branch_id' => $branchRow->id]);
-                    $branchRoute = route('super-admin.branch', ['branch_id' => $branchRow->id]);
-                    $btn = '<a href="'.$userRoute.'" class="user btn btn-warning btn-sm text-white fw-bolder" style="margin-right: 10px;">Users</a>';
-                    $btn .= '<a href="'.$branchRoute.'" class="branch btn btn-info btn-sm text-white fw-bolder">Branch</a>';
+                    $deleteRoute = route('branch.delete');
+                    $btn = '<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#backDropModal" class="user btn btn-info btn-sm text-white fw-bolder" style="margin-right: 10px;">Edit</a>';
+                    $btn .= '<a href="'.$deleteRoute.'" class="branch btn btn-danger btn-sm text-white fw-bolder deleteBranch">Delete</a>';
                     return $btn;
                 })
                 ->rawColumns(['action'])
@@ -61,6 +60,34 @@ class RestaurantController extends Controller
         if ($validatedData->fails()) {
             return redirect()->back()
                 ->withErrors($validatedData->errors());
+        }
+
+        $image_name = '';
+        if($request->file('logo')){
+            $directory = storage_path('app/public/branch_logo/');
+
+            if (!file_exists($directory)) {
+                mkdir($directory, 0777, true);
+            }
+
+            $imageFile = $request->file('logo');
+            $image_name = 'branch_logo/'.rand(10000000,99999999).".".$imageFile->GetClientOriginalExtension();
+            $imageFile->move(storage_path('app/public/branch_logo/'),$image_name);
+        }
+
+        $branchFormData = $request->all();
+        $branchFormData['logo'] = $image_name;
+
+        $branch = Branch::create($branchFormData);
+        return redirect()->route('super-admin.branch', ['restaurant_id' => $branch->restaurant_id])->with('success', 'Branch Create Successfully');
+    }
+
+    public function deleteBranch(Request $request)
+    {
+        $branch = Branch::findOrFail($request->branch_id);
+        if($branch) {
+            $branch->delete();
+            return redirect()->route('super-admin.branch', ['restaurant_id' => $request->restaurant_id])->with('message', 'Branch Deleted Successfully');
         }
     }
 }
