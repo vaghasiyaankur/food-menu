@@ -34,6 +34,7 @@ Route::controller(ForgotPasswordController::class)->group(function() {
 });
 
 Route::group(['middleware' => 'superAdmin'], function () {
+    
     Route::view('/', 'admin.page.dashboard')->name('super-admin.dashboard');
     Route::view('/user/{restaurant_id}', 'admin.page.user')->name('super-admin.user');
     Route::view('/restaurant', 'admin.page.restaurant')->name('super-admin.restaurant');
@@ -41,9 +42,14 @@ Route::group(['middleware' => 'superAdmin'], function () {
     Route::view('/restaurant-status', 'admin.page.restaurant_request')->name('super-admin.restaurant-request');
     Route::view('/profile', 'admin.page.profile')->name('super-admin.profile');
     
-    Route::get('users-list', [UserController::class, 'getUsers'])->name('users.list');
-    Route::get('restaurant-list', [RestaurantController::class, 'getRestaurants'])->name('restaurants.list');
-    Route::get('branch-list', [RestaurantController::class, 'getBranch'])->name('branch.list');
+    Route::controller(UserController::class)->group(function() {
+        Route::get('users-list', 'getUsers')->name('users.list');
+    });
 
-    Route::post('branch-create', [RestaurantController::class, 'createBranch'])->name('branch.create');
+    Route::controller(RestaurantController::class)->group(function() {
+        Route::get('restaurant-list', 'getRestaurants')->name('restaurants.list');
+        Route::get('branch-list', 'getBranch')->name('branch.list');
+        Route::post('branch-create', 'createBranch')->name('branch.create');
+        Route::post('branch-delete', 'deleteBranch')->name('branch.delete');
+    });
 });
