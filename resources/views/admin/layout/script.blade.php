@@ -13,7 +13,9 @@
 
     <!-- Main JS -->
     <script src="{{ asset('assets/js/main/main.js') }}"></script>
-`
+    
+    <script src="{{ asset('assets/js/toast/ui-toasts.js') }}"></script>
+
     <!-- Page JS -->
     <script src="{{ asset('assets/js/dashboards-analytics.js') }}"></script>
 

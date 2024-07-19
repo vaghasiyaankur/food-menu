@@ -286,6 +286,10 @@
                     },
                 ]
             });
+
+            $('select[name="DataTables_Table_0_length"]').addClass('form-select');
+
+            $('.dataTables_filter input').addClass('form-control');
             
             $('#formFile').change(function(event) {
                 event.preventDefault();
