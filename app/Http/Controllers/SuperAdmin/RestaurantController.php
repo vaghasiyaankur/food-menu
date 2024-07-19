@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\SuperAdmin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\SuperAdmin\BranchRequest;
 use App\Models\Branch;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
@@ -49,7 +48,7 @@ class RestaurantController extends Controller
         }
     }
 
-    public function createBranch(BranchRequest $request)
+    public function createBranch(Request $request)
     {
         dd($request);
     }
