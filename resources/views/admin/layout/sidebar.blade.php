@@ -3,7 +3,7 @@
  <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
         <a href="javascript:void(0)" class="app-brand-link">
-            <img src="{{ asset('images/logo.png') }}" height="60px" width="80px">
+            <img src="{{ asset('images/logo.png') }}" height="60px" width="100px">
         </a>
 
         <a href="javascript:void(0);"
