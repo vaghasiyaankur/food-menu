@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\SuperAdmin\AuthController;
 use App\Http\Controllers\SuperAdmin\ForgotPasswordController;
+use App\Http\Controllers\SuperAdmin\RestaurantController;
 use App\Http\Controllers\SuperAdmin\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,20 +22,28 @@ use Illuminate\Support\Facades\Route;
 Route::view('/super-admin-login', 'admin.auth.login')->name('super-admin.auth');
 Route::view('/forgot-password', 'admin.auth.forgot_password')->name('super-admin.forgot-password');
 
-Route::post('login', [AuthController::class, 'login'])->name('super-admin.login');
-Route::get('logout', [AuthController::class, 'logout'])->name('super-admin.logout');
+Route::name('super-admin.')->controller(AuthController::class)->group(function() {
+    Route::post('login', 'login')->name('login');
+    Route::get('logout', 'logout')->name('logout');
+});
 
-Route::post('/verify/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('super-admin.check-email');
-Route::get('password/reset/{token}', [ForgotPasswordController::class, 'showResetForm'])->name('password.reset');
-Route::post('password/reset', [ForgotPasswordController::class, 'reset'])->name('password.update');
-
+Route::controller(ForgotPasswordController::class)->group(function() {
+    Route::post('/verify/email', 'sendResetLinkEmail')->name('super-admin.check-email');
+    Route::get('password/reset/{token}', 'showResetForm')->name('password.reset');
+    Route::post('password/reset', 'reset')->name('password.update');
+});
 
 Route::group(['middleware' => 'superAdmin'], function () {
     Route::view('/', 'admin.page.dashboard')->name('super-admin.dashboard');
-    Route::get('users/list', [UserController::class, 'getUsers'])->name('users.list');
-    Route::view('/users', 'admin.page.user')->name('super-admin.user');
+    Route::view('/user/{restaurant_id}', 'admin.page.user')->name('super-admin.user');
     Route::view('/restaurant', 'admin.page.restaurant')->name('super-admin.restaurant');
-    Route::view('/branch', 'admin.page.branch')->name('super-admin.branch');
+    Route::view('/branch/{restaurant_id}', 'admin.page.branch')->name('super-admin.branch');
     Route::view('/restaurant-status', 'admin.page.restaurant_request')->name('super-admin.restaurant-request');
     Route::view('/profile', 'admin.page.profile')->name('super-admin.profile');
+    
+    Route::get('users-list', [UserController::class, 'getUsers'])->name('users.list');
+    Route::get('restaurant-list', [RestaurantController::class, 'getRestaurants'])->name('restaurants.list');
+    Route::get('branch-list', [RestaurantController::class, 'getBranch'])->name('branch.list');
+
+    Route::post('branch-create', [RestaurantController::class, 'createBranch'])->name('branch.create');
 });

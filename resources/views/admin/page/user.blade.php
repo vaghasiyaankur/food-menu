@@ -13,8 +13,9 @@
         <div class="card">
             <div class="card-datatable table-responsive">
                 <div class="card-header flex-column flex-md-row pb-0">
-                    <div class="head-label">
+                    <div class="head-label d-flex align-items-center justify-content-between w-100">
                         <h5 class="card-title mb-0">Users</h5>
+                        <a href="{{ route('super-admin.restaurant') }}" class="btn btn-primary">Back</a>
                     </div>
                 </div>
                 <div class="table-responsive text-nowrap">
@@ -46,11 +47,19 @@
     <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js"></script>
     <script type="text/javascript">
         $(function() {
+            
+            var urlPath = window.location.pathname;
+            var restaurantId = urlPath.split('/').pop(); 
 
             var table = $('.data-table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('users.list') }}",
+                ajax: {
+                    url : "{{ route('users.list') }}",
+                    data: {
+                        restaurant_id: restaurantId
+                    }
+                },
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex'

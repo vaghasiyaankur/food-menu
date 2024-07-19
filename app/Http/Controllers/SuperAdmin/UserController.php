@@ -12,7 +12,8 @@ class UserController extends Controller
     public function getUsers(Request $request)
     {
         if ($request->ajax()) {
-            $data = User::all();
+            $restaurantId = $request->input('restaurant_id');
+            $data = User::where('restaurant_id', $restaurantId)->get();
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
