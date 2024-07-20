@@ -14,7 +14,13 @@
     <!-- Main JS -->
     <script src="{{ asset('assets/js/main/main.js') }}"></script>
     
+    <script src="{{ asset('assets/js/toast/toastr.js') }}"></script>
+
     <script src="{{ asset('assets/js/toast/ui-toasts.js') }}"></script>
+
+    <script src="{{ asset('assets/js/sweetalert2/sweetalert2.js') }}"></script>
+
+    {{-- <script src="{{ asset('assets/js/sweetalert2/ui-sweetalert2.js') }}"></script> --}}
 
     <!-- Page JS -->
     <script src="{{ asset('assets/js/dashboards-analytics.js') }}"></script>

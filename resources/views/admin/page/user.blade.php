@@ -9,6 +9,16 @@
 @endsection
 
 @section('content')
+    @if (session('success'))
+        <div class="bs-toast toast toast-ex animate__animated my-2 fade bg-primary animate__bounceInRight show" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="2500">
+            <div class="toast-header">
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                {{ session('success') }}
+            </div>
+        </div>
+    @endif
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="card">
             <div class="card-datatable table-responsive">

@@ -1,6 +1,6 @@
 @extends('admin.layout.master')
 
-@section('title', 'Restorant')
+@section('title', 'Restaurants')
 
 @section('css')
     <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
