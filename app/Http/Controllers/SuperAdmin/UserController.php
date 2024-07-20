@@ -5,7 +5,9 @@ namespace App\Http\Controllers\SuperAdmin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -23,6 +25,39 @@ class UserController extends Controller
                 })
                 ->rawColumns(['action'])
                 ->make(true);
+        }
+    }
+
+    public function createUser(Request $request)
+    {
+        $validatedData = Validator::make($request->all(), [
+            'name'          =>  'required',
+            'email'         =>  'required|email',
+            'mobile_number' =>  'required|digits:10',
+            'password'      =>  'required|confirmed',
+            'role'          =>  'required',
+            'lock_pin'      =>  'required|digits:4'
+        ]);
+
+        if ($validatedData->fails()) {
+            return redirect()->back()
+                ->withErrors($validatedData->errors());
+        }
+        
+        $userDetail = $request->all();
+        $userDetail['password'] = Hash::make($request->password);
+        $userDetail['lock_enable'] = $request->has('lock_enable') ? 1 : 0;
+
+        $user = User::create($userDetail);
+        return redirect()->route('super-admin.user', ['restaurant_id' => $user->restaurant_id])->with('success', 'User Create Successfully');
+    }
+
+    public function deleteUser(Request $request)
+    {
+        $user = User::findOrFail($request->user_id);
+        if($user) {
+            $user->delete();
+            return redirect()->route('super-admin.user', ['restaurant_id' => $request->restaurant_id])->with('message', 'User Deleted Successfully');
         }
     }
 }
