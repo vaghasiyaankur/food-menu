@@ -17,13 +17,14 @@
 @endsection
 
 @section('content')
-
     @if (session('success'))
-        <div class="bs-toast toast fade show bg-success" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="bs-toast toast toast-ex animate__animated my-2 fade bg-primary animate__bounceInRight show" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="2500">
             <div class="toast-header">
                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
-            <div class="toast-body"> {{ session('success') }} </div>
+            <div class="toast-body">
+                {{ session('success') }}
+            </div>
         </div>
     @endif
 
@@ -337,26 +338,48 @@
                 e.preventDefault();
                 var row = $(this).closest('tr');
                 var rowData = table.row(row).data();
-    
-                if (confirm('Are you sure you want to delete this row?')) {
-                    $.ajax({
-                        url: "{{ route('branch.delete') }}",
-                        method: 'POST',
-                        data: {
-                            _token: '{{ csrf_token() }}',
-                            branch_id : rowData.id,
-                            restaurant_id : rowData.restaurant_id
-                        },
-                        success: function(response) {
-                            row.fadeOut(500, function() {
-                                table.row(row).remove().draw();
-                            });
-                        },
-                        error: function(error) {
-                            alert('Error deleting data');
-                        }
-                    });
-                }
+
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: !0,
+                    confirmButtonText: "Yes, delete it!",
+                    customClass: { confirmButton: "btn btn-primary me-3", cancelButton: "btn btn-label-secondary" },
+                    buttonsStyling: !1,
+                }).then(function (t) {
+                    if (t.value) {
+                        $.ajax({
+                            url: "{{ route('branch.delete') }}",
+                            method: 'POST',
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                                branch_id : rowData.id,
+                                restaurant_id : rowData.restaurant_id
+                            },
+                            success: function(response) {
+                                Swal.fire({ 
+                                    icon: "success", 
+                                    title: "Deleted!", 
+                                    text: "Your file has been deleted.", 
+                                    customClass: { confirmButton: "btn btn-success" } 
+                                }).then(function (t) {
+                                    row.fadeOut(500, function() {
+                                        table.row(row).remove().draw();
+                                    });
+                                });
+                            },
+                            error: function(error) {
+                                Swal.fire({ 
+                                    icon: "error", 
+                                    title: "Error!", 
+                                    text: "Error deleting data.", 
+                                    customClass: { confirmButton: "btn btn-danger" } 
+                                });
+                            }
+                        });
+                    }
+                });
             });
         });
     </script>

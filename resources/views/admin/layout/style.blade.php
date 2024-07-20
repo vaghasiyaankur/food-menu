@@ -19,6 +19,12 @@
 <!-- Vendors CSS -->
 <link rel="stylesheet" href="{{ asset('assets/css/perfect-scrollbar.css') }}" />
 
+<link rel="stylesheet" href="{{ asset('assets/css/toast/toastr.css') }}">
+
+<link rel="stylesheet" href="{{ asset('assets/css/toast/animate.css') }}">
+
+<link rel="stylesheet" href="{{ asset('assets/css/sweetalert2/sweetalert2.css') }}">
+
 {{-- <link rel="stylesheet" href="../assets/vendor/libs/apex-charts/apex-charts.css" /> --}}
 
 <!-- Page CSS -->
