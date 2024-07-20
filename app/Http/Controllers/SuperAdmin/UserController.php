@@ -18,9 +18,9 @@ class UserController extends Controller
             $data = User::where('restaurant_id', $restaurantId)->get();
             return DataTables::of($data)
                 ->addIndexColumn()
-                ->addColumn('action', function($row){
-                    $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">Edit</a>';
-                    $btn .= ' <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+                ->addColumn('action', function($userRow){
+                    $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#backDropModal">Edit</a>';
+                    $btn .= ' <a href="'.route('user.delete').'" class="delete btn btn-danger btn-sm deleteUser">Delete</a>';
                     return $btn;
                 })
                 ->rawColumns(['action'])
@@ -28,7 +28,7 @@ class UserController extends Controller
         }
     }
 
-    public function createUser(Request $request)
+    public function storeUser(Request $request)
     {
         $validatedData = Validator::make($request->all(), [
             'name'          =>  'required',
@@ -47,6 +47,7 @@ class UserController extends Controller
         $userDetail = $request->all();
         $userDetail['password'] = Hash::make($request->password);
         $userDetail['lock_enable'] = $request->has('lock_enable') ? 1 : 0;
+        unset($userDetail['confirm_password']);
 
         $user = User::create($userDetail);
         return redirect()->route('super-admin.user', ['restaurant_id' => $user->restaurant_id])->with('success', 'User Create Successfully');
@@ -57,7 +58,12 @@ class UserController extends Controller
         $user = User::findOrFail($request->user_id);
         if($user) {
             $user->delete();
-            return redirect()->route('super-admin.user', ['restaurant_id' => $request->restaurant_id])->with('message', 'User Deleted Successfully');
+            return redirect()->route('super-admin.user', ['restaurant_id' => $request->restaurant_id]);
         }
+    }
+
+    public function updateUser(Request $request) 
+    {
+        dd($request->toArray());
     }
 }

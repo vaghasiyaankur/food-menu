@@ -45,7 +45,8 @@ Route::group(['middleware' => 'superAdmin'], function () {
     Route::controller(UserController::class)->group(function() {
         Route::get('users-list', 'getUsers')->name('users.list');
 
-        Route::post('user-create', 'createUser')->name('user.create');
+        Route::post('user-create', 'storeUser')->name('user.create');
+        Route::post('user-update', 'updateUser')->name('user.update');
         Route::post('user-delete', 'deleteUser')->name('user.delete');
     });
 

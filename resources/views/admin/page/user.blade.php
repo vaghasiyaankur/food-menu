@@ -52,7 +52,7 @@
 
     <div class="modal fade" id="backDropModal" data-bs-backdrop="static" tabindex="-1">
         <div class="modal-dialog">
-            <form id="#" class="modal-content" action="{{ route('user.create') }}" method="POST">
+            <form id="userForm" class="modal-content" action="{{ route('user.create') }}" method="post">
                 @csrf
                 <div class="modal-header">
                     <h5 class="modal-title" id="backDropModalTitle">Create User</h5>
@@ -74,6 +74,7 @@
                                 id="user_name" 
                                 name="name"
                                 placeholder="Enter Name"
+                                value="{{ old('name') }}"
                             />
                             @error('name')
                                 <span style="color: red;">{{ $message }}</span>
@@ -89,6 +90,7 @@
                                 id="emailBackdrop"
                                 class="form-control"
                                 placeholder="xxxx@xxx.xx"
+                                value="{{ old('email') }}"
                             />
                             @error('email')
                                 <span style="color: red;">{{ $message }}</span>
@@ -102,6 +104,7 @@
                                 id="dobBackdrop"
                                 class="form-control"
                                 placeholder="+91-9652310547"
+                                value="{{ old('mobile_number') }}"
                             />
                             @error('mobile_number')
                                 <span style="color: red;">{{ $message }}</span>
@@ -112,7 +115,7 @@
                         <div class="col mb-0">
                             <label for="passwordBackdrop" class="form-label">Password</label>
                             <input
-                                type="text"
+                                type="password"
                                 name="password"
                                 id="passwordBackdrop"
                                 class="form-control"
@@ -125,7 +128,7 @@
                         <div class="col mb-3">
                             <label for="confPassBackdrop" class="form-label">Confirmation Password</label>
                             <input
-                                type="text"
+                                type="password"
                                 name="password_confirmation"
                                 id="confPassBackdrop"
                                 class="form-control"
@@ -141,10 +144,10 @@
                             <label for="exampleFormControlSelect1" class="form-label">Role</label>
                             <select name="role" class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
                                 <option selected="" disabled>Select User Role</option>
-                                <option value="manager">Manager</option>
-                                <option value="waiter">Waiter</option>
-                                <option value="admin">Admin</option>
-                                <option value="super_admin">Super Admin</option>
+                                <option value="manager" {{ old('role') == 'manager' ? 'selected' : '' }}>Manager</option>
+                                <option value="waiter" {{ old('role') == 'waiter' ? 'selected' : '' }}>Waiter</option>
+                                <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
+                                <option value="super_admin" {{ old('role') == 'super_admin' ? 'selected' : '' }}>Super Admin</option>
                             </select>
                             @error('role')
                                 <span style="color: red;">{{ $message }}</span>
@@ -160,6 +163,7 @@
                                 id="stateBackdrop"
                                 class="form-control"
                                 placeholder="Enter Lock Pin"
+                                value="{{ old('lock_pin') }}"
                             />
                             @error('lock_pin')
                                 <span style="color: red;">{{ $message }}</span>
@@ -167,7 +171,7 @@
                         </div>
                         <div class="col mb-3">
                             <label class="switch switch-square switch-lg">
-                                <input type="checkbox" class="switch-input" name="lock_enable">
+                                <input type="checkbox" class="switch-input" name="lock_enable" {{ old('lock_enable') ? 'checked' : '' }}>
                                 <span class="switch-label">Lock Status</span>
                             </label>
                         </div>
@@ -194,16 +198,19 @@
     <script type="text/javascript">
         $(function() {
             
+            var urlPath = window.location.pathname;
+            var restaurantId = urlPath.split('/').pop(); 
+
             @if ($errors->any())
+
+                $("#restaurant").val(restaurantId);
+                
                 var myModal = new bootstrap.Modal(document.getElementById('backDropModal'), {
                     backdrop  : 'static',
                     keyboard  : false
                 });
                 myModal.show();
             @endif
-
-            var urlPath = window.location.pathname;
-            var restaurantId = urlPath.split('/').pop(); 
 
             var table = $('.data-table').DataTable({
                 processing: true,
@@ -242,6 +249,55 @@
             $(document).on('click', '.addUser', function (e) {
                 e.preventDefault();
                 $("#restaurant").val(restaurantId);
+            });
+
+            $(document).on('click', '.deleteUser', function (event) {
+                event.preventDefault();
+
+                var row = $(this).closest('tr');
+                var rowData = table.row(row).data();
+
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: !0,
+                    confirmButtonText: "Yes, delete it!",
+                    customClass: { confirmButton: "btn btn-primary me-3", cancelButton: "btn btn-label-secondary" },
+                    buttonsStyling: !1,
+                }).then(function (t) {
+                    if (t.value) {
+                        $.ajax({
+                            url: "{{ route('user.delete') }}",
+                            method: 'POST',
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                                user_id : rowData.id,
+                                restaurant_id : rowData.restaurant_id
+                            },
+                            success: function(response) {
+                                Swal.fire({ 
+                                    icon: "success", 
+                                    title: "Deleted!", 
+                                    text: "Changes Save Successfully.", 
+                                    customClass: { confirmButton: "btn btn-success" } 
+                                }).then(function (t) {
+                                    row.fadeOut(500, function() {
+                                        table.row(row).remove().draw();
+                                    });
+                                });
+                            },
+                            error: function(error) {
+                                Swal.fire({ 
+                                    icon: "error", 
+                                    title: "Error!", 
+                                    text: "Error deleting data.", 
+                                    customClass: { confirmButton: "btn btn-danger" } 
+                                });
+                            }
+                        });
+                    }
+                });
             });
         });
     </script>

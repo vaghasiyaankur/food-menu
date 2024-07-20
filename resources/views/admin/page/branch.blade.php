@@ -230,16 +230,19 @@
     <script type="text/javascript">
         $(function() {
             
+            var urlPath = window.location.pathname;
+            var restaurantId = urlPath.split('/').pop(); 
+
             @if ($errors->any())
+                
+                $("#restaurant").val(restaurantId);
+
                 var myModal = new bootstrap.Modal(document.getElementById('backDropModal'), {
                     backdrop  : 'static',
                     keyboard  : false
                 });
                 myModal.show();
             @endif
-
-            var urlPath = window.location.pathname;
-            var restaurantId = urlPath.split('/').pop(); 
 
             var table = $('.data-table').DataTable({
                 processing: true,
@@ -361,7 +364,7 @@
                                 Swal.fire({ 
                                     icon: "success", 
                                     title: "Deleted!", 
-                                    text: "Your file has been deleted.", 
+                                    text: "Changes Save Successfully.", 
                                     customClass: { confirmButton: "btn btn-success" } 
                                 }).then(function (t) {
                                     row.fadeOut(500, function() {
