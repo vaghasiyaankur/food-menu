@@ -33,7 +33,8 @@ class RestaurantController extends Controller
     public function getBranch(Request $request)
     {
         if($request->ajax()) {
-            $branchList = Branch::all();
+            $restaurantId = $request->input('restaurant_id');
+            $branchList = Branch::whereRestaurantId($restaurantId)->get();
 
             return DataTables::of($branchList)
                 ->addIndexColumn()

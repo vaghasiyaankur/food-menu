@@ -17,26 +17,36 @@
 @endsection
 
 @section('content')
+
+    @if (session('success'))
+        <div class="bs-toast toast fade show bg-success" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body"> {{ session('success') }} </div>
+        </div>
+    @endif
+
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="card">
             <div class="card-datatable table-responsive">
                 <div class="card-header flex-column flex-md-row pb-0">
                     <div class="head-label d-flex align-items-center justify-content-between w-100">
                         <h5 class="card-title mb-0">Branch List</h5>
-                        <button type="button" data-bs-toggle="modal" data-bs-target="#backDropModal" class="btn btn-primary addBranch">Add</a>
+                        <div>
+                            <button type="button" data-bs-toggle="modal" data-bs-target="#backDropModal" class="btn btn-primary addBranch">Add</button>
+                            <a href="{{ route('super-admin.restaurant') }}" class="btn btn-primary ms-2">Back</a>
+                        </div>
                     </div>
                 </div>
-                @if (session('success'))
-                    <span style="color: green">{{ session('success') }} </span>
-                @endif
                 <div class="table-responsive text-nowrap">
                     <table
                         class="table table-bordered table-responsive data-table datatables-basic border-top dataTable dtr-column">
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Email</th>
                                 <th>Logo</th>
+                                <th>Email</th>
                                 <th>Branch Name</th>
                                 <th>Owner Name</th>
                                 <th>Address</th>
@@ -244,15 +254,15 @@
                         name: 'DT_RowIndex'
                     },
                     {
-                        data: 'email',
-                        name: 'email'
-                    },
-                    {
                         data: 'logo',
                         name: 'logo',
                         render: function (data) {
                             return '<img src="/storage/' + data + '" height="50px" width="50px" >';
                         }
+                    },
+                    {
+                        data: 'email',
+                        name: 'email'
                     },
                     {
                         data: 'branch_name',

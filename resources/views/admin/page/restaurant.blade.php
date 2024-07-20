@@ -14,7 +14,7 @@
         <div class="card-datatable table-responsive">
             <div class="card-header flex-column flex-md-row pb-0">
                 <div class="head-label">
-                    <h5 class="card-title mb-0">Restorants</h5>
+                    <h5 class="card-title mb-0">Restaurants</h5>
                 </div>
             </div>
             <div class="table-responsive text-nowrap">
@@ -23,9 +23,9 @@
                     <thead>
                         <tr>
                             <th>No</th>
+                            <th>Logo</th>
                             <th>Name</th>
                             <th>Location</th>
-                            <th>Logo</th>
                             <th>Status</th>
                             <th>Open Time</th>
                             <th>Close Time</th>
@@ -59,19 +59,19 @@
                         name: 'DT_RowIndex'
                     },
                     {
+                        data: 'logo',
+                        name: 'logo',
+                        render: function (data) {
+                            return '<img src="/storage/' + data + '" height="50px" width="50px" >';
+                        }
+                    },
+                    {
                         data: 'name',
                         name: 'name'
                     },
                     {
                         data: 'location',
                         name: 'location'
-                    },
-                    {
-                        data: 'logo',
-                        name: 'logo',
-                        render: function (data) {
-                            return '<img src="/storage/' + data + '" height="50px" width="50px" >';
-                        }
                     },
                     {
                         data: 'status',
@@ -96,6 +96,10 @@
                     },
                 ]
             });
+
+            $('select[name="DataTables_Table_0_length"]').addClass('form-select');
+
+            $('.dataTables_filter input').addClass('form-control');
         });
     </script>
 @endsection
