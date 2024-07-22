@@ -9,16 +9,7 @@
 @endsection
 
 @section('content')
-    @if (session('success'))
-        <div class="bs-toast toast toast-ex animate__animated my-2 fade bg-primary animate__bounceInRight show" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="2500">
-            <div class="toast-header">
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-            <div class="toast-body">
-                {{ session('success') }}
-            </div>
-        </div>
-    @endif
+
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="card">
             <div class="card-datatable table-responsive">
@@ -52,7 +43,7 @@
 
     <div class="modal fade" id="backDropModal" data-bs-backdrop="static" tabindex="-1">
         <div class="modal-dialog">
-            <form id="userForm" class="modal-content" action="{{ route('user.create') }}" method="post">
+            <form id="userForm" class="modal-content" action="{{ route('user.create-update') }}" method="post">
                 @csrf
                 <div class="modal-header">
                     <h5 class="modal-title" id="backDropModalTitle">Create User</h5>
@@ -63,7 +54,8 @@
                     aria-label="Close"
                     ></button>
                 </div>
-                <input class="form-control" type="hidden" name="restaurant_id" id="restaurant" />
+                <input class="form-control" type="hidden" name="restaurant_id" id="restaurant_id" />
+                <input class="form-control" type="hidden" name="user_id" id="id" />
                 <div class="modal-body">
                     <div class="row">
                         <div class="col mb-3">
@@ -71,14 +63,14 @@
                             <input 
                                 class="form-control" 
                                 type="text" 
-                                id="user_name" 
+                                id="name" 
                                 name="name"
                                 placeholder="Enter Name"
                                 value="{{ old('name') }}"
                             />
-                            @error('name')
-                                <span style="color: red;">{{ $message }}</span>
-                            @enderror
+                            <div>
+                                <span id="name_error" style="color: red;"></span>
+                            </div>
                         </div>
                     </div>
                     <div class="row g-2">
@@ -87,28 +79,28 @@
                             <input
                                 type="text"
                                 name="email"
-                                id="emailBackdrop"
+                                id="email"
                                 class="form-control"
                                 placeholder="xxxx@xxx.xx"
                                 value="{{ old('email') }}"
                             />
-                            @error('email')
-                                <span style="color: red;">{{ $message }}</span>
-                            @enderror
+                            <div>
+                                <span id="email_error" style="color: red;"></span>
+                            </div>
                         </div>
                         <div class="col mb-3">
                             <label for="dobBackdrop" class="form-label">Mobile Number</label>
                             <input
                                 type="number"
                                 name="mobile_number"
-                                id="dobBackdrop"
+                                id="mobile_number"
                                 class="form-control"
                                 placeholder="+91-9652310547"
                                 value="{{ old('mobile_number') }}"
                             />
-                            @error('mobile_number')
-                                <span style="color: red;">{{ $message }}</span>
-                            @enderror
+                            <div>
+                                <span id="mobile_number_error" style="color: red;"></span>
+                            </div>
                         </div>
                     </div>
                     <div class="row g-2">
@@ -117,41 +109,41 @@
                             <input
                                 type="password"
                                 name="password"
-                                id="passwordBackdrop"
+                                id="password"
                                 class="form-control"
                                 placeholder="Enter Password"
                             />
-                            @error('password')
-                                <span style="color: red;">{{ $message }}</span>
-                            @enderror
+                            <div>
+                                <span id="password_error" style="color: red;"></span>
+                            </div>
                         </div>
                         <div class="col mb-3">
                             <label for="confPassBackdrop" class="form-label">Confirmation Password</label>
                             <input
                                 type="password"
                                 name="password_confirmation"
-                                id="confPassBackdrop"
+                                id="password_confirmation"
                                 class="form-control"
                                 placeholder="Re-Enter Password"
                             />
-                            @error('password_confirmation')
-                                <span style="color: red;">{{ $message }}</span>
-                            @enderror
+                            <div>
+                                <span id="password_confirmation_error" style="color: red;"></span>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="mb-3">
-                            <label for="exampleFormControlSelect1" class="form-label">Role</label>
-                            <select name="role" class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
-                                <option selected="" disabled>Select User Role</option>
+                            <label for="role" class="form-label">Role</label>
+                            <select name="role" class="form-select" id="role" aria-label="Default select example">
+                                <option value="" selected="" disabled>Select User Role</option>
                                 <option value="manager" {{ old('role') == 'manager' ? 'selected' : '' }}>Manager</option>
                                 <option value="waiter" {{ old('role') == 'waiter' ? 'selected' : '' }}>Waiter</option>
                                 <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
                                 <option value="super_admin" {{ old('role') == 'super_admin' ? 'selected' : '' }}>Super Admin</option>
                             </select>
-                            @error('role')
-                                <span style="color: red;">{{ $message }}</span>
-                            @enderror
+                            <div>
+                                <span id="role_error" style="color: red;"></span>
+                            </div>
                         </div>
                     </div>
                     <div class="row g-2">
@@ -160,18 +152,18 @@
                             <input
                                 type="number"
                                 name="lock_pin"
-                                id="stateBackdrop"
+                                id="lock_pin"
                                 class="form-control"
                                 placeholder="Enter Lock Pin"
                                 value="{{ old('lock_pin') }}"
                             />
-                            @error('lock_pin')
-                                <span style="color: red;">{{ $message }}</span>
-                            @enderror
+                            <div>
+                                <span id="lock_pin_error" style="color: red;"></span>
+                            </div>
                         </div>
                         <div class="col mb-3">
                             <label class="switch switch-square switch-lg">
-                                <input type="checkbox" class="switch-input" name="lock_enable" {{ old('lock_enable') ? 'checked' : '' }}>
+                                <input type="checkbox" id="lock_enable" class="switch-input" name="lock_enable" {{ old('lock_enable') ? 'checked' : '' }}>
                                 <span class="switch-label">Lock Status</span>
                             </label>
                         </div>
@@ -200,17 +192,11 @@
             
             var urlPath = window.location.pathname;
             var restaurantId = urlPath.split('/').pop(); 
-
-            @if ($errors->any())
-
-                $("#restaurant").val(restaurantId);
-                
-                var myModal = new bootstrap.Modal(document.getElementById('backDropModal'), {
-                    backdrop  : 'static',
-                    keyboard  : false
-                });
-                myModal.show();
-            @endif
+            
+            var myModal = new bootstrap.Modal(document.getElementById('backDropModal'), {
+                backdrop  : 'static',
+                keyboard  : false
+            });
 
             var table = $('.data-table').DataTable({
                 processing: true,
@@ -248,7 +234,84 @@
 
             $(document).on('click', '.addUser', function (e) {
                 e.preventDefault();
-                $("#restaurant").val(restaurantId);
+                resetUserForm(1);
+                $("#restaurant_id").val(restaurantId);
+
+                var fields = [ 'name',  'email',  'mobile_number',  'password',  'password_confirmation',  'role',  'lock_pin'];
+                fields.forEach(field => { $(`#${field}_error`).text("") });
+
+                $("#backDropModalTitle").text("Add User");
+                $(".branchSubmit").text("Save");
+            });
+
+            $(document).on('submit', '#userForm', function (e) {
+                e.preventDefault();
+
+                var formData = new FormData(this);
+                var actionURL = $(this).attr('action');
+                var formMethod = $(this).attr('method');
+
+                $.ajax({
+                    type: formMethod,
+                    url: actionURL,
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        if(response.status) {
+                            myModal.hide();
+                            table.draw();
+                            $("#backDropModalTitle").text("Add User");
+                            $(".branchSubmit").text("Save");
+                            getSuccessMessage(response.success);
+                        }
+                    },
+                    error: function (xhr) {
+                        var fields = [ 'name',  'email',  'mobile_number',  'password',  'password_confirmation',  'role',  'lock_pin'];
+
+                        fields.forEach(field => {
+                            var errorMessage = xhr.responseJSON[field] ? xhr.responseJSON[field][0] : "";
+                            $(`#${field}_error`).text(errorMessage);
+                        });
+                    }
+                });
+            });
+
+            $(document).on('click', '.editUser', function (e) {
+                e.preventDefault();
+
+                var fields = [ 'name',  'email',  'mobile_number',  'password',  'password_confirmation',  'role',  'lock_pin'];
+                fields.forEach(field => { $(`#${field}_error`).text("") });
+
+                var id = $(this).data('id');
+                var url = "{{ route('user.edit', ':id') }}";
+                url = url.replace(':id', id);
+
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    dataType: "JSON",
+                    success: function (response) {
+                        if(response.status) {
+                            myModal.show();
+                            $(".branchSubmit").text("Update");
+                            $("#backDropModalTitle").text("Edit User");
+
+                            var formDetail = document.getElementById("userForm");
+                            var elements = formDetail.querySelectorAll("input, select");
+
+                            elements.forEach(function(element) {
+                                var elementId = element.id;
+                                if(response.user.hasOwnProperty(elementId)) {
+                                    $(element).val(response.user[elementId]);
+                                }
+                            });
+                        }
+                    }, 
+                    error : function(error) {
+                        console.error('Fetch User Detail Error : ', error);
+                    }
+                });
             });
 
             $(document).on('click', '.deleteUser', function (event) {
@@ -299,6 +362,39 @@
                     }
                 });
             });
+
+            function getSuccessMessage(message) {
+                if(message) resetUserForm(0);
+                var toastHTML = `
+                    <div id="ajax-toast" class="bs-toast toast toast-ex animate__animated my-2 fade bg-primary animate__bounceInRight show" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="2500">
+                        <div class="toast-header">
+                            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                        </div>
+                        <div class="toast-body">
+                            <span id="ajax-toast-message">${message}</span>
+                        </div>
+                    </div>
+                `;
+
+                $('body').append(toastHTML);
+                $('#ajax-toast').toast({ delay: 2500 }).toast('show');
+                
+            }
+
+            function resetUserForm(type) {
+                if(type == 0) {
+                    $("#restaurant_id").val("");
+                }
+                $("#id").val("");
+                $("#name").val("");
+                $("#email").val("");
+                $("#password").val("");
+                $("#password_confirmation").val("");
+                $("#mobile_number").val("");
+                $("#role").val("");
+                $("#lock_pin").val("");
+                $("#lock_enable").val("");
+            }
         });
     </script>
 @endsection

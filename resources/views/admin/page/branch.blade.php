@@ -323,10 +323,6 @@
     
             $(document).on('click', '.addBranch', function (e) {
                 e.preventDefault();
-    
-                var urlPath = window.location.pathname;
-                var restaurantId = urlPath.split('/').pop(); 
-                
                 $("#restaurant").val(restaurantId);
             });
     

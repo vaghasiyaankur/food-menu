@@ -19,8 +19,8 @@ class UserController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($userRow){
-                    $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#backDropModal">Edit</a>';
-                    $btn .= ' <a href="'.route('user.delete').'" class="delete btn btn-danger btn-sm deleteUser">Delete</a>';
+                    $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm editUser" data-id="' . $userRow->id . '" style="margin-right: 10px;">Edit</a>';
+                    $btn .= '<a href="'.route('user.delete').'" class="delete btn btn-danger btn-sm deleteUser">Delete</a>';
                     return $btn;
                 })
                 ->rawColumns(['action'])
@@ -28,7 +28,18 @@ class UserController extends Controller
         }
     }
 
-    public function storeUser(Request $request)
+    public function editUser(User $user)
+    {
+        if($user) {
+            $userResponse = [
+                'status'    =>  true,
+                'user'      =>  $user
+            ];
+            return response()->json($userResponse);
+        }
+    }
+
+    public function userCreateUpdate(Request $request)
     {
         $validatedData = Validator::make($request->all(), [
             'name'          =>  'required',
@@ -38,19 +49,26 @@ class UserController extends Controller
             'role'          =>  'required',
             'lock_pin'      =>  'required|digits:4'
         ]);
-
+        
         if ($validatedData->fails()) {
-            return redirect()->back()
-                ->withErrors($validatedData->errors());
+            return response()->json($validatedData->errors(), 422);
         }
         
         $userDetail = $request->all();
+
+        if (is_null($userDetail['user_id'])) {
+            unset($userDetail['user_id']);
+        }
+
         $userDetail['password'] = Hash::make($request->password);
         $userDetail['lock_enable'] = $request->has('lock_enable') ? 1 : 0;
         unset($userDetail['confirm_password']);
 
-        $user = User::create($userDetail);
-        return redirect()->route('super-admin.user', ['restaurant_id' => $user->restaurant_id])->with('success', 'User Create Successfully');
+        User::updateOrCreate(['id' => $request->user_id], $userDetail);
+        return response()->json([
+            'success'   =>  'Changes Save Successfully.',
+            'status'    =>  true
+        ], 200);
     }
 
     public function deleteUser(Request $request)
@@ -60,10 +78,5 @@ class UserController extends Controller
             $user->delete();
             return redirect()->route('super-admin.user', ['restaurant_id' => $request->restaurant_id]);
         }
-    }
-
-    public function updateUser(Request $request) 
-    {
-        dd($request->toArray());
     }
 }
