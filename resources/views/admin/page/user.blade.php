@@ -163,8 +163,14 @@
                         </div>
                         <div class="col mb-3">
                             <label class="switch switch-square switch-lg">
-                                <input type="checkbox" id="lock_enable" class="switch-input" name="lock_enable" {{ old('lock_enable') ? 'checked' : '' }}>
                                 <span class="switch-label">Lock Status</span>
+                            </label>
+                            <label class="switch switch-square">
+                                <input type="checkbox" class="switch-input" name="switches-square-stacked-radio" {{ old('lock_enable') ? 'checked' : '' }}>
+                                <span class="switch-toggle-slider">
+                                    <span class="switch-on"></span>
+                                    <span class="switch-off"></span>
+                                </span>
                             </label>
                         </div>
                     </div>
