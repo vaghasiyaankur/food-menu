@@ -71,29 +71,15 @@
                 @csrf
                 <div class="modal-header">
                     <h5 class="modal-title" id="backDropModalTitle">Create Branch</h5>
-                    <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                    ></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
                 </div>
                 <input class="form-control" type="hidden" name="restaurant_id" id="restaurant" />
                 <div class="modal-body">
                     <div class="row">
                         <div class="col mb-3">
                             <label for="formFile" class="form-label">Branch Logo</label>
-                            <input 
-                                class="form-control" 
-                                type="file" 
-                                id="formFile" 
-                                name="logo"
-                            />
-                            <img 
-                                id="imagePreview" 
-                                src="" 
-                                alt="Image Preview" 
-                            >
+                            <input class="form-control" type="file" id="formFile" name="logo" />
+                            <img id="imagePreview" src="" alt="Image Preview" >
                         </div>
                     </div>
                     <div class="row g-2">
