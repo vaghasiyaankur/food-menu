@@ -1095,7 +1095,7 @@ body.swal2-toast-shown .swal2-container.swal2-bottom-right {
     inset: auto 0 0 auto;
 }
 .swal2-modal.swal2-popup .swal2-title {
-    margin: 1.875rem 0 1rem 0;
+    margin: -0.125rem -10px 1rem 7px;
     max-width: 16em;
     line-height: 1.375;
 }
