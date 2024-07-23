@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Mail\RestaurantApprovedDeclined;
 use App\Models\Branch;
 use App\Models\Restaurant;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Yajra\DataTables\Facades\DataTables;
@@ -29,7 +30,7 @@ class RestaurantController extends Controller
     public function getRestaurants(Request $request)
     {
         if($request->ajax()) {
-            $restaurantList = Restaurant::all();
+            $restaurantList = Restaurant::where('request_status', 1)->get();
 
             return DataTables::of($restaurantList)
                 ->addIndexColumn()
@@ -162,18 +163,30 @@ class RestaurantController extends Controller
         }
     }
 
+    /**
+     * Handle AJAX request to fetch and display a list of restaurant requests with a request_status of 2.
+     * This function is used to generate a DataTable with an action column containing buttons
+     * for approving or declining each restaurant request.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
+    */
     public function restaurantRequestList(Request $request)
     {
-        if($request->ajax()) {
+        if ($request->ajax()) {
             $restaurantRequest = Restaurant::where('request_status', 2)->get();
 
             return DataTables::of($restaurantRequest)
                 ->addIndexColumn()
                 ->addColumn('action', function($branchRow) {
-                    $btn = '<a href="'.route('restaurant.approved-declined', ['restaurant' => $branchRow->id, 'request_status' => 1]).'" 
-                            class="user btn btn-primary btn-sm text-white fw-bolder" style="margin-right: 10px;">Approved</a>';
-                    $btn .= '<a href="'.route('restaurant.approved-declined', ['restaurant' => $branchRow->id, 'request_status' => 0]).'" 
-                            class="user btn btn-danger btn-sm text-white fw-bolder" style="margin-right: 10px;">Decline</a>';
+                    $btn = '<button data-restaurant-id="'.$branchRow->id.'" data-request-status="1"
+                            class="requestStatusBtn user btn btn-primary btn-sm text-white fw-bolder" style="margin-right: 10px;">
+                                Approved
+                            </button>';
+                    $btn .= '<button data-restaurant-id="'.$branchRow->id.'" data-request-status="0"
+                            class="requestStatusBtn user btn btn-danger btn-sm text-white fw-bolder" style="margin-right: 10px;">
+                                Decline
+                            </button>';
                     return $btn;
                 })
                 ->rawColumns(['action'])
@@ -188,13 +201,15 @@ class RestaurantController extends Controller
      * @param  int  $request_status  The status to set (1 for approved, 0 for declined).
      * @return \Illuminate\Http\RedirectResponse  Redirect back with a success message.
      */
-    public function restaurantApprovedDeclined($restaurant, $request_status)
-    {
-        $requestStatus = $request_status == 1 ? 1 : 0;
+    public function restaurantApprovedDeclined(Request $request)
+    {   
+        $requestStatus = $request->request_status == 1 ? 1 : 0;
 
-        Restaurant::where('id', $restaurant)->update(['request_status' => $requestStatus]);
-        Mail::to('sampleuser@gmail.com')->send(new RestaurantApprovedDeclined($restaurant));
+        Restaurant::where('id', $request->restaurant_id)->update(['request_status' => $requestStatus]);
 
-        return back()->with('success', 'Restaurant Updated Successfully');
+        $user = User::where('restaurant_id', $request->restaurant_id)->value('email');
+        Mail::to($user)->send(new RestaurantApprovedDeclined($request->restaurant_id));
+
+        return redirect()->back();
     }
 }
