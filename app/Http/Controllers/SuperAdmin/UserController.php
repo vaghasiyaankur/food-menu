@@ -41,14 +41,21 @@ class UserController extends Controller
 
     public function userCreateUpdate(Request $request)
     {
-        $validatedData = Validator::make($request->all(), [
+        $rules = [
             'name'          =>  'required',
             'email'         =>  'required|email',
             'mobile_number' =>  'required|digits:10',
-            'password'      =>  'required|confirmed',
             'role'          =>  'required',
             'lock_pin'      =>  'required|digits:4'
-        ]);
+        ];
+
+        if(request()->get('user_id')) {
+            $rules['password'] = 'confirmed';
+        }else{
+            $rules['password'] = 'required|confirmed';
+        }
+
+        $validatedData = Validator::make($request->all(), $rules);
         
         if ($validatedData->fails()) {
             return response()->json($validatedData->errors(), 422);

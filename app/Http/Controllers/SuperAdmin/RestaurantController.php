@@ -62,7 +62,7 @@ class RestaurantController extends Controller
         if(request()->get('branch_id')) {
             $rules['logo'] = 'image|mimes:jpg,png,jpeg,webp';
         }else{
-            $rules['logo'] = 'required|image|mimes:jpg,png,jpeg,webp';
+            $rules['logo'] = 'required|mimes:jpg,png,jpeg,webp';
         }
 
         $validatedData = Validator::make($request->all(), $rules);

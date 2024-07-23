@@ -78,8 +78,8 @@
                     <div class="row">
                         <div class="col mb-3">
                             <label for="logo" class="form-label">Branch Logo</label>
-                            <input class="form-control" type="file" id="logo" name="logo" />
-                            <img id="imagePreview" src="" alt="Image Preview" >
+                            <input class="form-control" type="file" id="logo" name="logo" accept="image/*" />
+                            <img id="imagePreview" src="" alt="Image Preview" />
                             <div>
                                 <span id="logo_error" style="color: red;"></span>
                             </div>
@@ -305,7 +305,14 @@
     
             $(document).on('click', '.addBranch', function (e) {
                 e.preventDefault();
+                $("#id").val("");
+                $imagePreview.hide();
+                $('#branchForm')[0].reset();
+                var $imagePreview = $("#imagePreview");
                 $("#restaurant_id").val(restaurantId);
+
+                $("#backDropModalTitle").text("Add Branch");
+                $(".branchSubmit").text("Save");
 
                 var fields = [ 'logo',  'branch_name',  'owner_name',  'address',  'city',  'zip_code',  'state', 'country', 'mobile_number', 'email'];
                 fields.forEach(field => { $(`#${field}_error`).text("") });
@@ -327,8 +334,16 @@
                     success: function (response) {
                         if(response.status) {
                             myModal.hide();
+
                             e.target.reset();
                             table.draw();
+
+                            $('#imagePreview').attr('src', "").hide();
+                            $("#id").val("");
+
+                            $("#backDropModalTitle").text("Add Branch");
+                            $(".branchSubmit").text("Save");
+                            getSuccessMessage(response.success);
                         }
                     },
                     error: function (xhr) {
@@ -336,7 +351,7 @@
                         
                         $.each(fields, function(index, field) {
                             var errorMessage = xhr.responseJSON[field] ? xhr.responseJSON[field][0] : "";
-                            $('#' + field + '_error').text(errorMessage);
+                            $(`#${field}_error`).text(errorMessage);
                         });
                     }
                 });
@@ -359,6 +374,8 @@
                     success: function (response) {
                         if (response.status) {
                             myModal.show();
+                            $("#backDropModalTitle").text("Edit User");
+                            $(".branchSubmit").text("Update");
 
                             var $branchForm = $("#branchForm");
                             var $elements = $branchForm.find("input, textarea, img");
@@ -381,11 +398,10 @@
                             if (response.branch.logo) {
                                 var $imagePreview = $("#imagePreview");
                                 $imagePreview.attr("src", '/storage/' + response.branch.logo);
-                                $imagePreview.addClass("d-block");
+                                $imagePreview.show();
                             }
                         }
                     }
-
                 });
             });
     
@@ -436,6 +452,23 @@
                     }
                 });
             });
+
+            function getSuccessMessage(message) {
+                var toastHTML = `
+                    <div id="ajax-toast" class="bs-toast toast toast-ex animate__animated my-2 fade bg-primary animate__bounceInRight show" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="2500">
+                        <div class="toast-header">
+                            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                        </div>
+                        <div class="toast-body">
+                            <span id="ajax-toast-message">${message}</span>
+                        </div>
+                    </div>
+                `;
+
+                $('body').append(toastHTML);
+                $('#ajax-toast').toast({ delay: 2500 }).toast('show');
+                
+            }
         });
     </script>
 @endsection

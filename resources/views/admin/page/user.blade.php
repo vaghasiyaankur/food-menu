@@ -189,7 +189,7 @@
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                     Close
                     </button>
-                    <button type="submit" class="btn btn-primary branchSubmit">Save</button>
+                    <button type="submit" class="btn btn-primary userSubmit">Save</button>
                 </div>
             </form>
         </div>
@@ -257,7 +257,7 @@
                 fields.forEach(field => { $(`#${field}_error`).text("") });
 
                 $("#backDropModalTitle").text("Add User");
-                $(".branchSubmit").text("Save");
+                $(".userSubmit").text("Save");
             });
 
             $(document).on('submit', '#userForm', function (e) {
@@ -278,7 +278,7 @@
                             myModal.hide();
                             table.draw();
                             $("#backDropModalTitle").text("Add User");
-                            $(".branchSubmit").text("Save");
+                            $(".userSubmit").text("Save");
                             getSuccessMessage(response.success);
                         }
                     },
@@ -309,7 +309,7 @@
                     success: function (response) {
                         if(response.status) {
                             myModal.show();
-                            $(".branchSubmit").text("Update");
+                            $(".userSubmit").text("Update");
                             $("#backDropModalTitle").text("Edit User");
 
                             var formDetail = $("#userForm");
