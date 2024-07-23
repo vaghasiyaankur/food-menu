@@ -47,7 +47,7 @@ const navbarItems = [
     { label: 'Feedback', routesName: ['feedback'], href: '/feedback/', icon: 'feedback' },
     { label: 'User', routesName: ['user'], href: '/user/', icon: 'user' },
     { label: 'Branch', routesName: ['branch'], href: '/branch/', icon: 'branch' },
-    { label: 'Logout', routesName: ['logout'], href: '/logout/', icon: 'logout' }
+    { label: 'Logout', routesName: [], href: '#', icon: 'logout', logoutUser: true }
 ];
 
 

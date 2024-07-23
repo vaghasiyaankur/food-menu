@@ -58,6 +58,15 @@
                                 </li>
                             </ul>
                         </div>
+                        <div v-else-if="item.logoutUser" class="height-40 border-bottom padding-left">
+                            <button
+                                class="col nav-link button close_reservation no-padding font-16 panel-close"
+                                @click="logoutUserEvent(closeReservation)"
+                            >
+                            <Icon :name="'logout'" :color="item.routesName.includes(currentRouteName) ? '#fff' :iconColor" class="margin-right-half" />
+                            Logout
+                            </button>
+                        </div>
                         <div v-else-if="item.openCloseReservation" class="height-40 border-bottom padding-left" >
                             <button
                                 class="col nav-link button close_reservation no-padding font-16 panel-close"
@@ -88,6 +97,7 @@
 </template>
 
 <script setup>
+import axios from 'axios';
 import Icon from './Icon.vue';
 
 const props = defineProps({
@@ -100,6 +110,13 @@ const props = defineProps({
     closeReservation: [Boolean, Number],
     closeReservationEvent: Function
 });
+
+const logoutUserEvent = () => {
+    axios.get('/api/logout')
+        .then(response => {
+            window.location.reload();
+        });
+}
 </script>
 <style scoped>
 .active_submenu {

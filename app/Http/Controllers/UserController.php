@@ -118,4 +118,12 @@ class UserController extends Controller
         }
     }
 
+    public function logout() {
+        Auth::logout();
+        return response()->json([
+            'status' => true,
+            'success'   =>  'User logout successfully.'
+        ], 200);
+    }
+
 }

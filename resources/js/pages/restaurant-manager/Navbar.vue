@@ -57,7 +57,8 @@ const navbarItems = [
     href: '#', 
     icon: 'close',
     openCloseReservation: true
-  }
+  },
+  { label: 'Logout', routesName: [], href: '#', icon: 'logout', logoutUser: true }
 ];
 
 

@@ -201,6 +201,8 @@ Route::post('/change-table-status',[SettingController::class, 'changeTableStatus
 
 Route::get('/member-limitation',[SettingController::class, 'memberLimitation']);
 
+Route::get('/logout', [UserController::class, 'logout']);
+
 
 // ------------------------ Manager Table Page Routes ------------------------ //
 
