@@ -385,7 +385,7 @@
 .user_setting-tab .tabs{
     width: 100%;
     max-height: 752px;
-    overflow: scroll;
+    overflow: auto;
     scrollbar-width: none;
 }
 .data-table {
@@ -688,7 +688,7 @@ thead .label-cell {
     height: 100%;
 }
 .qrcode_generate .data-table{
-    overflow-x: scroll;
+    overflow-x: auto;
     overflow-y: auto;
 }
 .qrcode_generate_popup .button{

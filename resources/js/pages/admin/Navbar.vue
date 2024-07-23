@@ -44,7 +44,20 @@ const navbarItems = [
     { label: 'Dashboard', routesName: ['dashboard'], href: '/dashboard/', icon: 'dashboard' },
     { label: 'Orders', routesName: ['orders'], href: '/orders/', icon: 'order' },
     { label: 'Transaction', routesName: ['transaction'], href: '/transaction/', icon: 'transaction' },
-    { label: 'Feedback', routesName: ['feedback'], href: '/feedback/', icon: 'feedback' },
+    {
+        label: 'Menu Management',
+        icon: 'bars',
+        routesName: ['FoodCategory', 'FoodSubCategory', 'FoodIngredient', 'FoodVariation', 'FoodCombo', 'AddCombo', 'EditCombo', 'FoodProduct', 'AddProduct', 'EditProduct', 'DigitalMenu'],
+        submenu: [
+        { label: 'Food Category', href: '/food-category/', routesName: ['FoodCategory']},
+        { label: 'Food Subcategory', href: '/food-subcategory/', routesName: ['FoodSubCategory']},
+        { label: 'Food Ingredient', href: '/food-ingredient/', routesName: ['FoodIngredient']},
+        { label: 'Food Variation', href: '/food-variation/', routesName: ['FoodVariation']},
+        { label: 'Food Combo', href: '/food-combo/', routesName: ['FoodCombo', 'AddCombo', 'EditCombo']},
+        { label: 'Food Menu', href: '/food-product/', routesName: ['FoodProduct', 'AddProduct', 'EditProduct']},
+        { label: 'Digital Menu', href: '/digital-menu/', routesName: ['DigitalMenu']}
+        ]
+    },
     { label: 'User', routesName: ['user'], href: '/user/', icon: 'user' },
     { label: 'Branch', routesName: ['branch'], href: '/branch/', icon: 'branch' },
     { label: 'Logout', routesName: [], href: '#', icon: 'logout', logoutUser: true }
