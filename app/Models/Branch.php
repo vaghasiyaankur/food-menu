@@ -29,4 +29,9 @@ class Branch extends Model
             }
         });
     }
+
+    public function restaurant()
+    {
+        return $this->belongsTo(Restaurant::class);
+    }
 }

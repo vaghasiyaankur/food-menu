@@ -48,4 +48,9 @@ class Restaurant extends Model
         return $this->hasMany(Setting::class, 'restaurant_id');
     }
 
+    public function branch()
+    {
+        return $this->hasMany(Branch::class);
+    }
+
 }

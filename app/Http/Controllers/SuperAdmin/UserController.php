@@ -11,6 +11,13 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
+    /**
+     * Handles AJAX requests to retrieve a list of users for a specified restaurant.
+     *
+     * @param \Illuminate\Http\Request $request The HTTP request instance containing the restaurant ID.
+     * @return \Illuminate\Http\JsonResponse A JSON response containing the user list formatted for DataTables.
+     *
+     */
     public function getUsers(Request $request)
     {
         if ($request->ajax()) {
@@ -28,6 +35,13 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * Returns the details of a specified user in JSON format.
+     *
+     * @param \App\Models\User $user The User model instance representing the user to be edited.
+     * @return \Illuminate\Http\JsonResponse A JSON response containing the user's details and a status indicator.
+     *
+     */
     public function editUser(User $user)
     {
         if($user) {
@@ -39,6 +53,13 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * Creates or updates a user based on the provided request data.
+     *
+     * @param \Illuminate\Http\Request $request The HTTP request instance containing user data.
+     * @return \Illuminate\Http\JsonResponse A JSON response indicating the success or failure of the operation.
+     *
+    */
     public function userCreateUpdate(Request $request)
     {
         $rules = [
@@ -78,6 +99,13 @@ class UserController extends Controller
         ], 200);
     }
 
+    /**
+     * Deletes a user based on the provided user ID.
+     *
+     * @param \Illuminate\Http\Request $request The HTTP request instance containing the user ID and restaurant ID.
+     * @return \Illuminate\Http\RedirectResponse A redirect response to the 'super-admin.user' route with the restaurant ID.
+     *
+    */
     public function deleteUser(Request $request)
     {
         $user = User::findOrFail($request->user_id);
