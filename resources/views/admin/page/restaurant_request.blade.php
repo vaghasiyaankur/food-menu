@@ -97,6 +97,63 @@
 
             $('select[name="DataTables_Table_0_length"]').addClass('form-select');
             $('.dataTables_filter input').addClass('form-control');
+
+            $(document).on('click', '.requestStatusBtn', function (event) {
+                event.preventDefault();
+
+                var restaurant_id = $(this).data('restaurant-id');
+                var restaurant_status = $(this).data('request-status');
+
+                var $this = $(this);
+                var $buttons = $('.requestStatusBtn');
+                var $row = $this.closest('tr');
+
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: !0,
+                    confirmButtonText: "Yes, delete it!",
+                    customClass: { confirmButton: "btn btn-primary me-3", cancelButton: "btn btn-label-secondary" },
+                    buttonsStyling: !1,
+                }).then(function (t) {
+                    if (t.value) {
+                        $buttons.prop('disabled', true);
+                        $.ajax({
+                            url: "{{ route('restaurant.approved-declined') }}",
+                            method: 'POST',
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                                restaurant_id  : restaurant_id,
+                                request_status : restaurant_status
+                            },
+                            success: function(response) {
+                                Swal.fire({ 
+                                    icon: "success", 
+                                    title: "Deleted!", 
+                                    text: "Changes Save Successfully.", 
+                                    customClass: { confirmButton: "btn btn-success" } 
+                                }).then(function (t) {
+                                    $buttons.prop('disabled', false);
+                                    $row.fadeOut(500, function() {
+                                        table.row($row).remove().draw();
+                                    });
+                                });
+                            },
+                            error: function(error) {
+                                Swal.fire({ 
+                                    icon: "error", 
+                                    title: "Error!", 
+                                    text: "Error update status.", 
+                                    customClass: { confirmButton: "btn btn-danger" } 
+                                }).then(function() {
+                                    $buttons.prop('disabled', false);
+                                });
+                            }
+                        });
+                    }
+                });
+            });
         });
     </script>
 @endsection

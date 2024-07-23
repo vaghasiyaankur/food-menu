@@ -45,6 +45,7 @@ Route::group(['middleware' => 'superAdmin'], function () {
     Route::controller(UserController::class)->group(function() {
         Route::get('users-list', 'getUsers')->name('users.list');
         Route::get('/users/{user}/edit', 'editUser')->name('user.edit');
+        Route::get('{user}/user-simulation/{role}', 'changeUserSimulation')->name('user.simulation');
 
         Route::post('user-create-update', 'userCreateUpdate')->name('user.create-update');
         Route::post('user-delete', 'deleteUser')->name('user.delete');
@@ -55,10 +56,9 @@ Route::group(['middleware' => 'superAdmin'], function () {
         Route::get('restaurant-request-list', 'restaurantRequestList')->name('restaurant-request.list');
         Route::get('branch-list', 'getBranch')->name('branch.list');
         Route::get('/branch/{branch}/edit', 'editBranch')->name('branch.edit');
-        Route::get('/restaurant/{restaurant}/status/{request_status}', 'restaurantApprovedDeclined')->name('restaurant.approved-declined');
         
         Route::post('branch-create-update', 'createUpdateBranch')->name('branch.create-update');
         Route::post('branch-delete', 'deleteBranch')->name('branch.delete');
-
+        Route::post('restaurant-approved-declined', 'restaurantApprovedDeclined')->name('restaurant.approved-declined');
     });
 });

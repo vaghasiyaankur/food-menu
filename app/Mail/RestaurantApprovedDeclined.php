@@ -32,9 +32,9 @@ class RestaurantApprovedDeclined extends Mailable
     public function build()
     {
         $restaurant = Restaurant::where('id', $this->restaurant)->first();
-        $status = $restaurant->request_status == 0 ? 'Your Restaurant has been Declined' : 'Your Restaurant has been Approved';
+        $emailSubject = $restaurant->request_status == 0 ? 'Your Restaurant has been Declined' : 'Your Restaurant has been Approved';
 
-        return $this->subject($status)
+        return $this->subject($emailSubject)
         ->view('admin.emails.approved_declined_request', compact('restaurant'));
     }
 }

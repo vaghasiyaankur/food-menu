@@ -5,6 +5,7 @@ namespace App\Http\Controllers\SuperAdmin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
@@ -26,8 +27,9 @@ class UserController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($userRow){
-                    $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm editUser" data-id="' . $userRow->id . '" style="margin-right: 10px;">Edit</a>';
-                    $btn .= '<a href="'.route('user.delete').'" class="delete btn btn-danger btn-sm deleteUser">Delete</a>';
+                    $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm editUser fw-bolder" data-id="' . $userRow->id . '" style="margin-right: 10px;">Edit</a>';
+                    $btn .= '<a href="'.route('user.delete').'" class="delete btn btn-danger btn-sm fw-bolder deleteUser" style="margin-right: 10px;">Delete</a>';
+                    $btn .= '<a href="'.route('user.simulation', ['user' => $userRow->id, 'role' => $userRow->role]).'" class="btn btn-info btn-sm userSimulation fw-bolder" data-user-role="' . $userRow->role . '" data-user-id="' . $userRow->id . '">Simulation</a>';
                     return $btn;
                 })
                 ->rawColumns(['action'])
@@ -113,5 +115,26 @@ class UserController extends Controller
             $user->delete();
             return redirect()->route('super-admin.user', ['restaurant_id' => $request->restaurant_id]);
         }
+    }
+
+    /**
+     * Log in as the specified user and redirect based on the given role.
+     *
+     * @param int $user The ID of the user to log in as.
+     * @param string $role The role to redirect to.
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException If the role is invalid.
+    */
+    public function changeUserSimulation($user, $role)
+    {
+        $user = User::findOrFail($user);
+
+        $routes = ['manager' => 'pos','waiter'  => 'manager','admin'   => 'admin'];
+
+        if (array_key_exists($role, $routes)) {
+            Auth::loginUsingId($user->id);
+            return redirect()->route($routes[$role]);
+        }
+        abort(404, 'Role not found');
     }
 }
