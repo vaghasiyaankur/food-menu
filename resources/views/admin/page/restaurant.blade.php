@@ -12,11 +12,7 @@
 <div class="container-xxl flex-grow-1 container-p-y">
     <div class="card">
         <div class="card-datatable table-responsive">
-            <div class="card-header flex-column flex-md-row pb-0">
-                <div class="head-label">
-                    <h5 class="card-title mb-0">Restaurants</h5>
-                </div>
-            </div>
+            @include('admin.page.include.header', ['title' => 'Restaurants', 'button' => false, 'back' => false])
             <div class="table-responsive text-nowrap">
                 <table
                     class="table table-bordered table-responsive data-table datatables-basic border-top dataTable dtr-column">
