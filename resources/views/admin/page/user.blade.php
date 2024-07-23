@@ -181,7 +181,7 @@
                             </div>
                         </div>
                         <div class="col mb-3">
-                            <label class="switch-label">Lock Status</label>
+                            <label class="form-label">Lock Status</label>
                             <label class="switch switch-square">
                                 <input type="checkbox" id="lock_enable" class="switch-input" name="lock_enable" {{ old('lock_enable') ? 'checked' : '' }}>
                                 <span class="switch-toggle-slider">
