@@ -23,6 +23,8 @@ return new class extends Migration
             $table->text('operating_start_hours')->nullable();
             $table->text('operating_end_hours')->nullable();
             $table->boolean('status')->default(1);
+            $table->boolean('request_status')->default(2)->comment("1 => Approved, 2 => Pending, 0 => Declined");
+            $table->string('restaurant_code')->nullable();
             $table->timestamps();
         });
     }

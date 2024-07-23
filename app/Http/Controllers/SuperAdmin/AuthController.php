@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
+    /**
+     * Handles user login requests and authentication.
+     *
+     * @param \Illuminate\Http\Request $request The HTTP request instance containing the login credentials.
+     * @return \Illuminate\Http\RedirectResponse A redirect response based on the outcome of the login attempt.
+    */
     public function login(Request $request) {
 
         $validatedData = Validator::make($request->all(), [
@@ -35,6 +41,12 @@ class AuthController extends Controller
         ])->withInput($request->only('email'));
     }
 
+    /**
+     * Logs out the currently authenticated user if they are a super admin and redirects them to the super admin authentication route.
+     *
+     * @return \Illuminate\Http\RedirectResponse A redirect response to the super admin authentication route.
+     *
+     */
     public function logout()
     {
         if(Auth::user()) {
