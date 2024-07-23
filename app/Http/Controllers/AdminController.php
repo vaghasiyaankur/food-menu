@@ -15,7 +15,10 @@ use Illuminate\Support\Facades\Hash;
 class AdminController extends Controller
 {
     public function admin(){
-        
-        return view('admin');
+        if (Auth::user()->role == 'super_admin') {
+            return redirect()->route('super-admin.dashboard');
+        } else if (Auth::user()->role == 'admin') {
+            return view('admin');
+        }
     }
 }

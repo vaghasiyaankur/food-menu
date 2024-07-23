@@ -41,12 +41,13 @@ const props = defineProps({
 });
 
 const navbarItems = [
-  { label: 'Dashboard', routesName: ['dashboard'], href: '/dashboard/', icon: 'dashboard' },
-  { label: 'Orders', routesName: ['orders'], href: '/orders/', icon: 'order' },
-  { label: 'Transaction', routesName: ['transaction'], href: '/transaction/', icon: 'transaction' },
-  { label: 'Feedback', routesName: ['feedback'], href: '/feedback/', icon: 'feedback' },
-  { label: 'User', routesName: ['user'], href: '/user/', icon: 'user' },
-  { label: 'Branch', routesName: ['branch'], href: '/branch/', icon: 'branch' }
+    { label: 'Dashboard', routesName: ['dashboard'], href: '/dashboard/', icon: 'dashboard' },
+    { label: 'Orders', routesName: ['orders'], href: '/orders/', icon: 'order' },
+    { label: 'Transaction', routesName: ['transaction'], href: '/transaction/', icon: 'transaction' },
+    { label: 'Feedback', routesName: ['feedback'], href: '/feedback/', icon: 'feedback' },
+    { label: 'User', routesName: ['user'], href: '/user/', icon: 'user' },
+    { label: 'Branch', routesName: ['branch'], href: '/branch/', icon: 'branch' },
+    { label: 'Logout', routesName: ['logout'], href: '/logout/', icon: 'logout' }
 ];
 
 
@@ -55,9 +56,9 @@ let currentRouteName = ref(null);
 
 // Function to update currentRouteName
 const updateCurrentRoute = () => {
-  if (f7.view.main) {
-    currentRouteName.value = f7.view.main.router.currentRoute.name;
-  }
+    if (f7.view.main) {
+        currentRouteName.value = f7.view.main.router.currentRoute.name;
+    }
 };
 
 // Fetch and update currentRouteName on component mount
