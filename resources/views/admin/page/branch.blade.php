@@ -305,10 +305,10 @@
     
             $(document).on('click', '.addBranch', function (e) {
                 e.preventDefault();
-                $("#id").val("");
-                $imagePreview.hide();
-                $('#branchForm')[0].reset();
                 var $imagePreview = $("#imagePreview");
+                if($imagePreview.show()) $imagePreview.hide();
+                $("#id").val("");
+                $('#branchForm')[0].reset();
                 $("#restaurant_id").val(restaurantId);
 
                 $("#backDropModalTitle").text("Add Branch");
@@ -374,7 +374,7 @@
                     success: function (response) {
                         if (response.status) {
                             myModal.show();
-                            $("#backDropModalTitle").text("Edit User");
+                            $("#backDropModalTitle").text("Edit Branch");
                             $(".branchSubmit").text("Update");
 
                             var $branchForm = $("#branchForm");
