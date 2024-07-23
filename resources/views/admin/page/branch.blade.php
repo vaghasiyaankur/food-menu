@@ -64,22 +64,25 @@
         </div>
     </div>
 
-    {{-- Branch Create Modal --}}
     <div class="modal fade" id="backDropModal" data-bs-backdrop="static" tabindex="-1">
         <div class="modal-dialog">
-            <form id="#" class="modal-content" action="{{ route('branch.create') }}" method="POST" enctype="multipart/form-data">
+            <form id="branchForm" class="modal-content" action="{{ route('branch.create-update') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-header">
                     <h5 class="modal-title" id="backDropModalTitle">Create Branch</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
                 </div>
-                <input class="form-control" type="hidden" name="restaurant_id" id="restaurant" />
+                <input class="form-control" type="hidden" name="restaurant_id" id="restaurant_id" />
+                <input class="form-control" type="hidden" name="branch_id" id="id" />
                 <div class="modal-body">
                     <div class="row">
                         <div class="col mb-3">
-                            <label for="formFile" class="form-label">Branch Logo</label>
-                            <input class="form-control" type="file" id="formFile" name="logo" />
+                            <label for="logo" class="form-label">Branch Logo</label>
+                            <input class="form-control" type="file" id="logo" name="logo" />
                             <img id="imagePreview" src="" alt="Image Preview" >
+                            <div>
+                                <span id="logo_error" style="color: red;"></span>
+                            </div>
                         </div>
                     </div>
                     <div class="row g-2">
@@ -88,63 +91,63 @@
                             <input
                                 type="text"
                                 name="branch_name"
-                                id="nameBackdrop"
+                                id="branch_name"
                                 class="form-control"
                                 placeholder="Enter Branch Name"
                             />
-                            @error('branch_name')
-                                <span style="color: red;">{{ $message }}</span>
-                            @enderror
+                            <div>
+                                <span id="branch_name_error" style="color: red;"></span>
+                            </div>
                         </div>
                         <div class="col mb-3">
                             <label for="ownerBackdrop" class="form-label">Owner Name</label>
                             <input
                                 type="text"
                                 name="owner_name"
-                                id="ownerBackdrop"
+                                id="owner_name"
                                 class="form-control"
                                 placeholder="Enter Branch Owner"
                             />
-                            @error('owner_name')
-                                <span style="color: red;">{{ $message }}</span>
-                            @enderror
+                            <div>
+                                <span id="owner_name_error" style="color: red;"></span>
+                            </div>
                         </div>
                     </div>
                     <div class="row g-2">
                         <div class="col mb-0">
-                            <label for="emailBackdrop" class="form-label">Branch Email</label>
+                            <label for="email" class="form-label">Branch Email</label>
                             <input
                                 type="text"
                                 name="email"
-                                id="emailBackdrop"
+                                id="email"
                                 class="form-control"
                                 placeholder="xxxx@xxx.xx"
                             />
-                            @error('email')
-                                <span style="color: red;">{{ $message }}</span>
-                            @enderror
+                            <div>
+                                <span id="email_error" style="color: red;"></span>
+                            </div>
                         </div>
                         <div class="col mb-3">
-                            <label for="dobBackdrop" class="form-label">Mobile Number</label>
+                            <label for="mobile_number" class="form-label">Mobile Number</label>
                             <input
                                 type="number"
                                 name="mobile_number"
-                                id="dobBackdrop"
+                                id="mobile_number"
                                 class="form-control"
                                 placeholder="+91-9652310547"
                             />
-                            @error('mobile_number')
-                                <span style="color: red;">{{ $message }}</span>
-                            @enderror
+                            <div>
+                                <span id="mobile_number_error" style="color: red;"></span>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col mb-3">
-                            <label for="exampleFormControlTextarea1" class="form-label">Branch Address</label>
+                            <label for="address" class="form-label">Branch Address</label>
                             <textarea
                                 rows="2"
                                 name="address"
-                                id="exampleFormControlTextarea1"
+                                id="address"
                                 class="form-control"
                                 placeholder="Enter Branch Address"
                             ></textarea>
@@ -152,21 +155,21 @@
                     </div>
                     <div class="row g-2">
                         <div class="col mb-0">
-                            <label for="countryBackdrop" class="form-label">Branch Country</label>
+                            <label for="country" class="form-label">Branch Country</label>
                             <input
                                 type="text"
                                 name="country"
-                                id="countryBackdrop"
+                                id="country"
                                 class="form-control"
                                 placeholder="Branch Country"
                             />
                         </div>
                         <div class="col mb-3">
-                            <label for="codeBackdrop" class="form-label">Branch Zip Code</label>
+                            <label for="zip_code" class="form-label">Branch Zip Code</label>
                             <input
                                 type="number"
                                 name="zip_code"
-                                id="codeBackdrop"
+                                id="zip_code"
                                 class="form-control"
                                 placeholder="Enter Zip Code"
                             />
@@ -174,21 +177,21 @@
                     </div>
                     <div class="row g-2">
                         <div class="col mb-0">
-                            <label for="stateBackdrop" class="form-label">Branch State</label>
+                            <label for="state" class="form-label">Branch State</label>
                             <input
                                 type="text"
                                 name="state"
-                                id="stateBackdrop"
+                                id="state"
                                 class="form-control"
                                 placeholder="Branch State"
                             />
                         </div>
                         <div class="col mb-3">
-                            <label for="cityBackdrop" class="form-label">Branch City</label>
+                            <label for="city" class="form-label">Branch City</label>
                             <input
                                 type="text"
                                 name="city"
-                                id="cityBackdrop"
+                                id="city"
                                 class="form-control"
                                 placeholder="Enter Branch City"
                             />
@@ -219,16 +222,10 @@
             var urlPath = window.location.pathname;
             var restaurantId = urlPath.split('/').pop(); 
 
-            @if ($errors->any())
-                
-                $("#restaurant").val(restaurantId);
-
-                var myModal = new bootstrap.Modal(document.getElementById('backDropModal'), {
-                    backdrop  : 'static',
-                    keyboard  : false
-                });
-                myModal.show();
-            @endif
+            var myModal = new bootstrap.Modal(document.getElementById('backDropModal'), {
+                backdrop  : 'static',
+                keyboard  : false
+            });
 
             var table = $('.data-table').DataTable({
                 processing: true,
@@ -288,10 +285,9 @@
             });
 
             $('select[name="DataTables_Table_0_length"]').addClass('form-select');
-
             $('.dataTables_filter input').addClass('form-control');
             
-            $('#formFile').change(function(event) {
+            $('#logo').change(function(event) {
                 event.preventDefault();
     
                 var reader = new FileReader();
@@ -309,14 +305,88 @@
     
             $(document).on('click', '.addBranch', function (e) {
                 e.preventDefault();
-                $("#restaurant").val(restaurantId);
+                $("#restaurant_id").val(restaurantId);
+
+                var fields = [ 'logo',  'branch_name',  'owner_name',  'address',  'city',  'zip_code',  'state', 'country', 'mobile_number', 'email'];
+                fields.forEach(field => { $(`#${field}_error`).text("") });
             });
     
             $(document).on('submit', '#branchForm', function (e) {
                 e.preventDefault();
-                $("#restaurant").val("");
-                $('#imagePreview').attr('src', "");
-                e.target.reset();
+
+                var formData = new FormData(this);
+                var actionURL = $(this).attr('action');
+                var formMethod = $(this).attr('method');
+
+                $.ajax({
+                    type: formMethod,
+                    url: actionURL,
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        if(response.status) {
+                            myModal.hide();
+                            e.target.reset();
+                            table.draw();
+                        }
+                    },
+                    error: function (xhr) {
+                        var fields = ['logo', 'branch_name', 'owner_name', 'address', 'city', 'zip_code', 'state', 'country', 'mobile_number', 'email'];
+                        
+                        $.each(fields, function(index, field) {
+                            var errorMessage = xhr.responseJSON[field] ? xhr.responseJSON[field][0] : "";
+                            $('#' + field + '_error').text(errorMessage);
+                        });
+                    }
+                });
+            });
+
+            $(document).on('click', '.editBranch', function (e) {
+                e.preventDefault();
+
+                var fields = [ 'logo',  'branch_name',  'owner_name',  'address',  'city',  'zip_code',  'state', 'country', 'mobile_number', 'email'];
+                fields.forEach(field => { $(`#${field}_error`).text("") });
+
+                var branchEditId = $(this).data('id');
+                var url = "{{ route('branch.edit', ':id') }}";
+                url = url.replace(':id', branchEditId);
+
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.status) {
+                            myModal.show();
+
+                            var $branchForm = $("#branchForm");
+                            var $elements = $branchForm.find("input, textarea, img");
+
+                            $elements.each(function() {
+                                var $element = $(this);
+                                var elementId = $element.attr("id");
+
+                                if (response.branch.hasOwnProperty(elementId)) {
+                                    if ($element.is("textarea")) {
+                                        $element.text(response.branch[elementId]);
+                                    } else if ($element.attr("type") == 'file') {
+                                        return;
+                                    } else {
+                                        $element.val(response.branch[elementId]);
+                                    }
+                                }
+                            });
+
+                            if (response.branch.logo) {
+                                var $imagePreview = $("#imagePreview");
+                                $imagePreview.attr("src", '/storage/' + response.branch.logo);
+                                $imagePreview.addClass("d-block");
+                            }
+                        }
+                    }
+
+                });
             });
     
             $(document).on('click', '.deleteBranch', function (e) {

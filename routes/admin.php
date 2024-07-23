@@ -53,7 +53,9 @@ Route::group(['middleware' => 'superAdmin'], function () {
     Route::controller(RestaurantController::class)->group(function() {
         Route::get('restaurant-list', 'getRestaurants')->name('restaurants.list');
         Route::get('branch-list', 'getBranch')->name('branch.list');
-        Route::post('branch-create', 'createBranch')->name('branch.create');
+        Route::get('/branch/{branch}/edit', 'editBranch')->name('branch.edit');
+
+        Route::post('branch-create-update', 'createUpdateBranch')->name('branch.create-update');
         Route::post('branch-delete', 'deleteBranch')->name('branch.delete');
     });
 });

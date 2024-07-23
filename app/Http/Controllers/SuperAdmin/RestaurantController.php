@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\SuperAdmin;
 
+use App\Helper\ImageHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Branch;
 use App\Models\Restaurant;
@@ -40,7 +41,7 @@ class RestaurantController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function($branchRow) {
                     $deleteRoute = route('branch.delete');
-                    $btn = '<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#backDropModal" class="user btn btn-info btn-sm text-white fw-bolder" style="margin-right: 10px;">Edit</a>';
+                    $btn = '<a href="javascript:void(0)" data-id="' . $branchRow->id . '" class="user btn btn-info btn-sm text-white fw-bolder editBranch" style="margin-right: 10px;">Edit</a>';
                     $btn .= '<a href="'.$deleteRoute.'" class="branch btn btn-danger btn-sm text-white fw-bolder deleteBranch">Delete</a>';
                     return $btn;
                 })
@@ -49,38 +50,65 @@ class RestaurantController extends Controller
         }
     }
 
-    public function createBranch(Request $request)
+    public function createUpdateBranch(Request $request)
     {
-        $validatedData = Validator::make($request->all(), [
+        $rules = [
             'branch_name'   =>  'required',
             'owner_name'    =>  'required|string',
             'email'         =>  'required|email',
-            'mobile_number' =>  'required'
-        ]);
-
-        if ($validatedData->fails()) {
-            return redirect()->back()
-                ->withErrors($validatedData->errors());
+            'mobile_number' =>  'required|digits:10'
+        ];
+        
+        if(request()->get('branch_id')) {
+            $rules['logo'] = 'image|mimes:jpg,png,jpeg,webp';
+        }else{
+            $rules['logo'] = 'required|image|mimes:jpg,png,jpeg,webp';
         }
 
-        $image_name = '';
-        if($request->file('logo')){
-            $directory = storage_path('app/public/branch_logo/');
+        $validatedData = Validator::make($request->all(), $rules);
 
+        if ($validatedData->fails()) {
+            return response()->json($validatedData->errors(), 422);
+        }
+        
+        $branchFormData = $request->all();
+        if (is_null($branchFormData['branch_id'])) {
+            unset($branchFormData['branch_id']);
+        }
+
+        if(array_key_exists('branch_id', $branchFormData)) {
+            $branch = Branch::findOrFail($branchFormData['branch_id']);
+            $image_name = $branch->logo;
+
+            if($request->file('logo'))  ImageHelper::removeImage($branch->logo);
+        }
+
+        if($request->file('logo')){
+            
+            $directory = storage_path('app/public/branch_logo/');
             if (!file_exists($directory)) {
                 mkdir($directory, 0777, true);
             }
-
-            $imageFile = $request->file('logo');
-            $image_name = 'branch_logo/'.rand(10000000,99999999).".".$imageFile->GetClientOriginalExtension();
-            $imageFile->move(storage_path('app/public/branch_logo/'),$image_name);
+            $image_name = ImageHelper::storeImage($request->file('logo'), 'branch_logo');
         }
-
-        $branchFormData = $request->all();
         $branchFormData['logo'] = $image_name;
 
-        $branch = Branch::create($branchFormData);
-        return redirect()->route('super-admin.branch', ['restaurant_id' => $branch->restaurant_id])->with('success', 'Branch Create Successfully');
+        Branch::updateOrCreate(['id' => $request->branch_id ], $branchFormData);
+        return response()->json([
+            'success'   =>  'Changes Save Successfully.',
+            'status'    =>  true
+        ], 200);
+    }
+
+    public function editBranch(Branch $branch)
+    {
+        if($branch) {
+            $branchResponse = [
+                'status' => true,
+                'branch' => $branch
+            ];
+            return response()->json($branchResponse);
+        }
     }
 
     public function deleteBranch(Request $request)

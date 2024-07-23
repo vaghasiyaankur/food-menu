@@ -6,6 +6,18 @@
     <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/css/datatable.css') }}">
+
+    <style>
+        .switch-label {
+    display: block; /* Ensures label is on its own line */
+    margin-bottom: 5px; /* Adds some space between the label and the checkbox */
+    font-weight: bold; /* Optional: Makes the label text bold */
+}
+
+.switch {
+    display: block; /* Ensures the switch is on a new line */
+}
+    </style>
 @endsection
 
 @section('content')
@@ -162,11 +174,9 @@
                             </div>
                         </div>
                         <div class="col mb-3">
-                            <label class="switch switch-square switch-lg">
-                                <span class="switch-label">Lock Status</span>
-                            </label>
+                            <label class="switch-label">Lock Status</label>
                             <label class="switch switch-square">
-                                <input type="checkbox" class="switch-input" name="switches-square-stacked-radio" {{ old('lock_enable') ? 'checked' : '' }}>
+                                <input type="checkbox" id="lock_enable" class="switch-input" name="lock_enable" {{ old('lock_enable') ? 'checked' : '' }}>
                                 <span class="switch-toggle-slider">
                                     <span class="switch-on"></span>
                                     <span class="switch-off"></span>
@@ -273,9 +283,8 @@
                         }
                     },
                     error: function (xhr) {
-                        var fields = [ 'name',  'email',  'mobile_number',  'password',  'password_confirmation',  'role',  'lock_pin'];
-
-                        fields.forEach(field => {
+                        var fields = ['name', 'email', 'mobile_number', 'password', 'password_confirmation', 'role', 'lock_pin'];
+                        $.each(fields, function(index, field) {
                             var errorMessage = xhr.responseJSON[field] ? xhr.responseJSON[field][0] : "";
                             $(`#${field}_error`).text(errorMessage);
                         });
@@ -303,15 +312,21 @@
                             $(".branchSubmit").text("Update");
                             $("#backDropModalTitle").text("Edit User");
 
-                            var formDetail = document.getElementById("userForm");
-                            var elements = formDetail.querySelectorAll("input, select");
+                            var formDetail = $("#userForm");
+                            var elements = formDetail.find("input, select");
 
-                            elements.forEach(function(element) {
-                                var elementId = element.id;
-                                if(response.user.hasOwnProperty(elementId)) {
-                                    $(element).val(response.user[elementId]);
+                            elements.each(function() {
+                                var element = $(this);
+                                var elementId = element.attr("id");
+                                if (response.user.hasOwnProperty(elementId)) {
+                                    if (element.attr("type") === "checkbox" && elementId === "lock_enable") {
+                                        element.prop('checked', response.user[elementId] == 1);
+                                    } else {
+                                        element.val(response.user[elementId]);
+                                    }
                                 }
                             });
+
                         }
                     }, 
                     error : function(error) {
