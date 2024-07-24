@@ -11,7 +11,7 @@
 
     <meta name="description" content="" />
 
-    @include('admin.layout.style')
+    @includeIf('admin.layout.style')
 
     @yield('css')
 </head>
@@ -21,19 +21,19 @@
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
 
-            @include('admin.layout.sidebar')
+            @includeIf('admin.layout.sidebar')
 
             <!-- Layout container -->
             <div class="layout-page">
                 
-                @include('admin.layout.navbar')
+                @includeIf('admin.layout.navbar')
 
                 <!-- Content wrapper -->
                 <div class="content-wrapper">
                     
                     @yield('content')
 
-                    @include('admin.layout.footer')
+                    @includeIf('admin.layout.footer')
 
                     <div class="content-backdrop fade"></div>
                 </div>
@@ -47,7 +47,7 @@
     </div>
     <!-- / Layout wrapper -->
 
-    @include('admin.layout.script')
+    @includeIf('admin.layout.script')
 
     @yield('script')
     

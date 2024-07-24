@@ -52,7 +52,7 @@ class AuthController extends Controller
         if(Auth::user()) {
             if(Auth::user()->role == 'super_admin') {
                 Auth::logout();
-                return redirect()->route('super-admin.auth');
+                return to_route('super-admin.auth');
             }
         }
     }

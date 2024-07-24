@@ -113,7 +113,7 @@ class UserController extends Controller
         $user = User::findOrFail($request->user_id);
         if($user) {
             $user->delete();
-            return redirect()->route('super-admin.user', ['restaurant_id' => $request->restaurant_id]);
+            return to_route('super-admin.user', ['restaurant_id' => $request->restaurant_id]);
         }
     }
 
@@ -136,5 +136,47 @@ class UserController extends Controller
             return redirect()->route($routes[$role]);
         }
         abort(404, 'Role not found');
+    }
+
+    /**
+     * Retrieve and return the profile details for the authenticated user.
+     *
+     * @return \Illuminate\View\View|null
+    */
+    public function getProfileDetail()
+    {
+        $user = Auth::user();
+        if($user && $user->role == 'super_admin') {
+            return view('admin.page.profile', compact('user'));
+        }
+    }
+
+    /**
+     * Update the user's profile information.
+     *
+     * This function validates the incoming request data, ensuring that all required fields are present
+     * and meet specific validation criteria. It then finds the user by their ID, updates the user's 
+     * information with the validated data, and redirects the user back with a success message.
+     *
+     * @param \Illuminate\Http\Request $request The incoming HTTP request containing the profile data.
+     * 
+     * @return \Illuminate\Http\RedirectResponse Redirects back to the previous page with a success message.
+    */
+    public function updateProfile(Request $request)
+    {
+        $user = User::findOrFail($request->user_id);
+
+        $request->validate([
+            'name'          => 'required',
+            'email'         => 'required|email|unique:users,email,'.$user->id,
+            'mobile_number' => 'required|digits:10',
+            'role'          => 'required',
+            'lock_pin'      => 'required|digits:4',
+        ]);
+
+        if($user) {
+            $user->update($request->all());
+            return redirect()->back()->with('success', 'Profile Updated Successfully.');
+        }
     }
 }

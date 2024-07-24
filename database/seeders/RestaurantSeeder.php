@@ -31,7 +31,8 @@ class RestaurantSeeder extends Seeder
             'fav_icon' => 'setting/'.$image_name_1,
             'operating_start_hours' => '10:00 AM',
             'operating_end_hours' => '11:00 PM',
-            'status' => 1
+            'status' => 1,
+            'request_status' => 1,
         ]);
 
         $image_name_2 = rand(00000,11111) .'_logo.png';
@@ -46,7 +47,8 @@ class RestaurantSeeder extends Seeder
             'fav_icon' => 'setting/'.$image_name_2,
             'operating_start_hours' => '10:00 AM',
             'operating_end_hours' => '11:00 PM',
-            'status' => 1
+            'status' => 1,
+            'request_status' => 2,
         ]);
 
     }

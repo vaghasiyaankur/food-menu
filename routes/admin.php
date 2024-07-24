@@ -39,16 +39,17 @@ Route::group(['middleware' => 'superAdmin'], function () {
     Route::view('/user/{restaurant_id}', 'admin.page.user')->name('super-admin.user');
     Route::view('/restaurant', 'admin.page.restaurant')->name('super-admin.restaurant');
     Route::view('/branch/{restaurant_id}', 'admin.page.branch')->name('super-admin.branch');
-    Route::view('/restaurant-status', 'admin.page.restaurant_request')->name('super-admin.restaurant-request');
-    Route::view('/profile', 'admin.page.profile')->name('super-admin.profile');
+    Route::view('/restaurant-request', 'admin.page.restaurant_request')->name('super-admin.restaurant-request');
     
     Route::controller(UserController::class)->group(function() {
         Route::get('users-list', 'getUsers')->name('users.list');
         Route::get('/users/{user}/edit', 'editUser')->name('user.edit');
         Route::get('{user}/user-simulation/{role}', 'changeUserSimulation')->name('user.simulation');
+        Route::get('profile', 'getProfileDetail')->name('super-admin.profile');
 
         Route::post('user-create-update', 'userCreateUpdate')->name('user.create-update');
         Route::post('user-delete', 'deleteUser')->name('user.delete');
+        Route::post('profile-update', 'updateProfile')->name('super-admin.profile.update');
     });
 
     Route::controller(RestaurantController::class)->group(function() {

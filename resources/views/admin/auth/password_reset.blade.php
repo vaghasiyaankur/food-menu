@@ -76,14 +76,14 @@
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
-                                <input type="text" class="form-control" id="password" name="password" placeholder="Enter Your Password" autofocus />
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Enter Your Password" autofocus />
                                 @error('password')
                                     <span style="color: red;">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="mb-3">
                                 <label for="password_confirmation" class="form-label">Confirmation Password</label>
-                                <input type="text" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Enter Confirmation Password" />
+                                <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Enter Confirmation Password" />
                                 @error('password_confirmation')
                                     <span style="color: red;">{{ $message }}</span>
                                 @enderror

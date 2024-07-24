@@ -12,7 +12,7 @@
         </div>
         @if ($button)
             <div>
-                <button type="button" data-bs-toggle="modal" data-bs-target="#backDropModal" class="btn btn-primary addUser">Add</button>
+                <button type="button" data-bs-toggle="modal" data-bs-target="#backDropModal" class="btn btn-primary {{ $name }}">Add</button>
             </div>
         @endif
     </div>

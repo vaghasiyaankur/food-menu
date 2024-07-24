@@ -81,7 +81,7 @@ class ForgotPasswordController extends Controller
         );
 
         return $status == Password::PASSWORD_RESET
-                    ? redirect()->route('super-admin.auth')->with('status', __($status))
+                    ? to_route('super-admin.auth')->with('status', __($status))
                     : back()->withErrors(['email' => [__($status)]]);
     }
 }

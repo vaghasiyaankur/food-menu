@@ -4,14 +4,13 @@ namespace App\Http\Controllers\SuperAdmin;
 
 use App\Helper\ImageHelper;
 use App\Http\Controllers\Controller;
-use App\Mail\RestaurantApprovedDeclined;
 use App\Models\Branch;
 use App\Models\Restaurant;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
+use App\Notifications\RestaurantApprovedDeclinedNotification;
 
 class RestaurantController extends Controller
 {
@@ -89,9 +88,9 @@ class RestaurantController extends Controller
         ];
         
         if(request()->get('branch_id')) {
-            $rules['logo'] = 'image|mimes:jpg,png,jpeg,webp';
+            $rules['logo'] = 'image|mimes:jpg,png,jpeg,webp|max:1024';
         }else{
-            $rules['logo'] = 'required|mimes:jpg,png,jpeg,webp';
+            $rules['logo'] = 'required|mimes:jpg,png,jpeg,webp|max:1024';
         }
 
         $validatedData = Validator::make($request->all(), $rules);
@@ -159,7 +158,7 @@ class RestaurantController extends Controller
         $branch = Branch::findOrFail($request->branch_id);
         if($branch) {
             $branch->delete();
-            return redirect()->route('super-admin.branch', ['restaurant_id' => $request->restaurant_id])->with('message', 'Branch Deleted Successfully');
+            return redirect()->back()->with('message', 'Branch Deleted Successfully');
         }
     }
 
@@ -195,21 +194,26 @@ class RestaurantController extends Controller
     }
 
     /**
-     * Update the request status of a restaurant and send an email notification.
+     * Handle the approval or declination of a restaurant and send a notification.
      *
-     * @param  int  $restaurant  The ID of the restaurant to update.
-     * @param  int  $request_status  The status to set (1 for approved, 0 for declined).
-     * @return \Illuminate\Http\RedirectResponse  Redirect back with a success message.
-     */
+     * This method processes the approval or declination of a restaurant based on the 
+     * provided request status. It finds the restaurant by its ID, determines the request status,
+     * and sends a notification to the associated user. If the restaurant is found, it sends
+     * the notification and redirects back. If the restaurant is not found, it throws a 404 error.
+     *
+     * @param  \Illuminate\Http\Request  $request  The incoming request containing the restaurant ID and request status.
+     * @return \Illuminate\Http\RedirectResponse  A redirect response back to the previous page.
+    */
     public function restaurantApprovedDeclined(Request $request)
     {   
-        $requestStatus = $request->request_status == 1 ? 1 : 0;
-
-        Restaurant::where('id', $request->restaurant_id)->update(['request_status' => $requestStatus]);
-
-        $user = User::where('restaurant_id', $request->restaurant_id)->value('email');
-        Mail::to($user)->send(new RestaurantApprovedDeclined($request->restaurant_id));
-
-        return redirect()->back();
+        $restaurant = Restaurant::findOrFail($request->restaurant_id);
+        if($restaurant) {
+            $requestStatus = $request->request_status == 1 ? 1 : 0;
+            
+            $user = User::where('restaurant_id', $restaurant->id)->first();
+            $user->notify(new RestaurantApprovedDeclinedNotification($restaurant, $requestStatus));
+    
+            return redirect()->back();
+        }
     }
 }

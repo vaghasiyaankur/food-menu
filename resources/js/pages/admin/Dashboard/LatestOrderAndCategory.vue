@@ -67,7 +67,7 @@
         <div class="latest_category_table">
             <div class="table_header">
                 <h3 class="no-margin">Latest Category</h3>
-                <a href="" class="no-margin">
+                <a href="/food-category/" class="no-margin">
                     <h5 class="no-margin">View All</h5>
                 </a>
             </div>

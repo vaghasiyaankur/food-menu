@@ -42,7 +42,7 @@
         <div class="latest_product_table">
             <div class="table_header">
                 <h3 class="no-margin">Latest Product</h3>
-                <a href="" class="no-margin">
+                <a href="/food-product/" class="no-margin">
                     <h5 class="no-margin">View All</h5>
                 </a>
             </div>
