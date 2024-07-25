@@ -45,16 +45,27 @@ class AdminController extends Controller
             ], 200);
 
         } else {
+            $restaurantCode = $this->generateUniqueCode($request->name, $request->user_id);
+            
             $checkRestaurantCode = Restaurant::pluck('restaurant_code')->toArray();
-
-            if (in_array($checkRestaurantCode, $checkRestaurantCode)) {
+            if (in_array($restaurantCode, $checkRestaurantCode)) {
                 return response()->json(['error' => 'The code already exists.'], 400);
             }
 
+            $slug = Str::slug($request->name);
+            $baseSlug = $slug;
+            $i = 1;
+
+            while (Restaurant::where('slug', $slug)->exists()) {
+                $slug = $baseSlug . '-' . $i;
+                $i++;
+            }
             $restaurant = Restaurant::insertGetId([
-                'name'    => $request->name,
+                'name'  => $request->name,
+                'slug'  => $slug,
                 'location' => $request->address,
                 'request_status' => 2,
+                'restaurant_code' => $restaurantCode
             ]);
 
             if($restaurant) {
@@ -77,12 +88,14 @@ class AdminController extends Controller
 
     }
 
-    private function generateUniqueNumber($length = 6) {
-        do {
-            $number = str_pad(rand(0, pow(10, $length) - 1), $length, '0', STR_PAD_LEFT);
-        } while (Restaurant::where('restaurant_code', $number)->exists());
+    private function generateUniqueCode($name, $userId) {
+        $baseCode = strtoupper(substr($name, 0, 2)) . sprintf('%04d', mt_rand(1, 9999)) . $userId;
     
-        return $number;
+        while (Restaurant::where('restaurant_code', $baseCode)->exists()) {
+            $baseCode = strtoupper(substr($name, 0, 2)) . sprintf('%04d', mt_rand(1, 9999)) . $userId;
+        }
+    
+        return $baseCode;
     }
     
 }

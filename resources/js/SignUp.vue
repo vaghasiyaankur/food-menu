@@ -330,7 +330,6 @@
             formData.append('name', restaurantName.value);
             formData.append('address', restaurantAddress.value);
             formData.append('user_id', authId.value);
-            formData.append('restaurant_code', generateKeyCode(restaurantName.value, authId.value))
         }
 
         axios.post('/api/sign-up', formData)
@@ -342,6 +341,7 @@
                     if(response && response.type && response.type == 'restaurant') {
                         authId.value = null;
                         isRestaurantShow.value = false;
+                        window.location.reload();
                     } else {
                         authId.value = response.data.user;
                         isRestaurantShow.value = true;
@@ -349,14 +349,8 @@
                     resetFormDetail(type);
                 }
             }).catch((error) => {
-                errorNotification(error);
+                errorNotification(error.response.data.error);
             });
-    }
-
-    const generateKeyCode = (restaurantName, authId) => {
-        const namePrefix = restaurantName.substring(0, 2);
-        const randomFourDigitNumber = Math.floor(1000 + Math.random() * 9000);
-        return `${namePrefix}_${randomFourDigitNumber}_${authId}`;
     }
 
     const resetFormDetail = (type) => {
