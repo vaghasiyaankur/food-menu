@@ -382,4 +382,4 @@ Route::get('/delete-transaction/{transaction}', [AdminOrderController::class, 'd
 
 // ------------------------ Admin Register Routes ------------------------ //
 
-Route::post('/sign-up', [AdminController::class, 'signUp']);
+Route::post('/sign-up', [AdminController::class, 'registerDetail']);

@@ -11,7 +11,7 @@
                             <img src="/images/login_smallbg.png" alt="" />
                         </div>
                     </div>
-                    <div class="login_form">
+                    <div class="login_form" v-if="!isRestaurantShow">
                         <div class="login_title text-align-center">
                             <h3>Sign Up</h3>
                         </div>
@@ -147,7 +147,94 @@
                                         <div class="item-input-wrap">
                                             <button
                                                 class="button button-fill button border_radius_10 button-raised bg_red text-color-white button-large text-transform-capitalize height_40"
-                                                @click="signUpUser"
+                                                @click="registerDetail('signup')"
+                                            >
+                                                Continue
+                                            </button>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="login_form" v-else>
+                        <div class="login_title text-align-center">
+                            <h3>Restaurant Detail</h3>
+                        </div>
+                        <div
+                            class="list no-hairlines login_inputs margin-top-half no-margin-bottom"
+                        >
+                            <ul>
+                                <li
+                                    class="item-content item-input no-padding-left padding-bottom"
+                                >
+                                    <div class="item-inner no-padding-right">
+                                        <div class="item-title item-label">
+                                            Name *
+                                        </div>
+                                        <div class="item-input-wrap">
+                                            <input
+                                                type="text"
+                                                placeholder="Enter Restaurant Name"
+                                                v-model="restaurantName"
+                                                class="padding-left-half"
+                                            />
+                                            <span class="input-clear-button"></span>
+                                            <!-- ====== ERROR SYMBOL ========= -->
+                                            <span
+                                                class="input_error_symbol display-none"
+                                                ><i class="f7-icons font-18"
+                                                    >exclamationmark_triangle</i
+                                                ></span
+                                            >
+                                        </div>
+                                        <!-- ======= ERROR MESSAGE =======-->
+                                        <p
+                                            class="error_message no-margin-bottom display-none"
+                                        >
+                                            Please enter valid restaurant name
+                                        </p>
+                                    </div>
+                                </li>
+                                <li
+                                    class="item-content item-input no-padding-left padding-bottom"
+                                >
+                                    <div class="item-inner no-padding-right">
+                                        <div class="item-title item-label">
+                                            Restaurant Address*
+                                        </div>
+                                        <div class="item-input-wrap">
+                                            <input
+                                                type="text"
+                                                placeholder="Restaurant Address"
+                                                v-model="restaurantAddress"
+                                                class="padding-left-half"
+                                            />
+                                            <span class="input-clear-button"></span>
+                                            <!-- ====== ERROR SYMBOL ========= -->
+                                            <span
+                                                class="input_error_symbol display-none"
+                                                ><i class="f7-icons font-18"
+                                                    >exclamationmark_triangle</i
+                                                ></span
+                                            >
+                                        </div>
+                                        <!-- ======= ERROR MESSAGE =======-->
+                                        <p
+                                            class="error_message no-margin-bottom display-none"
+                                        >
+                                            Please enter restaurant address
+                                        </p>
+                                    </div>
+                                </li>
+                                <li
+                                    class="item-content item-input no-padding-left padding-bottom"
+                                >
+                                    <div class="item-inner no-padding-right">
+                                        <div class="item-input-wrap">
+                                            <button
+                                                class="button button-fill button border_radius_10 button-raised bg_red text-color-white button-large text-transform-capitalize height_40"
+                                                @click="registerDetail('restaurant')"
                                             >
                                                 Continue
                                             </button>
@@ -164,60 +251,126 @@
 </template>
 
 <script setup>
-import { f7App, f7Page, f7 } from "framework7-vue";
-import axios from "axios";
-import { ref,reactive } from 'vue';
-import { errorNotification } from './commonFunction.js';
+    import { f7App, f7Page, f7 } from "framework7-vue";
+    import axios from "axios";
+    import { ref,reactive } from 'vue';
+    import { errorNotification, successNotification } from './commonFunction.js';
 
-const userName = ref("");
-const userEmail = ref("");
-const userPassword = ref("");
-const userConfirmationPassword = ref("");
-const userMobileNumber = ref("");
+    const authId = ref(null);
 
-const isLoggedIn = ref(false);
+    const userName = ref("");
+    const userEmail = ref("");
+    const userPassword = ref("");
+    const userMobileNumber = ref("");
+    const userConfirmationPassword = ref("");
 
-// Reactive data
-const f7Params = reactive({
-    id: "io.framework7.testapp",
-    theme: "auto",
-    popup: {
-        closeOnEscape: true,
-    },
-    sheet: {
-        closeOnEscape: true,
-    },
-    popover: {
-        closeOnEscape: true,
-    },
-    actions: {
-        closeOnEscape: true,
-    },
-});
+    const restaurantName = ref("");
+    const restaurantAddress = ref("");
+    const restaurantTimeZone = ref("");
 
-const signUpUser = () => {
-    
-    const formData = new FormData();
-    formData.append('name', userName.value);
-    formData.append('email', userEmail.value);
-    formData.append('password', userPassword.value);
-    formData.append('password_confirmation', userConfirmationPassword.value);
-    formData.append('mobile_number', userMobileNumber.value);
+    const isLoggedIn = ref(false);
+    const isRestaurantShow = ref(false);
 
+    // Reactive data
+    const f7Params = reactive({
+        id: "io.framework7.testapp",
+        theme: "auto",
+        popup: {
+            closeOnEscape: true,
+        },
+        sheet: {
+            closeOnEscape: true,
+        },
+        popover: {
+            closeOnEscape: true,
+        },
+        actions: {
+            closeOnEscape: true,
+        },
+    });
 
-    axios.post('/api/sign-up', formData)
-        .then(response => {
-            console.log(response);
-        }).catch((error) => {
-            console.log(error);
-        });
-}
+    const registerDetail = (type) => {
+        if(type == 'signup') {
+            if(!userName.value) {
+                errorNotification("Please Enter User Name");
+                return;
+            } else if(!userEmail.value) {
+                errorNotification("Please Enter User Email Address");
+                return;
+            } else if(!userPassword.value) {
+                errorNotification("Please Enter Password");
+                return;
+            } else if(!userConfirmationPassword.value) {
+                errorNotification("Please Re-Enter Password");
+                return;
+            } else if(!userMobileNumber.value) {
+                errorNotification("Please Enter Mobile Number");
+                return;
+            } else if (!/^\d{10}$/.test(userMobileNumber.value)) {
+                errorNotification("Mobile Number must be 10 digits");
+                return;
+            } else if (userPassword.value !== userConfirmationPassword.value) {
+                errorNotification("Passwords do not match");
+                return;
+            }
+        } else {
 
-const redirectToRegister = () => {
-    if(!isLoggedIn.value) {
-        window.location.href = "signup";
+        }
+
+        const formData = new FormData();
+        formData.append('type', type);
+        
+        if(type == 'signup') {
+            formData.append('name', userName.value);
+            formData.append('email', userEmail.value);
+            formData.append('password', userPassword.value);
+            formData.append('password_confirmation', userConfirmationPassword.value);
+            formData.append('mobile_number', userMobileNumber.value);
+        } else {
+            formData.append('name', restaurantName.value);
+            formData.append('address', restaurantAddress.value);
+            formData.append('user_id', authId.value);
+        }
+
+        axios.post('/api/sign-up', formData)
+            .then(response => {
+                if(response.status) {
+
+                    successNotification(response.data.message);
+
+                    if(response && response.type && response.type == 'restaurant') {
+                        authId.value = null;
+                        isRestaurantShow.value = false;
+                    } else {
+                        authId.value = response.data.user;
+                        isRestaurantShow.value = true;
+                    }
+                    resetFormDetail(type);
+                }
+            }).catch((error) => {
+                errorNotification(error);
+            });
     }
-}
+
+    const resetFormDetail = (type) => {
+        if(type == 'signup') {
+            userName.value = "";
+            userEmail.value = "";
+            userPassword.value = "";
+            userMobileNumber.value = "";
+            userConfirmationPassword.value = "";
+        } else {
+            restaurantName.value = "";
+            restaurantAddress.value = "";
+            restaurantTimeZone.value = "";
+        }
+    }
+
+    const redirectToRegister = () => {
+        if(!isLoggedIn.value) {
+            window.location.href = "signup";
+        }
+    }
 
 </script>
 
