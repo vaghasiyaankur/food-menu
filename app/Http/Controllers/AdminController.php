@@ -45,12 +45,16 @@ class AdminController extends Controller
             ], 200);
 
         } else {
+            $checkRestaurantCode = Restaurant::pluck('restaurant_code')->toArray();
+
+            if (in_array($checkRestaurantCode, $checkRestaurantCode)) {
+                return response()->json(['error' => 'The code already exists.'], 400);
+            }
 
             $restaurant = Restaurant::insertGetId([
                 'name'    => $request->name,
                 'location' => $request->address,
                 'request_status' => 2,
-                'restaurant_code' => $this->generateUniqueNumber(6),
             ]);
 
             if($restaurant) {
