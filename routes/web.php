@@ -36,6 +36,7 @@ Route::get('/test', [\App\Http\Controllers\NotificationController::class,'notifi
 
 Route::middleware('alreadyLogin')->group(function () {
     Route::get('/login', [UserController::class, 'login'])->name('login');
+    Route::get('/signup', [UserController::class, 'signup'])->name('register');
 });
 
 Route::middleware('auth')->group(function () {

@@ -25,6 +25,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -377,3 +378,8 @@ Route::get('/delete-order/{order}', [AdminOrderController::class, 'deleteOrder']
 Route::get('/get-transactions', [AdminOrderController::class, 'getTransactions']);
 
 Route::get('/delete-transaction/{transaction}', [AdminOrderController::class, 'deleteTransaction']);
+
+
+// ------------------------ Admin Register Routes ------------------------ //
+
+Route::post('/sign-up', [AdminController::class, 'signUp']);

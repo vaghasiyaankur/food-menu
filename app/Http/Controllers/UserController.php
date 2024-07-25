@@ -20,6 +20,11 @@ class UserController extends Controller
         return view('login');
     }
 
+    public function signup()
+    {
+        return view('signup');
+    }
+
     public function manager($slug = '')
     {
         return $this->redirectToView('restaurant_manager', $slug, 'manager');

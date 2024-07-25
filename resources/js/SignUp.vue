@@ -13,12 +13,43 @@
                     </div>
                     <div class="login_form">
                         <div class="login_title text-align-center">
-                            <h3>Login</h3>
+                            <h3>Sign Up</h3>
                         </div>
                         <div
                             class="list no-hairlines login_inputs margin-top-half no-margin-bottom"
                         >
                             <ul>
+                                <li
+                                    class="item-content item-input no-padding-left padding-bottom"
+                                >
+                                    <div class="item-inner no-padding-right">
+                                        <div class="item-title item-label">
+                                            Name *
+                                        </div>
+                                        <div class="item-input-wrap">
+                                            <input
+                                                type="text"
+                                                placeholder="Enter Name"
+                                                v-model="userName"
+                                                class="padding-left-half"
+                                            />
+                                            <span class="input-clear-button"></span>
+                                            <!-- ====== ERROR SYMBOL ========= -->
+                                            <span
+                                                class="input_error_symbol display-none"
+                                                ><i class="f7-icons font-18"
+                                                    >exclamationmark_triangle</i
+                                                ></span
+                                            >
+                                        </div>
+                                        <!-- ======= ERROR MESSAGE =======-->
+                                        <p
+                                            class="error_message no-margin-bottom display-none"
+                                        >
+                                            Please enter valid Email Address
+                                        </p>
+                                    </div>
+                                </li>
                                 <li
                                     class="item-content item-input no-padding-left padding-bottom"
                                 >
@@ -30,7 +61,7 @@
                                             <input
                                                 type="email"
                                                 placeholder="Email Address"
-                                                v-model="email"
+                                                v-model="userEmail"
                                                 class="padding-left-half"
                                             />
                                             <span class="input-clear-button"></span>
@@ -61,7 +92,47 @@
                                             <input
                                                 type="password"
                                                 placeholder="Enter your password"
-                                                v-model="password"
+                                                v-model="userPassword"
+                                                class="padding-left-half"
+                                            /><span
+                                                class="input-clear-button"
+                                            ></span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li
+                                    class="item-content item-input no-padding-left padding-bottom"
+                                >
+                                    <div class="item-inner no-padding-right">
+                                        <div class="item-title item-label">
+                                            Confirm Password*
+                                        </div>
+                                        <div class="item-input-wrap">
+                                            <input
+                                                type="password"
+                                                name="password_confirmation"
+                                                placeholder="Re-Enter your password"
+                                                v-model="userConfirmationPassword"
+                                                class="padding-left-half"
+                                            /><span
+                                                class="input-clear-button"
+                                            ></span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li
+                                    class="item-content item-input no-padding-left padding-bottom"
+                                >
+                                    <div class="item-inner no-padding-right">
+                                        <div class="item-title item-label">
+                                            Mobile Number*
+                                        </div>
+                                        <div class="item-input-wrap">
+                                            <input
+                                                type="number"
+                                                name="mobile_number"
+                                                placeholder="Enter Mobile Number"
+                                                v-model="userMobileNumber"
                                                 class="padding-left-half"
                                             /><span
                                                 class="input-clear-button"
@@ -76,18 +147,12 @@
                                         <div class="item-input-wrap">
                                             <button
                                                 class="button button-fill button border_radius_10 button-raised bg_red text-color-white button-large text-transform-capitalize height_40"
-                                                @click="loginAuthUser"
+                                                @click="signUpUser"
                                             >
                                                 Continue
                                             </button>
                                         </div>
                                     </div>
-                                </li>
-
-                                <li
-                                    class="item-content item-input no-padding-left padding-bottom"
-                                >
-                                    <a href="javascript:void(0)" @click="redirectToRegister()">Sign Up Here</a>
                                 </li>
                             </ul>
                         </div>
@@ -104,8 +169,12 @@ import axios from "axios";
 import { ref,reactive } from 'vue';
 import { errorNotification } from './commonFunction.js';
 
-const email = ref('');
-const password = ref('');
+const userName = ref("");
+const userEmail = ref("");
+const userPassword = ref("");
+const userConfirmationPassword = ref("");
+const userMobileNumber = ref("");
+
 const isLoggedIn = ref(false);
 
 // Reactive data
@@ -126,26 +195,21 @@ const f7Params = reactive({
     },
 });
 
-const loginAuthUser = () => {
-    if (!email.value) {
-        errorNotification("Please enter your email");
-        return;
-    } else if (!password.value) {
-        errorNotification("Please enter your password");
-        return;
-    }
-    axios
-        .post("/api/login-user", {
-            email: email.value,
-            password: password.value,
-        })
-        .then((res) => {
-            if (res.data.success) {
-                isLoggedIn.value = true;
-                location.reload();
-            } else {
-                errorNotification(res.data.error);
-            }
+const signUpUser = () => {
+    
+    const formData = new FormData();
+    formData.append('name', userName.value);
+    formData.append('email', userEmail.value);
+    formData.append('password', userPassword.value);
+    formData.append('password_confirmation', userConfirmationPassword.value);
+    formData.append('mobile_number', userMobileNumber.value);
+
+
+    axios.post('/api/sign-up', formData)
+        .then(response => {
+            console.log(response);
+        }).catch((error) => {
+            console.log(error);
         });
 }
 

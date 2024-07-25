@@ -22,9 +22,13 @@ class AlreadyAuthenticate
      */
     public function handle(Request $request, Closure $next, ...$guards)
     {
-        if (Auth::check()) {
+
+        if (Auth::check() && Auth::user()->role == 'admin') {
+            return redirect('admin');
+        } else if (Auth::check() && Auth::user()->role == 'manager') {
             return redirect('manager');
         }
+
         return $next($request);
     }
 }

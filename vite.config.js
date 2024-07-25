@@ -12,7 +12,8 @@ export default defineConfig({
                 'resources/js/res_manager.js',
                 'resources/js/login.js',
                 'resources/js/pos.js',
-                'resources/js/admin.js'                
+                'resources/js/admin.js',
+                'resources/js/sign-up.js'           
             ],
             refresh: true,
         }),

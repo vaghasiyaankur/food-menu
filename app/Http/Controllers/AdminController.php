@@ -21,4 +21,9 @@ class AdminController extends Controller
             return view('admin');
         }
     }
+
+    public function signUp(Request $request)
+    {
+        dd($request);
+    }
 }

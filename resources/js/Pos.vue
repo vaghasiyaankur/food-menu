@@ -187,10 +187,21 @@ onMounted(async () => {
       }
     }, 500);
 
-    $(window).bind("load", function () {
-      $(".overlay, body").addClass("loaded");
+    $(document).ready(function () {
+
+      if ($(".overlay").length) {
+        $(".overlay").addClass("loaded");
+      } 
+
+      // Check if the body element exists
+      if ($("body").length) {
+        $("body").addClass("loaded");
+      } 
+
       setTimeout(function () {
-        $(".overlay").css({ display: "none" });
+        if ($(".overlay").length) {
+          $(".overlay").css({ display: "none" });
+        } 
       }, 1000);
     });
     
