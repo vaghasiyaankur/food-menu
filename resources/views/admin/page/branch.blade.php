@@ -5,7 +5,6 @@
 @section('css')
     <style>
         #imagePreview {
-            display: none;
             margin-top: 10px;
             width: 100px;
             height: 100px;
