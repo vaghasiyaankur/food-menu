@@ -17,7 +17,7 @@ class UserController extends Controller
 {
     public function login()
     {
-        return view('login');
+        return view('auth');
     }
 
     public function signup()

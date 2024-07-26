@@ -16,8 +16,8 @@
 </head>
 <body>
 	<div id="app">
-        <LOGIN></LOGIN>
+        <AUTH></AUTH>
     </div>
-	@vite('resources/js/login.js')
+	@vite('resources/js/authentication.js')
 </body>
 </html>
