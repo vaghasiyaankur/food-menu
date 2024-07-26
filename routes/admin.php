@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\SuperAdmin\AuthController;
+use App\Http\Controllers\SuperAdmin\DashboardController;
 use App\Http\Controllers\SuperAdmin\ForgotPasswordController;
 use App\Http\Controllers\SuperAdmin\RestaurantController;
 use App\Http\Controllers\SuperAdmin\UserController;
@@ -57,9 +58,14 @@ Route::group(['middleware' => 'superAdmin'], function () {
         Route::get('restaurant-request-list', 'restaurantRequestList')->name('restaurant-request.list');
         Route::get('branch-list', 'getBranch')->name('branch.list');
         Route::get('/branch/{branch}/edit', 'editBranch')->name('branch.edit');
+        Route::get('/restaurant-detail/{id}', 'getRestaurantDetail')->name('restaurant-detail');
         
         Route::post('branch-create-update', 'createUpdateBranch')->name('branch.create-update');
         Route::post('branch-delete', 'deleteBranch')->name('branch.delete');
         Route::post('restaurant-approved-declined', 'restaurantApprovedDeclined')->name('restaurant.approved-declined');
+    });
+
+    Route::controller(DashboardController::class)->group(function() {
+        Route::get('dashboard-list', 'dashboardList')->name('dashboard.list');
     });
 });
