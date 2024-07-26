@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\ImageHelper;
 use App\Helper\SettingHelper;
 use App\Http\Requests\UserRequest;
 use App\Models\Product;
@@ -28,9 +29,8 @@ class AdminController extends Controller
     public function registerDetail(Request $request)
     {
         $formDetail = json_decode($request->register_detail, true);
-        
+
         $userData = $formDetail[0];
-        unset($userData['type']);
         unset($userData['password_confirmation']);
 
         $user = User::create([
@@ -44,8 +44,6 @@ class AdminController extends Controller
         if($user) {
 
             $restaurantData = $formDetail[1];
-            unset($restaurantData['type']);
-
             $restaurantCode = $this->generateUniqueRestaurantCode($restaurantData['name']);
 
             $checkRestaurantCode = Restaurant::pluck('restaurant_code')->toArray();
@@ -61,11 +59,23 @@ class AdminController extends Controller
                 $slug = $baseSlug . '-' . $i;
                 $i++;
             }
+            
+            $restaurantLogo = "";
+            if($request->file('logo')){
+                $directory = storage_path('app/public/setting/');
+                if (!file_exists($directory)) {
+                    mkdir($directory, 0777, true);
+                }
+            }
+
+            $restaurantLogo = ImageHelper::storeImage($request->file('logo'), 'setting');
 
             $restaurant = Restaurant::create([
                 'name' => $restaurantData['name'],
-                'address' => $restaurantData['address'],
+                'email' =>  $restaurantData['email'],
+                'location' => $restaurantData['address'],
                 'restaurant_code' => $restaurantCode,
+                'logo'  =>  $restaurantLogo
             ]);
 
             if($restaurant) {
