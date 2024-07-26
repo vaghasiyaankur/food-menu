@@ -34,9 +34,12 @@ class RestaurantController extends Controller
             return DataTables::of($restaurantList)
                 ->addIndexColumn()
                 ->addColumn('action', function($restaurantRow) {
+
                     $userRoute = route('super-admin.user', ['restaurant_id' => $restaurantRow->id]);
                     $branchRoute = route('super-admin.branch', ['restaurant_id' => $restaurantRow->id]);
-                    $btn = '<a href="'.$userRoute.'" class="user btn btn-warning btn-sm text-white fw-bolder" style="margin-right: 10px;">Users</a>';
+
+                    $btn = '<a href="javascript:void(0)" data-id="'.$restaurantRow->id.'" class="branch btn btn-primary btn-sm text-white fw-bolder restaurantDetail" style="margin-right: 10px;">Detail</a>';
+                    $btn .= '<a href="'.$userRoute.'" class="user btn btn-warning btn-sm text-white fw-bolder" style="margin-right: 10px;">Users</a>';
                     $btn .= '<a href="'.$branchRoute.'" class="branch btn btn-info btn-sm text-white fw-bolder">Branch</a>';
                     return $btn;
                 })
@@ -214,6 +217,22 @@ class RestaurantController extends Controller
             $user->notify(new RestaurantApprovedDeclinedNotification($restaurant, $requestStatus));
     
             return redirect()->back();
+        }
+    }
+
+    public function getRestaurantDetail($id)
+    {
+        $restaurantDetail = Restaurant::findOrFail($id);
+        if($restaurantDetail) {
+            return response()->json([
+                'status'    =>  true,
+                'detail'    =>  $restaurantDetail
+            ]);
+        } else {
+            return response()->json([
+                'status'    =>  false,
+                'error'    =>  'Restaurant Detail Found Error.'
+            ]);
         }
     }
 }

@@ -498,4 +498,6 @@
 @endsection
 
 
-{{-- @section('script')@endsection --}}
+@section('script')
+    @includeIf('admin.page.include.script.dashboard_script_js')
+@endsection
