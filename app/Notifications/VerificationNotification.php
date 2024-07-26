@@ -43,14 +43,9 @@ class VerificationNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        $restaurantDetail = Restaurant::findOrFail($this->restaurant);
-
-        if($restaurantDetail) {
-            
-            return (new MailMessage)
-                    ->subject('Email Subject')
-                    ->view('admin.emails.restaurant_verification', compact('restaurantDetail'));
-        }
+        return (new MailMessage)
+                ->subject('Restaurant Verification Email')
+                ->view('admin.emails.restaurant_verification', ['restaurant' => $this->restaurant]);
     }
 
     /**

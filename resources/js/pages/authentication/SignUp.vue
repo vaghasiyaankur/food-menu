@@ -275,8 +275,8 @@
 <script setup>
     import { f7App, f7Page, f7 } from "framework7-vue";
     import axios from "axios";
-    import { ref,reactive } from 'vue';
-    import { errorNotification, successNotification } from './commonFunction.js';
+    import { ref } from 'vue';
+    import { errorNotification, successNotification } from '../../commonFunction.js';
 
     const userName = ref("");
     const userEmail = ref("");
@@ -372,9 +372,11 @@
                 .then(response => {
                     if(response.status) {
                         successNotification(response.data.message);
+                        f7.view.main.router.navigate({ url: "/restaurant-request/" });
                         resetFormDetail();
                     }
                 }).catch((error) => {
+                    console.log(error);
                     errorNotification(error.response.data.error);
                 });
             }
@@ -394,7 +396,6 @@
         userConfirmationPassword.value = "";
         restaurantName.value = "";
         restaurantAddress.value = "";
-        restaurantTimeZone.value = "";
     }
 
 </script>

@@ -29,11 +29,23 @@ class AuthController extends Controller
         ]);
 
         $credentials = $req->only('email', 'password');
-        if (Auth::attempt($credentials)) {
-            $id = Auth::user()->id;
-            return response()->json(['success' => 'You are logged in successfully.', 'id' => $id]);
-        }else{
-            return response()->json(['error' => 'Unable to access account, verify password.']);
+        
+        $checkRestaurantStatus = User::where('email', $credentials['email'])
+            ->whereHas('restaurant', function($query) {
+                $query->whereIn('request_status', [0, 2]);
+            })
+        ->select('id', 'restaurant_id')
+        ->first();
+
+        if(!is_null($checkRestaurantStatus)) {
+            return response()->json(['error' => 'Your Restaurant Not Approved Yet!']);
+        } else {
+            if (Auth::attempt($credentials)) {
+                $id = Auth::user()->id;
+                return response()->json(['success' => 'You are logged in successfully.', 'id' => $id]);
+            }else{
+                return response()->json(['error' => 'Unable to access account, verify password.']);
+            }
         }
     }
 

@@ -7,6 +7,6 @@
     <title>Restaurant Verification</title>
 </head>
 <body>
-    {{ $restaurantDetail }}
+    {{ $restaurant }}
 </body>
 </html>
