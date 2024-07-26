@@ -1,270 +1,268 @@
 <template>
     <f7-page>
-        <div class="login_screen">
-            <div class="login_screen_inner">
-                <div class="login_image">
-                    <div class="login_main_img">
-                        <img src="/images/login_screen.png" />
+        <div class="signup_screen">
+            <div class="signup_screen_inner display-flex">
+                <div class="signup_screen_details">
+                    <div class="signup_form" v-if="!isRestaurantShow">
+                        <div class="signup_title text-align-center">
+                            <h3>Sign Up</h3>
+                        </div>
+                        <div
+                            class="list no-hairlines signup_inputs margin-top-half no-margin-bottom"
+                        >
+                            <ul>
+                                <li
+                                    class="item-content item-input no-padding-left padding-bottom"
+                                >
+                                    <div class="item-inner no-padding-right">
+                                        <div class="item-title item-label">
+                                            Name *
+                                        </div>
+                                        <div class="item-input-wrap">
+                                            <input
+                                                type="text"
+                                                placeholder="Enter Name"
+                                                v-model="userName"
+                                                class="padding-left-half"
+                                            />
+                                            <span class="input-clear-button"></span>
+                                            <!-- ====== ERROR SYMBOL ========= -->
+                                            <span
+                                                class="input_error_symbol display-none"
+                                                ><i class="f7-icons font-18"
+                                                    >exclamationmark_triangle</i
+                                                ></span
+                                            >
+                                        </div>
+                                        <!-- ======= ERROR MESSAGE =======-->
+                                        <p
+                                            class="error_message no-margin-bottom display-none"
+                                        >
+                                            Please enter valid Email Address
+                                        </p>
+                                    </div>
+                                </li>
+                                <li
+                                    class="item-content item-input no-padding-left padding-bottom"
+                                >
+                                    <div class="item-inner no-padding-right">
+                                        <div class="item-title item-label">
+                                            Email Address*
+                                        </div>
+                                        <div class="item-input-wrap">
+                                            <input
+                                                type="email"
+                                                placeholder="Email Address"
+                                                v-model="userEmail"
+                                                class="padding-left-half"
+                                            />
+                                            <span class="input-clear-button"></span>
+                                            <!-- ====== ERROR SYMBOL ========= -->
+                                            <span
+                                                class="input_error_symbol display-none"
+                                                ><i class="f7-icons font-18"
+                                                    >exclamationmark_triangle</i
+                                                ></span
+                                            >
+                                        </div>
+                                        <!-- ======= ERROR MESSAGE =======-->
+                                        <p
+                                            class="error_message no-margin-bottom display-none"
+                                        >
+                                            Please enter valid Email Address
+                                        </p>
+                                    </div>
+                                </li>
+                                <li
+                                    class="item-content item-input no-padding-left padding-bottom"
+                                >
+                                    <div class="item-inner no-padding-right">
+                                        <div class="item-title item-label">
+                                            Password*
+                                        </div>
+                                        <div class="item-input-wrap">
+                                            <input
+                                                type="password"
+                                                placeholder="Enter your password"
+                                                v-model="userPassword"
+                                                class="padding-left-half"
+                                            /><span
+                                                class="input-clear-button"
+                                            ></span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li
+                                    class="item-content item-input no-padding-left padding-bottom"
+                                >
+                                    <div class="item-inner no-padding-right">
+                                        <div class="item-title item-label">
+                                            Confirm Password*
+                                        </div>
+                                        <div class="item-input-wrap">
+                                            <input
+                                                type="password"
+                                                name="password_confirmation"
+                                                placeholder="Re-Enter your password"
+                                                v-model="userConfirmationPassword"
+                                                class="padding-left-half"
+                                            /><span
+                                                class="input-clear-button"
+                                            ></span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li
+                                    class="item-content item-input no-padding-left padding-bottom"
+                                >
+                                    <div class="item-inner no-padding-right">
+                                        <div class="item-title item-label">
+                                            Mobile Number*
+                                        </div>
+                                        <div class="item-input-wrap">
+                                            <input
+                                                type="number"
+                                                name="mobile_number"
+                                                placeholder="Enter Mobile Number"
+                                                v-model="userMobileNumber"
+                                                class="padding-left-half"
+                                            /><span
+                                                class="input-clear-button"
+                                            ></span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li
+                                    class="item-content item-input no-padding-left padding-bottom"
+                                >
+                                    <div class="item-inner no-padding-right">
+                                        <div class="item-input-wrap">
+                                            <button
+                                                class="button button-fill button border_radius_10 button-raised bg_red text-color-white button-large text-transform-capitalize height_40"
+                                                @click="registerDetail('signup', 0)"
+                                            >
+                                                Continue
+                                            </button>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <p class="no-margin text-align-center">Already have a account? <a href="/login/" class="sign-up-btn">Sign In</a></p>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="login_tab_img display-none">
-                        <img src="/images/login_smallbg.png" alt="" />
+                    <div class="signup_form" v-else>
+                        <div class="signup_title text-align-center">
+                            <h3>Restaurant Detail</h3>
+                        </div>
+                        <div
+                            class="list no-hairlines signup_inputs margin-top-half no-margin-bottom"
+                        >
+                            <ul>
+                                <li
+                                    class="item-content item-input no-padding-left padding-bottom"
+                                >
+                                    <div class="item-inner no-padding-right">
+                                        <div class="item-title item-label">
+                                            Restaurant Logo *
+                                        </div>
+                                        <div class="item-input-wrap">
+                                            <input
+                                                type="file"
+                                                id="logo"
+                                                class="padding-left-half"
+                                                accept="image/*"
+                                                @change="handleRestaurantLogo"
+                                            />
+                                        </div>
+                                        <div v-if="restaurantLogoPreview">
+                                            <img :src="restaurantLogoPreview" height="80px" width="80px" alt="" class="restaurant_logo">
+                                        </div>
+                                    </div>
+                                </li>
+                                <li
+                                    class="item-content item-input no-padding-left padding-bottom"
+                                >
+                                    <div class="item-inner no-padding-right">
+                                        <div class="item-title item-label">
+                                            Name *
+                                        </div>
+                                        <div class="item-input-wrap">
+                                            <input
+                                                type="text"
+                                                placeholder="Enter Restaurant Name"
+                                                v-model="restaurantName"
+                                                class="padding-left-half"
+                                            />
+                                            <span class="input-clear-button"></span>
+                                            <!-- ====== ERROR SYMBOL ========= -->
+                                            <span class="input_error_symbol display-none"><i class="f7-icons font-18">exclamationmark_triangle</i></span>
+                                        </div>
+                                        <!-- ======= ERROR MESSAGE =======-->
+                                        <p class="error_message no-margin-bottom display-none">
+                                            Please enter valid restaurant name
+                                        </p>
+                                    </div>
+                                </li>
+                                <li
+                                    class="item-content item-input no-padding-left padding-bottom"
+                                >
+                                    <div class="item-inner no-padding-right">
+                                        <div class="item-title item-label">
+                                            Restaurant Address*
+                                        </div>
+                                        <div class="item-input-wrap">
+                                            <input
+                                                type="text"
+                                                placeholder="Restaurant Address"
+                                                v-model="restaurantAddress"
+                                                class="padding-left-half"
+                                            />
+                                        </div>
+                                    </div>
+                                </li>
+                                <li
+                                    class="item-content item-input no-padding-left padding-bottom"
+                                >
+                                    <div class="item-inner no-padding-right">
+                                        <div class="item-title item-label">
+                                            Email Address*
+                                        </div>
+                                        <div class="item-input-wrap">
+                                            <input
+                                                type="email"
+                                                placeholder="Email Address"
+                                                v-model="restaurantEmail"
+                                                class="padding-left-half"
+                                            />
+                                        </div>
+                                    </div>
+                                </li>
+                                <li
+                                    class="item-content item-input no-padding-left padding-bottom"
+                                >
+                                    <div class="item-inner no-padding-right">
+                                        <div class="item-input-wrap">
+                                            <button class="button button-fill button border_radius_10 button-raised bg_red text-color-white button-large text-transform-capitalize height_40" @click="registerDetail('restaurant', 1)">
+                                                Continue
+                                            </button>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <p class="no-margin text-align-center">Already have a account? <a href="/login/" class="sign-up-btn">Sign In</a></p>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                <div class="login_form" v-if="!isRestaurantShow">
-                    <div class="login_title text-align-center">
-                        <h3>Sign Up</h3>
+                <div class="signup_image">
+                    <div class="signup_main_img">
+                        <img src="/images/sign-up.png" />
                     </div>
-                    <div
-                        class="list no-hairlines login_inputs margin-top-half no-margin-bottom"
-                    >
-                        <ul>
-                            <li
-                                class="item-content item-input no-padding-left padding-bottom"
-                            >
-                                <div class="item-inner no-padding-right">
-                                    <div class="item-title item-label">
-                                        Name *
-                                    </div>
-                                    <div class="item-input-wrap">
-                                        <input
-                                            type="text"
-                                            placeholder="Enter Name"
-                                            v-model="userName"
-                                            class="padding-left-half"
-                                        />
-                                        <span class="input-clear-button"></span>
-                                        <!-- ====== ERROR SYMBOL ========= -->
-                                        <span
-                                            class="input_error_symbol display-none"
-                                            ><i class="f7-icons font-18"
-                                                >exclamationmark_triangle</i
-                                            ></span
-                                        >
-                                    </div>
-                                    <!-- ======= ERROR MESSAGE =======-->
-                                    <p
-                                        class="error_message no-margin-bottom display-none"
-                                    >
-                                        Please enter valid Email Address
-                                    </p>
-                                </div>
-                            </li>
-                            <li
-                                class="item-content item-input no-padding-left padding-bottom"
-                            >
-                                <div class="item-inner no-padding-right">
-                                    <div class="item-title item-label">
-                                        Email Address*
-                                    </div>
-                                    <div class="item-input-wrap">
-                                        <input
-                                            type="email"
-                                            placeholder="Email Address"
-                                            v-model="userEmail"
-                                            class="padding-left-half"
-                                        />
-                                        <span class="input-clear-button"></span>
-                                        <!-- ====== ERROR SYMBOL ========= -->
-                                        <span
-                                            class="input_error_symbol display-none"
-                                            ><i class="f7-icons font-18"
-                                                >exclamationmark_triangle</i
-                                            ></span
-                                        >
-                                    </div>
-                                    <!-- ======= ERROR MESSAGE =======-->
-                                    <p
-                                        class="error_message no-margin-bottom display-none"
-                                    >
-                                        Please enter valid Email Address
-                                    </p>
-                                </div>
-                            </li>
-                            <li
-                                class="item-content item-input no-padding-left padding-bottom"
-                            >
-                                <div class="item-inner no-padding-right">
-                                    <div class="item-title item-label">
-                                        Password*
-                                    </div>
-                                    <div class="item-input-wrap">
-                                        <input
-                                            type="password"
-                                            placeholder="Enter your password"
-                                            v-model="userPassword"
-                                            class="padding-left-half"
-                                        /><span
-                                            class="input-clear-button"
-                                        ></span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li
-                                class="item-content item-input no-padding-left padding-bottom"
-                            >
-                                <div class="item-inner no-padding-right">
-                                    <div class="item-title item-label">
-                                        Confirm Password*
-                                    </div>
-                                    <div class="item-input-wrap">
-                                        <input
-                                            type="password"
-                                            name="password_confirmation"
-                                            placeholder="Re-Enter your password"
-                                            v-model="userConfirmationPassword"
-                                            class="padding-left-half"
-                                        /><span
-                                            class="input-clear-button"
-                                        ></span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li
-                                class="item-content item-input no-padding-left padding-bottom"
-                            >
-                                <div class="item-inner no-padding-right">
-                                    <div class="item-title item-label">
-                                        Mobile Number*
-                                    </div>
-                                    <div class="item-input-wrap">
-                                        <input
-                                            type="number"
-                                            name="mobile_number"
-                                            placeholder="Enter Mobile Number"
-                                            v-model="userMobileNumber"
-                                            class="padding-left-half"
-                                        /><span
-                                            class="input-clear-button"
-                                        ></span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li
-                                class="item-content item-input no-padding-left padding-bottom"
-                            >
-                                <div class="item-inner no-padding-right">
-                                    <div class="item-input-wrap">
-                                        <button
-                                            class="button button-fill button border_radius_10 button-raised bg_red text-color-white button-large text-transform-capitalize height_40"
-                                            @click="registerDetail('signup', 0)"
-                                        >
-                                            Continue
-                                        </button>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="login_form" v-else>
-                    <div class="login_title text-align-center">
-                        <h3>Restaurant Detail</h3>
-                    </div>
-                    <div
-                        class="list no-hairlines login_inputs margin-top-half no-margin-bottom"
-                    >
-                        <ul>
-                            <li
-                                class="item-content item-input no-padding-left padding-bottom"
-                            >
-                                <div class="item-inner no-padding-right">
-                                    <div class="item-title item-label">
-                                        Restaurant Logo *
-                                    </div>
-                                    <div class="item-input-wrap">
-                                        <input
-                                            type="file"
-                                            id="logo"
-                                            class="padding-left-half"
-                                            accept="image/*"
-                                            @change="handleRestaurantLogo"
-                                        />
-                                    </div>
-                                    <div v-if="restaurantLogoPreview">
-                                        <img :src="restaurantLogoPreview" height="80px" width="80px" alt="" class="restaurant_logo">
-                                    </div>
-                                </div>
-                            </li>
-                            <li
-                                class="item-content item-input no-padding-left padding-bottom"
-                            >
-                                <div class="item-inner no-padding-right">
-                                    <div class="item-title item-label">
-                                        Name *
-                                    </div>
-                                    <div class="item-input-wrap">
-                                        <input
-                                            type="text"
-                                            placeholder="Enter Restaurant Name"
-                                            v-model="restaurantName"
-                                            class="padding-left-half"
-                                        />
-                                        <span class="input-clear-button"></span>
-                                        <!-- ====== ERROR SYMBOL ========= -->
-                                        <span
-                                            class="input_error_symbol display-none"
-                                            ><i class="f7-icons font-18"
-                                                >exclamationmark_triangle</i
-                                            ></span
-                                        >
-                                    </div>
-                                    <!-- ======= ERROR MESSAGE =======-->
-                                    <p
-                                        class="error_message no-margin-bottom display-none"
-                                    >
-                                        Please enter valid restaurant name
-                                    </p>
-                                </div>
-                            </li>
-                            <li
-                                class="item-content item-input no-padding-left padding-bottom"
-                            >
-                                <div class="item-inner no-padding-right">
-                                    <div class="item-title item-label">
-                                        Restaurant Address*
-                                    </div>
-                                    <div class="item-input-wrap">
-                                        <input
-                                            type="text"
-                                            placeholder="Restaurant Address"
-                                            v-model="restaurantAddress"
-                                            class="padding-left-half"
-                                        />
-                                    </div>
-                                </div>
-                            </li>
-                            <li
-                                class="item-content item-input no-padding-left padding-bottom"
-                            >
-                                <div class="item-inner no-padding-right">
-                                    <div class="item-title item-label">
-                                        Email Address*
-                                    </div>
-                                    <div class="item-input-wrap">
-                                        <input
-                                            type="email"
-                                            placeholder="Email Address"
-                                            v-model="restaurantEmail"
-                                            class="padding-left-half"
-                                        />
-                                    </div>
-                                </div>
-                            </li>
-                            <li
-                                class="item-content item-input no-padding-left padding-bottom"
-                            >
-                                <div class="item-inner no-padding-right">
-                                    <div class="item-input-wrap">
-                                        <button
-                                            class="button button-fill button border_radius_10 button-raised bg_red text-color-white button-large text-transform-capitalize height_40"
-                                            @click="registerDetail('restaurant', 1)"
-                                        >
-                                            Continue
-                                        </button>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
+                    <div class="signup_tab_img display-none">
+                        <img src="/images/sign-up.png" alt="" />
                     </div>
                 </div>
             </div>
@@ -276,7 +274,7 @@
     import { f7App, f7Page, f7 } from "framework7-vue";
     import axios from "axios";
     import { ref,reactive } from 'vue';
-    import { errorNotification, successNotification } from './commonFunction.js';
+    import { errorNotification, successNotification } from '../../commonFunction.js';
 
     const userName = ref("");
     const userEmail = ref("");
@@ -420,26 +418,61 @@
     right: 6px;
     top: 27%;
 }
-.login_screen .login_screen_inner {
+.signup_screen .signup_screen_inner {
     position: relative;
+    min-height: 100%;
+    background: #ffffff;
 }
-.login_screen .login_screen_inner .login_image img {
-    height: 100%;
-    width: 100%;
-}
-.login_screen .login_screen_inner .login_form {
+.signup_screen .signup_screen_inner::before {
+    content: "";
+    background-image: url("/images/rings.png");
     position: absolute;
-    top: 58%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    width: 100%;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-repeat: no-repeat;
+}
+.signup_screen .signup_screen_inner::after {
+    content: "";
+    background-image: url("/images/dot.png");
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 35%;
+    right: 0;
+    bottom: 0;
+    background-repeat: no-repeat;
+}
+.signup_screen .signup_screen_inner .signup_main_img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.signup_screen .signup_screen_inner .signup_image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.signup_screen .signup_screen_inner .signup_image, .signup_screen .signup_screen_inner .signup_screen_details{
+    width: 100%;
+    max-width: 50%;
+}
+.signup_screen .signup_screen_inner .signup_screen_details{
+    margin: auto;
+}
+.signup_screen .signup_screen_inner .signup_form {
     width: 100%;
     max-width: 457px;
     background: #ffffff;
     box-shadow: 0px 2px 11px rgb(166 107 107 / 25%);
     border-radius: 20px;
+    margin: auto;
     padding: 25px;
 }
-.login_screen .login_form .item-label {
+.signup_screen .signup_form .item-label {
     font-weight: 400;
     font-size: 16px;
     line-height: 19px;
@@ -452,14 +485,14 @@
 .list .item-inner:after {
     background-color: transparent !important;
 }
-.login_screen .login_form .item-input-wrap {
+.signup_screen .signup_form .item-input-wrap {
     background: #fafafa;
     border-radius: 10px;
 }
-.login_screen .login_form .item-input-wrap input {
+.signup_screen .signup_form .item-input-wrap input {
     padding-right: 24px;
 }
-.login_screen .login_form .login_title h3 {
+.signup_screen .signup_form .signup_title h3 {
     font-weight: 500;
     font-size: 26px;
     line-height: 31px;
@@ -468,24 +501,27 @@
     padding-bottom: 20px;
     margin-top: 0;
 }
-.login_screen input::placeholder {
+.sign-up-btn{
+    color: #f33e3e;
+}
+.signup_screen input::placeholder {
     color: #999999 !important;
     font-weight: 400 !important;
     font-size: 16px;
     line-height: 19px;
 }
-.login_screen .input-clear-button {
+.signup_screen .input-clear-button {
     right: 6px !important;
 }
 @media screen and (max-width: 991px) {
-    .login_screen .login_screen_inner .login_form {
+    .signup_screen .signup_screen_inner .signup_form {
         top: 56%;
         max-width: 404px;
     }
-    .login_tab_img {
+    .signup_tab_img {
         display: block !important;
     }
-    .login_main_img {
+    .signup_main_img {
         display: none;
     }
 }

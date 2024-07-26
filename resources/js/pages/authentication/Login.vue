@@ -4,7 +4,7 @@
             <div class="login_screen_inner">
                 <div class="login_image">
                     <div class="login_main_img">
-                        <img src="/images/login_screen.png" />
+                        <img src="/images/login-lg-bg.png" />
                     </div>
                     <div class="login_tab_img display-none">
                         <img src="/images/login_smallbg.png" alt="" />
@@ -34,12 +34,9 @@
                                         />
                                         <span class="input-clear-button"></span>
                                         <!-- ====== ERROR SYMBOL ========= -->
-                                        <span
-                                            class="input_error_symbol display-none"
-                                            ><i class="f7-icons font-18"
-                                                >exclamationmark_triangle</i
-                                            ></span
-                                        >
+                                        <span class="input_error_symbol display-none">
+                                            <i class="f7-icons font-18" >exclamationmark_triangle</i>
+                                        </span>
                                     </div>
                                     <!-- ======= ERROR MESSAGE =======-->
                                     <p
@@ -82,11 +79,8 @@
                                     </div>
                                 </div>
                             </li>
-
-                            <li
-                                class="item-content item-input no-padding-left padding-bottom"
-                            >
-                                <a href="/sign-up/">Sign Up Here</a>
+                            <li>
+                                <p class="no-margin text-align-center">Don't have an account? <a href="/sign-up/" class="sign-up-btn">Sign Up</a></p>
                             </li>
                         </ul>
                     </div>
@@ -143,6 +137,9 @@ const redirectToRegister = () => {
 }
 .bg_red {
     background-color: #f33e3e;
+}
+.sign-up-btn{
+    color: #f33e3e;
 }
 /* ======= ERROR MESSAGE =======*/
 .error_message {
