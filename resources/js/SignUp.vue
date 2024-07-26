@@ -147,7 +147,7 @@
                                         <div class="item-input-wrap">
                                             <button
                                                 class="button button-fill button border_radius_10 button-raised bg_red text-color-white button-large text-transform-capitalize height_40"
-                                                @click="registerDetail('signup')"
+                                                @click="registerDetail('signup', 0)"
                                             >
                                                 Continue
                                             </button>
@@ -234,7 +234,7 @@
                                         <div class="item-input-wrap">
                                             <button
                                                 class="button button-fill button border_radius_10 button-raised bg_red text-color-white button-large text-transform-capitalize height_40"
-                                                @click="registerDetail('restaurant')"
+                                                @click="registerDetail('restaurant', 1)"
                                             >
                                                 Continue
                                             </button>
@@ -256,8 +256,6 @@
     import { ref,reactive } from 'vue';
     import { errorNotification, successNotification } from './commonFunction.js';
 
-    const authId = ref(null);
-
     const userName = ref("");
     const userEmail = ref("");
     const userPassword = ref("");
@@ -265,6 +263,7 @@
     const userConfirmationPassword = ref("");
 
     const restaurantName = ref("");
+    const restaurantEmail = ref("");
     const restaurantAddress = ref("");
     const restaurantTimeZone = ref("");
 
@@ -289,7 +288,7 @@
         },
     });
 
-    const registerDetail = (type) => {
+    const registerDetail = (type, order) => {
         if(type == 'signup') {
             if(!userName.value) {
                 errorNotification("Please Enter User Name");
@@ -317,60 +316,67 @@
 
         }
 
-        const formData = new FormData();
-        formData.append('type', type);
-        
-        if(type == 'signup') {
-            formData.append('name', userName.value);
-            formData.append('email', userEmail.value);
-            formData.append('password', userPassword.value);
-            formData.append('password_confirmation', userConfirmationPassword.value);
-            formData.append('mobile_number', userMobileNumber.value);
-        } else {
-            formData.append('name', restaurantName.value);
-            formData.append('address', restaurantAddress.value);
-            formData.append('user_id', authId.value);
-        }
+        let formArray = [];
+        if (order === 0 || order === 1) {
+            
+            let signupArray = [];
+            let restaurantArray = [];
 
-        axios.post('/api/sign-up', formData)
-            .then(response => {
-                if(response.status) {
-
-                    successNotification(response.data.message);
-
-                    if(response && response.type && response.type == 'restaurant') {
-                        authId.value = null;
-                        isRestaurantShow.value = false;
-                        window.location.reload();
-                    } else {
-                        authId.value = response.data.user;
-                        isRestaurantShow.value = true;
-                    }
-                    resetFormDetail(type);
-                }
-            }).catch((error) => {
-                errorNotification(error.response.data.error);
+            signupArray.push({
+                'name': userName.value,
+                'email': userEmail.value,
+                'password': userPassword.value,
+                'password_confirmation': userConfirmationPassword.value,
+                'mobile_number': userMobileNumber.value,
+                'type' : 'signup'
             });
-    }
 
-    const resetFormDetail = (type) => {
-        if(type == 'signup') {
-            userName.value = "";
-            userEmail.value = "";
-            userPassword.value = "";
-            userMobileNumber.value = "";
-            userConfirmationPassword.value = "";
-        } else {
-            restaurantName.value = "";
-            restaurantAddress.value = "";
-            restaurantTimeZone.value = "";
+            if(restaurantName.value && restaurantAddress.value) {
+                restaurantArray.push({
+                    'name': restaurantName.value,
+                    'address': restaurantAddress.value,
+                    'type' : 'restaurant'
+                });
+            }
+
+            if (type == 'signup') {
+                isRestaurantShow.value = true;
+            }
+
+            if (signupArray.length > 0) {
+                formArray.push(signupArray);
+            }
+            if (restaurantArray.length > 0) {
+                formArray.push(restaurantArray);
+            }
+
+            if(signupArray.length > 0 && restaurantArray.length > 0) {
+
+                const formData = new FormData();
+                formData.append('register_detail', JSON.stringify(formArray));
+        
+                axios.post('/api/sign-up', formData)
+                .then(response => {
+                    if(response.status) {
+                        successNotification(response.data.message);
+                        resetFormDetail();
+                    }
+                }).catch((error) => {
+                    errorNotification(error.response.data.error);
+                });
+            }
         }
     }
 
-    const redirectToRegister = () => {
-        if(!isLoggedIn.value) {
-            window.location.href = "signup";
-        }
+    const resetFormDetail = () => {
+        userName.value = "";
+        userEmail.value = "";
+        userPassword.value = "";
+        userMobileNumber.value = "";
+        userConfirmationPassword.value = "";
+        restaurantName.value = "";
+        restaurantAddress.value = "";
+        restaurantTimeZone.value = "";
     }
 
 </script>
