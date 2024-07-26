@@ -75,7 +75,7 @@
             <a href="javascript:void(0)" class="button">Go to Dashboard</a>
             
             <p> Best regards,<br>
-            The Food Menu Team </p>
+            The E-waiting Team </p>
         
 
         @elseif ($restaurant->request_status == 0)
@@ -88,7 +88,7 @@
             <a href="javascript:void(0)" class="button">Go to Dashboard</a>
 
             <p> Best regards,<br>
-            The Food Menu Team </p>
+            The E-waiting Team </p>
 
         @endif
 

@@ -12,16 +12,17 @@ class VerificationNotification extends Notification
 {
     use Queueable;
 
-    private $restaurant;
+    private $restaurant, $user;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($restaurant)
+    public function __construct($restaurant,$user)
     {
         $this->restaurant = $restaurant;
+        $this->user = $user;
     }
 
     /**
@@ -45,7 +46,7 @@ class VerificationNotification extends Notification
     {
         return (new MailMessage)
                 ->subject('Restaurant Verification Email')
-                ->view('admin.emails.restaurant_verification', ['restaurant' => $this->restaurant]);
+                ->view('admin.emails.restaurant_verification', ['restaurant' => $this->restaurant,'user' => $this->user]);
     }
 
     /**

@@ -114,7 +114,6 @@ const loginAuthUser = () => {
             password: password.value,
         })
         .then((res) => {
-            console.log(res);
             if (res.data.success) {
                 isLoggedIn.value = true;
                 location.reload();

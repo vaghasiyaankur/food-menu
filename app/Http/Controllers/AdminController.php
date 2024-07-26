@@ -83,9 +83,10 @@ class AdminController extends Controller
 
                 User::where('id', $user->id)->update(['restaurant_id' => $restaurant->id, 'email_verified_at' => now()]);
 
-                $user = User::where('role', 'super_admin')->first();
-                if($user) {
-                    $user->notify(new VerificationNotification($restaurant));
+                $verify_user = User::where('role', 'super_admin')->first();
+                if($verify_user) {
+                    
+                    $verify_user->notify(new VerificationNotification($restaurant,$user));
 
                     return response()->json([
                         'status'    =>  true,

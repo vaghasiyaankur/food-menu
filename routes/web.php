@@ -22,6 +22,7 @@ Route::get('/qrcode', [QrCodeController::class, 'index']);
 Route::post('/fcm-token', [\App\Http\Controllers\NotificationController::class, 'updateToken'])->name('fcmToken');
 Route::post('/send-notification',[\App\Http\Controllers\NotificationController::class,'notification'])->name('notification');
 Route::get('/test', [\App\Http\Controllers\NotificationController::class,'notification']);
+Route::view('user-mail', 'admin.emails.restaurant_verification');
 
 Route::middleware('alreadyLogin')->group(function () {
     Route::get('/user', [UserController::class, 'login'])->name('login');
