@@ -22,7 +22,7 @@ class AdminController extends Controller
         if (Auth::user()->role == 'super_admin') {
             return redirect()->route('super-admin.dashboard');
         } else {
-            return view('a`dmin');
+            return view('admin');
         }
     }
 

@@ -10,10 +10,10 @@ export default defineConfig({
                 'resources/css/manager.css', 
                 'resources/js/app.js',
                 'resources/js/res_manager.js',
-                'resources/js/login.js',
+                // 'resources/js/login.js',
                 'resources/js/pos.js',
                 'resources/js/admin.js',
-                'resources/js/sign-up.js'           
+                'resources/js/authentication.js'           
             ],
             refresh: true,
         }),
