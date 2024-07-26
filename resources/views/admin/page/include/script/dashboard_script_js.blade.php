@@ -10,7 +10,12 @@
             url: "{{ route('dashboard.list') }}",
             dataType: "json",
             success: function (response) {
-                console.log(response);
+                if(response.status) {
+                    $(".approved_count").text(response.approved);
+                    $(".declined_count").text(response.declined);
+                    $(".pending_count").text(response.pending);
+                    $(".users").text(response.user);
+                }
             }
         });
     }
