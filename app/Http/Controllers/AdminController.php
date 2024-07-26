@@ -31,27 +31,27 @@ class AdminController extends Controller
         $formDetail = json_decode($request->register_detail, true);
 
         $userData = $formDetail[0];
-        unset($userData['password_confirmation']);
+        unset($userData[0]['password_confirmation']);
 
         $user = User::create([
-            'name' => $userData['name'],
-            'email' => $userData['email'],
-            'password' => Hash::make($userData['password']),
-            'mobile_number' => $userData['mobile_number'],
+            'name' => $userData[0]['name'],
+            'email' => $userData[0]['email'],
+            'password' => Hash::make($userData[0]['password']),
+            'mobile_number' => $userData[0]['mobile_number'],
             'role'  =>  'admin'
         ]);
 
         if($user) {
 
             $restaurantData = $formDetail[1];
-            $restaurantCode = $this->generateUniqueRestaurantCode($restaurantData['name']);
+            $restaurantCode = $this->generateUniqueRestaurantCode($restaurantData[0]['name']);
 
             $checkRestaurantCode = Restaurant::pluck('restaurant_code')->toArray();
             if (in_array($restaurantCode, $checkRestaurantCode)) {
                 return response()->json(['error' => 'The restaurant already exists.'], 400);
             }
 
-            $slug = Str::slug($restaurantData['name']);
+            $slug = Str::slug($restaurantData[0]['name']);
             $baseSlug = $slug;
             $i = 1;
 
@@ -71,16 +71,17 @@ class AdminController extends Controller
             $restaurantLogo = ImageHelper::storeImage($request->file('logo'), 'setting');
 
             $restaurant = Restaurant::create([
-                'name' => $restaurantData['name'],
-                'email' =>  $restaurantData['email'],
-                'location' => $restaurantData['address'],
+                'name' => $restaurantData[0]['name'],
+                'slug'  =>  $slug,
+                'email' =>  $restaurantData[0]['email'],
+                'location' => $restaurantData[0]['address'],
                 'restaurant_code' => $restaurantCode,
                 'logo'  =>  $restaurantLogo
             ]);
 
             if($restaurant) {
 
-                User::where('id', $user->id)->update(['restaurant_id' => $restaurant->id]);
+                User::where('id', $user->id)->update(['restaurant_id' => $restaurant->id, 'email_verified_at' => now()]);
 
                 $user = User::where('role', 'super_admin')->first();
                 if($user) {

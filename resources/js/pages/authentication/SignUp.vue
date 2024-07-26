@@ -370,9 +370,11 @@
                 .then(response => {
                     if(response.status) {
                         successNotification(response.data.message);
+                        f7.view.main.router.navigate({ url: "/restaurant-request/" });
                         resetFormDetail();
                     }
                 }).catch((error) => {
+                    console.log(error);
                     errorNotification(error.response.data.error);
                 });
             }
@@ -392,7 +394,6 @@
         userConfirmationPassword.value = "";
         restaurantName.value = "";
         restaurantAddress.value = "";
-        restaurantTimeZone.value = "";
     }
 
 </script>

@@ -114,10 +114,12 @@ const loginAuthUser = () => {
             password: password.value,
         })
         .then((res) => {
+            console.log(res);
             if (res.data.success) {
                 isLoggedIn.value = true;
                 location.reload();
             } else {
+                f7.view.main.router.navigate({ url: "/restaurant-request/" });
                 errorNotification(res.data.error);
             }
         });

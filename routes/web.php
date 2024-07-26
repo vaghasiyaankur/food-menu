@@ -24,7 +24,7 @@ Route::post('/send-notification',[\App\Http\Controllers\NotificationController::
 Route::get('/test', [\App\Http\Controllers\NotificationController::class,'notification']);
 
 Route::middleware('alreadyLogin')->group(function () {
-    Route::get('/login', [UserController::class, 'login'])->name('login');
+    Route::get('/user', [UserController::class, 'login'])->name('login');
 });
 
 Route::middleware('auth')->group(function () {
