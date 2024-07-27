@@ -47,6 +47,9 @@
         </div>
     </div>
 </div>
+
+<x-restaurant-details />
+
 @endsection
 
 @section('script')

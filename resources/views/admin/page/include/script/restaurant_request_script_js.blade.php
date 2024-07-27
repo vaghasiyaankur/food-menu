@@ -1,6 +1,11 @@
 <script type="text/javascript">
     $(function() {
 
+        var myModal = new bootstrap.Modal(document.getElementById('backDropModal'), {
+            backdrop: 'static',
+            keyboard: false
+        });
+
         var table = $('.data-table').DataTable({
             processing: true,
             serverSide: true,
@@ -100,6 +105,37 @@
                             });
                         }
                     });
+                }
+            });
+        });
+
+        $(document).on('click', '.restaurantDetail', function (event) {
+            event.preventDefault();
+            myModal.show();
+    
+            var id = $(this).data('id');
+            var url = "{{ route('restaurant-detail', ':id') }}";
+            url = url.replace(':id', id);
+    
+            $.ajax({
+                type: "GET",
+                url: url,
+                dataType: "json",
+                success: function (response) {
+                    if(response.status) {
+                        
+                        const statusMap = { 1: 'Approved', 2: 'Pending', 0: 'Declined'};
+                        const requestStatus = statusMap[response.detail.request_status] || "-";
+    
+                        $("#name").text(response.detail.name ? response.detail.name : "-");
+                        $("#address").text(response.detail.location ? response.detail.location : "-");
+                        $("#email").text(response.detail.email ? response.detail.email : "-");
+                        $("#code").text(response.detail.restaurant_code ? response.detail.restaurant_code : "-");
+                        $("#start_hour").text(response.detail.operating_start_hours ? response.detail.operating_start_hours : "-");
+                        $("#end_hour").text(response.detail.operating_end_hours ? response.detail.operating_end_hours : "-");
+                        $("#status").text(requestStatus);
+                        $("#logo").attr("src", response.detail.logo ? '/storage/'+response.detail.logo : 'images/logo.png');
+                    }
                 }
             });
         });
