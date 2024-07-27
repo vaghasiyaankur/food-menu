@@ -18,9 +18,9 @@ class DashboardController extends Controller
             ->get()
             ->keyBy('request_status');
 
-        $approvedRestaurants = $restaurant->where('request_status', 1)->get();
-        $declinedRestaurants = $restaurant->where('request_status', 0)->get();
-        $pendingRestaurants = $restaurant->where('request_status', 2)->get();
+        $approvedRestaurants = $restaurant->where('request_status', 1)->take(5)->latest('id')->get();
+        $declinedRestaurants = $restaurant->where('request_status', 0)->take(5)->latest('id')->get();
+        $pendingRestaurants = $restaurant->where('request_status', 2)->take(5)->latest('id')->get();
 
         $dashboardItem = [
             'status' => true,
