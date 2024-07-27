@@ -38,9 +38,19 @@ class RestaurantController extends Controller
                     $userRoute = route('super-admin.user', ['restaurant_id' => $restaurantRow->id]);
                     $branchRoute = route('super-admin.branch', ['restaurant_id' => $restaurantRow->id]);
 
-                    $btn = '<a href="javascript:void(0)" data-id="'.$restaurantRow->id.'" class="branch btn btn-primary btn-sm text-white fw-bolder restaurantDetail" style="margin-right: 10px;">Detail</a>';
-                    $btn .= '<a href="'.$userRoute.'" class="user btn btn-warning btn-sm text-white fw-bolder" style="margin-right: 10px;">Users</a>';
-                    $btn .= '<a href="'.$branchRoute.'" class="branch btn btn-info btn-sm text-white fw-bolder">Branch</a>';
+                    $btn = '<div class="d-inline-block">
+                                <a href="javascript:;" class="btn btn-icon dropdown-toggle hide-arrow me-1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bx bx-dots-vertical-rounded bx-md"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end m-0" style="">
+                                    <li><a href="javascript:void(0)" data-id="'.$restaurantRow->id.'" class="branch dropdown-item restaurantDetail" style="margin-right: 10px;">Detail</a></li>
+                                    <li><a href="'.$userRoute.'" class="dropdown-item">Users</a></li>
+                                    <li><a href="'.$branchRoute.'" class="dropdown-item">Branch</a></li>
+                                    <div class="dropdown-divider"></div>
+                                    <li><a href="javascript:;" class="dropdown-item text-danger delete-record">Delete</a></li>
+                                    <li><a href="javascript:;" class="dropdown-item text-danger delete-record">Permanent Delete</a></li>
+                                </ul>
+                            </div>';
                     return $btn;
                 })
                 ->rawColumns(['action'])
@@ -181,14 +191,18 @@ class RestaurantController extends Controller
             return DataTables::of($restaurantRequest)
                 ->addIndexColumn()
                 ->addColumn('action', function($branchRow) {
-                    $btn = '<button data-restaurant-id="'.$branchRow->id.'" data-request-status="1"
-                            class="requestStatusBtn user btn btn-primary btn-sm text-white fw-bolder" style="margin-right: 10px;">
-                                Approved
-                            </button>';
-                    $btn .= '<button data-restaurant-id="'.$branchRow->id.'" data-request-status="0"
-                            class="requestStatusBtn user btn btn-danger btn-sm text-white fw-bolder" style="margin-right: 10px;">
-                                Decline
-                            </button>';
+
+                    $btn = '<div class="d-inline-block">
+                            <a href="javascript:;" class="btn btn-icon dropdown-toggle hide-arrow me-1" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bx bx-dots-vertical-rounded bx-md"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end m-0" style="">
+                                <li><a href="javascript:void(0)" data-id="'.$branchRow->id.'" class="branch dropdown-item restaurantDetail" style="margin-right: 10px;">Detail</a></li>
+                                <li><button class="dropdown-item requestStatusBtn user" data-restaurant-id="'.$branchRow->id.'" data-request-status="1">Approved</button></li>
+                                <div class="dropdown-divider"></div>
+                                <li><a data-restaurant-id="'.$branchRow->id.'" data-request-status="0" class="dropdown-item text-danger requestStatusBtn user">Decline</a></li>
+                            </ul>
+                        </div>';
                     return $btn;
                 })
                 ->rawColumns(['action'])
