@@ -1,6 +1,9 @@
 <script type="text/javascript">
     $(function() {
         
+        var urlPath = window.location.pathname;
+        var pageType = urlPath.split('/').pop();
+
         var myModal = new bootstrap.Modal(document.getElementById('backDropModal'), {
             backdrop: 'static',
             keyboard: false
@@ -9,7 +12,12 @@
         var table = $('.data-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('restaurants.list') }}",
+            ajax: {
+                url: "{{ route('restaurants.list') }}",
+                data: function(d) {
+                    d.pageType = pageType;
+                }
+            },
             columns: [{
                     data: 'DT_RowIndex',
                     name: 'DT_RowIndex'
@@ -86,5 +94,86 @@
                 }
             });
         });
+
+        $(document).on('click', ".deleteRestaurantRow", function (e) {
+            e.preventDefault();
+
+            var row = $(this).closest('tr');
+            var deleteType = $(this).data('delete-type');
+            var deleteID = $(this).data('restaurant-id');
+
+            Swal.fire({
+                title: "Are you sure?",
+                text: getLabelMessage(deleteType, 'text'),
+                icon: "warning",
+                showCancelButton: !0,
+                confirmButtonText: getLabelMessage(deleteType, 'button'),
+                customClass: {
+                    confirmButton: "btn btn-primary me-3",
+                    cancelButton: "btn btn-label-secondary"
+                },
+                buttonsStyling: !1,
+            }).then(function(t) {
+                if (t.value) {
+                    $.ajax({
+                        url: "{{ route('restaurant.delete') }}",
+                        method: 'DELETE',
+                        data: {
+                            _token : '{{ csrf_token() }}',
+                            id : deleteID,
+                            type : deleteType
+                        },
+                        success: function(response) {
+                            if(response.status) {
+                                Swal.fire({
+                                    icon: "success",
+                                    title: getLabelMessage(deleteType, 'title'),
+                                    text: response.message,
+                                    customClass: {
+                                        confirmButton: "btn btn-success"
+                                    }
+                                }).then(function(t) {
+                                    row.fadeOut(500, function() {
+                                        table.row(row).remove().draw();
+                                    });
+                                });
+                            }
+                        },
+                        error: function(error) {
+                            Swal.fire({
+                                icon: "error",
+                                title: "Error!",
+                                text: "Error deleting data.",
+                                customClass: {
+                                    confirmButton: "btn btn-danger"
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        });
+
+        function getLabelMessage(type, messageType) {
+            const messages = {
+                restore : {
+                    text: 'You want to restore this restaurant.',
+                    button: 'Yes, Restore it!',
+                    title: 'Restore'
+                },
+                permanent_delete : {
+                    text: "You won't be able to restore this ! You want to remove this restaurant.",
+                    button: 'Yes, delete it!',
+                    title: 'Deleted'
+                },
+                temporary_delete : {
+                    text: 'You want to remove this restaurant.',
+                    button: 'Yes, delete it!',
+                    title: 'Deleted'
+                }
+            };
+
+            return messages[type][messageType];
+        }
     });
 </script>

@@ -44,6 +44,16 @@
                         <div data-i18n="Without navbar">Restaurant Request</div>
                     </a>
                 </li>
+                <li class="menu-item">
+                    <a href="{{ route('super-admin.delete-restaurant') }}" class="menu-link">
+                        <div data-i18n="Without menu">Deleted Restaurant</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="{{ route('super-admin.declined-restaurant') }}" class="menu-link">
+                        <div data-i18n="Without menu">Declined Restaurant</div>
+                    </a>
+                </li>
             </ul>
         </li>
     </ul>

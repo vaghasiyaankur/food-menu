@@ -15,7 +15,7 @@
                     <div class="row g-0">
                         <div class="col-lg-12 d-flex justify-content-between align-items-center pe-4">
                             <h5 class="card-header m-0 me-2 pb-3">Restaurant Pending Request</h5>
-                            <a href="#" class="btn btn-primary btn-sm">View All</a>
+                            <a href="{{ route('super-admin.restaurant-request') }}" class="btn btn-primary btn-sm">View All</a>
                         </div>
                         <div class="col-lg-12">
                             <div class="card-body">
@@ -104,7 +104,7 @@
                     <div class="row g-0">
                         <div class="col-lg-12 d-flex justify-content-between align-items-center pe-4">
                             <h5 class="card-header m-0 me-2 pb-3">Restaurant Approved Detail</h5>
-                            <a href="#" class="btn btn-primary btn-sm">View All</a>
+                            <a href="{{ route('super-admin.restaurant') }}" class="btn btn-primary btn-sm">View All</a>
                         </div>
                         <div class="col-lg-12">
                             <div class="card-body">
@@ -136,7 +136,7 @@
                     <div class="row g-0">
                         <div class="col-lg-12 d-flex justify-content-between align-items-center pe-4">
                             <h5 class="card-header m-0 me-2 pb-3">Restaurant Declined Detail</h5>
-                            <a href="#" class="btn btn-primary btn-sm">View All</a>
+                            <a href="{{ route('super-admin.declined-restaurant') }}" class="btn btn-primary btn-sm">View All</a>
                         </div>
                         <div class="col-lg-12">
                             <div class="card-body">

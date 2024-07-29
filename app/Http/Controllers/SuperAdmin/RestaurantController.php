@@ -29,33 +29,84 @@ class RestaurantController extends Controller
     public function getRestaurants(Request $request)
     {
         if($request->ajax()) {
-            $restaurantList = Restaurant::where('request_status', 1)->get();
 
+            $pageType = $request->query('pageType');
+            $query = Restaurant::query();
+        
+            if($pageType == 'restaurant') {
+                $query->where('request_status', 1);
+            } else if($pageType == 'declined-restaurant') {
+                $query->where('request_status', 0);
+            } else {
+                $query->onlyTrashed();
+            }
+        
+            $restaurantList = $query->get();
+        
             return DataTables::of($restaurantList)
                 ->addIndexColumn()
-                ->addColumn('action', function($restaurantRow) {
+                ->addColumn('action', function($restaurantRow) use ($pageType) {
 
                     $userRoute = route('super-admin.user', ['restaurant_id' => $restaurantRow->id]);
                     $branchRoute = route('super-admin.branch', ['restaurant_id' => $restaurantRow->id]);
 
-                    $btn = '<div class="d-inline-block">
+                    if ($pageType == 'declined-restaurant') {
+                        $actionItems = '<li><a href="javascript:;" data-delete-type="permanent_delete" data-restaurant-id="' . $restaurantRow->id . '" class="deleteRestaurantRow dropdown-item text-danger delete-record">Permanent Delete</a></li>';
+                    } elseif ($pageType == 'restaurant') {
+                        $actionItems = '<li><a href="javascript:void(0)" data-id="' . $restaurantRow->id . '" class="branch dropdown-item restaurantDetail" style="margin-right: 10px;">Detail</a></li>
+                                        <li><a href="' . $userRoute . '" class="dropdown-item">Users</a></li>
+                                        <li><a href="' . $branchRoute . '" class="dropdown-item">Branch</a></li>
+                                        <div class="dropdown-divider"></div>
+                                        <li><a href="javascript:;" data-delete-type="temporary_delete" data-restaurant-id="' . $restaurantRow->id . '" class="deleteRestaurantRow dropdown-item text-danger delete-record">Delete</a></li>
+                                        <li><a href="javascript:;" data-delete-type="permanent_delete" data-restaurant-id="' . $restaurantRow->id . '" class="deleteRestaurantRow dropdown-item text-danger delete-record">Permanent Delete</a></li>';
+                    } else {
+                        $actionItems = '<li><a href="javascript:void(0)" data-delete-type="restore" data-restaurant-id="' . $restaurantRow->id . '" class="deleteRestaurantRow dropdown-item">Restore</a></li>
+                                        <li><a href="javascript:void(0)" data-delete-type="permanent_delete" data-restaurant-id="' . $restaurantRow->id . '" class="deleteRestaurantRow dropdown-item text-danger delete-record">Permanent Delete</a></li>';
+                    }
+                    
+
+                    return '<div class="d-inline-block">
                                 <a href="javascript:;" class="btn btn-icon dropdown-toggle hide-arrow me-1" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="bx bx-dots-vertical-rounded bx-md"></i>
                                 </a>
-                                <ul class="dropdown-menu dropdown-menu-end m-0" style="">
-                                    <li><a href="javascript:void(0)" data-id="'.$restaurantRow->id.'" class="branch dropdown-item restaurantDetail" style="margin-right: 10px;">Detail</a></li>
-                                    <li><a href="'.$userRoute.'" class="dropdown-item">Users</a></li>
-                                    <li><a href="'.$branchRoute.'" class="dropdown-item">Branch</a></li>
-                                    <div class="dropdown-divider"></div>
-                                    <li><a href="javascript:;" class="dropdown-item text-danger delete-record">Delete</a></li>
-                                    <li><a href="javascript:;" class="dropdown-item text-danger delete-record">Permanent Delete</a></li>
-                                </ul>
+                                <ul class="dropdown-menu dropdown-menu-end m-0">' . $actionItems . '</ul>
                             </div>';
-                    return $btn;
-                })
+                        })
                 ->rawColumns(['action'])
                 ->make(true);
         }
+    }
+
+    /**
+     * Handle the request to delete or restore a restaurant.
+     *
+     * This method performs different actions based on the type of request received.
+     * It can restore a previously deleted restaurant, temporarily delete a restaurant,
+     * or permanently delete a restaurant.
+     *
+     * @param Request $request The request object containing the 'type' of action and 'id' of the restaurant.
+     * @return \Illuminate\Http\JsonResponse A JSON response indicating the result of the operation.
+    */
+    public function deleteRestaurant(Request $request)
+    {
+        if($request->type == 'restore' || $request->type == 'permanent_delete') {
+            $restaurant = Restaurant::withTrashed()->find($request->id);
+        } else {
+            $restaurant = Restaurant::find($request->id);
+        }
+        if($restaurant) {
+            if($request->type == 'temporary_delete') {
+                $restaurant->delete();
+                return response()->json(['status' => true, 'message' => 'Restaurant Successfully Delete.'], 200);
+            } else if ($request->type == 'restore') {
+                $restaurant->restore();
+                return response()->json(['status' => true, 'message' => 'Restaurant Restore Successfully.'], 200);
+            } else {
+                $restaurant->forceDelete();
+                return response()->json(['status' => true, 'message' => 'Restaurant Successfully Delete.'], 200);
+            }
+        }
+        return response()->json(['status' => false, 'message' => 'Restaurant not found.'], 404);
     }
 
     /**

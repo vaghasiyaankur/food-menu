@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('image')->nullable();
             $table->float('price')->nullable();
             $table->unsignedBigInteger('sub_category_id');
-            $table->foreign('sub_category_id')->references('id')->on('sub_categories');
+            $table->foreign('sub_category_id')->references('id')->on('sub_categories')->onDelete('cascade');
             $table->unsignedBigInteger('restaurant_id');
             $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
             $table->enum('added_by', ['admin', 'manager'])->default('manager');

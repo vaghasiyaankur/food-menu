@@ -54,15 +54,20 @@ Route::group(['middleware' => 'superAdmin'], function () {
     });
 
     Route::controller(RestaurantController::class)->group(function() {
+        Route::view('delete-restaurant', 'admin.page.delete_restaurant')->name('super-admin.delete-restaurant');
+        Route::view('declined-restaurant', 'admin.page.declined_restaurant')->name('super-admin.declined-restaurant');
+
         Route::get('restaurant-list', 'getRestaurants')->name('restaurants.list');
         Route::get('restaurant-request-list', 'restaurantRequestList')->name('restaurant-request.list');
         Route::get('branch-list', 'getBranch')->name('branch.list');
         Route::get('/branch/{branch}/edit', 'editBranch')->name('branch.edit');
         Route::get('/restaurant-detail/{id}', 'getRestaurantDetail')->name('restaurant-detail');
-        
+
         Route::post('branch-create-update', 'createUpdateBranch')->name('branch.create-update');
         Route::post('branch-delete', 'deleteBranch')->name('branch.delete');
         Route::post('restaurant-approved-declined', 'restaurantApprovedDeclined')->name('restaurant.approved-declined');
+        
+        Route::delete('restaurant-delete', 'deleteRestaurant')->name('restaurant.delete');
     });
 
     Route::controller(DashboardController::class)->group(function() {
