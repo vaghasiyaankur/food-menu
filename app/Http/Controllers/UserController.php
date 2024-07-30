@@ -94,7 +94,7 @@ class UserController extends Controller
 
     public function saveUserData(UserRequest $request) {
         $data = $request->toArray();
-        $data['lock_enable'] = $data['lock_enable'] ?? 0;
+        $data['lock_enable'] = isset($data['lock_enable']) && $data['lock_enable'] == 'on' ? 1 : 0;
         $data['restaurant_id'] = Auth::user()->restaurant_id;
         $data['password'] = $data['password'] ? Hash::make($data['password']) : '';
 

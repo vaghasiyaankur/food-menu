@@ -13,23 +13,7 @@
     <div class="card">
         <div class="card-datatable table-responsive">
             @includeIf('admin.page.include.header', ['title' => $headerTitle, 'button' => $button, 'back' => $back, 'route' => $route])
-            <div class="table-responsive text-nowrap">
-                <table class="table table-bordered table-responsive data-table datatables-basic border-top dataTable dtr-column">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Logo</th>
-                            <th>Name</th>
-                            <th>Location</th>
-                            <th>Status</th>
-                            <th>Open Time</th>
-                            <th>Close Time</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
+            <x-table-header :headers="['No', 'Logo', 'Name', 'Location', 'Status', 'Open Time', 'Close Time', 'Action']" />
         </div>
     </div>
 </div>

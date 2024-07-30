@@ -77,7 +77,11 @@
                         </template>
                         <template v-if="data.type == 'switch'">
                             <div class="data-name text-align-left">
-                                <Switch :name="'lock_enable'" @update:changeData="saveValue(index, null, $event)" :value="data.value" :changeStatus="data.changeStatus" />
+                                <Switch
+                                    :name="data.name"
+                                    :changeStatus="data.value"
+                                    @update:changeData="(value) => saveValue(index, null, value)"
+                                />
                             </div>
                         </template>
                         <template v-if="data.type == 'date-time'">

@@ -14,21 +14,7 @@
         <div class="card">
             <div class="card-datatable table-responsive">
                 @includeIf('admin.page.include.header', ['route' => route('super-admin.restaurant'), 'title' => 'Users', 'button' => true, 'name' => 'addUser', 'back' => true])
-                <div class="table-responsive text-nowrap">
-                    <table
-                        class="table table-bordered table-responsive data-table datatables-basic border-top dataTable dtr-column">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                </div>
+                <x-table-header :headers="['No', 'Name', 'Email', 'Action']" />
             </div>
         </div>
     </div>

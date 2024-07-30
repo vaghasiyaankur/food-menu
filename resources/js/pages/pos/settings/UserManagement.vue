@@ -57,35 +57,35 @@ const dataType = ref('all');
 
 const getUser = () => {
     axios.get('/api/get-users')
-    .then((res) => {
-        userData.value = res.data.users;
-    });                                                                                                                                                      
+        .then((res) => {
+            userData.value = res.data.users;
+        });
 }
 
-const saveUserData = () => {    
-    var formData = new FormData(event.target);
+const saveUserData = () => {
+    const formData = new FormData(event.target);
     axios.post('/api/save-user-data', formData)
-    .then((res) => {
-        successNotification(res.data.success);
-        f7.popup.close(`#addEditUserPopup`);
-        resetFormData();
-        getUser();
-    })
-    .catch((error) => {
-        const errorMessage = getErrorMessage(error);
-        errorNotification(errorMessage);
-    });
+        .then((res) => {
+            successNotification(res.data.success);
+            f7.popup.close(`#addEditUserPopup`);
+            resetFormData();
+            getUser();
+        })
+        .catch((error) => {
+            const errorMessage = getErrorMessage(error);
+            errorNotification(errorMessage);
+        });
 }
 
 const manipulateField = (formData, label, value = null) => {
     const index = formData.findIndex(item => item.label === label);
     if (index !== -1) {
-        formData[index].value = (label === 'Lock Status') ? value !== null ? value : formData[index].default : value !== null ? value : formData[index].default;
+        formData[index].value = value !== null ? value : formData[index].default;
     }
 };
 
 const showUserPopup = (id = null) => {
-    if(id){
+    if (id) {
         const user = userData.value.all.find(item => item.id === id);
         updateFormData(user);
     }else{
@@ -102,7 +102,6 @@ const updateFormData = (user) => {
     manipulateField(formData, 'Email', user.email);
     manipulateField(formData, 'Mobile Number', user.mobile_number);
     manipulateField(formData, 'Password', user.password);
-    
     manipulateField(formData, 'Confirm Password', user.password);
     manipulateField(formData, 'Role', user.role);
     manipulateField(formData, 'Lock pin', parseInt(user.lock_pin));
@@ -122,10 +121,10 @@ const deleteUserData = (id) => {
 
 const removeData = () => {
     axios.delete('/api/delete-user-data/'+deleteId.value)
-    .then((res) => {
-        successNotification(res.data.success);
-        f7.popup.close(`.removeUserPopup`);
-        getUser();
+        .then((res) => {
+            successNotification(res.data.success);
+            f7.popup.close(`.removeUserPopup`);
+            getUser();
     })
 }
 
