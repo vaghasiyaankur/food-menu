@@ -383,3 +383,9 @@ Route::get('/delete-transaction/{transaction}', [AdminOrderController::class, 'd
 // ------------------------ Admin Register Routes ------------------------ //
 
 Route::post('/sign-up', [AdminController::class, 'registerDetail']);
+
+Route::get('/branch-list', [AdminController::class, 'getBranchList']);
+
+Route::post('/add-update-branch', [AdminController::class, 'addUpdateBranch']);
+
+Route::delete('/delete-branch/{id}', [AdminController::class, 'removeBranch']);

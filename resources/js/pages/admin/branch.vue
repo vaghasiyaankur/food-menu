@@ -1,107 +1,230 @@
 <template>
     <f7-page>
-        <div class="branch_admin_page">
-            <div class="branch_header">
-                <h2 class="no-margin">Add Branch</h2>
+        <div class="user_admin_page">
+            <div class="user_header">
+                <h2 class="no-margin">User</h2>
+                <f7-breadcrumbs>
+                    <f7-breadcrumbs-item class="f7-link" active>
+                        <f7-link>Dashboard</f7-link>
+                    </f7-breadcrumbs-item>
+                    <f7-breadcrumbs-separator />
+                    <f7-breadcrumbs-item class="f7-link">
+                        <f7-link>Customers</f7-link>
+                    </f7-breadcrumbs-item>
+                </f7-breadcrumbs>
             </div>
-            <div class="branch_info">
-                <div class="add_branch_header">
-                    <i class="f7-icons size-22">arrow_left</i>
-                    <h3>Add Branch</h3>
-                </div>
-                <div class="branch_form">
-                    <div class="info_form_top">
-                        <div class="branch_name">
-                            <h4>Branch Name</h4>
-                            <input type="text" placeholder="Food Restaurant - 2">
+            <div class="user_info">
+                <div class="table_search_filter">
+                    <div class="search_bar_left">
+                        <div class="search_bar">
+                            <form data-search-container=".search-list" data-search-in=".item-title" class="searchbar">
+                                <input type="search" placeholder="Search Branch" @input="searchBranch()" v-model="searchQuery"/>
+                                <i class="searchbar-icon"></i>
+                                <span class="input-clear-button"></span>
+                            </form>
                         </div>
-                        <div class="owner_name">
-                            <h4>Owner Name</h4>
-                            <input type="text" placeholder="Enter owner name">
-                        </div>
+                        <select @change="searchBranch()" v-model="restaurantType" name="restaurant" id="select_filter" placeholder="User Filter">
+                            <option selected value="">All</option>
+                            <option v-for="restaurant in filterRestaurant" :key="restaurant.id" :value="restaurant.id">{{ restaurant.name }}</option>
+                        </select>
                     </div>
-                    <div class="info_form_bottom">
-                        <div class="address_info">
-                            <h3>Address</h3>
-                            <div class="address_form">
-                                <div class="address-input">
-                                    <h4>Address</h4>
-                                    <input type="text" placeholder="Enter address">
-                                </div>
-                                <div class="city-input">
-                                    <h4>City</h4>
-                                    <input type="text" placeholder="Enter city name">
-                                </div>
-                                <div class="zip-code-input">
-                                    <h4>Zip Code</h4>
-                                    <input type="number" placeholder="Enter zip code">
-                                </div>
-                                <div class="state-input">
-                                    <h4>State</h4>
-                                    <input type="text" placeholder="Enter city name">
-                                </div>
-                                <div class="contry-input">
-                                    <h4>Country</h4>
-                                    <input type="text" placeholder="Enter country name">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="contact_info-branch_img">
-                            <div class="contact_info">
-                                <h3>Contact Information</h3>
-                                <div class="mobile-input">
-                                    <h4>Mobile number</h4>
-                                    <input type="number" placeholder="Enter mobile number">
-                                </div>
-                                <div class="email-input">
-                                    <h4>Email</h4>
-                                    <input type="email" placeholder="Enter email address">
-                                </div>
-                            </div>
-                            <div class="branch_img">
-                                <h4>Branch Image</h4>
-                                <div class="image_select_preview-wrapper">
-                                    <div class="image_select_preview">
-                                        <svg width="80" height="80" viewBox="0 0 80 80" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M78.7585 54.869C78.7585 61.1955 72.5516 67.2604 66.3447 67.2604C63.2602 67.2627 60.2844 66.1241 57.9917 64.0644C55.6991 62.0048 54.2523 59.1702 53.9309 56.1081H11.724C11.0655 56.1081 10.434 55.847 9.96839 55.3823C9.50279 54.9175 9.24121 54.2871 9.24121 53.6298V15.2166C9.24121 14.5593 9.50279 13.9289 9.96839 13.4642C10.434 12.9994 11.0655 12.7383 11.724 12.7383H63.8619C64.5204 12.7383 65.1519 12.9994 65.6175 13.4642C66.0831 13.9289 66.3447 14.5593 66.3447 15.2166V42.4776C69.6096 42.5644 72.7168 43.8978 75.0262 46.2031C77.3357 48.5084 78.6715 51.61 78.7585 54.869Z"
-                                                fill="#FAFAFA" />
-                                            <path
-                                                d="M58.8969 22.6519C58.8969 23.6322 58.6056 24.5905 58.06 25.4056C57.5144 26.2207 56.7389 26.856 55.8316 27.2311C54.9242 27.6063 53.9258 27.7044 52.9626 27.5132C51.9994 27.3219 51.1146 26.8499 50.4202 26.1567C49.7258 25.4635 49.2528 24.5803 49.0612 23.6188C48.8696 22.6574 48.968 21.6608 49.3438 20.7551C49.7196 19.8494 50.3561 19.0753 51.1726 18.5306C51.9892 17.986 52.9493 17.6953 53.9313 17.6953C55.2483 17.6953 56.5113 18.2175 57.4425 19.1471C58.3737 20.0766 58.8969 21.3373 58.8969 22.6519Z"
-                                                fill="#E0E0E0" />
-                                            <path
-                                                d="M10.8789 54.0906L29.3608 31.3012C29.4784 31.1562 29.6274 31.0395 29.7966 30.96C29.9658 30.8804 30.1508 30.84 30.3377 30.8419C30.5247 30.8437 30.7089 30.8876 30.8765 30.9705C31.0441 31.0533 31.1907 31.1729 31.3055 31.3202L39.0347 41.2398L46.7992 33.4893C46.9183 33.3705 47.0605 33.277 47.2169 33.2148C47.3734 33.1525 47.5409 33.1226 47.7093 33.127C47.8777 33.1315 48.0435 33.17 48.1965 33.2404C48.3494 33.3108 48.4865 33.4116 48.5992 33.5365L58.8968 44.9572C58.8968 44.9572 53.9313 47.4354 53.9313 56.1094H11.7244C11.4932 56.1026 11.2689 56.0294 11.0783 55.8986C10.8878 55.7679 10.739 55.585 10.6498 55.372C10.5606 55.1591 10.5347 54.9249 10.5754 54.6977C10.616 54.4704 10.7214 54.2596 10.8789 54.0906Z"
-                                                fill="#E0E0E0" />
-                                            <path
-                                                d="M73.7931 54.8698C73.7931 55.1985 73.6623 55.5137 73.4295 55.746C73.1967 55.9784 72.881 56.109 72.5517 56.109H67.5862V61.0655C67.5862 61.3942 67.4554 61.7094 67.2226 61.9417C66.9898 62.1741 66.6741 62.3047 66.3448 62.3047C66.0156 62.3047 65.6998 62.1741 65.467 61.9417C65.2342 61.7094 65.1034 61.3942 65.1034 61.0655V56.109H60.1379C59.8087 56.109 59.4929 55.9784 59.2601 55.746C59.0273 55.5137 58.8965 55.1985 58.8965 54.8698C58.8965 54.5412 59.0273 54.226 59.2601 53.9936C59.4929 53.7612 59.8087 53.6307 60.1379 53.6307H65.1034V48.6741C65.1034 48.3455 65.2342 48.0303 65.467 47.7979C65.6998 47.5656 66.0156 47.435 66.3448 47.435C66.6741 47.435 66.9898 47.5656 67.2226 47.7979C67.4554 48.0303 67.5862 48.3455 67.5862 48.6741V53.6307H72.5517C72.881 53.6307 73.1967 53.7612 73.4295 53.9936C73.6623 54.226 73.7931 54.5412 73.7931 54.8698ZM80 54.8698C80.0012 58.2689 78.7296 61.5457 76.4347 64.057C74.1399 66.5682 70.9876 68.1326 67.5966 68.443C64.2056 68.7534 60.8208 67.7875 58.1067 65.7347C55.3925 63.682 53.545 60.6907 52.9269 57.3481H11.7241C10.7368 57.347 9.79015 56.955 9.09197 56.2581C8.3938 55.5612 8.00108 54.6163 8 53.6307V15.2174C8.00108 14.2318 8.3938 13.2869 9.09197 12.59C9.79015 11.8931 10.7368 11.5011 11.7241 11.5H63.8621C64.8494 11.5011 65.7961 11.8931 66.4942 12.59C67.1924 13.2869 67.5851 14.2318 67.5862 15.2174V41.3021C70.9765 41.6143 74.128 43.1781 76.424 45.6875C78.72 48.1969 79.9952 51.4713 80 54.8698ZM10.4828 15.2174V52.8872L28.3501 30.5929C28.5898 30.2937 28.8957 30.0541 29.2439 29.8928C29.592 29.7315 29.9729 29.653 30.3566 29.6635C30.7403 29.6739 31.1163 29.773 31.4551 29.9529C31.794 30.1329 32.0864 30.3888 32.3094 30.7006L39.0371 39.4846L45.8658 32.6682C46.1116 32.4202 46.4076 32.2275 46.7341 32.1029C47.0605 31.9783 47.4098 31.9248 47.7586 31.9458C48.1073 31.9651 48.4479 32.0576 48.7583 32.2173C49.0687 32.3769 49.3419 32.6 49.5601 32.8722L59.0989 43.3371C60.9109 42.194 62.9688 41.4966 65.1034 41.3021V15.2174C65.103 14.8889 64.9721 14.574 64.7394 14.3417C64.5067 14.1094 64.1912 13.9787 63.8621 13.9783H11.7241C11.395 13.9787 11.0795 14.1094 10.8468 14.3417C10.6141 14.574 10.4832 14.8889 10.4828 15.2174ZM30.3127 32.1733L12.0738 54.8698H47.6952L30.3127 32.1733ZM52.6897 54.8698C52.6907 52.984 53.0853 51.119 53.8481 49.3938C54.6109 47.6685 55.7253 46.1207 57.1204 44.8489L47.672 34.4803L40.5621 41.4759L50.8205 54.8698H52.6897ZM77.5172 54.8698C77.5172 52.6641 76.862 50.508 75.6343 48.674C74.4067 46.84 72.6618 45.4106 70.6203 44.5665C68.5788 43.7224 66.3324 43.5016 64.1652 43.9319C61.998 44.3622 60.0072 45.4243 58.4447 46.984C56.8822 48.5437 55.8182 50.5308 55.3871 52.6941C54.956 54.8575 55.1772 57.0998 56.0229 59.1376C56.8685 61.1754 58.3005 62.9172 60.1378 64.1426C61.9751 65.368 64.1351 66.0221 66.3448 66.0221C69.3069 66.0188 72.1468 64.8428 74.2413 62.752C76.3358 60.6613 77.514 57.8266 77.5172 54.8698ZM47.7241 22.6522C47.7241 21.4269 48.0882 20.229 48.7702 19.2101C49.4522 18.1912 50.4216 17.3971 51.5558 16.9282C52.6899 16.4592 53.9379 16.3365 55.1419 16.5756C56.346 16.8147 57.4519 17.4047 58.32 18.2712C59.188 19.1377 59.7792 20.2417 60.0187 21.4435C60.2582 22.6454 60.1352 23.8911 59.6655 25.0232C59.1957 26.1553 58.4001 27.123 57.3794 27.8038C56.3587 28.4846 55.1586 28.8479 53.931 28.8479C52.2855 28.846 50.7078 28.1926 49.5442 27.0311C48.3806 25.8696 47.7261 24.2948 47.7241 22.6522ZM50.2069 22.6522C50.2069 23.3875 50.4253 24.1062 50.8345 24.7175C51.2437 25.3289 51.8254 25.8053 52.5059 26.0867C53.1864 26.3681 53.9352 26.4417 54.6576 26.2982C55.38 26.1548 56.0436 25.8007 56.5644 25.2809C57.0852 24.761 57.4399 24.0986 57.5836 23.3775C57.7273 22.6564 57.6536 21.9089 57.3717 21.2297C57.0898 20.5504 56.6125 19.9698 56.0001 19.5613C55.3876 19.1529 54.6676 18.9348 53.931 18.9348C52.9437 18.9359 51.997 19.3279 51.2989 20.0248C50.6007 20.7217 50.208 21.6667 50.2069 22.6522Z"
-                                                fill="#999999" />
-                                        </svg>
-                                        <button class="choose_img_btn">
-                                            <span>Choose Image</span>
-                                        </button>
+                    <div class="no-padding no-margin">
+                        <button @click="showBranchModal()" class="button button-raised button-raise text-color-white bg-pink height-40 padding-horizontal padding-vertical-half text-transform-capitalize" data-popup="#addEditBranchPopup">
+                            <Icon name="plusCircleIcon" class="margin-right-half" /> Add Branch
+                        </button>
+                    </div>
+                </div>
+                <div class="user_table_wrapper">
+                    <table class="user_table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Logo</th>
+                                <th>Branch Name</th>
+                                <th>Owner Name</th>
+                                <th>Email</th>
+                                <th>Address</th>
+                                <th>Mobile Number</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(branch, index) in branchDetails" :key="index">
+                                <td>{{ (paginateData.per_page * (pageCount - 1)) + (index + 1) }}</td>
+                                <td>
+                                    <div class="customer-detail">
+                                        <div class="customer-img">
+                                            <img :src="'/storage/'+branch.logo" width="40px" height="40px">
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="action-btn">
-                        <button class="cancel_btn">
-                            <span>Cancel</span>
-                        </button>
-                        <button class="save_btn">
-                            <span>Save Changes</span>
-                        </button>
+                                </td>
+                                <td>{{ branch.branch_name }}</td>
+                                <td>{{ branch.owner_name }}</td>
+                                <td>{{ branch.email }}</td>
+                                <td>{{ branch.address }}</td>
+                                <td>{{ branch.mobile_number }}</td>
+                                <td>
+                                    <div class="flex gap-4 items-center">
+                                        <svg @click="setEditDelete(branch.id, 'delete')" width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M3 6H5H21V8H19.3628L18.2794 20.5561C18.2152 21.3541 17.5408 22 16.7397 22H7.26028C6.45924 22 5.78483 21.3541 5.72057 20.5561L4.63716 8H3V6ZM8 10V19H10V10H8ZM14 
+                                            10V19H16V10H14ZM5.93682 8L6.86142 20H17.1386L18.0632 8H5.93682ZM14 2H10V4H4V6H20V4H14V2Z" fill="#F33E3E"/>
+                                        </svg>
+                                        <svg @click="setEditDelete(branch.id, 'edit')" width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M13.5 6.53573V11.1786C13.5 12.4585 12.4585 13.5 11.1785 13.5H2.82142C1.54151 13.5 0.5 12.4585 0.5 11.1786V2.82145C0.5 1.54154 1.54151 0.500029 2.82142 0.500029H7.46427C7.72067 0.500029 7.92855 0.707912 
+                                            7.92855 0.964314C7.92855 1.22071 7.72067 1.4286 7.46427 1.4286H2.82142C2.05338 1.4286 1.42857 2.05341 1.42857 2.82145V11.1786C1.42857 11.9466 2.05338 12.5714 2.82142 12.5714H11.1785C11.9466 12.5714 12.5714 11.9466 
+                                            12.5714 11.1786V6.53573C12.5714 6.27933 12.7793 6.07144 13.0357 6.07144C13.2921 6.07144 13.5 6.27933 13.5 6.53573ZM3.88603 7.13605L10.386 0.636064C10.5674 0.454645 10.8612 0.454645 11.0425 0.636064L13.3639 2.95749C13.5454 
+                                            3.13891 13.5454 3.43268 13.3639 3.61399L6.86395 10.114C6.7769 10.201 6.65885 10.25 6.5357 10.25H4.21428C3.95788 10.25 3.74999 10.0421 3.74999 9.78572V7.4643C3.74999 7.34115 3.79897 7.2231 3.88603 7.13605ZM9.97791 2.35717L11.6428 
+                                            4.02209L12.3792 3.28574L10.7143 1.62081L9.97791 2.35717ZM4.67856 9.32144H6.34349L10.9863 4.67859L9.32141 3.01367L4.67856 7.65651V9.32144Z" fill="#F33E3E" stroke="#F33E3E" stroke-width="0.7"></path>
+                                        </svg>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr v-if="branchDetails.length == 0">
+                                <td colspan="8">No Data Found !!</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="pagination_wrapper">
+                    <p class="no-margin">Showing {{ paginateData.to }} of {{ paginateData.total }} Results</p>
+                    <div class="pagination">
+                        <Pagination :function-name="getBranchList" :data="paginateData" />
                     </div>
                 </div>
             </div>
+        </div>
+
+        <!-- Add Update Branch Popup -->
+        <div class="popup addEditBranchPopup" id="addEditBranchPopup">
+            <AddUpdateBranch ref="branchRef" :modal-title="modalTitle" :branch-details="currentBranchDetails" @save-branch="saveBranch" />
+        </div>
+        <!-- ========= DELETE Branch POPUP ========= -->
+        <div class="popup removeBranchPopup">
+            <RemovePopup :title="'Are you sure delete this branch ?'" @remove="deleteBranch" />
         </div>
     </f7-page>
 </template>
 
 <script setup>
-import {
-    f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Breadcrumbs,
-    f7BreadcrumbsItem, f7BreadcrumbsSeparator, f7BreadcrumbsCollapsed,
-} from 'framework7-vue';
+    import axios from 'axios';
+    import { ref, onMounted } from 'vue';
+    import Icon from '../../components/Icon.vue';
+    import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Breadcrumbs, f7BreadcrumbsItem, f7BreadcrumbsSeparator, f7BreadcrumbsCollapsed } from 'framework7-vue';
+    import Pagination from '../../components/Pagination.vue';
+    import AddUpdateBranch from './Modal/AddUpdateBranch.vue';
+    import RemovePopup from '../../components/common/RemovePopup.vue';
+    import { errorNotification, successNotification } from '../../commonFunction';
+
+    onMounted(() => {
+        getBranchList();
+    });
+
+    const branchDetails = ref([]);
+    const paginateData = ref([]);
+    const filterRestaurant = ref([]);
+
+    const restaurantType = ref("");
+    const searchQuery = ref("");
+
+    const pageNumber = ref(1);
+    const pageCount = ref(1);
+
+    const modalTitle = ref(null);
+    const editDeleteId = ref(null);
+
+    const currentBranchDetails = ref(null);
+    const originalBranchDetails = ref(null);
+
+    const branchRef = ref(null);
+
+    const debounce = (func, delay) => {
+        let timeoutId;
+        return function (...args) {
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => {
+                func.apply(this, args);
+            }, delay);
+        };
+    }
+
+    const searchBranch = debounce(() => {
+        const currentSearchQuery = searchQuery.value;
+        const currentRestaurantType = restaurantType.value;
+        getBranchList(currentSearchQuery, currentRestaurantType);
+    }, 300);
+
+    const getBranchList = async (searchQuery = '', restaurantType = '', pageNum) => {
+        
+        if (pageNum == undefined || pageNum == 1) {
+            pageNum = 1
+        } else if (pageNum.includes('page')) {        
+                pageNum = pageNum.split('page=')[1];
+        }
+        pageNumber.value = pageNum;
+        pageCount.value = pageNum;
+
+        var page = '/api/branch-list' + '?page=' + pageNum + '&search=' + searchQuery + '&filter='+ restaurantType;
+
+        axios.get(page)
+        .then(response => {
+            branchDetails.value = response.data.branch.data;
+            paginateData.value = response.data.branch;
+            filterRestaurant.value = response.data.restaurant;
+        }).catch((error) => {
+            console.error("Error fetching branch :", error);
+        });
+    }
+
+    const showBranchModal = () => {
+        branchRef.value.logo = '';
+        modalTitle.value = "Add Branch";
+        currentBranchDetails.value = {};
+        originalBranchDetails.value = {};
+        f7.popup.open(`#addEditBranchPopup`);
+    }
+
+    const saveBranch = (branch) => {
+        axios.post('/api/add-update-branch', branch)
+        .then(response => {
+            successNotification(response.data.success);
+            f7.popup.close(`#addEditBranchPopup`);
+            getBranchList('', '', 1);
+        })
+        .catch(error => {
+            if (error.response && error.response.status === 422) {
+                const errors = error.response.data.error;
+                for (const messages of Object.entries(errors)) {
+                    messages.forEach(message => errorNotification(`${message}`));
+                }
+            } else {
+                errorNotification('An unexpected error occurred.');
+            }
+        });
+    }
+
+    const setEditDelete = (id, type) => {
+        editDeleteId.value = id;
+        if (type == 'edit') {
+            modalTitle.value = 'Edit Branch';
+            const branch = branchDetails.value.find(branch => branch.id === id);
+            currentBranchDetails.value = { ...branch }; 
+            originalBranchDetails.value = { ...branch };
+        }
+        f7.popup.open(type == 'edit' ? '#addEditBranchPopup' :'.removeBranchPopup');
+    }
+
+    const deleteBranch = () => {
+        axios.delete('/api/delete-branch/'+editDeleteId.value)
+        .then(response => {
+            if(response.status) {
+                f7.popup.close(`.removeBranchPopup`);
+                successNotification(response.data.success);
+                getBranchList('', '', 1);
+            }
+        }).catch((error) => {
+            if(error.response || error.response.status == 404) {
+                errorNotification(error.response.data.message);
+            }
+        })
+    }
 </script>

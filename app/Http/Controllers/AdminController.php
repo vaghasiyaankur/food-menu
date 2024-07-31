@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helper\ImageHelper;
 use App\Helper\SettingHelper;
 use App\Http\Requests\UserRequest;
+use App\Models\Branch;
 use App\Models\Product;
 use App\Models\Restaurant;
 use App\Models\User;
@@ -14,6 +15,7 @@ use Cookie;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 class AdminController extends Controller
@@ -107,6 +109,89 @@ class AdminController extends Controller
         } while (Restaurant::where('restaurant_code', $restaurantCode)->exists());
 
         return $restaurantCode;
+    }
+
+    public function getBranchList(Request $request)
+    {
+        $search = $request->input('search', '');
+        $filter = $request->input('filter', '');
+
+        $branchQuery = Branch::query();
+        $restaurant = Restaurant::select('id', 'name')->get();
+
+        $branchQuery->when($search, function ($query, $search) {
+            return $query->where('branch_name', 'like', '%' . $search . '%')
+                ->orWhere('owner_name', 'like', '%' . $search . '%')
+                ->orWhere('email', 'like', '%' . $search . '%');
+        });
+
+        $branchQuery->when($filter, function ($query, $filter) {
+            return $query->where('restaurant_id', $filter);
+        });
+
+        $branch = $branchQuery->paginate(10);
+        return response()->json(['branch' =>  $branch, 'restaurant' => $restaurant], 200);
+    }
+
+    public function addUpdateBranch(Request $request)
+    {
+        $rules = [
+            'branch_name'   =>  'required',
+            'owner_name'    =>  'required|string',
+            'email'         =>  'required|email',
+            'mobile_number' =>  'required|digits:10'
+        ];
+        
+        if(request()->get('id')) {
+            $rules['logo'] = 'image|mimes:jpg,png,jpeg,webp|max:1024';
+        }else{
+            $rules['logo'] = 'required|mimes:jpg,png,jpeg,webp|max:1024';
+        }
+        
+        $branchFormData = $request->all();
+        $validatedData = Validator::make($request->all(), $rules);
+        
+        if ($validatedData->fails()) {
+            return response()->json([
+                'status' =>  false,
+                'error'  =>  $validatedData->errors()
+            ], 422);
+        }
+        
+        if(array_key_exists('id', $branchFormData)) {
+            $branch = Branch::findOrFail($branchFormData['id']);
+            $image_name = $branch->logo;
+
+            if($request->file('logo'))  ImageHelper::removeImage($branch->logo);
+        }
+
+        if($request->file('logo')){
+            $directory = storage_path('app/public/branch_logo/');
+            if (!file_exists($directory)) {
+                mkdir($directory, 0777, true);
+            }
+            $image_name = ImageHelper::storeImage($request->file('logo'), 'branch_logo');
+        }
+        
+        $branchFormData['logo'] = $image_name;
+        $branchFormData['restaurant_id'] = Auth::user()->restaurant_id;
+
+        Branch::updateOrCreate(['id' => $request->id ], $branchFormData);
+        return response()->json([
+            'success'   =>  $request->id ? 'Branch Updated Successfully.' : 'Branch Created Successfully.',
+            'status'    =>  true
+        ], 200);
+    }
+
+    public function removeBranch($id)
+    {
+        $branch = Branch::findOrFail($id);
+        if($branch) {
+            $branch->delete();
+            return response()->json(['status' => true, 'success' => 'Changes Save Successfully'], 200);
+        } else {
+            return response()->json(['status' => false, 'error' => 'Branch Not Found'], 404);
+        }
     }
     
 }
