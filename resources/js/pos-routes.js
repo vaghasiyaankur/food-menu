@@ -16,9 +16,14 @@ import TableView from "./pages/pos/TableView.vue"
 import KotView from "./pages/pos/KOT-view.vue"
 import completedOrders from "./pages/pos/completedOrders.vue"
 import currentOrders from "./pages/pos/currentOrders.vue"
-
+import LockScreen from './pages/restaurant-manager/LockScreen.vue'
 
 export default [
+  {
+    name : 'LockScreen',
+    path: '/lock-screen/',
+    component: LockScreen,
+  },
   {
     name : 'TableView',
     path: '/',

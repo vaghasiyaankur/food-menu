@@ -21,8 +21,14 @@ import AddEditProduct from "./pages/pos/menu-management/AddEditProduct.vue";
 import DigitalMenu from "./pages/pos/menu-management/DigitalMenu.vue";
 import FoodIngredient from "./pages/pos/menu-management/FoodIngredient.vue";
 import FoodVariation from "./pages/pos/menu-management/FoodVariation.vue";
+import LockScreen from './pages/restaurant-manager/LockScreen.vue';
 
 export default [
+  {
+    name : 'LockScreen',
+    path: '/lock-screen/',
+    component: LockScreen,
+  },
   {
     name : 'dashboard',
     path: '/dashboard/',

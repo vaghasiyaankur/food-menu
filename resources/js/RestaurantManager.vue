@@ -75,6 +75,7 @@ onMounted(() => {
       checkReservation();
     }
   }, 500);
+  resetTimer();
   $(window).bind("load", function () {
     $(".overlay, body").addClass("loaded");
     setTimeout(function () {
@@ -177,7 +178,7 @@ const removeLoader = () => {
 };
 
 const setTimer = () => {
-  warningTimer.value = setTimeout(warningMessage.value, 15 * 60 * 1000);
+  warningTimer.value = setInterval(warningMessage, 15 * 60 * 1000);
 };
 
 const warningMessage = () => {
@@ -188,7 +189,7 @@ const warningMessage = () => {
 };
 
 const resetTimer = () => {
-  clearTimeout(warningTimer.value);
+  clearInterval(warningTimer.value);
   setTimer();
 };
 
@@ -197,7 +198,7 @@ const lockScreenEnable = () => {
     headers: { "content-type": "multipart/form-data" },
   };
   axios
-    .post("/api/lockenabledisable", { lock: 1 }, config)
+    .post("/api/lock-enable-disable", { lock: 1 }, config)
     .then((res) => {})
     .catch((err) => {});
 };

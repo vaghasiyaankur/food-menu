@@ -55,11 +55,11 @@ class AuthController extends Controller
         return 'success';
     }
 
-    public function userPasscode()
+    public function userPassCode()
     {
         $user = Auth::user();
 
-        return response()->json(['passcode' => @$user->lock_pin]);
+        return response()->json(['passCode' => @$user->lock_pin]);
     }
 
 }

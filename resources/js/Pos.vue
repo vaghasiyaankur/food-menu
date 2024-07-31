@@ -143,7 +143,7 @@ const removeLoader = () => {
 };
 
 const setTimer = () => {
-  warningTimer.value = setTimeout(warningMessage, 15 * 60 * 1000);
+  warningTimer.value = setInterval(warningMessage, 15 * 60 * 1000);
 };
 
 const warningMessage = () => {
@@ -154,14 +154,14 @@ const warningMessage = () => {
 };
 
 const resetTimer = () => {
-  clearTimeout(warningTimer.value);
+  clearInterval(warningTimer.value);
   setTimer();
 };
 
 const lockScreenEnable = async () => {
   try {
     const config = { headers: { "content-type": "multipart/form-data" } };
-    await axios.post("/api/lockenabledisable", { lock: 1 }, config);
+    await axios.post("/api/lock-enable-disable", { lock: 1 }, config);
   } catch (error) {
     console.error("Error:", error);
   }
@@ -186,7 +186,7 @@ onMounted(async () => {
         getCurrencyData();
       }
     }, 500);
-
+    resetTimer();
     $(document).ready(function () {
 
       if ($(".overlay").length) {

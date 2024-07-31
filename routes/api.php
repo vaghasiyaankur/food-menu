@@ -333,9 +333,9 @@ Route::get('/checkLogin', [AuthController::class, 'checklogin']);
 
 Route::post('/login-user', [AuthController::class, 'loginUser']);
 
-Route::post('lockenabledisable', [AuthController::class , 'lockEnableDisable']);
+Route::post('lock-enable-disable', [AuthController::class , 'lockEnableDisable']);
 
-Route::get('getuserpasscode', [AuthController::class , 'userPasscode']);
+Route::get('get-user-pass-code', [AuthController::class , 'userPassCode']);
 
 // ------------------------ Coupon Routes ------------------------ //
 

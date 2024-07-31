@@ -53,130 +53,107 @@
     </f7-page>
 </template>
 
-<script>
-import { f7,f7Page} from 'framework7-vue';
-import $ from 'jquery';
-import axios from 'axios';
-import moment from 'moment';
+<script setup>
+    import { ref, onBeforeMount } from 'vue';
+    import { f7, f7Page } from 'framework7-vue';
+    import $ from 'jquery';
+    import axios from 'axios';
+    import moment from 'moment';
 
+    const pinPosition = ref(0);
+    const pin = ref('');
+    const passCode = ref(0);
+    const dateTime = ref(null);
 
-export default {
-    name : 'LockScreen',
-    data() {
-        return {
-            pinposition : 0,
-            pin: '',
-            passcode: 0,
-            dateTime : null,
+    const timeFormate = () => {
+        dateTime.value = moment().format('hh:mm A');
+        setInterval(() => {
+            dateTime.value = moment().format('hh:mm A');
+        }, 60000);
+    };
+
+    const dateFormat = () => moment().format('dddd MMMM d, Y');
+
+    const passwordVerify = () => {
+    if (pin.value.length === 4 && parseInt(passCode.value) === parseInt(pin.value)) {
+        $('.lock-screen').addClass('scale-out-ver-top');
+        $(".numberfield").removeClass('number_active');
+        pinPosition.value = 0;
+        pin.value = '';
+        setTimeout(() => {
+            f7.view.main.router.navigate({ url: '/table/' });
+        }, 500);
+        lockScreenDisable();
+    } else {
+        $(".numberfield").removeClass('number_active');
+        pinPosition.value = 0;
+        pin.value = '';
+        $("#fields").addClass('miss');
+        $('.password_waiting').addClass('display-none');
+        $('.wrong_passcord').removeClass('display-none');
+        $('.pin_show').addClass('wrong_password');
+        setTimeout(() => {
+            $("#fields").removeClass('miss');
+        }, 500);
+        setTimeout(() => {
+            $('.wrong_passcord').addClass('display-none');
+            $('.password_waiting').removeClass('display-none');
+            $('.pin_show').removeClass('wrong_password');
+        }, 2000);
+    }
+    };
+
+    const addLockPin = (number) => {
+
+        const element = event.target;
+        element.classList.add("number_active");
+        setTimeout(() => {
+            element.classList.remove("number_active");
+        }, 500);
+
+        if (pin.value.length <= 4) {
+            const pos = pinPosition.value + 1;
+            $("#position-" + pos).addClass('number_active');
+            pinPosition.value++;
+            pin.value += number;
+            if (pin.value.length === 4) {
+                passwordVerify();
+            }
         }
-    },
-    components : { f7,f7Page },
-    mounted() {
-        this.$root.activationMenu('login');
-        this.$root.removeLoader();
-    },
-    created() {
-        this.getusepasscode();
-        this.timeformat();
-    },
-    methods: {
-        timeformat: function () {
-            this.dateTime = moment().format('hh:mm A');
-            setInterval(() => {
-                this.dateTime = moment().format('hh:mm A');
-            }, 60000);
-        },
-        dateFormat : function () {
-            return moment().format('dddd MMMM d, Y')
-        },
-         /* verify user passcode */
-        passwordVerify() {
-            if(this.pin.length == 4 && (parseInt(this.passcode) == parseInt(this.pin))){
-                $('.lock-screen').addClass('scale-out-ver-top');
-                // var routes = this.$router;
-                $(".numberfield").removeClass('number_active');
-                this.pinposition = 0;
-                this.pin = '';
-                setTimeout(function () {
-                    f7.view.main.router.navigate({ url: '/table/' });
-                }, 500);
-                this.lockScreenDisable();
-            }else{
-                $(".numberfield").removeClass('number_active');
-                this.pinposition = 0;
-                this.pin = '';
-                $("#fields").addClass('miss');
-                $('.password_waiting').addClass('display-none');
-                $('.wrong_passcord').removeClass('display-none');
-                $('.pin_show').addClass('wrong_password');
-                setTimeout(function() {
-                    $("#fields").removeClass('miss');
-                }, 500);
-                setTimeout(function () {
-                    $('.wrong_passcord').addClass('display-none');
-                    $('.password_waiting').removeClass('display-none');
-                    $('.pin_show').removeClass('wrong_password');
-                }, 2000);
-            }
-        },
+    };
 
-        /* Pin number set */
-        addLockPin(number){
+    const removeLockPin = () => {
+        if (pin.value.length > 0) {
+            const pos = pinPosition.value;
+            $("#position-" + pos).removeClass('number_active');
+            pinPosition.value--;
+            pin.value = pin.value.slice(0, -1);
+        }
+    };
 
-            var element = event.target;
-            element.classList.add("number_active");
-
-            setTimeout(function() {
-                element.classList.remove("number_active")
-            }, 500);
-
-            if(this.pin.length <= 4){
-                var pos = this.pinposition + 1;
-                $("#position-"+pos).addClass('number_active');
-                this.position = this.pinposition++;
-                let newpin = '' + this.pin + number;
-                this.pin = newpin;
-                if(newpin.length == 4){
-                    this.passwordVerify();
-                }
-            }
-        },
-
-        /* Remove last number of the pin*/
-        removeLockPin() {
-            if(this.pin.length > 0){
-
-                var pos = this.pinposition;
-                $("#position-"+pos).removeClass('number_active');
-                this.position = this.pinposition--;
-
-                let newpin = this.pin.slice(0, -1);
-                this.pin = newpin;
-
-            }
-        },
-
-        /* Lock Screen Disable for backend side */
-        lockScreenDisable(){
-            const config = {
-                headers: { 'content-type': 'multipart/form-data' }
-            }
-            axios.post('/api/lockenabledisable',{lock : 0},config)
+    const lockScreenDisable = () => {
+        const config = {
+            headers: { 'content-type': 'multipart/form-data' }
+        };
+        axios.post('/api/lock-enable-disable', { lock: 0 }, config)
             .then(res => {
             }).catch(err => {
-            })
-        },
-        /* User Passcode catch from database */
-        getusepasscode(){
-            axios.get('/api/getuserpasscode')
+            });
+    };
+
+    const getUsePassCode = () => {
+        axios.get('/api/get-user-pass-code')
             .then(res => {
-                this.passcode = res.data.passcode;
+            passCode.value = res.data.passCode;
             })
             .catch(err => {
             });
-        },
-    }
-}
+    };
+
+    onBeforeMount(() => {
+        getUsePassCode();
+        timeFormate();
+    });
 </script>
 <style scoped>
 .miss {
