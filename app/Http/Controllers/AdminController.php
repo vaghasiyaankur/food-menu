@@ -40,6 +40,7 @@ class AdminController extends Controller
             'email' => $userData[0]['email'],
             'password' => Hash::make($userData[0]['password']),
             'mobile_number' => $userData[0]['mobile_number'],
+            'lock_pin'  =>  $userData[0]['lock_pin'],
             'role'  =>  'admin'
         ]);
 
@@ -172,7 +173,7 @@ class AdminController extends Controller
             }
             $image_name = ImageHelper::storeImage($request->file('logo'), 'branch_logo');
         }
-        
+
         $branchFormData['logo'] = $image_name;
         $branchFormData['restaurant_id'] = Auth::user()->restaurant_id;
 

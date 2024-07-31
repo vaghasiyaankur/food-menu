@@ -78,6 +78,46 @@
                                 >
                                     <div class="item-inner no-padding-right">
                                         <div class="item-title item-label">
+                                            Mobile Number*
+                                        </div>
+                                        <div class="item-input-wrap">
+                                            <input
+                                                type="number"
+                                                name="mobile_number"
+                                                placeholder="Enter Mobile Number"
+                                                v-model="userMobileNumber"
+                                                class="padding-left-half"
+                                            /><span
+                                                class="input-clear-button"
+                                            ></span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li
+                                    class="item-content item-input no-padding-left padding-bottom"
+                                >
+                                    <div class="item-inner no-padding-right">
+                                        <div class="item-title item-label">
+                                            Lock Pin *
+                                        </div>
+                                        <div class="item-input-wrap">
+                                            <input
+                                                type="number"
+                                                name="lock_pin"
+                                                placeholder="Enter Lock Pin"
+                                                v-model="userLockPin"
+                                                class="padding-left-half"
+                                            /><span
+                                                class="input-clear-button"
+                                            ></span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li
+                                    class="item-content item-input no-padding-left padding-bottom"
+                                >
+                                    <div class="item-inner no-padding-right">
+                                        <div class="item-title item-label">
                                             Password*
                                         </div>
                                         <div class="item-input-wrap">
@@ -105,26 +145,6 @@
                                                 name="password_confirmation"
                                                 placeholder="Re-Enter your password"
                                                 v-model="userConfirmationPassword"
-                                                class="padding-left-half"
-                                            /><span
-                                                class="input-clear-button"
-                                            ></span>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li
-                                    class="item-content item-input no-padding-left padding-bottom"
-                                >
-                                    <div class="item-inner no-padding-right">
-                                        <div class="item-title item-label">
-                                            Mobile Number*
-                                        </div>
-                                        <div class="item-input-wrap">
-                                            <input
-                                                type="number"
-                                                name="mobile_number"
-                                                placeholder="Enter Mobile Number"
-                                                v-model="userMobileNumber"
                                                 class="padding-left-half"
                                             /><span
                                                 class="input-clear-button"
@@ -245,13 +265,10 @@
                                     <div class="item-inner no-padding-right">
                                         <div class="item-input-wrap">
                                             <button class="button button-fill button border_radius_10 button-raised bg_red text-color-white button-large text-transform-capitalize height_40" @click="registerDetail('restaurant', 1)">
-                                                Continue
+                                                Submit
                                             </button>
                                         </div>
                                     </div>
-                                </li>
-                                <li>
-                                    <p class="no-margin text-align-center">Already have a account? <a href="/login/" class="sign-up-btn">Sign In</a></p>
                                 </li>
                             </ul>
                         </div>
@@ -280,6 +297,7 @@
     const userEmail = ref("");
     const userPassword = ref("");
     const userMobileNumber = ref("");
+    const userLockPin = ref("");
     const userConfirmationPassword = ref("");
 
     const restaurantName = ref("");
@@ -308,9 +326,11 @@
             { condition: !userName.value, message: "Please Enter User Name" },
             { condition: !userEmail.value, message: "Please Enter User Email Address" },
             { condition: !userPassword.value, message: "Please Enter Password" },
+            { condition: !userLockPin.value, message: "Please Generate Lock Pin" },
             { condition: !userConfirmationPassword.value, message: "Please Re-Enter Password" },
             { condition: !userMobileNumber.value, message: "Please Enter Mobile Number" },
             { condition: !/^\d{10}$/.test(userMobileNumber.value), message: "Mobile Number must be 10 digits" },
+            { condition: !/^\d{4}$/.test(userLockPin.value), message: "User Lock Pin  must be 4 digits" },
             { condition: userPassword.value !== userConfirmationPassword.value, message: "Passwords do not match" }
         ] : [
             { condition: !restaurantLogoPreview.value, message: "Please Select Restaurant Logo" },
@@ -335,6 +355,7 @@
                 'password': userPassword.value,
                 'password_confirmation': userConfirmationPassword.value,
                 'mobile_number': userMobileNumber.value,
+                'lock_pin'  :userLockPin.value
             });
 
             if(restaurantName.value && restaurantAddress.value) {
