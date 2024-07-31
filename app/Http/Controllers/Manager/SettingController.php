@@ -81,7 +81,7 @@ class SettingController extends Controller
 
 
         $settingData = $request->setting;
-        $settingData['highlight_on_off'] = $settingData['highlight_on_off'] ?? 0;
+        $settingData['highlight_on_off'] = isset($settingData['highlight_on_off']) && $settingData['highlight_on_off'] == 'on' ? 1 : 0;
         $settingData['highlight_time'] = $request->highlight_on_off ? $request->highlight_time : 0;
         
         $restaurantData = $request->restaurant;
