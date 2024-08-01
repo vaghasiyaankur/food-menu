@@ -145,6 +145,7 @@ import { ref, onMounted } from 'vue';
 import Icon from "../../components/Icon.vue";
 import NoValueFound from "../../components/NoValueFound.vue";
 import $ from 'jquery';
+import { successNotification } from '../../commonFunction';
 
 const orders = ref([]);
 const currency = ref([]);
@@ -211,6 +212,9 @@ const getCurrency = async () => {
 const printOrder = async (id) => {
     await axios.get('/api/print-order/'+ id)
     .then(response => {
+        if(response.status) {
+            successNotification(response.data.success);
+        }
     });
 }
 

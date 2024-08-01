@@ -33,6 +33,9 @@
                     @remove:cart-product="removeProductIntoCart"
                     @create:kot="createKOT"
                     @hold:kot="holdKOT"
+                    :person-detail-fill-up="personDetailFillUp"
+                    :no-of-person-fill-up="noOfPersonFillUp"
+                    :assign-delivery-fill-up="assignDeliveryFillUp"
                 />
             </div>
         </div>
@@ -194,7 +197,7 @@ const getTableCurrentDetail = (tableId) => {
             numberOfPerson.value = response.data.order ? response.data.order.person : 0;
             personNumber.value = response.data.order ? response.data.order.phone : '';
             personName.value = response.data.order ? response.data.order.name : '';
-            personEmail.value = response.data.order ? response.data.order.name : '';
+            personEmail.value = response.data.order ? response.data.order.email : '';
             personAddress.value = response.data.order ? response.data.order.address : '';
             personLocality.value = response.data.order ? response.data.order.locality : '';
             orderNote.value = response.data.order ? response.data.order.note : '';

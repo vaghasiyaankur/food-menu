@@ -90,6 +90,18 @@ const props = defineProps({
     totalAmount: [String, Number],
     subTotal: [String, Number],
     discount: [String, Number],
+    personDetailFillUp : {
+        type: Boolean,
+        default: false
+    },
+    noOfPersonFillUp : {
+        type: Boolean,
+        default: false
+    },
+    assignDeliveryFillUp : {
+        type: Boolean,
+        default: false
+    }
 });
 
 
@@ -110,7 +122,12 @@ const removeProduct = (index, kot, kotIndex, kotProductIndex) => {
 }
 
 const createKot = (tableId) => {
-    emit('create:kot', tableId)
+    if(!props.personDetailFillUp || !props.noOfPersonFillUp || !props.assignDeliveryFillUp) {
+        errorNotification("Please complete the user form before create kot.");
+        return;
+    } else {
+        emit('create:kot', tableId)
+    }
 }
 const holdKot = (tableId) => {
     emit('hold:kot', tableId)

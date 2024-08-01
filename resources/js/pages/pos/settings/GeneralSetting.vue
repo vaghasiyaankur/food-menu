@@ -101,7 +101,7 @@ const getGeneralSetting = () => {
 getGeneralSetting();
 
 const changeLogo = (type) => {
-    if (type == 'logo') logoPreview.value = URL.createObjectURL(event.target.files[0]);
+    if (type == 'restaurant[logo]') logoPreview.value = URL.createObjectURL(event.target.files[0]);
     else favPreview.value = URL.createObjectURL(event.target.files[0]);
 }
 
