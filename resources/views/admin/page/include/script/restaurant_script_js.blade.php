@@ -9,6 +9,28 @@
             keyboard: false
         });
 
+        var columns = [
+            { data: 'DT_RowIndex', name: 'DT_RowIndex' },
+            { data: 'logo', name: 'logo', render: function(data) { return '<img src="/storage/' + data + '" height="50px" width="50px" >'; }},
+            { data: 'name', name: 'name' },
+            { data: 'location', name: 'location' },
+            { data: 'status', name: 'status', render: function(data) { return data == 1 ? 'Open' : 'Close'; }},
+            { data: 'action', name: 'action', orderable: false, searchable: false }
+        ];
+
+        if (pageType === 'declined-restaurant') {
+            columns.splice(4, 0, { 
+                data: 'declined_reason', 
+                name: 'declined_reason',
+                render: function(data, type, row) {
+                    return `<button class="btn btn-sm btn-danger show-declined-reason" data-reason="${data}">Show Reason</button>`;
+                }
+            });
+        } else {
+            columns.splice(4, 0, { data: 'operating_start_hours', name: 'operating_start_hours' });
+            columns.splice(5, 0, { data: 'operating_end_hours', name: 'operating_end_hours' });
+        }
+
         var table = $('.data-table').DataTable({
             processing: true,
             serverSide: true,
@@ -18,47 +40,7 @@
                     d.pageType = pageType;
                 }
             },
-            columns: [{
-                    data: 'DT_RowIndex',
-                    name: 'DT_RowIndex'
-                },
-                {
-                    data: 'logo',
-                    name: 'logo',
-                    render: function(data) {
-                        return '<img src="/storage/' + data + '" height="50px" width="50px" >';
-                    }
-                },
-                {
-                    data: 'name',
-                    name: 'name'
-                },
-                {
-                    data: 'location',
-                    name: 'location'
-                },
-                {
-                    data: 'status',
-                    name: 'status',
-                    render: function(data) {
-                        return data == 1 ? 'Open' : 'Close';
-                    }
-                },
-                {
-                    data: 'operating_start_hours',
-                    name: 'operating_start_hours'
-                },
-                {
-                    data: 'operating_end_hours',
-                    name: 'operating_end_hours'
-                },
-                {
-                    data: 'action',
-                    name: 'action',
-                    orderable: false,
-                    searchable: false
-                },
-            ]
+            columns: columns
         });
 
         $('select[name="DataTables_Table_0_length"]').addClass('form-select');
@@ -152,6 +134,12 @@
                     });
                 }
             });
+        });
+
+        $(document).on('click', '.show-declined-reason', function() {
+            var reason = $(this).data('reason');
+            $('#declinedReasonModal .modal-body').text(reason);
+            $('#declinedReasonModal').modal('show');
         });
 
         function getLabelMessage(type, messageType) {

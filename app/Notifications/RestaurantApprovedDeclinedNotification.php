@@ -14,16 +14,18 @@ class RestaurantApprovedDeclinedNotification extends Notification
 
     private $restaurant;
     private $status;
+    private $isDeclinedReason;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($restaurant, $status)
+    public function __construct($restaurant, $status, $isDeclinedReason)
     {
         $this->restaurant = $restaurant;
         $this->status = $status;
+        $this->isDeclinedReason = $isDeclinedReason;
     }
 
     /**
@@ -50,7 +52,10 @@ class RestaurantApprovedDeclinedNotification extends Notification
     */
     public function toMail($notifiable)
     {
-        $result = $this->restaurant->update(['request_status' => $this->status]);
+        $result = $this->restaurant->update([
+            'request_status'    =>  $this->status,
+            'declined_reason'   =>  $this->isDeclinedReason
+        ]);
 
         if($result) {
             $restaurant = Restaurant::where('id', $this->restaurant->id)->first();

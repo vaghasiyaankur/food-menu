@@ -30,6 +30,7 @@
 </div>
 
 <x-restaurant-details />
+<x-declined-reason-modal />
 
 @endsection
 

@@ -273,13 +273,14 @@ class RestaurantController extends Controller
      * @return \Illuminate\Http\RedirectResponse  A redirect response back to the previous page.
     */
     public function restaurantApprovedDeclined(Request $request)
-    {   
+    {           
         $restaurant = Restaurant::findOrFail($request->restaurant_id);
         if($restaurant) {
             $requestStatus = $request->request_status == 1 ? 1 : 0;
+            $isDeclinedReason = $request->declined_reason ?? Null;
             
             $user = User::where('restaurant_id', $restaurant->id)->first();
-            $user->notify(new RestaurantApprovedDeclinedNotification($restaurant, $requestStatus));
+            $user->notify(new RestaurantApprovedDeclinedNotification($restaurant, $requestStatus, $isDeclinedReason));
     
             return redirect()->back();
         }
