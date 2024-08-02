@@ -1,14 +1,16 @@
 <template>
   <f7-app v-bind="f7Params">
     <f7-page>
-      <div class="nav-bar" v-if="currentRoute != 'login'">
-        <Navbar 
-          :moveToPos="moveToPos"
-          :close-reservation="closeReservationValue"
-          :close-reservation-event="closeReservation"
-          :current-submenu-route="currentSubmenuRoute"
-        />
-      </div>
+      <template v-if="navbarShow">
+        <div class="nav-bar" v-if="currentRoute != 'login'">
+          <Navbar 
+            :moveToPos="moveToPos"
+            :close-reservation="closeReservationValue"
+            :close-reservation-event="closeReservation"
+            :current-submenu-route="currentSubmenuRoute"
+          />
+        </div>
+      </template>
       <f7-view
         url="/reservation/"
         :main="true"
@@ -67,6 +69,7 @@ const warningTimer = ref(null);
 let checkLogin = false;
 const trans = ref([]);
 const user = ref([]);
+const navbarShow = ref(true);
 
 onMounted(() => {
   setTimeout(() => {
@@ -178,13 +181,15 @@ const removeLoader = () => {
 };
 
 const setTimer = () => {
-  warningTimer.value = setInterval(warningMessage, 10000);
+  warningTimer.value = setInterval(warningMessage, 15 * 60 * 10000);
 };
 
 const warningMessage = () => {
   f7.dialog.close();
   f7.popup.close();
+
   f7.view.main.router.navigate({ url: "/lock-screen/" });
+  navbarShow.value = false;
   lockScreenEnable();
 };
 

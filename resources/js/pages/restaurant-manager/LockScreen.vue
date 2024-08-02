@@ -14,7 +14,7 @@
                             <h1>Wrong Password! Please Enter Right Password</h1>
                         </div>
                         <div id="fields">
-                            <div class="grid pin_show">
+                            <div class="grid_pin pin_show">
                                 <div class="grid__col numberfield" id="position-1"><span></span></div>
                                 <div class="grid__col numberfield" id="position-2"><span></span></div>
                                 <div class="grid__col numberfield" id="position-3"><span></span></div>
@@ -22,7 +22,7 @@
                             </div>
                         </div>
                         <div id="numbers" class="pt-3">
-                            <div class="grid">
+                            <div class="grid_pin">
                                 <div class="grid__col grid__col--1-of-3"><button @click="addLockPin(1)" >1</button></div>
                                 <div class="grid__col grid__col--1-of-3"><button @click="addLockPin(2)" >2</button></div>
                                 <div class="grid__col grid__col--1-of-3"><button @click="addLockPin(3)" >3</button></div>
@@ -261,7 +261,7 @@
     position: relative;
     display: block;
 }
-.lock-screen .lock-screen-right .grid {
+.lock-screen .lock-screen-right .grid_pin {
     list-style: none;
     margin-left: -20px;
 }
