@@ -141,5 +141,41 @@ class OrderHelper
             // }
     }
 
-    
+    public static function orderUpdate($request, $restaurantId, $counter, $table = null)
+    {
+        $data = ['email' => $request->personEmail];
+
+        $commonData = [
+            'person' => $request->numberOfPerson,
+            'phone' => $request->personNumber,
+            'name' => $request->personName,
+            'address' => $request->personAddress,
+            'locality' => $request->personLocality,
+            'note' => $request->orderNote,
+            'waiter_id' => $request->selectWaiter,
+            'discount_amount' => $request->discountAmount,
+        ];
+
+        $commonArray = [
+            'table_id' => $request->tableId,
+            'restaurant_id' => $restaurantId,
+            'start_at' => date('Y-m-d H:i:s'),
+        ];
+
+        switch ($counter) {
+            case 4:
+                $data = array_merge($data, $commonArray, [ 'finish_time' => $table->finish_order_time ]);
+                break;
+            case 3:
+                $data = array_merge($data, $commonArray);
+                break;
+            case 11:
+                $data = array_merge($data, $commonData, [ 'total_price' => $request->subTotal, 'payable_amount' => $request->payableAmount]);
+                break;
+            case 12:
+                $data = array_merge($data, $commonData, [ 'discount_type' => $request->discountType ?? 'fixed' ]);
+                break;
+        }
+        return Order::updateOrCreate(['email' => $request->personEmail], $data);
+    }
 }
