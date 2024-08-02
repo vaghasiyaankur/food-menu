@@ -58,7 +58,7 @@
                                 <td>{{ user.mobile_number ? user.mobile_number : '' }}</td>
                                 <td>{{ roleLabel(user.role) }}</td>
                                 <td>
-                                    <div class="flex gap-4 items-center">
+                                    <div class="flex gap-4 items-center edit-list">
                                         <svg @click="handleSimulation(user.id)" width="22" height="22" viewBox="0 0 22 22" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path

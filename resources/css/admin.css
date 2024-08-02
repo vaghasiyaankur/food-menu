@@ -594,3 +594,131 @@
     text-decoration: none;
     border-radius: 5px;
 }
+.user_admin_page .user_table_wrapper .user_table tbody td .edit-list:last-child{
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    justify-content: center;
+}
+.general_info_form-input input{
+    padding: 12px 15px !important;
+}
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="tel"],
+input[type="url"],
+input[type="date"],
+input[type="month"],
+input[type="datetime-local"],
+input[type="time"],
+input[type="number"],
+select,
+textarea {
+    background-color: #f5f5f5;
+    font-size: 15px;
+    font-weight: 500;
+    color: #555555;
+    padding: 12px 16px;
+    border-radius: 8px;
+    width: 100%;
+}
+.switch {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    width: 80px;
+    height: 31px;
+    padding: 3px;
+    background-color: white;
+    border-radius: 7px;
+    cursor: pointer;
+}
+.switch-label:before {
+    content: attr(data-off);
+    right: 11px;
+    color: #999999;
+    text-shadow: 0 1px rgba(255, 255, 255, 0.5);
+}
+.switch-label {
+    position: relative;
+    display: block;
+    height: inherit;
+    font-size: 14px;
+    text-transform: uppercase;
+    background: #f5f5f5;
+    border-radius: inherit;
+    -webkit-transition: 0.15s ease-out;
+    -moz-transition: 0.15s ease-out;
+    -o-transition: 0.15s ease-out;
+    transition: 0.15s ease-out;
+    -webkit-transition-property: opacity background;
+    -moz-transition-property: opacity background;
+    -o-transition-property: opacity background;
+    transition-property: opacity background;
+}
+.switch-label:before, .switch-label:after {
+    position: absolute;
+    top: 50%;
+    margin-top: -.5em;
+    line-height: 1;
+    -webkit-transition: inherit;
+    -moz-transition: inherit;
+    -o-transition: inherit;
+    transition: inherit;
+}
+.switch-handle {
+    position: absolute;
+    top: 7px;
+    left: 10px;
+    width: 22px;
+    height: 22px;
+    background: #999999;
+    border-radius: 7px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+    -webkit-transition: left 0.15s ease-out;
+    -moz-transition: left 0.15s ease-out;
+    -o-transition: left 0.15s ease-out;
+    transition: left 0.15s ease-out;
+}
+.general_info_form-input, .currency_form-input, .tax-settings-form-input, .gst-details {
+    margin-top: 7px !important;
+}
+.popup_button button {
+    font-size: 16px !important;
+}
+.popup_button .button {
+    border-radius: 10px;
+}
+.md .button {
+    transition-duration: 300ms;
+    transform: translate3d(0, 0, 0);
+}
+.switch-label:after {
+    content: attr(data-on);
+    left: 11px;
+    color: white;
+    text-shadow: 0 1px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+}
+.switch-input:checked ~.switch-label:after {
+    opacity: 1;
+}
+.switch-input:checked ~.switch-label:before {
+    opacity: 0;
+}
+.switch-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+.switch-input:checked ~ .switch-label {
+    background: #f33e3e;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.25);
+}
+.switch-input:checked ~.switch-handle {
+    left: 53px;
+    box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+}

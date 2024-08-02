@@ -178,7 +178,7 @@ const removeLoader = () => {
 };
 
 const setTimer = () => {
-  warningTimer.value = setInterval(warningMessage, 15 * 60 * 1000);
+  warningTimer.value = setInterval(warningMessage, 10000);
 };
 
 const warningMessage = () => {
