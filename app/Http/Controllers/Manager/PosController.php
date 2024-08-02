@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Manager;
 
 use App\Helper\CustomerHelper;
+use App\Helper\OrderHelper;
 use App\Helper\SettingHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
@@ -175,13 +176,7 @@ class PosController extends Controller
 
             $kotNumber = count($order->kots) + 1;
         }else{
-            $order = new Order();
-            $order->table_id = $request->tableId;
-            $order->restaurant_id = $restaurantId;
-            $order->start_at = date('Y-m-d H:i:s');
-            $order->finish_time = $table->finish_order_time;
-            $order->save();
-
+            $order = OrderHelper::orderUpdate($request, $restaurantId, 4, $table);
             $orderId = $order->id;
             $kotNumber = 1;
         }
@@ -227,22 +222,9 @@ class PosController extends Controller
             Kot::where('id',$kot->id)->update(['price' => $kotPrice]);
         }
 
-        Order::where('id', $order->id)->update([
-            // 'total_price' => $order->total_price + $priceCount,
-            'total_price' => $request->subTotal,
-            'payable_amount' => $request->payableAmount,
-            'discount_amount' => $request->discountAmount,
-            'person' => $request->numberOfPerson,
-            'phone' => $request->personNumber,
-            'name' => $request->personName,
-            'address' => $request->personAddress,
-            'locality' => $request->personLocality,
-            'note' => $request->orderNote,
-            'waiter_id' => $request->selectWaiter
-        ]);
+        $order = OrderHelper::orderUpdate($request, $restaurantId, 11, null);
 
         $this->updateCustomerData($order->id, $request);
-
         $this->removeHoldKOT($request->tableId);
         
         return response()->json(['success'=>'KOT Added Successfully.']);
@@ -280,28 +262,10 @@ class PosController extends Controller
         if($table->orders->isNotEmpty()){
             $order = $table->orders->first();
         }else{
-            $order = new Order();
-            $order->table_id = $request->tableId;
-            $order->restaurant_id = $restaurantId;
-            $order->start_at = date('Y-m-d H:i:s');
-            $order->save();
+            $order = OrderHelper::orderUpdate($request, $restaurantId, 3, null);
         }
 
-
-        Order::where('id', $order->id)->update([
-            'person' => $request->numberOfPerson,
-            'phone' => $request->personNumber,
-            'name' => $request->personName,
-            'email' => $request->personEmail,
-            'address' => $request->personAddress,
-            'locality' => $request->personLocality,
-            'note' => $request->orderNote,
-            'waiter_id' => $request->selectWaiter,
-            'discount_amount' => $request->discountAmount,
-            'discount_type' => $request->discountType ?? 'fixed'
-            // 'total_price' => $request->subTotal,
-            // 'payable_amount' => $request->subTotal - $request->discountAmount
-        ]);
+        OrderHelper::orderUpdate($request, $restaurantId, 12, null);
 
         $this->updateCustomerData($order->id, $request);
         return response()->json(['success'=>'Data Added Successfully.']);
@@ -403,14 +367,11 @@ class PosController extends Controller
         $kotId = (isset($order->kots) && isset($order->kots[0])) ? $order->kots[0]->id : "";
         $orderProduct = KotProduct::with('product.productRestaurantLanguages')->where('kot_id',$kotId)->get();
 
-        // Generate PDF content (example HTML content)
-
-        // return view('emails.invoice', compact('setting', 'order', 'restaurant', 'orderProduct'));
         $htmlContent = view('emails.invoice', compact('setting', 'order', 'restaurant', 'orderProduct'))->render();
 
         // Load HTML content into Dompdf instance
         $options = new Options();
-        $options->set('defaultFont', 'DejaVu Sans');  // Set thte default font
+        $options->set('defaultFont', 'DejaVu Sans');  // Set the default font
 
         $domPdf = new Dompdf($options); 
 
@@ -429,7 +390,7 @@ class PosController extends Controller
         if($result) {
             return response()->json([
                 'status'    =>  true,
-                'success'   =>  'We Have Mail Invoice To Your Mail Address.'
+                'success'   =>  'We Have Mail Invoice To Your Mail Address With Pdf Attachment.'
             ], 200);
         }
 

@@ -282,12 +282,18 @@
                 <span>{{ $setting->currency_symbol }}{{ number_format($order->total_price,2) }}</span>
             </div>
             <div class="invoice-tax">
-                <span>Discount</span>
-                <span>{{ $setting->currency_symbol }}{{ number_format($order->discount_amount, 2) }}</span>
+                <span>Discount : 
+                    @if ($order->discount_type == 'percentage')
+                        ({{ $order->discount_amount. '%' }})
+                    @endif
+                </span>
+                <span>
+                    {{ $setting->currency_symbol }}{{ number_format($order->discount_type != 'percentage' ? $order->discount_amount : ($order->total_price * $order->discount_amount / 100), 2) }}
+                </span>
             </div>
             <hr>
             <div class="invoice-total-amount">
-                <span>Total</span>
+                <span>Total : </span>
                 <span>{{ $setting->currency_symbol }}{{ number_format($order->payable_amount, 2) }}</span>
             </div>
         </div>
