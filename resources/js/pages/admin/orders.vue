@@ -57,7 +57,7 @@
                                         <div class="customer-name">{{ order.customer?.name }}</div>
                                     </div>
                                 </td>
-                                <td>{{ currency+""+formattedPrice(order.total_price) }}</td>
+                                <td>{{ currency+""+formattedPrice(order.payable_amount) }}</td>
                                 <td>
                                     <div v-if="order.cancelled_by" class="order_status cancelled_status">
                                         <p class="no-margin">Cancelled</p>

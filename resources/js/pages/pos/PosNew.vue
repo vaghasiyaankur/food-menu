@@ -17,7 +17,7 @@
                     :activeCategory="activeCategory"
                     @add:cart-product="addProductIntoCart"
                 />
-            </div>
+            </div>``
             <div class="add-to-cart">
                 <AddToCart 
                     :cart-products="cartProducts"

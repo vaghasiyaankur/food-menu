@@ -139,8 +139,15 @@
                         <h4 class="no-margin">{{ currencySetting.currency_symbol+""+formattedPrice(orderInfo.sub_total) }}</h4>
                     </div>
                     <div class="vat" v-if="orderInfo.discount_amount">
-                        <h4 class="no-margin">Discount :</h4>
-                        <h4 class="no-margin">{{ currencySetting.currency_symbol+""+formattedPrice(orderInfo.discount_amount) }}</h4>
+                        <h4 class="no-margin">Discount 
+                            {{ orderInfo.discount_type == 'percentage' ? (`(${orderInfo.discount_amount}%)`) : "" }} : 
+                        </h4>
+                        <h4 class="no-margin" v-if="orderInfo.discount_type != 'percentage'">
+                            {{ currencySetting.currency_symbol+""+formattedPrice(orderInfo.discount_amount)}}
+                        </h4>
+                        <h4 class="no-margin" v-else>
+                            {{ calculatePercentage(currencySetting.currency_symbol, orderInfo.discount_amount, orderInfo.sub_total) }}
+                        </h4>
                     </div>
                     <hr class="divider">
                     <div class="total">
@@ -203,7 +210,7 @@
     import axios from 'axios';
     import { ref, onMounted } from 'vue';
     import relativeTime from 'dayjs/plugin/relativeTime';
-    import { formattedPrice } from '../../commonFunction.js';
+    import { calculatePercentage, formattedPrice } from '../../commonFunction.js';
     import { f7App, f7Panel, f7View, f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Breadcrumbs, f7BreadcrumbsItem, f7BreadcrumbsSeparator, f7BreadcrumbsCollapsed } from 'framework7-vue';
     dayjs.extend(relativeTime);
 
@@ -238,7 +245,6 @@
         await axios.get('/api/order/'+orderID.value)
         .then(response => {
             if(response.data) {
-
                 customerInfo.value = response.data.order?.customer;
                 orderKots.value = response.data.order?.kots;
 
@@ -246,6 +252,7 @@
                 orderInfo.value.order_date = response.data.order?.created_at;
                 orderInfo.value.payment_method = response.data.order?.order_payment?.payment_type;
                 orderInfo.value.sub_total = response.data.order?.total_price;
+                orderInfo.value.discount_type = response.data.order?.discount_type;
                 orderInfo.value.discount_amount = response.data.order?.discount_amount;
                 orderInfo.value.payable_amount = response.data.order?.payable_amount;
 

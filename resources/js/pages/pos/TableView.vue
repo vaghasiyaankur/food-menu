@@ -295,10 +295,9 @@ const storeUpdateData = () => {
         }
     })
     .then((response) => {
-        successNotification(response.data.success);
+        successNotification(response.data.message);
         f7.popup.close(`.addUpdatePopup`);
         getTableListFloorWise();
-        console.log(addUpdateFormDataFormat.value);
     })
     .catch((error) => {
         const errorMessage = getErrorMessage(error);

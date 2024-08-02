@@ -84,16 +84,23 @@
                         <div class="pullUp_total_menu-wrapper">
                             <div class="pullUp_total_menu">
                                 <div class="sub_total">
-                                    <h5 class="no-margin">Sub Total</h5>
+                                    <h5 class="no-margin">Sub Total : </h5>
                                     <h5 class="no-margin">{{ currency.currency_symbol }}{{order?.total_price?.toFixed(2)}}</h5>
                                 </div>
                                 <div class="discount_provided">
-                                    <h5 class="no-margin">Discount</h5>
-                                    <h5 class="no-margin">{{ currency.currency_symbol }}{{order?.discount_amount?.toFixed(2)}}</h5>
+                                    <h5 class="no-margin">Discount 
+                                        {{ order.discount_type == 'percentage' ? (`(${order.discount_amount}%)`) : "" }} : 
+                                    </h5>
+                                    <h5 class="no-margin" v-if="order.discount_type != 'percentage'">
+                                        {{ currency.currency_symbol }}{{order?.discount_amount?.toFixed(2)}}
+                                    </h5>
+                                    <h5 class="no-margin" v-else>
+                                        {{ calculatePercentage(currency.currency_symbol, order?.discount_amount, order?.total_price) }}
+                                    </h5>
                                 </div>
                                 <hr class="divider">
                                 <div class="total_amount">
-                                    <h5 class="no-margin">Total Amount</h5>
+                                    <h5 class="no-margin">Total Amount : </h5>
                                     <h5 class="no-margin">{{ currency.currency_symbol }}{{order?.payable_amount?.toFixed(2)}}</h5>
                                 </div>
                                 <button class="print_invoice_btn" @click="printOrder(order?.id)">
@@ -145,7 +152,7 @@ import { ref, onMounted } from 'vue';
 import Icon from "../../components/Icon.vue";
 import NoValueFound from "../../components/NoValueFound.vue";
 import $ from 'jquery';
-import { successNotification } from '../../commonFunction';
+import { calculatePercentage, successNotification } from '../../commonFunction';
 
 const orders = ref([]);
 const currency = ref([]);

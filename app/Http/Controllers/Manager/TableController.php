@@ -334,7 +334,7 @@ class TableController extends Controller
                 // ]);
 
          }
-         catch (Exception $e) {
+         catch (\Exception $e) {
              // dd("Error: ". $e->getMessage());
          }
 
@@ -404,7 +404,7 @@ class TableController extends Controller
                 // ]);
 
          }
-         catch (Exception $e) {
+         catch (\Exception $e) {
              // dd("Error: ". $e->getMessage());
          }
 

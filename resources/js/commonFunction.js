@@ -61,3 +61,13 @@ export const removeLoader = () => {
 export const formattedPrice = (price) => {
     return parseFloat(price).toFixed(2);
 }
+
+export const calculatePercentage = (symbol, percentage, totalPrice) => {
+    if (typeof totalPrice !== 'number' || typeof percentage !== 'number') {
+        errorNotification('Both total price and percentage should be numbers');
+    }
+    if (totalPrice < 0 || percentage < 0) {
+        errorNotification('Both total price and percentage should be non-negative');
+    }
+    return symbol +""+ (totalPrice * percentage) / 100;
+}
