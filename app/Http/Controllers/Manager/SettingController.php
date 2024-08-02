@@ -54,8 +54,11 @@ class SettingController extends Controller
             'restaurant.name' => 'required',
             'restaurant.operating_start_hours' => 'required',
             'restaurant.operating_end_hours' => 'required',
-            'setting.logo' => 'image|mimes:jpg,png,jpeg,gif,svg,webp',
-            'setting.fav_icon' => 'image|mimes:jpg,png,jpeg,gif,svg,webp',
+            'setting.address' => 'required',
+            'setting.member_capacity' => 'required',
+            'setting.phone_number' => 'required|digits:10',
+            'restaurant.logo' => 'image|mimes:jpg,png,jpeg,gif,svg,webp',
+            'restaurant.fav_icon' => 'image|mimes:jpg,png,jpeg,gif,svg,webp',
         ];
     
         $validator = Validator::make($request->all(), $rules);
@@ -67,21 +70,21 @@ class SettingController extends Controller
         $res_setting = Restaurant::whereId(Auth::user()->restaurant_id)->first();
 
         $logo_name = $res_setting->logo;
-        if($request->file('setting.logo')){
-            $logo_name = ImageHelper::storeImage($request->file('setting.logo'), 'setting');
+        if($request->file('restaurant.logo')){
+            $logo_name = ImageHelper::storeImage($request->file('restaurant.logo'), 'setting');
             ImageHelper::removeImage($res_setting->logo);
         }
 
         $fav_icon_name = $res_setting->fav_icon;
-        if($request->file('setting.fav_icon')){
-            $fav_icon_name = ImageHelper::storeImage($request->file('setting.fav_icon'), 'setting');
+        if($request->file('restaurant.fav_icon')){
+            $fav_icon_name = ImageHelper::storeImage($request->file('restaurant.fav_icon'), 'setting');
             ImageHelper::removeImage($res_setting->fav_icon);
         }
 
 
 
         $settingData = $request->setting;
-        $settingData['highlight_on_off'] = $settingData['highlight_on_off'] ?? 0;
+        $settingData['highlight_on_off'] = isset($settingData['highlight_on_off']) && $settingData['highlight_on_off'] == 'on' ? 1 : 0;
         $settingData['highlight_time'] = $request->highlight_on_off ? $request->highlight_time : 0;
         
         $restaurantData = $request->restaurant;

@@ -13,7 +13,17 @@
     <div class="card">
         <div class="card-datatable table-responsive">
             @includeIf('admin.page.include.header', ['title' => $headerTitle, 'button' => $button, 'back' => $back, 'route' => $route])
-            <x-table-header :headers="['No', 'Logo', 'Name', 'Location', 'Status', 'Open Time', 'Close Time', 'Action']" />
+
+            @if (Route::currentRouteName() == 'super-admin.declined-restaurant')
+                @php
+                    $headers = ['No', 'Logo', 'Name', 'Location', 'Decline Reason', 'Status', 'Action'];    
+                @endphp
+            @else 
+                @php
+                    $headers = ['No', 'Logo', 'Name', 'Location', 'Status', 'Open Time', 'Close Time', 'Action'];
+                @endphp
+            @endif
+            <x-table-header :headers="$headers" />
         </div>
     </div>
 </div>

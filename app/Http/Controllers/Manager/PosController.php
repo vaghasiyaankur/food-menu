@@ -108,6 +108,7 @@ class PosController extends Controller
                     'person' => $order->person,
                     'phone' => $order->phone,
                     'name' => $order->name,
+                    'email' => $order->email,
                     'address' => $order->address,
                     'locality' => $order->locality,
                     'start_at' => $order->start_at,
@@ -423,8 +424,14 @@ class PosController extends Controller
         $pdfContent = $domPdf->output();
 
         // Send email with PDF attachment
-        Mail::to($order->email)->send(new SendPdfMail($pdfContent,$order,$setting, $restaurant));
+        $result = Mail::to($order->email)->send(new SendPdfMail($pdfContent,$order,$setting, $restaurant));
 
-        return "PDF email has been sent.";
+        if($result) {
+            return response()->json([
+                'status'    =>  true,
+                'success'   =>  'We Have Mail Invoice To Your Mail Address.'
+            ], 200);
+        }
+
     }
 }

@@ -107,7 +107,7 @@ class ReservationController extends Controller
                     $messageNotification = "Food-Menu : Your Turn Now!!";
                     OrderHelper::sendMobileNotification($messageNotification);
                 }
-                catch (Exception $e) {
+                catch (\Exception $e) {
                     // dd("Error: ". $e->getMessage());
                 }
             }

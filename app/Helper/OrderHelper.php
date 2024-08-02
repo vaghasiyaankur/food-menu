@@ -24,6 +24,7 @@ class OrderHelper
         $order->customer_id = $data['customer_id'] ?? null;
         $order->table_id = $data['table_id'] ?? null;
         $order->person = $data['person'] ?? null;
+        $order->email = $data['email'] ?? null;
         $order->name = $customer ? $customer->name : null;
         $order->phone = $customer ? $customer->number : null;
         if (isset($data['orderExists']) && $data['orderExists']) {

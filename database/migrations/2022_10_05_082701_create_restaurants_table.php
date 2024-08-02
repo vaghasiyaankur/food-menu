@@ -26,6 +26,7 @@ return new class extends Migration
             $table->boolean('status')->default(1);
             $table->boolean('request_status')->default(2)->comment("1 => Approved, 2 => Pending, 0 => Declined");
             $table->string('restaurant_code')->nullable();
+            $table->text('declined_reason')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
