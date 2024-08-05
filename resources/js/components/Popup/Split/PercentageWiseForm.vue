@@ -46,7 +46,6 @@ import Icon from '../../Icon.vue';
 const splitPercentageData = inject('splitPercentageData')
 
 const portionFormSubmit = () => {
-    console.log(splitPercentageData.value);
     if (Object.values(splitPercentageData.value).some(val => !val)) return errorNotification('Please add a value for all percentages.');
     const sum = Object.values(splitPercentageData.value).reduce((acc, val) => acc + parseFloat(val || 0), 0);
     

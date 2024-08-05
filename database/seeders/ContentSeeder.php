@@ -27,6 +27,10 @@ class ContentSeeder extends Seeder
             ['language_id' => 2, 'title' => 'phone_number', 'content' => 'ફોન નંબર'],
             ['language_id' => 3, 'title' => 'phone_number', 'content' => 'फ़ोन नंबर'],
 
+            ['language_id' => 1, 'title' => 'enter_email', 'content' => 'Enter Your Email'],
+            ['language_id' => 2, 'title' => 'enter_email', 'content' => 'તમારું ઈમેલ દાખલ કરો'],
+            ['language_id' => 3, 'title' => 'enter_email', 'content' => 'अपना ईमेल दर्ज करें'],
+
             ['language_id' => 1, 'title' => 'family_member', 'content' => 'Family Member'],
             ['language_id' => 2, 'title' => 'family_member', 'content' => 'પરિવારના સભ્ય'],
             ['language_id' => 3, 'title' => 'family_member', 'content' => 'परिवार के सदस्य'],

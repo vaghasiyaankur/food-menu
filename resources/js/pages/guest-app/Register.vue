@@ -39,7 +39,13 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="item-content item-input no-padding-left">
+                        <div class="item-inner no-padding-right">
+                            <div class="item-input-wrap margin-bottom-half">
+                                <input type="email" v-model="reservation.email" name="email" class="padding" :placeholder="trans.enter_email" @keyup="removeTimer()">
+                                </div>
+                        </div>
+                    </div>
                     <div class="item-content item-input no-padding-left">
                         <div class="item-inner no-padding-right">
                             <div class="item-input-wrap margin-bottom-half">
@@ -221,6 +227,7 @@ const reservation = ref({
     name: '',
     number: '',
     member: '',
+    email: '',
     floor: null,
     agree_condition: true,
 });
@@ -390,6 +397,7 @@ const checkTimeForRegister = async () => {
         var formData = new FormData(document.getElementById('register-form'));
         ['customer_name', 'customer_number'].forEach(key => formData.delete(key));
         formData.append('floor', reservation.value.floor);
+        // formData.append('email', reservation.value.email);
         formData.append('role', 'Guest');
 
         axios.post('/api/check-time', formData)
@@ -431,6 +439,7 @@ const register = () => {
         var form = document.getElementById('register-form');
         var formData = new FormData(form);
         formData.append('role', 'Guest');
+        formData.append('email', reservation.value.email);
         formData.append('agree_condition', agreeCondition);
 
         axios.post('/api/add-reservation', formData)

@@ -23,6 +23,7 @@ class DashboardController extends Controller
         $ordersQuery = Order::with(['customer' => function($query) {
             $query->select('id', 'name');
         }])
+        ->withTrashed()
         ->whereRestaurantId(Auth::user()->restaurant_id)
         ->whereDate('created_at', '>=', $from_date)
         ->whereDate('created_at', '<=', $to_date);
@@ -33,7 +34,7 @@ class DashboardController extends Controller
         $complete_order = $completeOrdersQuery->count();
         $latest_complete_order = $completeOrdersQuery->take(8)->latest('id')->get();
 
-        $pendingOrdersQuery = (clone $ordersQuery)->where('finished', 0)->whereNotNull('start_at');
+        $pendingOrdersQuery = (clone $ordersQuery)->where('finished', 0)->whereNotNull('start_at')->withoutTrashed();
         $pending_order = $pendingOrdersQuery->count();
         $latest_pending_order = $pendingOrdersQuery->take(8)->latest('id')->get();
 

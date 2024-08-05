@@ -34,19 +34,20 @@ class OrderController extends Controller
                         } else if ($status == 2) {
                             return $query->whereNotNull('cancelled_by');
                         } else if ($status == 3) {
-                            return $query->where('finished', 0)->whereNotNull('start_at');
+                            return $query->where('finished', 0)->whereNotNull('start_at')->withoutTrashed();
                         }
-                    })->latest('id')->paginate(10);
+                    })->withTrashed()->latest('id')->paginate(10);
 
         // Return the response as JSON
         return response()->json(['setting' => $setting, 'orders' => $orders]);
     }
 
 
-    public function getOrder(Order $order) {
+    public function getOrder(Order $order, $orderId) {
 
         $setting = Setting::whereRestaurantId(Auth::user()->restaurant_id)->first(['currency_code', 'currency_symbol']);
 
+        $order = Order::withTrashed()->find($orderId);
         $order->load([
             'customer',
             'orderPayment',

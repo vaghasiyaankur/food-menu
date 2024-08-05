@@ -130,7 +130,12 @@ const createKot = (tableId) => {
     }
 }
 const holdKot = (tableId) => {
-    emit('hold:kot', tableId)
+    if(!props.personDetailFillUp || !props.noOfPersonFillUp || !props.assignDeliveryFillUp) {
+        errorNotification("Please complete the user form before hold kot.");
+        return;
+    } else {
+        emit('hold:kot', tableId)
+    }
 }
 
 const settleBill = () => {
