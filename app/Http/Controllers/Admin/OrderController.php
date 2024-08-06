@@ -43,7 +43,7 @@ class OrderController extends Controller
     }
 
 
-    public function getOrder(Order $order, $orderId) {
+    public function getOrder($orderId) {
 
         $setting = Setting::whereRestaurantId(Auth::user()->restaurant_id)->first(['currency_code', 'currency_symbol']);
 

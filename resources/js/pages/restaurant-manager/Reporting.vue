@@ -17,6 +17,12 @@
                                         <div class="item-input-wrap input-dropdown-wrap">
                                             <input type="text" placeholder="Select date range" readonly="readonly" id="demo-calendar-range" />
                                         </div>
+                                        <div class="filter_by_date_button">
+                                            <button @click="resetFilter()" class="filter_btn">
+                                                <Icon name="filterIcon" />
+                                                <span>Reset</span>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </li>
@@ -77,25 +83,97 @@
                 </div>
             </div>
             <div class="reporting__chart">
-                <div class="row">
+                <div class="row" v-if="showTotalOrderChart">
                     <div class="col-100">
                         <div class="card elevation-2">
                             <h3 class="card__heading margin padding-top">Total Orders</h3>
                             <f7-block>
                                 <div id="chart">
                                     <div id="chart-timeline">
-                                        <Chart :pannable="true" :zoomable="true" :style="{ height: '400px'}">
-                                            <ChartTooltip :background="'#fff'" />
-                                            <ChartCategoryAxis>
-                                                <ChartCategoryAxisItem :max="categoryAxisMax" :max-divisions="categoryAxisMaxDivisions" :labels="{ color: '#686868',rotation: 'auto', }" :line="{ color: 'rgba(243, 62, 62, 1)' }" />
-                                            </ChartCategoryAxis>
-                                            <ChartValueAxis>
-                                                <ChartValueAxisItem :labels="{ visible: true ,color : '#686868'}" :line="{ color: 'rgba(243, 62, 62, 1)' }"/>
-                                            </ChartValueAxis>
-                                            <ChartSeries>
-                                                <ChartSeriesItem :type="'line'" :data-items="series" :category-field="'category'" :color="'rgba(243, 62, 62, 1)'" :markers="{ visible: false }" :line-style="'normal'" :field="'value'" />
-                                            </ChartSeries>
-                                        </Chart>
+                                        <f7-area-chart
+                                            tooltip
+                                            axis
+                                            :axis-labels="chartData.hours"
+                                            legend
+                                            line-chart
+                                            toggle-datasets
+                                            :format-axis-label="formatHourLabel"
+                                            :format-tooltip-axis-label="formatHourLabel"
+                                            :datasets="[
+                                                {
+                                                    label: 'Total Orders',
+                                                    color: '#F33E3E',
+                                                    values: chartData.total,
+                                                }
+                                            ]"
+                                        />
+                                    </div>
+                                </div>
+                            </f7-block>
+                        </div>
+                        <input type="hidden" id="fromDate">
+                        <input type="hidden" id="toDate">
+                        <button @click="report" style="opacity: 0" id="date-set"></button>
+                    </div>
+                </div>
+                <div class="row" v-if="completedOrderChart">
+                    <div class="col-100">
+                        <div class="card elevation-2">
+                            <h3 class="card__heading margin padding-top">Completed Orders</h3>
+                            <f7-block>
+                                <div id="chart">
+                                    <div id="+-timeline">
+                                        <f7-area-chart
+                                            tooltip
+                                            axis
+                                            :axis-labels="chartData.hours"
+                                            legend
+                                            toggle-datasets
+                                            line-chart
+                                            :format-axis-label="formatHourLabel"
+                                            :format-tooltip-axis-label="formatHourLabel"
+                                            :datasets="[
+                                                {
+                                                    label: 'Completed Orders',
+                                                    color: '#F33E3E',
+                                                    values: chartData.completed,
+                                                }
+                                            ]"
+                                        />
+                                    </div>
+                                </div>
+                            </f7-block>
+                        </div>
+                        <input type="hidden" id="fromDate">
+                        <input type="hidden" id="toDate">
+                        <button @click="report" style="opacity: 0" id="date-set"></button>
+                    </div>
+                </div>
+                <div class="row" v-if="ongoingOrderChart">
+                    <div class="col-100">
+                        <div class="card elevation-2">
+                            <h3 class="card__heading margin padding-top">Ongoing Orders</h3>
+                            <f7-block>
+                                <div id="chart">
+                                    <div id="chart-timeline">
+                                        <f7-area-chart
+                                            tooltip
+                                            axis
+                                            :axis-labels="chartData.hours"
+                                            legend
+                                            toggle-datasets
+                                            line-chart
+                                            :format-axis-label="formatHourLabel"
+                                            :format-tooltip-axis-label="formatHourLabel"
+                                            :datasets="[
+                                                {
+                                                    label: 'Ongoing Orders',
+                                                    color: '#F33E3E',
+                                                    values: chartData.ongoing,
+                                                }
+                                            ]"
+                                        />
+
                                     </div>
                                 </div>
                             </f7-block>
@@ -115,27 +193,31 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeMount } from 'vue';
+import { ref, onMounted } from 'vue';
 import { f7Page, f7Navbar, f7BlockTitle, f7Block, f7, f7Input,f7AreaChart } from 'framework7-vue';
 import axios from 'axios';
 import $ from 'jquery';
-import moment from 'moment';
 import 'hammerjs';
 
+const picker = ref(null);
 const totalOrder = ref(0);
 const completeOrder = ref(0);
 const ongoingOrder = ref(0);
 const reservationTable = ref(0);
-const series = ref([]);
-const categoryAxisMax = new Date(2023, 1, 0);
-const categoryAxisMaxDivisions = 10;
 
-onBeforeMount(() => {
-    // addLoader();
+const chartData = ref({
+    hours: [],
+    total: [],
+    completed: [],
+    ongoing: [],
 });
 
+const showTotalOrderChart = ref(false);
+const completedOrderChart = ref(false);
+const ongoingOrderChart = ref(false);
+
 onMounted(() => {
-    f7.calendar.create({
+    picker.value = f7.calendar.create({
         inputEl: '#demo-calendar-range',
         rangePicker: true,
         numbers:true,
@@ -162,15 +244,13 @@ onMounted(() => {
             }
         }
     });
-
-    // activationMenu('reporting', '');
-    // removeLoader();
     report();
-    // apexChartData();
 });
 
-const chartInstance = (chart) => {
-    chart.value = chart;
+const formatHourLabel = (hour) => {
+    const period = hour >= 12 ? 'PM' : 'AM';
+    const formattedHour = hour % 12 === 0 ? 12 : hour % 12;
+    return `${formattedHour}:00 ${period}`;
 }
 
 const report = () => {
@@ -182,27 +262,23 @@ const report = () => {
             completeOrder.value = res.data.complete_order;
             ongoingOrder.value = res.data.ongoing_order;
             reservationTable.value = res.data.reservation_table;
+            chartData.value = res.data.chart_data;
+            
+            showTotalOrderChart.value = chartData.value.total?.length > 0 && !chartData.value.total.every(totalOrder => totalOrder === 0);
+            completedOrderChart.value = chartData.value.completed?.length > 0 && !chartData.value.completed.every(completedOrder => completedOrder === 0);
+            ongoingOrderChart.value = chartData.value?.ongoing?.length > 0 && !chartData.value?.ongoing.every(ongoingOrder => ongoingOrder === 0);
         })
         .catch((error) => {
             console.error('Error fetching report data:', error);
         });
 };
 
-const apexChartData = () => {
-    axios.get('/api/report-chart-data')
-        .then((res) => {
-            res.data.all_orders.forEach((data) => {
-                const category = moment(data.created_at, moment.defaultFormat).toDate();
-                series.value.push({
-                    value: data.orders,
-                    category: category,
-                });
-            });
-        })
-        .catch((error) => {
-            console.error('Error fetching chart data:', error);
-        });
-};
+const resetFilter = () => {
+    $('#fromDate').val('');
+    $('#toDate').val('');
+    picker.value.setValue([]);
+    report();
+}
 
 </script>
 
