@@ -23,10 +23,6 @@
                                 <span class="input-clear-button"></span>
                             </form>
                         </div>
-                        <select @change="searchBranch()" v-model="restaurantType" name="restaurant" id="select_filter" placeholder="User Filter">
-                            <option selected value="">All</option>
-                            <option v-for="restaurant in filterRestaurant" :key="restaurant.id" :value="restaurant.id">{{ restaurant.name }}</option>
-                        </select>
                     </div>
                     <div class="no-padding no-margin">
                         <button @click="showBranchModal()" class="button button-raised button-raise text-color-white bg-pink height-40 padding-horizontal padding-vertical-half text-transform-capitalize" data-popup="#addEditBranchPopup">
@@ -121,9 +117,7 @@
 
     const branchDetails = ref([]);
     const paginateData = ref([]);
-    const filterRestaurant = ref([]);
 
-    const restaurantType = ref("");
     const searchQuery = ref("");
 
     const pageNumber = ref(1);
@@ -149,11 +143,10 @@
 
     const searchBranch = debounce(() => {
         const currentSearchQuery = searchQuery.value;
-        const currentRestaurantType = restaurantType.value;
-        getBranchList(currentSearchQuery, currentRestaurantType);
+        getBranchList(currentSearchQuery, 1);
     }, 300);
 
-    const getBranchList = async (searchQuery = '', restaurantType = '', pageNum) => {
+    const getBranchList = async (searchQuery = '', pageNum) => {
         
         if (pageNum == undefined || pageNum == 1) {
             pageNum = 1
@@ -163,13 +156,12 @@
         pageNumber.value = pageNum;
         pageCount.value = pageNum;
 
-        var page = '/api/branch-list' + '?page=' + pageNum + '&search=' + searchQuery + '&filter='+ restaurantType;
+        var page = '/api/branch-list' + '?page=' + pageNum + '&search=' + searchQuery;
 
         axios.get(page)
         .then(response => {
             branchDetails.value = response.data.branch.data;
             paginateData.value = response.data.branch;
-            filterRestaurant.value = response.data.restaurant;
         }).catch((error) => {
             console.error("Error fetching branch :", error);
         });
@@ -188,7 +180,7 @@
         .then(response => {
             successNotification(response.data.success);
             f7.popup.close(`#addEditBranchPopup`);
-            getBranchList('', '', 1);
+            getBranchList('', 1);
         })
         .catch(error => {
             if (error.response && error.response.status === 422) {
@@ -219,7 +211,7 @@
             if(response.status) {
                 f7.popup.close(`.removeBranchPopup`);
                 successNotification(response.data.success);
-                getBranchList('', '', 1);
+                getBranchList('', 1);
             }
         }).catch((error) => {
             if(error.response || error.response.status == 404) {

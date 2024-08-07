@@ -128,6 +128,8 @@ const assignDeliveryFillUp = ref(false);
 const orderNoteFillUp = ref(false);
 const discountFillUp = ref(false);
 
+const waitersList = ref([]);
+
 // Split Payment Popup
 const splitType = ref('portion');
 const splitPortionData = ref({
@@ -153,9 +155,22 @@ onMounted(() => {
         if(f7.view.main.router.currentRoute.params.id){
             const id = f7.view.main.router.currentRoute.params.id;
             getTableCurrentDetail(id);
+            getWaitersList();
         }
     });
 });
+
+const getWaitersList = () => {
+    axios.get('/api/waiters')
+    .then(response => {
+        if(response.data.success) {
+            waitersList.value = response.data.waiters;
+        }
+    }).catch((error) => {
+        const err = getErrorMessage(error);
+        errorNotification(err);
+    });
+}
 
 const getTableCurrentDetail = (tableId) => {
     axios.post('/api/get-current-table-details', { tableId: tableId })
@@ -672,6 +687,7 @@ provide('removeDiscount', removeDiscount);
 
 
 provide('saveData', saveData);
+provide('waiters', waitersList);
 
 // Settle & Save Popup
 provide('paymentType', paymentType);

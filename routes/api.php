@@ -282,6 +282,8 @@ Route::post('/remove-reservation',[ReservationController::class, 'removeReservat
 
 Route::get('/reservation-detail/{id}',[ReservationController::class, 'reservationDetail']);
 
+Route::get('/waiters', [ReservationController::class, 'waiterList']);
+
 // ------------------------ Wishlist Routes ------------------------ //
 
 Route::post('/get-wishlist',[FavoriteController::class, 'getWishlist']);

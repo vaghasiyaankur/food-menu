@@ -22,9 +22,8 @@ use App\Helper\LanguageHelper;
 use App\Helper\OrderHelper;
 use App\Models\Content;
 use App\Models\QrCodeToken;
-use App\Models\Restaurant;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use League\CommonMark\Parser\Inline\NewlineParser;
 use Mockery\Undefined;
 
 class ReservationController extends Controller
@@ -545,6 +544,12 @@ class ReservationController extends Controller
             }
         }
         return response()->json([ 'close_reservation' => $close_reservation ] , 200);
+    }
+
+    public function waiterList()
+    {
+        $waiters = User::whereRestaurantId(Auth::user()->restaurant_id)->whereRole('waiter')->get(['id', 'name']);
+        return response()->json(['success' => true, 'waiters' => $waiters], 200);
     }
 
 }

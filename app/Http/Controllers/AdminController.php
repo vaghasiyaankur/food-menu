@@ -115,23 +115,18 @@ class AdminController extends Controller
     public function getBranchList(Request $request)
     {
         $search = $request->input('search', '');
-        $filter = $request->input('filter', '');
 
         $branchQuery = Branch::query();
-        $restaurant = Restaurant::select('id', 'name')->get();
 
         $branchQuery->when($search, function ($query, $search) {
-            return $query->where('branch_name', 'like', '%' . $search . '%')
+            return $query->whereRestaurantId(Auth::user()->restaurant_id)
+                ->where('branch_name', 'like', '%' . $search . '%')
                 ->orWhere('owner_name', 'like', '%' . $search . '%')
                 ->orWhere('email', 'like', '%' . $search . '%');
         });
 
-        $branchQuery->when($filter, function ($query, $filter) {
-            return $query->where('restaurant_id', $filter);
-        });
-
-        $branch = $branchQuery->paginate(10);
-        return response()->json(['branch' =>  $branch, 'restaurant' => $restaurant], 200);
+        $branch = $branchQuery->whereRestaurantId(Auth::user()->restaurant_id)->paginate(10);
+        return response()->json(['branch' =>  $branch], 200);
     }
 
     public function addUpdateBranch(Request $request)

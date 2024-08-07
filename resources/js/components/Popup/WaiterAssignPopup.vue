@@ -6,17 +6,9 @@
             <hr class="popup_title_divider">
             <label class="waiter-text">Select Waiter</label>
             <div class="add_waiter-selector text-align-left">
-                <div class="waiter-data display-flex align-items-center">
-                    <input type="radio" id="waiter-list-1" name="waiter-list" value="1"  v-model="selectWaiter">
-                    <label for="waiter-list-1">John</label>
-                </div>
-                <div class="waiter-data display-flex align-items-center">
-                    <input type="radio" id="waiter-list-2" name="waiter-list" value="2" v-model="selectWaiter">
-                    <label for="waiter-list-2">Lincon</label>
-                </div>
-                <div class="waiter-data display-flex align-items-center">
-                    <input type="radio" id="waiter-list-3" name="waiter-list" value="3" v-model="selectWaiter">
-                    <label for="waiter-list-3">William</label>
+                <div class="waiter-data display-flex align-items-center" v-for="waiter in waiters" :key="waiter.id">
+                    <input type="radio" :id="'waiter-list-'+waiter.id" name="waiter-list" :value="waiter.id" v-model="selectWaiter">
+                    <label :for="'waiter-list-'+waiter.id">{{ waiter.name }}</label>
                 </div>
             </div>
             <div class="display-flex justify-content-center popup_button">
@@ -36,6 +28,7 @@ import { inject }  from 'vue';
 const selectWaiter = inject('selectWaiter');
 const saveData = inject('saveData');
 const table = inject('table');
+const waiters = inject('waiters');
 
 const setOrderNote = () => {
     saveData(table.value.id);

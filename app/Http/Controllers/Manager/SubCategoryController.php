@@ -104,17 +104,28 @@ class SubCategoryController extends Controller
         $subCat->added_by_id = Auth::user()->id;
         $subCat->status = $req->status;
         $subCat->category_id = $req->category_id;
-        if($subCat->save()){
+
+        if($subCat->save()) {
+            
             $names = $req->names;
-            foreach($resLangs as $resLang){
-                $language = Language::where('id', $resLang->language_id)->first();
-                $subCatResLang = new SubcategoryRestaurantLanguage();
-                $subCatResLang->restaurant_language_id = $resLang->id;
-                $subCatResLang->sub_category_id = $subCat->id;
-                $subCatResLang->name = $names[$language->name];
-                $subCatResLang->save();
+            foreach ($resLangs as $resLang) {
+                
+                $language = Language::find($resLang->language_id);
+                $name = $names[$language->name];
+        
+                SubcategoryRestaurantLanguage::create([
+                    'restaurant_language_id' => $resLang->id,
+                    'sub_category_id' => $subCat->id,
+                    'name' => $name
+                ]);
+        
+                SubCategoryLanguage::create([
+                    'language_id' => $resLang->language_id,
+                    'sub_category_id' => $subCat->id,
+                    'name' => $name
+                ]);
             }
-        }
+        }        
         return response()->json(['success'=>'Sub Category Added Successfully.']);
     }
 
