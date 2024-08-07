@@ -81,21 +81,21 @@ class LanguageController extends Controller
         foreach ($lang_trans as $key => $trans) {
             $trans = Content::where('id',$key)->update(['content' => $trans]);
         }
-        return response()->json(['success' => 'Traslation Updated successfully.']);
+        return response()->json(['success' => 'Translation Updated successfully.']);
     }
 
     public function updateLangStatus(Request $req)
     {
-        $restaurant_id = Auth::user()->value('restaurant_id');
+        $restaurant_id = Auth::user()->restaurant_id;
         $langs = $req->language;
         foreach ($langs as $key => $lang) {
             // Language::where('id',$key)->update(['status' => $lang == true ? 1 : 0]);
             RestaurantLanguage::where('restaurant_id', $restaurant_id)->where('language_id',$key)->update(['status' => $lang == true ? 1 : 0]);
         }
-        $selectlang = Language::whereHas('RestaurantLanguages', function ($query) {
+        $select_lang = Language::whereHas('RestaurantLanguages', function ($query) {
             $query->where('status', 1);
         })->first('id')->id;
-        Setting::where('id','1')->update(['language_id' => $selectlang]);
+        Setting::where('id','1')->update(['language_id' => $select_lang]);
         return response()->json(['success' => 'Language Updated successfully.']);
     }
 }

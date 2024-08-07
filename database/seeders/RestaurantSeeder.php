@@ -48,7 +48,7 @@ class RestaurantSeeder extends Seeder
             'operating_start_hours' => '10:00 AM',
             'operating_end_hours' => '11:00 PM',
             'status' => 1,
-            'request_status' => 2,
+            'request_status' => 1,
         ]);
 
     }
