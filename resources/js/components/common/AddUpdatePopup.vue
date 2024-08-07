@@ -8,7 +8,7 @@
                         <label class="add-data-name" v-if="data.type != 'hidden'">{{ data.label }}</label>
                         <template v-if="data.type == 'text' || data.type == 'hidden'  || data.type == 'number' || data.type == 'email' || data.type == 'password' || data.type == 'month'">
                             <template v-if="data.multipleLang">
-                                <div class="data-name text-align-left padding-bottom-half" 
+                                <div class="data-name" :class="{ 'text-align-left padding-bottom-half' : data.type != 'hidden' }"
                                     v-for="(option, ind) in data.options" :key="option"
                                 >
                                     <Input 
@@ -23,7 +23,7 @@
                                 </div>
                             </template>
                             <template v-else>
-                                <div class="data-name text-align-left padding-bottom-half">
+                                <div class="data-name" :class="{ 'text-align-left padding-bottom-half' : data.type != 'hidden' }">
                                     <Input 
                                         :data-type="dataType"
                                         :type="data.type" 

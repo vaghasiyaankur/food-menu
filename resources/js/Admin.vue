@@ -1,11 +1,13 @@
 <template>
   <f7-app ref="app" v-bind="f7Params">
     <f7-page>
-      <div class="nav-bar" v-if="currentRoute != 'login'">
-        <Navbar 
-          :moveToMethod="MoveToWaitingArea"
-        />
-      </div>
+      <template v-if="navbarShow">
+        <div class="nav-bar" v-if="currentRoute != 'login'">
+          <Navbar 
+            :moveToMethod="MoveToWaitingArea"
+          />
+        </div>
+      </template>
       <f7-view
         url="/dashboard/"
         :main="true"
@@ -64,6 +66,7 @@ const warningTimer = ref(null);
 const checkLogin = ref(false);
 const trans = ref([]);
 const user = ref([]);
+const navbarShow = ref(true);
 
 // Function to move to waiting area
 const MoveToWaitingArea = () => {
@@ -149,6 +152,7 @@ const warningMessage = () => {
   f7.dialog.close();
   f7.popup.close();
   f7.view.main.router.navigate({ url: "/lock-screen/" });
+  navbarShow.value = false;
   lockScreenEnable();
 };
 
@@ -174,7 +178,7 @@ onMounted(() => {
     if (res.data.check_auth) {
       checkLogin.value = true;
       user.value = res.data.user;
-      f7.view.main.router.navigate({ url: "/table/" });
+      f7.view.main.router.navigate({ url: "/dashboard/" });
     } else {
       f7.view.main.router.navigate({ url: "/login/" });
     }

@@ -462,7 +462,7 @@
 .dashboard_page .latest_product_table thead tr th:last-child,
 .dashboard_page .latest_product_table tbody tr td:last-child {
     text-align: center;
-    padding-left: 230px;
+    /* padding-left: 230px; */
 }
 .dashboard_page .menu_transactions_tables {
     display: flex;
