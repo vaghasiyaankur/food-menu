@@ -59,7 +59,7 @@ class QrCodeController extends Controller
             }else{
                 $date = date('Y-m-d', strtotime($start->addMonth(1)));
             }
-            $qrcode = QrCodeToken::whereDate('start_date',$date)->doesntExist();
+            $qrcode = QrCodeToken::whereRestaurantId(Auth::user()->restaurant_id)->whereDate('start_date',$date)->doesntExist();
             if ($qrcode) {
                 $this->setQrCodeMonthly($date);
                 $exsitsData = 1;
