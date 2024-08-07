@@ -66,7 +66,7 @@ class LanguageController extends Controller
 
     public function getLangTrans(Request $req,$id)
     {
-        $restaurant_id = Auth::user()->value('restaurant_id');
+        $restaurant_id = Auth::user()->restaurant_id;
         $restaurant_language_id = RestaurantLanguage::where('language_id', $id)->where('restaurant_id', $restaurant_id)->value('id');
         $trans = Content::whereRestaurantLanguageId($restaurant_language_id)->where(function($query) use ($req){
                             $query->where('content', 'LIKE', '%'.$req->q.'%')
