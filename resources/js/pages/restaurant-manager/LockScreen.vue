@@ -81,7 +81,10 @@
         pinPosition.value = 0;
         pin.value = '';
         setTimeout(() => {
-            f7.view.main.router.navigate({ url: '/table/' });
+            console.log(f7.view.main.router);
+            // if (condition) {
+                f7.view.main.router.navigate({ url: '/table/' });
+            // }
         }, 500);
         lockScreenDisable();
     } else {

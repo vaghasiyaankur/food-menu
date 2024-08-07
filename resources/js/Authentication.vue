@@ -89,41 +89,6 @@ const languageTranslation = (langId) => {
   });
 };
 
-const checkReservation = () => {
-  axios.get("/api/check-reservation").then((res) => {
-    closeReservationValue.value = res.data.close_reservation;
-  });
-};
-
-const closeReservation = (reservation) => {
-  $(".closeReservation").css("background-color", "#F33E3E");
-  var openOrClose = closeReservationValue.value == 0 ? "open" : "close";
-  f7.dialog.confirm("Are you sure " + openOrClose + " the reservation?", () => {
-    var changeReservation = closeReservationValue.value == 0 ? 1 : 0;
-    axios
-      .post("/api/change-reservation", { reservation: changeReservation })
-      .then((res) => {
-        closeReservationValue.value = res.data.close_reservation;
-      });
-    $(".closeReservation").css("background-color", "");
-  });
-  setTimeout(() => {
-    $(".dialog-button").eq(1).css({ "background-color": "#F33E3E", color: "#fff" });
-    if (closeReservationValue.value == 0)
-      $(".dialog-title").html("<img src='/images/open_reservation.png'>");
-    else $(".dialog-title").html("<img src='/images/close_reservation.png'>");
-    $(".dialog-buttons").after(
-      "<div><img src='/images/flow.png' style='width:100%'></div>"
-    );
-    $(".dialog-button").addClass(
-      "col button button-raised text-color-black button-large text-transform-capitalize"
-    );
-    $(".dialog-button").eq(1).removeClass("text-color-black");
-    $(".dialog-text").addClass("margin-top");
-    $(".dialog-buttons").addClass("margin-top no-margin-bottom");
-  }, 50);
-};
-
 const successNotification = (notice) => {
   var notificationFull = f7.notification.create({
     title: '<img src="/images/check-icon.png">' + notice,
@@ -147,56 +112,6 @@ const errorNotification = (notice) => {
   $(".notification-header").append('<div><i class="f7-icons">xmark</i></div>');
   $(".notification-content").remove();
 };
-
-const activationMenu = (active, submenuactive) => {
-  currentRoute.value = active;
-  currentSubmenuRoute.value = submenuactive;
-};
-
-const addLoader = () => {
-  $(".overlay, body").removeClass("loaded");
-  $(".overlay").css({ display: "" });
-};
-
-const removeLoader = () => {
-  setTimeout(function () {
-    $(".overlay, body").addClass("loaded");
-    setTimeout(function () {
-      $(".overlay").css({ display: "none" });
-    }, 1000);
-  }, 2000);
-};
-
-const setTimer = () => {
-  warningTimer.value = setTimeout(warningMessage.value, 15 * 60 * 1000);
-};
-
-const warningMessage = () => {
-  f7.dialog.close();
-  f7.popup.close();
-  f7.view.main.router.navigate({ url: "/lock-screen/" });
-  lockScreenEnable();
-};
-
-const resetTimer = () => {
-  clearTimeout(warningTimer.value);
-  setTimer();
-};
-
-const lockScreenEnable = () => {
-  const config = {
-    headers: { "content-type": "multipart/form-data" },
-  };
-  axios
-    .post("/api/lock-enable-disable", { lock: 1 }, config)
-    .then((res) => {})
-    .catch((err) => {});
-};
-
-const moveToPos = () => {
-  window.open('/pos', '_blank');
-};
-
 
 provide('user', user)
 

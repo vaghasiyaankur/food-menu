@@ -38,13 +38,13 @@ class AuthController extends Controller
         ->first();
 
         if(!is_null($checkRestaurantStatus)) {
-            return response()->json(['error' => 'Your Restaurant Not Approved Yet!']);
+            return response()->json(['error' => true,'message' => 'Your Restaurant Not Approved Yet!']);
         } else {
             if (Auth::attempt($credentials)) {
                 $id = Auth::user()->id;
-                return response()->json(['success' => 'You are logged in successfully.', 'id' => $id]);
+                return response()->json(['success' => true,'message' => 'You are logged in successfully.', 'id' => $id]);
             }else{
-                return response()->json(['error' => 'Unable to access account, verify password.']);
+                return response()->json(['success' => false,'message' => 'Unable to access account, verify password.']);
             }
         }
     }

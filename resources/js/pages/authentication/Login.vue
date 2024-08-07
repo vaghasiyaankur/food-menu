@@ -118,8 +118,10 @@ const loginAuthUser = () => {
                 isLoggedIn.value = true;
                 location.reload();
             } else {
-                f7.view.main.router.navigate({ url: "/restaurant-request/" });
-                errorNotification(res.data.error);
+                if (res.data.error) {
+                    f7.view.main.router.navigate({ url: "/restaurant-request/" });
+                }
+                errorNotification(res.data.message);
             }
         });
 }
