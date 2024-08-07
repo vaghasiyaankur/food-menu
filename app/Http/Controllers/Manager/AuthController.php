@@ -32,7 +32,7 @@ class AuthController extends Controller
         
         $checkRestaurantStatus = User::where('email', $credentials['email'])
             ->whereHas('restaurant', function($query) {
-                $query->whereIn('request_status', [0, 2]);
+                $query->where('request_status', 2);
             })
         ->select('id', 'restaurant_id')
         ->first();

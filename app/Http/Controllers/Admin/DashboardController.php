@@ -44,7 +44,7 @@ class DashboardController extends Controller
         $categories = SubCategory::with(['subCategoryRestaurantLanguagesFirst' => function($q) {
             $q->select('id', 'name', 'sub_category_id');
         }])
-        ->withCount('products')->whereStatus(1)->latest('id')->take(8)->get();            
+        ->whereRestaurantId(Auth::user()->restaurant_id)->withCount('products')->whereStatus(1)->latest('id')->take(8)->get();            
 
         $customers = Customer::whereRestaurantId(Auth::user()->restaurant_id)
                     ->whereDate('created_at', '>=', $from_date)

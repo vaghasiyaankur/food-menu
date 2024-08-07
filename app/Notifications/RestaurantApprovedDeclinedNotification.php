@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Helper\LanguageHelper;
 use App\Models\Restaurant;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -59,6 +60,11 @@ class RestaurantApprovedDeclinedNotification extends Notification
 
         if($result) {
             $restaurant = Restaurant::where('id', $this->restaurant->id)->first();
+            
+            if($restaurant->request_status == 1) {
+                LanguageHelper::setLanguagesApprovedRestaurant($restaurant->id);
+            }
+
             $emailSubject = $restaurant->request_status == 0 
                 ? 'Your Restaurant has been Declined' 
                 : 'Your Restaurant has been Approved';
