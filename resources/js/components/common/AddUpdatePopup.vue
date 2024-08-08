@@ -101,7 +101,7 @@
                 </template>
                 <div class="display-flex justify-content-center popup_button">
                     <button type="button"
-                        class="button button-raised button-large popup-close popup-cancel-button">Cancel</button>
+                        class="button button-raised button-large popup-close popup-cancel-button bg-color-white">Cancel</button>
                     <button type="submit" class="button button-raised button-large popup-ok-button">Ok</button>
                 </div>
             </form>

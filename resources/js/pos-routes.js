@@ -11,7 +11,7 @@ import DigitalMenu from "./pages/pos/menu-management/DigitalMenu.vue";
 import FoodIngredient from "./pages/pos/menu-management/FoodIngredient.vue";
 import FoodVariation from "./pages/pos/menu-management/FoodVariation.vue";
 import Setting from "./pages/pos/SettingsTab.vue";
-// import NewSetting from "./pages/pos/NewSettingsTab.vue";
+import NewSetting from "./pages/pos/NewSettingsTab.vue";
 import TableView from "./pages/pos/TableView.vue"
 import KotView from "./pages/pos/KOT-view.vue"
 import completedOrders from "./pages/pos/completedOrders.vue"
@@ -99,11 +99,11 @@ export default [
     path: '/settings/',
     component: Setting,
   },
-  // {
-  //   name : 'NewSetting',
-  //   path: '/new-settings/',
-  //   component: NewSetting,
-  // },  
+  {
+    name : 'NewSetting',
+    path: '/new-settings/',
+    component: NewSetting,
+  },  
   {
     name : 'TableView',
     path: '/table-view/',

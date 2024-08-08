@@ -550,11 +550,11 @@
 .pagination_count {
     /* position: fixed;
     bottom: 15; */
-    width: 100%;
-    z-index: 9999999;
-    height: 60px;
+    /* width: 100%; */
+    /* z-index: 9999999; */
+    /* height: 60px; */
     background-color: #fff;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+    /* box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2); */
 }
 
 .pagination_wrapper {
