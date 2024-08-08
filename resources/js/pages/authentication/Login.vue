@@ -93,12 +93,16 @@
 <script setup>
 import { f7App, f7Page, f7 } from "framework7-vue";
 import axios from "axios";
-import { ref,reactive } from 'vue';
-import { errorNotification } from '../../commonFunction.js';
+import { ref, onBeforeMount } from 'vue';
+import { errorNotification, getErrorMessage } from '../../commonFunction.js';
 
 const email = ref('');
 const password = ref('');
 const isLoggedIn = ref(false);
+
+onBeforeMount(() => {
+    checkRestaurantStatus();
+});
 
 const loginAuthUser = () => {
     if (!email.value) {
@@ -119,6 +123,10 @@ const loginAuthUser = () => {
                 location.reload();
             } else {
                 if (res.data.error) {
+                    let storedEmails = localStorage.getItem("user_email") || [];
+                    if (!storedEmails.includes(email.value)) {
+                        localStorage.setItem("user_email", email.value);
+                    }
                     f7.view.main.router.navigate({ url: "/restaurant-request/" });
                 }
                 errorNotification(res.data.message);
@@ -126,9 +134,24 @@ const loginAuthUser = () => {
         });
 }
 
-const redirectToRegister = () => {
-    if(!isLoggedIn.value) {
-        window.location.href = "signup";
+const checkRestaurantStatus = () => {
+    let user_email = localStorage.getItem("user_email");
+    if (user_email) {
+        axios.get('/api/check-restaurant-status', { params: { email: user_email }} )
+        .then(response => {
+            if(response.data.status == 1) {
+                f7.view.main.router.navigate({ url: "/restaurant-request/" });
+            } else {
+                localStorage.removeItem("user_email");
+                f7.view.main.router.navigate({ url: "/login/" });
+            }
+        })
+        .catch(err => {
+            const error = getErrorMessage(err);
+            errorNotification(error);
+        });
+    } else {
+        return false;
     }
 }
 
