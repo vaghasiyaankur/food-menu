@@ -339,6 +339,8 @@ Route::post('lock-enable-disable', [AuthController::class , 'lockEnableDisable']
 
 Route::get('get-user-pass-code', [AuthController::class , 'userPassCode']);
 
+Route::get('check-restaurant-status', [AuthController::class, 'checkRestaurantStatus']);
+
 // ------------------------ Coupon Routes ------------------------ //
 
 Route::get('/get-coupon-list', [CouponController::class, 'getCouponCodes']);

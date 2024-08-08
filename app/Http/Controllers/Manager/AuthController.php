@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Manager;
 
 use App\Http\Controllers\Controller;
+use App\Models\Restaurant;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -60,6 +61,17 @@ class AuthController extends Controller
         $user = Auth::user();
 
         return response()->json(['passCode' => @$user->lock_pin]);
+    }
+
+    public function checkRestaurantStatus(Request $request)
+    {
+        $toggleStatus = User::where('email', $request->email)
+            ->whereHas('restaurant', function ($query) {
+                $query->where('request_status', 2);
+            })
+        ->exists() ? 1 : 0;
+
+        return response()->json(['success' => true, 'status' => $toggleStatus], 200);
     }
 
 }

@@ -3,6 +3,12 @@
 @section('title', 'Restaurant Requests')
 
 @section('css')
+    <style>
+        .processing-swal .swal2-confirm,
+        .processing-swal .swal2-cancel {
+            display: none !important;
+        }
+    </style>
     <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/css/datatable.css') }}">

@@ -54,6 +54,8 @@
                 text: `You are about to ${isApprove ? 'approve' : 'decline'} this restaurant!`,
                 icon: "warning",
                 showCancelButton: true,
+                allowOutsideClick: false,
+                allowEscapeKey: false,
                 confirmButtonText: `Yes, ${isApprove ? 'approve' : 'decline'} it!`,
                 customClass: {
                     confirmButton: "btn btn-primary me-3",
@@ -76,9 +78,23 @@
                                 return;
                             }
 
+                            $('#declineModal').modal('hide');
                             $buttons.prop('disabled', true);
                             $(".confirmDeclined").text("Please Wait...");
                             
+                            Swal.fire({
+                                title: "Processing",
+                                text: "Your request is being processed...",
+                                allowOutsideClick: false,
+                                allowEscapeKey: false,
+                                timerProgressBar: false,
+                                customClass: {
+                                    container: 'processing-swal'
+                                },
+                                didOpen: () => {
+                                    Swal.showLoading();
+                                }
+                            });
                             $.post("{{ route('restaurant.approved-declined') }}", {
                                 _token: '{{ csrf_token() }}',
                                 restaurant_id: restaurant_id,
@@ -98,6 +114,19 @@
                     } else {
                         
                         $buttons.prop('disabled', true);
+                        Swal.fire({
+                            title: "Processing",
+                            text: "Your request is being processed...",
+                            customClass: {
+                                container: 'processing-swal'
+                            },
+                            timerProgressBar: false,
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                            didOpen: () => {
+                                Swal.showLoading();
+                            }
+                        });
                         $.post("{{ route('restaurant.approved-declined') }}", {
                             _token: '{{ csrf_token() }}',
                             restaurant_id: restaurant_id,
