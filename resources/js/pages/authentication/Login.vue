@@ -128,6 +128,10 @@ const loginAuthUser = () => {
                         localStorage.setItem("user_email", email.value);
                     }
                     f7.view.main.router.navigate({ url: "/restaurant-request/" });
+                } else if(!res.data.status) {
+                    email.value = "";
+                    password.value = "";
+                    errorNotification(res.data.message);
                 }
                 errorNotification(res.data.message);
             }

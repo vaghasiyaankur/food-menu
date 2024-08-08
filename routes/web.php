@@ -34,7 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/manager/{any}', [UserController::class, 'manager'])->name('manager.any');
 
     Route::get('/admin', [AdminController::class, 'admin'])->name('admin');
-    Route::get('/admin/{any}', [AdminController::class, 'admin'])->name('admin');
+    Route::get('/admin/{any}', [AdminController::class, 'admin'])->name('admin.any');
 
     Route::get('/pos', [UserController::class, 'pos'])->name('pos');
     Route::get('/pos/{any}', [UserController::class, 'pos'])->name('pos.any');

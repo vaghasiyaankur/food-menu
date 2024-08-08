@@ -72,7 +72,7 @@
             <p class="additional-info"> Thank you for your patience. We are excited to welcome you to our platform and look forward to a successful partnership. </p>
             <p class="additional-info"> If you have any questions or need further assistance, feel free to reach out to us. </p>
             
-            <a href="javascript:void(0)" class="button">Go to Dashboard</a>
+            <a href="{{ route('admin') }}" class="button">Go to Dashboard</a>
             
             <p> Best regards,<br>
             The E-waiting Team </p>

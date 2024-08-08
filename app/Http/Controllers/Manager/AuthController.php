@@ -30,6 +30,17 @@ class AuthController extends Controller
         ]);
 
         $credentials = $req->only('email', 'password');
+
+        $isRestaurantApproved = User::with(['restaurant' => function($query) {
+            $query->select('id', 'request_status');
+        }])
+        ->where('email', $credentials['email'])
+        ->select('id', 'restaurant_id')
+        ->get();
+
+        if ($isRestaurantApproved[0]->restaurant->request_status == 0)  {
+            return response()->json(['status' => false, 'message' => 'Your Request Decline For Some Reason. We Have Mail To Your Mail Address.']);
+        }
         
         $checkRestaurantStatus = User::where('email', $credentials['email'])
             ->whereHas('restaurant', function($query) {
