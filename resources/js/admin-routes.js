@@ -22,6 +22,7 @@ import DigitalMenu from "./pages/pos/menu-management/DigitalMenu.vue";
 import FoodIngredient from "./pages/pos/menu-management/FoodIngredient.vue";
 import FoodVariation from "./pages/pos/menu-management/FoodVariation.vue";
 import LockScreen from './pages/restaurant-manager/LockScreen.vue';
+import NewSetting from "./pages/pos/NewSettingsTab.vue";
 
 export default [
   {
@@ -39,6 +40,11 @@ export default [
     path: '/orders/',
     component: orders,
   },
+  {
+    name : 'NewSetting',
+    path: '/new-settings/',
+    component: NewSetting,
+  },  
   {
     name : 'ordersdetail',
     path: '/ordersdetail/:id',
