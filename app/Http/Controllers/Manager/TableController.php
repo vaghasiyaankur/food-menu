@@ -113,7 +113,12 @@ class TableController extends Controller
             if($tlwo->orders_count == 0) $count += 1;
         }
         $max_table_cap = Table::whereRestaurantId(Auth::user()->restaurant_id)->where('floor_id', $groundFloorId)->where('status', 1)->max('capacity_of_person');
-        $current_capacity = (100 - ($count / $total_table_number * 100));
+
+        if ($total_table_number != 0) {
+            $current_capacity = 100 - (($count / $total_table_number) * 100);
+        } else {
+            $current_capacity = 0; // or handle the zero division case appropriately
+        }
 
         return response()->json([ 'tables' => $tables , 'floorList' => $floorlist, 'current_capacity' => $current_capacity,'max_table_cap'=>$max_table_cap, 'highlight_time' => $highlight_time, 'highlight_time_on_off' => $highlight_time_on_off] , 200);
 

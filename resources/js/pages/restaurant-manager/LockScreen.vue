@@ -72,7 +72,7 @@
         }, 60000);
     };
 
-    const dateFormat = () => moment().format('dddd MMMM d, Y');
+    const dateFormat = () => moment().format('dddd MMMM D, YYYY');
 
     const passwordVerify = () => {
     if (pin.value.length === 4 && parseInt(passCode.value) === parseInt(pin.value)) {

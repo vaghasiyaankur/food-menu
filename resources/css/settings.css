@@ -875,7 +875,7 @@ ul .item-input-wrap input{
 }
 .coupon_code_page .coupon_table_wrapper{
     width: 100%;
-    overflow-x: scroll;
+    overflow-x: auto;
     scrollbar-width: none;
 }
 .coupon_code_page .coupon_table{
