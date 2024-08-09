@@ -106,8 +106,6 @@
             <p class="additional-info"> If you have any questions or need further assistance, feel free to reach out to us. </p>
             <a href="{{ route('admin') }}" class="button">Go to Dashboard</a>
             <p> Best regards, The E-waiting Team </p>
-            
-        
 
         @elseif ($restaurant->request_status == 0)
 
@@ -116,7 +114,7 @@
             <p class="additional-info"> {{ $restaurant->declined_reason }} </p>
             <p class="additional-info"> Please review our guidelines and make any necessary adjustments before reapplying. If you have any questions or need feedback on your application, please contact us. </p>
             <p class="additional-info"> Thank you for your interest, and we hope to have the opportunity to work with you in the future. </p>
-            <a href="{{ route('signup', ['id' => $restaurant->id]) }}" class="button">Resend Verification</a>
+            <a href="{{ route('signup', [ 'id' => $restaurant->id ]) }}" class="button">Resend Verification</a>
             <p> Best regards,<br>
             The E-waiting Team </p>
 

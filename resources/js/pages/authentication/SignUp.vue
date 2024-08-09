@@ -6,7 +6,6 @@
                     <div class="signup_form" v-if="!isRestaurantShow">
                         <div class="signup_title text-align-center">
                             <h3>Sign Up</h3>
-
                         </div>
                         <div
                             class="list no-hairlines signup_inputs margin-top-half no-margin-bottom"
@@ -289,30 +288,10 @@
 </template>
 
 <script setup>
-    import { f7App, f7Page, f7} from "framework7-vue";
     import axios from "axios";
-    import { ref, onMounted } from 'vue';
-    import { errorNotification, successNotification } from '../../commonFunction.js';
-
-    onMounted(() => {
-        console.log(f7.view.main.router.currentRoute.params.id);
-        // setTimeout(() => {
-        //     const id = f7.view.main.router.currentRoute.params.id;
-        //     console.log(id);
-        //     if(id != null) getRestaurantDetail(id); 
-        // }, 500);
-    });
-
-    // const getRestaurantDetail = (id) => {
-    //     console.log('1234');
-    //     console.log(id);
-    //     axios.get('/api/verification/'+id)
-    //     .then(response => {
-    //         console.log(response.data);
-    //     }).catch((err) => {
-
-    //     });
-    // }
+    import { ref } from 'vue';
+    import { f7App, f7Page, f7 } from "framework7-vue";
+    import { errorNotification, getErrorMessage, successNotification } from '../../commonFunction.js';
 
     const userName = ref("");
     const userEmail = ref("");
@@ -416,8 +395,8 @@
                         resetFormDetail();
                     }
                 }).catch((error) => {
-                    console.log(error);
-                    errorNotification(error.response.data.error);
+                    const err = getErrorMessage(error);
+                    errorNotification(err);
                 });
             }
         }
