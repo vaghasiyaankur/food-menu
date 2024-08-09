@@ -52,11 +52,16 @@ class RestaurantApprovedDeclinedNotification extends Notification
      * @return \Illuminate\Notifications\Messages\MailMessage 
     */
     public function toMail($notifiable)
-    {
-        $result = $this->restaurant->update([
+    {   
+        $restaurantData = [
             'request_status'    =>  $this->status,
             'declined_reason'   =>  $this->isDeclinedReason
-        ]);
+        ];
+
+        if($this->status == 0) {
+            $restaurantData['restaurant_code'] = Null;
+        }
+        $result = $this->restaurant->update($restaurantData);
 
         if($result) {
             $restaurant = Restaurant::where('id', $this->restaurant->id)->first();
