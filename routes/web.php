@@ -28,6 +28,8 @@ Route::middleware('alreadyLogin')->group(function () {
     Route::get('/user', [UserController::class, 'login'])->name('login');
 });
 
+Route::get('/sign-up', [UserController::class, 'signup'])->name('signup');
+
 Route::middleware('auth')->group(function () {
 
     Route::get('/manager', [UserController::class, 'manager'])->name('manager');

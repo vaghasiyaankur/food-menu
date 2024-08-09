@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -16,7 +16,7 @@
 </head>
 <body>
 	<div id="app">
-        <SIGNUP></SIGNUP>
+        <SIGNUP :test-data="'Hello, Vue!'"></SIGNUP>
     </div>
 	@vite('resources/js/sign-up.js')
 </body>

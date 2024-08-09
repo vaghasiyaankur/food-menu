@@ -288,11 +288,19 @@
 </template>
 
 <script setup>
-    import { f7App, f7Page, f7 } from "framework7-vue";
+    import { f7App, f7Page, f7} from "framework7-vue";
     import axios from "axios";
     import { ref,reactive } from 'vue';
     import { errorNotification, successNotification } from '../../commonFunction.js';
 
+
+    const props = defineProps({
+        testData: {
+            type: [String, Object, Array],
+            required: true,
+        },
+    });
+    console.log(props.testData);
     const userName = ref("");
     const userEmail = ref("");
     const userPassword = ref("");
