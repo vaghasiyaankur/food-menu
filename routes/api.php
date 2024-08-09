@@ -393,3 +393,5 @@ Route::get('/branch-list', [AdminController::class, 'getBranchList']);
 Route::post('/add-update-branch', [AdminController::class, 'addUpdateBranch']);
 
 Route::delete('/delete-branch/{id}', [AdminController::class, 'removeBranch']);
+
+Route::get('/verification/{id}', [UserController::class, 'reSubmitRestaurant']);

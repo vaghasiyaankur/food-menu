@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helper\SettingHelper;
 use App\Http\Requests\UserRequest;
 use App\Models\Product;
+use App\Models\Restaurant;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Cookie;
@@ -20,7 +21,13 @@ class UserController extends Controller
         return view('auth');
     }
 
-    public function signup()
+    public function reSubmitRestaurant($id)
+    {
+        $restaurant = Restaurant::with(['user'])->whereId($id)->first();
+        return response()->json(['status' => true, 'data' => $restaurant], 200);
+    }
+
+    public function signup($id)
     {
         return view('signup');
     }
