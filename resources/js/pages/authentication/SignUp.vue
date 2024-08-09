@@ -6,7 +6,6 @@
                     <div class="signup_form" v-if="!isRestaurantShow">
                         <div class="signup_title text-align-center">
                             <h3>Sign Up</h3>
-                    {{ restaurantDetail ? restaurantDetail : [] }}
 
                         </div>
                         <div
@@ -290,7 +289,7 @@
 </template>
 
 <script setup>
-    import { f7App, f7Page, f7 } from "framework7-vue";
+    import { f7App, f7Page, f7} from "framework7-vue";
     import axios from "axios";
     import { ref, onMounted } from 'vue';
     import { errorNotification, successNotification } from '../../commonFunction.js';

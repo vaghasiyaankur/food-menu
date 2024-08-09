@@ -29,7 +29,8 @@ class UserController extends Controller
 
     public function signup($id)
     {
-        return view('signup');
+        $test = '1234';
+        return view('signup', ['test' => $test]);
     }
 
     public function manager($slug = '')
