@@ -36,9 +36,9 @@ class AuthController extends Controller
         }])
         ->where('email', $credentials['email'])
         ->select('id', 'restaurant_id')
-        ->get();
+        ->first();
 
-        if ($isRestaurantApproved[0]->restaurant->request_status == 0)  {
+        if (isset($isRestaurantApproved) && $isRestaurantApproved->restaurant->request_status == 0)  {
             return response()->json(['status' => false, 'message' => 'Your Request Decline For Some Reason. We Have Mail To Your Mail Address.']);
         }
         
