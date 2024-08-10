@@ -4,6 +4,7 @@ namespace App\Notifications;
 
 use App\Helper\LanguageHelper;
 use App\Models\Restaurant;
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -63,8 +64,10 @@ class RestaurantApprovedDeclinedNotification extends Notification
         }
         $result = $this->restaurant->update($restaurantData);
 
+        $restaurantArray = array();
         if($result) {
             $restaurant = Restaurant::where('id', $this->restaurant->id)->first();
+            array_push($restaurantArray, $restaurant);
             
             if($restaurant->request_status == 1) {
                 LanguageHelper::setLanguagesApprovedRestaurant($restaurant->id);
@@ -73,7 +76,12 @@ class RestaurantApprovedDeclinedNotification extends Notification
             $emailSubject = $restaurant->request_status == 0 
                 ? 'Your Restaurant has been Declined' 
                 : 'Your Restaurant has been Approved';
-    
+            
+            if($restaurant->request_status == 0) {
+                User::whereRestaurantId($restaurantArray[0]['id'])->delete();
+                Restaurant::whereId($restaurantArray[0]['id'])->delete();
+            }
+
             return (new MailMessage)
                 ->subject($emailSubject)
                 ->view('admin.emails.approved_declined_request', compact('restaurant'));

@@ -11,15 +11,16 @@ class DashboardController extends Controller
     public function dashboardList()
     {
         $restaurant = new Restaurant();
-        $userCount = User::count();
+        $userCount = User::whereNotNull('restaurant_id')->count();
 
-        $restaurantCounts = $restaurant->groupBy('request_status')
+        $restaurantCounts = $restaurant->withTrashed()
+            ->groupBy('request_status')
             ->selectRaw('request_status, count(*) as count')
             ->get()
             ->keyBy('request_status');
 
         $approvedRestaurants = $restaurant->where('request_status', 1)->take(5)->latest('id')->get();
-        $declinedRestaurants = $restaurant->where('request_status', 0)->take(5)->latest('id')->get();
+        $declinedRestaurants = $restaurant->withTrashed()->where('request_status', 0)->take(5)->latest('id')->get();
         $pendingRestaurants = $restaurant->where('request_status', 2)->take(5)->latest('id')->get();
 
         $dashboardItem = [

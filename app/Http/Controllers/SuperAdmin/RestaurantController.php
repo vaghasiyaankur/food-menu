@@ -36,9 +36,9 @@ class RestaurantController extends Controller
             if($pageType == 'restaurant') {
                 $query->where('request_status', 1);
             } else if($pageType == 'declined-restaurant') {
-                $query->where('request_status', 0);
+                $query->where('request_status', 0)->withTrashed();
             } else {
-                $query->onlyTrashed();
+                $query->whereNot('request_status', 0)->onlyTrashed();
             }
         
             $restaurantList = $query->get();
