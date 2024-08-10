@@ -56,7 +56,7 @@ class Restaurant extends Model
 
     public function kotHolds()
     {
-        return $this->hasMany(Restaurant::class, 'restaurant_id');
+        return $this->hasMany(KotHold::class, 'restaurant_id');
     }
 
     public function setting()
