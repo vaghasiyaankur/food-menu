@@ -13,6 +13,20 @@ class KotProduct extends Model
 
     protected $guarded = ['id']; 
 
+    public static function boot() {
+        parent::boot();
+
+        self::deleting(function($kot_product) {
+            $kot_product->kotProductIngredients()->each(function($kot_product_ingredient) {
+                $kot_product_ingredient->delete();
+            });
+
+            $kot_product->kotProductVariation()->each(function($kot_product_variation) {
+                $kot_product_variation->delete();
+            });
+        });
+    }
+
     public function kot()
     {
         return $this->belongsTo(Kot::class, 'kot_id');

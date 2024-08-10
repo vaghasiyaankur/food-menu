@@ -13,6 +13,19 @@ class Combo extends Model
 
     protected $guarded = ['id'];
 
+    public static function boot() {
+        parent::boot();
+
+        self::deleting(function($combo) {
+            $combo->comboProducts()->each(function($combo_products) {
+                $combo_products->delete();
+            });
+            $combo->comboRestaurantLanguages()->each(function($combo_lang) {
+                $combo_lang->delete();
+            });
+        });
+    }
+
     public function comboProducts()
     {
         return $this->hasMany(ComboProduct::class, 'combo_id');

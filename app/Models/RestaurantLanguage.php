@@ -11,6 +11,31 @@ class RestaurantLanguage extends Model
 
     protected $guarded = ['id'];
 
+    public static function boot() {
+        parent::boot();
+
+        self::deleting(function($restaurants_lang) {
+            $restaurants_lang->categoryRestaurantLanguages()->each(function($cat_restro_lang) {
+                $cat_restro_lang->delete();
+            });
+            $restaurants_lang->subCategoryRestaurantLanguages()->each(function($subcat_restro_lang) {
+                $subcat_restro_lang->delete();
+            });
+            $restaurants_lang->productRestaurantLanguages()->each(function($product_restaurant_lang) {
+                $product_restaurant_lang->delete();
+            });
+            $restaurants_lang->ingredientRestaurantLanguages()->each(function($ingredient_restro_lang) {
+                $ingredient_restro_lang->delete();
+            });
+            $restaurants_lang->variationRestaurantLanguages()->each(function($variation_restro_lang) {
+                $variation_restro_lang->delete();
+            });
+            $restaurants_lang->comboRestaurantLanguages()->each(function($combo_restro_lang) {
+                $combo_restro_lang->delete();
+            });
+        });
+    }
+
     public function Language()
     {
         return $this->belongsTo(Language::class, 'language_id');

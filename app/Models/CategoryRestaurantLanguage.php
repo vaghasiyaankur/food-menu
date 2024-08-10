@@ -11,7 +11,7 @@ class CategoryRestaurantLanguage extends Model
 
     protected $table = 'category_restaurant_languages';
 
-    protected $guarded = ['id']; 
+    protected $guarded = ['id'];
 
     public function restaurantLanguage()
     {

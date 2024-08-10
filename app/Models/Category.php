@@ -18,6 +18,12 @@ class Category extends Model
         parent::boot();
 
         self::deleting(function($category) {
+            $category->categoryRestaurantLanguages()->each(function($category_lang) {
+                $category_lang->delete();
+            });
+            $category->subCategory()->each(function($subCategory) {
+                $subCategory->delete();
+            });
             $category->categoryLanguages()->each(function($category_lang) {
                 $category_lang->delete();
             });

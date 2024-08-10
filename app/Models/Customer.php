@@ -12,6 +12,16 @@ class Customer extends Model
 
     protected $table = 'customers';
 
+    public static function boot() {
+        parent::boot();
+
+        self::deleting(function($customer) {
+            $customer->orders()->each(function($order) {
+                $order->delete();
+            });
+        });
+    }
+
     public function orders()
     {
         return $this->hasMany(Order::class);

@@ -13,6 +13,16 @@ class Floor extends Model
 
     protected $guarded = ['id'];
 
+    public static function boot() {
+        parent::boot();
+
+        self::deleting(function($floor) {
+            $floor->tables()->each(function($table) {
+                $table->delete();
+            });
+        });
+    }
+
     public function tables()
     {
         return $this->hasMany(Table::class);

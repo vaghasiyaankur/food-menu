@@ -20,6 +20,25 @@ class Order extends Model
 
     use SoftDeletes;
 
+    public static function boot() {
+        parent::boot();
+
+        self::deleting(function($language) {
+            $language->floorShiftHistory()->each(function($floor) {
+                $floor->delete();
+            });
+            $language->tableShiftHistory()->each(function($table) {
+                $table->delete();
+            });
+            $language->kots()->each(function($kot) {
+                $kot->delete();
+            });
+            $language->orderPayment()->each(function($order) {
+                $order->delete();
+            });
+        });
+    }
+
     public function customer()
     {
         return $this->belongsTo(Customer::class);

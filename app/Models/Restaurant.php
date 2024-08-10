@@ -21,6 +21,21 @@ class Restaurant extends Model
             $restaurants->restaurantManager()->each(function($rest_manage) {
                 $rest_manage->delete();
             });
+            $restaurants->user()->each(function($user) {
+                $user->delete();
+            });
+            $restaurants->RestaurantLanguages()->each(function($RestaurantLanguages) {
+                $RestaurantLanguages->delete();
+            });
+            $restaurants->kotHolds()->each(function($kotHolds) {
+                $kotHolds->delete();
+            });
+            $restaurants->setting()->each(function($setting) {
+                $setting->delete();
+            });
+            $restaurants->branch()->each(function($branch) {
+                $branch->delete();
+            });
         });
     }
 
