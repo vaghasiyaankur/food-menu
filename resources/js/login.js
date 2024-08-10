@@ -1,7 +1,7 @@
 import { createApp } from 'vue';
 import Framework7 from 'framework7/lite/bundle';
 import Framework7Vue from 'framework7-vue';
-import Login from './Login.vue';
+import Login from './pages/authentication/Login.vue';
 import Pusher from 'pusher-js';
 import Echo from 'laravel-echo';
 

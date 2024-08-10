@@ -26,6 +26,7 @@ return new class extends Migration
             $table->integer('lock_pin')->nullable();
             $table->boolean('lock_enable')->default(0);
             $table->rememberToken();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

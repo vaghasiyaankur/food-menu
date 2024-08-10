@@ -21,16 +21,9 @@ class UserController extends Controller
         return view('auth');
     }
 
-    public function reSubmitRestaurant($id)
-    {
-        $restaurant = Restaurant::with(['user'])->whereId($id)->first();
-        return response()->json(['status' => true, 'data' => $restaurant], 200);
-    }
-
     public function signup($id)
     {
-        $test = '1234';
-        return view('signup', ['test' => $test]);
+        return view('signup');
     }
 
     public function manager($slug = '')

@@ -16,7 +16,7 @@
 </head>
 <body>
 	<div id="app">
-        <SIGNUP :test-data="'Hello, Vue!'"></SIGNUP>
+        <SIGNUP></SIGNUP>
     </div>
 	@vite('resources/js/sign-up.js')
 </body>
