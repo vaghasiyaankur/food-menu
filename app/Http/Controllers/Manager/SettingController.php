@@ -39,7 +39,12 @@ class SettingController extends Controller
         $setting['close_time_12_format'] = date("g:i A", strtotime($restaurant->operating_end_hours));
         $setting['select_highlight_time'] = $select_highlight_time;
 
-        return response()->json([ 'setting' => $setting, 'restaurant' => $restaurant ] , 200);
+        if(request()->query('image')) {
+            return response()->json([ 'logo' => $restaurant->logo ], 200);
+        } else {
+            return response()->json([ 'setting' => $setting, 'restaurant' => $restaurant ] , 200);
+        }
+
     }
 
     /**
@@ -92,9 +97,9 @@ class SettingController extends Controller
         $restaurantData['fav_icon'] = $fav_icon_name;
 
         Setting::updateOrCreate(['id' => $request->id],$settingData);
-        Restaurant::updateOrCreate(['id' => Auth::user()->restaurant_id],$restaurantData);
+        $restaurantData = Restaurant::updateOrCreate(['id' => Auth::user()->restaurant_id],$restaurantData);
 
-        return response()->json([ 'success' => 'Setting Data Updated successfully' ] , 200);
+        return response()->json([ 'success' => 'Setting Data Updated successfully', 'logo' => $restaurantData->logo ] , 200);
     }
 
     /**

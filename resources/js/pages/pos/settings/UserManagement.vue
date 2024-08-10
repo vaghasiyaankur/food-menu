@@ -46,7 +46,7 @@ const addUpdateFormDataFormat = ref([
     { label: 'Mobile Number', name: 'mobile_number', type: 'number', placeHolder: 'Enter Mobile Number', value: ''},
     { label: 'Password', name: 'password', type: 'password', placeHolder: 'Enter Password', value: ''},
     { label: 'Confirm Password', name: 'confirm_password', type: 'password', placeHolder: 'Enter Confirm Password', value: ''},
-    { label: 'Role', multipleLang: false, type: 'drop-down', name: 'role', options: [{ label: 'Manager', id: 'manager'}, { label: 'Waiter', id: 'waiter'}], placeHolder: 'Select Role', value: 1 },
+    { label: 'Role', multipleLang: false, type: 'drop-down', name: 'role', options: [{ label: 'Manager', id: 'manager'}, { label: 'Admin', id: 'admin'}, { label: 'Waiter', id: 'waiter'}], placeHolder: 'Select Role', value: 1 },
     { label: 'Lock pin', name: 'lock_pin', type: 'password', placeHolder: 'Enter Lock pin', value: ''},
     { label: 'Lock Status', name: 'lock_enable', type: 'switch', value: 1, changeStatus: 1 },
 ]);
