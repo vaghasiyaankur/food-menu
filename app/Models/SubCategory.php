@@ -24,6 +24,9 @@ class SubCategory extends Model
             $category->subCategoryLanguage()->each(function($sub_category_lang) {
                 $sub_category_lang->delete();
             });
+            $category->subCategoryRestaurantLanguages()->each(function($sub_category_lang) {
+                $sub_category_lang->delete();
+            });
         });
     }
 

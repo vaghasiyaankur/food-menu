@@ -20,6 +20,26 @@ class Product extends Model
             $product->productLanguage()->each(function($product_lang) {
                 $product_lang->delete();
             });
+
+            $product->productRestaurantLanguages()->each(function($product_restro_lang) {
+                $product_restro_lang->delete();
+            });
+
+            $product->productVariations()->each(function($product_variations) {
+                $product_variations->delete();
+            });
+
+            $product->productIngredients()->each(function($product_ingredient) {
+                $product_ingredient->delete();
+            });
+
+            $product->comboProducts()->each(function($combo_pro) {
+                $combo_pro->delete();
+            });
+
+            $product->kotProduct()->each(function($kot_pro) {
+                $kot_pro->delete();
+            });
         });
     }
 

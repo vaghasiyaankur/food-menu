@@ -13,6 +13,16 @@ class Kot extends Model
 
     protected $guarded = ['id']; 
 
+    public static function boot() {
+        parent::boot();
+
+        self::deleting(function($kot) {
+            $kot->kotProducts()->each(function($kot_product) {
+                $kot_product->delete();
+            });
+        });
+    }
+
     public function kotProducts()
     {
         return $this->hasMany(KotProduct::class, 'kot_id');

@@ -11,7 +11,23 @@ class Variation extends Model
 
     protected $table = 'variations';
 
-    protected $guarded = ['id']; 
+    protected $guarded = ['id'];
+    
+    public static function boot() {
+        parent::boot();
+
+        self::deleting(function($category) {
+            $category->variationRestaurantLanguages()->each(function($order) {
+                $order->delete();
+            });
+            $category->productVariations()->each(function($kot_hold) {
+                $kot_hold->delete();
+            });
+            $category->kotProductVariations()->each(function($kot_hold) {
+                $kot_hold->delete();
+            });
+        });
+    }
 
     public function variationRestaurantLanguages()
     {

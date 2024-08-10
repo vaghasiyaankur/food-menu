@@ -30,6 +30,9 @@ class Language extends Model
             $language->productLanguages()->each(function($productLang) {
                 $productLang->delete();
             });
+            $language->RestaurantLanguages()->each(function($restroLang) {
+                $restroLang->delete();
+            });
         });
     }
 

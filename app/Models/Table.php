@@ -16,6 +16,19 @@ class Table extends Model
 
     protected $guarded = ['id'];
 
+    public static function boot() {
+        parent::boot();
+
+        self::deleting(function($category) {
+            $category->orders()->each(function($order) {
+                $order->delete();
+            });
+            $category->kotHold()->each(function($kot_hold) {
+                $kot_hold->delete();
+            });
+        });
+    }
+
     public function color()
     {
         return $this->belongsTo(Color::class);
