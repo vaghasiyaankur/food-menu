@@ -113,6 +113,11 @@ const submitGeneralSetting = () => {
     var formData = new FormData(event.target);
     axios.post('/api/update-setting', formData)
     .then((res) => {
+        if(res.data.success) {
+            document.getElementById('restaurant_logo_image') ?
+            document.getElementById('restaurant_logo_image').setAttribute('src', '/storage/'+res.data?.logo) :
+            "";
+        }
         successNotification(res.data.success);
     })
     .catch((error) => {
