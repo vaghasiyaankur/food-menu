@@ -12,7 +12,7 @@ class DashboardController extends Controller
     {
         $restaurant = new Restaurant();
         $userCount = User::whereNotNull('restaurant_id')->whereHas('restaurant', function($q) {
-            $q->whereNotIn('request_status',[0,2]);
+            $q->whereNotIn('request_status', [0, 2]);
         })->count();
 
         $restaurantCounts = $restaurant->withTrashed()
