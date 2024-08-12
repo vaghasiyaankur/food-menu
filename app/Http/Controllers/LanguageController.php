@@ -88,14 +88,23 @@ class LanguageController extends Controller
     {
         $restaurant_id = Auth::user()->restaurant_id;
         $langs = $req->language;
+
         foreach ($langs as $key => $lang) {
-            // Language::where('id',$key)->update(['status' => $lang == true ? 1 : 0]);
-            RestaurantLanguage::where('restaurant_id', $restaurant_id)->where('language_id',$key)->update(['status' => $lang == true ? 1 : 0]);
+            // Check if the language_id exists in the languages table
+            if (Language::where('id', $key)->exists()) {
+                RestaurantLanguage::updateOrCreate([
+                    'restaurant_id' => $restaurant_id,
+                    'language_id' => $key
+                ], ['status' => $lang == true ? 1 : 0]);
+            }
         }
+
         $select_lang = Language::whereHas('RestaurantLanguages', function ($query) {
             $query->where('status', 1);
         })->first('id')->id;
+
         Setting::where('id','1')->update(['language_id' => $select_lang]);
+
         return response()->json(['success' => 'Language Updated successfully.']);
     }
 }

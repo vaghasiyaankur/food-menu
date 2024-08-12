@@ -11,7 +11,9 @@ class DashboardController extends Controller
     public function dashboardList()
     {
         $restaurant = new Restaurant();
-        $userCount = User::whereNotNull('restaurant_id')->count();
+        $userCount = User::whereNotNull('restaurant_id')->whereHas('restaurant', function($q) {
+            $q->whereNotIn('request_status',[0,2]);
+        })->count();
 
         $restaurantCounts = $restaurant->withTrashed()
             ->groupBy('request_status')
