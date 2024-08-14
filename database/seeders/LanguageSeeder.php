@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Helper\LanguageHelper;
+use App\Models\Content;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Language;
@@ -37,12 +39,23 @@ class LanguageSeeder extends Seeder
         ];
 
         foreach($restaurants as $res_id=>$restaurant){
-            foreach($restaurant as $restaurantLang)
-                RestaurantLanguage::create([
+            foreach($restaurant as $restaurantLang) {
+                $lastInsertId = RestaurantLanguage::insertGetId([
                     'restaurant_id' => $res_id,
                     'language_id' => $restaurantLang,
                     'status' => 1,
                 ]);
+
+                $contents = LanguageHelper::getLanguageSeederContent();
+
+                foreach ($contents[$restaurantLang] as $key => $data) {
+                    $cnt = new Content();
+                    $cnt->restaurant_language_id = $lastInsertId;
+                    $cnt->title = $data['title'];
+                    $cnt->content = $data['content'];
+                    $cnt->save();
+                }
             }
         }
     }
+}

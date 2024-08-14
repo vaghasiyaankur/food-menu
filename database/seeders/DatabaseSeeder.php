@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
             TableSeeder::class,
             // OrderSeeder::class,
             SettingSeeder::class,
-            ContentSeeder::class,
+            // ContentSeeder::class,
             QrCodeTokenSeeder::class,
             IngredientSeeder::class,
             VariationSeeder::class
