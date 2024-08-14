@@ -99,9 +99,11 @@ class RestaurantController extends Controller
                 $restaurant->delete();
                 return response()->json(['status' => true, 'message' => 'Restaurant Successfully Delete.'], 200);
             } else if ($request->type == 'restore') {
+                User::whereRestaurantId($request->id)->restore();
                 $restaurant->restore();
                 return response()->json(['status' => true, 'message' => 'Restaurant Restore Successfully.'], 200);
             } else {
+                User::whereRestaurantId($request->id)->forceDelete();
                 $restaurant->forceDelete();
                 return response()->json(['status' => true, 'message' => 'Restaurant Successfully Delete.'], 200);
             }
